@@ -1,4 +1,5 @@
 <!ELEMENT okr_grade_rule (id,created_at,updated_at,deleted_at,okr_grade_id,rule_id,instrument,grade,category,description)>
+<!ATTLIST okr_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/objectives-and-key-results-tracker/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

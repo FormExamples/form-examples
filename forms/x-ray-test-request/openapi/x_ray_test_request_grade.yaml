@@ -5,10 +5,19 @@ info:
   title: X Ray Test Request — XRayTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ACR / RCR iRefer 1-9), radiation safety (IR(ME)R), request completeness, and triage priority."
+x-namespace:
+  form: x-ray-test-request
+  apiPrefix: /api/x-ray-test-request/
+  sqlSchema: x_ray_test_request
+  xmlNamespace: https://formexamples.github.io/x-ray-test-request/xml
+tags:
+  - name: x-ray-test-request
+    description: X Ray Test Request form
 paths:
   /api/x-ray-test-request/x_ray_test_request_grades:
     get:
       summary: List XRayTestRequestGrade records
+      tags: [x-ray-test-request]
       operationId: listXRayTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new XRayTestRequestGrade
+      tags: [x-ray-test-request]
       operationId: createXRayTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one XRayTestRequestGrade by id
+      tags: [x-ray-test-request]
       operationId: getXRayTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing XRayTestRequestGrade
+      tags: [x-ray-test-request]
       operationId: updateXRayTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing XRayTestRequestGrade
+      tags: [x-ray-test-request]
       operationId: replaceXRayTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a XRayTestRequestGrade
+      tags: [x-ray-test-request]
       operationId: deleteXRayTestRequestGrade
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Parkland Formula For Burns — ParklandFormulaForBurnsGrade
   version: 1.0.0
   description: "Computed Parkland-formula result: total 24-hour volume, phase volumes and rates (time-offset), and the urine-output titration band (1:1 with the parent calculation record)."
+x-namespace:
+  form: parkland-formula-for-burns
+  apiPrefix: /api/parkland-formula-for-burns/
+  sqlSchema: parkland_formula_for_burns
+  xmlNamespace: https://formexamples.github.io/parkland-formula-for-burns/xml
+tags:
+  - name: parkland-formula-for-burns
+    description: Parkland Formula For Burns form
 paths:
   /api/parkland-formula-for-burns/parkland_formula_for_burns_grades:
     get:
       summary: List ParklandFormulaForBurnsGrade records
+      tags: [parkland-formula-for-burns]
       operationId: listParklandFormulaForBurnsGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ParklandFormulaForBurnsGrade
+      tags: [parkland-formula-for-burns]
       operationId: createParklandFormulaForBurnsGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ParklandFormulaForBurnsGrade by id
+      tags: [parkland-formula-for-burns]
       operationId: getParklandFormulaForBurnsGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ParklandFormulaForBurnsGrade
+      tags: [parkland-formula-for-burns]
       operationId: updateParklandFormulaForBurnsGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ParklandFormulaForBurnsGrade
+      tags: [parkland-formula-for-burns]
       operationId: replaceParklandFormulaForBurnsGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ParklandFormulaForBurnsGrade
+      tags: [parkland-formula-for-burns]
       operationId: deleteParklandFormulaForBurnsGrade
       responses:
         "200":

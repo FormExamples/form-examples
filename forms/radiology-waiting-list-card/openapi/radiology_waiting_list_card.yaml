@@ -5,10 +5,19 @@ info:
   title: Radiology Waiting List Card — RadiologyWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a radiology waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: radiology-waiting-list-card
+  apiPrefix: /api/radiology-waiting-list-card/
+  sqlSchema: radiology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/radiology-waiting-list-card/xml
+tags:
+  - name: radiology-waiting-list-card
+    description: Radiology Waiting List Card form
 paths:
   /api/radiology-waiting-list-card/radiology_waiting_list_cards:
     get:
       summary: List RadiologyWaitingListCard records
+      tags: [radiology-waiting-list-card]
       operationId: listRadiologyWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RadiologyWaitingListCard
+      tags: [radiology-waiting-list-card]
       operationId: createRadiologyWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RadiologyWaitingListCard by id
+      tags: [radiology-waiting-list-card]
       operationId: getRadiologyWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RadiologyWaitingListCard
+      tags: [radiology-waiting-list-card]
       operationId: updateRadiologyWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RadiologyWaitingListCard
+      tags: [radiology-waiting-list-card]
       operationId: replaceRadiologyWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RadiologyWaitingListCard
+      tags: [radiology-waiting-list-card]
       operationId: deleteRadiologyWaitingListCard
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT return_to_work_grade (id,created_at,updated_at,deleted_at,return_to_work_id,fitness_statement,restriction_priority,rule_count,flag_count,graded_at)>
+<!ATTLIST return_to_work_grade xmlns CDATA #FIXED "https://formexamples.github.io/return-to-work/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

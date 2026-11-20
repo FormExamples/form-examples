@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE patient_medication SYSTEM "patient_medication.dtd">
-<patient_medication>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<patient_medication xmlns="https://formexamples.github.io/pre-anaesthesia-assessment/xml">
+<id>5e2f04e5-c95a-58b3-96b3-a255f7725ddb</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<medication_id>770e8400-e29b-41d4-a716-446655440002</medication_id>
+<patient_id>96eefb7b-2405-5e87-9516-eaa5fe31bb7e</patient_id>
+<medication_id>2ab97f75-2178-5b8c-9ee9-463efeadf135</medication_id>
 </patient_medication>

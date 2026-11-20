@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE electroencephalogram_test_result_grade_rule SYSTEM "electroencephalogram_test_result_grade_rule.dtd">
-<electroencephalogram_test_result_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<electroencephalogram_test_result_grade_rule xmlns="https://formexamples.github.io/electroencephalogram-test-result/xml">
+<id>de0a0f14-6b7a-5187-80ae-f6b19aa0ef50</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<electroencephalogram_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</electroencephalogram_test_result_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<electroencephalogram_test_result_grade_id>94361b16-7655-593f-b4ef-f8a5a31692ce</electroencephalogram_test_result_grade_id>
+<rule_id>65b581a8-e534-5a8d-b4c0-bb7b688d47b7</rule_id>
 <axis>classification</axis>
 <category>General</category>
 <description>Example text.</description>

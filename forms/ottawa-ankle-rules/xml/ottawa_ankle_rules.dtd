@@ -1,4 +1,5 @@
 <!ELEMENT ottawa_ankle_rules (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,patient_identifier,assessed_at,care_setting,injured_side,hours_since_injury,age_years,sex,assessment_reliable,malleolar_zone_pain,lateral_malleolus_tenderness,medial_malleolus_tenderness,midfoot_zone_pain,fifth_metatarsal_base_tenderness,navicular_tenderness,able_to_bear_weight_immediately,able_to_bear_weight_now,clinical_notes)>
+<!ATTLIST ottawa_ankle_rules xmlns CDATA #FIXED "https://formexamples.github.io/ottawa-ankle-rules/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

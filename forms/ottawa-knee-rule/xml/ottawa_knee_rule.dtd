@@ -1,4 +1,5 @@
 <!ELEMENT ottawa_knee_rule (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,patient_identifier,assessed_at,care_setting,injury_mechanism,hours_since_injury,sex,injured_side,age_years,patellar_tenderness,other_bony_tenderness,fibular_head_tenderness,unable_to_flex_90,unable_to_bear_weight,clinical_notes)>
+<!ATTLIST ottawa_knee_rule xmlns CDATA #FIXED "https://formexamples.github.io/ottawa-knee-rule/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

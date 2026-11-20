@@ -1,4 +1,5 @@
 <!ELEMENT corrected_calcium_calculator_grade (id,created_at,updated_at,deleted_at,corrected_calcium_calculator_id,corrected_calcium_mmol_l,classification,graded_at)>
+<!ATTLIST corrected_calcium_calculator_grade xmlns CDATA #FIXED "https://formexamples.github.io/corrected-calcium-calculator/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

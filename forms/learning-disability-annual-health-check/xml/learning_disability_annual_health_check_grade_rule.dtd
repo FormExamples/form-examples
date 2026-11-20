@@ -1,4 +1,5 @@
 <!ELEMENT learning_disability_annual_health_check_grade_rule (id,created_at,updated_at,deleted_at,learning_disability_annual_health_check_grade_id,rule_id,component,completed,category,description)>
+<!ATTLIST learning_disability_annual_health_check_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/learning-disability-annual-health-check/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

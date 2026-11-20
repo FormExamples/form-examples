@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,asrm_stage,asrm_points,ehp30_total_score,overall_severity,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/endometriosis-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

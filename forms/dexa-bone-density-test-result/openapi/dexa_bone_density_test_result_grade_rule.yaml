@@ -5,10 +5,19 @@ info:
   title: Dexa Bone Density Test Result — DexaBoneDensityTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: dexa-bone-density-test-result
+  apiPrefix: /api/dexa-bone-density-test-result/
+  sqlSchema: dexa_bone_density_test_result
+  xmlNamespace: https://formexamples.github.io/dexa-bone-density-test-result/xml
+tags:
+  - name: dexa-bone-density-test-result
+    description: Dexa Bone Density Test Result form
 paths:
   /api/dexa-bone-density-test-result/dexa_bone_density_test_result_grade_rules:
     get:
       summary: List DexaBoneDensityTestResultGradeRule records
+      tags: [dexa-bone-density-test-result]
       operationId: listDexaBoneDensityTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DexaBoneDensityTestResultGradeRule
+      tags: [dexa-bone-density-test-result]
       operationId: createDexaBoneDensityTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DexaBoneDensityTestResultGradeRule by id
+      tags: [dexa-bone-density-test-result]
       operationId: getDexaBoneDensityTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DexaBoneDensityTestResultGradeRule
+      tags: [dexa-bone-density-test-result]
       operationId: updateDexaBoneDensityTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DexaBoneDensityTestResultGradeRule
+      tags: [dexa-bone-density-test-result]
       operationId: replaceDexaBoneDensityTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DexaBoneDensityTestResultGradeRule
+      tags: [dexa-bone-density-test-result]
       operationId: deleteDexaBoneDensityTestResultGradeRule
       responses:
         "200":

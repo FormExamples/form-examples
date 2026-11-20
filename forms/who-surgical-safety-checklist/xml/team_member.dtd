@@ -1,4 +1,5 @@
 <!ELEMENT team_member (id,created_at,updated_at,deleted_at,checklist_id,clinician_id,name,role,introduced_during_time_out,notes)>
+<!ATTLIST team_member xmlns CDATA #FIXED "https://formexamples.github.io/who-surgical-safety-checklist/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Toxicology Test Request — Clinician
   version: 1.0.0
   description: Requesting clinician (referrer) who completes the toxicology test request.
+x-namespace:
+  form: toxicology-test-request
+  apiPrefix: /api/toxicology-test-request/
+  sqlSchema: toxicology_test_request
+  xmlNamespace: https://formexamples.github.io/toxicology-test-request/xml
+tags:
+  - name: toxicology-test-request
+    description: Toxicology Test Request form
 paths:
   /api/toxicology-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags: [toxicology-test-request]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [toxicology-test-request]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [toxicology-test-request]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [toxicology-test-request]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [toxicology-test-request]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [toxicology-test-request]
       operationId: deleteClinician
       responses:
         "200":

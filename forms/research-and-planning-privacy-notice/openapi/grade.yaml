@@ -5,10 +5,19 @@ info:
   title: Research And Planning Privacy Notice — Grade
   version: 1.0.0
   description: Computed grading / scoring result. One-to-one child of assessment. The result_category column holds a form-specific label (e.g. Low, Moderate, High, or Complete/Incomplete); result_score is optional for numeric instruments.
+x-namespace:
+  form: research-and-planning-privacy-notice
+  apiPrefix: /api/research-and-planning-privacy-notice/
+  sqlSchema: research_and_planning_privacy_notice
+  xmlNamespace: https://formexamples.github.io/research-and-planning-privacy-notice/xml
+tags:
+  - name: research-and-planning-privacy-notice
+    description: Research And Planning Privacy Notice form
 paths:
   /api/research-and-planning-privacy-notice/grades:
     get:
       summary: List Grade records
+      tags: [research-and-planning-privacy-notice]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [research-and-planning-privacy-notice]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [research-and-planning-privacy-notice]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [research-and-planning-privacy-notice]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [research-and-planning-privacy-notice]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [research-and-planning-privacy-notice]
       operationId: deleteGrade
       responses:
         "200":

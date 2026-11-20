@@ -5,10 +5,19 @@ info:
   title: Casualty Card Form — CasualtyCardVitalSigns
   version: 1.0.0
   description: 1:1 with casualty_card. Vital signs observations used for NEWS2 auto-calculation.
+x-namespace:
+  form: casualty-card-form
+  apiPrefix: /api/casualty-card-form/
+  sqlSchema: casualty_card_form
+  xmlNamespace: https://formexamples.github.io/casualty-card-form/xml
+tags:
+  - name: casualty-card-form
+    description: Casualty Card Form form
 paths:
   /api/casualty-card-form/casualty_card_vital_signs:
     get:
       summary: List CasualtyCardVitalSigns records
+      tags: [casualty-card-form]
       operationId: listCasualtyCardVitalSigns
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CasualtyCardVitalSigns
+      tags: [casualty-card-form]
       operationId: createCasualtyCardVitalSigns
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CasualtyCardVitalSigns by id
+      tags: [casualty-card-form]
       operationId: getCasualtyCardVitalSigns
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CasualtyCardVitalSigns
+      tags: [casualty-card-form]
       operationId: updateCasualtyCardVitalSigns
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CasualtyCardVitalSigns
+      tags: [casualty-card-form]
       operationId: replaceCasualtyCardVitalSigns
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CasualtyCardVitalSigns
+      tags: [casualty-card-form]
       operationId: deleteCasualtyCardVitalSigns
       responses:
         "200":

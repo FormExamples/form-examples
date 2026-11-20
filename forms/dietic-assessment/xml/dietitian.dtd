@@ -1,4 +1,5 @@
 <!ELEMENT dietitian (id,created_at,updated_at,deleted_at,name,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,role,specialty,registration_body,registration_number,employer,united_kingdom_nhs_number)>
+<!ATTLIST dietitian xmlns CDATA #FIXED "https://formexamples.github.io/dietic-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

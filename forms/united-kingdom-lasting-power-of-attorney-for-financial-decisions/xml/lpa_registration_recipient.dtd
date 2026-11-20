@@ -1,4 +1,5 @@
 <!ELEMENT lpa_registration_recipient (id,created_at,updated_at,deleted_at,lpa_id,recipient_kind,recipient_person_id,company_name,prefers_post,prefers_phone,prefers_email,prefers_welsh,contact_phone,contact_email,other_first_names,other_last_name,other_address_line_1,other_address_line_2,other_address_line_3,other_postcode)>
+<!ATTLIST lpa_registration_recipient xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

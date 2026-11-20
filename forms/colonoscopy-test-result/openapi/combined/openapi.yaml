@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Colonoscopy Test Result form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: colonoscopy-test-result
+  apiPrefix: /api/colonoscopy-test-result/
+  sqlSchema: colonoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/colonoscopy-test-result/xml
+tags:
+- name: colonoscopy-test-result
+  description: Colonoscopy Test Result form
 paths:
   /api/colonoscopy-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - colonoscopy-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - colonoscopy-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - colonoscopy-test-result
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - colonoscopy-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - colonoscopy-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - colonoscopy-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/colonoscopy-test-result/colonoscopy_test_result_grade_flags:
     get:
       summary: List ColonoscopyTestResultGradeFlag records
+      tags:
+      - colonoscopy-test-result
       operationId: listColonoscopyTestResultGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ColonoscopyTestResultGradeFlag
+      tags:
+      - colonoscopy-test-result
       operationId: createColonoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ColonoscopyTestResultGradeFlag by id
+      tags:
+      - colonoscopy-test-result
       operationId: getColonoscopyTestResultGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ColonoscopyTestResultGradeFlag
+      tags:
+      - colonoscopy-test-result
       operationId: updateColonoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ColonoscopyTestResultGradeFlag
+      tags:
+      - colonoscopy-test-result
       operationId: replaceColonoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ColonoscopyTestResultGradeFlag
+      tags:
+      - colonoscopy-test-result
       operationId: deleteColonoscopyTestResultGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/colonoscopy-test-result/colonoscopy_test_result_grade_rules:
     get:
       summary: List ColonoscopyTestResultGradeRule records
+      tags:
+      - colonoscopy-test-result
       operationId: listColonoscopyTestResultGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ColonoscopyTestResultGradeRule
+      tags:
+      - colonoscopy-test-result
       operationId: createColonoscopyTestResultGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ColonoscopyTestResultGradeRule by id
+      tags:
+      - colonoscopy-test-result
       operationId: getColonoscopyTestResultGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ColonoscopyTestResultGradeRule
+      tags:
+      - colonoscopy-test-result
       operationId: updateColonoscopyTestResultGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ColonoscopyTestResultGradeRule
+      tags:
+      - colonoscopy-test-result
       operationId: replaceColonoscopyTestResultGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ColonoscopyTestResultGradeRule
+      tags:
+      - colonoscopy-test-result
       operationId: deleteColonoscopyTestResultGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/colonoscopy-test-result/colonoscopy_test_result_grades:
     get:
       summary: List ColonoscopyTestResultGrade records
+      tags:
+      - colonoscopy-test-result
       operationId: listColonoscopyTestResultGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ColonoscopyTestResultGrade
+      tags:
+      - colonoscopy-test-result
       operationId: createColonoscopyTestResultGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ColonoscopyTestResultGrade by id
+      tags:
+      - colonoscopy-test-result
       operationId: getColonoscopyTestResultGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ColonoscopyTestResultGrade
+      tags:
+      - colonoscopy-test-result
       operationId: updateColonoscopyTestResultGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ColonoscopyTestResultGrade
+      tags:
+      - colonoscopy-test-result
       operationId: replaceColonoscopyTestResultGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ColonoscopyTestResultGrade
+      tags:
+      - colonoscopy-test-result
       operationId: deleteColonoscopyTestResultGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/colonoscopy-test-result/colonoscopy_test_results:
     get:
       summary: List ColonoscopyTestResult records
+      tags:
+      - colonoscopy-test-result
       operationId: listColonoscopyTestResult
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ColonoscopyTestResult
+      tags:
+      - colonoscopy-test-result
       operationId: createColonoscopyTestResult
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ColonoscopyTestResult by id
+      tags:
+      - colonoscopy-test-result
       operationId: getColonoscopyTestResult
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ColonoscopyTestResult
+      tags:
+      - colonoscopy-test-result
       operationId: updateColonoscopyTestResult
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ColonoscopyTestResult
+      tags:
+      - colonoscopy-test-result
       operationId: replaceColonoscopyTestResult
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ColonoscopyTestResult
+      tags:
+      - colonoscopy-test-result
       operationId: deleteColonoscopyTestResult
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - colonoscopy-test-result
   /api/colonoscopy-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - colonoscopy-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - colonoscopy-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - colonoscopy-test-result
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - colonoscopy-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - colonoscopy-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - colonoscopy-test-result
       operationId: deletePatient
       responses:
         '200':

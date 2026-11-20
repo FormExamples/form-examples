@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE clin_micro_waiting_list_card_grade_flag SYSTEM "clin_micro_waiting_list_card_grade_flag.dtd">
-<clin_micro_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<clin_micro_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/clinical-microbiology-waiting-list-card/xml">
+<id>80202209-0e97-57be-9ec2-e921175aa25b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<clin_micro_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</clin_micro_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<clin_micro_waiting_list_card_grade_id>22d42fd1-bfe0-5f0d-82a3-771af9da27f5</clin_micro_waiting_list_card_grade_id>
+<flag_id>ae8a2962-6439-5e35-8008-2f250ec78ee6</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -5,10 +5,19 @@ info:
   title: Attention Deficit Assessment — Grade
   version: 1.0.0
   description: "Computed ASRS v1.1 screening result. Part A: 4+ darkly shaded responses = highly consistent with ADHD diagnosis. One-to-one child of assessment."
+x-namespace:
+  form: attention-deficit-assessment
+  apiPrefix: /api/attention-deficit-assessment/
+  sqlSchema: attention_deficit_assessment
+  xmlNamespace: https://formexamples.github.io/attention-deficit-assessment/xml
+tags:
+  - name: attention-deficit-assessment
+    description: Attention Deficit Assessment form
 paths:
   /api/attention-deficit-assessment/grades:
     get:
       summary: List Grade records
+      tags: [attention-deficit-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [attention-deficit-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [attention-deficit-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [attention-deficit-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [attention-deficit-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [attention-deficit-assessment]
       operationId: deleteGrade
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT ward_round_note_grade (id,created_at,updated_at,deleted_at,ward_round_note_id,status,completeness_percent,header_documented,problems_documented,examination_documented,investigations_documented,vte_documented,medication_documented,plan_documented,escalation_documented,graded_at)>
+<!ATTLIST ward_round_note_grade xmlns CDATA #FIXED "https://formexamples.github.io/ward-round-note/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,6 +1,6 @@
 {
   "resourceType": "ClinicalImpression",
-  "id": "880e8400-e29b-41d4-a716-446655440003",
+  "id": "5a464675-d928-584d-adcd-a6e308711f75",
   "meta": {
     "profile": [
       "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -9,10 +9,10 @@
   },
   "status": "completed",
   "subject": {
-    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+    "reference": "Patient/a6d5d1b5-1e5c-5295-9551-df7a5b4f6f6f"
   },
   "encounter": {
-    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+    "reference": "Encounter/249ae1f0-e64a-52dc-b040-5f2746375b43"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "date": "2026-04-09T10:00:00+00:00",

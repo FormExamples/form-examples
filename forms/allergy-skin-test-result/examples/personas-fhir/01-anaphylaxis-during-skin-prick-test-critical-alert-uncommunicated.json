@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "c57e1a56-1251-4561-a0a6-00046f05a94d",
+  "id": "790ff383-e28d-550d-b3c8-c02f51f81950",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:fc2221ff-99ad-4178-ae72-4cec2e40af09",
+      "fullUrl": "urn:uuid:c0c1b48a-8543-5c80-a651-c0666ac268af",
       "resource": {
         "resourceType": "Patient",
-        "id": "fc2221ff-99ad-4178-ae72-4cec2e40af09",
+        "id": "c0c1b48a-8543-5c80-a651-c0666ac268af",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a8808fb7-40f0-4042-a20e-efc1800f1303",
+      "fullUrl": "urn:uuid:19837ac3-18cf-5169-87c7-1c8d71a43f1f",
       "resource": {
         "resourceType": "Observation",
-        "id": "a8808fb7-40f0-4042-a20e-efc1800f1303",
+        "id": "19837ac3-18cf-5169-87c7-1c8d71a43f1f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:fc2221ff-99ad-4178-ae72-4cec2e40af09"
+          "reference": "urn:uuid:c0c1b48a-8543-5c80-a651-c0666ac268af"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:65649f22-abb2-4075-aed2-483457155c3e",
+      "fullUrl": "urn:uuid:fafb8a38-8cdf-5c6b-a200-e33eddaf33f2",
       "resource": {
         "resourceType": "Observation",
-        "id": "65649f22-abb2-4075-aed2-483457155c3e",
+        "id": "fafb8a38-8cdf-5c6b-a200-e33eddaf33f2",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:fc2221ff-99ad-4178-ae72-4cec2e40af09"
+          "reference": "urn:uuid:c0c1b48a-8543-5c80-a651-c0666ac268af"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -538,10 +538,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:42c7c727-bd26-424e-a939-c8776d0e14db",
+      "fullUrl": "urn:uuid:ac014655-2230-513f-b991-0899ff18ac8d",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "42c7c727-bd26-424e-a939-c8776d0e14db",
+        "id": "ac014655-2230-513f-b991-0899ff18ac8d",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -550,7 +550,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:fc2221ff-99ad-4178-ae72-4cec2e40af09"
+          "reference": "urn:uuid:c0c1b48a-8543-5c80-a651-c0666ac268af"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -559,10 +559,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:16dea148-3d5f-4327-a5f0-94276fbce8b7",
+      "fullUrl": "urn:uuid:d5a9a353-a6f4-5a91-b4e5-2bbbe8991d8f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "16dea148-3d5f-4327-a5f0-94276fbce8b7",
+        "id": "d5a9a353-a6f4-5a91-b4e5-2bbbe8991d8f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -592,17 +592,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:fc2221ff-99ad-4178-ae72-4cec2e40af09"
+          "reference": "urn:uuid:c0c1b48a-8543-5c80-a651-c0666ac268af"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A systemic / anaphylactic reaction occurred during the test; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:ac4c7aba-d8c2-4f57-ae99-793d98c7557e",
+      "fullUrl": "urn:uuid:c6462289-c051-5ad0-a5cd-086731d9c7d5",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ac4c7aba-d8c2-4f57-ae99-793d98c7557e",
+        "id": "c6462289-c051-5ad0-a5cd-086731d9c7d5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -632,17 +632,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:fc2221ff-99ad-4178-ae72-4cec2e40af09"
+          "reference": "urn:uuid:c0c1b48a-8543-5c80-a651-c0666ac268af"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Anaphylaxis during the test; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:cab12acf-fe56-4e9e-a76f-32274c23861f",
+      "fullUrl": "urn:uuid:ec188652-aab7-5d77-853d-e4d54825bfd5",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "cab12acf-fe56-4e9e-a76f-32274c23861f",
+        "id": "ec188652-aab7-5d77-853d-e4d54825bfd5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -672,17 +672,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:fc2221ff-99ad-4178-ae72-4cec2e40af09"
+          "reference": "urn:uuid:c0c1b48a-8543-5c80-a651-c0666ac268af"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Anaphylaxis during the test auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:ab3f5ef5-9756-4bbb-ad60-f5b804c27b09",
+      "fullUrl": "urn:uuid:3a4ae21b-1feb-5e0b-853a-099657feb991",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ab3f5ef5-9756-4bbb-ad60-f5b804c27b09",
+        "id": "3a4ae21b-1feb-5e0b-853a-099657feb991",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -712,7 +712,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:fc2221ff-99ad-4178-ae72-4cec2e40af09"
+          "reference": "urn:uuid:c0c1b48a-8543-5c80-a651-c0666ac268af"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A systemic / anaphylactic reaction occurred during the test.",
@@ -726,10 +726,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:18d00240-4d6c-4326-a68f-c1a42514e3bc",
+      "fullUrl": "urn:uuid:3bea2fcf-34e6-58ed-a1fb-73814b7ba193",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "18d00240-4d6c-4326-a68f-c1a42514e3bc",
+        "id": "3bea2fcf-34e6-58ed-a1fb-73814b7ba193",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -759,7 +759,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:fc2221ff-99ad-4178-ae72-4cec2e40af09"
+          "reference": "urn:uuid:c0c1b48a-8543-5c80-a651-c0666ac268af"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Anaphylaxis during testing is a critical safety event.",
@@ -773,10 +773,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:bf6360eb-9fab-4e33-a075-14e44ac8c8a6",
+      "fullUrl": "urn:uuid:e23f6769-0fc0-538c-b8c0-0f623bde03e7",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "bf6360eb-9fab-4e33-a075-14e44ac8c8a6",
+        "id": "e23f6769-0fc0-538c-b8c0-0f623bde03e7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -806,7 +806,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:fc2221ff-99ad-4178-ae72-4cec2e40af09"
+          "reference": "urn:uuid:c0c1b48a-8543-5c80-a651-c0666ac268af"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical event present but the result has not been recorded as communicated.",

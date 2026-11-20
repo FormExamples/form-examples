@@ -5,10 +5,19 @@ info:
   title: Consent To Treatment — GradingAdditionalFlag
   version: 1.0.0
   description: Additional flags detected during consent form validation (e.g. capacity concerns, missing signatures, advance directives).
+x-namespace:
+  form: consent-to-treatment
+  apiPrefix: /api/consent-to-treatment/
+  sqlSchema: consent_to_treatment
+  xmlNamespace: https://formexamples.github.io/consent-to-treatment/xml
+tags:
+  - name: consent-to-treatment
+    description: Consent To Treatment form
 paths:
   /api/consent-to-treatment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [consent-to-treatment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [consent-to-treatment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [consent-to-treatment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [consent-to-treatment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [consent-to-treatment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [consent-to-treatment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

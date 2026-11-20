@@ -5,10 +5,19 @@ info:
   title: Uk Nhs Digital Technology Assessment Criteria — Product
   version: 1.0.0
   description: Digital health technology product under assessment.
+x-namespace:
+  form: uk-nhs-digital-technology-assessment-criteria
+  apiPrefix: /api/uk-nhs-digital-technology-assessment-criteria/
+  sqlSchema: uk_nhs_digital_technology_assessment_criteria
+  xmlNamespace: https://formexamples.github.io/uk-nhs-digital-technology-assessment-criteria/xml
+tags:
+  - name: uk-nhs-digital-technology-assessment-criteria
+    description: Uk Nhs Digital Technology Assessment Criteria form
 paths:
   /api/uk-nhs-digital-technology-assessment-criteria/products:
     get:
       summary: List Product records
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: listProduct
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Product
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: createProduct
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Product by id
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: getProduct
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Product
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: updateProduct
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Product
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: replaceProduct
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Product
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: deleteProduct
       responses:
         "200":

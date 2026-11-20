@@ -5,10 +5,19 @@ info:
   title: Occupational Therapy Assessment — AssessmentSatisfactionRatingItem
   version: 1.0.0
   description: Individual COPM satisfaction rating for a specific occupational issue identified by the patient.
+x-namespace:
+  form: occupational-therapy-assessment
+  apiPrefix: /api/occupational-therapy-assessment/
+  sqlSchema: occupational_therapy_assessment
+  xmlNamespace: https://formexamples.github.io/occupational-therapy-assessment/xml
+tags:
+  - name: occupational-therapy-assessment
+    description: Occupational Therapy Assessment form
 paths:
   /api/occupational-therapy-assessment/assessment_satisfaction_rating_items:
     get:
       summary: List AssessmentSatisfactionRatingItem records
+      tags: [occupational-therapy-assessment]
       operationId: listAssessmentSatisfactionRatingItem
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentSatisfactionRatingItem
+      tags: [occupational-therapy-assessment]
       operationId: createAssessmentSatisfactionRatingItem
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentSatisfactionRatingItem by id
+      tags: [occupational-therapy-assessment]
       operationId: getAssessmentSatisfactionRatingItem
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentSatisfactionRatingItem
+      tags: [occupational-therapy-assessment]
       operationId: updateAssessmentSatisfactionRatingItem
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentSatisfactionRatingItem
+      tags: [occupational-therapy-assessment]
       operationId: replaceAssessmentSatisfactionRatingItem
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentSatisfactionRatingItem
+      tags: [occupational-therapy-assessment]
       operationId: deleteAssessmentSatisfactionRatingItem
       responses:
         "200":

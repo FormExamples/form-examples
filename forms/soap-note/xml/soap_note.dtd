@@ -1,4 +1,5 @@
 <!ELEMENT soap_note (id,created_at,updated_at,deleted_at,patient_id,clinician_id,encountered_at,care_setting,encounter_type,clinician_role,patient_identifier,presenting_complaint,history_of_presenting_complaint,patient_reported_symptoms,relevant_history,red_flag_symptoms,examination_findings,vital_signs,abnormal_vitals_present,investigation_results,primary_diagnosis,problem_list,differential,clinical_impression,investigations_plan,treatment_plan,referrals,follow_up,safety_netting,managed_at_home,clinical_note)>
+<!ATTLIST soap_note xmlns CDATA #FIXED "https://formexamples.github.io/soap-note/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

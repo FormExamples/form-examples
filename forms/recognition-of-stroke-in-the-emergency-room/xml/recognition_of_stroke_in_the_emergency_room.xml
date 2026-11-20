@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE recognition_of_stroke_in_the_emergency_room SYSTEM "recognition_of_stroke_in_the_emergency_room.dtd">
-<recognition_of_stroke_in_the_emergency_room>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<recognition_of_stroke_in_the_emergency_room xmlns="https://formexamples.github.io/recognition-of-stroke-in-the-emergency-room/xml">
+<id>67ad2e99-81de-5b6a-840a-3f50eaad5477</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>cba88556-db2b-5981-a97e-69c5390cf4d8</patient_id>
+<clinician_id>2fb83ac8-32e9-5471-8d40-e3dd8660361c</clinician_id>
 <clinician_name>Example</clinician_name>
 <clinician_role>doctor</clinician_role>
 <assessed_at>2026-04-09T10:00:00Z</assessed_at>

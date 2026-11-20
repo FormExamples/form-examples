@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rheumatology_waiting_list_card_grade SYSTEM "rheumatology_waiting_list_card_grade.dtd">
-<rheumatology_waiting_list_card_grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<rheumatology_waiting_list_card_grade xmlns="https://formexamples.github.io/rheumatology-waiting-list-card/xml">
+<id>7bb84be0-f49c-59bf-bf90-2894c89df701</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<rheumatology_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</rheumatology_waiting_list_card_id>
+<rheumatology_waiting_list_card_id>a585b623-5e17-518b-b6c9-af6f4987a3f0</rheumatology_waiting_list_card_id>
 <waiting_time_status>within-target</waiting_time_status>
 <clinical_priority>P1a</clinical_priority>
 <target_wait_weeks>0.0</target_wait_weeks>

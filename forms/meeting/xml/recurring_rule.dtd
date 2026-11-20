@@ -1,4 +1,5 @@
 <!ELEMENT recurring_rule (id,created_at,updated_at,deleted_at,meeting_id,frequency,interval_count,by_day_of_week,by_day_of_month,by_set_position,by_month_of_year,series_count,series_until,timezone,rrule_text)>
+<!ATTLIST recurring_rule xmlns CDATA #FIXED "https://formexamples.github.io/meeting/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

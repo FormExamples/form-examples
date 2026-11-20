@@ -5,10 +5,19 @@ info:
   title: Mental State Examination — MentalStateExamination
   version: 1.0.0
   description: "Main mental state examination (MSE) record: assessment context, patient and clinician identification, and the seven ASEPTIC domains (appearance and behaviour, speech, emotion, perception, thought, insight and judgement, cognition). Completeness-and-risk grade, fired rules, and flags live in child tables."
+x-namespace:
+  form: mental-state-examination
+  apiPrefix: /api/mental-state-examination/
+  sqlSchema: mental_state_examination
+  xmlNamespace: https://formexamples.github.io/mental-state-examination/xml
+tags:
+  - name: mental-state-examination
+    description: Mental State Examination form
 paths:
   /api/mental-state-examination/mental_state_examinations:
     get:
       summary: List MentalStateExamination records
+      tags: [mental-state-examination]
       operationId: listMentalStateExamination
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MentalStateExamination
+      tags: [mental-state-examination]
       operationId: createMentalStateExamination
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MentalStateExamination by id
+      tags: [mental-state-examination]
       operationId: getMentalStateExamination
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MentalStateExamination
+      tags: [mental-state-examination]
       operationId: updateMentalStateExamination
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MentalStateExamination
+      tags: [mental-state-examination]
       operationId: replaceMentalStateExamination
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MentalStateExamination
+      tags: [mental-state-examination]
       operationId: deleteMentalStateExamination
       responses:
         "200":

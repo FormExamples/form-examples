@@ -5,10 +5,19 @@ info:
   title: Pulmonary Function Test Request — PulmonaryFunctionTestRequest
   version: 1.0.0
   description: Pulmonary function test (lung-function / spirometry) request (referral). Captures the requested test, the clinical indication and question, symptoms, smoking and inhaler background, a safety / contraindication screen, and triage urgency.
+x-namespace:
+  form: pulmonary-function-test-request
+  apiPrefix: /api/pulmonary-function-test-request/
+  sqlSchema: pulmonary_function_test_request
+  xmlNamespace: https://formexamples.github.io/pulmonary-function-test-request/xml
+tags:
+  - name: pulmonary-function-test-request
+    description: Pulmonary Function Test Request form
 paths:
   /api/pulmonary-function-test-request/pulmonary_function_test_requests:
     get:
       summary: List PulmonaryFunctionTestRequest records
+      tags: [pulmonary-function-test-request]
       operationId: listPulmonaryFunctionTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PulmonaryFunctionTestRequest
+      tags: [pulmonary-function-test-request]
       operationId: createPulmonaryFunctionTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PulmonaryFunctionTestRequest by id
+      tags: [pulmonary-function-test-request]
       operationId: getPulmonaryFunctionTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PulmonaryFunctionTestRequest
+      tags: [pulmonary-function-test-request]
       operationId: updatePulmonaryFunctionTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PulmonaryFunctionTestRequest
+      tags: [pulmonary-function-test-request]
       operationId: replacePulmonaryFunctionTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PulmonaryFunctionTestRequest
+      tags: [pulmonary-function-test-request]
       operationId: deletePulmonaryFunctionTestRequest
       responses:
         "200":

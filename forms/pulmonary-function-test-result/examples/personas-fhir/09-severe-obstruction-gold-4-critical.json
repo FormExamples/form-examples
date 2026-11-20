@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "4497bb4b-483d-41ea-ab9c-03db26377772",
+  "id": "1dbb3024-c026-579b-a698-7435d8410dcb",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:fd4dc61c-765d-4b61-aed7-995199ff5623",
+      "fullUrl": "urn:uuid:ad17562c-2a34-5d2c-a693-f602beccd5ed",
       "resource": {
         "resourceType": "Patient",
-        "id": "fd4dc61c-765d-4b61-aed7-995199ff5623",
+        "id": "ad17562c-2a34-5d2c-a693-f602beccd5ed",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:676e8b9b-80e4-4561-ad5a-158256f6d820",
+      "fullUrl": "urn:uuid:f7a74207-c198-50f4-939a-ff2de2b77e06",
       "resource": {
         "resourceType": "Observation",
-        "id": "676e8b9b-80e4-4561-ad5a-158256f6d820",
+        "id": "f7a74207-c198-50f4-939a-ff2de2b77e06",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:fd4dc61c-765d-4b61-aed7-995199ff5623"
+          "reference": "urn:uuid:ad17562c-2a34-5d2c-a693-f602beccd5ed"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:9b20a04a-cb5e-42ed-aeb1-dbfe80c030f5",
+      "fullUrl": "urn:uuid:49354146-0d41-5ecb-8ba3-702996c000a0",
       "resource": {
         "resourceType": "Observation",
-        "id": "9b20a04a-cb5e-42ed-aeb1-dbfe80c030f5",
+        "id": "49354146-0d41-5ecb-8ba3-702996c000a0",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:fd4dc61c-765d-4b61-aed7-995199ff5623"
+          "reference": "urn:uuid:ad17562c-2a34-5d2c-a693-f602beccd5ed"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -664,10 +664,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:c39f209c-8d05-473e-a805-59861dd6fda8",
+      "fullUrl": "urn:uuid:2940b447-090c-53cc-a4ea-3c0760b6b01b",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "c39f209c-8d05-473e-a805-59861dd6fda8",
+        "id": "2940b447-090c-53cc-a4ea-3c0760b6b01b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -676,7 +676,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:fd4dc61c-765d-4b61-aed7-995199ff5623"
+          "reference": "urn:uuid:ad17562c-2a34-5d2c-a693-f602beccd5ed"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -685,10 +685,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:41d2f028-7d52-4950-a899-095e10f26c1b",
+      "fullUrl": "urn:uuid:2360e329-b649-549c-8491-27348ed4706f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "41d2f028-7d52-4950-a899-095e10f26c1b",
+        "id": "2360e329-b649-549c-8491-27348ed4706f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -718,17 +718,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:fd4dc61c-765d-4b61-aed7-995199ff5623"
+          "reference": "urn:uuid:ad17562c-2a34-5d2c-a693-f602beccd5ed"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical structured finding (severe or very-severe airflow obstruction or restriction) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:28527dce-d0e3-43c1-acf1-040af8872369",
+      "fullUrl": "urn:uuid:9ea591b0-afd5-5120-834a-ea18a6abda7e",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "28527dce-d0e3-43c1-acf1-040af8872369",
+        "id": "9ea591b0-afd5-5120-834a-ea18a6abda7e",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -758,17 +758,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:fd4dc61c-765d-4b61-aed7-995199ff5623"
+          "reference": "urn:uuid:ad17562c-2a34-5d2c-a693-f602beccd5ed"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Severe or very-severe ventilatory impairment; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:990c95d4-a91e-4270-aed2-70c57a077f3a",
+      "fullUrl": "urn:uuid:57e74a16-fd02-539d-823d-59eba24851d7",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "990c95d4-a91e-4270-aed2-70c57a077f3a",
+        "id": "57e74a16-fd02-539d-823d-59eba24851d7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -798,17 +798,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:fd4dc61c-765d-4b61-aed7-995199ff5623"
+          "reference": "urn:uuid:ad17562c-2a34-5d2c-a693-f602beccd5ed"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:da553d60-44b0-4323-a740-c77857a4a394",
+      "fullUrl": "urn:uuid:33932505-bbf8-577f-bcc2-ba7e5ce0f7e4",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "da553d60-44b0-4323-a740-c77857a4a394",
+        "id": "33932505-bbf8-577f-bcc2-ba7e5ce0f7e4",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -838,7 +838,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:fd4dc61c-765d-4b61-aed7-995199ff5623"
+          "reference": "urn:uuid:ad17562c-2a34-5d2c-a693-f602beccd5ed"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (severe or very-severe airflow obstruction or restriction) is present.",
@@ -852,10 +852,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:5be62401-2b12-4610-a7d6-c78748ec42e8",
+      "fullUrl": "urn:uuid:b05b6dbe-4b0c-5564-8320-678887e67977",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "5be62401-2b12-4610-a7d6-c78748ec42e8",
+        "id": "b05b6dbe-4b0c-5564-8320-678887e67977",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -885,7 +885,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:fd4dc61c-765d-4b61-aed7-995199ff5623"
+          "reference": "urn:uuid:ad17562c-2a34-5d2c-a693-f602beccd5ed"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",
@@ -899,10 +899,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:1f6aec1d-3691-438b-ac8f-ba7a7b83e05d",
+      "fullUrl": "urn:uuid:48921664-9e84-5efa-a6b7-5280513bf977",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "1f6aec1d-3691-438b-ac8f-ba7a7b83e05d",
+        "id": "48921664-9e84-5efa-a6b7-5280513bf977",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -932,7 +932,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:fd4dc61c-765d-4b61-aed7-995199ff5623"
+          "reference": "urn:uuid:ad17562c-2a34-5d2c-a693-f602beccd5ed"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Reduced gas transfer (low DLCO) is present and may warrant respiratory referral.",

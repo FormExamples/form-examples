@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pulmonary_function_test_result SYSTEM "pulmonary_function_test_result.dtd">
-<pulmonary_function_test_result>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<pulmonary_function_test_result xmlns="https://formexamples.github.io/pulmonary-function-test-result/xml">
+<id>1c834339-066f-5bcb-a37e-455bc9580d2c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>09c9ed37-ef03-56cf-bf6e-0821d9bfbda2</patient_id>
+<clinician_id>bb38eb94-5f20-5c31-a044-45b45bf4d9c2</clinician_id>
 <originating_request_reference></originating_request_reference>
 <test_type>spirometry</test_type>
 <performed_date>2026-01-15</performed_date>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nephrology_waiting_list_card_grade_flag SYSTEM "nephrology_waiting_list_card_grade_flag.dtd">
-<nephrology_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<nephrology_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/nephrology-waiting-list-card/xml">
+<id>f72488d6-229f-5b3c-82e6-4a2fae25d380</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<nephrology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</nephrology_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<nephrology_waiting_list_card_grade_id>2ed97ebe-7136-5334-a689-47ff3e7c0043</nephrology_waiting_list_card_grade_id>
+<flag_id>e95e4977-bba4-5092-ad60-23ff73ee3640</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

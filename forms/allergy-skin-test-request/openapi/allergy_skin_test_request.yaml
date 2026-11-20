@@ -5,10 +5,19 @@ info:
   title: Allergy Skin Test Request — AllergySkinTestRequest
   version: 1.0.0
   description: Allergy skin test request (referral) for skin-prick, intradermal, patch, specific-IgE blood, or drug-provocation testing. Captures the requested test type, allergen panels, the clinical indication and question, antihistamine / beta-blocker / skin-disease validity-and-safety history, and triage urgency.
+x-namespace:
+  form: allergy-skin-test-request
+  apiPrefix: /api/allergy-skin-test-request/
+  sqlSchema: allergy_skin_test_request
+  xmlNamespace: https://formexamples.github.io/allergy-skin-test-request/xml
+tags:
+  - name: allergy-skin-test-request
+    description: Allergy Skin Test Request form
 paths:
   /api/allergy-skin-test-request/allergy_skin_test_requests:
     get:
       summary: List AllergySkinTestRequest records
+      tags: [allergy-skin-test-request]
       operationId: listAllergySkinTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AllergySkinTestRequest
+      tags: [allergy-skin-test-request]
       operationId: createAllergySkinTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AllergySkinTestRequest by id
+      tags: [allergy-skin-test-request]
       operationId: getAllergySkinTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AllergySkinTestRequest
+      tags: [allergy-skin-test-request]
       operationId: updateAllergySkinTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AllergySkinTestRequest
+      tags: [allergy-skin-test-request]
       operationId: replaceAllergySkinTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AllergySkinTestRequest
+      tags: [allergy-skin-test-request]
       operationId: deleteAllergySkinTestRequest
       responses:
         "200":

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United Kingdom Statement of Fitness for Work form,
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-kingdom-statement-of-fitness-for-work
+  apiPrefix: /api/united-kingdom-statement-of-fitness-for-work/
+  sqlSchema: united_kingdom_statement_of_fitness_for_work
+  xmlNamespace: https://formexamples.github.io/united-kingdom-statement-of-fitness-for-work/xml
+tags:
+- name: united-kingdom-statement-of-fitness-for-work
+  description: United Kingdom Statement of Fitness for Work form
 paths:
   /api/united-kingdom-statement-of-fitness-for-work/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/united-kingdom-statement-of-fitness-for-work/medical_practices:
     get:
       summary: List MedicalPractice records
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: listMedicalPractice
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalPractice
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: createMedicalPractice
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalPractice by id
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: getMedicalPractice
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalPractice
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: updateMedicalPractice
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalPractice
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: replaceMedicalPractice
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalPractice
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: deleteMedicalPractice
       responses:
         '200':
@@ -511,9 +543,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
   /api/united-kingdom-statement-of-fitness-for-work/patients:
     get:
       summary: List Patient records
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: listPatient
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: createPatient
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: getPatient
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: updatePatient
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: replacePatient
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: deletePatient
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_work_grade_flags:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWorkGradeFlag records
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: listUnitedKingdomStatementOfFitnessForWorkGradeFlag
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomStatementOfFitnessForWorkGradeFlag
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: createUnitedKingdomStatementOfFitnessForWorkGradeFlag
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomStatementOfFitnessForWorkGradeFlag by id
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: getUnitedKingdomStatementOfFitnessForWorkGradeFlag
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomStatementOfFitnessForWorkGradeFlag
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: updateUnitedKingdomStatementOfFitnessForWorkGradeFlag
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomStatementOfFitnessForWorkGradeFlag
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: replaceUnitedKingdomStatementOfFitnessForWorkGradeFlag
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomStatementOfFitnessForWorkGradeFlag
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: deleteUnitedKingdomStatementOfFitnessForWorkGradeFlag
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_work_grade_rules:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWorkGradeRule records
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: listUnitedKingdomStatementOfFitnessForWorkGradeRule
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomStatementOfFitnessForWorkGradeRule
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: createUnitedKingdomStatementOfFitnessForWorkGradeRule
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomStatementOfFitnessForWorkGradeRule by id
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: getUnitedKingdomStatementOfFitnessForWorkGradeRule
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomStatementOfFitnessForWorkGradeRule
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: updateUnitedKingdomStatementOfFitnessForWorkGradeRule
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomStatementOfFitnessForWorkGradeRule
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: replaceUnitedKingdomStatementOfFitnessForWorkGradeRule
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomStatementOfFitnessForWorkGradeRule
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: deleteUnitedKingdomStatementOfFitnessForWorkGradeRule
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_work_grades:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWorkGrade records
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: listUnitedKingdomStatementOfFitnessForWorkGrade
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomStatementOfFitnessForWorkGrade
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: createUnitedKingdomStatementOfFitnessForWorkGrade
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomStatementOfFitnessForWorkGrade by id
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: getUnitedKingdomStatementOfFitnessForWorkGrade
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomStatementOfFitnessForWorkGrade
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: updateUnitedKingdomStatementOfFitnessForWorkGrade
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomStatementOfFitnessForWorkGrade
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: replaceUnitedKingdomStatementOfFitnessForWorkGrade
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomStatementOfFitnessForWorkGrade
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: deleteUnitedKingdomStatementOfFitnessForWorkGrade
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_works:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWork records
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: listUnitedKingdomStatementOfFitnessForWork
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomStatementOfFitnessForWork
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: createUnitedKingdomStatementOfFitnessForWork
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomStatementOfFitnessForWork by id
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: getUnitedKingdomStatementOfFitnessForWork
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomStatementOfFitnessForWork
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: updateUnitedKingdomStatementOfFitnessForWork
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomStatementOfFitnessForWork
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: replaceUnitedKingdomStatementOfFitnessForWork
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomStatementOfFitnessForWork
+      tags:
+      - united-kingdom-statement-of-fitness-for-work
       operationId: deleteUnitedKingdomStatementOfFitnessForWork
       responses:
         '200':

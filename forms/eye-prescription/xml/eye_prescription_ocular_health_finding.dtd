@@ -1,4 +1,5 @@
 <!ELEMENT eye_prescription_ocular_health_finding (id,created_at,updated_at,deleted_at,eye_prescription_id,slit_lamp_right,slit_lamp_left,fundus_right,fundus_left,intraocular_pressure_right_mmhg,intraocular_pressure_left_mmhg,cup_to_disc_ratio_right,cup_to_disc_ratio_left,oct_performed,oct_findings,fields_performed,fields_findings,pathology_flag,refer_ophthalmology,referral_reason)>
+<!ATTLIST eye_prescription_ocular_health_finding xmlns CDATA #FIXED "https://formexamples.github.io/eye-prescription/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

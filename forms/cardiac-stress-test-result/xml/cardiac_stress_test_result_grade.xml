@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cardiac_stress_test_result_grade SYSTEM "cardiac_stress_test_result_grade.dtd">
-<cardiac_stress_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<cardiac_stress_test_result_grade xmlns="https://formexamples.github.io/cardiac-stress-test-result/xml">
+<id>37acd00c-360d-58ad-ad75-c095d1196a9f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cardiac_stress_test_result_id>770e8400-e29b-41d4-a716-446655440002</cardiac_stress_test_result_id>
+<cardiac_stress_test_result_id>4bd5cd2b-e2ff-5534-b370-3a4339678cd6</cardiac_stress_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

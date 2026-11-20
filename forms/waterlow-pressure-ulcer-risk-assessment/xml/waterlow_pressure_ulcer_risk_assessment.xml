@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE waterlow_pressure_ulcer_risk_assessment SYSTEM "waterlow_pressure_ulcer_risk_assessment.dtd">
-<waterlow_pressure_ulcer_risk_assessment>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<waterlow_pressure_ulcer_risk_assessment xmlns="https://formexamples.github.io/waterlow-pressure-ulcer-risk-assessment/xml">
+<id>405f1b68-9595-530b-a22a-d1d86da20787</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>a1817b38-c8d1-52c2-8c06-70ef9addcd22</patient_id>
+<clinician_id>fd00272d-298d-5839-b6f1-f46024fb2d07</clinician_id>
 <nurse_name>Example</nurse_name>
 <nurse_role>registered-nurse</nurse_role>
 <assessed_at>2026-04-09T10:00:00Z</assessed_at>

@@ -5,10 +5,19 @@ info:
   title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaReplacementAttorney
   version: 1.0.0
   description: LPA replacement attorney — join table linking persons appointed as replacement attorneys to an LPA (LP1F section 4).
+x-namespace:
+  form: united-kingdom-lasting-power-of-attorney-for-financial-decisions
+  apiPrefix: /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/
+  sqlSchema: united_kingdom_lasting_power_of_attorney_for_financial_decisions
+  xmlNamespace: https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml
+tags:
+  - name: united-kingdom-lasting-power-of-attorney-for-financial-decisions
+    description: United Kingdom Lasting Power Of Attorney For Financial Decisions form
 paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_replacement_attorneys:
     get:
       summary: List LpaReplacementAttorney records
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: listLpaReplacementAttorney
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LpaReplacementAttorney
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: createLpaReplacementAttorney
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LpaReplacementAttorney by id
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: getLpaReplacementAttorney
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LpaReplacementAttorney
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: updateLpaReplacementAttorney
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LpaReplacementAttorney
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: replaceLpaReplacementAttorney
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LpaReplacementAttorney
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: deleteLpaReplacementAttorney
       responses:
         "200":

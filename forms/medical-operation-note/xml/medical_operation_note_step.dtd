@@ -1,4 +1,5 @@
 <!ELEMENT medical_operation_note_step (id,created_at,updated_at,deleted_at,medical_operation_note_id,step_number,title,description)>
+<!ATTLIST medical_operation_note_step xmlns CDATA #FIXED "https://formexamples.github.io/medical-operation-note/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

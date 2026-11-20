@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_additional_flag SYSTEM "grading_additional_flag.dtd">
-<grading_additional_flag>
-<id>440e8400-e29b-41d4-a716-44665544000e</id>
+<grading_additional_flag xmlns="https://formexamples.github.io/heart-health-check/xml">
+<id>53c193b7-e914-56f8-9188-ca0872ffa7b1</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>220e8400-e29b-41d4-a716-44665544000c</grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<grade_id>5ec98c1b-ace9-5b45-9116-ac3b0b12ff97</grade_id>
+<flag_id>2c8aa308-3ece-5a57-80a7-1cd2bc6946a8</flag_id>
 <category>General</category>
 <message></message>
 <priority>high</priority>

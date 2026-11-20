@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Hospital Dashboard Metrics form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: hospital-dashboard-metrics
+  apiPrefix: /api/hospital-dashboard-metrics/
+  sqlSchema: hospital_dashboard_metrics
+  xmlNamespace: https://formexamples.github.io/hospital-dashboard-metrics/xml
+tags:
+- name: hospital-dashboard-metrics
+  description: Hospital Dashboard Metrics form
 paths:
   /api/hospital-dashboard-metrics/hospital_dashboard_metric_values:
     get:
       summary: List HospitalDashboardMetricValue records
+      tags:
+      - hospital-dashboard-metrics
       operationId: listHospitalDashboardMetricValue
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HospitalDashboardMetricValue
+      tags:
+      - hospital-dashboard-metrics
       operationId: createHospitalDashboardMetricValue
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HospitalDashboardMetricValue by id
+      tags:
+      - hospital-dashboard-metrics
       operationId: getHospitalDashboardMetricValue
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HospitalDashboardMetricValue
+      tags:
+      - hospital-dashboard-metrics
       operationId: updateHospitalDashboardMetricValue
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HospitalDashboardMetricValue
+      tags:
+      - hospital-dashboard-metrics
       operationId: replaceHospitalDashboardMetricValue
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HospitalDashboardMetricValue
+      tags:
+      - hospital-dashboard-metrics
       operationId: deleteHospitalDashboardMetricValue
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/hospital-dashboard-metrics/hospital_dashboard_metrics:
     get:
       summary: List HospitalDashboardMetrics records
+      tags:
+      - hospital-dashboard-metrics
       operationId: listHospitalDashboardMetrics
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HospitalDashboardMetrics
+      tags:
+      - hospital-dashboard-metrics
       operationId: createHospitalDashboardMetrics
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HospitalDashboardMetrics by id
+      tags:
+      - hospital-dashboard-metrics
       operationId: getHospitalDashboardMetrics
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HospitalDashboardMetrics
+      tags:
+      - hospital-dashboard-metrics
       operationId: updateHospitalDashboardMetrics
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HospitalDashboardMetrics
+      tags:
+      - hospital-dashboard-metrics
       operationId: replaceHospitalDashboardMetrics
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HospitalDashboardMetrics
+      tags:
+      - hospital-dashboard-metrics
       operationId: deleteHospitalDashboardMetrics
       responses:
         '200':
@@ -511,6 +543,8 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - hospital-dashboard-metrics
 components:
   schemas:
     HospitalDashboardMetricValue:

@@ -1,4 +1,5 @@
 <!ELEMENT medical_information_form_for_air_travel_grade_rule (id,created_at,updated_at,deleted_at,medical_information_form_for_air_travel_grade_id,rule_id,instrument,fitness_band,category,description)>
+<!ATTLIST medical_information_form_for_air_travel_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/medical-information-form-for-air-travel/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

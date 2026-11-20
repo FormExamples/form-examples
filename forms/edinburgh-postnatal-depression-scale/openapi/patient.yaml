@@ -5,10 +5,19 @@ info:
   title: Edinburgh Postnatal Depression Scale — Patient
   version: 1.0.0
   description: Patient demographic information used by the Edinburgh Postnatal Depression Scale assessment record.
+x-namespace:
+  form: edinburgh-postnatal-depression-scale
+  apiPrefix: /api/edinburgh-postnatal-depression-scale/
+  sqlSchema: edinburgh_postnatal_depression_scale
+  xmlNamespace: https://formexamples.github.io/edinburgh-postnatal-depression-scale/xml
+tags:
+  - name: edinburgh-postnatal-depression-scale
+    description: Edinburgh Postnatal Depression Scale form
 paths:
   /api/edinburgh-postnatal-depression-scale/patients:
     get:
       summary: List Patient records
+      tags: [edinburgh-postnatal-depression-scale]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [edinburgh-postnatal-depression-scale]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [edinburgh-postnatal-depression-scale]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [edinburgh-postnatal-depression-scale]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [edinburgh-postnatal-depression-scale]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [edinburgh-postnatal-depression-scale]
       operationId: deletePatient
       responses:
         "200":

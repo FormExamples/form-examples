@@ -5,10 +5,19 @@ info:
   title: Pulmonary Function Test Request — PulmonaryFunctionTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (NICE NG80 / NG115, ARTP indication match; 1-9), safety / contraindication, request completeness, and triage priority."
+x-namespace:
+  form: pulmonary-function-test-request
+  apiPrefix: /api/pulmonary-function-test-request/
+  sqlSchema: pulmonary_function_test_request
+  xmlNamespace: https://formexamples.github.io/pulmonary-function-test-request/xml
+tags:
+  - name: pulmonary-function-test-request
+    description: Pulmonary Function Test Request form
 paths:
   /api/pulmonary-function-test-request/pulmonary_function_test_request_grades:
     get:
       summary: List PulmonaryFunctionTestRequestGrade records
+      tags: [pulmonary-function-test-request]
       operationId: listPulmonaryFunctionTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PulmonaryFunctionTestRequestGrade
+      tags: [pulmonary-function-test-request]
       operationId: createPulmonaryFunctionTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PulmonaryFunctionTestRequestGrade by id
+      tags: [pulmonary-function-test-request]
       operationId: getPulmonaryFunctionTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PulmonaryFunctionTestRequestGrade
+      tags: [pulmonary-function-test-request]
       operationId: updatePulmonaryFunctionTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PulmonaryFunctionTestRequestGrade
+      tags: [pulmonary-function-test-request]
       operationId: replacePulmonaryFunctionTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PulmonaryFunctionTestRequestGrade
+      tags: [pulmonary-function-test-request]
       operationId: deletePulmonaryFunctionTestRequestGrade
       responses:
         "200":

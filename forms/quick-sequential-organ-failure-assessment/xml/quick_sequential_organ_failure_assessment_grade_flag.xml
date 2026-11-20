@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE quick_sequential_organ_failure_assessment_grade_flag SYSTEM "quick_sequential_organ_failure_assessment_grade_flag.dtd">
-<quick_sequential_organ_failure_assessment_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<quick_sequential_organ_failure_assessment_grade_flag xmlns="https://formexamples.github.io/quick-sequential-organ-failure-assessment/xml">
+<id>a96c64e9-415d-5df1-a72a-c190b307798d</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<quick_sequential_organ_failure_assessment_grade_id>880e8400-e29b-41d4-a716-446655440003</quick_sequential_organ_failure_assessment_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<quick_sequential_organ_failure_assessment_grade_id>015668de-6fee-5850-b7e2-1c6fbb58486a</quick_sequential_organ_failure_assessment_grade_id>
+<flag_id>2de46fc2-b34c-51a4-85d4-8bdedbdc7c38</flag_id>
 <category>sepsis-escalation</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -5,10 +5,19 @@ info:
   title: Thoracic Surgery Waiting List Card — ThoracicSurgWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: thoracic-surgery-waiting-list-card
+  apiPrefix: /api/thoracic-surgery-waiting-list-card/
+  sqlSchema: thoracic_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/thoracic-surgery-waiting-list-card/xml
+tags:
+  - name: thoracic-surgery-waiting-list-card
+    description: Thoracic Surgery Waiting List Card form
 paths:
   /api/thoracic-surgery-waiting-list-card/thoracic_surg_waiting_list_card_grades:
     get:
       summary: List ThoracicSurgWaitingListCardGrade records
+      tags: [thoracic-surgery-waiting-list-card]
       operationId: listThoracicSurgWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ThoracicSurgWaitingListCardGrade
+      tags: [thoracic-surgery-waiting-list-card]
       operationId: createThoracicSurgWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ThoracicSurgWaitingListCardGrade by id
+      tags: [thoracic-surgery-waiting-list-card]
       operationId: getThoracicSurgWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ThoracicSurgWaitingListCardGrade
+      tags: [thoracic-surgery-waiting-list-card]
       operationId: updateThoracicSurgWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ThoracicSurgWaitingListCardGrade
+      tags: [thoracic-surgery-waiting-list-card]
       operationId: replaceThoracicSurgWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ThoracicSurgWaitingListCardGrade
+      tags: [thoracic-surgery-waiting-list-card]
       operationId: deleteThoracicSurgWaitingListCardGrade
       responses:
         "200":

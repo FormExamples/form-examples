@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the MRI Scan Test Request form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: mri-scan-test-request
+  apiPrefix: /api/mri-scan-test-request/
+  sqlSchema: mri_scan_test_request
+  xmlNamespace: https://formexamples.github.io/mri-scan-test-request/xml
+tags:
+- name: mri-scan-test-request
+  description: MRI Scan Test Request form
 paths:
   /api/mri-scan-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - mri-scan-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - mri-scan-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - mri-scan-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - mri-scan-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - mri-scan-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - mri-scan-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/mri-scan-test-request/mri_scan_test_request_grade_flags:
     get:
       summary: List MriScanTestRequestGradeFlag records
+      tags:
+      - mri-scan-test-request
       operationId: listMriScanTestRequestGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MriScanTestRequestGradeFlag
+      tags:
+      - mri-scan-test-request
       operationId: createMriScanTestRequestGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MriScanTestRequestGradeFlag by id
+      tags:
+      - mri-scan-test-request
       operationId: getMriScanTestRequestGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MriScanTestRequestGradeFlag
+      tags:
+      - mri-scan-test-request
       operationId: updateMriScanTestRequestGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MriScanTestRequestGradeFlag
+      tags:
+      - mri-scan-test-request
       operationId: replaceMriScanTestRequestGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MriScanTestRequestGradeFlag
+      tags:
+      - mri-scan-test-request
       operationId: deleteMriScanTestRequestGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/mri-scan-test-request/mri_scan_test_request_grade_rules:
     get:
       summary: List MriScanTestRequestGradeRule records
+      tags:
+      - mri-scan-test-request
       operationId: listMriScanTestRequestGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MriScanTestRequestGradeRule
+      tags:
+      - mri-scan-test-request
       operationId: createMriScanTestRequestGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MriScanTestRequestGradeRule by id
+      tags:
+      - mri-scan-test-request
       operationId: getMriScanTestRequestGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MriScanTestRequestGradeRule
+      tags:
+      - mri-scan-test-request
       operationId: updateMriScanTestRequestGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MriScanTestRequestGradeRule
+      tags:
+      - mri-scan-test-request
       operationId: replaceMriScanTestRequestGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MriScanTestRequestGradeRule
+      tags:
+      - mri-scan-test-request
       operationId: deleteMriScanTestRequestGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/mri-scan-test-request/mri_scan_test_request_grades:
     get:
       summary: List MriScanTestRequestGrade records
+      tags:
+      - mri-scan-test-request
       operationId: listMriScanTestRequestGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MriScanTestRequestGrade
+      tags:
+      - mri-scan-test-request
       operationId: createMriScanTestRequestGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MriScanTestRequestGrade by id
+      tags:
+      - mri-scan-test-request
       operationId: getMriScanTestRequestGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MriScanTestRequestGrade
+      tags:
+      - mri-scan-test-request
       operationId: updateMriScanTestRequestGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MriScanTestRequestGrade
+      tags:
+      - mri-scan-test-request
       operationId: replaceMriScanTestRequestGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MriScanTestRequestGrade
+      tags:
+      - mri-scan-test-request
       operationId: deleteMriScanTestRequestGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/mri-scan-test-request/mri_scan_test_requests:
     get:
       summary: List MriScanTestRequest records
+      tags:
+      - mri-scan-test-request
       operationId: listMriScanTestRequest
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MriScanTestRequest
+      tags:
+      - mri-scan-test-request
       operationId: createMriScanTestRequest
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MriScanTestRequest by id
+      tags:
+      - mri-scan-test-request
       operationId: getMriScanTestRequest
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MriScanTestRequest
+      tags:
+      - mri-scan-test-request
       operationId: updateMriScanTestRequest
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MriScanTestRequest
+      tags:
+      - mri-scan-test-request
       operationId: replaceMriScanTestRequest
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MriScanTestRequest
+      tags:
+      - mri-scan-test-request
       operationId: deleteMriScanTestRequest
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - mri-scan-test-request
   /api/mri-scan-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - mri-scan-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - mri-scan-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - mri-scan-test-request
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - mri-scan-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - mri-scan-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - mri-scan-test-request
       operationId: deletePatient
       responses:
         '200':

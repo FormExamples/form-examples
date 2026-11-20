@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE urinalysis_test_result_grade_rule SYSTEM "urinalysis_test_result_grade_rule.dtd">
-<urinalysis_test_result_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<urinalysis_test_result_grade_rule xmlns="https://formexamples.github.io/urinalysis-test-result/xml">
+<id>67529677-6d18-5b33-a849-8a86d86a6c12</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<urinalysis_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</urinalysis_test_result_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<urinalysis_test_result_grade_id>28f65997-9fd2-5095-92a5-11daa89af018</urinalysis_test_result_grade_id>
+<rule_id>13d2bbc4-18ed-5f91-857b-e7292f1d3704</rule_id>
 <axis>classification</axis>
 <category>General</category>
 <description>Example text.</description>

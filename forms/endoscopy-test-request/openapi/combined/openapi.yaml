@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Endoscopy Test Request form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: endoscopy-test-request
+  apiPrefix: /api/endoscopy-test-request/
+  sqlSchema: endoscopy_test_request
+  xmlNamespace: https://formexamples.github.io/endoscopy-test-request/xml
+tags:
+- name: endoscopy-test-request
+  description: Endoscopy Test Request form
 paths:
   /api/endoscopy-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - endoscopy-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - endoscopy-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - endoscopy-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - endoscopy-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - endoscopy-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - endoscopy-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/endoscopy-test-request/endoscopy_test_request_grade_flags:
     get:
       summary: List EndoscopyTestRequestGradeFlag records
+      tags:
+      - endoscopy-test-request
       operationId: listEndoscopyTestRequestGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EndoscopyTestRequestGradeFlag
+      tags:
+      - endoscopy-test-request
       operationId: createEndoscopyTestRequestGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EndoscopyTestRequestGradeFlag by id
+      tags:
+      - endoscopy-test-request
       operationId: getEndoscopyTestRequestGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EndoscopyTestRequestGradeFlag
+      tags:
+      - endoscopy-test-request
       operationId: updateEndoscopyTestRequestGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EndoscopyTestRequestGradeFlag
+      tags:
+      - endoscopy-test-request
       operationId: replaceEndoscopyTestRequestGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EndoscopyTestRequestGradeFlag
+      tags:
+      - endoscopy-test-request
       operationId: deleteEndoscopyTestRequestGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/endoscopy-test-request/endoscopy_test_request_grade_rules:
     get:
       summary: List EndoscopyTestRequestGradeRule records
+      tags:
+      - endoscopy-test-request
       operationId: listEndoscopyTestRequestGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EndoscopyTestRequestGradeRule
+      tags:
+      - endoscopy-test-request
       operationId: createEndoscopyTestRequestGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EndoscopyTestRequestGradeRule by id
+      tags:
+      - endoscopy-test-request
       operationId: getEndoscopyTestRequestGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EndoscopyTestRequestGradeRule
+      tags:
+      - endoscopy-test-request
       operationId: updateEndoscopyTestRequestGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EndoscopyTestRequestGradeRule
+      tags:
+      - endoscopy-test-request
       operationId: replaceEndoscopyTestRequestGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EndoscopyTestRequestGradeRule
+      tags:
+      - endoscopy-test-request
       operationId: deleteEndoscopyTestRequestGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/endoscopy-test-request/endoscopy_test_request_grades:
     get:
       summary: List EndoscopyTestRequestGrade records
+      tags:
+      - endoscopy-test-request
       operationId: listEndoscopyTestRequestGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EndoscopyTestRequestGrade
+      tags:
+      - endoscopy-test-request
       operationId: createEndoscopyTestRequestGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EndoscopyTestRequestGrade by id
+      tags:
+      - endoscopy-test-request
       operationId: getEndoscopyTestRequestGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EndoscopyTestRequestGrade
+      tags:
+      - endoscopy-test-request
       operationId: updateEndoscopyTestRequestGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EndoscopyTestRequestGrade
+      tags:
+      - endoscopy-test-request
       operationId: replaceEndoscopyTestRequestGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EndoscopyTestRequestGrade
+      tags:
+      - endoscopy-test-request
       operationId: deleteEndoscopyTestRequestGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/endoscopy-test-request/endoscopy_test_requests:
     get:
       summary: List EndoscopyTestRequest records
+      tags:
+      - endoscopy-test-request
       operationId: listEndoscopyTestRequest
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EndoscopyTestRequest
+      tags:
+      - endoscopy-test-request
       operationId: createEndoscopyTestRequest
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EndoscopyTestRequest by id
+      tags:
+      - endoscopy-test-request
       operationId: getEndoscopyTestRequest
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EndoscopyTestRequest
+      tags:
+      - endoscopy-test-request
       operationId: updateEndoscopyTestRequest
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EndoscopyTestRequest
+      tags:
+      - endoscopy-test-request
       operationId: replaceEndoscopyTestRequest
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EndoscopyTestRequest
+      tags:
+      - endoscopy-test-request
       operationId: deleteEndoscopyTestRequest
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - endoscopy-test-request
   /api/endoscopy-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - endoscopy-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - endoscopy-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - endoscopy-test-request
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - endoscopy-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - endoscopy-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - endoscopy-test-request
       operationId: deletePatient
       responses:
         '200':

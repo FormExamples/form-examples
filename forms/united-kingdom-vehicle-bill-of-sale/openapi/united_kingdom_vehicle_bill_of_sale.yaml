@@ -5,10 +5,19 @@ info:
   title: United Kingdom Vehicle Bill Of Sale — UnitedKingdomVehicleBillOfSale
   version: 1.0.0
   description: "Main bill of sale record for a private UK vehicle sale: sale, vehicle, V5C / MOT / finance checks, price and payment, condition terms, DVLA steps, and signatures. Classification, fired rules, and flags live in child tables. Documentation support, not legal advice."
+x-namespace:
+  form: united-kingdom-vehicle-bill-of-sale
+  apiPrefix: /api/united-kingdom-vehicle-bill-of-sale/
+  sqlSchema: united_kingdom_vehicle_bill_of_sale
+  xmlNamespace: https://formexamples.github.io/united-kingdom-vehicle-bill-of-sale/xml
+tags:
+  - name: united-kingdom-vehicle-bill-of-sale
+    description: United Kingdom Vehicle Bill Of Sale form
 paths:
   /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sales:
     get:
       summary: List UnitedKingdomVehicleBillOfSale records
+      tags: [united-kingdom-vehicle-bill-of-sale]
       operationId: listUnitedKingdomVehicleBillOfSale
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomVehicleBillOfSale
+      tags: [united-kingdom-vehicle-bill-of-sale]
       operationId: createUnitedKingdomVehicleBillOfSale
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomVehicleBillOfSale by id
+      tags: [united-kingdom-vehicle-bill-of-sale]
       operationId: getUnitedKingdomVehicleBillOfSale
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomVehicleBillOfSale
+      tags: [united-kingdom-vehicle-bill-of-sale]
       operationId: updateUnitedKingdomVehicleBillOfSale
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomVehicleBillOfSale
+      tags: [united-kingdom-vehicle-bill-of-sale]
       operationId: replaceUnitedKingdomVehicleBillOfSale
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomVehicleBillOfSale
+      tags: [united-kingdom-vehicle-bill-of-sale]
       operationId: deleteUnitedKingdomVehicleBillOfSale
       responses:
         "200":

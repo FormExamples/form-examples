@@ -5,10 +5,19 @@ info:
   title: Pulmonary Function Test Result — PulmonaryFunctionTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: pulmonary-function-test-result
+  apiPrefix: /api/pulmonary-function-test-result/
+  sqlSchema: pulmonary_function_test_result
+  xmlNamespace: https://formexamples.github.io/pulmonary-function-test-result/xml
+tags:
+  - name: pulmonary-function-test-result
+    description: Pulmonary Function Test Result form
 paths:
   /api/pulmonary-function-test-result/pulmonary_function_test_result_grade_rules:
     get:
       summary: List PulmonaryFunctionTestResultGradeRule records
+      tags: [pulmonary-function-test-result]
       operationId: listPulmonaryFunctionTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PulmonaryFunctionTestResultGradeRule
+      tags: [pulmonary-function-test-result]
       operationId: createPulmonaryFunctionTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PulmonaryFunctionTestResultGradeRule by id
+      tags: [pulmonary-function-test-result]
       operationId: getPulmonaryFunctionTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PulmonaryFunctionTestResultGradeRule
+      tags: [pulmonary-function-test-result]
       operationId: updatePulmonaryFunctionTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PulmonaryFunctionTestResultGradeRule
+      tags: [pulmonary-function-test-result]
       operationId: replacePulmonaryFunctionTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PulmonaryFunctionTestResultGradeRule
+      tags: [pulmonary-function-test-result]
       operationId: deletePulmonaryFunctionTestResultGradeRule
       responses:
         "200":

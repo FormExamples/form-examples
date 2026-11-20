@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000052",
+    "id": "cb998e89-3a66-5ba4-8b7f-22020e6339e1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000064",
+    "id": "bbd15fbb-8ced-5234-9b55-f6995dc7100e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "cageAlcoholQuestionnaire": {
-    "id": "550e8400-e29b-41d4-a716-000000000071",
+    "id": "3eb1e017-8cff-5f4d-a8a1-763cccda88c0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000075",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000076",
+    "patientId": "0ea38fa6-bdb6-5089-9987-057022ac228b",
+    "clinicianId": "42b8cc98-22d0-519f-9cc8-207fc56878b9",
     "clinicianName": "",
     "clinicianRole": "doctor",
     "assessedAt": null,
@@ -55,11 +55,11 @@
     "clinicalNote": ""
   },
   "cageAlcoholQuestionnaireGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000083",
+    "id": "a64951b3-de2c-5695-9b15-e17614d9b08c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cageAlcoholQuestionnaireId": "550e8400-e29b-41d4-a716-000000000087",
+    "cageAlcoholQuestionnaireId": "71b6a8d7-e842-59b1-a73f-f55bfd3bedd7",
     "cutDownPoint": null,
     "annoyedPoint": null,
     "guiltyPoint": null,
@@ -69,11 +69,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "cageAlcoholQuestionnaireGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000008f",
+    "id": "b302f043-08aa-54b7-ba92-1f843be5ba17",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cageAlcoholQuestionnaireGradeId": "550e8400-e29b-41d4-a716-000000000093",
+    "cageAlcoholQuestionnaireGradeId": "c6965eea-a982-5231-8f11-eee980a75a9c",
     "ruleId": "",
     "parameter": "cut-down",
     "points": null,
@@ -81,11 +81,11 @@
     "description": ""
   },
   "cageAlcoholQuestionnaireGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000099",
+    "id": "8c63f626-4f9e-519a-a0cb-b9ca08521a20",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cageAlcoholQuestionnaireGradeId": "550e8400-e29b-41d4-a716-00000000009d",
+    "cageAlcoholQuestionnaireGradeId": "231dd5cf-508a-59d9-a193-fca4bfa32239",
     "flagId": "",
     "category": "positive-screen",
     "priority": "low",

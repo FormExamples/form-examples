@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "fb15dc98-a2a5-4873-aa61-9149d8155a83",
+  "id": "45194ba1-23ea-5ee5-b759-a04eaecb66e8",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:4abedb5e-b099-4208-ab0c-5622ce70edfa",
+      "fullUrl": "urn:uuid:07a7541c-790f-5040-b097-dd19dc0fcd95",
       "resource": {
         "resourceType": "Patient",
-        "id": "4abedb5e-b099-4208-ab0c-5622ce70edfa",
+        "id": "07a7541c-790f-5040-b097-dd19dc0fcd95",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:511259d2-5847-4984-ab92-81b91299f4a3",
+      "fullUrl": "urn:uuid:aa561ba0-5f64-5fce-926f-a9d4e47f73c6",
       "resource": {
         "resourceType": "Observation",
-        "id": "511259d2-5847-4984-ab92-81b91299f4a3",
+        "id": "aa561ba0-5f64-5fce-926f-a9d4e47f73c6",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:4abedb5e-b099-4208-ab0c-5622ce70edfa"
+          "reference": "urn:uuid:07a7541c-790f-5040-b097-dd19dc0fcd95"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:8abea854-678d-4be8-a6ae-b08b00529f78",
+      "fullUrl": "urn:uuid:20ae3a09-0e23-5fda-ad25-6ed6aac2833a",
       "resource": {
         "resourceType": "Observation",
-        "id": "8abea854-678d-4be8-a6ae-b08b00529f78",
+        "id": "20ae3a09-0e23-5fda-ad25-6ed6aac2833a",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:4abedb5e-b099-4208-ab0c-5622ce70edfa"
+          "reference": "urn:uuid:07a7541c-790f-5040-b097-dd19dc0fcd95"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -587,10 +587,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:1acadff2-1d13-4d7c-a6b1-6289502022de",
+      "fullUrl": "urn:uuid:5d18d8f8-9947-55e1-a9b1-d17114e98ab4",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "1acadff2-1d13-4d7c-a6b1-6289502022de",
+        "id": "5d18d8f8-9947-55e1-a9b1-d17114e98ab4",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -599,7 +599,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:4abedb5e-b099-4208-ab0c-5622ce70edfa"
+          "reference": "urn:uuid:07a7541c-790f-5040-b097-dd19dc0fcd95"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -608,10 +608,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a7b5238a-56cf-4cc9-a411-be7cd094e7a6",
+      "fullUrl": "urn:uuid:ce13086e-d02e-5851-abfd-f282e54258ee",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "a7b5238a-56cf-4cc9-a411-be7cd094e7a6",
+        "id": "ce13086e-d02e-5851-abfd-f282e54258ee",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -641,17 +641,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4abedb5e-b099-4208-ab0c-5622ce70edfa"
+          "reference": "urn:uuid:07a7541c-790f-5040-b097-dd19dc0fcd95"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Severe (established) osteoporosis \u2014 T \u2264 \u22122.5 with an identified fragility / vertebral fracture; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:924dfa9d-5c8e-457a-a8c7-d44882065382",
+      "fullUrl": "urn:uuid:e3a2dd17-d821-5ce1-a10c-c83741d97809",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "924dfa9d-5c8e-457a-a8c7-d44882065382",
+        "id": "e3a2dd17-d821-5ce1-a10c-c83741d97809",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -681,17 +681,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4abedb5e-b099-4208-ab0c-5622ce70edfa"
+          "reference": "urn:uuid:07a7541c-790f-5040-b097-dd19dc0fcd95"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Severe (established) osteoporosis; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:c832c6a4-d324-42f1-a442-486e9b6de582",
+      "fullUrl": "urn:uuid:25e8a496-67f3-5c6a-897c-8eb6efb958d9",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "c832c6a4-d324-42f1-a442-486e9b6de582",
+        "id": "25e8a496-67f3-5c6a-897c-8eb6efb958d9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -721,17 +721,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4abedb5e-b099-4208-ab0c-5622ce70edfa"
+          "reference": "urn:uuid:07a7541c-790f-5040-b097-dd19dc0fcd95"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Severe (established) osteoporosis auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:74524487-9768-423e-a292-85012fcffeda",
+      "fullUrl": "urn:uuid:ea5fe984-fc36-51bf-a54f-aed2849d193b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "74524487-9768-423e-a292-85012fcffeda",
+        "id": "ea5fe984-fc36-51bf-a54f-aed2849d193b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -761,7 +761,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:4abedb5e-b099-4208-ab0c-5622ce70edfa"
+          "reference": "urn:uuid:07a7541c-790f-5040-b097-dd19dc0fcd95"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Severe (established) osteoporosis \u2014 T \u2264 \u22122.5 with an identified fragility / vertebral fracture.",

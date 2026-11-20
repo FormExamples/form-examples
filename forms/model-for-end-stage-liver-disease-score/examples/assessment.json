@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000059",
+    "id": "6697e1cf-3fcf-5ea5-849d-25c51f94839f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006b",
+    "id": "33398b1c-13b0-5243-a45a-6faf1b1be0e3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "modelForEndStageLiverDiseaseScore": {
-    "id": "550e8400-e29b-41d4-a716-000000000078",
+    "id": "95274406-97ca-5053-a6d2-65f92668d906",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007c",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007d",
+    "patientId": "e93b0905-34be-5740-81e0-bdb0f5f6b4b8",
+    "clinicianId": "b061a9a6-d9a9-5bf9-9295-4bc04aa9cb84",
     "clinicianName": "",
     "clinicianRole": "hepatologist",
     "assessedAt": null,
@@ -61,11 +61,11 @@
     "clinicalNote": ""
   },
   "modelForEndStageLiverDiseaseScoreGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000090",
+    "id": "8f88b2df-3459-5679-9209-33e1d3d12c79",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "modelForEndStageLiverDiseaseScoreId": "550e8400-e29b-41d4-a716-000000000094",
+    "modelForEndStageLiverDiseaseScoreId": "ea47247c-b0ba-5079-92f7-d1734f1bb033",
     "bilirubinMgDl": null,
     "creatinineMgDl": null,
     "creatinineAdjusted": null,
@@ -76,11 +76,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "modelForEndStageLiverDiseaseScoreGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000009d",
+    "id": "bacbc6af-480e-5b9a-b8f1-d47efa707623",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "modelForEndStageLiverDiseaseScoreGradeId": "550e8400-e29b-41d4-a716-0000000000a1",
+    "modelForEndStageLiverDiseaseScoreGradeId": "cdb404f5-abe6-5c8a-84aa-d1cb42c36201",
     "ruleId": "",
     "component": "bilirubin",
     "contribution": null,
@@ -88,11 +88,11 @@
     "description": ""
   },
   "modelForEndStageLiverDiseaseScoreGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a7",
+    "id": "076eb21b-3007-5783-9a0e-5795959e3813",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "modelForEndStageLiverDiseaseScoreGradeId": "550e8400-e29b-41d4-a716-0000000000ab",
+    "modelForEndStageLiverDiseaseScoreGradeId": "40e0a711-325d-5a3e-884d-0f6ffd59c210",
     "flagId": "",
     "category": "transplant-referral",
     "priority": "low",

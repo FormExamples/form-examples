@@ -5,10 +5,19 @@ info:
   title: Quick Sequential Organ Failure Assessment — QuickSequentialOrganFailureAssessment
   version: 1.0.0
   description: "Main qSOFA assessment record: assessment context, patient identification, and the three scored criterion inputs (respiratory rate, mentation, systolic blood pressure)."
+x-namespace:
+  form: quick-sequential-organ-failure-assessment
+  apiPrefix: /api/quick-sequential-organ-failure-assessment/
+  sqlSchema: quick_sequential_organ_failure_assessment
+  xmlNamespace: https://formexamples.github.io/quick-sequential-organ-failure-assessment/xml
+tags:
+  - name: quick-sequential-organ-failure-assessment
+    description: Quick Sequential Organ Failure Assessment form
 paths:
   /api/quick-sequential-organ-failure-assessment/quick_sequential_organ_failure_assessments:
     get:
       summary: List QuickSequentialOrganFailureAssessment records
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: listQuickSequentialOrganFailureAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new QuickSequentialOrganFailureAssessment
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: createQuickSequentialOrganFailureAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one QuickSequentialOrganFailureAssessment by id
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: getQuickSequentialOrganFailureAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing QuickSequentialOrganFailureAssessment
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: updateQuickSequentialOrganFailureAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing QuickSequentialOrganFailureAssessment
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: replaceQuickSequentialOrganFailureAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a QuickSequentialOrganFailureAssessment
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: deleteQuickSequentialOrganFailureAssessment
       responses:
         "200":

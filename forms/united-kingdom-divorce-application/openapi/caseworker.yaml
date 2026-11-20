@@ -5,10 +5,19 @@ info:
   title: United Kingdom Divorce Application — Caseworker
   version: 1.0.0
   description: Caseworker information for the legal adviser or court officer who prepares or checks the application.
+x-namespace:
+  form: united-kingdom-divorce-application
+  apiPrefix: /api/united-kingdom-divorce-application/
+  sqlSchema: united_kingdom_divorce_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-divorce-application/xml
+tags:
+  - name: united-kingdom-divorce-application
+    description: United Kingdom Divorce Application form
 paths:
   /api/united-kingdom-divorce-application/caseworkers:
     get:
       summary: List Caseworker records
+      tags: [united-kingdom-divorce-application]
       operationId: listCaseworker
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Caseworker
+      tags: [united-kingdom-divorce-application]
       operationId: createCaseworker
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Caseworker by id
+      tags: [united-kingdom-divorce-application]
       operationId: getCaseworker
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Caseworker
+      tags: [united-kingdom-divorce-application]
       operationId: updateCaseworker
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Caseworker
+      tags: [united-kingdom-divorce-application]
       operationId: replaceCaseworker
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Caseworker
+      tags: [united-kingdom-divorce-application]
       operationId: deleteCaseworker
       responses:
         "200":

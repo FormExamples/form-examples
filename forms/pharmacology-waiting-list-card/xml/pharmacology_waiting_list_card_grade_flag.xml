@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pharmacology_waiting_list_card_grade_flag SYSTEM "pharmacology_waiting_list_card_grade_flag.dtd">
-<pharmacology_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<pharmacology_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/pharmacology-waiting-list-card/xml">
+<id>95e488a2-ebcc-5472-8f82-da7efb54d581</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pharmacology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</pharmacology_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<pharmacology_waiting_list_card_grade_id>891a62f2-f24a-5baa-8444-40bd62fe26ff</pharmacology_waiting_list_card_grade_id>
+<flag_id>d7c36ee7-4c94-500c-8f50-f2486afa161f</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

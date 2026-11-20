@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE eye_vision_test_request_grade_flag SYSTEM "eye_vision_test_request_grade_flag.dtd">
-<eye_vision_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<eye_vision_test_request_grade_flag xmlns="https://formexamples.github.io/eye-vision-test-request/xml">
+<id>19edfb41-12ba-5879-85c6-5efc45adadb8</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<eye_vision_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</eye_vision_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<eye_vision_test_request_grade_id>87ab71a6-3491-57e6-a94d-afdcb302828a</eye_vision_test_request_grade_id>
+<flag_id>75ef9b66-b467-5f9c-8907-505232f5b558</flag_id>
 <category>sudden-visual-loss-emergency</category>
 <priority>low</priority>
 <description>Example text.</description>

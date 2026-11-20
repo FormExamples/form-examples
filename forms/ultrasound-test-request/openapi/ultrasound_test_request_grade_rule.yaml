@@ -5,10 +5,19 @@ info:
   title: Ultrasound Test Request — UltrasoundTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / suitability / completeness / triage rule that fired for this request.
+x-namespace:
+  form: ultrasound-test-request
+  apiPrefix: /api/ultrasound-test-request/
+  sqlSchema: ultrasound_test_request
+  xmlNamespace: https://formexamples.github.io/ultrasound-test-request/xml
+tags:
+  - name: ultrasound-test-request
+    description: Ultrasound Test Request form
 paths:
   /api/ultrasound-test-request/ultrasound_test_request_grade_rules:
     get:
       summary: List UltrasoundTestRequestGradeRule records
+      tags: [ultrasound-test-request]
       operationId: listUltrasoundTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UltrasoundTestRequestGradeRule
+      tags: [ultrasound-test-request]
       operationId: createUltrasoundTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UltrasoundTestRequestGradeRule by id
+      tags: [ultrasound-test-request]
       operationId: getUltrasoundTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UltrasoundTestRequestGradeRule
+      tags: [ultrasound-test-request]
       operationId: updateUltrasoundTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UltrasoundTestRequestGradeRule
+      tags: [ultrasound-test-request]
       operationId: replaceUltrasoundTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UltrasoundTestRequestGradeRule
+      tags: [ultrasound-test-request]
       operationId: deleteUltrasoundTestRequestGradeRule
       responses:
         "200":

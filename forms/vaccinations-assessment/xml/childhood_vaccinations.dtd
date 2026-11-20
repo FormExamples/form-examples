@@ -1,4 +1,5 @@
 <!ELEMENT childhood_vaccinations (id,created_at,updated_at,deleted_at,assessment_id,dtap_ipv_hib_hepb,pneumococcal,rotavirus,meningitis_b,mmr,hib_menc,preschool_booster)>
+<!ATTLIST childhood_vaccinations xmlns CDATA #FIXED "https://formexamples.github.io/vaccinations-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE gastro_waiting_list_card SYSTEM "gastro_waiting_list_card.dtd">
-<gastro_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<gastro_waiting_list_card xmlns="https://formexamples.github.io/gastroenterology-waiting-list-card/xml">
+<id>9eda8b13-9138-5684-8894-ff71632fd2f3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>f06c349c-deed-5e8b-8a40-12514c3fcf00</patient_id>
+<practitioner_id>39535775-a9c5-5c02-a5d2-a01a7b072419</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

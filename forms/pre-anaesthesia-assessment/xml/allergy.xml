@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE allergy SYSTEM "allergy.dtd">
-<allergy>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<allergy xmlns="https://formexamples.github.io/pre-anaesthesia-assessment/xml">
+<id>36f05094-5e15-5cbd-94ab-06e00b611fdc</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>

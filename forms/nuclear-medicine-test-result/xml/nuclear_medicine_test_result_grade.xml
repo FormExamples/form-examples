@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nuclear_medicine_test_result_grade SYSTEM "nuclear_medicine_test_result_grade.dtd">
-<nuclear_medicine_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<nuclear_medicine_test_result_grade xmlns="https://formexamples.github.io/nuclear-medicine-test-result/xml">
+<id>375e18c8-1166-56cd-a7e5-68a9e789653f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<nuclear_medicine_test_result_id>770e8400-e29b-41d4-a716-446655440002</nuclear_medicine_test_result_id>
+<nuclear_medicine_test_result_id>6a9df65a-4206-5f9c-a712-e2eaa96f4169</nuclear_medicine_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

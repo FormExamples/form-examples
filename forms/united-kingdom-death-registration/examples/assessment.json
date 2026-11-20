@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000057",
+    "id": "f411f9dd-56e7-5330-aecf-76dc9613dd39",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -13,7 +13,7 @@
     "unitedKingdomNhsNumber": ""
   },
   "informant": {
-    "id": "550e8400-e29b-41d4-a716-000000000062",
+    "id": "1ba19d9d-affe-5fcb-86a2-e9a74ea7eb8d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -26,12 +26,12 @@
     "relationship": "relative-present-at-death"
   },
   "unitedKingdomDeathRegistration": {
-    "id": "550e8400-e29b-41d4-a716-00000000006d",
+    "id": "00cc7982-49f7-5cf5-afb6-5a1ca43645cb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000071",
-    "informantId": "550e8400-e29b-41d4-a716-000000000072",
+    "patientId": "b3f77366-3898-5a70-beb6-7a8d7c845ad9",
+    "informantId": "22b59bb3-7fda-5bd5-9dd9-722dddc49eac",
     "deceasedName": "",
     "sex": "female",
     "dateOfBirth": null,
@@ -63,11 +63,11 @@
     "priorityService": "yes"
   },
   "unitedKingdomDeathRegistrationGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000090",
+    "id": "e2935dcb-9874-5f8b-a201-1d7415a92cc5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedKingdomDeathRegistrationId": "550e8400-e29b-41d4-a716-000000000094",
+    "unitedKingdomDeathRegistrationId": "d0dcb54c-df4f-5742-8b11-c896763be9d0",
     "registrationClass": "ready-to-register",
     "deadlineStatus": "not-started",
     "daysSinceConfirmation": null,
@@ -75,22 +75,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "unitedKingdomDeathRegistrationGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000009a",
+    "id": "a5944edf-3a58-520b-a8a3-57d6c148b58c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedKingdomDeathRegistrationGradeId": "550e8400-e29b-41d4-a716-00000000009e",
+    "unitedKingdomDeathRegistrationGradeId": "d1d2bd8f-d3f1-5439-a68f-0661b6a5c8c4",
     "ruleId": "",
     "dimension": "deceased",
     "category": "",
     "description": ""
   },
   "unitedKingdomDeathRegistrationGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a3",
+    "id": "b207f208-5dc9-58ee-846d-fab2d5070e50",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedKingdomDeathRegistrationGradeId": "550e8400-e29b-41d4-a716-0000000000a7",
+    "unitedKingdomDeathRegistrationGradeId": "408b986e-4f7f-5bc9-962c-52acf210459f",
     "flagId": "",
     "category": "deadline",
     "priority": "low",

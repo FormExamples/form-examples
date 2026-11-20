@@ -5,10 +5,19 @@ info:
   title: United Kingdom Council Tax Discount Application — UnitedKingdomCouncilTaxDiscountApplication
   version: 1.0.0
   description: "Main United Kingdom Council Tax discount application: one application to an English billing authority for a Council Tax discount, exemption, disregard or reduction. It captures the claim type, the property, the evidence and the declaration; the occupant roster lives in the occupant table. The completeness and eligibility classification, the audit trail of fired rules and the flagged issues live in dedicated child tables. Eligibility is decided by the billing authority, not by this record."
+x-namespace:
+  form: united-kingdom-council-tax-discount-application
+  apiPrefix: /api/united-kingdom-council-tax-discount-application/
+  sqlSchema: united_kingdom_council_tax_discount_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-council-tax-discount-application/xml
+tags:
+  - name: united-kingdom-council-tax-discount-application
+    description: United Kingdom Council Tax Discount Application form
 paths:
   /api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_applications:
     get:
       summary: List UnitedKingdomCouncilTaxDiscountApplication records
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: listUnitedKingdomCouncilTaxDiscountApplication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomCouncilTaxDiscountApplication
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: createUnitedKingdomCouncilTaxDiscountApplication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomCouncilTaxDiscountApplication by id
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: getUnitedKingdomCouncilTaxDiscountApplication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomCouncilTaxDiscountApplication
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: updateUnitedKingdomCouncilTaxDiscountApplication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomCouncilTaxDiscountApplication
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: replaceUnitedKingdomCouncilTaxDiscountApplication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomCouncilTaxDiscountApplication
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: deleteUnitedKingdomCouncilTaxDiscountApplication
       responses:
         "200":

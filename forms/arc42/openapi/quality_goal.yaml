@@ -5,10 +5,19 @@ info:
   title: Arc42 — QualityGoal
   version: 1.0.0
   description: Quality goal captured in §1 Introduction & Goals of the arc42 documentation.
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+  - name: arc42
+    description: Arc42 form
 paths:
   /api/arc42/quality_goals:
     get:
       summary: List QualityGoal records
+      tags: [arc42]
       operationId: listQualityGoal
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new QualityGoal
+      tags: [arc42]
       operationId: createQualityGoal
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one QualityGoal by id
+      tags: [arc42]
       operationId: getQualityGoal
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing QualityGoal
+      tags: [arc42]
       operationId: updateQualityGoal
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing QualityGoal
+      tags: [arc42]
       operationId: replaceQualityGoal
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a QualityGoal
+      tags: [arc42]
       operationId: deleteQualityGoal
       responses:
         "200":

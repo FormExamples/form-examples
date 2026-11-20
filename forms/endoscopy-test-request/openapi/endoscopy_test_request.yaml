@@ -5,10 +5,19 @@ info:
   title: Endoscopy Test Request — EndoscopyTestRequest
   version: 1.0.0
   description: GI endoscopy procedure request (referral). Captures the requested procedure, clinical indication and question, ALARM red flags, FIT and haematinic results, anticoagulant / antiplatelet medication, diabetes, allergies, comorbidities, infection-control flags, bowel-prep and sedation plans, and triage urgency.
+x-namespace:
+  form: endoscopy-test-request
+  apiPrefix: /api/endoscopy-test-request/
+  sqlSchema: endoscopy_test_request
+  xmlNamespace: https://formexamples.github.io/endoscopy-test-request/xml
+tags:
+  - name: endoscopy-test-request
+    description: Endoscopy Test Request form
 paths:
   /api/endoscopy-test-request/endoscopy_test_requests:
     get:
       summary: List EndoscopyTestRequest records
+      tags: [endoscopy-test-request]
       operationId: listEndoscopyTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EndoscopyTestRequest
+      tags: [endoscopy-test-request]
       operationId: createEndoscopyTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EndoscopyTestRequest by id
+      tags: [endoscopy-test-request]
       operationId: getEndoscopyTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EndoscopyTestRequest
+      tags: [endoscopy-test-request]
       operationId: updateEndoscopyTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EndoscopyTestRequest
+      tags: [endoscopy-test-request]
       operationId: replaceEndoscopyTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EndoscopyTestRequest
+      tags: [endoscopy-test-request]
       operationId: deleteEndoscopyTestRequest
       responses:
         "200":

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United States Divorce Petition form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-states-divorce-petition
+  apiPrefix: /api/united-states-divorce-petition/
+  sqlSchema: united_states_divorce_petition
+  xmlNamespace: https://formexamples.github.io/united-states-divorce-petition/xml
+tags:
+- name: united-states-divorce-petition
+  description: United States Divorce Petition form
 paths:
   /api/united-states-divorce-petition/attorneys:
     get:
       summary: List Attorney records
+      tags:
+      - united-states-divorce-petition
       operationId: listAttorney
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Attorney
+      tags:
+      - united-states-divorce-petition
       operationId: createAttorney
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Attorney by id
+      tags:
+      - united-states-divorce-petition
       operationId: getAttorney
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Attorney
+      tags:
+      - united-states-divorce-petition
       operationId: updateAttorney
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Attorney
+      tags:
+      - united-states-divorce-petition
       operationId: replaceAttorney
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Attorney
+      tags:
+      - united-states-divorce-petition
       operationId: deleteAttorney
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-states-divorce-petition
   /api/united-states-divorce-petition/petitioners:
     get:
       summary: List Petitioner records
+      tags:
+      - united-states-divorce-petition
       operationId: listPetitioner
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Petitioner
+      tags:
+      - united-states-divorce-petition
       operationId: createPetitioner
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Petitioner by id
+      tags:
+      - united-states-divorce-petition
       operationId: getPetitioner
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Petitioner
+      tags:
+      - united-states-divorce-petition
       operationId: updatePetitioner
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Petitioner
+      tags:
+      - united-states-divorce-petition
       operationId: replacePetitioner
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Petitioner
+      tags:
+      - united-states-divorce-petition
       operationId: deletePetitioner
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/united-states-divorce-petition/united_states_divorce_petition_grade_flags:
     get:
       summary: List UnitedStatesDivorcePetitionGradeFlag records
+      tags:
+      - united-states-divorce-petition
       operationId: listUnitedStatesDivorcePetitionGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesDivorcePetitionGradeFlag
+      tags:
+      - united-states-divorce-petition
       operationId: createUnitedStatesDivorcePetitionGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesDivorcePetitionGradeFlag by id
+      tags:
+      - united-states-divorce-petition
       operationId: getUnitedStatesDivorcePetitionGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesDivorcePetitionGradeFlag
+      tags:
+      - united-states-divorce-petition
       operationId: updateUnitedStatesDivorcePetitionGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesDivorcePetitionGradeFlag
+      tags:
+      - united-states-divorce-petition
       operationId: replaceUnitedStatesDivorcePetitionGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesDivorcePetitionGradeFlag
+      tags:
+      - united-states-divorce-petition
       operationId: deleteUnitedStatesDivorcePetitionGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-states-divorce-petition/united_states_divorce_petition_grade_rules:
     get:
       summary: List UnitedStatesDivorcePetitionGradeRule records
+      tags:
+      - united-states-divorce-petition
       operationId: listUnitedStatesDivorcePetitionGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesDivorcePetitionGradeRule
+      tags:
+      - united-states-divorce-petition
       operationId: createUnitedStatesDivorcePetitionGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesDivorcePetitionGradeRule by id
+      tags:
+      - united-states-divorce-petition
       operationId: getUnitedStatesDivorcePetitionGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesDivorcePetitionGradeRule
+      tags:
+      - united-states-divorce-petition
       operationId: updateUnitedStatesDivorcePetitionGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesDivorcePetitionGradeRule
+      tags:
+      - united-states-divorce-petition
       operationId: replaceUnitedStatesDivorcePetitionGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesDivorcePetitionGradeRule
+      tags:
+      - united-states-divorce-petition
       operationId: deleteUnitedStatesDivorcePetitionGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-states-divorce-petition/united_states_divorce_petition_grades:
     get:
       summary: List UnitedStatesDivorcePetitionGrade records
+      tags:
+      - united-states-divorce-petition
       operationId: listUnitedStatesDivorcePetitionGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesDivorcePetitionGrade
+      tags:
+      - united-states-divorce-petition
       operationId: createUnitedStatesDivorcePetitionGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesDivorcePetitionGrade by id
+      tags:
+      - united-states-divorce-petition
       operationId: getUnitedStatesDivorcePetitionGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesDivorcePetitionGrade
+      tags:
+      - united-states-divorce-petition
       operationId: updateUnitedStatesDivorcePetitionGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesDivorcePetitionGrade
+      tags:
+      - united-states-divorce-petition
       operationId: replaceUnitedStatesDivorcePetitionGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesDivorcePetitionGrade
+      tags:
+      - united-states-divorce-petition
       operationId: deleteUnitedStatesDivorcePetitionGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-states-divorce-petition/united_states_divorce_petitions:
     get:
       summary: List UnitedStatesDivorcePetition records
+      tags:
+      - united-states-divorce-petition
       operationId: listUnitedStatesDivorcePetition
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesDivorcePetition
+      tags:
+      - united-states-divorce-petition
       operationId: createUnitedStatesDivorcePetition
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesDivorcePetition by id
+      tags:
+      - united-states-divorce-petition
       operationId: getUnitedStatesDivorcePetition
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesDivorcePetition
+      tags:
+      - united-states-divorce-petition
       operationId: updateUnitedStatesDivorcePetition
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesDivorcePetition
+      tags:
+      - united-states-divorce-petition
       operationId: replaceUnitedStatesDivorcePetition
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesDivorcePetition
+      tags:
+      - united-states-divorce-petition
       operationId: deleteUnitedStatesDivorcePetition
       responses:
         '200':

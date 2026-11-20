@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE waterlow_pressure_ulcer_risk_assessment_grade_flag SYSTEM "waterlow_pressure_ulcer_risk_assessment_grade_flag.dtd">
-<waterlow_pressure_ulcer_risk_assessment_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<waterlow_pressure_ulcer_risk_assessment_grade_flag xmlns="https://formexamples.github.io/waterlow-pressure-ulcer-risk-assessment/xml">
+<id>ed58c059-7a80-5e29-83e7-eb08211de17a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<waterlow_pressure_ulcer_risk_assessment_grade_id>880e8400-e29b-41d4-a716-446655440003</waterlow_pressure_ulcer_risk_assessment_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<waterlow_pressure_ulcer_risk_assessment_grade_id>a5fe8cd5-4473-55f3-b424-539256873bc8</waterlow_pressure_ulcer_risk_assessment_grade_id>
+<flag_id>852ba51c-19cb-594f-9a53-54ce3c4b44e0</flag_id>
 <category>very-high-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

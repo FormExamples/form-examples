@@ -5,10 +5,19 @@ info:
   title: United States Hipaa Authorization Form — SignatureWitness
   version: 1.0.0
   description: Signature, date, and witness fields. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(vi).
+x-namespace:
+  form: united-states-hipaa-authorization-form
+  apiPrefix: /api/united-states-hipaa-authorization-form/
+  sqlSchema: united_states_hipaa_authorization_form
+  xmlNamespace: https://formexamples.github.io/united-states-hipaa-authorization-form/xml
+tags:
+  - name: united-states-hipaa-authorization-form
+    description: United States Hipaa Authorization Form form
 paths:
   /api/united-states-hipaa-authorization-form/signature_witnesses:
     get:
       summary: List SignatureWitness records
+      tags: [united-states-hipaa-authorization-form]
       operationId: listSignatureWitness
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SignatureWitness
+      tags: [united-states-hipaa-authorization-form]
       operationId: createSignatureWitness
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one SignatureWitness by id
+      tags: [united-states-hipaa-authorization-form]
       operationId: getSignatureWitness
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SignatureWitness
+      tags: [united-states-hipaa-authorization-form]
       operationId: updateSignatureWitness
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing SignatureWitness
+      tags: [united-states-hipaa-authorization-form]
       operationId: replaceSignatureWitness
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SignatureWitness
+      tags: [united-states-hipaa-authorization-form]
       operationId: deleteSignatureWitness
       responses:
         "200":

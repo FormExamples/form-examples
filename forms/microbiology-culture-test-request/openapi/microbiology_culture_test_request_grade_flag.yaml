@@ -5,10 +5,19 @@ info:
   title: Microbiology Culture Test Request — MicrobiologyCultureTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the laboratory team.
+x-namespace:
+  form: microbiology-culture-test-request
+  apiPrefix: /api/microbiology-culture-test-request/
+  sqlSchema: microbiology_culture_test_request
+  xmlNamespace: https://formexamples.github.io/microbiology-culture-test-request/xml
+tags:
+  - name: microbiology-culture-test-request
+    description: Microbiology Culture Test Request form
 paths:
   /api/microbiology-culture-test-request/microbiology_culture_test_request_grade_flags:
     get:
       summary: List MicrobiologyCultureTestRequestGradeFlag records
+      tags: [microbiology-culture-test-request]
       operationId: listMicrobiologyCultureTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MicrobiologyCultureTestRequestGradeFlag
+      tags: [microbiology-culture-test-request]
       operationId: createMicrobiologyCultureTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MicrobiologyCultureTestRequestGradeFlag by id
+      tags: [microbiology-culture-test-request]
       operationId: getMicrobiologyCultureTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MicrobiologyCultureTestRequestGradeFlag
+      tags: [microbiology-culture-test-request]
       operationId: updateMicrobiologyCultureTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MicrobiologyCultureTestRequestGradeFlag
+      tags: [microbiology-culture-test-request]
       operationId: replaceMicrobiologyCultureTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MicrobiologyCultureTestRequestGradeFlag
+      tags: [microbiology-culture-test-request]
       operationId: deleteMicrobiologyCultureTestRequestGradeFlag
       responses:
         "200":

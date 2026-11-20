@@ -1,4 +1,5 @@
 <!ELEMENT anaesthetic_record_timed_observation (id,created_at,updated_at,deleted_at,anaesthetic_record_id,observed_at,systolic_blood_pressure,diastolic_blood_pressure,heart_rate,spo2,end_tidal_co2,temperature,agent_percent,fresh_gas_flow_l)>
+<!ATTLIST anaesthetic_record_timed_observation xmlns CDATA #FIXED "https://formexamples.github.io/anaesthetic-record/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

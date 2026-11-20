@@ -9,6 +9,9 @@ import os
 import re
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "lib"))
+from example_ids import example_uuid  # noqa: E402
 from xml.sax.saxutils import escape as xml_escape
 
 FORMS_DIR = Path(__file__).resolve().parent.parent.parent / "forms"
@@ -52,13 +55,15 @@ TIMESTAMP = "2026-04-09T10:00:00Z"
 # Map table names to UUID indices for consistent FK references
 table_uuid_map = {}
 uuid_counter = 0
+# The form being generated; example ids are UUIDv5 names within it (bin/lib/example_ids.py).
+CURRENT_SLUG = ""
 
 
 def get_uuid(table_name):
     """Get a consistent UUID for a table name."""
     global uuid_counter
     if table_name not in table_uuid_map:
-        table_uuid_map[table_name] = UUIDS[uuid_counter % len(UUIDS)]
+        table_uuid_map[table_name] = example_uuid(CURRENT_SLUG, table_name)
         uuid_counter += 1
     return table_uuid_map[table_name]
 
@@ -82,7 +87,7 @@ def guess_example_value(col_name, col_type, check_values, col_def, all_tables):
         ref_table = col_name_lower.replace("_id", "")
         if ref_table in table_uuid_map:
             return table_uuid_map[ref_table]
-        return UUIDS[1]  # default FK
+        return example_uuid(CURRENT_SLUG, ref_table)  # default FK
 
     # CHECK constraint values - pick the first non-empty value
     if check_values:
@@ -303,6 +308,11 @@ def parse_create_table(sql_text):
     return tables
 
 
+def xml_namespace(slug):
+    """The form's XML namespace, per spec/form-namespacing/."""
+    return f"https://formexamples.github.io/{slug}/xml"
+
+
 def generate_dtd(table_name, columns):
     """Generate DTD content for a table (external DTD format)."""
     col_names = [c['name'] for c in columns]
@@ -310,6 +320,7 @@ def generate_dtd(table_name, columns):
 
     lines = [
         f"<!ELEMENT {table_name} ({elements})>",
+        f'<!ATTLIST {table_name} xmlns CDATA #FIXED "{xml_namespace(CURRENT_SLUG)}">',
     ]
     for col in columns:
         lines.append(f"<!ELEMENT {col['name']} (#PCDATA)>")
@@ -325,7 +336,7 @@ def generate_xml(table_name, columns, all_tables):
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         f'<!DOCTYPE {table_name} SYSTEM "{table_name}.dtd">',
-        f"<{table_name}>",
+        f'<{table_name} xmlns="{xml_namespace(CURRENT_SLUG)}">',
     ]
 
     for col in columns:
@@ -348,8 +359,9 @@ def generate_xml(table_name, columns, all_tables):
 
 def process_form(form_dir):
     """Process a single form's SQL migrations and generate XML representations."""
-    global uuid_counter
+    global uuid_counter, CURRENT_SLUG
     uuid_counter = 0
+    CURRENT_SLUG = form_dir.name
     table_uuid_map.clear()
 
     sql_dir = form_dir / "sql"

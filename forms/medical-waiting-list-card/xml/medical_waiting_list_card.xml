@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE medical_waiting_list_card SYSTEM "medical_waiting_list_card.dtd">
-<medical_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<medical_waiting_list_card xmlns="https://formexamples.github.io/medical-waiting-list-card/xml">
+<id>8ba0dd01-c2f0-51ea-a002-eae5f7934f92</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>65ebb9c2-bd2d-596a-80f6-29ac0383e763</patient_id>
+<practitioner_id>0a71de69-1a55-57eb-90de-ff442f7aac6d</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

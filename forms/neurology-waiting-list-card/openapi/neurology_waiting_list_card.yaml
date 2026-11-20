@@ -5,10 +5,19 @@ info:
   title: Neurology Waiting List Card — NeurologyWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a neurology waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: neurology-waiting-list-card
+  apiPrefix: /api/neurology-waiting-list-card/
+  sqlSchema: neurology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/neurology-waiting-list-card/xml
+tags:
+  - name: neurology-waiting-list-card
+    description: Neurology Waiting List Card form
 paths:
   /api/neurology-waiting-list-card/neurology_waiting_list_cards:
     get:
       summary: List NeurologyWaitingListCard records
+      tags: [neurology-waiting-list-card]
       operationId: listNeurologyWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeurologyWaitingListCard
+      tags: [neurology-waiting-list-card]
       operationId: createNeurologyWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NeurologyWaitingListCard by id
+      tags: [neurology-waiting-list-card]
       operationId: getNeurologyWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeurologyWaitingListCard
+      tags: [neurology-waiting-list-card]
       operationId: updateNeurologyWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NeurologyWaitingListCard
+      tags: [neurology-waiting-list-card]
       operationId: replaceNeurologyWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NeurologyWaitingListCard
+      tags: [neurology-waiting-list-card]
       operationId: deleteNeurologyWaitingListCard
       responses:
         "200":

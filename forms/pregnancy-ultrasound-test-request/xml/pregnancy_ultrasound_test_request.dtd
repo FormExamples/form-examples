@@ -1,4 +1,5 @@
 <!ELEMENT pregnancy_ultrasound_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,last_menstrual_period_date,last_menstrual_period_reliability,estimated_due_date,estimated_due_date_method,gestational_age_weeks,gestational_age_days,gravida,para,plurality,chorionicity,conception_method,rhesus_status,body_mass_index,requested_scan_type,primary_indication,clinical_question,relevant_history,previous_scan_finding,previous_scan_date,vaginal_bleeding,abdominal_pain,reduced_fetal_movements,suspected_ectopic,haemodynamically_unstable,hypertension,diabetes,previous_growth_restriction,previous_preterm_birth,previous_caesarean,smoker,urgency,supervising_consultant,requester_contact,interpreter_required,notes)>
+<!ATTLIST pregnancy_ultrasound_test_request xmlns CDATA #FIXED "https://formexamples.github.io/pregnancy-ultrasound-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

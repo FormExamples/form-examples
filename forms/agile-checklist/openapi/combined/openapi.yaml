@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Agile Checklist form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: agile-checklist
+  apiPrefix: /api/agile-checklist/
+  sqlSchema: agile_checklist
+  xmlNamespace: https://formexamples.github.io/agile-checklist/xml
+tags:
+- name: agile-checklist
+  description: Agile Checklist form
 paths:
   /api/agile-checklist/agile_checklist_grade_flags:
     get:
       summary: List AgileChecklistGradeFlag records
+      tags:
+      - agile-checklist
       operationId: listAgileChecklistGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AgileChecklistGradeFlag
+      tags:
+      - agile-checklist
       operationId: createAgileChecklistGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AgileChecklistGradeFlag by id
+      tags:
+      - agile-checklist
       operationId: getAgileChecklistGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AgileChecklistGradeFlag
+      tags:
+      - agile-checklist
       operationId: updateAgileChecklistGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AgileChecklistGradeFlag
+      tags:
+      - agile-checklist
       operationId: replaceAgileChecklistGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AgileChecklistGradeFlag
+      tags:
+      - agile-checklist
       operationId: deleteAgileChecklistGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/agile-checklist/agile_checklist_grade_rules:
     get:
       summary: List AgileChecklistGradeRule records
+      tags:
+      - agile-checklist
       operationId: listAgileChecklistGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AgileChecklistGradeRule
+      tags:
+      - agile-checklist
       operationId: createAgileChecklistGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AgileChecklistGradeRule by id
+      tags:
+      - agile-checklist
       operationId: getAgileChecklistGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AgileChecklistGradeRule
+      tags:
+      - agile-checklist
       operationId: updateAgileChecklistGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AgileChecklistGradeRule
+      tags:
+      - agile-checklist
       operationId: replaceAgileChecklistGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AgileChecklistGradeRule
+      tags:
+      - agile-checklist
       operationId: deleteAgileChecklistGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/agile-checklist/agile_checklist_grades:
     get:
       summary: List AgileChecklistGrade records
+      tags:
+      - agile-checklist
       operationId: listAgileChecklistGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AgileChecklistGrade
+      tags:
+      - agile-checklist
       operationId: createAgileChecklistGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AgileChecklistGrade by id
+      tags:
+      - agile-checklist
       operationId: getAgileChecklistGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AgileChecklistGrade
+      tags:
+      - agile-checklist
       operationId: updateAgileChecklistGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AgileChecklistGrade
+      tags:
+      - agile-checklist
       operationId: replaceAgileChecklistGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AgileChecklistGrade
+      tags:
+      - agile-checklist
       operationId: deleteAgileChecklistGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/agile-checklist/agile_checklists:
     get:
       summary: List AgileChecklist records
+      tags:
+      - agile-checklist
       operationId: listAgileChecklist
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AgileChecklist
+      tags:
+      - agile-checklist
       operationId: createAgileChecklist
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AgileChecklist by id
+      tags:
+      - agile-checklist
       operationId: getAgileChecklist
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AgileChecklist
+      tags:
+      - agile-checklist
       operationId: updateAgileChecklist
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AgileChecklist
+      tags:
+      - agile-checklist
       operationId: replaceAgileChecklist
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AgileChecklist
+      tags:
+      - agile-checklist
       operationId: deleteAgileChecklist
       responses:
         '200':
@@ -1003,9 +1059,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - agile-checklist
   /api/agile-checklist/respondents:
     get:
       summary: List Respondent records
+      tags:
+      - agile-checklist
       operationId: listRespondent
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Respondent
+      tags:
+      - agile-checklist
       operationId: createRespondent
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Respondent by id
+      tags:
+      - agile-checklist
       operationId: getRespondent
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Respondent
+      tags:
+      - agile-checklist
       operationId: updateRespondent
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Respondent
+      tags:
+      - agile-checklist
       operationId: replaceRespondent
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Respondent
+      tags:
+      - agile-checklist
       operationId: deleteRespondent
       responses:
         '200':

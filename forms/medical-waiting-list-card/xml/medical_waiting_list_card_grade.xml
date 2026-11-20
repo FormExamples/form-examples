@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE medical_waiting_list_card_grade SYSTEM "medical_waiting_list_card_grade.dtd">
-<medical_waiting_list_card_grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<medical_waiting_list_card_grade xmlns="https://formexamples.github.io/medical-waiting-list-card/xml">
+<id>b262cc4f-5cdb-5692-9164-4fb41d012b16</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<medical_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</medical_waiting_list_card_id>
+<medical_waiting_list_card_id>8ba0dd01-c2f0-51ea-a002-eae5f7934f92</medical_waiting_list_card_id>
 <waiting_time_status>within-target</waiting_time_status>
 <clinical_priority>P1a</clinical_priority>
 <target_wait_weeks>0.0</target_wait_weeks>

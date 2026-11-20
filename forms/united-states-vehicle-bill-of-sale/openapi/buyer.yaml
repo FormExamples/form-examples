@@ -5,10 +5,19 @@ info:
   title: United States Vehicle Bill Of Sale — Buyer
   version: 1.0.0
   description: "Buyer (transferee) contact record for a United States vehicle bill of sale: name, contact details, ZIP code, and whether an individual or a business."
+x-namespace:
+  form: united-states-vehicle-bill-of-sale
+  apiPrefix: /api/united-states-vehicle-bill-of-sale/
+  sqlSchema: united_states_vehicle_bill_of_sale
+  xmlNamespace: https://formexamples.github.io/united-states-vehicle-bill-of-sale/xml
+tags:
+  - name: united-states-vehicle-bill-of-sale
+    description: United States Vehicle Bill Of Sale form
 paths:
   /api/united-states-vehicle-bill-of-sale/buyers:
     get:
       summary: List Buyer records
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: listBuyer
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Buyer
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: createBuyer
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Buyer by id
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: getBuyer
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Buyer
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: updateBuyer
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Buyer
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: replaceBuyer
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Buyer
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: deleteBuyer
       responses:
         "200":

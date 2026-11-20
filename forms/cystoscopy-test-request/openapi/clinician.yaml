@@ -5,10 +5,19 @@ info:
   title: Cystoscopy Test Request — Clinician
   version: 1.0.0
   description: Requesting clinician (referrer) who completes the cystoscopy request.
+x-namespace:
+  form: cystoscopy-test-request
+  apiPrefix: /api/cystoscopy-test-request/
+  sqlSchema: cystoscopy_test_request
+  xmlNamespace: https://formexamples.github.io/cystoscopy-test-request/xml
+tags:
+  - name: cystoscopy-test-request
+    description: Cystoscopy Test Request form
 paths:
   /api/cystoscopy-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags: [cystoscopy-test-request]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [cystoscopy-test-request]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [cystoscopy-test-request]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [cystoscopy-test-request]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [cystoscopy-test-request]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [cystoscopy-test-request]
       operationId: deleteClinician
       responses:
         "200":

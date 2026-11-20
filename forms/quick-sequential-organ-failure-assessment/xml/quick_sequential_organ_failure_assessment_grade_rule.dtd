@@ -1,4 +1,5 @@
 <!ELEMENT quick_sequential_organ_failure_assessment_grade_rule (id,created_at,updated_at,deleted_at,quick_sequential_organ_failure_assessment_grade_id,rule_id,criterion,points,category,description)>
+<!ATTLIST quick_sequential_organ_failure_assessment_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/quick-sequential-organ-failure-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

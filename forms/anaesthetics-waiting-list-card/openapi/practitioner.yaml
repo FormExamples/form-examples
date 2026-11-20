@@ -5,10 +5,19 @@ info:
   title: Anaesthetics Waiting List Card — Practitioner
   version: 1.0.0
   description: Practitioner who completes a anaesthetics waiting list card on behalf of the patient.
+x-namespace:
+  form: anaesthetics-waiting-list-card
+  apiPrefix: /api/anaesthetics-waiting-list-card/
+  sqlSchema: anaesthetics_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/anaesthetics-waiting-list-card/xml
+tags:
+  - name: anaesthetics-waiting-list-card
+    description: Anaesthetics Waiting List Card form
 paths:
   /api/anaesthetics-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags: [anaesthetics-waiting-list-card]
       operationId: listPractitioner
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Practitioner
+      tags: [anaesthetics-waiting-list-card]
       operationId: createPractitioner
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags: [anaesthetics-waiting-list-card]
       operationId: getPractitioner
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Practitioner
+      tags: [anaesthetics-waiting-list-card]
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Practitioner
+      tags: [anaesthetics-waiting-list-card]
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Practitioner
+      tags: [anaesthetics-waiting-list-card]
       operationId: deletePractitioner
       responses:
         "200":

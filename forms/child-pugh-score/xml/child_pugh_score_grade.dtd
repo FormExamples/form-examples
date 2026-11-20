@@ -1,4 +1,5 @@
 <!ELEMENT child_pugh_score_grade (id,created_at,updated_at,deleted_at,child_pugh_score_id,bilirubin_points,albumin_points,coagulation_points,ascites_points,encephalopathy_points,total_score,child_pugh_class,one_year_survival,two_year_survival,surgical_risk,graded_at)>
+<!ATTLIST child_pugh_score_grade xmlns CDATA #FIXED "https://formexamples.github.io/child-pugh-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

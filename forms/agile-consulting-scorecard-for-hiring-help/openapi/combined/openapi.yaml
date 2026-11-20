@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Agile consulting scorecard for hiring help form,
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: agile-consulting-scorecard-for-hiring-help
+  apiPrefix: /api/agile-consulting-scorecard-for-hiring-help/
+  sqlSchema: agile_consulting_scorecard_for_hiring_help
+  xmlNamespace: https://formexamples.github.io/agile-consulting-scorecard-for-hiring-help/xml
+tags:
+- name: agile-consulting-scorecard-for-hiring-help
+  description: Agile consulting scorecard for hiring help form
 paths:
   /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_help_grade_flags:
     get:
       summary: List AgileConsultingScorecardForHiringHelpGradeFlag records
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: listAgileConsultingScorecardForHiringHelpGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AgileConsultingScorecardForHiringHelpGradeFlag
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: createAgileConsultingScorecardForHiringHelpGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AgileConsultingScorecardForHiringHelpGradeFlag by id
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: getAgileConsultingScorecardForHiringHelpGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AgileConsultingScorecardForHiringHelpGradeFlag
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: updateAgileConsultingScorecardForHiringHelpGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AgileConsultingScorecardForHiringHelpGradeFlag
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: replaceAgileConsultingScorecardForHiringHelpGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AgileConsultingScorecardForHiringHelpGradeFlag
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: deleteAgileConsultingScorecardForHiringHelpGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_help_grade_rules:
     get:
       summary: List AgileConsultingScorecardForHiringHelpGradeRule records
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: listAgileConsultingScorecardForHiringHelpGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AgileConsultingScorecardForHiringHelpGradeRule
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: createAgileConsultingScorecardForHiringHelpGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AgileConsultingScorecardForHiringHelpGradeRule by id
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: getAgileConsultingScorecardForHiringHelpGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AgileConsultingScorecardForHiringHelpGradeRule
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: updateAgileConsultingScorecardForHiringHelpGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AgileConsultingScorecardForHiringHelpGradeRule
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: replaceAgileConsultingScorecardForHiringHelpGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AgileConsultingScorecardForHiringHelpGradeRule
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: deleteAgileConsultingScorecardForHiringHelpGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_help_grades:
     get:
       summary: List AgileConsultingScorecardForHiringHelpGrade records
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: listAgileConsultingScorecardForHiringHelpGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AgileConsultingScorecardForHiringHelpGrade
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: createAgileConsultingScorecardForHiringHelpGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AgileConsultingScorecardForHiringHelpGrade by id
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: getAgileConsultingScorecardForHiringHelpGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AgileConsultingScorecardForHiringHelpGrade
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: updateAgileConsultingScorecardForHiringHelpGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AgileConsultingScorecardForHiringHelpGrade
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: replaceAgileConsultingScorecardForHiringHelpGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AgileConsultingScorecardForHiringHelpGrade
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: deleteAgileConsultingScorecardForHiringHelpGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_helps:
     get:
       summary: List AgileConsultingScorecardForHiringHelp records
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: listAgileConsultingScorecardForHiringHelp
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AgileConsultingScorecardForHiringHelp
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: createAgileConsultingScorecardForHiringHelp
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AgileConsultingScorecardForHiringHelp by id
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: getAgileConsultingScorecardForHiringHelp
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AgileConsultingScorecardForHiringHelp
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: updateAgileConsultingScorecardForHiringHelp
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AgileConsultingScorecardForHiringHelp
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: replaceAgileConsultingScorecardForHiringHelp
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AgileConsultingScorecardForHiringHelp
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: deleteAgileConsultingScorecardForHiringHelp
       responses:
         '200':
@@ -1003,9 +1059,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
   /api/agile-consulting-scorecard-for-hiring-help/organizations:
     get:
       summary: List Organization records
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: listOrganization
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Organization
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: createOrganization
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Organization by id
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: getOrganization
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Organization
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: updateOrganization
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Organization
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: replaceOrganization
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Organization
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: deleteOrganization
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/agile-consulting-scorecard-for-hiring-help/respondents:
     get:
       summary: List Respondent records
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: listRespondent
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Respondent
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: createRespondent
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Respondent by id
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: getRespondent
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Respondent
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: updateRespondent
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Respondent
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: replaceRespondent
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Respondent
+      tags:
+      - agile-consulting-scorecard-for-hiring-help
       operationId: deleteRespondent
       responses:
         '200':

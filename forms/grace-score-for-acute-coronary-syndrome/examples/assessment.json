@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000056",
+    "id": "dd7be88c-d66c-51be-8cc2-21fcdf55412e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000068",
+    "id": "f6280d42-0f4d-53bc-8ba5-d5536d73bd74",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "graceScoreForAcuteCoronarySyndrome": {
-    "id": "550e8400-e29b-41d4-a716-000000000075",
+    "id": "66f9e89c-5042-5e19-a5fa-a7b1b9d3014f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000079",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007a",
+    "patientId": "7db67e59-c109-5117-90cc-5110899d10c7",
+    "clinicianId": "0bc71e44-cdb6-57c4-b416-0a094f40b3de",
     "clinicianName": "",
     "clinicianRole": "emergency-physician",
     "assessedAt": null,
@@ -60,11 +60,11 @@
     "clinicalNote": ""
   },
   "graceScoreForAcuteCoronarySyndromeGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008c",
+    "id": "bb69d760-97e7-5a81-a61c-a9feaf11a3ed",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "graceScoreForAcuteCoronarySyndromeId": "550e8400-e29b-41d4-a716-000000000090",
+    "graceScoreForAcuteCoronarySyndromeId": "4051aa2f-d9a9-5e38-ab43-73ad6628e9a5",
     "graceScore": null,
     "inHospitalRiskBand": "low",
     "sixMonthRiskBand": "low",
@@ -73,11 +73,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "graceScoreForAcuteCoronarySyndromeGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000097",
+    "id": "8a97b128-4b5e-56b8-9ea4-a1ada4728d35",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "graceScoreForAcuteCoronarySyndromeGradeId": "550e8400-e29b-41d4-a716-00000000009b",
+    "graceScoreForAcuteCoronarySyndromeGradeId": "95134c71-a718-58a4-89b0-48ea16bdc7b6",
     "ruleId": "",
     "variable": "age",
     "points": null,
@@ -85,11 +85,11 @@
     "description": ""
   },
   "graceScoreForAcuteCoronarySyndromeGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a1",
+    "id": "dcbcd067-60c4-5c2c-a28e-5203b07860bb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "graceScoreForAcuteCoronarySyndromeGradeId": "550e8400-e29b-41d4-a716-0000000000a5",
+    "graceScoreForAcuteCoronarySyndromeGradeId": "95744bf0-1001-50ce-884e-9f3da5cff2e2",
     "flagId": "",
     "category": "high-risk-early-angiography",
     "priority": "low",

@@ -5,10 +5,19 @@ info:
   title: United States Divorce Petition — Attorney
   version: 1.0.0
   description: Attorney or court self-help facilitator who prepares the petition; optional because many petitioners file pro se.
+x-namespace:
+  form: united-states-divorce-petition
+  apiPrefix: /api/united-states-divorce-petition/
+  sqlSchema: united_states_divorce_petition
+  xmlNamespace: https://formexamples.github.io/united-states-divorce-petition/xml
+tags:
+  - name: united-states-divorce-petition
+    description: United States Divorce Petition form
 paths:
   /api/united-states-divorce-petition/attorneys:
     get:
       summary: List Attorney records
+      tags: [united-states-divorce-petition]
       operationId: listAttorney
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Attorney
+      tags: [united-states-divorce-petition]
       operationId: createAttorney
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Attorney by id
+      tags: [united-states-divorce-petition]
       operationId: getAttorney
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Attorney
+      tags: [united-states-divorce-petition]
       operationId: updateAttorney
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Attorney
+      tags: [united-states-divorce-petition]
       operationId: replaceAttorney
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Attorney
+      tags: [united-states-divorce-petition]
       operationId: deleteAttorney
       responses:
         "200":

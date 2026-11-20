@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE anion_gap_calculator_grade_flag SYSTEM "anion_gap_calculator_grade_flag.dtd">
-<anion_gap_calculator_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<anion_gap_calculator_grade_flag xmlns="https://formexamples.github.io/anion-gap-calculator/xml">
+<id>1e868531-050f-5110-80b0-10f17d016dd7</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<anion_gap_calculator_grade_id>880e8400-e29b-41d4-a716-446655440003</anion_gap_calculator_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<anion_gap_calculator_grade_id>4ceb40b7-6385-53c8-96cd-4c1bec8a454f</anion_gap_calculator_grade_id>
+<flag_id>213a33d8-6fca-51a0-8253-c9e05901040d</flag_id>
 <category>very-high</category>
 <priority>low</priority>
 <description>Example text.</description>

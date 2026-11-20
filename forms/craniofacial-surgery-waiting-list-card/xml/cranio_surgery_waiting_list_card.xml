@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cranio_surgery_waiting_list_card SYSTEM "cranio_surgery_waiting_list_card.dtd">
-<cranio_surgery_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<cranio_surgery_waiting_list_card xmlns="https://formexamples.github.io/craniofacial-surgery-waiting-list-card/xml">
+<id>b2a6eb78-5ebd-5e4c-a645-ff5bc611fd7e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>77991044-e466-5f92-81cf-7765f48914e8</patient_id>
+<practitioner_id>1a35e9c5-4945-5118-87b3-20c9743b32b6</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

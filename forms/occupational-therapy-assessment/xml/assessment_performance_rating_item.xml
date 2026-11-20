@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment_performance_rating_item SYSTEM "assessment_performance_rating_item.dtd">
-<assessment_performance_rating_item>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<assessment_performance_rating_item xmlns="https://formexamples.github.io/occupational-therapy-assessment/xml">
+<id>c6039e24-5add-57a7-b687-64ff6181e08c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<performance_ratings_id>660e8400-e29b-41d4-a716-446655440001</performance_ratings_id>
+<performance_ratings_id>24377ccb-abf2-5299-a0d7-bc36ba8c57db</performance_ratings_id>
 <occupational_issue>Teacher</occupational_issue>
 <domain>self-care</domain>
 <importance_score>5</importance_score>

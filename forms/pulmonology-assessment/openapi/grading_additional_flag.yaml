@@ -5,10 +5,19 @@ info:
   title: Pulmonology Assessment — GradingAdditionalFlag
   version: 1.0.0
   description: Additional safety-critical flags detected during pulmonology assessment grading (e.g. acute respiratory failure, lung cancer suspicion, oxygen desaturation).
+x-namespace:
+  form: pulmonology-assessment
+  apiPrefix: /api/pulmonology-assessment/
+  sqlSchema: pulmonology_assessment
+  xmlNamespace: https://formexamples.github.io/pulmonology-assessment/xml
+tags:
+  - name: pulmonology-assessment
+    description: Pulmonology Assessment form
 paths:
   /api/pulmonology-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [pulmonology-assessment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [pulmonology-assessment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [pulmonology-assessment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [pulmonology-assessment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [pulmonology-assessment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [pulmonology-assessment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

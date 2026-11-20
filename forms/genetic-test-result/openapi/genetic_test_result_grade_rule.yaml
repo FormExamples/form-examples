@@ -5,10 +5,19 @@ info:
   title: Genetic Test Result — GeneticTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: genetic-test-result
+  apiPrefix: /api/genetic-test-result/
+  sqlSchema: genetic_test_result
+  xmlNamespace: https://formexamples.github.io/genetic-test-result/xml
+tags:
+  - name: genetic-test-result
+    description: Genetic Test Result form
 paths:
   /api/genetic-test-result/genetic_test_result_grade_rules:
     get:
       summary: List GeneticTestResultGradeRule records
+      tags: [genetic-test-result]
       operationId: listGeneticTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GeneticTestResultGradeRule
+      tags: [genetic-test-result]
       operationId: createGeneticTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GeneticTestResultGradeRule by id
+      tags: [genetic-test-result]
       operationId: getGeneticTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GeneticTestResultGradeRule
+      tags: [genetic-test-result]
       operationId: updateGeneticTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GeneticTestResultGradeRule
+      tags: [genetic-test-result]
       operationId: replaceGeneticTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GeneticTestResultGradeRule
+      tags: [genetic-test-result]
       operationId: deleteGeneticTestResultGradeRule
       responses:
         "200":

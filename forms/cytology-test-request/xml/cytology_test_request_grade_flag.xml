@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cytology_test_request_grade_flag SYSTEM "cytology_test_request_grade_flag.dtd">
-<cytology_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<cytology_test_request_grade_flag xmlns="https://formexamples.github.io/cytology-test-request/xml">
+<id>bb62d054-bc4c-5ae6-9692-f80d8ae5f4d5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cytology_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</cytology_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<cytology_test_request_grade_id>93828e0f-64ce-5f06-9ba9-a66199d7efe6</cytology_test_request_grade_id>
+<flag_id>94cf41dd-33cb-58b1-9c73-79376d2c8956</flag_id>
 <category>suspected-cancer-2ww</category>
 <priority>low</priority>
 <description>Example text.</description>

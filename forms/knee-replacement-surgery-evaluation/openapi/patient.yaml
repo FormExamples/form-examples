@@ -5,10 +5,19 @@ info:
   title: Knee Replacement Surgery Evaluation — Patient
   version: 1.0.0
   description: Patient.
+x-namespace:
+  form: knee-replacement-surgery-evaluation
+  apiPrefix: /api/knee-replacement-surgery-evaluation/
+  sqlSchema: knee_replacement_surgery_evaluation
+  xmlNamespace: https://formexamples.github.io/knee-replacement-surgery-evaluation/xml
+tags:
+  - name: knee-replacement-surgery-evaluation
+    description: Knee Replacement Surgery Evaluation form
 paths:
   /api/knee-replacement-surgery-evaluation/patients:
     get:
       summary: List Patient records
+      tags: [knee-replacement-surgery-evaluation]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [knee-replacement-surgery-evaluation]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [knee-replacement-surgery-evaluation]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [knee-replacement-surgery-evaluation]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [knee-replacement-surgery-evaluation]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [knee-replacement-surgery-evaluation]
       operationId: deletePatient
       responses:
         "200":

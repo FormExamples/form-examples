@@ -1,4 +1,5 @@
 <!ELEMENT lpa_decision_rule (id,created_at,updated_at,deleted_at,lpa_id,decision_rule,joint_decision_set)>
+<!ATTLIST lpa_decision_rule xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

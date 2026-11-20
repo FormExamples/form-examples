@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<grade xmlns="https://formexamples.github.io/hematology-assessment/xml">
+<id>e4fc462b-f9e4-5a06-93be-b222f1e22fed</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>d1ce8f28-8ac8-514c-8e23-496bb84c88b2</assessment_id>
 <abnormality_level>draft</abnormality_level>
 <abnormality_score>5.0</abnormality_score>
 <abnormality_level_override>normal</abnormality_level_override>

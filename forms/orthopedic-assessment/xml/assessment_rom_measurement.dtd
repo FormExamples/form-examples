@@ -1,4 +1,5 @@
 <!ELEMENT assessment_rom_measurement (id,created_at,updated_at,deleted_at,range_of_motion_id,movement,active_degrees,passive_degrees,normal_degrees,end_feel,pain_on_movement,sort_order)>
+<!ATTLIST assessment_rom_measurement xmlns CDATA #FIXED "https://formexamples.github.io/orthopedic-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE diabetes_eye_screening SYSTEM "diabetes_eye_screening.dtd">
-<diabetes_eye_screening>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<diabetes_eye_screening xmlns="https://formexamples.github.io/diabetes-eye-screening/xml">
+<id>7cdb4a31-16eb-5d2c-a4dd-2316e9e33c68</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>2921de08-4939-5870-ab32-a56354492483</patient_id>
+<clinician_id>086ce799-5af3-5cca-8739-32054e4bbee6</clinician_id>
 <grader_name>Example</grader_name>
 <grader_role>screener</grader_role>
 <graded_at>2026-01-15</graded_at>

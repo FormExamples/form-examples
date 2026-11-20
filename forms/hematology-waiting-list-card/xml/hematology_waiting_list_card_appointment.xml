@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hematology_waiting_list_card_appointment SYSTEM "hematology_waiting_list_card_appointment.dtd">
-<hematology_waiting_list_card_appointment>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<hematology_waiting_list_card_appointment xmlns="https://formexamples.github.io/hematology-waiting-list-card/xml">
+<id>1ad528ef-25b6-5730-8e0d-fa17c23e4d87</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<hematology_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</hematology_waiting_list_card_id>
+<hematology_waiting_list_card_id>b5f3db22-9662-52cc-aa2d-d5339a5aecb6</hematology_waiting_list_card_id>
 <appointment_date>2026-01-15</appointment_date>
 <appointment_time></appointment_time>
 <duration_minutes>1</duration_minutes>

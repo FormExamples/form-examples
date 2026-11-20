@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE who_surgical_safety_checklist SYSTEM "who_surgical_safety_checklist.dtd">
-<who_surgical_safety_checklist>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<who_surgical_safety_checklist xmlns="https://formexamples.github.io/who-surgical-safety-checklist/xml">
+<id>270dedbe-45a0-50aa-b900-c23edaba1016</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<surgeon_id>660e8400-e29b-41d4-a716-446655440001</surgeon_id>
-<anaesthetist_id>660e8400-e29b-41d4-a716-446655440001</anaesthetist_id>
-<lead_nurse_id>660e8400-e29b-41d4-a716-446655440001</lead_nurse_id>
+<patient_id>4fafa676-bdb9-53d0-9fda-449137f93bd1</patient_id>
+<surgeon_id>df0890a1-365a-59bb-92d3-98df3cb36152</surgeon_id>
+<anaesthetist_id>22a517cb-892e-5b0c-966c-d58786b5cf01</anaesthetist_id>
+<lead_nurse_id>4f495a21-f437-5e45-a207-b6ca7913d841</lead_nurse_id>
 <status>not-started</status>
 <site_name>Example</site_name>
 <operating_room></operating_room>
@@ -29,7 +29,7 @@
 <sign_in_known_allergy_detail></sign_in_known_allergy_detail>
 <sign_in_difficult_airway_aspiration_risk>no</sign_in_difficult_airway_aspiration_risk>
 <sign_in_blood_loss_risk>no</sign_in_blood_loss_risk>
-<sign_in_coordinator_id>660e8400-e29b-41d4-a716-446655440001</sign_in_coordinator_id>
+<sign_in_coordinator_id>7739b93f-1f53-5898-881c-43f40ba30b06</sign_in_coordinator_id>
 <sign_in_completed_at>2026-04-09T10:00:00Z</sign_in_completed_at>
 <time_out_team_introductions_confirmed>yes</time_out_team_introductions_confirmed>
 <time_out_patient_procedure_incision_confirmed>yes</time_out_patient_procedure_incision_confirmed>
@@ -41,13 +41,13 @@
 <time_out_nursing_sterility_confirmed>yes</time_out_nursing_sterility_confirmed>
 <time_out_nursing_equipment_concerns></time_out_nursing_equipment_concerns>
 <time_out_essential_imaging_displayed>yes</time_out_essential_imaging_displayed>
-<time_out_coordinator_id>660e8400-e29b-41d4-a716-446655440001</time_out_coordinator_id>
+<time_out_coordinator_id>1ee7f0f8-d211-5916-b51c-9f82d6a1d7c8</time_out_coordinator_id>
 <time_out_completed_at>2026-04-09T10:00:00Z</time_out_completed_at>
 <sign_out_procedure_name_confirmed>yes</sign_out_procedure_name_confirmed>
 <sign_out_counts_confirmed>yes</sign_out_counts_confirmed>
 <sign_out_specimens_labelled>yes</sign_out_specimens_labelled>
 <sign_out_equipment_problems></sign_out_equipment_problems>
 <sign_out_recovery_concerns></sign_out_recovery_concerns>
-<sign_out_coordinator_id>660e8400-e29b-41d4-a716-446655440001</sign_out_coordinator_id>
+<sign_out_coordinator_id>d30e769a-5f43-5a34-978d-08de81f7db5f</sign_out_coordinator_id>
 <sign_out_completed_at>2026-04-09T10:00:00Z</sign_out_completed_at>
 </who_surgical_safety_checklist>

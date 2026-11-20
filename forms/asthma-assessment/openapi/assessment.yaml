@@ -5,10 +5,19 @@ info:
   title: Asthma Assessment — Assessment
   version: 1.0.0
   description: Asthma assessment form using the Asthma Control Test (ACT) instrument. Parent entity for all assessment sections.
+x-namespace:
+  form: asthma-assessment
+  apiPrefix: /api/asthma-assessment/
+  sqlSchema: asthma_assessment
+  xmlNamespace: https://formexamples.github.io/asthma-assessment/xml
+tags:
+  - name: asthma-assessment
+    description: Asthma Assessment form
 paths:
   /api/asthma-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [asthma-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [asthma-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [asthma-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [asthma-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [asthma-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [asthma-assessment]
       operationId: deleteAssessment
       responses:
         "200":

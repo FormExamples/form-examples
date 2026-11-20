@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "06b19f91-5a5b-56b7-8be3-c06985a1aa25",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "5084336d-cd48-558c-b233-9099caf89230",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "stomatologyWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "af5bc4de-6e23-5cb5-bc78-b1d3d4073139",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000096",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000097",
+    "patientId": "0af25176-bfbe-5b2a-b9c4-82f0f7b8bcea",
+    "practitionerId": "1aadc839-6edf-50b5-b627-58265d4932aa",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "stomatologyWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "ac6a2b83-ad29-5fd3-9c6d-7bf4355e5501",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "stomatologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "stomatologyWaitingListCardId": "34a09655-65fb-5b10-8524-c0fa2960bb5c",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "stomatologyWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "4068391c-b27a-572f-90e1-900f92f2f87d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "stomatologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "stomatologyWaitingListCardId": "9bace994-0d70-5de4-8fe2-b240e9ffbb42",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "stomatologyWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d1",
+    "id": "ef2a9dd8-9724-5052-8603-b4fe1a8e971f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "stomatologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "stomatologyWaitingListCardGradeId": "cbbe5ab9-13d6-5611-921f-129ccadaab84",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "stomatologyWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000db",
+    "id": "96d32fcd-30bc-5eca-b1b2-9908c0b0c3b3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "stomatologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000df",
+    "stomatologyWaitingListCardGradeId": "4619ed2b-cbcc-58f9-8a2f-aca6053af6b9",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

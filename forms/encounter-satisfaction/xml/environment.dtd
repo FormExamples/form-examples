@@ -1,4 +1,5 @@
 <!ELEMENT environment (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,cleanliness,waiting_area_comfort,privacy)>
+<!ATTLIST environment xmlns CDATA #FIXED "https://formexamples.github.io/encounter-satisfaction/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

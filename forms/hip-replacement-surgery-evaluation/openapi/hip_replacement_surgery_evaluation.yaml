@@ -5,10 +5,19 @@ info:
   title: Hip Replacement Surgery Evaluation — HipReplacementSurgeryEvaluation
   version: 1.0.0
   description: "Hip-replacement surgery evaluation: the payload of the 15-step single-page wizard, i.e. the orthopaedic assessment of whether a patient's hip disease and functional decline justify total hip arthroplasty and whether conservative options have been exhausted."
+x-namespace:
+  form: hip-replacement-surgery-evaluation
+  apiPrefix: /api/hip-replacement-surgery-evaluation/
+  sqlSchema: hip_replacement_surgery_evaluation
+  xmlNamespace: https://formexamples.github.io/hip-replacement-surgery-evaluation/xml
+tags:
+  - name: hip-replacement-surgery-evaluation
+    description: Hip Replacement Surgery Evaluation form
 paths:
   /api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluations:
     get:
       summary: List HipReplacementSurgeryEvaluation records
+      tags: [hip-replacement-surgery-evaluation]
       operationId: listHipReplacementSurgeryEvaluation
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HipReplacementSurgeryEvaluation
+      tags: [hip-replacement-surgery-evaluation]
       operationId: createHipReplacementSurgeryEvaluation
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HipReplacementSurgeryEvaluation by id
+      tags: [hip-replacement-surgery-evaluation]
       operationId: getHipReplacementSurgeryEvaluation
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HipReplacementSurgeryEvaluation
+      tags: [hip-replacement-surgery-evaluation]
       operationId: updateHipReplacementSurgeryEvaluation
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HipReplacementSurgeryEvaluation
+      tags: [hip-replacement-surgery-evaluation]
       operationId: replaceHipReplacementSurgeryEvaluation
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HipReplacementSurgeryEvaluation
+      tags: [hip-replacement-surgery-evaluation]
       operationId: deleteHipReplacementSurgeryEvaluation
       responses:
         "200":

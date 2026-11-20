@@ -5,10 +5,19 @@ info:
   title: International Certificate Of Vaccination Or Prophylaxis — InternationalCertificateOfVaccinationOrProphylaxis
   version: 1.0.0
   description: WHO International Certificate of Vaccination or Prophylaxis (IHR 2005 Annex 6). One row per vaccinee per issued certificate; vaccination entries are recorded in the companion *_entry table.
+x-namespace:
+  form: international-certificate-of-vaccination-or-prophylaxis
+  apiPrefix: /api/international-certificate-of-vaccination-or-prophylaxis/
+  sqlSchema: international_certificate_of_vaccination_or_prophylaxis
+  xmlNamespace: https://formexamples.github.io/international-certificate-of-vaccination-or-prophylaxis/xml
+tags:
+  - name: international-certificate-of-vaccination-or-prophylaxis
+    description: International Certificate Of Vaccination Or Prophylaxis form
 paths:
   /api/international-certificate-of-vaccination-or-prophylaxis/international_certificate_of_vaccination_or_prophylaxis:
     get:
       summary: List InternationalCertificateOfVaccinationOrProphylaxis records
+      tags: [international-certificate-of-vaccination-or-prophylaxis]
       operationId: listInternationalCertificateOfVaccinationOrProphylaxis
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new InternationalCertificateOfVaccinationOrProphylaxis
+      tags: [international-certificate-of-vaccination-or-prophylaxis]
       operationId: createInternationalCertificateOfVaccinationOrProphylaxis
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one InternationalCertificateOfVaccinationOrProphylaxis by id
+      tags: [international-certificate-of-vaccination-or-prophylaxis]
       operationId: getInternationalCertificateOfVaccinationOrProphylaxis
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing InternationalCertificateOfVaccinationOrProphylaxis
+      tags: [international-certificate-of-vaccination-or-prophylaxis]
       operationId: updateInternationalCertificateOfVaccinationOrProphylaxis
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing InternationalCertificateOfVaccinationOrProphylaxis
+      tags: [international-certificate-of-vaccination-or-prophylaxis]
       operationId: replaceInternationalCertificateOfVaccinationOrProphylaxis
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a InternationalCertificateOfVaccinationOrProphylaxis
+      tags: [international-certificate-of-vaccination-or-prophylaxis]
       operationId: deleteInternationalCertificateOfVaccinationOrProphylaxis
       responses:
         "200":

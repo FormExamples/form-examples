@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005c",
+    "id": "e1779dfd-8608-5d46-9afb-ead45f5b49bf",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006e",
+    "id": "ce09df88-3408-53cd-a4f0-0f4b29655b80",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "paediatricEarlyWarningScore": {
-    "id": "550e8400-e29b-41d4-a716-00000000007b",
+    "id": "93066407-62af-536e-8d6f-aa13356e9129",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007f",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000080",
+    "patientId": "fc5a0c61-eec0-57b9-bc8e-235d230eb7f3",
+    "clinicianId": "7b5639dc-10b9-5bb1-be08-b720c34ef443",
     "status": "draft",
     "observationAt": null,
     "careSetting": "ward",
@@ -57,11 +57,11 @@
     "clinicalNotes": ""
   },
   "paediatricEarlyWarningScoreGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008f",
+    "id": "10c3c3b9-f55f-5a61-9adc-f3bd4929bd2d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "paediatricEarlyWarningScoreId": "550e8400-e29b-41d4-a716-000000000093",
+    "paediatricEarlyWarningScoreId": "706725b5-570a-5a9e-b260-5580095242f3",
     "aggregateScore": null,
     "maxParameterScore": null,
     "respiratoryRateScore": null,
@@ -78,11 +78,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "paediatricEarlyWarningScoreGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a2",
+    "id": "4af10604-4a85-5f05-8b80-c3eeb2209975",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "paediatricEarlyWarningScoreGradeId": "550e8400-e29b-41d4-a716-0000000000a6",
+    "paediatricEarlyWarningScoreGradeId": "fc9c7bac-19ae-519c-bc1e-4d93b4db7f01",
     "ruleId": "",
     "instrument": "respiratory-rate",
     "band": "routine",
@@ -91,11 +91,11 @@
     "description": ""
   },
   "paediatricEarlyWarningScoreGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ad",
+    "id": "1f25fa2c-6cc7-5f2d-8786-565567a8cc85",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "paediatricEarlyWarningScoreGradeId": "550e8400-e29b-41d4-a716-0000000000b1",
+    "paediatricEarlyWarningScoreGradeId": "94d37372-ab5c-5bbb-9449-06bd242106df",
     "flagId": "",
     "category": "urgent-review",
     "priority": "low",

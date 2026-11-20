@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "id": "e8c56ee1-7c14-50e0-92a1-f3331c6764e1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000012",
+    "id": "6bd8b776-ea9d-5a35-b60c-56346496d6f8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "medicalWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000020",
+    "id": "874d9f0e-2b3a-5a47-80c9-9f9a3a78c7a2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000024",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000025",
+    "patientId": "1ca90f54-252d-5aa2-a04c-82cc0d91fc79",
+    "practitionerId": "c51cbccd-d457-53a5-99d9-0b5c9f4528cf",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "medicalWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-00000000003e",
+    "id": "4238bc32-231d-5c5e-ae25-1e0d73302caa",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalWaitingListCardId": "550e8400-e29b-41d4-a716-000000000042",
+    "medicalWaitingListCardId": "d7ba0919-ec7e-5f6b-92d0-94f1825443af",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "medicalWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000050",
+    "id": "3a7e0687-c8a3-5519-9cd6-952973ea6121",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalWaitingListCardId": "550e8400-e29b-41d4-a716-000000000054",
+    "medicalWaitingListCardId": "23ff89d6-65da-5112-b205-19931dfbe582",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "medicalWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000005f",
+    "id": "29d50414-e54b-5c64-acdb-64ed6cad0dbb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalWaitingListCardGradeId": "550e8400-e29b-41d4-a716-000000000063",
+    "medicalWaitingListCardGradeId": "2ddab505-dee5-5b15-a39d-4e7ed7773555",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "medicalWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000069",
+    "id": "fefb5e36-c57b-5d48-84d9-a9017fa0ee50",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalWaitingListCardGradeId": "550e8400-e29b-41d4-a716-00000000006d",
+    "medicalWaitingListCardGradeId": "42a5e531-e2d9-57b6-8d84-50a96a6f9176",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

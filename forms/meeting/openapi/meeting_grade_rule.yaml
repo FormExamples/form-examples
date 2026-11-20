@@ -5,10 +5,19 @@ info:
   title: Meeting — MeetingGradeRule
   version: 1.0.0
   description: Audit trail of every validation rule that fired for this meeting, across the validation instruments (invitation, agenda, participants, resources, recurrence, summary, action-items, outputs, outcomes, composite).
+x-namespace:
+  form: meeting
+  apiPrefix: /api/meeting/
+  sqlSchema: meeting
+  xmlNamespace: https://formexamples.github.io/meeting/xml
+tags:
+  - name: meeting
+    description: Meeting form
 paths:
   /api/meeting/meeting_grade_rules:
     get:
       summary: List MeetingGradeRule records
+      tags: [meeting]
       operationId: listMeetingGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MeetingGradeRule
+      tags: [meeting]
       operationId: createMeetingGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MeetingGradeRule by id
+      tags: [meeting]
       operationId: getMeetingGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MeetingGradeRule
+      tags: [meeting]
       operationId: updateMeetingGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MeetingGradeRule
+      tags: [meeting]
       operationId: replaceMeetingGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MeetingGradeRule
+      tags: [meeting]
       operationId: deleteMeetingGradeRule
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — Lpa
   version: 1.0.0
   description: Header row for a Lasting Power of Attorney for Health and Welfare under the Mental Capacity Act 2005.
+x-namespace:
+  form: united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
+  apiPrefix: /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/
+  sqlSchema: united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions
+  xmlNamespace: https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml
+tags:
+  - name: united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
+    description: United Kingdom Lasting Power Of Attorney For Health And Care Decisions form
 paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpas:
     get:
       summary: List Lpa records
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: listLpa
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Lpa
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: createLpa
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Lpa by id
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: getLpa
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Lpa
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: updateLpa
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Lpa
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: replaceLpa
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Lpa
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: deleteLpa
       responses:
         "200":

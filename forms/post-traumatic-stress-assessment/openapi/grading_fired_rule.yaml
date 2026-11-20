@@ -5,10 +5,19 @@ info:
   title: Post Traumatic Stress Assessment — GradingFiredRule
   version: 1.0.0
   description: Individual rules that evaluated to true during grading.
+x-namespace:
+  form: post-traumatic-stress-assessment
+  apiPrefix: /api/post-traumatic-stress-assessment/
+  sqlSchema: post_traumatic_stress_assessment
+  xmlNamespace: https://formexamples.github.io/post-traumatic-stress-assessment/xml
+tags:
+  - name: post-traumatic-stress-assessment
+    description: Post Traumatic Stress Assessment form
 paths:
   /api/post-traumatic-stress-assessment/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags: [post-traumatic-stress-assessment]
       operationId: listGradingFiredRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingFiredRule
+      tags: [post-traumatic-stress-assessment]
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags: [post-traumatic-stress-assessment]
       operationId: getGradingFiredRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingFiredRule
+      tags: [post-traumatic-stress-assessment]
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingFiredRule
+      tags: [post-traumatic-stress-assessment]
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingFiredRule
+      tags: [post-traumatic-stress-assessment]
       operationId: deleteGradingFiredRule
       responses:
         "200":

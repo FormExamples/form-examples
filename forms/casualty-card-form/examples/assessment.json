@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000124",
+    "id": "2e6e3764-30ee-5dae-a6fd-f15917d912a4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000136",
+    "id": "00687dc8-d830-5f36-a769-7e2bd625701b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,21 +36,21 @@
     "unitedKingdomNhsNumber": ""
   },
   "casualtyCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000144",
+    "id": "79719968-15a4-54e7-9790-77246d25ea65",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000148",
+    "patientId": "5fd36a7f-4c04-501d-97b2-a05d8aeffc26",
     "status": "in_progress",
     "attendanceDate": null,
     "arrivalTime": null
   },
   "casualtyCardDemographics": {
-    "id": "550e8400-e29b-41d4-a716-00000000014c",
+    "id": "9215e7ca-1cc9-50dd-a583-8cec8b3bfb2f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-000000000150",
+    "casualtyCardId": "03d7aadd-6d87-540d-b723-bd98fcb6a7be",
     "address": "",
     "postcode": "",
     "phone": "",
@@ -60,33 +60,33 @@
     "interpreterRequired": "yes"
   },
   "casualtyCardNextOfKin": {
-    "id": "550e8400-e29b-41d4-a716-000000000158",
+    "id": "1e708b03-1aa1-5b9c-96f5-8f98049aaf78",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-00000000015c",
+    "casualtyCardId": "233daed3-a620-5e92-b6ff-639ec7ea55fd",
     "name": "",
     "relationship": "",
     "phone": "",
     "notified": "yes"
   },
   "casualtyCardGp": {
-    "id": "550e8400-e29b-41d4-a716-000000000161",
+    "id": "fa559c8b-f020-5606-b69c-4f1dbc3aadb1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-000000000165",
+    "casualtyCardId": "b7e63543-3a36-5d02-baeb-b3e0fac58de5",
     "name": "",
     "practiceName": "",
     "practiceAddress": "",
     "practicePhone": ""
   },
   "casualtyCardArrivalTriage": {
-    "id": "550e8400-e29b-41d4-a716-00000000016a",
+    "id": "fd6c3f55-7667-5195-9f45-c0685e82e070",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-00000000016e",
+    "casualtyCardId": "ab96e4c2-2101-58df-bb72-66ee44cd8cb4",
     "attendanceCategory": "first",
     "arrivalMode": "ambulance",
     "referralSource": "self",
@@ -98,11 +98,11 @@
     "mtsDiscriminator": ""
   },
   "casualtyCardPresentingComplaint": {
-    "id": "550e8400-e29b-41d4-a716-000000000178",
+    "id": "e0610b9e-8196-5831-bbe1-5a4b2033c2fb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-00000000017c",
+    "casualtyCardId": "fc1f5b99-f5ba-5e67-a6aa-797b5ce59c3f",
     "chiefComplaint": "",
     "historyOfPresentingComplaint": "",
     "onset": "",
@@ -118,11 +118,11 @@
     "treatmentPriorToArrival": ""
   },
   "casualtyCardPainAssessment": {
-    "id": "550e8400-e29b-41d4-a716-00000000018a",
+    "id": "acf3eb00-535f-50ed-ae29-5471d6570ddf",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-00000000018e",
+    "casualtyCardId": "e5d0b8ff-0654-5672-b851-c44ecefdf540",
     "painPresent": "yes",
     "painScore": null,
     "painLocation": "",
@@ -131,11 +131,11 @@
     "painSeverityCategory": "mild"
   },
   "casualtyCardMedicalHistory": {
-    "id": "550e8400-e29b-41d4-a716-000000000195",
+    "id": "6b37d6fe-d9f0-515f-96c8-a7d67d7d8999",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-000000000199",
+    "casualtyCardId": "28da9af7-1905-533a-a3b9-65fc0543cf5e",
     "pastMedicalHistory": "",
     "pastSurgicalHistory": "",
     "tetanusStatus": "up-to-date",
@@ -145,33 +145,33 @@
     "lastOralIntake": ""
   },
   "casualtyCardMedication": {
-    "id": "550e8400-e29b-41d4-a716-0000000001a1",
+    "id": "1924c251-833a-5ab1-8126-fac07d6fee94",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-0000000001a5",
+    "casualtyCardId": "1105ca96-0419-5108-927c-cebed35ac41a",
     "name": "",
     "dose": "",
     "frequency": "",
     "sortOrder": 0
   },
   "casualtyCardAllergy": {
-    "id": "550e8400-e29b-41d4-a716-0000000001aa",
+    "id": "7af230c3-d6e8-5e7a-b0ec-fc92ce0c2705",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-0000000001ae",
+    "casualtyCardId": "e3aeccad-e939-5b54-9d87-3a7c20fffe86",
     "allergen": "",
     "reaction": "",
     "severity": "mild",
     "sortOrder": 0
   },
   "casualtyCardVitalSigns": {
-    "id": "550e8400-e29b-41d4-a716-0000000001b3",
+    "id": "4b702437-670b-583e-8df8-befdf68df40e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-0000000001b7",
+    "casualtyCardId": "3a3d576f-2fb1-53ae-831c-945fb2766a1f",
     "heartRate": null,
     "systolicBp": null,
     "diastolicBp": null,
@@ -190,11 +190,11 @@
     "weight": null
   },
   "casualtyCardPrimarySurvey": {
-    "id": "550e8400-e29b-41d4-a716-0000000001c8",
+    "id": "0e806bcb-6ac4-51d8-b75f-228df88af3f6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-0000000001cc",
+    "casualtyCardId": "81937e09-d0e8-5006-92ed-a6b65d9d973f",
     "airwayStatus": "patent",
     "airwayAdjuncts": "",
     "cSpineImmobilised": "yes",
@@ -220,11 +220,11 @@
     "logRollFindings": ""
   },
   "casualtyCardClinicalExamination": {
-    "id": "550e8400-e29b-41d4-a716-0000000001e4",
+    "id": "d397cdaf-9749-5929-8f23-289efa2a9caa",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-0000000001e8",
+    "casualtyCardId": "82ec9344-21d4-5b15-b3df-c8f0e8d0f80f",
     "generalAppearance": "",
     "headAndFace": "",
     "neck": "",
@@ -239,11 +239,11 @@
     "bodyDiagramNotes": ""
   },
   "casualtyCardInvestigations": {
-    "id": "550e8400-e29b-41d4-a716-0000000001f5",
+    "id": "161e8ff0-d7a2-5500-9d65-c3aea401c57c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-0000000001f9",
+    "casualtyCardId": "f039fb3c-6447-58d7-bbba-f916e7482114",
     "bloodTests": "",
     "urinalysis": "",
     "pregnancyTest": "",
@@ -252,32 +252,32 @@
     "otherInvestigations": ""
   },
   "casualtyCardTreatment": {
-    "id": "550e8400-e29b-41d4-a716-000000000200",
+    "id": "5d0961e2-e994-591a-a884-4243246f0aa7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-000000000204",
+    "casualtyCardId": "69cfc3da-b64c-5eea-9d26-ff8be4f6fe01",
     "oxygenTherapyDevice": "",
     "oxygenTherapyFlowRate": "",
     "tetanusProphylaxis": "given"
   },
   "casualtyCardAssessmentPlan": {
-    "id": "550e8400-e29b-41d4-a716-000000000208",
+    "id": "0352311d-9a35-5f83-9f7f-e8cd8c6776a7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-00000000020c",
+    "casualtyCardId": "fdece549-ceea-5c5d-bf8a-844901a826dc",
     "workingDiagnosis": "",
     "differentialDiagnoses": "",
     "clinicalImpression": "",
     "riskStratification": ""
   },
   "casualtyCardDisposition": {
-    "id": "550e8400-e29b-41d4-a716-000000000211",
+    "id": "6d51048a-29ff-529f-b26f-f11bc525c0a6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-000000000215",
+    "casualtyCardId": "ffed32bf-954a-5e37-82b9-6941e93b97eb",
     "disposition": "admitted",
     "admittingSpecialty": "",
     "admittingConsultant": "",
@@ -295,11 +295,11 @@
     "totalTimeInDepartment": ""
   },
   "casualtyCardSafeguardingConsent": {
-    "id": "550e8400-e29b-41d4-a716-000000000225",
+    "id": "9664c8ff-d539-52f9-afb0-81d8f401709f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-000000000229",
+    "casualtyCardId": "b4ffb9c8-ef04-592d-9c4f-af3de94de362",
     "safeguardingConcern": "yes",
     "safeguardingType": "",
     "referralMade": "yes",
@@ -312,11 +312,11 @@
     "seniorReviewingClinician": ""
   },
   "news2Result": {
-    "id": "550e8400-e29b-41d4-a716-000000000234",
+    "id": "c20e064c-e37d-554f-8c81-3ad794d0e2db",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "casualtyCardId": "550e8400-e29b-41d4-a716-000000000238",
+    "casualtyCardId": "ce90d7e4-e53e-51ca-af0b-027f2537c715",
     "totalScore": 0,
     "clinicalResponse": "low",
     "hasAnySingleScore3": true,
@@ -324,11 +324,11 @@
     "scoredAt": "2026-04-09T10:00:00+00:00"
   },
   "flaggedIssue": {
-    "id": "550e8400-e29b-41d4-a716-00000000023e",
+    "id": "8aaecb1b-1a39-556f-b6df-47bccb713357",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "news2ResultId": "550e8400-e29b-41d4-a716-000000000242",
+    "news2ResultId": "102a37de-0881-5add-99d0-da809daaf923",
     "flagId": "",
     "category": "",
     "message": "",

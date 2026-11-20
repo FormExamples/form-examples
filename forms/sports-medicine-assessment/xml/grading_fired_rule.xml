@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/sports-medicine-assessment/xml">
+<id>d21353a8-3175-5f55-8fdd-c24326ad5930</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>880e8400-e29b-41d4-a716-446655440003</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>68059fe4-5e38-5712-a8a6-ec5d16b72a2c</grade_id>
+<rule_id>b4771ba5-6f8f-55d3-91c9-c18e709ddfbd</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>low</severity_level>

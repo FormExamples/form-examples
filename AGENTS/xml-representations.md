@@ -68,7 +68,8 @@ Example merged structure:
 
 - XML declaration with `version="1.0"` and `encoding="UTF-8"`
 - External DTD reference via `<!DOCTYPE ... SYSTEM "<entity>.dtd">`
-- One root element per file, matching the entity name (snake_case)
+- One root element per file, matching the entity name (snake_case), in the form's namespace `xmlns="https://formexamples.github.io/<slug>/xml"`, which the DTD fixes with `<!ATTLIST <entity> xmlns CDATA #FIXED "…">` ([`spec/form-namespacing/`](../spec/form-namespacing/))
+- Example ids are UUIDv5 names within the form (`bin/lib/example_ids.py`), the same as the entity's FHIR id
 - Child element order matches the column order in the corresponding SQL CREATE TABLE
 - UUIDs serialized as hyphenated lowercase strings
 - Timestamps serialized as ISO 8601 in UTC (e.g. `2026-04-17T10:30:00Z`)

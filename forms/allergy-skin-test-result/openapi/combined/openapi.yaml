@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Allergy Skin Test Result form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: allergy-skin-test-result
+  apiPrefix: /api/allergy-skin-test-result/
+  sqlSchema: allergy_skin_test_result
+  xmlNamespace: https://formexamples.github.io/allergy-skin-test-result/xml
+tags:
+- name: allergy-skin-test-result
+  description: Allergy Skin Test Result form
 paths:
   /api/allergy-skin-test-result/allergy_skin_test_result_grade_flags:
     get:
       summary: List AllergySkinTestResultGradeFlag records
+      tags:
+      - allergy-skin-test-result
       operationId: listAllergySkinTestResultGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AllergySkinTestResultGradeFlag
+      tags:
+      - allergy-skin-test-result
       operationId: createAllergySkinTestResultGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AllergySkinTestResultGradeFlag by id
+      tags:
+      - allergy-skin-test-result
       operationId: getAllergySkinTestResultGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AllergySkinTestResultGradeFlag
+      tags:
+      - allergy-skin-test-result
       operationId: updateAllergySkinTestResultGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AllergySkinTestResultGradeFlag
+      tags:
+      - allergy-skin-test-result
       operationId: replaceAllergySkinTestResultGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AllergySkinTestResultGradeFlag
+      tags:
+      - allergy-skin-test-result
       operationId: deleteAllergySkinTestResultGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/allergy-skin-test-result/allergy_skin_test_result_grade_rules:
     get:
       summary: List AllergySkinTestResultGradeRule records
+      tags:
+      - allergy-skin-test-result
       operationId: listAllergySkinTestResultGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AllergySkinTestResultGradeRule
+      tags:
+      - allergy-skin-test-result
       operationId: createAllergySkinTestResultGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AllergySkinTestResultGradeRule by id
+      tags:
+      - allergy-skin-test-result
       operationId: getAllergySkinTestResultGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AllergySkinTestResultGradeRule
+      tags:
+      - allergy-skin-test-result
       operationId: updateAllergySkinTestResultGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AllergySkinTestResultGradeRule
+      tags:
+      - allergy-skin-test-result
       operationId: replaceAllergySkinTestResultGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AllergySkinTestResultGradeRule
+      tags:
+      - allergy-skin-test-result
       operationId: deleteAllergySkinTestResultGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/allergy-skin-test-result/allergy_skin_test_result_grades:
     get:
       summary: List AllergySkinTestResultGrade records
+      tags:
+      - allergy-skin-test-result
       operationId: listAllergySkinTestResultGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AllergySkinTestResultGrade
+      tags:
+      - allergy-skin-test-result
       operationId: createAllergySkinTestResultGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AllergySkinTestResultGrade by id
+      tags:
+      - allergy-skin-test-result
       operationId: getAllergySkinTestResultGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AllergySkinTestResultGrade
+      tags:
+      - allergy-skin-test-result
       operationId: updateAllergySkinTestResultGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AllergySkinTestResultGrade
+      tags:
+      - allergy-skin-test-result
       operationId: replaceAllergySkinTestResultGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AllergySkinTestResultGrade
+      tags:
+      - allergy-skin-test-result
       operationId: deleteAllergySkinTestResultGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/allergy-skin-test-result/allergy_skin_test_results:
     get:
       summary: List AllergySkinTestResult records
+      tags:
+      - allergy-skin-test-result
       operationId: listAllergySkinTestResult
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AllergySkinTestResult
+      tags:
+      - allergy-skin-test-result
       operationId: createAllergySkinTestResult
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AllergySkinTestResult by id
+      tags:
+      - allergy-skin-test-result
       operationId: getAllergySkinTestResult
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AllergySkinTestResult
+      tags:
+      - allergy-skin-test-result
       operationId: updateAllergySkinTestResult
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AllergySkinTestResult
+      tags:
+      - allergy-skin-test-result
       operationId: replaceAllergySkinTestResult
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AllergySkinTestResult
+      tags:
+      - allergy-skin-test-result
       operationId: deleteAllergySkinTestResult
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/allergy-skin-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - allergy-skin-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - allergy-skin-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - allergy-skin-test-result
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - allergy-skin-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - allergy-skin-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - allergy-skin-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - allergy-skin-test-result
   /api/allergy-skin-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - allergy-skin-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - allergy-skin-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - allergy-skin-test-result
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - allergy-skin-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - allergy-skin-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - allergy-skin-test-result
       operationId: deletePatient
       responses:
         '200':

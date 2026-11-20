@@ -5,10 +5,19 @@ info:
   title: Glasgow Coma Scale — Clinician
   version: 1.0.0
   description: Clinician identifying information for the assessing observer.
+x-namespace:
+  form: glasgow-coma-scale
+  apiPrefix: /api/glasgow-coma-scale/
+  sqlSchema: glasgow_coma_scale
+  xmlNamespace: https://formexamples.github.io/glasgow-coma-scale/xml
+tags:
+  - name: glasgow-coma-scale
+    description: Glasgow Coma Scale form
 paths:
   /api/glasgow-coma-scale/clinicians:
     get:
       summary: List Clinician records
+      tags: [glasgow-coma-scale]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [glasgow-coma-scale]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [glasgow-coma-scale]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [glasgow-coma-scale]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [glasgow-coma-scale]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [glasgow-coma-scale]
       operationId: deleteClinician
       responses:
         "200":

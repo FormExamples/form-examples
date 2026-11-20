@@ -1,4 +1,5 @@
 <!ELEMENT estimated_glomerular_filtration_rate_calculator_grade (id,created_at,updated_at,deleted_at,estimated_glomerular_filtration_rate_calculator_id,serum_creatinine_mg_dl,egfr_ml_min_1_73m2,g_stage,g_stage_label,graded_at)>
+<!ATTLIST estimated_glomerular_filtration_rate_calculator_grade xmlns CDATA #FIXED "https://formexamples.github.io/estimated-glomerular-filtration-rate-calculator/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

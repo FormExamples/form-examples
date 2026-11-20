@@ -5,10 +5,19 @@ info:
   title: Cage Alcohol Questionnaire — CageAlcoholQuestionnaire
   version: 1.0.0
   description: "Main CAGE alcohol questionnaire record: assessment context, patient identification, and the four scored criterion inputs (cut down, annoyed, guilty, eye-opener)."
+x-namespace:
+  form: cage-alcohol-questionnaire
+  apiPrefix: /api/cage-alcohol-questionnaire/
+  sqlSchema: cage_alcohol_questionnaire
+  xmlNamespace: https://formexamples.github.io/cage-alcohol-questionnaire/xml
+tags:
+  - name: cage-alcohol-questionnaire
+    description: Cage Alcohol Questionnaire form
 paths:
   /api/cage-alcohol-questionnaire/cage_alcohol_questionnaires:
     get:
       summary: List CageAlcoholQuestionnaire records
+      tags: [cage-alcohol-questionnaire]
       operationId: listCageAlcoholQuestionnaire
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CageAlcoholQuestionnaire
+      tags: [cage-alcohol-questionnaire]
       operationId: createCageAlcoholQuestionnaire
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CageAlcoholQuestionnaire by id
+      tags: [cage-alcohol-questionnaire]
       operationId: getCageAlcoholQuestionnaire
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CageAlcoholQuestionnaire
+      tags: [cage-alcohol-questionnaire]
       operationId: updateCageAlcoholQuestionnaire
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CageAlcoholQuestionnaire
+      tags: [cage-alcohol-questionnaire]
       operationId: replaceCageAlcoholQuestionnaire
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CageAlcoholQuestionnaire
+      tags: [cage-alcohol-questionnaire]
       operationId: deleteCageAlcoholQuestionnaire
       responses:
         "200":

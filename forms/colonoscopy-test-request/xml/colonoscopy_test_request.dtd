@@ -1,4 +1,5 @@
 <!ELEMENT colonoscopy_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,procedure,primary_indication,clinical_question,relevant_history,red_flag_weight_loss,red_flag_anaemia,red_flag_abdominal_mass,red_flag_rectal_bleeding,fit_result_ug_g,haemoglobin_g_l,taking_anticoagulant,anticoagulant_agent,taking_antiplatelet,antiplatelet_agent,diabetes_medication,fit_for_bowel_prep,bowel_prep_agent,chronic_kidney_disease,egfr_ml_min,asa_grade,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST colonoscopy_test_request xmlns CDATA #FIXED "https://formexamples.github.io/colonoscopy-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

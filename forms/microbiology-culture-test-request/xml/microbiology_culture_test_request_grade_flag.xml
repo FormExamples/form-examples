@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE microbiology_culture_test_request_grade_flag SYSTEM "microbiology_culture_test_request_grade_flag.dtd">
-<microbiology_culture_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<microbiology_culture_test_request_grade_flag xmlns="https://formexamples.github.io/microbiology-culture-test-request/xml">
+<id>bcd7d79c-ffa6-54b1-9e09-1c7bb4d4bfe7</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<microbiology_culture_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</microbiology_culture_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<microbiology_culture_test_request_grade_id>8ddb7e87-16db-52e5-8d79-353b0b8c2072</microbiology_culture_test_request_grade_id>
+<flag_id>13ac7724-dc86-590b-9deb-297039079d03</flag_id>
 <category>suspected-sepsis-stat</category>
 <priority>low</priority>
 <description>Example text.</description>

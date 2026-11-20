@@ -5,10 +5,19 @@ info:
   title: Ergonomic Assessment — RebaRule
   version: 1.0.0
   description: Reference table of REBA scoring rules. Each rule has an ID, system, description, and score contribution.
+x-namespace:
+  form: ergonomic-assessment
+  apiPrefix: /api/ergonomic-assessment/
+  sqlSchema: ergonomic_assessment
+  xmlNamespace: https://formexamples.github.io/ergonomic-assessment/xml
+tags:
+  - name: ergonomic-assessment
+    description: Ergonomic Assessment form
 paths:
   /api/ergonomic-assessment/reba_rules:
     get:
       summary: List RebaRule records
+      tags: [ergonomic-assessment]
       operationId: listRebaRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RebaRule
+      tags: [ergonomic-assessment]
       operationId: createRebaRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RebaRule by id
+      tags: [ergonomic-assessment]
       operationId: getRebaRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RebaRule
+      tags: [ergonomic-assessment]
       operationId: updateRebaRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RebaRule
+      tags: [ergonomic-assessment]
       operationId: replaceRebaRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RebaRule
+      tags: [ergonomic-assessment]
       operationId: deleteRebaRule
       responses:
         "200":

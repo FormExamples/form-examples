@@ -1,6 +1,6 @@
 {
   "applicant": {
-    "id": "550e8400-e29b-41d4-a716-00000000005a",
+    "id": "705f1249-a56a-54f9-845f-533af223f08e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -13,7 +13,7 @@
     "countryAsIso31661Alpha2": ""
   },
   "billingAuthority": {
-    "id": "550e8400-e29b-41d4-a716-000000000065",
+    "id": "813a9cab-9818-575f-a3df-3741da7fbde0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -24,12 +24,12 @@
     "websiteUrl": ""
   },
   "unitedKingdomCouncilTaxDiscountApplication": {
-    "id": "550e8400-e29b-41d4-a716-00000000006e",
+    "id": "1cb4d17b-2dbd-5ecf-82aa-9c46d15bd763",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "applicantId": "550e8400-e29b-41d4-a716-000000000072",
-    "billingAuthorityId": "550e8400-e29b-41d4-a716-000000000073",
+    "applicantId": "f1558d2d-4a90-5a14-a82a-2610e1645af2",
+    "billingAuthorityId": "1378ffd5-bbfa-5d24-b3b0-97f3ef74f661",
     "claimType": "single-person-discount",
     "accountReference": "",
     "applicationDate": null,
@@ -58,44 +58,44 @@
     "declarationDate": null
   },
   "occupant": {
-    "id": "550e8400-e29b-41d4-a716-00000000008e",
+    "id": "06630937-06ca-5bd5-8e07-592310e8d4f3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedKingdomCouncilTaxDiscountApplicationId": "550e8400-e29b-41d4-a716-000000000092",
+    "unitedKingdomCouncilTaxDiscountApplicationId": "c9f686bf-a6d0-57b6-9b05-3a8038ab3485",
     "name": "",
     "birthDate": null,
     "status": "counted-adult",
     "evidenceHeld": "yes"
   },
   "unitedKingdomCouncilTaxDiscountApplicationGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000097",
+    "id": "c5827e8a-4d65-5793-9407-067513c2e6d5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedKingdomCouncilTaxDiscountApplicationId": "550e8400-e29b-41d4-a716-00000000009b",
+    "unitedKingdomCouncilTaxDiscountApplicationId": "fdcdab3e-cdbe-54a8-85aa-b27e89247d5e",
     "eligibilityClass": "likely-eligible",
     "countedAdults": null,
     "indicativeOutcome": "25-percent-discount",
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "unitedKingdomCouncilTaxDiscountApplicationGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a0",
+    "id": "c597557a-9292-56cf-8cde-2b82d321f7d5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedKingdomCouncilTaxDiscountApplicationGradeId": "550e8400-e29b-41d4-a716-0000000000a4",
+    "unitedKingdomCouncilTaxDiscountApplicationGradeId": "efe7af1e-2076-5a42-898f-b88b8b49eba0",
     "ruleId": "",
     "dimension": "claim",
     "category": "",
     "description": ""
   },
   "unitedKingdomCouncilTaxDiscountApplicationGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a9",
+    "id": "71987043-5636-53c0-b736-8d210c29ddde",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedKingdomCouncilTaxDiscountApplicationGradeId": "550e8400-e29b-41d4-a716-0000000000ad",
+    "unitedKingdomCouncilTaxDiscountApplicationGradeId": "25cac5a7-37ba-5e1b-b529-1926d617ffc5",
     "flagId": "",
     "category": "adult-count-mismatch",
     "priority": "low",

@@ -5,10 +5,19 @@ info:
   title: United Kingdom Lasting Power Of Attorney For Financial Decisions — Person
   version: 1.0.0
   description: Person — every named individual involved in an LPA (donor, attorney, replacement attorney, certificate provider, person to notify, witness, applicant, recipient).
+x-namespace:
+  form: united-kingdom-lasting-power-of-attorney-for-financial-decisions
+  apiPrefix: /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/
+  sqlSchema: united_kingdom_lasting_power_of_attorney_for_financial_decisions
+  xmlNamespace: https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml
+tags:
+  - name: united-kingdom-lasting-power-of-attorney-for-financial-decisions
+    description: United Kingdom Lasting Power Of Attorney For Financial Decisions form
 paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/persons:
     get:
       summary: List Person records
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: listPerson
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Person
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: createPerson
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Person by id
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: getPerson
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Person
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: updatePerson
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Person
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: replacePerson
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Person
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: deletePerson
       responses:
         "200":

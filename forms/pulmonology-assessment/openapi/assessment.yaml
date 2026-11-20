@@ -5,10 +5,19 @@ info:
   title: Pulmonology Assessment — Assessment
   version: 1.0.0
   description: Pulmonology assessment form. Parent entity for all sections covering GOLD (Global Initiative for Chronic Obstructive Lung Disease) staging.
+x-namespace:
+  form: pulmonology-assessment
+  apiPrefix: /api/pulmonology-assessment/
+  sqlSchema: pulmonology_assessment
+  xmlNamespace: https://formexamples.github.io/pulmonology-assessment/xml
+tags:
+  - name: pulmonology-assessment
+    description: Pulmonology Assessment form
 paths:
   /api/pulmonology-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [pulmonology-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [pulmonology-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [pulmonology-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [pulmonology-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [pulmonology-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [pulmonology-assessment]
       operationId: deleteAssessment
       responses:
         "200":

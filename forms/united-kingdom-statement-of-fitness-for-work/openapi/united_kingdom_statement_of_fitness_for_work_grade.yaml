@@ -5,10 +5,19 @@ info:
   title: United Kingdom Statement Of Fitness For Work — UnitedKingdomStatementOfFitnessForWorkGrade
   version: 1.0.0
   description: "Computed grading result for a fit note: fitness category, adaptation intensity, period compliance, and overall recommendation."
+x-namespace:
+  form: united-kingdom-statement-of-fitness-for-work
+  apiPrefix: /api/united-kingdom-statement-of-fitness-for-work/
+  sqlSchema: united_kingdom_statement_of_fitness_for_work
+  xmlNamespace: https://formexamples.github.io/united-kingdom-statement-of-fitness-for-work/xml
+tags:
+  - name: united-kingdom-statement-of-fitness-for-work
+    description: United Kingdom Statement Of Fitness For Work form
 paths:
   /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_work_grades:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWorkGrade records
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: listUnitedKingdomStatementOfFitnessForWorkGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomStatementOfFitnessForWorkGrade
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: createUnitedKingdomStatementOfFitnessForWorkGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomStatementOfFitnessForWorkGrade by id
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: getUnitedKingdomStatementOfFitnessForWorkGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomStatementOfFitnessForWorkGrade
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: updateUnitedKingdomStatementOfFitnessForWorkGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomStatementOfFitnessForWorkGrade
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: replaceUnitedKingdomStatementOfFitnessForWorkGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomStatementOfFitnessForWorkGrade
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: deleteUnitedKingdomStatementOfFitnessForWorkGrade
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE corrected_calcium_calculator SYSTEM "corrected_calcium_calculator.dtd">
-<corrected_calcium_calculator>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<corrected_calcium_calculator xmlns="https://formexamples.github.io/corrected-calcium-calculator/xml">
+<id>d68d3122-bd18-5c3d-888b-7525c6d81396</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>59f11ddc-2752-5c7b-ac9a-3241ca573b20</patient_id>
+<clinician_id>12bb0919-8de4-5b94-b799-e905b558134a</clinician_id>
 <clinician_name>Example</clinician_name>
 <clinician_role>doctor</clinician_role>
 <assessed_at>2026-04-09T10:00:00Z</assessed_at>

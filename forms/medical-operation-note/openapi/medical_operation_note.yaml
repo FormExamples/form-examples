@@ -5,10 +5,19 @@ info:
   title: Medical Operation Note — MedicalOperationNote
   version: 1.0.0
   description: "Operating-team contemporaneous record of a surgical procedure: identification, timing, diagnoses, anaesthesia summary, approach, counts, EBL, complications summary, and post-operative plan."
+x-namespace:
+  form: medical-operation-note
+  apiPrefix: /api/medical-operation-note/
+  sqlSchema: medical_operation_note
+  xmlNamespace: https://formexamples.github.io/medical-operation-note/xml
+tags:
+  - name: medical-operation-note
+    description: Medical Operation Note form
 paths:
   /api/medical-operation-note/medical_operation_notes:
     get:
       summary: List MedicalOperationNote records
+      tags: [medical-operation-note]
       operationId: listMedicalOperationNote
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalOperationNote
+      tags: [medical-operation-note]
       operationId: createMedicalOperationNote
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalOperationNote by id
+      tags: [medical-operation-note]
       operationId: getMedicalOperationNote
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalOperationNote
+      tags: [medical-operation-note]
       operationId: updateMedicalOperationNote
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalOperationNote
+      tags: [medical-operation-note]
       operationId: replaceMedicalOperationNote
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalOperationNote
+      tags: [medical-operation-note]
       operationId: deleteMedicalOperationNote
       responses:
         "200":

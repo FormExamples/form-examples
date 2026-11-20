@@ -5,10 +5,19 @@ info:
   title: Hip Replacement Surgery Evaluation — HipReplacementSurgeryEvaluationGrade
   version: 1.0.0
   description: Computed and signed-off grading result for one hip-replacement surgery evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.
+x-namespace:
+  form: hip-replacement-surgery-evaluation
+  apiPrefix: /api/hip-replacement-surgery-evaluation/
+  sqlSchema: hip_replacement_surgery_evaluation
+  xmlNamespace: https://formexamples.github.io/hip-replacement-surgery-evaluation/xml
+tags:
+  - name: hip-replacement-surgery-evaluation
+    description: Hip Replacement Surgery Evaluation form
 paths:
   /api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluation_grades:
     get:
       summary: List HipReplacementSurgeryEvaluationGrade records
+      tags: [hip-replacement-surgery-evaluation]
       operationId: listHipReplacementSurgeryEvaluationGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HipReplacementSurgeryEvaluationGrade
+      tags: [hip-replacement-surgery-evaluation]
       operationId: createHipReplacementSurgeryEvaluationGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HipReplacementSurgeryEvaluationGrade by id
+      tags: [hip-replacement-surgery-evaluation]
       operationId: getHipReplacementSurgeryEvaluationGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HipReplacementSurgeryEvaluationGrade
+      tags: [hip-replacement-surgery-evaluation]
       operationId: updateHipReplacementSurgeryEvaluationGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HipReplacementSurgeryEvaluationGrade
+      tags: [hip-replacement-surgery-evaluation]
       operationId: replaceHipReplacementSurgeryEvaluationGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HipReplacementSurgeryEvaluationGrade
+      tags: [hip-replacement-surgery-evaluation]
       operationId: deleteHipReplacementSurgeryEvaluationGrade
       responses:
         "200":

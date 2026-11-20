@@ -1,4 +1,5 @@
 <!ELEMENT united_kingdom_council_tax_discount_application_grade (id,created_at,updated_at,deleted_at,united_kingdom_council_tax_discount_application_id,eligibility_class,counted_adults,indicative_outcome,graded_at)>
+<!ATTLIST united_kingdom_council_tax_discount_application_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-council-tax-discount-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

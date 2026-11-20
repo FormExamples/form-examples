@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE family_general_waiting_list_card_grade_flag SYSTEM "family_general_waiting_list_card_grade_flag.dtd">
-<family_general_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<family_general_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/family-and-general-medicine-waiting-list-card/xml">
+<id>55ba62e1-0a44-520a-8105-dd6cb8addaa7</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<family_general_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</family_general_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<family_general_waiting_list_card_grade_id>8b8b41d7-f99f-5df8-97b1-6a7b1f4fbbc7</family_general_waiting_list_card_grade_id>
+<flag_id>baa497e3-519e-5a90-9732-ff764fdd4a62</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United States Birth Certificate Application form,
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-states-birth-certificate-application
+  apiPrefix: /api/united-states-birth-certificate-application/
+  sqlSchema: united_states_birth_certificate_application
+  xmlNamespace: https://formexamples.github.io/united-states-birth-certificate-application/xml
+tags:
+- name: united-states-birth-certificate-application
+  description: United States Birth Certificate Application form
 paths:
   /api/united-states-birth-certificate-application/applicants:
     get:
       summary: List Applicant records
+      tags:
+      - united-states-birth-certificate-application
       operationId: listApplicant
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Applicant
+      tags:
+      - united-states-birth-certificate-application
       operationId: createApplicant
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Applicant by id
+      tags:
+      - united-states-birth-certificate-application
       operationId: getApplicant
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Applicant
+      tags:
+      - united-states-birth-certificate-application
       operationId: updateApplicant
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Applicant
+      tags:
+      - united-states-birth-certificate-application
       operationId: replaceApplicant
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Applicant
+      tags:
+      - united-states-birth-certificate-application
       operationId: deleteApplicant
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-states-birth-certificate-application
   /api/united-states-birth-certificate-application/registrants:
     get:
       summary: List Registrant records
+      tags:
+      - united-states-birth-certificate-application
       operationId: listRegistrant
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Registrant
+      tags:
+      - united-states-birth-certificate-application
       operationId: createRegistrant
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Registrant by id
+      tags:
+      - united-states-birth-certificate-application
       operationId: getRegistrant
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Registrant
+      tags:
+      - united-states-birth-certificate-application
       operationId: updateRegistrant
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Registrant
+      tags:
+      - united-states-birth-certificate-application
       operationId: replaceRegistrant
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Registrant
+      tags:
+      - united-states-birth-certificate-application
       operationId: deleteRegistrant
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/united-states-birth-certificate-application/united_states_birth_certificate_application_grade_flags:
     get:
       summary: List UnitedStatesBirthCertificateApplicationGradeFlag records
+      tags:
+      - united-states-birth-certificate-application
       operationId: listUnitedStatesBirthCertificateApplicationGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesBirthCertificateApplicationGradeFlag
+      tags:
+      - united-states-birth-certificate-application
       operationId: createUnitedStatesBirthCertificateApplicationGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesBirthCertificateApplicationGradeFlag by id
+      tags:
+      - united-states-birth-certificate-application
       operationId: getUnitedStatesBirthCertificateApplicationGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesBirthCertificateApplicationGradeFlag
+      tags:
+      - united-states-birth-certificate-application
       operationId: updateUnitedStatesBirthCertificateApplicationGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesBirthCertificateApplicationGradeFlag
+      tags:
+      - united-states-birth-certificate-application
       operationId: replaceUnitedStatesBirthCertificateApplicationGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesBirthCertificateApplicationGradeFlag
+      tags:
+      - united-states-birth-certificate-application
       operationId: deleteUnitedStatesBirthCertificateApplicationGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-states-birth-certificate-application/united_states_birth_certificate_application_grade_rules:
     get:
       summary: List UnitedStatesBirthCertificateApplicationGradeRule records
+      tags:
+      - united-states-birth-certificate-application
       operationId: listUnitedStatesBirthCertificateApplicationGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesBirthCertificateApplicationGradeRule
+      tags:
+      - united-states-birth-certificate-application
       operationId: createUnitedStatesBirthCertificateApplicationGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesBirthCertificateApplicationGradeRule by id
+      tags:
+      - united-states-birth-certificate-application
       operationId: getUnitedStatesBirthCertificateApplicationGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesBirthCertificateApplicationGradeRule
+      tags:
+      - united-states-birth-certificate-application
       operationId: updateUnitedStatesBirthCertificateApplicationGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesBirthCertificateApplicationGradeRule
+      tags:
+      - united-states-birth-certificate-application
       operationId: replaceUnitedStatesBirthCertificateApplicationGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesBirthCertificateApplicationGradeRule
+      tags:
+      - united-states-birth-certificate-application
       operationId: deleteUnitedStatesBirthCertificateApplicationGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-states-birth-certificate-application/united_states_birth_certificate_application_grades:
     get:
       summary: List UnitedStatesBirthCertificateApplicationGrade records
+      tags:
+      - united-states-birth-certificate-application
       operationId: listUnitedStatesBirthCertificateApplicationGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesBirthCertificateApplicationGrade
+      tags:
+      - united-states-birth-certificate-application
       operationId: createUnitedStatesBirthCertificateApplicationGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesBirthCertificateApplicationGrade by id
+      tags:
+      - united-states-birth-certificate-application
       operationId: getUnitedStatesBirthCertificateApplicationGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesBirthCertificateApplicationGrade
+      tags:
+      - united-states-birth-certificate-application
       operationId: updateUnitedStatesBirthCertificateApplicationGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesBirthCertificateApplicationGrade
+      tags:
+      - united-states-birth-certificate-application
       operationId: replaceUnitedStatesBirthCertificateApplicationGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesBirthCertificateApplicationGrade
+      tags:
+      - united-states-birth-certificate-application
       operationId: deleteUnitedStatesBirthCertificateApplicationGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-states-birth-certificate-application/united_states_birth_certificate_applications:
     get:
       summary: List UnitedStatesBirthCertificateApplication records
+      tags:
+      - united-states-birth-certificate-application
       operationId: listUnitedStatesBirthCertificateApplication
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesBirthCertificateApplication
+      tags:
+      - united-states-birth-certificate-application
       operationId: createUnitedStatesBirthCertificateApplication
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesBirthCertificateApplication by id
+      tags:
+      - united-states-birth-certificate-application
       operationId: getUnitedStatesBirthCertificateApplication
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesBirthCertificateApplication
+      tags:
+      - united-states-birth-certificate-application
       operationId: updateUnitedStatesBirthCertificateApplication
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesBirthCertificateApplication
+      tags:
+      - united-states-birth-certificate-application
       operationId: replaceUnitedStatesBirthCertificateApplication
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesBirthCertificateApplication
+      tags:
+      - united-states-birth-certificate-application
       operationId: deleteUnitedStatesBirthCertificateApplication
       responses:
         '200':

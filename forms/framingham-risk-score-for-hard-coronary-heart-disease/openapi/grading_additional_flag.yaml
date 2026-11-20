@@ -5,10 +5,19 @@ info:
   title: Framingham Risk Score For Hard Coronary Heart Disease — GradingAdditionalFlag
   version: 1.0.0
   description: Additional safety-critical flags detected during Framingham risk grading (e.g. hypertensive crisis, model applicability warnings for diabetic or prior CHD patients).
+x-namespace:
+  form: framingham-risk-score-for-hard-coronary-heart-disease
+  apiPrefix: /api/framingham-risk-score-for-hard-coronary-heart-disease/
+  sqlSchema: framingham_risk_score_for_hard_coronary_heart_disease
+  xmlNamespace: https://formexamples.github.io/framingham-risk-score-for-hard-coronary-heart-disease/xml
+tags:
+  - name: framingham-risk-score-for-hard-coronary-heart-disease
+    description: Framingham Risk Score For Hard Coronary Heart Disease form
 paths:
   /api/framingham-risk-score-for-hard-coronary-heart-disease/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [framingham-risk-score-for-hard-coronary-heart-disease]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [framingham-risk-score-for-hard-coronary-heart-disease]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [framingham-risk-score-for-hard-coronary-heart-disease]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [framingham-risk-score-for-hard-coronary-heart-disease]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [framingham-risk-score-for-hard-coronary-heart-disease]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [framingham-risk-score-for-hard-coronary-heart-disease]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

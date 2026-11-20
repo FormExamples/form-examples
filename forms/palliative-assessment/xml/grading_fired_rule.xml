@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/palliative-assessment/xml">
+<id>0b0b27b9-83cb-5b77-8988-ca89c4ed5982</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>880e8400-e29b-41d4-a716-446655440003</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>3748f92f-a9a0-5d18-afe0-b1fc72022bbc</grade_id>
+<rule_id>d79f7316-0d33-5b3a-9c68-105e3f31e8cb</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>low</severity_level>

@@ -1,4 +1,5 @@
 <!ELEMENT center (id,created_at,updated_at,deleted_at,name,who_designation_reference,national_authority_reference,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,country_as_iso_3166_1_alpha_3,postcode,uniform_stamp_image_data_url,authorised_diseases,designation_valid_from,designation_valid_until)>
+<!ATTLIST center xmlns CDATA #FIXED "https://formexamples.github.io/international-certificate-of-vaccination-or-prophylaxis/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

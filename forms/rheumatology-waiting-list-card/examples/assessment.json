@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "4b069ebd-6e64-547a-8627-cbfc0f89c387",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "88ef11fb-9fa9-5942-9dc1-5eab02bdda1d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "rheumatologyWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "db8bf178-e3d6-5e0f-b56c-2051fe1fcea0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000096",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000097",
+    "patientId": "cfcc2e88-6ed2-5dcd-9aa3-824c24383e0b",
+    "practitionerId": "cc8fbc22-6141-5050-b44f-49dbddb8bc4a",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "rheumatologyWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "33e262af-5504-5dac-9284-09f2ab4c38ad",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "rheumatologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "rheumatologyWaitingListCardId": "86cb694c-7780-5b47-abbc-10f5ca18ab70",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "rheumatologyWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "0dc81dd7-6034-5847-b7c1-4cda35cf0d01",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "rheumatologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "rheumatologyWaitingListCardId": "86d8ff2c-3072-5aa3-81ac-5383263ed494",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "rheumatologyWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d1",
+    "id": "eedb7e5e-5de5-5571-898e-bfe843e27a3d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "rheumatologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "rheumatologyWaitingListCardGradeId": "736db81e-92de-5d00-9e81-17eb08acf0e7",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "rheumatologyWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000db",
+    "id": "fd0d83ef-f712-527b-8a8b-a422b3898a82",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "rheumatologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000df",
+    "rheumatologyWaitingListCardGradeId": "398093e3-35fc-5e7b-a41c-068102af644a",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

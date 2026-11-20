@@ -5,10 +5,19 @@ info:
   title: Medical Fit Note — MedicalFitNoteGradeFlag
   version: 1.0.0
   description: Medical fit note grade flag.
+x-namespace:
+  form: medical-fit-note
+  apiPrefix: /api/medical-fit-note/
+  sqlSchema: medical_fit_note
+  xmlNamespace: https://formexamples.github.io/medical-fit-note/xml
+tags:
+  - name: medical-fit-note
+    description: Medical Fit Note form
 paths:
   /api/medical-fit-note/medical_fit_note_grade_flags:
     get:
       summary: List MedicalFitNoteGradeFlag records
+      tags: [medical-fit-note]
       operationId: listMedicalFitNoteGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalFitNoteGradeFlag
+      tags: [medical-fit-note]
       operationId: createMedicalFitNoteGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalFitNoteGradeFlag by id
+      tags: [medical-fit-note]
       operationId: getMedicalFitNoteGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalFitNoteGradeFlag
+      tags: [medical-fit-note]
       operationId: updateMedicalFitNoteGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalFitNoteGradeFlag
+      tags: [medical-fit-note]
       operationId: replaceMedicalFitNoteGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalFitNoteGradeFlag
+      tags: [medical-fit-note]
       operationId: deleteMedicalFitNoteGradeFlag
       responses:
         "200":

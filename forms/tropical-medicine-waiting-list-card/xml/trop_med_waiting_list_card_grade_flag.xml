@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE trop_med_waiting_list_card_grade_flag SYSTEM "trop_med_waiting_list_card_grade_flag.dtd">
-<trop_med_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<trop_med_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/tropical-medicine-waiting-list-card/xml">
+<id>fde52dfa-7537-5d60-bc61-17fb1066a581</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<trop_med_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</trop_med_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<trop_med_waiting_list_card_grade_id>6d35dfbc-c530-56f3-ba87-a0d06b79dafb</trop_med_waiting_list_card_grade_id>
+<flag_id>e30fd975-a0a2-51e6-b718-c5e4cee6ef90</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

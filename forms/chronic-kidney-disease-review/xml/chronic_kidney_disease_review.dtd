@@ -1,4 +1,5 @@
 <!ELEMENT chronic_kidney_disease_review (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,reviewed_at,care_setting,review_type,patient_identifier,age_band,sex,diabetes_status,primary_cause,months_since_diagnosis,egfr,egfr_sample_date,previous_egfr,previous_egfr_date,acr,acr_sample_date,acr_measured,systolic_blood_pressure,diastolic_blood_pressure,acei_or_arb_prescribed,sglt2i_prescribed,statin_prescribed,nephrotoxic_drug_present,nephrotoxic_dose_adjusted,medication_review_completed,hba1c,potassium,bicarbonate,calcium,phosphate,pth,haemoglobin,referral_decision,clinical_note)>
+<!ATTLIST chronic_kidney_disease_review xmlns CDATA #FIXED "https://formexamples.github.io/chronic-kidney-disease-review/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

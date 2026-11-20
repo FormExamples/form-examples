@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005c",
+    "id": "263490fe-5c29-5eab-b87f-f09e6822da4f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006e",
+    "id": "8b181c46-739e-530c-86d4-9613f2759473",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "fluoroscopyTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-00000000007c",
+    "id": "86b811db-cade-5e1e-89b2-b9882b10dd11",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000080",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000081",
+    "patientId": "3450c927-b09f-5718-a29c-50362777cf73",
+    "clinicianId": "b577a7a1-7447-555f-908f-30dd77a5ef66",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -62,11 +62,11 @@
     "notes": ""
   },
   "fluoroscopyTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000094",
+    "id": "24666647-1b5b-51e4-b24d-3766a79514a3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "fluoroscopyTestRequestId": "550e8400-e29b-41d4-a716-000000000098",
+    "fluoroscopyTestRequestId": "0de2f7af-2a5c-50f5-b8ab-630c9d783f3c",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "safetyBand": "ok",
@@ -80,22 +80,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "fluoroscopyTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a4",
+    "id": "2cc0fa2f-49b7-51d5-8b10-028dc37dcbeb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "fluoroscopyTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000a8",
+    "fluoroscopyTestRequestGradeId": "d254db90-b604-5aac-8fe2-39f829e99434",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "fluoroscopyTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ad",
+    "id": "c36cb646-3cdd-5eff-b7e0-ca473ffdce5d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "fluoroscopyTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b1",
+    "fluoroscopyTestRequestGradeId": "a1fd330f-007f-597a-8df0-000a7147944e",
     "flagId": "",
     "category": "pregnancy",
     "priority": "low",

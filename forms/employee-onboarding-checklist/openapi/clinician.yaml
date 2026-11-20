@@ -5,10 +5,19 @@ info:
   title: Employee Onboarding Checklist — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: employee-onboarding-checklist
+  apiPrefix: /api/employee-onboarding-checklist/
+  sqlSchema: employee_onboarding_checklist
+  xmlNamespace: https://formexamples.github.io/employee-onboarding-checklist/xml
+tags:
+  - name: employee-onboarding-checklist
+    description: Employee Onboarding Checklist form
 paths:
   /api/employee-onboarding-checklist/clinicians:
     get:
       summary: List Clinician records
+      tags: [employee-onboarding-checklist]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [employee-onboarding-checklist]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [employee-onboarding-checklist]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [employee-onboarding-checklist]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [employee-onboarding-checklist]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [employee-onboarding-checklist]
       operationId: deleteClinician
       responses:
         "200":

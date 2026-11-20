@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nuclear_medicine_test_result SYSTEM "nuclear_medicine_test_result.dtd">
-<nuclear_medicine_test_result>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<nuclear_medicine_test_result xmlns="https://formexamples.github.io/nuclear-medicine-test-result/xml">
+<id>6a9df65a-4206-5f9c-a712-e2eaa96f4169</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>76c4102b-a55f-5e5d-9ae4-a22c8032fa1a</patient_id>
+<clinician_id>9be8d270-93f6-5e09-b362-e6cb6d5bd922</clinician_id>
 <originating_request_reference></originating_request_reference>
 <report_status>preliminary</report_status>
 <performed_date>2026-01-15</performed_date>

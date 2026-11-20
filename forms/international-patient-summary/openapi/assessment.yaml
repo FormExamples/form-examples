@@ -5,10 +5,19 @@ info:
   title: International Patient Summary — Assessment
   version: 1.0.0
   description: Top-level assessment instance for international-patient-summary. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: international-patient-summary
+  apiPrefix: /api/international-patient-summary/
+  sqlSchema: international_patient_summary
+  xmlNamespace: https://formexamples.github.io/international-patient-summary/xml
+tags:
+  - name: international-patient-summary
+    description: International Patient Summary form
 paths:
   /api/international-patient-summary/assessments:
     get:
       summary: List Assessment records
+      tags: [international-patient-summary]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [international-patient-summary]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [international-patient-summary]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [international-patient-summary]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [international-patient-summary]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [international-patient-summary]
       operationId: deleteAssessment
       responses:
         "200":

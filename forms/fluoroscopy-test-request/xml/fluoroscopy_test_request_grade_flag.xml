@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fluoroscopy_test_request_grade_flag SYSTEM "fluoroscopy_test_request_grade_flag.dtd">
-<fluoroscopy_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<fluoroscopy_test_request_grade_flag xmlns="https://formexamples.github.io/fluoroscopy-test-request/xml">
+<id>a2adddb0-2bae-5b84-986a-54af5895f9d6</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<fluoroscopy_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</fluoroscopy_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<fluoroscopy_test_request_grade_id>0920ec5b-f3e1-5d28-aa26-3e6a71647891</fluoroscopy_test_request_grade_id>
+<flag_id>6c2513b1-9c0e-53dc-ac89-dcb9c6ba73a7</flag_id>
 <category>pregnancy</category>
 <priority>low</priority>
 <description>Example text.</description>

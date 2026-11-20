@@ -1,4 +1,5 @@
 <!ELEMENT nursing_care_plan_problem (id,created_at,updated_at,deleted_at,nursing_care_plan_id,problem_statement,adl_category,actual_or_potential,assessment_data,linked_risk,evaluation_note,goal_met,next_review_date)>
+<!ATTLIST nursing_care_plan_problem xmlns CDATA #FIXED "https://formexamples.github.io/nursing-care-plan/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

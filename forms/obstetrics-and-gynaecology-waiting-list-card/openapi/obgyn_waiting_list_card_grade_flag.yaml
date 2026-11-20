@@ -5,10 +5,19 @@ info:
   title: Obstetrics And Gynaecology Waiting List Card — ObgynWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: obstetrics-and-gynaecology-waiting-list-card
+  apiPrefix: /api/obstetrics-and-gynaecology-waiting-list-card/
+  sqlSchema: obstetrics_and_gynaecology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/obstetrics-and-gynaecology-waiting-list-card/xml
+tags:
+  - name: obstetrics-and-gynaecology-waiting-list-card
+    description: Obstetrics And Gynaecology Waiting List Card form
 paths:
   /api/obstetrics-and-gynaecology-waiting-list-card/obgyn_waiting_list_card_grade_flags:
     get:
       summary: List ObgynWaitingListCardGradeFlag records
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: listObgynWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ObgynWaitingListCardGradeFlag
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: createObgynWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ObgynWaitingListCardGradeFlag by id
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: getObgynWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ObgynWaitingListCardGradeFlag
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: updateObgynWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ObgynWaitingListCardGradeFlag
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: replaceObgynWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ObgynWaitingListCardGradeFlag
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: deleteObgynWaitingListCardGradeFlag
       responses:
         "200":

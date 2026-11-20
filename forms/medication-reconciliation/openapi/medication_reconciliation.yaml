@@ -5,10 +5,19 @@ info:
   title: Medication Reconciliation — MedicationReconciliation
   version: 1.0.0
   description: "Parent medication-reconciliation header: transition-of-care context, care setting, reconciling clinician, patient identification, and patient-level allergy status."
+x-namespace:
+  form: medication-reconciliation
+  apiPrefix: /api/medication-reconciliation/
+  sqlSchema: medication_reconciliation
+  xmlNamespace: https://formexamples.github.io/medication-reconciliation/xml
+tags:
+  - name: medication-reconciliation
+    description: Medication Reconciliation form
 paths:
   /api/medication-reconciliation/medication_reconciliations:
     get:
       summary: List MedicationReconciliation records
+      tags: [medication-reconciliation]
       operationId: listMedicationReconciliation
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicationReconciliation
+      tags: [medication-reconciliation]
       operationId: createMedicationReconciliation
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicationReconciliation by id
+      tags: [medication-reconciliation]
       operationId: getMedicationReconciliation
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicationReconciliation
+      tags: [medication-reconciliation]
       operationId: updateMedicationReconciliation
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicationReconciliation
+      tags: [medication-reconciliation]
       operationId: replaceMedicationReconciliation
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicationReconciliation
+      tags: [medication-reconciliation]
       operationId: deleteMedicationReconciliation
       responses:
         "200":

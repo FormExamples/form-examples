@@ -5,10 +5,19 @@ info:
   title: Electrocardiogram Test Result — ElectrocardiogramTestResultGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.
+x-namespace:
+  form: electrocardiogram-test-result
+  apiPrefix: /api/electrocardiogram-test-result/
+  sqlSchema: electrocardiogram_test_result
+  xmlNamespace: https://formexamples.github.io/electrocardiogram-test-result/xml
+tags:
+  - name: electrocardiogram-test-result
+    description: Electrocardiogram Test Result form
 paths:
   /api/electrocardiogram-test-result/electrocardiogram_test_result_grade_flags:
     get:
       summary: List ElectrocardiogramTestResultGradeFlag records
+      tags: [electrocardiogram-test-result]
       operationId: listElectrocardiogramTestResultGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ElectrocardiogramTestResultGradeFlag
+      tags: [electrocardiogram-test-result]
       operationId: createElectrocardiogramTestResultGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ElectrocardiogramTestResultGradeFlag by id
+      tags: [electrocardiogram-test-result]
       operationId: getElectrocardiogramTestResultGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ElectrocardiogramTestResultGradeFlag
+      tags: [electrocardiogram-test-result]
       operationId: updateElectrocardiogramTestResultGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ElectrocardiogramTestResultGradeFlag
+      tags: [electrocardiogram-test-result]
       operationId: replaceElectrocardiogramTestResultGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ElectrocardiogramTestResultGradeFlag
+      tags: [electrocardiogram-test-result]
       operationId: deleteElectrocardiogramTestResultGradeFlag
       responses:
         "200":

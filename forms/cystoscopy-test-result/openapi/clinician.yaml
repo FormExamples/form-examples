@@ -5,10 +5,19 @@ info:
   title: Cystoscopy Test Result — Clinician
   version: 1.0.0
   description: Operating / reporting clinician (cystoscopy operator) who performs the examination and authors and signs the cystoscopy result report.
+x-namespace:
+  form: cystoscopy-test-result
+  apiPrefix: /api/cystoscopy-test-result/
+  sqlSchema: cystoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/cystoscopy-test-result/xml
+tags:
+  - name: cystoscopy-test-result
+    description: Cystoscopy Test Result form
 paths:
   /api/cystoscopy-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags: [cystoscopy-test-result]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [cystoscopy-test-result]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [cystoscopy-test-result]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [cystoscopy-test-result]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [cystoscopy-test-result]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [cystoscopy-test-result]
       operationId: deleteClinician
       responses:
         "200":

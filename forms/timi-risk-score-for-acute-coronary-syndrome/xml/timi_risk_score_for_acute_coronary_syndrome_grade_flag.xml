@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE timi_risk_score_for_acute_coronary_syndrome_grade_flag SYSTEM "timi_risk_score_for_acute_coronary_syndrome_grade_flag.dtd">
-<timi_risk_score_for_acute_coronary_syndrome_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<timi_risk_score_for_acute_coronary_syndrome_grade_flag xmlns="https://formexamples.github.io/timi-risk-score-for-acute-coronary-syndrome/xml">
+<id>667121ef-85e8-5f55-9097-e7df091c13fc</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<timi_risk_score_for_acute_coronary_syndrome_grade_id>880e8400-e29b-41d4-a716-446655440003</timi_risk_score_for_acute_coronary_syndrome_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<timi_risk_score_for_acute_coronary_syndrome_grade_id>74b05ecf-d144-5fa7-8663-9c0a117cf62b</timi_risk_score_for_acute_coronary_syndrome_grade_id>
+<flag_id>edca2c7d-9f75-56cb-a519-5b6e25eefe3e</flag_id>
 <category>high-score-early-invasive</category>
 <priority>low</priority>
 <description>Example text.</description>

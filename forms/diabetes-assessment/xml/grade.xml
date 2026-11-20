@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<grade xmlns="https://formexamples.github.io/diabetes-assessment/xml">
+<id>faf2582d-a8b5-52e2-bbdf-fbfc8dcfecb0</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>14264c3d-310e-5dc2-b99b-146d09c9a4ea</assessment_id>
 <control_level>wellControlled</control_level>
 <control_score>5</control_score>
 <graded_at>2026-04-09T10:00:00Z</graded_at>

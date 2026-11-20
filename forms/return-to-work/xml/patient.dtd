@@ -1,4 +1,5 @@
 <!ELEMENT patient (id,created_at,updated_at,deleted_at,name,birth_date,sex,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,united_kingdom_nhs_number,job_title,role_description,contracted_hours_per_week,shift_pattern,safety_critical_role,dvla_group_1_licence_held,dvla_group_2_licence_held)>
+<!ATTLIST patient xmlns CDATA #FIXED "https://formexamples.github.io/return-to-work/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

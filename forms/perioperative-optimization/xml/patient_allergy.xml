@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE patient_allergy SYSTEM "patient_allergy.dtd">
-<patient_allergy>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<patient_allergy xmlns="https://formexamples.github.io/perioperative-optimization/xml">
+<id>f2146808-7c0a-5ccb-bdd0-4b363c3ebdb2</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<allergy_id>990e8400-e29b-41d4-a716-446655440004</allergy_id>
+<patient_id>b8055d34-dfca-51bf-8eea-9d3596c9658b</patient_id>
+<allergy_id>0f122ce3-8c22-581b-b195-8ef36f7b5ce6</allergy_id>
 <reaction>Urticaria</reaction>
 <severity>mild</severity>
 <kind>allergy</kind>

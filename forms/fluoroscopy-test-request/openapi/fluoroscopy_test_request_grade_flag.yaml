@@ -5,10 +5,19 @@ info:
   title: Fluoroscopy Test Request — FluoroscopyTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the imaging team.
+x-namespace:
+  form: fluoroscopy-test-request
+  apiPrefix: /api/fluoroscopy-test-request/
+  sqlSchema: fluoroscopy_test_request
+  xmlNamespace: https://formexamples.github.io/fluoroscopy-test-request/xml
+tags:
+  - name: fluoroscopy-test-request
+    description: Fluoroscopy Test Request form
 paths:
   /api/fluoroscopy-test-request/fluoroscopy_test_request_grade_flags:
     get:
       summary: List FluoroscopyTestRequestGradeFlag records
+      tags: [fluoroscopy-test-request]
       operationId: listFluoroscopyTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new FluoroscopyTestRequestGradeFlag
+      tags: [fluoroscopy-test-request]
       operationId: createFluoroscopyTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one FluoroscopyTestRequestGradeFlag by id
+      tags: [fluoroscopy-test-request]
       operationId: getFluoroscopyTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing FluoroscopyTestRequestGradeFlag
+      tags: [fluoroscopy-test-request]
       operationId: updateFluoroscopyTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing FluoroscopyTestRequestGradeFlag
+      tags: [fluoroscopy-test-request]
       operationId: replaceFluoroscopyTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a FluoroscopyTestRequestGradeFlag
+      tags: [fluoroscopy-test-request]
       operationId: deleteFluoroscopyTestRequestGradeFlag
       responses:
         "200":

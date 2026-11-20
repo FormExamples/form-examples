@@ -5,10 +5,19 @@ info:
   title: Allergy Skin Test Request — AllergySkinTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (BSACI / EAACI indication match, 1-9), validity-and-safety, request completeness, and triage priority."
+x-namespace:
+  form: allergy-skin-test-request
+  apiPrefix: /api/allergy-skin-test-request/
+  sqlSchema: allergy_skin_test_request
+  xmlNamespace: https://formexamples.github.io/allergy-skin-test-request/xml
+tags:
+  - name: allergy-skin-test-request
+    description: Allergy Skin Test Request form
 paths:
   /api/allergy-skin-test-request/allergy_skin_test_request_grades:
     get:
       summary: List AllergySkinTestRequestGrade records
+      tags: [allergy-skin-test-request]
       operationId: listAllergySkinTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AllergySkinTestRequestGrade
+      tags: [allergy-skin-test-request]
       operationId: createAllergySkinTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AllergySkinTestRequestGrade by id
+      tags: [allergy-skin-test-request]
       operationId: getAllergySkinTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AllergySkinTestRequestGrade
+      tags: [allergy-skin-test-request]
       operationId: updateAllergySkinTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AllergySkinTestRequestGrade
+      tags: [allergy-skin-test-request]
       operationId: replaceAllergySkinTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AllergySkinTestRequestGrade
+      tags: [allergy-skin-test-request]
       operationId: deleteAllergySkinTestRequestGrade
       responses:
         "200":

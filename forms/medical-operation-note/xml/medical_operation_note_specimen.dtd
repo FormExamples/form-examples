@@ -1,4 +1,5 @@
 <!ELEMENT medical_operation_note_specimen (id,created_at,updated_at,deleted_at,medical_operation_note_id,label,specimen_type,anatomical_site,container,fixative,destination,urgency,label_verified,chain_of_custody_documented,notes)>
+<!ATTLIST medical_operation_note_specimen xmlns CDATA #FIXED "https://formexamples.github.io/medical-operation-note/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

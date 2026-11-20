@@ -5,10 +5,19 @@ info:
   title: Code Of Conduct Notice — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: code-of-conduct-notice
+  apiPrefix: /api/code-of-conduct-notice/
+  sqlSchema: code_of_conduct_notice
+  xmlNamespace: https://formexamples.github.io/code-of-conduct-notice/xml
+tags:
+  - name: code-of-conduct-notice
+    description: Code Of Conduct Notice form
 paths:
   /api/code-of-conduct-notice/patients:
     get:
       summary: List Patient records
+      tags: [code-of-conduct-notice]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [code-of-conduct-notice]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [code-of-conduct-notice]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [code-of-conduct-notice]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [code-of-conduct-notice]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [code-of-conduct-notice]
       operationId: deletePatient
       responses:
         "200":

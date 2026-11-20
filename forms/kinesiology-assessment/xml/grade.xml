@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<grade xmlns="https://formexamples.github.io/kinesiology-assessment/xml">
+<id>9987c0b7-0e47-5564-a730-eb9c13b71667</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>d2b26664-e764-5d4f-92bd-7f50f1a6c4e8</assessment_id>
 <total_fms_score>5</total_fms_score>
 <risk_category>increased_injury_risk</risk_category>
 <asymmetry_count>2</asymmetry_count>

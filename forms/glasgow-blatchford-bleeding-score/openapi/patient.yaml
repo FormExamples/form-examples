@@ -5,10 +5,19 @@ info:
   title: Glasgow Blatchford Bleeding Score — Patient
   version: 1.0.0
   description: Patient demographic information used by the Glasgow-Blatchford Bleeding Score assessment record.
+x-namespace:
+  form: glasgow-blatchford-bleeding-score
+  apiPrefix: /api/glasgow-blatchford-bleeding-score/
+  sqlSchema: glasgow_blatchford_bleeding_score
+  xmlNamespace: https://formexamples.github.io/glasgow-blatchford-bleeding-score/xml
+tags:
+  - name: glasgow-blatchford-bleeding-score
+    description: Glasgow Blatchford Bleeding Score form
 paths:
   /api/glasgow-blatchford-bleeding-score/patients:
     get:
       summary: List Patient records
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: deletePatient
       responses:
         "200":

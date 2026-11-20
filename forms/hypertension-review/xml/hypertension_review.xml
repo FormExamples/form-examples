@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hypertension_review SYSTEM "hypertension_review.dtd">
-<hypertension_review>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<hypertension_review xmlns="https://formexamples.github.io/hypertension-review/xml">
+<id>289e5d1d-d30f-5c77-93f6-c20f9e2d42f5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>105306cf-e4ad-50ab-abc8-8799689de120</patient_id>
+<clinician_id>246e6562-3b09-54d9-85ba-8a55fdad470b</clinician_id>
 <clinician_role>gp</clinician_role>
 <reviewed_at>2026-01-15</reviewed_at>
 <practice_site>Example location</practice_site>

@@ -5,10 +5,19 @@ info:
   title: Agile Principles Assessment — Respondent
   version: 1.0.0
   description: A single person completing an agile-principles assessment. One respondent may submit multiple assessments over time.
+x-namespace:
+  form: agile-principles-assessment
+  apiPrefix: /api/agile-principles-assessment/
+  sqlSchema: agile_principles_assessment
+  xmlNamespace: https://formexamples.github.io/agile-principles-assessment/xml
+tags:
+  - name: agile-principles-assessment
+    description: Agile Principles Assessment form
 paths:
   /api/agile-principles-assessment/respondents:
     get:
       summary: List Respondent records
+      tags: [agile-principles-assessment]
       operationId: listRespondent
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Respondent
+      tags: [agile-principles-assessment]
       operationId: createRespondent
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Respondent by id
+      tags: [agile-principles-assessment]
       operationId: getRespondent
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Respondent
+      tags: [agile-principles-assessment]
       operationId: updateRespondent
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Respondent
+      tags: [agile-principles-assessment]
       operationId: replaceRespondent
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Respondent
+      tags: [agile-principles-assessment]
       operationId: deleteRespondent
       responses:
         "200":

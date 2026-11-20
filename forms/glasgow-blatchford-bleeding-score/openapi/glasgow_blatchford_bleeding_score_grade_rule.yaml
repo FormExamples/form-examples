@@ -5,10 +5,19 @@ info:
   title: Glasgow Blatchford Bleeding Score — GlasgowBlatchfordBleedingScoreGradeRule
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during Glasgow-Blatchford computation: parameter, points contributed, category, and description."
+x-namespace:
+  form: glasgow-blatchford-bleeding-score
+  apiPrefix: /api/glasgow-blatchford-bleeding-score/
+  sqlSchema: glasgow_blatchford_bleeding_score
+  xmlNamespace: https://formexamples.github.io/glasgow-blatchford-bleeding-score/xml
+tags:
+  - name: glasgow-blatchford-bleeding-score
+    description: Glasgow Blatchford Bleeding Score form
 paths:
   /api/glasgow-blatchford-bleeding-score/glasgow_blatchford_bleeding_score_grade_rules:
     get:
       summary: List GlasgowBlatchfordBleedingScoreGradeRule records
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: listGlasgowBlatchfordBleedingScoreGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GlasgowBlatchfordBleedingScoreGradeRule
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: createGlasgowBlatchfordBleedingScoreGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GlasgowBlatchfordBleedingScoreGradeRule by id
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: getGlasgowBlatchfordBleedingScoreGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GlasgowBlatchfordBleedingScoreGradeRule
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: updateGlasgowBlatchfordBleedingScoreGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GlasgowBlatchfordBleedingScoreGradeRule
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: replaceGlasgowBlatchfordBleedingScoreGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GlasgowBlatchfordBleedingScoreGradeRule
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: deleteGlasgowBlatchfordBleedingScoreGradeRule
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT audit_c_grade (id,created_at,updated_at,deleted_at,audit_c_id,total_score,risk_band,positive_screen,graded_at)>
+<!ATTLIST audit_c_grade xmlns CDATA #FIXED "https://formexamples.github.io/alcohol-use-disorders-identification-test-consumption/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

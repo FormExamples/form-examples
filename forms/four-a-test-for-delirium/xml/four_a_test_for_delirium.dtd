@@ -1,4 +1,5 @@
 <!ELEMENT four_a_test_for_delirium (id,created_at,updated_at,deleted_at,patient_id,clinician_id,patient_identifier,patient_name,date_of_birth,assessment_date,assessment_time,setting,assessor_name,assessor_role,alertness,amt4,attention_months,acute_change,acute_change_source,clinical_notes)>
+<!ATTLIST four_a_test_for_delirium xmlns CDATA #FIXED "https://formexamples.github.io/four-a-test-for-delirium/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

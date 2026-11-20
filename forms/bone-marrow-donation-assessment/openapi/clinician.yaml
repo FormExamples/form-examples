@@ -5,10 +5,19 @@ info:
   title: Bone Marrow Donation Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: bone-marrow-donation-assessment
+  apiPrefix: /api/bone-marrow-donation-assessment/
+  sqlSchema: bone_marrow_donation_assessment
+  xmlNamespace: https://formexamples.github.io/bone-marrow-donation-assessment/xml
+tags:
+  - name: bone-marrow-donation-assessment
+    description: Bone Marrow Donation Assessment form
 paths:
   /api/bone-marrow-donation-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [bone-marrow-donation-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [bone-marrow-donation-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [bone-marrow-donation-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [bone-marrow-donation-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [bone-marrow-donation-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [bone-marrow-donation-assessment]
       operationId: deleteClinician
       responses:
         "200":

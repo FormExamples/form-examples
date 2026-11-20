@@ -5,10 +5,19 @@ info:
   title: Cardiopulmonary Resuscitation Training — Assessment
   version: 1.0.0
   description: Top-level assessment instance for cardiopulmonary-resuscitation-training. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: cardiopulmonary-resuscitation-training
+  apiPrefix: /api/cardiopulmonary-resuscitation-training/
+  sqlSchema: cardiopulmonary_resuscitation_training
+  xmlNamespace: https://formexamples.github.io/cardiopulmonary-resuscitation-training/xml
+tags:
+  - name: cardiopulmonary-resuscitation-training
+    description: Cardiopulmonary Resuscitation Training form
 paths:
   /api/cardiopulmonary-resuscitation-training/assessments:
     get:
       summary: List Assessment records
+      tags: [cardiopulmonary-resuscitation-training]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [cardiopulmonary-resuscitation-training]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [cardiopulmonary-resuscitation-training]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [cardiopulmonary-resuscitation-training]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [cardiopulmonary-resuscitation-training]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [cardiopulmonary-resuscitation-training]
       operationId: deleteAssessment
       responses:
         "200":

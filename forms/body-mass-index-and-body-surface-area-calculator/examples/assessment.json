@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000050",
+    "id": "700a0cad-8b51-5760-9529-b9345d186f31",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000062",
+    "id": "ec358b7d-fd36-5a8e-8999-09e573704153",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "bodyMassIndexAndBodySurfaceAreaCalculator": {
-    "id": "550e8400-e29b-41d4-a716-00000000006f",
+    "id": "78dd3a9b-3b4f-5384-a2d9-6dd0a40b7571",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000073",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000074",
+    "patientId": "5ab8d72f-908f-5535-a66f-440482b05050",
+    "clinicianId": "2704f57a-01ad-5549-9975-2cdd95001a8d",
     "clinicianName": "",
     "clinicianRole": "doctor",
     "assessedAt": null,
@@ -55,11 +55,11 @@
     "bsaFormula": "mosteller"
   },
   "bodyMassIndexAndBodySurfaceAreaCalculatorGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000081",
+    "id": "19dcfa5a-1cec-5f3e-8176-70bf89ea9119",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "bodyMassIndexAndBodySurfaceAreaCalculatorId": "550e8400-e29b-41d4-a716-000000000085",
+    "bodyMassIndexAndBodySurfaceAreaCalculatorId": "ab6fc146-bb08-58fc-b9c1-329f93c32844",
     "bmi": null,
     "bmiCategory": "underweight",
     "bsaMosteller": null,
@@ -67,11 +67,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "bodyMassIndexAndBodySurfaceAreaCalculatorGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000008b",
+    "id": "eaa8a230-9745-5f03-b97d-fb2a9864f1de",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "bodyMassIndexAndBodySurfaceAreaCalculatorGradeId": "550e8400-e29b-41d4-a716-00000000008f",
+    "bodyMassIndexAndBodySurfaceAreaCalculatorGradeId": "ec9df65c-d0e3-5c4e-9be7-082e27ddab94",
     "ruleId": "",
     "instrument": "bmi",
     "band": "underweight",
@@ -79,11 +79,11 @@
     "description": ""
   },
   "bodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000095",
+    "id": "4e9fbd6f-fa7d-523f-8121-54a8df0cb29e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "bodyMassIndexAndBodySurfaceAreaCalculatorGradeId": "550e8400-e29b-41d4-a716-000000000099",
+    "bodyMassIndexAndBodySurfaceAreaCalculatorGradeId": "0ca77d1d-6471-56b3-97c9-318050540e27",
     "flagId": "",
     "category": "severe-obesity",
     "priority": "low",

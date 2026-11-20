@@ -5,10 +5,19 @@ info:
   title: Prescription Request — PrescriptionDetails
   version: 1.0.0
   description: Medication, dosage, and treatment details for a prescription request. One-to-one child of prescription_request.
+x-namespace:
+  form: prescription-request
+  apiPrefix: /api/prescription-request/
+  sqlSchema: prescription_request
+  xmlNamespace: https://formexamples.github.io/prescription-request/xml
+tags:
+  - name: prescription-request
+    description: Prescription Request form
 paths:
   /api/prescription-request/prescription_details:
     get:
       summary: List PrescriptionDetails records
+      tags: [prescription-request]
       operationId: listPrescriptionDetails
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PrescriptionDetails
+      tags: [prescription-request]
       operationId: createPrescriptionDetails
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PrescriptionDetails by id
+      tags: [prescription-request]
       operationId: getPrescriptionDetails
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PrescriptionDetails
+      tags: [prescription-request]
       operationId: updatePrescriptionDetails
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PrescriptionDetails
+      tags: [prescription-request]
       operationId: replacePrescriptionDetails
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PrescriptionDetails
+      tags: [prescription-request]
       operationId: deletePrescriptionDetails
       responses:
         "200":

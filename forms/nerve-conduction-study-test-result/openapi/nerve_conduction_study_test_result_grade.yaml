@@ -5,10 +5,19 @@ info:
   title: Nerve Conduction Study Test Result — NerveConductionStudyTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. motor neurone disease features, or a severe acute neuropathy such as a Guillain-Barre syndrome pattern) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: nerve-conduction-study-test-result
+  apiPrefix: /api/nerve-conduction-study-test-result/
+  sqlSchema: nerve_conduction_study_test_result
+  xmlNamespace: https://formexamples.github.io/nerve-conduction-study-test-result/xml
+tags:
+  - name: nerve-conduction-study-test-result
+    description: Nerve Conduction Study Test Result form
 paths:
   /api/nerve-conduction-study-test-result/nerve_conduction_study_test_result_grades:
     get:
       summary: List NerveConductionStudyTestResultGrade records
+      tags: [nerve-conduction-study-test-result]
       operationId: listNerveConductionStudyTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NerveConductionStudyTestResultGrade
+      tags: [nerve-conduction-study-test-result]
       operationId: createNerveConductionStudyTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NerveConductionStudyTestResultGrade by id
+      tags: [nerve-conduction-study-test-result]
       operationId: getNerveConductionStudyTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NerveConductionStudyTestResultGrade
+      tags: [nerve-conduction-study-test-result]
       operationId: updateNerveConductionStudyTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NerveConductionStudyTestResultGrade
+      tags: [nerve-conduction-study-test-result]
       operationId: replaceNerveConductionStudyTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NerveConductionStudyTestResultGrade
+      tags: [nerve-conduction-study-test-result]
       operationId: deleteNerveConductionStudyTestResultGrade
       responses:
         "200":

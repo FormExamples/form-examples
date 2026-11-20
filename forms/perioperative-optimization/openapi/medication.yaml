@@ -5,10 +5,19 @@ info:
   title: Perioperative Optimization — Medication
   version: 1.0.0
   description: Medication catalogue, carrying the perioperative hold guidance that drives the medication optimization domain.
+x-namespace:
+  form: perioperative-optimization
+  apiPrefix: /api/perioperative-optimization/
+  sqlSchema: perioperative_optimization
+  xmlNamespace: https://formexamples.github.io/perioperative-optimization/xml
+tags:
+  - name: perioperative-optimization
+    description: Perioperative Optimization form
 paths:
   /api/perioperative-optimization/medications:
     get:
       summary: List Medication records
+      tags: [perioperative-optimization]
       operationId: listMedication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Medication
+      tags: [perioperative-optimization]
       operationId: createMedication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Medication by id
+      tags: [perioperative-optimization]
       operationId: getMedication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Medication
+      tags: [perioperative-optimization]
       operationId: updateMedication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Medication
+      tags: [perioperative-optimization]
       operationId: replaceMedication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Medication
+      tags: [perioperative-optimization]
       operationId: deleteMedication
       responses:
         "200":

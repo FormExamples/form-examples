@@ -5,10 +5,19 @@ info:
   title: Blood Test Request — BloodTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (1-9 anchored on RCPath retesting intervals + indication match), pre-analytical / specimen safety, request completeness, and triage priority."
+x-namespace:
+  form: blood-test-request
+  apiPrefix: /api/blood-test-request/
+  sqlSchema: blood_test_request
+  xmlNamespace: https://formexamples.github.io/blood-test-request/xml
+tags:
+  - name: blood-test-request
+    description: Blood Test Request form
 paths:
   /api/blood-test-request/blood_test_request_grades:
     get:
       summary: List BloodTestRequestGrade records
+      tags: [blood-test-request]
       operationId: listBloodTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BloodTestRequestGrade
+      tags: [blood-test-request]
       operationId: createBloodTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BloodTestRequestGrade by id
+      tags: [blood-test-request]
       operationId: getBloodTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BloodTestRequestGrade
+      tags: [blood-test-request]
       operationId: updateBloodTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BloodTestRequestGrade
+      tags: [blood-test-request]
       operationId: replaceBloodTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BloodTestRequestGrade
+      tags: [blood-test-request]
       operationId: deleteBloodTestRequestGrade
       responses:
         "200":

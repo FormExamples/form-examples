@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE prescription_details SYSTEM "prescription_details.dtd">
-<prescription_details>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<prescription_details xmlns="https://formexamples.github.io/prescription-request/xml">
+<id>2470e4cc-3701-5b01-8c23-6b79c0943021</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<prescription_request_id>770e8400-e29b-41d4-a716-446655440002</prescription_request_id>
+<prescription_request_id>5e4299a2-9963-53a0-8f01-8918f8c070e0</prescription_request_id>
 <request_date>2026-01-15</request_date>
 <medication_name>Example</medication_name>
 <dosage>500mg</dosage>

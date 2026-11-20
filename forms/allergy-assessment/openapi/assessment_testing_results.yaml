@@ -5,10 +5,19 @@ info:
   title: Allergy Assessment — AssessmentTestingResults
   version: 1.0.0
   description: "Testing results section: which allergy tests have been performed. One-to-one child of assessment."
+x-namespace:
+  form: allergy-assessment
+  apiPrefix: /api/allergy-assessment/
+  sqlSchema: allergy_assessment
+  xmlNamespace: https://formexamples.github.io/allergy-assessment/xml
+tags:
+  - name: allergy-assessment
+    description: Allergy Assessment form
 paths:
   /api/allergy-assessment/assessment_testing_results:
     get:
       summary: List AssessmentTestingResults records
+      tags: [allergy-assessment]
       operationId: listAssessmentTestingResults
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentTestingResults
+      tags: [allergy-assessment]
       operationId: createAssessmentTestingResults
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentTestingResults by id
+      tags: [allergy-assessment]
       operationId: getAssessmentTestingResults
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentTestingResults
+      tags: [allergy-assessment]
       operationId: updateAssessmentTestingResults
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentTestingResults
+      tags: [allergy-assessment]
       operationId: replaceAssessmentTestingResults
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentTestingResults
+      tags: [allergy-assessment]
       operationId: deleteAssessmentTestingResults
       responses:
         "200":

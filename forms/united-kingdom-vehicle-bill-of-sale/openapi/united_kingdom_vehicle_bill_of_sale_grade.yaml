@@ -5,10 +5,19 @@ info:
   title: United Kingdom Vehicle Bill Of Sale — UnitedKingdomVehicleBillOfSaleGrade
   version: 1.0.0
   description: "Computed completeness classification for a vehicle bill of sale: classification (complete/incomplete/risk-flagged), missing item count, and risk flag count."
+x-namespace:
+  form: united-kingdom-vehicle-bill-of-sale
+  apiPrefix: /api/united-kingdom-vehicle-bill-of-sale/
+  sqlSchema: united_kingdom_vehicle_bill_of_sale
+  xmlNamespace: https://formexamples.github.io/united-kingdom-vehicle-bill-of-sale/xml
+tags:
+  - name: united-kingdom-vehicle-bill-of-sale
+    description: United Kingdom Vehicle Bill Of Sale form
 paths:
   /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sale_grades:
     get:
       summary: List UnitedKingdomVehicleBillOfSaleGrade records
+      tags: [united-kingdom-vehicle-bill-of-sale]
       operationId: listUnitedKingdomVehicleBillOfSaleGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomVehicleBillOfSaleGrade
+      tags: [united-kingdom-vehicle-bill-of-sale]
       operationId: createUnitedKingdomVehicleBillOfSaleGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomVehicleBillOfSaleGrade by id
+      tags: [united-kingdom-vehicle-bill-of-sale]
       operationId: getUnitedKingdomVehicleBillOfSaleGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomVehicleBillOfSaleGrade
+      tags: [united-kingdom-vehicle-bill-of-sale]
       operationId: updateUnitedKingdomVehicleBillOfSaleGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomVehicleBillOfSaleGrade
+      tags: [united-kingdom-vehicle-bill-of-sale]
       operationId: replaceUnitedKingdomVehicleBillOfSaleGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomVehicleBillOfSaleGrade
+      tags: [united-kingdom-vehicle-bill-of-sale]
       operationId: deleteUnitedKingdomVehicleBillOfSaleGrade
       responses:
         "200":

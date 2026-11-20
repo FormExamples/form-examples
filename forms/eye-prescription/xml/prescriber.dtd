@@ -1,4 +1,5 @@
 <!ELEMENT prescriber (id,created_at,updated_at,deleted_at,name,goc_registration_number,role,practice_name,practice_address,postcode,country_as_iso_3166_1_alpha_2,email,phone)>
+<!ATTLIST prescriber xmlns CDATA #FIXED "https://formexamples.github.io/eye-prescription/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

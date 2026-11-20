@@ -5,10 +5,19 @@ info:
   title: Blood Test Request — BloodTestRequest
   version: 1.0.0
   description: Pathology / phlebotomy blood-test order (request). Captures the requested test panels (booleans), the clinical indication and details, pre-analytical / specimen handling, patient-safety factors, and triage urgency.
+x-namespace:
+  form: blood-test-request
+  apiPrefix: /api/blood-test-request/
+  sqlSchema: blood_test_request
+  xmlNamespace: https://formexamples.github.io/blood-test-request/xml
+tags:
+  - name: blood-test-request
+    description: Blood Test Request form
 paths:
   /api/blood-test-request/blood_test_requests:
     get:
       summary: List BloodTestRequest records
+      tags: [blood-test-request]
       operationId: listBloodTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BloodTestRequest
+      tags: [blood-test-request]
       operationId: createBloodTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BloodTestRequest by id
+      tags: [blood-test-request]
       operationId: getBloodTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BloodTestRequest
+      tags: [blood-test-request]
       operationId: updateBloodTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BloodTestRequest
+      tags: [blood-test-request]
       operationId: replaceBloodTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BloodTestRequest
+      tags: [blood-test-request]
       operationId: deleteBloodTestRequest
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Allergy Skin Test Result — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: allergy-skin-test-result
+  apiPrefix: /api/allergy-skin-test-result/
+  sqlSchema: allergy_skin_test_result
+  xmlNamespace: https://formexamples.github.io/allergy-skin-test-result/xml
+tags:
+  - name: allergy-skin-test-result
+    description: Allergy Skin Test Result form
 paths:
   /api/allergy-skin-test-result/patients:
     get:
       summary: List Patient records
+      tags: [allergy-skin-test-result]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [allergy-skin-test-result]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [allergy-skin-test-result]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [allergy-skin-test-result]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [allergy-skin-test-result]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [allergy-skin-test-result]
       operationId: deletePatient
       responses:
         "200":

@@ -1,6 +1,6 @@
 {
   "resourceType": "DetectedIssue",
-  "id": "aa0e8400-e29b-41d4-a716-446655440005",
+  "id": "bcd7d79c-ffa6-54b1-9e09-1c7bb4d4bfe7",
   "meta": {
     "profile": [
       "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -30,7 +30,7 @@
   },
   "severity": "low",
   "subject": {
-    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+    "reference": "Patient/7338bbda-313b-56a3-bdf7-6abeecffc281"
   },
   "identifiedDateTime": "2026-04-09T10:00:00+00:00",
   "detail": "Clinical flag detected."

@@ -5,10 +5,19 @@ info:
   title: Genetic Test Request — Clinician
   version: 1.0.0
   description: Requesting clinician (referrer) who completes the genetic test request.
+x-namespace:
+  form: genetic-test-request
+  apiPrefix: /api/genetic-test-request/
+  sqlSchema: genetic_test_request
+  xmlNamespace: https://formexamples.github.io/genetic-test-request/xml
+tags:
+  - name: genetic-test-request
+    description: Genetic Test Request form
 paths:
   /api/genetic-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags: [genetic-test-request]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [genetic-test-request]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [genetic-test-request]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [genetic-test-request]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [genetic-test-request]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [genetic-test-request]
       operationId: deleteClinician
       responses:
         "200":

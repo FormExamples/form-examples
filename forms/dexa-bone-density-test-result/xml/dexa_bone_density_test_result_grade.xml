@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dexa_bone_density_test_result_grade SYSTEM "dexa_bone_density_test_result_grade.dtd">
-<dexa_bone_density_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<dexa_bone_density_test_result_grade xmlns="https://formexamples.github.io/dexa-bone-density-test-result/xml">
+<id>6944f103-54f6-575b-871a-30724cc54408</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<dexa_bone_density_test_result_id>770e8400-e29b-41d4-a716-446655440002</dexa_bone_density_test_result_id>
+<dexa_bone_density_test_result_id>82f97f17-7341-52f2-ae7e-87a1e855098a</dexa_bone_density_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

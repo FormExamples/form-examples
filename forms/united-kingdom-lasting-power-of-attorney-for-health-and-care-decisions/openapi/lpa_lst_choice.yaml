@@ -5,10 +5,19 @@ info:
   title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — LpaLstChoice
   version: 1.0.0
   description: Donor election under MCA 2005 s.11(7) on life-sustaining treatment authority for attorneys.
+x-namespace:
+  form: united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
+  apiPrefix: /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/
+  sqlSchema: united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions
+  xmlNamespace: https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml
+tags:
+  - name: united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
+    description: United Kingdom Lasting Power Of Attorney For Health And Care Decisions form
 paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_lst_choices:
     get:
       summary: List LpaLstChoice records
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: listLpaLstChoice
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LpaLstChoice
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: createLpaLstChoice
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LpaLstChoice by id
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: getLpaLstChoice
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LpaLstChoice
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: updateLpaLstChoice
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LpaLstChoice
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: replaceLpaLstChoice
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LpaLstChoice
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: deleteLpaLstChoice
       responses:
         "200":

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ward_round_note_grade SYSTEM "ward_round_note_grade.dtd">
-<ward_round_note_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<ward_round_note_grade xmlns="https://formexamples.github.io/ward-round-note/xml">
+<id>4aa330e8-5d1e-54e5-9617-d8b5f227eacc</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<ward_round_note_id>770e8400-e29b-41d4-a716-446655440002</ward_round_note_id>
+<ward_round_note_id>c95cf1ca-d70a-5ce1-abfd-f601aad146ff</ward_round_note_id>
 <status>complete</status>
 <completeness_percent>1</completeness_percent>
 <header_documented>yes</header_documented>

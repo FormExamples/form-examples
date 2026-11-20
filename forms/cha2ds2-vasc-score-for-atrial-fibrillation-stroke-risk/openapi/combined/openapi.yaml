@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the CHA2DS2-VASc Score for Atrial Fibrillation Stroke
     Risk form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL
     table, and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
+  apiPrefix: /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/
+  sqlSchema: cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk
+  xmlNamespace: https://formexamples.github.io/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/xml
+tags:
+- name: cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
+  description: CHA2DS2-VASc Score for Atrial Fibrillation Stroke Risk form
 paths:
   /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vasc_grade_flags:
     get:
       summary: List Cha2ds2VascGradeFlag records
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: listCha2ds2VascGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Cha2ds2VascGradeFlag
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: createCha2ds2VascGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Cha2ds2VascGradeFlag by id
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: getCha2ds2VascGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Cha2ds2VascGradeFlag
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: updateCha2ds2VascGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Cha2ds2VascGradeFlag
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: replaceCha2ds2VascGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Cha2ds2VascGradeFlag
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: deleteCha2ds2VascGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vasc_grade_rules:
     get:
       summary: List Cha2ds2VascGradeRule records
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: listCha2ds2VascGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Cha2ds2VascGradeRule
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: createCha2ds2VascGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Cha2ds2VascGradeRule by id
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: getCha2ds2VascGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Cha2ds2VascGradeRule
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: updateCha2ds2VascGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Cha2ds2VascGradeRule
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: replaceCha2ds2VascGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Cha2ds2VascGradeRule
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: deleteCha2ds2VascGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vasc_grades:
     get:
       summary: List Cha2ds2VascGrade records
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: listCha2ds2VascGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Cha2ds2VascGrade
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: createCha2ds2VascGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Cha2ds2VascGrade by id
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: getCha2ds2VascGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Cha2ds2VascGrade
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: updateCha2ds2VascGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Cha2ds2VascGrade
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: replaceCha2ds2VascGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Cha2ds2VascGrade
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: deleteCha2ds2VascGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vascs:
     get:
       summary: List Cha2ds2Vasc records
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: listCha2ds2Vasc
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Cha2ds2Vasc
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: createCha2ds2Vasc
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Cha2ds2Vasc by id
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: getCha2ds2Vasc
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Cha2ds2Vasc
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: updateCha2ds2Vasc
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Cha2ds2Vasc
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: replaceCha2ds2Vasc
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Cha2ds2Vasc
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: deleteCha2ds2Vasc
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
   /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/patients:
     get:
       summary: List Patient records
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
       operationId: deletePatient
       responses:
         '200':

@@ -5,10 +5,19 @@ info:
   title: Medical Records Release Permission — RestrictionsLimitations
   version: 1.0.0
   description: Patient restrictions on which sensitive record categories to exclude from release. One-to-one child of release_form.
+x-namespace:
+  form: medical-records-release-permission
+  apiPrefix: /api/medical-records-release-permission/
+  sqlSchema: medical_records_release_permission
+  xmlNamespace: https://formexamples.github.io/medical-records-release-permission/xml
+tags:
+  - name: medical-records-release-permission
+    description: Medical Records Release Permission form
 paths:
   /api/medical-records-release-permission/restrictions_limitations:
     get:
       summary: List RestrictionsLimitations records
+      tags: [medical-records-release-permission]
       operationId: listRestrictionsLimitations
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RestrictionsLimitations
+      tags: [medical-records-release-permission]
       operationId: createRestrictionsLimitations
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RestrictionsLimitations by id
+      tags: [medical-records-release-permission]
       operationId: getRestrictionsLimitations
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RestrictionsLimitations
+      tags: [medical-records-release-permission]
       operationId: updateRestrictionsLimitations
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RestrictionsLimitations
+      tags: [medical-records-release-permission]
       operationId: replaceRestrictionsLimitations
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RestrictionsLimitations
+      tags: [medical-records-release-permission]
       operationId: deleteRestrictionsLimitations
       responses:
         "200":

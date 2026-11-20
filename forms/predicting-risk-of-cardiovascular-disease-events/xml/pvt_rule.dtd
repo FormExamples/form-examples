@@ -1,4 +1,5 @@
 <!ELEMENT pvt_rule (id,created_at,updated_at,deleted_at,code,category,description,risk_level)>
+<!ATTLIST pvt_rule xmlns CDATA #FIXED "https://formexamples.github.io/predicting-risk-of-cardiovascular-disease-events/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

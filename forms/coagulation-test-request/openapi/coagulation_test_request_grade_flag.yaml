@@ -5,10 +5,19 @@ info:
   title: Coagulation Test Request — CoagulationTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the laboratory / haematology team.
+x-namespace:
+  form: coagulation-test-request
+  apiPrefix: /api/coagulation-test-request/
+  sqlSchema: coagulation_test_request
+  xmlNamespace: https://formexamples.github.io/coagulation-test-request/xml
+tags:
+  - name: coagulation-test-request
+    description: Coagulation Test Request form
 paths:
   /api/coagulation-test-request/coagulation_test_request_grade_flags:
     get:
       summary: List CoagulationTestRequestGradeFlag records
+      tags: [coagulation-test-request]
       operationId: listCoagulationTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CoagulationTestRequestGradeFlag
+      tags: [coagulation-test-request]
       operationId: createCoagulationTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CoagulationTestRequestGradeFlag by id
+      tags: [coagulation-test-request]
       operationId: getCoagulationTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CoagulationTestRequestGradeFlag
+      tags: [coagulation-test-request]
       operationId: updateCoagulationTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CoagulationTestRequestGradeFlag
+      tags: [coagulation-test-request]
       operationId: replaceCoagulationTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CoagulationTestRequestGradeFlag
+      tags: [coagulation-test-request]
       operationId: deleteCoagulationTestRequestGradeFlag
       responses:
         "200":

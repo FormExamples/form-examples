@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Abdominal Aortic Aneurysm (AAA) Screening form,
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: abdominal-aortic-aneurysm-screening
+  apiPrefix: /api/abdominal-aortic-aneurysm-screening/
+  sqlSchema: abdominal_aortic_aneurysm_screening
+  xmlNamespace: https://formexamples.github.io/abdominal-aortic-aneurysm-screening/xml
+tags:
+- name: abdominal-aortic-aneurysm-screening
+  description: Abdominal Aortic Aneurysm (AAA) Screening form
 paths:
   /api/abdominal-aortic-aneurysm-screening/abdominal_aortic_aneurysm_screening_grade_flags:
     get:
       summary: List AbdominalAorticAneurysmScreeningGradeFlag records
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: listAbdominalAorticAneurysmScreeningGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AbdominalAorticAneurysmScreeningGradeFlag
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: createAbdominalAorticAneurysmScreeningGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AbdominalAorticAneurysmScreeningGradeFlag by id
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: getAbdominalAorticAneurysmScreeningGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AbdominalAorticAneurysmScreeningGradeFlag
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: updateAbdominalAorticAneurysmScreeningGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AbdominalAorticAneurysmScreeningGradeFlag
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: replaceAbdominalAorticAneurysmScreeningGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AbdominalAorticAneurysmScreeningGradeFlag
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: deleteAbdominalAorticAneurysmScreeningGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/abdominal-aortic-aneurysm-screening/abdominal_aortic_aneurysm_screening_grade_rules:
     get:
       summary: List AbdominalAorticAneurysmScreeningGradeRule records
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: listAbdominalAorticAneurysmScreeningGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AbdominalAorticAneurysmScreeningGradeRule
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: createAbdominalAorticAneurysmScreeningGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AbdominalAorticAneurysmScreeningGradeRule by id
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: getAbdominalAorticAneurysmScreeningGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AbdominalAorticAneurysmScreeningGradeRule
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: updateAbdominalAorticAneurysmScreeningGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AbdominalAorticAneurysmScreeningGradeRule
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: replaceAbdominalAorticAneurysmScreeningGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AbdominalAorticAneurysmScreeningGradeRule
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: deleteAbdominalAorticAneurysmScreeningGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/abdominal-aortic-aneurysm-screening/abdominal_aortic_aneurysm_screening_grades:
     get:
       summary: List AbdominalAorticAneurysmScreeningGrade records
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: listAbdominalAorticAneurysmScreeningGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AbdominalAorticAneurysmScreeningGrade
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: createAbdominalAorticAneurysmScreeningGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AbdominalAorticAneurysmScreeningGrade by id
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: getAbdominalAorticAneurysmScreeningGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AbdominalAorticAneurysmScreeningGrade
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: updateAbdominalAorticAneurysmScreeningGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AbdominalAorticAneurysmScreeningGrade
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: replaceAbdominalAorticAneurysmScreeningGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AbdominalAorticAneurysmScreeningGrade
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: deleteAbdominalAorticAneurysmScreeningGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/abdominal-aortic-aneurysm-screening/abdominal_aortic_aneurysm_screenings:
     get:
       summary: List AbdominalAorticAneurysmScreening records
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: listAbdominalAorticAneurysmScreening
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AbdominalAorticAneurysmScreening
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: createAbdominalAorticAneurysmScreening
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AbdominalAorticAneurysmScreening by id
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: getAbdominalAorticAneurysmScreening
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AbdominalAorticAneurysmScreening
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: updateAbdominalAorticAneurysmScreening
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AbdominalAorticAneurysmScreening
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: replaceAbdominalAorticAneurysmScreening
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AbdominalAorticAneurysmScreening
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: deleteAbdominalAorticAneurysmScreening
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/abdominal-aortic-aneurysm-screening/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - abdominal-aortic-aneurysm-screening
   /api/abdominal-aortic-aneurysm-screening/patients:
     get:
       summary: List Patient records
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - abdominal-aortic-aneurysm-screening
       operationId: deletePatient
       responses:
         '200':

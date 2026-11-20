@@ -5,10 +5,19 @@ info:
   title: Cardiology Response — CardiologyResponseGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: response classification, condition severity / category, response completeness, and follow-up urgency. A critical result auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: cardiology-response
+  apiPrefix: /api/cardiology-response/
+  sqlSchema: cardiology_response
+  xmlNamespace: https://formexamples.github.io/cardiology-response/xml
+tags:
+  - name: cardiology-response
+    description: Cardiology Response form
 paths:
   /api/cardiology-response/cardiology_response_grades:
     get:
       summary: List CardiologyResponseGrade records
+      tags: [cardiology-response]
       operationId: listCardiologyResponseGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiologyResponseGrade
+      tags: [cardiology-response]
       operationId: createCardiologyResponseGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiologyResponseGrade by id
+      tags: [cardiology-response]
       operationId: getCardiologyResponseGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiologyResponseGrade
+      tags: [cardiology-response]
       operationId: updateCardiologyResponseGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiologyResponseGrade
+      tags: [cardiology-response]
       operationId: replaceCardiologyResponseGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiologyResponseGrade
+      tags: [cardiology-response]
       operationId: deleteCardiologyResponseGrade
       responses:
         "200":

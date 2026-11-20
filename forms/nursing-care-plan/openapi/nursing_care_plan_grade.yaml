@@ -5,10 +5,19 @@ info:
   title: Nursing Care Plan — NursingCarePlanGrade
   version: 1.0.0
   description: "Computed completeness grading result for a nursing care plan: overall status and completeness percent."
+x-namespace:
+  form: nursing-care-plan
+  apiPrefix: /api/nursing-care-plan/
+  sqlSchema: nursing_care_plan
+  xmlNamespace: https://formexamples.github.io/nursing-care-plan/xml
+tags:
+  - name: nursing-care-plan
+    description: Nursing Care Plan form
 paths:
   /api/nursing-care-plan/nursing_care_plan_grades:
     get:
       summary: List NursingCarePlanGrade records
+      tags: [nursing-care-plan]
       operationId: listNursingCarePlanGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NursingCarePlanGrade
+      tags: [nursing-care-plan]
       operationId: createNursingCarePlanGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NursingCarePlanGrade by id
+      tags: [nursing-care-plan]
       operationId: getNursingCarePlanGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NursingCarePlanGrade
+      tags: [nursing-care-plan]
       operationId: updateNursingCarePlanGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NursingCarePlanGrade
+      tags: [nursing-care-plan]
       operationId: replaceNursingCarePlanGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NursingCarePlanGrade
+      tags: [nursing-care-plan]
       operationId: deleteNursingCarePlanGrade
       responses:
         "200":

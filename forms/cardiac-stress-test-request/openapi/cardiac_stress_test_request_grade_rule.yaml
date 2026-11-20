@@ -5,10 +5,19 @@ info:
   title: Cardiac Stress Test Request — CardiacStressTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.
+x-namespace:
+  form: cardiac-stress-test-request
+  apiPrefix: /api/cardiac-stress-test-request/
+  sqlSchema: cardiac_stress_test_request
+  xmlNamespace: https://formexamples.github.io/cardiac-stress-test-request/xml
+tags:
+  - name: cardiac-stress-test-request
+    description: Cardiac Stress Test Request form
 paths:
   /api/cardiac-stress-test-request/cardiac_stress_test_request_grade_rules:
     get:
       summary: List CardiacStressTestRequestGradeRule records
+      tags: [cardiac-stress-test-request]
       operationId: listCardiacStressTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiacStressTestRequestGradeRule
+      tags: [cardiac-stress-test-request]
       operationId: createCardiacStressTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiacStressTestRequestGradeRule by id
+      tags: [cardiac-stress-test-request]
       operationId: getCardiacStressTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiacStressTestRequestGradeRule
+      tags: [cardiac-stress-test-request]
       operationId: updateCardiacStressTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiacStressTestRequestGradeRule
+      tags: [cardiac-stress-test-request]
       operationId: replaceCardiacStressTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiacStressTestRequestGradeRule
+      tags: [cardiac-stress-test-request]
       operationId: deleteCardiacStressTestRequestGradeRule
       responses:
         "200":

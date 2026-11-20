@@ -5,10 +5,19 @@ info:
   title: Colonoscopy Test Result — ColonoscopyTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. obstructing or suspicious mass, perforation) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: colonoscopy-test-result
+  apiPrefix: /api/colonoscopy-test-result/
+  sqlSchema: colonoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/colonoscopy-test-result/xml
+tags:
+  - name: colonoscopy-test-result
+    description: Colonoscopy Test Result form
 paths:
   /api/colonoscopy-test-result/colonoscopy_test_result_grades:
     get:
       summary: List ColonoscopyTestResultGrade records
+      tags: [colonoscopy-test-result]
       operationId: listColonoscopyTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ColonoscopyTestResultGrade
+      tags: [colonoscopy-test-result]
       operationId: createColonoscopyTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ColonoscopyTestResultGrade by id
+      tags: [colonoscopy-test-result]
       operationId: getColonoscopyTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ColonoscopyTestResultGrade
+      tags: [colonoscopy-test-result]
       operationId: updateColonoscopyTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ColonoscopyTestResultGrade
+      tags: [colonoscopy-test-result]
       operationId: replaceColonoscopyTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ColonoscopyTestResultGrade
+      tags: [colonoscopy-test-result]
       operationId: deleteColonoscopyTestResultGrade
       responses:
         "200":

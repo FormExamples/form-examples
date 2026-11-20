@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_birth_registration SYSTEM "united_kingdom_birth_registration.dtd">
-<united_kingdom_birth_registration>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<united_kingdom_birth_registration xmlns="https://formexamples.github.io/united-kingdom-birth-registration/xml">
+<id>329ba61f-957d-574e-a0ab-7d94bd9aeb2b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>496248b3-51ab-5074-a8c2-60df2a43f505</patient_id>
+<clinician_id>35e75408-65ea-52df-8935-6ef656a3860e</clinician_id>
 <child_forenames>Example</child_forenames>
 <child_surname>Example</child_surname>
 <sex>female</sex>

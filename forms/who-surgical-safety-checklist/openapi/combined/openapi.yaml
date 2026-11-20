@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the WHO Surgical Safety Checklist form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: who-surgical-safety-checklist
+  apiPrefix: /api/who-surgical-safety-checklist/
+  sqlSchema: who_surgical_safety_checklist
+  xmlNamespace: https://formexamples.github.io/who-surgical-safety-checklist/xml
+tags:
+- name: who-surgical-safety-checklist
+  description: WHO Surgical Safety Checklist form
 paths:
   /api/who-surgical-safety-checklist/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - who-surgical-safety-checklist
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - who-surgical-safety-checklist
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - who-surgical-safety-checklist
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - who-surgical-safety-checklist
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - who-surgical-safety-checklist
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - who-surgical-safety-checklist
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - who-surgical-safety-checklist
   /api/who-surgical-safety-checklist/patients:
     get:
       summary: List Patient records
+      tags:
+      - who-surgical-safety-checklist
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - who-surgical-safety-checklist
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - who-surgical-safety-checklist
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - who-surgical-safety-checklist
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - who-surgical-safety-checklist
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - who-surgical-safety-checklist
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/who-surgical-safety-checklist/team_members:
     get:
       summary: List TeamMember records
+      tags:
+      - who-surgical-safety-checklist
       operationId: listTeamMember
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TeamMember
+      tags:
+      - who-surgical-safety-checklist
       operationId: createTeamMember
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TeamMember by id
+      tags:
+      - who-surgical-safety-checklist
       operationId: getTeamMember
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TeamMember
+      tags:
+      - who-surgical-safety-checklist
       operationId: updateTeamMember
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TeamMember
+      tags:
+      - who-surgical-safety-checklist
       operationId: replaceTeamMember
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TeamMember
+      tags:
+      - who-surgical-safety-checklist
       operationId: deleteTeamMember
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/who-surgical-safety-checklist/who_surgical_safety_checklists:
     get:
       summary: List WhoSurgicalSafetyChecklist records
+      tags:
+      - who-surgical-safety-checklist
       operationId: listWhoSurgicalSafetyChecklist
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WhoSurgicalSafetyChecklist
+      tags:
+      - who-surgical-safety-checklist
       operationId: createWhoSurgicalSafetyChecklist
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WhoSurgicalSafetyChecklist by id
+      tags:
+      - who-surgical-safety-checklist
       operationId: getWhoSurgicalSafetyChecklist
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WhoSurgicalSafetyChecklist
+      tags:
+      - who-surgical-safety-checklist
       operationId: updateWhoSurgicalSafetyChecklist
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WhoSurgicalSafetyChecklist
+      tags:
+      - who-surgical-safety-checklist
       operationId: replaceWhoSurgicalSafetyChecklist
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WhoSurgicalSafetyChecklist
+      tags:
+      - who-surgical-safety-checklist
       operationId: deleteWhoSurgicalSafetyChecklist
       responses:
         '200':

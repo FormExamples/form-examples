@@ -5,10 +5,19 @@ info:
   title: Urinalysis Test Request — UrinalysisTestRequest
   version: 1.0.0
   description: Urinalysis (urine pathology) test request (order). Captures the requested urine test panel, the clinical indication and details, symptoms / red flags, specimen preanalytical data, modifiers, and triage urgency.
+x-namespace:
+  form: urinalysis-test-request
+  apiPrefix: /api/urinalysis-test-request/
+  sqlSchema: urinalysis_test_request
+  xmlNamespace: https://formexamples.github.io/urinalysis-test-request/xml
+tags:
+  - name: urinalysis-test-request
+    description: Urinalysis Test Request form
 paths:
   /api/urinalysis-test-request/urinalysis_test_requests:
     get:
       summary: List UrinalysisTestRequest records
+      tags: [urinalysis-test-request]
       operationId: listUrinalysisTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UrinalysisTestRequest
+      tags: [urinalysis-test-request]
       operationId: createUrinalysisTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UrinalysisTestRequest by id
+      tags: [urinalysis-test-request]
       operationId: getUrinalysisTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UrinalysisTestRequest
+      tags: [urinalysis-test-request]
       operationId: updateUrinalysisTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UrinalysisTestRequest
+      tags: [urinalysis-test-request]
       operationId: replaceUrinalysisTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UrinalysisTestRequest
+      tags: [urinalysis-test-request]
       operationId: deleteUrinalysisTestRequest
       responses:
         "200":

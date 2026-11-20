@@ -5,10 +5,19 @@ info:
   title: Otorhinolaryngology Waiting List Card — EntWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: otorhinolaryngology-waiting-list-card
+  apiPrefix: /api/otorhinolaryngology-waiting-list-card/
+  sqlSchema: otorhinolaryngology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/otorhinolaryngology-waiting-list-card/xml
+tags:
+  - name: otorhinolaryngology-waiting-list-card
+    description: Otorhinolaryngology Waiting List Card form
 paths:
   /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_card_grade_flags:
     get:
       summary: List EntWaitingListCardGradeFlag records
+      tags: [otorhinolaryngology-waiting-list-card]
       operationId: listEntWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EntWaitingListCardGradeFlag
+      tags: [otorhinolaryngology-waiting-list-card]
       operationId: createEntWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EntWaitingListCardGradeFlag by id
+      tags: [otorhinolaryngology-waiting-list-card]
       operationId: getEntWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EntWaitingListCardGradeFlag
+      tags: [otorhinolaryngology-waiting-list-card]
       operationId: updateEntWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EntWaitingListCardGradeFlag
+      tags: [otorhinolaryngology-waiting-list-card]
       operationId: replaceEntWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EntWaitingListCardGradeFlag
+      tags: [otorhinolaryngology-waiting-list-card]
       operationId: deleteEntWaitingListCardGradeFlag
       responses:
         "200":

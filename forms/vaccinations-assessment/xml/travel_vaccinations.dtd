@@ -1,4 +1,5 @@
 <!ELEMENT travel_vaccinations (id,created_at,updated_at,deleted_at,assessment_id,travel_planned,travel_destination,hepatitis_a,hepatitis_b,typhoid,yellow_fever,rabies,japanese_encephalitis)>
+<!ATTLIST travel_vaccinations xmlns CDATA #FIXED "https://formexamples.github.io/vaccinations-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

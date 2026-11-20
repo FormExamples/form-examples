@@ -5,10 +5,19 @@ info:
   title: Anion Gap Calculator — Clinician
   version: 1.0.0
   description: Clinician identifying information for the staff recording an anion-gap calculation.
+x-namespace:
+  form: anion-gap-calculator
+  apiPrefix: /api/anion-gap-calculator/
+  sqlSchema: anion_gap_calculator
+  xmlNamespace: https://formexamples.github.io/anion-gap-calculator/xml
+tags:
+  - name: anion-gap-calculator
+    description: Anion Gap Calculator form
 paths:
   /api/anion-gap-calculator/clinicians:
     get:
       summary: List Clinician records
+      tags: [anion-gap-calculator]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [anion-gap-calculator]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [anion-gap-calculator]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [anion-gap-calculator]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [anion-gap-calculator]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [anion-gap-calculator]
       operationId: deleteClinician
       responses:
         "200":

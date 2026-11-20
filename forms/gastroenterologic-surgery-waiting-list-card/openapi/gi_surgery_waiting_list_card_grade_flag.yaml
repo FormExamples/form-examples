@@ -5,10 +5,19 @@ info:
   title: Gastroenterologic Surgery Waiting List Card — GiSurgeryWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: gastroenterologic-surgery-waiting-list-card
+  apiPrefix: /api/gastroenterologic-surgery-waiting-list-card/
+  sqlSchema: gastroenterologic_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/gastroenterologic-surgery-waiting-list-card/xml
+tags:
+  - name: gastroenterologic-surgery-waiting-list-card
+    description: Gastroenterologic Surgery Waiting List Card form
 paths:
   /api/gastroenterologic-surgery-waiting-list-card/gi_surgery_waiting_list_card_grade_flags:
     get:
       summary: List GiSurgeryWaitingListCardGradeFlag records
+      tags: [gastroenterologic-surgery-waiting-list-card]
       operationId: listGiSurgeryWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GiSurgeryWaitingListCardGradeFlag
+      tags: [gastroenterologic-surgery-waiting-list-card]
       operationId: createGiSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GiSurgeryWaitingListCardGradeFlag by id
+      tags: [gastroenterologic-surgery-waiting-list-card]
       operationId: getGiSurgeryWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GiSurgeryWaitingListCardGradeFlag
+      tags: [gastroenterologic-surgery-waiting-list-card]
       operationId: updateGiSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GiSurgeryWaitingListCardGradeFlag
+      tags: [gastroenterologic-surgery-waiting-list-card]
       operationId: replaceGiSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GiSurgeryWaitingListCardGradeFlag
+      tags: [gastroenterologic-surgery-waiting-list-card]
       operationId: deleteGiSurgeryWaitingListCardGradeFlag
       responses:
         "200":

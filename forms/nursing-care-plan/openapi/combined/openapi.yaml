@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Nursing Care Plan form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: nursing-care-plan
+  apiPrefix: /api/nursing-care-plan/
+  sqlSchema: nursing_care_plan
+  xmlNamespace: https://formexamples.github.io/nursing-care-plan/xml
+tags:
+- name: nursing-care-plan
+  description: Nursing Care Plan form
 paths:
   /api/nursing-care-plan/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - nursing-care-plan
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - nursing-care-plan
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - nursing-care-plan
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - nursing-care-plan
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - nursing-care-plan
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - nursing-care-plan
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/nursing-care-plan/nursing_care_plan_goals:
     get:
       summary: List NursingCarePlanGoal records
+      tags:
+      - nursing-care-plan
       operationId: listNursingCarePlanGoal
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlanGoal
+      tags:
+      - nursing-care-plan
       operationId: createNursingCarePlanGoal
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NursingCarePlanGoal by id
+      tags:
+      - nursing-care-plan
       operationId: getNursingCarePlanGoal
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlanGoal
+      tags:
+      - nursing-care-plan
       operationId: updateNursingCarePlanGoal
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NursingCarePlanGoal
+      tags:
+      - nursing-care-plan
       operationId: replaceNursingCarePlanGoal
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NursingCarePlanGoal
+      tags:
+      - nursing-care-plan
       operationId: deleteNursingCarePlanGoal
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/nursing-care-plan/nursing_care_plan_grade_flags:
     get:
       summary: List NursingCarePlanGradeFlag records
+      tags:
+      - nursing-care-plan
       operationId: listNursingCarePlanGradeFlag
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlanGradeFlag
+      tags:
+      - nursing-care-plan
       operationId: createNursingCarePlanGradeFlag
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NursingCarePlanGradeFlag by id
+      tags:
+      - nursing-care-plan
       operationId: getNursingCarePlanGradeFlag
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlanGradeFlag
+      tags:
+      - nursing-care-plan
       operationId: updateNursingCarePlanGradeFlag
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NursingCarePlanGradeFlag
+      tags:
+      - nursing-care-plan
       operationId: replaceNursingCarePlanGradeFlag
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NursingCarePlanGradeFlag
+      tags:
+      - nursing-care-plan
       operationId: deleteNursingCarePlanGradeFlag
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/nursing-care-plan/nursing_care_plan_grade_rules:
     get:
       summary: List NursingCarePlanGradeRule records
+      tags:
+      - nursing-care-plan
       operationId: listNursingCarePlanGradeRule
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlanGradeRule
+      tags:
+      - nursing-care-plan
       operationId: createNursingCarePlanGradeRule
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NursingCarePlanGradeRule by id
+      tags:
+      - nursing-care-plan
       operationId: getNursingCarePlanGradeRule
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlanGradeRule
+      tags:
+      - nursing-care-plan
       operationId: updateNursingCarePlanGradeRule
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NursingCarePlanGradeRule
+      tags:
+      - nursing-care-plan
       operationId: replaceNursingCarePlanGradeRule
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NursingCarePlanGradeRule
+      tags:
+      - nursing-care-plan
       operationId: deleteNursingCarePlanGradeRule
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/nursing-care-plan/nursing_care_plan_grades:
     get:
       summary: List NursingCarePlanGrade records
+      tags:
+      - nursing-care-plan
       operationId: listNursingCarePlanGrade
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlanGrade
+      tags:
+      - nursing-care-plan
       operationId: createNursingCarePlanGrade
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NursingCarePlanGrade by id
+      tags:
+      - nursing-care-plan
       operationId: getNursingCarePlanGrade
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlanGrade
+      tags:
+      - nursing-care-plan
       operationId: updateNursingCarePlanGrade
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NursingCarePlanGrade
+      tags:
+      - nursing-care-plan
       operationId: replaceNursingCarePlanGrade
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NursingCarePlanGrade
+      tags:
+      - nursing-care-plan
       operationId: deleteNursingCarePlanGrade
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/nursing-care-plan/nursing_care_plan_interventions:
     get:
       summary: List NursingCarePlanIntervention records
+      tags:
+      - nursing-care-plan
       operationId: listNursingCarePlanIntervention
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlanIntervention
+      tags:
+      - nursing-care-plan
       operationId: createNursingCarePlanIntervention
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NursingCarePlanIntervention by id
+      tags:
+      - nursing-care-plan
       operationId: getNursingCarePlanIntervention
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlanIntervention
+      tags:
+      - nursing-care-plan
       operationId: updateNursingCarePlanIntervention
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NursingCarePlanIntervention
+      tags:
+      - nursing-care-plan
       operationId: replaceNursingCarePlanIntervention
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NursingCarePlanIntervention
+      tags:
+      - nursing-care-plan
       operationId: deleteNursingCarePlanIntervention
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/nursing-care-plan/nursing_care_plan_problems:
     get:
       summary: List NursingCarePlanProblem records
+      tags:
+      - nursing-care-plan
       operationId: listNursingCarePlanProblem
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlanProblem
+      tags:
+      - nursing-care-plan
       operationId: createNursingCarePlanProblem
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NursingCarePlanProblem by id
+      tags:
+      - nursing-care-plan
       operationId: getNursingCarePlanProblem
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlanProblem
+      tags:
+      - nursing-care-plan
       operationId: updateNursingCarePlanProblem
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NursingCarePlanProblem
+      tags:
+      - nursing-care-plan
       operationId: replaceNursingCarePlanProblem
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NursingCarePlanProblem
+      tags:
+      - nursing-care-plan
       operationId: deleteNursingCarePlanProblem
       responses:
         '200':
@@ -1733,6 +1825,8 @@ paths:
   /api/nursing-care-plan/nursing_care_plans:
     get:
       summary: List NursingCarePlan records
+      tags:
+      - nursing-care-plan
       operationId: listNursingCarePlan
       parameters:
       - name: limit
@@ -1785,6 +1879,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlan
+      tags:
+      - nursing-care-plan
       operationId: createNursingCarePlan
       requestBody:
         required: true
@@ -1838,6 +1934,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NursingCarePlan by id
+      tags:
+      - nursing-care-plan
       operationId: getNursingCarePlan
       responses:
         '200':
@@ -1865,6 +1963,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlan
+      tags:
+      - nursing-care-plan
       operationId: updateNursingCarePlan
       requestBody:
         required: true
@@ -1910,6 +2010,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NursingCarePlan
+      tags:
+      - nursing-care-plan
       operationId: replaceNursingCarePlan
       requestBody:
         required: true
@@ -1955,6 +2057,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NursingCarePlan
+      tags:
+      - nursing-care-plan
       operationId: deleteNursingCarePlan
       responses:
         '200':
@@ -1987,9 +2091,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - nursing-care-plan
   /api/nursing-care-plan/patients:
     get:
       summary: List Patient records
+      tags:
+      - nursing-care-plan
       operationId: listPatient
       parameters:
       - name: limit
@@ -2042,6 +2150,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - nursing-care-plan
       operationId: createPatient
       requestBody:
         required: true
@@ -2095,6 +2205,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - nursing-care-plan
       operationId: getPatient
       responses:
         '200':
@@ -2122,6 +2234,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - nursing-care-plan
       operationId: updatePatient
       requestBody:
         required: true
@@ -2167,6 +2281,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - nursing-care-plan
       operationId: replacePatient
       requestBody:
         required: true
@@ -2212,6 +2328,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - nursing-care-plan
       operationId: deletePatient
       responses:
         '200':

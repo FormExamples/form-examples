@@ -1,4 +1,5 @@
 <!ELEMENT quick_sequential_organ_failure_assessment_grade (id,created_at,updated_at,deleted_at,quick_sequential_organ_failure_assessment_id,respiratory_rate_point,mentation_point,systolic_blood_pressure_point,total_score,risk_band,threshold_met,graded_at)>
+<!ATTLIST quick_sequential_organ_failure_assessment_grade xmlns CDATA #FIXED "https://formexamples.github.io/quick-sequential-organ-failure-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

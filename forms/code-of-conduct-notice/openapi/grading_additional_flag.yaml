@@ -5,10 +5,19 @@ info:
   title: Code Of Conduct Notice — GradingAdditionalFlag
   version: 1.0.0
   description: Safety-critical clinical flags raised alongside the grading result.
+x-namespace:
+  form: code-of-conduct-notice
+  apiPrefix: /api/code-of-conduct-notice/
+  sqlSchema: code_of_conduct_notice
+  xmlNamespace: https://formexamples.github.io/code-of-conduct-notice/xml
+tags:
+  - name: code-of-conduct-notice
+    description: Code Of Conduct Notice form
 paths:
   /api/code-of-conduct-notice/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [code-of-conduct-notice]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [code-of-conduct-notice]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [code-of-conduct-notice]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [code-of-conduct-notice]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [code-of-conduct-notice]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [code-of-conduct-notice]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

@@ -1,6 +1,6 @@
 {
   "supplier": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "5dd699f4-acd2-5dc5-80a8-7a1d4bd775e8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -17,7 +17,7 @@
     "contactPhone": ""
   },
   "assessor": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a1",
+    "id": "4a9d882f-6d09-5467-9bb3-9f9e4717460f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -28,11 +28,11 @@
     "role": "commissioner"
   },
   "product": {
-    "id": "550e8400-e29b-41d4-a716-0000000000aa",
+    "id": "29dec395-9a6b-5068-babf-4551c9b2dc33",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "supplierId": "550e8400-e29b-41d4-a716-0000000000ae",
+    "supplierId": "6b37ce47-c953-5dd6-865a-c4b67fbd8dcf",
     "name": "",
     "version": "",
     "description": "",
@@ -43,13 +43,13 @@
     "isPatientFacing": "yes"
   },
   "ukNhsDigitalTechnologyAssessmentCriteria": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b7",
+    "id": "677fab5a-225c-5737-8636-9e2ce41fe16f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "supplierId": "550e8400-e29b-41d4-a716-0000000000bb",
-    "productId": "550e8400-e29b-41d4-a716-0000000000bc",
-    "assessorId": "550e8400-e29b-41d4-a716-0000000000bd",
+    "supplierId": "ab4ed83d-6ff6-5d65-aa26-4cb6af217d9f",
+    "productId": "cb35c1bc-7c24-53fd-90a4-8430e3c4b12f",
+    "assessorId": "746bf145-686b-588b-9e90-b6b5646f2e4e",
     "status": "draft",
     "assessmentDate": null,
     "reviewDueDate": null,
@@ -112,11 +112,11 @@
     "assessorNotes": ""
   },
   "ukNhsDigitalTechnologyAssessmentCriteriaGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000fa",
+    "id": "81cb6215-db8c-5d03-b8a0-8a7733d32588",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "ukNhsDigitalTechnologyAssessmentCriteriaId": "550e8400-e29b-41d4-a716-0000000000fe",
+    "ukNhsDigitalTechnologyAssessmentCriteriaId": "53457133-fef2-5f84-a3a0-751e2f2f15b6",
     "outcome": "meets",
     "mandatoryTotal": 0,
     "mandatoryMet": 0,
@@ -135,11 +135,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "ukNhsDigitalTechnologyAssessmentCriteriaGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000010f",
+    "id": "62981c77-60ef-5f60-a019-f27fbc82ec22",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-000000000113",
+    "gradeId": "d82e43e6-8911-5fa3-ad8c-d3a4fb2261d1",
     "ruleId": "",
     "section": "a",
     "criterionId": "a1",
@@ -148,11 +148,11 @@
     "description": ""
   },
   "ukNhsDigitalTechnologyAssessmentCriteriaGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000011a",
+    "id": "ac45b91b-a313-54e1-9865-94f74e8a5adc",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "ukNhsDigitalTechnologyAssessmentCriteriaGradeId": "550e8400-e29b-41d4-a716-00000000011e",
+    "ukNhsDigitalTechnologyAssessmentCriteriaGradeId": "696cc632-4ce9-563c-9063-7201002fcb49",
     "flagId": "",
     "category": "company",
     "severity": "info",

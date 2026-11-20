@@ -5,10 +5,19 @@ info:
   title: Fluoroscopy Test Result — FluoroscopyTestResult
   version: 1.0.0
   description: Fluoroscopy / contrast-study result (report). Captures the performed examination (barium / water-soluble / proctogram / hysterosalpingogram / cystourethrogram / arthrogram / fluoroscopy-guided procedure), the contrast used, screening time, clinical history, the narrative and structured findings, the impression and structured-reporting category, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: fluoroscopy-test-result
+  apiPrefix: /api/fluoroscopy-test-result/
+  sqlSchema: fluoroscopy_test_result
+  xmlNamespace: https://formexamples.github.io/fluoroscopy-test-result/xml
+tags:
+  - name: fluoroscopy-test-result
+    description: Fluoroscopy Test Result form
 paths:
   /api/fluoroscopy-test-result/fluoroscopy_test_results:
     get:
       summary: List FluoroscopyTestResult records
+      tags: [fluoroscopy-test-result]
       operationId: listFluoroscopyTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new FluoroscopyTestResult
+      tags: [fluoroscopy-test-result]
       operationId: createFluoroscopyTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one FluoroscopyTestResult by id
+      tags: [fluoroscopy-test-result]
       operationId: getFluoroscopyTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing FluoroscopyTestResult
+      tags: [fluoroscopy-test-result]
       operationId: updateFluoroscopyTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing FluoroscopyTestResult
+      tags: [fluoroscopy-test-result]
       operationId: replaceFluoroscopyTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a FluoroscopyTestResult
+      tags: [fluoroscopy-test-result]
       operationId: deleteFluoroscopyTestResult
       responses:
         "200":

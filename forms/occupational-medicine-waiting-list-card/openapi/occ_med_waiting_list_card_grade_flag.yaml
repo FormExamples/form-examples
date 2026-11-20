@@ -5,10 +5,19 @@ info:
   title: Occupational Medicine Waiting List Card — OccMedWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: occupational-medicine-waiting-list-card
+  apiPrefix: /api/occupational-medicine-waiting-list-card/
+  sqlSchema: occupational_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/occupational-medicine-waiting-list-card/xml
+tags:
+  - name: occupational-medicine-waiting-list-card
+    description: Occupational Medicine Waiting List Card form
 paths:
   /api/occupational-medicine-waiting-list-card/occ_med_waiting_list_card_grade_flags:
     get:
       summary: List OccMedWaitingListCardGradeFlag records
+      tags: [occupational-medicine-waiting-list-card]
       operationId: listOccMedWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OccMedWaitingListCardGradeFlag
+      tags: [occupational-medicine-waiting-list-card]
       operationId: createOccMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OccMedWaitingListCardGradeFlag by id
+      tags: [occupational-medicine-waiting-list-card]
       operationId: getOccMedWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OccMedWaitingListCardGradeFlag
+      tags: [occupational-medicine-waiting-list-card]
       operationId: updateOccMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OccMedWaitingListCardGradeFlag
+      tags: [occupational-medicine-waiting-list-card]
       operationId: replaceOccMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OccMedWaitingListCardGradeFlag
+      tags: [occupational-medicine-waiting-list-card]
       operationId: deleteOccMedWaitingListCardGradeFlag
       responses:
         "200":

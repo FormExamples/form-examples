@@ -5,10 +5,19 @@ info:
   title: Internal Medicine Waiting List Card — InternalMedWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: internal-medicine-waiting-list-card
+  apiPrefix: /api/internal-medicine-waiting-list-card/
+  sqlSchema: internal_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/internal-medicine-waiting-list-card/xml
+tags:
+  - name: internal-medicine-waiting-list-card
+    description: Internal Medicine Waiting List Card form
 paths:
   /api/internal-medicine-waiting-list-card/internal_med_waiting_list_card_grades:
     get:
       summary: List InternalMedWaitingListCardGrade records
+      tags: [internal-medicine-waiting-list-card]
       operationId: listInternalMedWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new InternalMedWaitingListCardGrade
+      tags: [internal-medicine-waiting-list-card]
       operationId: createInternalMedWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one InternalMedWaitingListCardGrade by id
+      tags: [internal-medicine-waiting-list-card]
       operationId: getInternalMedWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing InternalMedWaitingListCardGrade
+      tags: [internal-medicine-waiting-list-card]
       operationId: updateInternalMedWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing InternalMedWaitingListCardGrade
+      tags: [internal-medicine-waiting-list-card]
       operationId: replaceInternalMedWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a InternalMedWaitingListCardGrade
+      tags: [internal-medicine-waiting-list-card]
       operationId: deleteInternalMedWaitingListCardGrade
       responses:
         "200":

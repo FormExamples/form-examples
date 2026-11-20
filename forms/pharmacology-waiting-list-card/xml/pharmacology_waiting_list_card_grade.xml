@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pharmacology_waiting_list_card_grade SYSTEM "pharmacology_waiting_list_card_grade.dtd">
-<pharmacology_waiting_list_card_grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<pharmacology_waiting_list_card_grade xmlns="https://formexamples.github.io/pharmacology-waiting-list-card/xml">
+<id>891a62f2-f24a-5baa-8444-40bd62fe26ff</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pharmacology_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</pharmacology_waiting_list_card_id>
+<pharmacology_waiting_list_card_id>d936b0a4-5891-52ba-a8c8-1740da396444</pharmacology_waiting_list_card_id>
 <waiting_time_status>within-target</waiting_time_status>
 <clinical_priority>P1a</clinical_priority>
 <target_wait_weeks>0.0</target_wait_weeks>

@@ -1,4 +1,5 @@
 <!ELEMENT medication_reconciliation (id,created_at,updated_at,deleted_at,patient_id,clinician_id,reconciliation_type,care_setting,reconciled_at,clinician_name,clinician_role,patient_identifier,age_band,sex,weight_kg,allergy_status)>
+<!ATTLIST medication_reconciliation xmlns CDATA #FIXED "https://formexamples.github.io/medication-reconciliation/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

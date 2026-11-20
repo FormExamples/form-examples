@@ -5,10 +5,19 @@ info:
   title: Seasonal Affective Disorder Assessment — GradingFiredRule
   version: 1.0.0
   description: Individual SAD assessment rules that evaluated to true during grading.
+x-namespace:
+  form: seasonal-affective-disorder-assessment
+  apiPrefix: /api/seasonal-affective-disorder-assessment/
+  sqlSchema: seasonal_affective_disorder_assessment
+  xmlNamespace: https://formexamples.github.io/seasonal-affective-disorder-assessment/xml
+tags:
+  - name: seasonal-affective-disorder-assessment
+    description: Seasonal Affective Disorder Assessment form
 paths:
   /api/seasonal-affective-disorder-assessment/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags: [seasonal-affective-disorder-assessment]
       operationId: listGradingFiredRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingFiredRule
+      tags: [seasonal-affective-disorder-assessment]
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags: [seasonal-affective-disorder-assessment]
       operationId: getGradingFiredRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingFiredRule
+      tags: [seasonal-affective-disorder-assessment]
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingFiredRule
+      tags: [seasonal-affective-disorder-assessment]
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingFiredRule
+      tags: [seasonal-affective-disorder-assessment]
       operationId: deleteGradingFiredRule
       responses:
         "200":

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Ottawa Ankle Rules (and Ottawa Foot Rules) form,
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: ottawa-ankle-rules
+  apiPrefix: /api/ottawa-ankle-rules/
+  sqlSchema: ottawa_ankle_rules
+  xmlNamespace: https://formexamples.github.io/ottawa-ankle-rules/xml
+tags:
+- name: ottawa-ankle-rules
+  description: Ottawa Ankle Rules (and Ottawa Foot Rules) form
 paths:
   /api/ottawa-ankle-rules/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - ottawa-ankle-rules
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - ottawa-ankle-rules
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - ottawa-ankle-rules
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - ottawa-ankle-rules
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - ottawa-ankle-rules
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - ottawa-ankle-rules
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - ottawa-ankle-rules
   /api/ottawa-ankle-rules/ottawa_ankle_rules:
     get:
       summary: List OttawaAnkleRules records
+      tags:
+      - ottawa-ankle-rules
       operationId: listOttawaAnkleRules
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OttawaAnkleRules
+      tags:
+      - ottawa-ankle-rules
       operationId: createOttawaAnkleRules
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OttawaAnkleRules by id
+      tags:
+      - ottawa-ankle-rules
       operationId: getOttawaAnkleRules
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OttawaAnkleRules
+      tags:
+      - ottawa-ankle-rules
       operationId: updateOttawaAnkleRules
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OttawaAnkleRules
+      tags:
+      - ottawa-ankle-rules
       operationId: replaceOttawaAnkleRules
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OttawaAnkleRules
+      tags:
+      - ottawa-ankle-rules
       operationId: deleteOttawaAnkleRules
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/ottawa-ankle-rules/ottawa_ankle_rules_grade_flags:
     get:
       summary: List OttawaAnkleRulesGradeFlag records
+      tags:
+      - ottawa-ankle-rules
       operationId: listOttawaAnkleRulesGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OttawaAnkleRulesGradeFlag
+      tags:
+      - ottawa-ankle-rules
       operationId: createOttawaAnkleRulesGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OttawaAnkleRulesGradeFlag by id
+      tags:
+      - ottawa-ankle-rules
       operationId: getOttawaAnkleRulesGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OttawaAnkleRulesGradeFlag
+      tags:
+      - ottawa-ankle-rules
       operationId: updateOttawaAnkleRulesGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OttawaAnkleRulesGradeFlag
+      tags:
+      - ottawa-ankle-rules
       operationId: replaceOttawaAnkleRulesGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OttawaAnkleRulesGradeFlag
+      tags:
+      - ottawa-ankle-rules
       operationId: deleteOttawaAnkleRulesGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/ottawa-ankle-rules/ottawa_ankle_rules_grade_rules:
     get:
       summary: List OttawaAnkleRulesGradeRule records
+      tags:
+      - ottawa-ankle-rules
       operationId: listOttawaAnkleRulesGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OttawaAnkleRulesGradeRule
+      tags:
+      - ottawa-ankle-rules
       operationId: createOttawaAnkleRulesGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OttawaAnkleRulesGradeRule by id
+      tags:
+      - ottawa-ankle-rules
       operationId: getOttawaAnkleRulesGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OttawaAnkleRulesGradeRule
+      tags:
+      - ottawa-ankle-rules
       operationId: updateOttawaAnkleRulesGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OttawaAnkleRulesGradeRule
+      tags:
+      - ottawa-ankle-rules
       operationId: replaceOttawaAnkleRulesGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OttawaAnkleRulesGradeRule
+      tags:
+      - ottawa-ankle-rules
       operationId: deleteOttawaAnkleRulesGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/ottawa-ankle-rules/ottawa_ankle_rules_grades:
     get:
       summary: List OttawaAnkleRulesGrade records
+      tags:
+      - ottawa-ankle-rules
       operationId: listOttawaAnkleRulesGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OttawaAnkleRulesGrade
+      tags:
+      - ottawa-ankle-rules
       operationId: createOttawaAnkleRulesGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OttawaAnkleRulesGrade by id
+      tags:
+      - ottawa-ankle-rules
       operationId: getOttawaAnkleRulesGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OttawaAnkleRulesGrade
+      tags:
+      - ottawa-ankle-rules
       operationId: updateOttawaAnkleRulesGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OttawaAnkleRulesGrade
+      tags:
+      - ottawa-ankle-rules
       operationId: replaceOttawaAnkleRulesGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OttawaAnkleRulesGrade
+      tags:
+      - ottawa-ankle-rules
       operationId: deleteOttawaAnkleRulesGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/ottawa-ankle-rules/patients:
     get:
       summary: List Patient records
+      tags:
+      - ottawa-ankle-rules
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - ottawa-ankle-rules
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - ottawa-ankle-rules
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - ottawa-ankle-rules
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - ottawa-ankle-rules
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - ottawa-ankle-rules
       operationId: deletePatient
       responses:
         '200':

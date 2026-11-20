@@ -1,4 +1,5 @@
 <!ELEMENT glossary_term (id,created_at,updated_at,deleted_at,arc42_documentation_id,ordinal,term,definition)>
+<!ATTLIST glossary_term xmlns CDATA #FIXED "https://formexamples.github.io/arc42/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

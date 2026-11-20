@@ -1,4 +1,5 @@
 <!ELEMENT smoking_alcohol (id,created_at,updated_at,deleted_at,assessment_id,smoking_status,cigarettes_per_day,years_since_quit,alcohol_units_per_week,alcohol_frequency)>
+<!ATTLIST smoking_alcohol xmlns CDATA #FIXED "https://formexamples.github.io/heart-health-check/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

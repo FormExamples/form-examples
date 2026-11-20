@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/mental-health-assessment/xml">
+<id>f0fcd6eb-7f30-578b-bb85-7a86762132ee</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>aa0e8400-e29b-41d4-a716-446655440005</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>3fbb86ac-6fd6-5288-852c-97f893b279bb</grade_id>
+<rule_id>b4e9babf-8699-566f-9e10-e607be793615</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>mild</severity_level>

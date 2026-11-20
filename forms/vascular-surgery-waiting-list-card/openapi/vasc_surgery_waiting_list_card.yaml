@@ -5,10 +5,19 @@ info:
   title: Vascular Surgery Waiting List Card — VascSurgeryWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a vascular surgery waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: vascular-surgery-waiting-list-card
+  apiPrefix: /api/vascular-surgery-waiting-list-card/
+  sqlSchema: vascular_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/vascular-surgery-waiting-list-card/xml
+tags:
+  - name: vascular-surgery-waiting-list-card
+    description: Vascular Surgery Waiting List Card form
 paths:
   /api/vascular-surgery-waiting-list-card/vasc_surgery_waiting_list_cards:
     get:
       summary: List VascSurgeryWaitingListCard records
+      tags: [vascular-surgery-waiting-list-card]
       operationId: listVascSurgeryWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new VascSurgeryWaitingListCard
+      tags: [vascular-surgery-waiting-list-card]
       operationId: createVascSurgeryWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one VascSurgeryWaitingListCard by id
+      tags: [vascular-surgery-waiting-list-card]
       operationId: getVascSurgeryWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing VascSurgeryWaitingListCard
+      tags: [vascular-surgery-waiting-list-card]
       operationId: updateVascSurgeryWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing VascSurgeryWaitingListCard
+      tags: [vascular-surgery-waiting-list-card]
       operationId: replaceVascSurgeryWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a VascSurgeryWaitingListCard
+      tags: [vascular-surgery-waiting-list-card]
       operationId: deleteVascSurgeryWaitingListCard
       responses:
         "200":

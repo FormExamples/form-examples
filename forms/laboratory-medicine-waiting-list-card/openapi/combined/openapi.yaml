@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Laboratory Medicine Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: laboratory-medicine-waiting-list-card
+  apiPrefix: /api/laboratory-medicine-waiting-list-card/
+  sqlSchema: laboratory_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/laboratory-medicine-waiting-list-card/xml
+tags:
+- name: laboratory-medicine-waiting-list-card
+  description: Laboratory Medicine Waiting List Card form
 paths:
   /api/laboratory-medicine-waiting-list-card/lab_med_waiting_list_card_appointments:
     get:
       summary: List LabMedWaitingListCardAppointment records
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: listLabMedWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LabMedWaitingListCardAppointment
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: createLabMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LabMedWaitingListCardAppointment by id
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: getLabMedWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LabMedWaitingListCardAppointment
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: updateLabMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LabMedWaitingListCardAppointment
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: replaceLabMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LabMedWaitingListCardAppointment
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: deleteLabMedWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/laboratory-medicine-waiting-list-card/lab_med_waiting_list_card_grade_flags:
     get:
       summary: List LabMedWaitingListCardGradeFlag records
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: listLabMedWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LabMedWaitingListCardGradeFlag
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: createLabMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LabMedWaitingListCardGradeFlag by id
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: getLabMedWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LabMedWaitingListCardGradeFlag
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: updateLabMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LabMedWaitingListCardGradeFlag
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: replaceLabMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LabMedWaitingListCardGradeFlag
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: deleteLabMedWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/laboratory-medicine-waiting-list-card/lab_med_waiting_list_card_grade_rules:
     get:
       summary: List LabMedWaitingListCardGradeRule records
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: listLabMedWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LabMedWaitingListCardGradeRule
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: createLabMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LabMedWaitingListCardGradeRule by id
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: getLabMedWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LabMedWaitingListCardGradeRule
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: updateLabMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LabMedWaitingListCardGradeRule
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: replaceLabMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LabMedWaitingListCardGradeRule
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: deleteLabMedWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/laboratory-medicine-waiting-list-card/lab_med_waiting_list_card_grades:
     get:
       summary: List LabMedWaitingListCardGrade records
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: listLabMedWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LabMedWaitingListCardGrade
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: createLabMedWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LabMedWaitingListCardGrade by id
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: getLabMedWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LabMedWaitingListCardGrade
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: updateLabMedWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LabMedWaitingListCardGrade
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: replaceLabMedWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LabMedWaitingListCardGrade
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: deleteLabMedWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/laboratory-medicine-waiting-list-card/lab_med_waiting_list_cards:
     get:
       summary: List LabMedWaitingListCard records
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: listLabMedWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LabMedWaitingListCard
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: createLabMedWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LabMedWaitingListCard by id
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: getLabMedWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LabMedWaitingListCard
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: updateLabMedWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LabMedWaitingListCard
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: replaceLabMedWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LabMedWaitingListCard
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: deleteLabMedWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - laboratory-medicine-waiting-list-card
   /api/laboratory-medicine-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/laboratory-medicine-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - laboratory-medicine-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

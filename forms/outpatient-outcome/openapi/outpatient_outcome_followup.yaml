@@ -5,10 +5,19 @@ info:
   title: Outpatient Outcome — OutpatientOutcomeFollowup
   version: 1.0.0
   description: "Follow-up plan: disposition, next appointment date, onward referral, and clinician notes."
+x-namespace:
+  form: outpatient-outcome
+  apiPrefix: /api/outpatient-outcome/
+  sqlSchema: outpatient_outcome
+  xmlNamespace: https://formexamples.github.io/outpatient-outcome/xml
+tags:
+  - name: outpatient-outcome
+    description: Outpatient Outcome form
 paths:
   /api/outpatient-outcome/outpatient_outcome_followups:
     get:
       summary: List OutpatientOutcomeFollowup records
+      tags: [outpatient-outcome]
       operationId: listOutpatientOutcomeFollowup
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OutpatientOutcomeFollowup
+      tags: [outpatient-outcome]
       operationId: createOutpatientOutcomeFollowup
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OutpatientOutcomeFollowup by id
+      tags: [outpatient-outcome]
       operationId: getOutpatientOutcomeFollowup
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OutpatientOutcomeFollowup
+      tags: [outpatient-outcome]
       operationId: updateOutpatientOutcomeFollowup
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OutpatientOutcomeFollowup
+      tags: [outpatient-outcome]
       operationId: replaceOutpatientOutcomeFollowup
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OutpatientOutcomeFollowup
+      tags: [outpatient-outcome]
       operationId: deleteOutpatientOutcomeFollowup
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Vaccinations Assessment — AdministrationRecord
   version: 1.0.0
   description: Vaccine administration details including batch, site, and route. One-to-one child of assessment.
+x-namespace:
+  form: vaccinations-assessment
+  apiPrefix: /api/vaccinations-assessment/
+  sqlSchema: vaccinations_assessment
+  xmlNamespace: https://formexamples.github.io/vaccinations-assessment/xml
+tags:
+  - name: vaccinations-assessment
+    description: Vaccinations Assessment form
 paths:
   /api/vaccinations-assessment/administration_records:
     get:
       summary: List AdministrationRecord records
+      tags: [vaccinations-assessment]
       operationId: listAdministrationRecord
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AdministrationRecord
+      tags: [vaccinations-assessment]
       operationId: createAdministrationRecord
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AdministrationRecord by id
+      tags: [vaccinations-assessment]
       operationId: getAdministrationRecord
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AdministrationRecord
+      tags: [vaccinations-assessment]
       operationId: updateAdministrationRecord
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AdministrationRecord
+      tags: [vaccinations-assessment]
       operationId: replaceAdministrationRecord
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AdministrationRecord
+      tags: [vaccinations-assessment]
       operationId: deleteAdministrationRecord
       responses:
         "200":

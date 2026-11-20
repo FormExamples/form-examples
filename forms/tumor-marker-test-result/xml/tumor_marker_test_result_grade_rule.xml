@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tumor_marker_test_result_grade_rule SYSTEM "tumor_marker_test_result_grade_rule.dtd">
-<tumor_marker_test_result_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<tumor_marker_test_result_grade_rule xmlns="https://formexamples.github.io/tumor-marker-test-result/xml">
+<id>d83a5054-40dc-5b32-992d-23128f1f8b13</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<tumor_marker_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</tumor_marker_test_result_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<tumor_marker_test_result_grade_id>14f00670-acdd-5c28-8f4f-da55e90c5edf</tumor_marker_test_result_grade_id>
+<rule_id>2a975800-27bf-5c61-bea3-d2c7af579b81</rule_id>
 <axis>classification</axis>
 <category>General</category>
 <description>Example text.</description>

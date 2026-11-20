@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fired_rule SYSTEM "fired_rule.dtd">
-<fired_rule>
-<id>330e8400-e29b-41d4-a716-44665544000d</id>
+<fired_rule xmlns="https://formexamples.github.io/vaccinations-assessment/xml">
+<id>7de7b106-4bc6-5fd5-ae49-88f6468785af</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>220e8400-e29b-41d4-a716-44665544000c</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>92e3eee5-2f05-5321-91ec-c28f424959fb</grade_id>
+<rule_id>9a62ca32-1ee0-5081-a38f-ea8dfb9d1ae6</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <concern_level>high</concern_level>

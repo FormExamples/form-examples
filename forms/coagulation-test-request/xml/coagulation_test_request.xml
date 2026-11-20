@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE coagulation_test_request SYSTEM "coagulation_test_request.dtd">
-<coagulation_test_request>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<coagulation_test_request xmlns="https://formexamples.github.io/coagulation-test-request/xml">
+<id>21b5feaf-ce51-51b1-afc9-fa22937c973e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>93dee963-40f2-52b6-b4c1-86b0b1d92ef4</patient_id>
+<clinician_id>216219ef-8c0c-52a9-a774-d62374c8db31</clinician_id>
 <status>draft</status>
 <site_name>Example</site_name>
 <setting>outpatient</setting>

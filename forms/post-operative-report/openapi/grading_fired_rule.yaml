@@ -5,10 +5,19 @@ info:
   title: Post Operative Report — GradingFiredRule
   version: 1.0.0
   description: Individual rules that evaluated to true during grading.
+x-namespace:
+  form: post-operative-report
+  apiPrefix: /api/post-operative-report/
+  sqlSchema: post_operative_report
+  xmlNamespace: https://formexamples.github.io/post-operative-report/xml
+tags:
+  - name: post-operative-report
+    description: Post Operative Report form
 paths:
   /api/post-operative-report/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags: [post-operative-report]
       operationId: listGradingFiredRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingFiredRule
+      tags: [post-operative-report]
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags: [post-operative-report]
       operationId: getGradingFiredRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingFiredRule
+      tags: [post-operative-report]
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingFiredRule
+      tags: [post-operative-report]
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingFiredRule
+      tags: [post-operative-report]
       operationId: deleteGradingFiredRule
       responses:
         "200":

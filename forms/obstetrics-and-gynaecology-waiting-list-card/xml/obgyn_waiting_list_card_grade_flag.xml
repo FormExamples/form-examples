@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE obgyn_waiting_list_card_grade_flag SYSTEM "obgyn_waiting_list_card_grade_flag.dtd">
-<obgyn_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<obgyn_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/obstetrics-and-gynaecology-waiting-list-card/xml">
+<id>58c7a619-fc77-54d0-a752-083812e033b2</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<obgyn_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</obgyn_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<obgyn_waiting_list_card_grade_id>90ffd0fe-f6a4-58cf-89a9-0c79e9315f4e</obgyn_waiting_list_card_grade_id>
+<flag_id>50ccd31d-85d2-5206-aba8-498dd6c7c6f9</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

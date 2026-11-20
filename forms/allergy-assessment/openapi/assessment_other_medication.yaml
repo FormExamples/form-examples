@@ -5,10 +5,19 @@ info:
   title: Allergy Assessment — AssessmentOtherMedication
   version: 1.0.0
   description: Other medications the patient is taking, with name, dose, and frequency.
+x-namespace:
+  form: allergy-assessment
+  apiPrefix: /api/allergy-assessment/
+  sqlSchema: allergy_assessment
+  xmlNamespace: https://formexamples.github.io/allergy-assessment/xml
+tags:
+  - name: allergy-assessment
+    description: Allergy Assessment form
 paths:
   /api/allergy-assessment/assessment_other_medications:
     get:
       summary: List AssessmentOtherMedication records
+      tags: [allergy-assessment]
       operationId: listAssessmentOtherMedication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentOtherMedication
+      tags: [allergy-assessment]
       operationId: createAssessmentOtherMedication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentOtherMedication by id
+      tags: [allergy-assessment]
       operationId: getAssessmentOtherMedication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentOtherMedication
+      tags: [allergy-assessment]
       operationId: updateAssessmentOtherMedication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentOtherMedication
+      tags: [allergy-assessment]
       operationId: replaceAssessmentOtherMedication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentOtherMedication
+      tags: [allergy-assessment]
       operationId: deleteAssessmentOtherMedication
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Inpatient Clinical Note — InpatientClinicalNoteJob
   version: 1.0.0
   description: "Outstanding-job rows for an inpatient clinical note: one row per task the entry generates, with owner, priority, due time, and status, so the jobs list can be handed over between shifts."
+x-namespace:
+  form: inpatient-clinical-note
+  apiPrefix: /api/inpatient-clinical-note/
+  sqlSchema: inpatient_clinical_note
+  xmlNamespace: https://formexamples.github.io/inpatient-clinical-note/xml
+tags:
+  - name: inpatient-clinical-note
+    description: Inpatient Clinical Note form
 paths:
   /api/inpatient-clinical-note/inpatient_clinical_note_jobs:
     get:
       summary: List InpatientClinicalNoteJob records
+      tags: [inpatient-clinical-note]
       operationId: listInpatientClinicalNoteJob
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new InpatientClinicalNoteJob
+      tags: [inpatient-clinical-note]
       operationId: createInpatientClinicalNoteJob
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one InpatientClinicalNoteJob by id
+      tags: [inpatient-clinical-note]
       operationId: getInpatientClinicalNoteJob
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing InpatientClinicalNoteJob
+      tags: [inpatient-clinical-note]
       operationId: updateInpatientClinicalNoteJob
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing InpatientClinicalNoteJob
+      tags: [inpatient-clinical-note]
       operationId: replaceInpatientClinicalNoteJob
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a InpatientClinicalNoteJob
+      tags: [inpatient-clinical-note]
       operationId: deleteInpatientClinicalNoteJob
       responses:
         "200":

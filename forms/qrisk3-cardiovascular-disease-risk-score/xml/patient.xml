@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE patient SYSTEM "patient.dtd">
-<patient>
-<id>550e8400-e29b-41d4-a716-446655440000</id>
+<patient xmlns="https://formexamples.github.io/qrisk3-cardiovascular-disease-risk-score/xml">
+<id>62f06e5b-16f9-5acd-b8fd-defa4ee7fbb2</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>

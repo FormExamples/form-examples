@@ -1,4 +1,5 @@
 <!ELEMENT child_safeguarding_referral (id,created_at,updated_at,deleted_at,patient_id,clinician_id,referrer_organisation,referred_at,relationship_to_child,child_age,child_setting,child_reference,child_ethnicity,child_first_language,child_disability,carers,household_members,other_children,professionals_involved,concern_description,concern_onset,child_disclosed,referrer_observations,primary_category,additional_categories,presenting_evidence,immediate_danger,child_whereabouts,who_with_child,alleged_person_in_contact,other_children_at_risk,consent_sought,consent_status,sharing_basis_without_consent,family_aware,unsafe_to_inform_reason,agencies_contacted,strategy_discussion_held,previous_safeguarding_history,requested_action,referrer_declaration,notes)>
+<!ATTLIST child_safeguarding_referral xmlns CDATA #FIXED "https://formexamples.github.io/child-safeguarding-referral/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

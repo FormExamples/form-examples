@@ -1,4 +1,5 @@
 <!ELEMENT ss5_application_grade (id,created_at,updated_at,deleted_at,ss5_application_id,application_class,missing_evidence_count,replacement_limit_reached,graded_at)>
+<!ATTLIST ss5_application_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-states-social-security-card-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

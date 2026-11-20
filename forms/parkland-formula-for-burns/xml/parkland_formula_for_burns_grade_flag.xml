@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE parkland_formula_for_burns_grade_flag SYSTEM "parkland_formula_for_burns_grade_flag.dtd">
-<parkland_formula_for_burns_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<parkland_formula_for_burns_grade_flag xmlns="https://formexamples.github.io/parkland-formula-for-burns/xml">
+<id>d4f31620-dda3-5c71-8e05-8c5ce98f4271</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<parkland_formula_for_burns_grade_id>880e8400-e29b-41d4-a716-446655440003</parkland_formula_for_burns_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<parkland_formula_for_burns_grade_id>2cc0ca9e-65be-5e9d-a024-72574b6aa4c4</parkland_formula_for_burns_grade_id>
+<flag_id>8019e3ca-2ce9-56f7-8e81-8f06f06ad8e0</flag_id>
 <category>major-burn-referral</category>
 <priority>low</priority>
 <description>Example text.</description>

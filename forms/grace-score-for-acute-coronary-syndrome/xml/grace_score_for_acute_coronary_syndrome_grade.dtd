@@ -1,4 +1,5 @@
 <!ELEMENT grace_score_for_acute_coronary_syndrome_grade (id,created_at,updated_at,deleted_at,grace_score_for_acute_coronary_syndrome_id,grace_score,in_hospital_risk_band,six_month_risk_band,overall_band,invasive_strategy,graded_at)>
+<!ATTLIST grace_score_for_acute_coronary_syndrome_grade xmlns CDATA #FIXED "https://formexamples.github.io/grace-score-for-acute-coronary-syndrome/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

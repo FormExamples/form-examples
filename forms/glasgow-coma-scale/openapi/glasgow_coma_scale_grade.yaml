@@ -5,10 +5,19 @@ info:
   title: Glasgow Coma Scale — GlasgowComaScaleGrade
   version: 1.0.0
   description: "Computed Glasgow Coma Scale grading result: resolved component scores (null when NT), summed total (3-15, null when any component is NT), breakdown and total-display strings, severity band, Pupil Reactivity Score, and the secondary GCS-Pupils score."
+x-namespace:
+  form: glasgow-coma-scale
+  apiPrefix: /api/glasgow-coma-scale/
+  sqlSchema: glasgow_coma_scale
+  xmlNamespace: https://formexamples.github.io/glasgow-coma-scale/xml
+tags:
+  - name: glasgow-coma-scale
+    description: Glasgow Coma Scale form
 paths:
   /api/glasgow-coma-scale/glasgow_coma_scale_grades:
     get:
       summary: List GlasgowComaScaleGrade records
+      tags: [glasgow-coma-scale]
       operationId: listGlasgowComaScaleGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GlasgowComaScaleGrade
+      tags: [glasgow-coma-scale]
       operationId: createGlasgowComaScaleGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GlasgowComaScaleGrade by id
+      tags: [glasgow-coma-scale]
       operationId: getGlasgowComaScaleGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GlasgowComaScaleGrade
+      tags: [glasgow-coma-scale]
       operationId: updateGlasgowComaScaleGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GlasgowComaScaleGrade
+      tags: [glasgow-coma-scale]
       operationId: replaceGlasgowComaScaleGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GlasgowComaScaleGrade
+      tags: [glasgow-coma-scale]
       operationId: deleteGlasgowComaScaleGrade
       responses:
         "200":

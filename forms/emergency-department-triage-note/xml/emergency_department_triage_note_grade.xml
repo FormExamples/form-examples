@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE emergency_department_triage_note_grade SYSTEM "emergency_department_triage_note_grade.dtd">
-<emergency_department_triage_note_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<emergency_department_triage_note_grade xmlns="https://formexamples.github.io/emergency-department-triage-note/xml">
+<id>05641b7b-c2de-5478-ac76-62a9d7a4eff8</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<emergency_department_triage_note_id>770e8400-e29b-41d4-a716-446655440002</emergency_department_triage_note_id>
+<emergency_department_triage_note_id>8899c100-2464-518a-82f3-41cd6f1fe41f</emergency_department_triage_note_id>
 <news2_total>1</news2_total>
 <news2_any_parameter_three>yes</news2_any_parameter_three>
 <priority_level>1</priority_level>

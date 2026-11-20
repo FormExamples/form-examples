@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United Kingdom Lasting Power of Attorney for Health
     and Care Decisions form, merged from the per-entity specs in this directory. One RESTful resource
     per routed SQL table, and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
+  apiPrefix: /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/
+  sqlSchema: united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions
+  xmlNamespace: https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml
+tags:
+- name: united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
+  description: United Kingdom Lasting Power of Attorney for Health and Care Decisions form
 paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/attorneys:
     get:
       summary: List Attorney records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listAttorney
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Attorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createAttorney
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Attorney by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getAttorney
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Attorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateAttorney
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Attorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceAttorney
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Attorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteAttorney
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/certificate_providers:
     get:
       summary: List CertificateProvider records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listCertificateProvider
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CertificateProvider
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createCertificateProvider
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CertificateProvider by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getCertificateProvider
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CertificateProvider
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateCertificateProvider
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CertificateProvider
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceCertificateProvider
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CertificateProvider
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteCertificateProvider
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/donors:
     get:
       summary: List Donor records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listDonor
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Donor
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createDonor
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Donor by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getDonor
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Donor
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateDonor
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Donor
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceDonor
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Donor
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteDonor
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_attorneys:
     get:
       summary: List LpaAttorney records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listLpaAttorney
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createLpaAttorney
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaAttorney by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getLpaAttorney
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateLpaAttorney
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceLpaAttorney
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteLpaAttorney
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_decision_rules:
     get:
       summary: List LpaDecisionRule records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listLpaDecisionRule
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaDecisionRule
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createLpaDecisionRule
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaDecisionRule by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getLpaDecisionRule
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaDecisionRule
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateLpaDecisionRule
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaDecisionRule
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceLpaDecisionRule
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaDecisionRule
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteLpaDecisionRule
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_instructions:
     get:
       summary: List LpaInstruction records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listLpaInstruction
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaInstruction
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createLpaInstruction
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaInstruction by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getLpaInstruction
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaInstruction
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateLpaInstruction
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaInstruction
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceLpaInstruction
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaInstruction
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteLpaInstruction
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_lst_choices:
     get:
       summary: List LpaLstChoice records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listLpaLstChoice
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaLstChoice
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createLpaLstChoice
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaLstChoice by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getLpaLstChoice
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaLstChoice
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateLpaLstChoice
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaLstChoice
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceLpaLstChoice
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaLstChoice
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteLpaLstChoice
       responses:
         '200':
@@ -1733,6 +1825,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_person_to_notifies:
     get:
       summary: List LpaPersonToNotify records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listLpaPersonToNotify
       parameters:
       - name: limit
@@ -1785,6 +1879,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaPersonToNotify
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createLpaPersonToNotify
       requestBody:
         required: true
@@ -1838,6 +1934,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaPersonToNotify by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getLpaPersonToNotify
       responses:
         '200':
@@ -1865,6 +1963,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaPersonToNotify
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateLpaPersonToNotify
       requestBody:
         required: true
@@ -1910,6 +2010,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaPersonToNotify
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceLpaPersonToNotify
       requestBody:
         required: true
@@ -1955,6 +2057,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaPersonToNotify
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteLpaPersonToNotify
       responses:
         '200':
@@ -1979,6 +2083,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_preferences:
     get:
       summary: List LpaPreference records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listLpaPreference
       parameters:
       - name: limit
@@ -2031,6 +2137,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaPreference
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createLpaPreference
       requestBody:
         required: true
@@ -2084,6 +2192,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaPreference by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getLpaPreference
       responses:
         '200':
@@ -2111,6 +2221,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaPreference
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateLpaPreference
       requestBody:
         required: true
@@ -2156,6 +2268,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaPreference
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceLpaPreference
       requestBody:
         required: true
@@ -2201,6 +2315,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaPreference
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteLpaPreference
       responses:
         '200':
@@ -2225,6 +2341,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_registration_applications:
     get:
       summary: List LpaRegistrationApplication records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listLpaRegistrationApplication
       parameters:
       - name: limit
@@ -2277,6 +2395,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaRegistrationApplication
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createLpaRegistrationApplication
       requestBody:
         required: true
@@ -2330,6 +2450,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaRegistrationApplication by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getLpaRegistrationApplication
       responses:
         '200':
@@ -2357,6 +2479,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaRegistrationApplication
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateLpaRegistrationApplication
       requestBody:
         required: true
@@ -2402,6 +2526,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaRegistrationApplication
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceLpaRegistrationApplication
       requestBody:
         required: true
@@ -2447,6 +2573,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaRegistrationApplication
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteLpaRegistrationApplication
       responses:
         '200':
@@ -2471,6 +2599,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_replacement_attorneys:
     get:
       summary: List LpaReplacementAttorney records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listLpaReplacementAttorney
       parameters:
       - name: limit
@@ -2523,6 +2653,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaReplacementAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createLpaReplacementAttorney
       requestBody:
         required: true
@@ -2576,6 +2708,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaReplacementAttorney by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getLpaReplacementAttorney
       responses:
         '200':
@@ -2603,6 +2737,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaReplacementAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateLpaReplacementAttorney
       requestBody:
         required: true
@@ -2648,6 +2784,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaReplacementAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceLpaReplacementAttorney
       requestBody:
         required: true
@@ -2693,6 +2831,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaReplacementAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteLpaReplacementAttorney
       responses:
         '200':
@@ -2717,6 +2857,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_signatures:
     get:
       summary: List LpaSignature records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listLpaSignature
       parameters:
       - name: limit
@@ -2769,6 +2911,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaSignature
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createLpaSignature
       requestBody:
         required: true
@@ -2822,6 +2966,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaSignature by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getLpaSignature
       responses:
         '200':
@@ -2849,6 +2995,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaSignature
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateLpaSignature
       requestBody:
         required: true
@@ -2894,6 +3042,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaSignature
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceLpaSignature
       requestBody:
         required: true
@@ -2939,6 +3089,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaSignature
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteLpaSignature
       responses:
         '200':
@@ -2963,6 +3115,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_validities:
     get:
       summary: List LpaValidity records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listLpaValidity
       parameters:
       - name: limit
@@ -3015,6 +3169,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaValidity
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createLpaValidity
       requestBody:
         required: true
@@ -3068,6 +3224,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaValidity by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getLpaValidity
       responses:
         '200':
@@ -3095,6 +3253,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaValidity
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateLpaValidity
       requestBody:
         required: true
@@ -3140,6 +3300,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaValidity
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceLpaValidity
       requestBody:
         required: true
@@ -3185,6 +3347,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaValidity
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteLpaValidity
       responses:
         '200':
@@ -3209,6 +3373,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_validity_additional_flags:
     get:
       summary: List LpaValidityAdditionalFlag records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listLpaValidityAdditionalFlag
       parameters:
       - name: limit
@@ -3261,6 +3427,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaValidityAdditionalFlag
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createLpaValidityAdditionalFlag
       requestBody:
         required: true
@@ -3314,6 +3482,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaValidityAdditionalFlag by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getLpaValidityAdditionalFlag
       responses:
         '200':
@@ -3341,6 +3511,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaValidityAdditionalFlag
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateLpaValidityAdditionalFlag
       requestBody:
         required: true
@@ -3386,6 +3558,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaValidityAdditionalFlag
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceLpaValidityAdditionalFlag
       requestBody:
         required: true
@@ -3431,6 +3605,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaValidityAdditionalFlag
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteLpaValidityAdditionalFlag
       responses:
         '200':
@@ -3455,6 +3631,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_validity_fired_rules:
     get:
       summary: List LpaValidityFiredRule records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listLpaValidityFiredRule
       parameters:
       - name: limit
@@ -3507,6 +3685,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaValidityFiredRule
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createLpaValidityFiredRule
       requestBody:
         required: true
@@ -3560,6 +3740,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaValidityFiredRule by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getLpaValidityFiredRule
       responses:
         '200':
@@ -3587,6 +3769,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaValidityFiredRule
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateLpaValidityFiredRule
       requestBody:
         required: true
@@ -3632,6 +3816,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaValidityFiredRule
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceLpaValidityFiredRule
       requestBody:
         required: true
@@ -3677,6 +3863,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaValidityFiredRule
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteLpaValidityFiredRule
       responses:
         '200':
@@ -3701,6 +3889,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpas:
     get:
       summary: List Lpa records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listLpa
       parameters:
       - name: limit
@@ -3753,6 +3943,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Lpa
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createLpa
       requestBody:
         required: true
@@ -3806,6 +3998,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Lpa by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getLpa
       responses:
         '200':
@@ -3833,6 +4027,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Lpa
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateLpa
       requestBody:
         required: true
@@ -3878,6 +4074,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Lpa
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceLpa
       requestBody:
         required: true
@@ -3923,6 +4121,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Lpa
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteLpa
       responses:
         '200':
@@ -3955,9 +4155,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/person_to_notifies:
     get:
       summary: List PersonToNotify records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listPersonToNotify
       parameters:
       - name: limit
@@ -4010,6 +4214,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PersonToNotify
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createPersonToNotify
       requestBody:
         required: true
@@ -4063,6 +4269,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PersonToNotify by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getPersonToNotify
       responses:
         '200':
@@ -4090,6 +4298,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PersonToNotify
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updatePersonToNotify
       requestBody:
         required: true
@@ -4135,6 +4345,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PersonToNotify
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replacePersonToNotify
       requestBody:
         required: true
@@ -4180,6 +4392,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PersonToNotify
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deletePersonToNotify
       responses:
         '200':
@@ -4204,6 +4418,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/replacement_attorneys:
     get:
       summary: List ReplacementAttorney records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: listReplacementAttorney
       parameters:
       - name: limit
@@ -4256,6 +4472,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ReplacementAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: createReplacementAttorney
       requestBody:
         required: true
@@ -4309,6 +4527,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ReplacementAttorney by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: getReplacementAttorney
       responses:
         '200':
@@ -4336,6 +4556,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ReplacementAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: updateReplacementAttorney
       requestBody:
         required: true
@@ -4381,6 +4603,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ReplacementAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: replaceReplacementAttorney
       requestBody:
         required: true
@@ -4426,6 +4650,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ReplacementAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
       operationId: deleteReplacementAttorney
       responses:
         '200':

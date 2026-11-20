@@ -1,4 +1,5 @@
 <!ELEMENT patient_medication (id,created_at,updated_at,deleted_at,patient_id,medication_id,dose,frequency,route,started_on,prescribed_by,adherence,notes)>
+<!ATTLIST patient_medication xmlns CDATA #FIXED "https://formexamples.github.io/dietic-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

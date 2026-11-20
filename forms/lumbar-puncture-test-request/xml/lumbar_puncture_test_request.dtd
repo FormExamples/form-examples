@@ -1,4 +1,5 @@
 <!ELEMENT lumbar_puncture_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,procedure_intent,primary_indication,clinical_question,relevant_history,suspected_raised_intracranial_pressure,focal_neurological_signs,reduced_consciousness,ct_head_status,taking_anticoagulant,anticoagulant_agent,taking_antiplatelet,antiplatelet_agent,inr,platelet_count,bleeding_disorder,local_skin_infection,opening_pressure_required,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST lumbar_puncture_test_request xmlns CDATA #FIXED "https://formexamples.github.io/lumbar-puncture-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

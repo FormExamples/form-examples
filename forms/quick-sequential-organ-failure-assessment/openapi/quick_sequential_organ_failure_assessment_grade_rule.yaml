@@ -5,10 +5,19 @@ info:
   title: Quick Sequential Organ Failure Assessment — QuickSequentialOrganFailureAssessmentGradeRule
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during qSOFA computation: criterion, point contributed, category, and description."
+x-namespace:
+  form: quick-sequential-organ-failure-assessment
+  apiPrefix: /api/quick-sequential-organ-failure-assessment/
+  sqlSchema: quick_sequential_organ_failure_assessment
+  xmlNamespace: https://formexamples.github.io/quick-sequential-organ-failure-assessment/xml
+tags:
+  - name: quick-sequential-organ-failure-assessment
+    description: Quick Sequential Organ Failure Assessment form
 paths:
   /api/quick-sequential-organ-failure-assessment/quick_sequential_organ_failure_assessment_grade_rules:
     get:
       summary: List QuickSequentialOrganFailureAssessmentGradeRule records
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: listQuickSequentialOrganFailureAssessmentGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new QuickSequentialOrganFailureAssessmentGradeRule
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: createQuickSequentialOrganFailureAssessmentGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one QuickSequentialOrganFailureAssessmentGradeRule by id
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: getQuickSequentialOrganFailureAssessmentGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing QuickSequentialOrganFailureAssessmentGradeRule
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: updateQuickSequentialOrganFailureAssessmentGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing QuickSequentialOrganFailureAssessmentGradeRule
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: replaceQuickSequentialOrganFailureAssessmentGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a QuickSequentialOrganFailureAssessmentGradeRule
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: deleteQuickSequentialOrganFailureAssessmentGradeRule
       responses:
         "200":

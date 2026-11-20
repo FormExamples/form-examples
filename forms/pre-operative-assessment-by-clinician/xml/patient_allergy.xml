@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE patient_allergy SYSTEM "patient_allergy.dtd">
-<patient_allergy>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<patient_allergy xmlns="https://formexamples.github.io/pre-operative-assessment-by-clinician/xml">
+<id>2bfb40da-1d7b-57da-8975-12d2d75333e4</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<allergy_id>990e8400-e29b-41d4-a716-446655440004</allergy_id>
+<patient_id>f8e7c3aa-5026-5979-81c6-b5dc7e2a68b7</patient_id>
+<allergy_id>d8986dd5-43b9-5e7c-9f8a-33729e184223</allergy_id>
 </patient_allergy>

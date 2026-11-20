@@ -5,10 +5,19 @@ info:
   title: Patient Intake — AssessmentAllergies
   version: 1.0.0
   description: "Allergies section header: drug, food, environmental, and other allergies. One-to-one child of assessment."
+x-namespace:
+  form: patient-intake
+  apiPrefix: /api/patient-intake/
+  sqlSchema: patient_intake
+  xmlNamespace: https://formexamples.github.io/patient-intake/xml
+tags:
+  - name: patient-intake
+    description: Patient Intake form
 paths:
   /api/patient-intake/assessment_allergies:
     get:
       summary: List AssessmentAllergies records
+      tags: [patient-intake]
       operationId: listAssessmentAllergies
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentAllergies
+      tags: [patient-intake]
       operationId: createAssessmentAllergies
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentAllergies by id
+      tags: [patient-intake]
       operationId: getAssessmentAllergies
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentAllergies
+      tags: [patient-intake]
       operationId: updateAssessmentAllergies
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentAllergies
+      tags: [patient-intake]
       operationId: replaceAssessmentAllergies
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentAllergies
+      tags: [patient-intake]
       operationId: deleteAssessmentAllergies
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Knee Replacement Surgery Evaluation — KneeReplacementSurgeryEvaluation
   version: 1.0.0
   description: "Knee replacement surgery evaluation: the payload of the 15-step single-page wizard, covering presenting history, the Oxford Knee Score, physical examination, diagnostic imaging, conservative-treatment audit, general health screen, pre-operative bloods checklist, shared decision-making, and the management plan."
+x-namespace:
+  form: knee-replacement-surgery-evaluation
+  apiPrefix: /api/knee-replacement-surgery-evaluation/
+  sqlSchema: knee_replacement_surgery_evaluation
+  xmlNamespace: https://formexamples.github.io/knee-replacement-surgery-evaluation/xml
+tags:
+  - name: knee-replacement-surgery-evaluation
+    description: Knee Replacement Surgery Evaluation form
 paths:
   /api/knee-replacement-surgery-evaluation/knee_replacement_surgery_evaluations:
     get:
       summary: List KneeReplacementSurgeryEvaluation records
+      tags: [knee-replacement-surgery-evaluation]
       operationId: listKneeReplacementSurgeryEvaluation
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new KneeReplacementSurgeryEvaluation
+      tags: [knee-replacement-surgery-evaluation]
       operationId: createKneeReplacementSurgeryEvaluation
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one KneeReplacementSurgeryEvaluation by id
+      tags: [knee-replacement-surgery-evaluation]
       operationId: getKneeReplacementSurgeryEvaluation
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing KneeReplacementSurgeryEvaluation
+      tags: [knee-replacement-surgery-evaluation]
       operationId: updateKneeReplacementSurgeryEvaluation
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing KneeReplacementSurgeryEvaluation
+      tags: [knee-replacement-surgery-evaluation]
       operationId: replaceKneeReplacementSurgeryEvaluation
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a KneeReplacementSurgeryEvaluation
+      tags: [knee-replacement-surgery-evaluation]
       operationId: deleteKneeReplacementSurgeryEvaluation
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT united_states_birth_certificate_application_grade (id,created_at,updated_at,deleted_at,united_states_birth_certificate_application_id,application_class,state_rule_applied,expected_fee_usd,graded_at)>
+<!ATTLIST united_states_birth_certificate_application_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-states-birth-certificate-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

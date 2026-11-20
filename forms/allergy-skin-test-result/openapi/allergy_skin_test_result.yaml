@@ -5,10 +5,19 @@ info:
   title: Allergy Skin Test Result — AllergySkinTestResult
   version: 1.0.0
   description: Allergy skin test result (report). Captures the performed test type, clinical history, the pre-analytic validity controls (antihistamine washout, positive histamine control), the allergens tested and their measured weal sizes / specific-IgE results, the sensitised allergens and structured reaction summary, the clinical interpretation and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: allergy-skin-test-result
+  apiPrefix: /api/allergy-skin-test-result/
+  sqlSchema: allergy_skin_test_result
+  xmlNamespace: https://formexamples.github.io/allergy-skin-test-result/xml
+tags:
+  - name: allergy-skin-test-result
+    description: Allergy Skin Test Result form
 paths:
   /api/allergy-skin-test-result/allergy_skin_test_results:
     get:
       summary: List AllergySkinTestResult records
+      tags: [allergy-skin-test-result]
       operationId: listAllergySkinTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AllergySkinTestResult
+      tags: [allergy-skin-test-result]
       operationId: createAllergySkinTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AllergySkinTestResult by id
+      tags: [allergy-skin-test-result]
       operationId: getAllergySkinTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AllergySkinTestResult
+      tags: [allergy-skin-test-result]
       operationId: updateAllergySkinTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AllergySkinTestResult
+      tags: [allergy-skin-test-result]
       operationId: replaceAllergySkinTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AllergySkinTestResult
+      tags: [allergy-skin-test-result]
       operationId: deleteAllergySkinTestResult
       responses:
         "200":

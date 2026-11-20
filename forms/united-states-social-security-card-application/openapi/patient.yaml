@@ -5,10 +5,19 @@ info:
   title: United States Social Security Card Application — Patient
   version: 1.0.0
   description: Applicant demographic information for the person who needs a Social Security card. The Social Security number is never stored.
+x-namespace:
+  form: united-states-social-security-card-application
+  apiPrefix: /api/united-states-social-security-card-application/
+  sqlSchema: united_states_social_security_card_application
+  xmlNamespace: https://formexamples.github.io/united-states-social-security-card-application/xml
+tags:
+  - name: united-states-social-security-card-application
+    description: United States Social Security Card Application form
 paths:
   /api/united-states-social-security-card-application/patients:
     get:
       summary: List Patient records
+      tags: [united-states-social-security-card-application]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [united-states-social-security-card-application]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [united-states-social-security-card-application]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [united-states-social-security-card-application]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [united-states-social-security-card-application]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [united-states-social-security-card-application]
       operationId: deletePatient
       responses:
         "200":

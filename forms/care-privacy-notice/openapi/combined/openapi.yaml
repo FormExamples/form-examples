@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Care Privacy Notice form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: care-privacy-notice
+  apiPrefix: /api/care-privacy-notice/
+  sqlSchema: care_privacy_notice
+  xmlNamespace: https://formexamples.github.io/care-privacy-notice/xml
+tags:
+- name: care-privacy-notice
+  description: Care Privacy Notice form
 paths:
   /api/care-privacy-notice/assessments:
     get:
       summary: List Assessment records
+      tags:
+      - care-privacy-notice
       operationId: listAssessment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessment
+      tags:
+      - care-privacy-notice
       operationId: createAssessment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags:
+      - care-privacy-notice
       operationId: getAssessment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessment
+      tags:
+      - care-privacy-notice
       operationId: updateAssessment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Assessment
+      tags:
+      - care-privacy-notice
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Assessment
+      tags:
+      - care-privacy-notice
       operationId: deleteAssessment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/care-privacy-notice/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - care-privacy-notice
       operationId: listClinician
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - care-privacy-notice
       operationId: createClinician
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - care-privacy-notice
       operationId: getClinician
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - care-privacy-notice
       operationId: updateClinician
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - care-privacy-notice
       operationId: replaceClinician
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - care-privacy-notice
       operationId: deleteClinician
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/care-privacy-notice/grades:
     get:
       summary: List Grade records
+      tags:
+      - care-privacy-notice
       operationId: listGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Grade
+      tags:
+      - care-privacy-notice
       operationId: createGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Grade by id
+      tags:
+      - care-privacy-notice
       operationId: getGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Grade
+      tags:
+      - care-privacy-notice
       operationId: updateGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Grade
+      tags:
+      - care-privacy-notice
       operationId: replaceGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Grade
+      tags:
+      - care-privacy-notice
       operationId: deleteGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/care-privacy-notice/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags:
+      - care-privacy-notice
       operationId: listGradingFiredRule
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingFiredRule
+      tags:
+      - care-privacy-notice
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags:
+      - care-privacy-notice
       operationId: getGradingFiredRule
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingFiredRule
+      tags:
+      - care-privacy-notice
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingFiredRule
+      tags:
+      - care-privacy-notice
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingFiredRule
+      tags:
+      - care-privacy-notice
       operationId: deleteGradingFiredRule
       responses:
         '200':
@@ -1003,9 +1059,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - care-privacy-notice
   /api/care-privacy-notice/patients:
     get:
       summary: List Patient records
+      tags:
+      - care-privacy-notice
       operationId: listPatient
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - care-privacy-notice
       operationId: createPatient
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - care-privacy-notice
       operationId: getPatient
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - care-privacy-notice
       operationId: updatePatient
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - care-privacy-notice
       operationId: replacePatient
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - care-privacy-notice
       operationId: deletePatient
       responses:
         '200':

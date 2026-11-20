@@ -1,4 +1,5 @@
 <!ELEMENT united_kingdom_birth_registration_grade (id,created_at,updated_at,deleted_at,united_kingdom_birth_registration_id,readiness_class,days_since_birth,late_registration,missing_item_count,graded_at)>
+<!ATTLIST united_kingdom_birth_registration_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-birth-registration/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

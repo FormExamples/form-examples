@@ -5,10 +5,19 @@ info:
   title: Nursing Care Plan — NursingCarePlanGoal
   version: 1.0.0
   description: SMART goals for a nursing problem; cascades from the parent problem.
+x-namespace:
+  form: nursing-care-plan
+  apiPrefix: /api/nursing-care-plan/
+  sqlSchema: nursing_care_plan
+  xmlNamespace: https://formexamples.github.io/nursing-care-plan/xml
+tags:
+  - name: nursing-care-plan
+    description: Nursing Care Plan form
 paths:
   /api/nursing-care-plan/nursing_care_plan_goals:
     get:
       summary: List NursingCarePlanGoal records
+      tags: [nursing-care-plan]
       operationId: listNursingCarePlanGoal
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NursingCarePlanGoal
+      tags: [nursing-care-plan]
       operationId: createNursingCarePlanGoal
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NursingCarePlanGoal by id
+      tags: [nursing-care-plan]
       operationId: getNursingCarePlanGoal
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NursingCarePlanGoal
+      tags: [nursing-care-plan]
       operationId: updateNursingCarePlanGoal
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NursingCarePlanGoal
+      tags: [nursing-care-plan]
       operationId: replaceNursingCarePlanGoal
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NursingCarePlanGoal
+      tags: [nursing-care-plan]
       operationId: deleteNursingCarePlanGoal
       responses:
         "200":

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000065",
+    "id": "eb594764-e0e7-5d7a-a8a0-cd64782865ac",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000077",
+    "id": "4ceac738-7684-5638-8393-f50b47d24f19",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "bronchoscopyTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-000000000085",
+    "id": "b07237da-0c89-5a5a-9927-9f81a571c106",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000089",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000008a",
+    "patientId": "1017cb63-65fe-579c-a79b-6b122d99bff5",
+    "clinicianId": "0b3c3ebe-82d5-58d6-a2ea-0e15066e6818",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -70,11 +70,11 @@
     "notes": ""
   },
   "bronchoscopyTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a5",
+    "id": "bb2f071b-cb6f-5479-810f-ae9a6f7be9fd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "bronchoscopyTestRequestId": "550e8400-e29b-41d4-a716-0000000000a9",
+    "bronchoscopyTestRequestId": "fe70b371-ec20-502f-96eb-0307b916f769",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "triageTier": "routine",
@@ -89,22 +89,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "bronchoscopyTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b6",
+    "id": "34268130-1d41-5e48-80af-33fe9afc9670",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "bronchoscopyTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000ba",
+    "bronchoscopyTestRequestGradeId": "58babef8-4123-5e7f-bb3a-7e4585810b55",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "bronchoscopyTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bf",
+    "id": "cbf35b0a-5ab0-5560-8a32-c46ca7b8cc2b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "bronchoscopyTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000c3",
+    "bronchoscopyTestRequestGradeId": "8eee175c-dd4c-5095-a82f-5610dbbd3bc4",
     "flagId": "",
     "category": "suspected-cancer-2ww",
     "priority": "low",

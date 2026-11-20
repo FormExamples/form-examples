@@ -5,10 +5,19 @@ info:
   title: Recognition Of Stroke In The Emergency Room — RecognitionOfStrokeInTheEmergencyRoomGrade
   version: 1.0.0
   description: "Computed ROSIER grading result: signed total (-2..+5), derived band against the strict > 0 threshold, and whether the hypoglycaemia mimic was excluded before scoring."
+x-namespace:
+  form: recognition-of-stroke-in-the-emergency-room
+  apiPrefix: /api/recognition-of-stroke-in-the-emergency-room/
+  sqlSchema: recognition_of_stroke_in_the_emergency_room
+  xmlNamespace: https://formexamples.github.io/recognition-of-stroke-in-the-emergency-room/xml
+tags:
+  - name: recognition-of-stroke-in-the-emergency-room
+    description: Recognition Of Stroke In The Emergency Room form
 paths:
   /api/recognition-of-stroke-in-the-emergency-room/recognition_of_stroke_in_the_emergency_room_grades:
     get:
       summary: List RecognitionOfStrokeInTheEmergencyRoomGrade records
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: listRecognitionOfStrokeInTheEmergencyRoomGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RecognitionOfStrokeInTheEmergencyRoomGrade
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: createRecognitionOfStrokeInTheEmergencyRoomGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RecognitionOfStrokeInTheEmergencyRoomGrade by id
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: getRecognitionOfStrokeInTheEmergencyRoomGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RecognitionOfStrokeInTheEmergencyRoomGrade
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: updateRecognitionOfStrokeInTheEmergencyRoomGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RecognitionOfStrokeInTheEmergencyRoomGrade
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: replaceRecognitionOfStrokeInTheEmergencyRoomGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RecognitionOfStrokeInTheEmergencyRoomGrade
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: deleteRecognitionOfStrokeInTheEmergencyRoomGrade
       responses:
         "200":

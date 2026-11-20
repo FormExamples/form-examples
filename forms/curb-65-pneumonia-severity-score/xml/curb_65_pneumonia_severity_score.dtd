@@ -1,4 +1,5 @@
 <!ELEMENT curb_65_pneumonia_severity_score (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,patient_identifier,sex,age_years,confusion_present,amt_score,urea_measured,urea_mmol_l,respiratory_rate,systolic_bp,diastolic_bp,oxygen_saturation,temperature_c,significant_comorbidity,multilobar_changes,clinician_override_band,override_reason,clinical_note)>
+<!ATTLIST curb_65_pneumonia_severity_score xmlns CDATA #FIXED "https://formexamples.github.io/curb-65-pneumonia-severity-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

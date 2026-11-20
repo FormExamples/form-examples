@@ -5,10 +5,19 @@ info:
   title: Prescription Request — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: prescription-request
+  apiPrefix: /api/prescription-request/
+  sqlSchema: prescription_request
+  xmlNamespace: https://formexamples.github.io/prescription-request/xml
+tags:
+  - name: prescription-request
+    description: Prescription Request form
 paths:
   /api/prescription-request/patients:
     get:
       summary: List Patient records
+      tags: [prescription-request]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [prescription-request]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [prescription-request]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [prescription-request]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [prescription-request]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [prescription-request]
       operationId: deletePatient
       responses:
         "200":

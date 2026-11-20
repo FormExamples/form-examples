@@ -1,4 +1,5 @@
 <!ELEMENT expense_reimbursement_item (id,created_at,updated_at,deleted_at,expense_reimbursement_id,line_number,expense_date,category,description,merchant,currency_as_iso_4217,amount,vat_amount,exchange_rate_to_claim_currency,payment_method,mileage_distance_miles,receipt_attached,receipt_reference,receipt_missing_reason,prior_approval_obtained)>
+<!ATTLIST expense_reimbursement_item xmlns CDATA #FIXED "https://formexamples.github.io/expense-reimbursement/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

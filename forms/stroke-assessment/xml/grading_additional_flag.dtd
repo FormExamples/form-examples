@@ -1,4 +1,5 @@
 <!ELEMENT grading_additional_flag (id,created_at,updated_at,deleted_at,grade_id,flag_id,category,message,priority)>
+<!ATTLIST grading_additional_flag xmlns CDATA #FIXED "https://formexamples.github.io/stroke-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

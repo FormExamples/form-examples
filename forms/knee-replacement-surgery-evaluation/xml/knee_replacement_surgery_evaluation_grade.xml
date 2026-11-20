@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE knee_replacement_surgery_evaluation_grade SYSTEM "knee_replacement_surgery_evaluation_grade.dtd">
-<knee_replacement_surgery_evaluation_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<knee_replacement_surgery_evaluation_grade xmlns="https://formexamples.github.io/knee-replacement-surgery-evaluation/xml">
+<id>46ef5e23-bdb1-561a-b622-35c0025f0129</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<knee_replacement_surgery_evaluation_id>770e8400-e29b-41d4-a716-446655440002</knee_replacement_surgery_evaluation_id>
+<knee_replacement_surgery_evaluation_id>d2a01b7b-81ab-559a-af4e-78e1280e5d3c</knee_replacement_surgery_evaluation_id>
 <oks_total>1</oks_total>
 <computed_oks_category>severe</computed_oks_category>
 <final_oks_category>severe</final_oks_category>

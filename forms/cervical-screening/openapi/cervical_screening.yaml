@@ -5,10 +5,19 @@ info:
   title: Cervical Screening — CervicalScreening
   version: 1.0.0
   description: "Main cervical-screening record for one HPV-primary screening encounter: encounter context, patient identification, eligibility, consent, symptoms, sample adequacy, the primary hrHPV result, and reflex cytology. Result classification, fired rules, and flags live in child tables."
+x-namespace:
+  form: cervical-screening
+  apiPrefix: /api/cervical-screening/
+  sqlSchema: cervical_screening
+  xmlNamespace: https://formexamples.github.io/cervical-screening/xml
+tags:
+  - name: cervical-screening
+    description: Cervical Screening form
 paths:
   /api/cervical-screening/cervical_screenings:
     get:
       summary: List CervicalScreening records
+      tags: [cervical-screening]
       operationId: listCervicalScreening
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CervicalScreening
+      tags: [cervical-screening]
       operationId: createCervicalScreening
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CervicalScreening by id
+      tags: [cervical-screening]
       operationId: getCervicalScreening
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CervicalScreening
+      tags: [cervical-screening]
       operationId: updateCervicalScreening
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CervicalScreening
+      tags: [cervical-screening]
       operationId: replaceCervicalScreening
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CervicalScreening
+      tags: [cervical-screening]
       operationId: deleteCervicalScreening
       responses:
         "200":

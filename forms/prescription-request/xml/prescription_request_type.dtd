@@ -1,4 +1,5 @@
 <!ELEMENT prescription_request_type (id,created_at,updated_at,deleted_at,prescription_request_id,is_new_prescription,is_emergency,additional_notes)>
+<!ATTLIST prescription_request_type xmlns CDATA #FIXED "https://formexamples.github.io/prescription-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

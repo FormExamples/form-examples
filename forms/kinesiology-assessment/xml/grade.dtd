@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,total_fms_score,risk_category,asymmetry_count,pain_count,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/kinesiology-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

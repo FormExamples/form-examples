@@ -1,4 +1,5 @@
 <!ELEMENT nursing_care_plan (id,created_at,updated_at,deleted_at,patient_id,clinician_id,nurse_name,nurse_role,nmc_number,authored_at,care_setting,plan_type,model_used,patient_identifier,patient_name,date_of_birth,sex,ward_location,handover_note,review_date,falls_risk_done,falls_risk_level,falls_risk_assessed_on,falls_risk_actioned,pressure_ulcer_risk_done,pressure_ulcer_risk_level,pressure_ulcer_risk_assessed_on,pressure_ulcer_risk_actioned,vte_risk_done,vte_risk_level,vte_risk_assessed_on,vte_risk_actioned,nutrition_risk_done,nutrition_risk_level,nutrition_risk_assessed_on,nutrition_risk_actioned)>
+<!ATTLIST nursing_care_plan xmlns CDATA #FIXED "https://formexamples.github.io/nursing-care-plan/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

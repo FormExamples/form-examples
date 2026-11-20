@@ -5,10 +5,19 @@ info:
   title: Pregnancy Ultrasound Test Request — PregnancyUltrasoundTestRequest
   version: 1.0.0
   description: Obstetric ultrasound scan request (referral). Captures pregnancy dating, obstetric history, the requested examination, the clinical indication and question, symptoms / red flags, risk factors, and triage urgency.
+x-namespace:
+  form: pregnancy-ultrasound-test-request
+  apiPrefix: /api/pregnancy-ultrasound-test-request/
+  sqlSchema: pregnancy_ultrasound_test_request
+  xmlNamespace: https://formexamples.github.io/pregnancy-ultrasound-test-request/xml
+tags:
+  - name: pregnancy-ultrasound-test-request
+    description: Pregnancy Ultrasound Test Request form
 paths:
   /api/pregnancy-ultrasound-test-request/pregnancy_ultrasound_test_requests:
     get:
       summary: List PregnancyUltrasoundTestRequest records
+      tags: [pregnancy-ultrasound-test-request]
       operationId: listPregnancyUltrasoundTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PregnancyUltrasoundTestRequest
+      tags: [pregnancy-ultrasound-test-request]
       operationId: createPregnancyUltrasoundTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PregnancyUltrasoundTestRequest by id
+      tags: [pregnancy-ultrasound-test-request]
       operationId: getPregnancyUltrasoundTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PregnancyUltrasoundTestRequest
+      tags: [pregnancy-ultrasound-test-request]
       operationId: updatePregnancyUltrasoundTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PregnancyUltrasoundTestRequest
+      tags: [pregnancy-ultrasound-test-request]
       operationId: replacePregnancyUltrasoundTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PregnancyUltrasoundTestRequest
+      tags: [pregnancy-ultrasound-test-request]
       operationId: deletePregnancyUltrasoundTestRequest
       responses:
         "200":

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Ward Round Note form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: ward-round-note
+  apiPrefix: /api/ward-round-note/
+  sqlSchema: ward_round_note
+  xmlNamespace: https://formexamples.github.io/ward-round-note/xml
+tags:
+- name: ward-round-note
+  description: Ward Round Note form
 paths:
   /api/ward-round-note/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - ward-round-note
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - ward-round-note
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - ward-round-note
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - ward-round-note
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - ward-round-note
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - ward-round-note
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - ward-round-note
   /api/ward-round-note/patients:
     get:
       summary: List Patient records
+      tags:
+      - ward-round-note
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - ward-round-note
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - ward-round-note
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - ward-round-note
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - ward-round-note
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - ward-round-note
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/ward-round-note/ward_round_note_grade_flags:
     get:
       summary: List WardRoundNoteGradeFlag records
+      tags:
+      - ward-round-note
       operationId: listWardRoundNoteGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WardRoundNoteGradeFlag
+      tags:
+      - ward-round-note
       operationId: createWardRoundNoteGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WardRoundNoteGradeFlag by id
+      tags:
+      - ward-round-note
       operationId: getWardRoundNoteGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WardRoundNoteGradeFlag
+      tags:
+      - ward-round-note
       operationId: updateWardRoundNoteGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WardRoundNoteGradeFlag
+      tags:
+      - ward-round-note
       operationId: replaceWardRoundNoteGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WardRoundNoteGradeFlag
+      tags:
+      - ward-round-note
       operationId: deleteWardRoundNoteGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/ward-round-note/ward_round_note_grade_rules:
     get:
       summary: List WardRoundNoteGradeRule records
+      tags:
+      - ward-round-note
       operationId: listWardRoundNoteGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WardRoundNoteGradeRule
+      tags:
+      - ward-round-note
       operationId: createWardRoundNoteGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WardRoundNoteGradeRule by id
+      tags:
+      - ward-round-note
       operationId: getWardRoundNoteGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WardRoundNoteGradeRule
+      tags:
+      - ward-round-note
       operationId: updateWardRoundNoteGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WardRoundNoteGradeRule
+      tags:
+      - ward-round-note
       operationId: replaceWardRoundNoteGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WardRoundNoteGradeRule
+      tags:
+      - ward-round-note
       operationId: deleteWardRoundNoteGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/ward-round-note/ward_round_note_grades:
     get:
       summary: List WardRoundNoteGrade records
+      tags:
+      - ward-round-note
       operationId: listWardRoundNoteGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WardRoundNoteGrade
+      tags:
+      - ward-round-note
       operationId: createWardRoundNoteGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WardRoundNoteGrade by id
+      tags:
+      - ward-round-note
       operationId: getWardRoundNoteGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WardRoundNoteGrade
+      tags:
+      - ward-round-note
       operationId: updateWardRoundNoteGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WardRoundNoteGrade
+      tags:
+      - ward-round-note
       operationId: replaceWardRoundNoteGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WardRoundNoteGrade
+      tags:
+      - ward-round-note
       operationId: deleteWardRoundNoteGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/ward-round-note/ward_round_notes:
     get:
       summary: List WardRoundNote records
+      tags:
+      - ward-round-note
       operationId: listWardRoundNote
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WardRoundNote
+      tags:
+      - ward-round-note
       operationId: createWardRoundNote
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WardRoundNote by id
+      tags:
+      - ward-round-note
       operationId: getWardRoundNote
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WardRoundNote
+      tags:
+      - ward-round-note
       operationId: updateWardRoundNote
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WardRoundNote
+      tags:
+      - ward-round-note
       operationId: replaceWardRoundNote
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WardRoundNote
+      tags:
+      - ward-round-note
       operationId: deleteWardRoundNote
       responses:
         '200':

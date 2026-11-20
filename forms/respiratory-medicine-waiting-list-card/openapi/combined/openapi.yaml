@@ -7,6 +7,14 @@ info:
   description: Combined OpenAPI specification for the Respiratory Medicine Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: respiratory-medicine-waiting-list-card
+  apiPrefix: /api/respiratory-medicine-waiting-list-card/
+  sqlSchema: respiratory_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/respiratory-medicine-waiting-list-card/xml
+tags:
+- name: respiratory-medicine-waiting-list-card
+  description: Respiratory Medicine Waiting List Card form
 paths:
   /api/respiratory-medicine-waiting-list-card/openapi.yaml:
     get:
@@ -19,9 +27,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - respiratory-medicine-waiting-list-card
   /api/respiratory-medicine-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -74,6 +86,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -127,6 +141,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -154,6 +170,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -199,6 +217,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -244,6 +264,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -268,6 +290,8 @@ paths:
   /api/respiratory-medicine-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/respiratory-medicine-waiting-list-card/resp_med_waiting_list_card_appointments:
     get:
       summary: List RespMedWaitingListCardAppointment records
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: listRespMedWaitingListCardAppointment
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RespMedWaitingListCardAppointment
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: createRespMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RespMedWaitingListCardAppointment by id
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: getRespMedWaitingListCardAppointment
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RespMedWaitingListCardAppointment
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: updateRespMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RespMedWaitingListCardAppointment
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: replaceRespMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RespMedWaitingListCardAppointment
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: deleteRespMedWaitingListCardAppointment
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/respiratory-medicine-waiting-list-card/resp_med_waiting_list_card_grade_flags:
     get:
       summary: List RespMedWaitingListCardGradeFlag records
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: listRespMedWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RespMedWaitingListCardGradeFlag
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: createRespMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RespMedWaitingListCardGradeFlag by id
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: getRespMedWaitingListCardGradeFlag
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RespMedWaitingListCardGradeFlag
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: updateRespMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RespMedWaitingListCardGradeFlag
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: replaceRespMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RespMedWaitingListCardGradeFlag
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: deleteRespMedWaitingListCardGradeFlag
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/respiratory-medicine-waiting-list-card/resp_med_waiting_list_card_grade_rules:
     get:
       summary: List RespMedWaitingListCardGradeRule records
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: listRespMedWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RespMedWaitingListCardGradeRule
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: createRespMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RespMedWaitingListCardGradeRule by id
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: getRespMedWaitingListCardGradeRule
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RespMedWaitingListCardGradeRule
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: updateRespMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RespMedWaitingListCardGradeRule
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: replaceRespMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RespMedWaitingListCardGradeRule
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: deleteRespMedWaitingListCardGradeRule
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/respiratory-medicine-waiting-list-card/resp_med_waiting_list_card_grades:
     get:
       summary: List RespMedWaitingListCardGrade records
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: listRespMedWaitingListCardGrade
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RespMedWaitingListCardGrade
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: createRespMedWaitingListCardGrade
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RespMedWaitingListCardGrade by id
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: getRespMedWaitingListCardGrade
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RespMedWaitingListCardGrade
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: updateRespMedWaitingListCardGrade
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RespMedWaitingListCardGrade
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: replaceRespMedWaitingListCardGrade
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RespMedWaitingListCardGrade
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: deleteRespMedWaitingListCardGrade
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/respiratory-medicine-waiting-list-card/resp_med_waiting_list_cards:
     get:
       summary: List RespMedWaitingListCard records
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: listRespMedWaitingListCard
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RespMedWaitingListCard
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: createRespMedWaitingListCard
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RespMedWaitingListCard by id
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: getRespMedWaitingListCard
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RespMedWaitingListCard
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: updateRespMedWaitingListCard
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RespMedWaitingListCard
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: replaceRespMedWaitingListCard
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RespMedWaitingListCard
+      tags:
+      - respiratory-medicine-waiting-list-card
       operationId: deleteRespMedWaitingListCard
       responses:
         '200':

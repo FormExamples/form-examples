@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mammography_test_result_grade_flag SYSTEM "mammography_test_result_grade_flag.dtd">
-<mammography_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<mammography_test_result_grade_flag xmlns="https://formexamples.github.io/mammography-test-result/xml">
+<id>2d111ef6-7209-51c1-8297-b24ec8f09939</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<mammography_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</mammography_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<mammography_test_result_grade_id>f61ee935-ecd8-58a1-a8f3-ebbcd25f572f</mammography_test_result_grade_id>
+<flag_id>954b8ae5-8177-543a-b235-26e3c560f951</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

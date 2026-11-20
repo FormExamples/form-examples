@@ -5,10 +5,19 @@ info:
   title: Microbiology Culture Test Result — MicrobiologyCultureTestResult
   version: 1.0.0
   description: Microbiology culture test result (report). Captures the specimen and its condition, the clinical history, the Gram-stain and culture results, the organism(s) isolated and colony count, antibiotic sensitivities and key resistance markers (MRSA / ESBL / CPE), specialised tests (C. difficile toxin, acid-fast bacilli, PCR), the narrative findings, impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: microbiology-culture-test-result
+  apiPrefix: /api/microbiology-culture-test-result/
+  sqlSchema: microbiology_culture_test_result
+  xmlNamespace: https://formexamples.github.io/microbiology-culture-test-result/xml
+tags:
+  - name: microbiology-culture-test-result
+    description: Microbiology Culture Test Result form
 paths:
   /api/microbiology-culture-test-result/microbiology_culture_test_results:
     get:
       summary: List MicrobiologyCultureTestResult records
+      tags: [microbiology-culture-test-result]
       operationId: listMicrobiologyCultureTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MicrobiologyCultureTestResult
+      tags: [microbiology-culture-test-result]
       operationId: createMicrobiologyCultureTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MicrobiologyCultureTestResult by id
+      tags: [microbiology-culture-test-result]
       operationId: getMicrobiologyCultureTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MicrobiologyCultureTestResult
+      tags: [microbiology-culture-test-result]
       operationId: updateMicrobiologyCultureTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MicrobiologyCultureTestResult
+      tags: [microbiology-culture-test-result]
       operationId: replaceMicrobiologyCultureTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MicrobiologyCultureTestResult
+      tags: [microbiology-culture-test-result]
       operationId: deleteMicrobiologyCultureTestResult
       responses:
         "200":

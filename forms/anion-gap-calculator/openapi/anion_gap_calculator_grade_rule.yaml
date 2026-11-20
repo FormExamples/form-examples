@@ -5,10 +5,19 @@ info:
   title: Anion Gap Calculator — AnionGapCalculatorGradeRule
   version: 1.0.0
   description: "Audit trail of every rule that fired during anion-gap computation: instrument, band, category, and description."
+x-namespace:
+  form: anion-gap-calculator
+  apiPrefix: /api/anion-gap-calculator/
+  sqlSchema: anion_gap_calculator
+  xmlNamespace: https://formexamples.github.io/anion-gap-calculator/xml
+tags:
+  - name: anion-gap-calculator
+    description: Anion Gap Calculator form
 paths:
   /api/anion-gap-calculator/anion_gap_calculator_grade_rules:
     get:
       summary: List AnionGapCalculatorGradeRule records
+      tags: [anion-gap-calculator]
       operationId: listAnionGapCalculatorGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AnionGapCalculatorGradeRule
+      tags: [anion-gap-calculator]
       operationId: createAnionGapCalculatorGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AnionGapCalculatorGradeRule by id
+      tags: [anion-gap-calculator]
       operationId: getAnionGapCalculatorGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AnionGapCalculatorGradeRule
+      tags: [anion-gap-calculator]
       operationId: updateAnionGapCalculatorGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AnionGapCalculatorGradeRule
+      tags: [anion-gap-calculator]
       operationId: replaceAnionGapCalculatorGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AnionGapCalculatorGradeRule
+      tags: [anion-gap-calculator]
       operationId: deleteAnionGapCalculatorGradeRule
       responses:
         "200":

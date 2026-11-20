@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Neurology Waiting List Card form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: neurology-waiting-list-card
+  apiPrefix: /api/neurology-waiting-list-card/
+  sqlSchema: neurology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/neurology-waiting-list-card/xml
+tags:
+- name: neurology-waiting-list-card
+  description: Neurology Waiting List Card form
 paths:
   /api/neurology-waiting-list-card/neurology_waiting_list_card_appointments:
     get:
       summary: List NeurologyWaitingListCardAppointment records
+      tags:
+      - neurology-waiting-list-card
       operationId: listNeurologyWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurologyWaitingListCardAppointment
+      tags:
+      - neurology-waiting-list-card
       operationId: createNeurologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NeurologyWaitingListCardAppointment by id
+      tags:
+      - neurology-waiting-list-card
       operationId: getNeurologyWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurologyWaitingListCardAppointment
+      tags:
+      - neurology-waiting-list-card
       operationId: updateNeurologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NeurologyWaitingListCardAppointment
+      tags:
+      - neurology-waiting-list-card
       operationId: replaceNeurologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NeurologyWaitingListCardAppointment
+      tags:
+      - neurology-waiting-list-card
       operationId: deleteNeurologyWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/neurology-waiting-list-card/neurology_waiting_list_card_grade_flags:
     get:
       summary: List NeurologyWaitingListCardGradeFlag records
+      tags:
+      - neurology-waiting-list-card
       operationId: listNeurologyWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurologyWaitingListCardGradeFlag
+      tags:
+      - neurology-waiting-list-card
       operationId: createNeurologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NeurologyWaitingListCardGradeFlag by id
+      tags:
+      - neurology-waiting-list-card
       operationId: getNeurologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurologyWaitingListCardGradeFlag
+      tags:
+      - neurology-waiting-list-card
       operationId: updateNeurologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NeurologyWaitingListCardGradeFlag
+      tags:
+      - neurology-waiting-list-card
       operationId: replaceNeurologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NeurologyWaitingListCardGradeFlag
+      tags:
+      - neurology-waiting-list-card
       operationId: deleteNeurologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/neurology-waiting-list-card/neurology_waiting_list_card_grade_rules:
     get:
       summary: List NeurologyWaitingListCardGradeRule records
+      tags:
+      - neurology-waiting-list-card
       operationId: listNeurologyWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurologyWaitingListCardGradeRule
+      tags:
+      - neurology-waiting-list-card
       operationId: createNeurologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NeurologyWaitingListCardGradeRule by id
+      tags:
+      - neurology-waiting-list-card
       operationId: getNeurologyWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurologyWaitingListCardGradeRule
+      tags:
+      - neurology-waiting-list-card
       operationId: updateNeurologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NeurologyWaitingListCardGradeRule
+      tags:
+      - neurology-waiting-list-card
       operationId: replaceNeurologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NeurologyWaitingListCardGradeRule
+      tags:
+      - neurology-waiting-list-card
       operationId: deleteNeurologyWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/neurology-waiting-list-card/neurology_waiting_list_card_grades:
     get:
       summary: List NeurologyWaitingListCardGrade records
+      tags:
+      - neurology-waiting-list-card
       operationId: listNeurologyWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurologyWaitingListCardGrade
+      tags:
+      - neurology-waiting-list-card
       operationId: createNeurologyWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NeurologyWaitingListCardGrade by id
+      tags:
+      - neurology-waiting-list-card
       operationId: getNeurologyWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurologyWaitingListCardGrade
+      tags:
+      - neurology-waiting-list-card
       operationId: updateNeurologyWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NeurologyWaitingListCardGrade
+      tags:
+      - neurology-waiting-list-card
       operationId: replaceNeurologyWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NeurologyWaitingListCardGrade
+      tags:
+      - neurology-waiting-list-card
       operationId: deleteNeurologyWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/neurology-waiting-list-card/neurology_waiting_list_cards:
     get:
       summary: List NeurologyWaitingListCard records
+      tags:
+      - neurology-waiting-list-card
       operationId: listNeurologyWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurologyWaitingListCard
+      tags:
+      - neurology-waiting-list-card
       operationId: createNeurologyWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NeurologyWaitingListCard by id
+      tags:
+      - neurology-waiting-list-card
       operationId: getNeurologyWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurologyWaitingListCard
+      tags:
+      - neurology-waiting-list-card
       operationId: updateNeurologyWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NeurologyWaitingListCard
+      tags:
+      - neurology-waiting-list-card
       operationId: replaceNeurologyWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NeurologyWaitingListCard
+      tags:
+      - neurology-waiting-list-card
       operationId: deleteNeurologyWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - neurology-waiting-list-card
   /api/neurology-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - neurology-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - neurology-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - neurology-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - neurology-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - neurology-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - neurology-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/neurology-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - neurology-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - neurology-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - neurology-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - neurology-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - neurology-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - neurology-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

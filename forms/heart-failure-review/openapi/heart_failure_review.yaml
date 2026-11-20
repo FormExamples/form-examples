@@ -5,10 +5,19 @@ info:
   title: Heart Failure Review — HeartFailureReview
   version: 1.0.0
   description: "Main heart-failure annual-review record (NICE NG106): patient and clinician identification, review context, diagnosis and subtype, functional status (NYHA), fluid balance and observations, monitoring bloods, the four pillars of guideline-directed medical therapy plus loop diuretic and other medications, devices, vaccinations, and self-management. The computed functional status, medication-optimisation status, completeness grade, fired rules, and flags live in child tables."
+x-namespace:
+  form: heart-failure-review
+  apiPrefix: /api/heart-failure-review/
+  sqlSchema: heart_failure_review
+  xmlNamespace: https://formexamples.github.io/heart-failure-review/xml
+tags:
+  - name: heart-failure-review
+    description: Heart Failure Review form
 paths:
   /api/heart-failure-review/heart_failure_reviews:
     get:
       summary: List HeartFailureReview records
+      tags: [heart-failure-review]
       operationId: listHeartFailureReview
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HeartFailureReview
+      tags: [heart-failure-review]
       operationId: createHeartFailureReview
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HeartFailureReview by id
+      tags: [heart-failure-review]
       operationId: getHeartFailureReview
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HeartFailureReview
+      tags: [heart-failure-review]
       operationId: updateHeartFailureReview
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HeartFailureReview
+      tags: [heart-failure-review]
       operationId: replaceHeartFailureReview
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HeartFailureReview
+      tags: [heart-failure-review]
       operationId: deleteHeartFailureReview
       responses:
         "200":

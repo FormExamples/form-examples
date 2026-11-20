@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment SYSTEM "assessment.dtd">
-<assessment>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<assessment xmlns="https://formexamples.github.io/diabetes-assessment/xml">
+<id>14264c3d-310e-5dc2-b99b-146d09c9a4ea</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<patient_id>654d855b-678f-59f6-8670-ed3ff3948adc</patient_id>
 <status>in_progress</status>
 </assessment>

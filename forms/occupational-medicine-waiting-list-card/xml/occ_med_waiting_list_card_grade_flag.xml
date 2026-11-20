@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE occ_med_waiting_list_card_grade_flag SYSTEM "occ_med_waiting_list_card_grade_flag.dtd">
-<occ_med_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<occ_med_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/occupational-medicine-waiting-list-card/xml">
+<id>d0b5ae8f-b376-56e8-a5bd-08e623e9f285</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<occ_med_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</occ_med_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<occ_med_waiting_list_card_grade_id>1fdea3cc-a960-51ba-bd23-99e6cb1afd04</occ_med_waiting_list_card_grade_id>
+<flag_id>f77eac49-6137-5087-bc7a-b46b916af25d</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

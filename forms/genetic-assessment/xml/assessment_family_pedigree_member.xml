@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment_family_pedigree_member SYSTEM "assessment_family_pedigree_member.dtd">
-<assessment_family_pedigree_member>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<assessment_family_pedigree_member xmlns="https://formexamples.github.io/genetic-assessment/xml">
+<id>1fe0ef29-fe4e-5caf-a392-fb0f42f952c5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<family_pedigree_id>660e8400-e29b-41d4-a716-446655440001</family_pedigree_id>
+<family_pedigree_id>003cf8fe-4ba5-5446-a845-802d64f79711</family_pedigree_id>
 <relationship>Spouse</relationship>
 <sex>male</sex>
 <age>45</age>

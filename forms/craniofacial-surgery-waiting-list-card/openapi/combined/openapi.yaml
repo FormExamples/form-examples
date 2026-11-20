@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Craniofacial Surgery Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: craniofacial-surgery-waiting-list-card
+  apiPrefix: /api/craniofacial-surgery-waiting-list-card/
+  sqlSchema: craniofacial_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/craniofacial-surgery-waiting-list-card/xml
+tags:
+- name: craniofacial-surgery-waiting-list-card
+  description: Craniofacial Surgery Waiting List Card form
 paths:
   /api/craniofacial-surgery-waiting-list-card/cranio_surgery_waiting_list_card_appointments:
     get:
       summary: List CranioSurgeryWaitingListCardAppointment records
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: listCranioSurgeryWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CranioSurgeryWaitingListCardAppointment
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: createCranioSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CranioSurgeryWaitingListCardAppointment by id
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: getCranioSurgeryWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CranioSurgeryWaitingListCardAppointment
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: updateCranioSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CranioSurgeryWaitingListCardAppointment
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: replaceCranioSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CranioSurgeryWaitingListCardAppointment
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: deleteCranioSurgeryWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/craniofacial-surgery-waiting-list-card/cranio_surgery_waiting_list_card_grade_flags:
     get:
       summary: List CranioSurgeryWaitingListCardGradeFlag records
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: listCranioSurgeryWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CranioSurgeryWaitingListCardGradeFlag
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: createCranioSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CranioSurgeryWaitingListCardGradeFlag by id
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: getCranioSurgeryWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CranioSurgeryWaitingListCardGradeFlag
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: updateCranioSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CranioSurgeryWaitingListCardGradeFlag
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: replaceCranioSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CranioSurgeryWaitingListCardGradeFlag
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: deleteCranioSurgeryWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/craniofacial-surgery-waiting-list-card/cranio_surgery_waiting_list_card_grade_rules:
     get:
       summary: List CranioSurgeryWaitingListCardGradeRule records
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: listCranioSurgeryWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CranioSurgeryWaitingListCardGradeRule
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: createCranioSurgeryWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CranioSurgeryWaitingListCardGradeRule by id
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: getCranioSurgeryWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CranioSurgeryWaitingListCardGradeRule
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: updateCranioSurgeryWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CranioSurgeryWaitingListCardGradeRule
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: replaceCranioSurgeryWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CranioSurgeryWaitingListCardGradeRule
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: deleteCranioSurgeryWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/craniofacial-surgery-waiting-list-card/cranio_surgery_waiting_list_card_grades:
     get:
       summary: List CranioSurgeryWaitingListCardGrade records
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: listCranioSurgeryWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CranioSurgeryWaitingListCardGrade
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: createCranioSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CranioSurgeryWaitingListCardGrade by id
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: getCranioSurgeryWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CranioSurgeryWaitingListCardGrade
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: updateCranioSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CranioSurgeryWaitingListCardGrade
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: replaceCranioSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CranioSurgeryWaitingListCardGrade
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: deleteCranioSurgeryWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/craniofacial-surgery-waiting-list-card/cranio_surgery_waiting_list_cards:
     get:
       summary: List CranioSurgeryWaitingListCard records
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: listCranioSurgeryWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CranioSurgeryWaitingListCard
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: createCranioSurgeryWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CranioSurgeryWaitingListCard by id
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: getCranioSurgeryWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CranioSurgeryWaitingListCard
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: updateCranioSurgeryWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CranioSurgeryWaitingListCard
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: replaceCranioSurgeryWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CranioSurgeryWaitingListCard
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: deleteCranioSurgeryWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - craniofacial-surgery-waiting-list-card
   /api/craniofacial-surgery-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/craniofacial-surgery-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - craniofacial-surgery-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

@@ -5,10 +5,19 @@ info:
   title: Medical Device Assessment — Manufacturer
   version: 1.0.0
   description: Manufacturer.
+x-namespace:
+  form: medical-device-assessment
+  apiPrefix: /api/medical-device-assessment/
+  sqlSchema: medical_device_assessment
+  xmlNamespace: https://formexamples.github.io/medical-device-assessment/xml
+tags:
+  - name: medical-device-assessment
+    description: Medical Device Assessment form
 paths:
   /api/medical-device-assessment/manufacturers:
     get:
       summary: List Manufacturer records
+      tags: [medical-device-assessment]
       operationId: listManufacturer
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Manufacturer
+      tags: [medical-device-assessment]
       operationId: createManufacturer
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Manufacturer by id
+      tags: [medical-device-assessment]
       operationId: getManufacturer
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Manufacturer
+      tags: [medical-device-assessment]
       operationId: updateManufacturer
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Manufacturer
+      tags: [medical-device-assessment]
       operationId: replaceManufacturer
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Manufacturer
+      tags: [medical-device-assessment]
       operationId: deleteManufacturer
       responses:
         "200":

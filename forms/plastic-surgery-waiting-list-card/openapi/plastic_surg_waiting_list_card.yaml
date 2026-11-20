@@ -5,10 +5,19 @@ info:
   title: Plastic Surgery Waiting List Card — PlasticSurgWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a plastic surgery waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: plastic-surgery-waiting-list-card
+  apiPrefix: /api/plastic-surgery-waiting-list-card/
+  sqlSchema: plastic_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/plastic-surgery-waiting-list-card/xml
+tags:
+  - name: plastic-surgery-waiting-list-card
+    description: Plastic Surgery Waiting List Card form
 paths:
   /api/plastic-surgery-waiting-list-card/plastic_surg_waiting_list_cards:
     get:
       summary: List PlasticSurgWaitingListCard records
+      tags: [plastic-surgery-waiting-list-card]
       operationId: listPlasticSurgWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PlasticSurgWaitingListCard
+      tags: [plastic-surgery-waiting-list-card]
       operationId: createPlasticSurgWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PlasticSurgWaitingListCard by id
+      tags: [plastic-surgery-waiting-list-card]
       operationId: getPlasticSurgWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PlasticSurgWaitingListCard
+      tags: [plastic-surgery-waiting-list-card]
       operationId: updatePlasticSurgWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PlasticSurgWaitingListCard
+      tags: [plastic-surgery-waiting-list-card]
       operationId: replacePlasticSurgWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PlasticSurgWaitingListCard
+      tags: [plastic-surgery-waiting-list-card]
       operationId: deletePlasticSurgWaitingListCard
       responses:
         "200":

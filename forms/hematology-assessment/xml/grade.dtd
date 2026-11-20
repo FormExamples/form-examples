@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,abnormality_level,abnormality_score,abnormality_level_override,override_reason,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/hematology-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

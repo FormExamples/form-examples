@@ -5,10 +5,19 @@ info:
   title: Ward Round Note — WardRoundNoteGradeRule
   version: 1.0.0
   description: "Audit trail of every completeness rule that fired during grading: component, category, and description."
+x-namespace:
+  form: ward-round-note
+  apiPrefix: /api/ward-round-note/
+  sqlSchema: ward_round_note
+  xmlNamespace: https://formexamples.github.io/ward-round-note/xml
+tags:
+  - name: ward-round-note
+    description: Ward Round Note form
 paths:
   /api/ward-round-note/ward_round_note_grade_rules:
     get:
       summary: List WardRoundNoteGradeRule records
+      tags: [ward-round-note]
       operationId: listWardRoundNoteGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new WardRoundNoteGradeRule
+      tags: [ward-round-note]
       operationId: createWardRoundNoteGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one WardRoundNoteGradeRule by id
+      tags: [ward-round-note]
       operationId: getWardRoundNoteGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing WardRoundNoteGradeRule
+      tags: [ward-round-note]
       operationId: updateWardRoundNoteGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing WardRoundNoteGradeRule
+      tags: [ward-round-note]
       operationId: replaceWardRoundNoteGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a WardRoundNoteGradeRule
+      tags: [ward-round-note]
       operationId: deleteWardRoundNoteGradeRule
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE heart_failure_review_grade_flag SYSTEM "heart_failure_review_grade_flag.dtd">
-<heart_failure_review_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<heart_failure_review_grade_flag xmlns="https://formexamples.github.io/heart-failure-review/xml">
+<id>a6051eb4-cfb1-549b-b5d2-8d9e1d81ec65</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<heart_failure_review_grade_id>880e8400-e29b-41d4-a716-446655440003</heart_failure_review_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<heart_failure_review_grade_id>bb12b829-6d5a-5aef-a314-56ad82880b46</heart_failure_review_grade_id>
+<flag_id>eb383967-9863-526a-ae06-326e44fcdae9</flag_id>
 <category>urgent-review</category>
 <priority>low</priority>
 <description>Example text.</description>

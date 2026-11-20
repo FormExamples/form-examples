@@ -5,10 +5,19 @@ info:
   title: Bhutani Bilirubin Nomogram — Patient
   version: 1.0.0
   description: Patient demographic information for the newborn infant used by the Bhutani bilirubin nomogram assessment record.
+x-namespace:
+  form: bhutani-bilirubin-nomogram
+  apiPrefix: /api/bhutani-bilirubin-nomogram/
+  sqlSchema: bhutani_bilirubin_nomogram
+  xmlNamespace: https://formexamples.github.io/bhutani-bilirubin-nomogram/xml
+tags:
+  - name: bhutani-bilirubin-nomogram
+    description: Bhutani Bilirubin Nomogram form
 paths:
   /api/bhutani-bilirubin-nomogram/patients:
     get:
       summary: List Patient records
+      tags: [bhutani-bilirubin-nomogram]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [bhutani-bilirubin-nomogram]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [bhutani-bilirubin-nomogram]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [bhutani-bilirubin-nomogram]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [bhutani-bilirubin-nomogram]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [bhutani-bilirubin-nomogram]
       operationId: deletePatient
       responses:
         "200":

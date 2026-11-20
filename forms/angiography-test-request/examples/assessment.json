@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000062",
+    "id": "96d8960f-87fc-542b-ada8-ddaf112103f3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000074",
+    "id": "2b8ab2e8-dbf6-58c7-8ac0-2b6f25519848",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "angiographyTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-000000000082",
+    "id": "61d5192d-8a03-5f06-8cc4-b3ca3cc937a8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000086",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000087",
+    "patientId": "47945452-9096-570f-a680-bbe06332b223",
+    "clinicianId": "839a2d71-3054-5221-8bf3-ec6381cbdaa7",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -69,11 +69,11 @@
     "notes": ""
   },
   "angiographyTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a1",
+    "id": "0884fa4d-6fd3-5f9f-a0cd-e1d28fbc3e5c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "angiographyTestRequestId": "550e8400-e29b-41d4-a716-0000000000a5",
+    "angiographyTestRequestId": "770c3805-161d-553d-91f7-9d6609a57d1e",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "safetyBand": "ok",
@@ -86,22 +86,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "angiographyTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "314eec53-cb3a-53d7-9062-a5240209951f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "angiographyTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "angiographyTestRequestGradeId": "88b61f60-4f68-5051-a48b-25eee8e0f103",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "angiographyTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b9",
+    "id": "3db29864-308e-5564-9fa8-f9f96b84cda5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "angiographyTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000bd",
+    "angiographyTestRequestGradeId": "37f11e55-afa8-5621-826b-66b01014d263",
     "flagId": "",
     "category": "contrast-allergy",
     "priority": "low",

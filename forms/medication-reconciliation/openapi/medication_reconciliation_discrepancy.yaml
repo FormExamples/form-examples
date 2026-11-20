@@ -5,10 +5,19 @@ info:
   title: Medication Reconciliation — MedicationReconciliationDiscrepancy
   version: 1.0.0
   description: Reconciliation discrepancies between the BPMH and the inpatient list, classified by type and by intentional / unintentional, cascading from the parent reconciliation.
+x-namespace:
+  form: medication-reconciliation
+  apiPrefix: /api/medication-reconciliation/
+  sqlSchema: medication_reconciliation
+  xmlNamespace: https://formexamples.github.io/medication-reconciliation/xml
+tags:
+  - name: medication-reconciliation
+    description: Medication Reconciliation form
 paths:
   /api/medication-reconciliation/medication_reconciliation_discrepancies:
     get:
       summary: List MedicationReconciliationDiscrepancy records
+      tags: [medication-reconciliation]
       operationId: listMedicationReconciliationDiscrepancy
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicationReconciliationDiscrepancy
+      tags: [medication-reconciliation]
       operationId: createMedicationReconciliationDiscrepancy
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicationReconciliationDiscrepancy by id
+      tags: [medication-reconciliation]
       operationId: getMedicationReconciliationDiscrepancy
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicationReconciliationDiscrepancy
+      tags: [medication-reconciliation]
       operationId: updateMedicationReconciliationDiscrepancy
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicationReconciliationDiscrepancy
+      tags: [medication-reconciliation]
       operationId: replaceMedicationReconciliationDiscrepancy
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicationReconciliationDiscrepancy
+      tags: [medication-reconciliation]
       operationId: deleteMedicationReconciliationDiscrepancy
       responses:
         "200":

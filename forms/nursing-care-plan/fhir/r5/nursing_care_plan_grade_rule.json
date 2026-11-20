@@ -1,6 +1,6 @@
 {
   "resourceType": "DetectedIssue",
-  "id": "cc0e8400-e29b-41d4-a716-446655440007",
+  "id": "b050718b-81bc-5e1c-b0ca-927dcefae4e1",
   "meta": {
     "profile": [
       "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -30,7 +30,7 @@
   },
   "severity": "moderate",
   "subject": {
-    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+    "reference": "Patient/dcc9b258-ca62-552d-8706-9d55f61b0c10"
   },
   "identifiedDateTime": "2026-04-09T10:00:00+00:00",
   "detail": "Example text."

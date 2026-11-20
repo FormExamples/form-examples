@@ -5,10 +5,19 @@ info:
   title: Diabetes Eye Screening — DiabetesEyeScreeningGradeFlag
   version: 1.0.0
   description: Flagged issues that fire independently of the recall / referral pathway, with priority and a suggested action for the grader or screening service.
+x-namespace:
+  form: diabetes-eye-screening
+  apiPrefix: /api/diabetes-eye-screening/
+  sqlSchema: diabetes_eye_screening
+  xmlNamespace: https://formexamples.github.io/diabetes-eye-screening/xml
+tags:
+  - name: diabetes-eye-screening
+    description: Diabetes Eye Screening form
 paths:
   /api/diabetes-eye-screening/diabetes_eye_screening_grade_flags:
     get:
       summary: List DiabetesEyeScreeningGradeFlag records
+      tags: [diabetes-eye-screening]
       operationId: listDiabetesEyeScreeningGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DiabetesEyeScreeningGradeFlag
+      tags: [diabetes-eye-screening]
       operationId: createDiabetesEyeScreeningGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DiabetesEyeScreeningGradeFlag by id
+      tags: [diabetes-eye-screening]
       operationId: getDiabetesEyeScreeningGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DiabetesEyeScreeningGradeFlag
+      tags: [diabetes-eye-screening]
       operationId: updateDiabetesEyeScreeningGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DiabetesEyeScreeningGradeFlag
+      tags: [diabetes-eye-screening]
       operationId: replaceDiabetesEyeScreeningGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DiabetesEyeScreeningGradeFlag
+      tags: [diabetes-eye-screening]
       operationId: deleteDiabetesEyeScreeningGradeFlag
       responses:
         "200":

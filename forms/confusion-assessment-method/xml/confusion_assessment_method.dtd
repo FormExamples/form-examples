@@ -1,4 +1,5 @@
 <!ELEMENT confusion_assessment_method (id,created_at,updated_at,deleted_at,patient_id,clinician_id,assessor_name,assessor_role,assessed_at,ward_unit,cam_variant,patient_identifier,age_band,sex,cognitive_baseline,collateral_source,feature_acute_onset_fluctuating,onset_timing,feature_inattention,attention_test,feature_disorganised_thinking,feature_altered_consciousness,consciousness_level,rass_score,motoric_subtype,hallucinations,delusions,sleep_wake_disturbance,deliriogenic_medication,deliriogenic_medication_detail,suspected_precipitants,recommended_actions,clinical_note)>
+<!ATTLIST confusion_assessment_method xmlns CDATA #FIXED "https://formexamples.github.io/confusion-assessment-method/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

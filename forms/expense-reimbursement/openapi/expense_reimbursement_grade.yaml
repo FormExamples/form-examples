@@ -5,10 +5,19 @@ info:
   title: Expense Reimbursement — ExpenseReimbursementGrade
   version: 1.0.0
   description: "Computed three-axis grade for an expense reimbursement claim: policy compliance, completeness and approval tier."
+x-namespace:
+  form: expense-reimbursement
+  apiPrefix: /api/expense-reimbursement/
+  sqlSchema: expense_reimbursement
+  xmlNamespace: https://formexamples.github.io/expense-reimbursement/xml
+tags:
+  - name: expense-reimbursement
+    description: Expense Reimbursement form
 paths:
   /api/expense-reimbursement/expense_reimbursement_grades:
     get:
       summary: List ExpenseReimbursementGrade records
+      tags: [expense-reimbursement]
       operationId: listExpenseReimbursementGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ExpenseReimbursementGrade
+      tags: [expense-reimbursement]
       operationId: createExpenseReimbursementGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ExpenseReimbursementGrade by id
+      tags: [expense-reimbursement]
       operationId: getExpenseReimbursementGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ExpenseReimbursementGrade
+      tags: [expense-reimbursement]
       operationId: updateExpenseReimbursementGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ExpenseReimbursementGrade
+      tags: [expense-reimbursement]
       operationId: replaceExpenseReimbursementGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ExpenseReimbursementGrade
+      tags: [expense-reimbursement]
       operationId: deleteExpenseReimbursementGrade
       responses:
         "200":

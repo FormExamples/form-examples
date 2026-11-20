@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE medical_device_assessment SYSTEM "medical_device_assessment.dtd">
-<medical_device_assessment>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<medical_device_assessment xmlns="https://formexamples.github.io/medical-device-assessment/xml">
+<id>f1afa838-a53c-5999-86b2-1bf4ab14b7d5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<manufacturer_id>550e8400-e29b-41d4-a716-446655440000</manufacturer_id>
-<assessor_id>660e8400-e29b-41d4-a716-446655440001</assessor_id>
+<manufacturer_id>14fa8728-0932-58b0-b1dc-fa42f31a463a</manufacturer_id>
+<assessor_id>387947c2-6c82-5754-ae62-eeb0293b69bb</assessor_id>
 <status>draft</status>
 <assessment_date>2026-01-15</assessment_date>
 <device_name>Example</device_name>

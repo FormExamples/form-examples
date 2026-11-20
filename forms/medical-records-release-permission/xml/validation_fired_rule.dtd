@@ -1,4 +1,5 @@
 <!ELEMENT validation_fired_rule (id,created_at,updated_at,deleted_at,validation_result_id,rule_id,domain,description,score)>
+<!ATTLIST validation_fired_rule xmlns CDATA #FIXED "https://formexamples.github.io/medical-records-release-permission/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

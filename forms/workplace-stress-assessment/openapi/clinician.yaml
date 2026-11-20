@@ -5,10 +5,19 @@ info:
   title: Workplace Stress Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: workplace-stress-assessment
+  apiPrefix: /api/workplace-stress-assessment/
+  sqlSchema: workplace_stress_assessment
+  xmlNamespace: https://formexamples.github.io/workplace-stress-assessment/xml
+tags:
+  - name: workplace-stress-assessment
+    description: Workplace Stress Assessment form
 paths:
   /api/workplace-stress-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [workplace-stress-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [workplace-stress-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [workplace-stress-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [workplace-stress-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [workplace-stress-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [workplace-stress-assessment]
       operationId: deleteClinician
       responses:
         "200":

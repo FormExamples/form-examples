@@ -5,10 +5,19 @@ info:
   title: Microbiology Culture Test Result — MicrobiologyCultureTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (positive blood culture, CSF isolate, CPE, or any flagged critical organism) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: microbiology-culture-test-result
+  apiPrefix: /api/microbiology-culture-test-result/
+  sqlSchema: microbiology_culture_test_result
+  xmlNamespace: https://formexamples.github.io/microbiology-culture-test-result/xml
+tags:
+  - name: microbiology-culture-test-result
+    description: Microbiology Culture Test Result form
 paths:
   /api/microbiology-culture-test-result/microbiology_culture_test_result_grades:
     get:
       summary: List MicrobiologyCultureTestResultGrade records
+      tags: [microbiology-culture-test-result]
       operationId: listMicrobiologyCultureTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MicrobiologyCultureTestResultGrade
+      tags: [microbiology-culture-test-result]
       operationId: createMicrobiologyCultureTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MicrobiologyCultureTestResultGrade by id
+      tags: [microbiology-culture-test-result]
       operationId: getMicrobiologyCultureTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MicrobiologyCultureTestResultGrade
+      tags: [microbiology-culture-test-result]
       operationId: updateMicrobiologyCultureTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MicrobiologyCultureTestResultGrade
+      tags: [microbiology-culture-test-result]
       operationId: replaceMicrobiologyCultureTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MicrobiologyCultureTestResultGrade
+      tags: [microbiology-culture-test-result]
       operationId: deleteMicrobiologyCultureTestResultGrade
       responses:
         "200":

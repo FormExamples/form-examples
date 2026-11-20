@@ -5,10 +5,19 @@ info:
   title: Hospital Dashboard Metrics — HospitalDashboardMetricValue
   version: 1.0.0
   description: One recorded metric (of 67) within a hospital dashboard reporting period.
+x-namespace:
+  form: hospital-dashboard-metrics
+  apiPrefix: /api/hospital-dashboard-metrics/
+  sqlSchema: hospital_dashboard_metrics
+  xmlNamespace: https://formexamples.github.io/hospital-dashboard-metrics/xml
+tags:
+  - name: hospital-dashboard-metrics
+    description: Hospital Dashboard Metrics form
 paths:
   /api/hospital-dashboard-metrics/hospital_dashboard_metric_values:
     get:
       summary: List HospitalDashboardMetricValue records
+      tags: [hospital-dashboard-metrics]
       operationId: listHospitalDashboardMetricValue
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HospitalDashboardMetricValue
+      tags: [hospital-dashboard-metrics]
       operationId: createHospitalDashboardMetricValue
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HospitalDashboardMetricValue by id
+      tags: [hospital-dashboard-metrics]
       operationId: getHospitalDashboardMetricValue
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HospitalDashboardMetricValue
+      tags: [hospital-dashboard-metrics]
       operationId: updateHospitalDashboardMetricValue
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HospitalDashboardMetricValue
+      tags: [hospital-dashboard-metrics]
       operationId: replaceHospitalDashboardMetricValue
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HospitalDashboardMetricValue
+      tags: [hospital-dashboard-metrics]
       operationId: deleteHospitalDashboardMetricValue
       responses:
         "200":

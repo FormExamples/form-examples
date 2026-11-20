@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "e4a9db3d-95fe-41f0-a70c-3d64d9b71ea3",
+  "id": "bd1bb61b-1dfb-53eb-a17b-376d8f2727d2",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:35b25114-bcbf-4e9d-a280-9ae198f604d7",
+      "fullUrl": "urn:uuid:1cdd782e-25fe-5d89-bd64-cdafba591d14",
       "resource": {
         "resourceType": "Patient",
-        "id": "35b25114-bcbf-4e9d-a280-9ae198f604d7",
+        "id": "1cdd782e-25fe-5d89-bd64-cdafba591d14",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:701665c3-49e6-45e2-aeee-9cb257aa9a06",
+      "fullUrl": "urn:uuid:bfb06cec-d5ba-5dbf-bebc-7ecf0c03238b",
       "resource": {
         "resourceType": "Observation",
-        "id": "701665c3-49e6-45e2-aeee-9cb257aa9a06",
+        "id": "bfb06cec-d5ba-5dbf-bebc-7ecf0c03238b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:35b25114-bcbf-4e9d-a280-9ae198f604d7"
+          "reference": "urn:uuid:1cdd782e-25fe-5d89-bd64-cdafba591d14"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:609d603c-fd6d-469a-af20-691d216c383f",
+      "fullUrl": "urn:uuid:98fad1ab-053d-529f-8fc9-698f8d413004",
       "resource": {
         "resourceType": "Observation",
-        "id": "609d603c-fd6d-469a-af20-691d216c383f",
+        "id": "98fad1ab-053d-529f-8fc9-698f8d413004",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:35b25114-bcbf-4e9d-a280-9ae198f604d7"
+          "reference": "urn:uuid:1cdd782e-25fe-5d89-bd64-cdafba591d14"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -506,10 +506,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:170e68c3-f7c2-46dc-a7c5-f3a2b574c95e",
+      "fullUrl": "urn:uuid:2657a704-e298-5528-96fd-e32f2dd55e08",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "170e68c3-f7c2-46dc-a7c5-f3a2b574c95e",
+        "id": "2657a704-e298-5528-96fd-e32f2dd55e08",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -518,7 +518,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:35b25114-bcbf-4e9d-a280-9ae198f604d7"
+          "reference": "urn:uuid:1cdd782e-25fe-5d89-bd64-cdafba591d14"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -527,10 +527,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:fa348379-ee3e-45bc-ac42-0c0101897c71",
+      "fullUrl": "urn:uuid:ab09f901-ea9b-5f24-990f-cf9c7fc0d8dd",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "fa348379-ee3e-45bc-ac42-0c0101897c71",
+        "id": "ab09f901-ea9b-5f24-990f-cf9c7fc0d8dd",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -560,17 +560,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:35b25114-bcbf-4e9d-a280-9ae198f604d7"
+          "reference": "urn:uuid:1cdd782e-25fe-5d89-bd64-cdafba591d14"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical ophthalmic finding (proliferative retinopathy, acutely raised IOP, or reduced acuity with optic-disc abnormality) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:73c33654-56b8-4918-a49c-25debf352dd4",
+      "fullUrl": "urn:uuid:41abbd35-c176-5359-90ff-0d83b60e5137",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "73c33654-56b8-4918-a49c-25debf352dd4",
+        "id": "41abbd35-c176-5359-90ff-0d83b60e5137",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -600,17 +600,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:35b25114-bcbf-4e9d-a280-9ae198f604d7"
+          "reference": "urn:uuid:1cdd782e-25fe-5d89-bd64-cdafba591d14"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:e63dea7b-0170-45de-a17f-af4ad69ca16b",
+      "fullUrl": "urn:uuid:c1f9eb35-9ff1-5132-9e3d-c743007c5916",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "e63dea7b-0170-45de-a17f-af4ad69ca16b",
+        "id": "c1f9eb35-9ff1-5132-9e3d-c743007c5916",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -640,17 +640,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:35b25114-bcbf-4e9d-a280-9ae198f604d7"
+          "reference": "urn:uuid:1cdd782e-25fe-5d89-bd64-cdafba591d14"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: clinical history."
       }
     },
     {
-      "fullUrl": "urn:uuid:8d53f374-1cbb-43cc-aa72-98323bb040d3",
+      "fullUrl": "urn:uuid:1e4e9d80-28db-55d2-8c4c-f7512e9f6f34",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "8d53f374-1cbb-43cc-aa72-98323bb040d3",
+        "id": "1e4e9d80-28db-55d2-8c4c-f7512e9f6f34",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -680,17 +680,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:35b25114-bcbf-4e9d-a280-9ae198f604d7"
+          "reference": "urn:uuid:1cdd782e-25fe-5d89-bd64-cdafba591d14"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: impression."
       }
     },
     {
-      "fullUrl": "urn:uuid:79d026c0-0a81-4727-a571-368184ced47c",
+      "fullUrl": "urn:uuid:53d30e8e-5d9c-5832-acea-18b596c23b6a",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "79d026c0-0a81-4727-a571-368184ced47c",
+        "id": "53d30e8e-5d9c-5832-acea-18b596c23b6a",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -720,17 +720,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:35b25114-bcbf-4e9d-a280-9ae198f604d7"
+          "reference": "urn:uuid:1cdd782e-25fe-5d89-bd64-cdafba591d14"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: recommended follow-up."
       }
     },
     {
-      "fullUrl": "urn:uuid:37490b8c-9ee7-493a-afe7-d3fe28449e2e",
+      "fullUrl": "urn:uuid:59999208-e852-5a69-983e-fc74502357ae",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "37490b8c-9ee7-493a-afe7-d3fe28449e2e",
+        "id": "59999208-e852-5a69-983e-fc74502357ae",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -760,17 +760,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:35b25114-bcbf-4e9d-a280-9ae198f604d7"
+          "reference": "urn:uuid:1cdd782e-25fe-5d89-bd64-cdafba591d14"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical ophthalmic finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:d9e341a3-c8d9-49a2-a1d6-a65c485c282e",
+      "fullUrl": "urn:uuid:ae204032-3a15-591f-838a-32c2b22bfba5",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "d9e341a3-c8d9-49a2-a1d6-a65c485c282e",
+        "id": "ae204032-3a15-591f-838a-32c2b22bfba5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -800,7 +800,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:35b25114-bcbf-4e9d-a280-9ae198f604d7"
+          "reference": "urn:uuid:1cdd782e-25fe-5d89-bd64-cdafba591d14"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical ophthalmic finding (proliferative retinopathy, acutely raised IOP, or reduced acuity with optic-disc abnormality) is present.",
@@ -814,10 +814,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:f40c16d1-fce0-460d-abb1-7c32013c9e99",
+      "fullUrl": "urn:uuid:5c16d9b3-e4e9-5e33-be5f-7ef915b51448",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "f40c16d1-fce0-460d-abb1-7c32013c9e99",
+        "id": "5c16d9b3-e4e9-5e33-be5f-7ef915b51448",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -847,7 +847,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:35b25114-bcbf-4e9d-a280-9ae198f604d7"
+          "reference": "urn:uuid:1cdd782e-25fe-5d89-bd64-cdafba591d14"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",
@@ -861,10 +861,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:ce0bc9b4-f5aa-4837-a449-2dc9b668b852",
+      "fullUrl": "urn:uuid:dd267980-c969-5fca-b998-d4e9a5cb54ae",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ce0bc9b4-f5aa-4837-a449-2dc9b668b852",
+        "id": "dd267980-c969-5fca-b998-d4e9a5cb54ae",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -894,7 +894,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:35b25114-bcbf-4e9d-a280-9ae198f604d7"
+          "reference": "urn:uuid:1cdd782e-25fe-5d89-bd64-cdafba591d14"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",

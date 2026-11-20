@@ -1,4 +1,5 @@
 <!ELEMENT edinburgh_postnatal_depression_scale_grade (id,created_at,updated_at,deleted_at,edinburgh_postnatal_depression_scale_id,total_score,interpretation,item_10_score,self_harm_flag,graded_at)>
+<!ATTLIST edinburgh_postnatal_depression_scale_grade xmlns CDATA #FIXED "https://formexamples.github.io/edinburgh-postnatal-depression-scale/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

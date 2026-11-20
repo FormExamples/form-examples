@@ -5,10 +5,19 @@ info:
   title: Padua Venous Thromboembolism Risk Assessment — Clinician
   version: 1.0.0
   description: Clinician identifying information for the clinician performing the Padua VTE risk assessment.
+x-namespace:
+  form: padua-venous-thromboembolism-risk-assessment
+  apiPrefix: /api/padua-venous-thromboembolism-risk-assessment/
+  sqlSchema: padua_venous_thromboembolism_risk_assessment
+  xmlNamespace: https://formexamples.github.io/padua-venous-thromboembolism-risk-assessment/xml
+tags:
+  - name: padua-venous-thromboembolism-risk-assessment
+    description: Padua Venous Thromboembolism Risk Assessment form
 paths:
   /api/padua-venous-thromboembolism-risk-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: deleteClinician
       responses:
         "200":

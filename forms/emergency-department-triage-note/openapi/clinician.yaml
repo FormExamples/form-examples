@@ -5,10 +5,19 @@ info:
   title: Emergency Department Triage Note — Clinician
   version: 1.0.0
   description: Clinician identifying information for the triaging clinician.
+x-namespace:
+  form: emergency-department-triage-note
+  apiPrefix: /api/emergency-department-triage-note/
+  sqlSchema: emergency_department_triage_note
+  xmlNamespace: https://formexamples.github.io/emergency-department-triage-note/xml
+tags:
+  - name: emergency-department-triage-note
+    description: Emergency Department Triage Note form
 paths:
   /api/emergency-department-triage-note/clinicians:
     get:
       summary: List Clinician records
+      tags: [emergency-department-triage-note]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [emergency-department-triage-note]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [emergency-department-triage-note]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [emergency-department-triage-note]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [emergency-department-triage-note]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [emergency-department-triage-note]
       operationId: deleteClinician
       responses:
         "200":

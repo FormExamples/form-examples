@@ -5,10 +5,19 @@ info:
   title: Ophthalmology Assessment — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: ophthalmology-assessment
+  apiPrefix: /api/ophthalmology-assessment/
+  sqlSchema: ophthalmology_assessment
+  xmlNamespace: https://formexamples.github.io/ophthalmology-assessment/xml
+tags:
+  - name: ophthalmology-assessment
+    description: Ophthalmology Assessment form
 paths:
   /api/ophthalmology-assessment/patients:
     get:
       summary: List Patient records
+      tags: [ophthalmology-assessment]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [ophthalmology-assessment]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [ophthalmology-assessment]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [ophthalmology-assessment]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [ophthalmology-assessment]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [ophthalmology-assessment]
       operationId: deletePatient
       responses:
         "200":

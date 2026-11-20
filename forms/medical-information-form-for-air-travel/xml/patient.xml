@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE patient SYSTEM "patient.dtd">
-<patient>
-<id>550e8400-e29b-41d4-a716-446655440000</id>
+<patient xmlns="https://formexamples.github.io/medical-information-form-for-air-travel/xml">
+<id>ed906c99-3d8b-5a6e-bdc1-6e33f07a17a1</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
@@ -11,7 +11,7 @@
 <nationality_as_iso_3166_1_alpha_2></nationality_as_iso_3166_1_alpha_2>
 <passport_number></passport_number>
 <united_kingdom_nhs_number>mg/dL</united_kingdom_nhs_number>
-<national_health_id>660e8400-e29b-41d4-a716-446655440001</national_health_id>
+<national_health_id>29f69aa0-a2df-5b51-9b4e-65db5d5bb734</national_health_id>
 <email>jane.doe@example.com</email>
 <phone>07700900000</phone>
 <postal_address_as_full_text>Example text.</postal_address_as_full_text>

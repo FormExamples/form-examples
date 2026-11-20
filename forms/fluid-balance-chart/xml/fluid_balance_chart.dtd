@@ -1,4 +1,5 @@
 <!ELEMENT fluid_balance_chart (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,patient_identifier,ward_or_unit,chart_start_at,chart_period_hours,weight_kg,clinical_note)>
+<!ATTLIST fluid_balance_chart xmlns CDATA #FIXED "https://formexamples.github.io/fluid-balance-chart/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

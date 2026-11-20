@@ -5,10 +5,19 @@ info:
   title: Rheumatology Assessment — Assessment
   version: 1.0.0
   description: Rheumatology assessment form using DAS28 scoring. Parent entity for all assessment sections.
+x-namespace:
+  form: rheumatology-assessment
+  apiPrefix: /api/rheumatology-assessment/
+  sqlSchema: rheumatology_assessment
+  xmlNamespace: https://formexamples.github.io/rheumatology-assessment/xml
+tags:
+  - name: rheumatology-assessment
+    description: Rheumatology Assessment form
 paths:
   /api/rheumatology-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [rheumatology-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [rheumatology-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [rheumatology-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [rheumatology-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [rheumatology-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [rheumatology-assessment]
       operationId: deleteAssessment
       responses:
         "200":

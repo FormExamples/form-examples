@@ -5,10 +5,19 @@ info:
   title: Hospital Performance Indicators — HospitalPerformanceIndicatorValue
   version: 1.0.0
   description: One recorded Balanced Scorecard indicator (of 50) within a hospital performance reporting period.
+x-namespace:
+  form: hospital-performance-indicators
+  apiPrefix: /api/hospital-performance-indicators/
+  sqlSchema: hospital_performance_indicators
+  xmlNamespace: https://formexamples.github.io/hospital-performance-indicators/xml
+tags:
+  - name: hospital-performance-indicators
+    description: Hospital Performance Indicators form
 paths:
   /api/hospital-performance-indicators/hospital_performance_indicator_values:
     get:
       summary: List HospitalPerformanceIndicatorValue records
+      tags: [hospital-performance-indicators]
       operationId: listHospitalPerformanceIndicatorValue
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HospitalPerformanceIndicatorValue
+      tags: [hospital-performance-indicators]
       operationId: createHospitalPerformanceIndicatorValue
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HospitalPerformanceIndicatorValue by id
+      tags: [hospital-performance-indicators]
       operationId: getHospitalPerformanceIndicatorValue
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HospitalPerformanceIndicatorValue
+      tags: [hospital-performance-indicators]
       operationId: updateHospitalPerformanceIndicatorValue
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HospitalPerformanceIndicatorValue
+      tags: [hospital-performance-indicators]
       operationId: replaceHospitalPerformanceIndicatorValue
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HospitalPerformanceIndicatorValue
+      tags: [hospital-performance-indicators]
       operationId: deleteHospitalPerformanceIndicatorValue
       responses:
         "200":

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b9",
+    "id": "a62b5c2a-a34f-5ad1-8b4a-b07c51d8cca9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d3",
+    "id": "d6033994-c6b8-59a4-a08c-713bacc7e778",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,19 +36,19 @@
     "unitedKingdomNhsNumber": ""
   },
   "releaseForm": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "34af1a03-66cc-59fd-946e-f91ab1f722fe",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000088",
+    "patientId": "e0ce70ce-9a5b-57a2-83ab-0e66ea1da671",
     "status": "draft"
   },
   "authorizedRecipient": {
-    "id": "550e8400-e29b-41d4-a716-00000000008a",
+    "id": "258ddb20-8e4d-5dda-9ca4-381769ff519c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "releaseFormId": "550e8400-e29b-41d4-a716-00000000008e",
+    "releaseFormId": "02d74748-1dfe-5d1b-9f6b-9a2e95f9028b",
     "recipientName": "",
     "recipientOrganization": "",
     "recipientAddress": "",
@@ -57,11 +57,11 @@
     "recipientRole": ""
   },
   "recordsToRelease": {
-    "id": "550e8400-e29b-41d4-a716-000000000095",
+    "id": "c69ed74d-4d7c-5741-a8ea-66c323f2273a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "releaseFormId": "550e8400-e29b-41d4-a716-000000000099",
+    "releaseFormId": "547d6762-c938-5398-9d48-3544c919b788",
     "recordTypes": "",
     "specificDateRange": "yes",
     "dateFrom": null,
@@ -69,30 +69,30 @@
     "specificRecordDetails": ""
   },
   "purposeOfRelease": {
-    "id": "550e8400-e29b-41d4-a716-00000000009f",
+    "id": "cffb482a-7356-5fad-9834-facac402bf4f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "releaseFormId": "550e8400-e29b-41d4-a716-0000000000a3",
+    "releaseFormId": "d968e687-6a73-53d2-a97b-a2199a44c207",
     "purpose": "continuing-care",
     "otherDetails": ""
   },
   "authorizationPeriod": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a6",
+    "id": "02f29f08-0320-5fe1-9d90-4b235f27a2e3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "releaseFormId": "550e8400-e29b-41d4-a716-0000000000aa",
+    "releaseFormId": "9b91bf41-6f34-5ecb-a6d3-31bb7e0a23d4",
     "startDate": "2026-04-09",
     "endDate": "2026-04-09",
     "singleUse": "yes"
   },
   "restrictionsLimitations": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ae",
+    "id": "c1026d62-e466-587c-a15d-e2e05ae14ec4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "releaseFormId": "550e8400-e29b-41d4-a716-0000000000b2",
+    "releaseFormId": "d730350d-ec90-53a7-a257-3008dcd29d7d",
     "excludeHiv": "yes",
     "excludeSubstanceAbuse": "yes",
     "excludeMentalHealth": "yes",
@@ -101,21 +101,21 @@
     "additionalRestrictions": ""
   },
   "patientRights": {
-    "id": "550e8400-e29b-41d4-a716-0000000000cb",
+    "id": "d1b8dd7b-f6c8-57b2-929a-a8665a7a14a1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "releaseFormId": "550e8400-e29b-41d4-a716-0000000000cf",
+    "releaseFormId": "2a96de61-ab1b-5549-a945-c49ee7ebe4de",
     "acknowledgedRightToRevoke": "yes",
     "acknowledgedNoChargeForAccess": "yes",
     "acknowledgedDataProtection": "yes"
   },
   "signatureConsent": {
-    "id": "550e8400-e29b-41d4-a716-0000000000e1",
+    "id": "63845e48-218a-52af-90b5-4294eecdc2ea",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "releaseFormId": "550e8400-e29b-41d4-a716-0000000000e5",
+    "releaseFormId": "d3676264-944f-5e37-9059-5967f7f53ea1",
     "patientSignatureConfirmed": "yes",
     "signatureDate": null,
     "witnessName": "",
@@ -124,33 +124,33 @@
     "parentGuardianName": ""
   },
   "validationResult": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ec",
+    "id": "4c1f4106-2b8e-5589-b726-885bd9a3a4ed",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "releaseFormId": "550e8400-e29b-41d4-a716-0000000000f0",
+    "releaseFormId": "67ade4b1-fffd-55ef-b137-df565ca6d321",
     "completenessScore": 0,
     "completenessStatus": "",
     "validationStatus": "",
     "validatedAt": null
   },
   "validationFiredRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000f5",
+    "id": "e9cf7618-b4ee-5c36-b263-9a261fc8c0b2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "validationResultId": "550e8400-e29b-41d4-a716-0000000000f9",
+    "validationResultId": "50f4a354-9281-51b2-9260-1ace8e9186e2",
     "ruleId": "",
     "domain": "",
     "description": "",
     "score": 0
   },
   "validationAdditionalFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000fe",
+    "id": "4c58015d-6897-5a77-92f1-3447be6c19eb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "validationResultId": "550e8400-e29b-41d4-a716-000000000102",
+    "validationResultId": "56be1e87-fe51-57ad-9b94-9cc7f98f0e93",
     "flagId": "",
     "category": "",
     "message": "",

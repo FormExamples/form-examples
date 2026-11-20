@@ -5,10 +5,19 @@ info:
   title: United Kingdom Maternity Certificate Mat B1 — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: united-kingdom-maternity-certificate-mat-b1
+  apiPrefix: /api/united-kingdom-maternity-certificate-mat-b1/
+  sqlSchema: united_kingdom_maternity_certificate_mat_b1
+  xmlNamespace: https://formexamples.github.io/united-kingdom-maternity-certificate-mat-b1/xml
+tags:
+  - name: united-kingdom-maternity-certificate-mat-b1
+    description: United Kingdom Maternity Certificate Mat B1 form
 paths:
   /api/united-kingdom-maternity-certificate-mat-b1/clinicians:
     get:
       summary: List Clinician records
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: deleteClinician
       responses:
         "200":

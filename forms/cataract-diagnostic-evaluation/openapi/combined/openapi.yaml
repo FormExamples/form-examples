@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Cataract Diagnostic Evaluation form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: cataract-diagnostic-evaluation
+  apiPrefix: /api/cataract-diagnostic-evaluation/
+  sqlSchema: cataract_diagnostic_evaluation
+  xmlNamespace: https://formexamples.github.io/cataract-diagnostic-evaluation/xml
+tags:
+- name: cataract-diagnostic-evaluation
+  description: Cataract Diagnostic Evaluation form
 paths:
   /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluation_grade_flags:
     get:
       summary: List CataractDiagnosticEvaluationGradeFlag records
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: listCataractDiagnosticEvaluationGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CataractDiagnosticEvaluationGradeFlag
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: createCataractDiagnosticEvaluationGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CataractDiagnosticEvaluationGradeFlag by id
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: getCataractDiagnosticEvaluationGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CataractDiagnosticEvaluationGradeFlag
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: updateCataractDiagnosticEvaluationGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CataractDiagnosticEvaluationGradeFlag
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: replaceCataractDiagnosticEvaluationGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CataractDiagnosticEvaluationGradeFlag
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: deleteCataractDiagnosticEvaluationGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluation_grades:
     get:
       summary: List CataractDiagnosticEvaluationGrade records
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: listCataractDiagnosticEvaluationGrade
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CataractDiagnosticEvaluationGrade
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: createCataractDiagnosticEvaluationGrade
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CataractDiagnosticEvaluationGrade by id
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: getCataractDiagnosticEvaluationGrade
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CataractDiagnosticEvaluationGrade
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: updateCataractDiagnosticEvaluationGrade
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CataractDiagnosticEvaluationGrade
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: replaceCataractDiagnosticEvaluationGrade
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CataractDiagnosticEvaluationGrade
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: deleteCataractDiagnosticEvaluationGrade
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluations:
     get:
       summary: List CataractDiagnosticEvaluation records
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: listCataractDiagnosticEvaluation
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CataractDiagnosticEvaluation
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: createCataractDiagnosticEvaluation
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CataractDiagnosticEvaluation by id
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: getCataractDiagnosticEvaluation
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CataractDiagnosticEvaluation
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: updateCataractDiagnosticEvaluation
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CataractDiagnosticEvaluation
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: replaceCataractDiagnosticEvaluation
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CataractDiagnosticEvaluation
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: deleteCataractDiagnosticEvaluation
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/cataract-diagnostic-evaluation/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: listClinician
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: createClinician
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: getClinician
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: updateClinician
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: replaceClinician
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: deleteClinician
       responses:
         '200':
@@ -1003,9 +1059,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - cataract-diagnostic-evaluation
   /api/cataract-diagnostic-evaluation/patients:
     get:
       summary: List Patient records
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: listPatient
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: createPatient
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: getPatient
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: updatePatient
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: replacePatient
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - cataract-diagnostic-evaluation
       operationId: deletePatient
       responses:
         '200':

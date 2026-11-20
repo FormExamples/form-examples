@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "a27102d6-d761-44a7-a23a-20e48bbce7ed",
+  "id": "acfb41b9-8325-585d-90fd-7a3f9d2a041e",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88",
+      "fullUrl": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4",
       "resource": {
         "resourceType": "Patient",
-        "id": "b6eaf27d-387a-4f99-a2ef-bf6139534b88",
+        "id": "b09db5ac-4dd3-5663-ab7b-f1014df447b4",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:f9623f71-02df-4459-ab28-994d802bda35",
+      "fullUrl": "urn:uuid:b9a619b7-3441-52a2-a98f-27fdd20cdaf0",
       "resource": {
         "resourceType": "Observation",
-        "id": "f9623f71-02df-4459-ab28-994d802bda35",
+        "id": "b9a619b7-3441-52a2-a98f-27fdd20cdaf0",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:5918b144-e97b-4662-aeef-39b5cc53b1f9",
+      "fullUrl": "urn:uuid:70488c91-0bb8-5119-b340-816d6f5a3ba8",
       "resource": {
         "resourceType": "Observation",
-        "id": "5918b144-e97b-4662-aeef-39b5cc53b1f9",
+        "id": "70488c91-0bb8-5119-b340-816d6f5a3ba8",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -444,10 +444,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:aa7527b0-e3e5-4db8-a3b9-d970e6f19a9b",
+      "fullUrl": "urn:uuid:a83a126d-c6c3-5bba-afe9-92a45492d030",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "aa7527b0-e3e5-4db8-a3b9-d970e6f19a9b",
+        "id": "a83a126d-c6c3-5bba-afe9-92a45492d030",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -456,7 +456,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -465,10 +465,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:64e20223-a46e-43d4-a8cb-0c51532195ee",
+      "fullUrl": "urn:uuid:f6b533a2-f164-5be1-b054-8c4c07f91f58",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "64e20223-a46e-43d4-a8cb-0c51532195ee",
+        "id": "f6b533a2-f164-5be1-b054-8c4c07f91f58",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -498,17 +498,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (malignant cells, high-grade dyskaryosis, Thy5, or breast C5) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:b02b0f98-6b86-448a-a048-116c80246007",
+      "fullUrl": "urn:uuid:4dc4fc69-1cfd-5f0f-94ec-ed285d99c35b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "b02b0f98-6b86-448a-a048-116c80246007",
+        "id": "4dc4fc69-1cfd-5f0f-94ec-ed285d99c35b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -538,17 +538,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:baf4412a-f7fa-4c83-a76a-b4b58b158dca",
+      "fullUrl": "urn:uuid:4ce7b624-8dde-5725-8c8a-bc8a811fe225",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "baf4412a-f7fa-4c83-a76a-b4b58b158dca",
+        "id": "4ce7b624-8dde-5725-8c8a-bc8a811fe225",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -578,17 +578,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: clinical history."
       }
     },
     {
-      "fullUrl": "urn:uuid:4239dea0-18d6-43ff-a5a2-bc6ba65509ca",
+      "fullUrl": "urn:uuid:895715df-a7ac-5f30-9e18-7c88a036fa21",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "4239dea0-18d6-43ff-a5a2-bc6ba65509ca",
+        "id": "895715df-a7ac-5f30-9e18-7c88a036fa21",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -618,17 +618,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: diagnosis."
       }
     },
     {
-      "fullUrl": "urn:uuid:77f402db-c5ef-4536-aa73-c8f9415c22ca",
+      "fullUrl": "urn:uuid:7236a2b4-a595-5ff8-a546-755ad3e170ae",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "77f402db-c5ef-4536-aa73-c8f9415c22ca",
+        "id": "7236a2b4-a595-5ff8-a546-755ad3e170ae",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -658,17 +658,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: impression."
       }
     },
     {
-      "fullUrl": "urn:uuid:feb3fa41-bd51-4e83-a2e6-dc40b3d3ede3",
+      "fullUrl": "urn:uuid:01f16cbe-cdf7-5d1b-b178-6788ef74ea84",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "feb3fa41-bd51-4e83-a2e6-dc40b3d3ede3",
+        "id": "01f16cbe-cdf7-5d1b-b178-6788ef74ea84",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -698,17 +698,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:f893c4a9-50b5-4897-acbe-28e7bdd2d66b",
+      "fullUrl": "urn:uuid:e3d809f6-6438-5e4f-ba45-d1a1c3e38b63",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "f893c4a9-50b5-4897-acbe-28e7bdd2d66b",
+        "id": "e3d809f6-6438-5e4f-ba45-d1a1c3e38b63",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -738,7 +738,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (malignant cells, high-grade dyskaryosis, Thy5, or breast C5) is present.",
@@ -752,10 +752,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:41c5efb2-f9a1-4d9a-ae32-a1c4078ad2c9",
+      "fullUrl": "urn:uuid:cd23b61e-0e8a-5eef-9d90-92a38d344f31",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "41c5efb2-f9a1-4d9a-ae32-a1c4078ad2c9",
+        "id": "cd23b61e-0e8a-5eef-9d90-92a38d344f31",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -785,7 +785,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",
@@ -799,10 +799,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:21efcfb1-8cf8-4552-a7e3-c5eaf63f07d2",
+      "fullUrl": "urn:uuid:55e6c3de-b15c-5c66-b696-3917d7ef9ba1",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "21efcfb1-8cf8-4552-a7e3-c5eaf63f07d2",
+        "id": "55e6c3de-b15c-5c66-b696-3917d7ef9ba1",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -832,7 +832,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Malignant cells reported; this is a suspected-cancer (2-week-wait) result.",
@@ -846,10 +846,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:eb440ff5-4332-407c-a45e-7f96924a9089",
+      "fullUrl": "urn:uuid:f7b08812-48ec-50d7-a655-c389b29b284b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "eb440ff5-4332-407c-a45e-7f96924a9089",
+        "id": "f7b08812-48ec-50d7-a655-c389b29b284b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -879,7 +879,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
@@ -893,10 +893,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:34781915-15dd-4773-ae68-1c3edef2c7da",
+      "fullUrl": "urn:uuid:93a2b027-569c-5ed2-9f4f-5ffcbeabf872",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "34781915-15dd-4773-ae68-1c3edef2c7da",
+        "id": "93a2b027-569c-5ed2-9f4f-5ffcbeabf872",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -926,7 +926,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An abnormal finding is reported but no structured reporting category was recorded.",
@@ -940,10 +940,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:f948d66a-1f45-4ac6-a3e4-7f171478f4e6",
+      "fullUrl": "urn:uuid:0f2342f2-60e9-5058-846c-c959826e263f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "f948d66a-1f45-4ac6-a3e4-7f171478f4e6",
+        "id": "0f2342f2-60e9-5058-846c-c959826e263f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -973,7 +973,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:b6eaf27d-387a-4f99-a2ef-bf6139534b88"
+          "reference": "urn:uuid:b09db5ac-4dd3-5663-ab7b-f1014df447b4"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A significant finding is present but no originating request reference is recorded.",

@@ -5,10 +5,19 @@ info:
   title: Angiography Test Request — AngiographyTestRequest
   version: 1.0.0
   description: Vascular angiography request (referral). Captures the requested examination (modality + body region), the clinical indication and question, contrast and renal safety, bleeding / anticoagulation, pregnancy / radiation, IR(ME)R justification, and triage urgency.
+x-namespace:
+  form: angiography-test-request
+  apiPrefix: /api/angiography-test-request/
+  sqlSchema: angiography_test_request
+  xmlNamespace: https://formexamples.github.io/angiography-test-request/xml
+tags:
+  - name: angiography-test-request
+    description: Angiography Test Request form
 paths:
   /api/angiography-test-request/angiography_test_requests:
     get:
       summary: List AngiographyTestRequest records
+      tags: [angiography-test-request]
       operationId: listAngiographyTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AngiographyTestRequest
+      tags: [angiography-test-request]
       operationId: createAngiographyTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AngiographyTestRequest by id
+      tags: [angiography-test-request]
       operationId: getAngiographyTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AngiographyTestRequest
+      tags: [angiography-test-request]
       operationId: updateAngiographyTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AngiographyTestRequest
+      tags: [angiography-test-request]
       operationId: replaceAngiographyTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AngiographyTestRequest
+      tags: [angiography-test-request]
       operationId: deleteAngiographyTestRequest
       responses:
         "200":

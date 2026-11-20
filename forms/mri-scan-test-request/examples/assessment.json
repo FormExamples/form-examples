@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000067",
+    "id": "f0897ad9-03e1-5370-a0c3-77bf614d659f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000079",
+    "id": "5f4bd47f-4bed-5855-9a52-aa36d9a8f8e8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "mriScanTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-000000000087",
+    "id": "c692e9ef-3d08-5d3c-9318-51b8256edff4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000008b",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000008c",
+    "patientId": "4fb50812-fe25-58b2-9a05-10a09e083196",
+    "clinicianId": "759481d6-095d-5b70-bfc0-10f903f0205c",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -73,11 +73,11 @@
     "notes": ""
   },
   "mriScanTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000aa",
+    "id": "6d828d6d-a899-592f-bb80-27314963df35",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "mriScanTestRequestId": "550e8400-e29b-41d4-a716-0000000000ae",
+    "mriScanTestRequestId": "7ddae88e-bfdb-5470-9256-00bf266b5039",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "mriSafetyBand": "cleared",
@@ -91,22 +91,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "mriScanTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ba",
+    "id": "b4e580ed-0745-59f0-9b04-ed2bc3f456cc",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "mriScanTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000be",
+    "mriScanTestRequestGradeId": "e6238ca6-db59-55b5-8a2c-2fc3a94471f6",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "mriScanTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c3",
+    "id": "7d138090-4e0d-5370-993d-687d6fc6a72c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "mriScanTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000c7",
+    "mriScanTestRequestGradeId": "8a461ee4-49ce-5f14-808f-00ce0a62cedf",
     "flagId": "",
     "category": "ferromagnetic-implant",
     "priority": "low",

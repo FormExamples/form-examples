@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE podiatric_surg_waiting_list_card_grade_rule SYSTEM "podiatric_surg_waiting_list_card_grade_rule.dtd">
-<podiatric_surg_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<podiatric_surg_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/podiatric-surgery-waiting-list-card/xml">
+<id>392a0f83-cd8a-52df-8ff7-1d1af2197b4b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<podiatric_surg_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</podiatric_surg_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<podiatric_surg_waiting_list_card_grade_id>8349c47c-cc8b-54e5-b1b3-1277988081a0</podiatric_surg_waiting_list_card_grade_id>
+<rule_id>3bca7db2-9b20-5354-bab3-096f8b01f3cd</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE clin_chem_waiting_list_card_grade_rule SYSTEM "clin_chem_waiting_list_card_grade_rule.dtd">
-<clin_chem_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<clin_chem_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/clinical-chemistry-waiting-list-card/xml">
+<id>1c7c2110-06df-5325-9a97-a17bf57c643c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<clin_chem_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</clin_chem_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<clin_chem_waiting_list_card_grade_id>40a34930-6d72-5168-811a-bbf5ca7a59e9</clin_chem_waiting_list_card_grade_id>
+<rule_id>b116b26c-4fd3-53a6-a2f5-9ed8ff0c893c</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

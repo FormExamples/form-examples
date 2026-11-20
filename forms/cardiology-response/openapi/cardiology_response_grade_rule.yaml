@@ -5,10 +5,19 @@ info:
   title: Cardiology Response — CardiologyResponseGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this response.
+x-namespace:
+  form: cardiology-response
+  apiPrefix: /api/cardiology-response/
+  sqlSchema: cardiology_response
+  xmlNamespace: https://formexamples.github.io/cardiology-response/xml
+tags:
+  - name: cardiology-response
+    description: Cardiology Response form
 paths:
   /api/cardiology-response/cardiology_response_grade_rules:
     get:
       summary: List CardiologyResponseGradeRule records
+      tags: [cardiology-response]
       operationId: listCardiologyResponseGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiologyResponseGradeRule
+      tags: [cardiology-response]
       operationId: createCardiologyResponseGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiologyResponseGradeRule by id
+      tags: [cardiology-response]
       operationId: getCardiologyResponseGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiologyResponseGradeRule
+      tags: [cardiology-response]
       operationId: updateCardiologyResponseGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiologyResponseGradeRule
+      tags: [cardiology-response]
       operationId: replaceCardiologyResponseGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiologyResponseGradeRule
+      tags: [cardiology-response]
       operationId: deleteCardiologyResponseGradeRule
       responses:
         "200":

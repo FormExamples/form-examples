@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Sequential Organ Failure Assessment (SOFA) form,
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: sequential-organ-failure-assessment
+  apiPrefix: /api/sequential-organ-failure-assessment/
+  sqlSchema: sequential_organ_failure_assessment
+  xmlNamespace: https://formexamples.github.io/sequential-organ-failure-assessment/xml
+tags:
+- name: sequential-organ-failure-assessment
+  description: Sequential Organ Failure Assessment (SOFA) form
 paths:
   /api/sequential-organ-failure-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - sequential-organ-failure-assessment
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - sequential-organ-failure-assessment
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - sequential-organ-failure-assessment
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - sequential-organ-failure-assessment
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - sequential-organ-failure-assessment
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - sequential-organ-failure-assessment
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - sequential-organ-failure-assessment
   /api/sequential-organ-failure-assessment/patients:
     get:
       summary: List Patient records
+      tags:
+      - sequential-organ-failure-assessment
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - sequential-organ-failure-assessment
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - sequential-organ-failure-assessment
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - sequential-organ-failure-assessment
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - sequential-organ-failure-assessment
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - sequential-organ-failure-assessment
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/sequential-organ-failure-assessment/sequential_organ_failure_assessment_grade_flags:
     get:
       summary: List SequentialOrganFailureAssessmentGradeFlag records
+      tags:
+      - sequential-organ-failure-assessment
       operationId: listSequentialOrganFailureAssessmentGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new SequentialOrganFailureAssessmentGradeFlag
+      tags:
+      - sequential-organ-failure-assessment
       operationId: createSequentialOrganFailureAssessmentGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one SequentialOrganFailureAssessmentGradeFlag by id
+      tags:
+      - sequential-organ-failure-assessment
       operationId: getSequentialOrganFailureAssessmentGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing SequentialOrganFailureAssessmentGradeFlag
+      tags:
+      - sequential-organ-failure-assessment
       operationId: updateSequentialOrganFailureAssessmentGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing SequentialOrganFailureAssessmentGradeFlag
+      tags:
+      - sequential-organ-failure-assessment
       operationId: replaceSequentialOrganFailureAssessmentGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a SequentialOrganFailureAssessmentGradeFlag
+      tags:
+      - sequential-organ-failure-assessment
       operationId: deleteSequentialOrganFailureAssessmentGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/sequential-organ-failure-assessment/sequential_organ_failure_assessment_grade_rules:
     get:
       summary: List SequentialOrganFailureAssessmentGradeRule records
+      tags:
+      - sequential-organ-failure-assessment
       operationId: listSequentialOrganFailureAssessmentGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new SequentialOrganFailureAssessmentGradeRule
+      tags:
+      - sequential-organ-failure-assessment
       operationId: createSequentialOrganFailureAssessmentGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one SequentialOrganFailureAssessmentGradeRule by id
+      tags:
+      - sequential-organ-failure-assessment
       operationId: getSequentialOrganFailureAssessmentGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing SequentialOrganFailureAssessmentGradeRule
+      tags:
+      - sequential-organ-failure-assessment
       operationId: updateSequentialOrganFailureAssessmentGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing SequentialOrganFailureAssessmentGradeRule
+      tags:
+      - sequential-organ-failure-assessment
       operationId: replaceSequentialOrganFailureAssessmentGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a SequentialOrganFailureAssessmentGradeRule
+      tags:
+      - sequential-organ-failure-assessment
       operationId: deleteSequentialOrganFailureAssessmentGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/sequential-organ-failure-assessment/sequential_organ_failure_assessment_grades:
     get:
       summary: List SequentialOrganFailureAssessmentGrade records
+      tags:
+      - sequential-organ-failure-assessment
       operationId: listSequentialOrganFailureAssessmentGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new SequentialOrganFailureAssessmentGrade
+      tags:
+      - sequential-organ-failure-assessment
       operationId: createSequentialOrganFailureAssessmentGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one SequentialOrganFailureAssessmentGrade by id
+      tags:
+      - sequential-organ-failure-assessment
       operationId: getSequentialOrganFailureAssessmentGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing SequentialOrganFailureAssessmentGrade
+      tags:
+      - sequential-organ-failure-assessment
       operationId: updateSequentialOrganFailureAssessmentGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing SequentialOrganFailureAssessmentGrade
+      tags:
+      - sequential-organ-failure-assessment
       operationId: replaceSequentialOrganFailureAssessmentGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a SequentialOrganFailureAssessmentGrade
+      tags:
+      - sequential-organ-failure-assessment
       operationId: deleteSequentialOrganFailureAssessmentGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/sequential-organ-failure-assessment/sequential_organ_failure_assessments:
     get:
       summary: List SequentialOrganFailureAssessment records
+      tags:
+      - sequential-organ-failure-assessment
       operationId: listSequentialOrganFailureAssessment
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new SequentialOrganFailureAssessment
+      tags:
+      - sequential-organ-failure-assessment
       operationId: createSequentialOrganFailureAssessment
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one SequentialOrganFailureAssessment by id
+      tags:
+      - sequential-organ-failure-assessment
       operationId: getSequentialOrganFailureAssessment
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing SequentialOrganFailureAssessment
+      tags:
+      - sequential-organ-failure-assessment
       operationId: updateSequentialOrganFailureAssessment
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing SequentialOrganFailureAssessment
+      tags:
+      - sequential-organ-failure-assessment
       operationId: replaceSequentialOrganFailureAssessment
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a SequentialOrganFailureAssessment
+      tags:
+      - sequential-organ-failure-assessment
       operationId: deleteSequentialOrganFailureAssessment
       responses:
         '200':

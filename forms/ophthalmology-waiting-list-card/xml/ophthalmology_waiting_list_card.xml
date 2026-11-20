@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ophthalmology_waiting_list_card SYSTEM "ophthalmology_waiting_list_card.dtd">
-<ophthalmology_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<ophthalmology_waiting_list_card xmlns="https://formexamples.github.io/ophthalmology-waiting-list-card/xml">
+<id>4e9db39c-0763-5c62-bae4-c12b967290a6</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>d0d9a212-c40b-5d29-a5e2-7ad47a54654c</patient_id>
+<practitioner_id>86247013-cb28-51e7-8a37-93a0a0c09166</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

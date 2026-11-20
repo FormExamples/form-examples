@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Alcohol Use Disorders Identification Test — Consumption
     (AUDIT-C) form, merged from the per-entity specs in this directory. One RESTful resource per routed
     SQL table, and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: alcohol-use-disorders-identification-test-consumption
+  apiPrefix: /api/alcohol-use-disorders-identification-test-consumption/
+  sqlSchema: alcohol_use_disorders_identification_test_consumption
+  xmlNamespace: https://formexamples.github.io/alcohol-use-disorders-identification-test-consumption/xml
+tags:
+- name: alcohol-use-disorders-identification-test-consumption
+  description: Alcohol Use Disorders Identification Test — Consumption (AUDIT-C) form
 paths:
   /api/alcohol-use-disorders-identification-test-consumption/audit_c_grade_flags:
     get:
       summary: List AuditCGradeFlag records
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: listAuditCGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AuditCGradeFlag
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: createAuditCGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AuditCGradeFlag by id
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: getAuditCGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AuditCGradeFlag
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: updateAuditCGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AuditCGradeFlag
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: replaceAuditCGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AuditCGradeFlag
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: deleteAuditCGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/alcohol-use-disorders-identification-test-consumption/audit_c_grade_rules:
     get:
       summary: List AuditCGradeRule records
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: listAuditCGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AuditCGradeRule
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: createAuditCGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AuditCGradeRule by id
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: getAuditCGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AuditCGradeRule
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: updateAuditCGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AuditCGradeRule
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: replaceAuditCGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AuditCGradeRule
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: deleteAuditCGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/alcohol-use-disorders-identification-test-consumption/audit_c_grades:
     get:
       summary: List AuditCGrade records
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: listAuditCGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AuditCGrade
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: createAuditCGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AuditCGrade by id
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: getAuditCGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AuditCGrade
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: updateAuditCGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AuditCGrade
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: replaceAuditCGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AuditCGrade
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: deleteAuditCGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/alcohol-use-disorders-identification-test-consumption/audit_cs:
     get:
       summary: List AuditC records
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: listAuditC
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AuditC
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: createAuditC
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AuditC by id
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: getAuditC
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AuditC
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: updateAuditC
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AuditC
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: replaceAuditC
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AuditC
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: deleteAuditC
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/alcohol-use-disorders-identification-test-consumption/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
   /api/alcohol-use-disorders-identification-test-consumption/patients:
     get:
       summary: List Patient records
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - alcohol-use-disorders-identification-test-consumption
       operationId: deletePatient
       responses:
         '200':

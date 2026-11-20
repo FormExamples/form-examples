@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "8bb56214-43dc-49f0-a802-575853a51b70",
+  "id": "38a3908f-5b9a-5b85-9cac-a4b11b3647c7",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:ca503b03-7942-4187-a929-4114a33987b1",
+      "fullUrl": "urn:uuid:31fb5641-7dd2-5d1b-a71a-e05e10a27004",
       "resource": {
         "resourceType": "Patient",
-        "id": "ca503b03-7942-4187-a929-4114a33987b1",
+        "id": "31fb5641-7dd2-5d1b-a71a-e05e10a27004",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:8ac61b29-a780-4729-a5e1-295c8c5447dc",
+      "fullUrl": "urn:uuid:9658cf72-5a75-558c-8088-167afd4d294d",
       "resource": {
         "resourceType": "Observation",
-        "id": "8ac61b29-a780-4729-a5e1-295c8c5447dc",
+        "id": "9658cf72-5a75-558c-8088-167afd4d294d",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:ca503b03-7942-4187-a929-4114a33987b1"
+          "reference": "urn:uuid:31fb5641-7dd2-5d1b-a71a-e05e10a27004"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:93d0ee88-98c5-4006-a6e6-15d41de785e2",
+      "fullUrl": "urn:uuid:367cd7a3-e9a7-572b-92e4-50f0b3b8f709",
       "resource": {
         "resourceType": "Observation",
-        "id": "93d0ee88-98c5-4006-a6e6-15d41de785e2",
+        "id": "367cd7a3-e9a7-572b-92e4-50f0b3b8f709",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:ca503b03-7942-4187-a929-4114a33987b1"
+          "reference": "urn:uuid:31fb5641-7dd2-5d1b-a71a-e05e10a27004"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -613,10 +613,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:7783d511-3f08-465e-a2a3-6f71f1542fdc",
+      "fullUrl": "urn:uuid:14853b59-2861-5474-b9e1-f1ace55e00d1",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "7783d511-3f08-465e-a2a3-6f71f1542fdc",
+        "id": "14853b59-2861-5474-b9e1-f1ace55e00d1",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -625,7 +625,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:ca503b03-7942-4187-a929-4114a33987b1"
+          "reference": "urn:uuid:31fb5641-7dd2-5d1b-a71a-e05e10a27004"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -634,10 +634,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:c1eacfe5-2001-4087-aff9-1e5499d2fb9b",
+      "fullUrl": "urn:uuid:4ed13ffb-f02d-5967-9638-6e2409285e46",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "c1eacfe5-2001-4087-aff9-1e5499d2fb9b",
+        "id": "4ed13ffb-f02d-5967-9638-6e2409285e46",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -667,17 +667,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:ca503b03-7942-4187-a929-4114a33987b1"
+          "reference": "urn:uuid:31fb5641-7dd2-5d1b-a71a-e05e10a27004"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "One or more abnormal structured findings are present; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:8b777e29-5014-4c85-a5e6-e941e6a0f620",
+      "fullUrl": "urn:uuid:02f26796-0972-5f5a-8c5e-bd193debe13c",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "8b777e29-5014-4c85-a5e6-e941e6a0f620",
+        "id": "02f26796-0972-5f5a-8c5e-bd193debe13c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -707,17 +707,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:ca503b03-7942-4187-a929-4114a33987b1"
+          "reference": "urn:uuid:31fb5641-7dd2-5d1b-a71a-e05e10a27004"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An actionable abnormal finding (induced ischaemia, chest pain, or arrhythmia) is present; severity graded moderate."
       }
     },
     {
-      "fullUrl": "urn:uuid:ce5e22be-ddb4-40a0-a6ff-5e7e32dd78e5",
+      "fullUrl": "urn:uuid:871c069b-8514-5a38-9e40-ee366eac232c",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ce5e22be-ddb4-40a0-a6ff-5e7e32dd78e5",
+        "id": "871c069b-8514-5a38-9e40-ee366eac232c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -747,17 +747,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:ca503b03-7942-4187-a929-4114a33987b1"
+          "reference": "urn:uuid:31fb5641-7dd2-5d1b-a71a-e05e10a27004"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: structured findings."
       }
     },
     {
-      "fullUrl": "urn:uuid:98c62b9f-97e2-4c2f-a933-f51979362025",
+      "fullUrl": "urn:uuid:de2f9fc1-fa2b-5270-925d-74ff0f980558",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "98c62b9f-97e2-4c2f-a933-f51979362025",
+        "id": "de2f9fc1-fa2b-5270-925d-74ff0f980558",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -787,17 +787,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:ca503b03-7942-4187-a929-4114a33987b1"
+          "reference": "urn:uuid:31fb5641-7dd2-5d1b-a71a-e05e10a27004"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Moderate abnormality present; follow-up recommended."
       }
     },
     {
-      "fullUrl": "urn:uuid:60635309-d668-4922-a3dc-57a8b9409141",
+      "fullUrl": "urn:uuid:8829397a-08cb-59ba-bf53-1b984749e066",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "60635309-d668-4922-a3dc-57a8b9409141",
+        "id": "8829397a-08cb-59ba-bf53-1b984749e066",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -827,7 +827,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:ca503b03-7942-4187-a929-4114a33987b1"
+          "reference": "urn:uuid:31fb5641-7dd2-5d1b-a71a-e05e10a27004"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Induced ischaemia or chest pain requiring timely action is present.",
@@ -841,10 +841,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:38c808e7-6070-4c8a-a27b-2b5051d627d5",
+      "fullUrl": "urn:uuid:b78dd340-7d12-5151-9d67-c3ff5cb2d474",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "38c808e7-6070-4c8a-a27b-2b5051d627d5",
+        "id": "b78dd340-7d12-5151-9d67-c3ff5cb2d474",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -874,7 +874,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:ca503b03-7942-4187-a929-4114a33987b1"
+          "reference": "urn:uuid:31fb5641-7dd2-5d1b-a71a-e05e10a27004"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Test was terminated early or submaximal (target heart rate not reached); diagnostic confidence may be reduced.",

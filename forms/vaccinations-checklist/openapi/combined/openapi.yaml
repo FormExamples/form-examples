@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Vaccinations Checklist form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: vaccinations-checklist
+  apiPrefix: /api/vaccinations-checklist/
+  sqlSchema: vaccinations_checklist
+  xmlNamespace: https://formexamples.github.io/vaccinations-checklist/xml
+tags:
+- name: vaccinations-checklist
+  description: Vaccinations Checklist form
 paths:
   /api/vaccinations-checklist/assessments:
     get:
       summary: List Assessment records
+      tags:
+      - vaccinations-checklist
       operationId: listAssessment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessment
+      tags:
+      - vaccinations-checklist
       operationId: createAssessment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags:
+      - vaccinations-checklist
       operationId: getAssessment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessment
+      tags:
+      - vaccinations-checklist
       operationId: updateAssessment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Assessment
+      tags:
+      - vaccinations-checklist
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Assessment
+      tags:
+      - vaccinations-checklist
       operationId: deleteAssessment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/vaccinations-checklist/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - vaccinations-checklist
       operationId: listClinician
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - vaccinations-checklist
       operationId: createClinician
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - vaccinations-checklist
       operationId: getClinician
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - vaccinations-checklist
       operationId: updateClinician
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - vaccinations-checklist
       operationId: replaceClinician
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - vaccinations-checklist
       operationId: deleteClinician
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/vaccinations-checklist/grades:
     get:
       summary: List Grade records
+      tags:
+      - vaccinations-checklist
       operationId: listGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Grade
+      tags:
+      - vaccinations-checklist
       operationId: createGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Grade by id
+      tags:
+      - vaccinations-checklist
       operationId: getGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Grade
+      tags:
+      - vaccinations-checklist
       operationId: updateGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Grade
+      tags:
+      - vaccinations-checklist
       operationId: replaceGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Grade
+      tags:
+      - vaccinations-checklist
       operationId: deleteGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/vaccinations-checklist/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags:
+      - vaccinations-checklist
       operationId: listGradingAdditionalFlag
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingAdditionalFlag
+      tags:
+      - vaccinations-checklist
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags:
+      - vaccinations-checklist
       operationId: getGradingAdditionalFlag
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags:
+      - vaccinations-checklist
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags:
+      - vaccinations-checklist
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags:
+      - vaccinations-checklist
       operationId: deleteGradingAdditionalFlag
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/vaccinations-checklist/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags:
+      - vaccinations-checklist
       operationId: listGradingFiredRule
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingFiredRule
+      tags:
+      - vaccinations-checklist
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags:
+      - vaccinations-checklist
       operationId: getGradingFiredRule
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingFiredRule
+      tags:
+      - vaccinations-checklist
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingFiredRule
+      tags:
+      - vaccinations-checklist
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingFiredRule
+      tags:
+      - vaccinations-checklist
       operationId: deleteGradingFiredRule
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - vaccinations-checklist
   /api/vaccinations-checklist/patients:
     get:
       summary: List Patient records
+      tags:
+      - vaccinations-checklist
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - vaccinations-checklist
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - vaccinations-checklist
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - vaccinations-checklist
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - vaccinations-checklist
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - vaccinations-checklist
       operationId: deletePatient
       responses:
         '200':

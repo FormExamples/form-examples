@@ -1,4 +1,5 @@
 <!ELEMENT authorized_recipient (id,created_at,updated_at,deleted_at,release_form_id,recipient_name,recipient_organization,recipient_address,recipient_phone,recipient_email,recipient_role)>
+<!ATTLIST authorized_recipient xmlns CDATA #FIXED "https://formexamples.github.io/medical-records-release-permission/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

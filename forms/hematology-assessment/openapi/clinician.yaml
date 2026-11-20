@@ -5,10 +5,19 @@ info:
   title: Hematology Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: hematology-assessment
+  apiPrefix: /api/hematology-assessment/
+  sqlSchema: hematology_assessment
+  xmlNamespace: https://formexamples.github.io/hematology-assessment/xml
+tags:
+  - name: hematology-assessment
+    description: Hematology Assessment form
 paths:
   /api/hematology-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [hematology-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [hematology-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [hematology-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [hematology-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [hematology-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [hematology-assessment]
       operationId: deleteClinician
       responses:
         "200":

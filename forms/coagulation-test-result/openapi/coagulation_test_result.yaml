@@ -5,10 +5,19 @@ info:
   title: Coagulation Test Result — CoagulationTestResult
   version: 1.0.0
   description: Coagulation / haemostasis test result (report). Captures the reported result values (PT/INR, APTT/ratio, fibrinogen, D-dimer, thrombin time, factor assays), the specimen condition, clinical history and anticoagulant status, the narrative and impression, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: coagulation-test-result
+  apiPrefix: /api/coagulation-test-result/
+  sqlSchema: coagulation_test_result
+  xmlNamespace: https://formexamples.github.io/coagulation-test-result/xml
+tags:
+  - name: coagulation-test-result
+    description: Coagulation Test Result form
 paths:
   /api/coagulation-test-result/coagulation_test_results:
     get:
       summary: List CoagulationTestResult records
+      tags: [coagulation-test-result]
       operationId: listCoagulationTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CoagulationTestResult
+      tags: [coagulation-test-result]
       operationId: createCoagulationTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CoagulationTestResult by id
+      tags: [coagulation-test-result]
       operationId: getCoagulationTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CoagulationTestResult
+      tags: [coagulation-test-result]
       operationId: updateCoagulationTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CoagulationTestResult
+      tags: [coagulation-test-result]
       operationId: replaceCoagulationTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CoagulationTestResult
+      tags: [coagulation-test-result]
       operationId: deleteCoagulationTestResult
       responses:
         "200":

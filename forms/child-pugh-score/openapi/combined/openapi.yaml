@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Child-Pugh Score (Child-Turcotte-Pugh) form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: child-pugh-score
+  apiPrefix: /api/child-pugh-score/
+  sqlSchema: child_pugh_score
+  xmlNamespace: https://formexamples.github.io/child-pugh-score/xml
+tags:
+- name: child-pugh-score
+  description: Child-Pugh Score (Child-Turcotte-Pugh) form
 paths:
   /api/child-pugh-score/child_pugh_score_grade_flags:
     get:
       summary: List ChildPughScoreGradeFlag records
+      tags:
+      - child-pugh-score
       operationId: listChildPughScoreGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ChildPughScoreGradeFlag
+      tags:
+      - child-pugh-score
       operationId: createChildPughScoreGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ChildPughScoreGradeFlag by id
+      tags:
+      - child-pugh-score
       operationId: getChildPughScoreGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ChildPughScoreGradeFlag
+      tags:
+      - child-pugh-score
       operationId: updateChildPughScoreGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ChildPughScoreGradeFlag
+      tags:
+      - child-pugh-score
       operationId: replaceChildPughScoreGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ChildPughScoreGradeFlag
+      tags:
+      - child-pugh-score
       operationId: deleteChildPughScoreGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/child-pugh-score/child_pugh_score_grade_rules:
     get:
       summary: List ChildPughScoreGradeRule records
+      tags:
+      - child-pugh-score
       operationId: listChildPughScoreGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ChildPughScoreGradeRule
+      tags:
+      - child-pugh-score
       operationId: createChildPughScoreGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ChildPughScoreGradeRule by id
+      tags:
+      - child-pugh-score
       operationId: getChildPughScoreGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ChildPughScoreGradeRule
+      tags:
+      - child-pugh-score
       operationId: updateChildPughScoreGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ChildPughScoreGradeRule
+      tags:
+      - child-pugh-score
       operationId: replaceChildPughScoreGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ChildPughScoreGradeRule
+      tags:
+      - child-pugh-score
       operationId: deleteChildPughScoreGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/child-pugh-score/child_pugh_score_grades:
     get:
       summary: List ChildPughScoreGrade records
+      tags:
+      - child-pugh-score
       operationId: listChildPughScoreGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ChildPughScoreGrade
+      tags:
+      - child-pugh-score
       operationId: createChildPughScoreGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ChildPughScoreGrade by id
+      tags:
+      - child-pugh-score
       operationId: getChildPughScoreGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ChildPughScoreGrade
+      tags:
+      - child-pugh-score
       operationId: updateChildPughScoreGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ChildPughScoreGrade
+      tags:
+      - child-pugh-score
       operationId: replaceChildPughScoreGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ChildPughScoreGrade
+      tags:
+      - child-pugh-score
       operationId: deleteChildPughScoreGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/child-pugh-score/child_pugh_scores:
     get:
       summary: List ChildPughScore records
+      tags:
+      - child-pugh-score
       operationId: listChildPughScore
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ChildPughScore
+      tags:
+      - child-pugh-score
       operationId: createChildPughScore
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ChildPughScore by id
+      tags:
+      - child-pugh-score
       operationId: getChildPughScore
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ChildPughScore
+      tags:
+      - child-pugh-score
       operationId: updateChildPughScore
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ChildPughScore
+      tags:
+      - child-pugh-score
       operationId: replaceChildPughScore
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ChildPughScore
+      tags:
+      - child-pugh-score
       operationId: deleteChildPughScore
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/child-pugh-score/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - child-pugh-score
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - child-pugh-score
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - child-pugh-score
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - child-pugh-score
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - child-pugh-score
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - child-pugh-score
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - child-pugh-score
   /api/child-pugh-score/patients:
     get:
       summary: List Patient records
+      tags:
+      - child-pugh-score
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - child-pugh-score
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - child-pugh-score
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - child-pugh-score
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - child-pugh-score
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - child-pugh-score
       operationId: deletePatient
       responses:
         '200':

@@ -5,10 +5,19 @@ info:
   title: Arc42 — ConstraintItem
   version: 1.0.0
   description: Constraint item captured in §2 Constraints of the arc42 documentation.
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+  - name: arc42
+    description: Arc42 form
 paths:
   /api/arc42/constraint_items:
     get:
       summary: List ConstraintItem records
+      tags: [arc42]
       operationId: listConstraintItem
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ConstraintItem
+      tags: [arc42]
       operationId: createConstraintItem
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ConstraintItem by id
+      tags: [arc42]
       operationId: getConstraintItem
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ConstraintItem
+      tags: [arc42]
       operationId: updateConstraintItem
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ConstraintItem
+      tags: [arc42]
       operationId: replaceConstraintItem
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ConstraintItem
+      tags: [arc42]
       operationId: deleteConstraintItem
       responses:
         "200":

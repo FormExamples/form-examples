@@ -5,10 +5,19 @@ info:
   title: Wells Score For Pulmonary Embolism — WellsScoreForPulmonaryEmbolism
   version: 1.0.0
   description: "Main Wells PE assessment record: identification, context, and the seven weighted clinical criterion inputs."
+x-namespace:
+  form: wells-score-for-pulmonary-embolism
+  apiPrefix: /api/wells-score-for-pulmonary-embolism/
+  sqlSchema: wells_score_for_pulmonary_embolism
+  xmlNamespace: https://formexamples.github.io/wells-score-for-pulmonary-embolism/xml
+tags:
+  - name: wells-score-for-pulmonary-embolism
+    description: Wells Score For Pulmonary Embolism form
 paths:
   /api/wells-score-for-pulmonary-embolism/wells_score_for_pulmonary_embolisms:
     get:
       summary: List WellsScoreForPulmonaryEmbolism records
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: listWellsScoreForPulmonaryEmbolism
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new WellsScoreForPulmonaryEmbolism
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: createWellsScoreForPulmonaryEmbolism
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one WellsScoreForPulmonaryEmbolism by id
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: getWellsScoreForPulmonaryEmbolism
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing WellsScoreForPulmonaryEmbolism
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: updateWellsScoreForPulmonaryEmbolism
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing WellsScoreForPulmonaryEmbolism
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: replaceWellsScoreForPulmonaryEmbolism
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a WellsScoreForPulmonaryEmbolism
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: deleteWellsScoreForPulmonaryEmbolism
       responses:
         "200":

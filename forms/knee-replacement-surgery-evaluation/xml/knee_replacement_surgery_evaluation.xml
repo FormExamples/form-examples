@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE knee_replacement_surgery_evaluation SYSTEM "knee_replacement_surgery_evaluation.dtd">
-<knee_replacement_surgery_evaluation>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<knee_replacement_surgery_evaluation xmlns="https://formexamples.github.io/knee-replacement-surgery-evaluation/xml">
+<id>d2a01b7b-81ab-559a-af4e-78e1280e5d3c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>d49f7ee8-b74a-5074-8c77-b8debcb31ea5</patient_id>
+<clinician_id>0946cad3-c18a-51d6-b172-9cdfc431df04</clinician_id>
 <status>draft</status>
 <site_name>Example</site_name>
 <assessment_date>2026-01-15</assessment_date>

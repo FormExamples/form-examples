@@ -5,10 +5,19 @@ info:
   title: General Surgery Waiting List Card — GenSurgeryWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: general-surgery-waiting-list-card
+  apiPrefix: /api/general-surgery-waiting-list-card/
+  sqlSchema: general_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/general-surgery-waiting-list-card/xml
+tags:
+  - name: general-surgery-waiting-list-card
+    description: General Surgery Waiting List Card form
 paths:
   /api/general-surgery-waiting-list-card/gen_surgery_waiting_list_card_grades:
     get:
       summary: List GenSurgeryWaitingListCardGrade records
+      tags: [general-surgery-waiting-list-card]
       operationId: listGenSurgeryWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GenSurgeryWaitingListCardGrade
+      tags: [general-surgery-waiting-list-card]
       operationId: createGenSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GenSurgeryWaitingListCardGrade by id
+      tags: [general-surgery-waiting-list-card]
       operationId: getGenSurgeryWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GenSurgeryWaitingListCardGrade
+      tags: [general-surgery-waiting-list-card]
       operationId: updateGenSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GenSurgeryWaitingListCardGrade
+      tags: [general-surgery-waiting-list-card]
       operationId: replaceGenSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GenSurgeryWaitingListCardGrade
+      tags: [general-surgery-waiting-list-card]
       operationId: deleteGenSurgeryWaitingListCardGrade
       responses:
         "200":

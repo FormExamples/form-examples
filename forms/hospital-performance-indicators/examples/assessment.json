@@ -1,6 +1,6 @@
 {
   "hospitalPerformanceIndicators": {
-    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "id": "e9512ccd-a38a-5a2f-84ee-c54533a534d8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -13,11 +13,11 @@
     "signedAt": null
   },
   "hospitalPerformanceIndicatorValue": {
-    "id": "550e8400-e29b-41d4-a716-00000000000c",
+    "id": "e58573a5-a75b-5a4f-b616-7fd3f9e458e2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hospitalPerformanceIndicatorsId": "550e8400-e29b-41d4-a716-000000000010",
+    "hospitalPerformanceIndicatorsId": "3d39c03d-8bf9-587d-946f-82aa8dc7eb95",
     "indicatorCode": "",
     "categoryNumber": 2,
     "categoryTitle": "",

@@ -1,4 +1,5 @@
 <!ELEMENT reporter (id,created_at,updated_at,deleted_at,name,email,phone,role,organisation,team,location,timezone,preferred_contact)>
+<!ATTLIST reporter xmlns CDATA #FIXED "https://formexamples.github.io/issue-tracker/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

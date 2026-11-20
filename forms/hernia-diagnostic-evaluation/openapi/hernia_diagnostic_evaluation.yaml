@@ -5,10 +5,19 @@ info:
   title: Hernia Diagnostic Evaluation — HerniaDiagnosticEvaluation
   version: 1.0.0
   description: "Hernia diagnostic evaluation: the payload of the 14-step single-page wizard used to detect, classify, and grade the urgency of an abdominal-wall or groin hernia."
+x-namespace:
+  form: hernia-diagnostic-evaluation
+  apiPrefix: /api/hernia-diagnostic-evaluation/
+  sqlSchema: hernia_diagnostic_evaluation
+  xmlNamespace: https://formexamples.github.io/hernia-diagnostic-evaluation/xml
+tags:
+  - name: hernia-diagnostic-evaluation
+    description: Hernia Diagnostic Evaluation form
 paths:
   /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluations:
     get:
       summary: List HerniaDiagnosticEvaluation records
+      tags: [hernia-diagnostic-evaluation]
       operationId: listHerniaDiagnosticEvaluation
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HerniaDiagnosticEvaluation
+      tags: [hernia-diagnostic-evaluation]
       operationId: createHerniaDiagnosticEvaluation
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HerniaDiagnosticEvaluation by id
+      tags: [hernia-diagnostic-evaluation]
       operationId: getHerniaDiagnosticEvaluation
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HerniaDiagnosticEvaluation
+      tags: [hernia-diagnostic-evaluation]
       operationId: updateHerniaDiagnosticEvaluation
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HerniaDiagnosticEvaluation
+      tags: [hernia-diagnostic-evaluation]
       operationId: replaceHerniaDiagnosticEvaluation
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HerniaDiagnosticEvaluation
+      tags: [hernia-diagnostic-evaluation]
       operationId: deleteHerniaDiagnosticEvaluation
       responses:
         "200":

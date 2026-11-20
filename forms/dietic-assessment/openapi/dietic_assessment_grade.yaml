@@ -5,10 +5,19 @@ info:
   title: Dietic Assessment — DieticAssessmentGrade
   version: 1.0.0
   description: Computed and signed-off grading result for one dietetic assessment. Stores both the engine-computed values and the dietitian-final values with an override reason.
+x-namespace:
+  form: dietic-assessment
+  apiPrefix: /api/dietic-assessment/
+  sqlSchema: dietic_assessment
+  xmlNamespace: https://formexamples.github.io/dietic-assessment/xml
+tags:
+  - name: dietic-assessment
+    description: Dietic Assessment form
 paths:
   /api/dietic-assessment/dietic_assessment_grades:
     get:
       summary: List DieticAssessmentGrade records
+      tags: [dietic-assessment]
       operationId: listDieticAssessmentGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DieticAssessmentGrade
+      tags: [dietic-assessment]
       operationId: createDieticAssessmentGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DieticAssessmentGrade by id
+      tags: [dietic-assessment]
       operationId: getDieticAssessmentGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DieticAssessmentGrade
+      tags: [dietic-assessment]
       operationId: updateDieticAssessmentGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DieticAssessmentGrade
+      tags: [dietic-assessment]
       operationId: replaceDieticAssessmentGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DieticAssessmentGrade
+      tags: [dietic-assessment]
       operationId: deleteDieticAssessmentGrade
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT assessment_polypharmacy_review_medication (id,created_at,updated_at,deleted_at,polypharmacy_review_id,medication_name,dose,frequency,route,indication,is_prn,sort_order)>
+<!ATTLIST assessment_polypharmacy_review_medication xmlns CDATA #FIXED "https://formexamples.github.io/gerontology-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

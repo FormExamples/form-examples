@@ -5,10 +5,19 @@ info:
   title: Stomatology Waiting List Card — StomatologyWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: stomatology-waiting-list-card
+  apiPrefix: /api/stomatology-waiting-list-card/
+  sqlSchema: stomatology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/stomatology-waiting-list-card/xml
+tags:
+  - name: stomatology-waiting-list-card
+    description: Stomatology Waiting List Card form
 paths:
   /api/stomatology-waiting-list-card/stomatology_waiting_list_card_grades:
     get:
       summary: List StomatologyWaitingListCardGrade records
+      tags: [stomatology-waiting-list-card]
       operationId: listStomatologyWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new StomatologyWaitingListCardGrade
+      tags: [stomatology-waiting-list-card]
       operationId: createStomatologyWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one StomatologyWaitingListCardGrade by id
+      tags: [stomatology-waiting-list-card]
       operationId: getStomatologyWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing StomatologyWaitingListCardGrade
+      tags: [stomatology-waiting-list-card]
       operationId: updateStomatologyWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing StomatologyWaitingListCardGrade
+      tags: [stomatology-waiting-list-card]
       operationId: replaceStomatologyWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a StomatologyWaitingListCardGrade
+      tags: [stomatology-waiting-list-card]
       operationId: deleteStomatologyWaitingListCardGrade
       responses:
         "200":

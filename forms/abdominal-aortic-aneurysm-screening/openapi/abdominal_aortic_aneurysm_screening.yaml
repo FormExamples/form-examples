@@ -5,10 +5,19 @@ info:
   title: Abdominal Aortic Aneurysm Screening — AbdominalAorticAneurysmScreening
   version: 1.0.0
   description: "Main abdominal-aortic-aneurysm-screening record for one aortic ultrasound scan: scan context, patient identification and eligibility, consent, the ultrasound measurement (maximum antero-posterior aortic diameter), and clinical observations. Classification, fired rules, and flags live in child tables."
+x-namespace:
+  form: abdominal-aortic-aneurysm-screening
+  apiPrefix: /api/abdominal-aortic-aneurysm-screening/
+  sqlSchema: abdominal_aortic_aneurysm_screening
+  xmlNamespace: https://formexamples.github.io/abdominal-aortic-aneurysm-screening/xml
+tags:
+  - name: abdominal-aortic-aneurysm-screening
+    description: Abdominal Aortic Aneurysm Screening form
 paths:
   /api/abdominal-aortic-aneurysm-screening/abdominal_aortic_aneurysm_screenings:
     get:
       summary: List AbdominalAorticAneurysmScreening records
+      tags: [abdominal-aortic-aneurysm-screening]
       operationId: listAbdominalAorticAneurysmScreening
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AbdominalAorticAneurysmScreening
+      tags: [abdominal-aortic-aneurysm-screening]
       operationId: createAbdominalAorticAneurysmScreening
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AbdominalAorticAneurysmScreening by id
+      tags: [abdominal-aortic-aneurysm-screening]
       operationId: getAbdominalAorticAneurysmScreening
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AbdominalAorticAneurysmScreening
+      tags: [abdominal-aortic-aneurysm-screening]
       operationId: updateAbdominalAorticAneurysmScreening
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AbdominalAorticAneurysmScreening
+      tags: [abdominal-aortic-aneurysm-screening]
       operationId: replaceAbdominalAorticAneurysmScreening
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AbdominalAorticAneurysmScreening
+      tags: [abdominal-aortic-aneurysm-screening]
       operationId: deleteAbdominalAorticAneurysmScreening
       responses:
         "200":

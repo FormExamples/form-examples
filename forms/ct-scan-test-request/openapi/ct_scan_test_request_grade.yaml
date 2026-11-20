@@ -5,10 +5,19 @@ info:
   title: Ct Scan Test Request — CtScanTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ACR 1-9), radiation / contrast safety (RCR / ESUR + IR(ME)R), request completeness, and triage priority."
+x-namespace:
+  form: ct-scan-test-request
+  apiPrefix: /api/ct-scan-test-request/
+  sqlSchema: ct_scan_test_request
+  xmlNamespace: https://formexamples.github.io/ct-scan-test-request/xml
+tags:
+  - name: ct-scan-test-request
+    description: Ct Scan Test Request form
 paths:
   /api/ct-scan-test-request/ct_scan_test_request_grades:
     get:
       summary: List CtScanTestRequestGrade records
+      tags: [ct-scan-test-request]
       operationId: listCtScanTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CtScanTestRequestGrade
+      tags: [ct-scan-test-request]
       operationId: createCtScanTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CtScanTestRequestGrade by id
+      tags: [ct-scan-test-request]
       operationId: getCtScanTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CtScanTestRequestGrade
+      tags: [ct-scan-test-request]
       operationId: updateCtScanTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CtScanTestRequestGrade
+      tags: [ct-scan-test-request]
       operationId: replaceCtScanTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CtScanTestRequestGrade
+      tags: [ct-scan-test-request]
       operationId: deleteCtScanTestRequestGrade
       responses:
         "200":

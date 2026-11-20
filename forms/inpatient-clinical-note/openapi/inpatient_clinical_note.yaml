@@ -5,10 +5,19 @@ info:
   title: Inpatient Clinical Note — InpatientClinicalNote
   version: 1.0.0
   description: "Main inpatient clinical note record: note identification, admission context, interval history, observations and NEWS2, examination findings, risk assessments, clinical impression, plan and escalation, communication, and sign-off. Problems, medication changes, investigations, and jobs live in child tables."
+x-namespace:
+  form: inpatient-clinical-note
+  apiPrefix: /api/inpatient-clinical-note/
+  sqlSchema: inpatient_clinical_note
+  xmlNamespace: https://formexamples.github.io/inpatient-clinical-note/xml
+tags:
+  - name: inpatient-clinical-note
+    description: Inpatient Clinical Note form
 paths:
   /api/inpatient-clinical-note/inpatient_clinical_notes:
     get:
       summary: List InpatientClinicalNote records
+      tags: [inpatient-clinical-note]
       operationId: listInpatientClinicalNote
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new InpatientClinicalNote
+      tags: [inpatient-clinical-note]
       operationId: createInpatientClinicalNote
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one InpatientClinicalNote by id
+      tags: [inpatient-clinical-note]
       operationId: getInpatientClinicalNote
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing InpatientClinicalNote
+      tags: [inpatient-clinical-note]
       operationId: updateInpatientClinicalNote
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing InpatientClinicalNote
+      tags: [inpatient-clinical-note]
       operationId: replaceInpatientClinicalNote
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a InpatientClinicalNote
+      tags: [inpatient-clinical-note]
       operationId: deleteInpatientClinicalNote
       responses:
         "200":

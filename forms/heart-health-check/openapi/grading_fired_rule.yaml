@@ -5,10 +5,19 @@ info:
   title: Heart Health Check — GradingFiredRule
   version: 1.0.0
   description: Individual risk rules that fired during the Heart Health Check grading. Many-to-one child of grade.
+x-namespace:
+  form: heart-health-check
+  apiPrefix: /api/heart-health-check/
+  sqlSchema: heart_health_check
+  xmlNamespace: https://formexamples.github.io/heart-health-check/xml
+tags:
+  - name: heart-health-check
+    description: Heart Health Check form
 paths:
   /api/heart-health-check/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags: [heart-health-check]
       operationId: listGradingFiredRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingFiredRule
+      tags: [heart-health-check]
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags: [heart-health-check]
       operationId: getGradingFiredRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingFiredRule
+      tags: [heart-health-check]
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingFiredRule
+      tags: [heart-health-check]
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingFiredRule
+      tags: [heart-health-check]
       operationId: deleteGradingFiredRule
       responses:
         "200":

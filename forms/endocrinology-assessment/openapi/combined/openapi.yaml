@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Endocrinology Assessment form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: endocrinology-assessment
+  apiPrefix: /api/endocrinology-assessment/
+  sqlSchema: endocrinology_assessment
+  xmlNamespace: https://formexamples.github.io/endocrinology-assessment/xml
+tags:
+- name: endocrinology-assessment
+  description: Endocrinology Assessment form
 paths:
   /api/endocrinology-assessment/assessments:
     get:
       summary: List Assessment records
+      tags:
+      - endocrinology-assessment
       operationId: listAssessment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessment
+      tags:
+      - endocrinology-assessment
       operationId: createAssessment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags:
+      - endocrinology-assessment
       operationId: getAssessment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessment
+      tags:
+      - endocrinology-assessment
       operationId: updateAssessment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Assessment
+      tags:
+      - endocrinology-assessment
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Assessment
+      tags:
+      - endocrinology-assessment
       operationId: deleteAssessment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/endocrinology-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - endocrinology-assessment
       operationId: listClinician
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - endocrinology-assessment
       operationId: createClinician
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - endocrinology-assessment
       operationId: getClinician
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - endocrinology-assessment
       operationId: updateClinician
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - endocrinology-assessment
       operationId: replaceClinician
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - endocrinology-assessment
       operationId: deleteClinician
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/endocrinology-assessment/grades:
     get:
       summary: List Grade records
+      tags:
+      - endocrinology-assessment
       operationId: listGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Grade
+      tags:
+      - endocrinology-assessment
       operationId: createGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Grade by id
+      tags:
+      - endocrinology-assessment
       operationId: getGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Grade
+      tags:
+      - endocrinology-assessment
       operationId: updateGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Grade
+      tags:
+      - endocrinology-assessment
       operationId: replaceGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Grade
+      tags:
+      - endocrinology-assessment
       operationId: deleteGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/endocrinology-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags:
+      - endocrinology-assessment
       operationId: listGradingAdditionalFlag
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingAdditionalFlag
+      tags:
+      - endocrinology-assessment
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags:
+      - endocrinology-assessment
       operationId: getGradingAdditionalFlag
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags:
+      - endocrinology-assessment
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags:
+      - endocrinology-assessment
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags:
+      - endocrinology-assessment
       operationId: deleteGradingAdditionalFlag
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/endocrinology-assessment/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags:
+      - endocrinology-assessment
       operationId: listGradingFiredRule
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingFiredRule
+      tags:
+      - endocrinology-assessment
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags:
+      - endocrinology-assessment
       operationId: getGradingFiredRule
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingFiredRule
+      tags:
+      - endocrinology-assessment
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingFiredRule
+      tags:
+      - endocrinology-assessment
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingFiredRule
+      tags:
+      - endocrinology-assessment
       operationId: deleteGradingFiredRule
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - endocrinology-assessment
   /api/endocrinology-assessment/patients:
     get:
       summary: List Patient records
+      tags:
+      - endocrinology-assessment
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - endocrinology-assessment
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - endocrinology-assessment
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - endocrinology-assessment
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - endocrinology-assessment
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - endocrinology-assessment
       operationId: deletePatient
       responses:
         '200':

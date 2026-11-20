@@ -1,4 +1,5 @@
 <!ELEMENT property_tax_exemption_application_grade (id,created_at,updated_at,deleted_at,property_tax_exemption_application_id,eligibility_class,filing_deadline,filed_late,qualifying_exemptions,graded_at)>
+<!ATTLIST property_tax_exemption_application_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-states-property-tax-exemption-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

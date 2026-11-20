@@ -7,6 +7,14 @@ info:
   description: Combined OpenAPI specification for the Neurodiversity Adjustment Review form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: neurodiversity-adjustment-review
+  apiPrefix: /api/neurodiversity-adjustment-review/
+  sqlSchema: neurodiversity_adjustment_review
+  xmlNamespace: https://formexamples.github.io/neurodiversity-adjustment-review/xml
+tags:
+- name: neurodiversity-adjustment-review
+  description: Neurodiversity Adjustment Review form
 paths:
   /api/neurodiversity-adjustment-review/dashboard:
     get:
@@ -62,9 +70,13 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+      tags:
+      - neurodiversity-adjustment-review
   /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews:
     get:
       summary: List NeurodiversityAdjustmentReview records
+      tags:
+      - neurodiversity-adjustment-review
       operationId: listNeurodiversityAdjustmentReview
       parameters:
       - name: limit
@@ -117,6 +129,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurodiversityAdjustmentReview
+      tags:
+      - neurodiversity-adjustment-review
       operationId: createNeurodiversityAdjustmentReview
       requestBody:
         required: true
@@ -170,6 +184,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NeurodiversityAdjustmentReview by id
+      tags:
+      - neurodiversity-adjustment-review
       operationId: getNeurodiversityAdjustmentReview
       responses:
         '200':
@@ -197,6 +213,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurodiversityAdjustmentReview
+      tags:
+      - neurodiversity-adjustment-review
       operationId: updateNeurodiversityAdjustmentReview
       requestBody:
         required: true
@@ -242,6 +260,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NeurodiversityAdjustmentReview
+      tags:
+      - neurodiversity-adjustment-review
       operationId: deleteNeurodiversityAdjustmentReview
       responses:
         '200':
@@ -298,6 +318,8 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+      tags:
+      - neurodiversity-adjustment-review
   /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews/{id}/submit:
     parameters:
     - name: id
@@ -335,6 +357,8 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+      tags:
+      - neurodiversity-adjustment-review
 components:
   schemas:
     NeurodiversityAdjustmentReview:

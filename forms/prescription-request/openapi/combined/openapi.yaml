@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Prescription Request form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: prescription-request
+  apiPrefix: /api/prescription-request/
+  sqlSchema: prescription_request
+  xmlNamespace: https://formexamples.github.io/prescription-request/xml
+tags:
+- name: prescription-request
+  description: Prescription Request form
 paths:
   /api/prescription-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - prescription-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - prescription-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - prescription-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - prescription-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - prescription-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - prescription-request
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/prescription-request/grades:
     get:
       summary: List Grade records
+      tags:
+      - prescription-request
       operationId: listGrade
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Grade
+      tags:
+      - prescription-request
       operationId: createGrade
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Grade by id
+      tags:
+      - prescription-request
       operationId: getGrade
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Grade
+      tags:
+      - prescription-request
       operationId: updateGrade
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Grade
+      tags:
+      - prescription-request
       operationId: replaceGrade
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Grade
+      tags:
+      - prescription-request
       operationId: deleteGrade
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/prescription-request/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags:
+      - prescription-request
       operationId: listGradingAdditionalFlag
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingAdditionalFlag
+      tags:
+      - prescription-request
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags:
+      - prescription-request
       operationId: getGradingAdditionalFlag
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags:
+      - prescription-request
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags:
+      - prescription-request
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags:
+      - prescription-request
       operationId: deleteGradingAdditionalFlag
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/prescription-request/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags:
+      - prescription-request
       operationId: listGradingFiredRule
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingFiredRule
+      tags:
+      - prescription-request
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags:
+      - prescription-request
       operationId: getGradingFiredRule
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingFiredRule
+      tags:
+      - prescription-request
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingFiredRule
+      tags:
+      - prescription-request
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingFiredRule
+      tags:
+      - prescription-request
       operationId: deleteGradingFiredRule
       responses:
         '200':
@@ -1003,9 +1059,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - prescription-request
   /api/prescription-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - prescription-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - prescription-request
       operationId: createPatient
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - prescription-request
       operationId: getPatient
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - prescription-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - prescription-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - prescription-request
       operationId: deletePatient
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/prescription-request/prescription_details:
     get:
       summary: List PrescriptionDetails records
+      tags:
+      - prescription-request
       operationId: listPrescriptionDetails
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PrescriptionDetails
+      tags:
+      - prescription-request
       operationId: createPrescriptionDetails
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PrescriptionDetails by id
+      tags:
+      - prescription-request
       operationId: getPrescriptionDetails
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PrescriptionDetails
+      tags:
+      - prescription-request
       operationId: updatePrescriptionDetails
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PrescriptionDetails
+      tags:
+      - prescription-request
       operationId: replacePrescriptionDetails
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PrescriptionDetails
+      tags:
+      - prescription-request
       operationId: deletePrescriptionDetails
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/prescription-request/prescription_request_types:
     get:
       summary: List PrescriptionRequestType records
+      tags:
+      - prescription-request
       operationId: listPrescriptionRequestType
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PrescriptionRequestType
+      tags:
+      - prescription-request
       operationId: createPrescriptionRequestType
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PrescriptionRequestType by id
+      tags:
+      - prescription-request
       operationId: getPrescriptionRequestType
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PrescriptionRequestType
+      tags:
+      - prescription-request
       operationId: updatePrescriptionRequestType
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PrescriptionRequestType
+      tags:
+      - prescription-request
       operationId: replacePrescriptionRequestType
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PrescriptionRequestType
+      tags:
+      - prescription-request
       operationId: deletePrescriptionRequestType
       responses:
         '200':
@@ -1744,6 +1838,8 @@ paths:
   /api/prescription-request/prescription_requests:
     get:
       summary: List PrescriptionRequest records
+      tags:
+      - prescription-request
       operationId: listPrescriptionRequest
       parameters:
       - name: limit
@@ -1796,6 +1892,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PrescriptionRequest
+      tags:
+      - prescription-request
       operationId: createPrescriptionRequest
       requestBody:
         required: true
@@ -1849,6 +1947,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PrescriptionRequest by id
+      tags:
+      - prescription-request
       operationId: getPrescriptionRequest
       responses:
         '200':
@@ -1876,6 +1976,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PrescriptionRequest
+      tags:
+      - prescription-request
       operationId: updatePrescriptionRequest
       requestBody:
         required: true
@@ -1921,6 +2023,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PrescriptionRequest
+      tags:
+      - prescription-request
       operationId: replacePrescriptionRequest
       requestBody:
         required: true
@@ -1966,6 +2070,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PrescriptionRequest
+      tags:
+      - prescription-request
       operationId: deletePrescriptionRequest
       responses:
         '200':
@@ -1990,6 +2096,8 @@ paths:
   /api/prescription-request/prescription_substitution_options:
     get:
       summary: List PrescriptionSubstitutionOptions records
+      tags:
+      - prescription-request
       operationId: listPrescriptionSubstitutionOptions
       parameters:
       - name: limit
@@ -2042,6 +2150,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PrescriptionSubstitutionOptions
+      tags:
+      - prescription-request
       operationId: createPrescriptionSubstitutionOptions
       requestBody:
         required: true
@@ -2095,6 +2205,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PrescriptionSubstitutionOptions by id
+      tags:
+      - prescription-request
       operationId: getPrescriptionSubstitutionOptions
       responses:
         '200':
@@ -2122,6 +2234,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PrescriptionSubstitutionOptions
+      tags:
+      - prescription-request
       operationId: updatePrescriptionSubstitutionOptions
       requestBody:
         required: true
@@ -2167,6 +2281,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PrescriptionSubstitutionOptions
+      tags:
+      - prescription-request
       operationId: replacePrescriptionSubstitutionOptions
       requestBody:
         required: true
@@ -2212,6 +2328,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PrescriptionSubstitutionOptions
+      tags:
+      - prescription-request
       operationId: deletePrescriptionSubstitutionOptions
       responses:
         '200':

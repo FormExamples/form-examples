@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE public_health_waiting_list_card SYSTEM "public_health_waiting_list_card.dtd">
-<public_health_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<public_health_waiting_list_card xmlns="https://formexamples.github.io/public-health-waiting-list-card/xml">
+<id>8b70f996-5178-5476-ae6e-5d54459f0761</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>7deb38c5-5899-5f66-a5af-d9d1b5e6bd9f</patient_id>
+<practitioner_id>002a8c13-006a-5d51-946e-fe3b8858d987</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

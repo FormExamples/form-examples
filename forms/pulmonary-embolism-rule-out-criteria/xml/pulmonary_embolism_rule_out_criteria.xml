@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pulmonary_embolism_rule_out_criteria SYSTEM "pulmonary_embolism_rule_out_criteria.dtd">
-<pulmonary_embolism_rule_out_criteria>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<pulmonary_embolism_rule_out_criteria xmlns="https://formexamples.github.io/pulmonary-embolism-rule-out-criteria/xml">
+<id>547b9b21-3d26-5acb-8410-48c2484e5090</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>21b9c606-0cce-5804-8ea6-c06a454eb484</patient_id>
+<clinician_id>d9358dca-c8bd-52f0-9a60-620b6ac8e0b8</clinician_id>
 <status>draft</status>
 <patient_identifier></patient_identifier>
 <assessed_at>2026-04-09T10:00:00Z</assessed_at>

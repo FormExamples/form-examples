@@ -5,10 +5,19 @@ info:
   title: First Aid Training Checklist — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: first-aid-training-checklist
+  apiPrefix: /api/first-aid-training-checklist/
+  sqlSchema: first_aid_training_checklist
+  xmlNamespace: https://formexamples.github.io/first-aid-training-checklist/xml
+tags:
+  - name: first-aid-training-checklist
+    description: First Aid Training Checklist form
 paths:
   /api/first-aid-training-checklist/patients:
     get:
       summary: List Patient records
+      tags: [first-aid-training-checklist]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [first-aid-training-checklist]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [first-aid-training-checklist]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [first-aid-training-checklist]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [first-aid-training-checklist]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [first-aid-training-checklist]
       operationId: deletePatient
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Model For End Stage Liver Disease Score — Clinician
   version: 1.0.0
   description: Clinician identifying information for the assessing clinician.
+x-namespace:
+  form: model-for-end-stage-liver-disease-score
+  apiPrefix: /api/model-for-end-stage-liver-disease-score/
+  sqlSchema: model_for_end_stage_liver_disease_score
+  xmlNamespace: https://formexamples.github.io/model-for-end-stage-liver-disease-score/xml
+tags:
+  - name: model-for-end-stage-liver-disease-score
+    description: Model For End Stage Liver Disease Score form
 paths:
   /api/model-for-end-stage-liver-disease-score/clinicians:
     get:
       summary: List Clinician records
+      tags: [model-for-end-stage-liver-disease-score]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [model-for-end-stage-liver-disease-score]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [model-for-end-stage-liver-disease-score]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [model-for-end-stage-liver-disease-score]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [model-for-end-stage-liver-disease-score]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [model-for-end-stage-liver-disease-score]
       operationId: deleteClinician
       responses:
         "200":

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Electrocardiogram Test Result form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: electrocardiogram-test-result
+  apiPrefix: /api/electrocardiogram-test-result/
+  sqlSchema: electrocardiogram_test_result
+  xmlNamespace: https://formexamples.github.io/electrocardiogram-test-result/xml
+tags:
+- name: electrocardiogram-test-result
+  description: Electrocardiogram Test Result form
 paths:
   /api/electrocardiogram-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - electrocardiogram-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - electrocardiogram-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - electrocardiogram-test-result
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - electrocardiogram-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - electrocardiogram-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - electrocardiogram-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/electrocardiogram-test-result/electrocardiogram_test_result_grade_flags:
     get:
       summary: List ElectrocardiogramTestResultGradeFlag records
+      tags:
+      - electrocardiogram-test-result
       operationId: listElectrocardiogramTestResultGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ElectrocardiogramTestResultGradeFlag
+      tags:
+      - electrocardiogram-test-result
       operationId: createElectrocardiogramTestResultGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ElectrocardiogramTestResultGradeFlag by id
+      tags:
+      - electrocardiogram-test-result
       operationId: getElectrocardiogramTestResultGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ElectrocardiogramTestResultGradeFlag
+      tags:
+      - electrocardiogram-test-result
       operationId: updateElectrocardiogramTestResultGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ElectrocardiogramTestResultGradeFlag
+      tags:
+      - electrocardiogram-test-result
       operationId: replaceElectrocardiogramTestResultGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ElectrocardiogramTestResultGradeFlag
+      tags:
+      - electrocardiogram-test-result
       operationId: deleteElectrocardiogramTestResultGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/electrocardiogram-test-result/electrocardiogram_test_result_grade_rules:
     get:
       summary: List ElectrocardiogramTestResultGradeRule records
+      tags:
+      - electrocardiogram-test-result
       operationId: listElectrocardiogramTestResultGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ElectrocardiogramTestResultGradeRule
+      tags:
+      - electrocardiogram-test-result
       operationId: createElectrocardiogramTestResultGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ElectrocardiogramTestResultGradeRule by id
+      tags:
+      - electrocardiogram-test-result
       operationId: getElectrocardiogramTestResultGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ElectrocardiogramTestResultGradeRule
+      tags:
+      - electrocardiogram-test-result
       operationId: updateElectrocardiogramTestResultGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ElectrocardiogramTestResultGradeRule
+      tags:
+      - electrocardiogram-test-result
       operationId: replaceElectrocardiogramTestResultGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ElectrocardiogramTestResultGradeRule
+      tags:
+      - electrocardiogram-test-result
       operationId: deleteElectrocardiogramTestResultGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/electrocardiogram-test-result/electrocardiogram_test_result_grades:
     get:
       summary: List ElectrocardiogramTestResultGrade records
+      tags:
+      - electrocardiogram-test-result
       operationId: listElectrocardiogramTestResultGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ElectrocardiogramTestResultGrade
+      tags:
+      - electrocardiogram-test-result
       operationId: createElectrocardiogramTestResultGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ElectrocardiogramTestResultGrade by id
+      tags:
+      - electrocardiogram-test-result
       operationId: getElectrocardiogramTestResultGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ElectrocardiogramTestResultGrade
+      tags:
+      - electrocardiogram-test-result
       operationId: updateElectrocardiogramTestResultGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ElectrocardiogramTestResultGrade
+      tags:
+      - electrocardiogram-test-result
       operationId: replaceElectrocardiogramTestResultGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ElectrocardiogramTestResultGrade
+      tags:
+      - electrocardiogram-test-result
       operationId: deleteElectrocardiogramTestResultGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/electrocardiogram-test-result/electrocardiogram_test_results:
     get:
       summary: List ElectrocardiogramTestResult records
+      tags:
+      - electrocardiogram-test-result
       operationId: listElectrocardiogramTestResult
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ElectrocardiogramTestResult
+      tags:
+      - electrocardiogram-test-result
       operationId: createElectrocardiogramTestResult
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ElectrocardiogramTestResult by id
+      tags:
+      - electrocardiogram-test-result
       operationId: getElectrocardiogramTestResult
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ElectrocardiogramTestResult
+      tags:
+      - electrocardiogram-test-result
       operationId: updateElectrocardiogramTestResult
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ElectrocardiogramTestResult
+      tags:
+      - electrocardiogram-test-result
       operationId: replaceElectrocardiogramTestResult
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ElectrocardiogramTestResult
+      tags:
+      - electrocardiogram-test-result
       operationId: deleteElectrocardiogramTestResult
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - electrocardiogram-test-result
   /api/electrocardiogram-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - electrocardiogram-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - electrocardiogram-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - electrocardiogram-test-result
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - electrocardiogram-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - electrocardiogram-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - electrocardiogram-test-result
       operationId: deletePatient
       responses:
         '200':

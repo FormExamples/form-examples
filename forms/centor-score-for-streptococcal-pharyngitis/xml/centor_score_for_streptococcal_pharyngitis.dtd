@@ -1,4 +1,5 @@
 <!ELEMENT centor_score_for_streptococcal_pharyngitis (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,patient_identifier,age_years,sex,tonsillar_exudate,tender_anterior_cervical_nodes,fever_over_38,measured_temperature_celsius,absence_of_cough,stridor_or_breathing_difficulty,drooling_or_cannot_swallow,trismus,muffled_voice,unilateral_neck_swelling,clinical_note)>
+<!ATTLIST centor_score_for_streptococcal_pharyngitis xmlns CDATA #FIXED "https://formexamples.github.io/centor-score-for-streptococcal-pharyngitis/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

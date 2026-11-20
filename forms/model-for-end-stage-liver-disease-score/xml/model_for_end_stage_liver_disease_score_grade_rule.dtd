@@ -1,4 +1,5 @@
 <!ELEMENT model_for_end_stage_liver_disease_score_grade_rule (id,created_at,updated_at,deleted_at,model_for_end_stage_liver_disease_score_grade_id,rule_id,component,contribution,category,description)>
+<!ATTLIST model_for_end_stage_liver_disease_score_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/model-for-end-stage-liver-disease-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

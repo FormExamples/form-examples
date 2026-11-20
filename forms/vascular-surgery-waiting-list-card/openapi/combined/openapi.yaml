@@ -7,6 +7,14 @@ info:
   description: Combined OpenAPI specification for the Vascular Surgery Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: vascular-surgery-waiting-list-card
+  apiPrefix: /api/vascular-surgery-waiting-list-card/
+  sqlSchema: vascular_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/vascular-surgery-waiting-list-card/xml
+tags:
+- name: vascular-surgery-waiting-list-card
+  description: Vascular Surgery Waiting List Card form
 paths:
   /api/vascular-surgery-waiting-list-card/openapi.yaml:
     get:
@@ -19,9 +27,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - vascular-surgery-waiting-list-card
   /api/vascular-surgery-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -74,6 +86,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -127,6 +141,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -154,6 +170,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -199,6 +217,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -244,6 +264,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -268,6 +290,8 @@ paths:
   /api/vascular-surgery-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/vascular-surgery-waiting-list-card/vasc_surgery_waiting_list_card_appointments:
     get:
       summary: List VascSurgeryWaitingListCardAppointment records
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: listVascSurgeryWaitingListCardAppointment
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VascSurgeryWaitingListCardAppointment
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: createVascSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VascSurgeryWaitingListCardAppointment by id
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: getVascSurgeryWaitingListCardAppointment
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VascSurgeryWaitingListCardAppointment
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: updateVascSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VascSurgeryWaitingListCardAppointment
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: replaceVascSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VascSurgeryWaitingListCardAppointment
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: deleteVascSurgeryWaitingListCardAppointment
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/vascular-surgery-waiting-list-card/vasc_surgery_waiting_list_card_grade_flags:
     get:
       summary: List VascSurgeryWaitingListCardGradeFlag records
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: listVascSurgeryWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VascSurgeryWaitingListCardGradeFlag
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: createVascSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VascSurgeryWaitingListCardGradeFlag by id
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: getVascSurgeryWaitingListCardGradeFlag
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VascSurgeryWaitingListCardGradeFlag
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: updateVascSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VascSurgeryWaitingListCardGradeFlag
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: replaceVascSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VascSurgeryWaitingListCardGradeFlag
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: deleteVascSurgeryWaitingListCardGradeFlag
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/vascular-surgery-waiting-list-card/vasc_surgery_waiting_list_card_grade_rules:
     get:
       summary: List VascSurgeryWaitingListCardGradeRule records
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: listVascSurgeryWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VascSurgeryWaitingListCardGradeRule
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: createVascSurgeryWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VascSurgeryWaitingListCardGradeRule by id
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: getVascSurgeryWaitingListCardGradeRule
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VascSurgeryWaitingListCardGradeRule
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: updateVascSurgeryWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VascSurgeryWaitingListCardGradeRule
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: replaceVascSurgeryWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VascSurgeryWaitingListCardGradeRule
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: deleteVascSurgeryWaitingListCardGradeRule
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/vascular-surgery-waiting-list-card/vasc_surgery_waiting_list_card_grades:
     get:
       summary: List VascSurgeryWaitingListCardGrade records
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: listVascSurgeryWaitingListCardGrade
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VascSurgeryWaitingListCardGrade
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: createVascSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VascSurgeryWaitingListCardGrade by id
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: getVascSurgeryWaitingListCardGrade
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VascSurgeryWaitingListCardGrade
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: updateVascSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VascSurgeryWaitingListCardGrade
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: replaceVascSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VascSurgeryWaitingListCardGrade
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: deleteVascSurgeryWaitingListCardGrade
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/vascular-surgery-waiting-list-card/vasc_surgery_waiting_list_cards:
     get:
       summary: List VascSurgeryWaitingListCard records
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: listVascSurgeryWaitingListCard
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VascSurgeryWaitingListCard
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: createVascSurgeryWaitingListCard
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VascSurgeryWaitingListCard by id
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: getVascSurgeryWaitingListCard
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VascSurgeryWaitingListCard
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: updateVascSurgeryWaitingListCard
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VascSurgeryWaitingListCard
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: replaceVascSurgeryWaitingListCard
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VascSurgeryWaitingListCard
+      tags:
+      - vascular-surgery-waiting-list-card
       operationId: deleteVascSurgeryWaitingListCard
       responses:
         '200':

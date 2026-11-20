@@ -1,4 +1,5 @@
 <!ELEMENT epilepsy_review_grade (id,created_at,updated_at,deleted_at,epilepsy_review_id,seizure_control,review_status,completeness_score,graded_at)>
+<!ATTLIST epilepsy_review_grade xmlns CDATA #FIXED "https://formexamples.github.io/epilepsy-review/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

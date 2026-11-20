@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Body Mass Index and Body Surface Area Calculator
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: body-mass-index-and-body-surface-area-calculator
+  apiPrefix: /api/body-mass-index-and-body-surface-area-calculator/
+  sqlSchema: body_mass_index_and_body_surface_area_calculator
+  xmlNamespace: https://formexamples.github.io/body-mass-index-and-body-surface-area-calculator/xml
+tags:
+- name: body-mass-index-and-body-surface-area-calculator
+  description: Body Mass Index and Body Surface Area Calculator form
 paths:
   /api/body-mass-index-and-body-surface-area-calculator/body_mass_index_and_body_surface_area_calculator_grade_flags:
     get:
       summary: List BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag records
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: listBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: createBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag by id
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: getBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: updateBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: replaceBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: deleteBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/body-mass-index-and-body-surface-area-calculator/body_mass_index_and_body_surface_area_calculator_grade_rules:
     get:
       summary: List BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule records
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: listBodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: createBodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule by id
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: getBodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: updateBodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: replaceBodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: deleteBodyMassIndexAndBodySurfaceAreaCalculatorGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/body-mass-index-and-body-surface-area-calculator/body_mass_index_and_body_surface_area_calculator_grades:
     get:
       summary: List BodyMassIndexAndBodySurfaceAreaCalculatorGrade records
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: listBodyMassIndexAndBodySurfaceAreaCalculatorGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BodyMassIndexAndBodySurfaceAreaCalculatorGrade
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: createBodyMassIndexAndBodySurfaceAreaCalculatorGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BodyMassIndexAndBodySurfaceAreaCalculatorGrade by id
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: getBodyMassIndexAndBodySurfaceAreaCalculatorGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BodyMassIndexAndBodySurfaceAreaCalculatorGrade
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: updateBodyMassIndexAndBodySurfaceAreaCalculatorGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BodyMassIndexAndBodySurfaceAreaCalculatorGrade
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: replaceBodyMassIndexAndBodySurfaceAreaCalculatorGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BodyMassIndexAndBodySurfaceAreaCalculatorGrade
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: deleteBodyMassIndexAndBodySurfaceAreaCalculatorGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/body-mass-index-and-body-surface-area-calculator/body_mass_index_and_body_surface_area_calculators:
     get:
       summary: List BodyMassIndexAndBodySurfaceAreaCalculator records
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: listBodyMassIndexAndBodySurfaceAreaCalculator
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BodyMassIndexAndBodySurfaceAreaCalculator
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: createBodyMassIndexAndBodySurfaceAreaCalculator
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BodyMassIndexAndBodySurfaceAreaCalculator by id
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: getBodyMassIndexAndBodySurfaceAreaCalculator
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BodyMassIndexAndBodySurfaceAreaCalculator
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: updateBodyMassIndexAndBodySurfaceAreaCalculator
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BodyMassIndexAndBodySurfaceAreaCalculator
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: replaceBodyMassIndexAndBodySurfaceAreaCalculator
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BodyMassIndexAndBodySurfaceAreaCalculator
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: deleteBodyMassIndexAndBodySurfaceAreaCalculator
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/body-mass-index-and-body-surface-area-calculator/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
   /api/body-mass-index-and-body-surface-area-calculator/patients:
     get:
       summary: List Patient records
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - body-mass-index-and-body-surface-area-calculator
       operationId: deletePatient
       responses:
         '200':

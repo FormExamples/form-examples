@@ -5,10 +5,19 @@ info:
   title: X Ray Test Result — XRayTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical finding (pneumothorax, free intraperitoneal air, unstable fracture) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: x-ray-test-result
+  apiPrefix: /api/x-ray-test-result/
+  sqlSchema: x_ray_test_result
+  xmlNamespace: https://formexamples.github.io/x-ray-test-result/xml
+tags:
+  - name: x-ray-test-result
+    description: X Ray Test Result form
 paths:
   /api/x-ray-test-result/x_ray_test_result_grades:
     get:
       summary: List XRayTestResultGrade records
+      tags: [x-ray-test-result]
       operationId: listXRayTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new XRayTestResultGrade
+      tags: [x-ray-test-result]
       operationId: createXRayTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one XRayTestResultGrade by id
+      tags: [x-ray-test-result]
       operationId: getXRayTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing XRayTestResultGrade
+      tags: [x-ray-test-result]
       operationId: updateXRayTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing XRayTestResultGrade
+      tags: [x-ray-test-result]
       operationId: replaceXRayTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a XRayTestResultGrade
+      tags: [x-ray-test-result]
       operationId: deleteXRayTestResultGrade
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: United States Health Care Power Of Attorney — Reviewer
   version: 1.0.0
   description: "Reviewer: the attorney, social worker, or facility staff member who reviews the directive for execution readiness."
+x-namespace:
+  form: united-states-health-care-power-of-attorney
+  apiPrefix: /api/united-states-health-care-power-of-attorney/
+  sqlSchema: united_states_health_care_power_of_attorney
+  xmlNamespace: https://formexamples.github.io/united-states-health-care-power-of-attorney/xml
+tags:
+  - name: united-states-health-care-power-of-attorney
+    description: United States Health Care Power Of Attorney form
 paths:
   /api/united-states-health-care-power-of-attorney/reviewers:
     get:
       summary: List Reviewer records
+      tags: [united-states-health-care-power-of-attorney]
       operationId: listReviewer
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Reviewer
+      tags: [united-states-health-care-power-of-attorney]
       operationId: createReviewer
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Reviewer by id
+      tags: [united-states-health-care-power-of-attorney]
       operationId: getReviewer
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Reviewer
+      tags: [united-states-health-care-power-of-attorney]
       operationId: updateReviewer
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Reviewer
+      tags: [united-states-health-care-power-of-attorney]
       operationId: replaceReviewer
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Reviewer
+      tags: [united-states-health-care-power-of-attorney]
       operationId: deleteReviewer
       responses:
         "200":

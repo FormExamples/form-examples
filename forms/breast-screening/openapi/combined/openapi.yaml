@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Breast Screening Record (NHS Breast Screening Programme)
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: breast-screening
+  apiPrefix: /api/breast-screening/
+  sqlSchema: breast_screening
+  xmlNamespace: https://formexamples.github.io/breast-screening/xml
+tags:
+- name: breast-screening
+  description: Breast Screening Record (NHS Breast Screening Programme) form
 paths:
   /api/breast-screening/breast_screening_grade_flags:
     get:
       summary: List BreastScreeningGradeFlag records
+      tags:
+      - breast-screening
       operationId: listBreastScreeningGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BreastScreeningGradeFlag
+      tags:
+      - breast-screening
       operationId: createBreastScreeningGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BreastScreeningGradeFlag by id
+      tags:
+      - breast-screening
       operationId: getBreastScreeningGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BreastScreeningGradeFlag
+      tags:
+      - breast-screening
       operationId: updateBreastScreeningGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BreastScreeningGradeFlag
+      tags:
+      - breast-screening
       operationId: replaceBreastScreeningGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BreastScreeningGradeFlag
+      tags:
+      - breast-screening
       operationId: deleteBreastScreeningGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/breast-screening/breast_screening_grade_rules:
     get:
       summary: List BreastScreeningGradeRule records
+      tags:
+      - breast-screening
       operationId: listBreastScreeningGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BreastScreeningGradeRule
+      tags:
+      - breast-screening
       operationId: createBreastScreeningGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BreastScreeningGradeRule by id
+      tags:
+      - breast-screening
       operationId: getBreastScreeningGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BreastScreeningGradeRule
+      tags:
+      - breast-screening
       operationId: updateBreastScreeningGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BreastScreeningGradeRule
+      tags:
+      - breast-screening
       operationId: replaceBreastScreeningGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BreastScreeningGradeRule
+      tags:
+      - breast-screening
       operationId: deleteBreastScreeningGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/breast-screening/breast_screening_grades:
     get:
       summary: List BreastScreeningGrade records
+      tags:
+      - breast-screening
       operationId: listBreastScreeningGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BreastScreeningGrade
+      tags:
+      - breast-screening
       operationId: createBreastScreeningGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BreastScreeningGrade by id
+      tags:
+      - breast-screening
       operationId: getBreastScreeningGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BreastScreeningGrade
+      tags:
+      - breast-screening
       operationId: updateBreastScreeningGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BreastScreeningGrade
+      tags:
+      - breast-screening
       operationId: replaceBreastScreeningGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BreastScreeningGrade
+      tags:
+      - breast-screening
       operationId: deleteBreastScreeningGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/breast-screening/breast_screenings:
     get:
       summary: List BreastScreening records
+      tags:
+      - breast-screening
       operationId: listBreastScreening
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BreastScreening
+      tags:
+      - breast-screening
       operationId: createBreastScreening
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BreastScreening by id
+      tags:
+      - breast-screening
       operationId: getBreastScreening
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BreastScreening
+      tags:
+      - breast-screening
       operationId: updateBreastScreening
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BreastScreening
+      tags:
+      - breast-screening
       operationId: replaceBreastScreening
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BreastScreening
+      tags:
+      - breast-screening
       operationId: deleteBreastScreening
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/breast-screening/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - breast-screening
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - breast-screening
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - breast-screening
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - breast-screening
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - breast-screening
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - breast-screening
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - breast-screening
   /api/breast-screening/patients:
     get:
       summary: List Patient records
+      tags:
+      - breast-screening
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - breast-screening
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - breast-screening
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - breast-screening
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - breast-screening
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - breast-screening
       operationId: deletePatient
       responses:
         '200':

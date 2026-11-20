@@ -5,10 +5,19 @@ info:
   title: Electroencephalogram Test Result — ElectroencephalogramTestResult
   version: 1.0.0
   description: Electroencephalogram (EEG) test result (report). Captures the performed recording (EEG type, duration, quality), the clinical history, the background rhythm and structured neurophysiological findings, the narrative interpretation and clinical correlation, the impression and structured-reporting category, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: electroencephalogram-test-result
+  apiPrefix: /api/electroencephalogram-test-result/
+  sqlSchema: electroencephalogram_test_result
+  xmlNamespace: https://formexamples.github.io/electroencephalogram-test-result/xml
+tags:
+  - name: electroencephalogram-test-result
+    description: Electroencephalogram Test Result form
 paths:
   /api/electroencephalogram-test-result/electroencephalogram_test_results:
     get:
       summary: List ElectroencephalogramTestResult records
+      tags: [electroencephalogram-test-result]
       operationId: listElectroencephalogramTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ElectroencephalogramTestResult
+      tags: [electroencephalogram-test-result]
       operationId: createElectroencephalogramTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ElectroencephalogramTestResult by id
+      tags: [electroencephalogram-test-result]
       operationId: getElectroencephalogramTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ElectroencephalogramTestResult
+      tags: [electroencephalogram-test-result]
       operationId: updateElectroencephalogramTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ElectroencephalogramTestResult
+      tags: [electroencephalogram-test-result]
       operationId: replaceElectroencephalogramTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ElectroencephalogramTestResult
+      tags: [electroencephalogram-test-result]
       operationId: deleteElectroencephalogramTestResult
       responses:
         "200":

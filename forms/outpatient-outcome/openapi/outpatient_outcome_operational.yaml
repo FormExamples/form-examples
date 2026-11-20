@@ -5,10 +5,19 @@ info:
   title: Outpatient Outcome — OutpatientOutcomeOperational
   version: 1.0.0
   description: "Operational efficiency data: referral-to-appointment wait time vs service target, NHS Attendance Outcome code."
+x-namespace:
+  form: outpatient-outcome
+  apiPrefix: /api/outpatient-outcome/
+  sqlSchema: outpatient_outcome
+  xmlNamespace: https://formexamples.github.io/outpatient-outcome/xml
+tags:
+  - name: outpatient-outcome
+    description: Outpatient Outcome form
 paths:
   /api/outpatient-outcome/outpatient_outcome_operationals:
     get:
       summary: List OutpatientOutcomeOperational records
+      tags: [outpatient-outcome]
       operationId: listOutpatientOutcomeOperational
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OutpatientOutcomeOperational
+      tags: [outpatient-outcome]
       operationId: createOutpatientOutcomeOperational
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OutpatientOutcomeOperational by id
+      tags: [outpatient-outcome]
       operationId: getOutpatientOutcomeOperational
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OutpatientOutcomeOperational
+      tags: [outpatient-outcome]
       operationId: updateOutpatientOutcomeOperational
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OutpatientOutcomeOperational
+      tags: [outpatient-outcome]
       operationId: replaceOutpatientOutcomeOperational
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OutpatientOutcomeOperational
+      tags: [outpatient-outcome]
       operationId: deleteOutpatientOutcomeOperational
       responses:
         "200":

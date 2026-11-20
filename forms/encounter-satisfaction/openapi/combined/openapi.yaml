@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Encounter Satisfaction form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: encounter-satisfaction
+  apiPrefix: /api/encounter-satisfaction/
+  sqlSchema: encounter_satisfaction
+  xmlNamespace: https://formexamples.github.io/encounter-satisfaction/xml
+tags:
+- name: encounter-satisfaction
+  description: Encounter Satisfaction form
 paths:
   /api/encounter-satisfaction/access_schedulings:
     get:
       summary: List AccessScheduling records
+      tags:
+      - encounter-satisfaction
       operationId: listAccessScheduling
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AccessScheduling
+      tags:
+      - encounter-satisfaction
       operationId: createAccessScheduling
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AccessScheduling by id
+      tags:
+      - encounter-satisfaction
       operationId: getAccessScheduling
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AccessScheduling
+      tags:
+      - encounter-satisfaction
       operationId: updateAccessScheduling
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AccessScheduling
+      tags:
+      - encounter-satisfaction
       operationId: replaceAccessScheduling
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AccessScheduling
+      tags:
+      - encounter-satisfaction
       operationId: deleteAccessScheduling
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/encounter-satisfaction/care_qualities:
     get:
       summary: List CareQuality records
+      tags:
+      - encounter-satisfaction
       operationId: listCareQuality
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CareQuality
+      tags:
+      - encounter-satisfaction
       operationId: createCareQuality
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CareQuality by id
+      tags:
+      - encounter-satisfaction
       operationId: getCareQuality
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CareQuality
+      tags:
+      - encounter-satisfaction
       operationId: updateCareQuality
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CareQuality
+      tags:
+      - encounter-satisfaction
       operationId: replaceCareQuality
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CareQuality
+      tags:
+      - encounter-satisfaction
       operationId: deleteCareQuality
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/encounter-satisfaction/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - encounter-satisfaction
       operationId: listClinician
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - encounter-satisfaction
       operationId: createClinician
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - encounter-satisfaction
       operationId: getClinician
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - encounter-satisfaction
       operationId: updateClinician
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - encounter-satisfaction
       operationId: replaceClinician
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - encounter-satisfaction
       operationId: deleteClinician
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/encounter-satisfaction/communications:
     get:
       summary: List Communication records
+      tags:
+      - encounter-satisfaction
       operationId: listCommunication
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Communication
+      tags:
+      - encounter-satisfaction
       operationId: createCommunication
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Communication by id
+      tags:
+      - encounter-satisfaction
       operationId: getCommunication
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Communication
+      tags:
+      - encounter-satisfaction
       operationId: updateCommunication
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Communication
+      tags:
+      - encounter-satisfaction
       operationId: replaceCommunication
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Communication
+      tags:
+      - encounter-satisfaction
       operationId: deleteCommunication
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/encounter-satisfaction/encounter_satisfactions:
     get:
       summary: List EncounterSatisfaction records
+      tags:
+      - encounter-satisfaction
       operationId: listEncounterSatisfaction
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EncounterSatisfaction
+      tags:
+      - encounter-satisfaction
       operationId: createEncounterSatisfaction
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EncounterSatisfaction by id
+      tags:
+      - encounter-satisfaction
       operationId: getEncounterSatisfaction
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EncounterSatisfaction
+      tags:
+      - encounter-satisfaction
       operationId: updateEncounterSatisfaction
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EncounterSatisfaction
+      tags:
+      - encounter-satisfaction
       operationId: replaceEncounterSatisfaction
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EncounterSatisfaction
+      tags:
+      - encounter-satisfaction
       operationId: deleteEncounterSatisfaction
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/encounter-satisfaction/environments:
     get:
       summary: List Environment records
+      tags:
+      - encounter-satisfaction
       operationId: listEnvironment
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Environment
+      tags:
+      - encounter-satisfaction
       operationId: createEnvironment
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Environment by id
+      tags:
+      - encounter-satisfaction
       operationId: getEnvironment
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Environment
+      tags:
+      - encounter-satisfaction
       operationId: updateEnvironment
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Environment
+      tags:
+      - encounter-satisfaction
       operationId: replaceEnvironment
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Environment
+      tags:
+      - encounter-satisfaction
       operationId: deleteEnvironment
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/encounter-satisfaction/flagged_issues:
     get:
       summary: List FlaggedIssue records
+      tags:
+      - encounter-satisfaction
       operationId: listFlaggedIssue
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FlaggedIssue
+      tags:
+      - encounter-satisfaction
       operationId: createFlaggedIssue
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one FlaggedIssue by id
+      tags:
+      - encounter-satisfaction
       operationId: getFlaggedIssue
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FlaggedIssue
+      tags:
+      - encounter-satisfaction
       operationId: updateFlaggedIssue
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing FlaggedIssue
+      tags:
+      - encounter-satisfaction
       operationId: replaceFlaggedIssue
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a FlaggedIssue
+      tags:
+      - encounter-satisfaction
       operationId: deleteFlaggedIssue
       responses:
         '200':
@@ -1741,9 +1833,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - encounter-satisfaction
   /api/encounter-satisfaction/overall_satisfactions:
     get:
       summary: List OverallSatisfaction records
+      tags:
+      - encounter-satisfaction
       operationId: listOverallSatisfaction
       parameters:
       - name: limit
@@ -1796,6 +1892,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OverallSatisfaction
+      tags:
+      - encounter-satisfaction
       operationId: createOverallSatisfaction
       requestBody:
         required: true
@@ -1849,6 +1947,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OverallSatisfaction by id
+      tags:
+      - encounter-satisfaction
       operationId: getOverallSatisfaction
       responses:
         '200':
@@ -1876,6 +1976,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OverallSatisfaction
+      tags:
+      - encounter-satisfaction
       operationId: updateOverallSatisfaction
       requestBody:
         required: true
@@ -1921,6 +2023,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OverallSatisfaction
+      tags:
+      - encounter-satisfaction
       operationId: replaceOverallSatisfaction
       requestBody:
         required: true
@@ -1966,6 +2070,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OverallSatisfaction
+      tags:
+      - encounter-satisfaction
       operationId: deleteOverallSatisfaction
       responses:
         '200':
@@ -1990,6 +2096,8 @@ paths:
   /api/encounter-satisfaction/patients:
     get:
       summary: List Patient records
+      tags:
+      - encounter-satisfaction
       operationId: listPatient
       parameters:
       - name: limit
@@ -2042,6 +2150,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - encounter-satisfaction
       operationId: createPatient
       requestBody:
         required: true
@@ -2095,6 +2205,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - encounter-satisfaction
       operationId: getPatient
       responses:
         '200':
@@ -2122,6 +2234,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - encounter-satisfaction
       operationId: updatePatient
       requestBody:
         required: true
@@ -2167,6 +2281,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - encounter-satisfaction
       operationId: replacePatient
       requestBody:
         required: true
@@ -2212,6 +2328,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - encounter-satisfaction
       operationId: deletePatient
       responses:
         '200':
@@ -2236,6 +2354,8 @@ paths:
   /api/encounter-satisfaction/satisfaction_results:
     get:
       summary: List SatisfactionResult records
+      tags:
+      - encounter-satisfaction
       operationId: listSatisfactionResult
       parameters:
       - name: limit
@@ -2288,6 +2408,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new SatisfactionResult
+      tags:
+      - encounter-satisfaction
       operationId: createSatisfactionResult
       requestBody:
         required: true
@@ -2341,6 +2463,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one SatisfactionResult by id
+      tags:
+      - encounter-satisfaction
       operationId: getSatisfactionResult
       responses:
         '200':
@@ -2368,6 +2492,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing SatisfactionResult
+      tags:
+      - encounter-satisfaction
       operationId: updateSatisfactionResult
       requestBody:
         required: true
@@ -2413,6 +2539,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing SatisfactionResult
+      tags:
+      - encounter-satisfaction
       operationId: replaceSatisfactionResult
       requestBody:
         required: true
@@ -2458,6 +2586,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a SatisfactionResult
+      tags:
+      - encounter-satisfaction
       operationId: deleteSatisfactionResult
       responses:
         '200':
@@ -2482,6 +2612,8 @@ paths:
   /api/encounter-satisfaction/staff_professionalisms:
     get:
       summary: List StaffProfessionalism records
+      tags:
+      - encounter-satisfaction
       operationId: listStaffProfessionalism
       parameters:
       - name: limit
@@ -2534,6 +2666,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new StaffProfessionalism
+      tags:
+      - encounter-satisfaction
       operationId: createStaffProfessionalism
       requestBody:
         required: true
@@ -2587,6 +2721,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one StaffProfessionalism by id
+      tags:
+      - encounter-satisfaction
       operationId: getStaffProfessionalism
       responses:
         '200':
@@ -2614,6 +2750,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing StaffProfessionalism
+      tags:
+      - encounter-satisfaction
       operationId: updateStaffProfessionalism
       requestBody:
         required: true
@@ -2659,6 +2797,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing StaffProfessionalism
+      tags:
+      - encounter-satisfaction
       operationId: replaceStaffProfessionalism
       requestBody:
         required: true
@@ -2704,6 +2844,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a StaffProfessionalism
+      tags:
+      - encounter-satisfaction
       operationId: deleteStaffProfessionalism
       responses:
         '200':
@@ -2728,6 +2870,8 @@ paths:
   /api/encounter-satisfaction/visit_informations:
     get:
       summary: List VisitInformation records
+      tags:
+      - encounter-satisfaction
       operationId: listVisitInformation
       parameters:
       - name: limit
@@ -2780,6 +2924,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VisitInformation
+      tags:
+      - encounter-satisfaction
       operationId: createVisitInformation
       requestBody:
         required: true
@@ -2833,6 +2979,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VisitInformation by id
+      tags:
+      - encounter-satisfaction
       operationId: getVisitInformation
       responses:
         '200':
@@ -2860,6 +3008,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VisitInformation
+      tags:
+      - encounter-satisfaction
       operationId: updateVisitInformation
       requestBody:
         required: true
@@ -2905,6 +3055,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VisitInformation
+      tags:
+      - encounter-satisfaction
       operationId: replaceVisitInformation
       requestBody:
         required: true
@@ -2950,6 +3102,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VisitInformation
+      tags:
+      - encounter-satisfaction
       operationId: deleteVisitInformation
       responses:
         '200':

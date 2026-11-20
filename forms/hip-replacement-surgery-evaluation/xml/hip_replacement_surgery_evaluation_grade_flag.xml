@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hip_replacement_surgery_evaluation_grade_flag SYSTEM "hip_replacement_surgery_evaluation_grade_flag.dtd">
-<hip_replacement_surgery_evaluation_grade_flag>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<hip_replacement_surgery_evaluation_grade_flag xmlns="https://formexamples.github.io/hip-replacement-surgery-evaluation/xml">
+<id>a672ca5b-979b-5f9a-ba84-848382557f83</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<hip_replacement_surgery_evaluation_grade_id>880e8400-e29b-41d4-a716-446655440003</hip_replacement_surgery_evaluation_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<hip_replacement_surgery_evaluation_grade_id>dc59f410-0eb6-5305-8244-e66fc80b02f5</hip_replacement_surgery_evaluation_grade_id>
+<flag_id>58809d50-ecc6-55fa-943c-b0658fca2f6d</flag_id>
 <category>conservative-treatment-not-exhausted</category>
 <priority>low</priority>
 <description>Example text.</description>

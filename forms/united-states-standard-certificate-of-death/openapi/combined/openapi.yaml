@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the US Standard Certificate of Death (NCHS 2003 revision)
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-states-standard-certificate-of-death
+  apiPrefix: /api/united-states-standard-certificate-of-death/
+  sqlSchema: united_states_standard_certificate_of_death
+  xmlNamespace: https://formexamples.github.io/united-states-standard-certificate-of-death/xml
+tags:
+- name: united-states-standard-certificate-of-death
+  description: US Standard Certificate of Death (NCHS 2003 revision) form
 paths:
   /api/united-states-standard-certificate-of-death/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-states-standard-certificate-of-death
   /api/united-states-standard-certificate-of-death/patients:
     get:
       summary: List Patient records
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/united-states-standard-certificate-of-death/united_states_standard_certificate_of_death_grade_flags:
     get:
       summary: List UnitedStatesStandardCertificateOfDeathGradeFlag records
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: listUnitedStatesStandardCertificateOfDeathGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesStandardCertificateOfDeathGradeFlag
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: createUnitedStatesStandardCertificateOfDeathGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesStandardCertificateOfDeathGradeFlag by id
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: getUnitedStatesStandardCertificateOfDeathGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesStandardCertificateOfDeathGradeFlag
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: updateUnitedStatesStandardCertificateOfDeathGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesStandardCertificateOfDeathGradeFlag
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: replaceUnitedStatesStandardCertificateOfDeathGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesStandardCertificateOfDeathGradeFlag
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: deleteUnitedStatesStandardCertificateOfDeathGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-states-standard-certificate-of-death/united_states_standard_certificate_of_death_grade_rules:
     get:
       summary: List UnitedStatesStandardCertificateOfDeathGradeRule records
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: listUnitedStatesStandardCertificateOfDeathGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesStandardCertificateOfDeathGradeRule
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: createUnitedStatesStandardCertificateOfDeathGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesStandardCertificateOfDeathGradeRule by id
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: getUnitedStatesStandardCertificateOfDeathGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesStandardCertificateOfDeathGradeRule
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: updateUnitedStatesStandardCertificateOfDeathGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesStandardCertificateOfDeathGradeRule
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: replaceUnitedStatesStandardCertificateOfDeathGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesStandardCertificateOfDeathGradeRule
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: deleteUnitedStatesStandardCertificateOfDeathGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-states-standard-certificate-of-death/united_states_standard_certificate_of_death_grades:
     get:
       summary: List UnitedStatesStandardCertificateOfDeathGrade records
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: listUnitedStatesStandardCertificateOfDeathGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesStandardCertificateOfDeathGrade
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: createUnitedStatesStandardCertificateOfDeathGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesStandardCertificateOfDeathGrade by id
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: getUnitedStatesStandardCertificateOfDeathGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesStandardCertificateOfDeathGrade
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: updateUnitedStatesStandardCertificateOfDeathGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesStandardCertificateOfDeathGrade
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: replaceUnitedStatesStandardCertificateOfDeathGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesStandardCertificateOfDeathGrade
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: deleteUnitedStatesStandardCertificateOfDeathGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-states-standard-certificate-of-death/united_states_standard_certificate_of_deaths:
     get:
       summary: List UnitedStatesStandardCertificateOfDeath records
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: listUnitedStatesStandardCertificateOfDeath
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesStandardCertificateOfDeath
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: createUnitedStatesStandardCertificateOfDeath
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesStandardCertificateOfDeath by id
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: getUnitedStatesStandardCertificateOfDeath
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesStandardCertificateOfDeath
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: updateUnitedStatesStandardCertificateOfDeath
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesStandardCertificateOfDeath
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: replaceUnitedStatesStandardCertificateOfDeath
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesStandardCertificateOfDeath
+      tags:
+      - united-states-standard-certificate-of-death
       operationId: deleteUnitedStatesStandardCertificateOfDeath
       responses:
         '200':

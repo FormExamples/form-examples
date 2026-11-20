@@ -5,10 +5,19 @@ info:
   title: Glasgow Coma Scale — GlasgowComaScale
   version: 1.0.0
   description: "Main Glasgow Coma Scale assessment record: assessment context, patient identification, confounders, the three component responses (eye, verbal, motor) with not-testable handling, pupillary findings for GCS-Pupils, and trend fields."
+x-namespace:
+  form: glasgow-coma-scale
+  apiPrefix: /api/glasgow-coma-scale/
+  sqlSchema: glasgow_coma_scale
+  xmlNamespace: https://formexamples.github.io/glasgow-coma-scale/xml
+tags:
+  - name: glasgow-coma-scale
+    description: Glasgow Coma Scale form
 paths:
   /api/glasgow-coma-scale/glasgow_coma_scales:
     get:
       summary: List GlasgowComaScale records
+      tags: [glasgow-coma-scale]
       operationId: listGlasgowComaScale
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GlasgowComaScale
+      tags: [glasgow-coma-scale]
       operationId: createGlasgowComaScale
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GlasgowComaScale by id
+      tags: [glasgow-coma-scale]
       operationId: getGlasgowComaScale
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GlasgowComaScale
+      tags: [glasgow-coma-scale]
       operationId: updateGlasgowComaScale
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GlasgowComaScale
+      tags: [glasgow-coma-scale]
       operationId: replaceGlasgowComaScale
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GlasgowComaScale
+      tags: [glasgow-coma-scale]
       operationId: deleteGlasgowComaScale
       responses:
         "200":

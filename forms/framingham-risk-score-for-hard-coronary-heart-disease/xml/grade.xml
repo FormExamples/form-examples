@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<grade xmlns="https://formexamples.github.io/framingham-risk-score-for-hard-coronary-heart-disease/xml">
+<id>22942e17-22e0-5ad3-b856-4af08f9c4e8e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>38da2b8e-1ad4-5783-8f65-58cd034f82db</assessment_id>
 <ten_year_risk_percent>50.0</ten_year_risk_percent>
 <risk_category>low</risk_category>
 <graded_at>2026-04-09T10:00:00Z</graded_at>

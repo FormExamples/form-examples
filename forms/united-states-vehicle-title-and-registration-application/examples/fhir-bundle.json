@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "550e8400-e29b-41d4-a716-000000000063",
+  "id": "26f492ba-06fd-5934-920b-1fa4c51a7827",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+      "fullUrl": "urn:uuid:1a6327e5-6f17-5fbb-a0fa-b0b14409515a",
       "resource": {
         "resourceType": "Observation",
-        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "id": "1a6327e5-6f17-5fbb-a0fa-b0b14409515a",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -49,7 +49,7 @@
           ]
         },
         "encounter": {
-          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:a663abad-b864-5ed1-afd5-bb05bfe757de"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -205,10 +205,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:660e8400-e29b-41d4-a716-446655440001",
+      "fullUrl": "urn:uuid:b51ca19c-e13b-5ea7-a970-e96609df73cb",
       "resource": {
         "resourceType": "Observation",
-        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "id": "b51ca19c-e13b-5ea7-a970-e96609df73cb",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -237,7 +237,7 @@
           ]
         },
         "encounter": {
-          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:a663abad-b864-5ed1-afd5-bb05bfe757de"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -341,10 +341,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
+      "fullUrl": "urn:uuid:a663abad-b864-5ed1-afd5-bb05bfe757de",
       "resource": {
         "resourceType": "Encounter",
-        "id": "770e8400-e29b-41d4-a716-446655440002",
+        "id": "a663abad-b864-5ed1-afd5-bb05bfe757de",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Encounter"
@@ -381,10 +381,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
+      "fullUrl": "urn:uuid:0b6a458a-a1d0-5d6d-b161-57f17ba4fb1f",
       "resource": {
         "resourceType": "Observation",
-        "id": "880e8400-e29b-41d4-a716-446655440003",
+        "id": "0b6a458a-a1d0-5d6d-b161-57f17ba4fb1f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -413,7 +413,7 @@
           ]
         },
         "encounter": {
-          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
+          "reference": "urn:uuid:a663abad-b864-5ed1-afd5-bb05bfe757de"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -557,10 +557,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
+      "fullUrl": "urn:uuid:a43feaa4-f064-5328-af63-660871ca2fa4",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "aa0e8400-e29b-41d4-a716-446655440005",
+        "id": "a43feaa4-f064-5328-af63-660871ca2fa4",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -594,10 +594,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
+      "fullUrl": "urn:uuid:d48086f9-e6f2-5eca-876d-45da2d0f3c36",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "990e8400-e29b-41d4-a716-446655440004",
+        "id": "d48086f9-e6f2-5eca-876d-45da2d0f3c36",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"

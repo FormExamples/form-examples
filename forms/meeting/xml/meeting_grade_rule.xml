@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE meeting_grade_rule SYSTEM "meeting_grade_rule.dtd">
-<meeting_grade_rule>
-<id>ff0e8400-e29b-41d4-a716-44665544000a</id>
+<meeting_grade_rule xmlns="https://formexamples.github.io/meeting/xml">
+<id>2c67f905-c393-577b-a64f-548d84033f0d</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<meeting_grade_id>ee0e8400-e29b-41d4-a716-446655440009</meeting_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<meeting_grade_id>ea1ef7db-ece0-5d6c-8b1d-03b8653ac8e6</meeting_grade_id>
+<rule_id>4df18c1a-08ab-5bb3-9d2d-cccc7368408a</rule_id>
 <instrument>invitation</instrument>
 <grade></grade>
 <category>General</category>

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Lumbar Puncture Test Request form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: lumbar-puncture-test-request
+  apiPrefix: /api/lumbar-puncture-test-request/
+  sqlSchema: lumbar_puncture_test_request
+  xmlNamespace: https://formexamples.github.io/lumbar-puncture-test-request/xml
+tags:
+- name: lumbar-puncture-test-request
+  description: Lumbar Puncture Test Request form
 paths:
   /api/lumbar-puncture-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - lumbar-puncture-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - lumbar-puncture-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - lumbar-puncture-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - lumbar-puncture-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - lumbar-puncture-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - lumbar-puncture-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/lumbar-puncture-test-request/lumbar_puncture_test_request_grade_flags:
     get:
       summary: List LumbarPunctureTestRequestGradeFlag records
+      tags:
+      - lumbar-puncture-test-request
       operationId: listLumbarPunctureTestRequestGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LumbarPunctureTestRequestGradeFlag
+      tags:
+      - lumbar-puncture-test-request
       operationId: createLumbarPunctureTestRequestGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LumbarPunctureTestRequestGradeFlag by id
+      tags:
+      - lumbar-puncture-test-request
       operationId: getLumbarPunctureTestRequestGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LumbarPunctureTestRequestGradeFlag
+      tags:
+      - lumbar-puncture-test-request
       operationId: updateLumbarPunctureTestRequestGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LumbarPunctureTestRequestGradeFlag
+      tags:
+      - lumbar-puncture-test-request
       operationId: replaceLumbarPunctureTestRequestGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LumbarPunctureTestRequestGradeFlag
+      tags:
+      - lumbar-puncture-test-request
       operationId: deleteLumbarPunctureTestRequestGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/lumbar-puncture-test-request/lumbar_puncture_test_request_grade_rules:
     get:
       summary: List LumbarPunctureTestRequestGradeRule records
+      tags:
+      - lumbar-puncture-test-request
       operationId: listLumbarPunctureTestRequestGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LumbarPunctureTestRequestGradeRule
+      tags:
+      - lumbar-puncture-test-request
       operationId: createLumbarPunctureTestRequestGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LumbarPunctureTestRequestGradeRule by id
+      tags:
+      - lumbar-puncture-test-request
       operationId: getLumbarPunctureTestRequestGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LumbarPunctureTestRequestGradeRule
+      tags:
+      - lumbar-puncture-test-request
       operationId: updateLumbarPunctureTestRequestGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LumbarPunctureTestRequestGradeRule
+      tags:
+      - lumbar-puncture-test-request
       operationId: replaceLumbarPunctureTestRequestGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LumbarPunctureTestRequestGradeRule
+      tags:
+      - lumbar-puncture-test-request
       operationId: deleteLumbarPunctureTestRequestGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/lumbar-puncture-test-request/lumbar_puncture_test_request_grades:
     get:
       summary: List LumbarPunctureTestRequestGrade records
+      tags:
+      - lumbar-puncture-test-request
       operationId: listLumbarPunctureTestRequestGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LumbarPunctureTestRequestGrade
+      tags:
+      - lumbar-puncture-test-request
       operationId: createLumbarPunctureTestRequestGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LumbarPunctureTestRequestGrade by id
+      tags:
+      - lumbar-puncture-test-request
       operationId: getLumbarPunctureTestRequestGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LumbarPunctureTestRequestGrade
+      tags:
+      - lumbar-puncture-test-request
       operationId: updateLumbarPunctureTestRequestGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LumbarPunctureTestRequestGrade
+      tags:
+      - lumbar-puncture-test-request
       operationId: replaceLumbarPunctureTestRequestGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LumbarPunctureTestRequestGrade
+      tags:
+      - lumbar-puncture-test-request
       operationId: deleteLumbarPunctureTestRequestGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/lumbar-puncture-test-request/lumbar_puncture_test_requests:
     get:
       summary: List LumbarPunctureTestRequest records
+      tags:
+      - lumbar-puncture-test-request
       operationId: listLumbarPunctureTestRequest
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LumbarPunctureTestRequest
+      tags:
+      - lumbar-puncture-test-request
       operationId: createLumbarPunctureTestRequest
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LumbarPunctureTestRequest by id
+      tags:
+      - lumbar-puncture-test-request
       operationId: getLumbarPunctureTestRequest
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LumbarPunctureTestRequest
+      tags:
+      - lumbar-puncture-test-request
       operationId: updateLumbarPunctureTestRequest
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LumbarPunctureTestRequest
+      tags:
+      - lumbar-puncture-test-request
       operationId: replaceLumbarPunctureTestRequest
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LumbarPunctureTestRequest
+      tags:
+      - lumbar-puncture-test-request
       operationId: deleteLumbarPunctureTestRequest
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - lumbar-puncture-test-request
   /api/lumbar-puncture-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - lumbar-puncture-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - lumbar-puncture-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - lumbar-puncture-test-request
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - lumbar-puncture-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - lumbar-puncture-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - lumbar-puncture-test-request
       operationId: deletePatient
       responses:
         '200':

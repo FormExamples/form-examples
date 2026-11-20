@@ -5,10 +5,19 @@ info:
   title: Employee Satisfaction Survey — GradingAdditionalFlag
   version: 1.0.0
   description: Safety-critical clinical flags raised alongside the grading result.
+x-namespace:
+  form: employee-satisfaction-survey
+  apiPrefix: /api/employee-satisfaction-survey/
+  sqlSchema: employee_satisfaction_survey
+  xmlNamespace: https://formexamples.github.io/employee-satisfaction-survey/xml
+tags:
+  - name: employee-satisfaction-survey
+    description: Employee Satisfaction Survey form
 paths:
   /api/employee-satisfaction-survey/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [employee-satisfaction-survey]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [employee-satisfaction-survey]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [employee-satisfaction-survey]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [employee-satisfaction-survey]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [employee-satisfaction-survey]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [employee-satisfaction-survey]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

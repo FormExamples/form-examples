@@ -5,10 +5,19 @@ info:
   title: Ct Scan Test Result — CtScanTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: ct-scan-test-result
+  apiPrefix: /api/ct-scan-test-result/
+  sqlSchema: ct_scan_test_result
+  xmlNamespace: https://formexamples.github.io/ct-scan-test-result/xml
+tags:
+  - name: ct-scan-test-result
+    description: Ct Scan Test Result form
 paths:
   /api/ct-scan-test-result/ct_scan_test_result_grades:
     get:
       summary: List CtScanTestResultGrade records
+      tags: [ct-scan-test-result]
       operationId: listCtScanTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CtScanTestResultGrade
+      tags: [ct-scan-test-result]
       operationId: createCtScanTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CtScanTestResultGrade by id
+      tags: [ct-scan-test-result]
       operationId: getCtScanTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CtScanTestResultGrade
+      tags: [ct-scan-test-result]
       operationId: updateCtScanTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CtScanTestResultGrade
+      tags: [ct-scan-test-result]
       operationId: replaceCtScanTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CtScanTestResultGrade
+      tags: [ct-scan-test-result]
       operationId: deleteCtScanTestResultGrade
       responses:
         "200":

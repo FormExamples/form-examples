@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pet_scan_test_result_grade SYSTEM "pet_scan_test_result_grade.dtd">
-<pet_scan_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<pet_scan_test_result_grade xmlns="https://formexamples.github.io/pet-scan-test-result/xml">
+<id>1b462246-61fe-57bd-85ba-e26b656ba6c7</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pet_scan_test_result_id>770e8400-e29b-41d4-a716-446655440002</pet_scan_test_result_id>
+<pet_scan_test_result_id>bba2ccd9-29a1-58e9-957f-6bfe572ba766</pet_scan_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

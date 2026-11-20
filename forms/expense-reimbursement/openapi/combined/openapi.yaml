@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Expense Reimbursement form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: expense-reimbursement
+  apiPrefix: /api/expense-reimbursement/
+  sqlSchema: expense_reimbursement
+  xmlNamespace: https://formexamples.github.io/expense-reimbursement/xml
+tags:
+- name: expense-reimbursement
+  description: Expense Reimbursement form
 paths:
   /api/expense-reimbursement/expense_reimbursement_grade_flags:
     get:
       summary: List ExpenseReimbursementGradeFlag records
+      tags:
+      - expense-reimbursement
       operationId: listExpenseReimbursementGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ExpenseReimbursementGradeFlag
+      tags:
+      - expense-reimbursement
       operationId: createExpenseReimbursementGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ExpenseReimbursementGradeFlag by id
+      tags:
+      - expense-reimbursement
       operationId: getExpenseReimbursementGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ExpenseReimbursementGradeFlag
+      tags:
+      - expense-reimbursement
       operationId: updateExpenseReimbursementGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ExpenseReimbursementGradeFlag
+      tags:
+      - expense-reimbursement
       operationId: replaceExpenseReimbursementGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ExpenseReimbursementGradeFlag
+      tags:
+      - expense-reimbursement
       operationId: deleteExpenseReimbursementGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/expense-reimbursement/expense_reimbursement_grade_rules:
     get:
       summary: List ExpenseReimbursementGradeRule records
+      tags:
+      - expense-reimbursement
       operationId: listExpenseReimbursementGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ExpenseReimbursementGradeRule
+      tags:
+      - expense-reimbursement
       operationId: createExpenseReimbursementGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ExpenseReimbursementGradeRule by id
+      tags:
+      - expense-reimbursement
       operationId: getExpenseReimbursementGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ExpenseReimbursementGradeRule
+      tags:
+      - expense-reimbursement
       operationId: updateExpenseReimbursementGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ExpenseReimbursementGradeRule
+      tags:
+      - expense-reimbursement
       operationId: replaceExpenseReimbursementGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ExpenseReimbursementGradeRule
+      tags:
+      - expense-reimbursement
       operationId: deleteExpenseReimbursementGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/expense-reimbursement/expense_reimbursement_grades:
     get:
       summary: List ExpenseReimbursementGrade records
+      tags:
+      - expense-reimbursement
       operationId: listExpenseReimbursementGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ExpenseReimbursementGrade
+      tags:
+      - expense-reimbursement
       operationId: createExpenseReimbursementGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ExpenseReimbursementGrade by id
+      tags:
+      - expense-reimbursement
       operationId: getExpenseReimbursementGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ExpenseReimbursementGrade
+      tags:
+      - expense-reimbursement
       operationId: updateExpenseReimbursementGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ExpenseReimbursementGrade
+      tags:
+      - expense-reimbursement
       operationId: replaceExpenseReimbursementGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ExpenseReimbursementGrade
+      tags:
+      - expense-reimbursement
       operationId: deleteExpenseReimbursementGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/expense-reimbursement/expense_reimbursement_items:
     get:
       summary: List ExpenseReimbursementItem records
+      tags:
+      - expense-reimbursement
       operationId: listExpenseReimbursementItem
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ExpenseReimbursementItem
+      tags:
+      - expense-reimbursement
       operationId: createExpenseReimbursementItem
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ExpenseReimbursementItem by id
+      tags:
+      - expense-reimbursement
       operationId: getExpenseReimbursementItem
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ExpenseReimbursementItem
+      tags:
+      - expense-reimbursement
       operationId: updateExpenseReimbursementItem
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ExpenseReimbursementItem
+      tags:
+      - expense-reimbursement
       operationId: replaceExpenseReimbursementItem
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ExpenseReimbursementItem
+      tags:
+      - expense-reimbursement
       operationId: deleteExpenseReimbursementItem
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/expense-reimbursement/expense_reimbursements:
     get:
       summary: List ExpenseReimbursement records
+      tags:
+      - expense-reimbursement
       operationId: listExpenseReimbursement
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ExpenseReimbursement
+      tags:
+      - expense-reimbursement
       operationId: createExpenseReimbursement
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ExpenseReimbursement by id
+      tags:
+      - expense-reimbursement
       operationId: getExpenseReimbursement
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ExpenseReimbursement
+      tags:
+      - expense-reimbursement
       operationId: updateExpenseReimbursement
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ExpenseReimbursement
+      tags:
+      - expense-reimbursement
       operationId: replaceExpenseReimbursement
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ExpenseReimbursement
+      tags:
+      - expense-reimbursement
       operationId: deleteExpenseReimbursement
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/expense-reimbursement/managers:
     get:
       summary: List Manager records
+      tags:
+      - expense-reimbursement
       operationId: listManager
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Manager
+      tags:
+      - expense-reimbursement
       operationId: createManager
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Manager by id
+      tags:
+      - expense-reimbursement
       operationId: getManager
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Manager
+      tags:
+      - expense-reimbursement
       operationId: updateManager
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Manager
+      tags:
+      - expense-reimbursement
       operationId: replaceManager
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Manager
+      tags:
+      - expense-reimbursement
       operationId: deleteManager
       responses:
         '200':
@@ -1495,9 +1575,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - expense-reimbursement
   /api/expense-reimbursement/workers:
     get:
       summary: List Worker records
+      tags:
+      - expense-reimbursement
       operationId: listWorker
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Worker
+      tags:
+      - expense-reimbursement
       operationId: createWorker
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Worker by id
+      tags:
+      - expense-reimbursement
       operationId: getWorker
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Worker
+      tags:
+      - expense-reimbursement
       operationId: updateWorker
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Worker
+      tags:
+      - expense-reimbursement
       operationId: replaceWorker
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Worker
+      tags:
+      - expense-reimbursement
       operationId: deleteWorker
       responses:
         '200':

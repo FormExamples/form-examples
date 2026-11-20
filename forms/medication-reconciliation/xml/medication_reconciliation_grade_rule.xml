@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE medication_reconciliation_grade_rule SYSTEM "medication_reconciliation_grade_rule.dtd">
-<medication_reconciliation_grade_rule>
-<id>dd0e8400-e29b-41d4-a716-446655440008</id>
+<medication_reconciliation_grade_rule xmlns="https://formexamples.github.io/medication-reconciliation/xml">
+<id>1e380661-bf72-5aa7-a585-8a361d24a89e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<medication_reconciliation_grade_id>cc0e8400-e29b-41d4-a716-446655440007</medication_reconciliation_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<medication_reconciliation_grade_id>b1326a7e-b318-5630-8ec0-0d0d91c23738</medication_reconciliation_grade_id>
+<rule_id>29064510-6070-5334-aa57-2bc4eb7e7e3c</rule_id>
 <category>General</category>
 <description>Example text.</description>
 </medication_reconciliation_grade_rule>

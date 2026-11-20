@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/cognitive-assessment/xml">
+<id>79b28451-f351-5ec6-ad76-0ffb3a8fa6e1</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>880e8400-e29b-41d4-a716-446655440003</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>4da258e0-f4a2-5e78-a8bd-e454acab6252</grade_id>
+<rule_id>f555273f-89bc-5a39-93a2-c1d4ca9e39f6</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>normal</severity_level>

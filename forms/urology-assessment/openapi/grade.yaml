@@ -5,10 +5,19 @@ info:
   title: Urology Assessment — Grade
   version: 1.0.0
   description: Computed IPSS prostate symptom grading result. One-to-one child of assessment.
+x-namespace:
+  form: urology-assessment
+  apiPrefix: /api/urology-assessment/
+  sqlSchema: urology_assessment
+  xmlNamespace: https://formexamples.github.io/urology-assessment/xml
+tags:
+  - name: urology-assessment
+    description: Urology Assessment form
 paths:
   /api/urology-assessment/grades:
     get:
       summary: List Grade records
+      tags: [urology-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [urology-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [urology-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [urology-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [urology-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [urology-assessment]
       operationId: deleteGrade
       responses:
         "200":

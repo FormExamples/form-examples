@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Structured Medication Review (SMR) form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: structured-medication-review
+  apiPrefix: /api/structured-medication-review/
+  sqlSchema: structured_medication_review
+  xmlNamespace: https://formexamples.github.io/structured-medication-review/xml
+tags:
+- name: structured-medication-review
+  description: Structured Medication Review (SMR) form
 paths:
   /api/structured-medication-review/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - structured-medication-review
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - structured-medication-review
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - structured-medication-review
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - structured-medication-review
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - structured-medication-review
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - structured-medication-review
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - structured-medication-review
   /api/structured-medication-review/patients:
     get:
       summary: List Patient records
+      tags:
+      - structured-medication-review
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - structured-medication-review
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - structured-medication-review
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - structured-medication-review
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - structured-medication-review
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - structured-medication-review
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/structured-medication-review/structured_medication_review_grade_flags:
     get:
       summary: List StructuredMedicationReviewGradeFlag records
+      tags:
+      - structured-medication-review
       operationId: listStructuredMedicationReviewGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new StructuredMedicationReviewGradeFlag
+      tags:
+      - structured-medication-review
       operationId: createStructuredMedicationReviewGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one StructuredMedicationReviewGradeFlag by id
+      tags:
+      - structured-medication-review
       operationId: getStructuredMedicationReviewGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing StructuredMedicationReviewGradeFlag
+      tags:
+      - structured-medication-review
       operationId: updateStructuredMedicationReviewGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing StructuredMedicationReviewGradeFlag
+      tags:
+      - structured-medication-review
       operationId: replaceStructuredMedicationReviewGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a StructuredMedicationReviewGradeFlag
+      tags:
+      - structured-medication-review
       operationId: deleteStructuredMedicationReviewGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/structured-medication-review/structured_medication_review_grade_rules:
     get:
       summary: List StructuredMedicationReviewGradeRule records
+      tags:
+      - structured-medication-review
       operationId: listStructuredMedicationReviewGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new StructuredMedicationReviewGradeRule
+      tags:
+      - structured-medication-review
       operationId: createStructuredMedicationReviewGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one StructuredMedicationReviewGradeRule by id
+      tags:
+      - structured-medication-review
       operationId: getStructuredMedicationReviewGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing StructuredMedicationReviewGradeRule
+      tags:
+      - structured-medication-review
       operationId: updateStructuredMedicationReviewGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing StructuredMedicationReviewGradeRule
+      tags:
+      - structured-medication-review
       operationId: replaceStructuredMedicationReviewGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a StructuredMedicationReviewGradeRule
+      tags:
+      - structured-medication-review
       operationId: deleteStructuredMedicationReviewGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/structured-medication-review/structured_medication_review_grades:
     get:
       summary: List StructuredMedicationReviewGrade records
+      tags:
+      - structured-medication-review
       operationId: listStructuredMedicationReviewGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new StructuredMedicationReviewGrade
+      tags:
+      - structured-medication-review
       operationId: createStructuredMedicationReviewGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one StructuredMedicationReviewGrade by id
+      tags:
+      - structured-medication-review
       operationId: getStructuredMedicationReviewGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing StructuredMedicationReviewGrade
+      tags:
+      - structured-medication-review
       operationId: updateStructuredMedicationReviewGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing StructuredMedicationReviewGrade
+      tags:
+      - structured-medication-review
       operationId: replaceStructuredMedicationReviewGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a StructuredMedicationReviewGrade
+      tags:
+      - structured-medication-review
       operationId: deleteStructuredMedicationReviewGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/structured-medication-review/structured_medication_review_medicines:
     get:
       summary: List StructuredMedicationReviewMedicine records
+      tags:
+      - structured-medication-review
       operationId: listStructuredMedicationReviewMedicine
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new StructuredMedicationReviewMedicine
+      tags:
+      - structured-medication-review
       operationId: createStructuredMedicationReviewMedicine
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one StructuredMedicationReviewMedicine by id
+      tags:
+      - structured-medication-review
       operationId: getStructuredMedicationReviewMedicine
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing StructuredMedicationReviewMedicine
+      tags:
+      - structured-medication-review
       operationId: updateStructuredMedicationReviewMedicine
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing StructuredMedicationReviewMedicine
+      tags:
+      - structured-medication-review
       operationId: replaceStructuredMedicationReviewMedicine
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a StructuredMedicationReviewMedicine
+      tags:
+      - structured-medication-review
       operationId: deleteStructuredMedicationReviewMedicine
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/structured-medication-review/structured_medication_reviews:
     get:
       summary: List StructuredMedicationReview records
+      tags:
+      - structured-medication-review
       operationId: listStructuredMedicationReview
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new StructuredMedicationReview
+      tags:
+      - structured-medication-review
       operationId: createStructuredMedicationReview
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one StructuredMedicationReview by id
+      tags:
+      - structured-medication-review
       operationId: getStructuredMedicationReview
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing StructuredMedicationReview
+      tags:
+      - structured-medication-review
       operationId: updateStructuredMedicationReview
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing StructuredMedicationReview
+      tags:
+      - structured-medication-review
       operationId: replaceStructuredMedicationReview
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a StructuredMedicationReview
+      tags:
+      - structured-medication-review
       operationId: deleteStructuredMedicationReview
       responses:
         '200':

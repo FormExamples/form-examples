@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE encounter_satisfaction SYSTEM "encounter_satisfaction.dtd">
-<encounter_satisfaction>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<encounter_satisfaction xmlns="https://formexamples.github.io/encounter-satisfaction/xml">
+<id>9d55e49a-33ad-5345-8437-aabb2c65c34a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<patient_id>d4658236-e393-53bd-9df2-ce916d688c37</patient_id>
 <status>in_progress</status>
 </encounter_satisfaction>

@@ -1,4 +1,5 @@
 <!ELEMENT modified_early_warning_score_grade (id,created_at,updated_at,deleted_at,modified_early_warning_score_id,aggregate_score,systolic_blood_pressure_score,heart_rate_score,respiratory_rate_score,temperature_score,avpu_score,single_parameter_trigger,risk_band,monitoring_frequency,graded_at)>
+<!ATTLIST modified_early_warning_score_grade xmlns CDATA #FIXED "https://formexamples.github.io/modified-early-warning-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

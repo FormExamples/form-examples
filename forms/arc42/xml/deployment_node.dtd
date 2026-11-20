@@ -1,4 +1,5 @@
 <!ELEMENT deployment_node (id,created_at,updated_at,deleted_at,arc42_documentation_id,ordinal,environment,node_name,responsibility)>
+<!ATTLIST deployment_node xmlns CDATA #FIXED "https://formexamples.github.io/arc42/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Diabetes Podiatry Assessment — DiabetesPodiatryAssessmentGrade
   version: 1.0.0
   description: "Computed per-foot and overall diabetic foot risk classification for a diabetes-podiatry-assessment record: per-foot risk, overall risk, review pathway, referral, review interval, and completeness status."
+x-namespace:
+  form: diabetes-podiatry-assessment
+  apiPrefix: /api/diabetes-podiatry-assessment/
+  sqlSchema: diabetes_podiatry_assessment
+  xmlNamespace: https://formexamples.github.io/diabetes-podiatry-assessment/xml
+tags:
+  - name: diabetes-podiatry-assessment
+    description: Diabetes Podiatry Assessment form
 paths:
   /api/diabetes-podiatry-assessment/diabetes_podiatry_assessment_grades:
     get:
       summary: List DiabetesPodiatryAssessmentGrade records
+      tags: [diabetes-podiatry-assessment]
       operationId: listDiabetesPodiatryAssessmentGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DiabetesPodiatryAssessmentGrade
+      tags: [diabetes-podiatry-assessment]
       operationId: createDiabetesPodiatryAssessmentGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DiabetesPodiatryAssessmentGrade by id
+      tags: [diabetes-podiatry-assessment]
       operationId: getDiabetesPodiatryAssessmentGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DiabetesPodiatryAssessmentGrade
+      tags: [diabetes-podiatry-assessment]
       operationId: updateDiabetesPodiatryAssessmentGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DiabetesPodiatryAssessmentGrade
+      tags: [diabetes-podiatry-assessment]
       operationId: replaceDiabetesPodiatryAssessmentGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DiabetesPodiatryAssessmentGrade
+      tags: [diabetes-podiatry-assessment]
       operationId: deleteDiabetesPodiatryAssessmentGrade
       responses:
         "200":

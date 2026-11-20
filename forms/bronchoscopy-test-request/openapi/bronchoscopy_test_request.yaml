@@ -5,10 +5,19 @@ info:
   title: Bronchoscopy Test Request — BronchoscopyTestRequest
   version: 1.0.0
   description: Bronchoscopy (airway endoscopy) request (referral). Captures the requested procedure, the clinical indication and question, symptoms, imaging findings, bleeding / anticoagulation risk, procedural risk, and triage urgency.
+x-namespace:
+  form: bronchoscopy-test-request
+  apiPrefix: /api/bronchoscopy-test-request/
+  sqlSchema: bronchoscopy_test_request
+  xmlNamespace: https://formexamples.github.io/bronchoscopy-test-request/xml
+tags:
+  - name: bronchoscopy-test-request
+    description: Bronchoscopy Test Request form
 paths:
   /api/bronchoscopy-test-request/bronchoscopy_test_requests:
     get:
       summary: List BronchoscopyTestRequest records
+      tags: [bronchoscopy-test-request]
       operationId: listBronchoscopyTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BronchoscopyTestRequest
+      tags: [bronchoscopy-test-request]
       operationId: createBronchoscopyTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BronchoscopyTestRequest by id
+      tags: [bronchoscopy-test-request]
       operationId: getBronchoscopyTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BronchoscopyTestRequest
+      tags: [bronchoscopy-test-request]
       operationId: updateBronchoscopyTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BronchoscopyTestRequest
+      tags: [bronchoscopy-test-request]
       operationId: replaceBronchoscopyTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BronchoscopyTestRequest
+      tags: [bronchoscopy-test-request]
       operationId: deleteBronchoscopyTestRequest
       responses:
         "200":

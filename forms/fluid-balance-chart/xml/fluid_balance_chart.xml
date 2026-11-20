@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fluid_balance_chart SYSTEM "fluid_balance_chart.dtd">
-<fluid_balance_chart>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<fluid_balance_chart xmlns="https://formexamples.github.io/fluid-balance-chart/xml">
+<id>45f305f9-0692-5f10-a580-e384155f7209</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>1b51d03f-f041-5e3c-a231-ac92454856aa</patient_id>
+<clinician_id>939c0bca-1c06-5560-bdd0-b4646bb929e1</clinician_id>
 <clinician_name>Example</clinician_name>
 <clinician_role>nurse</clinician_role>
 <patient_identifier></patient_identifier>

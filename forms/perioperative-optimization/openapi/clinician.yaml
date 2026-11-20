@@ -5,10 +5,19 @@ info:
   title: Perioperative Optimization — Clinician
   version: 1.0.0
   description: Clinician, i.e. the practitioner who conducts the perioperative optimization assessment.
+x-namespace:
+  form: perioperative-optimization
+  apiPrefix: /api/perioperative-optimization/
+  sqlSchema: perioperative_optimization
+  xmlNamespace: https://formexamples.github.io/perioperative-optimization/xml
+tags:
+  - name: perioperative-optimization
+    description: Perioperative Optimization form
 paths:
   /api/perioperative-optimization/clinicians:
     get:
       summary: List Clinician records
+      tags: [perioperative-optimization]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [perioperative-optimization]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [perioperative-optimization]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [perioperative-optimization]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [perioperative-optimization]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [perioperative-optimization]
       operationId: deleteClinician
       responses:
         "200":

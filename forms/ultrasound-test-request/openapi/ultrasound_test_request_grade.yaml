@@ -5,10 +5,19 @@ info:
   title: Ultrasound Test Request — UltrasoundTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ACR 1-9), preparation / technical suitability, request completeness, and triage priority."
+x-namespace:
+  form: ultrasound-test-request
+  apiPrefix: /api/ultrasound-test-request/
+  sqlSchema: ultrasound_test_request
+  xmlNamespace: https://formexamples.github.io/ultrasound-test-request/xml
+tags:
+  - name: ultrasound-test-request
+    description: Ultrasound Test Request form
 paths:
   /api/ultrasound-test-request/ultrasound_test_request_grades:
     get:
       summary: List UltrasoundTestRequestGrade records
+      tags: [ultrasound-test-request]
       operationId: listUltrasoundTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UltrasoundTestRequestGrade
+      tags: [ultrasound-test-request]
       operationId: createUltrasoundTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UltrasoundTestRequestGrade by id
+      tags: [ultrasound-test-request]
       operationId: getUltrasoundTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UltrasoundTestRequestGrade
+      tags: [ultrasound-test-request]
       operationId: updateUltrasoundTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UltrasoundTestRequestGrade
+      tags: [ultrasound-test-request]
       operationId: replaceUltrasoundTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UltrasoundTestRequestGrade
+      tags: [ultrasound-test-request]
       operationId: deleteUltrasoundTestRequestGrade
       responses:
         "200":

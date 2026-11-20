@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the General Practitioner Referral Letter form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: general-practitioner-referral-letter
+  apiPrefix: /api/general-practitioner-referral-letter/
+  sqlSchema: general_practitioner_referral_letter
+  xmlNamespace: https://formexamples.github.io/general-practitioner-referral-letter/xml
+tags:
+- name: general-practitioner-referral-letter
+  description: General Practitioner Referral Letter form
 paths:
   /api/general-practitioner-referral-letter/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - general-practitioner-referral-letter
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - general-practitioner-referral-letter
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - general-practitioner-referral-letter
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - general-practitioner-referral-letter
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - general-practitioner-referral-letter
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - general-practitioner-referral-letter
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/general-practitioner-referral-letter/general_practitioner_referral_letter_grade_flags:
     get:
       summary: List GeneralPractitionerReferralLetterGradeFlag records
+      tags:
+      - general-practitioner-referral-letter
       operationId: listGeneralPractitionerReferralLetterGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GeneralPractitionerReferralLetterGradeFlag
+      tags:
+      - general-practitioner-referral-letter
       operationId: createGeneralPractitionerReferralLetterGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GeneralPractitionerReferralLetterGradeFlag by id
+      tags:
+      - general-practitioner-referral-letter
       operationId: getGeneralPractitionerReferralLetterGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GeneralPractitionerReferralLetterGradeFlag
+      tags:
+      - general-practitioner-referral-letter
       operationId: updateGeneralPractitionerReferralLetterGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GeneralPractitionerReferralLetterGradeFlag
+      tags:
+      - general-practitioner-referral-letter
       operationId: replaceGeneralPractitionerReferralLetterGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GeneralPractitionerReferralLetterGradeFlag
+      tags:
+      - general-practitioner-referral-letter
       operationId: deleteGeneralPractitionerReferralLetterGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/general-practitioner-referral-letter/general_practitioner_referral_letter_grade_rules:
     get:
       summary: List GeneralPractitionerReferralLetterGradeRule records
+      tags:
+      - general-practitioner-referral-letter
       operationId: listGeneralPractitionerReferralLetterGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GeneralPractitionerReferralLetterGradeRule
+      tags:
+      - general-practitioner-referral-letter
       operationId: createGeneralPractitionerReferralLetterGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GeneralPractitionerReferralLetterGradeRule by id
+      tags:
+      - general-practitioner-referral-letter
       operationId: getGeneralPractitionerReferralLetterGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GeneralPractitionerReferralLetterGradeRule
+      tags:
+      - general-practitioner-referral-letter
       operationId: updateGeneralPractitionerReferralLetterGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GeneralPractitionerReferralLetterGradeRule
+      tags:
+      - general-practitioner-referral-letter
       operationId: replaceGeneralPractitionerReferralLetterGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GeneralPractitionerReferralLetterGradeRule
+      tags:
+      - general-practitioner-referral-letter
       operationId: deleteGeneralPractitionerReferralLetterGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/general-practitioner-referral-letter/general_practitioner_referral_letter_grades:
     get:
       summary: List GeneralPractitionerReferralLetterGrade records
+      tags:
+      - general-practitioner-referral-letter
       operationId: listGeneralPractitionerReferralLetterGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GeneralPractitionerReferralLetterGrade
+      tags:
+      - general-practitioner-referral-letter
       operationId: createGeneralPractitionerReferralLetterGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GeneralPractitionerReferralLetterGrade by id
+      tags:
+      - general-practitioner-referral-letter
       operationId: getGeneralPractitionerReferralLetterGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GeneralPractitionerReferralLetterGrade
+      tags:
+      - general-practitioner-referral-letter
       operationId: updateGeneralPractitionerReferralLetterGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GeneralPractitionerReferralLetterGrade
+      tags:
+      - general-practitioner-referral-letter
       operationId: replaceGeneralPractitionerReferralLetterGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GeneralPractitionerReferralLetterGrade
+      tags:
+      - general-practitioner-referral-letter
       operationId: deleteGeneralPractitionerReferralLetterGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/general-practitioner-referral-letter/general_practitioner_referral_letters:
     get:
       summary: List GeneralPractitionerReferralLetter records
+      tags:
+      - general-practitioner-referral-letter
       operationId: listGeneralPractitionerReferralLetter
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GeneralPractitionerReferralLetter
+      tags:
+      - general-practitioner-referral-letter
       operationId: createGeneralPractitionerReferralLetter
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GeneralPractitionerReferralLetter by id
+      tags:
+      - general-practitioner-referral-letter
       operationId: getGeneralPractitionerReferralLetter
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GeneralPractitionerReferralLetter
+      tags:
+      - general-practitioner-referral-letter
       operationId: updateGeneralPractitionerReferralLetter
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GeneralPractitionerReferralLetter
+      tags:
+      - general-practitioner-referral-letter
       operationId: replaceGeneralPractitionerReferralLetter
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GeneralPractitionerReferralLetter
+      tags:
+      - general-practitioner-referral-letter
       operationId: deleteGeneralPractitionerReferralLetter
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - general-practitioner-referral-letter
   /api/general-practitioner-referral-letter/patients:
     get:
       summary: List Patient records
+      tags:
+      - general-practitioner-referral-letter
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - general-practitioner-referral-letter
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - general-practitioner-referral-letter
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - general-practitioner-referral-letter
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - general-practitioner-referral-letter
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - general-practitioner-referral-letter
       operationId: deletePatient
       responses:
         '200':

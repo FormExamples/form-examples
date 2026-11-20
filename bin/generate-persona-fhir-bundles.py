@@ -51,6 +51,9 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+from example_ids import example_uuid  # noqa: E402
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 FORMS_DIR = REPO_ROOT / "forms"
 
@@ -327,12 +330,10 @@ def build_persona_flag(form_slug, flag: dict, res_id):
 
 
 def deterministic_uuid(seed_text: str) -> str:
-    """A stable, distinct UUID-shaped id derived from seed_text (not random —
-    reruns of the same persona must produce byte-identical output)."""
-    import hashlib
-
-    h = hashlib.sha256(seed_text.encode()).hexdigest()
-    return f"{h[0:8]}-{h[8:12]}-4{h[13:16]}-a{h[17:20]}-{h[20:32]}"
+    """A stable UUIDv5 named by seed_text, which starts with the form's slug
+    (reruns of the same persona must produce byte-identical output)."""
+    slug, _, rest = seed_text.partition(":")
+    return example_uuid(slug, rest)
 
 
 def build_persona_bundle(form_dir: Path, form_slug: str, title: str, roles: dict, tables: dict, persona: dict, idx: int):

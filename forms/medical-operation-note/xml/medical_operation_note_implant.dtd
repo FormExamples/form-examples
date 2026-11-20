@@ -1,4 +1,5 @@
 <!ELEMENT medical_operation_note_implant (id,created_at,updated_at,deleted_at,medical_operation_note_id,category,name,size_or_gauge,quantity,manufacturer,lot_number,serial_number,batch_number,expiry_date,udi_di,implant_site,registry_required,registry_submitted,notes)>
+<!ATTLIST medical_operation_note_implant xmlns CDATA #FIXED "https://formexamples.github.io/medical-operation-note/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

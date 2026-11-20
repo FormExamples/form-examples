@@ -5,10 +5,19 @@ info:
   title: Heart Health Check — Cholesterol
   version: 1.0.0
   description: Cholesterol lipid profile and statin therapy status.
+x-namespace:
+  form: heart-health-check
+  apiPrefix: /api/heart-health-check/
+  sqlSchema: heart_health_check
+  xmlNamespace: https://formexamples.github.io/heart-health-check/xml
+tags:
+  - name: heart-health-check
+    description: Heart Health Check form
 paths:
   /api/heart-health-check/cholesterols:
     get:
       summary: List Cholesterol records
+      tags: [heart-health-check]
       operationId: listCholesterol
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Cholesterol
+      tags: [heart-health-check]
       operationId: createCholesterol
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Cholesterol by id
+      tags: [heart-health-check]
       operationId: getCholesterol
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Cholesterol
+      tags: [heart-health-check]
       operationId: updateCholesterol
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Cholesterol
+      tags: [heart-health-check]
       operationId: replaceCholesterol
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Cholesterol
+      tags: [heart-health-check]
       operationId: deleteCholesterol
       responses:
         "200":

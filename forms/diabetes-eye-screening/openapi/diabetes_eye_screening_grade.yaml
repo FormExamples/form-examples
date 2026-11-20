@@ -5,10 +5,19 @@ info:
   title: Diabetes Eye Screening — DiabetesEyeScreeningGrade
   version: 1.0.0
   description: "Computed worst-eye classification and outcome for a diabetes-eye-screening record: worst retinopathy and maculopathy grade, any-ungradable marker, recall / referral pathway, recall interval, and completeness status."
+x-namespace:
+  form: diabetes-eye-screening
+  apiPrefix: /api/diabetes-eye-screening/
+  sqlSchema: diabetes_eye_screening
+  xmlNamespace: https://formexamples.github.io/diabetes-eye-screening/xml
+tags:
+  - name: diabetes-eye-screening
+    description: Diabetes Eye Screening form
 paths:
   /api/diabetes-eye-screening/diabetes_eye_screening_grades:
     get:
       summary: List DiabetesEyeScreeningGrade records
+      tags: [diabetes-eye-screening]
       operationId: listDiabetesEyeScreeningGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DiabetesEyeScreeningGrade
+      tags: [diabetes-eye-screening]
       operationId: createDiabetesEyeScreeningGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DiabetesEyeScreeningGrade by id
+      tags: [diabetes-eye-screening]
       operationId: getDiabetesEyeScreeningGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DiabetesEyeScreeningGrade
+      tags: [diabetes-eye-screening]
       operationId: updateDiabetesEyeScreeningGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DiabetesEyeScreeningGrade
+      tags: [diabetes-eye-screening]
       operationId: replaceDiabetesEyeScreeningGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DiabetesEyeScreeningGrade
+      tags: [diabetes-eye-screening]
       operationId: deleteDiabetesEyeScreeningGrade
       responses:
         "200":

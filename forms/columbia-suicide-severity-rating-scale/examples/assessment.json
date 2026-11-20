@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000067",
+    "id": "b3d23283-1307-5982-b498-a936d7fbffa2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000079",
+    "id": "687b4c1d-0616-554a-be8d-b909c70ae1d1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "columbiaSuicideSeverityRatingScale": {
-    "id": "550e8400-e29b-41d4-a716-000000000086",
+    "id": "85e70c94-78bc-5aa4-9ba4-1286def53e17",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000008a",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000008b",
+    "patientId": "d36896a4-169c-52dc-839e-6bbd1911f9fc",
+    "clinicianId": "4ee2cc9f-e894-5db4-a856-cfce787397b3",
     "clinicianName": "",
     "clinicianRole": "clinician",
     "assessedAt": null,
@@ -76,11 +76,11 @@
     "clinicalNote": ""
   },
   "columbiaSuicideSeverityRatingScaleGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ad",
+    "id": "2662f4c1-4857-5346-bf0d-f12278cf48db",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "columbiaSuicideSeverityRatingScaleId": "550e8400-e29b-41d4-a716-0000000000b1",
+    "columbiaSuicideSeverityRatingScaleId": "938db6be-0b7a-56cc-8737-b09429db47ce",
     "ideationLevel": 2,
     "anyBehaviour": "yes",
     "recentBehaviour": "yes",
@@ -90,11 +90,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "columbiaSuicideSeverityRatingScaleGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b9",
+    "id": "ddc52921-ffd1-5dad-b046-2018b2ed798d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "columbiaSuicideSeverityRatingScaleGradeId": "550e8400-e29b-41d4-a716-0000000000bd",
+    "columbiaSuicideSeverityRatingScaleGradeId": "3a8ca3f3-2168-5c86-b9d2-c054fa51a530",
     "ruleId": "",
     "dimension": "ideation",
     "tier": "low",
@@ -102,11 +102,11 @@
     "description": ""
   },
   "columbiaSuicideSeverityRatingScaleGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c3",
+    "id": "2e7b067c-c956-52b4-83d6-1373ea976ddb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "columbiaSuicideSeverityRatingScaleGradeId": "550e8400-e29b-41d4-a716-0000000000c7",
+    "columbiaSuicideSeverityRatingScaleGradeId": "e001a629-d91a-50ab-ab72-81574bde0f84",
     "flagId": "",
     "category": "high-risk-crisis-response",
     "priority": "low",

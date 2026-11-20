@@ -5,10 +5,19 @@ info:
   title: United States Divorce Petition — UnitedStatesDivorcePetitionGradeFlag
   version: 1.0.0
   description: Flagged issues that fire independently of the readiness class, with priority and suggested action.
+x-namespace:
+  form: united-states-divorce-petition
+  apiPrefix: /api/united-states-divorce-petition/
+  sqlSchema: united_states_divorce_petition
+  xmlNamespace: https://formexamples.github.io/united-states-divorce-petition/xml
+tags:
+  - name: united-states-divorce-petition
+    description: United States Divorce Petition form
 paths:
   /api/united-states-divorce-petition/united_states_divorce_petition_grade_flags:
     get:
       summary: List UnitedStatesDivorcePetitionGradeFlag records
+      tags: [united-states-divorce-petition]
       operationId: listUnitedStatesDivorcePetitionGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesDivorcePetitionGradeFlag
+      tags: [united-states-divorce-petition]
       operationId: createUnitedStatesDivorcePetitionGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesDivorcePetitionGradeFlag by id
+      tags: [united-states-divorce-petition]
       operationId: getUnitedStatesDivorcePetitionGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesDivorcePetitionGradeFlag
+      tags: [united-states-divorce-petition]
       operationId: updateUnitedStatesDivorcePetitionGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesDivorcePetitionGradeFlag
+      tags: [united-states-divorce-petition]
       operationId: replaceUnitedStatesDivorcePetitionGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesDivorcePetitionGradeFlag
+      tags: [united-states-divorce-petition]
       operationId: deleteUnitedStatesDivorcePetitionGradeFlag
       responses:
         "200":

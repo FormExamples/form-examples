@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/prescription-request/xml">
+<id>c80de7fa-bd97-5e49-8c32-b18e1301cb71</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>bb0e8400-e29b-41d4-a716-446655440006</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>c0530d10-4ee7-5af6-87bc-915038325819</grade_id>
+<rule_id>422ea904-a919-58bd-878e-e43053237624</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>routine</severity_level>

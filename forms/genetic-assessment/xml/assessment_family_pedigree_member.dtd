@@ -1,4 +1,5 @@
 <!ELEMENT assessment_family_pedigree_member (id,created_at,updated_at,deleted_at,family_pedigree_id,relationship,sex,age,alive,age_at_death,cause_of_death,medical_conditions,sort_order)>
+<!ATTLIST assessment_family_pedigree_member xmlns CDATA #FIXED "https://formexamples.github.io/genetic-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

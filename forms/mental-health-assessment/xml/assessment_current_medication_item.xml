@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment_current_medication_item SYSTEM "assessment_current_medication_item.dtd">
-<assessment_current_medication_item>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<assessment_current_medication_item xmlns="https://formexamples.github.io/mental-health-assessment/xml">
+<id>d0d41731-3238-5392-9de7-9ca35b0e7d98</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<current_medications_id>660e8400-e29b-41d4-a716-446655440001</current_medications_id>
+<current_medications_id>5dd85311-8149-5ef2-b87c-c1d6f10ecd9e</current_medications_id>
 <medication_name>Example</medication_name>
 <dose>500mg</dose>
 <frequency>twice daily</frequency>

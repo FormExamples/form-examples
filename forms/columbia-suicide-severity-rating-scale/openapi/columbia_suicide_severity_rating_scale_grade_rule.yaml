@@ -5,10 +5,19 @@ info:
   title: Columbia Suicide Severity Rating Scale — ColumbiaSuicideSeverityRatingScaleGradeRule
   version: 1.0.0
   description: "Audit trail of every classification rule that fired during C-SSRS risk-tier computation: dimension, contributed tier, category, and description."
+x-namespace:
+  form: columbia-suicide-severity-rating-scale
+  apiPrefix: /api/columbia-suicide-severity-rating-scale/
+  sqlSchema: columbia_suicide_severity_rating_scale
+  xmlNamespace: https://formexamples.github.io/columbia-suicide-severity-rating-scale/xml
+tags:
+  - name: columbia-suicide-severity-rating-scale
+    description: Columbia Suicide Severity Rating Scale form
 paths:
   /api/columbia-suicide-severity-rating-scale/columbia_suicide_severity_rating_scale_grade_rules:
     get:
       summary: List ColumbiaSuicideSeverityRatingScaleGradeRule records
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: listColumbiaSuicideSeverityRatingScaleGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ColumbiaSuicideSeverityRatingScaleGradeRule
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: createColumbiaSuicideSeverityRatingScaleGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ColumbiaSuicideSeverityRatingScaleGradeRule by id
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: getColumbiaSuicideSeverityRatingScaleGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ColumbiaSuicideSeverityRatingScaleGradeRule
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: updateColumbiaSuicideSeverityRatingScaleGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ColumbiaSuicideSeverityRatingScaleGradeRule
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: replaceColumbiaSuicideSeverityRatingScaleGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ColumbiaSuicideSeverityRatingScaleGradeRule
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: deleteColumbiaSuicideSeverityRatingScaleGradeRule
       responses:
         "200":

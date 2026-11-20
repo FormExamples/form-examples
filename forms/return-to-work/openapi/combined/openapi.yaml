@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Return to Work form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: return-to-work
+  apiPrefix: /api/return-to-work/
+  sqlSchema: return_to_work
+  xmlNamespace: https://formexamples.github.io/return-to-work/xml
+tags:
+- name: return-to-work
+  description: Return to Work form
 paths:
   /api/return-to-work/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - return-to-work
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - return-to-work
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - return-to-work
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - return-to-work
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - return-to-work
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - return-to-work
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/return-to-work/employers:
     get:
       summary: List Employer records
+      tags:
+      - return-to-work
       operationId: listEmployer
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Employer
+      tags:
+      - return-to-work
       operationId: createEmployer
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Employer by id
+      tags:
+      - return-to-work
       operationId: getEmployer
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Employer
+      tags:
+      - return-to-work
       operationId: updateEmployer
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Employer
+      tags:
+      - return-to-work
       operationId: replaceEmployer
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Employer
+      tags:
+      - return-to-work
       operationId: deleteEmployer
       responses:
         '200':
@@ -511,9 +543,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - return-to-work
   /api/return-to-work/patients:
     get:
       summary: List Patient records
+      tags:
+      - return-to-work
       operationId: listPatient
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - return-to-work
       operationId: createPatient
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - return-to-work
       operationId: getPatient
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - return-to-work
       operationId: updatePatient
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - return-to-work
       operationId: replacePatient
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - return-to-work
       operationId: deletePatient
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/return-to-work/return_to_work_grade_flags:
     get:
       summary: List ReturnToWorkGradeFlag records
+      tags:
+      - return-to-work
       operationId: listReturnToWorkGradeFlag
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ReturnToWorkGradeFlag
+      tags:
+      - return-to-work
       operationId: createReturnToWorkGradeFlag
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ReturnToWorkGradeFlag by id
+      tags:
+      - return-to-work
       operationId: getReturnToWorkGradeFlag
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ReturnToWorkGradeFlag
+      tags:
+      - return-to-work
       operationId: updateReturnToWorkGradeFlag
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ReturnToWorkGradeFlag
+      tags:
+      - return-to-work
       operationId: replaceReturnToWorkGradeFlag
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ReturnToWorkGradeFlag
+      tags:
+      - return-to-work
       operationId: deleteReturnToWorkGradeFlag
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/return-to-work/return_to_work_grade_rules:
     get:
       summary: List ReturnToWorkGradeRule records
+      tags:
+      - return-to-work
       operationId: listReturnToWorkGradeRule
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ReturnToWorkGradeRule
+      tags:
+      - return-to-work
       operationId: createReturnToWorkGradeRule
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ReturnToWorkGradeRule by id
+      tags:
+      - return-to-work
       operationId: getReturnToWorkGradeRule
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ReturnToWorkGradeRule
+      tags:
+      - return-to-work
       operationId: updateReturnToWorkGradeRule
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ReturnToWorkGradeRule
+      tags:
+      - return-to-work
       operationId: replaceReturnToWorkGradeRule
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ReturnToWorkGradeRule
+      tags:
+      - return-to-work
       operationId: deleteReturnToWorkGradeRule
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/return-to-work/return_to_work_grades:
     get:
       summary: List ReturnToWorkGrade records
+      tags:
+      - return-to-work
       operationId: listReturnToWorkGrade
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ReturnToWorkGrade
+      tags:
+      - return-to-work
       operationId: createReturnToWorkGrade
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ReturnToWorkGrade by id
+      tags:
+      - return-to-work
       operationId: getReturnToWorkGrade
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ReturnToWorkGrade
+      tags:
+      - return-to-work
       operationId: updateReturnToWorkGrade
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ReturnToWorkGrade
+      tags:
+      - return-to-work
       operationId: replaceReturnToWorkGrade
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ReturnToWorkGrade
+      tags:
+      - return-to-work
       operationId: deleteReturnToWorkGrade
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/return-to-work/return_to_work_restrictions:
     get:
       summary: List ReturnToWorkRestriction records
+      tags:
+      - return-to-work
       operationId: listReturnToWorkRestriction
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ReturnToWorkRestriction
+      tags:
+      - return-to-work
       operationId: createReturnToWorkRestriction
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ReturnToWorkRestriction by id
+      tags:
+      - return-to-work
       operationId: getReturnToWorkRestriction
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ReturnToWorkRestriction
+      tags:
+      - return-to-work
       operationId: updateReturnToWorkRestriction
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ReturnToWorkRestriction
+      tags:
+      - return-to-work
       operationId: replaceReturnToWorkRestriction
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ReturnToWorkRestriction
+      tags:
+      - return-to-work
       operationId: deleteReturnToWorkRestriction
       responses:
         '200':
@@ -1744,6 +1838,8 @@ paths:
   /api/return-to-work/return_to_works:
     get:
       summary: List ReturnToWork records
+      tags:
+      - return-to-work
       operationId: listReturnToWork
       parameters:
       - name: limit
@@ -1796,6 +1892,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ReturnToWork
+      tags:
+      - return-to-work
       operationId: createReturnToWork
       requestBody:
         required: true
@@ -1849,6 +1947,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ReturnToWork by id
+      tags:
+      - return-to-work
       operationId: getReturnToWork
       responses:
         '200':
@@ -1876,6 +1976,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ReturnToWork
+      tags:
+      - return-to-work
       operationId: updateReturnToWork
       requestBody:
         required: true
@@ -1921,6 +2023,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ReturnToWork
+      tags:
+      - return-to-work
       operationId: replaceReturnToWork
       requestBody:
         required: true
@@ -1966,6 +2070,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ReturnToWork
+      tags:
+      - return-to-work
       operationId: deleteReturnToWork
       responses:
         '200':

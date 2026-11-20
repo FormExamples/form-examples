@@ -5,10 +5,19 @@ info:
   title: Workplace Safety Assessment — Assessment
   version: 1.0.0
   description: Top-level assessment instance for workplace-safety-assessment. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: workplace-safety-assessment
+  apiPrefix: /api/workplace-safety-assessment/
+  sqlSchema: workplace_safety_assessment
+  xmlNamespace: https://formexamples.github.io/workplace-safety-assessment/xml
+tags:
+  - name: workplace-safety-assessment
+    description: Workplace Safety Assessment form
 paths:
   /api/workplace-safety-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [workplace-safety-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [workplace-safety-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [workplace-safety-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [workplace-safety-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [workplace-safety-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [workplace-safety-assessment]
       operationId: deleteAssessment
       responses:
         "200":

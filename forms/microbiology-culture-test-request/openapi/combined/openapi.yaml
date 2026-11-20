@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Microbiology Culture Test Request form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: microbiology-culture-test-request
+  apiPrefix: /api/microbiology-culture-test-request/
+  sqlSchema: microbiology_culture_test_request
+  xmlNamespace: https://formexamples.github.io/microbiology-culture-test-request/xml
+tags:
+- name: microbiology-culture-test-request
+  description: Microbiology Culture Test Request form
 paths:
   /api/microbiology-culture-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - microbiology-culture-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - microbiology-culture-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - microbiology-culture-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - microbiology-culture-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - microbiology-culture-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - microbiology-culture-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/microbiology-culture-test-request/microbiology_culture_test_request_grade_flags:
     get:
       summary: List MicrobiologyCultureTestRequestGradeFlag records
+      tags:
+      - microbiology-culture-test-request
       operationId: listMicrobiologyCultureTestRequestGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MicrobiologyCultureTestRequestGradeFlag
+      tags:
+      - microbiology-culture-test-request
       operationId: createMicrobiologyCultureTestRequestGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MicrobiologyCultureTestRequestGradeFlag by id
+      tags:
+      - microbiology-culture-test-request
       operationId: getMicrobiologyCultureTestRequestGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MicrobiologyCultureTestRequestGradeFlag
+      tags:
+      - microbiology-culture-test-request
       operationId: updateMicrobiologyCultureTestRequestGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MicrobiologyCultureTestRequestGradeFlag
+      tags:
+      - microbiology-culture-test-request
       operationId: replaceMicrobiologyCultureTestRequestGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MicrobiologyCultureTestRequestGradeFlag
+      tags:
+      - microbiology-culture-test-request
       operationId: deleteMicrobiologyCultureTestRequestGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/microbiology-culture-test-request/microbiology_culture_test_request_grade_rules:
     get:
       summary: List MicrobiologyCultureTestRequestGradeRule records
+      tags:
+      - microbiology-culture-test-request
       operationId: listMicrobiologyCultureTestRequestGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MicrobiologyCultureTestRequestGradeRule
+      tags:
+      - microbiology-culture-test-request
       operationId: createMicrobiologyCultureTestRequestGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MicrobiologyCultureTestRequestGradeRule by id
+      tags:
+      - microbiology-culture-test-request
       operationId: getMicrobiologyCultureTestRequestGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MicrobiologyCultureTestRequestGradeRule
+      tags:
+      - microbiology-culture-test-request
       operationId: updateMicrobiologyCultureTestRequestGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MicrobiologyCultureTestRequestGradeRule
+      tags:
+      - microbiology-culture-test-request
       operationId: replaceMicrobiologyCultureTestRequestGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MicrobiologyCultureTestRequestGradeRule
+      tags:
+      - microbiology-culture-test-request
       operationId: deleteMicrobiologyCultureTestRequestGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/microbiology-culture-test-request/microbiology_culture_test_request_grades:
     get:
       summary: List MicrobiologyCultureTestRequestGrade records
+      tags:
+      - microbiology-culture-test-request
       operationId: listMicrobiologyCultureTestRequestGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MicrobiologyCultureTestRequestGrade
+      tags:
+      - microbiology-culture-test-request
       operationId: createMicrobiologyCultureTestRequestGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MicrobiologyCultureTestRequestGrade by id
+      tags:
+      - microbiology-culture-test-request
       operationId: getMicrobiologyCultureTestRequestGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MicrobiologyCultureTestRequestGrade
+      tags:
+      - microbiology-culture-test-request
       operationId: updateMicrobiologyCultureTestRequestGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MicrobiologyCultureTestRequestGrade
+      tags:
+      - microbiology-culture-test-request
       operationId: replaceMicrobiologyCultureTestRequestGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MicrobiologyCultureTestRequestGrade
+      tags:
+      - microbiology-culture-test-request
       operationId: deleteMicrobiologyCultureTestRequestGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/microbiology-culture-test-request/microbiology_culture_test_requests:
     get:
       summary: List MicrobiologyCultureTestRequest records
+      tags:
+      - microbiology-culture-test-request
       operationId: listMicrobiologyCultureTestRequest
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MicrobiologyCultureTestRequest
+      tags:
+      - microbiology-culture-test-request
       operationId: createMicrobiologyCultureTestRequest
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MicrobiologyCultureTestRequest by id
+      tags:
+      - microbiology-culture-test-request
       operationId: getMicrobiologyCultureTestRequest
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MicrobiologyCultureTestRequest
+      tags:
+      - microbiology-culture-test-request
       operationId: updateMicrobiologyCultureTestRequest
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MicrobiologyCultureTestRequest
+      tags:
+      - microbiology-culture-test-request
       operationId: replaceMicrobiologyCultureTestRequest
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MicrobiologyCultureTestRequest
+      tags:
+      - microbiology-culture-test-request
       operationId: deleteMicrobiologyCultureTestRequest
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - microbiology-culture-test-request
   /api/microbiology-culture-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - microbiology-culture-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - microbiology-culture-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - microbiology-culture-test-request
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - microbiology-culture-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - microbiology-culture-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - microbiology-culture-test-request
       operationId: deletePatient
       responses:
         '200':

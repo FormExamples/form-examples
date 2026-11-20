@@ -5,10 +5,19 @@ info:
   title: Internal Medicine Waiting List Card — InternalMedWaitingListCardGradeRule
   version: 1.0.0
   description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that fired during grading of a waiting list card.
+x-namespace:
+  form: internal-medicine-waiting-list-card
+  apiPrefix: /api/internal-medicine-waiting-list-card/
+  sqlSchema: internal_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/internal-medicine-waiting-list-card/xml
+tags:
+  - name: internal-medicine-waiting-list-card
+    description: Internal Medicine Waiting List Card form
 paths:
   /api/internal-medicine-waiting-list-card/internal_med_waiting_list_card_grade_rules:
     get:
       summary: List InternalMedWaitingListCardGradeRule records
+      tags: [internal-medicine-waiting-list-card]
       operationId: listInternalMedWaitingListCardGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new InternalMedWaitingListCardGradeRule
+      tags: [internal-medicine-waiting-list-card]
       operationId: createInternalMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one InternalMedWaitingListCardGradeRule by id
+      tags: [internal-medicine-waiting-list-card]
       operationId: getInternalMedWaitingListCardGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing InternalMedWaitingListCardGradeRule
+      tags: [internal-medicine-waiting-list-card]
       operationId: updateInternalMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing InternalMedWaitingListCardGradeRule
+      tags: [internal-medicine-waiting-list-card]
       operationId: replaceInternalMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a InternalMedWaitingListCardGradeRule
+      tags: [internal-medicine-waiting-list-card]
       operationId: deleteInternalMedWaitingListCardGradeRule
       responses:
         "200":

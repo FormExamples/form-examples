@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE bronchoscopy_test_request_grade_flag SYSTEM "bronchoscopy_test_request_grade_flag.dtd">
-<bronchoscopy_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<bronchoscopy_test_request_grade_flag xmlns="https://formexamples.github.io/bronchoscopy-test-request/xml">
+<id>7b2f40cb-2a75-53a3-8b61-61eddb3c1c5b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<bronchoscopy_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</bronchoscopy_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<bronchoscopy_test_request_grade_id>62152156-4d80-5ed7-8a4f-f2e6d9458be2</bronchoscopy_test_request_grade_id>
+<flag_id>75d6245f-13aa-5b27-9010-89db7056ee18</flag_id>
 <category>suspected-cancer-2ww</category>
 <priority>low</priority>
 <description>Example text.</description>

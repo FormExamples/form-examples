@@ -5,10 +5,19 @@ info:
   title: Hypertension Review — HypertensionReview
   version: 1.0.0
   description: "Main hypertension annual-review record (NICE NG136): patient and clinician identification, review context, diagnosis and comorbidity target drivers, clinic and home/ambulatory blood pressure, medication and adherence, cardiovascular risk, annual bloods, urine ACR, lifestyle, and complications. The computed control classification, completeness grade, fired rules, and flags live in child tables."
+x-namespace:
+  form: hypertension-review
+  apiPrefix: /api/hypertension-review/
+  sqlSchema: hypertension_review
+  xmlNamespace: https://formexamples.github.io/hypertension-review/xml
+tags:
+  - name: hypertension-review
+    description: Hypertension Review form
 paths:
   /api/hypertension-review/hypertension_reviews:
     get:
       summary: List HypertensionReview records
+      tags: [hypertension-review]
       operationId: listHypertensionReview
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HypertensionReview
+      tags: [hypertension-review]
       operationId: createHypertensionReview
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HypertensionReview by id
+      tags: [hypertension-review]
       operationId: getHypertensionReview
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HypertensionReview
+      tags: [hypertension-review]
       operationId: updateHypertensionReview
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HypertensionReview
+      tags: [hypertension-review]
       operationId: replaceHypertensionReview
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HypertensionReview
+      tags: [hypertension-review]
       operationId: deleteHypertensionReview
       responses:
         "200":

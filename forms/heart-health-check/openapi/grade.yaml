@@ -5,10 +5,19 @@ info:
   title: Heart Health Check — Grade
   version: 1.0.0
   description: Grading result summarizing 10-year CVD risk and heart age. One-to-one child of assessment.
+x-namespace:
+  form: heart-health-check
+  apiPrefix: /api/heart-health-check/
+  sqlSchema: heart_health_check
+  xmlNamespace: https://formexamples.github.io/heart-health-check/xml
+tags:
+  - name: heart-health-check
+    description: Heart Health Check form
 paths:
   /api/heart-health-check/grades:
     get:
       summary: List Grade records
+      tags: [heart-health-check]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [heart-health-check]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [heart-health-check]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [heart-health-check]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [heart-health-check]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [heart-health-check]
       operationId: deleteGrade
       responses:
         "200":

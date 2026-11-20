@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Modified Early Warning Score (MEWS) form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: modified-early-warning-score
+  apiPrefix: /api/modified-early-warning-score/
+  sqlSchema: modified_early_warning_score
+  xmlNamespace: https://formexamples.github.io/modified-early-warning-score/xml
+tags:
+- name: modified-early-warning-score
+  description: Modified Early Warning Score (MEWS) form
 paths:
   /api/modified-early-warning-score/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - modified-early-warning-score
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - modified-early-warning-score
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - modified-early-warning-score
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - modified-early-warning-score
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - modified-early-warning-score
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - modified-early-warning-score
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/modified-early-warning-score/modified_early_warning_score_grade_flags:
     get:
       summary: List ModifiedEarlyWarningScoreGradeFlag records
+      tags:
+      - modified-early-warning-score
       operationId: listModifiedEarlyWarningScoreGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ModifiedEarlyWarningScoreGradeFlag
+      tags:
+      - modified-early-warning-score
       operationId: createModifiedEarlyWarningScoreGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ModifiedEarlyWarningScoreGradeFlag by id
+      tags:
+      - modified-early-warning-score
       operationId: getModifiedEarlyWarningScoreGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ModifiedEarlyWarningScoreGradeFlag
+      tags:
+      - modified-early-warning-score
       operationId: updateModifiedEarlyWarningScoreGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ModifiedEarlyWarningScoreGradeFlag
+      tags:
+      - modified-early-warning-score
       operationId: replaceModifiedEarlyWarningScoreGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ModifiedEarlyWarningScoreGradeFlag
+      tags:
+      - modified-early-warning-score
       operationId: deleteModifiedEarlyWarningScoreGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/modified-early-warning-score/modified_early_warning_score_grade_rules:
     get:
       summary: List ModifiedEarlyWarningScoreGradeRule records
+      tags:
+      - modified-early-warning-score
       operationId: listModifiedEarlyWarningScoreGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ModifiedEarlyWarningScoreGradeRule
+      tags:
+      - modified-early-warning-score
       operationId: createModifiedEarlyWarningScoreGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ModifiedEarlyWarningScoreGradeRule by id
+      tags:
+      - modified-early-warning-score
       operationId: getModifiedEarlyWarningScoreGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ModifiedEarlyWarningScoreGradeRule
+      tags:
+      - modified-early-warning-score
       operationId: updateModifiedEarlyWarningScoreGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ModifiedEarlyWarningScoreGradeRule
+      tags:
+      - modified-early-warning-score
       operationId: replaceModifiedEarlyWarningScoreGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ModifiedEarlyWarningScoreGradeRule
+      tags:
+      - modified-early-warning-score
       operationId: deleteModifiedEarlyWarningScoreGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/modified-early-warning-score/modified_early_warning_score_grades:
     get:
       summary: List ModifiedEarlyWarningScoreGrade records
+      tags:
+      - modified-early-warning-score
       operationId: listModifiedEarlyWarningScoreGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ModifiedEarlyWarningScoreGrade
+      tags:
+      - modified-early-warning-score
       operationId: createModifiedEarlyWarningScoreGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ModifiedEarlyWarningScoreGrade by id
+      tags:
+      - modified-early-warning-score
       operationId: getModifiedEarlyWarningScoreGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ModifiedEarlyWarningScoreGrade
+      tags:
+      - modified-early-warning-score
       operationId: updateModifiedEarlyWarningScoreGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ModifiedEarlyWarningScoreGrade
+      tags:
+      - modified-early-warning-score
       operationId: replaceModifiedEarlyWarningScoreGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ModifiedEarlyWarningScoreGrade
+      tags:
+      - modified-early-warning-score
       operationId: deleteModifiedEarlyWarningScoreGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/modified-early-warning-score/modified_early_warning_scores:
     get:
       summary: List ModifiedEarlyWarningScore records
+      tags:
+      - modified-early-warning-score
       operationId: listModifiedEarlyWarningScore
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ModifiedEarlyWarningScore
+      tags:
+      - modified-early-warning-score
       operationId: createModifiedEarlyWarningScore
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ModifiedEarlyWarningScore by id
+      tags:
+      - modified-early-warning-score
       operationId: getModifiedEarlyWarningScore
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ModifiedEarlyWarningScore
+      tags:
+      - modified-early-warning-score
       operationId: updateModifiedEarlyWarningScore
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ModifiedEarlyWarningScore
+      tags:
+      - modified-early-warning-score
       operationId: replaceModifiedEarlyWarningScore
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ModifiedEarlyWarningScore
+      tags:
+      - modified-early-warning-score
       operationId: deleteModifiedEarlyWarningScore
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - modified-early-warning-score
   /api/modified-early-warning-score/patients:
     get:
       summary: List Patient records
+      tags:
+      - modified-early-warning-score
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - modified-early-warning-score
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - modified-early-warning-score
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - modified-early-warning-score
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - modified-early-warning-score
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - modified-early-warning-score
       operationId: deletePatient
       responses:
         '200':

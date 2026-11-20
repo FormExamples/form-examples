@@ -5,10 +5,19 @@ info:
   title: Curb 65 Pneumonia Severity Score — Curb65PneumoniaSeverityScoreGradeFlag
   version: 1.0.0
   description: Advisory safety flags that fire independently of the numeric band, with priority and a suggested action for the clinical team.
+x-namespace:
+  form: curb-65-pneumonia-severity-score
+  apiPrefix: /api/curb-65-pneumonia-severity-score/
+  sqlSchema: curb_65_pneumonia_severity_score
+  xmlNamespace: https://formexamples.github.io/curb-65-pneumonia-severity-score/xml
+tags:
+  - name: curb-65-pneumonia-severity-score
+    description: Curb 65 Pneumonia Severity Score form
 paths:
   /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_score_grade_flags:
     get:
       summary: List Curb65PneumoniaSeverityScoreGradeFlag records
+      tags: [curb-65-pneumonia-severity-score]
       operationId: listCurb65PneumoniaSeverityScoreGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Curb65PneumoniaSeverityScoreGradeFlag
+      tags: [curb-65-pneumonia-severity-score]
       operationId: createCurb65PneumoniaSeverityScoreGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Curb65PneumoniaSeverityScoreGradeFlag by id
+      tags: [curb-65-pneumonia-severity-score]
       operationId: getCurb65PneumoniaSeverityScoreGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Curb65PneumoniaSeverityScoreGradeFlag
+      tags: [curb-65-pneumonia-severity-score]
       operationId: updateCurb65PneumoniaSeverityScoreGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Curb65PneumoniaSeverityScoreGradeFlag
+      tags: [curb-65-pneumonia-severity-score]
       operationId: replaceCurb65PneumoniaSeverityScoreGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Curb65PneumoniaSeverityScoreGradeFlag
+      tags: [curb-65-pneumonia-severity-score]
       operationId: deleteCurb65PneumoniaSeverityScoreGradeFlag
       responses:
         "200":

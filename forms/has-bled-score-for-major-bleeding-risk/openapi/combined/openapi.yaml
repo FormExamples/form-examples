@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the HAS-BLED Score for Major Bleeding Risk form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: has-bled-score-for-major-bleeding-risk
+  apiPrefix: /api/has-bled-score-for-major-bleeding-risk/
+  sqlSchema: has_bled_score_for_major_bleeding_risk
+  xmlNamespace: https://formexamples.github.io/has-bled-score-for-major-bleeding-risk/xml
+tags:
+- name: has-bled-score-for-major-bleeding-risk
+  description: HAS-BLED Score for Major Bleeding Risk form
 paths:
   /api/has-bled-score-for-major-bleeding-risk/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/has-bled-score-for-major-bleeding-risk/has_bled_score_for_major_bleeding_risk_grade_flags:
     get:
       summary: List HasBledScoreForMajorBleedingRiskGradeFlag records
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: listHasBledScoreForMajorBleedingRiskGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HasBledScoreForMajorBleedingRiskGradeFlag
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: createHasBledScoreForMajorBleedingRiskGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HasBledScoreForMajorBleedingRiskGradeFlag by id
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: getHasBledScoreForMajorBleedingRiskGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HasBledScoreForMajorBleedingRiskGradeFlag
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: updateHasBledScoreForMajorBleedingRiskGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HasBledScoreForMajorBleedingRiskGradeFlag
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: replaceHasBledScoreForMajorBleedingRiskGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HasBledScoreForMajorBleedingRiskGradeFlag
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: deleteHasBledScoreForMajorBleedingRiskGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/has-bled-score-for-major-bleeding-risk/has_bled_score_for_major_bleeding_risk_grade_rules:
     get:
       summary: List HasBledScoreForMajorBleedingRiskGradeRule records
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: listHasBledScoreForMajorBleedingRiskGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HasBledScoreForMajorBleedingRiskGradeRule
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: createHasBledScoreForMajorBleedingRiskGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HasBledScoreForMajorBleedingRiskGradeRule by id
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: getHasBledScoreForMajorBleedingRiskGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HasBledScoreForMajorBleedingRiskGradeRule
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: updateHasBledScoreForMajorBleedingRiskGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HasBledScoreForMajorBleedingRiskGradeRule
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: replaceHasBledScoreForMajorBleedingRiskGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HasBledScoreForMajorBleedingRiskGradeRule
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: deleteHasBledScoreForMajorBleedingRiskGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/has-bled-score-for-major-bleeding-risk/has_bled_score_for_major_bleeding_risk_grades:
     get:
       summary: List HasBledScoreForMajorBleedingRiskGrade records
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: listHasBledScoreForMajorBleedingRiskGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HasBledScoreForMajorBleedingRiskGrade
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: createHasBledScoreForMajorBleedingRiskGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HasBledScoreForMajorBleedingRiskGrade by id
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: getHasBledScoreForMajorBleedingRiskGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HasBledScoreForMajorBleedingRiskGrade
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: updateHasBledScoreForMajorBleedingRiskGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HasBledScoreForMajorBleedingRiskGrade
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: replaceHasBledScoreForMajorBleedingRiskGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HasBledScoreForMajorBleedingRiskGrade
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: deleteHasBledScoreForMajorBleedingRiskGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/has-bled-score-for-major-bleeding-risk/has_bled_score_for_major_bleeding_risks:
     get:
       summary: List HasBledScoreForMajorBleedingRisk records
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: listHasBledScoreForMajorBleedingRisk
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HasBledScoreForMajorBleedingRisk
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: createHasBledScoreForMajorBleedingRisk
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HasBledScoreForMajorBleedingRisk by id
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: getHasBledScoreForMajorBleedingRisk
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HasBledScoreForMajorBleedingRisk
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: updateHasBledScoreForMajorBleedingRisk
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HasBledScoreForMajorBleedingRisk
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: replaceHasBledScoreForMajorBleedingRisk
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HasBledScoreForMajorBleedingRisk
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: deleteHasBledScoreForMajorBleedingRisk
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - has-bled-score-for-major-bleeding-risk
   /api/has-bled-score-for-major-bleeding-risk/patients:
     get:
       summary: List Patient records
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - has-bled-score-for-major-bleeding-risk
       operationId: deletePatient
       responses:
         '200':

@@ -1,4 +1,5 @@
 <!ELEMENT national_early_warning_score_2_grade (id,created_at,updated_at,deleted_at,national_early_warning_score_2_id,aggregate_score,respiratory_rate_score,spo2_score,oxygen_score,blood_pressure_score,pulse_score,consciousness_score,temperature_score,any_single_parameter_three,risk_band,monitoring_frequency,recommendation,graded_at)>
+<!ATTLIST national_early_warning_score_2_grade xmlns CDATA #FIXED "https://formexamples.github.io/national-early-warning-score-2/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

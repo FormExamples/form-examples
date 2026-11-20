@@ -5,10 +5,19 @@ info:
   title: Physical Medicine And Rehabilitation Waiting List Card — PmrWaitingListCardAppointment
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+x-namespace:
+  form: physical-medicine-and-rehabilitation-waiting-list-card
+  apiPrefix: /api/physical-medicine-and-rehabilitation-waiting-list-card/
+  sqlSchema: physical_medicine_and_rehabilitation_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/physical-medicine-and-rehabilitation-waiting-list-card/xml
+tags:
+  - name: physical-medicine-and-rehabilitation-waiting-list-card
+    description: Physical Medicine And Rehabilitation Waiting List Card form
 paths:
   /api/physical-medicine-and-rehabilitation-waiting-list-card/pmr_waiting_list_card_appointments:
     get:
       summary: List PmrWaitingListCardAppointment records
+      tags: [physical-medicine-and-rehabilitation-waiting-list-card]
       operationId: listPmrWaitingListCardAppointment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PmrWaitingListCardAppointment
+      tags: [physical-medicine-and-rehabilitation-waiting-list-card]
       operationId: createPmrWaitingListCardAppointment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PmrWaitingListCardAppointment by id
+      tags: [physical-medicine-and-rehabilitation-waiting-list-card]
       operationId: getPmrWaitingListCardAppointment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PmrWaitingListCardAppointment
+      tags: [physical-medicine-and-rehabilitation-waiting-list-card]
       operationId: updatePmrWaitingListCardAppointment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PmrWaitingListCardAppointment
+      tags: [physical-medicine-and-rehabilitation-waiting-list-card]
       operationId: replacePmrWaitingListCardAppointment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PmrWaitingListCardAppointment
+      tags: [physical-medicine-and-rehabilitation-waiting-list-card]
       operationId: deletePmrWaitingListCardAppointment
       responses:
         "200":

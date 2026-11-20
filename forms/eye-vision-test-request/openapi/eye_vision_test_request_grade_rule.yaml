@@ -5,10 +5,19 @@ info:
   title: Eye Vision Test Request — EyeVisionTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / urgency / completeness / priority rule that fired for this request.
+x-namespace:
+  form: eye-vision-test-request
+  apiPrefix: /api/eye-vision-test-request/
+  sqlSchema: eye_vision_test_request
+  xmlNamespace: https://formexamples.github.io/eye-vision-test-request/xml
+tags:
+  - name: eye-vision-test-request
+    description: Eye Vision Test Request form
 paths:
   /api/eye-vision-test-request/eye_vision_test_request_grade_rules:
     get:
       summary: List EyeVisionTestRequestGradeRule records
+      tags: [eye-vision-test-request]
       operationId: listEyeVisionTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EyeVisionTestRequestGradeRule
+      tags: [eye-vision-test-request]
       operationId: createEyeVisionTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EyeVisionTestRequestGradeRule by id
+      tags: [eye-vision-test-request]
       operationId: getEyeVisionTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EyeVisionTestRequestGradeRule
+      tags: [eye-vision-test-request]
       operationId: updateEyeVisionTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EyeVisionTestRequestGradeRule
+      tags: [eye-vision-test-request]
       operationId: replaceEyeVisionTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EyeVisionTestRequestGradeRule
+      tags: [eye-vision-test-request]
       operationId: deleteEyeVisionTestRequestGradeRule
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT anion_gap_calculator_grade (id,created_at,updated_at,deleted_at,anion_gap_calculator_id,anion_gap,corrected_anion_gap,classification,graded_at)>
+<!ATTLIST anion_gap_calculator_grade xmlns CDATA #FIXED "https://formexamples.github.io/anion-gap-calculator/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Diabetes Eye Screening record form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: diabetes-eye-screening
+  apiPrefix: /api/diabetes-eye-screening/
+  sqlSchema: diabetes_eye_screening
+  xmlNamespace: https://formexamples.github.io/diabetes-eye-screening/xml
+tags:
+- name: diabetes-eye-screening
+  description: Diabetes Eye Screening record form
 paths:
   /api/diabetes-eye-screening/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - diabetes-eye-screening
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - diabetes-eye-screening
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - diabetes-eye-screening
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - diabetes-eye-screening
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - diabetes-eye-screening
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - diabetes-eye-screening
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/diabetes-eye-screening/diabetes_eye_screening_grade_flags:
     get:
       summary: List DiabetesEyeScreeningGradeFlag records
+      tags:
+      - diabetes-eye-screening
       operationId: listDiabetesEyeScreeningGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DiabetesEyeScreeningGradeFlag
+      tags:
+      - diabetes-eye-screening
       operationId: createDiabetesEyeScreeningGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DiabetesEyeScreeningGradeFlag by id
+      tags:
+      - diabetes-eye-screening
       operationId: getDiabetesEyeScreeningGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DiabetesEyeScreeningGradeFlag
+      tags:
+      - diabetes-eye-screening
       operationId: updateDiabetesEyeScreeningGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DiabetesEyeScreeningGradeFlag
+      tags:
+      - diabetes-eye-screening
       operationId: replaceDiabetesEyeScreeningGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DiabetesEyeScreeningGradeFlag
+      tags:
+      - diabetes-eye-screening
       operationId: deleteDiabetesEyeScreeningGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/diabetes-eye-screening/diabetes_eye_screening_grade_rules:
     get:
       summary: List DiabetesEyeScreeningGradeRule records
+      tags:
+      - diabetes-eye-screening
       operationId: listDiabetesEyeScreeningGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DiabetesEyeScreeningGradeRule
+      tags:
+      - diabetes-eye-screening
       operationId: createDiabetesEyeScreeningGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DiabetesEyeScreeningGradeRule by id
+      tags:
+      - diabetes-eye-screening
       operationId: getDiabetesEyeScreeningGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DiabetesEyeScreeningGradeRule
+      tags:
+      - diabetes-eye-screening
       operationId: updateDiabetesEyeScreeningGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DiabetesEyeScreeningGradeRule
+      tags:
+      - diabetes-eye-screening
       operationId: replaceDiabetesEyeScreeningGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DiabetesEyeScreeningGradeRule
+      tags:
+      - diabetes-eye-screening
       operationId: deleteDiabetesEyeScreeningGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/diabetes-eye-screening/diabetes_eye_screening_grades:
     get:
       summary: List DiabetesEyeScreeningGrade records
+      tags:
+      - diabetes-eye-screening
       operationId: listDiabetesEyeScreeningGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DiabetesEyeScreeningGrade
+      tags:
+      - diabetes-eye-screening
       operationId: createDiabetesEyeScreeningGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DiabetesEyeScreeningGrade by id
+      tags:
+      - diabetes-eye-screening
       operationId: getDiabetesEyeScreeningGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DiabetesEyeScreeningGrade
+      tags:
+      - diabetes-eye-screening
       operationId: updateDiabetesEyeScreeningGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DiabetesEyeScreeningGrade
+      tags:
+      - diabetes-eye-screening
       operationId: replaceDiabetesEyeScreeningGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DiabetesEyeScreeningGrade
+      tags:
+      - diabetes-eye-screening
       operationId: deleteDiabetesEyeScreeningGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/diabetes-eye-screening/diabetes_eye_screenings:
     get:
       summary: List DiabetesEyeScreening records
+      tags:
+      - diabetes-eye-screening
       operationId: listDiabetesEyeScreening
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DiabetesEyeScreening
+      tags:
+      - diabetes-eye-screening
       operationId: createDiabetesEyeScreening
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DiabetesEyeScreening by id
+      tags:
+      - diabetes-eye-screening
       operationId: getDiabetesEyeScreening
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DiabetesEyeScreening
+      tags:
+      - diabetes-eye-screening
       operationId: updateDiabetesEyeScreening
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DiabetesEyeScreening
+      tags:
+      - diabetes-eye-screening
       operationId: replaceDiabetesEyeScreening
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DiabetesEyeScreening
+      tags:
+      - diabetes-eye-screening
       operationId: deleteDiabetesEyeScreening
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - diabetes-eye-screening
   /api/diabetes-eye-screening/patients:
     get:
       summary: List Patient records
+      tags:
+      - diabetes-eye-screening
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - diabetes-eye-screening
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - diabetes-eye-screening
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - diabetes-eye-screening
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - diabetes-eye-screening
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - diabetes-eye-screening
       operationId: deletePatient
       responses:
         '200':

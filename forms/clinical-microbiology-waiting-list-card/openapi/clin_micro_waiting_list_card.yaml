@@ -5,10 +5,19 @@ info:
   title: Clinical Microbiology Waiting List Card — ClinMicroWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a clinical microbiology waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: clinical-microbiology-waiting-list-card
+  apiPrefix: /api/clinical-microbiology-waiting-list-card/
+  sqlSchema: clinical_microbiology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/clinical-microbiology-waiting-list-card/xml
+tags:
+  - name: clinical-microbiology-waiting-list-card
+    description: Clinical Microbiology Waiting List Card form
 paths:
   /api/clinical-microbiology-waiting-list-card/clin_micro_waiting_list_cards:
     get:
       summary: List ClinMicroWaitingListCard records
+      tags: [clinical-microbiology-waiting-list-card]
       operationId: listClinMicroWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ClinMicroWaitingListCard
+      tags: [clinical-microbiology-waiting-list-card]
       operationId: createClinMicroWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ClinMicroWaitingListCard by id
+      tags: [clinical-microbiology-waiting-list-card]
       operationId: getClinMicroWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ClinMicroWaitingListCard
+      tags: [clinical-microbiology-waiting-list-card]
       operationId: updateClinMicroWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ClinMicroWaitingListCard
+      tags: [clinical-microbiology-waiting-list-card]
       operationId: replaceClinMicroWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ClinMicroWaitingListCard
+      tags: [clinical-microbiology-waiting-list-card]
       operationId: deleteClinMicroWaitingListCard
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: International Certificate Of Vaccination Or Prophylaxis — Clinician
   version: 1.0.0
   description: Supervising clinician authorised to issue an International Certificate of Vaccination or Prophylaxis on behalf of a WHO-designated centre.
+x-namespace:
+  form: international-certificate-of-vaccination-or-prophylaxis
+  apiPrefix: /api/international-certificate-of-vaccination-or-prophylaxis/
+  sqlSchema: international_certificate_of_vaccination_or_prophylaxis
+  xmlNamespace: https://formexamples.github.io/international-certificate-of-vaccination-or-prophylaxis/xml
+tags:
+  - name: international-certificate-of-vaccination-or-prophylaxis
+    description: International Certificate Of Vaccination Or Prophylaxis form
 paths:
   /api/international-certificate-of-vaccination-or-prophylaxis/clinicians:
     get:
       summary: List Clinician records
+      tags: [international-certificate-of-vaccination-or-prophylaxis]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [international-certificate-of-vaccination-or-prophylaxis]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [international-certificate-of-vaccination-or-prophylaxis]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [international-certificate-of-vaccination-or-prophylaxis]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [international-certificate-of-vaccination-or-prophylaxis]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [international-certificate-of-vaccination-or-prophylaxis]
       operationId: deleteClinician
       responses:
         "200":

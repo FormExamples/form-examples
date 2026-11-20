@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Recognition Of Stroke In the Emergency Room (ROSIER)
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: recognition-of-stroke-in-the-emergency-room
+  apiPrefix: /api/recognition-of-stroke-in-the-emergency-room/
+  sqlSchema: recognition_of_stroke_in_the_emergency_room
+  xmlNamespace: https://formexamples.github.io/recognition-of-stroke-in-the-emergency-room/xml
+tags:
+- name: recognition-of-stroke-in-the-emergency-room
+  description: Recognition Of Stroke In the Emergency Room (ROSIER) form
 paths:
   /api/recognition-of-stroke-in-the-emergency-room/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
   /api/recognition-of-stroke-in-the-emergency-room/patients:
     get:
       summary: List Patient records
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/recognition-of-stroke-in-the-emergency-room/recognition_of_stroke_in_the_emergency_room_grade_flags:
     get:
       summary: List RecognitionOfStrokeInTheEmergencyRoomGradeFlag records
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: listRecognitionOfStrokeInTheEmergencyRoomGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RecognitionOfStrokeInTheEmergencyRoomGradeFlag
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: createRecognitionOfStrokeInTheEmergencyRoomGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RecognitionOfStrokeInTheEmergencyRoomGradeFlag by id
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: getRecognitionOfStrokeInTheEmergencyRoomGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RecognitionOfStrokeInTheEmergencyRoomGradeFlag
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: updateRecognitionOfStrokeInTheEmergencyRoomGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RecognitionOfStrokeInTheEmergencyRoomGradeFlag
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: replaceRecognitionOfStrokeInTheEmergencyRoomGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RecognitionOfStrokeInTheEmergencyRoomGradeFlag
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: deleteRecognitionOfStrokeInTheEmergencyRoomGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/recognition-of-stroke-in-the-emergency-room/recognition_of_stroke_in_the_emergency_room_grade_rules:
     get:
       summary: List RecognitionOfStrokeInTheEmergencyRoomGradeRule records
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: listRecognitionOfStrokeInTheEmergencyRoomGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RecognitionOfStrokeInTheEmergencyRoomGradeRule
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: createRecognitionOfStrokeInTheEmergencyRoomGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RecognitionOfStrokeInTheEmergencyRoomGradeRule by id
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: getRecognitionOfStrokeInTheEmergencyRoomGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RecognitionOfStrokeInTheEmergencyRoomGradeRule
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: updateRecognitionOfStrokeInTheEmergencyRoomGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RecognitionOfStrokeInTheEmergencyRoomGradeRule
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: replaceRecognitionOfStrokeInTheEmergencyRoomGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RecognitionOfStrokeInTheEmergencyRoomGradeRule
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: deleteRecognitionOfStrokeInTheEmergencyRoomGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/recognition-of-stroke-in-the-emergency-room/recognition_of_stroke_in_the_emergency_room_grades:
     get:
       summary: List RecognitionOfStrokeInTheEmergencyRoomGrade records
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: listRecognitionOfStrokeInTheEmergencyRoomGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RecognitionOfStrokeInTheEmergencyRoomGrade
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: createRecognitionOfStrokeInTheEmergencyRoomGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RecognitionOfStrokeInTheEmergencyRoomGrade by id
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: getRecognitionOfStrokeInTheEmergencyRoomGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RecognitionOfStrokeInTheEmergencyRoomGrade
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: updateRecognitionOfStrokeInTheEmergencyRoomGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RecognitionOfStrokeInTheEmergencyRoomGrade
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: replaceRecognitionOfStrokeInTheEmergencyRoomGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RecognitionOfStrokeInTheEmergencyRoomGrade
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: deleteRecognitionOfStrokeInTheEmergencyRoomGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/recognition-of-stroke-in-the-emergency-room/recognition_of_stroke_in_the_emergency_rooms:
     get:
       summary: List RecognitionOfStrokeInTheEmergencyRoom records
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: listRecognitionOfStrokeInTheEmergencyRoom
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RecognitionOfStrokeInTheEmergencyRoom
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: createRecognitionOfStrokeInTheEmergencyRoom
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RecognitionOfStrokeInTheEmergencyRoom by id
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: getRecognitionOfStrokeInTheEmergencyRoom
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RecognitionOfStrokeInTheEmergencyRoom
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: updateRecognitionOfStrokeInTheEmergencyRoom
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RecognitionOfStrokeInTheEmergencyRoom
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: replaceRecognitionOfStrokeInTheEmergencyRoom
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RecognitionOfStrokeInTheEmergencyRoom
+      tags:
+      - recognition-of-stroke-in-the-emergency-room
       operationId: deleteRecognitionOfStrokeInTheEmergencyRoom
       responses:
         '200':

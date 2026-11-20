@@ -5,10 +5,19 @@ info:
   title: Gynecology Assessment — Grade
   version: 1.0.0
   description: Computed gynaecological symptom severity result based on frequency, intensity, and clinical significance. One-to-one child of assessment.
+x-namespace:
+  form: gynecology-assessment
+  apiPrefix: /api/gynecology-assessment/
+  sqlSchema: gynecology_assessment
+  xmlNamespace: https://formexamples.github.io/gynecology-assessment/xml
+tags:
+  - name: gynecology-assessment
+    description: Gynecology Assessment form
 paths:
   /api/gynecology-assessment/grades:
     get:
       summary: List Grade records
+      tags: [gynecology-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [gynecology-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [gynecology-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [gynecology-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [gynecology-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [gynecology-assessment]
       operationId: deleteGrade
       responses:
         "200":

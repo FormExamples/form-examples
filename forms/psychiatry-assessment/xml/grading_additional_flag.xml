@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_additional_flag SYSTEM "grading_additional_flag.dtd">
-<grading_additional_flag>
-<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<grading_additional_flag xmlns="https://formexamples.github.io/psychiatry-assessment/xml">
+<id>7e7a18b1-b203-5ced-b390-ed783e487c1b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>aa0e8400-e29b-41d4-a716-446655440005</grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<grade_id>7b93f6d4-9739-5d13-b4c4-77df8cfd829a</grade_id>
+<flag_id>939be6b4-ef04-5093-96fd-bade8f7ea4be</flag_id>
 <category>General</category>
 <message></message>
 <priority>high</priority>

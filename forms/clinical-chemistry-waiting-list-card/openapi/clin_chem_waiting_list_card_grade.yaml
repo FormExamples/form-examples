@@ -5,10 +5,19 @@ info:
   title: Clinical Chemistry Waiting List Card — ClinChemWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: clinical-chemistry-waiting-list-card
+  apiPrefix: /api/clinical-chemistry-waiting-list-card/
+  sqlSchema: clinical_chemistry_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/clinical-chemistry-waiting-list-card/xml
+tags:
+  - name: clinical-chemistry-waiting-list-card
+    description: Clinical Chemistry Waiting List Card form
 paths:
   /api/clinical-chemistry-waiting-list-card/clin_chem_waiting_list_card_grades:
     get:
       summary: List ClinChemWaitingListCardGrade records
+      tags: [clinical-chemistry-waiting-list-card]
       operationId: listClinChemWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ClinChemWaitingListCardGrade
+      tags: [clinical-chemistry-waiting-list-card]
       operationId: createClinChemWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ClinChemWaitingListCardGrade by id
+      tags: [clinical-chemistry-waiting-list-card]
       operationId: getClinChemWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ClinChemWaitingListCardGrade
+      tags: [clinical-chemistry-waiting-list-card]
       operationId: updateClinChemWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ClinChemWaitingListCardGrade
+      tags: [clinical-chemistry-waiting-list-card]
       operationId: replaceClinChemWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ClinChemWaitingListCardGrade
+      tags: [clinical-chemistry-waiting-list-card]
       operationId: deleteClinChemWaitingListCardGrade
       responses:
         "200":

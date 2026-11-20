@@ -5,10 +5,19 @@ info:
   title: Neuropsychiatry Waiting List Card — NeuropsychWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a neuropsychiatry waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: neuropsychiatry-waiting-list-card
+  apiPrefix: /api/neuropsychiatry-waiting-list-card/
+  sqlSchema: neuropsychiatry_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/neuropsychiatry-waiting-list-card/xml
+tags:
+  - name: neuropsychiatry-waiting-list-card
+    description: Neuropsychiatry Waiting List Card form
 paths:
   /api/neuropsychiatry-waiting-list-card/neuropsych_waiting_list_cards:
     get:
       summary: List NeuropsychWaitingListCard records
+      tags: [neuropsychiatry-waiting-list-card]
       operationId: listNeuropsychWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeuropsychWaitingListCard
+      tags: [neuropsychiatry-waiting-list-card]
       operationId: createNeuropsychWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NeuropsychWaitingListCard by id
+      tags: [neuropsychiatry-waiting-list-card]
       operationId: getNeuropsychWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeuropsychWaitingListCard
+      tags: [neuropsychiatry-waiting-list-card]
       operationId: updateNeuropsychWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NeuropsychWaitingListCard
+      tags: [neuropsychiatry-waiting-list-card]
       operationId: replaceNeuropsychWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NeuropsychWaitingListCard
+      tags: [neuropsychiatry-waiting-list-card]
       operationId: deleteNeuropsychWaitingListCard
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT x_ray_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,body_region,laterality,primary_indication,clinical_question,relevant_history,pregnancy_status,recent_similar_xray,mobility,urgency,ir_me_r_justification,supervising_consultant,requester_contact,notes)>
+<!ATTLIST x_ray_test_request xmlns CDATA #FIXED "https://formexamples.github.io/x-ray-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

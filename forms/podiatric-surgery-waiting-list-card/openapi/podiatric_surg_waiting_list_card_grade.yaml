@@ -5,10 +5,19 @@ info:
   title: Podiatric Surgery Waiting List Card — PodiatricSurgWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: podiatric-surgery-waiting-list-card
+  apiPrefix: /api/podiatric-surgery-waiting-list-card/
+  sqlSchema: podiatric_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/podiatric-surgery-waiting-list-card/xml
+tags:
+  - name: podiatric-surgery-waiting-list-card
+    description: Podiatric Surgery Waiting List Card form
 paths:
   /api/podiatric-surgery-waiting-list-card/podiatric_surg_waiting_list_card_grades:
     get:
       summary: List PodiatricSurgWaitingListCardGrade records
+      tags: [podiatric-surgery-waiting-list-card]
       operationId: listPodiatricSurgWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PodiatricSurgWaitingListCardGrade
+      tags: [podiatric-surgery-waiting-list-card]
       operationId: createPodiatricSurgWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PodiatricSurgWaitingListCardGrade by id
+      tags: [podiatric-surgery-waiting-list-card]
       operationId: getPodiatricSurgWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PodiatricSurgWaitingListCardGrade
+      tags: [podiatric-surgery-waiting-list-card]
       operationId: updatePodiatricSurgWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PodiatricSurgWaitingListCardGrade
+      tags: [podiatric-surgery-waiting-list-card]
       operationId: replacePodiatricSurgWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PodiatricSurgWaitingListCardGrade
+      tags: [podiatric-surgery-waiting-list-card]
       operationId: deletePodiatricSurgWaitingListCardGrade
       responses:
         "200":

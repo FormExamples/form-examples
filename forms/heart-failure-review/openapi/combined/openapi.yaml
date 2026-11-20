@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Heart Failure Annual Review form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: heart-failure-review
+  apiPrefix: /api/heart-failure-review/
+  sqlSchema: heart_failure_review
+  xmlNamespace: https://formexamples.github.io/heart-failure-review/xml
+tags:
+- name: heart-failure-review
+  description: Heart Failure Annual Review form
 paths:
   /api/heart-failure-review/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - heart-failure-review
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - heart-failure-review
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - heart-failure-review
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - heart-failure-review
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - heart-failure-review
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - heart-failure-review
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/heart-failure-review/heart_failure_review_grade_flags:
     get:
       summary: List HeartFailureReviewGradeFlag records
+      tags:
+      - heart-failure-review
       operationId: listHeartFailureReviewGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HeartFailureReviewGradeFlag
+      tags:
+      - heart-failure-review
       operationId: createHeartFailureReviewGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HeartFailureReviewGradeFlag by id
+      tags:
+      - heart-failure-review
       operationId: getHeartFailureReviewGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HeartFailureReviewGradeFlag
+      tags:
+      - heart-failure-review
       operationId: updateHeartFailureReviewGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HeartFailureReviewGradeFlag
+      tags:
+      - heart-failure-review
       operationId: replaceHeartFailureReviewGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HeartFailureReviewGradeFlag
+      tags:
+      - heart-failure-review
       operationId: deleteHeartFailureReviewGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/heart-failure-review/heart_failure_review_grade_rules:
     get:
       summary: List HeartFailureReviewGradeRule records
+      tags:
+      - heart-failure-review
       operationId: listHeartFailureReviewGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HeartFailureReviewGradeRule
+      tags:
+      - heart-failure-review
       operationId: createHeartFailureReviewGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HeartFailureReviewGradeRule by id
+      tags:
+      - heart-failure-review
       operationId: getHeartFailureReviewGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HeartFailureReviewGradeRule
+      tags:
+      - heart-failure-review
       operationId: updateHeartFailureReviewGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HeartFailureReviewGradeRule
+      tags:
+      - heart-failure-review
       operationId: replaceHeartFailureReviewGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HeartFailureReviewGradeRule
+      tags:
+      - heart-failure-review
       operationId: deleteHeartFailureReviewGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/heart-failure-review/heart_failure_review_grades:
     get:
       summary: List HeartFailureReviewGrade records
+      tags:
+      - heart-failure-review
       operationId: listHeartFailureReviewGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HeartFailureReviewGrade
+      tags:
+      - heart-failure-review
       operationId: createHeartFailureReviewGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HeartFailureReviewGrade by id
+      tags:
+      - heart-failure-review
       operationId: getHeartFailureReviewGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HeartFailureReviewGrade
+      tags:
+      - heart-failure-review
       operationId: updateHeartFailureReviewGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HeartFailureReviewGrade
+      tags:
+      - heart-failure-review
       operationId: replaceHeartFailureReviewGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HeartFailureReviewGrade
+      tags:
+      - heart-failure-review
       operationId: deleteHeartFailureReviewGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/heart-failure-review/heart_failure_reviews:
     get:
       summary: List HeartFailureReview records
+      tags:
+      - heart-failure-review
       operationId: listHeartFailureReview
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HeartFailureReview
+      tags:
+      - heart-failure-review
       operationId: createHeartFailureReview
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HeartFailureReview by id
+      tags:
+      - heart-failure-review
       operationId: getHeartFailureReview
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HeartFailureReview
+      tags:
+      - heart-failure-review
       operationId: updateHeartFailureReview
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HeartFailureReview
+      tags:
+      - heart-failure-review
       operationId: replaceHeartFailureReview
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HeartFailureReview
+      tags:
+      - heart-failure-review
       operationId: deleteHeartFailureReview
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - heart-failure-review
   /api/heart-failure-review/patients:
     get:
       summary: List Patient records
+      tags:
+      - heart-failure-review
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - heart-failure-review
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - heart-failure-review
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - heart-failure-review
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - heart-failure-review
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - heart-failure-review
       operationId: deletePatient
       responses:
         '200':

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000060",
+    "id": "0807d7e9-6946-5fc4-b02a-40c732030cd6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000072",
+    "id": "274b24d8-b490-541f-b55e-88dabbcfeed3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "nationalEarlyWarningScore2": {
-    "id": "550e8400-e29b-41d4-a716-00000000007f",
+    "id": "c7dcc873-3bed-5d3f-acc3-ceeeb548aa3f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000083",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000084",
+    "patientId": "c13360ac-779f-562f-b944-6453c023f60f",
+    "clinicianId": "f09ec3ee-c84a-5ff2-807b-fa3f8cbef97b",
     "status": "draft",
     "observationAt": null,
     "wardOrLocation": "",
@@ -62,11 +62,11 @@
     "clinicalNotes": ""
   },
   "nationalEarlyWarningScore2Grade": {
-    "id": "550e8400-e29b-41d4-a716-000000000098",
+    "id": "1a2194f1-bafe-54a1-a219-d7e30a84f0e7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "nationalEarlyWarningScore2Id": "550e8400-e29b-41d4-a716-00000000009c",
+    "nationalEarlyWarningScore2Id": "344d0823-35c2-58d3-84e5-a9ebfec9bd60",
     "aggregateScore": null,
     "respiratoryRateScore": null,
     "spo2Score": null,
@@ -82,11 +82,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "nationalEarlyWarningScore2GradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000aa",
+    "id": "1361a44b-d110-519b-85f9-3d19c62c5a98",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "nationalEarlyWarningScore2GradeId": "550e8400-e29b-41d4-a716-0000000000ae",
+    "nationalEarlyWarningScore2GradeId": "b31be5b2-c130-542f-b852-c0521286a900",
     "ruleId": "",
     "instrument": "respiratory-rate",
     "band": "low",
@@ -95,11 +95,11 @@
     "description": ""
   },
   "nationalEarlyWarningScore2GradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b5",
+    "id": "ef117c25-1792-55f5-b512-741a2bf0bfd7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "nationalEarlyWarningScore2GradeId": "550e8400-e29b-41d4-a716-0000000000b9",
+    "nationalEarlyWarningScore2GradeId": "5ed5cdf3-e298-5ca9-9e3e-92d7a64189b8",
     "flagId": "",
     "category": "high-score-escalate",
     "priority": "low",

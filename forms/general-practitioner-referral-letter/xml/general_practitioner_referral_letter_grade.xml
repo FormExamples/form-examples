@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE general_practitioner_referral_letter_grade SYSTEM "general_practitioner_referral_letter_grade.dtd">
-<general_practitioner_referral_letter_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<general_practitioner_referral_letter_grade xmlns="https://formexamples.github.io/general-practitioner-referral-letter/xml">
+<id>567583fa-d112-5632-b1e8-1322fd001dff</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<general_practitioner_referral_letter_id>770e8400-e29b-41d4-a716-446655440002</general_practitioner_referral_letter_id>
+<general_practitioner_referral_letter_id>a5340845-2c22-56e2-82f6-1dd3c498440a</general_practitioner_referral_letter_id>
 <status>Complete</status>
 <urgency>routine</urgency>
 <completeness_percent>1</completeness_percent>

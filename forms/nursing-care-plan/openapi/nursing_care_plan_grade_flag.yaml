@@ -5,10 +5,19 @@ info:
   title: Nursing Care Plan — NursingCarePlanGradeFlag
   version: 1.0.0
   description: Flagged issues raised independently of the completeness status, with priority and a suggested action for the nursing team.
+x-namespace:
+  form: nursing-care-plan
+  apiPrefix: /api/nursing-care-plan/
+  sqlSchema: nursing_care_plan
+  xmlNamespace: https://formexamples.github.io/nursing-care-plan/xml
+tags:
+  - name: nursing-care-plan
+    description: Nursing Care Plan form
 paths:
   /api/nursing-care-plan/nursing_care_plan_grade_flags:
     get:
       summary: List NursingCarePlanGradeFlag records
+      tags: [nursing-care-plan]
       operationId: listNursingCarePlanGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NursingCarePlanGradeFlag
+      tags: [nursing-care-plan]
       operationId: createNursingCarePlanGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NursingCarePlanGradeFlag by id
+      tags: [nursing-care-plan]
       operationId: getNursingCarePlanGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NursingCarePlanGradeFlag
+      tags: [nursing-care-plan]
       operationId: updateNursingCarePlanGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NursingCarePlanGradeFlag
+      tags: [nursing-care-plan]
       operationId: replaceNursingCarePlanGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NursingCarePlanGradeFlag
+      tags: [nursing-care-plan]
       operationId: deleteNursingCarePlanGradeFlag
       responses:
         "200":

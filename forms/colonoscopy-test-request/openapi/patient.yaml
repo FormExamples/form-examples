@@ -5,10 +5,19 @@ info:
   title: Colonoscopy Test Request — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: colonoscopy-test-request
+  apiPrefix: /api/colonoscopy-test-request/
+  sqlSchema: colonoscopy_test_request
+  xmlNamespace: https://formexamples.github.io/colonoscopy-test-request/xml
+tags:
+  - name: colonoscopy-test-request
+    description: Colonoscopy Test Request form
 paths:
   /api/colonoscopy-test-request/patients:
     get:
       summary: List Patient records
+      tags: [colonoscopy-test-request]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [colonoscopy-test-request]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [colonoscopy-test-request]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [colonoscopy-test-request]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [colonoscopy-test-request]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [colonoscopy-test-request]
       operationId: deletePatient
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE histopathology_test_request SYSTEM "histopathology_test_request.dtd">
-<histopathology_test_request>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<histopathology_test_request xmlns="https://formexamples.github.io/histopathology-test-request/xml">
+<id>3a8ba0e3-881b-54b2-9b5c-0efa3321002c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>74a19c04-7df0-5c1f-b251-4633b6b133b7</patient_id>
+<clinician_id>450bc62f-df06-5651-a6e5-491a58b57aba</clinician_id>
 <status>draft</status>
 <site_name>Example</site_name>
 <setting>outpatient</setting>

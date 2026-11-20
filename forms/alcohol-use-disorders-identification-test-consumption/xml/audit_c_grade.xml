@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE audit_c_grade SYSTEM "audit_c_grade.dtd">
-<audit_c_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<audit_c_grade xmlns="https://formexamples.github.io/alcohol-use-disorders-identification-test-consumption/xml">
+<id>14efc0d7-376f-5003-b95e-5c26409eac7f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<audit_c_id>770e8400-e29b-41d4-a716-446655440002</audit_c_id>
+<audit_c_id>c0fbb043-b528-5c41-8fab-30fa09c7a38b</audit_c_id>
 <total_score>5</total_score>
 <risk_band>lower</risk_band>
 <positive_screen>yes</positive_screen>

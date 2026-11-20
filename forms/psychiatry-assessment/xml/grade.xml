@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<grade xmlns="https://formexamples.github.io/psychiatry-assessment/xml">
+<id>7b93f6d4-9739-5d13-b4c4-77df8cfd829a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>3e4652e2-b013-5266-8cc8-06f28d8c05d4</assessment_id>
 <gaf_score>5</gaf_score>
 <gaf_category>superior-functioning</gaf_category>
 <symptom_severity>minimal</symptom_severity>

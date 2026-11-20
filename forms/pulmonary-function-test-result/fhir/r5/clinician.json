@@ -1,6 +1,6 @@
 {
   "resourceType": "Observation",
-  "id": "660e8400-e29b-41d4-a716-446655440001",
+  "id": "bb38eb94-5f20-5c31-a044-45b45bf4d9c2",
   "meta": {
     "profile": [
       "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -29,10 +29,10 @@
     ]
   },
   "subject": {
-    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+    "reference": "Patient/09c9ed37-ef03-56cf-bf6e-0821d9bfbda2"
   },
   "encounter": {
-    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+    "reference": "Encounter/1c834339-066f-5bcb-a37e-455bc9580d2c"
   },
   "effectiveDateTime": "2026-04-09T10:00:00+00:00",
   "component": [

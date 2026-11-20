@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-123 tools.
+124 tools.
 
 - [`bin/axum-api-namespace`](#axum-api-namespace)
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
@@ -108,6 +108,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/test-engines`](#test-engines)
 - [`bin/test-examples-conformance`](#test-examples-conformance)
 - [`bin/test-form`](#test-form)
+- [`bin/test-form-namespacing`](#test-form-namespacing)
 - [`bin/test-minimum-supported-rust-version`](#test-minimum-supported-rust-version)
 - [`bin/test-personas`](#test-personas)
 - [`bin/test-security-policy`](#test-security-policy)
@@ -3276,6 +3277,31 @@ test-form: test one form directory in this project for implementation
  Structural checks print "Error: ..." lines and the script exits non-zero
  if any check failed. The Axum crate's `cargo test` is the only executable
  gate (it needs the Rust toolchain and a running Postgres).
+```
+
+<h2 id="test-form-namespacing"><code>bin/test-form-namespacing</code></h2>
+
+```text
+bin/test-form-namespacing — every layer of every form is namespaced by its slug.
+
+The conformance test for [`spec/form-namespacing/`](../spec/form-namespacing/).
+Per form it checks:
+
+    sql/                      every CREATE TABLE is qualified with the form's schema
+    openapi/combined/         every path starts with /api/<slug>/, every operation is
+                              tagged <slug>, and x-namespace names the form
+    openapi/*.yaml            the same tag and x-namespace on each per-entity file
+    front-end-with-svelte/    src/routes/ holds only <slug>/ and SvelteKit root files
+    xml/*.xml                 the root element carries xmlns="https://formexamples.github.io/<slug>/xml"
+    fhir/r5/, examples/,      no UUID is shared with another form (each form's example
+    xml/                      ids are UUIDv5 names within it; see bin/lib/example_ids.py)
+    schema names              no two forms' SQL schemas are equal within 63 bytes
+
+Browser storage keys are checked by `bin/browser-storage-namespace --check --all`,
+and the mechanical rewrites by `bin/sql-schema-namespace` and `bin/axum-api-namespace`.
+
+Usage:
+  bin/test-form-namespacing [--verbose] [<slug>...]   # default: every form
 ```
 
 <h2 id="test-minimum-supported-rust-version"><code>bin/test-minimum-supported-rust-version</code></h2>

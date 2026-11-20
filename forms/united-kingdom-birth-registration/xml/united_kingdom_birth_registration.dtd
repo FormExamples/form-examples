@@ -1,4 +1,5 @@
 <!ELEMENT united_kingdom_birth_registration (id,created_at,updated_at,deleted_at,patient_id,clinician_id,child_forenames,child_surname,sex,date_of_birth,time_of_birth,place_of_birth_type,place_of_birth,birth_country,multiple_birth,stillbirth,mother_name,mother_maiden_surname,mother_date_of_birth,mother_place_of_birth,mother_occupation,mother_address,parents_relationship,marriage_date,second_parent_included,second_parent_name,second_parent_date_of_birth,second_parent_place_of_birth,second_parent_occupation,paternity_basis,paternity_evidence_held,licensed_clinic_treatment,informant_relationship,informant_name,parents_unable_to_register,registration_route,registration_date,identity_primary_document,identity_secondary_count,identity_originals,red_book_presented,certificates_requested,service_level,delivery_address,payment_confirmed,applicant_note)>
+<!ATTLIST united_kingdom_birth_registration xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-birth-registration/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

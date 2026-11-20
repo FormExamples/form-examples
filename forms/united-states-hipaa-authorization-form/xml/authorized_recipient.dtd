@@ -1,4 +1,5 @@
 <!ELEMENT authorized_recipient (id,created_at,updated_at,deleted_at,hipaa_authorization_id,recipient_name,recipient_organization,recipient_role,recipient_address,recipient_phone,recipient_email,recipient_relationship_to_patient)>
+<!ATTLIST authorized_recipient xmlns CDATA #FIXED "https://formexamples.github.io/united-states-hipaa-authorization-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

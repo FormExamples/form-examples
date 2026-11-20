@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE health_screening_questionnaire SYSTEM "health_screening_questionnaire.dtd">
-<health_screening_questionnaire>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<health_screening_questionnaire xmlns="https://formexamples.github.io/health-screening-questionnaire/xml">
+<id>40ecc0f9-8298-50ed-b44d-a7fb1a8b959c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<assessor_id>660e8400-e29b-41d4-a716-446655440001</assessor_id>
+<patient_id>3012d525-148d-52a8-bc37-28a53060cc3e</patient_id>
+<assessor_id>88f43b33-665d-54d1-84fe-450cc3fbb118</assessor_id>
 <status>draft</status>
 <screening_purpose>occupational-pre-placement</screening_purpose>
 <site_name>Example</site_name>

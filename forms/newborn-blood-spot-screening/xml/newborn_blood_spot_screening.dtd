@@ -1,4 +1,5 @@
 <!ELEMENT newborn_blood_spot_screening (id,created_at,updated_at,deleted_at,patient_id,clinician_id,sample_taker_role,care_setting,record_date,time_of_birth,gestation_weeks,previously_screened,consent_given,decline_reason,sample_date,sample_time,age_at_sample_days,sampling_site,sample_notes,sample_adequacy,spot_quality_issue,is_repeat,repeat_reason,scd_result,cf_result,cht_result,pku_result,mcadd_result,msud_result,iva_result,ga1_result,hcu_result,clinical_context)>
+<!ATTLIST newborn_blood_spot_screening xmlns CDATA #FIXED "https://formexamples.github.io/newborn-blood-spot-screening/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE centor_score_for_streptococcal_pharyngitis_grade_rule SYSTEM "centor_score_for_streptococcal_pharyngitis_grade_rule.dtd">
-<centor_score_for_streptococcal_pharyngitis_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<centor_score_for_streptococcal_pharyngitis_grade_rule xmlns="https://formexamples.github.io/centor-score-for-streptococcal-pharyngitis/xml">
+<id>9509c55b-9b70-5925-a27f-0c6a5d4af5e7</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<centor_score_for_streptococcal_pharyngitis_grade_id>880e8400-e29b-41d4-a716-446655440003</centor_score_for_streptococcal_pharyngitis_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<centor_score_for_streptococcal_pharyngitis_grade_id>83fee598-f6f7-5a38-8d43-380a192d30a3</centor_score_for_streptococcal_pharyngitis_grade_id>
+<rule_id>ac4a445b-17de-58c2-ab3e-eae7024ab60c</rule_id>
 <criterion>tonsillar-exudate</criterion>
 <points>1</points>
 <category>General</category>

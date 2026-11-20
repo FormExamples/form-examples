@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Anion Gap Calculator form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: anion-gap-calculator
+  apiPrefix: /api/anion-gap-calculator/
+  sqlSchema: anion_gap_calculator
+  xmlNamespace: https://formexamples.github.io/anion-gap-calculator/xml
+tags:
+- name: anion-gap-calculator
+  description: Anion Gap Calculator form
 paths:
   /api/anion-gap-calculator/anion_gap_calculator_grade_flags:
     get:
       summary: List AnionGapCalculatorGradeFlag records
+      tags:
+      - anion-gap-calculator
       operationId: listAnionGapCalculatorGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AnionGapCalculatorGradeFlag
+      tags:
+      - anion-gap-calculator
       operationId: createAnionGapCalculatorGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AnionGapCalculatorGradeFlag by id
+      tags:
+      - anion-gap-calculator
       operationId: getAnionGapCalculatorGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AnionGapCalculatorGradeFlag
+      tags:
+      - anion-gap-calculator
       operationId: updateAnionGapCalculatorGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AnionGapCalculatorGradeFlag
+      tags:
+      - anion-gap-calculator
       operationId: replaceAnionGapCalculatorGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AnionGapCalculatorGradeFlag
+      tags:
+      - anion-gap-calculator
       operationId: deleteAnionGapCalculatorGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/anion-gap-calculator/anion_gap_calculator_grade_rules:
     get:
       summary: List AnionGapCalculatorGradeRule records
+      tags:
+      - anion-gap-calculator
       operationId: listAnionGapCalculatorGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AnionGapCalculatorGradeRule
+      tags:
+      - anion-gap-calculator
       operationId: createAnionGapCalculatorGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AnionGapCalculatorGradeRule by id
+      tags:
+      - anion-gap-calculator
       operationId: getAnionGapCalculatorGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AnionGapCalculatorGradeRule
+      tags:
+      - anion-gap-calculator
       operationId: updateAnionGapCalculatorGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AnionGapCalculatorGradeRule
+      tags:
+      - anion-gap-calculator
       operationId: replaceAnionGapCalculatorGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AnionGapCalculatorGradeRule
+      tags:
+      - anion-gap-calculator
       operationId: deleteAnionGapCalculatorGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/anion-gap-calculator/anion_gap_calculator_grades:
     get:
       summary: List AnionGapCalculatorGrade records
+      tags:
+      - anion-gap-calculator
       operationId: listAnionGapCalculatorGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AnionGapCalculatorGrade
+      tags:
+      - anion-gap-calculator
       operationId: createAnionGapCalculatorGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AnionGapCalculatorGrade by id
+      tags:
+      - anion-gap-calculator
       operationId: getAnionGapCalculatorGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AnionGapCalculatorGrade
+      tags:
+      - anion-gap-calculator
       operationId: updateAnionGapCalculatorGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AnionGapCalculatorGrade
+      tags:
+      - anion-gap-calculator
       operationId: replaceAnionGapCalculatorGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AnionGapCalculatorGrade
+      tags:
+      - anion-gap-calculator
       operationId: deleteAnionGapCalculatorGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/anion-gap-calculator/anion_gap_calculators:
     get:
       summary: List AnionGapCalculator records
+      tags:
+      - anion-gap-calculator
       operationId: listAnionGapCalculator
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AnionGapCalculator
+      tags:
+      - anion-gap-calculator
       operationId: createAnionGapCalculator
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AnionGapCalculator by id
+      tags:
+      - anion-gap-calculator
       operationId: getAnionGapCalculator
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AnionGapCalculator
+      tags:
+      - anion-gap-calculator
       operationId: updateAnionGapCalculator
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AnionGapCalculator
+      tags:
+      - anion-gap-calculator
       operationId: replaceAnionGapCalculator
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AnionGapCalculator
+      tags:
+      - anion-gap-calculator
       operationId: deleteAnionGapCalculator
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/anion-gap-calculator/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - anion-gap-calculator
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - anion-gap-calculator
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - anion-gap-calculator
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - anion-gap-calculator
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - anion-gap-calculator
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - anion-gap-calculator
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - anion-gap-calculator
   /api/anion-gap-calculator/patients:
     get:
       summary: List Patient records
+      tags:
+      - anion-gap-calculator
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - anion-gap-calculator
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - anion-gap-calculator
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - anion-gap-calculator
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - anion-gap-calculator
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - anion-gap-calculator
       operationId: deletePatient
       responses:
         '200':

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE zarit_burden_interview_grade SYSTEM "zarit_burden_interview_grade.dtd">
-<zarit_burden_interview_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<zarit_burden_interview_grade xmlns="https://formexamples.github.io/zarit-burden-interview/xml">
+<id>ce83564a-948a-5629-bba5-be14edf862a4</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<zarit_burden_interview_id>770e8400-e29b-41d4-a716-446655440002</zarit_burden_interview_id>
+<zarit_burden_interview_id>f0c7fac4-a3bf-5d0f-ade2-8bbda712c9a7</zarit_burden_interview_id>
 <total_score>5</total_score>
 <max_score>5</max_score>
 <burden_band>little-or-none</burden_band>

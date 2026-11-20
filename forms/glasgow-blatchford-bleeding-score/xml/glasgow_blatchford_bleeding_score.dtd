@@ -1,4 +1,5 @@
 <!ELEMENT glasgow_blatchford_bleeding_score (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,presenting_complaint,patient_identifier,age_band,sex,blood_urea_mmol_l,haemoglobin_g_l,systolic_blood_pressure_mmhg,pulse_beats_per_min,melaena_present,syncope,hepatic_disease,cardiac_failure,clinical_note)>
+<!ATTLIST glasgow_blatchford_bleeding_score xmlns CDATA #FIXED "https://formexamples.github.io/glasgow-blatchford-bleeding-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

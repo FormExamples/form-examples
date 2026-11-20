@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000067",
+    "id": "7c2b8571-d2bf-5744-8e31-740b76bbe5cf",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000079",
+    "id": "c753c9c8-b8e5-5d07-ad7a-0ec50f3adb8b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "emergencyDepartmentTriageNote": {
-    "id": "550e8400-e29b-41d4-a716-000000000086",
+    "id": "96b0a4bf-f49a-5e6d-955e-dcfe757e5a9a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000008a",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000008b",
+    "patientId": "62800023-ad02-50dc-941b-829b5f6883fa",
+    "clinicianId": "874a1a1a-99dd-562e-9b89-38d72344cf01",
     "status": "draft",
     "nurseName": "",
     "triagedAt": null,
@@ -76,11 +76,11 @@
     "clinicalNotes": ""
   },
   "emergencyDepartmentTriageNoteGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ad",
+    "id": "39022af3-eab1-55f6-a783-f2f26ca73f18",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "emergencyDepartmentTriageNoteId": "550e8400-e29b-41d4-a716-0000000000b1",
+    "emergencyDepartmentTriageNoteId": "10544be7-0067-5301-960a-02e7bc46c03b",
     "news2Total": null,
     "news2AnyParameterThree": "yes",
     "priorityLevel": 3,
@@ -90,11 +90,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "emergencyDepartmentTriageNoteGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b9",
+    "id": "b02efb2c-b60e-531d-874c-437ee7fe10df",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "emergencyDepartmentTriageNoteGradeId": "550e8400-e29b-41d4-a716-0000000000bd",
+    "emergencyDepartmentTriageNoteGradeId": "4b83e573-dd0a-557e-93c0-ea35856340c5",
     "ruleId": "",
     "instrument": "discriminator",
     "band": 3,
@@ -102,11 +102,11 @@
     "description": ""
   },
   "emergencyDepartmentTriageNoteGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c3",
+    "id": "cfe9b05a-2c6b-55d9-9f73-29870570a5d8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "emergencyDepartmentTriageNoteGradeId": "550e8400-e29b-41d4-a716-0000000000c7",
+    "emergencyDepartmentTriageNoteGradeId": "d35191e4-e57c-554f-8706-45cc6169d430",
     "flagId": "",
     "category": "resus-immediate",
     "priority": "low",

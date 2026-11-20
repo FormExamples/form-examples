@@ -5,10 +5,19 @@ info:
   title: Medication Reconciliation — MedicationReconciliationGradeFlag
   version: 1.0.0
   description: Safety flags raised independently of the reconciliation status, with priority, description, and a suggested action for the pharmacy or prescribing team.
+x-namespace:
+  form: medication-reconciliation
+  apiPrefix: /api/medication-reconciliation/
+  sqlSchema: medication_reconciliation
+  xmlNamespace: https://formexamples.github.io/medication-reconciliation/xml
+tags:
+  - name: medication-reconciliation
+    description: Medication Reconciliation form
 paths:
   /api/medication-reconciliation/medication_reconciliation_grade_flags:
     get:
       summary: List MedicationReconciliationGradeFlag records
+      tags: [medication-reconciliation]
       operationId: listMedicationReconciliationGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicationReconciliationGradeFlag
+      tags: [medication-reconciliation]
       operationId: createMedicationReconciliationGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicationReconciliationGradeFlag by id
+      tags: [medication-reconciliation]
       operationId: getMedicationReconciliationGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicationReconciliationGradeFlag
+      tags: [medication-reconciliation]
       operationId: updateMedicationReconciliationGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicationReconciliationGradeFlag
+      tags: [medication-reconciliation]
       operationId: replaceMedicationReconciliationGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicationReconciliationGradeFlag
+      tags: [medication-reconciliation]
       operationId: deleteMedicationReconciliationGradeFlag
       responses:
         "200":

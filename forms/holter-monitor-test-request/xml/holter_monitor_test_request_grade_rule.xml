@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE holter_monitor_test_request_grade_rule SYSTEM "holter_monitor_test_request_grade_rule.dtd">
-<holter_monitor_test_request_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<holter_monitor_test_request_grade_rule xmlns="https://formexamples.github.io/holter-monitor-test-request/xml">
+<id>6a76796e-b134-5789-b74b-580b8b65945f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<holter_monitor_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</holter_monitor_test_request_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<holter_monitor_test_request_grade_id>4785ac60-eccd-5728-9b2e-e03a0e35c869</holter_monitor_test_request_grade_id>
+<rule_id>81429d1a-fc98-5281-befb-2ea9fa6ecdbb</rule_id>
 <axis>appropriateness</axis>
 <category>General</category>
 <description>Example text.</description>

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "d0c7a853-4a1b-50f0-bcd4-d5e1101c2a30",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -18,7 +18,7 @@
     "bodyMassIndex": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a2",
+    "id": "7f124b68-3152-52e5-ad59-e64d1acc47ac",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -34,12 +34,12 @@
     "employer": ""
   },
   "herniaDiagnosticEvaluation": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "e1266600-7b98-58c8-b7d7-5172448e4bde",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000000b4",
-    "clinicianId": "550e8400-e29b-41d4-a716-0000000000b5",
+    "patientId": "1b4394f7-9ae7-5d3b-beaa-35ff0fcd06a6",
+    "clinicianId": "baa9f82e-7374-5bf9-9629-85527be6a3b8",
     "status": "draft",
     "assessmentDate": null,
     "assessmentTime": null,
@@ -123,11 +123,11 @@
     "additionalNotes": ""
   },
   "herniaDiagnosticEvaluationGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000107",
+    "id": "ebbc22c3-2b25-50cc-8476-2e2a336d0ab5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "herniaDiagnosticEvaluationId": "550e8400-e29b-41d4-a716-00000000010b",
+    "herniaDiagnosticEvaluationId": "db2641c3-b6f1-532b-a6e1-663602a1bfa4",
     "herniaType": "inguinal",
     "herniaSubtype": "direct",
     "ehsClassification": "",
@@ -143,11 +143,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "herniaDiagnosticEvaluationGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000119",
+    "id": "cbd607b5-029b-5d04-9d3c-f348021333d7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "herniaDiagnosticEvaluationGradeId": "550e8400-e29b-41d4-a716-00000000011d",
+    "herniaDiagnosticEvaluationGradeId": "5cbdc104-83e1-5318-8a8c-7bfb26f75d85",
     "flagId": "",
     "category": "strangulation-suspected",
     "priority": "low",

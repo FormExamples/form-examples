@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000069",
+    "id": "6121aa2c-b79f-5f77-b1e6-769e589664ac",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000007b",
+    "id": "eb06635a-e3a7-576a-9054-98dbf389b146",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "epilepsyReview": {
-    "id": "550e8400-e29b-41d4-a716-000000000088",
+    "id": "a958911c-031b-5782-92e8-e8a521eecfb0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000008c",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000008d",
+    "patientId": "ca12d4ad-85d0-5ef5-87cd-dba4a93df8d5",
+    "clinicianId": "e9718880-a456-563f-8431-3f374c62b66c",
     "reviewerName": "",
     "reviewerRole": "gp",
     "reviewedAt": null,
@@ -82,33 +82,33 @@
     "reviewContext": ""
   },
   "epilepsyReviewGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b5",
+    "id": "bba3396b-5363-5c48-bdf1-b19563e05177",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "epilepsyReviewId": "550e8400-e29b-41d4-a716-0000000000b9",
+    "epilepsyReviewId": "daa927aa-8209-585d-aa4c-aa866b7e3b57",
     "seizureControl": "seizure-free",
     "reviewStatus": "complete",
     "completenessScore": null,
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "epilepsyReviewGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000be",
+    "id": "8fc2a629-b675-5f72-8107-18d295b246b8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "epilepsyReviewGradeId": "550e8400-e29b-41d4-a716-0000000000c2",
+    "epilepsyReviewGradeId": "57bb459f-8f6c-50b3-a2ef-672d25842f7c",
     "ruleId": "",
     "section": "seizure-control",
     "category": "",
     "description": ""
   },
   "epilepsyReviewGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c7",
+    "id": "840b6f35-4019-5142-a016-fd88cb002448",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "epilepsyReviewGradeId": "550e8400-e29b-41d4-a716-0000000000cb",
+    "epilepsyReviewGradeId": "d243a5dd-4b67-5cb5-af75-6952507b18e2",
     "flagId": "",
     "category": "specialist-review",
     "priority": "low",

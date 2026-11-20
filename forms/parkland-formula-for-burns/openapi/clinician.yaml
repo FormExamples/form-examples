@@ -5,10 +5,19 @@ info:
   title: Parkland Formula For Burns — Clinician
   version: 1.0.0
   description: Clinician identifying information for the staff recording a Parkland-formula burns fluid-resuscitation calculation.
+x-namespace:
+  form: parkland-formula-for-burns
+  apiPrefix: /api/parkland-formula-for-burns/
+  sqlSchema: parkland_formula_for_burns
+  xmlNamespace: https://formexamples.github.io/parkland-formula-for-burns/xml
+tags:
+  - name: parkland-formula-for-burns
+    description: Parkland Formula For Burns form
 paths:
   /api/parkland-formula-for-burns/clinicians:
     get:
       summary: List Clinician records
+      tags: [parkland-formula-for-burns]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [parkland-formula-for-burns]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [parkland-formula-for-burns]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [parkland-formula-for-burns]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [parkland-formula-for-burns]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [parkland-formula-for-burns]
       operationId: deleteClinician
       responses:
         "200":

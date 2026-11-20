@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "01d15825-ff03-5739-a7e5-225aadc60a60",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "17602243-5d04-56e2-b07a-3b76682e40fb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "allergistWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "a0918d12-56b5-5982-b35e-45c06bc365af",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000096",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000097",
+    "patientId": "bcdfa7e8-a63f-561a-b968-ee1be20d2709",
+    "practitionerId": "70f6ec9e-88a5-552f-aea2-417b327fb70c",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "allergistWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "7e125d7e-230e-5ca7-ac7f-4297d56fa7d9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "allergistWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "allergistWaitingListCardId": "8979fc6e-dbe7-5fef-9cdc-0977ce574357",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "allergistWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "6d9e4596-85bf-5af6-af88-f220b7fe4a6c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "allergistWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "allergistWaitingListCardId": "9360e733-16d3-53fd-958e-58cfbbaae533",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "allergistWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d1",
+    "id": "315ef4e6-b7d2-5b12-917d-9cf20ccfbce3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "allergistWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "allergistWaitingListCardGradeId": "e18a884c-cdb5-59da-81ba-7dc585083c8a",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "allergistWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000db",
+    "id": "faa7cc90-d8e1-55ba-8ef8-723ce8b8d99c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "allergistWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000df",
+    "allergistWaitingListCardGradeId": "b4caa96a-ac65-5ffb-9bbd-5ed90437e138",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

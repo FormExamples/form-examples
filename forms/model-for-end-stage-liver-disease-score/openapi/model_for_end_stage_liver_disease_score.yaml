@@ -5,10 +5,19 @@ info:
   title: Model For End Stage Liver Disease Score — ModelForEndStageLiverDiseaseScore
   version: 1.0.0
   description: "Main MELD assessment record: assessment context, patient identification, chosen MELD variant, and the laboratory inputs (total bilirubin, INR, serum creatinine, dialysis history, serum sodium, and serum albumin)."
+x-namespace:
+  form: model-for-end-stage-liver-disease-score
+  apiPrefix: /api/model-for-end-stage-liver-disease-score/
+  sqlSchema: model_for_end_stage_liver_disease_score
+  xmlNamespace: https://formexamples.github.io/model-for-end-stage-liver-disease-score/xml
+tags:
+  - name: model-for-end-stage-liver-disease-score
+    description: Model For End Stage Liver Disease Score form
 paths:
   /api/model-for-end-stage-liver-disease-score/model_for_end_stage_liver_disease_scores:
     get:
       summary: List ModelForEndStageLiverDiseaseScore records
+      tags: [model-for-end-stage-liver-disease-score]
       operationId: listModelForEndStageLiverDiseaseScore
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ModelForEndStageLiverDiseaseScore
+      tags: [model-for-end-stage-liver-disease-score]
       operationId: createModelForEndStageLiverDiseaseScore
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ModelForEndStageLiverDiseaseScore by id
+      tags: [model-for-end-stage-liver-disease-score]
       operationId: getModelForEndStageLiverDiseaseScore
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ModelForEndStageLiverDiseaseScore
+      tags: [model-for-end-stage-liver-disease-score]
       operationId: updateModelForEndStageLiverDiseaseScore
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ModelForEndStageLiverDiseaseScore
+      tags: [model-for-end-stage-liver-disease-score]
       operationId: replaceModelForEndStageLiverDiseaseScore
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ModelForEndStageLiverDiseaseScore
+      tags: [model-for-end-stage-liver-disease-score]
       operationId: deleteModelForEndStageLiverDiseaseScore
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Mammography Test Result — MammographyTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: mammography-test-result
+  apiPrefix: /api/mammography-test-result/
+  sqlSchema: mammography_test_result
+  xmlNamespace: https://formexamples.github.io/mammography-test-result/xml
+tags:
+  - name: mammography-test-result
+    description: Mammography Test Result form
 paths:
   /api/mammography-test-result/mammography_test_result_grade_rules:
     get:
       summary: List MammographyTestResultGradeRule records
+      tags: [mammography-test-result]
       operationId: listMammographyTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MammographyTestResultGradeRule
+      tags: [mammography-test-result]
       operationId: createMammographyTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MammographyTestResultGradeRule by id
+      tags: [mammography-test-result]
       operationId: getMammographyTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MammographyTestResultGradeRule
+      tags: [mammography-test-result]
       operationId: updateMammographyTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MammographyTestResultGradeRule
+      tags: [mammography-test-result]
       operationId: replaceMammographyTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MammographyTestResultGradeRule
+      tags: [mammography-test-result]
       operationId: deleteMammographyTestResultGradeRule
       responses:
         "200":

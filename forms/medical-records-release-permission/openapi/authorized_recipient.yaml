@@ -5,10 +5,19 @@ info:
   title: Medical Records Release Permission — AuthorizedRecipient
   version: 1.0.0
   description: Authorized recipient of released medical records. One-to-one child of release_form.
+x-namespace:
+  form: medical-records-release-permission
+  apiPrefix: /api/medical-records-release-permission/
+  sqlSchema: medical_records_release_permission
+  xmlNamespace: https://formexamples.github.io/medical-records-release-permission/xml
+tags:
+  - name: medical-records-release-permission
+    description: Medical Records Release Permission form
 paths:
   /api/medical-records-release-permission/authorized_recipients:
     get:
       summary: List AuthorizedRecipient records
+      tags: [medical-records-release-permission]
       operationId: listAuthorizedRecipient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AuthorizedRecipient
+      tags: [medical-records-release-permission]
       operationId: createAuthorizedRecipient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AuthorizedRecipient by id
+      tags: [medical-records-release-permission]
       operationId: getAuthorizedRecipient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AuthorizedRecipient
+      tags: [medical-records-release-permission]
       operationId: updateAuthorizedRecipient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AuthorizedRecipient
+      tags: [medical-records-release-permission]
       operationId: replaceAuthorizedRecipient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AuthorizedRecipient
+      tags: [medical-records-release-permission]
       operationId: deleteAuthorizedRecipient
       responses:
         "200":

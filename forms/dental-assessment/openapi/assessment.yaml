@@ -5,10 +5,19 @@ info:
   title: Dental Assessment — Assessment
   version: 1.0.0
   description: Dental assessment form using DMFT Index. Parent entity for all assessment sections.
+x-namespace:
+  form: dental-assessment
+  apiPrefix: /api/dental-assessment/
+  sqlSchema: dental_assessment
+  xmlNamespace: https://formexamples.github.io/dental-assessment/xml
+tags:
+  - name: dental-assessment
+    description: Dental Assessment form
 paths:
   /api/dental-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [dental-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [dental-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [dental-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [dental-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [dental-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [dental-assessment]
       operationId: deleteAssessment
       responses:
         "200":

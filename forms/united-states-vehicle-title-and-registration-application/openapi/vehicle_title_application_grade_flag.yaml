@@ -5,10 +5,19 @@ info:
   title: United States Vehicle Title And Registration Application — VehicleTitleApplicationGradeFlag
   version: 1.0.0
   description: Flagged issues that fire independently of the application class, with priority and a suggested action for the applicant or clerk.
+x-namespace:
+  form: united-states-vehicle-title-and-registration-application
+  apiPrefix: /api/united-states-vehicle-title-and-registration-application/
+  sqlSchema: united_states_vehicle_title_and_registration_application
+  xmlNamespace: https://formexamples.github.io/united-states-vehicle-title-and-registration-application/xml
+tags:
+  - name: united-states-vehicle-title-and-registration-application
+    description: United States Vehicle Title And Registration Application form
 paths:
   /api/united-states-vehicle-title-and-registration-application/vehicle_title_application_grade_flags:
     get:
       summary: List VehicleTitleApplicationGradeFlag records
+      tags: [united-states-vehicle-title-and-registration-application]
       operationId: listVehicleTitleApplicationGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new VehicleTitleApplicationGradeFlag
+      tags: [united-states-vehicle-title-and-registration-application]
       operationId: createVehicleTitleApplicationGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one VehicleTitleApplicationGradeFlag by id
+      tags: [united-states-vehicle-title-and-registration-application]
       operationId: getVehicleTitleApplicationGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing VehicleTitleApplicationGradeFlag
+      tags: [united-states-vehicle-title-and-registration-application]
       operationId: updateVehicleTitleApplicationGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing VehicleTitleApplicationGradeFlag
+      tags: [united-states-vehicle-title-and-registration-application]
       operationId: replaceVehicleTitleApplicationGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a VehicleTitleApplicationGradeFlag
+      tags: [united-states-vehicle-title-and-registration-application]
       operationId: deleteVehicleTitleApplicationGradeFlag
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sleep_study_test_result_grade_rule SYSTEM "sleep_study_test_result_grade_rule.dtd">
-<sleep_study_test_result_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<sleep_study_test_result_grade_rule xmlns="https://formexamples.github.io/sleep-study-test-result/xml">
+<id>be1c6dd1-ad19-55d8-9014-7eb3ce78faf6</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<sleep_study_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</sleep_study_test_result_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<sleep_study_test_result_grade_id>50926ed9-aab4-55af-b729-e3adc52be146</sleep_study_test_result_grade_id>
+<rule_id>6b2f3d7e-97d7-5993-aa5e-d5acf77c1289</rule_id>
 <axis>classification</axis>
 <category>General</category>
 <description>Example text.</description>

@@ -1,4 +1,5 @@
 <!ELEMENT coagulation_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,prothrombin_time_inr,activated_partial_thromboplastin_time,fibrinogen,d_dimer,thrombophilia_screen,factor_assays,anti_xa_assay,mixing_studies,von_willebrand_screen,primary_indication,clinical_details,on_anticoagulant,anticoagulant_agent,bleeding_history,thrombosis_history,specimen_collected,collection_datetime,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST coagulation_test_request xmlns CDATA #FIXED "https://formexamples.github.io/coagulation-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

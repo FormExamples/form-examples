@@ -1,4 +1,5 @@
 <!ELEMENT okr_key_result (id,created_at,updated_at,deleted_at,okr_objective_id,position,title,kr_type,unit,start_value,current_value,target_value,milestones_json,binary_done,owner_name,due_date,progress_fraction)>
+<!ATTLIST okr_key_result xmlns CDATA #FIXED "https://formexamples.github.io/objectives-and-key-results-tracker/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000063",
+    "id": "f66bfd02-826f-5bd7-95f1-4e18d60834b8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000075",
+    "id": "fade1b1e-a867-54c2-bc35-50db81a21006",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "diabetesPodiatryAssessment": {
-    "id": "550e8400-e29b-41d4-a716-000000000082",
+    "id": "debf99b8-88f3-5627-aa1a-a933a37615cc",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000086",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000087",
+    "patientId": "1bf67e11-5f45-5ca9-b917-d6cc5b74191e",
+    "clinicianId": "986c3491-a986-57ad-b37d-d9259a8e76d0",
     "assessedAt": null,
     "assessmentSetting": "annual-review",
     "diabetesType": "type-1",
@@ -72,11 +72,11 @@
     "clinicalContext": ""
   },
   "diabetesPodiatryAssessmentGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a5",
+    "id": "371af03c-904f-5e46-be8a-9f3aea1d5217",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "diabetesPodiatryAssessmentId": "550e8400-e29b-41d4-a716-0000000000a9",
+    "diabetesPodiatryAssessmentId": "6ae1221e-cd57-5d4c-8098-5103ff99972e",
     "rightFootRisk": "low",
     "leftFootRisk": "low",
     "overallRisk": "low",
@@ -87,22 +87,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "diabetesPodiatryAssessmentGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b2",
+    "id": "66efd824-dfdc-5d52-85a7-23f0eacdcf99",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "diabetesPodiatryAssessmentGradeId": "550e8400-e29b-41d4-a716-0000000000b6",
+    "diabetesPodiatryAssessmentGradeId": "d84b4c9e-5f3a-53ec-906b-883865297135",
     "ruleId": "",
     "stage": "per-foot",
     "category": "",
     "description": ""
   },
   "diabetesPodiatryAssessmentGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bb",
+    "id": "7df217a2-2d4a-579d-9e55-df8a4efeab5d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "diabetesPodiatryAssessmentGradeId": "550e8400-e29b-41d4-a716-0000000000bf",
+    "diabetesPodiatryAssessmentGradeId": "10a41768-567d-57ee-9bf2-050fc9b63486",
     "flagId": "",
     "category": "active-ulcer",
     "priority": "low",

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Cardiac Stress Test Result form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: cardiac-stress-test-result
+  apiPrefix: /api/cardiac-stress-test-result/
+  sqlSchema: cardiac_stress_test_result
+  xmlNamespace: https://formexamples.github.io/cardiac-stress-test-result/xml
+tags:
+- name: cardiac-stress-test-result
+  description: Cardiac Stress Test Result form
 paths:
   /api/cardiac-stress-test-result/cardiac_stress_test_result_grade_flags:
     get:
       summary: List CardiacStressTestResultGradeFlag records
+      tags:
+      - cardiac-stress-test-result
       operationId: listCardiacStressTestResultGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CardiacStressTestResultGradeFlag
+      tags:
+      - cardiac-stress-test-result
       operationId: createCardiacStressTestResultGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CardiacStressTestResultGradeFlag by id
+      tags:
+      - cardiac-stress-test-result
       operationId: getCardiacStressTestResultGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CardiacStressTestResultGradeFlag
+      tags:
+      - cardiac-stress-test-result
       operationId: updateCardiacStressTestResultGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CardiacStressTestResultGradeFlag
+      tags:
+      - cardiac-stress-test-result
       operationId: replaceCardiacStressTestResultGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CardiacStressTestResultGradeFlag
+      tags:
+      - cardiac-stress-test-result
       operationId: deleteCardiacStressTestResultGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/cardiac-stress-test-result/cardiac_stress_test_result_grade_rules:
     get:
       summary: List CardiacStressTestResultGradeRule records
+      tags:
+      - cardiac-stress-test-result
       operationId: listCardiacStressTestResultGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CardiacStressTestResultGradeRule
+      tags:
+      - cardiac-stress-test-result
       operationId: createCardiacStressTestResultGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CardiacStressTestResultGradeRule by id
+      tags:
+      - cardiac-stress-test-result
       operationId: getCardiacStressTestResultGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CardiacStressTestResultGradeRule
+      tags:
+      - cardiac-stress-test-result
       operationId: updateCardiacStressTestResultGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CardiacStressTestResultGradeRule
+      tags:
+      - cardiac-stress-test-result
       operationId: replaceCardiacStressTestResultGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CardiacStressTestResultGradeRule
+      tags:
+      - cardiac-stress-test-result
       operationId: deleteCardiacStressTestResultGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/cardiac-stress-test-result/cardiac_stress_test_result_grades:
     get:
       summary: List CardiacStressTestResultGrade records
+      tags:
+      - cardiac-stress-test-result
       operationId: listCardiacStressTestResultGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CardiacStressTestResultGrade
+      tags:
+      - cardiac-stress-test-result
       operationId: createCardiacStressTestResultGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CardiacStressTestResultGrade by id
+      tags:
+      - cardiac-stress-test-result
       operationId: getCardiacStressTestResultGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CardiacStressTestResultGrade
+      tags:
+      - cardiac-stress-test-result
       operationId: updateCardiacStressTestResultGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CardiacStressTestResultGrade
+      tags:
+      - cardiac-stress-test-result
       operationId: replaceCardiacStressTestResultGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CardiacStressTestResultGrade
+      tags:
+      - cardiac-stress-test-result
       operationId: deleteCardiacStressTestResultGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/cardiac-stress-test-result/cardiac_stress_test_results:
     get:
       summary: List CardiacStressTestResult records
+      tags:
+      - cardiac-stress-test-result
       operationId: listCardiacStressTestResult
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CardiacStressTestResult
+      tags:
+      - cardiac-stress-test-result
       operationId: createCardiacStressTestResult
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CardiacStressTestResult by id
+      tags:
+      - cardiac-stress-test-result
       operationId: getCardiacStressTestResult
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CardiacStressTestResult
+      tags:
+      - cardiac-stress-test-result
       operationId: updateCardiacStressTestResult
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CardiacStressTestResult
+      tags:
+      - cardiac-stress-test-result
       operationId: replaceCardiacStressTestResult
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CardiacStressTestResult
+      tags:
+      - cardiac-stress-test-result
       operationId: deleteCardiacStressTestResult
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/cardiac-stress-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - cardiac-stress-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - cardiac-stress-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - cardiac-stress-test-result
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - cardiac-stress-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - cardiac-stress-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - cardiac-stress-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - cardiac-stress-test-result
   /api/cardiac-stress-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - cardiac-stress-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - cardiac-stress-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - cardiac-stress-test-result
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - cardiac-stress-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - cardiac-stress-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - cardiac-stress-test-result
       operationId: deletePatient
       responses:
         '200':

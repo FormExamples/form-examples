@@ -1,4 +1,5 @@
 <!ELEMENT wells_score_for_deep_vein_thrombosis (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,patient_identifier,assessed_at,care_setting,age_band,symptomatic_leg,active_cancer,paralysis_or_immobilisation,recently_bedridden_or_surgery,localised_tenderness,entire_leg_swollen,calf_swelling_over_3cm,pitting_oedema,collateral_superficial_veins,previously_documented_dvt,alternative_diagnosis_as_likely,clinical_notes)>
+<!ATTLIST wells_score_for_deep_vein_thrombosis xmlns CDATA #FIXED "https://formexamples.github.io/wells-score-for-deep-vein-thrombosis/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

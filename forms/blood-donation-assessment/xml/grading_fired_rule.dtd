@@ -1,4 +1,5 @@
 <!ELEMENT grading_fired_rule (id,created_at,updated_at,deleted_at,grade_id,rule_id,category,description,severity_level)>
+<!ATTLIST grading_fired_rule xmlns CDATA #FIXED "https://formexamples.github.io/blood-donation-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

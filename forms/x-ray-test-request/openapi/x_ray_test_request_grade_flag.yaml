@@ -5,10 +5,19 @@ info:
   title: X Ray Test Request — XRayTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the imaging team.
+x-namespace:
+  form: x-ray-test-request
+  apiPrefix: /api/x-ray-test-request/
+  sqlSchema: x_ray_test_request
+  xmlNamespace: https://formexamples.github.io/x-ray-test-request/xml
+tags:
+  - name: x-ray-test-request
+    description: X Ray Test Request form
 paths:
   /api/x-ray-test-request/x_ray_test_request_grade_flags:
     get:
       summary: List XRayTestRequestGradeFlag records
+      tags: [x-ray-test-request]
       operationId: listXRayTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new XRayTestRequestGradeFlag
+      tags: [x-ray-test-request]
       operationId: createXRayTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one XRayTestRequestGradeFlag by id
+      tags: [x-ray-test-request]
       operationId: getXRayTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing XRayTestRequestGradeFlag
+      tags: [x-ray-test-request]
       operationId: updateXRayTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing XRayTestRequestGradeFlag
+      tags: [x-ray-test-request]
       operationId: replaceXRayTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a XRayTestRequestGradeFlag
+      tags: [x-ray-test-request]
       operationId: deleteXRayTestRequestGradeFlag
       responses:
         "200":

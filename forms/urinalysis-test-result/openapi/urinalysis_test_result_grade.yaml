@@ -5,10 +5,19 @@ info:
   title: Urinalysis Test Result — UrinalysisTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. significant growth in pregnancy, a critical organism, or visible haematuria findings) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: urinalysis-test-result
+  apiPrefix: /api/urinalysis-test-result/
+  sqlSchema: urinalysis_test_result
+  xmlNamespace: https://formexamples.github.io/urinalysis-test-result/xml
+tags:
+  - name: urinalysis-test-result
+    description: Urinalysis Test Result form
 paths:
   /api/urinalysis-test-result/urinalysis_test_result_grades:
     get:
       summary: List UrinalysisTestResultGrade records
+      tags: [urinalysis-test-result]
       operationId: listUrinalysisTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UrinalysisTestResultGrade
+      tags: [urinalysis-test-result]
       operationId: createUrinalysisTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UrinalysisTestResultGrade by id
+      tags: [urinalysis-test-result]
       operationId: getUrinalysisTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UrinalysisTestResultGrade
+      tags: [urinalysis-test-result]
       operationId: updateUrinalysisTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UrinalysisTestResultGrade
+      tags: [urinalysis-test-result]
       operationId: replaceUrinalysisTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UrinalysisTestResultGrade
+      tags: [urinalysis-test-result]
       operationId: deleteUrinalysisTestResultGrade
       responses:
         "200":

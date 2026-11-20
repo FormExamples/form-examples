@@ -5,10 +5,19 @@ info:
   title: Pre Anaesthesia Assessment — PreAnaesthesiaAssessmentGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the ASA grade, with priority and a suggested action for the perioperative team.
+x-namespace:
+  form: pre-anaesthesia-assessment
+  apiPrefix: /api/pre-anaesthesia-assessment/
+  sqlSchema: pre_anaesthesia_assessment
+  xmlNamespace: https://formexamples.github.io/pre-anaesthesia-assessment/xml
+tags:
+  - name: pre-anaesthesia-assessment
+    description: Pre Anaesthesia Assessment form
 paths:
   /api/pre-anaesthesia-assessment/pre_anaesthesia_assessment_grade_flags:
     get:
       summary: List PreAnaesthesiaAssessmentGradeFlag records
+      tags: [pre-anaesthesia-assessment]
       operationId: listPreAnaesthesiaAssessmentGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PreAnaesthesiaAssessmentGradeFlag
+      tags: [pre-anaesthesia-assessment]
       operationId: createPreAnaesthesiaAssessmentGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PreAnaesthesiaAssessmentGradeFlag by id
+      tags: [pre-anaesthesia-assessment]
       operationId: getPreAnaesthesiaAssessmentGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PreAnaesthesiaAssessmentGradeFlag
+      tags: [pre-anaesthesia-assessment]
       operationId: updatePreAnaesthesiaAssessmentGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PreAnaesthesiaAssessmentGradeFlag
+      tags: [pre-anaesthesia-assessment]
       operationId: replacePreAnaesthesiaAssessmentGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PreAnaesthesiaAssessmentGradeFlag
+      tags: [pre-anaesthesia-assessment]
       operationId: deletePreAnaesthesiaAssessmentGradeFlag
       responses:
         "200":

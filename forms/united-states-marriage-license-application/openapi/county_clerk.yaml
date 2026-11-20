@@ -5,10 +5,19 @@ info:
   title: United States Marriage License Application — CountyClerk
   version: 1.0.0
   description: The county clerk, recorder, or registrar office that issues the marriage license and records the certificate.
+x-namespace:
+  form: united-states-marriage-license-application
+  apiPrefix: /api/united-states-marriage-license-application/
+  sqlSchema: united_states_marriage_license_application
+  xmlNamespace: https://formexamples.github.io/united-states-marriage-license-application/xml
+tags:
+  - name: united-states-marriage-license-application
+    description: United States Marriage License Application form
 paths:
   /api/united-states-marriage-license-application/county_clerks:
     get:
       summary: List CountyClerk records
+      tags: [united-states-marriage-license-application]
       operationId: listCountyClerk
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CountyClerk
+      tags: [united-states-marriage-license-application]
       operationId: createCountyClerk
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CountyClerk by id
+      tags: [united-states-marriage-license-application]
       operationId: getCountyClerk
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CountyClerk
+      tags: [united-states-marriage-license-application]
       operationId: updateCountyClerk
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CountyClerk
+      tags: [united-states-marriage-license-application]
       operationId: replaceCountyClerk
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CountyClerk
+      tags: [united-states-marriage-license-application]
       operationId: deleteCountyClerk
       responses:
         "200":

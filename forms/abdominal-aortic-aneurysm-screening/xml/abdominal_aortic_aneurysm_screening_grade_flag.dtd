@@ -1,4 +1,5 @@
 <!ELEMENT abdominal_aortic_aneurysm_screening_grade_flag (id,created_at,updated_at,deleted_at,abdominal_aortic_aneurysm_screening_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST abdominal_aortic_aneurysm_screening_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/abdominal-aortic-aneurysm-screening/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

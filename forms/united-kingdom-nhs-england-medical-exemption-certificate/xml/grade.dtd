@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,application_id,outcome,redirect_to,result_category,result_score,result_notes,valid_from,valid_until,validity_years,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-nhs-england-medical-exemption-certificate/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

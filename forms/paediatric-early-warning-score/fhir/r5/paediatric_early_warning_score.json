@@ -1,6 +1,6 @@
 {
   "resourceType": "Encounter",
-  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "id": "0c832d44-e8a8-5148-90da-ac4a09a277a3",
   "meta": {
     "profile": [
       "http://hl7.org/fhir/StructureDefinition/Encounter"
@@ -32,7 +32,7 @@
     }
   ],
   "subject": {
-    "reference": "Patient/550e8400-e29b-41d4-a716-446655440000"
+    "reference": "Patient/cdf05dbb-1e21-5217-a2de-dd9caf9a7271"
   },
   "actualPeriod": {
     "start": "2026-04-09T10:00:00+00:00"

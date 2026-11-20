@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United Kingdom Divorce Application form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-kingdom-divorce-application
+  apiPrefix: /api/united-kingdom-divorce-application/
+  sqlSchema: united_kingdom_divorce_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-divorce-application/xml
+tags:
+- name: united-kingdom-divorce-application
+  description: United Kingdom Divorce Application form
 paths:
   /api/united-kingdom-divorce-application/applicants:
     get:
       summary: List Applicant records
+      tags:
+      - united-kingdom-divorce-application
       operationId: listApplicant
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Applicant
+      tags:
+      - united-kingdom-divorce-application
       operationId: createApplicant
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Applicant by id
+      tags:
+      - united-kingdom-divorce-application
       operationId: getApplicant
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Applicant
+      tags:
+      - united-kingdom-divorce-application
       operationId: updateApplicant
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Applicant
+      tags:
+      - united-kingdom-divorce-application
       operationId: replaceApplicant
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Applicant
+      tags:
+      - united-kingdom-divorce-application
       operationId: deleteApplicant
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/united-kingdom-divorce-application/caseworkers:
     get:
       summary: List Caseworker records
+      tags:
+      - united-kingdom-divorce-application
       operationId: listCaseworker
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Caseworker
+      tags:
+      - united-kingdom-divorce-application
       operationId: createCaseworker
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Caseworker by id
+      tags:
+      - united-kingdom-divorce-application
       operationId: getCaseworker
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Caseworker
+      tags:
+      - united-kingdom-divorce-application
       operationId: updateCaseworker
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Caseworker
+      tags:
+      - united-kingdom-divorce-application
       operationId: replaceCaseworker
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Caseworker
+      tags:
+      - united-kingdom-divorce-application
       operationId: deleteCaseworker
       responses:
         '200':
@@ -511,9 +543,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-kingdom-divorce-application
   /api/united-kingdom-divorce-application/united_kingdom_divorce_application_grade_flags:
     get:
       summary: List UnitedKingdomDivorceApplicationGradeFlag records
+      tags:
+      - united-kingdom-divorce-application
       operationId: listUnitedKingdomDivorceApplicationGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomDivorceApplicationGradeFlag
+      tags:
+      - united-kingdom-divorce-application
       operationId: createUnitedKingdomDivorceApplicationGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomDivorceApplicationGradeFlag by id
+      tags:
+      - united-kingdom-divorce-application
       operationId: getUnitedKingdomDivorceApplicationGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomDivorceApplicationGradeFlag
+      tags:
+      - united-kingdom-divorce-application
       operationId: updateUnitedKingdomDivorceApplicationGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomDivorceApplicationGradeFlag
+      tags:
+      - united-kingdom-divorce-application
       operationId: replaceUnitedKingdomDivorceApplicationGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomDivorceApplicationGradeFlag
+      tags:
+      - united-kingdom-divorce-application
       operationId: deleteUnitedKingdomDivorceApplicationGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-kingdom-divorce-application/united_kingdom_divorce_application_grade_rules:
     get:
       summary: List UnitedKingdomDivorceApplicationGradeRule records
+      tags:
+      - united-kingdom-divorce-application
       operationId: listUnitedKingdomDivorceApplicationGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomDivorceApplicationGradeRule
+      tags:
+      - united-kingdom-divorce-application
       operationId: createUnitedKingdomDivorceApplicationGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomDivorceApplicationGradeRule by id
+      tags:
+      - united-kingdom-divorce-application
       operationId: getUnitedKingdomDivorceApplicationGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomDivorceApplicationGradeRule
+      tags:
+      - united-kingdom-divorce-application
       operationId: updateUnitedKingdomDivorceApplicationGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomDivorceApplicationGradeRule
+      tags:
+      - united-kingdom-divorce-application
       operationId: replaceUnitedKingdomDivorceApplicationGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomDivorceApplicationGradeRule
+      tags:
+      - united-kingdom-divorce-application
       operationId: deleteUnitedKingdomDivorceApplicationGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-kingdom-divorce-application/united_kingdom_divorce_application_grades:
     get:
       summary: List UnitedKingdomDivorceApplicationGrade records
+      tags:
+      - united-kingdom-divorce-application
       operationId: listUnitedKingdomDivorceApplicationGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomDivorceApplicationGrade
+      tags:
+      - united-kingdom-divorce-application
       operationId: createUnitedKingdomDivorceApplicationGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomDivorceApplicationGrade by id
+      tags:
+      - united-kingdom-divorce-application
       operationId: getUnitedKingdomDivorceApplicationGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomDivorceApplicationGrade
+      tags:
+      - united-kingdom-divorce-application
       operationId: updateUnitedKingdomDivorceApplicationGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomDivorceApplicationGrade
+      tags:
+      - united-kingdom-divorce-application
       operationId: replaceUnitedKingdomDivorceApplicationGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomDivorceApplicationGrade
+      tags:
+      - united-kingdom-divorce-application
       operationId: deleteUnitedKingdomDivorceApplicationGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-kingdom-divorce-application/united_kingdom_divorce_applications:
     get:
       summary: List UnitedKingdomDivorceApplication records
+      tags:
+      - united-kingdom-divorce-application
       operationId: listUnitedKingdomDivorceApplication
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomDivorceApplication
+      tags:
+      - united-kingdom-divorce-application
       operationId: createUnitedKingdomDivorceApplication
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomDivorceApplication by id
+      tags:
+      - united-kingdom-divorce-application
       operationId: getUnitedKingdomDivorceApplication
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomDivorceApplication
+      tags:
+      - united-kingdom-divorce-application
       operationId: updateUnitedKingdomDivorceApplication
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomDivorceApplication
+      tags:
+      - united-kingdom-divorce-application
       operationId: replaceUnitedKingdomDivorceApplication
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomDivorceApplication
+      tags:
+      - united-kingdom-divorce-application
       operationId: deleteUnitedKingdomDivorceApplication
       responses:
         '200':

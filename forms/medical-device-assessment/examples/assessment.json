@@ -1,6 +1,6 @@
 {
   "manufacturer": {
-    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "id": "e63498c6-7bc6-562c-88d3-08b23c2d774f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -15,7 +15,7 @@
     "unitedKingdomResponsiblePersonName": ""
   },
   "assessor": {
-    "id": "550e8400-e29b-41d4-a716-00000000000e",
+    "id": "564d0dbc-d918-57c2-9082-7d8bbad35672",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -26,12 +26,12 @@
     "organization": ""
   },
   "medicalDeviceAssessment": {
-    "id": "550e8400-e29b-41d4-a716-000000000017",
+    "id": "3abe385f-9f34-5260-8e06-11f13d34a6a9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "manufacturerId": "550e8400-e29b-41d4-a716-00000000001b",
-    "assessorId": "550e8400-e29b-41d4-a716-00000000001c",
+    "manufacturerId": "a925b57c-833b-5515-ab12-04b9a8388012",
+    "assessorId": "43eed423-834a-501d-afd9-4f326fc61a17",
     "status": "draft",
     "assessmentDate": null,
     "deviceName": "",
@@ -74,11 +74,11 @@
     "assessorNotes": ""
   },
   "medicalDeviceAssessmentGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000045",
+    "id": "f47bec71-a803-5cf7-a44b-21407f419d19",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalDeviceAssessmentId": "550e8400-e29b-41d4-a716-000000000049",
+    "medicalDeviceAssessmentId": "5bfc00fa-d5c0-5a0a-bbfe-7b323c53bc4d",
     "computedDeviceClass": "I",
     "finalDeviceClass": "I",
     "classSuffix": "s",
@@ -91,11 +91,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "medicalDeviceAssessmentGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000054",
+    "id": "159e30ac-a27a-5bd6-a381-68a25d9b0427",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-000000000058",
+    "gradeId": "dd2a099c-2d47-5ac5-8ae3-dbb140b3fed8",
     "ruleId": "",
     "annexViiiRule": 11,
     "deviceClass": "I",
@@ -103,11 +103,11 @@
     "description": ""
   },
   "medicalDeviceAssessmentGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000005e",
+    "id": "245adfeb-0f56-5c26-8d1c-fc19014b1f54",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalDeviceAssessmentGradeId": "550e8400-e29b-41d4-a716-000000000062",
+    "medicalDeviceAssessmentGradeId": "8a8bc696-d8f0-5ed8-8428-a46301336d3e",
     "flagId": "",
     "category": "missing-intended-purpose",
     "priority": "low",

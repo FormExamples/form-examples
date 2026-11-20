@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE neurology_waiting_list_card_appointment SYSTEM "neurology_waiting_list_card_appointment.dtd">
-<neurology_waiting_list_card_appointment>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<neurology_waiting_list_card_appointment xmlns="https://formexamples.github.io/neurology-waiting-list-card/xml">
+<id>9412a26e-d599-5633-b3b5-4db6f0285006</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<neurology_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</neurology_waiting_list_card_id>
+<neurology_waiting_list_card_id>abb5b51d-27a2-5d38-92bc-7793e6cc792a</neurology_waiting_list_card_id>
 <appointment_date>2026-01-15</appointment_date>
 <appointment_time></appointment_time>
 <duration_minutes>1</duration_minutes>

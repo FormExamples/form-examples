@@ -5,10 +5,19 @@ info:
   title: Medical Information Form For Air Travel — MedicalInformationFormForAirTravelGradeRule
   version: 1.0.0
   description: Audit trail of every fitness-to-fly rule that fired for this MEDIF, including the contributing instrument and resulting band.
+x-namespace:
+  form: medical-information-form-for-air-travel
+  apiPrefix: /api/medical-information-form-for-air-travel/
+  sqlSchema: medical_information_form_for_air_travel
+  xmlNamespace: https://formexamples.github.io/medical-information-form-for-air-travel/xml
+tags:
+  - name: medical-information-form-for-air-travel
+    description: Medical Information Form For Air Travel form
 paths:
   /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grade_rules:
     get:
       summary: List MedicalInformationFormForAirTravelGradeRule records
+      tags: [medical-information-form-for-air-travel]
       operationId: listMedicalInformationFormForAirTravelGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalInformationFormForAirTravelGradeRule
+      tags: [medical-information-form-for-air-travel]
       operationId: createMedicalInformationFormForAirTravelGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalInformationFormForAirTravelGradeRule by id
+      tags: [medical-information-form-for-air-travel]
       operationId: getMedicalInformationFormForAirTravelGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalInformationFormForAirTravelGradeRule
+      tags: [medical-information-form-for-air-travel]
       operationId: updateMedicalInformationFormForAirTravelGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalInformationFormForAirTravelGradeRule
+      tags: [medical-information-form-for-air-travel]
       operationId: replaceMedicalInformationFormForAirTravelGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalInformationFormForAirTravelGradeRule
+      tags: [medical-information-form-for-air-travel]
       operationId: deleteMedicalInformationFormForAirTravelGradeRule
       responses:
         "200":

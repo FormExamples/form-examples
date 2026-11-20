@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Genetic Test Result form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: genetic-test-result
+  apiPrefix: /api/genetic-test-result/
+  sqlSchema: genetic_test_result
+  xmlNamespace: https://formexamples.github.io/genetic-test-result/xml
+tags:
+- name: genetic-test-result
+  description: Genetic Test Result form
 paths:
   /api/genetic-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - genetic-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - genetic-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - genetic-test-result
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - genetic-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - genetic-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - genetic-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/genetic-test-result/genetic_test_result_grade_flags:
     get:
       summary: List GeneticTestResultGradeFlag records
+      tags:
+      - genetic-test-result
       operationId: listGeneticTestResultGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GeneticTestResultGradeFlag
+      tags:
+      - genetic-test-result
       operationId: createGeneticTestResultGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GeneticTestResultGradeFlag by id
+      tags:
+      - genetic-test-result
       operationId: getGeneticTestResultGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GeneticTestResultGradeFlag
+      tags:
+      - genetic-test-result
       operationId: updateGeneticTestResultGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GeneticTestResultGradeFlag
+      tags:
+      - genetic-test-result
       operationId: replaceGeneticTestResultGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GeneticTestResultGradeFlag
+      tags:
+      - genetic-test-result
       operationId: deleteGeneticTestResultGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/genetic-test-result/genetic_test_result_grade_rules:
     get:
       summary: List GeneticTestResultGradeRule records
+      tags:
+      - genetic-test-result
       operationId: listGeneticTestResultGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GeneticTestResultGradeRule
+      tags:
+      - genetic-test-result
       operationId: createGeneticTestResultGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GeneticTestResultGradeRule by id
+      tags:
+      - genetic-test-result
       operationId: getGeneticTestResultGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GeneticTestResultGradeRule
+      tags:
+      - genetic-test-result
       operationId: updateGeneticTestResultGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GeneticTestResultGradeRule
+      tags:
+      - genetic-test-result
       operationId: replaceGeneticTestResultGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GeneticTestResultGradeRule
+      tags:
+      - genetic-test-result
       operationId: deleteGeneticTestResultGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/genetic-test-result/genetic_test_result_grades:
     get:
       summary: List GeneticTestResultGrade records
+      tags:
+      - genetic-test-result
       operationId: listGeneticTestResultGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GeneticTestResultGrade
+      tags:
+      - genetic-test-result
       operationId: createGeneticTestResultGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GeneticTestResultGrade by id
+      tags:
+      - genetic-test-result
       operationId: getGeneticTestResultGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GeneticTestResultGrade
+      tags:
+      - genetic-test-result
       operationId: updateGeneticTestResultGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GeneticTestResultGrade
+      tags:
+      - genetic-test-result
       operationId: replaceGeneticTestResultGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GeneticTestResultGrade
+      tags:
+      - genetic-test-result
       operationId: deleteGeneticTestResultGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/genetic-test-result/genetic_test_results:
     get:
       summary: List GeneticTestResult records
+      tags:
+      - genetic-test-result
       operationId: listGeneticTestResult
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GeneticTestResult
+      tags:
+      - genetic-test-result
       operationId: createGeneticTestResult
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GeneticTestResult by id
+      tags:
+      - genetic-test-result
       operationId: getGeneticTestResult
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GeneticTestResult
+      tags:
+      - genetic-test-result
       operationId: updateGeneticTestResult
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GeneticTestResult
+      tags:
+      - genetic-test-result
       operationId: replaceGeneticTestResult
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GeneticTestResult
+      tags:
+      - genetic-test-result
       operationId: deleteGeneticTestResult
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - genetic-test-result
   /api/genetic-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - genetic-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - genetic-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - genetic-test-result
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - genetic-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - genetic-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - genetic-test-result
       operationId: deletePatient
       responses:
         '200':

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pathology_waiting_list_card_appointment SYSTEM "pathology_waiting_list_card_appointment.dtd">
-<pathology_waiting_list_card_appointment>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<pathology_waiting_list_card_appointment xmlns="https://formexamples.github.io/pathology-waiting-list-card/xml">
+<id>4dd31ac9-707c-5f81-8592-053fa25afd7c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pathology_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</pathology_waiting_list_card_id>
+<pathology_waiting_list_card_id>f34f3c4c-387a-5dd6-8a21-13f07eae51fb</pathology_waiting_list_card_id>
 <appointment_date>2026-01-15</appointment_date>
 <appointment_time></appointment_time>
 <duration_minutes>1</duration_minutes>

@@ -5,10 +5,19 @@ info:
   title: United States Marriage License Application — UnitedStatesMarriageLicenseApplication
   version: 1.0.0
   description: One United States marriage license application, covering the issuing jurisdiction, both applicants, eligibility, the ceremony, and the certified marriage certificate. Documentation support, not legal advice.
+x-namespace:
+  form: united-states-marriage-license-application
+  apiPrefix: /api/united-states-marriage-license-application/
+  sqlSchema: united_states_marriage_license_application
+  xmlNamespace: https://formexamples.github.io/united-states-marriage-license-application/xml
+tags:
+  - name: united-states-marriage-license-application
+    description: United States Marriage License Application form
 paths:
   /api/united-states-marriage-license-application/united_states_marriage_license_applications:
     get:
       summary: List UnitedStatesMarriageLicenseApplication records
+      tags: [united-states-marriage-license-application]
       operationId: listUnitedStatesMarriageLicenseApplication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesMarriageLicenseApplication
+      tags: [united-states-marriage-license-application]
       operationId: createUnitedStatesMarriageLicenseApplication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesMarriageLicenseApplication by id
+      tags: [united-states-marriage-license-application]
       operationId: getUnitedStatesMarriageLicenseApplication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesMarriageLicenseApplication
+      tags: [united-states-marriage-license-application]
       operationId: updateUnitedStatesMarriageLicenseApplication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesMarriageLicenseApplication
+      tags: [united-states-marriage-license-application]
       operationId: replaceUnitedStatesMarriageLicenseApplication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesMarriageLicenseApplication
+      tags: [united-states-marriage-license-application]
       operationId: deleteUnitedStatesMarriageLicenseApplication
       responses:
         "200":

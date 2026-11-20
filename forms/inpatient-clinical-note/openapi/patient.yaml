@@ -5,10 +5,19 @@ info:
   title: Inpatient Clinical Note — Patient
   version: 1.0.0
   description: Patient demographic information used by the inpatient-clinical-note record.
+x-namespace:
+  form: inpatient-clinical-note
+  apiPrefix: /api/inpatient-clinical-note/
+  sqlSchema: inpatient_clinical_note
+  xmlNamespace: https://formexamples.github.io/inpatient-clinical-note/xml
+tags:
+  - name: inpatient-clinical-note
+    description: Inpatient Clinical Note form
 paths:
   /api/inpatient-clinical-note/patients:
     get:
       summary: List Patient records
+      tags: [inpatient-clinical-note]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [inpatient-clinical-note]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [inpatient-clinical-note]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [inpatient-clinical-note]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [inpatient-clinical-note]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [inpatient-clinical-note]
       operationId: deletePatient
       responses:
         "200":

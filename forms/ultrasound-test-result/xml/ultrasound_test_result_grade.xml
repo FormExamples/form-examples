@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ultrasound_test_result_grade SYSTEM "ultrasound_test_result_grade.dtd">
-<ultrasound_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<ultrasound_test_result_grade xmlns="https://formexamples.github.io/ultrasound-test-result/xml">
+<id>21847b89-f17a-5902-a889-2bf33a87a06d</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<ultrasound_test_result_id>770e8400-e29b-41d4-a716-446655440002</ultrasound_test_result_id>
+<ultrasound_test_result_id>4c35b83c-7bf7-55c3-a2cb-925ae149424f</ultrasound_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

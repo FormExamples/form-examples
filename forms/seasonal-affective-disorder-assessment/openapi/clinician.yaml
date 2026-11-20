@@ -5,10 +5,19 @@ info:
   title: Seasonal Affective Disorder Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: seasonal-affective-disorder-assessment
+  apiPrefix: /api/seasonal-affective-disorder-assessment/
+  sqlSchema: seasonal_affective_disorder_assessment
+  xmlNamespace: https://formexamples.github.io/seasonal-affective-disorder-assessment/xml
+tags:
+  - name: seasonal-affective-disorder-assessment
+    description: Seasonal Affective Disorder Assessment form
 paths:
   /api/seasonal-affective-disorder-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [seasonal-affective-disorder-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [seasonal-affective-disorder-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [seasonal-affective-disorder-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [seasonal-affective-disorder-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [seasonal-affective-disorder-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [seasonal-affective-disorder-assessment]
       operationId: deleteClinician
       responses:
         "200":

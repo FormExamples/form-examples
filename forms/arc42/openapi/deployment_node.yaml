@@ -5,10 +5,19 @@ info:
   title: Arc42 — DeploymentNode
   version: 1.0.0
   description: Deployment node captured in §7 Deployment View of the arc42 documentation.
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+  - name: arc42
+    description: Arc42 form
 paths:
   /api/arc42/deployment_nodes:
     get:
       summary: List DeploymentNode records
+      tags: [arc42]
       operationId: listDeploymentNode
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DeploymentNode
+      tags: [arc42]
       operationId: createDeploymentNode
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DeploymentNode by id
+      tags: [arc42]
       operationId: getDeploymentNode
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DeploymentNode
+      tags: [arc42]
       operationId: updateDeploymentNode
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DeploymentNode
+      tags: [arc42]
       operationId: replaceDeploymentNode
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DeploymentNode
+      tags: [arc42]
       operationId: deleteDeploymentNode
       responses:
         "200":

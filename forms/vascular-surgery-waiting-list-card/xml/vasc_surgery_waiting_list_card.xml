@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE vasc_surgery_waiting_list_card SYSTEM "vasc_surgery_waiting_list_card.dtd">
-<vasc_surgery_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<vasc_surgery_waiting_list_card xmlns="https://formexamples.github.io/vascular-surgery-waiting-list-card/xml">
+<id>9288b335-8fd6-5830-ab28-cb2733e31712</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>4c4f3300-80a5-5078-bda8-e6ef916a84a1</patient_id>
+<practitioner_id>d56749a9-0591-5a25-86d9-a89aab2b63b6</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

@@ -5,10 +5,19 @@ info:
   title: Plastic Surgery Waiting List Card — PlasticSurgWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: plastic-surgery-waiting-list-card
+  apiPrefix: /api/plastic-surgery-waiting-list-card/
+  sqlSchema: plastic_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/plastic-surgery-waiting-list-card/xml
+tags:
+  - name: plastic-surgery-waiting-list-card
+    description: Plastic Surgery Waiting List Card form
 paths:
   /api/plastic-surgery-waiting-list-card/plastic_surg_waiting_list_card_grades:
     get:
       summary: List PlasticSurgWaitingListCardGrade records
+      tags: [plastic-surgery-waiting-list-card]
       operationId: listPlasticSurgWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PlasticSurgWaitingListCardGrade
+      tags: [plastic-surgery-waiting-list-card]
       operationId: createPlasticSurgWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PlasticSurgWaitingListCardGrade by id
+      tags: [plastic-surgery-waiting-list-card]
       operationId: getPlasticSurgWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PlasticSurgWaitingListCardGrade
+      tags: [plastic-surgery-waiting-list-card]
       operationId: updatePlasticSurgWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PlasticSurgWaitingListCardGrade
+      tags: [plastic-surgery-waiting-list-card]
       operationId: replacePlasticSurgWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PlasticSurgWaitingListCardGrade
+      tags: [plastic-surgery-waiting-list-card]
       operationId: deletePlasticSurgWaitingListCardGrade
       responses:
         "200":

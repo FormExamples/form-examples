@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<grade xmlns="https://formexamples.github.io/prenatal-assessment/xml">
+<id>ca72b43d-a623-567b-95a3-5c758d72cdca</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>66a4cf8d-9c35-55d8-8b4a-a45d1a0ec614</assessment_id>
 <risk_level>low</risk_level>
 <risk_score>5</risk_score>
 <obstetric_risk>low</obstetric_risk>

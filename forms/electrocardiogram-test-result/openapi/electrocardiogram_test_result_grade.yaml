@@ -5,10 +5,19 @@ info:
   title: Electrocardiogram Test Result — ElectrocardiogramTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. STEMI ST-elevation, ventricular tachycardia, complete heart block, or markedly prolonged QTc) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: electrocardiogram-test-result
+  apiPrefix: /api/electrocardiogram-test-result/
+  sqlSchema: electrocardiogram_test_result
+  xmlNamespace: https://formexamples.github.io/electrocardiogram-test-result/xml
+tags:
+  - name: electrocardiogram-test-result
+    description: Electrocardiogram Test Result form
 paths:
   /api/electrocardiogram-test-result/electrocardiogram_test_result_grades:
     get:
       summary: List ElectrocardiogramTestResultGrade records
+      tags: [electrocardiogram-test-result]
       operationId: listElectrocardiogramTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ElectrocardiogramTestResultGrade
+      tags: [electrocardiogram-test-result]
       operationId: createElectrocardiogramTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ElectrocardiogramTestResultGrade by id
+      tags: [electrocardiogram-test-result]
       operationId: getElectrocardiogramTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ElectrocardiogramTestResultGrade
+      tags: [electrocardiogram-test-result]
       operationId: updateElectrocardiogramTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ElectrocardiogramTestResultGrade
+      tags: [electrocardiogram-test-result]
       operationId: replaceElectrocardiogramTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ElectrocardiogramTestResultGrade
+      tags: [electrocardiogram-test-result]
       operationId: deleteElectrocardiogramTestResultGrade
       responses:
         "200":

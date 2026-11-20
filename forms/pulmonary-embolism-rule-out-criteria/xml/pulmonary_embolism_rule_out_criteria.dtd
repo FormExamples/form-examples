@@ -1,4 +1,5 @@
 <!ELEMENT pulmonary_embolism_rule_out_criteria (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,patient_identifier,assessed_at,care_setting,presenting_complaint,age,heart_rate,oxygen_saturation,pretest_probability,age_under_50,heart_rate_under_100,spo2_at_least_95,no_unilateral_leg_swelling,no_haemoptysis,no_recent_surgery_trauma,no_prior_dvt_pe,no_oestrogen_use,clinical_notes)>
+<!ATTLIST pulmonary_embolism_rule_out_criteria xmlns CDATA #FIXED "https://formexamples.github.io/pulmonary-embolism-rule-out-criteria/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

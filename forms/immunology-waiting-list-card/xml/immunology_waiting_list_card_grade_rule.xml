@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE immunology_waiting_list_card_grade_rule SYSTEM "immunology_waiting_list_card_grade_rule.dtd">
-<immunology_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<immunology_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/immunology-waiting-list-card/xml">
+<id>423ddb96-b715-5363-8cc5-60daa14eeaaf</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<immunology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</immunology_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<immunology_waiting_list_card_grade_id>ae5f865f-b8f8-59db-8044-0e424eda00d5</immunology_waiting_list_card_grade_id>
+<rule_id>3f293f90-58a0-5c45-940c-3b9402b99141</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

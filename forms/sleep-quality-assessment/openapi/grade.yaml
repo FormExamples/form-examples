@@ -5,10 +5,19 @@ info:
   title: Sleep Quality Assessment — Grade
   version: 1.0.0
   description: Computed PSQI sleep quality grading result with 7 component scores. One-to-one child of assessment.
+x-namespace:
+  form: sleep-quality-assessment
+  apiPrefix: /api/sleep-quality-assessment/
+  sqlSchema: sleep_quality_assessment
+  xmlNamespace: https://formexamples.github.io/sleep-quality-assessment/xml
+tags:
+  - name: sleep-quality-assessment
+    description: Sleep Quality Assessment form
 paths:
   /api/sleep-quality-assessment/grades:
     get:
       summary: List Grade records
+      tags: [sleep-quality-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [sleep-quality-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [sleep-quality-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [sleep-quality-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [sleep-quality-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [sleep-quality-assessment]
       operationId: deleteGrade
       responses:
         "200":

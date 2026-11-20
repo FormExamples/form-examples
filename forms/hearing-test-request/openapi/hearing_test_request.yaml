@@ -5,10 +5,19 @@ info:
   title: Hearing Test Request — HearingTestRequest
   version: 1.0.0
   description: Audiology / hearing-assessment request (referral). Captures the requested test, laterality, the clinical indication and question, relevant history, symptoms / red flags, and triage urgency.
+x-namespace:
+  form: hearing-test-request
+  apiPrefix: /api/hearing-test-request/
+  sqlSchema: hearing_test_request
+  xmlNamespace: https://formexamples.github.io/hearing-test-request/xml
+tags:
+  - name: hearing-test-request
+    description: Hearing Test Request form
 paths:
   /api/hearing-test-request/hearing_test_requests:
     get:
       summary: List HearingTestRequest records
+      tags: [hearing-test-request]
       operationId: listHearingTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HearingTestRequest
+      tags: [hearing-test-request]
       operationId: createHearingTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HearingTestRequest by id
+      tags: [hearing-test-request]
       operationId: getHearingTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HearingTestRequest
+      tags: [hearing-test-request]
       operationId: updateHearingTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HearingTestRequest
+      tags: [hearing-test-request]
       operationId: replaceHearingTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HearingTestRequest
+      tags: [hearing-test-request]
       operationId: deleteHearingTestRequest
       responses:
         "200":

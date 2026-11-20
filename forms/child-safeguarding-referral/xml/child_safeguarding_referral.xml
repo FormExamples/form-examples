@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE child_safeguarding_referral SYSTEM "child_safeguarding_referral.dtd">
-<child_safeguarding_referral>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<child_safeguarding_referral xmlns="https://formexamples.github.io/child-safeguarding-referral/xml">
+<id>0ff2d44b-3ad4-5d53-b096-aa65ea920ffe</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>b13b5789-e482-56c5-968c-5a68e5efbaa8</patient_id>
+<clinician_id>5c312fa5-f3ca-564d-8484-0380d4f2bf1a</clinician_id>
 <referrer_organisation></referrer_organisation>
 <referred_at>2026-04-09T10:00:00Z</referred_at>
 <relationship_to_child>Spouse</relationship_to_child>

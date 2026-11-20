@@ -1,4 +1,5 @@
 <!ELEMENT inpatient_clinical_note_grade_flag (id,created_at,updated_at,deleted_at,inpatient_clinical_note_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST inpatient_clinical_note_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/inpatient-clinical-note/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

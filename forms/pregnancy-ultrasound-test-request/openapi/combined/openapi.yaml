@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Pregnancy Ultrasound Test Request form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: pregnancy-ultrasound-test-request
+  apiPrefix: /api/pregnancy-ultrasound-test-request/
+  sqlSchema: pregnancy_ultrasound_test_request
+  xmlNamespace: https://formexamples.github.io/pregnancy-ultrasound-test-request/xml
+tags:
+- name: pregnancy-ultrasound-test-request
+  description: Pregnancy Ultrasound Test Request form
 paths:
   /api/pregnancy-ultrasound-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - pregnancy-ultrasound-test-request
   /api/pregnancy-ultrasound-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/pregnancy-ultrasound-test-request/pregnancy_ultrasound_test_request_grade_flags:
     get:
       summary: List PregnancyUltrasoundTestRequestGradeFlag records
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: listPregnancyUltrasoundTestRequestGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PregnancyUltrasoundTestRequestGradeFlag
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: createPregnancyUltrasoundTestRequestGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PregnancyUltrasoundTestRequestGradeFlag by id
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: getPregnancyUltrasoundTestRequestGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PregnancyUltrasoundTestRequestGradeFlag
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: updatePregnancyUltrasoundTestRequestGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PregnancyUltrasoundTestRequestGradeFlag
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: replacePregnancyUltrasoundTestRequestGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PregnancyUltrasoundTestRequestGradeFlag
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: deletePregnancyUltrasoundTestRequestGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/pregnancy-ultrasound-test-request/pregnancy_ultrasound_test_request_grade_rules:
     get:
       summary: List PregnancyUltrasoundTestRequestGradeRule records
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: listPregnancyUltrasoundTestRequestGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PregnancyUltrasoundTestRequestGradeRule
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: createPregnancyUltrasoundTestRequestGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PregnancyUltrasoundTestRequestGradeRule by id
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: getPregnancyUltrasoundTestRequestGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PregnancyUltrasoundTestRequestGradeRule
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: updatePregnancyUltrasoundTestRequestGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PregnancyUltrasoundTestRequestGradeRule
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: replacePregnancyUltrasoundTestRequestGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PregnancyUltrasoundTestRequestGradeRule
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: deletePregnancyUltrasoundTestRequestGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/pregnancy-ultrasound-test-request/pregnancy_ultrasound_test_request_grades:
     get:
       summary: List PregnancyUltrasoundTestRequestGrade records
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: listPregnancyUltrasoundTestRequestGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PregnancyUltrasoundTestRequestGrade
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: createPregnancyUltrasoundTestRequestGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PregnancyUltrasoundTestRequestGrade by id
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: getPregnancyUltrasoundTestRequestGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PregnancyUltrasoundTestRequestGrade
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: updatePregnancyUltrasoundTestRequestGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PregnancyUltrasoundTestRequestGrade
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: replacePregnancyUltrasoundTestRequestGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PregnancyUltrasoundTestRequestGrade
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: deletePregnancyUltrasoundTestRequestGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/pregnancy-ultrasound-test-request/pregnancy_ultrasound_test_requests:
     get:
       summary: List PregnancyUltrasoundTestRequest records
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: listPregnancyUltrasoundTestRequest
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PregnancyUltrasoundTestRequest
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: createPregnancyUltrasoundTestRequest
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PregnancyUltrasoundTestRequest by id
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: getPregnancyUltrasoundTestRequest
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PregnancyUltrasoundTestRequest
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: updatePregnancyUltrasoundTestRequest
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PregnancyUltrasoundTestRequest
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: replacePregnancyUltrasoundTestRequest
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PregnancyUltrasoundTestRequest
+      tags:
+      - pregnancy-ultrasound-test-request
       operationId: deletePregnancyUltrasoundTestRequest
       responses:
         '200':

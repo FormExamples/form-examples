@@ -5,10 +5,19 @@ info:
   title: Fluoroscopy Test Request — FluoroscopyTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ACR / RCR iRefer 1-9), safety (safety band + radiation-dose band), request completeness, and triage priority."
+x-namespace:
+  form: fluoroscopy-test-request
+  apiPrefix: /api/fluoroscopy-test-request/
+  sqlSchema: fluoroscopy_test_request
+  xmlNamespace: https://formexamples.github.io/fluoroscopy-test-request/xml
+tags:
+  - name: fluoroscopy-test-request
+    description: Fluoroscopy Test Request form
 paths:
   /api/fluoroscopy-test-request/fluoroscopy_test_request_grades:
     get:
       summary: List FluoroscopyTestRequestGrade records
+      tags: [fluoroscopy-test-request]
       operationId: listFluoroscopyTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new FluoroscopyTestRequestGrade
+      tags: [fluoroscopy-test-request]
       operationId: createFluoroscopyTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one FluoroscopyTestRequestGrade by id
+      tags: [fluoroscopy-test-request]
       operationId: getFluoroscopyTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing FluoroscopyTestRequestGrade
+      tags: [fluoroscopy-test-request]
       operationId: updateFluoroscopyTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing FluoroscopyTestRequestGrade
+      tags: [fluoroscopy-test-request]
       operationId: replaceFluoroscopyTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a FluoroscopyTestRequestGrade
+      tags: [fluoroscopy-test-request]
       operationId: deleteFluoroscopyTestRequestGrade
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Waterlow Pressure Ulcer Risk Assessment — WaterlowPressureUlcerRiskAssessmentGradeFlag
   version: 1.0.0
   description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.
+x-namespace:
+  form: waterlow-pressure-ulcer-risk-assessment
+  apiPrefix: /api/waterlow-pressure-ulcer-risk-assessment/
+  sqlSchema: waterlow_pressure_ulcer_risk_assessment
+  xmlNamespace: https://formexamples.github.io/waterlow-pressure-ulcer-risk-assessment/xml
+tags:
+  - name: waterlow-pressure-ulcer-risk-assessment
+    description: Waterlow Pressure Ulcer Risk Assessment form
 paths:
   /api/waterlow-pressure-ulcer-risk-assessment/waterlow_pressure_ulcer_risk_assessment_grade_flags:
     get:
       summary: List WaterlowPressureUlcerRiskAssessmentGradeFlag records
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: listWaterlowPressureUlcerRiskAssessmentGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new WaterlowPressureUlcerRiskAssessmentGradeFlag
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: createWaterlowPressureUlcerRiskAssessmentGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one WaterlowPressureUlcerRiskAssessmentGradeFlag by id
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: getWaterlowPressureUlcerRiskAssessmentGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing WaterlowPressureUlcerRiskAssessmentGradeFlag
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: updateWaterlowPressureUlcerRiskAssessmentGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing WaterlowPressureUlcerRiskAssessmentGradeFlag
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: replaceWaterlowPressureUlcerRiskAssessmentGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a WaterlowPressureUlcerRiskAssessmentGradeFlag
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: deleteWaterlowPressureUlcerRiskAssessmentGradeFlag
       responses:
         "200":

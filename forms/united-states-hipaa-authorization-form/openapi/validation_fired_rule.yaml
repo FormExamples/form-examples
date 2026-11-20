@@ -5,10 +5,19 @@ info:
   title: United States Hipaa Authorization Form — ValidationFiredRule
   version: 1.0.0
   description: Validation rules that fired during the HIPAA-authorization check. Many-to-one child of validation_result.
+x-namespace:
+  form: united-states-hipaa-authorization-form
+  apiPrefix: /api/united-states-hipaa-authorization-form/
+  sqlSchema: united_states_hipaa_authorization_form
+  xmlNamespace: https://formexamples.github.io/united-states-hipaa-authorization-form/xml
+tags:
+  - name: united-states-hipaa-authorization-form
+    description: United States Hipaa Authorization Form form
 paths:
   /api/united-states-hipaa-authorization-form/validation_fired_rules:
     get:
       summary: List ValidationFiredRule records
+      tags: [united-states-hipaa-authorization-form]
       operationId: listValidationFiredRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ValidationFiredRule
+      tags: [united-states-hipaa-authorization-form]
       operationId: createValidationFiredRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ValidationFiredRule by id
+      tags: [united-states-hipaa-authorization-form]
       operationId: getValidationFiredRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ValidationFiredRule
+      tags: [united-states-hipaa-authorization-form]
       operationId: updateValidationFiredRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ValidationFiredRule
+      tags: [united-states-hipaa-authorization-form]
       operationId: replaceValidationFiredRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ValidationFiredRule
+      tags: [united-states-hipaa-authorization-form]
       operationId: deleteValidationFiredRule
       responses:
         "200":

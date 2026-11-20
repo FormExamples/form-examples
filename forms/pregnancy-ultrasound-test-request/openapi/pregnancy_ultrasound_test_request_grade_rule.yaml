@@ -5,10 +5,19 @@ info:
   title: Pregnancy Ultrasound Test Request — PregnancyUltrasoundTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / window / completeness / triage rule that fired for this request.
+x-namespace:
+  form: pregnancy-ultrasound-test-request
+  apiPrefix: /api/pregnancy-ultrasound-test-request/
+  sqlSchema: pregnancy_ultrasound_test_request
+  xmlNamespace: https://formexamples.github.io/pregnancy-ultrasound-test-request/xml
+tags:
+  - name: pregnancy-ultrasound-test-request
+    description: Pregnancy Ultrasound Test Request form
 paths:
   /api/pregnancy-ultrasound-test-request/pregnancy_ultrasound_test_request_grade_rules:
     get:
       summary: List PregnancyUltrasoundTestRequestGradeRule records
+      tags: [pregnancy-ultrasound-test-request]
       operationId: listPregnancyUltrasoundTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PregnancyUltrasoundTestRequestGradeRule
+      tags: [pregnancy-ultrasound-test-request]
       operationId: createPregnancyUltrasoundTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PregnancyUltrasoundTestRequestGradeRule by id
+      tags: [pregnancy-ultrasound-test-request]
       operationId: getPregnancyUltrasoundTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PregnancyUltrasoundTestRequestGradeRule
+      tags: [pregnancy-ultrasound-test-request]
       operationId: updatePregnancyUltrasoundTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PregnancyUltrasoundTestRequestGradeRule
+      tags: [pregnancy-ultrasound-test-request]
       operationId: replacePregnancyUltrasoundTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PregnancyUltrasoundTestRequestGradeRule
+      tags: [pregnancy-ultrasound-test-request]
       operationId: deletePregnancyUltrasoundTestRequestGradeRule
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Learning Disability Annual Health Check — LearningDisabilityAnnualHealthCheckGradeRule
   version: 1.0.0
   description: "Audit trail of every completeness rule that fired during grading: required component, whether it was completed, category, and description."
+x-namespace:
+  form: learning-disability-annual-health-check
+  apiPrefix: /api/learning-disability-annual-health-check/
+  sqlSchema: learning_disability_annual_health_check
+  xmlNamespace: https://formexamples.github.io/learning-disability-annual-health-check/xml
+tags:
+  - name: learning-disability-annual-health-check
+    description: Learning Disability Annual Health Check form
 paths:
   /api/learning-disability-annual-health-check/learning_disability_annual_health_check_grade_rules:
     get:
       summary: List LearningDisabilityAnnualHealthCheckGradeRule records
+      tags: [learning-disability-annual-health-check]
       operationId: listLearningDisabilityAnnualHealthCheckGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LearningDisabilityAnnualHealthCheckGradeRule
+      tags: [learning-disability-annual-health-check]
       operationId: createLearningDisabilityAnnualHealthCheckGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LearningDisabilityAnnualHealthCheckGradeRule by id
+      tags: [learning-disability-annual-health-check]
       operationId: getLearningDisabilityAnnualHealthCheckGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LearningDisabilityAnnualHealthCheckGradeRule
+      tags: [learning-disability-annual-health-check]
       operationId: updateLearningDisabilityAnnualHealthCheckGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LearningDisabilityAnnualHealthCheckGradeRule
+      tags: [learning-disability-annual-health-check]
       operationId: replaceLearningDisabilityAnnualHealthCheckGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LearningDisabilityAnnualHealthCheckGradeRule
+      tags: [learning-disability-annual-health-check]
       operationId: deleteLearningDisabilityAnnualHealthCheckGradeRule
       responses:
         "200":

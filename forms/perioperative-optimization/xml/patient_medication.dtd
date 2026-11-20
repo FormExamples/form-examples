@@ -1,4 +1,5 @@
 <!ELEMENT patient_medication (id,created_at,updated_at,deleted_at,patient_id,medication_id,dose,frequency,route,indication,started_on,prescribed_by,adherence,hold_required,hold_start_before_days,restart_after_days,hold_plan_agreed,hold_plan_agreed_by,hold_plan_agreed_on,notes)>
+<!ATTLIST patient_medication xmlns CDATA #FIXED "https://formexamples.github.io/perioperative-optimization/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

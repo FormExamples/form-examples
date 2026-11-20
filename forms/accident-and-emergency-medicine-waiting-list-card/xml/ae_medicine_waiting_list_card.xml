@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ae_medicine_waiting_list_card SYSTEM "ae_medicine_waiting_list_card.dtd">
-<ae_medicine_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<ae_medicine_waiting_list_card xmlns="https://formexamples.github.io/accident-and-emergency-medicine-waiting-list-card/xml">
+<id>417f104b-4e1f-5e20-958d-8cd6d0c8e1f3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>ad2b9a2f-06e0-520f-850f-071301f9daae</patient_id>
+<practitioner_id>5fb41af7-bdc2-5b53-bb74-10e7c349ca70</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

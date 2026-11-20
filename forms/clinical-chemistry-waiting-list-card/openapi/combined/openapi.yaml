@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Clinical Chemistry Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: clinical-chemistry-waiting-list-card
+  apiPrefix: /api/clinical-chemistry-waiting-list-card/
+  sqlSchema: clinical_chemistry_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/clinical-chemistry-waiting-list-card/xml
+tags:
+- name: clinical-chemistry-waiting-list-card
+  description: Clinical Chemistry Waiting List Card form
 paths:
   /api/clinical-chemistry-waiting-list-card/clin_chem_waiting_list_card_appointments:
     get:
       summary: List ClinChemWaitingListCardAppointment records
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: listClinChemWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinChemWaitingListCardAppointment
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: createClinChemWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinChemWaitingListCardAppointment by id
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: getClinChemWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinChemWaitingListCardAppointment
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: updateClinChemWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinChemWaitingListCardAppointment
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: replaceClinChemWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinChemWaitingListCardAppointment
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: deleteClinChemWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/clinical-chemistry-waiting-list-card/clin_chem_waiting_list_card_grade_flags:
     get:
       summary: List ClinChemWaitingListCardGradeFlag records
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: listClinChemWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinChemWaitingListCardGradeFlag
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: createClinChemWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinChemWaitingListCardGradeFlag by id
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: getClinChemWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinChemWaitingListCardGradeFlag
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: updateClinChemWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinChemWaitingListCardGradeFlag
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: replaceClinChemWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinChemWaitingListCardGradeFlag
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: deleteClinChemWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/clinical-chemistry-waiting-list-card/clin_chem_waiting_list_card_grade_rules:
     get:
       summary: List ClinChemWaitingListCardGradeRule records
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: listClinChemWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinChemWaitingListCardGradeRule
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: createClinChemWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinChemWaitingListCardGradeRule by id
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: getClinChemWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinChemWaitingListCardGradeRule
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: updateClinChemWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinChemWaitingListCardGradeRule
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: replaceClinChemWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinChemWaitingListCardGradeRule
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: deleteClinChemWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/clinical-chemistry-waiting-list-card/clin_chem_waiting_list_card_grades:
     get:
       summary: List ClinChemWaitingListCardGrade records
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: listClinChemWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinChemWaitingListCardGrade
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: createClinChemWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinChemWaitingListCardGrade by id
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: getClinChemWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinChemWaitingListCardGrade
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: updateClinChemWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinChemWaitingListCardGrade
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: replaceClinChemWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinChemWaitingListCardGrade
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: deleteClinChemWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/clinical-chemistry-waiting-list-card/clin_chem_waiting_list_cards:
     get:
       summary: List ClinChemWaitingListCard records
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: listClinChemWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinChemWaitingListCard
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: createClinChemWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinChemWaitingListCard by id
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: getClinChemWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinChemWaitingListCard
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: updateClinChemWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinChemWaitingListCard
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: replaceClinChemWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinChemWaitingListCard
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: deleteClinChemWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - clinical-chemistry-waiting-list-card
   /api/clinical-chemistry-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/clinical-chemistry-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - clinical-chemistry-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

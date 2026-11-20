@@ -5,10 +5,19 @@ info:
   title: Cardiology Request — CardiologyRequest
   version: 1.0.0
   description: Cardiology referral / consult request (referral into cardiology). Captures the requested cardiology service and reason, the specific clinical question, presenting symptoms and functional class, acute red flags, investigations already performed (ECG, troponin, BNP), cardiac history and risk factors, and triage details. This is the source-of-truth record that the four-axis vetting grade is computed from.
+x-namespace:
+  form: cardiology-request
+  apiPrefix: /api/cardiology-request/
+  sqlSchema: cardiology_request
+  xmlNamespace: https://formexamples.github.io/cardiology-request/xml
+tags:
+  - name: cardiology-request
+    description: Cardiology Request form
 paths:
   /api/cardiology-request/cardiology_requests:
     get:
       summary: List CardiologyRequest records
+      tags: [cardiology-request]
       operationId: listCardiologyRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiologyRequest
+      tags: [cardiology-request]
       operationId: createCardiologyRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiologyRequest by id
+      tags: [cardiology-request]
       operationId: getCardiologyRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiologyRequest
+      tags: [cardiology-request]
       operationId: updateCardiologyRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiologyRequest
+      tags: [cardiology-request]
       operationId: replaceCardiologyRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiologyRequest
+      tags: [cardiology-request]
       operationId: deleteCardiologyRequest
       responses:
         "200":

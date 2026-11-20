@@ -1,4 +1,5 @@
 <!ELEMENT architecture_decision_record (id,created_at,updated_at,deleted_at,author_id,organization_id,slug,number,title,decision_date,status,decision_group,issue,decision,assumptions,constraints,argument,implications,related_decisions,related_requirements,related_artifacts,related_principles,signed_off_by,signed_off_at)>
+<!ATTLIST architecture_decision_record xmlns CDATA #FIXED "https://formexamples.github.io/architecture-decision-record/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Ottawa Knee Rule form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: ottawa-knee-rule
+  apiPrefix: /api/ottawa-knee-rule/
+  sqlSchema: ottawa_knee_rule
+  xmlNamespace: https://formexamples.github.io/ottawa-knee-rule/xml
+tags:
+- name: ottawa-knee-rule
+  description: Ottawa Knee Rule form
 paths:
   /api/ottawa-knee-rule/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - ottawa-knee-rule
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - ottawa-knee-rule
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - ottawa-knee-rule
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - ottawa-knee-rule
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - ottawa-knee-rule
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - ottawa-knee-rule
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - ottawa-knee-rule
   /api/ottawa-knee-rule/ottawa_knee_rule_grade_flags:
     get:
       summary: List OttawaKneeRuleGradeFlag records
+      tags:
+      - ottawa-knee-rule
       operationId: listOttawaKneeRuleGradeFlag
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OttawaKneeRuleGradeFlag
+      tags:
+      - ottawa-knee-rule
       operationId: createOttawaKneeRuleGradeFlag
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OttawaKneeRuleGradeFlag by id
+      tags:
+      - ottawa-knee-rule
       operationId: getOttawaKneeRuleGradeFlag
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OttawaKneeRuleGradeFlag
+      tags:
+      - ottawa-knee-rule
       operationId: updateOttawaKneeRuleGradeFlag
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OttawaKneeRuleGradeFlag
+      tags:
+      - ottawa-knee-rule
       operationId: replaceOttawaKneeRuleGradeFlag
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OttawaKneeRuleGradeFlag
+      tags:
+      - ottawa-knee-rule
       operationId: deleteOttawaKneeRuleGradeFlag
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/ottawa-knee-rule/ottawa_knee_rule_grade_rules:
     get:
       summary: List OttawaKneeRuleGradeRule records
+      tags:
+      - ottawa-knee-rule
       operationId: listOttawaKneeRuleGradeRule
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OttawaKneeRuleGradeRule
+      tags:
+      - ottawa-knee-rule
       operationId: createOttawaKneeRuleGradeRule
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OttawaKneeRuleGradeRule by id
+      tags:
+      - ottawa-knee-rule
       operationId: getOttawaKneeRuleGradeRule
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OttawaKneeRuleGradeRule
+      tags:
+      - ottawa-knee-rule
       operationId: updateOttawaKneeRuleGradeRule
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OttawaKneeRuleGradeRule
+      tags:
+      - ottawa-knee-rule
       operationId: replaceOttawaKneeRuleGradeRule
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OttawaKneeRuleGradeRule
+      tags:
+      - ottawa-knee-rule
       operationId: deleteOttawaKneeRuleGradeRule
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/ottawa-knee-rule/ottawa_knee_rule_grades:
     get:
       summary: List OttawaKneeRuleGrade records
+      tags:
+      - ottawa-knee-rule
       operationId: listOttawaKneeRuleGrade
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OttawaKneeRuleGrade
+      tags:
+      - ottawa-knee-rule
       operationId: createOttawaKneeRuleGrade
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OttawaKneeRuleGrade by id
+      tags:
+      - ottawa-knee-rule
       operationId: getOttawaKneeRuleGrade
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OttawaKneeRuleGrade
+      tags:
+      - ottawa-knee-rule
       operationId: updateOttawaKneeRuleGrade
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OttawaKneeRuleGrade
+      tags:
+      - ottawa-knee-rule
       operationId: replaceOttawaKneeRuleGrade
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OttawaKneeRuleGrade
+      tags:
+      - ottawa-knee-rule
       operationId: deleteOttawaKneeRuleGrade
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/ottawa-knee-rule/ottawa_knee_rules:
     get:
       summary: List OttawaKneeRule records
+      tags:
+      - ottawa-knee-rule
       operationId: listOttawaKneeRule
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OttawaKneeRule
+      tags:
+      - ottawa-knee-rule
       operationId: createOttawaKneeRule
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OttawaKneeRule by id
+      tags:
+      - ottawa-knee-rule
       operationId: getOttawaKneeRule
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OttawaKneeRule
+      tags:
+      - ottawa-knee-rule
       operationId: updateOttawaKneeRule
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OttawaKneeRule
+      tags:
+      - ottawa-knee-rule
       operationId: replaceOttawaKneeRule
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OttawaKneeRule
+      tags:
+      - ottawa-knee-rule
       operationId: deleteOttawaKneeRule
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/ottawa-knee-rule/patients:
     get:
       summary: List Patient records
+      tags:
+      - ottawa-knee-rule
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - ottawa-knee-rule
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - ottawa-knee-rule
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - ottawa-knee-rule
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - ottawa-knee-rule
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - ottawa-knee-rule
       operationId: deletePatient
       responses:
         '200':

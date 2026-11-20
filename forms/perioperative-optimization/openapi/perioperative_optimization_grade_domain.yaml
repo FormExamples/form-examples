@@ -5,10 +5,19 @@ info:
   title: Perioperative Optimization — PerioperativeOptimizationGradeDomain
   version: 1.0.0
   description: Per-domain optimization result, one row per optimization domain per assessment. The domain statuses are this form primary output rather than an audit trail beneath a single score.
+x-namespace:
+  form: perioperative-optimization
+  apiPrefix: /api/perioperative-optimization/
+  sqlSchema: perioperative_optimization
+  xmlNamespace: https://formexamples.github.io/perioperative-optimization/xml
+tags:
+  - name: perioperative-optimization
+    description: Perioperative Optimization form
 paths:
   /api/perioperative-optimization/perioperative_optimization_grade_domains:
     get:
       summary: List PerioperativeOptimizationGradeDomain records
+      tags: [perioperative-optimization]
       operationId: listPerioperativeOptimizationGradeDomain
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PerioperativeOptimizationGradeDomain
+      tags: [perioperative-optimization]
       operationId: createPerioperativeOptimizationGradeDomain
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PerioperativeOptimizationGradeDomain by id
+      tags: [perioperative-optimization]
       operationId: getPerioperativeOptimizationGradeDomain
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PerioperativeOptimizationGradeDomain
+      tags: [perioperative-optimization]
       operationId: updatePerioperativeOptimizationGradeDomain
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PerioperativeOptimizationGradeDomain
+      tags: [perioperative-optimization]
       operationId: replacePerioperativeOptimizationGradeDomain
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PerioperativeOptimizationGradeDomain
+      tags: [perioperative-optimization]
       operationId: deletePerioperativeOptimizationGradeDomain
       responses:
         "200":

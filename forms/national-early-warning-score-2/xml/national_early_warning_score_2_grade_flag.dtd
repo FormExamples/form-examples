@@ -1,4 +1,5 @@
 <!ELEMENT national_early_warning_score_2_grade_flag (id,created_at,updated_at,deleted_at,national_early_warning_score_2_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST national_early_warning_score_2_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/national-early-warning-score-2/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

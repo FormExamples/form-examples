@@ -5,10 +5,19 @@ info:
   title: Lumbar Puncture Test Result — LumbarPunctureTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: lumbar-puncture-test-result
+  apiPrefix: /api/lumbar-puncture-test-result/
+  sqlSchema: lumbar_puncture_test_result
+  xmlNamespace: https://formexamples.github.io/lumbar-puncture-test-result/xml
+tags:
+  - name: lumbar-puncture-test-result
+    description: Lumbar Puncture Test Result form
 paths:
   /api/lumbar-puncture-test-result/lumbar_puncture_test_result_grade_rules:
     get:
       summary: List LumbarPunctureTestResultGradeRule records
+      tags: [lumbar-puncture-test-result]
       operationId: listLumbarPunctureTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LumbarPunctureTestResultGradeRule
+      tags: [lumbar-puncture-test-result]
       operationId: createLumbarPunctureTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LumbarPunctureTestResultGradeRule by id
+      tags: [lumbar-puncture-test-result]
       operationId: getLumbarPunctureTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LumbarPunctureTestResultGradeRule
+      tags: [lumbar-puncture-test-result]
       operationId: updateLumbarPunctureTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LumbarPunctureTestResultGradeRule
+      tags: [lumbar-puncture-test-result]
       operationId: replaceLumbarPunctureTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LumbarPunctureTestResultGradeRule
+      tags: [lumbar-puncture-test-result]
       operationId: deleteLumbarPunctureTestResultGradeRule
       responses:
         "200":

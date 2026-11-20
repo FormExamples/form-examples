@@ -5,10 +5,19 @@ info:
   title: Ward Round Note — Patient
   version: 1.0.0
   description: Patient demographic information used by the ward-round-note record.
+x-namespace:
+  form: ward-round-note
+  apiPrefix: /api/ward-round-note/
+  sqlSchema: ward_round_note
+  xmlNamespace: https://formexamples.github.io/ward-round-note/xml
+tags:
+  - name: ward-round-note
+    description: Ward Round Note form
 paths:
   /api/ward-round-note/patients:
     get:
       summary: List Patient records
+      tags: [ward-round-note]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [ward-round-note]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [ward-round-note]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [ward-round-note]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [ward-round-note]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [ward-round-note]
       operationId: deletePatient
       responses:
         "200":

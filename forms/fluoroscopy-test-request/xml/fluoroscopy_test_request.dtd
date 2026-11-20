@@ -1,4 +1,5 @@
 <!ELEMENT fluoroscopy_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,study_type,primary_indication,clinical_question,relevant_history,pregnancy_status,contrast_allergy,aspiration_risk,diabetes,urgency,ir_me_r_justification,supervising_consultant,requester_contact,notes)>
+<!ATTLIST fluoroscopy_test_request xmlns CDATA #FIXED "https://formexamples.github.io/fluoroscopy-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

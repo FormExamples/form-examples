@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE thoracic_surg_waiting_list_card_grade SYSTEM "thoracic_surg_waiting_list_card_grade.dtd">
-<thoracic_surg_waiting_list_card_grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<thoracic_surg_waiting_list_card_grade xmlns="https://formexamples.github.io/thoracic-surgery-waiting-list-card/xml">
+<id>d207e273-7ade-50bc-9947-6d5301e11f14</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<thoracic_surg_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</thoracic_surg_waiting_list_card_id>
+<thoracic_surg_waiting_list_card_id>8afd532f-dd03-5f92-8fa8-cf0539d2853d</thoracic_surg_waiting_list_card_id>
 <waiting_time_status>within-target</waiting_time_status>
 <clinical_priority>P1a</clinical_priority>
 <target_wait_weeks>0.0</target_wait_weeks>

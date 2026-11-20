@@ -5,10 +5,19 @@ info:
   title: Cytology Test Result — CytologyTestResult
   version: 1.0.0
   description: Cytology test result (report). Captures the examined specimen and its adequacy, the clinical history, the cytology result category and HPV status, the microscopic description and diagnosis, the impression and structured-reporting category, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: cytology-test-result
+  apiPrefix: /api/cytology-test-result/
+  sqlSchema: cytology_test_result
+  xmlNamespace: https://formexamples.github.io/cytology-test-result/xml
+tags:
+  - name: cytology-test-result
+    description: Cytology Test Result form
 paths:
   /api/cytology-test-result/cytology_test_results:
     get:
       summary: List CytologyTestResult records
+      tags: [cytology-test-result]
       operationId: listCytologyTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CytologyTestResult
+      tags: [cytology-test-result]
       operationId: createCytologyTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CytologyTestResult by id
+      tags: [cytology-test-result]
       operationId: getCytologyTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CytologyTestResult
+      tags: [cytology-test-result]
       operationId: updateCytologyTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CytologyTestResult
+      tags: [cytology-test-result]
       operationId: replaceCytologyTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CytologyTestResult
+      tags: [cytology-test-result]
       operationId: deleteCytologyTestResult
       responses:
         "200":

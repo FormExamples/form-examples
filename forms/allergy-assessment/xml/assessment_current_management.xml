@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment_current_management SYSTEM "assessment_current_management.dtd">
-<assessment_current_management>
-<id>110e8400-e29b-41d4-a716-44665544000b</id>
+<assessment_current_management xmlns="https://formexamples.github.io/allergy-assessment/xml">
+<id>d2e22608-c3f9-54bb-90c9-788ad6b8a6d2</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>5fd99768-6a1f-5300-bf95-106f0fb5a2eb</assessment_id>
 <antihistamines>yes</antihistamines>
 <antihistamine_details>Example text.</antihistamine_details>
 <nasal_steroids>yes</nasal_steroids>

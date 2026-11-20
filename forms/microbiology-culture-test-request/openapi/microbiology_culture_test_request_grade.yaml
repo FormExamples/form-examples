@@ -5,10 +5,19 @@ info:
   title: Microbiology Culture Test Request — MicrobiologyCultureTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (1-9 anchored on UKHSA SMI specimen / indication match), pre-analytical / specimen safety, request completeness, and triage priority."
+x-namespace:
+  form: microbiology-culture-test-request
+  apiPrefix: /api/microbiology-culture-test-request/
+  sqlSchema: microbiology_culture_test_request
+  xmlNamespace: https://formexamples.github.io/microbiology-culture-test-request/xml
+tags:
+  - name: microbiology-culture-test-request
+    description: Microbiology Culture Test Request form
 paths:
   /api/microbiology-culture-test-request/microbiology_culture_test_request_grades:
     get:
       summary: List MicrobiologyCultureTestRequestGrade records
+      tags: [microbiology-culture-test-request]
       operationId: listMicrobiologyCultureTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MicrobiologyCultureTestRequestGrade
+      tags: [microbiology-culture-test-request]
       operationId: createMicrobiologyCultureTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MicrobiologyCultureTestRequestGrade by id
+      tags: [microbiology-culture-test-request]
       operationId: getMicrobiologyCultureTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MicrobiologyCultureTestRequestGrade
+      tags: [microbiology-culture-test-request]
       operationId: updateMicrobiologyCultureTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MicrobiologyCultureTestRequestGrade
+      tags: [microbiology-culture-test-request]
       operationId: replaceMicrobiologyCultureTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MicrobiologyCultureTestRequestGrade
+      tags: [microbiology-culture-test-request]
       operationId: deleteMicrobiologyCultureTestRequestGrade
       responses:
         "200":

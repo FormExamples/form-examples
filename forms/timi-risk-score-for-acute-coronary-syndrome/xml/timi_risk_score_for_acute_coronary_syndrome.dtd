@@ -1,4 +1,5 @@
 <!ELEMENT timi_risk_score_for_acute_coronary_syndrome (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,working_diagnosis,patient_identifier,sex,age_over_65,three_or_more_cad_risk_factors,known_cad_stenosis,aspirin_use_prior_7_days,two_or_more_angina_episodes_24h,st_deviation,positive_cardiac_marker,clinical_note)>
+<!ATTLIST timi_risk_score_for_acute_coronary_syndrome xmlns CDATA #FIXED "https://formexamples.github.io/timi-risk-score-for-acute-coronary-syndrome/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Pre-operative Assessment by Clinician form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: pre-operative-assessment-by-clinician
+  apiPrefix: /api/pre-operative-assessment-by-clinician/
+  sqlSchema: pre_operative_assessment_by_clinician
+  xmlNamespace: https://formexamples.github.io/pre-operative-assessment-by-clinician/xml
+tags:
+- name: pre-operative-assessment-by-clinician
+  description: Pre-operative Assessment by Clinician form
 paths:
   /api/pre-operative-assessment-by-clinician/allergies:
     get:
       summary: List Allergy records
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: listAllergy
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Allergy
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: createAllergy
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Allergy by id
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: getAllergy
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Allergy
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: updateAllergy
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Allergy
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: replaceAllergy
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Allergy
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: deleteAllergy
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/pre-operative-assessment-by-clinician/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: listClinician
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: createClinician
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: getClinician
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: updateClinician
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: replaceClinician
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: deleteClinician
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/pre-operative-assessment-by-clinician/medications:
     get:
       summary: List Medication records
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: listMedication
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Medication
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: createMedication
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Medication by id
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: getMedication
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Medication
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: updateMedication
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Medication
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: replaceMedication
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Medication
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: deleteMedication
       responses:
         '200':
@@ -757,9 +801,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - pre-operative-assessment-by-clinician
   /api/pre-operative-assessment-by-clinician/patient_allergies:
     get:
       summary: List PatientAllergy records
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: listPatientAllergy
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PatientAllergy
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: createPatientAllergy
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PatientAllergy by id
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: getPatientAllergy
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PatientAllergy
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: updatePatientAllergy
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PatientAllergy
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: replacePatientAllergy
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PatientAllergy
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: deletePatientAllergy
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/pre-operative-assessment-by-clinician/patient_medications:
     get:
       summary: List PatientMedication records
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: listPatientMedication
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PatientMedication
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: createPatientMedication
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PatientMedication by id
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: getPatientMedication
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PatientMedication
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: updatePatientMedication
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PatientMedication
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: replacePatientMedication
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PatientMedication
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: deletePatientMedication
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/pre-operative-assessment-by-clinician/patients:
     get:
       summary: List Patient records
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinician_grade_flags:
     get:
       summary: List PreOperativeAssessmentByClinicianGradeFlag records
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: listPreOperativeAssessmentByClinicianGradeFlag
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PreOperativeAssessmentByClinicianGradeFlag
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: createPreOperativeAssessmentByClinicianGradeFlag
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PreOperativeAssessmentByClinicianGradeFlag by id
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: getPreOperativeAssessmentByClinicianGradeFlag
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PreOperativeAssessmentByClinicianGradeFlag
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: updatePreOperativeAssessmentByClinicianGradeFlag
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PreOperativeAssessmentByClinicianGradeFlag
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: replacePreOperativeAssessmentByClinicianGradeFlag
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PreOperativeAssessmentByClinicianGradeFlag
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: deletePreOperativeAssessmentByClinicianGradeFlag
       responses:
         '200':
@@ -1744,6 +1838,8 @@ paths:
   /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinician_grade_rules:
     get:
       summary: List PreOperativeAssessmentByClinicianGradeRule records
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: listPreOperativeAssessmentByClinicianGradeRule
       parameters:
       - name: limit
@@ -1796,6 +1892,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PreOperativeAssessmentByClinicianGradeRule
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: createPreOperativeAssessmentByClinicianGradeRule
       requestBody:
         required: true
@@ -1849,6 +1947,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PreOperativeAssessmentByClinicianGradeRule by id
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: getPreOperativeAssessmentByClinicianGradeRule
       responses:
         '200':
@@ -1876,6 +1976,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PreOperativeAssessmentByClinicianGradeRule
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: updatePreOperativeAssessmentByClinicianGradeRule
       requestBody:
         required: true
@@ -1921,6 +2023,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PreOperativeAssessmentByClinicianGradeRule
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: replacePreOperativeAssessmentByClinicianGradeRule
       requestBody:
         required: true
@@ -1966,6 +2070,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PreOperativeAssessmentByClinicianGradeRule
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: deletePreOperativeAssessmentByClinicianGradeRule
       responses:
         '200':
@@ -1990,6 +2096,8 @@ paths:
   /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinician_grades:
     get:
       summary: List PreOperativeAssessmentByClinicianGrade records
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: listPreOperativeAssessmentByClinicianGrade
       parameters:
       - name: limit
@@ -2042,6 +2150,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PreOperativeAssessmentByClinicianGrade
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: createPreOperativeAssessmentByClinicianGrade
       requestBody:
         required: true
@@ -2095,6 +2205,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PreOperativeAssessmentByClinicianGrade by id
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: getPreOperativeAssessmentByClinicianGrade
       responses:
         '200':
@@ -2122,6 +2234,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PreOperativeAssessmentByClinicianGrade
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: updatePreOperativeAssessmentByClinicianGrade
       requestBody:
         required: true
@@ -2167,6 +2281,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PreOperativeAssessmentByClinicianGrade
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: replacePreOperativeAssessmentByClinicianGrade
       requestBody:
         required: true
@@ -2212,6 +2328,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PreOperativeAssessmentByClinicianGrade
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: deletePreOperativeAssessmentByClinicianGrade
       responses:
         '200':
@@ -2236,6 +2354,8 @@ paths:
   /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinicians:
     get:
       summary: List PreOperativeAssessmentByClinician records
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: listPreOperativeAssessmentByClinician
       parameters:
       - name: limit
@@ -2288,6 +2408,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PreOperativeAssessmentByClinician
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: createPreOperativeAssessmentByClinician
       requestBody:
         required: true
@@ -2341,6 +2463,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PreOperativeAssessmentByClinician by id
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: getPreOperativeAssessmentByClinician
       responses:
         '200':
@@ -2368,6 +2492,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PreOperativeAssessmentByClinician
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: updatePreOperativeAssessmentByClinician
       requestBody:
         required: true
@@ -2413,6 +2539,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PreOperativeAssessmentByClinician
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: replacePreOperativeAssessmentByClinician
       requestBody:
         required: true
@@ -2458,6 +2586,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PreOperativeAssessmentByClinician
+      tags:
+      - pre-operative-assessment-by-clinician
       operationId: deletePreOperativeAssessmentByClinician
       responses:
         '200':

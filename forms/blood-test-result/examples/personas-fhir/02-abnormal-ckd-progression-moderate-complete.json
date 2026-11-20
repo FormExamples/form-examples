@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "62608803-1ac7-4f51-a8e4-f229aee3c1ef",
+  "id": "7e828f3c-7b11-591a-b916-7f59fb0e966b",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:aeee028c-000f-4621-a691-534582d4e2c3",
+      "fullUrl": "urn:uuid:388d4b2d-6fbb-5dd3-b9ff-b8cf6b9c093e",
       "resource": {
         "resourceType": "Patient",
-        "id": "aeee028c-000f-4621-a691-534582d4e2c3",
+        "id": "388d4b2d-6fbb-5dd3-b9ff-b8cf6b9c093e",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:44cc9727-145d-4605-ac99-12cd745c6aad",
+      "fullUrl": "urn:uuid:0e586d0d-66d6-5fa3-acc2-088f96465275",
       "resource": {
         "resourceType": "Observation",
-        "id": "44cc9727-145d-4605-ac99-12cd745c6aad",
+        "id": "0e586d0d-66d6-5fa3-acc2-088f96465275",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:aeee028c-000f-4621-a691-534582d4e2c3"
+          "reference": "urn:uuid:388d4b2d-6fbb-5dd3-b9ff-b8cf6b9c093e"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:0e512f78-e1b3-43ba-add5-2d8ea96ed879",
+      "fullUrl": "urn:uuid:299b9f39-eff6-518f-a309-9b2308c8152f",
       "resource": {
         "resourceType": "Observation",
-        "id": "0e512f78-e1b3-43ba-add5-2d8ea96ed879",
+        "id": "299b9f39-eff6-518f-a309-9b2308c8152f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:aeee028c-000f-4621-a691-534582d4e2c3"
+          "reference": "urn:uuid:388d4b2d-6fbb-5dd3-b9ff-b8cf6b9c093e"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -744,10 +744,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:403d8176-e14e-4284-a7c2-a5ae0f1f2fb0",
+      "fullUrl": "urn:uuid:aeaf44b8-6aa2-5b92-89ac-284fd1f014ae",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "403d8176-e14e-4284-a7c2-a5ae0f1f2fb0",
+        "id": "aeaf44b8-6aa2-5b92-89ac-284fd1f014ae",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -756,7 +756,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:aeee028c-000f-4621-a691-534582d4e2c3"
+          "reference": "urn:uuid:388d4b2d-6fbb-5dd3-b9ff-b8cf6b9c093e"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -765,10 +765,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:b8709781-50bc-4635-ad0a-3d7c1d47d2e7",
+      "fullUrl": "urn:uuid:2d396edd-0b07-5d89-a547-7ea13173f9d0",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "b8709781-50bc-4635-ad0a-3d7c1d47d2e7",
+        "id": "2d396edd-0b07-5d89-a547-7ea13173f9d0",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -798,17 +798,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:aeee028c-000f-4621-a691-534582d4e2c3"
+          "reference": "urn:uuid:388d4b2d-6fbb-5dd3-b9ff-b8cf6b9c093e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "One or more abnormal results are present, or a structured band (eGFR CKD stage or HbA1c band) deviates from normal; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:5129d8b4-189f-4ef7-aa61-fe78526a8924",
+      "fullUrl": "urn:uuid:bc031c87-1742-5ae5-89ba-7a5d3544486f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "5129d8b4-189f-4ef7-aa61-fe78526a8924",
+        "id": "bc031c87-1742-5ae5-89ba-7a5d3544486f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -838,17 +838,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:aeee028c-000f-4621-a691-534582d4e2c3"
+          "reference": "urn:uuid:388d4b2d-6fbb-5dd3-b9ff-b8cf6b9c093e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "One or more abnormal results are present; abnormality severity graded moderate."
       }
     },
     {
-      "fullUrl": "urn:uuid:36683147-de39-4d43-a5b6-d9548f7d4c3e",
+      "fullUrl": "urn:uuid:813e3160-8167-59ce-8ce6-863385135d9f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "36683147-de39-4d43-a5b6-d9548f7d4c3e",
+        "id": "813e3160-8167-59ce-8ce6-863385135d9f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -878,17 +878,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:aeee028c-000f-4621-a691-534582d4e2c3"
+          "reference": "urn:uuid:388d4b2d-6fbb-5dd3-b9ff-b8cf6b9c093e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Abnormal result present; follow-up recommended."
       }
     },
     {
-      "fullUrl": "urn:uuid:1847dce0-84d8-4e8e-a2c7-082da5dfb623",
+      "fullUrl": "urn:uuid:557ac1e7-fe38-50df-8f2d-049828d9ac44",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "1847dce0-84d8-4e8e-a2c7-082da5dfb623",
+        "id": "557ac1e7-fe38-50df-8f2d-049828d9ac44",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -918,7 +918,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:aeee028c-000f-4621-a691-534582d4e2c3"
+          "reference": "urn:uuid:388d4b2d-6fbb-5dd3-b9ff-b8cf6b9c093e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An abnormal result requiring timely action is present.",
@@ -932,10 +932,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:652fbf73-7c92-46c8-a0e5-97d2c8059311",
+      "fullUrl": "urn:uuid:63734442-b27b-5d72-89b4-86399ccae7d4",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "652fbf73-7c92-46c8-a0e5-97d2c8059311",
+        "id": "63734442-b27b-5d72-89b4-86399ccae7d4",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -965,7 +965,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:aeee028c-000f-4621-a691-534582d4e2c3"
+          "reference": "urn:uuid:388d4b2d-6fbb-5dd3-b9ff-b8cf6b9c093e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "eGFR below 30 mL/min/1.73m\u00b2 indicates advanced renal impairment.",

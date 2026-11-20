@@ -5,10 +5,19 @@ info:
   title: First Responder Assessment — Grade
   version: 1.0.0
   description: Computed first responder competency grading result. Domain competency levels and overall fitness decision. One-to-one child of assessment.
+x-namespace:
+  form: first-responder-assessment
+  apiPrefix: /api/first-responder-assessment/
+  sqlSchema: first_responder_assessment
+  xmlNamespace: https://formexamples.github.io/first-responder-assessment/xml
+tags:
+  - name: first-responder-assessment
+    description: First Responder Assessment form
 paths:
   /api/first-responder-assessment/grades:
     get:
       summary: List Grade records
+      tags: [first-responder-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [first-responder-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [first-responder-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [first-responder-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [first-responder-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [first-responder-assessment]
       operationId: deleteGrade
       responses:
         "200":

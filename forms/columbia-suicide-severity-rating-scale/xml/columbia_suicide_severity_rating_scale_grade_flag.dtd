@@ -1,4 +1,5 @@
 <!ELEMENT columbia_suicide_severity_rating_scale_grade_flag (id,created_at,updated_at,deleted_at,columbia_suicide_severity_rating_scale_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST columbia_suicide_severity_rating_scale_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/columbia-suicide-severity-rating-scale/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

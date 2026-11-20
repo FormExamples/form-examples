@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Medical Waiting List Card form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: medical-waiting-list-card
+  apiPrefix: /api/medical-waiting-list-card/
+  sqlSchema: medical_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/medical-waiting-list-card/xml
+tags:
+- name: medical-waiting-list-card
+  description: Medical Waiting List Card form
 paths:
   /api/medical-waiting-list-card/medical_waiting_list_card_appointments:
     get:
       summary: List MedicalWaitingListCardAppointment records
+      tags:
+      - medical-waiting-list-card
       operationId: listMedicalWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalWaitingListCardAppointment
+      tags:
+      - medical-waiting-list-card
       operationId: createMedicalWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalWaitingListCardAppointment by id
+      tags:
+      - medical-waiting-list-card
       operationId: getMedicalWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalWaitingListCardAppointment
+      tags:
+      - medical-waiting-list-card
       operationId: updateMedicalWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalWaitingListCardAppointment
+      tags:
+      - medical-waiting-list-card
       operationId: replaceMedicalWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalWaitingListCardAppointment
+      tags:
+      - medical-waiting-list-card
       operationId: deleteMedicalWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/medical-waiting-list-card/medical_waiting_list_card_grade_flags:
     get:
       summary: List MedicalWaitingListCardGradeFlag records
+      tags:
+      - medical-waiting-list-card
       operationId: listMedicalWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalWaitingListCardGradeFlag
+      tags:
+      - medical-waiting-list-card
       operationId: createMedicalWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalWaitingListCardGradeFlag by id
+      tags:
+      - medical-waiting-list-card
       operationId: getMedicalWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalWaitingListCardGradeFlag
+      tags:
+      - medical-waiting-list-card
       operationId: updateMedicalWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalWaitingListCardGradeFlag
+      tags:
+      - medical-waiting-list-card
       operationId: replaceMedicalWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalWaitingListCardGradeFlag
+      tags:
+      - medical-waiting-list-card
       operationId: deleteMedicalWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/medical-waiting-list-card/medical_waiting_list_card_grade_rules:
     get:
       summary: List MedicalWaitingListCardGradeRule records
+      tags:
+      - medical-waiting-list-card
       operationId: listMedicalWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalWaitingListCardGradeRule
+      tags:
+      - medical-waiting-list-card
       operationId: createMedicalWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalWaitingListCardGradeRule by id
+      tags:
+      - medical-waiting-list-card
       operationId: getMedicalWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalWaitingListCardGradeRule
+      tags:
+      - medical-waiting-list-card
       operationId: updateMedicalWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalWaitingListCardGradeRule
+      tags:
+      - medical-waiting-list-card
       operationId: replaceMedicalWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalWaitingListCardGradeRule
+      tags:
+      - medical-waiting-list-card
       operationId: deleteMedicalWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/medical-waiting-list-card/medical_waiting_list_card_grades:
     get:
       summary: List MedicalWaitingListCardGrade records
+      tags:
+      - medical-waiting-list-card
       operationId: listMedicalWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalWaitingListCardGrade
+      tags:
+      - medical-waiting-list-card
       operationId: createMedicalWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalWaitingListCardGrade by id
+      tags:
+      - medical-waiting-list-card
       operationId: getMedicalWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalWaitingListCardGrade
+      tags:
+      - medical-waiting-list-card
       operationId: updateMedicalWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalWaitingListCardGrade
+      tags:
+      - medical-waiting-list-card
       operationId: replaceMedicalWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalWaitingListCardGrade
+      tags:
+      - medical-waiting-list-card
       operationId: deleteMedicalWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/medical-waiting-list-card/medical_waiting_list_cards:
     get:
       summary: List MedicalWaitingListCard records
+      tags:
+      - medical-waiting-list-card
       operationId: listMedicalWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalWaitingListCard
+      tags:
+      - medical-waiting-list-card
       operationId: createMedicalWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalWaitingListCard by id
+      tags:
+      - medical-waiting-list-card
       operationId: getMedicalWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalWaitingListCard
+      tags:
+      - medical-waiting-list-card
       operationId: updateMedicalWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalWaitingListCard
+      tags:
+      - medical-waiting-list-card
       operationId: replaceMedicalWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalWaitingListCard
+      tags:
+      - medical-waiting-list-card
       operationId: deleteMedicalWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - medical-waiting-list-card
   /api/medical-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - medical-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - medical-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - medical-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - medical-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - medical-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - medical-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/medical-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - medical-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - medical-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - medical-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - medical-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - medical-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - medical-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

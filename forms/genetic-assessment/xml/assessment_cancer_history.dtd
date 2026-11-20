@@ -1,4 +1,5 @@
 <!ELEMENT assessment_cancer_history (id,created_at,updated_at,deleted_at,assessment_id,family_cancer_history,multiple_family_cancers,early_onset_cancer,bilateral_cancer,rare_tumour_types,rare_tumour_details,known_cancer_syndrome,cancer_syndrome_details,cancer_risk_score)>
+<!ATTLIST assessment_cancer_history xmlns CDATA #FIXED "https://formexamples.github.io/genetic-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

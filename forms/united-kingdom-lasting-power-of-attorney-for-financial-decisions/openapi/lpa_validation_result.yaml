@@ -5,10 +5,19 @@ info:
   title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaValidationResult
   version: 1.0.0
   description: "LPA validation result — the LPA validator output: registration-readiness band and composite-risk grade."
+x-namespace:
+  form: united-kingdom-lasting-power-of-attorney-for-financial-decisions
+  apiPrefix: /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/
+  sqlSchema: united_kingdom_lasting_power_of_attorney_for_financial_decisions
+  xmlNamespace: https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml
+tags:
+  - name: united-kingdom-lasting-power-of-attorney-for-financial-decisions
+    description: United Kingdom Lasting Power Of Attorney For Financial Decisions form
 paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_validation_results:
     get:
       summary: List LpaValidationResult records
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: listLpaValidationResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LpaValidationResult
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: createLpaValidationResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LpaValidationResult by id
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: getLpaValidationResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LpaValidationResult
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: updateLpaValidationResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LpaValidationResult
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: replaceLpaValidationResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LpaValidationResult
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: deleteLpaValidationResult
       responses:
         "200":

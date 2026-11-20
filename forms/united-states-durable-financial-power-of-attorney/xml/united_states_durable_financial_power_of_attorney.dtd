@@ -1,4 +1,5 @@
 <!ELEMENT united_states_durable_financial_power_of_attorney (id,created_at,updated_at,deleted_at,principal_id,agent_id,principal_name,date_of_birth,state,principal_address,capacity_confirmed,durable_statement,effectiveness,springing_trigger,statutory_notice_included,agent_name,agent_relationship,agent_is_adult,agent_signed_acknowledgment,successor_agent_name,co_agents_mode,compensation,compensation_amount,grant_banking,grant_real_estate,grant_investments,grant_business,grant_insurance,grant_tax_matters,grant_benefits,grant_retirement,grant_claims,grant_personal_property,hot_create_trust,hot_gift,hot_survivorship,hot_beneficiary,hot_delegate,hot_annuity_waiver,hot_disclaim,hot_powers_initialed,gift_limit_type,gift_limit_amount,self_gifting_allowed,notary_arranged,witness_count,witness_is_agent,used_for_real_estate,bank_form_completed,form2848_status)>
+<!ATTLIST united_states_durable_financial_power_of_attorney xmlns CDATA #FIXED "https://formexamples.github.io/united-states-durable-financial-power-of-attorney/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

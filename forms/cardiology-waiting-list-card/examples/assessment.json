@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "02bd726e-4c51-5376-afe6-014660052648",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "d8983aed-03fd-598d-a534-bed7657cd93f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "cardiologyWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "dba9622a-260f-5cb7-8263-44c3f8b9e9f9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000096",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000097",
+    "patientId": "06b958e7-a422-5e8e-9058-401d08e38d54",
+    "practitionerId": "647ac3f8-09e0-5de4-82ac-8b9429b2d1f0",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "cardiologyWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "051c8783-a0a5-57ab-8aa2-a0014b6f66cd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cardiologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "cardiologyWaitingListCardId": "3ccfec9b-33d1-5e8b-9c95-6a17098ac967",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "cardiologyWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "07d8d026-b4a8-5ad8-9d8f-d109ba4c6552",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cardiologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "cardiologyWaitingListCardId": "0054523e-5f66-5896-9e5c-159f16c62624",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "cardiologyWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d1",
+    "id": "da5b1ae4-0f5d-5f1c-b5ff-bdeac2528219",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cardiologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "cardiologyWaitingListCardGradeId": "df40b751-de7a-5023-b491-1eb4140c8d0a",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "cardiologyWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000db",
+    "id": "decd2159-f06a-5bd3-8f64-a9bfc0d29e43",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cardiologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000df",
+    "cardiologyWaitingListCardGradeId": "f6ddc41f-18df-519e-92f2-fef0c9b00b52",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

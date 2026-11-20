@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE stomatology_waiting_list_card_grade_rule SYSTEM "stomatology_waiting_list_card_grade_rule.dtd">
-<stomatology_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<stomatology_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/stomatology-waiting-list-card/xml">
+<id>850f8cd6-0462-5a71-984c-07757994d7be</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<stomatology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</stomatology_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<stomatology_waiting_list_card_grade_id>05944f10-243f-5ad2-8119-ba291d37b4b0</stomatology_waiting_list_card_grade_id>
+<rule_id>7c64821f-413d-53b2-b853-41b1cc0d31e8</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

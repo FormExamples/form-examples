@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<grade xmlns="https://formexamples.github.io/bone-marrow-donation-assessment/xml">
+<id>d708af6e-aaea-5356-b50b-46a07e88263d</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>660e8400-e29b-41d4-a716-446655440001</assessment_id>
+<assessment_id>4e2b6ddb-5968-5e52-895c-28fb6ded0cd6</assessment_id>
 <eligibility>suitable</eligibility>
 <overall_risk_level>low</overall_risk_level>
 <hla_match_level>10-of-10</hla_match_level>

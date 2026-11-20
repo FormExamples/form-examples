@@ -5,10 +5,19 @@ info:
   title: United Kingdom Marriage Certificate Application — UnitedKingdomMarriageCertificateApplicationGrade
   version: 1.0.0
   description: "Computed completeness and validity-classification result for a United Kingdom marriage certificate application: class (ready-to-submit/incomplete/needs-evidence/ineligible), earliest and latest permitted ceremony dates, and whether an immigration referral is indicated."
+x-namespace:
+  form: united-kingdom-marriage-certificate-application
+  apiPrefix: /api/united-kingdom-marriage-certificate-application/
+  sqlSchema: united_kingdom_marriage_certificate_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-marriage-certificate-application/xml
+tags:
+  - name: united-kingdom-marriage-certificate-application
+    description: United Kingdom Marriage Certificate Application form
 paths:
   /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_application_grades:
     get:
       summary: List UnitedKingdomMarriageCertificateApplicationGrade records
+      tags: [united-kingdom-marriage-certificate-application]
       operationId: listUnitedKingdomMarriageCertificateApplicationGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomMarriageCertificateApplicationGrade
+      tags: [united-kingdom-marriage-certificate-application]
       operationId: createUnitedKingdomMarriageCertificateApplicationGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomMarriageCertificateApplicationGrade by id
+      tags: [united-kingdom-marriage-certificate-application]
       operationId: getUnitedKingdomMarriageCertificateApplicationGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomMarriageCertificateApplicationGrade
+      tags: [united-kingdom-marriage-certificate-application]
       operationId: updateUnitedKingdomMarriageCertificateApplicationGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomMarriageCertificateApplicationGrade
+      tags: [united-kingdom-marriage-certificate-application]
       operationId: replaceUnitedKingdomMarriageCertificateApplicationGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomMarriageCertificateApplicationGrade
+      tags: [united-kingdom-marriage-certificate-application]
       operationId: deleteUnitedKingdomMarriageCertificateApplicationGrade
       responses:
         "200":

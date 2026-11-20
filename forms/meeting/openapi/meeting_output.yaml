@@ -5,10 +5,19 @@ info:
   title: Meeting — MeetingOutput
   version: 1.0.0
   description: "A tangible deliverable produced by the meeting: document, decision, data, recording, minutes, slides, agreement."
+x-namespace:
+  form: meeting
+  apiPrefix: /api/meeting/
+  sqlSchema: meeting
+  xmlNamespace: https://formexamples.github.io/meeting/xml
+tags:
+  - name: meeting
+    description: Meeting form
 paths:
   /api/meeting/meeting_outputs:
     get:
       summary: List MeetingOutput records
+      tags: [meeting]
       operationId: listMeetingOutput
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MeetingOutput
+      tags: [meeting]
       operationId: createMeetingOutput
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MeetingOutput by id
+      tags: [meeting]
       operationId: getMeetingOutput
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MeetingOutput
+      tags: [meeting]
       operationId: updateMeetingOutput
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MeetingOutput
+      tags: [meeting]
       operationId: replaceMeetingOutput
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MeetingOutput
+      tags: [meeting]
       operationId: deleteMeetingOutput
       responses:
         "200":

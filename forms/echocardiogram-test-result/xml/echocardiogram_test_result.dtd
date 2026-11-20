@@ -1,4 +1,5 @@
 <!ELEMENT echocardiogram_test_result (id,created_at,updated_at,deleted_at,patient_id,clinician_id,originating_request_reference,echo_type,performed_date,reported_date,report_status,study_quality,clinical_history,lv_ejection_fraction_percent,lv_function,lv_internal_diameter_diastole_mm,aortic_stenosis,aortic_regurgitation,mitral_stenosis,mitral_regurgitation,pulmonary_artery_systolic_pressure_mmhg,lv_hypertrophy,regional_wall_motion_abnormality,pericardial_effusion,vegetation,intracardiac_thrombus,normal_study,findings_narrative,comparison_with_previous,impression,reporting_category,recommended_follow_up,critical_result_communicated,reported_to)>
+<!ATTLIST echocardiogram_test_result xmlns CDATA #FIXED "https://formexamples.github.io/echocardiogram-test-result/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

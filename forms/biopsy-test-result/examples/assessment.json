@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000063",
+    "id": "3abef423-d611-5845-9369-f4897f467e93",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000075",
+    "id": "9716b851-41d4-55ea-9c68-46ab4f0b5a27",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "biopsyTestResult": {
-    "id": "550e8400-e29b-41d4-a716-000000000083",
+    "id": "3a22ec7f-e0bc-51b6-b2a7-3488a0b8c410",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000087",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000088",
+    "patientId": "7cab4e27-406b-5043-8bb9-03b407376699",
+    "clinicianId": "11829867-b33a-58b0-8d1e-71ae239818f0",
     "originatingRequestReference": "",
     "reportStatus": "preliminary",
     "performedDate": null,
@@ -69,11 +69,11 @@
     "reportedTo": ""
   },
   "biopsyTestResultGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a2",
+    "id": "a1669f7c-274f-506e-b99f-d23fecf1727d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "biopsyTestResultId": "550e8400-e29b-41d4-a716-0000000000a6",
+    "biopsyTestResultId": "4db6b471-ec01-5423-8541-3c0785b1d284",
     "resultClassification": "normal",
     "abnormalitySeverity": "none",
     "reportingCategory": "",
@@ -87,22 +87,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "biopsyTestResultGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b2",
+    "id": "7e508e92-1162-5165-9f61-fe69e65da254",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "biopsyTestResultGradeId": "550e8400-e29b-41d4-a716-0000000000b6",
+    "biopsyTestResultGradeId": "59c6ab69-d501-577d-b067-b7ee8cc6361b",
     "ruleId": "",
     "axis": "classification",
     "category": "",
     "description": ""
   },
   "biopsyTestResultGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bb",
+    "id": "517b85b7-fab0-54b2-8cb8-fe60f4ea465a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "biopsyTestResultGradeId": "550e8400-e29b-41d4-a716-0000000000bf",
+    "biopsyTestResultGradeId": "59f36467-fc06-5278-b5a5-66b423da0bea",
     "flagId": "",
     "category": "critical-result-alert",
     "priority": "low",

@@ -5,10 +5,19 @@ info:
   title: Hormone Replacement Therapy Assessment — Assessment
   version: 1.0.0
   description: HRT eligibility and symptom assessment using the Menopause Rating Scale. Parent entity for all assessment sections.
+x-namespace:
+  form: hormone-replacement-therapy-assessment
+  apiPrefix: /api/hormone-replacement-therapy-assessment/
+  sqlSchema: hormone_replacement_therapy_assessment
+  xmlNamespace: https://formexamples.github.io/hormone-replacement-therapy-assessment/xml
+tags:
+  - name: hormone-replacement-therapy-assessment
+    description: Hormone Replacement Therapy Assessment form
 paths:
   /api/hormone-replacement-therapy-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [hormone-replacement-therapy-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [hormone-replacement-therapy-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [hormone-replacement-therapy-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [hormone-replacement-therapy-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [hormone-replacement-therapy-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [hormone-replacement-therapy-assessment]
       operationId: deleteAssessment
       responses:
         "200":

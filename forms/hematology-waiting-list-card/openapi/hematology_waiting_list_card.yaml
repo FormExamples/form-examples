@@ -5,10 +5,19 @@ info:
   title: Hematology Waiting List Card — HematologyWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a hematology waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: hematology-waiting-list-card
+  apiPrefix: /api/hematology-waiting-list-card/
+  sqlSchema: hematology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/hematology-waiting-list-card/xml
+tags:
+  - name: hematology-waiting-list-card
+    description: Hematology Waiting List Card form
 paths:
   /api/hematology-waiting-list-card/hematology_waiting_list_cards:
     get:
       summary: List HematologyWaitingListCard records
+      tags: [hematology-waiting-list-card]
       operationId: listHematologyWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HematologyWaitingListCard
+      tags: [hematology-waiting-list-card]
       operationId: createHematologyWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HematologyWaitingListCard by id
+      tags: [hematology-waiting-list-card]
       operationId: getHematologyWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HematologyWaitingListCard
+      tags: [hematology-waiting-list-card]
       operationId: updateHematologyWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HematologyWaitingListCard
+      tags: [hematology-waiting-list-card]
       operationId: replaceHematologyWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HematologyWaitingListCard
+      tags: [hematology-waiting-list-card]
       operationId: deleteHematologyWaitingListCard
       responses:
         "200":

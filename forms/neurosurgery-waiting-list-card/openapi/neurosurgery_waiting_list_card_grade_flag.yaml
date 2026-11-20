@@ -5,10 +5,19 @@ info:
   title: Neurosurgery Waiting List Card — NeurosurgeryWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: neurosurgery-waiting-list-card
+  apiPrefix: /api/neurosurgery-waiting-list-card/
+  sqlSchema: neurosurgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/neurosurgery-waiting-list-card/xml
+tags:
+  - name: neurosurgery-waiting-list-card
+    description: Neurosurgery Waiting List Card form
 paths:
   /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_card_grade_flags:
     get:
       summary: List NeurosurgeryWaitingListCardGradeFlag records
+      tags: [neurosurgery-waiting-list-card]
       operationId: listNeurosurgeryWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeurosurgeryWaitingListCardGradeFlag
+      tags: [neurosurgery-waiting-list-card]
       operationId: createNeurosurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NeurosurgeryWaitingListCardGradeFlag by id
+      tags: [neurosurgery-waiting-list-card]
       operationId: getNeurosurgeryWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeurosurgeryWaitingListCardGradeFlag
+      tags: [neurosurgery-waiting-list-card]
       operationId: updateNeurosurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NeurosurgeryWaitingListCardGradeFlag
+      tags: [neurosurgery-waiting-list-card]
       operationId: replaceNeurosurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NeurosurgeryWaitingListCardGradeFlag
+      tags: [neurosurgery-waiting-list-card]
       operationId: deleteNeurosurgeryWaitingListCardGradeFlag
       responses:
         "200":

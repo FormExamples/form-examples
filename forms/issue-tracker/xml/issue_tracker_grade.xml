@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE issue_tracker_grade SYSTEM "issue_tracker_grade.dtd">
-<issue_tracker_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<issue_tracker_grade xmlns="https://formexamples.github.io/issue-tracker/xml">
+<id>4b63b19f-01fb-5d6b-814e-56ccd4ffc27f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<issue_tracker_id>770e8400-e29b-41d4-a716-446655440002</issue_tracker_id>
+<issue_tracker_id>6dd50351-6ad9-5934-bcf8-64871a135e00</issue_tracker_id>
 <score_by_priority_rank>5</score_by_priority_rank>
 <score_by_severity_of_impact>5</score_by_severity_of_impact>
 <score_by_magnitude_of_damage>5</score_by_magnitude_of_damage>

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005c",
+    "id": "ea2faf54-76ff-59a8-bb33-3caade854a94",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006e",
+    "id": "19f3f2b8-838f-5c48-89ab-24f902a980cb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "geneticTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-00000000007c",
+    "id": "6b0fe859-390d-5695-a26a-cd543b695fa3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000080",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000081",
+    "patientId": "3e37c155-aaa4-5d93-98f8-95a19cbb38f1",
+    "clinicianId": "46cfd58f-d641-5cfc-87f6-548d7a227914",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -63,11 +63,11 @@
     "notes": ""
   },
   "geneticTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000095",
+    "id": "9e5afb1a-22e0-5fd7-b1fc-d356e970e9db",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "geneticTestRequestId": "550e8400-e29b-41d4-a716-000000000099",
+    "geneticTestRequestId": "5a85b0a5-3d2c-5624-a09a-04cd59cd965e",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "consentCounsellingBand": "ok",
@@ -80,22 +80,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "geneticTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a4",
+    "id": "dcab019d-0168-5718-be5b-80f9846aa713",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "geneticTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000a8",
+    "geneticTestRequestGradeId": "71facace-ccee-5bf1-a1a4-18263417c0b0",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "geneticTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ad",
+    "id": "b37d64e0-242a-5da6-9bc3-8fb925968f35",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "geneticTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b1",
+    "geneticTestRequestGradeId": "0512ca6d-f14c-5081-9e27-da94b2040f98",
     "flagId": "",
     "category": "predictive-test-counselling-required",
     "priority": "low",

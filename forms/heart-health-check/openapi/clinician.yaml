@@ -5,10 +5,19 @@ info:
   title: Heart Health Check — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: heart-health-check
+  apiPrefix: /api/heart-health-check/
+  sqlSchema: heart_health_check
+  xmlNamespace: https://formexamples.github.io/heart-health-check/xml
+tags:
+  - name: heart-health-check
+    description: Heart Health Check form
 paths:
   /api/heart-health-check/clinicians:
     get:
       summary: List Clinician records
+      tags: [heart-health-check]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [heart-health-check]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [heart-health-check]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [heart-health-check]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [heart-health-check]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [heart-health-check]
       operationId: deleteClinician
       responses:
         "200":

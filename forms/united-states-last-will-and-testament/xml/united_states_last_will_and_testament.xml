@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_states_last_will_and_testament SYSTEM "united_states_last_will_and_testament.dtd">
-<united_states_last_will_and_testament>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<united_states_last_will_and_testament xmlns="https://formexamples.github.io/united-states-last-will-and-testament/xml">
+<id>e4d3d369-2f4c-55f7-8626-dfb7f613d7a4</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<testator_id>550e8400-e29b-41d4-a716-446655440000</testator_id>
-<attorney_id>660e8400-e29b-41d4-a716-446655440001</attorney_id>
+<testator_id>3b2b2d56-e7ce-52f4-bd56-b03bfa5c2fd9</testator_id>
+<attorney_id>b4a457c5-e283-5e8a-9b85-e1262a658fa1</attorney_id>
 <state></state>
 <testator_name>Example</testator_name>
 <testator_date_of_birth>2026-01-15</testator_date_of_birth>

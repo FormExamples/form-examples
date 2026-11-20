@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE microbiology_culture_test_result_grade_rule SYSTEM "microbiology_culture_test_result_grade_rule.dtd">
-<microbiology_culture_test_result_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<microbiology_culture_test_result_grade_rule xmlns="https://formexamples.github.io/microbiology-culture-test-result/xml">
+<id>6bd12f3d-d956-5bb3-93d6-742e88fa1f29</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<microbiology_culture_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</microbiology_culture_test_result_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<microbiology_culture_test_result_grade_id>f14d244a-683a-5410-8aa8-c11612a7c1c6</microbiology_culture_test_result_grade_id>
+<rule_id>05d73548-e9af-5363-b984-2d74d68343ad</rule_id>
 <axis>classification</axis>
 <category>General</category>
 <description>Example text.</description>

@@ -1,4 +1,5 @@
 <!ELEMENT occupational_vaccinations (id,created_at,updated_at,deleted_at,assessment_id,occupation,healthcare_worker,hepatitis_b_occupational,influenza_occupational,varicella,bcg_tuberculosis)>
+<!ATTLIST occupational_vaccinations xmlns CDATA #FIXED "https://formexamples.github.io/vaccinations-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Uk Nhs Digital Technology Assessment Criteria — UkNhsDigitalTechnologyAssessmentCriteria
   version: 1.0.0
   description: A DTAC assessment of one digital health technology product by one assessor.
+x-namespace:
+  form: uk-nhs-digital-technology-assessment-criteria
+  apiPrefix: /api/uk-nhs-digital-technology-assessment-criteria/
+  sqlSchema: uk_nhs_digital_technology_assessment_criteria
+  xmlNamespace: https://formexamples.github.io/uk-nhs-digital-technology-assessment-criteria/xml
+tags:
+  - name: uk-nhs-digital-technology-assessment-criteria
+    description: Uk Nhs Digital Technology Assessment Criteria form
 paths:
   /api/uk-nhs-digital-technology-assessment-criteria/uk_nhs_digital_technology_assessment_criterias:
     get:
       summary: List UkNhsDigitalTechnologyAssessmentCriteria records
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: listUkNhsDigitalTechnologyAssessmentCriteria
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UkNhsDigitalTechnologyAssessmentCriteria
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: createUkNhsDigitalTechnologyAssessmentCriteria
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UkNhsDigitalTechnologyAssessmentCriteria by id
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: getUkNhsDigitalTechnologyAssessmentCriteria
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UkNhsDigitalTechnologyAssessmentCriteria
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: updateUkNhsDigitalTechnologyAssessmentCriteria
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UkNhsDigitalTechnologyAssessmentCriteria
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: replaceUkNhsDigitalTechnologyAssessmentCriteria
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UkNhsDigitalTechnologyAssessmentCriteria
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: deleteUkNhsDigitalTechnologyAssessmentCriteria
       responses:
         "200":

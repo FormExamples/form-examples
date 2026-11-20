@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000006d",
+    "id": "c4980961-5b40-5b3f-a4a7-1b55240e8ab5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000007f",
+    "id": "2b1ca11c-10ed-57eb-ad91-353945e5b00b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "chronicObstructivePulmonaryDiseaseReview": {
-    "id": "550e8400-e29b-41d4-a716-00000000008c",
+    "id": "58d1d0d4-f4c9-5ac1-87cf-3a7c2287e216",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000090",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000091",
+    "patientId": "1a11d026-2ff4-5e96-bc79-b4a6f214e5c6",
+    "clinicianId": "c1793fdc-c433-5250-85c7-dbecf4e6c791",
     "clinicianName": "",
     "clinicianRole": "gp",
     "reviewedAt": null,
@@ -84,11 +84,11 @@
     "clinicianNote": ""
   },
   "chronicObstructivePulmonaryDiseaseReviewGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bb",
+    "id": "bb148eee-8c0e-5db1-88bb-6098aa0e89e5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "chronicObstructivePulmonaryDiseaseReviewId": "550e8400-e29b-41d4-a716-0000000000bf",
+    "chronicObstructivePulmonaryDiseaseReviewId": "e81f6b91-d0fb-5b0f-90f4-1168539a69bd",
     "goldAirflowGrade": "1",
     "symptomBurden": "low",
     "exacerbationRisk": "low",
@@ -97,22 +97,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "chronicObstructivePulmonaryDiseaseReviewGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c6",
+    "id": "23fa6a44-e5d8-57b4-a6e3-c3ca05e62764",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "chronicObstructivePulmonaryDiseaseReviewGradeId": "550e8400-e29b-41d4-a716-0000000000ca",
+    "chronicObstructivePulmonaryDiseaseReviewGradeId": "8b872106-827a-578a-b7ab-5ebf003ff093",
     "ruleId": "",
     "section": "gold",
     "category": "",
     "description": ""
   },
   "chronicObstructivePulmonaryDiseaseReviewGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000cf",
+    "id": "3f8c20ab-dee9-50dc-afb4-7a1e2fa2d87b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "chronicObstructivePulmonaryDiseaseReviewGradeId": "550e8400-e29b-41d4-a716-0000000000d3",
+    "chronicObstructivePulmonaryDiseaseReviewGradeId": "b81ea729-e99a-5780-97c0-693951c15bfd",
     "flagId": "",
     "category": "escalate-therapy",
     "priority": "low",

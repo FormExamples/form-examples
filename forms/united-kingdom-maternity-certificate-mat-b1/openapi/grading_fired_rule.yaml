@@ -5,10 +5,19 @@ info:
   title: United Kingdom Maternity Certificate Mat B1 — GradingFiredRule
   version: 1.0.0
   description: Individual rules that evaluated to true during grading.
+x-namespace:
+  form: united-kingdom-maternity-certificate-mat-b1
+  apiPrefix: /api/united-kingdom-maternity-certificate-mat-b1/
+  sqlSchema: united_kingdom_maternity_certificate_mat_b1
+  xmlNamespace: https://formexamples.github.io/united-kingdom-maternity-certificate-mat-b1/xml
+tags:
+  - name: united-kingdom-maternity-certificate-mat-b1
+    description: United Kingdom Maternity Certificate Mat B1 form
 paths:
   /api/united-kingdom-maternity-certificate-mat-b1/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: listGradingFiredRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingFiredRule
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: getGradingFiredRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingFiredRule
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingFiredRule
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingFiredRule
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: deleteGradingFiredRule
       responses:
         "200":

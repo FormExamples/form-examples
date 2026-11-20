@@ -5,10 +5,19 @@ info:
   title: Blood Donation Assessment — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: blood-donation-assessment
+  apiPrefix: /api/blood-donation-assessment/
+  sqlSchema: blood_donation_assessment
+  xmlNamespace: https://formexamples.github.io/blood-donation-assessment/xml
+tags:
+  - name: blood-donation-assessment
+    description: Blood Donation Assessment form
 paths:
   /api/blood-donation-assessment/patients:
     get:
       summary: List Patient records
+      tags: [blood-donation-assessment]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [blood-donation-assessment]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [blood-donation-assessment]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [blood-donation-assessment]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [blood-donation-assessment]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [blood-donation-assessment]
       operationId: deletePatient
       responses:
         "200":

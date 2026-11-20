@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<grade xmlns="https://formexamples.github.io/ophthalmology-assessment/xml">
+<id>05ea4201-c986-529e-a35e-95e5b700e34b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>114e20ab-8f70-5975-bb4e-8cdf7c2fabfd</assessment_id>
 <visual_acuity_grade>normal</visual_acuity_grade>
 <best_corrected_va_right></best_corrected_va_right>
 <best_corrected_va_left></best_corrected_va_left>

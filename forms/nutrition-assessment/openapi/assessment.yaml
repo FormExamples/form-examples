@@ -5,10 +5,19 @@ info:
   title: Nutrition Assessment — Assessment
   version: 1.0.0
   description: Nutrition assessment form using MUST (Malnutrition Universal Screening Tool). Parent entity for all assessment sections.
+x-namespace:
+  form: nutrition-assessment
+  apiPrefix: /api/nutrition-assessment/
+  sqlSchema: nutrition_assessment
+  xmlNamespace: https://formexamples.github.io/nutrition-assessment/xml
+tags:
+  - name: nutrition-assessment
+    description: Nutrition Assessment form
 paths:
   /api/nutrition-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [nutrition-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [nutrition-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [nutrition-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [nutrition-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [nutrition-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [nutrition-assessment]
       operationId: deleteAssessment
       responses:
         "200":

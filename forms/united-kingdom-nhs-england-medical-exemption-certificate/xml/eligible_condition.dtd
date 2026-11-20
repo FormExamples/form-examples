@@ -1,4 +1,5 @@
 <!ELEMENT eligible_condition (id,created_at,updated_at,deleted_at,code,label,description,requires_appliance_detail,requires_substitution_therapy_detail,requires_disability_attestation,requires_cancer_detail,excludes_diet_only_diabetes,snomed_ct_reference,icd10_reference)>
+<!ATTLIST eligible_condition xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-nhs-england-medical-exemption-certificate/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Internal Medicine Waiting List Card — InternalMedWaitingListCardAppointment
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+x-namespace:
+  form: internal-medicine-waiting-list-card
+  apiPrefix: /api/internal-medicine-waiting-list-card/
+  sqlSchema: internal_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/internal-medicine-waiting-list-card/xml
+tags:
+  - name: internal-medicine-waiting-list-card
+    description: Internal Medicine Waiting List Card form
 paths:
   /api/internal-medicine-waiting-list-card/internal_med_waiting_list_card_appointments:
     get:
       summary: List InternalMedWaitingListCardAppointment records
+      tags: [internal-medicine-waiting-list-card]
       operationId: listInternalMedWaitingListCardAppointment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new InternalMedWaitingListCardAppointment
+      tags: [internal-medicine-waiting-list-card]
       operationId: createInternalMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one InternalMedWaitingListCardAppointment by id
+      tags: [internal-medicine-waiting-list-card]
       operationId: getInternalMedWaitingListCardAppointment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing InternalMedWaitingListCardAppointment
+      tags: [internal-medicine-waiting-list-card]
       operationId: updateInternalMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing InternalMedWaitingListCardAppointment
+      tags: [internal-medicine-waiting-list-card]
       operationId: replaceInternalMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a InternalMedWaitingListCardAppointment
+      tags: [internal-medicine-waiting-list-card]
       operationId: deleteInternalMedWaitingListCardAppointment
       responses:
         "200":

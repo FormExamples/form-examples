@@ -1,4 +1,5 @@
 <!ELEMENT patient (id,created_at,updated_at,deleted_at,name,birth_date,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,united_kingdom_nhs_number,employer_name,occupation)>
+<!ATTLIST patient xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-statement-of-fitness-for-work/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,4 +1,5 @@
 <!ELEMENT assessment_current_medications (id,created_at,updated_at,deleted_at,assessment_id,takes_regular_medications,takes_over_the_counter,over_the_counter_details,takes_supplements,supplement_details,medication_adherence,adverse_drug_reactions,additional_notes)>
+<!ATTLIST assessment_current_medications xmlns CDATA #FIXED "https://formexamples.github.io/pediatric-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

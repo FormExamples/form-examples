@@ -5,10 +5,19 @@ info:
   title: United States Marriage License Application — UnitedStatesMarriageLicenseApplicationGradeFlag
   version: 1.0.0
   description: Flagged issues that fire independently of the eligibility class, with priority and a suggested action.
+x-namespace:
+  form: united-states-marriage-license-application
+  apiPrefix: /api/united-states-marriage-license-application/
+  sqlSchema: united_states_marriage_license_application
+  xmlNamespace: https://formexamples.github.io/united-states-marriage-license-application/xml
+tags:
+  - name: united-states-marriage-license-application
+    description: United States Marriage License Application form
 paths:
   /api/united-states-marriage-license-application/united_states_marriage_license_application_grade_flags:
     get:
       summary: List UnitedStatesMarriageLicenseApplicationGradeFlag records
+      tags: [united-states-marriage-license-application]
       operationId: listUnitedStatesMarriageLicenseApplicationGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesMarriageLicenseApplicationGradeFlag
+      tags: [united-states-marriage-license-application]
       operationId: createUnitedStatesMarriageLicenseApplicationGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesMarriageLicenseApplicationGradeFlag by id
+      tags: [united-states-marriage-license-application]
       operationId: getUnitedStatesMarriageLicenseApplicationGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesMarriageLicenseApplicationGradeFlag
+      tags: [united-states-marriage-license-application]
       operationId: updateUnitedStatesMarriageLicenseApplicationGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesMarriageLicenseApplicationGradeFlag
+      tags: [united-states-marriage-license-application]
       operationId: replaceUnitedStatesMarriageLicenseApplicationGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesMarriageLicenseApplicationGradeFlag
+      tags: [united-states-marriage-license-application]
       operationId: deleteUnitedStatesMarriageLicenseApplicationGradeFlag
       responses:
         "200":

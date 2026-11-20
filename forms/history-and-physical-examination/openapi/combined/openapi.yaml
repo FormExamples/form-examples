@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the History and Physical Examination (H&P) form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: history-and-physical-examination
+  apiPrefix: /api/history-and-physical-examination/
+  sqlSchema: history_and_physical_examination
+  xmlNamespace: https://formexamples.github.io/history-and-physical-examination/xml
+tags:
+- name: history-and-physical-examination
+  description: History and Physical Examination (H&P) form
 paths:
   /api/history-and-physical-examination/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - history-and-physical-examination
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - history-and-physical-examination
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - history-and-physical-examination
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - history-and-physical-examination
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - history-and-physical-examination
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - history-and-physical-examination
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/history-and-physical-examination/history_and_physical_examination_grade_flags:
     get:
       summary: List HistoryAndPhysicalExaminationGradeFlag records
+      tags:
+      - history-and-physical-examination
       operationId: listHistoryAndPhysicalExaminationGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HistoryAndPhysicalExaminationGradeFlag
+      tags:
+      - history-and-physical-examination
       operationId: createHistoryAndPhysicalExaminationGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HistoryAndPhysicalExaminationGradeFlag by id
+      tags:
+      - history-and-physical-examination
       operationId: getHistoryAndPhysicalExaminationGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HistoryAndPhysicalExaminationGradeFlag
+      tags:
+      - history-and-physical-examination
       operationId: updateHistoryAndPhysicalExaminationGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HistoryAndPhysicalExaminationGradeFlag
+      tags:
+      - history-and-physical-examination
       operationId: replaceHistoryAndPhysicalExaminationGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HistoryAndPhysicalExaminationGradeFlag
+      tags:
+      - history-and-physical-examination
       operationId: deleteHistoryAndPhysicalExaminationGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/history-and-physical-examination/history_and_physical_examination_grade_rules:
     get:
       summary: List HistoryAndPhysicalExaminationGradeRule records
+      tags:
+      - history-and-physical-examination
       operationId: listHistoryAndPhysicalExaminationGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HistoryAndPhysicalExaminationGradeRule
+      tags:
+      - history-and-physical-examination
       operationId: createHistoryAndPhysicalExaminationGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HistoryAndPhysicalExaminationGradeRule by id
+      tags:
+      - history-and-physical-examination
       operationId: getHistoryAndPhysicalExaminationGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HistoryAndPhysicalExaminationGradeRule
+      tags:
+      - history-and-physical-examination
       operationId: updateHistoryAndPhysicalExaminationGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HistoryAndPhysicalExaminationGradeRule
+      tags:
+      - history-and-physical-examination
       operationId: replaceHistoryAndPhysicalExaminationGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HistoryAndPhysicalExaminationGradeRule
+      tags:
+      - history-and-physical-examination
       operationId: deleteHistoryAndPhysicalExaminationGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/history-and-physical-examination/history_and_physical_examination_grades:
     get:
       summary: List HistoryAndPhysicalExaminationGrade records
+      tags:
+      - history-and-physical-examination
       operationId: listHistoryAndPhysicalExaminationGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HistoryAndPhysicalExaminationGrade
+      tags:
+      - history-and-physical-examination
       operationId: createHistoryAndPhysicalExaminationGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HistoryAndPhysicalExaminationGrade by id
+      tags:
+      - history-and-physical-examination
       operationId: getHistoryAndPhysicalExaminationGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HistoryAndPhysicalExaminationGrade
+      tags:
+      - history-and-physical-examination
       operationId: updateHistoryAndPhysicalExaminationGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HistoryAndPhysicalExaminationGrade
+      tags:
+      - history-and-physical-examination
       operationId: replaceHistoryAndPhysicalExaminationGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HistoryAndPhysicalExaminationGrade
+      tags:
+      - history-and-physical-examination
       operationId: deleteHistoryAndPhysicalExaminationGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/history-and-physical-examination/history_and_physical_examinations:
     get:
       summary: List HistoryAndPhysicalExamination records
+      tags:
+      - history-and-physical-examination
       operationId: listHistoryAndPhysicalExamination
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HistoryAndPhysicalExamination
+      tags:
+      - history-and-physical-examination
       operationId: createHistoryAndPhysicalExamination
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HistoryAndPhysicalExamination by id
+      tags:
+      - history-and-physical-examination
       operationId: getHistoryAndPhysicalExamination
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HistoryAndPhysicalExamination
+      tags:
+      - history-and-physical-examination
       operationId: updateHistoryAndPhysicalExamination
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HistoryAndPhysicalExamination
+      tags:
+      - history-and-physical-examination
       operationId: replaceHistoryAndPhysicalExamination
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HistoryAndPhysicalExamination
+      tags:
+      - history-and-physical-examination
       operationId: deleteHistoryAndPhysicalExamination
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - history-and-physical-examination
   /api/history-and-physical-examination/patients:
     get:
       summary: List Patient records
+      tags:
+      - history-and-physical-examination
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - history-and-physical-examination
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - history-and-physical-examination
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - history-and-physical-examination
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - history-and-physical-examination
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - history-and-physical-examination
       operationId: deletePatient
       responses:
         '200':

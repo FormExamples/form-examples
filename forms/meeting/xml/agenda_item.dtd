@@ -1,4 +1,5 @@
 <!ELEMENT agenda_item (id,created_at,updated_at,deleted_at,meeting_id,position,title,duration_minutes,presenter,notes,status)>
+<!ATTLIST agenda_item xmlns CDATA #FIXED "https://formexamples.github.io/meeting/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

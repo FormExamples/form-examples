@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cardiology_response_grade SYSTEM "cardiology_response_grade.dtd">
-<cardiology_response_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<cardiology_response_grade xmlns="https://formexamples.github.io/cardiology-response/xml">
+<id>cb1571e5-b942-5a59-a15a-0fb83cfa0107</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cardiology_response_id>770e8400-e29b-41d4-a716-446655440002</cardiology_response_id>
+<cardiology_response_id>7f93f59c-89e7-5223-8fe3-aeace7aaf21d</cardiology_response_id>
 <response_classification>no-abnormality</response_classification>
 <severity>none</severity>
 <severity_category>General</severity_category>

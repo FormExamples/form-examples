@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE anaesthetic_record SYSTEM "anaesthetic_record.dtd">
-<anaesthetic_record>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<anaesthetic_record xmlns="https://formexamples.github.io/anaesthetic-record/xml">
+<id>c9ac9734-0722-513c-af50-ea06913293c8</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>0e171ac3-013c-5b64-8b2c-128b9bc84645</patient_id>
+<clinician_id>16686dd0-59cf-53e7-90d9-8fd2ddbf6d83</clinician_id>
 <theatre></theatre>
 <operation_date>2026-01-15</operation_date>
 <anaesthetist_name>Example</anaesthetist_name>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cranio_surgery_waiting_list_card_grade_flag SYSTEM "cranio_surgery_waiting_list_card_grade_flag.dtd">
-<cranio_surgery_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<cranio_surgery_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/craniofacial-surgery-waiting-list-card/xml">
+<id>b6631ac1-a5fc-5d56-b024-53079d2a8c9e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cranio_surgery_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</cranio_surgery_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<cranio_surgery_waiting_list_card_grade_id>c5906adb-733a-5f90-8dfa-58efdd301bbe</cranio_surgery_waiting_list_card_grade_id>
+<flag_id>e17f377f-5619-51f6-a879-b34920d730dd</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE electrocardiogram_test_result_grade SYSTEM "electrocardiogram_test_result_grade.dtd">
-<electrocardiogram_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<electrocardiogram_test_result_grade xmlns="https://formexamples.github.io/electrocardiogram-test-result/xml">
+<id>50755166-1969-5226-8389-311034c94269</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<electrocardiogram_test_result_id>770e8400-e29b-41d4-a716-446655440002</electrocardiogram_test_result_id>
+<electrocardiogram_test_result_id>18e0a0ea-0b27-50b8-945a-25cbface34dc</electrocardiogram_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE casualty_card_disposition SYSTEM "casualty_card_disposition.dtd">
-<casualty_card_disposition>
-<id>881e8400-e29b-41d4-a716-446655440012</id>
+<casualty_card_disposition xmlns="https://formexamples.github.io/casualty-card-form/xml">
+<id>3b56b0d4-14c3-51bc-be6d-dec825a1ad62</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<casualty_card_id>770e8400-e29b-41d4-a716-446655440002</casualty_card_id>
+<casualty_card_id>8adbfe12-8ed7-5b00-800a-0bdbdfa13f84</casualty_card_id>
 <disposition>admitted</disposition>
 <admitting_specialty></admitting_specialty>
 <admitting_consultant></admitting_consultant>

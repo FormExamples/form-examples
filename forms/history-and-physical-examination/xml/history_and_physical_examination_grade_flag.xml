@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE history_and_physical_examination_grade_flag SYSTEM "history_and_physical_examination_grade_flag.dtd">
-<history_and_physical_examination_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<history_and_physical_examination_grade_flag xmlns="https://formexamples.github.io/history-and-physical-examination/xml">
+<id>e64a2bda-f0d7-577a-9c1e-224aeef3b9c5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<history_and_physical_examination_grade_id>880e8400-e29b-41d4-a716-446655440003</history_and_physical_examination_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<history_and_physical_examination_grade_id>8d9ebf3e-2226-52c0-a40c-681d2158ab6b</history_and_physical_examination_grade_id>
+<flag_id>8d8968d1-3d88-510b-a0f2-de5893e0746e</flag_id>
 <category>allergies-not-documented</category>
 <priority>low</priority>
 <description>Example text.</description>

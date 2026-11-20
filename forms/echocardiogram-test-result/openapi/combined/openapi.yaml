@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Echocardiogram Test Result form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: echocardiogram-test-result
+  apiPrefix: /api/echocardiogram-test-result/
+  sqlSchema: echocardiogram_test_result
+  xmlNamespace: https://formexamples.github.io/echocardiogram-test-result/xml
+tags:
+- name: echocardiogram-test-result
+  description: Echocardiogram Test Result form
 paths:
   /api/echocardiogram-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - echocardiogram-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - echocardiogram-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - echocardiogram-test-result
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - echocardiogram-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - echocardiogram-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - echocardiogram-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/echocardiogram-test-result/echocardiogram_test_result_grade_flags:
     get:
       summary: List EchocardiogramTestResultGradeFlag records
+      tags:
+      - echocardiogram-test-result
       operationId: listEchocardiogramTestResultGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EchocardiogramTestResultGradeFlag
+      tags:
+      - echocardiogram-test-result
       operationId: createEchocardiogramTestResultGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EchocardiogramTestResultGradeFlag by id
+      tags:
+      - echocardiogram-test-result
       operationId: getEchocardiogramTestResultGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EchocardiogramTestResultGradeFlag
+      tags:
+      - echocardiogram-test-result
       operationId: updateEchocardiogramTestResultGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EchocardiogramTestResultGradeFlag
+      tags:
+      - echocardiogram-test-result
       operationId: replaceEchocardiogramTestResultGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EchocardiogramTestResultGradeFlag
+      tags:
+      - echocardiogram-test-result
       operationId: deleteEchocardiogramTestResultGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/echocardiogram-test-result/echocardiogram_test_result_grade_rules:
     get:
       summary: List EchocardiogramTestResultGradeRule records
+      tags:
+      - echocardiogram-test-result
       operationId: listEchocardiogramTestResultGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EchocardiogramTestResultGradeRule
+      tags:
+      - echocardiogram-test-result
       operationId: createEchocardiogramTestResultGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EchocardiogramTestResultGradeRule by id
+      tags:
+      - echocardiogram-test-result
       operationId: getEchocardiogramTestResultGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EchocardiogramTestResultGradeRule
+      tags:
+      - echocardiogram-test-result
       operationId: updateEchocardiogramTestResultGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EchocardiogramTestResultGradeRule
+      tags:
+      - echocardiogram-test-result
       operationId: replaceEchocardiogramTestResultGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EchocardiogramTestResultGradeRule
+      tags:
+      - echocardiogram-test-result
       operationId: deleteEchocardiogramTestResultGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/echocardiogram-test-result/echocardiogram_test_result_grades:
     get:
       summary: List EchocardiogramTestResultGrade records
+      tags:
+      - echocardiogram-test-result
       operationId: listEchocardiogramTestResultGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EchocardiogramTestResultGrade
+      tags:
+      - echocardiogram-test-result
       operationId: createEchocardiogramTestResultGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EchocardiogramTestResultGrade by id
+      tags:
+      - echocardiogram-test-result
       operationId: getEchocardiogramTestResultGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EchocardiogramTestResultGrade
+      tags:
+      - echocardiogram-test-result
       operationId: updateEchocardiogramTestResultGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EchocardiogramTestResultGrade
+      tags:
+      - echocardiogram-test-result
       operationId: replaceEchocardiogramTestResultGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EchocardiogramTestResultGrade
+      tags:
+      - echocardiogram-test-result
       operationId: deleteEchocardiogramTestResultGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/echocardiogram-test-result/echocardiogram_test_results:
     get:
       summary: List EchocardiogramTestResult records
+      tags:
+      - echocardiogram-test-result
       operationId: listEchocardiogramTestResult
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EchocardiogramTestResult
+      tags:
+      - echocardiogram-test-result
       operationId: createEchocardiogramTestResult
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EchocardiogramTestResult by id
+      tags:
+      - echocardiogram-test-result
       operationId: getEchocardiogramTestResult
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EchocardiogramTestResult
+      tags:
+      - echocardiogram-test-result
       operationId: updateEchocardiogramTestResult
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EchocardiogramTestResult
+      tags:
+      - echocardiogram-test-result
       operationId: replaceEchocardiogramTestResult
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EchocardiogramTestResult
+      tags:
+      - echocardiogram-test-result
       operationId: deleteEchocardiogramTestResult
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - echocardiogram-test-result
   /api/echocardiogram-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - echocardiogram-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - echocardiogram-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - echocardiogram-test-result
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - echocardiogram-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - echocardiogram-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - echocardiogram-test-result
       operationId: deletePatient
       responses:
         '200':

@@ -5,10 +5,19 @@ info:
   title: Tumor Marker Test Request — TumorMarkerTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (marker-to-indication fit, 1-9), interpretation safety, request completeness, and urgency / triage priority."
+x-namespace:
+  form: tumor-marker-test-request
+  apiPrefix: /api/tumor-marker-test-request/
+  sqlSchema: tumor_marker_test_request
+  xmlNamespace: https://formexamples.github.io/tumor-marker-test-request/xml
+tags:
+  - name: tumor-marker-test-request
+    description: Tumor Marker Test Request form
 paths:
   /api/tumor-marker-test-request/tumor_marker_test_request_grades:
     get:
       summary: List TumorMarkerTestRequestGrade records
+      tags: [tumor-marker-test-request]
       operationId: listTumorMarkerTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new TumorMarkerTestRequestGrade
+      tags: [tumor-marker-test-request]
       operationId: createTumorMarkerTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one TumorMarkerTestRequestGrade by id
+      tags: [tumor-marker-test-request]
       operationId: getTumorMarkerTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing TumorMarkerTestRequestGrade
+      tags: [tumor-marker-test-request]
       operationId: updateTumorMarkerTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing TumorMarkerTestRequestGrade
+      tags: [tumor-marker-test-request]
       operationId: replaceTumorMarkerTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a TumorMarkerTestRequestGrade
+      tags: [tumor-marker-test-request]
       operationId: deleteTumorMarkerTestRequestGrade
       responses:
         "200":

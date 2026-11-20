@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the National Early Warning Score 2 (NEWS2) form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: national-early-warning-score-2
+  apiPrefix: /api/national-early-warning-score-2/
+  sqlSchema: national_early_warning_score_2
+  xmlNamespace: https://formexamples.github.io/national-early-warning-score-2/xml
+tags:
+- name: national-early-warning-score-2
+  description: National Early Warning Score 2 (NEWS2) form
 paths:
   /api/national-early-warning-score-2/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - national-early-warning-score-2
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - national-early-warning-score-2
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - national-early-warning-score-2
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - national-early-warning-score-2
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - national-early-warning-score-2
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - national-early-warning-score-2
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/national-early-warning-score-2/national_early_warning_score_2_grade_flags:
     get:
       summary: List NationalEarlyWarningScore2GradeFlag records
+      tags:
+      - national-early-warning-score-2
       operationId: listNationalEarlyWarningScore2GradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NationalEarlyWarningScore2GradeFlag
+      tags:
+      - national-early-warning-score-2
       operationId: createNationalEarlyWarningScore2GradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NationalEarlyWarningScore2GradeFlag by id
+      tags:
+      - national-early-warning-score-2
       operationId: getNationalEarlyWarningScore2GradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NationalEarlyWarningScore2GradeFlag
+      tags:
+      - national-early-warning-score-2
       operationId: updateNationalEarlyWarningScore2GradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NationalEarlyWarningScore2GradeFlag
+      tags:
+      - national-early-warning-score-2
       operationId: replaceNationalEarlyWarningScore2GradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NationalEarlyWarningScore2GradeFlag
+      tags:
+      - national-early-warning-score-2
       operationId: deleteNationalEarlyWarningScore2GradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/national-early-warning-score-2/national_early_warning_score_2_grade_rules:
     get:
       summary: List NationalEarlyWarningScore2GradeRule records
+      tags:
+      - national-early-warning-score-2
       operationId: listNationalEarlyWarningScore2GradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NationalEarlyWarningScore2GradeRule
+      tags:
+      - national-early-warning-score-2
       operationId: createNationalEarlyWarningScore2GradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NationalEarlyWarningScore2GradeRule by id
+      tags:
+      - national-early-warning-score-2
       operationId: getNationalEarlyWarningScore2GradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NationalEarlyWarningScore2GradeRule
+      tags:
+      - national-early-warning-score-2
       operationId: updateNationalEarlyWarningScore2GradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NationalEarlyWarningScore2GradeRule
+      tags:
+      - national-early-warning-score-2
       operationId: replaceNationalEarlyWarningScore2GradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NationalEarlyWarningScore2GradeRule
+      tags:
+      - national-early-warning-score-2
       operationId: deleteNationalEarlyWarningScore2GradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/national-early-warning-score-2/national_early_warning_score_2_grades:
     get:
       summary: List NationalEarlyWarningScore2Grade records
+      tags:
+      - national-early-warning-score-2
       operationId: listNationalEarlyWarningScore2Grade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NationalEarlyWarningScore2Grade
+      tags:
+      - national-early-warning-score-2
       operationId: createNationalEarlyWarningScore2Grade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NationalEarlyWarningScore2Grade by id
+      tags:
+      - national-early-warning-score-2
       operationId: getNationalEarlyWarningScore2Grade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NationalEarlyWarningScore2Grade
+      tags:
+      - national-early-warning-score-2
       operationId: updateNationalEarlyWarningScore2Grade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NationalEarlyWarningScore2Grade
+      tags:
+      - national-early-warning-score-2
       operationId: replaceNationalEarlyWarningScore2Grade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NationalEarlyWarningScore2Grade
+      tags:
+      - national-early-warning-score-2
       operationId: deleteNationalEarlyWarningScore2Grade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/national-early-warning-score-2/national_early_warning_score_2s:
     get:
       summary: List NationalEarlyWarningScore2 records
+      tags:
+      - national-early-warning-score-2
       operationId: listNationalEarlyWarningScore2
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NationalEarlyWarningScore2
+      tags:
+      - national-early-warning-score-2
       operationId: createNationalEarlyWarningScore2
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NationalEarlyWarningScore2 by id
+      tags:
+      - national-early-warning-score-2
       operationId: getNationalEarlyWarningScore2
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NationalEarlyWarningScore2
+      tags:
+      - national-early-warning-score-2
       operationId: updateNationalEarlyWarningScore2
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NationalEarlyWarningScore2
+      tags:
+      - national-early-warning-score-2
       operationId: replaceNationalEarlyWarningScore2
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NationalEarlyWarningScore2
+      tags:
+      - national-early-warning-score-2
       operationId: deleteNationalEarlyWarningScore2
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - national-early-warning-score-2
   /api/national-early-warning-score-2/patients:
     get:
       summary: List Patient records
+      tags:
+      - national-early-warning-score-2
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - national-early-warning-score-2
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - national-early-warning-score-2
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - national-early-warning-score-2
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - national-early-warning-score-2
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - national-early-warning-score-2
       operationId: deletePatient
       responses:
         '200':

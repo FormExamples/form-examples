@@ -5,10 +5,19 @@ info:
   title: Breast Screening — BreastScreeningGradeFlag
   version: 1.0.0
   description: Safety flags that fire independently of the screening outcome, with priority and a suggested action for the reporting clinician or screening service.
+x-namespace:
+  form: breast-screening
+  apiPrefix: /api/breast-screening/
+  sqlSchema: breast_screening
+  xmlNamespace: https://formexamples.github.io/breast-screening/xml
+tags:
+  - name: breast-screening
+    description: Breast Screening form
 paths:
   /api/breast-screening/breast_screening_grade_flags:
     get:
       summary: List BreastScreeningGradeFlag records
+      tags: [breast-screening]
       operationId: listBreastScreeningGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BreastScreeningGradeFlag
+      tags: [breast-screening]
       operationId: createBreastScreeningGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BreastScreeningGradeFlag by id
+      tags: [breast-screening]
       operationId: getBreastScreeningGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BreastScreeningGradeFlag
+      tags: [breast-screening]
       operationId: updateBreastScreeningGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BreastScreeningGradeFlag
+      tags: [breast-screening]
       operationId: replaceBreastScreeningGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BreastScreeningGradeFlag
+      tags: [breast-screening]
       operationId: deleteBreastScreeningGradeFlag
       responses:
         "200":

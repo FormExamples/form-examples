@@ -5,10 +5,19 @@ info:
   title: Accident And Emergency Medicine Waiting List Card — AeMedicineWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a accident and emergency medicine waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: accident-and-emergency-medicine-waiting-list-card
+  apiPrefix: /api/accident-and-emergency-medicine-waiting-list-card/
+  sqlSchema: accident_and_emergency_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/accident-and-emergency-medicine-waiting-list-card/xml
+tags:
+  - name: accident-and-emergency-medicine-waiting-list-card
+    description: Accident And Emergency Medicine Waiting List Card form
 paths:
   /api/accident-and-emergency-medicine-waiting-list-card/ae_medicine_waiting_list_cards:
     get:
       summary: List AeMedicineWaitingListCard records
+      tags: [accident-and-emergency-medicine-waiting-list-card]
       operationId: listAeMedicineWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AeMedicineWaitingListCard
+      tags: [accident-and-emergency-medicine-waiting-list-card]
       operationId: createAeMedicineWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AeMedicineWaitingListCard by id
+      tags: [accident-and-emergency-medicine-waiting-list-card]
       operationId: getAeMedicineWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AeMedicineWaitingListCard
+      tags: [accident-and-emergency-medicine-waiting-list-card]
       operationId: updateAeMedicineWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AeMedicineWaitingListCard
+      tags: [accident-and-emergency-medicine-waiting-list-card]
       operationId: replaceAeMedicineWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AeMedicineWaitingListCard
+      tags: [accident-and-emergency-medicine-waiting-list-card]
       operationId: deleteAeMedicineWaitingListCard
       responses:
         "200":

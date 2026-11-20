@@ -5,10 +5,19 @@ info:
   title: Recognition Of Stroke In The Emergency Room — Patient
   version: 1.0.0
   description: Patient demographic information used by the ROSIER stroke-recognition record.
+x-namespace:
+  form: recognition-of-stroke-in-the-emergency-room
+  apiPrefix: /api/recognition-of-stroke-in-the-emergency-room/
+  sqlSchema: recognition_of_stroke_in_the_emergency_room
+  xmlNamespace: https://formexamples.github.io/recognition-of-stroke-in-the-emergency-room/xml
+tags:
+  - name: recognition-of-stroke-in-the-emergency-room
+    description: Recognition Of Stroke In The Emergency Room form
 paths:
   /api/recognition-of-stroke-in-the-emergency-room/patients:
     get:
       summary: List Patient records
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: deletePatient
       responses:
         "200":

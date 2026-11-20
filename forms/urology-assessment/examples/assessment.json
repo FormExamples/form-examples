@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000003f",
+    "id": "af02e387-bac3-5089-89e3-2ccdf0d901ac",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000051",
+    "id": "6000e1ab-952b-5724-ada1-1097688b491f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,41 +36,41 @@
     "unitedKingdomNhsNumber": ""
   },
   "assessment": {
-    "id": "550e8400-e29b-41d4-a716-000000000039",
+    "id": "353b32b2-929f-5296-af5d-9826acfe7c59",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000003d",
+    "patientId": "ce13dc51-6a22-5c77-b08e-8415ec575276",
     "status": "draft"
   },
   "grade": {
-    "id": "550e8400-e29b-41d4-a716-00000000005f",
+    "id": "1fbe42c4-0918-5471-bfd6-cc1db53ed2bb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-000000000063",
+    "assessmentId": "d41b8486-a08f-5564-a8f1-1ea50982eb2f",
     "ipssTotalScore": null,
     "ipssQolScore": null,
     "symptomSeverity": "mild",
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "gradingFiredRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000068",
+    "id": "dbd97a2b-fc81-5c8f-af96-f30463f53459",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-00000000006c",
+    "gradeId": "9d8f5069-4d52-5118-a573-efa1d306db99",
     "ruleId": "",
     "category": "",
     "description": "",
     "severityLevel": "mild"
   },
   "gradingAdditionalFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000071",
+    "id": "bed7f76c-530d-5cf5-8a18-a2b5ca1fa86a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-000000000075",
+    "gradeId": "5466a8e5-dc0d-59fb-b256-77dcbca57fb9",
     "flagId": "",
     "category": "",
     "message": "",

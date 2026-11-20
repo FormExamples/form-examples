@@ -7,6 +7,14 @@ info:
   description: Combined OpenAPI specification for the Radiology Waiting List Card form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: radiology-waiting-list-card
+  apiPrefix: /api/radiology-waiting-list-card/
+  sqlSchema: radiology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/radiology-waiting-list-card/xml
+tags:
+- name: radiology-waiting-list-card
+  description: Radiology Waiting List Card form
 paths:
   /api/radiology-waiting-list-card/openapi.yaml:
     get:
@@ -19,9 +27,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - radiology-waiting-list-card
   /api/radiology-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - radiology-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -74,6 +86,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - radiology-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -127,6 +141,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - radiology-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -154,6 +170,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - radiology-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -199,6 +217,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - radiology-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -244,6 +264,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - radiology-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -268,6 +290,8 @@ paths:
   /api/radiology-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - radiology-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - radiology-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - radiology-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - radiology-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - radiology-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - radiology-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/radiology-waiting-list-card/radiology_waiting_list_card_appointments:
     get:
       summary: List RadiologyWaitingListCardAppointment records
+      tags:
+      - radiology-waiting-list-card
       operationId: listRadiologyWaitingListCardAppointment
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RadiologyWaitingListCardAppointment
+      tags:
+      - radiology-waiting-list-card
       operationId: createRadiologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RadiologyWaitingListCardAppointment by id
+      tags:
+      - radiology-waiting-list-card
       operationId: getRadiologyWaitingListCardAppointment
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RadiologyWaitingListCardAppointment
+      tags:
+      - radiology-waiting-list-card
       operationId: updateRadiologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RadiologyWaitingListCardAppointment
+      tags:
+      - radiology-waiting-list-card
       operationId: replaceRadiologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RadiologyWaitingListCardAppointment
+      tags:
+      - radiology-waiting-list-card
       operationId: deleteRadiologyWaitingListCardAppointment
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/radiology-waiting-list-card/radiology_waiting_list_card_grade_flags:
     get:
       summary: List RadiologyWaitingListCardGradeFlag records
+      tags:
+      - radiology-waiting-list-card
       operationId: listRadiologyWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RadiologyWaitingListCardGradeFlag
+      tags:
+      - radiology-waiting-list-card
       operationId: createRadiologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RadiologyWaitingListCardGradeFlag by id
+      tags:
+      - radiology-waiting-list-card
       operationId: getRadiologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RadiologyWaitingListCardGradeFlag
+      tags:
+      - radiology-waiting-list-card
       operationId: updateRadiologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RadiologyWaitingListCardGradeFlag
+      tags:
+      - radiology-waiting-list-card
       operationId: replaceRadiologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RadiologyWaitingListCardGradeFlag
+      tags:
+      - radiology-waiting-list-card
       operationId: deleteRadiologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/radiology-waiting-list-card/radiology_waiting_list_card_grade_rules:
     get:
       summary: List RadiologyWaitingListCardGradeRule records
+      tags:
+      - radiology-waiting-list-card
       operationId: listRadiologyWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RadiologyWaitingListCardGradeRule
+      tags:
+      - radiology-waiting-list-card
       operationId: createRadiologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RadiologyWaitingListCardGradeRule by id
+      tags:
+      - radiology-waiting-list-card
       operationId: getRadiologyWaitingListCardGradeRule
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RadiologyWaitingListCardGradeRule
+      tags:
+      - radiology-waiting-list-card
       operationId: updateRadiologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RadiologyWaitingListCardGradeRule
+      tags:
+      - radiology-waiting-list-card
       operationId: replaceRadiologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RadiologyWaitingListCardGradeRule
+      tags:
+      - radiology-waiting-list-card
       operationId: deleteRadiologyWaitingListCardGradeRule
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/radiology-waiting-list-card/radiology_waiting_list_card_grades:
     get:
       summary: List RadiologyWaitingListCardGrade records
+      tags:
+      - radiology-waiting-list-card
       operationId: listRadiologyWaitingListCardGrade
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RadiologyWaitingListCardGrade
+      tags:
+      - radiology-waiting-list-card
       operationId: createRadiologyWaitingListCardGrade
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RadiologyWaitingListCardGrade by id
+      tags:
+      - radiology-waiting-list-card
       operationId: getRadiologyWaitingListCardGrade
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RadiologyWaitingListCardGrade
+      tags:
+      - radiology-waiting-list-card
       operationId: updateRadiologyWaitingListCardGrade
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RadiologyWaitingListCardGrade
+      tags:
+      - radiology-waiting-list-card
       operationId: replaceRadiologyWaitingListCardGrade
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RadiologyWaitingListCardGrade
+      tags:
+      - radiology-waiting-list-card
       operationId: deleteRadiologyWaitingListCardGrade
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/radiology-waiting-list-card/radiology_waiting_list_cards:
     get:
       summary: List RadiologyWaitingListCard records
+      tags:
+      - radiology-waiting-list-card
       operationId: listRadiologyWaitingListCard
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RadiologyWaitingListCard
+      tags:
+      - radiology-waiting-list-card
       operationId: createRadiologyWaitingListCard
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RadiologyWaitingListCard by id
+      tags:
+      - radiology-waiting-list-card
       operationId: getRadiologyWaitingListCard
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RadiologyWaitingListCard
+      tags:
+      - radiology-waiting-list-card
       operationId: updateRadiologyWaitingListCard
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RadiologyWaitingListCard
+      tags:
+      - radiology-waiting-list-card
       operationId: replaceRadiologyWaitingListCard
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RadiologyWaitingListCard
+      tags:
+      - radiology-waiting-list-card
       operationId: deleteRadiologyWaitingListCard
       responses:
         '200':

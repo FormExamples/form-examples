@@ -5,10 +5,19 @@ info:
   title: Columbia Suicide Severity Rating Scale — ColumbiaSuicideSeverityRatingScaleGradeFlag
   version: 1.0.0
   description: Red-flag issues that fire independently of the risk tier, with priority and a suggested action for the clinical or crisis team.
+x-namespace:
+  form: columbia-suicide-severity-rating-scale
+  apiPrefix: /api/columbia-suicide-severity-rating-scale/
+  sqlSchema: columbia_suicide_severity_rating_scale
+  xmlNamespace: https://formexamples.github.io/columbia-suicide-severity-rating-scale/xml
+tags:
+  - name: columbia-suicide-severity-rating-scale
+    description: Columbia Suicide Severity Rating Scale form
 paths:
   /api/columbia-suicide-severity-rating-scale/columbia_suicide_severity_rating_scale_grade_flags:
     get:
       summary: List ColumbiaSuicideSeverityRatingScaleGradeFlag records
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: listColumbiaSuicideSeverityRatingScaleGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ColumbiaSuicideSeverityRatingScaleGradeFlag
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: createColumbiaSuicideSeverityRatingScaleGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ColumbiaSuicideSeverityRatingScaleGradeFlag by id
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: getColumbiaSuicideSeverityRatingScaleGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ColumbiaSuicideSeverityRatingScaleGradeFlag
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: updateColumbiaSuicideSeverityRatingScaleGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ColumbiaSuicideSeverityRatingScaleGradeFlag
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: replaceColumbiaSuicideSeverityRatingScaleGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ColumbiaSuicideSeverityRatingScaleGradeFlag
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: deleteColumbiaSuicideSeverityRatingScaleGradeFlag
       responses:
         "200":

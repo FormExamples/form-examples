@@ -5,10 +5,19 @@ info:
   title: Cystoscopy Test Request — CystoscopyTestRequest
   version: 1.0.0
   description: Cystoscopy (bladder endoscopy) request (referral). Captures the requested procedure, the clinical indication and question, relevant history, symptoms, bleeding-risk factors, and triage urgency.
+x-namespace:
+  form: cystoscopy-test-request
+  apiPrefix: /api/cystoscopy-test-request/
+  sqlSchema: cystoscopy_test_request
+  xmlNamespace: https://formexamples.github.io/cystoscopy-test-request/xml
+tags:
+  - name: cystoscopy-test-request
+    description: Cystoscopy Test Request form
 paths:
   /api/cystoscopy-test-request/cystoscopy_test_requests:
     get:
       summary: List CystoscopyTestRequest records
+      tags: [cystoscopy-test-request]
       operationId: listCystoscopyTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CystoscopyTestRequest
+      tags: [cystoscopy-test-request]
       operationId: createCystoscopyTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CystoscopyTestRequest by id
+      tags: [cystoscopy-test-request]
       operationId: getCystoscopyTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CystoscopyTestRequest
+      tags: [cystoscopy-test-request]
       operationId: updateCystoscopyTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CystoscopyTestRequest
+      tags: [cystoscopy-test-request]
       operationId: replaceCystoscopyTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CystoscopyTestRequest
+      tags: [cystoscopy-test-request]
       operationId: deleteCystoscopyTestRequest
       responses:
         "200":

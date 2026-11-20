@@ -5,10 +5,19 @@ info:
   title: United Kingdom Vehicle Registration Application — Applicant
   version: 1.0.0
   description: "Applicant (person making the application to the DVLA) for a vehicle registration application: name, date of birth, address, and identity documents supplied."
+x-namespace:
+  form: united-kingdom-vehicle-registration-application
+  apiPrefix: /api/united-kingdom-vehicle-registration-application/
+  sqlSchema: united_kingdom_vehicle_registration_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-vehicle-registration-application/xml
+tags:
+  - name: united-kingdom-vehicle-registration-application
+    description: United Kingdom Vehicle Registration Application form
 paths:
   /api/united-kingdom-vehicle-registration-application/applicants:
     get:
       summary: List Applicant records
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: listApplicant
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Applicant
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: createApplicant
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Applicant by id
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: getApplicant
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Applicant
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: updateApplicant
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Applicant
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: replaceApplicant
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Applicant
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: deleteApplicant
       responses:
         "200":

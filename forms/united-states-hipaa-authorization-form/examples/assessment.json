@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000098",
+    "id": "8d44a213-f2d1-59b4-826c-c6f3b35adec0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -15,33 +15,33 @@
     "email": ""
   },
   "hipaaAuthorization": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a5",
+    "id": "8085f974-e108-5828-b539-17826021d1fb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000000a9",
+    "patientId": "8b499df2-69f2-5c59-beff-bae0387e2901",
     "status": "draft",
     "stateTemplate": "tn-hs-2557",
     "revokedAt": null,
     "revocationMethod": "written"
   },
   "signer": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ae",
+    "id": "ab60337b-c263-5079-8292-c2bf73bc9199",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hipaaAuthorizationId": "550e8400-e29b-41d4-a716-0000000000b2",
+    "hipaaAuthorizationId": "9659a40c-f165-5283-85c8-980c005e5daf",
     "relationship": "self",
     "representativeName": "",
     "representativeAuthorityDescription": "",
     "representativeAuthorityProofAttached": "yes"
   },
   "disclosingSource": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b7",
+    "id": "a8a3d71a-2514-5046-9bcd-68dde625a4b3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hipaaAuthorizationId": "550e8400-e29b-41d4-a716-0000000000bb",
+    "hipaaAuthorizationId": "c3f1fe1d-12c7-588b-887e-0f9a1331ee85",
     "identificationMode": "specific",
     "specificPersonsOrOrganizations": "",
     "classDescription": "",
@@ -49,11 +49,11 @@
     "isPart2Program": "yes"
   },
   "authorizedRecipient": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c1",
+    "id": "580b283c-3e17-5db6-84c1-772b9adb6ad4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hipaaAuthorizationId": "550e8400-e29b-41d4-a716-0000000000c5",
+    "hipaaAuthorizationId": "ef4407f0-f8ad-57ce-8d20-55fc340f2a62",
     "recipientName": "",
     "recipientOrganization": "",
     "recipientRole": "",
@@ -63,11 +63,11 @@
     "recipientRelationshipToPatient": "health-plan"
   },
   "recordsToDisclose": {
-    "id": "550e8400-e29b-41d4-a716-0000000000cd",
+    "id": "a9a25a4d-bed1-5028-b66b-29e85577a0d1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hipaaAuthorizationId": "550e8400-e29b-41d4-a716-0000000000d1",
+    "hipaaAuthorizationId": "0bbf2dc2-7005-5f6e-a1ea-01528be6df4f",
     "includeMedicalHealth": "yes",
     "medicalHealthInitials": "",
     "includeMentalHealth": "yes",
@@ -88,21 +88,21 @@
     "otherDescription": ""
   },
   "purposeOfDisclosure": {
-    "id": "550e8400-e29b-41d4-a716-0000000000e4",
+    "id": "b0c03ac4-b705-5389-8fe0-b2d7de5b8129",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hipaaAuthorizationId": "550e8400-e29b-41d4-a716-0000000000e8",
+    "hipaaAuthorizationId": "6e022dc5-7b75-521c-bd51-d169ebd210a5",
     "purposes": "",
     "primaryPurpose": "eligibility-determination",
     "otherDetails": ""
   },
   "expiration": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ec",
+    "id": "37f2b906-1a04-5b37-aab4-afcacb3f9ea5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hipaaAuthorizationId": "550e8400-e29b-41d4-a716-0000000000f0",
+    "hipaaAuthorizationId": "3175a1d5-5ef1-53fa-8e3a-f82c65096916",
     "kind": "date",
     "expirationDate": null,
     "expirationEvent": "",
@@ -110,11 +110,11 @@
     "durationLabel": ""
   },
   "patientRightsAcknowledgement": {
-    "id": "550e8400-e29b-41d4-a716-0000000000f6",
+    "id": "3669edd5-815c-5053-9aa6-58e6d289e3bd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hipaaAuthorizationId": "550e8400-e29b-41d4-a716-0000000000fa",
+    "hipaaAuthorizationId": "baa547bc-8699-572e-a897-0d4f731498a3",
     "acknowledgedRightToRevoke": "yes",
     "acknowledgedRevocationProcedure": "yes",
     "acknowledgedNoConditioning": "yes",
@@ -123,11 +123,11 @@
     "acknowledgedRightToInspectDisclosed": "yes"
   },
   "signatureWitness": {
-    "id": "550e8400-e29b-41d4-a716-000000000101",
+    "id": "4a7a91a4-dea1-5429-8457-a3b1bd183dda",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hipaaAuthorizationId": "550e8400-e29b-41d4-a716-000000000105",
+    "hipaaAuthorizationId": "a17e19ef-dab7-5eb4-aab1-d5569d0e011d",
     "individualSignatureConfirmed": "yes",
     "individualSignatureImageUri": "",
     "signatureDate": null,
@@ -142,11 +142,11 @@
     "witnessRole": ""
   },
   "validationResult": {
-    "id": "550e8400-e29b-41d4-a716-000000000112",
+    "id": "2493f87e-7504-5398-911d-a0d4246734a6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hipaaAuthorizationId": "550e8400-e29b-41d4-a716-000000000116",
+    "hipaaAuthorizationId": "f20f998d-4365-571b-8114-06de9a0b22bf",
     "validityStatus": "valid",
     "completenessScore": 0,
     "completenessStatus": "complete",
@@ -154,11 +154,11 @@
     "validatorVersion": ""
   },
   "validationFiredRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000011c",
+    "id": "90c60820-e967-5120-8806-21ec42c5c445",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "validationResultId": "550e8400-e29b-41d4-a716-000000000120",
+    "validationResultId": "81fffa56-e19e-5b1a-92f8-24a27f15768b",
     "ruleId": "",
     "citation": "",
     "domain": "core-element",
@@ -166,11 +166,11 @@
     "priority": "high"
   },
   "validationAdditionalFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000126",
+    "id": "fdac2209-312d-5a71-a42c-3f9ee5268aef",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "validationResultId": "550e8400-e29b-41d4-a716-00000000012a",
+    "validationResultId": "e6d8a6ad-ca99-5cf7-a501-34ec2913bd32",
     "flagId": "",
     "category": "sensitive-category",
     "message": "",

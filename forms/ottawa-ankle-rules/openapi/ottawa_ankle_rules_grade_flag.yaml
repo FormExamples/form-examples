@@ -5,10 +5,19 @@ info:
   title: Ottawa Ankle Rules — OttawaAnkleRulesGradeFlag
   version: 1.0.0
   description: Clinically significant flags that fire independently of the imaging decisions, with priority and a suggested action for the assessing team.
+x-namespace:
+  form: ottawa-ankle-rules
+  apiPrefix: /api/ottawa-ankle-rules/
+  sqlSchema: ottawa_ankle_rules
+  xmlNamespace: https://formexamples.github.io/ottawa-ankle-rules/xml
+tags:
+  - name: ottawa-ankle-rules
+    description: Ottawa Ankle Rules form
 paths:
   /api/ottawa-ankle-rules/ottawa_ankle_rules_grade_flags:
     get:
       summary: List OttawaAnkleRulesGradeFlag records
+      tags: [ottawa-ankle-rules]
       operationId: listOttawaAnkleRulesGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OttawaAnkleRulesGradeFlag
+      tags: [ottawa-ankle-rules]
       operationId: createOttawaAnkleRulesGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OttawaAnkleRulesGradeFlag by id
+      tags: [ottawa-ankle-rules]
       operationId: getOttawaAnkleRulesGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OttawaAnkleRulesGradeFlag
+      tags: [ottawa-ankle-rules]
       operationId: updateOttawaAnkleRulesGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OttawaAnkleRulesGradeFlag
+      tags: [ottawa-ankle-rules]
       operationId: replaceOttawaAnkleRulesGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OttawaAnkleRulesGradeFlag
+      tags: [ottawa-ankle-rules]
       operationId: deleteOttawaAnkleRulesGradeFlag
       responses:
         "200":

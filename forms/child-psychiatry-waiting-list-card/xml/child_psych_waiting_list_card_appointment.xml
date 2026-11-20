@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE child_psych_waiting_list_card_appointment SYSTEM "child_psych_waiting_list_card_appointment.dtd">
-<child_psych_waiting_list_card_appointment>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<child_psych_waiting_list_card_appointment xmlns="https://formexamples.github.io/child-psychiatry-waiting-list-card/xml">
+<id>b4dca18b-d887-503a-9db9-50c01dfb1005</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<child_psych_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</child_psych_waiting_list_card_id>
+<child_psych_waiting_list_card_id>8cfb55d4-6566-5435-844e-4fc585732a17</child_psych_waiting_list_card_id>
 <appointment_date>2026-01-15</appointment_date>
 <appointment_time></appointment_time>
 <duration_minutes>1</duration_minutes>

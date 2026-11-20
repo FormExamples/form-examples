@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE agile_checklist_grade_rule SYSTEM "agile_checklist_grade_rule.dtd">
-<agile_checklist_grade_rule>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<agile_checklist_grade_rule xmlns="https://formexamples.github.io/agile-checklist/xml">
+<id>840ac3e6-5279-5c8b-b01f-8d388dbfa561</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<agile_checklist_grade_id>770e8400-e29b-41d4-a716-446655440002</agile_checklist_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<agile_checklist_grade_id>65ba1f91-624d-58fb-9b9f-2b34df7ced40</agile_checklist_grade_id>
+<rule_id>cdc538c8-d1df-5ef4-91a0-007dd00ad7ec</rule_id>
 <section>teams</section>
 <band>high</band>
 <description>Example text.</description>

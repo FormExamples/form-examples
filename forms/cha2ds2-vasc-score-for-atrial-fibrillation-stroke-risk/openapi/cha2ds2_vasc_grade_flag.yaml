@@ -5,10 +5,19 @@ info:
   title: Cha2ds2 Vasc Score For Atrial Fibrillation Stroke Risk — Cha2ds2VascGradeFlag
   version: 1.0.0
   description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.
+x-namespace:
+  form: cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
+  apiPrefix: /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/
+  sqlSchema: cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk
+  xmlNamespace: https://formexamples.github.io/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/xml
+tags:
+  - name: cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk
+    description: Cha2ds2 Vasc Score For Atrial Fibrillation Stroke Risk form
 paths:
   /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vasc_grade_flags:
     get:
       summary: List Cha2ds2VascGradeFlag records
+      tags: [cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk]
       operationId: listCha2ds2VascGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Cha2ds2VascGradeFlag
+      tags: [cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk]
       operationId: createCha2ds2VascGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Cha2ds2VascGradeFlag by id
+      tags: [cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk]
       operationId: getCha2ds2VascGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Cha2ds2VascGradeFlag
+      tags: [cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk]
       operationId: updateCha2ds2VascGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Cha2ds2VascGradeFlag
+      tags: [cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk]
       operationId: replaceCha2ds2VascGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Cha2ds2VascGradeFlag
+      tags: [cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk]
       operationId: deleteCha2ds2VascGradeFlag
       responses:
         "200":

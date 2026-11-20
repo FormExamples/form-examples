@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE blood_test_request SYSTEM "blood_test_request.dtd">
-<blood_test_request>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<blood_test_request xmlns="https://formexamples.github.io/blood-test-request/xml">
+<id>5a88bf11-3f78-5098-a58f-01aa6d0c5457</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>e546e226-6e2d-59f1-8702-38f17767d96d</patient_id>
+<clinician_id>ad3e049a-6e40-5254-9fd6-eb08fa5e4623</clinician_id>
 <status>draft</status>
 <site_name>Example</site_name>
 <setting>outpatient</setting>

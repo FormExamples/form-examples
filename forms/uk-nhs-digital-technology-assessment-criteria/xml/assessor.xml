@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessor SYSTEM "assessor.dtd">
-<assessor>
-<id>660e8400-e29b-41d4-a716-446655440001</id>
+<assessor xmlns="https://formexamples.github.io/uk-nhs-digital-technology-assessment-criteria/xml">
+<id>28f728db-707d-510a-a88f-835e4ae754fb</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>

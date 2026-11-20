@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE neurosurgery_waiting_list_card_grade_flag SYSTEM "neurosurgery_waiting_list_card_grade_flag.dtd">
-<neurosurgery_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<neurosurgery_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/neurosurgery-waiting-list-card/xml">
+<id>b5d67b81-f92e-50db-af53-80e9edba10bd</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<neurosurgery_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</neurosurgery_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<neurosurgery_waiting_list_card_grade_id>70a1b496-f134-5a62-9fab-42666be2fa4f</neurosurgery_waiting_list_card_grade_id>
+<flag_id>3521ba35-5869-581d-ad48-b6f90c05d9ee</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

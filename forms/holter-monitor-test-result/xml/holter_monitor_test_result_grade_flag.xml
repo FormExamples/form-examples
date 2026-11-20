@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE holter_monitor_test_result_grade_flag SYSTEM "holter_monitor_test_result_grade_flag.dtd">
-<holter_monitor_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<holter_monitor_test_result_grade_flag xmlns="https://formexamples.github.io/holter-monitor-test-result/xml">
+<id>1c939944-a76d-5cf7-ad70-3a124e924bcf</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<holter_monitor_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</holter_monitor_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<holter_monitor_test_result_grade_id>2662ce7c-d863-56f0-9af0-5d48b556d812</holter_monitor_test_result_grade_id>
+<flag_id>d834d214-a9fe-5659-803a-e1fadb418f33</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

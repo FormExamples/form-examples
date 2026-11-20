@@ -5,10 +5,19 @@ info:
   title: Post Traumatic Stress Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: post-traumatic-stress-assessment
+  apiPrefix: /api/post-traumatic-stress-assessment/
+  sqlSchema: post_traumatic_stress_assessment
+  xmlNamespace: https://formexamples.github.io/post-traumatic-stress-assessment/xml
+tags:
+  - name: post-traumatic-stress-assessment
+    description: Post Traumatic Stress Assessment form
 paths:
   /api/post-traumatic-stress-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [post-traumatic-stress-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [post-traumatic-stress-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [post-traumatic-stress-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [post-traumatic-stress-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [post-traumatic-stress-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [post-traumatic-stress-assessment]
       operationId: deleteClinician
       responses:
         "200":

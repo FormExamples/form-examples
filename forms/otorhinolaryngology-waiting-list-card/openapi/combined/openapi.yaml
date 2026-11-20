@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Otorhinolaryngology Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: otorhinolaryngology-waiting-list-card
+  apiPrefix: /api/otorhinolaryngology-waiting-list-card/
+  sqlSchema: otorhinolaryngology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/otorhinolaryngology-waiting-list-card/xml
+tags:
+- name: otorhinolaryngology-waiting-list-card
+  description: Otorhinolaryngology Waiting List Card form
 paths:
   /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_card_appointments:
     get:
       summary: List EntWaitingListCardAppointment records
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: listEntWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EntWaitingListCardAppointment
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: createEntWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EntWaitingListCardAppointment by id
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: getEntWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EntWaitingListCardAppointment
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: updateEntWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EntWaitingListCardAppointment
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: replaceEntWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EntWaitingListCardAppointment
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: deleteEntWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_card_grade_flags:
     get:
       summary: List EntWaitingListCardGradeFlag records
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: listEntWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EntWaitingListCardGradeFlag
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: createEntWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EntWaitingListCardGradeFlag by id
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: getEntWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EntWaitingListCardGradeFlag
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: updateEntWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EntWaitingListCardGradeFlag
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: replaceEntWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EntWaitingListCardGradeFlag
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: deleteEntWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_card_grade_rules:
     get:
       summary: List EntWaitingListCardGradeRule records
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: listEntWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EntWaitingListCardGradeRule
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: createEntWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EntWaitingListCardGradeRule by id
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: getEntWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EntWaitingListCardGradeRule
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: updateEntWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EntWaitingListCardGradeRule
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: replaceEntWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EntWaitingListCardGradeRule
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: deleteEntWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_card_grades:
     get:
       summary: List EntWaitingListCardGrade records
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: listEntWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EntWaitingListCardGrade
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: createEntWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EntWaitingListCardGrade by id
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: getEntWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EntWaitingListCardGrade
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: updateEntWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EntWaitingListCardGrade
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: replaceEntWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EntWaitingListCardGrade
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: deleteEntWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_cards:
     get:
       summary: List EntWaitingListCard records
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: listEntWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EntWaitingListCard
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: createEntWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EntWaitingListCard by id
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: getEntWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EntWaitingListCard
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: updateEntWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EntWaitingListCard
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: replaceEntWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EntWaitingListCard
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: deleteEntWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - otorhinolaryngology-waiting-list-card
   /api/otorhinolaryngology-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/otorhinolaryngology-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - otorhinolaryngology-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

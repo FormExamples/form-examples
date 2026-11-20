@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "ee881118-457e-4f66-a56b-8d17888e1ec7",
+  "id": "346310b8-85f2-5cc7-b5f2-3047e14c0e07",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0",
+      "fullUrl": "urn:uuid:5982555e-720d-5ea8-ae59-595ff3ef94fc",
       "resource": {
         "resourceType": "Patient",
-        "id": "a25e893c-ad1d-433b-ad38-d9cd547927b0",
+        "id": "5982555e-720d-5ea8-ae59-595ff3ef94fc",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:c518df21-ceaa-4011-a224-d5f734e0deef",
+      "fullUrl": "urn:uuid:aa3b6f14-e0c1-5644-a5c6-32542a1c985f",
       "resource": {
         "resourceType": "Observation",
-        "id": "c518df21-ceaa-4011-a224-d5f734e0deef",
+        "id": "aa3b6f14-e0c1-5644-a5c6-32542a1c985f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+          "reference": "urn:uuid:5982555e-720d-5ea8-ae59-595ff3ef94fc"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:9b30a627-b174-4e7a-abe4-e9e8176dd412",
+      "fullUrl": "urn:uuid:3db30082-5a6c-5df2-919e-8fef94457764",
       "resource": {
         "resourceType": "Observation",
-        "id": "9b30a627-b174-4e7a-abe4-e9e8176dd412",
+        "id": "3db30082-5a6c-5df2-919e-8fef94457764",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+          "reference": "urn:uuid:5982555e-720d-5ea8-ae59-595ff3ef94fc"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -583,10 +583,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:ee4f3ddc-4dcc-44f1-a0fb-9dc2de17e739",
+      "fullUrl": "urn:uuid:5ba153c7-6270-5cd9-b266-6c6dd063313b",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "ee4f3ddc-4dcc-44f1-a0fb-9dc2de17e739",
+        "id": "5ba153c7-6270-5cd9-b266-6c6dd063313b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -595,7 +595,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+          "reference": "urn:uuid:5982555e-720d-5ea8-ae59-595ff3ef94fc"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -604,10 +604,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:ad30db2e-d636-4254-a7e0-6b0f6904ac5a",
+      "fullUrl": "urn:uuid:ac240235-dfe3-5fb5-ac0f-3efd400c3d8b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ad30db2e-d636-4254-a7e0-6b0f6904ac5a",
+        "id": "ac240235-dfe3-5fb5-ac0f-3efd400c3d8b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -637,17 +637,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+          "reference": "urn:uuid:5982555e-720d-5ea8-ae59-595ff3ef94fc"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A pathogenic or likely-pathogenic actionable variant is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:ff087970-59d2-46a7-a803-90194605a1fc",
+      "fullUrl": "urn:uuid:dcb71d62-7888-51bd-835e-39bf851afe97",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ff087970-59d2-46a7-a803-90194605a1fc",
+        "id": "dcb71d62-7888-51bd-835e-39bf851afe97",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -677,17 +677,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+          "reference": "urn:uuid:5982555e-720d-5ea8-ae59-595ff3ef94fc"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Likely-pathogenic actionable variant (ACMG Class 4); abnormality severity graded moderate."
       }
     },
     {
-      "fullUrl": "urn:uuid:c4d17e3d-091a-4225-a0f1-fb7a0b2ccdbf",
+      "fullUrl": "urn:uuid:893dbcc3-3260-5b58-a588-4a5760b8fc5d",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "c4d17e3d-091a-4225-a0f1-fb7a0b2ccdbf",
+        "id": "893dbcc3-3260-5b58-a588-4a5760b8fc5d",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -717,17 +717,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+          "reference": "urn:uuid:5982555e-720d-5ea8-ae59-595ff3ef94fc"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Pathogenic / likely-pathogenic actionable variant auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:a88d5dba-fc79-4159-acae-cb9d3012e12e",
+      "fullUrl": "urn:uuid:6486d3a4-7258-5e2c-a481-cb59b6c71f46",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "a88d5dba-fc79-4159-acae-cb9d3012e12e",
+        "id": "6486d3a4-7258-5e2c-a481-cb59b6c71f46",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -757,7 +757,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+          "reference": "urn:uuid:5982555e-720d-5ea8-ae59-595ff3ef94fc"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A pathogenic or likely-pathogenic actionable variant is present.",
@@ -771,10 +771,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:29c37727-ea6d-4ce2-a529-a2e425b302c4",
+      "fullUrl": "urn:uuid:1fab2a62-0177-595d-8548-35be351f4800",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "29c37727-ea6d-4ce2-a529-a2e425b302c4",
+        "id": "1fab2a62-0177-595d-8548-35be351f4800",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -804,7 +804,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+          "reference": "urn:uuid:5982555e-720d-5ea8-ae59-595ff3ef94fc"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Actionable genomic result requiring direct communication to the referrer.",
@@ -818,10 +818,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:2ec87166-74ee-41b5-a8a4-67a300be3ab4",
+      "fullUrl": "urn:uuid:53b8b609-2734-5d3b-8641-399c2b219446",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "2ec87166-74ee-41b5-a8a4-67a300be3ab4",
+        "id": "53b8b609-2734-5d3b-8641-399c2b219446",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -851,7 +851,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+          "reference": "urn:uuid:5982555e-720d-5ea8-ae59-595ff3ef94fc"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Actionable variant present but the result has not been recorded as communicated.",
@@ -865,10 +865,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:57186858-3450-4e6e-a7f3-d5dcbd7dbdb4",
+      "fullUrl": "urn:uuid:93de98b8-7443-54e8-936d-b2d074aea0fa",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "57186858-3450-4e6e-a7f3-d5dcbd7dbdb4",
+        "id": "93de98b8-7443-54e8-936d-b2d074aea0fa",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -898,7 +898,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:a25e893c-ad1d-433b-ad38-d9cd547927b0"
+          "reference": "urn:uuid:5982555e-720d-5ea8-ae59-595ff3ef94fc"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Cascade (predictive) testing of at-risk relatives is recommended.",

@@ -5,10 +5,19 @@ info:
   title: United Kingdom Maternity Certificate Mat B1 — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: united-kingdom-maternity-certificate-mat-b1
+  apiPrefix: /api/united-kingdom-maternity-certificate-mat-b1/
+  sqlSchema: united_kingdom_maternity_certificate_mat_b1
+  xmlNamespace: https://formexamples.github.io/united-kingdom-maternity-certificate-mat-b1/xml
+tags:
+  - name: united-kingdom-maternity-certificate-mat-b1
+    description: United Kingdom Maternity Certificate Mat B1 form
 paths:
   /api/united-kingdom-maternity-certificate-mat-b1/patients:
     get:
       summary: List Patient records
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [united-kingdom-maternity-certificate-mat-b1]
       operationId: deletePatient
       responses:
         "200":

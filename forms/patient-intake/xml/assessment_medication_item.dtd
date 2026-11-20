@@ -1,4 +1,5 @@
 <!ELEMENT assessment_medication_item (id,created_at,updated_at,deleted_at,medications_id,medication_name,dose,frequency,route,prescriber,reason,start_date,sort_order)>
+<!ATTLIST assessment_medication_item xmlns CDATA #FIXED "https://formexamples.github.io/patient-intake/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

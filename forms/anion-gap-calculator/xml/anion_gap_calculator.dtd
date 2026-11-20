@@ -1,4 +1,5 @@
 <!ELEMENT anion_gap_calculator (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,calculated_at,care_setting,clinical_context,patient_identifier,age_band,sex,sodium_mmol_l,potassium_mmol_l,chloride_mmol_l,bicarbonate_mmol_l,albumin_g_l,include_potassium)>
+<!ATTLIST anion_gap_calculator xmlns CDATA #FIXED "https://formexamples.github.io/anion-gap-calculator/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

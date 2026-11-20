@@ -5,10 +5,19 @@ info:
   title: Meeting — RecurringRule
   version: 1.0.0
   description: Optional recurrence rule for a meeting, modelled on RFC 5545 RRULE but restricted to the seven frequencies a non-technical user is likely to need.
+x-namespace:
+  form: meeting
+  apiPrefix: /api/meeting/
+  sqlSchema: meeting
+  xmlNamespace: https://formexamples.github.io/meeting/xml
+tags:
+  - name: meeting
+    description: Meeting form
 paths:
   /api/meeting/recurring_rules:
     get:
       summary: List RecurringRule records
+      tags: [meeting]
       operationId: listRecurringRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RecurringRule
+      tags: [meeting]
       operationId: createRecurringRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RecurringRule by id
+      tags: [meeting]
       operationId: getRecurringRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RecurringRule
+      tags: [meeting]
       operationId: updateRecurringRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RecurringRule
+      tags: [meeting]
       operationId: replaceRecurringRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RecurringRule
+      tags: [meeting]
       operationId: deleteRecurringRule
       responses:
         "200":

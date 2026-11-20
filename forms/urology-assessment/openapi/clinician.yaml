@@ -5,10 +5,19 @@ info:
   title: Urology Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: urology-assessment
+  apiPrefix: /api/urology-assessment/
+  sqlSchema: urology_assessment
+  xmlNamespace: https://formexamples.github.io/urology-assessment/xml
+tags:
+  - name: urology-assessment
+    description: Urology Assessment form
 paths:
   /api/urology-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [urology-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [urology-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [urology-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [urology-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [urology-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [urology-assessment]
       operationId: deleteClinician
       responses:
         "200":

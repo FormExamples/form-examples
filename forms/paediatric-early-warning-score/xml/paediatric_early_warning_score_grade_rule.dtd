@@ -1,4 +1,5 @@
 <!ELEMENT paediatric_early_warning_score_grade_rule (id,created_at,updated_at,deleted_at,paediatric_early_warning_score_grade_id,rule_id,instrument,band,points,category,description)>
+<!ATTLIST paediatric_early_warning_score_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/paediatric-early-warning-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

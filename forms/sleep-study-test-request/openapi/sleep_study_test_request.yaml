@@ -5,10 +5,19 @@ info:
   title: Sleep Study Test Request — SleepStudyTestRequest
   version: 1.0.0
   description: Sleep study / polysomnography request (referral), mainly for obstructive sleep apnoea. Captures the requested study, the clinical indication and question, Epworth and STOP-BANG scores, anthropometry, symptoms / risk factors, and triage urgency.
+x-namespace:
+  form: sleep-study-test-request
+  apiPrefix: /api/sleep-study-test-request/
+  sqlSchema: sleep_study_test_request
+  xmlNamespace: https://formexamples.github.io/sleep-study-test-request/xml
+tags:
+  - name: sleep-study-test-request
+    description: Sleep Study Test Request form
 paths:
   /api/sleep-study-test-request/sleep_study_test_requests:
     get:
       summary: List SleepStudyTestRequest records
+      tags: [sleep-study-test-request]
       operationId: listSleepStudyTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SleepStudyTestRequest
+      tags: [sleep-study-test-request]
       operationId: createSleepStudyTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one SleepStudyTestRequest by id
+      tags: [sleep-study-test-request]
       operationId: getSleepStudyTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SleepStudyTestRequest
+      tags: [sleep-study-test-request]
       operationId: updateSleepStudyTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing SleepStudyTestRequest
+      tags: [sleep-study-test-request]
       operationId: replaceSleepStudyTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SleepStudyTestRequest
+      tags: [sleep-study-test-request]
       operationId: deleteSleepStudyTestRequest
       responses:
         "200":

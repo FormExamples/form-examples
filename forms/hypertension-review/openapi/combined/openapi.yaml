@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Hypertension Annual Review form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: hypertension-review
+  apiPrefix: /api/hypertension-review/
+  sqlSchema: hypertension_review
+  xmlNamespace: https://formexamples.github.io/hypertension-review/xml
+tags:
+- name: hypertension-review
+  description: Hypertension Annual Review form
 paths:
   /api/hypertension-review/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - hypertension-review
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - hypertension-review
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - hypertension-review
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - hypertension-review
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - hypertension-review
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - hypertension-review
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/hypertension-review/hypertension_review_grade_flags:
     get:
       summary: List HypertensionReviewGradeFlag records
+      tags:
+      - hypertension-review
       operationId: listHypertensionReviewGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HypertensionReviewGradeFlag
+      tags:
+      - hypertension-review
       operationId: createHypertensionReviewGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HypertensionReviewGradeFlag by id
+      tags:
+      - hypertension-review
       operationId: getHypertensionReviewGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HypertensionReviewGradeFlag
+      tags:
+      - hypertension-review
       operationId: updateHypertensionReviewGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HypertensionReviewGradeFlag
+      tags:
+      - hypertension-review
       operationId: replaceHypertensionReviewGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HypertensionReviewGradeFlag
+      tags:
+      - hypertension-review
       operationId: deleteHypertensionReviewGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/hypertension-review/hypertension_review_grade_rules:
     get:
       summary: List HypertensionReviewGradeRule records
+      tags:
+      - hypertension-review
       operationId: listHypertensionReviewGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HypertensionReviewGradeRule
+      tags:
+      - hypertension-review
       operationId: createHypertensionReviewGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HypertensionReviewGradeRule by id
+      tags:
+      - hypertension-review
       operationId: getHypertensionReviewGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HypertensionReviewGradeRule
+      tags:
+      - hypertension-review
       operationId: updateHypertensionReviewGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HypertensionReviewGradeRule
+      tags:
+      - hypertension-review
       operationId: replaceHypertensionReviewGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HypertensionReviewGradeRule
+      tags:
+      - hypertension-review
       operationId: deleteHypertensionReviewGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/hypertension-review/hypertension_review_grades:
     get:
       summary: List HypertensionReviewGrade records
+      tags:
+      - hypertension-review
       operationId: listHypertensionReviewGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HypertensionReviewGrade
+      tags:
+      - hypertension-review
       operationId: createHypertensionReviewGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HypertensionReviewGrade by id
+      tags:
+      - hypertension-review
       operationId: getHypertensionReviewGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HypertensionReviewGrade
+      tags:
+      - hypertension-review
       operationId: updateHypertensionReviewGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HypertensionReviewGrade
+      tags:
+      - hypertension-review
       operationId: replaceHypertensionReviewGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HypertensionReviewGrade
+      tags:
+      - hypertension-review
       operationId: deleteHypertensionReviewGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/hypertension-review/hypertension_reviews:
     get:
       summary: List HypertensionReview records
+      tags:
+      - hypertension-review
       operationId: listHypertensionReview
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HypertensionReview
+      tags:
+      - hypertension-review
       operationId: createHypertensionReview
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HypertensionReview by id
+      tags:
+      - hypertension-review
       operationId: getHypertensionReview
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HypertensionReview
+      tags:
+      - hypertension-review
       operationId: updateHypertensionReview
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HypertensionReview
+      tags:
+      - hypertension-review
       operationId: replaceHypertensionReview
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HypertensionReview
+      tags:
+      - hypertension-review
       operationId: deleteHypertensionReview
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - hypertension-review
   /api/hypertension-review/patients:
     get:
       summary: List Patient records
+      tags:
+      - hypertension-review
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - hypertension-review
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - hypertension-review
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - hypertension-review
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - hypertension-review
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - hypertension-review
       operationId: deletePatient
       responses:
         '200':

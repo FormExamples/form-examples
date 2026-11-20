@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Corrected Calcium Calculator form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: corrected-calcium-calculator
+  apiPrefix: /api/corrected-calcium-calculator/
+  sqlSchema: corrected_calcium_calculator
+  xmlNamespace: https://formexamples.github.io/corrected-calcium-calculator/xml
+tags:
+- name: corrected-calcium-calculator
+  description: Corrected Calcium Calculator form
 paths:
   /api/corrected-calcium-calculator/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - corrected-calcium-calculator
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - corrected-calcium-calculator
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - corrected-calcium-calculator
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - corrected-calcium-calculator
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - corrected-calcium-calculator
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - corrected-calcium-calculator
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/corrected-calcium-calculator/corrected_calcium_calculator_grade_flags:
     get:
       summary: List CorrectedCalciumCalculatorGradeFlag records
+      tags:
+      - corrected-calcium-calculator
       operationId: listCorrectedCalciumCalculatorGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CorrectedCalciumCalculatorGradeFlag
+      tags:
+      - corrected-calcium-calculator
       operationId: createCorrectedCalciumCalculatorGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CorrectedCalciumCalculatorGradeFlag by id
+      tags:
+      - corrected-calcium-calculator
       operationId: getCorrectedCalciumCalculatorGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CorrectedCalciumCalculatorGradeFlag
+      tags:
+      - corrected-calcium-calculator
       operationId: updateCorrectedCalciumCalculatorGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CorrectedCalciumCalculatorGradeFlag
+      tags:
+      - corrected-calcium-calculator
       operationId: replaceCorrectedCalciumCalculatorGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CorrectedCalciumCalculatorGradeFlag
+      tags:
+      - corrected-calcium-calculator
       operationId: deleteCorrectedCalciumCalculatorGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/corrected-calcium-calculator/corrected_calcium_calculator_grade_rules:
     get:
       summary: List CorrectedCalciumCalculatorGradeRule records
+      tags:
+      - corrected-calcium-calculator
       operationId: listCorrectedCalciumCalculatorGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CorrectedCalciumCalculatorGradeRule
+      tags:
+      - corrected-calcium-calculator
       operationId: createCorrectedCalciumCalculatorGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CorrectedCalciumCalculatorGradeRule by id
+      tags:
+      - corrected-calcium-calculator
       operationId: getCorrectedCalciumCalculatorGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CorrectedCalciumCalculatorGradeRule
+      tags:
+      - corrected-calcium-calculator
       operationId: updateCorrectedCalciumCalculatorGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CorrectedCalciumCalculatorGradeRule
+      tags:
+      - corrected-calcium-calculator
       operationId: replaceCorrectedCalciumCalculatorGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CorrectedCalciumCalculatorGradeRule
+      tags:
+      - corrected-calcium-calculator
       operationId: deleteCorrectedCalciumCalculatorGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/corrected-calcium-calculator/corrected_calcium_calculator_grades:
     get:
       summary: List CorrectedCalciumCalculatorGrade records
+      tags:
+      - corrected-calcium-calculator
       operationId: listCorrectedCalciumCalculatorGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CorrectedCalciumCalculatorGrade
+      tags:
+      - corrected-calcium-calculator
       operationId: createCorrectedCalciumCalculatorGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CorrectedCalciumCalculatorGrade by id
+      tags:
+      - corrected-calcium-calculator
       operationId: getCorrectedCalciumCalculatorGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CorrectedCalciumCalculatorGrade
+      tags:
+      - corrected-calcium-calculator
       operationId: updateCorrectedCalciumCalculatorGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CorrectedCalciumCalculatorGrade
+      tags:
+      - corrected-calcium-calculator
       operationId: replaceCorrectedCalciumCalculatorGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CorrectedCalciumCalculatorGrade
+      tags:
+      - corrected-calcium-calculator
       operationId: deleteCorrectedCalciumCalculatorGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/corrected-calcium-calculator/corrected_calcium_calculators:
     get:
       summary: List CorrectedCalciumCalculator records
+      tags:
+      - corrected-calcium-calculator
       operationId: listCorrectedCalciumCalculator
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CorrectedCalciumCalculator
+      tags:
+      - corrected-calcium-calculator
       operationId: createCorrectedCalciumCalculator
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CorrectedCalciumCalculator by id
+      tags:
+      - corrected-calcium-calculator
       operationId: getCorrectedCalciumCalculator
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CorrectedCalciumCalculator
+      tags:
+      - corrected-calcium-calculator
       operationId: updateCorrectedCalciumCalculator
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CorrectedCalciumCalculator
+      tags:
+      - corrected-calcium-calculator
       operationId: replaceCorrectedCalciumCalculator
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CorrectedCalciumCalculator
+      tags:
+      - corrected-calcium-calculator
       operationId: deleteCorrectedCalciumCalculator
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - corrected-calcium-calculator
   /api/corrected-calcium-calculator/patients:
     get:
       summary: List Patient records
+      tags:
+      - corrected-calcium-calculator
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - corrected-calcium-calculator
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - corrected-calcium-calculator
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - corrected-calcium-calculator
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - corrected-calcium-calculator
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - corrected-calcium-calculator
       operationId: deletePatient
       responses:
         '200':

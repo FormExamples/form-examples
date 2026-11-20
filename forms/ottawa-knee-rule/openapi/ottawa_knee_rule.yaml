@@ -5,10 +5,19 @@ info:
   title: Ottawa Knee Rule — OttawaKneeRule
   version: 1.0.0
   description: "Main Ottawa Knee Rule assessment record: identification, context, and the five objective bedside criterion inputs. A decision rule (ANY-of), not a score."
+x-namespace:
+  form: ottawa-knee-rule
+  apiPrefix: /api/ottawa-knee-rule/
+  sqlSchema: ottawa_knee_rule
+  xmlNamespace: https://formexamples.github.io/ottawa-knee-rule/xml
+tags:
+  - name: ottawa-knee-rule
+    description: Ottawa Knee Rule form
 paths:
   /api/ottawa-knee-rule/ottawa_knee_rules:
     get:
       summary: List OttawaKneeRule records
+      tags: [ottawa-knee-rule]
       operationId: listOttawaKneeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OttawaKneeRule
+      tags: [ottawa-knee-rule]
       operationId: createOttawaKneeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OttawaKneeRule by id
+      tags: [ottawa-knee-rule]
       operationId: getOttawaKneeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OttawaKneeRule
+      tags: [ottawa-knee-rule]
       operationId: updateOttawaKneeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OttawaKneeRule
+      tags: [ottawa-knee-rule]
       operationId: replaceOttawaKneeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OttawaKneeRule
+      tags: [ottawa-knee-rule]
       operationId: deleteOttawaKneeRule
       responses:
         "200":

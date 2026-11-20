@@ -5,10 +5,19 @@ info:
   title: Kinesiology Assessment — Assessment
   version: 1.0.0
   description: Kinesiology assessment form using the Functional Movement Screen (FMS). Parent entity for all assessment sections.
+x-namespace:
+  form: kinesiology-assessment
+  apiPrefix: /api/kinesiology-assessment/
+  sqlSchema: kinesiology_assessment
+  xmlNamespace: https://formexamples.github.io/kinesiology-assessment/xml
+tags:
+  - name: kinesiology-assessment
+    description: Kinesiology Assessment form
 paths:
   /api/kinesiology-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [kinesiology-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [kinesiology-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [kinesiology-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [kinesiology-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [kinesiology-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [kinesiology-assessment]
       operationId: deleteAssessment
       responses:
         "200":

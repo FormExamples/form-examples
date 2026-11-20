@@ -5,10 +5,19 @@ info:
   title: Abdominal Aortic Aneurysm Screening — AbdominalAorticAneurysmScreeningGradeRule
   version: 1.0.0
   description: "Audit trail of every classification rule that fired during grading: pathway stage, category, and description."
+x-namespace:
+  form: abdominal-aortic-aneurysm-screening
+  apiPrefix: /api/abdominal-aortic-aneurysm-screening/
+  sqlSchema: abdominal_aortic_aneurysm_screening
+  xmlNamespace: https://formexamples.github.io/abdominal-aortic-aneurysm-screening/xml
+tags:
+  - name: abdominal-aortic-aneurysm-screening
+    description: Abdominal Aortic Aneurysm Screening form
 paths:
   /api/abdominal-aortic-aneurysm-screening/abdominal_aortic_aneurysm_screening_grade_rules:
     get:
       summary: List AbdominalAorticAneurysmScreeningGradeRule records
+      tags: [abdominal-aortic-aneurysm-screening]
       operationId: listAbdominalAorticAneurysmScreeningGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AbdominalAorticAneurysmScreeningGradeRule
+      tags: [abdominal-aortic-aneurysm-screening]
       operationId: createAbdominalAorticAneurysmScreeningGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AbdominalAorticAneurysmScreeningGradeRule by id
+      tags: [abdominal-aortic-aneurysm-screening]
       operationId: getAbdominalAorticAneurysmScreeningGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AbdominalAorticAneurysmScreeningGradeRule
+      tags: [abdominal-aortic-aneurysm-screening]
       operationId: updateAbdominalAorticAneurysmScreeningGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AbdominalAorticAneurysmScreeningGradeRule
+      tags: [abdominal-aortic-aneurysm-screening]
       operationId: replaceAbdominalAorticAneurysmScreeningGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AbdominalAorticAneurysmScreeningGradeRule
+      tags: [abdominal-aortic-aneurysm-screening]
       operationId: deleteAbdominalAorticAneurysmScreeningGradeRule
       responses:
         "200":

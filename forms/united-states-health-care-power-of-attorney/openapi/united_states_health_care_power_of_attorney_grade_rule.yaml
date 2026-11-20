@@ -5,10 +5,19 @@ info:
   title: United States Health Care Power Of Attorney — UnitedStatesHealthCarePowerOfAttorneyGradeRule
   version: 1.0.0
   description: "Audit trail of every readiness rule that fired during classification: directive dimension, category, and description."
+x-namespace:
+  form: united-states-health-care-power-of-attorney
+  apiPrefix: /api/united-states-health-care-power-of-attorney/
+  sqlSchema: united_states_health_care_power_of_attorney
+  xmlNamespace: https://formexamples.github.io/united-states-health-care-power-of-attorney/xml
+tags:
+  - name: united-states-health-care-power-of-attorney
+    description: United States Health Care Power Of Attorney form
 paths:
   /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorney_grade_rules:
     get:
       summary: List UnitedStatesHealthCarePowerOfAttorneyGradeRule records
+      tags: [united-states-health-care-power-of-attorney]
       operationId: listUnitedStatesHealthCarePowerOfAttorneyGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesHealthCarePowerOfAttorneyGradeRule
+      tags: [united-states-health-care-power-of-attorney]
       operationId: createUnitedStatesHealthCarePowerOfAttorneyGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesHealthCarePowerOfAttorneyGradeRule by id
+      tags: [united-states-health-care-power-of-attorney]
       operationId: getUnitedStatesHealthCarePowerOfAttorneyGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesHealthCarePowerOfAttorneyGradeRule
+      tags: [united-states-health-care-power-of-attorney]
       operationId: updateUnitedStatesHealthCarePowerOfAttorneyGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesHealthCarePowerOfAttorneyGradeRule
+      tags: [united-states-health-care-power-of-attorney]
       operationId: replaceUnitedStatesHealthCarePowerOfAttorneyGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesHealthCarePowerOfAttorneyGradeRule
+      tags: [united-states-health-care-power-of-attorney]
       operationId: deleteUnitedStatesHealthCarePowerOfAttorneyGradeRule
       responses:
         "200":

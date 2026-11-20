@@ -1,4 +1,5 @@
 <!ELEMENT ultrasound_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,body_region,laterality,primary_indication,clinical_question,relevant_history,fasting_required,full_bladder_required,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST ultrasound_test_request xmlns CDATA #FIXED "https://formexamples.github.io/ultrasound-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

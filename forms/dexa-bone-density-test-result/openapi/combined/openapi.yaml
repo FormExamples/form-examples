@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the DEXA Bone Density Test Result form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: dexa-bone-density-test-result
+  apiPrefix: /api/dexa-bone-density-test-result/
+  sqlSchema: dexa_bone_density_test_result
+  xmlNamespace: https://formexamples.github.io/dexa-bone-density-test-result/xml
+tags:
+- name: dexa-bone-density-test-result
+  description: DEXA Bone Density Test Result form
 paths:
   /api/dexa-bone-density-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - dexa-bone-density-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - dexa-bone-density-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - dexa-bone-density-test-result
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - dexa-bone-density-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - dexa-bone-density-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - dexa-bone-density-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/dexa-bone-density-test-result/dexa_bone_density_test_result_grade_flags:
     get:
       summary: List DexaBoneDensityTestResultGradeFlag records
+      tags:
+      - dexa-bone-density-test-result
       operationId: listDexaBoneDensityTestResultGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DexaBoneDensityTestResultGradeFlag
+      tags:
+      - dexa-bone-density-test-result
       operationId: createDexaBoneDensityTestResultGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DexaBoneDensityTestResultGradeFlag by id
+      tags:
+      - dexa-bone-density-test-result
       operationId: getDexaBoneDensityTestResultGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DexaBoneDensityTestResultGradeFlag
+      tags:
+      - dexa-bone-density-test-result
       operationId: updateDexaBoneDensityTestResultGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DexaBoneDensityTestResultGradeFlag
+      tags:
+      - dexa-bone-density-test-result
       operationId: replaceDexaBoneDensityTestResultGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DexaBoneDensityTestResultGradeFlag
+      tags:
+      - dexa-bone-density-test-result
       operationId: deleteDexaBoneDensityTestResultGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/dexa-bone-density-test-result/dexa_bone_density_test_result_grade_rules:
     get:
       summary: List DexaBoneDensityTestResultGradeRule records
+      tags:
+      - dexa-bone-density-test-result
       operationId: listDexaBoneDensityTestResultGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DexaBoneDensityTestResultGradeRule
+      tags:
+      - dexa-bone-density-test-result
       operationId: createDexaBoneDensityTestResultGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DexaBoneDensityTestResultGradeRule by id
+      tags:
+      - dexa-bone-density-test-result
       operationId: getDexaBoneDensityTestResultGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DexaBoneDensityTestResultGradeRule
+      tags:
+      - dexa-bone-density-test-result
       operationId: updateDexaBoneDensityTestResultGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DexaBoneDensityTestResultGradeRule
+      tags:
+      - dexa-bone-density-test-result
       operationId: replaceDexaBoneDensityTestResultGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DexaBoneDensityTestResultGradeRule
+      tags:
+      - dexa-bone-density-test-result
       operationId: deleteDexaBoneDensityTestResultGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/dexa-bone-density-test-result/dexa_bone_density_test_result_grades:
     get:
       summary: List DexaBoneDensityTestResultGrade records
+      tags:
+      - dexa-bone-density-test-result
       operationId: listDexaBoneDensityTestResultGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DexaBoneDensityTestResultGrade
+      tags:
+      - dexa-bone-density-test-result
       operationId: createDexaBoneDensityTestResultGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DexaBoneDensityTestResultGrade by id
+      tags:
+      - dexa-bone-density-test-result
       operationId: getDexaBoneDensityTestResultGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DexaBoneDensityTestResultGrade
+      tags:
+      - dexa-bone-density-test-result
       operationId: updateDexaBoneDensityTestResultGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DexaBoneDensityTestResultGrade
+      tags:
+      - dexa-bone-density-test-result
       operationId: replaceDexaBoneDensityTestResultGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DexaBoneDensityTestResultGrade
+      tags:
+      - dexa-bone-density-test-result
       operationId: deleteDexaBoneDensityTestResultGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/dexa-bone-density-test-result/dexa_bone_density_test_results:
     get:
       summary: List DexaBoneDensityTestResult records
+      tags:
+      - dexa-bone-density-test-result
       operationId: listDexaBoneDensityTestResult
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DexaBoneDensityTestResult
+      tags:
+      - dexa-bone-density-test-result
       operationId: createDexaBoneDensityTestResult
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DexaBoneDensityTestResult by id
+      tags:
+      - dexa-bone-density-test-result
       operationId: getDexaBoneDensityTestResult
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DexaBoneDensityTestResult
+      tags:
+      - dexa-bone-density-test-result
       operationId: updateDexaBoneDensityTestResult
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DexaBoneDensityTestResult
+      tags:
+      - dexa-bone-density-test-result
       operationId: replaceDexaBoneDensityTestResult
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DexaBoneDensityTestResult
+      tags:
+      - dexa-bone-density-test-result
       operationId: deleteDexaBoneDensityTestResult
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - dexa-bone-density-test-result
   /api/dexa-bone-density-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - dexa-bone-density-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - dexa-bone-density-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - dexa-bone-density-test-result
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - dexa-bone-density-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - dexa-bone-density-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - dexa-bone-density-test-result
       operationId: deletePatient
       responses:
         '200':

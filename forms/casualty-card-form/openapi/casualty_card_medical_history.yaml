@@ -5,10 +5,19 @@ info:
   title: Casualty Card Form — CasualtyCardMedicalHistory
   version: 1.0.0
   description: 1:1 with casualty_card. Past medical/surgical history, tetanus status, and social history.
+x-namespace:
+  form: casualty-card-form
+  apiPrefix: /api/casualty-card-form/
+  sqlSchema: casualty_card_form
+  xmlNamespace: https://formexamples.github.io/casualty-card-form/xml
+tags:
+  - name: casualty-card-form
+    description: Casualty Card Form form
 paths:
   /api/casualty-card-form/casualty_card_medical_histories:
     get:
       summary: List CasualtyCardMedicalHistory records
+      tags: [casualty-card-form]
       operationId: listCasualtyCardMedicalHistory
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CasualtyCardMedicalHistory
+      tags: [casualty-card-form]
       operationId: createCasualtyCardMedicalHistory
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CasualtyCardMedicalHistory by id
+      tags: [casualty-card-form]
       operationId: getCasualtyCardMedicalHistory
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CasualtyCardMedicalHistory
+      tags: [casualty-card-form]
       operationId: updateCasualtyCardMedicalHistory
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CasualtyCardMedicalHistory
+      tags: [casualty-card-form]
       operationId: replaceCasualtyCardMedicalHistory
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CasualtyCardMedicalHistory
+      tags: [casualty-card-form]
       operationId: deleteCasualtyCardMedicalHistory
       responses:
         "200":

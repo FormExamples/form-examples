@@ -5,10 +5,19 @@ info:
   title: Biopsy Test Request — BiopsyTestRequest
   version: 1.0.0
   description: Tissue biopsy procedure / pathology request (referral). Captures the requested procedure (site, method, laterality), the clinical indication and question, lesion description, bleeding / coagulation status, and triage urgency.
+x-namespace:
+  form: biopsy-test-request
+  apiPrefix: /api/biopsy-test-request/
+  sqlSchema: biopsy_test_request
+  xmlNamespace: https://formexamples.github.io/biopsy-test-request/xml
+tags:
+  - name: biopsy-test-request
+    description: Biopsy Test Request form
 paths:
   /api/biopsy-test-request/biopsy_test_requests:
     get:
       summary: List BiopsyTestRequest records
+      tags: [biopsy-test-request]
       operationId: listBiopsyTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BiopsyTestRequest
+      tags: [biopsy-test-request]
       operationId: createBiopsyTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BiopsyTestRequest by id
+      tags: [biopsy-test-request]
       operationId: getBiopsyTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BiopsyTestRequest
+      tags: [biopsy-test-request]
       operationId: updateBiopsyTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BiopsyTestRequest
+      tags: [biopsy-test-request]
       operationId: replaceBiopsyTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BiopsyTestRequest
+      tags: [biopsy-test-request]
       operationId: deleteBiopsyTestRequest
       responses:
         "200":

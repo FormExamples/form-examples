@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE manufacturer SYSTEM "manufacturer.dtd">
-<manufacturer>
-<id>550e8400-e29b-41d4-a716-446655440000</id>
+<manufacturer xmlns="https://formexamples.github.io/medical-device-assessment/xml">
+<id>14fa8728-0932-58b0-b1dc-fa42f31a463a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>

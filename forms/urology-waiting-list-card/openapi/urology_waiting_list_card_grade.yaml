@@ -5,10 +5,19 @@ info:
   title: Urology Waiting List Card — UrologyWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: urology-waiting-list-card
+  apiPrefix: /api/urology-waiting-list-card/
+  sqlSchema: urology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/urology-waiting-list-card/xml
+tags:
+  - name: urology-waiting-list-card
+    description: Urology Waiting List Card form
 paths:
   /api/urology-waiting-list-card/urology_waiting_list_card_grades:
     get:
       summary: List UrologyWaitingListCardGrade records
+      tags: [urology-waiting-list-card]
       operationId: listUrologyWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UrologyWaitingListCardGrade
+      tags: [urology-waiting-list-card]
       operationId: createUrologyWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UrologyWaitingListCardGrade by id
+      tags: [urology-waiting-list-card]
       operationId: getUrologyWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UrologyWaitingListCardGrade
+      tags: [urology-waiting-list-card]
       operationId: updateUrologyWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UrologyWaitingListCardGrade
+      tags: [urology-waiting-list-card]
       operationId: replaceUrologyWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UrologyWaitingListCardGrade
+      tags: [urology-waiting-list-card]
       operationId: deleteUrologyWaitingListCardGrade
       responses:
         "200":

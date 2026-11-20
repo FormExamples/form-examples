@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "id": "30e416f9-5c58-57d7-be76-7f7394451bcf",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000013",
+    "id": "1d8a2335-1dc8-5d35-9e5c-5f0d01cd9977",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,7 +36,7 @@
     "unitedKingdomNhsNumber": ""
   },
   "medication": {
-    "id": "550e8400-e29b-41d4-a716-000000000021",
+    "id": "658a78d8-3257-5f42-9234-b3bdd1b5409c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -44,15 +44,15 @@
     "description": ""
   },
   "patientMedication": {
-    "id": "550e8400-e29b-41d4-a716-000000000027",
+    "id": "95d46eed-ccec-5551-8240-bbd69095a6d0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000002b",
-    "medicationId": "550e8400-e29b-41d4-a716-00000000002c"
+    "patientId": "62e6f83e-d84e-50ad-9d90-de35d533f919",
+    "medicationId": "06f4158f-5f02-5a72-9501-753f4e77517c"
   },
   "allergy": {
-    "id": "550e8400-e29b-41d4-a716-00000000002d",
+    "id": "de61dcc5-c9c5-5a51-b6a3-077659fe8694",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -62,20 +62,20 @@
     "cosmeticName": ""
   },
   "patientAllergy": {
-    "id": "550e8400-e29b-41d4-a716-000000000035",
+    "id": "95783bf3-7622-5ecf-9284-b7c2bb46d38a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000039",
-    "allergyId": "550e8400-e29b-41d4-a716-00000000003a"
+    "patientId": "3cc7a07b-9e97-5780-b31b-b127a5774f3f",
+    "allergyId": "f9d4c7fa-0de3-5f29-925b-192287c09c9e"
   },
   "preOperativeAssessmentByClinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000003b",
+    "id": "697bc096-d531-5b5a-bfeb-0935db54c3f3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000003f",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000040",
+    "patientId": "9dd8bbfd-5a4e-5486-a778-0b22b10ac27b",
+    "clinicianId": "ea8ae3e2-a981-5726-8e73-0fdf83e51b17",
     "status": "draft",
     "siteName": "",
     "assessmentDate": null,
@@ -277,11 +277,11 @@
     "bloodProductsRequired": ""
   },
   "preOperativeAssessmentByClinicianGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000108",
+    "id": "8c3867bd-a153-5680-bca6-b0b8c955a093",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "preOperativeAssessmentByClinicianId": "550e8400-e29b-41d4-a716-00000000010c",
+    "preOperativeAssessmentByClinicianId": "72e3a215-44a5-57c0-858b-e3417c31aa2a",
     "computedAsaGrade": "I",
     "finalAsaGrade": "I",
     "asaEmergencySuffix": "E",
@@ -297,11 +297,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "preOperativeAssessmentByClinicianGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000011a",
+    "id": "0914791f-05ce-526e-911f-a0ddba9b2ac4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-00000000011e",
+    "gradeId": "48fdc4ac-0a99-5605-91ab-359ba60276f8",
     "ruleId": "",
     "instrument": "asa",
     "grade": "",
@@ -309,11 +309,11 @@
     "description": ""
   },
   "preOperativeAssessmentByClinicianGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000124",
+    "id": "7b78de53-22fd-5675-8059-6dc267e7d03d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "preOperativeAssessmentByClinicianGradeId": "550e8400-e29b-41d4-a716-000000000128",
+    "preOperativeAssessmentByClinicianGradeId": "cc677b4f-22b7-5ec8-9450-32ec30659c3d",
     "flagId": "",
     "category": "difficult-airway",
     "priority": "low",

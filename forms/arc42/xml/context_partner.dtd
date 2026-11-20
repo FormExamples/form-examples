@@ -1,4 +1,5 @@
 <!ELEMENT context_partner (id,created_at,updated_at,deleted_at,arc42_documentation_id,ordinal,kind,name,interface_description,protocol,direction)>
+<!ATTLIST context_partner xmlns CDATA #FIXED "https://formexamples.github.io/arc42/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

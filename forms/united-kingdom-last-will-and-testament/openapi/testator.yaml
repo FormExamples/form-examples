@@ -5,10 +5,19 @@ info:
   title: United Kingdom Last Will And Testament — Testator
   version: 1.0.0
   description: "Testator: the person making the will, with contact details."
+x-namespace:
+  form: united-kingdom-last-will-and-testament
+  apiPrefix: /api/united-kingdom-last-will-and-testament/
+  sqlSchema: united_kingdom_last_will_and_testament
+  xmlNamespace: https://formexamples.github.io/united-kingdom-last-will-and-testament/xml
+tags:
+  - name: united-kingdom-last-will-and-testament
+    description: United Kingdom Last Will And Testament form
 paths:
   /api/united-kingdom-last-will-and-testament/testators:
     get:
       summary: List Testator records
+      tags: [united-kingdom-last-will-and-testament]
       operationId: listTestator
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Testator
+      tags: [united-kingdom-last-will-and-testament]
       operationId: createTestator
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Testator by id
+      tags: [united-kingdom-last-will-and-testament]
       operationId: getTestator
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Testator
+      tags: [united-kingdom-last-will-and-testament]
       operationId: updateTestator
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Testator
+      tags: [united-kingdom-last-will-and-testament]
       operationId: replaceTestator
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Testator
+      tags: [united-kingdom-last-will-and-testament]
       operationId: deleteTestator
       responses:
         "200":

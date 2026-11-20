@@ -1,4 +1,5 @@
 <!ELEMENT glasgow_blatchford_bleeding_score_grade_rule (id,created_at,updated_at,deleted_at,glasgow_blatchford_bleeding_score_grade_id,rule_id,parameter,points,category,description)>
+<!ATTLIST glasgow_blatchford_bleeding_score_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/glasgow-blatchford-bleeding-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

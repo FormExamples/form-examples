@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pulmonary_function_test_request_grade_flag SYSTEM "pulmonary_function_test_request_grade_flag.dtd">
-<pulmonary_function_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<pulmonary_function_test_request_grade_flag xmlns="https://formexamples.github.io/pulmonary-function-test-request/xml">
+<id>62541e9b-e8f7-5214-9710-794ee2b84222</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pulmonary_function_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</pulmonary_function_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<pulmonary_function_test_request_grade_id>4437a9c7-525a-56e1-8bb0-1256d12a9270</pulmonary_function_test_request_grade_id>
+<flag_id>b5041710-44d2-596e-9f29-b2ac2204f417</flag_id>
 <category>recent-mi-contraindication</category>
 <priority>low</priority>
 <description>Example text.</description>

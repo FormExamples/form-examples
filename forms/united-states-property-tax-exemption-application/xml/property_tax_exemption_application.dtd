@@ -1,4 +1,5 @@
 <!ELEMENT property_tax_exemption_application (id,created_at,updated_at,deleted_at,applicant_id,assessor_id,applicant_name,date_of_birth,age_on_assessment_date,mailing_address,state,county,parcel_number,property_address,property_type,ownership_type,owner_on_assessment_date,occupied_as_primary_residence,occupancy_start_date,other_homestead_claimed,claim_homestead,claim_senior,claim_disability,claim_veteran,claim_circuit_breaker,veteran_disability_percent,household_income_dollars,income_tax_year,assessment_year,filing_date,application_type,proof_of_ownership,proof_of_residency,proof_of_age,proof_of_income,proof_of_disability,appeal_requested,notice_of_value_date,appeal_filed,penalty_acknowledged,signed_by_applicant,signature_date)>
+<!ATTLIST property_tax_exemption_application xmlns CDATA #FIXED "https://formexamples.github.io/united-states-property-tax-exemption-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

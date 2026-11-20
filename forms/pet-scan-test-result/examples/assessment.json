@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000063",
+    "id": "15941fc7-0064-5ff1-ab3a-7c742a7e2535",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000075",
+    "id": "042efe3a-18ae-50f5-a84f-aa63eead0d55",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "petScanTestResult": {
-    "id": "550e8400-e29b-41d4-a716-000000000083",
+    "id": "7c770f41-b378-5f21-9d21-6876a8b111c6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000087",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000088",
+    "patientId": "eff01894-ba11-5b5e-90c4-cdd4563409b0",
+    "clinicianId": "b8245df7-3385-535e-8ab6-2463eb82181b",
     "originatingRequestReference": "",
     "scanType": "fdg-pet-ct",
     "reportStatus": "preliminary",
@@ -69,11 +69,11 @@
     "reportedTo": ""
   },
   "petScanTestResultGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a2",
+    "id": "4a51475b-2e21-5850-839f-e5765c9de518",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "petScanTestResultId": "550e8400-e29b-41d4-a716-0000000000a6",
+    "petScanTestResultId": "bb2608d1-c1c6-5bf9-8a93-2d5ddd0bfdb1",
     "resultClassification": "normal",
     "abnormalitySeverity": "none",
     "reportingCategory": "",
@@ -87,22 +87,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "petScanTestResultGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b2",
+    "id": "696f2ba9-9a61-591c-8d4d-e8cbf8473f7b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "petScanTestResultGradeId": "550e8400-e29b-41d4-a716-0000000000b6",
+    "petScanTestResultGradeId": "7e720214-24bd-5eb9-81c3-7a5928efc854",
     "ruleId": "",
     "axis": "classification",
     "category": "",
     "description": ""
   },
   "petScanTestResultGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bb",
+    "id": "4b88dcfb-c396-5de9-a496-7717a9b7aa2a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "petScanTestResultGradeId": "550e8400-e29b-41d4-a716-0000000000bf",
+    "petScanTestResultGradeId": "26016749-290c-5b9d-b97c-8d76c1bbf466",
     "flagId": "",
     "category": "critical-result-alert",
     "priority": "low",

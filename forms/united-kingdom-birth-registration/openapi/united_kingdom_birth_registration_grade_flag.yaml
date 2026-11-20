@@ -5,10 +5,19 @@ info:
   title: United Kingdom Birth Registration — UnitedKingdomBirthRegistrationGradeFlag
   version: 1.0.0
   description: Flagged issues that fire independently of the validity class, with priority and a suggested action for the applicant or registrar.
+x-namespace:
+  form: united-kingdom-birth-registration
+  apiPrefix: /api/united-kingdom-birth-registration/
+  sqlSchema: united_kingdom_birth_registration
+  xmlNamespace: https://formexamples.github.io/united-kingdom-birth-registration/xml
+tags:
+  - name: united-kingdom-birth-registration
+    description: United Kingdom Birth Registration form
 paths:
   /api/united-kingdom-birth-registration/united_kingdom_birth_registration_grade_flags:
     get:
       summary: List UnitedKingdomBirthRegistrationGradeFlag records
+      tags: [united-kingdom-birth-registration]
       operationId: listUnitedKingdomBirthRegistrationGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomBirthRegistrationGradeFlag
+      tags: [united-kingdom-birth-registration]
       operationId: createUnitedKingdomBirthRegistrationGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomBirthRegistrationGradeFlag by id
+      tags: [united-kingdom-birth-registration]
       operationId: getUnitedKingdomBirthRegistrationGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomBirthRegistrationGradeFlag
+      tags: [united-kingdom-birth-registration]
       operationId: updateUnitedKingdomBirthRegistrationGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomBirthRegistrationGradeFlag
+      tags: [united-kingdom-birth-registration]
       operationId: replaceUnitedKingdomBirthRegistrationGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomBirthRegistrationGradeFlag
+      tags: [united-kingdom-birth-registration]
       operationId: deleteUnitedKingdomBirthRegistrationGradeFlag
       responses:
         "200":

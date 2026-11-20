@@ -5,10 +5,19 @@ info:
   title: Patient Room Readiness — PatientRoomReadinessChecklist
   version: 1.0.0
   description: "One room-readiness inspection: location, 25 fixed fixture/fabric checkpoints, inspector, and inspection date/time."
+x-namespace:
+  form: patient-room-readiness
+  apiPrefix: /api/patient-room-readiness/
+  sqlSchema: patient_room_readiness
+  xmlNamespace: https://formexamples.github.io/patient-room-readiness/xml
+tags:
+  - name: patient-room-readiness
+    description: Patient Room Readiness form
 paths:
   /api/patient-room-readiness/patient_room_readiness_checklists:
     get:
       summary: List PatientRoomReadinessChecklist records
+      tags: [patient-room-readiness]
       operationId: listPatientRoomReadinessChecklist
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PatientRoomReadinessChecklist
+      tags: [patient-room-readiness]
       operationId: createPatientRoomReadinessChecklist
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PatientRoomReadinessChecklist by id
+      tags: [patient-room-readiness]
       operationId: getPatientRoomReadinessChecklist
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PatientRoomReadinessChecklist
+      tags: [patient-room-readiness]
       operationId: updatePatientRoomReadinessChecklist
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PatientRoomReadinessChecklist
+      tags: [patient-room-readiness]
       operationId: replacePatientRoomReadinessChecklist
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PatientRoomReadinessChecklist
+      tags: [patient-room-readiness]
       operationId: deletePatientRoomReadinessChecklist
       responses:
         "200":

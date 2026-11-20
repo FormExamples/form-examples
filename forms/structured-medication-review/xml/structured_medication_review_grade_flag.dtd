@@ -1,4 +1,5 @@
 <!ELEMENT structured_medication_review_grade_flag (id,created_at,updated_at,deleted_at,structured_medication_review_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST structured_medication_review_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/structured-medication-review/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

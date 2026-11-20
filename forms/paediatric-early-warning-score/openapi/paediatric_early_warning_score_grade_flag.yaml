@@ -5,10 +5,19 @@ info:
   title: Paediatric Early Warning Score — PaediatricEarlyWarningScoreGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the aggregate escalation band, with priority and a suggested action for the ward and escalation team.
+x-namespace:
+  form: paediatric-early-warning-score
+  apiPrefix: /api/paediatric-early-warning-score/
+  sqlSchema: paediatric_early_warning_score
+  xmlNamespace: https://formexamples.github.io/paediatric-early-warning-score/xml
+tags:
+  - name: paediatric-early-warning-score
+    description: Paediatric Early Warning Score form
 paths:
   /api/paediatric-early-warning-score/paediatric_early_warning_score_grade_flags:
     get:
       summary: List PaediatricEarlyWarningScoreGradeFlag records
+      tags: [paediatric-early-warning-score]
       operationId: listPaediatricEarlyWarningScoreGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PaediatricEarlyWarningScoreGradeFlag
+      tags: [paediatric-early-warning-score]
       operationId: createPaediatricEarlyWarningScoreGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PaediatricEarlyWarningScoreGradeFlag by id
+      tags: [paediatric-early-warning-score]
       operationId: getPaediatricEarlyWarningScoreGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PaediatricEarlyWarningScoreGradeFlag
+      tags: [paediatric-early-warning-score]
       operationId: updatePaediatricEarlyWarningScoreGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PaediatricEarlyWarningScoreGradeFlag
+      tags: [paediatric-early-warning-score]
       operationId: replacePaediatricEarlyWarningScoreGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PaediatricEarlyWarningScoreGradeFlag
+      tags: [paediatric-early-warning-score]
       operationId: deletePaediatricEarlyWarningScoreGradeFlag
       responses:
         "200":

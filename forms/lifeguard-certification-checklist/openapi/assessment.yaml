@@ -5,10 +5,19 @@ info:
   title: Lifeguard Certification Checklist — Assessment
   version: 1.0.0
   description: Top-level assessment instance for lifeguard-certification-checklist. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: lifeguard-certification-checklist
+  apiPrefix: /api/lifeguard-certification-checklist/
+  sqlSchema: lifeguard_certification_checklist
+  xmlNamespace: https://formexamples.github.io/lifeguard-certification-checklist/xml
+tags:
+  - name: lifeguard-certification-checklist
+    description: Lifeguard Certification Checklist form
 paths:
   /api/lifeguard-certification-checklist/assessments:
     get:
       summary: List Assessment records
+      tags: [lifeguard-certification-checklist]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [lifeguard-certification-checklist]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [lifeguard-certification-checklist]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [lifeguard-certification-checklist]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [lifeguard-certification-checklist]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [lifeguard-certification-checklist]
       operationId: deleteAssessment
       responses:
         "200":

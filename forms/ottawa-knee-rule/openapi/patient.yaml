@@ -5,10 +5,19 @@ info:
   title: Ottawa Knee Rule — Patient
   version: 1.0.0
   description: Patient demographic information used by the Ottawa Knee Rule assessment record.
+x-namespace:
+  form: ottawa-knee-rule
+  apiPrefix: /api/ottawa-knee-rule/
+  sqlSchema: ottawa_knee_rule
+  xmlNamespace: https://formexamples.github.io/ottawa-knee-rule/xml
+tags:
+  - name: ottawa-knee-rule
+    description: Ottawa Knee Rule form
 paths:
   /api/ottawa-knee-rule/patients:
     get:
       summary: List Patient records
+      tags: [ottawa-knee-rule]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [ottawa-knee-rule]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [ottawa-knee-rule]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [ottawa-knee-rule]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [ottawa-knee-rule]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [ottawa-knee-rule]
       operationId: deletePatient
       responses:
         "200":

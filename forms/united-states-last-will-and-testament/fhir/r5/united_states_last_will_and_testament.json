@@ -1,6 +1,6 @@
 {
   "resourceType": "Encounter",
-  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "id": "e4d3d369-2f4c-55f7-8626-dfb7f613d7a4",
   "meta": {
     "profile": [
       "http://hl7.org/fhir/StructureDefinition/Encounter"

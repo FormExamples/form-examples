@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Wells Score for Deep Vein Thrombosis (DVT) form,
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: wells-score-for-deep-vein-thrombosis
+  apiPrefix: /api/wells-score-for-deep-vein-thrombosis/
+  sqlSchema: wells_score_for_deep_vein_thrombosis
+  xmlNamespace: https://formexamples.github.io/wells-score-for-deep-vein-thrombosis/xml
+tags:
+- name: wells-score-for-deep-vein-thrombosis
+  description: Wells Score for Deep Vein Thrombosis (DVT) form
 paths:
   /api/wells-score-for-deep-vein-thrombosis/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - wells-score-for-deep-vein-thrombosis
   /api/wells-score-for-deep-vein-thrombosis/patients:
     get:
       summary: List Patient records
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/wells-score-for-deep-vein-thrombosis/wells_score_for_deep_vein_thromboses:
     get:
       summary: List WellsScoreForDeepVeinThrombosis records
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: listWellsScoreForDeepVeinThrombosis
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WellsScoreForDeepVeinThrombosis
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: createWellsScoreForDeepVeinThrombosis
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WellsScoreForDeepVeinThrombosis by id
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: getWellsScoreForDeepVeinThrombosis
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WellsScoreForDeepVeinThrombosis
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: updateWellsScoreForDeepVeinThrombosis
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WellsScoreForDeepVeinThrombosis
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: replaceWellsScoreForDeepVeinThrombosis
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WellsScoreForDeepVeinThrombosis
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: deleteWellsScoreForDeepVeinThrombosis
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/wells-score-for-deep-vein-thrombosis/wells_score_for_deep_vein_thrombosis_grade_flags:
     get:
       summary: List WellsScoreForDeepVeinThrombosisGradeFlag records
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: listWellsScoreForDeepVeinThrombosisGradeFlag
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WellsScoreForDeepVeinThrombosisGradeFlag
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: createWellsScoreForDeepVeinThrombosisGradeFlag
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WellsScoreForDeepVeinThrombosisGradeFlag by id
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: getWellsScoreForDeepVeinThrombosisGradeFlag
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WellsScoreForDeepVeinThrombosisGradeFlag
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: updateWellsScoreForDeepVeinThrombosisGradeFlag
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WellsScoreForDeepVeinThrombosisGradeFlag
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: replaceWellsScoreForDeepVeinThrombosisGradeFlag
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WellsScoreForDeepVeinThrombosisGradeFlag
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: deleteWellsScoreForDeepVeinThrombosisGradeFlag
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/wells-score-for-deep-vein-thrombosis/wells_score_for_deep_vein_thrombosis_grade_rules:
     get:
       summary: List WellsScoreForDeepVeinThrombosisGradeRule records
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: listWellsScoreForDeepVeinThrombosisGradeRule
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WellsScoreForDeepVeinThrombosisGradeRule
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: createWellsScoreForDeepVeinThrombosisGradeRule
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WellsScoreForDeepVeinThrombosisGradeRule by id
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: getWellsScoreForDeepVeinThrombosisGradeRule
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WellsScoreForDeepVeinThrombosisGradeRule
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: updateWellsScoreForDeepVeinThrombosisGradeRule
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WellsScoreForDeepVeinThrombosisGradeRule
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: replaceWellsScoreForDeepVeinThrombosisGradeRule
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WellsScoreForDeepVeinThrombosisGradeRule
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: deleteWellsScoreForDeepVeinThrombosisGradeRule
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/wells-score-for-deep-vein-thrombosis/wells_score_for_deep_vein_thrombosis_grades:
     get:
       summary: List WellsScoreForDeepVeinThrombosisGrade records
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: listWellsScoreForDeepVeinThrombosisGrade
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WellsScoreForDeepVeinThrombosisGrade
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: createWellsScoreForDeepVeinThrombosisGrade
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WellsScoreForDeepVeinThrombosisGrade by id
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: getWellsScoreForDeepVeinThrombosisGrade
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WellsScoreForDeepVeinThrombosisGrade
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: updateWellsScoreForDeepVeinThrombosisGrade
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WellsScoreForDeepVeinThrombosisGrade
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: replaceWellsScoreForDeepVeinThrombosisGrade
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WellsScoreForDeepVeinThrombosisGrade
+      tags:
+      - wells-score-for-deep-vein-thrombosis
       operationId: deleteWellsScoreForDeepVeinThrombosisGrade
       responses:
         '200':

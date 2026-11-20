@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000071",
+    "id": "fd976185-91f2-5a9d-bf19-f4d72730f897",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -15,7 +15,7 @@
     "hospitalMrn": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000007e",
+    "id": "bc0f4c44-5461-5eef-a9a9-ddd2d724417c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -30,12 +30,12 @@
     "registrationNumber": ""
   },
   "unitedStatesStandardCertificateOfDeath": {
-    "id": "550e8400-e29b-41d4-a716-00000000008b",
+    "id": "9b33d534-6074-5b30-9216-d1ba48b1170e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000008f",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000090",
+    "patientId": "df9b6002-c0b8-5ce7-a3c4-ba96e82ab612",
+    "clinicianId": "66adea67-55ef-5e27-85bc-4933108c66f4",
     "state": "",
     "decedentName": "",
     "sex": "female",
@@ -90,33 +90,33 @@
     "certifierNote": ""
   },
   "unitedStatesStandardCertificateOfDeathGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c5",
+    "id": "6c709a7c-b272-54bd-94d0-751bfc2ea12c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedStatesStandardCertificateOfDeathId": "550e8400-e29b-41d4-a716-0000000000c9",
+    "unitedStatesStandardCertificateOfDeathId": "7afbca27-2e26-5978-8bab-baf06d810121",
     "validityClass": "valid",
     "underlyingCause": "",
     "referralIndicated": "yes",
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "unitedStatesStandardCertificateOfDeathGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ce",
+    "id": "66174dca-a32a-5992-90be-8f28c91a06fe",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedStatesStandardCertificateOfDeathGradeId": "550e8400-e29b-41d4-a716-0000000000d2",
+    "unitedStatesStandardCertificateOfDeathGradeId": "e69b64b5-ec71-5ee3-aa6d-c7cf04fdcece",
     "ruleId": "",
     "dimension": "part-i",
     "category": "",
     "description": ""
   },
   "unitedStatesStandardCertificateOfDeathGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d7",
+    "id": "993bf689-16c3-5c41-9f63-bfb2fd44bae3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedStatesStandardCertificateOfDeathGradeId": "550e8400-e29b-41d4-a716-0000000000db",
+    "unitedStatesStandardCertificateOfDeathGradeId": "c675b134-1d6a-561b-b7ee-49ad2660255f",
     "flagId": "",
     "category": "medical-examiner-referral-required",
     "priority": "low",

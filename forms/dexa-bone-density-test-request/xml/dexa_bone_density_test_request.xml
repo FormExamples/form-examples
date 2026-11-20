@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dexa_bone_density_test_request SYSTEM "dexa_bone_density_test_request.dtd">
-<dexa_bone_density_test_request>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<dexa_bone_density_test_request xmlns="https://formexamples.github.io/dexa-bone-density-test-request/xml">
+<id>7e718c62-323c-53f6-995a-cfbfd2cb19d5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>415bda8a-2de9-5813-9803-a2c63753e8e7</patient_id>
+<clinician_id>845ddcc2-a15c-5900-96a4-fb7fc938209f</clinician_id>
 <status>draft</status>
 <site_name>Example</site_name>
 <setting>outpatient</setting>

@@ -1,4 +1,5 @@
 <!ELEMENT hypertension_review_grade (id,created_at,updated_at,deleted_at,hypertension_review_id,control_status,hypertension_stage,review_status,primary_source,target_group,clinic_target_systolic,clinic_target_diastolic,home_target_systolic,home_target_diastolic,graded_at)>
+<!ATTLIST hypertension_review_grade xmlns CDATA #FIXED "https://formexamples.github.io/hypertension-review/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

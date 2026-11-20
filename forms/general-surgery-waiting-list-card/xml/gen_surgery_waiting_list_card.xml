@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE gen_surgery_waiting_list_card SYSTEM "gen_surgery_waiting_list_card.dtd">
-<gen_surgery_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<gen_surgery_waiting_list_card xmlns="https://formexamples.github.io/general-surgery-waiting-list-card/xml">
+<id>a10ae61a-bcd3-5be3-a540-067d56f9eeee</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>8e638b41-4219-5de6-8ad7-a5017a045146</patient_id>
+<practitioner_id>5bd56499-214b-54dc-85d1-65b9b90e6f83</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

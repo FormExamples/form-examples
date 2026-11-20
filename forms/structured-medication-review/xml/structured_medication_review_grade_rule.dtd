@@ -1,4 +1,5 @@
 <!ELEMENT structured_medication_review_grade_rule (id,created_at,updated_at,deleted_at,structured_medication_review_grade_id,rule_id,category,description)>
+<!ATTLIST structured_medication_review_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/structured-medication-review/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

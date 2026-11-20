@@ -5,10 +5,19 @@ info:
   title: Rheumatology Waiting List Card — RheumatologyWaitingListCardAppointment
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+x-namespace:
+  form: rheumatology-waiting-list-card
+  apiPrefix: /api/rheumatology-waiting-list-card/
+  sqlSchema: rheumatology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/rheumatology-waiting-list-card/xml
+tags:
+  - name: rheumatology-waiting-list-card
+    description: Rheumatology Waiting List Card form
 paths:
   /api/rheumatology-waiting-list-card/rheumatology_waiting_list_card_appointments:
     get:
       summary: List RheumatologyWaitingListCardAppointment records
+      tags: [rheumatology-waiting-list-card]
       operationId: listRheumatologyWaitingListCardAppointment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RheumatologyWaitingListCardAppointment
+      tags: [rheumatology-waiting-list-card]
       operationId: createRheumatologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RheumatologyWaitingListCardAppointment by id
+      tags: [rheumatology-waiting-list-card]
       operationId: getRheumatologyWaitingListCardAppointment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RheumatologyWaitingListCardAppointment
+      tags: [rheumatology-waiting-list-card]
       operationId: updateRheumatologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RheumatologyWaitingListCardAppointment
+      tags: [rheumatology-waiting-list-card]
       operationId: replaceRheumatologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RheumatologyWaitingListCardAppointment
+      tags: [rheumatology-waiting-list-card]
       operationId: deleteRheumatologyWaitingListCardAppointment
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT assessment_strength_testing (id,created_at,updated_at,deleted_at,assessment_id,grip_strength_affected_kg,grip_strength_unaffected_kg,overall_strength_status,strength_testing_notes)>
+<!ATTLIST assessment_strength_testing xmlns CDATA #FIXED "https://formexamples.github.io/orthopedic-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

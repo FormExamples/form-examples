@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment_cancer_history_item SYSTEM "assessment_cancer_history_item.dtd">
-<assessment_cancer_history_item>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<assessment_cancer_history_item xmlns="https://formexamples.github.io/genetic-assessment/xml">
+<id>b7eaf964-f1e4-51ac-9871-86f3e40a9009</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cancer_history_id>660e8400-e29b-41d4-a716-446655440001</cancer_history_id>
+<cancer_history_id>72ddb034-b482-54fc-8d08-d19477a82d85</cancer_history_id>
 <relative_relationship>Spouse</relative_relationship>
 <cancer_type>standard</cancer_type>
 <age_at_diagnosis>45</age_at_diagnosis>

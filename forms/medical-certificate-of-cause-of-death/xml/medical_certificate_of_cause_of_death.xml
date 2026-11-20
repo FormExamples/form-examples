@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE medical_certificate_of_cause_of_death SYSTEM "medical_certificate_of_cause_of_death.dtd">
-<medical_certificate_of_cause_of_death>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<medical_certificate_of_cause_of_death xmlns="https://formexamples.github.io/medical-certificate-of-cause-of-death/xml">
+<id>d2008e3f-46ac-54f3-b03a-2f41a13547be</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>fe685a25-1b5d-557d-9962-91523a7b0eb4</patient_id>
+<clinician_id>5f0c7fe7-e2fd-52e7-80c3-dcc031b79252</clinician_id>
 <certifying_doctor_name>Example</certifying_doctor_name>
 <certifying_doctor_grade>consultant</certifying_doctor_grade>
 <gmc_reference></gmc_reference>

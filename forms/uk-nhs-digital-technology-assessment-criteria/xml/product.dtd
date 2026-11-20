@@ -1,4 +1,5 @@
 <!ELEMENT product (id,created_at,updated_at,deleted_at,supplier_id,name,version,description,intended_purpose,product_type,medical_device_class,handles_patient_data,is_patient_facing)>
+<!ATTLIST product xmlns CDATA #FIXED "https://formexamples.github.io/uk-nhs-digital-technology-assessment-criteria/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

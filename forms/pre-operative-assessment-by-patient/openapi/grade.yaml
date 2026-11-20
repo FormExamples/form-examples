@@ -5,10 +5,19 @@ info:
   title: Pre Operative Assessment By Patient — Grade
   version: 1.0.0
   description: "Step 16: computed and signed-off grading result. Stores both the engine-computed ASA grade and the clinician-final grade with an override reason."
+x-namespace:
+  form: pre-operative-assessment-by-patient
+  apiPrefix: /api/pre-operative-assessment-by-patient/
+  sqlSchema: pre_operative_assessment_by_patient
+  xmlNamespace: https://formexamples.github.io/pre-operative-assessment-by-patient/xml
+tags:
+  - name: pre-operative-assessment-by-patient
+    description: Pre Operative Assessment By Patient form
 paths:
   /api/pre-operative-assessment-by-patient/grades:
     get:
       summary: List Grade records
+      tags: [pre-operative-assessment-by-patient]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [pre-operative-assessment-by-patient]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [pre-operative-assessment-by-patient]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [pre-operative-assessment-by-patient]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [pre-operative-assessment-by-patient]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [pre-operative-assessment-by-patient]
       operationId: deleteGrade
       responses:
         "200":

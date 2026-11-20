@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE product SYSTEM "product.dtd">
-<product>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<product xmlns="https://formexamples.github.io/uk-nhs-digital-technology-assessment-criteria/xml">
+<id>d6fe1c08-fe46-52ec-945f-d3ec70b683ec</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<supplier_id>550e8400-e29b-41d4-a716-446655440000</supplier_id>
+<supplier_id>702f71b5-f430-5a6c-aea9-704d7d2a5591</supplier_id>
 <name>Example</name>
 <version></version>
 <description>Example text.</description>

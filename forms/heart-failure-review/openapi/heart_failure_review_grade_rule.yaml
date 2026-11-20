@@ -5,10 +5,19 @@ info:
   title: Heart Failure Review — HeartFailureReviewGradeRule
   version: 1.0.0
   description: "Audit trail of every classification or completeness rule that fired during grading: section, category, and description."
+x-namespace:
+  form: heart-failure-review
+  apiPrefix: /api/heart-failure-review/
+  sqlSchema: heart_failure_review
+  xmlNamespace: https://formexamples.github.io/heart-failure-review/xml
+tags:
+  - name: heart-failure-review
+    description: Heart Failure Review form
 paths:
   /api/heart-failure-review/heart_failure_review_grade_rules:
     get:
       summary: List HeartFailureReviewGradeRule records
+      tags: [heart-failure-review]
       operationId: listHeartFailureReviewGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HeartFailureReviewGradeRule
+      tags: [heart-failure-review]
       operationId: createHeartFailureReviewGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HeartFailureReviewGradeRule by id
+      tags: [heart-failure-review]
       operationId: getHeartFailureReviewGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HeartFailureReviewGradeRule
+      tags: [heart-failure-review]
       operationId: updateHeartFailureReviewGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HeartFailureReviewGradeRule
+      tags: [heart-failure-review]
       operationId: replaceHeartFailureReviewGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HeartFailureReviewGradeRule
+      tags: [heart-failure-review]
       operationId: deleteHeartFailureReviewGradeRule
       responses:
         "200":

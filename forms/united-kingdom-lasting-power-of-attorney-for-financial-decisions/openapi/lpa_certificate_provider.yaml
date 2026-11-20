@@ -5,10 +5,19 @@ info:
   title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaCertificateProvider
   version: 1.0.0
   description: LPA certificate provider — the single person who certifies the donor's capacity and lack of undue pressure (LP1F section 10).
+x-namespace:
+  form: united-kingdom-lasting-power-of-attorney-for-financial-decisions
+  apiPrefix: /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/
+  sqlSchema: united_kingdom_lasting_power_of_attorney_for_financial_decisions
+  xmlNamespace: https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml
+tags:
+  - name: united-kingdom-lasting-power-of-attorney-for-financial-decisions
+    description: United Kingdom Lasting Power Of Attorney For Financial Decisions form
 paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_certificate_providers:
     get:
       summary: List LpaCertificateProvider records
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: listLpaCertificateProvider
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LpaCertificateProvider
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: createLpaCertificateProvider
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LpaCertificateProvider by id
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: getLpaCertificateProvider
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LpaCertificateProvider
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: updateLpaCertificateProvider
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LpaCertificateProvider
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: replaceLpaCertificateProvider
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LpaCertificateProvider
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: deleteLpaCertificateProvider
       responses:
         "200":

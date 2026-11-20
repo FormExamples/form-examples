@@ -5,10 +5,19 @@ info:
   title: United Kingdom Council Tax Discount Application — UnitedKingdomCouncilTaxDiscountApplicationGrade
   version: 1.0.0
   description: "Computed completeness and eligibility result for a Council Tax discount application. The engine classifies the application as likely-eligible, incomplete or likely-ineligible, counts the adults and states the indicative outcome. It is not a decision: eligibility is decided by the billing authority."
+x-namespace:
+  form: united-kingdom-council-tax-discount-application
+  apiPrefix: /api/united-kingdom-council-tax-discount-application/
+  sqlSchema: united_kingdom_council_tax_discount_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-council-tax-discount-application/xml
+tags:
+  - name: united-kingdom-council-tax-discount-application
+    description: United Kingdom Council Tax Discount Application form
 paths:
   /api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_application_grades:
     get:
       summary: List UnitedKingdomCouncilTaxDiscountApplicationGrade records
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: listUnitedKingdomCouncilTaxDiscountApplicationGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomCouncilTaxDiscountApplicationGrade
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: createUnitedKingdomCouncilTaxDiscountApplicationGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomCouncilTaxDiscountApplicationGrade by id
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: getUnitedKingdomCouncilTaxDiscountApplicationGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomCouncilTaxDiscountApplicationGrade
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: updateUnitedKingdomCouncilTaxDiscountApplicationGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomCouncilTaxDiscountApplicationGrade
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: replaceUnitedKingdomCouncilTaxDiscountApplicationGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomCouncilTaxDiscountApplicationGrade
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: deleteUnitedKingdomCouncilTaxDiscountApplicationGrade
       responses:
         "200":

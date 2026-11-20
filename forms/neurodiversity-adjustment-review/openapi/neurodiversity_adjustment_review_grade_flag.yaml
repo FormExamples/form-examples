@@ -5,10 +5,19 @@ info:
   title: Neurodiversity Adjustment Review — NeurodiversityAdjustmentReviewGradeFlag
   version: 1.0.0
   description: Compliance and risk flags that fire independently of the four axes, with priority and a suggested action. The discrimination-risk flag (adjustments declined for a worker likely covered by the Equality Act 2010 without adequate justification or alternatives) is the highest-priority signal of a failure-to-make-reasonable-adjustments claim.
+x-namespace:
+  form: neurodiversity-adjustment-review
+  apiPrefix: /api/neurodiversity-adjustment-review/
+  sqlSchema: neurodiversity_adjustment_review
+  xmlNamespace: https://formexamples.github.io/neurodiversity-adjustment-review/xml
+tags:
+  - name: neurodiversity-adjustment-review
+    description: Neurodiversity Adjustment Review form
 paths:
   /api/neurodiversity-adjustment-review/neurodiversity_adjustment_review_grade_flags:
     get:
       summary: List NeurodiversityAdjustmentReviewGradeFlag records
+      tags: [neurodiversity-adjustment-review]
       operationId: listNeurodiversityAdjustmentReviewGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeurodiversityAdjustmentReviewGradeFlag
+      tags: [neurodiversity-adjustment-review]
       operationId: createNeurodiversityAdjustmentReviewGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NeurodiversityAdjustmentReviewGradeFlag by id
+      tags: [neurodiversity-adjustment-review]
       operationId: getNeurodiversityAdjustmentReviewGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeurodiversityAdjustmentReviewGradeFlag
+      tags: [neurodiversity-adjustment-review]
       operationId: updateNeurodiversityAdjustmentReviewGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NeurodiversityAdjustmentReviewGradeFlag
+      tags: [neurodiversity-adjustment-review]
       operationId: replaceNeurodiversityAdjustmentReviewGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NeurodiversityAdjustmentReviewGradeFlag
+      tags: [neurodiversity-adjustment-review]
       operationId: deleteNeurodiversityAdjustmentReviewGradeFlag
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT outpatient_outcome_operational (id,created_at,updated_at,deleted_at,outpatient_outcome_id,referral_date,appointment_date,wait_time_days,service_target_days,nhs_attendance_outcome)>
+<!ATTLIST outpatient_outcome_operational xmlns CDATA #FIXED "https://formexamples.github.io/outpatient-outcome/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

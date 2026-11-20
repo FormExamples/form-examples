@@ -1,4 +1,5 @@
 <!ELEMENT assessment_current_management (id,created_at,updated_at,deleted_at,assessment_id,antihistamines,antihistamine_details,nasal_steroids,adrenaline_auto_injector,immunotherapy,immunotherapy_details,biologics,biologic_details,allergen_avoidance_strategies)>
+<!ATTLIST assessment_current_management xmlns CDATA #FIXED "https://formexamples.github.io/allergy-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Anaesthetics Waiting List Card form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: anaesthetics-waiting-list-card
+  apiPrefix: /api/anaesthetics-waiting-list-card/
+  sqlSchema: anaesthetics_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/anaesthetics-waiting-list-card/xml
+tags:
+- name: anaesthetics-waiting-list-card
+  description: Anaesthetics Waiting List Card form
 paths:
   /api/anaesthetics-waiting-list-card/anaesthetics_waiting_list_card_appointments:
     get:
       summary: List AnaestheticsWaitingListCardAppointment records
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: listAnaestheticsWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AnaestheticsWaitingListCardAppointment
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: createAnaestheticsWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AnaestheticsWaitingListCardAppointment by id
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: getAnaestheticsWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AnaestheticsWaitingListCardAppointment
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: updateAnaestheticsWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AnaestheticsWaitingListCardAppointment
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: replaceAnaestheticsWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AnaestheticsWaitingListCardAppointment
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: deleteAnaestheticsWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/anaesthetics-waiting-list-card/anaesthetics_waiting_list_card_grade_flags:
     get:
       summary: List AnaestheticsWaitingListCardGradeFlag records
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: listAnaestheticsWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AnaestheticsWaitingListCardGradeFlag
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: createAnaestheticsWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AnaestheticsWaitingListCardGradeFlag by id
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: getAnaestheticsWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AnaestheticsWaitingListCardGradeFlag
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: updateAnaestheticsWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AnaestheticsWaitingListCardGradeFlag
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: replaceAnaestheticsWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AnaestheticsWaitingListCardGradeFlag
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: deleteAnaestheticsWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/anaesthetics-waiting-list-card/anaesthetics_waiting_list_card_grade_rules:
     get:
       summary: List AnaestheticsWaitingListCardGradeRule records
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: listAnaestheticsWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AnaestheticsWaitingListCardGradeRule
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: createAnaestheticsWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AnaestheticsWaitingListCardGradeRule by id
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: getAnaestheticsWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AnaestheticsWaitingListCardGradeRule
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: updateAnaestheticsWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AnaestheticsWaitingListCardGradeRule
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: replaceAnaestheticsWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AnaestheticsWaitingListCardGradeRule
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: deleteAnaestheticsWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/anaesthetics-waiting-list-card/anaesthetics_waiting_list_card_grades:
     get:
       summary: List AnaestheticsWaitingListCardGrade records
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: listAnaestheticsWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AnaestheticsWaitingListCardGrade
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: createAnaestheticsWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AnaestheticsWaitingListCardGrade by id
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: getAnaestheticsWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AnaestheticsWaitingListCardGrade
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: updateAnaestheticsWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AnaestheticsWaitingListCardGrade
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: replaceAnaestheticsWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AnaestheticsWaitingListCardGrade
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: deleteAnaestheticsWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/anaesthetics-waiting-list-card/anaesthetics_waiting_list_cards:
     get:
       summary: List AnaestheticsWaitingListCard records
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: listAnaestheticsWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AnaestheticsWaitingListCard
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: createAnaestheticsWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AnaestheticsWaitingListCard by id
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: getAnaestheticsWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AnaestheticsWaitingListCard
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: updateAnaestheticsWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AnaestheticsWaitingListCard
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: replaceAnaestheticsWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AnaestheticsWaitingListCard
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: deleteAnaestheticsWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - anaesthetics-waiting-list-card
   /api/anaesthetics-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/anaesthetics-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - anaesthetics-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

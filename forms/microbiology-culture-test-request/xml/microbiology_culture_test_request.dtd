@@ -1,4 +1,5 @@
 <!ELEMENT microbiology_culture_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,specimen_type,specimen_site_detail,test_culture_and_sensitivity,test_gram_stain,test_acid_fast_bacilli_tb,test_fungal_culture,test_pcr_molecular,test_c_difficile_toxin,test_mrsa_screen,primary_indication,clinical_details,fever,current_antibiotics,antibiotic_name,recent_travel,immunocompromised,specimen_collected,collection_datetime,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST microbiology_culture_test_request xmlns CDATA #FIXED "https://formexamples.github.io/microbiology-culture-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

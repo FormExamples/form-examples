@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United Kingdom Lasting Power of Attorney for Financial
     Decisions form, merged from the per-entity specs in this directory. One RESTful resource per routed
     SQL table, and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-kingdom-lasting-power-of-attorney-for-financial-decisions
+  apiPrefix: /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/
+  sqlSchema: united_kingdom_lasting_power_of_attorney_for_financial_decisions
+  xmlNamespace: https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml
+tags:
+- name: united-kingdom-lasting-power-of-attorney-for-financial-decisions
+  description: United Kingdom Lasting Power of Attorney for Financial Decisions form
 paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/addresses:
     get:
       summary: List Address records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listAddress
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Address
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createAddress
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Address by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getAddress
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Address
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateAddress
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Address
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceAddress
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Address
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteAddress
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lasting_power_of_attorneys:
     get:
       summary: List LastingPowerOfAttorney records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLastingPowerOfAttorney
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LastingPowerOfAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLastingPowerOfAttorney
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LastingPowerOfAttorney by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLastingPowerOfAttorney
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LastingPowerOfAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLastingPowerOfAttorney
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LastingPowerOfAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLastingPowerOfAttorney
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LastingPowerOfAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLastingPowerOfAttorney
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_attorneys:
     get:
       summary: List LpaAttorney records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLpaAttorney
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLpaAttorney
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaAttorney by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLpaAttorney
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLpaAttorney
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLpaAttorney
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLpaAttorney
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_certificate_providers:
     get:
       summary: List LpaCertificateProvider records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLpaCertificateProvider
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaCertificateProvider
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLpaCertificateProvider
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaCertificateProvider by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLpaCertificateProvider
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaCertificateProvider
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLpaCertificateProvider
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaCertificateProvider
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLpaCertificateProvider
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaCertificateProvider
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLpaCertificateProvider
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_continuation_sheets:
     get:
       summary: List LpaContinuationSheet records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLpaContinuationSheet
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaContinuationSheet
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLpaContinuationSheet
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaContinuationSheet by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLpaContinuationSheet
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaContinuationSheet
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLpaContinuationSheet
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaContinuationSheet
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLpaContinuationSheet
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaContinuationSheet
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLpaContinuationSheet
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_person_to_notifies:
     get:
       summary: List LpaPersonToNotify records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLpaPersonToNotify
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaPersonToNotify
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLpaPersonToNotify
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaPersonToNotify by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLpaPersonToNotify
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaPersonToNotify
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLpaPersonToNotify
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaPersonToNotify
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLpaPersonToNotify
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaPersonToNotify
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLpaPersonToNotify
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_preferences_and_instructions:
     get:
       summary: List LpaPreferencesAndInstructions records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLpaPreferencesAndInstructions
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaPreferencesAndInstructions
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLpaPreferencesAndInstructions
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaPreferencesAndInstructions by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLpaPreferencesAndInstructions
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaPreferencesAndInstructions
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLpaPreferencesAndInstructions
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaPreferencesAndInstructions
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLpaPreferencesAndInstructions
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaPreferencesAndInstructions
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLpaPreferencesAndInstructions
       responses:
         '200':
@@ -1733,6 +1825,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_registration_applications:
     get:
       summary: List LpaRegistrationApplication records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLpaRegistrationApplication
       parameters:
       - name: limit
@@ -1785,6 +1879,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaRegistrationApplication
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLpaRegistrationApplication
       requestBody:
         required: true
@@ -1838,6 +1934,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaRegistrationApplication by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLpaRegistrationApplication
       responses:
         '200':
@@ -1865,6 +1963,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaRegistrationApplication
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLpaRegistrationApplication
       requestBody:
         required: true
@@ -1910,6 +2010,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaRegistrationApplication
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLpaRegistrationApplication
       requestBody:
         required: true
@@ -1955,6 +2057,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaRegistrationApplication
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLpaRegistrationApplication
       responses:
         '200':
@@ -1979,6 +2083,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_registration_recipients:
     get:
       summary: List LpaRegistrationRecipient records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLpaRegistrationRecipient
       parameters:
       - name: limit
@@ -2031,6 +2137,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaRegistrationRecipient
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLpaRegistrationRecipient
       requestBody:
         required: true
@@ -2084,6 +2192,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaRegistrationRecipient by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLpaRegistrationRecipient
       responses:
         '200':
@@ -2111,6 +2221,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaRegistrationRecipient
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLpaRegistrationRecipient
       requestBody:
         required: true
@@ -2156,6 +2268,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaRegistrationRecipient
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLpaRegistrationRecipient
       requestBody:
         required: true
@@ -2201,6 +2315,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaRegistrationRecipient
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLpaRegistrationRecipient
       responses:
         '200':
@@ -2225,6 +2341,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_replacement_attorneys:
     get:
       summary: List LpaReplacementAttorney records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLpaReplacementAttorney
       parameters:
       - name: limit
@@ -2277,6 +2395,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaReplacementAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLpaReplacementAttorney
       requestBody:
         required: true
@@ -2330,6 +2450,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaReplacementAttorney by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLpaReplacementAttorney
       responses:
         '200':
@@ -2357,6 +2479,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaReplacementAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLpaReplacementAttorney
       requestBody:
         required: true
@@ -2402,6 +2526,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaReplacementAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLpaReplacementAttorney
       requestBody:
         required: true
@@ -2447,6 +2573,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaReplacementAttorney
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLpaReplacementAttorney
       responses:
         '200':
@@ -2471,6 +2599,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_signatures:
     get:
       summary: List LpaSignature records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLpaSignature
       parameters:
       - name: limit
@@ -2523,6 +2653,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaSignature
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLpaSignature
       requestBody:
         required: true
@@ -2576,6 +2708,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaSignature by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLpaSignature
       responses:
         '200':
@@ -2603,6 +2737,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaSignature
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLpaSignature
       requestBody:
         required: true
@@ -2648,6 +2784,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaSignature
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLpaSignature
       requestBody:
         required: true
@@ -2693,6 +2831,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaSignature
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLpaSignature
       responses:
         '200':
@@ -2717,6 +2857,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_validation_flags:
     get:
       summary: List LpaValidationFlag records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLpaValidationFlag
       parameters:
       - name: limit
@@ -2769,6 +2911,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaValidationFlag
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLpaValidationFlag
       requestBody:
         required: true
@@ -2822,6 +2966,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaValidationFlag by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLpaValidationFlag
       responses:
         '200':
@@ -2849,6 +2995,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaValidationFlag
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLpaValidationFlag
       requestBody:
         required: true
@@ -2894,6 +3042,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaValidationFlag
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLpaValidationFlag
       requestBody:
         required: true
@@ -2939,6 +3089,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaValidationFlag
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLpaValidationFlag
       responses:
         '200':
@@ -2963,6 +3115,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_validation_results:
     get:
       summary: List LpaValidationResult records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLpaValidationResult
       parameters:
       - name: limit
@@ -3015,6 +3169,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaValidationResult
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLpaValidationResult
       requestBody:
         required: true
@@ -3068,6 +3224,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaValidationResult by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLpaValidationResult
       responses:
         '200':
@@ -3095,6 +3253,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaValidationResult
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLpaValidationResult
       requestBody:
         required: true
@@ -3140,6 +3300,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaValidationResult
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLpaValidationResult
       requestBody:
         required: true
@@ -3185,6 +3347,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaValidationResult
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLpaValidationResult
       responses:
         '200':
@@ -3209,6 +3373,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_validation_rules:
     get:
       summary: List LpaValidationRule records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLpaValidationRule
       parameters:
       - name: limit
@@ -3261,6 +3427,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaValidationRule
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLpaValidationRule
       requestBody:
         required: true
@@ -3314,6 +3482,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaValidationRule by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLpaValidationRule
       responses:
         '200':
@@ -3341,6 +3511,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaValidationRule
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLpaValidationRule
       requestBody:
         required: true
@@ -3386,6 +3558,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaValidationRule
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLpaValidationRule
       requestBody:
         required: true
@@ -3431,6 +3605,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaValidationRule
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLpaValidationRule
       responses:
         '200':
@@ -3455,6 +3631,8 @@ paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_witnesses:
     get:
       summary: List LpaWitness records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listLpaWitness
       parameters:
       - name: limit
@@ -3507,6 +3685,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaWitness
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createLpaWitness
       requestBody:
         required: true
@@ -3560,6 +3740,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LpaWitness by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getLpaWitness
       responses:
         '200':
@@ -3587,6 +3769,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LpaWitness
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updateLpaWitness
       requestBody:
         required: true
@@ -3632,6 +3816,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LpaWitness
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replaceLpaWitness
       requestBody:
         required: true
@@ -3677,6 +3863,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaWitness
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deleteLpaWitness
       responses:
         '200':
@@ -3709,9 +3897,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/people:
     get:
       summary: List Person records
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: listPerson
       parameters:
       - name: limit
@@ -3764,6 +3956,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Person
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: createPerson
       requestBody:
         required: true
@@ -3817,6 +4011,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Person by id
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: getPerson
       responses:
         '200':
@@ -3844,6 +4040,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Person
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: updatePerson
       requestBody:
         required: true
@@ -3889,6 +4087,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Person
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: replacePerson
       requestBody:
         required: true
@@ -3934,6 +4134,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Person
+      tags:
+      - united-kingdom-lasting-power-of-attorney-for-financial-decisions
       operationId: deletePerson
       responses:
         '200':

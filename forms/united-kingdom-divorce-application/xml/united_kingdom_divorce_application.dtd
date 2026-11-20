@@ -1,4 +1,5 @@
 <!ELEMENT united_kingdom_divorce_application (id,created_at,updated_at,deleted_at,applicant_id,caseworker_id,application_type,application_mode,stage,as_of_date,domestic_abuse_risk,marriage_date,marriage_place,marriage_country,legally_recognised,breakdown_confirmed,marriage_certificate_type,certificate_in_english,certified_translation,name_changed,name_change_proof,applicant_habitual_resident,applicant_residence_months,applicant_domiciled,respondent_habitual_resident,respondent_domiciled,last_habitually_resident_together,applicant_name,applicant_address,applicant_email,respondent_name,respondent_address,respondent_email,respondent_address_known,service_method,children_under_18,children_count,children_arrangements,children_note,financial_order_intended,financial_order_applied,fee_status,application_issued_date,respondent_acknowledged,conditional_order_granted_date,final_order_delay_explained)>
+<!ATTLIST united_kingdom_divorce_application xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-divorce-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Bhutani Bilirubin Nomogram — BhutaniBilirubinNomogramGradeFlag
   version: 1.0.0
   description: Red-flag issues that fire independently of the risk zone, with priority and a suggested action for the clinical team.
+x-namespace:
+  form: bhutani-bilirubin-nomogram
+  apiPrefix: /api/bhutani-bilirubin-nomogram/
+  sqlSchema: bhutani_bilirubin_nomogram
+  xmlNamespace: https://formexamples.github.io/bhutani-bilirubin-nomogram/xml
+tags:
+  - name: bhutani-bilirubin-nomogram
+    description: Bhutani Bilirubin Nomogram form
 paths:
   /api/bhutani-bilirubin-nomogram/bhutani_bilirubin_nomogram_grade_flags:
     get:
       summary: List BhutaniBilirubinNomogramGradeFlag records
+      tags: [bhutani-bilirubin-nomogram]
       operationId: listBhutaniBilirubinNomogramGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BhutaniBilirubinNomogramGradeFlag
+      tags: [bhutani-bilirubin-nomogram]
       operationId: createBhutaniBilirubinNomogramGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BhutaniBilirubinNomogramGradeFlag by id
+      tags: [bhutani-bilirubin-nomogram]
       operationId: getBhutaniBilirubinNomogramGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BhutaniBilirubinNomogramGradeFlag
+      tags: [bhutani-bilirubin-nomogram]
       operationId: updateBhutaniBilirubinNomogramGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BhutaniBilirubinNomogramGradeFlag
+      tags: [bhutani-bilirubin-nomogram]
       operationId: replaceBhutaniBilirubinNomogramGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BhutaniBilirubinNomogramGradeFlag
+      tags: [bhutani-bilirubin-nomogram]
       operationId: deleteBhutaniBilirubinNomogramGradeFlag
       responses:
         "200":

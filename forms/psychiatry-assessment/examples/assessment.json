@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ba",
+    "id": "3a9182e0-caac-5c3c-a068-cfa8078ba634",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-0000000000cc",
+    "id": "660b70ac-38af-587a-85c9-36ee28781bdf",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,19 +36,19 @@
     "unitedKingdomNhsNumber": ""
   },
   "assessment": {
-    "id": "550e8400-e29b-41d4-a716-00000000007c",
+    "id": "43cbd294-8b9f-5164-a4cc-84477e42acd6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000080",
+    "patientId": "a47b7964-5c78-5b0d-94fb-ffb636137339",
     "status": "draft"
   },
   "assessmentCurrentMedications": {
-    "id": "550e8400-e29b-41d4-a716-000000000082",
+    "id": "4a892095-8df7-57da-96fe-3a6655f570cd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-000000000086",
+    "assessmentId": "e8c9456f-cf42-5d3e-b42f-afb0f77f74bf",
     "takesPsychiatricMedications": "yes",
     "takesOtherMedications": "yes",
     "medicationAdherence": "good",
@@ -61,11 +61,11 @@
     "additionalNotes": ""
   },
   "assessmentMedicationItem": {
-    "id": "550e8400-e29b-41d4-a716-000000000091",
+    "id": "00030a4c-5bec-5396-8147-f491e14e4999",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "currentMedicationsId": "550e8400-e29b-41d4-a716-000000000095",
+    "currentMedicationsId": "07ee8eea-284e-5401-b5dd-e0643892e0ef",
     "medicationName": "",
     "dose": "",
     "frequency": "",
@@ -75,11 +75,11 @@
     "sortOrder": 0
   },
   "grade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000da",
+    "id": "79f24aa8-5615-5d25-8873-e05741793afe",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000de",
+    "assessmentId": "7e15d02f-5684-5511-85f5-5274fced7845",
     "gafScore": 0,
     "gafCategory": 0.0,
     "symptomSeverity": "minimal",
@@ -88,22 +88,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "gradingFiredRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000e5",
+    "id": "8eeddfac-c2eb-583c-9ea8-e578e1050b32",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-0000000000e9",
+    "gradeId": "fbe180b2-4e25-5e8e-96a6-accf9893823d",
     "ruleId": "",
     "category": "",
     "description": "",
     "gafImpact": "minimal"
   },
   "gradingAdditionalFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ee",
+    "id": "3a2cab9a-f73a-5202-9305-54bde9130426",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-0000000000f2",
+    "gradeId": "587e7500-3c74-53d3-81b1-47ae0c1336ac",
     "flagId": "",
     "category": "",
     "message": "",

@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "26bbe29a-65d2-4a5d-a481-0811977686db",
+  "id": "7d1b1e6e-792e-5616-8325-2ce3c631a16b",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:51aab79c-81c3-4b26-ada4-7b184b2030ef",
+      "fullUrl": "urn:uuid:027d3038-aa43-5ea9-8d0e-2f8fc0360baf",
       "resource": {
         "resourceType": "Patient",
-        "id": "51aab79c-81c3-4b26-ada4-7b184b2030ef",
+        "id": "027d3038-aa43-5ea9-8d0e-2f8fc0360baf",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:76b14186-1ca3-4be8-a1fb-9a25f56a2e4c",
+      "fullUrl": "urn:uuid:2ad3e308-fa31-5bc6-b630-2e214af6f9cd",
       "resource": {
         "resourceType": "Observation",
-        "id": "76b14186-1ca3-4be8-a1fb-9a25f56a2e4c",
+        "id": "2ad3e308-fa31-5bc6-b630-2e214af6f9cd",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:51aab79c-81c3-4b26-ada4-7b184b2030ef"
+          "reference": "urn:uuid:027d3038-aa43-5ea9-8d0e-2f8fc0360baf"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:2948ec43-aeee-4821-a6ec-1e85747e5e54",
+      "fullUrl": "urn:uuid:fc78eddb-9c2e-5d9e-b728-08c3a1d4c5ba",
       "resource": {
         "resourceType": "Observation",
-        "id": "2948ec43-aeee-4821-a6ec-1e85747e5e54",
+        "id": "fc78eddb-9c2e-5d9e-b728-08c3a1d4c5ba",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:51aab79c-81c3-4b26-ada4-7b184b2030ef"
+          "reference": "urn:uuid:027d3038-aa43-5ea9-8d0e-2f8fc0360baf"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -596,10 +596,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:821587ef-63a4-4062-ae1d-8fbd1f86dda6",
+      "fullUrl": "urn:uuid:2108cfc0-f3f3-59a5-a8de-3495893c631c",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "821587ef-63a4-4062-ae1d-8fbd1f86dda6",
+        "id": "2108cfc0-f3f3-59a5-a8de-3495893c631c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -608,7 +608,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:51aab79c-81c3-4b26-ada4-7b184b2030ef"
+          "reference": "urn:uuid:027d3038-aa43-5ea9-8d0e-2f8fc0360baf"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -617,10 +617,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:21c1ad93-8931-4d2c-a414-90566e2b05fc",
+      "fullUrl": "urn:uuid:aa13579e-14d1-5c3d-b6d6-b576040f427b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "21c1ad93-8931-4d2c-a414-90566e2b05fc",
+        "id": "aa13579e-14d1-5c3d-b6d6-b576040f427b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -650,17 +650,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:51aab79c-81c3-4b26-ada4-7b184b2030ef"
+          "reference": "urn:uuid:027d3038-aa43-5ea9-8d0e-2f8fc0360baf"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "One or more abnormal structured findings are present; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:050f6bb9-45fa-4ef3-aff8-ac8ceda51c42",
+      "fullUrl": "urn:uuid:b29d6b4c-774b-504d-ae22-e402b9e571f4",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "050f6bb9-45fa-4ef3-aff8-ac8ceda51c42",
+        "id": "b29d6b4c-774b-504d-ae22-e402b9e571f4",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -690,17 +690,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:51aab79c-81c3-4b26-ada4-7b184b2030ef"
+          "reference": "urn:uuid:027d3038-aa43-5ea9-8d0e-2f8fc0360baf"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Highly tracer-avid disease (SUVmax 10 or greater); abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:6f3d433f-c3f0-4f11-a5f6-866218c22d4e",
+      "fullUrl": "urn:uuid:198d08a4-f121-541b-bb2b-e74005248bf0",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "6f3d433f-c3f0-4f11-a5f6-866218c22d4e",
+        "id": "198d08a4-f121-541b-bb2b-e74005248bf0",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -730,17 +730,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:51aab79c-81c3-4b26-ada4-7b184b2030ef"
+          "reference": "urn:uuid:027d3038-aa43-5ea9-8d0e-2f8fc0360baf"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Major abnormality present; follow-up urgency graded urgent."
       }
     },
     {
-      "fullUrl": "urn:uuid:bf5ee4d4-46ec-48f8-a4ff-bcf8f398c945",
+      "fullUrl": "urn:uuid:732e46b9-939b-57d6-ac30-a6540813ac7c",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "bf5ee4d4-46ec-48f8-a4ff-bcf8f398c945",
+        "id": "732e46b9-939b-57d6-ac30-a6540813ac7c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -770,7 +770,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:51aab79c-81c3-4b26-ada4-7b184b2030ef"
+          "reference": "urn:uuid:027d3038-aa43-5ea9-8d0e-2f8fc0360baf"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Abnormal tracer uptake (hypermetabolic lesion or nodal uptake) is present and may warrant urgent referral.",

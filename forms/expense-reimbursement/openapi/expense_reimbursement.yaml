@@ -5,10 +5,19 @@ info:
   title: Expense Reimbursement — ExpenseReimbursement
   version: 1.0.0
   description: "Expense reimbursement claim: a worker asks the employer to repay money the worker spent personally on work-related expenses."
+x-namespace:
+  form: expense-reimbursement
+  apiPrefix: /api/expense-reimbursement/
+  sqlSchema: expense_reimbursement
+  xmlNamespace: https://formexamples.github.io/expense-reimbursement/xml
+tags:
+  - name: expense-reimbursement
+    description: Expense Reimbursement form
 paths:
   /api/expense-reimbursement/expense_reimbursements:
     get:
       summary: List ExpenseReimbursement records
+      tags: [expense-reimbursement]
       operationId: listExpenseReimbursement
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ExpenseReimbursement
+      tags: [expense-reimbursement]
       operationId: createExpenseReimbursement
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ExpenseReimbursement by id
+      tags: [expense-reimbursement]
       operationId: getExpenseReimbursement
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ExpenseReimbursement
+      tags: [expense-reimbursement]
       operationId: updateExpenseReimbursement
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ExpenseReimbursement
+      tags: [expense-reimbursement]
       operationId: replaceExpenseReimbursement
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ExpenseReimbursement
+      tags: [expense-reimbursement]
       operationId: deleteExpenseReimbursement
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_last_will_and_testament_grade_flag SYSTEM "united_kingdom_last_will_and_testament_grade_flag.dtd">
-<united_kingdom_last_will_and_testament_grade_flag>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<united_kingdom_last_will_and_testament_grade_flag xmlns="https://formexamples.github.io/united-kingdom-last-will-and-testament/xml">
+<id>1d33023b-70ce-5452-b6f2-d45a3d24d36f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<united_kingdom_last_will_and_testament_grade_id>770e8400-e29b-41d4-a716-446655440002</united_kingdom_last_will_and_testament_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<united_kingdom_last_will_and_testament_grade_id>9804ea31-b5a1-520b-a279-ec65bbfbb93c</united_kingdom_last_will_and_testament_grade_id>
+<flag_id>4a6d3f6e-947d-5f96-808b-7cf43adab6d1</flag_id>
 <category>testator-eligibility</category>
 <priority>low</priority>
 <description>Example text.</description>

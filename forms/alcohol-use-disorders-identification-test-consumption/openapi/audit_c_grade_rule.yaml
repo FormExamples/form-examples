@@ -5,10 +5,19 @@ info:
   title: Alcohol Use Disorders Identification Test Consumption — AuditCGradeRule
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during AUDIT-C computation: item, points contributed, category, and description."
+x-namespace:
+  form: alcohol-use-disorders-identification-test-consumption
+  apiPrefix: /api/alcohol-use-disorders-identification-test-consumption/
+  sqlSchema: alcohol_use_disorders_identification_test_consumption
+  xmlNamespace: https://formexamples.github.io/alcohol-use-disorders-identification-test-consumption/xml
+tags:
+  - name: alcohol-use-disorders-identification-test-consumption
+    description: Alcohol Use Disorders Identification Test Consumption form
 paths:
   /api/alcohol-use-disorders-identification-test-consumption/audit_c_grade_rules:
     get:
       summary: List AuditCGradeRule records
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: listAuditCGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AuditCGradeRule
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: createAuditCGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AuditCGradeRule by id
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: getAuditCGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AuditCGradeRule
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: updateAuditCGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AuditCGradeRule
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: replaceAuditCGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AuditCGradeRule
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: deleteAuditCGradeRule
       responses:
         "200":

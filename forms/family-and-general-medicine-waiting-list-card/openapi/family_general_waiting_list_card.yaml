@@ -5,10 +5,19 @@ info:
   title: Family And General Medicine Waiting List Card — FamilyGeneralWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a family and general medicine waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: family-and-general-medicine-waiting-list-card
+  apiPrefix: /api/family-and-general-medicine-waiting-list-card/
+  sqlSchema: family_and_general_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/family-and-general-medicine-waiting-list-card/xml
+tags:
+  - name: family-and-general-medicine-waiting-list-card
+    description: Family And General Medicine Waiting List Card form
 paths:
   /api/family-and-general-medicine-waiting-list-card/family_general_waiting_list_cards:
     get:
       summary: List FamilyGeneralWaitingListCard records
+      tags: [family-and-general-medicine-waiting-list-card]
       operationId: listFamilyGeneralWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new FamilyGeneralWaitingListCard
+      tags: [family-and-general-medicine-waiting-list-card]
       operationId: createFamilyGeneralWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one FamilyGeneralWaitingListCard by id
+      tags: [family-and-general-medicine-waiting-list-card]
       operationId: getFamilyGeneralWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing FamilyGeneralWaitingListCard
+      tags: [family-and-general-medicine-waiting-list-card]
       operationId: updateFamilyGeneralWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing FamilyGeneralWaitingListCard
+      tags: [family-and-general-medicine-waiting-list-card]
       operationId: replaceFamilyGeneralWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a FamilyGeneralWaitingListCard
+      tags: [family-and-general-medicine-waiting-list-card]
       operationId: deleteFamilyGeneralWaitingListCard
       responses:
         "200":

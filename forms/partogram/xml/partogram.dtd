@@ -1,4 +1,5 @@
 <!ELEMENT partogram (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,care_setting,active_phase_start_at,patient_identifier,age_band,parity,gestation_weeks,membranes_on_admission,risk_factors,planned_care)>
+<!ATTLIST partogram xmlns CDATA #FIXED "https://formexamples.github.io/partogram/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

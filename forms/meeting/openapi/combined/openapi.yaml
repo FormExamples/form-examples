@@ -6,10 +6,20 @@ info:
   version: 1.0.0
   description: Combined OpenAPI specification for the Meeting form, merged from the per-entity specs in
     this directory. One RESTful resource per routed SQL table, and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: meeting
+  apiPrefix: /api/meeting/
+  sqlSchema: meeting
+  xmlNamespace: https://formexamples.github.io/meeting/xml
+tags:
+- name: meeting
+  description: Meeting form
 paths:
   /api/meeting/action_items:
     get:
       summary: List ActionItem records
+      tags:
+      - meeting
       operationId: listActionItem
       parameters:
       - name: limit
@@ -62,6 +72,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ActionItem
+      tags:
+      - meeting
       operationId: createActionItem
       requestBody:
         required: true
@@ -115,6 +127,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ActionItem by id
+      tags:
+      - meeting
       operationId: getActionItem
       responses:
         '200':
@@ -142,6 +156,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ActionItem
+      tags:
+      - meeting
       operationId: updateActionItem
       requestBody:
         required: true
@@ -187,6 +203,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ActionItem
+      tags:
+      - meeting
       operationId: replaceActionItem
       requestBody:
         required: true
@@ -232,6 +250,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ActionItem
+      tags:
+      - meeting
       operationId: deleteActionItem
       responses:
         '200':
@@ -256,6 +276,8 @@ paths:
   /api/meeting/agenda_items:
     get:
       summary: List AgendaItem records
+      tags:
+      - meeting
       operationId: listAgendaItem
       parameters:
       - name: limit
@@ -308,6 +330,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AgendaItem
+      tags:
+      - meeting
       operationId: createAgendaItem
       requestBody:
         required: true
@@ -361,6 +385,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AgendaItem by id
+      tags:
+      - meeting
       operationId: getAgendaItem
       responses:
         '200':
@@ -388,6 +414,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AgendaItem
+      tags:
+      - meeting
       operationId: updateAgendaItem
       requestBody:
         required: true
@@ -433,6 +461,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AgendaItem
+      tags:
+      - meeting
       operationId: replaceAgendaItem
       requestBody:
         required: true
@@ -478,6 +508,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AgendaItem
+      tags:
+      - meeting
       operationId: deleteAgendaItem
       responses:
         '200':
@@ -502,6 +534,8 @@ paths:
   /api/meeting/meeting_grade_flags:
     get:
       summary: List MeetingGradeFlag records
+      tags:
+      - meeting
       operationId: listMeetingGradeFlag
       parameters:
       - name: limit
@@ -554,6 +588,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MeetingGradeFlag
+      tags:
+      - meeting
       operationId: createMeetingGradeFlag
       requestBody:
         required: true
@@ -607,6 +643,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MeetingGradeFlag by id
+      tags:
+      - meeting
       operationId: getMeetingGradeFlag
       responses:
         '200':
@@ -634,6 +672,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MeetingGradeFlag
+      tags:
+      - meeting
       operationId: updateMeetingGradeFlag
       requestBody:
         required: true
@@ -679,6 +719,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MeetingGradeFlag
+      tags:
+      - meeting
       operationId: replaceMeetingGradeFlag
       requestBody:
         required: true
@@ -724,6 +766,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MeetingGradeFlag
+      tags:
+      - meeting
       operationId: deleteMeetingGradeFlag
       responses:
         '200':
@@ -748,6 +792,8 @@ paths:
   /api/meeting/meeting_grade_rules:
     get:
       summary: List MeetingGradeRule records
+      tags:
+      - meeting
       operationId: listMeetingGradeRule
       parameters:
       - name: limit
@@ -800,6 +846,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MeetingGradeRule
+      tags:
+      - meeting
       operationId: createMeetingGradeRule
       requestBody:
         required: true
@@ -853,6 +901,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MeetingGradeRule by id
+      tags:
+      - meeting
       operationId: getMeetingGradeRule
       responses:
         '200':
@@ -880,6 +930,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MeetingGradeRule
+      tags:
+      - meeting
       operationId: updateMeetingGradeRule
       requestBody:
         required: true
@@ -925,6 +977,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MeetingGradeRule
+      tags:
+      - meeting
       operationId: replaceMeetingGradeRule
       requestBody:
         required: true
@@ -970,6 +1024,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MeetingGradeRule
+      tags:
+      - meeting
       operationId: deleteMeetingGradeRule
       responses:
         '200':
@@ -994,6 +1050,8 @@ paths:
   /api/meeting/meeting_grades:
     get:
       summary: List MeetingGrade records
+      tags:
+      - meeting
       operationId: listMeetingGrade
       parameters:
       - name: limit
@@ -1046,6 +1104,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MeetingGrade
+      tags:
+      - meeting
       operationId: createMeetingGrade
       requestBody:
         required: true
@@ -1099,6 +1159,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MeetingGrade by id
+      tags:
+      - meeting
       operationId: getMeetingGrade
       responses:
         '200':
@@ -1126,6 +1188,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MeetingGrade
+      tags:
+      - meeting
       operationId: updateMeetingGrade
       requestBody:
         required: true
@@ -1171,6 +1235,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MeetingGrade
+      tags:
+      - meeting
       operationId: replaceMeetingGrade
       requestBody:
         required: true
@@ -1216,6 +1282,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MeetingGrade
+      tags:
+      - meeting
       operationId: deleteMeetingGrade
       responses:
         '200':
@@ -1240,6 +1308,8 @@ paths:
   /api/meeting/meeting_outcomes:
     get:
       summary: List MeetingOutcome records
+      tags:
+      - meeting
       operationId: listMeetingOutcome
       parameters:
       - name: limit
@@ -1292,6 +1362,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MeetingOutcome
+      tags:
+      - meeting
       operationId: createMeetingOutcome
       requestBody:
         required: true
@@ -1345,6 +1417,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MeetingOutcome by id
+      tags:
+      - meeting
       operationId: getMeetingOutcome
       responses:
         '200':
@@ -1372,6 +1446,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MeetingOutcome
+      tags:
+      - meeting
       operationId: updateMeetingOutcome
       requestBody:
         required: true
@@ -1417,6 +1493,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MeetingOutcome
+      tags:
+      - meeting
       operationId: replaceMeetingOutcome
       requestBody:
         required: true
@@ -1462,6 +1540,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MeetingOutcome
+      tags:
+      - meeting
       operationId: deleteMeetingOutcome
       responses:
         '200':
@@ -1486,6 +1566,8 @@ paths:
   /api/meeting/meeting_outputs:
     get:
       summary: List MeetingOutput records
+      tags:
+      - meeting
       operationId: listMeetingOutput
       parameters:
       - name: limit
@@ -1538,6 +1620,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MeetingOutput
+      tags:
+      - meeting
       operationId: createMeetingOutput
       requestBody:
         required: true
@@ -1591,6 +1675,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MeetingOutput by id
+      tags:
+      - meeting
       operationId: getMeetingOutput
       responses:
         '200':
@@ -1618,6 +1704,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MeetingOutput
+      tags:
+      - meeting
       operationId: updateMeetingOutput
       requestBody:
         required: true
@@ -1663,6 +1751,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MeetingOutput
+      tags:
+      - meeting
       operationId: replaceMeetingOutput
       requestBody:
         required: true
@@ -1708,6 +1798,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MeetingOutput
+      tags:
+      - meeting
       operationId: deleteMeetingOutput
       responses:
         '200':
@@ -1732,6 +1824,8 @@ paths:
   /api/meeting/meetings:
     get:
       summary: List Meeting records
+      tags:
+      - meeting
       operationId: listMeeting
       parameters:
       - name: limit
@@ -1784,6 +1878,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Meeting
+      tags:
+      - meeting
       operationId: createMeeting
       requestBody:
         required: true
@@ -1837,6 +1933,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Meeting by id
+      tags:
+      - meeting
       operationId: getMeeting
       responses:
         '200':
@@ -1864,6 +1962,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Meeting
+      tags:
+      - meeting
       operationId: updateMeeting
       requestBody:
         required: true
@@ -1909,6 +2009,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Meeting
+      tags:
+      - meeting
       operationId: replaceMeeting
       requestBody:
         required: true
@@ -1954,6 +2056,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Meeting
+      tags:
+      - meeting
       operationId: deleteMeeting
       responses:
         '200':
@@ -1986,9 +2090,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - meeting
   /api/meeting/organizers:
     get:
       summary: List Organizer records
+      tags:
+      - meeting
       operationId: listOrganizer
       parameters:
       - name: limit
@@ -2041,6 +2149,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Organizer
+      tags:
+      - meeting
       operationId: createOrganizer
       requestBody:
         required: true
@@ -2094,6 +2204,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Organizer by id
+      tags:
+      - meeting
       operationId: getOrganizer
       responses:
         '200':
@@ -2121,6 +2233,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Organizer
+      tags:
+      - meeting
       operationId: updateOrganizer
       requestBody:
         required: true
@@ -2166,6 +2280,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Organizer
+      tags:
+      - meeting
       operationId: replaceOrganizer
       requestBody:
         required: true
@@ -2211,6 +2327,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Organizer
+      tags:
+      - meeting
       operationId: deleteOrganizer
       responses:
         '200':
@@ -2235,6 +2353,8 @@ paths:
   /api/meeting/participants:
     get:
       summary: List Participant records
+      tags:
+      - meeting
       operationId: listParticipant
       parameters:
       - name: limit
@@ -2287,6 +2407,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Participant
+      tags:
+      - meeting
       operationId: createParticipant
       requestBody:
         required: true
@@ -2340,6 +2462,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Participant by id
+      tags:
+      - meeting
       operationId: getParticipant
       responses:
         '200':
@@ -2367,6 +2491,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Participant
+      tags:
+      - meeting
       operationId: updateParticipant
       requestBody:
         required: true
@@ -2412,6 +2538,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Participant
+      tags:
+      - meeting
       operationId: replaceParticipant
       requestBody:
         required: true
@@ -2457,6 +2585,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Participant
+      tags:
+      - meeting
       operationId: deleteParticipant
       responses:
         '200':
@@ -2481,6 +2611,8 @@ paths:
   /api/meeting/recurring_rules:
     get:
       summary: List RecurringRule records
+      tags:
+      - meeting
       operationId: listRecurringRule
       parameters:
       - name: limit
@@ -2533,6 +2665,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RecurringRule
+      tags:
+      - meeting
       operationId: createRecurringRule
       requestBody:
         required: true
@@ -2586,6 +2720,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RecurringRule by id
+      tags:
+      - meeting
       operationId: getRecurringRule
       responses:
         '200':
@@ -2613,6 +2749,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RecurringRule
+      tags:
+      - meeting
       operationId: updateRecurringRule
       requestBody:
         required: true
@@ -2658,6 +2796,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RecurringRule
+      tags:
+      - meeting
       operationId: replaceRecurringRule
       requestBody:
         required: true
@@ -2703,6 +2843,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RecurringRule
+      tags:
+      - meeting
       operationId: deleteRecurringRule
       responses:
         '200':
@@ -2727,6 +2869,8 @@ paths:
   /api/meeting/resources:
     get:
       summary: List Resource records
+      tags:
+      - meeting
       operationId: listResource
       parameters:
       - name: limit
@@ -2779,6 +2923,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Resource
+      tags:
+      - meeting
       operationId: createResource
       requestBody:
         required: true
@@ -2832,6 +2978,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Resource by id
+      tags:
+      - meeting
       operationId: getResource
       responses:
         '200':
@@ -2859,6 +3007,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Resource
+      tags:
+      - meeting
       operationId: updateResource
       requestBody:
         required: true
@@ -2904,6 +3054,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Resource
+      tags:
+      - meeting
       operationId: replaceResource
       requestBody:
         required: true
@@ -2949,6 +3101,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Resource
+      tags:
+      - meeting
       operationId: deleteResource
       responses:
         '200':

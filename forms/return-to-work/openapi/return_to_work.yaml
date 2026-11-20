@@ -5,10 +5,19 @@ info:
   title: Return To Work — ReturnToWork
   version: 1.0.0
   description: Clinician-issued Statement of Fitness for Work (Med 3 / fit note) authorising an employee return to work after illness, injury, or extended absence.
+x-namespace:
+  form: return-to-work
+  apiPrefix: /api/return-to-work/
+  sqlSchema: return_to_work
+  xmlNamespace: https://formexamples.github.io/return-to-work/xml
+tags:
+  - name: return-to-work
+    description: Return To Work form
 paths:
   /api/return-to-work/return_to_works:
     get:
       summary: List ReturnToWork records
+      tags: [return-to-work]
       operationId: listReturnToWork
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ReturnToWork
+      tags: [return-to-work]
       operationId: createReturnToWork
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ReturnToWork by id
+      tags: [return-to-work]
       operationId: getReturnToWork
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ReturnToWork
+      tags: [return-to-work]
       operationId: updateReturnToWork
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ReturnToWork
+      tags: [return-to-work]
       operationId: replaceReturnToWork
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ReturnToWork
+      tags: [return-to-work]
       operationId: deleteReturnToWork
       responses:
         "200":

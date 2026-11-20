@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Oral and Maxillofacial Surgery Waiting List Card
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: oral-and-maxillofacial-surgery-waiting-list-card
+  apiPrefix: /api/oral-and-maxillofacial-surgery-waiting-list-card/
+  sqlSchema: oral_and_maxillofacial_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/oral-and-maxillofacial-surgery-waiting-list-card/xml
+tags:
+- name: oral-and-maxillofacial-surgery-waiting-list-card
+  description: Oral and Maxillofacial Surgery Waiting List Card form
 paths:
   /api/oral-and-maxillofacial-surgery-waiting-list-card/omfs_waiting_list_card_appointments:
     get:
       summary: List OmfsWaitingListCardAppointment records
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: listOmfsWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OmfsWaitingListCardAppointment
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: createOmfsWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OmfsWaitingListCardAppointment by id
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: getOmfsWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OmfsWaitingListCardAppointment
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: updateOmfsWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OmfsWaitingListCardAppointment
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: replaceOmfsWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OmfsWaitingListCardAppointment
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: deleteOmfsWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/oral-and-maxillofacial-surgery-waiting-list-card/omfs_waiting_list_card_grade_flags:
     get:
       summary: List OmfsWaitingListCardGradeFlag records
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: listOmfsWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OmfsWaitingListCardGradeFlag
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: createOmfsWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OmfsWaitingListCardGradeFlag by id
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: getOmfsWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OmfsWaitingListCardGradeFlag
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: updateOmfsWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OmfsWaitingListCardGradeFlag
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: replaceOmfsWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OmfsWaitingListCardGradeFlag
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: deleteOmfsWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/oral-and-maxillofacial-surgery-waiting-list-card/omfs_waiting_list_card_grade_rules:
     get:
       summary: List OmfsWaitingListCardGradeRule records
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: listOmfsWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OmfsWaitingListCardGradeRule
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: createOmfsWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OmfsWaitingListCardGradeRule by id
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: getOmfsWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OmfsWaitingListCardGradeRule
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: updateOmfsWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OmfsWaitingListCardGradeRule
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: replaceOmfsWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OmfsWaitingListCardGradeRule
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: deleteOmfsWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/oral-and-maxillofacial-surgery-waiting-list-card/omfs_waiting_list_card_grades:
     get:
       summary: List OmfsWaitingListCardGrade records
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: listOmfsWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OmfsWaitingListCardGrade
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: createOmfsWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OmfsWaitingListCardGrade by id
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: getOmfsWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OmfsWaitingListCardGrade
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: updateOmfsWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OmfsWaitingListCardGrade
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: replaceOmfsWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OmfsWaitingListCardGrade
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: deleteOmfsWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/oral-and-maxillofacial-surgery-waiting-list-card/omfs_waiting_list_cards:
     get:
       summary: List OmfsWaitingListCard records
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: listOmfsWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OmfsWaitingListCard
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: createOmfsWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OmfsWaitingListCard by id
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: getOmfsWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OmfsWaitingListCard
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: updateOmfsWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OmfsWaitingListCard
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: replaceOmfsWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OmfsWaitingListCard
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: deleteOmfsWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
   /api/oral-and-maxillofacial-surgery-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/oral-and-maxillofacial-surgery-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - oral-and-maxillofacial-surgery-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

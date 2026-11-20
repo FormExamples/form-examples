@@ -5,10 +5,19 @@ info:
   title: Neurosurgery Waiting List Card — NeurosurgeryWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a neurosurgery waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: neurosurgery-waiting-list-card
+  apiPrefix: /api/neurosurgery-waiting-list-card/
+  sqlSchema: neurosurgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/neurosurgery-waiting-list-card/xml
+tags:
+  - name: neurosurgery-waiting-list-card
+    description: Neurosurgery Waiting List Card form
 paths:
   /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_cards:
     get:
       summary: List NeurosurgeryWaitingListCard records
+      tags: [neurosurgery-waiting-list-card]
       operationId: listNeurosurgeryWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeurosurgeryWaitingListCard
+      tags: [neurosurgery-waiting-list-card]
       operationId: createNeurosurgeryWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NeurosurgeryWaitingListCard by id
+      tags: [neurosurgery-waiting-list-card]
       operationId: getNeurosurgeryWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeurosurgeryWaitingListCard
+      tags: [neurosurgery-waiting-list-card]
       operationId: updateNeurosurgeryWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NeurosurgeryWaitingListCard
+      tags: [neurosurgery-waiting-list-card]
       operationId: replaceNeurosurgeryWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NeurosurgeryWaitingListCard
+      tags: [neurosurgery-waiting-list-card]
       operationId: deleteNeurosurgeryWaitingListCard
       responses:
         "200":

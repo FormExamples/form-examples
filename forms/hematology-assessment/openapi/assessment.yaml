@@ -5,10 +5,19 @@ info:
   title: Hematology Assessment — Assessment
   version: 1.0.0
   description: A single hematology assessment. Child tables hold section-specific clinical data.
+x-namespace:
+  form: hematology-assessment
+  apiPrefix: /api/hematology-assessment/
+  sqlSchema: hematology_assessment
+  xmlNamespace: https://formexamples.github.io/hematology-assessment/xml
+tags:
+  - name: hematology-assessment
+    description: Hematology Assessment form
 paths:
   /api/hematology-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [hematology-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [hematology-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [hematology-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [hematology-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [hematology-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [hematology-assessment]
       operationId: deleteAssessment
       responses:
         "200":

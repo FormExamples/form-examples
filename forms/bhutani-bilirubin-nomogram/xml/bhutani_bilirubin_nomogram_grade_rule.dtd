@@ -1,4 +1,5 @@
 <!ELEMENT bhutani_bilirubin_nomogram_grade_rule (id,created_at,updated_at,deleted_at,bhutani_bilirubin_nomogram_grade_id,rule_id,category,description)>
+<!ATTLIST bhutani_bilirubin_nomogram_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/bhutani-bilirubin-nomogram/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

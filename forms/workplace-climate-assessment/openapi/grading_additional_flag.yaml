@@ -5,10 +5,19 @@ info:
   title: Workplace Climate Assessment — GradingAdditionalFlag
   version: 1.0.0
   description: Safety-critical clinical flags raised alongside the grading result.
+x-namespace:
+  form: workplace-climate-assessment
+  apiPrefix: /api/workplace-climate-assessment/
+  sqlSchema: workplace_climate_assessment
+  xmlNamespace: https://formexamples.github.io/workplace-climate-assessment/xml
+tags:
+  - name: workplace-climate-assessment
+    description: Workplace Climate Assessment form
 paths:
   /api/workplace-climate-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [workplace-climate-assessment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [workplace-climate-assessment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [workplace-climate-assessment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [workplace-climate-assessment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [workplace-climate-assessment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [workplace-climate-assessment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

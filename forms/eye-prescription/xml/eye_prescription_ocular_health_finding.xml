@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE eye_prescription_ocular_health_finding SYSTEM "eye_prescription_ocular_health_finding.dtd">
-<eye_prescription_ocular_health_finding>
-<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<eye_prescription_ocular_health_finding xmlns="https://formexamples.github.io/eye-prescription/xml">
+<id>45f03b29-f2ef-52d0-bb96-00f9dc7a789e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<eye_prescription_id>770e8400-e29b-41d4-a716-446655440002</eye_prescription_id>
+<eye_prescription_id>7dcf0e2d-b1bd-537d-8f80-02dc8446bdec</eye_prescription_id>
 <slit_lamp_right></slit_lamp_right>
 <slit_lamp_left></slit_lamp_left>
 <fundus_right></fundus_right>

@@ -5,10 +5,19 @@ info:
   title: United States Last Will And Testament — Attorney
   version: 1.0.0
   description: Attorney who drafts, supervises, or reviews the will, with bar admission details.
+x-namespace:
+  form: united-states-last-will-and-testament
+  apiPrefix: /api/united-states-last-will-and-testament/
+  sqlSchema: united_states_last_will_and_testament
+  xmlNamespace: https://formexamples.github.io/united-states-last-will-and-testament/xml
+tags:
+  - name: united-states-last-will-and-testament
+    description: United States Last Will And Testament form
 paths:
   /api/united-states-last-will-and-testament/attorneys:
     get:
       summary: List Attorney records
+      tags: [united-states-last-will-and-testament]
       operationId: listAttorney
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Attorney
+      tags: [united-states-last-will-and-testament]
       operationId: createAttorney
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Attorney by id
+      tags: [united-states-last-will-and-testament]
       operationId: getAttorney
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Attorney
+      tags: [united-states-last-will-and-testament]
       operationId: updateAttorney
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Attorney
+      tags: [united-states-last-will-and-testament]
       operationId: replaceAttorney
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Attorney
+      tags: [united-states-last-will-and-testament]
       operationId: deleteAttorney
       responses:
         "200":

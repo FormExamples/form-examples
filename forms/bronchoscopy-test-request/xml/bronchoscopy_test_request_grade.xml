@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE bronchoscopy_test_request_grade SYSTEM "bronchoscopy_test_request_grade.dtd">
-<bronchoscopy_test_request_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<bronchoscopy_test_request_grade xmlns="https://formexamples.github.io/bronchoscopy-test-request/xml">
+<id>62152156-4d80-5ed7-8a4f-f2e6d9458be2</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<bronchoscopy_test_request_id>770e8400-e29b-41d4-a716-446655440002</bronchoscopy_test_request_id>
+<bronchoscopy_test_request_id>59a99fd0-7ba3-500f-9ec6-faffdc86663f</bronchoscopy_test_request_id>
 <appropriateness_score>5</appropriateness_score>
 <appropriateness_band>usually-appropriate</appropriateness_band>
 <triage_tier>routine</triage_tier>

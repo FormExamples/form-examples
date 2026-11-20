@@ -1,4 +1,5 @@
 <!ELEMENT organization (id,created_at,updated_at,deleted_at,name,legal_name,industry,domain,country_as_iso_3166_1_alpha_2,description)>
+<!ATTLIST organization xmlns CDATA #FIXED "https://formexamples.github.io/architecture-decision-record/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

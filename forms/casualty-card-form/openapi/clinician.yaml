@@ -5,10 +5,19 @@ info:
   title: Casualty Card Form — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: casualty-card-form
+  apiPrefix: /api/casualty-card-form/
+  sqlSchema: casualty_card_form
+  xmlNamespace: https://formexamples.github.io/casualty-card-form/xml
+tags:
+  - name: casualty-card-form
+    description: Casualty Card Form form
 paths:
   /api/casualty-card-form/clinicians:
     get:
       summary: List Clinician records
+      tags: [casualty-card-form]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [casualty-card-form]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [casualty-card-form]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [casualty-card-form]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [casualty-card-form]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [casualty-card-form]
       operationId: deleteClinician
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT apgar_score_timepoint (id,created_at,updated_at,deleted_at,apgar_score_id,timepoint_minutes,appearance,pulse,grimace,activity,respiration,total,band)>
+<!ATTLIST apgar_score_timepoint xmlns CDATA #FIXED "https://formexamples.github.io/apgar-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

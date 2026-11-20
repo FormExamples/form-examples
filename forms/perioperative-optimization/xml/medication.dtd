@@ -1,4 +1,5 @@
 <!ELEMENT medication (id,created_at,updated_at,deleted_at,international_nonproprietary_name,brand_name,kind,hold_class,hold_required,default_hold_start_before_days,default_restart_after_days,perioperative_hold_guidance,description)>
+<!ATTLIST medication xmlns CDATA #FIXED "https://formexamples.github.io/perioperative-optimization/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

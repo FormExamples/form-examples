@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE knee_replacement_surgery_evaluation_grade_flag SYSTEM "knee_replacement_surgery_evaluation_grade_flag.dtd">
-<knee_replacement_surgery_evaluation_grade_flag>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<knee_replacement_surgery_evaluation_grade_flag xmlns="https://formexamples.github.io/knee-replacement-surgery-evaluation/xml">
+<id>8c672222-c979-57f1-8cd7-fd0119b06e11</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<knee_replacement_surgery_evaluation_grade_id>880e8400-e29b-41d4-a716-446655440003</knee_replacement_surgery_evaluation_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<knee_replacement_surgery_evaluation_grade_id>46ef5e23-bdb1-561a-b622-35c0025f0129</knee_replacement_surgery_evaluation_grade_id>
+<flag_id>28cf0aff-0c85-519f-bc8d-a348df3abe38</flag_id>
 <category>conservative-treatment-not-exhausted</category>
 <priority>low</priority>
 <description>Example text.</description>

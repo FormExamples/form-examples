@@ -1,4 +1,5 @@
 <!ELEMENT soap_note_grade (id,created_at,updated_at,deleted_at,soap_note_id,status,completeness_percent,subjective_present,objective_present,assessment_present,plan_present,graded_at)>
+<!ATTLIST soap_note_grade xmlns CDATA #FIXED "https://formexamples.github.io/soap-note/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

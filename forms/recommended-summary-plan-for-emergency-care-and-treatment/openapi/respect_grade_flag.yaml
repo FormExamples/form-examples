@@ -5,10 +5,19 @@ info:
   title: Recommended Summary Plan For Emergency Care And Treatment — RespectGradeFlag
   version: 1.0.0
   description: Safety and governance flags that fire independently of the completeness status, with priority and a suggested action for the clinician or governance team.
+x-namespace:
+  form: recommended-summary-plan-for-emergency-care-and-treatment
+  apiPrefix: /api/recommended-summary-plan-for-emergency-care-and-treatment/
+  sqlSchema: recommended_summary_plan_for_emergency_care_and_treatment
+  xmlNamespace: https://formexamples.github.io/recommended-summary-plan-for-emergency-care-and-treatment/xml
+tags:
+  - name: recommended-summary-plan-for-emergency-care-and-treatment
+    description: Recommended Summary Plan For Emergency Care And Treatment form
 paths:
   /api/recommended-summary-plan-for-emergency-care-and-treatment/respect_grade_flags:
     get:
       summary: List RespectGradeFlag records
+      tags: [recommended-summary-plan-for-emergency-care-and-treatment]
       operationId: listRespectGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RespectGradeFlag
+      tags: [recommended-summary-plan-for-emergency-care-and-treatment]
       operationId: createRespectGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RespectGradeFlag by id
+      tags: [recommended-summary-plan-for-emergency-care-and-treatment]
       operationId: getRespectGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RespectGradeFlag
+      tags: [recommended-summary-plan-for-emergency-care-and-treatment]
       operationId: updateRespectGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RespectGradeFlag
+      tags: [recommended-summary-plan-for-emergency-care-and-treatment]
       operationId: replaceRespectGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RespectGradeFlag
+      tags: [recommended-summary-plan-for-emergency-care-and-treatment]
       operationId: deleteRespectGradeFlag
       responses:
         "200":

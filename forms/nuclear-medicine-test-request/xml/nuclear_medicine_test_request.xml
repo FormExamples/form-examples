@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nuclear_medicine_test_request SYSTEM "nuclear_medicine_test_request.dtd">
-<nuclear_medicine_test_request>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<nuclear_medicine_test_request xmlns="https://formexamples.github.io/nuclear-medicine-test-request/xml">
+<id>3364ec13-533a-5f3c-981e-c13bce7cd3a2</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>93d420cc-cdf6-5118-9c68-3493edafdd9e</patient_id>
+<clinician_id>ff7e7f46-638b-5ebe-90a5-ce815f0f9fa2</clinician_id>
 <status>draft</status>
 <site_name>Example</site_name>
 <setting>outpatient</setting>

@@ -5,10 +5,19 @@ info:
   title: Return To Work — Clinician
   version: 1.0.0
   description: Clinician issuing the Return to Work statement (GP, OH physician, hospital doctor, registered nurse, pharmacist, physiotherapist, or occupational therapist authorised under the UK fit-note scheme).
+x-namespace:
+  form: return-to-work
+  apiPrefix: /api/return-to-work/
+  sqlSchema: return_to_work
+  xmlNamespace: https://formexamples.github.io/return-to-work/xml
+tags:
+  - name: return-to-work
+    description: Return To Work form
 paths:
   /api/return-to-work/clinicians:
     get:
       summary: List Clinician records
+      tags: [return-to-work]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [return-to-work]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [return-to-work]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [return-to-work]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [return-to-work]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [return-to-work]
       operationId: deleteClinician
       responses:
         "200":

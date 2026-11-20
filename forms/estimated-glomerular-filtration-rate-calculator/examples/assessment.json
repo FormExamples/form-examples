@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000004f",
+    "id": "c0865829-4c41-51ef-91a6-10b200a91655",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000061",
+    "id": "ccd97e48-1906-5981-9ffd-de123111d4c5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "estimatedGlomerularFiltrationRateCalculator": {
-    "id": "550e8400-e29b-41d4-a716-00000000006e",
+    "id": "f8bd41c9-960f-5afe-9915-918c67a61c9f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000072",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000073",
+    "patientId": "3539e3b7-04aa-5b4b-aa48-c595dd51bdef",
+    "clinicianId": "2a98c842-d8c0-54b3-92c7-5eb95b66cef8",
     "clinicianName": "",
     "clinicianRole": "doctor",
     "assessedAt": null,
@@ -54,11 +54,11 @@
     "steadyState": "yes"
   },
   "estimatedGlomerularFiltrationRateCalculatorGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000007f",
+    "id": "a69a556c-860f-5112-9fbd-ab0dd76d9360",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "estimatedGlomerularFiltrationRateCalculatorId": "550e8400-e29b-41d4-a716-000000000083",
+    "estimatedGlomerularFiltrationRateCalculatorId": "7f3f5e48-0391-562c-a34c-93ae08246190",
     "serumCreatinineMgDl": null,
     "egfrMlMin173m2": null,
     "gStage": "G1",
@@ -66,11 +66,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "estimatedGlomerularFiltrationRateCalculatorGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000089",
+    "id": "468b7fe1-7b91-565c-b2c2-1b432a9d3cf9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "estimatedGlomerularFiltrationRateCalculatorGradeId": "550e8400-e29b-41d4-a716-00000000008d",
+    "estimatedGlomerularFiltrationRateCalculatorGradeId": "6d0b2019-c5b3-5325-8433-18ec5b58a6d5",
     "ruleId": "",
     "instrument": "conversion",
     "band": "G1",
@@ -78,11 +78,11 @@
     "description": ""
   },
   "estimatedGlomerularFiltrationRateCalculatorGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000093",
+    "id": "6d9deb5d-e6b4-5d37-aef3-259be0b89d01",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "estimatedGlomerularFiltrationRateCalculatorGradeId": "550e8400-e29b-41d4-a716-000000000097",
+    "estimatedGlomerularFiltrationRateCalculatorGradeId": "6e7277d7-a514-5ce1-b250-b7a7192e3e24",
     "flagId": "",
     "category": "g5-nephrology-referral",
     "priority": "low",

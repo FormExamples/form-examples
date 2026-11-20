@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE neurology_waiting_list_card_grade_flag SYSTEM "neurology_waiting_list_card_grade_flag.dtd">
-<neurology_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<neurology_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/neurology-waiting-list-card/xml">
+<id>2927b9d9-47dd-5851-8dc3-37646ae7b005</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<neurology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</neurology_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<neurology_waiting_list_card_grade_id>c105e778-908d-5124-ac2b-76ff772b9b95</neurology_waiting_list_card_grade_id>
+<flag_id>cdca07fa-c114-5f04-9161-c4d6b65b4e7b</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

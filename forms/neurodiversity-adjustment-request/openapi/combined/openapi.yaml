@@ -7,6 +7,14 @@ info:
   description: Combined OpenAPI specification for the Neurodiversity Adjustment Request form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: neurodiversity-adjustment-request
+  apiPrefix: /api/neurodiversity-adjustment-request/
+  sqlSchema: neurodiversity_adjustment_request
+  xmlNamespace: https://formexamples.github.io/neurodiversity-adjustment-request/xml
+tags:
+- name: neurodiversity-adjustment-request
+  description: Neurodiversity Adjustment Request form
 paths:
   /api/neurodiversity-adjustment-request/dashboard:
     get:
@@ -68,9 +76,13 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+      tags:
+      - neurodiversity-adjustment-request
   /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests:
     get:
       summary: List NeurodiversityAdjustmentRequest records
+      tags:
+      - neurodiversity-adjustment-request
       operationId: listNeurodiversityAdjustmentRequest
       parameters:
       - name: limit
@@ -123,6 +135,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurodiversityAdjustmentRequest
+      tags:
+      - neurodiversity-adjustment-request
       operationId: createNeurodiversityAdjustmentRequest
       requestBody:
         required: true
@@ -176,6 +190,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NeurodiversityAdjustmentRequest by id
+      tags:
+      - neurodiversity-adjustment-request
       operationId: getNeurodiversityAdjustmentRequest
       responses:
         '200':
@@ -203,6 +219,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurodiversityAdjustmentRequest
+      tags:
+      - neurodiversity-adjustment-request
       operationId: updateNeurodiversityAdjustmentRequest
       requestBody:
         required: true
@@ -248,6 +266,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NeurodiversityAdjustmentRequest
+      tags:
+      - neurodiversity-adjustment-request
       operationId: deleteNeurodiversityAdjustmentRequest
       responses:
         '200':
@@ -304,6 +324,8 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+      tags:
+      - neurodiversity-adjustment-request
   /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests/{id}/submit:
     parameters:
     - name: id
@@ -341,6 +363,8 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+      tags:
+      - neurodiversity-adjustment-request
 components:
   schemas:
     NeurodiversityAdjustmentRequest:

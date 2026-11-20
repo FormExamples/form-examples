@@ -5,10 +5,19 @@ info:
   title: Soap Note — Clinician
   version: 1.0.0
   description: Clinician identifying information for the authoring and co-signing clinicians on a SOAP note.
+x-namespace:
+  form: soap-note
+  apiPrefix: /api/soap-note/
+  sqlSchema: soap_note
+  xmlNamespace: https://formexamples.github.io/soap-note/xml
+tags:
+  - name: soap-note
+    description: Soap Note form
 paths:
   /api/soap-note/clinicians:
     get:
       summary: List Clinician records
+      tags: [soap-note]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [soap-note]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [soap-note]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [soap-note]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [soap-note]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [soap-note]
       operationId: deleteClinician
       responses:
         "200":

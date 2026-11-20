@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nuclear_med_waiting_list_card SYSTEM "nuclear_med_waiting_list_card.dtd">
-<nuclear_med_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<nuclear_med_waiting_list_card xmlns="https://formexamples.github.io/nuclear-medicine-waiting-list-card/xml">
+<id>c4b2a6e7-f7e0-5c91-84e6-750ca8946e6f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>54a3f908-a9ea-54f3-94c8-fe58e531cd3f</patient_id>
+<practitioner_id>4b4adbac-d5d9-5681-b29b-e2d1af9d76aa</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

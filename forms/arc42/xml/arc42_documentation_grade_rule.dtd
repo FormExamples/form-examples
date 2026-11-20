@@ -1,4 +1,5 @@
 <!ELEMENT arc42_documentation_grade_rule (id,created_at,updated_at,deleted_at,arc42_documentation_grade_id,ordinal,rule_id,section_number,description)>
+<!ATTLIST arc42_documentation_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/arc42/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

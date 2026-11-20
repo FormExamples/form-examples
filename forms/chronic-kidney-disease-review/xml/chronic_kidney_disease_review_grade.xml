@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chronic_kidney_disease_review_grade SYSTEM "chronic_kidney_disease_review_grade.dtd">
-<chronic_kidney_disease_review_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<chronic_kidney_disease_review_grade xmlns="https://formexamples.github.io/chronic-kidney-disease-review/xml">
+<id>f423034b-1e78-5db2-aa4b-64066c993f29</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<chronic_kidney_disease_review_id>770e8400-e29b-41d4-a716-446655440002</chronic_kidney_disease_review_id>
+<chronic_kidney_disease_review_id>cf147efa-dfd5-57e6-9588-ae2d12738e4b</chronic_kidney_disease_review_id>
 <gfr_category>G1</gfr_category>
 <albuminuria_category>A1</albuminuria_category>
 <kdigo_risk_zone>low</kdigo_risk_zone>

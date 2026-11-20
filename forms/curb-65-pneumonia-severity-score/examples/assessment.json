@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005e",
+    "id": "ce36a223-bdb7-5606-9105-b98b0916ea78",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000070",
+    "id": "ff25494e-4bbc-52dd-aa10-854f30ac929e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "curb65PneumoniaSeverityScore": {
-    "id": "550e8400-e29b-41d4-a716-00000000007d",
+    "id": "797bd002-635a-5886-a1f6-8dfb5b85e837",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000081",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000082",
+    "patientId": "ed073d8d-8be8-51a6-aed3-44e7867f5fec",
+    "clinicianId": "700d86b3-d9ee-540d-a55e-0d082deea067",
     "clinicianName": "",
     "clinicianRole": "physician",
     "assessedAt": null,
@@ -64,11 +64,11 @@
     "clinicalNote": ""
   },
   "curb65PneumoniaSeverityScoreGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000098",
+    "id": "89c04b77-e9fb-56d3-a090-dae65808b675",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "curb65PneumoniaSeverityScoreId": "550e8400-e29b-41d4-a716-00000000009c",
+    "curb65PneumoniaSeverityScoreId": "63990baa-aad4-5264-9d69-d2937e1a8184",
     "confusionScore": null,
     "ureaScore": null,
     "respiratoryRateScore": null,
@@ -81,11 +81,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "curb65PneumoniaSeverityScoreGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a7",
+    "id": "d4c7479e-a9e1-56ac-b5af-c73f0444c05a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "curb65PneumoniaSeverityScoreGradeId": "550e8400-e29b-41d4-a716-0000000000ab",
+    "curb65PneumoniaSeverityScoreGradeId": "7875e424-b36b-59a3-9228-2181628fc979",
     "ruleId": "",
     "criterion": "confusion",
     "points": null,
@@ -93,11 +93,11 @@
     "description": ""
   },
   "curb65PneumoniaSeverityScoreGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b1",
+    "id": "8f2dd4e8-930c-51f3-abe6-e148cbe28b56",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "curb65PneumoniaSeverityScoreGradeId": "550e8400-e29b-41d4-a716-0000000000b5",
+    "curb65PneumoniaSeverityScoreGradeId": "cb313a31-1de7-5004-b06a-7419656b15ea",
     "flagId": "",
     "category": "high-severity-admit",
     "priority": "low",

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rockall_score_for_upper_gastrointestinal_bleeding_grade_flag SYSTEM "rockall_score_for_upper_gastrointestinal_bleeding_grade_flag.dtd">
-<rockall_score_for_upper_gastrointestinal_bleeding_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<rockall_score_for_upper_gastrointestinal_bleeding_grade_flag xmlns="https://formexamples.github.io/rockall-score-for-upper-gastrointestinal-bleeding/xml">
+<id>7abe3dc1-397d-5e48-901d-64795642b731</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<rockall_score_for_upper_gastrointestinal_bleeding_grade_id>880e8400-e29b-41d4-a716-446655440003</rockall_score_for_upper_gastrointestinal_bleeding_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<rockall_score_for_upper_gastrointestinal_bleeding_grade_id>a7e7b809-29e9-5371-a5a3-1b63210974eb</rockall_score_for_upper_gastrointestinal_bleeding_grade_id>
+<flag_id>471d7cb4-f191-5f40-9296-40ca81acee6f</flag_id>
 <category>high-mortality-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -5,10 +5,19 @@ info:
   title: Hypertension Review — HypertensionReviewGrade
   version: 1.0.0
   description: "Computed control-classification and completeness grading result for a hypertension annual review: control status, hypertension stage, review status, the primary reading source, the selected blood-pressure target and its driving group. 1:1 with the parent review."
+x-namespace:
+  form: hypertension-review
+  apiPrefix: /api/hypertension-review/
+  sqlSchema: hypertension_review
+  xmlNamespace: https://formexamples.github.io/hypertension-review/xml
+tags:
+  - name: hypertension-review
+    description: Hypertension Review form
 paths:
   /api/hypertension-review/hypertension_review_grades:
     get:
       summary: List HypertensionReviewGrade records
+      tags: [hypertension-review]
       operationId: listHypertensionReviewGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HypertensionReviewGrade
+      tags: [hypertension-review]
       operationId: createHypertensionReviewGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HypertensionReviewGrade by id
+      tags: [hypertension-review]
       operationId: getHypertensionReviewGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HypertensionReviewGrade
+      tags: [hypertension-review]
       operationId: updateHypertensionReviewGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HypertensionReviewGrade
+      tags: [hypertension-review]
       operationId: replaceHypertensionReviewGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HypertensionReviewGrade
+      tags: [hypertension-review]
       operationId: deleteHypertensionReviewGrade
       responses:
         "200":

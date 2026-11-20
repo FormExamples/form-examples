@@ -5,10 +5,19 @@ info:
   title: United States Last Will And Testament — UnitedStatesLastWillAndTestament
   version: 1.0.0
   description: "Main United States Last Will and Testament record: testator and state, family and spouse, estate and bequests, personal representative and clauses, execution plan and witnesses, and the self-proving affidavit. Validity classification, fired rules, and flags live in child tables."
+x-namespace:
+  form: united-states-last-will-and-testament
+  apiPrefix: /api/united-states-last-will-and-testament/
+  sqlSchema: united_states_last_will_and_testament
+  xmlNamespace: https://formexamples.github.io/united-states-last-will-and-testament/xml
+tags:
+  - name: united-states-last-will-and-testament
+    description: United States Last Will And Testament form
 paths:
   /api/united-states-last-will-and-testament/united_states_last_will_and_testaments:
     get:
       summary: List UnitedStatesLastWillAndTestament records
+      tags: [united-states-last-will-and-testament]
       operationId: listUnitedStatesLastWillAndTestament
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesLastWillAndTestament
+      tags: [united-states-last-will-and-testament]
       operationId: createUnitedStatesLastWillAndTestament
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesLastWillAndTestament by id
+      tags: [united-states-last-will-and-testament]
       operationId: getUnitedStatesLastWillAndTestament
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesLastWillAndTestament
+      tags: [united-states-last-will-and-testament]
       operationId: updateUnitedStatesLastWillAndTestament
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesLastWillAndTestament
+      tags: [united-states-last-will-and-testament]
       operationId: replaceUnitedStatesLastWillAndTestament
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesLastWillAndTestament
+      tags: [united-states-last-will-and-testament]
       operationId: deleteUnitedStatesLastWillAndTestament
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: United Kingdom Council Tax Discount Application — BillingAuthority
   version: 1.0.0
   description: The billing authority (local council in England) that receives the application and decides eligibility.
+x-namespace:
+  form: united-kingdom-council-tax-discount-application
+  apiPrefix: /api/united-kingdom-council-tax-discount-application/
+  sqlSchema: united_kingdom_council_tax_discount_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-council-tax-discount-application/xml
+tags:
+  - name: united-kingdom-council-tax-discount-application
+    description: United Kingdom Council Tax Discount Application form
 paths:
   /api/united-kingdom-council-tax-discount-application/billing_authorities:
     get:
       summary: List BillingAuthority records
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: listBillingAuthority
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BillingAuthority
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: createBillingAuthority
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BillingAuthority by id
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: getBillingAuthority
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BillingAuthority
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: updateBillingAuthority
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BillingAuthority
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: replaceBillingAuthority
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BillingAuthority
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: deleteBillingAuthority
       responses:
         "200":

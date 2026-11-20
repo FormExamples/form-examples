@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000053",
+    "id": "a98f92ad-a879-5b20-8293-b99acdfa8d07",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000065",
+    "id": "808a21bf-da75-595d-9503-7a469168a872",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "timiRiskScoreForAcuteCoronarySyndrome": {
-    "id": "550e8400-e29b-41d4-a716-000000000072",
+    "id": "f0558693-7f13-5dc9-b447-0d304f68fb2c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000076",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000077",
+    "patientId": "afa9ad53-e81c-5b4b-adef-0b3ab8ff9a3a",
+    "clinicianId": "64ef85aa-1ff2-5b45-832f-b9f8cdf52be2",
     "clinicianName": "",
     "clinicianRole": "physician",
     "assessedAt": null,
@@ -58,11 +58,11 @@
     "clinicalNote": ""
   },
   "timiRiskScoreForAcuteCoronarySyndromeGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000087",
+    "id": "d2c7e9f3-a166-5783-90e1-ae5a85bf820c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "timiRiskScoreForAcuteCoronarySyndromeId": "550e8400-e29b-41d4-a716-00000000008b",
+    "timiRiskScoreForAcuteCoronarySyndromeId": "c8bee11a-8c76-5b33-9f71-26bb9f728415",
     "totalScore": null,
     "riskBand": "low",
     "fourteenDayEventRiskPercent": null,
@@ -70,11 +70,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "timiRiskScoreForAcuteCoronarySyndromeGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000091",
+    "id": "8e3d6646-fc68-5e4b-9d77-545c85d3faef",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "timiRiskScoreForAcuteCoronarySyndromeGradeId": "550e8400-e29b-41d4-a716-000000000095",
+    "timiRiskScoreForAcuteCoronarySyndromeGradeId": "88ed55d0-1554-5066-bfac-d2fd198200d0",
     "ruleId": "",
     "criterion": "age",
     "points": null,
@@ -82,11 +82,11 @@
     "description": ""
   },
   "timiRiskScoreForAcuteCoronarySyndromeGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000009b",
+    "id": "e8aadfee-ddc3-51b5-b76f-bd45d746fe76",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "timiRiskScoreForAcuteCoronarySyndromeGradeId": "550e8400-e29b-41d4-a716-00000000009f",
+    "timiRiskScoreForAcuteCoronarySyndromeGradeId": "3d04aee9-4051-5e58-b557-ffb146874e59",
     "flagId": "",
     "category": "high-score-early-invasive",
     "priority": "low",

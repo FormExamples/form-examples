@@ -5,10 +5,19 @@ info:
   title: Mast Cell Activation Syndrome Assessment — GradingAdditionalFlag
   version: 1.0.0
   description: Additional safety-critical flags detected during MCAS assessment grading (e.g. anaphylaxis risk, elevated tryptase, multi-system involvement).
+x-namespace:
+  form: mast-cell-activation-syndrome-assessment
+  apiPrefix: /api/mast-cell-activation-syndrome-assessment/
+  sqlSchema: mast_cell_activation_syndrome_assessment
+  xmlNamespace: https://formexamples.github.io/mast-cell-activation-syndrome-assessment/xml
+tags:
+  - name: mast-cell-activation-syndrome-assessment
+    description: Mast Cell Activation Syndrome Assessment form
 paths:
   /api/mast-cell-activation-syndrome-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [mast-cell-activation-syndrome-assessment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [mast-cell-activation-syndrome-assessment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [mast-cell-activation-syndrome-assessment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [mast-cell-activation-syndrome-assessment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [mast-cell-activation-syndrome-assessment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [mast-cell-activation-syndrome-assessment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

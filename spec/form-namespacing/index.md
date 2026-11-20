@@ -113,6 +113,50 @@ and two pre-operative assessment forms) and
 `neurodiversity-adjustment.{a11y,handoff}.v1` (the request, response and review
 forms). `bin/browser-storage-namespace` lists them in `FAMILY_KEYS`.
 
+### FHIR and example ids
+
+Every id in a form's generated FHIR resources (`fhir/r5/`), examples
+(`examples/*.json`, `examples/personas-fhir/`) and XML (`xml/`) is a version 5
+UUID (RFC 9562), named by the form's slug and the entity:
+
+```text
+NAMESPACE = uuidv5(NAMESPACE_URL, "https://formexamples.github.io/")
+id        = uuidv5(NAMESPACE, "<slug>/<entity>[/<more>]")
+```
+
+`bin/lib/example_ids.py` holds the one implementation, and every generator
+uses it. Within one form, an entity has the same id in its XML, its FHIR
+resource and its references. No two forms share an id, so every form's
+examples can be loaded into one FHIR server or one database together.
+`examples/assessment.json` is hand-curated, so its ids were mapped once, each
+old id `u` becoming `uuidv5(NAMESPACE, "<slug>/assessment/<u>")`, which keeps its
+references intact.
+
+### XML namespace
+
+Every generated XML document's root element carries the form's namespace,
+`xmlns="https://formexamples.github.io/<slug>/xml"`, and its DTD fixes it:
+
+```xml
+<!ATTLIST patient xmlns CDATA #FIXED "https://formexamples.github.io/apgar-score/xml">
+```
+
+### OpenAPI tags and x-namespace
+
+Every OpenAPI document, per-entity and combined, has a top-level tag named
+for the slug, and every operation is tagged with it. A top-level
+`x-namespace` object records the form's namespace in every layer:
+
+```yaml
+x-namespace:
+  form: apgar-score
+  apiPrefix: /api/apgar-score/
+  sqlSchema: apgar_score
+  xmlNamespace: https://formexamples.github.io/apgar-score/xml
+tags:
+- name: apgar-score
+```
+
 ## Conformance
 
 The fleet had 379 forms when this spec was written (2026-11-20). Their status:
@@ -123,6 +167,9 @@ The fleet had 379 forms when this spec was written (2026-11-20). Their status:
 | Axum API routes | 379 / 379 | Moved from `/api/<plural>` by `bin/axum-api-namespace` (2026-11-20) |
 | Browser storage keys | 379 / 379 | 63 copied keys in 32 forms fixed by `bin/browser-storage-namespace` (2026-11-20) |
 | SQL schema | 379 / 379 | Moved from `public` into a per-form schema by `bin/sql-schema-namespace` (2026-11-20) |
+| FHIR and example ids | 379 / 379 | Shared placeholder UUIDs replaced by per-form UUIDv5 (2026-11-20) |
+| XML namespace | 379 / 379 | Per-form `xmlns` on every root element, fixed in its DTD (2026-11-20) |
+| OpenAPI tags and x-namespace | 379 / 379 | 2,888 documents (2026-11-20) |
 
 New forms must conform from the start. `cargo run -- generate scaffold --api`
 emits un-namespaced `.prefix("api/<plural>/")` routes, so run
@@ -134,11 +181,17 @@ mode is the CI drift detector for the API layer.
 the CI drift detector for the SQL layer.
 
 The Axum crates keep their own tables (`patients`, `clinicians`, ...) in
-their own per-crate database, unchanged. Moving those into a schema is
+their own per-crate database, unchanged, and so do the development seed
+fixtures some crates carry under `src/<snake>/fixtures/`, which still reuse a
+few ids across forms. Moving those into a schema and onto per-form ids is
 separate, later work.
 
 ## Verification
 
+- `bin/test-form-namespacing`, the conformance test for every layer in this
+  spec (SQL schema, API paths, OpenAPI tags and `x-namespace`, Svelte routes,
+  XML namespace, example ids unique to their form, schema names unique within
+  63 bytes); it runs in CI.
 - `bin/sql-schema-namespace --check <slug>`, the CI drift detector for the
   SQL schema, and `bin/test-sql-apply <slug>`, which applies the qualified
   migrations to a fresh database.

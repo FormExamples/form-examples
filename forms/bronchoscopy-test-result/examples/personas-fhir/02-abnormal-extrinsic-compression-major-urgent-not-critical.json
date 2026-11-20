@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "5bed1192-903b-44ec-a096-68da70f6c11c",
+  "id": "3c8b7352-8cec-5438-a370-8588adb9dcbc",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:320012a6-d383-47bb-a1ba-1380a1297189",
+      "fullUrl": "urn:uuid:dce41887-fa6d-5fe4-a10a-9bf6ca883589",
       "resource": {
         "resourceType": "Patient",
-        "id": "320012a6-d383-47bb-a1ba-1380a1297189",
+        "id": "dce41887-fa6d-5fe4-a10a-9bf6ca883589",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:aebd64f3-172c-4bfb-a4e6-eb2606df8147",
+      "fullUrl": "urn:uuid:3d5e80df-3468-5b30-8a0e-8183e270046f",
       "resource": {
         "resourceType": "Observation",
-        "id": "aebd64f3-172c-4bfb-a4e6-eb2606df8147",
+        "id": "3d5e80df-3468-5b30-8a0e-8183e270046f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:320012a6-d383-47bb-a1ba-1380a1297189"
+          "reference": "urn:uuid:dce41887-fa6d-5fe4-a10a-9bf6ca883589"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:15f9942b-3330-4009-a63a-84df3dd6e689",
+      "fullUrl": "urn:uuid:c6ef4e6a-d85f-5f43-ac08-d52408b2deb1",
       "resource": {
         "resourceType": "Observation",
-        "id": "15f9942b-3330-4009-a63a-84df3dd6e689",
+        "id": "c6ef4e6a-d85f-5f43-ac08-d52408b2deb1",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:320012a6-d383-47bb-a1ba-1380a1297189"
+          "reference": "urn:uuid:dce41887-fa6d-5fe4-a10a-9bf6ca883589"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -564,10 +564,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:ea263590-be76-454d-ada2-91f020b98d6d",
+      "fullUrl": "urn:uuid:7c016fc3-f5df-5366-ad74-5f02d3b13a4b",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "ea263590-be76-454d-ada2-91f020b98d6d",
+        "id": "7c016fc3-f5df-5366-ad74-5f02d3b13a4b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -576,7 +576,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:320012a6-d383-47bb-a1ba-1380a1297189"
+          "reference": "urn:uuid:dce41887-fa6d-5fe4-a10a-9bf6ca883589"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -585,10 +585,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:2e476e29-0674-4555-a2c8-304bd56f8489",
+      "fullUrl": "urn:uuid:7fb28644-12cf-54e5-a129-b2da1964f3c7",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "2e476e29-0674-4555-a2c8-304bd56f8489",
+        "id": "7fb28644-12cf-54e5-a129-b2da1964f3c7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -618,17 +618,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:320012a6-d383-47bb-a1ba-1380a1297189"
+          "reference": "urn:uuid:dce41887-fa6d-5fe4-a10a-9bf6ca883589"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "One or more abnormal structured findings are present; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:4316c3e3-0406-4e93-a43c-fa9cdc19c5cb",
+      "fullUrl": "urn:uuid:2deb7a69-03d4-5d69-8003-4cc3962e6574",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "4316c3e3-0406-4e93-a43c-fa9cdc19c5cb",
+        "id": "2deb7a69-03d4-5d69-8003-4cc3962e6574",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -658,17 +658,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:320012a6-d383-47bb-a1ba-1380a1297189"
+          "reference": "urn:uuid:dce41887-fa6d-5fe4-a10a-9bf6ca883589"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Extrinsic central-airway compression present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:451e8b9e-2c4a-48e2-afc4-334621ba7dab",
+      "fullUrl": "urn:uuid:1bf793ab-dcc1-58b4-9a2e-26c3012dc126",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "451e8b9e-2c4a-48e2-afc4-334621ba7dab",
+        "id": "1bf793ab-dcc1-58b4-9a2e-26c3012dc126",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -698,17 +698,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:320012a6-d383-47bb-a1ba-1380a1297189"
+          "reference": "urn:uuid:dce41887-fa6d-5fe4-a10a-9bf6ca883589"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Major abnormality present; follow-up urgency graded urgent."
       }
     },
     {
-      "fullUrl": "urn:uuid:df4f0bc2-6d9a-42f1-a434-32bdceb9cb41",
+      "fullUrl": "urn:uuid:89805f28-5d5f-50c8-828b-6ae4c57bd751",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "df4f0bc2-6d9a-42f1-a434-32bdceb9cb41",
+        "id": "89805f28-5d5f-50c8-828b-6ae4c57bd751",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -738,7 +738,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:320012a6-d383-47bb-a1ba-1380a1297189"
+          "reference": "urn:uuid:dce41887-fa6d-5fe4-a10a-9bf6ca883589"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Extrinsic central-airway compression requiring timely action is present.",

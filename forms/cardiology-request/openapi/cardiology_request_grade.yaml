@@ -5,10 +5,19 @@ info:
   title: Cardiology Request — CardiologyRequestGrade
   version: 1.0.0
   description: "Computed four-axis vetting grade: referral appropriateness, safety / red-flag, request completeness, and triage priority. A red flag (suspected acute coronary syndrome, exertional syncope, new-onset heart failure) drives the safety axis and auto-escalates the triage tier regardless of the other axes."
+x-namespace:
+  form: cardiology-request
+  apiPrefix: /api/cardiology-request/
+  sqlSchema: cardiology_request
+  xmlNamespace: https://formexamples.github.io/cardiology-request/xml
+tags:
+  - name: cardiology-request
+    description: Cardiology Request form
 paths:
   /api/cardiology-request/cardiology_request_grades:
     get:
       summary: List CardiologyRequestGrade records
+      tags: [cardiology-request]
       operationId: listCardiologyRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiologyRequestGrade
+      tags: [cardiology-request]
       operationId: createCardiologyRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiologyRequestGrade by id
+      tags: [cardiology-request]
       operationId: getCardiologyRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiologyRequestGrade
+      tags: [cardiology-request]
       operationId: updateCardiologyRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiologyRequestGrade
+      tags: [cardiology-request]
       operationId: replaceCardiologyRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiologyRequestGrade
+      tags: [cardiology-request]
       operationId: deleteCardiologyRequestGrade
       responses:
         "200":

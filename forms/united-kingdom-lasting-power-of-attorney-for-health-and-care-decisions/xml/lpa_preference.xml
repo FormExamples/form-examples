@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE lpa_preference SYSTEM "lpa_preference.dtd">
-<lpa_preference>
-<id>110e8400-e29b-41d4-a716-44665544000b</id>
+<lpa_preference xmlns="https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml">
+<id>b3ce830e-f039-512b-8b5d-daed74f7fb8b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<lpa_id>aa0e8400-e29b-41d4-a716-446655440005</lpa_id>
+<lpa_id>37fb4e5a-a262-55e5-adee-7ae6af4edc29</lpa_id>
 <order_position>1</order_position>
 <category>residence</category>
 <statement></statement>

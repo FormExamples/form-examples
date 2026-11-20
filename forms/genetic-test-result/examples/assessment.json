@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000062",
+    "id": "9ae3632b-3592-5d01-8cfb-638aa29c2791",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000074",
+    "id": "12d63152-3d7a-597d-a47c-3a0dd66bb74e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "geneticTestResult": {
-    "id": "550e8400-e29b-41d4-a716-000000000082",
+    "id": "55325c39-ba7d-5af6-b440-6249b06e4c78",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000086",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000087",
+    "patientId": "4a9c4d96-be2d-5193-aba2-7d220ed243bb",
+    "clinicianId": "08eef05c-25ff-5868-a583-644db096174b",
     "originatingRequestReference": "",
     "reportStatus": "preliminary",
     "performedDate": null,
@@ -68,11 +68,11 @@
     "reportedTo": ""
   },
   "geneticTestResultGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a0",
+    "id": "a65c5744-6571-5215-be2d-7df77ca1d9f8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "geneticTestResultId": "550e8400-e29b-41d4-a716-0000000000a4",
+    "geneticTestResultId": "ce181d72-aea2-555c-a851-deedc568d3a6",
     "resultClassification": "normal",
     "abnormalitySeverity": "none",
     "reportingCategory": "",
@@ -86,22 +86,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "geneticTestResultGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "9c1e90de-9e05-511b-93d8-48f61e7b42a1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "geneticTestResultGradeId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "geneticTestResultGradeId": "be2dfe72-f7c9-5236-b4ca-56a213dfd8df",
     "ruleId": "",
     "axis": "classification",
     "category": "",
     "description": ""
   },
   "geneticTestResultGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b9",
+    "id": "0e021a7f-af93-5649-81a5-8c33813f02f2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "geneticTestResultGradeId": "550e8400-e29b-41d4-a716-0000000000bd",
+    "geneticTestResultGradeId": "82acdb61-4c0b-5f41-8729-bb5f61796a7b",
     "flagId": "",
     "category": "critical-result-alert",
     "priority": "low",

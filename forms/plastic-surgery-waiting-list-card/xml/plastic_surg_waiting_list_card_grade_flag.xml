@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plastic_surg_waiting_list_card_grade_flag SYSTEM "plastic_surg_waiting_list_card_grade_flag.dtd">
-<plastic_surg_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<plastic_surg_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/plastic-surgery-waiting-list-card/xml">
+<id>83ce94a3-5686-569d-a3f0-52ff8ebe1ba6</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<plastic_surg_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</plastic_surg_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<plastic_surg_waiting_list_card_grade_id>34a4d238-087d-5b88-b367-03a72e7e6a3e</plastic_surg_waiting_list_card_grade_id>
+<flag_id>6e46054f-3c01-5ae6-a4b7-4809800b240b</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

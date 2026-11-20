@@ -5,10 +5,19 @@ info:
   title: Cystoscopy Test Request — CystoscopyTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (NICE NG12 / BAUS, 1-9), cancer-pathway urgency, request completeness, and pre-procedure risk."
+x-namespace:
+  form: cystoscopy-test-request
+  apiPrefix: /api/cystoscopy-test-request/
+  sqlSchema: cystoscopy_test_request
+  xmlNamespace: https://formexamples.github.io/cystoscopy-test-request/xml
+tags:
+  - name: cystoscopy-test-request
+    description: Cystoscopy Test Request form
 paths:
   /api/cystoscopy-test-request/cystoscopy_test_request_grades:
     get:
       summary: List CystoscopyTestRequestGrade records
+      tags: [cystoscopy-test-request]
       operationId: listCystoscopyTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CystoscopyTestRequestGrade
+      tags: [cystoscopy-test-request]
       operationId: createCystoscopyTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CystoscopyTestRequestGrade by id
+      tags: [cystoscopy-test-request]
       operationId: getCystoscopyTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CystoscopyTestRequestGrade
+      tags: [cystoscopy-test-request]
       operationId: updateCystoscopyTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CystoscopyTestRequestGrade
+      tags: [cystoscopy-test-request]
       operationId: replaceCystoscopyTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CystoscopyTestRequestGrade
+      tags: [cystoscopy-test-request]
       operationId: deleteCystoscopyTestRequestGrade
       responses:
         "200":

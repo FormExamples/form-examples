@@ -5,10 +5,19 @@ info:
   title: Ophthalmology Waiting List Card — OphthalmologyWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: ophthalmology-waiting-list-card
+  apiPrefix: /api/ophthalmology-waiting-list-card/
+  sqlSchema: ophthalmology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/ophthalmology-waiting-list-card/xml
+tags:
+  - name: ophthalmology-waiting-list-card
+    description: Ophthalmology Waiting List Card form
 paths:
   /api/ophthalmology-waiting-list-card/ophthalmology_waiting_list_card_grade_flags:
     get:
       summary: List OphthalmologyWaitingListCardGradeFlag records
+      tags: [ophthalmology-waiting-list-card]
       operationId: listOphthalmologyWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OphthalmologyWaitingListCardGradeFlag
+      tags: [ophthalmology-waiting-list-card]
       operationId: createOphthalmologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OphthalmologyWaitingListCardGradeFlag by id
+      tags: [ophthalmology-waiting-list-card]
       operationId: getOphthalmologyWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OphthalmologyWaitingListCardGradeFlag
+      tags: [ophthalmology-waiting-list-card]
       operationId: updateOphthalmologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OphthalmologyWaitingListCardGradeFlag
+      tags: [ophthalmology-waiting-list-card]
       operationId: replaceOphthalmologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OphthalmologyWaitingListCardGradeFlag
+      tags: [ophthalmology-waiting-list-card]
       operationId: deleteOphthalmologyWaitingListCardGradeFlag
       responses:
         "200":

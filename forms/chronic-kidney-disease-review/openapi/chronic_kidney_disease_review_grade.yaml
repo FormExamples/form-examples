@@ -5,10 +5,19 @@ info:
   title: Chronic Kidney Disease Review — ChronicKidneyDiseaseReviewGrade
   version: 1.0.0
   description: "Computed KDIGO classification and completeness grading result for a CKD annual review: G-stage, albuminuria stage, KDIGO risk zone, review status, the selected blood-pressure target and whether it is met, and the completeness score. 1:1 with the parent review."
+x-namespace:
+  form: chronic-kidney-disease-review
+  apiPrefix: /api/chronic-kidney-disease-review/
+  sqlSchema: chronic_kidney_disease_review
+  xmlNamespace: https://formexamples.github.io/chronic-kidney-disease-review/xml
+tags:
+  - name: chronic-kidney-disease-review
+    description: Chronic Kidney Disease Review form
 paths:
   /api/chronic-kidney-disease-review/chronic_kidney_disease_review_grades:
     get:
       summary: List ChronicKidneyDiseaseReviewGrade records
+      tags: [chronic-kidney-disease-review]
       operationId: listChronicKidneyDiseaseReviewGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ChronicKidneyDiseaseReviewGrade
+      tags: [chronic-kidney-disease-review]
       operationId: createChronicKidneyDiseaseReviewGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ChronicKidneyDiseaseReviewGrade by id
+      tags: [chronic-kidney-disease-review]
       operationId: getChronicKidneyDiseaseReviewGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ChronicKidneyDiseaseReviewGrade
+      tags: [chronic-kidney-disease-review]
       operationId: updateChronicKidneyDiseaseReviewGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ChronicKidneyDiseaseReviewGrade
+      tags: [chronic-kidney-disease-review]
       operationId: replaceChronicKidneyDiseaseReviewGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ChronicKidneyDiseaseReviewGrade
+      tags: [chronic-kidney-disease-review]
       operationId: deleteChronicKidneyDiseaseReviewGrade
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Bowel Cancer Screening With Faecal Immunochemical Test — BowelCancerScreeningFit
   version: 1.0.0
   description: "Main bowel-cancer-screening FIT record for one home faecal immunochemical test kit outcome: review context, participant identification, eligibility and invitation, kit return and sample adequacy, the measured faecal haemoglobin concentration and programme threshold, and red-flag symptoms. Result classification, fired rules, and flags live in child tables."
+x-namespace:
+  form: bowel-cancer-screening-with-faecal-immunochemical-test
+  apiPrefix: /api/bowel-cancer-screening-with-faecal-immunochemical-test/
+  sqlSchema: bowel_cancer_screening_with_faecal_immunochemical_test
+  xmlNamespace: https://formexamples.github.io/bowel-cancer-screening-with-faecal-immunochemical-test/xml
+tags:
+  - name: bowel-cancer-screening-with-faecal-immunochemical-test
+    description: Bowel Cancer Screening With Faecal Immunochemical Test form
 paths:
   /api/bowel-cancer-screening-with-faecal-immunochemical-test/bowel_cancer_screening_fits:
     get:
       summary: List BowelCancerScreeningFit records
+      tags: [bowel-cancer-screening-with-faecal-immunochemical-test]
       operationId: listBowelCancerScreeningFit
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BowelCancerScreeningFit
+      tags: [bowel-cancer-screening-with-faecal-immunochemical-test]
       operationId: createBowelCancerScreeningFit
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BowelCancerScreeningFit by id
+      tags: [bowel-cancer-screening-with-faecal-immunochemical-test]
       operationId: getBowelCancerScreeningFit
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BowelCancerScreeningFit
+      tags: [bowel-cancer-screening-with-faecal-immunochemical-test]
       operationId: updateBowelCancerScreeningFit
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BowelCancerScreeningFit
+      tags: [bowel-cancer-screening-with-faecal-immunochemical-test]
       operationId: replaceBowelCancerScreeningFit
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BowelCancerScreeningFit
+      tags: [bowel-cancer-screening-with-faecal-immunochemical-test]
       operationId: deleteBowelCancerScreeningFit
       responses:
         "200":

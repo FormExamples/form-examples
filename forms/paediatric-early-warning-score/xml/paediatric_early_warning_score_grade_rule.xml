@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE paediatric_early_warning_score_grade_rule SYSTEM "paediatric_early_warning_score_grade_rule.dtd">
-<paediatric_early_warning_score_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<paediatric_early_warning_score_grade_rule xmlns="https://formexamples.github.io/paediatric-early-warning-score/xml">
+<id>3c5e8514-8ef6-5f1a-9990-634d5ad4e4eb</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<paediatric_early_warning_score_grade_id>880e8400-e29b-41d4-a716-446655440003</paediatric_early_warning_score_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<paediatric_early_warning_score_grade_id>c55b0ed1-d907-5e09-992a-852c5367fa29</paediatric_early_warning_score_grade_id>
+<rule_id>895a6bab-4c9a-5e98-8a87-8ae27053a1e6</rule_id>
 <instrument>respiratory-rate</instrument>
 <band>routine</band>
 <points>1</points>

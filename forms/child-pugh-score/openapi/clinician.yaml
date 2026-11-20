@@ -5,10 +5,19 @@ info:
   title: Child Pugh Score — Clinician
   version: 1.0.0
   description: Clinician identifying information for the assessing clinician.
+x-namespace:
+  form: child-pugh-score
+  apiPrefix: /api/child-pugh-score/
+  sqlSchema: child_pugh_score
+  xmlNamespace: https://formexamples.github.io/child-pugh-score/xml
+tags:
+  - name: child-pugh-score
+    description: Child Pugh Score form
 paths:
   /api/child-pugh-score/clinicians:
     get:
       summary: List Clinician records
+      tags: [child-pugh-score]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [child-pugh-score]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [child-pugh-score]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [child-pugh-score]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [child-pugh-score]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [child-pugh-score]
       operationId: deleteClinician
       responses:
         "200":

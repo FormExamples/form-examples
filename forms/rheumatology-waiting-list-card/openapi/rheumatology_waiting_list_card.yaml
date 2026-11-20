@@ -5,10 +5,19 @@ info:
   title: Rheumatology Waiting List Card — RheumatologyWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a rheumatology waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: rheumatology-waiting-list-card
+  apiPrefix: /api/rheumatology-waiting-list-card/
+  sqlSchema: rheumatology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/rheumatology-waiting-list-card/xml
+tags:
+  - name: rheumatology-waiting-list-card
+    description: Rheumatology Waiting List Card form
 paths:
   /api/rheumatology-waiting-list-card/rheumatology_waiting_list_cards:
     get:
       summary: List RheumatologyWaitingListCard records
+      tags: [rheumatology-waiting-list-card]
       operationId: listRheumatologyWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RheumatologyWaitingListCard
+      tags: [rheumatology-waiting-list-card]
       operationId: createRheumatologyWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RheumatologyWaitingListCard by id
+      tags: [rheumatology-waiting-list-card]
       operationId: getRheumatologyWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RheumatologyWaitingListCard
+      tags: [rheumatology-waiting-list-card]
       operationId: updateRheumatologyWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RheumatologyWaitingListCard
+      tags: [rheumatology-waiting-list-card]
       operationId: replaceRheumatologyWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RheumatologyWaitingListCard
+      tags: [rheumatology-waiting-list-card]
       operationId: deleteRheumatologyWaitingListCard
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT care_quality (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,involvement_in_decisions,treatment_plan_explanation,confidence_in_care)>
+<!ATTLIST care_quality xmlns CDATA #FIXED "https://formexamples.github.io/encounter-satisfaction/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

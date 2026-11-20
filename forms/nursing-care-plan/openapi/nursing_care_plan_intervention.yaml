@@ -5,10 +5,19 @@ info:
   title: Nursing Care Plan — NursingCarePlanIntervention
   version: 1.0.0
   description: Planned nursing interventions for a problem; cascades from the parent problem.
+x-namespace:
+  form: nursing-care-plan
+  apiPrefix: /api/nursing-care-plan/
+  sqlSchema: nursing_care_plan
+  xmlNamespace: https://formexamples.github.io/nursing-care-plan/xml
+tags:
+  - name: nursing-care-plan
+    description: Nursing Care Plan form
 paths:
   /api/nursing-care-plan/nursing_care_plan_interventions:
     get:
       summary: List NursingCarePlanIntervention records
+      tags: [nursing-care-plan]
       operationId: listNursingCarePlanIntervention
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NursingCarePlanIntervention
+      tags: [nursing-care-plan]
       operationId: createNursingCarePlanIntervention
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NursingCarePlanIntervention by id
+      tags: [nursing-care-plan]
       operationId: getNursingCarePlanIntervention
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NursingCarePlanIntervention
+      tags: [nursing-care-plan]
       operationId: updateNursingCarePlanIntervention
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NursingCarePlanIntervention
+      tags: [nursing-care-plan]
       operationId: replaceNursingCarePlanIntervention
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NursingCarePlanIntervention
+      tags: [nursing-care-plan]
       operationId: deleteNursingCarePlanIntervention
       responses:
         "200":

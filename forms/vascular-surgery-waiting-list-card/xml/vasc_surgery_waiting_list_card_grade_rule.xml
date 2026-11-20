@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE vasc_surgery_waiting_list_card_grade_rule SYSTEM "vasc_surgery_waiting_list_card_grade_rule.dtd">
-<vasc_surgery_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<vasc_surgery_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/vascular-surgery-waiting-list-card/xml">
+<id>7401177d-167f-58be-a3a3-ab8075c7aa28</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<vasc_surgery_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</vasc_surgery_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<vasc_surgery_waiting_list_card_grade_id>a6416f6a-0536-5b13-9a9b-6c3d76d0ad74</vasc_surgery_waiting_list_card_grade_id>
+<rule_id>0885e1fd-9104-54f8-a4ac-44aee088fca8</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

@@ -5,10 +5,19 @@ info:
   title: Radiology Waiting List Card — RadiologyWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: radiology-waiting-list-card
+  apiPrefix: /api/radiology-waiting-list-card/
+  sqlSchema: radiology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/radiology-waiting-list-card/xml
+tags:
+  - name: radiology-waiting-list-card
+    description: Radiology Waiting List Card form
 paths:
   /api/radiology-waiting-list-card/radiology_waiting_list_card_grades:
     get:
       summary: List RadiologyWaitingListCardGrade records
+      tags: [radiology-waiting-list-card]
       operationId: listRadiologyWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RadiologyWaitingListCardGrade
+      tags: [radiology-waiting-list-card]
       operationId: createRadiologyWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RadiologyWaitingListCardGrade by id
+      tags: [radiology-waiting-list-card]
       operationId: getRadiologyWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RadiologyWaitingListCardGrade
+      tags: [radiology-waiting-list-card]
       operationId: updateRadiologyWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RadiologyWaitingListCardGrade
+      tags: [radiology-waiting-list-card]
       operationId: replaceRadiologyWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RadiologyWaitingListCardGrade
+      tags: [radiology-waiting-list-card]
       operationId: deleteRadiologyWaitingListCardGrade
       responses:
         "200":

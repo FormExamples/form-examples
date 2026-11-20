@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE eye_prescription_lens_recommendation SYSTEM "eye_prescription_lens_recommendation.dtd">
-<eye_prescription_lens_recommendation>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<eye_prescription_lens_recommendation xmlns="https://formexamples.github.io/eye-prescription/xml">
+<id>ec8d59cd-3928-5232-987e-692a6311da1e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<eye_prescription_id>770e8400-e29b-41d4-a716-446655440002</eye_prescription_id>
+<eye_prescription_id>7dcf0e2d-b1bd-537d-8f80-02dc8446bdec</eye_prescription_id>
 <lens_type>single-vision-distance</lens_type>
 <material>cr-39</material>
 <refractive_index>0.0</refractive_index>

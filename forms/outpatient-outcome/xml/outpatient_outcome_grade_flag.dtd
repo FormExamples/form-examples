@@ -1,4 +1,5 @@
 <!ELEMENT outpatient_outcome_grade_flag (id,created_at,updated_at,deleted_at,grade_id,flag_id,category,description,priority)>
+<!ATTLIST outpatient_outcome_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/outpatient-outcome/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

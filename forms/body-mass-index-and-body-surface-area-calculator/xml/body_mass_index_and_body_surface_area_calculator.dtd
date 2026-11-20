@@ -1,4 +1,5 @@
 <!ELEMENT body_mass_index_and_body_surface_area_calculator (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,purpose,patient_identifier,age_band,sex,ancestry,height_cm,weight_kg,bsa_formula)>
+<!ATTLIST body_mass_index_and_body_surface_area_calculator xmlns CDATA #FIXED "https://formexamples.github.io/body-mass-index-and-body-surface-area-calculator/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

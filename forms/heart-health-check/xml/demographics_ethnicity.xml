@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE demographics_ethnicity SYSTEM "demographics_ethnicity.dtd">
-<demographics_ethnicity>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<demographics_ethnicity xmlns="https://formexamples.github.io/heart-health-check/xml">
+<id>673a8dce-1f97-5f7d-945f-1eb74833454e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>4d6dbfc2-df67-5465-bf49-f9f568150665</assessment_id>
 <age>45</age>
 <sex>male</sex>
 <ethnicity>White British</ethnicity>

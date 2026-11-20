@@ -5,10 +5,19 @@ info:
   title: Medical Certificate Of Cause Of Death — Patient
   version: 1.0.0
   description: Patient demographic information for the deceased whose cause of death this certificate records.
+x-namespace:
+  form: medical-certificate-of-cause-of-death
+  apiPrefix: /api/medical-certificate-of-cause-of-death/
+  sqlSchema: medical_certificate_of_cause_of_death
+  xmlNamespace: https://formexamples.github.io/medical-certificate-of-cause-of-death/xml
+tags:
+  - name: medical-certificate-of-cause-of-death
+    description: Medical Certificate Of Cause Of Death form
 paths:
   /api/medical-certificate-of-cause-of-death/patients:
     get:
       summary: List Patient records
+      tags: [medical-certificate-of-cause-of-death]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [medical-certificate-of-cause-of-death]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [medical-certificate-of-cause-of-death]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [medical-certificate-of-cause-of-death]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [medical-certificate-of-cause-of-death]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [medical-certificate-of-cause-of-death]
       operationId: deletePatient
       responses:
         "200":

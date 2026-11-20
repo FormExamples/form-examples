@@ -5,10 +5,19 @@ info:
   title: Histopathology Test Result — HistopathologyTestResultGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / requesting team.
+x-namespace:
+  form: histopathology-test-result
+  apiPrefix: /api/histopathology-test-result/
+  sqlSchema: histopathology_test_result
+  xmlNamespace: https://formexamples.github.io/histopathology-test-result/xml
+tags:
+  - name: histopathology-test-result
+    description: Histopathology Test Result form
 paths:
   /api/histopathology-test-result/histopathology_test_result_grade_flags:
     get:
       summary: List HistopathologyTestResultGradeFlag records
+      tags: [histopathology-test-result]
       operationId: listHistopathologyTestResultGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HistopathologyTestResultGradeFlag
+      tags: [histopathology-test-result]
       operationId: createHistopathologyTestResultGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HistopathologyTestResultGradeFlag by id
+      tags: [histopathology-test-result]
       operationId: getHistopathologyTestResultGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HistopathologyTestResultGradeFlag
+      tags: [histopathology-test-result]
       operationId: updateHistopathologyTestResultGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HistopathologyTestResultGradeFlag
+      tags: [histopathology-test-result]
       operationId: replaceHistopathologyTestResultGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HistopathologyTestResultGradeFlag
+      tags: [histopathology-test-result]
       operationId: deleteHistopathologyTestResultGradeFlag
       responses:
         "200":

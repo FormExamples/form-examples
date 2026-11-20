@@ -5,10 +5,19 @@ info:
   title: Vaccinations Assessment — TravelVaccinations
   version: 1.0.0
   description: Travel vaccination status and destination information. One-to-one child of assessment.
+x-namespace:
+  form: vaccinations-assessment
+  apiPrefix: /api/vaccinations-assessment/
+  sqlSchema: vaccinations_assessment
+  xmlNamespace: https://formexamples.github.io/vaccinations-assessment/xml
+tags:
+  - name: vaccinations-assessment
+    description: Vaccinations Assessment form
 paths:
   /api/vaccinations-assessment/travel_vaccinations:
     get:
       summary: List TravelVaccinations records
+      tags: [vaccinations-assessment]
       operationId: listTravelVaccinations
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new TravelVaccinations
+      tags: [vaccinations-assessment]
       operationId: createTravelVaccinations
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one TravelVaccinations by id
+      tags: [vaccinations-assessment]
       operationId: getTravelVaccinations
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing TravelVaccinations
+      tags: [vaccinations-assessment]
       operationId: updateTravelVaccinations
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing TravelVaccinations
+      tags: [vaccinations-assessment]
       operationId: replaceTravelVaccinations
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a TravelVaccinations
+      tags: [vaccinations-assessment]
       operationId: deleteTravelVaccinations
       responses:
         "200":

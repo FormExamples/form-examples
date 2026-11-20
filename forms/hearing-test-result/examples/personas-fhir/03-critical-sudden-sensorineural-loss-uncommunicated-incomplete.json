@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "53afb789-73dd-482c-a828-aed590dbf121",
+  "id": "1d49f985-6d8d-537c-8891-ecb4bc1d1ddb",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0",
+      "fullUrl": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d",
       "resource": {
         "resourceType": "Patient",
-        "id": "d211863e-8056-4909-a26b-8765473da4b0",
+        "id": "8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:d09f7ce4-1dd6-4cd2-a6d6-644a066df084",
+      "fullUrl": "urn:uuid:086fa618-9634-502d-96d6-5278b37aee83",
       "resource": {
         "resourceType": "Observation",
-        "id": "d09f7ce4-1dd6-4cd2-a6d6-644a066df084",
+        "id": "086fa618-9634-502d-96d6-5278b37aee83",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:fdec50fa-2267-4062-a3c4-44c2c06a0b80",
+      "fullUrl": "urn:uuid:f343bfbc-93a5-5e14-9ea0-3d872f5e0deb",
       "resource": {
         "resourceType": "Observation",
-        "id": "fdec50fa-2267-4062-a3c4-44c2c06a0b80",
+        "id": "f343bfbc-93a5-5e14-9ea0-3d872f5e0deb",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -591,10 +591,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:3be2de83-44b5-43c8-ad9a-a34563999ae2",
+      "fullUrl": "urn:uuid:8fea464d-8647-5bdd-a42f-cfa1719609ed",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "3be2de83-44b5-43c8-ad9a-a34563999ae2",
+        "id": "8fea464d-8647-5bdd-a42f-cfa1719609ed",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -603,7 +603,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -612,10 +612,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:89952ac2-b8df-4ec1-a527-2ef8f95f3f29",
+      "fullUrl": "urn:uuid:7ceb5aab-44b9-5795-9d76-51264859e8ec",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "89952ac2-b8df-4ec1-a527-2ef8f95f3f29",
+        "id": "7ceb5aab-44b9-5795-9d76-51264859e8ec",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -645,17 +645,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical structured finding (sudden sensorineural hearing loss or marked asymmetry) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:3b3d38ba-647e-48e0-a221-87d0813815de",
+      "fullUrl": "urn:uuid:3f6ce300-45d7-5a9e-98f8-72e53d138631",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "3b3d38ba-647e-48e0-a221-87d0813815de",
+        "id": "3f6ce300-45d7-5a9e-98f8-72e53d138631",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -685,17 +685,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:f95a7e19-87ab-4828-ad7b-c781c3dadbaa",
+      "fullUrl": "urn:uuid:348707ee-b17c-5aea-b5e3-496e818f6e8a",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "f95a7e19-87ab-4828-ad7b-c781c3dadbaa",
+        "id": "348707ee-b17c-5aea-b5e3-496e818f6e8a",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -725,17 +725,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: clinical history."
       }
     },
     {
-      "fullUrl": "urn:uuid:5dd82641-308e-4b87-a13d-9184d4b738c6",
+      "fullUrl": "urn:uuid:c1fd52db-fdff-5772-a8d8-424b3152eb38",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "5dd82641-308e-4b87-a13d-9184d4b738c6",
+        "id": "c1fd52db-fdff-5772-a8d8-424b3152eb38",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -765,17 +765,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: impression."
       }
     },
     {
-      "fullUrl": "urn:uuid:53412e48-2e5e-4f4e-a90e-9e49652a58c2",
+      "fullUrl": "urn:uuid:1883ff86-749a-5559-8f9a-f1919de55fe7",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "53412e48-2e5e-4f4e-a90e-9e49652a58c2",
+        "id": "1883ff86-749a-5559-8f9a-f1919de55fe7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -805,17 +805,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding (sudden sensorineural loss or marked asymmetry) auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:584cb78c-481c-4ff8-a803-27b3d387810a",
+      "fullUrl": "urn:uuid:eff42db1-0ed6-54be-835b-963c32d0449c",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "584cb78c-481c-4ff8-a803-27b3d387810a",
+        "id": "eff42db1-0ed6-54be-835b-963c32d0449c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -845,7 +845,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (sudden sensorineural hearing loss or marked asymmetry) is present.",
@@ -859,10 +859,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:7080c6d6-457a-435d-a812-67f6ecb2d3db",
+      "fullUrl": "urn:uuid:10563273-36ec-52e9-aa4e-b0201cf2e82f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "7080c6d6-457a-435d-a812-67f6ecb2d3db",
+        "id": "10563273-36ec-52e9-aa4e-b0201cf2e82f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -892,7 +892,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",
@@ -906,10 +906,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a0960399-8034-4429-a5ef-2bc4064c1035",
+      "fullUrl": "urn:uuid:4f19f44d-b080-5f99-844d-78415fb94002",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "a0960399-8034-4429-a5ef-2bc4064c1035",
+        "id": "4f19f44d-b080-5f99-844d-78415fb94002",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -939,7 +939,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Result is consistent with sudden sensorineural hearing loss (otological emergency).",
@@ -953,10 +953,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:80243c1b-93bd-4a44-ab6c-f0f6ca6ba885",
+      "fullUrl": "urn:uuid:630e59ae-164e-5b99-b388-a0af0cc61b30",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "80243c1b-93bd-4a44-ab6c-f0f6ca6ba885",
+        "id": "630e59ae-164e-5b99-b388-a0af0cc61b30",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -986,7 +986,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Marked asymmetry between ears (red flag for retrocochlear pathology).",
@@ -1000,10 +1000,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:3322b970-c44a-472f-ac7b-0828d5d9e025",
+      "fullUrl": "urn:uuid:9971a751-ce6a-5d4d-b70f-dda4950e1515",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "3322b970-c44a-472f-ac7b-0828d5d9e025",
+        "id": "9971a751-ce6a-5d4d-b70f-dda4950e1515",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -1033,7 +1033,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
@@ -1047,10 +1047,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:9238099e-c944-4ecb-aabd-f56eab9d77c4",
+      "fullUrl": "urn:uuid:7f6be1ed-870f-5383-9ae9-916de2945e05",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "9238099e-c944-4ecb-aabd-f56eab9d77c4",
+        "id": "7f6be1ed-870f-5383-9ae9-916de2945e05",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -1080,7 +1080,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:d211863e-8056-4909-a26b-8765473da4b0"
+          "reference": "urn:uuid:8a4dfe25-2ac7-5e5b-a349-f9568a5ff75d"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A significant finding is present but no originating request reference is recorded.",

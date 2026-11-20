@@ -5,10 +5,19 @@ info:
   title: Padua Venous Thromboembolism Risk Assessment — PaduaVenousThromboembolismRiskAssessment
   version: 1.0.0
   description: "Main Padua VTE risk-assessment record: assessment context, patient identification, the eleven weighted risk-factor inputs, and the informational bleeding-risk check."
+x-namespace:
+  form: padua-venous-thromboembolism-risk-assessment
+  apiPrefix: /api/padua-venous-thromboembolism-risk-assessment/
+  sqlSchema: padua_venous_thromboembolism_risk_assessment
+  xmlNamespace: https://formexamples.github.io/padua-venous-thromboembolism-risk-assessment/xml
+tags:
+  - name: padua-venous-thromboembolism-risk-assessment
+    description: Padua Venous Thromboembolism Risk Assessment form
 paths:
   /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessments:
     get:
       summary: List PaduaVenousThromboembolismRiskAssessment records
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: listPaduaVenousThromboembolismRiskAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PaduaVenousThromboembolismRiskAssessment
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: createPaduaVenousThromboembolismRiskAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PaduaVenousThromboembolismRiskAssessment by id
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: getPaduaVenousThromboembolismRiskAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PaduaVenousThromboembolismRiskAssessment
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: updatePaduaVenousThromboembolismRiskAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PaduaVenousThromboembolismRiskAssessment
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: replacePaduaVenousThromboembolismRiskAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PaduaVenousThromboembolismRiskAssessment
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: deletePaduaVenousThromboembolismRiskAssessment
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Pre Operative Assessment By Patient — GradingAdditionalFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the ASA grade, with priority and a suggested action for the perioperative team.
+x-namespace:
+  form: pre-operative-assessment-by-patient
+  apiPrefix: /api/pre-operative-assessment-by-patient/
+  sqlSchema: pre_operative_assessment_by_patient
+  xmlNamespace: https://formexamples.github.io/pre-operative-assessment-by-patient/xml
+tags:
+  - name: pre-operative-assessment-by-patient
+    description: Pre Operative Assessment By Patient form
 paths:
   /api/pre-operative-assessment-by-patient/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [pre-operative-assessment-by-patient]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [pre-operative-assessment-by-patient]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [pre-operative-assessment-by-patient]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [pre-operative-assessment-by-patient]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [pre-operative-assessment-by-patient]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [pre-operative-assessment-by-patient]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

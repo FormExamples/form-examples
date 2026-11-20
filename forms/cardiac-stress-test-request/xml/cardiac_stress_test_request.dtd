@@ -1,4 +1,5 @@
 <!ELEMENT cardiac_stress_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,test_type,primary_indication,clinical_question,relevant_history,symptom_chest_pain,symptom_breathlessness,symptom_palpitations,able_to_exercise,resting_ecg_findings,known_coronary_artery_disease,recent_acute_coronary_syndrome,aortic_stenosis,uncontrolled_hypertension,beta_blocker,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST cardiac_stress_test_request xmlns CDATA #FIXED "https://formexamples.github.io/cardiac-stress-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

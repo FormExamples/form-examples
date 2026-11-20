@@ -1,4 +1,5 @@
 <!ELEMENT edinburgh_postnatal_depression_scale (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,care_setting,assessed_at,perinatal_stage,perinatal_week,respondent_identifier,age_band,preferred_language,assistance_needed,item_1,item_2,item_3,item_4,item_5,item_6,item_7,item_8,item_9,item_10,clinical_note)>
+<!ATTLIST edinburgh_postnatal_depression_scale xmlns CDATA #FIXED "https://formexamples.github.io/edinburgh-postnatal-depression-scale/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

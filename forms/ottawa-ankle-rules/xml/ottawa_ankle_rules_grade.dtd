@@ -1,4 +1,5 @@
 <!ELEMENT ottawa_ankle_rules_grade (id,created_at,updated_at,deleted_at,ottawa_ankle_rules_id,unable_to_bear_weight,ankle_xray_indicated,foot_xray_indicated,recommended_action,graded_at)>
+<!ATTLIST ottawa_ankle_rules_grade xmlns CDATA #FIXED "https://formexamples.github.io/ottawa-ankle-rules/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

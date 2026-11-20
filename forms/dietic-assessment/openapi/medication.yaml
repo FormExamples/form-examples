@@ -5,10 +5,19 @@ info:
   title: Dietic Assessment — Medication
   version: 1.0.0
   description: Medication, supplement, or nutrition product that a patient may be taking.
+x-namespace:
+  form: dietic-assessment
+  apiPrefix: /api/dietic-assessment/
+  sqlSchema: dietic_assessment
+  xmlNamespace: https://formexamples.github.io/dietic-assessment/xml
+tags:
+  - name: dietic-assessment
+    description: Dietic Assessment form
 paths:
   /api/dietic-assessment/medications:
     get:
       summary: List Medication records
+      tags: [dietic-assessment]
       operationId: listMedication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Medication
+      tags: [dietic-assessment]
       operationId: createMedication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Medication by id
+      tags: [dietic-assessment]
       operationId: getMedication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Medication
+      tags: [dietic-assessment]
       operationId: updateMedication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Medication
+      tags: [dietic-assessment]
       operationId: replaceMedication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Medication
+      tags: [dietic-assessment]
       operationId: deleteMedication
       responses:
         "200":

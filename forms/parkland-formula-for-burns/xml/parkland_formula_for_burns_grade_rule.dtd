@@ -1,4 +1,5 @@
 <!ELEMENT parkland_formula_for_burns_grade_rule (id,created_at,updated_at,deleted_at,parkland_formula_for_burns_grade_id,rule_id,instrument,category,description)>
+<!ATTLIST parkland_formula_for_burns_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/parkland-formula-for-burns/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

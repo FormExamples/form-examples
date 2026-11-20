@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/fall-risk-assessment/xml">
+<id>deee5c73-087f-5d78-b9e0-9b5068883eef</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>880e8400-e29b-41d4-a716-446655440003</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>b4aaa5dc-f074-5fe2-bdb5-a87a3d3d7eda</grade_id>
+<rule_id>c79b9fc8-a52a-514f-9ebb-56d417581bb5</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>low</severity_level>

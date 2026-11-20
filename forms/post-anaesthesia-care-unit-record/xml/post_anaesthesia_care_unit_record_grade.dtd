@@ -1,4 +1,5 @@
 <!ELEMENT post_anaesthesia_care_unit_record_grade (id,created_at,updated_at,deleted_at,post_anaesthesia_care_unit_record_id,activity_score,respiration_score,circulation_score,consciousness_score,oxygen_saturation_score,aldrete_total,discharge_ready,padss_total,padss_street_fit,graded_at)>
+<!ATTLIST post_anaesthesia_care_unit_record_grade xmlns CDATA #FIXED "https://formexamples.github.io/post-anaesthesia-care-unit-record/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cholesterol SYSTEM "cholesterol.dtd">
-<cholesterol>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<cholesterol xmlns="https://formexamples.github.io/heart-health-check/xml">
+<id>7f4afdb8-a86c-53ee-8a7b-8a51a236ed54</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>4d6dbfc2-df67-5465-bf49-f9f568150665</assessment_id>
 <total_cholesterol>0.0</total_cholesterol>
 <hdl_cholesterol>0.0</hdl_cholesterol>
 <total_hdl_ratio>1.5</total_hdl_ratio>

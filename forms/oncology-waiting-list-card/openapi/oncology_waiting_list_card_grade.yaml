@@ -5,10 +5,19 @@ info:
   title: Oncology Waiting List Card — OncologyWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: oncology-waiting-list-card
+  apiPrefix: /api/oncology-waiting-list-card/
+  sqlSchema: oncology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/oncology-waiting-list-card/xml
+tags:
+  - name: oncology-waiting-list-card
+    description: Oncology Waiting List Card form
 paths:
   /api/oncology-waiting-list-card/oncology_waiting_list_card_grades:
     get:
       summary: List OncologyWaitingListCardGrade records
+      tags: [oncology-waiting-list-card]
       operationId: listOncologyWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OncologyWaitingListCardGrade
+      tags: [oncology-waiting-list-card]
       operationId: createOncologyWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OncologyWaitingListCardGrade by id
+      tags: [oncology-waiting-list-card]
       operationId: getOncologyWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OncologyWaitingListCardGrade
+      tags: [oncology-waiting-list-card]
       operationId: updateOncologyWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OncologyWaitingListCardGrade
+      tags: [oncology-waiting-list-card]
       operationId: replaceOncologyWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OncologyWaitingListCardGrade
+      tags: [oncology-waiting-list-card]
       operationId: deleteOncologyWaitingListCardGrade
       responses:
         "200":

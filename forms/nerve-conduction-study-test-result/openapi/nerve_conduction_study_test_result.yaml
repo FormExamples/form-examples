@@ -5,10 +5,19 @@ info:
   title: Nerve Conduction Study Test Result — NerveConductionStudyTestResult
   version: 1.0.0
   description: Nerve conduction study / EMG (electrodiagnostic) result (report). Captures the performed study type and region, clinical history, the nerve-conduction and needle-EMG findings, structured electrodiagnostic conclusions, severity and pattern characterisation, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: nerve-conduction-study-test-result
+  apiPrefix: /api/nerve-conduction-study-test-result/
+  sqlSchema: nerve_conduction_study_test_result
+  xmlNamespace: https://formexamples.github.io/nerve-conduction-study-test-result/xml
+tags:
+  - name: nerve-conduction-study-test-result
+    description: Nerve Conduction Study Test Result form
 paths:
   /api/nerve-conduction-study-test-result/nerve_conduction_study_test_results:
     get:
       summary: List NerveConductionStudyTestResult records
+      tags: [nerve-conduction-study-test-result]
       operationId: listNerveConductionStudyTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NerveConductionStudyTestResult
+      tags: [nerve-conduction-study-test-result]
       operationId: createNerveConductionStudyTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NerveConductionStudyTestResult by id
+      tags: [nerve-conduction-study-test-result]
       operationId: getNerveConductionStudyTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NerveConductionStudyTestResult
+      tags: [nerve-conduction-study-test-result]
       operationId: updateNerveConductionStudyTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NerveConductionStudyTestResult
+      tags: [nerve-conduction-study-test-result]
       operationId: replaceNerveConductionStudyTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NerveConductionStudyTestResult
+      tags: [nerve-conduction-study-test-result]
       operationId: deleteNerveConductionStudyTestResult
       responses:
         "200":

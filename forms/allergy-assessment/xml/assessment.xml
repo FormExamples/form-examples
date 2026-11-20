@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment SYSTEM "assessment.dtd">
-<assessment>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<assessment xmlns="https://formexamples.github.io/allergy-assessment/xml">
+<id>5fd99768-6a1f-5300-bf95-106f0fb5a2eb</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<patient_id>a03fe202-f046-5476-9f4e-1827fcb74fc5</patient_id>
 <status>draft</status>
 <age_of_onset>45</age_of_onset>
 <known_allergens>Peanuts</known_allergens>

@@ -1,4 +1,5 @@
 <!ELEMENT eye_vision_test_request_grade_flag (id,created_at,updated_at,deleted_at,eye_vision_test_request_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST eye_vision_test_request_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/eye-vision-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

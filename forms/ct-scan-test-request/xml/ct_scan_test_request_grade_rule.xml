@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ct_scan_test_request_grade_rule SYSTEM "ct_scan_test_request_grade_rule.dtd">
-<ct_scan_test_request_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<ct_scan_test_request_grade_rule xmlns="https://formexamples.github.io/ct-scan-test-request/xml">
+<id>499b17c3-6028-532c-b94c-b8e951c8a12c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<ct_scan_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</ct_scan_test_request_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<ct_scan_test_request_grade_id>8fc6b260-d4b9-58bb-8162-534502c5fd88</ct_scan_test_request_grade_id>
+<rule_id>d6ea0d3b-1175-5125-abb8-6b98913d5f4a</rule_id>
 <axis>appropriateness</axis>
 <category>General</category>
 <description>Example text.</description>

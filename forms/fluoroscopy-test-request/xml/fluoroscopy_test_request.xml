@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fluoroscopy_test_request SYSTEM "fluoroscopy_test_request.dtd">
-<fluoroscopy_test_request>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<fluoroscopy_test_request xmlns="https://formexamples.github.io/fluoroscopy-test-request/xml">
+<id>251391ee-abef-5fb3-9947-bc82bd285101</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>16445649-d149-5c18-bf38-01f2a48da0ab</patient_id>
+<clinician_id>cdbbcd35-f967-5d33-b697-8e1b6b007468</clinician_id>
 <status>draft</status>
 <site_name>Example</site_name>
 <setting>outpatient</setting>

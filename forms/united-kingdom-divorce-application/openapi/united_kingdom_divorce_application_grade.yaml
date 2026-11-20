@@ -5,10 +5,19 @@ info:
   title: United Kingdom Divorce Application — UnitedKingdomDivorceApplicationGrade
   version: 1.0.0
   description: "Computed readiness classification for a divorce or dissolution application: application class (ready-to-apply/incomplete/not-eligible-yet), earliest eligible date for the stage, and whether a jurisdiction ground is met."
+x-namespace:
+  form: united-kingdom-divorce-application
+  apiPrefix: /api/united-kingdom-divorce-application/
+  sqlSchema: united_kingdom_divorce_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-divorce-application/xml
+tags:
+  - name: united-kingdom-divorce-application
+    description: United Kingdom Divorce Application form
 paths:
   /api/united-kingdom-divorce-application/united_kingdom_divorce_application_grades:
     get:
       summary: List UnitedKingdomDivorceApplicationGrade records
+      tags: [united-kingdom-divorce-application]
       operationId: listUnitedKingdomDivorceApplicationGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomDivorceApplicationGrade
+      tags: [united-kingdom-divorce-application]
       operationId: createUnitedKingdomDivorceApplicationGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomDivorceApplicationGrade by id
+      tags: [united-kingdom-divorce-application]
       operationId: getUnitedKingdomDivorceApplicationGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomDivorceApplicationGrade
+      tags: [united-kingdom-divorce-application]
       operationId: updateUnitedKingdomDivorceApplicationGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomDivorceApplicationGrade
+      tags: [united-kingdom-divorce-application]
       operationId: replaceUnitedKingdomDivorceApplicationGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomDivorceApplicationGrade
+      tags: [united-kingdom-divorce-application]
       operationId: deleteUnitedKingdomDivorceApplicationGrade
       responses:
         "200":

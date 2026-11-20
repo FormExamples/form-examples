@@ -5,10 +5,19 @@ info:
   title: Palliative Assessment — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: palliative-assessment
+  apiPrefix: /api/palliative-assessment/
+  sqlSchema: palliative_assessment
+  xmlNamespace: https://formexamples.github.io/palliative-assessment/xml
+tags:
+  - name: palliative-assessment
+    description: Palliative Assessment form
 paths:
   /api/palliative-assessment/patients:
     get:
       summary: List Patient records
+      tags: [palliative-assessment]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [palliative-assessment]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [palliative-assessment]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [palliative-assessment]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [palliative-assessment]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [palliative-assessment]
       operationId: deletePatient
       responses:
         "200":

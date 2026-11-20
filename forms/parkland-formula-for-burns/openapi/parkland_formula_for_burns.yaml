@@ -5,10 +5,19 @@ info:
   title: Parkland Formula For Burns — ParklandFormulaForBurns
   version: 1.0.0
   description: "Main Parkland-formula burns record: context and identification, plus the body weight, %TBSA, and time-of-injury inputs and the injury-feature flags."
+x-namespace:
+  form: parkland-formula-for-burns
+  apiPrefix: /api/parkland-formula-for-burns/
+  sqlSchema: parkland_formula_for_burns
+  xmlNamespace: https://formexamples.github.io/parkland-formula-for-burns/xml
+tags:
+  - name: parkland-formula-for-burns
+    description: Parkland Formula For Burns form
 paths:
   /api/parkland-formula-for-burns/parkland_formula_for_burns:
     get:
       summary: List ParklandFormulaForBurns records
+      tags: [parkland-formula-for-burns]
       operationId: listParklandFormulaForBurns
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ParklandFormulaForBurns
+      tags: [parkland-formula-for-burns]
       operationId: createParklandFormulaForBurns
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ParklandFormulaForBurns by id
+      tags: [parkland-formula-for-burns]
       operationId: getParklandFormulaForBurns
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ParklandFormulaForBurns
+      tags: [parkland-formula-for-burns]
       operationId: updateParklandFormulaForBurns
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ParklandFormulaForBurns
+      tags: [parkland-formula-for-burns]
       operationId: replaceParklandFormulaForBurns
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ParklandFormulaForBurns
+      tags: [parkland-formula-for-burns]
       operationId: deleteParklandFormulaForBurns
       responses:
         "200":

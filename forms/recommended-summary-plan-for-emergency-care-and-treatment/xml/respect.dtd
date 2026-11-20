@@ -1,4 +1,5 @@
 <!ELEMENT respect (id,created_at,updated_at,deleted_at,patient_id,clinician_id,person_name,date_of_birth,identifier,address,key_contact,health_summary,diagnoses,existing_documents,what_matters,care_preferences,priority_balance,recommended_interventions,not_recommended_interventions,cpr_recommendation,cpr_rationale,cpr_discussed,hospital_transfer,critical_care_admission,treatment_ceilings,has_capacity,capacity_assessment,involvement,proxy_details,clinician_name,clinician_role,clinician_registration,signature,signed_at,senior_endorsement,emergency_contacts,review_date)>
+<!ATTLIST respect xmlns CDATA #FIXED "https://formexamples.github.io/recommended-summary-plan-for-emergency-care-and-treatment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

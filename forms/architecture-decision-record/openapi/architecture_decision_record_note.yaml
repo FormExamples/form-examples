@@ -5,10 +5,19 @@ info:
   title: Architecture Decision Record — ArchitectureDecisionRecordNote
   version: 1.0.0
   description: "Tyree & Akerman section 14: append-only discussion notes captured during socialisation."
+x-namespace:
+  form: architecture-decision-record
+  apiPrefix: /api/architecture-decision-record/
+  sqlSchema: architecture_decision_record
+  xmlNamespace: https://formexamples.github.io/architecture-decision-record/xml
+tags:
+  - name: architecture-decision-record
+    description: Architecture Decision Record form
 paths:
   /api/architecture-decision-record/architecture_decision_record_notes:
     get:
       summary: List ArchitectureDecisionRecordNote records
+      tags: [architecture-decision-record]
       operationId: listArchitectureDecisionRecordNote
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ArchitectureDecisionRecordNote
+      tags: [architecture-decision-record]
       operationId: createArchitectureDecisionRecordNote
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ArchitectureDecisionRecordNote by id
+      tags: [architecture-decision-record]
       operationId: getArchitectureDecisionRecordNote
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ArchitectureDecisionRecordNote
+      tags: [architecture-decision-record]
       operationId: updateArchitectureDecisionRecordNote
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ArchitectureDecisionRecordNote
+      tags: [architecture-decision-record]
       operationId: replaceArchitectureDecisionRecordNote
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ArchitectureDecisionRecordNote
+      tags: [architecture-decision-record]
       operationId: deleteArchitectureDecisionRecordNote
       responses:
         "200":

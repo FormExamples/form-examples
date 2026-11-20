@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE bowel_cancer_screening_fit SYSTEM "bowel_cancer_screening_fit.dtd">
-<bowel_cancer_screening_fit>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<bowel_cancer_screening_fit xmlns="https://formexamples.github.io/bowel-cancer-screening-with-faecal-immunochemical-test/xml">
+<id>8490528d-908d-59e3-a080-b94f3e70e390</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>47980951-b933-5bb1-b92a-494a92428e91</patient_id>
+<clinician_id>388b6728-a577-5943-a36b-a98e55907a3b</clinician_id>
 <reviewed_at>2026-04-09T10:00:00Z</reviewed_at>
 <screening_hub></screening_hub>
 <participant_identifier></participant_identifier>

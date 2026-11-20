@@ -1,4 +1,5 @@
 <!ELEMENT county_clerk (id,created_at,updated_at,deleted_at,name,state,county,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,website)>
+<!ATTLIST county_clerk xmlns CDATA #FIXED "https://formexamples.github.io/united-states-marriage-license-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

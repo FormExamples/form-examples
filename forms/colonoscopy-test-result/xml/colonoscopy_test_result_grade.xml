@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE colonoscopy_test_result_grade SYSTEM "colonoscopy_test_result_grade.dtd">
-<colonoscopy_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<colonoscopy_test_result_grade xmlns="https://formexamples.github.io/colonoscopy-test-result/xml">
+<id>c15450dc-d9f8-5902-a834-2c140db1a904</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<colonoscopy_test_result_id>770e8400-e29b-41d4-a716-446655440002</colonoscopy_test_result_id>
+<colonoscopy_test_result_id>e35e2f59-9afa-57af-b10b-cc39572a3445</colonoscopy_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

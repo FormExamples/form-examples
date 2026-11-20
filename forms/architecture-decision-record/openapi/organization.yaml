@@ -5,10 +5,19 @@ info:
   title: Architecture Decision Record — Organization
   version: 1.0.0
   description: Organization context (company, team, or program) under which an ADR is written.
+x-namespace:
+  form: architecture-decision-record
+  apiPrefix: /api/architecture-decision-record/
+  sqlSchema: architecture_decision_record
+  xmlNamespace: https://formexamples.github.io/architecture-decision-record/xml
+tags:
+  - name: architecture-decision-record
+    description: Architecture Decision Record form
 paths:
   /api/architecture-decision-record/organizations:
     get:
       summary: List Organization records
+      tags: [architecture-decision-record]
       operationId: listOrganization
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Organization
+      tags: [architecture-decision-record]
       operationId: createOrganization
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Organization by id
+      tags: [architecture-decision-record]
       operationId: getOrganization
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Organization
+      tags: [architecture-decision-record]
       operationId: updateOrganization
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Organization
+      tags: [architecture-decision-record]
       operationId: replaceOrganization
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Organization
+      tags: [architecture-decision-record]
       operationId: deleteOrganization
       responses:
         "200":

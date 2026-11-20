@@ -5,10 +5,19 @@ info:
   title: Dermatology Assessment — GradingAdditionalFlag
   version: 1.0.0
   description: Additional safety-critical flags detected during dermatology assessment grading (e.g. suspicious lesion, skin cancer risk, severe DLQI impact).
+x-namespace:
+  form: dermatology-assessment
+  apiPrefix: /api/dermatology-assessment/
+  sqlSchema: dermatology_assessment
+  xmlNamespace: https://formexamples.github.io/dermatology-assessment/xml
+tags:
+  - name: dermatology-assessment
+    description: Dermatology Assessment form
 paths:
   /api/dermatology-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [dermatology-assessment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [dermatology-assessment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [dermatology-assessment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [dermatology-assessment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [dermatology-assessment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [dermatology-assessment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

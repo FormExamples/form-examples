@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE genetic_test_result_grade SYSTEM "genetic_test_result_grade.dtd">
-<genetic_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<genetic_test_result_grade xmlns="https://formexamples.github.io/genetic-test-result/xml">
+<id>9702f755-30a9-5ba7-9d30-f3e4bc5d80fd</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<genetic_test_result_id>770e8400-e29b-41d4-a716-446655440002</genetic_test_result_id>
+<genetic_test_result_id>81ab6c36-deb8-51c8-bb9a-a33e797dbb88</genetic_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

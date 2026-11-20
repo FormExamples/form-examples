@@ -1,4 +1,5 @@
 <!ELEMENT curb_65_pneumonia_severity_score_grade (id,created_at,updated_at,deleted_at,curb_65_pneumonia_severity_score_id,confusion_score,urea_score,respiratory_rate_score,blood_pressure_score,age_score,total_score,score_variant,risk_band,recommended_setting,graded_at)>
+<!ATTLIST curb_65_pneumonia_severity_score_grade xmlns CDATA #FIXED "https://formexamples.github.io/curb-65-pneumonia-severity-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

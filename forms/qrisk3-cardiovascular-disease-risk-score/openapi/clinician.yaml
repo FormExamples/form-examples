@@ -5,10 +5,19 @@ info:
   title: Qrisk3 Cardiovascular Disease Risk Score — Clinician
   version: 1.0.0
   description: Clinician identifying information for the assessing clinician.
+x-namespace:
+  form: qrisk3-cardiovascular-disease-risk-score
+  apiPrefix: /api/qrisk3-cardiovascular-disease-risk-score/
+  sqlSchema: qrisk3_cardiovascular_disease_risk_score
+  xmlNamespace: https://formexamples.github.io/qrisk3-cardiovascular-disease-risk-score/xml
+tags:
+  - name: qrisk3-cardiovascular-disease-risk-score
+    description: Qrisk3 Cardiovascular Disease Risk Score form
 paths:
   /api/qrisk3-cardiovascular-disease-risk-score/clinicians:
     get:
       summary: List Clinician records
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: deleteClinician
       responses:
         "200":

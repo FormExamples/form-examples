@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005f",
+    "id": "4de66d0b-bf29-5af3-b627-f9ed77e72553",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000071",
+    "id": "775db318-9040-5461-a43c-bf0816d246b4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "dexaBoneDensityTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-00000000007f",
+    "id": "84e53ab8-8fbc-5ad1-a866-2cc24b6dc55f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000083",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000084",
+    "patientId": "f065c2c6-5695-548f-a533-99c1e7fa2457",
+    "clinicianId": "803384da-19c9-5d17-bcd7-33102cdf9ac9",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -65,11 +65,11 @@
     "notes": ""
   },
   "dexaBoneDensityTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000009a",
+    "id": "f8bc2d6c-e3f6-5e93-8d52-a0a3ead557cd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "dexaBoneDensityTestRequestId": "550e8400-e29b-41d4-a716-00000000009e",
+    "dexaBoneDensityTestRequestId": "6bed7fcb-a40a-5ed7-a80d-f18c3feedd0f",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "radiationDoseBand": "low",
@@ -83,22 +83,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "dexaBoneDensityTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000aa",
+    "id": "78da0739-20e0-5669-a0dd-7d6d696106c5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "dexaBoneDensityTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000ae",
+    "dexaBoneDensityTestRequestGradeId": "6e89e095-179f-5c59-9cb0-31f77580c859",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "dexaBoneDensityTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b3",
+    "id": "837a1ba6-ba73-528b-b929-231fefb27a61",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "dexaBoneDensityTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b7",
+    "dexaBoneDensityTestRequestGradeId": "071abde8-7c73-5f32-bab1-7463ae7e72e6",
     "flagId": "",
     "category": "recent-fragility-fracture",
     "priority": "low",

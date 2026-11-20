@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Eye Prescription form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: eye-prescription
+  apiPrefix: /api/eye-prescription/
+  sqlSchema: eye_prescription
+  xmlNamespace: https://formexamples.github.io/eye-prescription/xml
+tags:
+- name: eye-prescription
+  description: Eye Prescription form
 paths:
   /api/eye-prescription/eye_prescription_eyes:
     get:
       summary: List EyePrescriptionEye records
+      tags:
+      - eye-prescription
       operationId: listEyePrescriptionEye
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EyePrescriptionEye
+      tags:
+      - eye-prescription
       operationId: createEyePrescriptionEye
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EyePrescriptionEye by id
+      tags:
+      - eye-prescription
       operationId: getEyePrescriptionEye
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EyePrescriptionEye
+      tags:
+      - eye-prescription
       operationId: updateEyePrescriptionEye
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EyePrescriptionEye
+      tags:
+      - eye-prescription
       operationId: replaceEyePrescriptionEye
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EyePrescriptionEye
+      tags:
+      - eye-prescription
       operationId: deleteEyePrescriptionEye
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/eye-prescription/eye_prescription_grade_flags:
     get:
       summary: List EyePrescriptionGradeFlag records
+      tags:
+      - eye-prescription
       operationId: listEyePrescriptionGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EyePrescriptionGradeFlag
+      tags:
+      - eye-prescription
       operationId: createEyePrescriptionGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EyePrescriptionGradeFlag by id
+      tags:
+      - eye-prescription
       operationId: getEyePrescriptionGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EyePrescriptionGradeFlag
+      tags:
+      - eye-prescription
       operationId: updateEyePrescriptionGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EyePrescriptionGradeFlag
+      tags:
+      - eye-prescription
       operationId: replaceEyePrescriptionGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EyePrescriptionGradeFlag
+      tags:
+      - eye-prescription
       operationId: deleteEyePrescriptionGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/eye-prescription/eye_prescription_grade_rules:
     get:
       summary: List EyePrescriptionGradeRule records
+      tags:
+      - eye-prescription
       operationId: listEyePrescriptionGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EyePrescriptionGradeRule
+      tags:
+      - eye-prescription
       operationId: createEyePrescriptionGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EyePrescriptionGradeRule by id
+      tags:
+      - eye-prescription
       operationId: getEyePrescriptionGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EyePrescriptionGradeRule
+      tags:
+      - eye-prescription
       operationId: updateEyePrescriptionGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EyePrescriptionGradeRule
+      tags:
+      - eye-prescription
       operationId: replaceEyePrescriptionGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EyePrescriptionGradeRule
+      tags:
+      - eye-prescription
       operationId: deleteEyePrescriptionGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/eye-prescription/eye_prescription_grades:
     get:
       summary: List EyePrescriptionGrade records
+      tags:
+      - eye-prescription
       operationId: listEyePrescriptionGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EyePrescriptionGrade
+      tags:
+      - eye-prescription
       operationId: createEyePrescriptionGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EyePrescriptionGrade by id
+      tags:
+      - eye-prescription
       operationId: getEyePrescriptionGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EyePrescriptionGrade
+      tags:
+      - eye-prescription
       operationId: updateEyePrescriptionGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EyePrescriptionGrade
+      tags:
+      - eye-prescription
       operationId: replaceEyePrescriptionGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EyePrescriptionGrade
+      tags:
+      - eye-prescription
       operationId: deleteEyePrescriptionGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/eye-prescription/eye_prescription_lens_recommendations:
     get:
       summary: List EyePrescriptionLensRecommendation records
+      tags:
+      - eye-prescription
       operationId: listEyePrescriptionLensRecommendation
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EyePrescriptionLensRecommendation
+      tags:
+      - eye-prescription
       operationId: createEyePrescriptionLensRecommendation
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EyePrescriptionLensRecommendation by id
+      tags:
+      - eye-prescription
       operationId: getEyePrescriptionLensRecommendation
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EyePrescriptionLensRecommendation
+      tags:
+      - eye-prescription
       operationId: updateEyePrescriptionLensRecommendation
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EyePrescriptionLensRecommendation
+      tags:
+      - eye-prescription
       operationId: replaceEyePrescriptionLensRecommendation
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EyePrescriptionLensRecommendation
+      tags:
+      - eye-prescription
       operationId: deleteEyePrescriptionLensRecommendation
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/eye-prescription/eye_prescription_ocular_health_findings:
     get:
       summary: List EyePrescriptionOcularHealthFinding records
+      tags:
+      - eye-prescription
       operationId: listEyePrescriptionOcularHealthFinding
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EyePrescriptionOcularHealthFinding
+      tags:
+      - eye-prescription
       operationId: createEyePrescriptionOcularHealthFinding
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EyePrescriptionOcularHealthFinding by id
+      tags:
+      - eye-prescription
       operationId: getEyePrescriptionOcularHealthFinding
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EyePrescriptionOcularHealthFinding
+      tags:
+      - eye-prescription
       operationId: updateEyePrescriptionOcularHealthFinding
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EyePrescriptionOcularHealthFinding
+      tags:
+      - eye-prescription
       operationId: replaceEyePrescriptionOcularHealthFinding
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EyePrescriptionOcularHealthFinding
+      tags:
+      - eye-prescription
       operationId: deleteEyePrescriptionOcularHealthFinding
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/eye-prescription/eye_prescription_pupillary_distances:
     get:
       summary: List EyePrescriptionPupillaryDistance records
+      tags:
+      - eye-prescription
       operationId: listEyePrescriptionPupillaryDistance
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EyePrescriptionPupillaryDistance
+      tags:
+      - eye-prescription
       operationId: createEyePrescriptionPupillaryDistance
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EyePrescriptionPupillaryDistance by id
+      tags:
+      - eye-prescription
       operationId: getEyePrescriptionPupillaryDistance
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EyePrescriptionPupillaryDistance
+      tags:
+      - eye-prescription
       operationId: updateEyePrescriptionPupillaryDistance
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EyePrescriptionPupillaryDistance
+      tags:
+      - eye-prescription
       operationId: replaceEyePrescriptionPupillaryDistance
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EyePrescriptionPupillaryDistance
+      tags:
+      - eye-prescription
       operationId: deleteEyePrescriptionPupillaryDistance
       responses:
         '200':
@@ -1733,6 +1825,8 @@ paths:
   /api/eye-prescription/eye_prescription_visual_acuities:
     get:
       summary: List EyePrescriptionVisualAcuity records
+      tags:
+      - eye-prescription
       operationId: listEyePrescriptionVisualAcuity
       parameters:
       - name: limit
@@ -1785,6 +1879,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EyePrescriptionVisualAcuity
+      tags:
+      - eye-prescription
       operationId: createEyePrescriptionVisualAcuity
       requestBody:
         required: true
@@ -1838,6 +1934,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EyePrescriptionVisualAcuity by id
+      tags:
+      - eye-prescription
       operationId: getEyePrescriptionVisualAcuity
       responses:
         '200':
@@ -1865,6 +1963,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EyePrescriptionVisualAcuity
+      tags:
+      - eye-prescription
       operationId: updateEyePrescriptionVisualAcuity
       requestBody:
         required: true
@@ -1910,6 +2010,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EyePrescriptionVisualAcuity
+      tags:
+      - eye-prescription
       operationId: replaceEyePrescriptionVisualAcuity
       requestBody:
         required: true
@@ -1955,6 +2057,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EyePrescriptionVisualAcuity
+      tags:
+      - eye-prescription
       operationId: deleteEyePrescriptionVisualAcuity
       responses:
         '200':
@@ -1979,6 +2083,8 @@ paths:
   /api/eye-prescription/eye_prescriptions:
     get:
       summary: List EyePrescription records
+      tags:
+      - eye-prescription
       operationId: listEyePrescription
       parameters:
       - name: limit
@@ -2031,6 +2137,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EyePrescription
+      tags:
+      - eye-prescription
       operationId: createEyePrescription
       requestBody:
         required: true
@@ -2084,6 +2192,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EyePrescription by id
+      tags:
+      - eye-prescription
       operationId: getEyePrescription
       responses:
         '200':
@@ -2111,6 +2221,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EyePrescription
+      tags:
+      - eye-prescription
       operationId: updateEyePrescription
       requestBody:
         required: true
@@ -2156,6 +2268,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EyePrescription
+      tags:
+      - eye-prescription
       operationId: replaceEyePrescription
       requestBody:
         required: true
@@ -2201,6 +2315,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EyePrescription
+      tags:
+      - eye-prescription
       operationId: deleteEyePrescription
       responses:
         '200':
@@ -2233,9 +2349,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - eye-prescription
   /api/eye-prescription/patients:
     get:
       summary: List Patient records
+      tags:
+      - eye-prescription
       operationId: listPatient
       parameters:
       - name: limit
@@ -2288,6 +2408,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - eye-prescription
       operationId: createPatient
       requestBody:
         required: true
@@ -2341,6 +2463,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - eye-prescription
       operationId: getPatient
       responses:
         '200':
@@ -2368,6 +2492,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - eye-prescription
       operationId: updatePatient
       requestBody:
         required: true
@@ -2413,6 +2539,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - eye-prescription
       operationId: replacePatient
       requestBody:
         required: true
@@ -2458,6 +2586,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - eye-prescription
       operationId: deletePatient
       responses:
         '200':
@@ -2482,6 +2612,8 @@ paths:
   /api/eye-prescription/prescribers:
     get:
       summary: List Prescriber records
+      tags:
+      - eye-prescription
       operationId: listPrescriber
       parameters:
       - name: limit
@@ -2534,6 +2666,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Prescriber
+      tags:
+      - eye-prescription
       operationId: createPrescriber
       requestBody:
         required: true
@@ -2587,6 +2721,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Prescriber by id
+      tags:
+      - eye-prescription
       operationId: getPrescriber
       responses:
         '200':
@@ -2614,6 +2750,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Prescriber
+      tags:
+      - eye-prescription
       operationId: updatePrescriber
       requestBody:
         required: true
@@ -2659,6 +2797,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Prescriber
+      tags:
+      - eye-prescription
       operationId: replacePrescriber
       requestBody:
         required: true
@@ -2704,6 +2844,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Prescriber
+      tags:
+      - eye-prescription
       operationId: deletePrescriber
       responses:
         '200':

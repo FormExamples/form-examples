@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE paediatric_early_warning_score SYSTEM "paediatric_early_warning_score.dtd">
-<paediatric_early_warning_score>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<paediatric_early_warning_score xmlns="https://formexamples.github.io/paediatric-early-warning-score/xml">
+<id>0c832d44-e8a8-5148-90da-ac4a09a277a3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>cdf05dbb-1e21-5217-a2de-dd9caf9a7271</patient_id>
+<clinician_id>38958a86-35af-5cf9-8bc9-7c539fb77215</clinician_id>
 <status>draft</status>
 <observation_at>2026-04-09T10:00:00Z</observation_at>
 <care_setting>ward</care_setting>

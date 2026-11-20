@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hearing_test_request_grade_flag SYSTEM "hearing_test_request_grade_flag.dtd">
-<hearing_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<hearing_test_request_grade_flag xmlns="https://formexamples.github.io/hearing-test-request/xml">
+<id>0f04e997-a111-5cdd-8393-566998ef8426</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<hearing_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</hearing_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<hearing_test_request_grade_id>6b03cba1-5527-58a4-ac21-6d15a1e9f641</hearing_test_request_grade_id>
+<flag_id>24d773e2-5061-53a9-ad24-b092a4ebb299</flag_id>
 <category>sudden-sensorineural-hearing-loss-urgent</category>
 <priority>low</priority>
 <description>Example text.</description>

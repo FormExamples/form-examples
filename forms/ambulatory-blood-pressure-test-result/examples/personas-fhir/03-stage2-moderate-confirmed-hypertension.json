@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "f7726c80-ac7d-4889-ac40-2d4112b2bb09",
+  "id": "6bd485de-fdb1-57a7-8da2-03096c3f809b",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:2ff41c87-dbdd-4530-af06-c62e9a658677",
+      "fullUrl": "urn:uuid:ef442f6a-a17f-585c-b986-f2781f1caff5",
       "resource": {
         "resourceType": "Patient",
-        "id": "2ff41c87-dbdd-4530-af06-c62e9a658677",
+        "id": "ef442f6a-a17f-585c-b986-f2781f1caff5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:5e49ea1c-4355-4b81-a9f5-f9495e17d136",
+      "fullUrl": "urn:uuid:b58d12ab-77c6-504b-8c7f-5c8d86dcefa3",
       "resource": {
         "resourceType": "Observation",
-        "id": "5e49ea1c-4355-4b81-a9f5-f9495e17d136",
+        "id": "b58d12ab-77c6-504b-8c7f-5c8d86dcefa3",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:2ff41c87-dbdd-4530-af06-c62e9a658677"
+          "reference": "urn:uuid:ef442f6a-a17f-585c-b986-f2781f1caff5"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:fcda8bf5-feac-473d-ae73-b04f1a3c7142",
+      "fullUrl": "urn:uuid:f7ea5e23-5980-5b60-8d17-e089f6c01b3e",
       "resource": {
         "resourceType": "Observation",
-        "id": "fcda8bf5-feac-473d-ae73-b04f1a3c7142",
+        "id": "f7ea5e23-5980-5b60-8d17-e089f6c01b3e",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:2ff41c87-dbdd-4530-af06-c62e9a658677"
+          "reference": "urn:uuid:ef442f6a-a17f-585c-b986-f2781f1caff5"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -657,10 +657,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:cfeba51f-3443-4dfd-a6e3-2fb7f1fa02fb",
+      "fullUrl": "urn:uuid:eb0def85-a81d-50a7-9932-8dea74dc8ca8",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "cfeba51f-3443-4dfd-a6e3-2fb7f1fa02fb",
+        "id": "eb0def85-a81d-50a7-9932-8dea74dc8ca8",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -669,7 +669,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:2ff41c87-dbdd-4530-af06-c62e9a658677"
+          "reference": "urn:uuid:ef442f6a-a17f-585c-b986-f2781f1caff5"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -678,10 +678,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:84087f69-5efc-45cb-a67b-43b11b23b5ac",
+      "fullUrl": "urn:uuid:f5b9a337-05e8-50bd-bfc3-4468196ba510",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "84087f69-5efc-45cb-a67b-43b11b23b5ac",
+        "id": "f5b9a337-05e8-50bd-bfc3-4468196ba510",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -711,17 +711,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:2ff41c87-dbdd-4530-af06-c62e9a658677"
+          "reference": "urn:uuid:ef442f6a-a17f-585c-b986-f2781f1caff5"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "One or more abnormal interpretations (raised average or confirmed/masked/nocturnal hypertension) are present; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:160515ca-3f03-489b-afa4-ae916ca483f3",
+      "fullUrl": "urn:uuid:e9040711-f6b9-5f5d-8a76-4051146dc503",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "160515ca-3f03-489b-afa4-ae916ca483f3",
+        "id": "e9040711-f6b9-5f5d-8a76-4051146dc503",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -751,17 +751,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:2ff41c87-dbdd-4530-af06-c62e9a658677"
+          "reference": "urn:uuid:ef442f6a-a17f-585c-b986-f2781f1caff5"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Stage 2 hypertension (ABPM daytime average >= 150/95) or confirmed / masked hypertension present; severity graded moderate."
       }
     },
     {
-      "fullUrl": "urn:uuid:d90792cc-5e5e-42e7-a386-a6d8d1b927f3",
+      "fullUrl": "urn:uuid:c80c08bc-1291-59bd-bd7d-a6e902bb931c",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "d90792cc-5e5e-42e7-a386-a6d8d1b927f3",
+        "id": "c80c08bc-1291-59bd-bd7d-a6e902bb931c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -791,17 +791,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:2ff41c87-dbdd-4530-af06-c62e9a658677"
+          "reference": "urn:uuid:ef442f6a-a17f-585c-b986-f2781f1caff5"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Moderate abnormality present; follow-up recommended."
       }
     },
     {
-      "fullUrl": "urn:uuid:a0aa4b1b-7653-4506-a93c-a260a231abff",
+      "fullUrl": "urn:uuid:d5e2f96d-1db7-56af-9d82-54ab4fc6f5b1",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "a0aa4b1b-7653-4506-a93c-a260a231abff",
+        "id": "d5e2f96d-1db7-56af-9d82-54ab4fc6f5b1",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -831,7 +831,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:2ff41c87-dbdd-4530-af06-c62e9a658677"
+          "reference": "urn:uuid:ef442f6a-a17f-585c-b986-f2781f1caff5"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Hypertension is confirmed on ambulatory averages and requires action.",
@@ -845,10 +845,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:121a7f97-2f06-4734-a723-c97d413b481a",
+      "fullUrl": "urn:uuid:72e57451-35bc-536f-80c5-dd9f92e2f2dd",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "121a7f97-2f06-4734-a723-c97d413b481a",
+        "id": "72e57451-35bc-536f-80c5-dd9f92e2f2dd",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -878,7 +878,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:2ff41c87-dbdd-4530-af06-c62e9a658677"
+          "reference": "urn:uuid:ef442f6a-a17f-585c-b986-f2781f1caff5"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Masked or nocturnal hypertension is present and carries elevated cardiovascular risk.",

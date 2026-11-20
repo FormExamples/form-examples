@@ -5,10 +5,19 @@ info:
   title: Toxicology Test Request — ToxicologyTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / timing / completeness / triage rule that fired for this request.
+x-namespace:
+  form: toxicology-test-request
+  apiPrefix: /api/toxicology-test-request/
+  sqlSchema: toxicology_test_request
+  xmlNamespace: https://formexamples.github.io/toxicology-test-request/xml
+tags:
+  - name: toxicology-test-request
+    description: Toxicology Test Request form
 paths:
   /api/toxicology-test-request/toxicology_test_request_grade_rules:
     get:
       summary: List ToxicologyTestRequestGradeRule records
+      tags: [toxicology-test-request]
       operationId: listToxicologyTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ToxicologyTestRequestGradeRule
+      tags: [toxicology-test-request]
       operationId: createToxicologyTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ToxicologyTestRequestGradeRule by id
+      tags: [toxicology-test-request]
       operationId: getToxicologyTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ToxicologyTestRequestGradeRule
+      tags: [toxicology-test-request]
       operationId: updateToxicologyTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ToxicologyTestRequestGradeRule
+      tags: [toxicology-test-request]
       operationId: replaceToxicologyTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ToxicologyTestRequestGradeRule
+      tags: [toxicology-test-request]
       operationId: deleteToxicologyTestRequestGradeRule
       responses:
         "200":

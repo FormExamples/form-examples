@@ -5,10 +5,19 @@ info:
   title: Fluid Balance Chart — FluidBalanceChart
   version: 1.0.0
   description: "Parent fluid balance chart header: charting context, patient identification, charting period, and patient weight enabling the mL/kg/h urine output rate."
+x-namespace:
+  form: fluid-balance-chart
+  apiPrefix: /api/fluid-balance-chart/
+  sqlSchema: fluid_balance_chart
+  xmlNamespace: https://formexamples.github.io/fluid-balance-chart/xml
+tags:
+  - name: fluid-balance-chart
+    description: Fluid Balance Chart form
 paths:
   /api/fluid-balance-chart/fluid_balance_charts:
     get:
       summary: List FluidBalanceChart records
+      tags: [fluid-balance-chart]
       operationId: listFluidBalanceChart
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new FluidBalanceChart
+      tags: [fluid-balance-chart]
       operationId: createFluidBalanceChart
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one FluidBalanceChart by id
+      tags: [fluid-balance-chart]
       operationId: getFluidBalanceChart
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing FluidBalanceChart
+      tags: [fluid-balance-chart]
       operationId: updateFluidBalanceChart
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing FluidBalanceChart
+      tags: [fluid-balance-chart]
       operationId: replaceFluidBalanceChart
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a FluidBalanceChart
+      tags: [fluid-balance-chart]
       operationId: deleteFluidBalanceChart
       responses:
         "200":

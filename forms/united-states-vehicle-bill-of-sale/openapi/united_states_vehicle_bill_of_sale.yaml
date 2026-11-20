@@ -5,10 +5,19 @@ info:
   title: United States Vehicle Bill Of Sale — UnitedStatesVehicleBillOfSale
   version: 1.0.0
   description: "Main United States vehicle bill of sale record: sale transaction, seller, buyer, vehicle, the federal odometer disclosure (49 CFR 580), as-is clause, title and lien status, notarization, and post-sale release of liability. Completeness classification, fired rules, and flags live in child tables."
+x-namespace:
+  form: united-states-vehicle-bill-of-sale
+  apiPrefix: /api/united-states-vehicle-bill-of-sale/
+  sqlSchema: united_states_vehicle_bill_of_sale
+  xmlNamespace: https://formexamples.github.io/united-states-vehicle-bill-of-sale/xml
+tags:
+  - name: united-states-vehicle-bill-of-sale
+    description: United States Vehicle Bill Of Sale form
 paths:
   /api/united-states-vehicle-bill-of-sale/united_states_vehicle_bill_of_sales:
     get:
       summary: List UnitedStatesVehicleBillOfSale records
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: listUnitedStatesVehicleBillOfSale
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesVehicleBillOfSale
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: createUnitedStatesVehicleBillOfSale
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesVehicleBillOfSale by id
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: getUnitedStatesVehicleBillOfSale
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesVehicleBillOfSale
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: updateUnitedStatesVehicleBillOfSale
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesVehicleBillOfSale
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: replaceUnitedStatesVehicleBillOfSale
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesVehicleBillOfSale
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: deleteUnitedStatesVehicleBillOfSale
       responses:
         "200":

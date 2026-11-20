@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cardiology_waiting_list_card_grade_flag SYSTEM "cardiology_waiting_list_card_grade_flag.dtd">
-<cardiology_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<cardiology_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/cardiology-waiting-list-card/xml">
+<id>bb797012-1f7f-538d-a1c7-6ddc0978f13c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cardiology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</cardiology_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<cardiology_waiting_list_card_grade_id>7fb49f4d-42a8-5c58-80f1-cb7f7da7e205</cardiology_waiting_list_card_grade_id>
+<flag_id>50adeb45-54a0-5e32-a0b7-20ffbe259eef</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

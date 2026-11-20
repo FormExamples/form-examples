@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_states_birth_certificate_application_grade_flag SYSTEM "united_states_birth_certificate_application_grade_flag.dtd">
-<united_states_birth_certificate_application_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<united_states_birth_certificate_application_grade_flag xmlns="https://formexamples.github.io/united-states-birth-certificate-application/xml">
+<id>719ee4b8-e7b0-5a1b-9432-397c0fd2f6a2</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<united_states_birth_certificate_application_grade_id>880e8400-e29b-41d4-a716-446655440003</united_states_birth_certificate_application_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<united_states_birth_certificate_application_grade_id>e318a773-bfc6-5581-94eb-441fa233e774</united_states_birth_certificate_application_grade_id>
+<flag_id>397a9ee8-8063-5fe8-b351-85f9c584a7ce</flag_id>
 <category>ineligible-requester</category>
 <priority>low</priority>
 <description>Example text.</description>

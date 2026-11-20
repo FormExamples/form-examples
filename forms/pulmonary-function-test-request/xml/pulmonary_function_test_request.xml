@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pulmonary_function_test_request SYSTEM "pulmonary_function_test_request.dtd">
-<pulmonary_function_test_request>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<pulmonary_function_test_request xmlns="https://formexamples.github.io/pulmonary-function-test-request/xml">
+<id>b7e2358b-df85-57c6-b643-32aa09d58f44</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>9ff00b2b-6db1-56eb-83b3-4d03648c8561</patient_id>
+<clinician_id>bedb8a08-65b8-52f6-bf98-cfcc0c53a7a4</clinician_id>
 <status>draft</status>
 <site_name>Example</site_name>
 <setting>outpatient</setting>

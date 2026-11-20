@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "07edb6f6-0bf2-43b1-a574-7d27d722fd3e",
+  "id": "636341be-83e7-5774-952c-2e880931158d",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b",
+      "fullUrl": "urn:uuid:c7acdf95-01e0-54bb-8e09-ec27fa8629b1",
       "resource": {
         "resourceType": "Patient",
-        "id": "357db89c-50a8-430a-aedf-a038d73ade3b",
+        "id": "c7acdf95-01e0-54bb-8e09-ec27fa8629b1",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:c4bc4549-3cbd-420e-a70f-7d63ce66c7fb",
+      "fullUrl": "urn:uuid:cb0a36ce-09b4-5edf-a06c-5e9a2d1f7143",
       "resource": {
         "resourceType": "Observation",
-        "id": "c4bc4549-3cbd-420e-a70f-7d63ce66c7fb",
+        "id": "cb0a36ce-09b4-5edf-a06c-5e9a2d1f7143",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+          "reference": "urn:uuid:c7acdf95-01e0-54bb-8e09-ec27fa8629b1"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:b444a18a-7fbe-4e79-a2c5-07db33143fc7",
+      "fullUrl": "urn:uuid:31e9452b-dd4d-5960-8fb6-fd3910b20db6",
       "resource": {
         "resourceType": "Observation",
-        "id": "b444a18a-7fbe-4e79-a2c5-07db33143fc7",
+        "id": "31e9452b-dd4d-5960-8fb6-fd3910b20db6",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+          "reference": "urn:uuid:c7acdf95-01e0-54bb-8e09-ec27fa8629b1"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -631,10 +631,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:3ac246f3-558d-4b58-a561-eb9a2d98ec47",
+      "fullUrl": "urn:uuid:e0e21c52-2f1e-54d7-9cc5-6cc10f8e3589",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "3ac246f3-558d-4b58-a561-eb9a2d98ec47",
+        "id": "e0e21c52-2f1e-54d7-9cc5-6cc10f8e3589",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -643,7 +643,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+          "reference": "urn:uuid:c7acdf95-01e0-54bb-8e09-ec27fa8629b1"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -652,10 +652,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:f1639ca8-d1c4-4609-ad46-2ca45bfaca1b",
+      "fullUrl": "urn:uuid:3df88169-9c0e-57bc-b0c6-2f63c7cf6952",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "f1639ca8-d1c4-4609-ad46-2ca45bfaca1b",
+        "id": "3df88169-9c0e-57bc-b0c6-2f63c7cf6952",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -685,17 +685,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+          "reference": "urn:uuid:c7acdf95-01e0-54bb-8e09-ec27fa8629b1"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "One or more abnormal structured findings or an abnormal rhythm are present; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:6ea58592-990a-41ba-a17e-3a6aa5588078",
+      "fullUrl": "urn:uuid:6f0beef4-20a9-57e3-b0f6-cadf16a161d3",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "6ea58592-990a-41ba-a17e-3a6aa5588078",
+        "id": "6f0beef4-20a9-57e3-b0f6-cadf16a161d3",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -725,17 +725,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+          "reference": "urn:uuid:c7acdf95-01e0-54bb-8e09-ec27fa8629b1"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An isolated minor finding (T-wave inversion or left ventricular hypertrophy) is present; severity graded minor."
       }
     },
     {
-      "fullUrl": "urn:uuid:20a567b3-a695-4d98-a8e2-7c32bc1d0651",
+      "fullUrl": "urn:uuid:246ac89b-df56-5c15-a307-2afcdbc64822",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "20a567b3-a695-4d98-a8e2-7c32bc1d0651",
+        "id": "246ac89b-df56-5c15-a307-2afcdbc64822",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -765,17 +765,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+          "reference": "urn:uuid:c7acdf95-01e0-54bb-8e09-ec27fa8629b1"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Minor finding present; structured follow-up recommended."
       }
     },
     {
-      "fullUrl": "urn:uuid:85cdd00e-a909-43eb-a1b4-9f6720f76458",
+      "fullUrl": "urn:uuid:574befa3-c632-5190-b7bb-6b0317c11094",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "85cdd00e-a909-43eb-a1b4-9f6720f76458",
+        "id": "574befa3-c632-5190-b7bb-6b0317c11094",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -805,7 +805,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:357db89c-50a8-430a-aedf-a038d73ade3b"
+          "reference": "urn:uuid:c7acdf95-01e0-54bb-8e09-ec27fa8629b1"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "QTc is borderline prolonged (485 ms) but below the critical threshold.",

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<grade xmlns="https://formexamples.github.io/rheumatology-assessment/xml">
+<id>9638b802-2590-5e3a-9d24-147b38619117</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>7cdce117-0eb7-5779-92f9-8700dd92d578</assessment_id>
 <das28_score>5.0</das28_score>
 <das28_method>das28_esr</das28_method>
 <disease_activity_level>remission</disease_activity_level>

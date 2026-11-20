@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE electrocardiogram_test_result_grade_rule SYSTEM "electrocardiogram_test_result_grade_rule.dtd">
-<electrocardiogram_test_result_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<electrocardiogram_test_result_grade_rule xmlns="https://formexamples.github.io/electrocardiogram-test-result/xml">
+<id>8ba2fc4b-b4b1-5815-ba35-7f310be088b5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<electrocardiogram_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</electrocardiogram_test_result_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<electrocardiogram_test_result_grade_id>50755166-1969-5226-8389-311034c94269</electrocardiogram_test_result_grade_id>
+<rule_id>c2903516-a279-50f0-ae19-0f9063489927</rule_id>
 <axis>classification</axis>
 <category>General</category>
 <description>Example text.</description>

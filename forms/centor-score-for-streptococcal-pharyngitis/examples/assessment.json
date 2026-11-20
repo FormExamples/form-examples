@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000057",
+    "id": "dac98842-2cd2-5b2c-bf30-da842f458c7c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000069",
+    "id": "2b3c4e15-5042-5039-971d-8a353f27f1df",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "centorScoreForStreptococcalPharyngitis": {
-    "id": "550e8400-e29b-41d4-a716-000000000076",
+    "id": "c3dd232b-5384-53d6-9408-a65508e342c2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007a",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007b",
+    "patientId": "683af1b1-baac-5b6f-817a-c48ff827947c",
+    "clinicianId": "b317cbcf-d325-558f-bb25-6701280a6f35",
     "clinicianName": "",
     "clinicianRole": "gp",
     "assessedAt": null,
@@ -61,11 +61,11 @@
     "clinicalNote": ""
   },
   "centorScoreForStreptococcalPharyngitisGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008e",
+    "id": "037364bf-b8c3-5d5c-a1a3-a4308c392460",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "centorScoreForStreptococcalPharyngitisId": "550e8400-e29b-41d4-a716-000000000092",
+    "centorScoreForStreptococcalPharyngitisId": "7e34c80e-2a83-57ca-af7c-ee3e116bf763",
     "centorScore": null,
     "ageModifier": null,
     "mcisaacScore": null,
@@ -74,11 +74,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "centorScoreForStreptococcalPharyngitisGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000099",
+    "id": "ad7263dc-7736-5451-bae1-d4f6d73ff46d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "centorScoreForStreptococcalPharyngitisGradeId": "550e8400-e29b-41d4-a716-00000000009d",
+    "centorScoreForStreptococcalPharyngitisGradeId": "db0a80f6-e9cc-521e-a82f-d2b2759e6ff4",
     "ruleId": "",
     "criterion": "tonsillar-exudate",
     "points": null,
@@ -86,11 +86,11 @@
     "description": ""
   },
   "centorScoreForStreptococcalPharyngitisGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a3",
+    "id": "24e66a16-6e1f-527c-9c91-1c8f994cb00c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "centorScoreForStreptococcalPharyngitisGradeId": "550e8400-e29b-41d4-a716-0000000000a7",
+    "centorScoreForStreptococcalPharyngitisGradeId": "22578f9d-e900-51dc-b2e5-52ab0827fe28",
     "flagId": "",
     "category": "airway-red-flag",
     "priority": "low",

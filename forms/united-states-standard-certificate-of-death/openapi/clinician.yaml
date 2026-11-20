@@ -5,10 +5,19 @@ info:
   title: United States Standard Certificate Of Death — Clinician
   version: 1.0.0
   description: Clinician information for the medical certifier (physician, medical examiner, or coroner) who completes the cause-of-death section of the US Standard Certificate of Death.
+x-namespace:
+  form: united-states-standard-certificate-of-death
+  apiPrefix: /api/united-states-standard-certificate-of-death/
+  sqlSchema: united_states_standard_certificate_of_death
+  xmlNamespace: https://formexamples.github.io/united-states-standard-certificate-of-death/xml
+tags:
+  - name: united-states-standard-certificate-of-death
+    description: United States Standard Certificate Of Death form
 paths:
   /api/united-states-standard-certificate-of-death/clinicians:
     get:
       summary: List Clinician records
+      tags: [united-states-standard-certificate-of-death]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [united-states-standard-certificate-of-death]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [united-states-standard-certificate-of-death]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [united-states-standard-certificate-of-death]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [united-states-standard-certificate-of-death]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [united-states-standard-certificate-of-death]
       operationId: deleteClinician
       responses:
         "200":

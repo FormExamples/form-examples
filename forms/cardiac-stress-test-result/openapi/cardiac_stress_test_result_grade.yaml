@@ -5,10 +5,19 @@ info:
   title: Cardiac Stress Test Result — CardiacStressTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (strongly positive test, exertional hypotension, ischaemia at low workload, or a high-risk Duke treadmill score) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: cardiac-stress-test-result
+  apiPrefix: /api/cardiac-stress-test-result/
+  sqlSchema: cardiac_stress_test_result
+  xmlNamespace: https://formexamples.github.io/cardiac-stress-test-result/xml
+tags:
+  - name: cardiac-stress-test-result
+    description: Cardiac Stress Test Result form
 paths:
   /api/cardiac-stress-test-result/cardiac_stress_test_result_grades:
     get:
       summary: List CardiacStressTestResultGrade records
+      tags: [cardiac-stress-test-result]
       operationId: listCardiacStressTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiacStressTestResultGrade
+      tags: [cardiac-stress-test-result]
       operationId: createCardiacStressTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiacStressTestResultGrade by id
+      tags: [cardiac-stress-test-result]
       operationId: getCardiacStressTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiacStressTestResultGrade
+      tags: [cardiac-stress-test-result]
       operationId: updateCardiacStressTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiacStressTestResultGrade
+      tags: [cardiac-stress-test-result]
       operationId: replaceCardiacStressTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiacStressTestResultGrade
+      tags: [cardiac-stress-test-result]
       operationId: deleteCardiacStressTestResultGrade
       responses:
         "200":

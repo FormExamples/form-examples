@@ -5,10 +5,19 @@ info:
   title: Casualty Card Form — CasualtyCardMedication
   version: 1.0.0
   description: Many-to-one with casualty_card. Each row is one current medication the patient takes.
+x-namespace:
+  form: casualty-card-form
+  apiPrefix: /api/casualty-card-form/
+  sqlSchema: casualty_card_form
+  xmlNamespace: https://formexamples.github.io/casualty-card-form/xml
+tags:
+  - name: casualty-card-form
+    description: Casualty Card Form form
 paths:
   /api/casualty-card-form/casualty_card_medications:
     get:
       summary: List CasualtyCardMedication records
+      tags: [casualty-card-form]
       operationId: listCasualtyCardMedication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CasualtyCardMedication
+      tags: [casualty-card-form]
       operationId: createCasualtyCardMedication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CasualtyCardMedication by id
+      tags: [casualty-card-form]
       operationId: getCasualtyCardMedication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CasualtyCardMedication
+      tags: [casualty-card-form]
       operationId: updateCasualtyCardMedication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CasualtyCardMedication
+      tags: [casualty-card-form]
       operationId: replaceCasualtyCardMedication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CasualtyCardMedication
+      tags: [casualty-card-form]
       operationId: deleteCasualtyCardMedication
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE radiology_waiting_list_card SYSTEM "radiology_waiting_list_card.dtd">
-<radiology_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<radiology_waiting_list_card xmlns="https://formexamples.github.io/radiology-waiting-list-card/xml">
+<id>0eb91a9f-99b8-5b93-a43e-c061cafcc91c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>3af4c87b-ed64-532e-b021-cbd938839419</patient_id>
+<practitioner_id>5173088d-6ae8-5428-aabe-6c4a7c2efbf4</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

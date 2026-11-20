@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>dd0e8400-e29b-41d4-a716-446655440008</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/patient-intake/xml">
+<id>469ec218-6d53-5b5c-bf4c-e1079be14912</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>cc0e8400-e29b-41d4-a716-446655440007</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>6b80b05f-287e-533e-9eee-9355a4cf17e0</grade_id>
+<rule_id>28de5874-1f6c-5bbf-ac5c-00b925cf76db</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>low</severity_level>

@@ -1,4 +1,5 @@
 <!ELEMENT united_kingdom_divorce_application_grade (id,created_at,updated_at,deleted_at,united_kingdom_divorce_application_id,application_class,earliest_eligible_date,jurisdiction_met,graded_at)>
+<!ATTLIST united_kingdom_divorce_application_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-divorce-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

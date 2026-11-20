@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE podiatric_surg_waiting_list_card_grade_flag SYSTEM "podiatric_surg_waiting_list_card_grade_flag.dtd">
-<podiatric_surg_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<podiatric_surg_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/podiatric-surgery-waiting-list-card/xml">
+<id>406b58b4-5c8a-5d65-ae7b-e8e520bff400</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<podiatric_surg_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</podiatric_surg_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<podiatric_surg_waiting_list_card_grade_id>8349c47c-cc8b-54e5-b1b3-1277988081a0</podiatric_surg_waiting_list_card_grade_id>
+<flag_id>23ffc24e-87ed-5131-99cf-d0d5320186a3</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

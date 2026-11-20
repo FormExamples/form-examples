@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mammography_test_request SYSTEM "mammography_test_request.dtd">
-<mammography_test_request>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<mammography_test_request xmlns="https://formexamples.github.io/mammography-test-request/xml">
+<id>00d7bf98-a647-5a7a-abc9-1c65bc5bcd47</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>7b805284-fc56-5784-a812-ef1bbb2ac3af</patient_id>
+<clinician_id>253d741d-75ce-5d62-833a-0748c7dbdb6d</clinician_id>
 <status>draft</status>
 <site_name>Example</site_name>
 <setting>outpatient</setting>

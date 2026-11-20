@@ -1,4 +1,5 @@
 <!ELEMENT genetic_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,test_type,primary_indication,clinical_question,clinical_details,family_history,suspected_condition,consent_obtained,genetic_counselling_offered,affected_relative_tested,specimen_type,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST genetic_test_request xmlns CDATA #FIXED "https://formexamples.github.io/genetic-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

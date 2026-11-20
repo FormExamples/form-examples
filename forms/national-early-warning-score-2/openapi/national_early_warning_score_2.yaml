@@ -5,10 +5,19 @@ info:
   title: National Early Warning Score 2 — NationalEarlyWarningScore2
   version: 1.0.0
   description: "Main NEWS2 observation record: raw physiological observations for a single vital-sign set plus recording context (ward/location, observation timestamp, SpO2 scale, supplemental-oxygen details). Subscores, aggregate, risk band, rules, and flags live in child tables."
+x-namespace:
+  form: national-early-warning-score-2
+  apiPrefix: /api/national-early-warning-score-2/
+  sqlSchema: national_early_warning_score_2
+  xmlNamespace: https://formexamples.github.io/national-early-warning-score-2/xml
+tags:
+  - name: national-early-warning-score-2
+    description: National Early Warning Score 2 form
 paths:
   /api/national-early-warning-score-2/national_early_warning_score_2s:
     get:
       summary: List NationalEarlyWarningScore2 records
+      tags: [national-early-warning-score-2]
       operationId: listNationalEarlyWarningScore2
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NationalEarlyWarningScore2
+      tags: [national-early-warning-score-2]
       operationId: createNationalEarlyWarningScore2
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NationalEarlyWarningScore2 by id
+      tags: [national-early-warning-score-2]
       operationId: getNationalEarlyWarningScore2
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NationalEarlyWarningScore2
+      tags: [national-early-warning-score-2]
       operationId: updateNationalEarlyWarningScore2
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NationalEarlyWarningScore2
+      tags: [national-early-warning-score-2]
       operationId: replaceNationalEarlyWarningScore2
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NationalEarlyWarningScore2
+      tags: [national-early-warning-score-2]
       operationId: deleteNationalEarlyWarningScore2
       responses:
         "200":

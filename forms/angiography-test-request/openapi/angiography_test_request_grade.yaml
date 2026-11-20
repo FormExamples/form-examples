@@ -5,10 +5,19 @@ info:
   title: Angiography Test Request — AngiographyTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ACR 1-9), contrast / radiation safety, request completeness, and triage priority."
+x-namespace:
+  form: angiography-test-request
+  apiPrefix: /api/angiography-test-request/
+  sqlSchema: angiography_test_request
+  xmlNamespace: https://formexamples.github.io/angiography-test-request/xml
+tags:
+  - name: angiography-test-request
+    description: Angiography Test Request form
 paths:
   /api/angiography-test-request/angiography_test_request_grades:
     get:
       summary: List AngiographyTestRequestGrade records
+      tags: [angiography-test-request]
       operationId: listAngiographyTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AngiographyTestRequestGrade
+      tags: [angiography-test-request]
       operationId: createAngiographyTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AngiographyTestRequestGrade by id
+      tags: [angiography-test-request]
       operationId: getAngiographyTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AngiographyTestRequestGrade
+      tags: [angiography-test-request]
       operationId: updateAngiographyTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AngiographyTestRequestGrade
+      tags: [angiography-test-request]
       operationId: replaceAngiographyTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AngiographyTestRequestGrade
+      tags: [angiography-test-request]
       operationId: deleteAngiographyTestRequestGrade
       responses:
         "200":

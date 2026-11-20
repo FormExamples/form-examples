@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE anaesthetics_waiting_list_card SYSTEM "anaesthetics_waiting_list_card.dtd">
-<anaesthetics_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<anaesthetics_waiting_list_card xmlns="https://formexamples.github.io/anaesthetics-waiting-list-card/xml">
+<id>de3fe7d4-12b1-56e6-9cf2-b77c7e25c123</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>7a4c9d72-01a9-55a0-b69e-401c776238a8</patient_id>
+<practitioner_id>41465892-4834-5ec5-a008-a249973bc280</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

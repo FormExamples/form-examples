@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005c",
+    "id": "cdc7ac8e-e7ce-5ba7-badd-696e5b38644f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006e",
+    "id": "d553630a-8fd5-5117-8354-773969f86397",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "diabetesEyeScreening": {
-    "id": "550e8400-e29b-41d4-a716-00000000007b",
+    "id": "77d8028a-dfd9-570a-934e-c16c49e04382",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007f",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000080",
+    "patientId": "8d0cdadd-fcd3-5b19-9176-d5f7439b24b4",
+    "clinicianId": "671f4685-5d83-5803-815d-2374d0efbdc9",
     "graderName": "",
     "graderRole": "screener",
     "gradedAt": null,
@@ -65,11 +65,11 @@
     "clinicalContext": ""
   },
   "diabetesEyeScreeningGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000097",
+    "id": "6eac4072-1256-5c0d-865a-0c3403db0171",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "diabetesEyeScreeningId": "550e8400-e29b-41d4-a716-00000000009b",
+    "diabetesEyeScreeningId": "6264cfa5-1028-5a61-8caa-024ee4fc57f6",
     "worstRetinopathy": "R0",
     "worstMaculopathy": "M0",
     "anyUngradable": "yes",
@@ -80,22 +80,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "diabetesEyeScreeningGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a4",
+    "id": "90394e3e-a603-5022-8a46-e2b399b5b3ce",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "diabetesEyeScreeningGradeId": "550e8400-e29b-41d4-a716-0000000000a8",
+    "diabetesEyeScreeningGradeId": "f10f437c-870b-5475-8433-df55910a8d42",
     "ruleId": "",
     "stage": "eligibility",
     "category": "",
     "description": ""
   },
   "diabetesEyeScreeningGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ad",
+    "id": "f5938493-c3ff-5144-af95-20a8aa8cee8f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "diabetesEyeScreeningGradeId": "550e8400-e29b-41d4-a716-0000000000b1",
+    "diabetesEyeScreeningGradeId": "edb6906a-6348-5d6f-9695-53823378a924",
     "flagId": "",
     "category": "active-proliferative",
     "priority": "low",

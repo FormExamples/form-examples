@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Inpatient Clinical Note form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: inpatient-clinical-note
+  apiPrefix: /api/inpatient-clinical-note/
+  sqlSchema: inpatient_clinical_note
+  xmlNamespace: https://formexamples.github.io/inpatient-clinical-note/xml
+tags:
+- name: inpatient-clinical-note
+  description: Inpatient Clinical Note form
 paths:
   /api/inpatient-clinical-note/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - inpatient-clinical-note
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - inpatient-clinical-note
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - inpatient-clinical-note
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - inpatient-clinical-note
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - inpatient-clinical-note
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - inpatient-clinical-note
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/inpatient-clinical-note/inpatient_clinical_note_grade_flags:
     get:
       summary: List InpatientClinicalNoteGradeFlag records
+      tags:
+      - inpatient-clinical-note
       operationId: listInpatientClinicalNoteGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteGradeFlag
+      tags:
+      - inpatient-clinical-note
       operationId: createInpatientClinicalNoteGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InpatientClinicalNoteGradeFlag by id
+      tags:
+      - inpatient-clinical-note
       operationId: getInpatientClinicalNoteGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteGradeFlag
+      tags:
+      - inpatient-clinical-note
       operationId: updateInpatientClinicalNoteGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InpatientClinicalNoteGradeFlag
+      tags:
+      - inpatient-clinical-note
       operationId: replaceInpatientClinicalNoteGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InpatientClinicalNoteGradeFlag
+      tags:
+      - inpatient-clinical-note
       operationId: deleteInpatientClinicalNoteGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/inpatient-clinical-note/inpatient_clinical_note_grade_rules:
     get:
       summary: List InpatientClinicalNoteGradeRule records
+      tags:
+      - inpatient-clinical-note
       operationId: listInpatientClinicalNoteGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteGradeRule
+      tags:
+      - inpatient-clinical-note
       operationId: createInpatientClinicalNoteGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InpatientClinicalNoteGradeRule by id
+      tags:
+      - inpatient-clinical-note
       operationId: getInpatientClinicalNoteGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteGradeRule
+      tags:
+      - inpatient-clinical-note
       operationId: updateInpatientClinicalNoteGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InpatientClinicalNoteGradeRule
+      tags:
+      - inpatient-clinical-note
       operationId: replaceInpatientClinicalNoteGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InpatientClinicalNoteGradeRule
+      tags:
+      - inpatient-clinical-note
       operationId: deleteInpatientClinicalNoteGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/inpatient-clinical-note/inpatient_clinical_note_grades:
     get:
       summary: List InpatientClinicalNoteGrade records
+      tags:
+      - inpatient-clinical-note
       operationId: listInpatientClinicalNoteGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteGrade
+      tags:
+      - inpatient-clinical-note
       operationId: createInpatientClinicalNoteGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InpatientClinicalNoteGrade by id
+      tags:
+      - inpatient-clinical-note
       operationId: getInpatientClinicalNoteGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteGrade
+      tags:
+      - inpatient-clinical-note
       operationId: updateInpatientClinicalNoteGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InpatientClinicalNoteGrade
+      tags:
+      - inpatient-clinical-note
       operationId: replaceInpatientClinicalNoteGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InpatientClinicalNoteGrade
+      tags:
+      - inpatient-clinical-note
       operationId: deleteInpatientClinicalNoteGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/inpatient-clinical-note/inpatient_clinical_note_investigations:
     get:
       summary: List InpatientClinicalNoteInvestigation records
+      tags:
+      - inpatient-clinical-note
       operationId: listInpatientClinicalNoteInvestigation
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteInvestigation
+      tags:
+      - inpatient-clinical-note
       operationId: createInpatientClinicalNoteInvestigation
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InpatientClinicalNoteInvestigation by id
+      tags:
+      - inpatient-clinical-note
       operationId: getInpatientClinicalNoteInvestigation
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteInvestigation
+      tags:
+      - inpatient-clinical-note
       operationId: updateInpatientClinicalNoteInvestigation
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InpatientClinicalNoteInvestigation
+      tags:
+      - inpatient-clinical-note
       operationId: replaceInpatientClinicalNoteInvestigation
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InpatientClinicalNoteInvestigation
+      tags:
+      - inpatient-clinical-note
       operationId: deleteInpatientClinicalNoteInvestigation
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/inpatient-clinical-note/inpatient_clinical_note_jobs:
     get:
       summary: List InpatientClinicalNoteJob records
+      tags:
+      - inpatient-clinical-note
       operationId: listInpatientClinicalNoteJob
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteJob
+      tags:
+      - inpatient-clinical-note
       operationId: createInpatientClinicalNoteJob
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InpatientClinicalNoteJob by id
+      tags:
+      - inpatient-clinical-note
       operationId: getInpatientClinicalNoteJob
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteJob
+      tags:
+      - inpatient-clinical-note
       operationId: updateInpatientClinicalNoteJob
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InpatientClinicalNoteJob
+      tags:
+      - inpatient-clinical-note
       operationId: replaceInpatientClinicalNoteJob
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InpatientClinicalNoteJob
+      tags:
+      - inpatient-clinical-note
       operationId: deleteInpatientClinicalNoteJob
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/inpatient-clinical-note/inpatient_clinical_note_medication_changes:
     get:
       summary: List InpatientClinicalNoteMedicationChange records
+      tags:
+      - inpatient-clinical-note
       operationId: listInpatientClinicalNoteMedicationChange
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteMedicationChange
+      tags:
+      - inpatient-clinical-note
       operationId: createInpatientClinicalNoteMedicationChange
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InpatientClinicalNoteMedicationChange by id
+      tags:
+      - inpatient-clinical-note
       operationId: getInpatientClinicalNoteMedicationChange
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteMedicationChange
+      tags:
+      - inpatient-clinical-note
       operationId: updateInpatientClinicalNoteMedicationChange
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InpatientClinicalNoteMedicationChange
+      tags:
+      - inpatient-clinical-note
       operationId: replaceInpatientClinicalNoteMedicationChange
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InpatientClinicalNoteMedicationChange
+      tags:
+      - inpatient-clinical-note
       operationId: deleteInpatientClinicalNoteMedicationChange
       responses:
         '200':
@@ -1733,6 +1825,8 @@ paths:
   /api/inpatient-clinical-note/inpatient_clinical_note_problems:
     get:
       summary: List InpatientClinicalNoteProblem records
+      tags:
+      - inpatient-clinical-note
       operationId: listInpatientClinicalNoteProblem
       parameters:
       - name: limit
@@ -1785,6 +1879,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteProblem
+      tags:
+      - inpatient-clinical-note
       operationId: createInpatientClinicalNoteProblem
       requestBody:
         required: true
@@ -1838,6 +1934,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InpatientClinicalNoteProblem by id
+      tags:
+      - inpatient-clinical-note
       operationId: getInpatientClinicalNoteProblem
       responses:
         '200':
@@ -1865,6 +1963,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteProblem
+      tags:
+      - inpatient-clinical-note
       operationId: updateInpatientClinicalNoteProblem
       requestBody:
         required: true
@@ -1910,6 +2010,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InpatientClinicalNoteProblem
+      tags:
+      - inpatient-clinical-note
       operationId: replaceInpatientClinicalNoteProblem
       requestBody:
         required: true
@@ -1955,6 +2057,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InpatientClinicalNoteProblem
+      tags:
+      - inpatient-clinical-note
       operationId: deleteInpatientClinicalNoteProblem
       responses:
         '200':
@@ -1979,6 +2083,8 @@ paths:
   /api/inpatient-clinical-note/inpatient_clinical_notes:
     get:
       summary: List InpatientClinicalNote records
+      tags:
+      - inpatient-clinical-note
       operationId: listInpatientClinicalNote
       parameters:
       - name: limit
@@ -2031,6 +2137,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNote
+      tags:
+      - inpatient-clinical-note
       operationId: createInpatientClinicalNote
       requestBody:
         required: true
@@ -2084,6 +2192,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InpatientClinicalNote by id
+      tags:
+      - inpatient-clinical-note
       operationId: getInpatientClinicalNote
       responses:
         '200':
@@ -2111,6 +2221,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNote
+      tags:
+      - inpatient-clinical-note
       operationId: updateInpatientClinicalNote
       requestBody:
         required: true
@@ -2156,6 +2268,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InpatientClinicalNote
+      tags:
+      - inpatient-clinical-note
       operationId: replaceInpatientClinicalNote
       requestBody:
         required: true
@@ -2201,6 +2315,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InpatientClinicalNote
+      tags:
+      - inpatient-clinical-note
       operationId: deleteInpatientClinicalNote
       responses:
         '200':
@@ -2260,6 +2376,8 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+      tags:
+      - inpatient-clinical-note
     get:
       summary: The newest stored grade of the note
       operationId: getNewestInpatientClinicalNoteGrade
@@ -2288,6 +2406,8 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+      tags:
+      - inpatient-clinical-note
   /api/inpatient-clinical-note/openapi.yaml:
     get:
       summary: This document
@@ -2299,9 +2419,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - inpatient-clinical-note
   /api/inpatient-clinical-note/patients:
     get:
       summary: List Patient records
+      tags:
+      - inpatient-clinical-note
       operationId: listPatient
       parameters:
       - name: limit
@@ -2354,6 +2478,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - inpatient-clinical-note
       operationId: createPatient
       requestBody:
         required: true
@@ -2407,6 +2533,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - inpatient-clinical-note
       operationId: getPatient
       responses:
         '200':
@@ -2434,6 +2562,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - inpatient-clinical-note
       operationId: updatePatient
       requestBody:
         required: true
@@ -2479,6 +2609,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - inpatient-clinical-note
       operationId: replacePatient
       requestBody:
         required: true
@@ -2524,6 +2656,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - inpatient-clinical-note
       operationId: deletePatient
       responses:
         '200':

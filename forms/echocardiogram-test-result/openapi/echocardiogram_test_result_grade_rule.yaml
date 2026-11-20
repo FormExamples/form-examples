@@ -5,10 +5,19 @@ info:
   title: Echocardiogram Test Result — EchocardiogramTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: echocardiogram-test-result
+  apiPrefix: /api/echocardiogram-test-result/
+  sqlSchema: echocardiogram_test_result
+  xmlNamespace: https://formexamples.github.io/echocardiogram-test-result/xml
+tags:
+  - name: echocardiogram-test-result
+    description: Echocardiogram Test Result form
 paths:
   /api/echocardiogram-test-result/echocardiogram_test_result_grade_rules:
     get:
       summary: List EchocardiogramTestResultGradeRule records
+      tags: [echocardiogram-test-result]
       operationId: listEchocardiogramTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EchocardiogramTestResultGradeRule
+      tags: [echocardiogram-test-result]
       operationId: createEchocardiogramTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EchocardiogramTestResultGradeRule by id
+      tags: [echocardiogram-test-result]
       operationId: getEchocardiogramTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EchocardiogramTestResultGradeRule
+      tags: [echocardiogram-test-result]
       operationId: updateEchocardiogramTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EchocardiogramTestResultGradeRule
+      tags: [echocardiogram-test-result]
       operationId: replaceEchocardiogramTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EchocardiogramTestResultGradeRule
+      tags: [echocardiogram-test-result]
       operationId: deleteEchocardiogramTestResultGradeRule
       responses:
         "200":

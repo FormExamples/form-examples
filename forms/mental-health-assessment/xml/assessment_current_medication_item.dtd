@@ -1,4 +1,5 @@
 <!ELEMENT assessment_current_medication_item (id,created_at,updated_at,deleted_at,current_medications_id,medication_name,dose,frequency,prescriber,start_date,medication_class,sort_order)>
+<!ATTLIST assessment_current_medication_item xmlns CDATA #FIXED "https://formexamples.github.io/mental-health-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

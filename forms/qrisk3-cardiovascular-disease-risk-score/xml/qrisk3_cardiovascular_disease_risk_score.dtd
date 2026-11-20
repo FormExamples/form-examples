@@ -1,4 +1,5 @@
 <!ELEMENT qrisk3_cardiovascular_disease_risk_score (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,patient_identifier,age,sex,ethnicity,townsend_score,postcode,smoking_status,body_mass_index,diabetes_status,cholesterol_hdl_ratio,systolic_blood_pressure,systolic_blood_pressure_sd,on_blood_pressure_treatment,family_history_chd,atrial_fibrillation,chronic_kidney_disease_stage,migraine,rheumatoid_arthritis,systemic_lupus_erythematosus,severe_mental_illness,erectile_dysfunction,on_atypical_antipsychotics,on_corticosteroids,has_established_cvd,has_familial_hypercholesterolaemia,clinical_note)>
+<!ATTLIST qrisk3_cardiovascular_disease_risk_score xmlns CDATA #FIXED "https://formexamples.github.io/qrisk3-cardiovascular-disease-risk-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Post-Anaesthesia Care Unit (PACU) Record form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: post-anaesthesia-care-unit-record
+  apiPrefix: /api/post-anaesthesia-care-unit-record/
+  sqlSchema: post_anaesthesia_care_unit_record
+  xmlNamespace: https://formexamples.github.io/post-anaesthesia-care-unit-record/xml
+tags:
+- name: post-anaesthesia-care-unit-record
+  description: Post-Anaesthesia Care Unit (PACU) Record form
 paths:
   /api/post-anaesthesia-care-unit-record/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - post-anaesthesia-care-unit-record
   /api/post-anaesthesia-care-unit-record/patients:
     get:
       summary: List Patient records
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/post-anaesthesia-care-unit-record/post_anaesthesia_care_unit_record_grade_flags:
     get:
       summary: List PostAnaesthesiaCareUnitRecordGradeFlag records
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: listPostAnaesthesiaCareUnitRecordGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PostAnaesthesiaCareUnitRecordGradeFlag
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: createPostAnaesthesiaCareUnitRecordGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PostAnaesthesiaCareUnitRecordGradeFlag by id
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: getPostAnaesthesiaCareUnitRecordGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PostAnaesthesiaCareUnitRecordGradeFlag
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: updatePostAnaesthesiaCareUnitRecordGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PostAnaesthesiaCareUnitRecordGradeFlag
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: replacePostAnaesthesiaCareUnitRecordGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PostAnaesthesiaCareUnitRecordGradeFlag
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: deletePostAnaesthesiaCareUnitRecordGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/post-anaesthesia-care-unit-record/post_anaesthesia_care_unit_record_grade_rules:
     get:
       summary: List PostAnaesthesiaCareUnitRecordGradeRule records
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: listPostAnaesthesiaCareUnitRecordGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PostAnaesthesiaCareUnitRecordGradeRule
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: createPostAnaesthesiaCareUnitRecordGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PostAnaesthesiaCareUnitRecordGradeRule by id
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: getPostAnaesthesiaCareUnitRecordGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PostAnaesthesiaCareUnitRecordGradeRule
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: updatePostAnaesthesiaCareUnitRecordGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PostAnaesthesiaCareUnitRecordGradeRule
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: replacePostAnaesthesiaCareUnitRecordGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PostAnaesthesiaCareUnitRecordGradeRule
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: deletePostAnaesthesiaCareUnitRecordGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/post-anaesthesia-care-unit-record/post_anaesthesia_care_unit_record_grades:
     get:
       summary: List PostAnaesthesiaCareUnitRecordGrade records
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: listPostAnaesthesiaCareUnitRecordGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PostAnaesthesiaCareUnitRecordGrade
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: createPostAnaesthesiaCareUnitRecordGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PostAnaesthesiaCareUnitRecordGrade by id
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: getPostAnaesthesiaCareUnitRecordGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PostAnaesthesiaCareUnitRecordGrade
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: updatePostAnaesthesiaCareUnitRecordGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PostAnaesthesiaCareUnitRecordGrade
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: replacePostAnaesthesiaCareUnitRecordGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PostAnaesthesiaCareUnitRecordGrade
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: deletePostAnaesthesiaCareUnitRecordGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/post-anaesthesia-care-unit-record/post_anaesthesia_care_unit_records:
     get:
       summary: List PostAnaesthesiaCareUnitRecord records
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: listPostAnaesthesiaCareUnitRecord
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PostAnaesthesiaCareUnitRecord
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: createPostAnaesthesiaCareUnitRecord
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PostAnaesthesiaCareUnitRecord by id
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: getPostAnaesthesiaCareUnitRecord
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PostAnaesthesiaCareUnitRecord
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: updatePostAnaesthesiaCareUnitRecord
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PostAnaesthesiaCareUnitRecord
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: replacePostAnaesthesiaCareUnitRecord
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PostAnaesthesiaCareUnitRecord
+      tags:
+      - post-anaesthesia-care-unit-record
       operationId: deletePostAnaesthesiaCareUnitRecord
       responses:
         '200':

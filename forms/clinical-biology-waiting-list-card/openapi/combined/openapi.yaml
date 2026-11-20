@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Clinical Biology Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: clinical-biology-waiting-list-card
+  apiPrefix: /api/clinical-biology-waiting-list-card/
+  sqlSchema: clinical_biology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/clinical-biology-waiting-list-card/xml
+tags:
+- name: clinical-biology-waiting-list-card
+  description: Clinical Biology Waiting List Card form
 paths:
   /api/clinical-biology-waiting-list-card/clin_biology_waiting_list_card_appointments:
     get:
       summary: List ClinBiologyWaitingListCardAppointment records
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: listClinBiologyWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinBiologyWaitingListCardAppointment
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: createClinBiologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinBiologyWaitingListCardAppointment by id
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: getClinBiologyWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinBiologyWaitingListCardAppointment
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: updateClinBiologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinBiologyWaitingListCardAppointment
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: replaceClinBiologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinBiologyWaitingListCardAppointment
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: deleteClinBiologyWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/clinical-biology-waiting-list-card/clin_biology_waiting_list_card_grade_flags:
     get:
       summary: List ClinBiologyWaitingListCardGradeFlag records
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: listClinBiologyWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinBiologyWaitingListCardGradeFlag
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: createClinBiologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinBiologyWaitingListCardGradeFlag by id
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: getClinBiologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinBiologyWaitingListCardGradeFlag
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: updateClinBiologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinBiologyWaitingListCardGradeFlag
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: replaceClinBiologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinBiologyWaitingListCardGradeFlag
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: deleteClinBiologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/clinical-biology-waiting-list-card/clin_biology_waiting_list_card_grade_rules:
     get:
       summary: List ClinBiologyWaitingListCardGradeRule records
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: listClinBiologyWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinBiologyWaitingListCardGradeRule
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: createClinBiologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinBiologyWaitingListCardGradeRule by id
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: getClinBiologyWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinBiologyWaitingListCardGradeRule
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: updateClinBiologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinBiologyWaitingListCardGradeRule
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: replaceClinBiologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinBiologyWaitingListCardGradeRule
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: deleteClinBiologyWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/clinical-biology-waiting-list-card/clin_biology_waiting_list_card_grades:
     get:
       summary: List ClinBiologyWaitingListCardGrade records
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: listClinBiologyWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinBiologyWaitingListCardGrade
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: createClinBiologyWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinBiologyWaitingListCardGrade by id
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: getClinBiologyWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinBiologyWaitingListCardGrade
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: updateClinBiologyWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinBiologyWaitingListCardGrade
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: replaceClinBiologyWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinBiologyWaitingListCardGrade
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: deleteClinBiologyWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/clinical-biology-waiting-list-card/clin_biology_waiting_list_cards:
     get:
       summary: List ClinBiologyWaitingListCard records
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: listClinBiologyWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinBiologyWaitingListCard
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: createClinBiologyWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinBiologyWaitingListCard by id
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: getClinBiologyWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinBiologyWaitingListCard
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: updateClinBiologyWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinBiologyWaitingListCard
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: replaceClinBiologyWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinBiologyWaitingListCard
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: deleteClinBiologyWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - clinical-biology-waiting-list-card
   /api/clinical-biology-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/clinical-biology-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - clinical-biology-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

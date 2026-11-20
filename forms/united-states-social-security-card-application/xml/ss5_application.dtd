@@ -1,4 +1,5 @@
 <!ELEMENT ss5_application (id,created_at,updated_at,deleted_at,patient_id,clinician_id,application_date,request_type,channel,previously_applied,name_change,name_change_reason,date_of_birth_correction,replacements_this_year,replacements_lifetime,limit_exception_reason,limit_exception_evidence,name_on_card,name_at_birth,other_names_used,name_on_most_recent_card,date_of_birth,place_of_birth_city,place_of_birth_region,sex,citizenship,non_work_reason_valid,mother_name_at_birth,father_name,state_of_residence,mailing_address,phone,identity_document,identity_document_expired,age_document,citizenship_document,citizenship_on_file,name_change_document,documents_original_or_certified,signer_relationship,signer_name,signer_identity_document,signature_present,applicant_deceased,death_reported_to_ssa,preparer_note)>
+<!ATTLIST ss5_application xmlns CDATA #FIXED "https://formexamples.github.io/united-states-social-security-card-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

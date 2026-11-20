@@ -5,10 +5,19 @@ info:
   title: Glasgow Blatchford Bleeding Score — GlasgowBlatchfordBleedingScore
   version: 1.0.0
   description: "Main Glasgow-Blatchford Bleeding Score assessment record: assessment context, patient identification, and the eight weighted admission parameter inputs (blood urea, haemoglobin, systolic blood pressure, pulse, melaena, syncope, hepatic disease, cardiac failure)."
+x-namespace:
+  form: glasgow-blatchford-bleeding-score
+  apiPrefix: /api/glasgow-blatchford-bleeding-score/
+  sqlSchema: glasgow_blatchford_bleeding_score
+  xmlNamespace: https://formexamples.github.io/glasgow-blatchford-bleeding-score/xml
+tags:
+  - name: glasgow-blatchford-bleeding-score
+    description: Glasgow Blatchford Bleeding Score form
 paths:
   /api/glasgow-blatchford-bleeding-score/glasgow_blatchford_bleeding_scores:
     get:
       summary: List GlasgowBlatchfordBleedingScore records
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: listGlasgowBlatchfordBleedingScore
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GlasgowBlatchfordBleedingScore
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: createGlasgowBlatchfordBleedingScore
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GlasgowBlatchfordBleedingScore by id
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: getGlasgowBlatchfordBleedingScore
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GlasgowBlatchfordBleedingScore
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: updateGlasgowBlatchfordBleedingScore
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GlasgowBlatchfordBleedingScore
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: replaceGlasgowBlatchfordBleedingScore
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GlasgowBlatchfordBleedingScore
+      tags: [glasgow-blatchford-bleeding-score]
       operationId: deleteGlasgowBlatchfordBleedingScore
       responses:
         "200":

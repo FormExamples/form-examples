@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Objectives and Key Results tracker form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: objectives-and-key-results-tracker
+  apiPrefix: /api/objectives-and-key-results-tracker/
+  sqlSchema: objectives_and_key_results_tracker
+  xmlNamespace: https://formexamples.github.io/objectives-and-key-results-tracker/xml
+tags:
+- name: objectives-and-key-results-tracker
+  description: Objectives and Key Results tracker form
 paths:
   /api/objectives-and-key-results-tracker/okr_check_ins:
     get:
       summary: List OkrCheckIn records
+      tags:
+      - objectives-and-key-results-tracker
       operationId: listOkrCheckIn
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OkrCheckIn
+      tags:
+      - objectives-and-key-results-tracker
       operationId: createOkrCheckIn
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OkrCheckIn by id
+      tags:
+      - objectives-and-key-results-tracker
       operationId: getOkrCheckIn
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OkrCheckIn
+      tags:
+      - objectives-and-key-results-tracker
       operationId: updateOkrCheckIn
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OkrCheckIn
+      tags:
+      - objectives-and-key-results-tracker
       operationId: replaceOkrCheckIn
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OkrCheckIn
+      tags:
+      - objectives-and-key-results-tracker
       operationId: deleteOkrCheckIn
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/objectives-and-key-results-tracker/okr_grade_flags:
     get:
       summary: List OkrGradeFlag records
+      tags:
+      - objectives-and-key-results-tracker
       operationId: listOkrGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OkrGradeFlag
+      tags:
+      - objectives-and-key-results-tracker
       operationId: createOkrGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OkrGradeFlag by id
+      tags:
+      - objectives-and-key-results-tracker
       operationId: getOkrGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OkrGradeFlag
+      tags:
+      - objectives-and-key-results-tracker
       operationId: updateOkrGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OkrGradeFlag
+      tags:
+      - objectives-and-key-results-tracker
       operationId: replaceOkrGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OkrGradeFlag
+      tags:
+      - objectives-and-key-results-tracker
       operationId: deleteOkrGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/objectives-and-key-results-tracker/okr_grade_rules:
     get:
       summary: List OkrGradeRule records
+      tags:
+      - objectives-and-key-results-tracker
       operationId: listOkrGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OkrGradeRule
+      tags:
+      - objectives-and-key-results-tracker
       operationId: createOkrGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OkrGradeRule by id
+      tags:
+      - objectives-and-key-results-tracker
       operationId: getOkrGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OkrGradeRule
+      tags:
+      - objectives-and-key-results-tracker
       operationId: updateOkrGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OkrGradeRule
+      tags:
+      - objectives-and-key-results-tracker
       operationId: replaceOkrGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OkrGradeRule
+      tags:
+      - objectives-and-key-results-tracker
       operationId: deleteOkrGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/objectives-and-key-results-tracker/okr_grades:
     get:
       summary: List OkrGrade records
+      tags:
+      - objectives-and-key-results-tracker
       operationId: listOkrGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OkrGrade
+      tags:
+      - objectives-and-key-results-tracker
       operationId: createOkrGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OkrGrade by id
+      tags:
+      - objectives-and-key-results-tracker
       operationId: getOkrGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OkrGrade
+      tags:
+      - objectives-and-key-results-tracker
       operationId: updateOkrGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OkrGrade
+      tags:
+      - objectives-and-key-results-tracker
       operationId: replaceOkrGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OkrGrade
+      tags:
+      - objectives-and-key-results-tracker
       operationId: deleteOkrGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/objectives-and-key-results-tracker/okr_key_results:
     get:
       summary: List OkrKeyResult records
+      tags:
+      - objectives-and-key-results-tracker
       operationId: listOkrKeyResult
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OkrKeyResult
+      tags:
+      - objectives-and-key-results-tracker
       operationId: createOkrKeyResult
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OkrKeyResult by id
+      tags:
+      - objectives-and-key-results-tracker
       operationId: getOkrKeyResult
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OkrKeyResult
+      tags:
+      - objectives-and-key-results-tracker
       operationId: updateOkrKeyResult
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OkrKeyResult
+      tags:
+      - objectives-and-key-results-tracker
       operationId: replaceOkrKeyResult
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OkrKeyResult
+      tags:
+      - objectives-and-key-results-tracker
       operationId: deleteOkrKeyResult
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/objectives-and-key-results-tracker/okr_objectives:
     get:
       summary: List OkrObjective records
+      tags:
+      - objectives-and-key-results-tracker
       operationId: listOkrObjective
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OkrObjective
+      tags:
+      - objectives-and-key-results-tracker
       operationId: createOkrObjective
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OkrObjective by id
+      tags:
+      - objectives-and-key-results-tracker
       operationId: getOkrObjective
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OkrObjective
+      tags:
+      - objectives-and-key-results-tracker
       operationId: updateOkrObjective
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OkrObjective
+      tags:
+      - objectives-and-key-results-tracker
       operationId: replaceOkrObjective
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OkrObjective
+      tags:
+      - objectives-and-key-results-tracker
       operationId: deleteOkrObjective
       responses:
         '200':
@@ -1495,9 +1575,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - objectives-and-key-results-tracker
   /api/objectives-and-key-results-tracker/participants:
     get:
       summary: List Participant records
+      tags:
+      - objectives-and-key-results-tracker
       operationId: listParticipant
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Participant
+      tags:
+      - objectives-and-key-results-tracker
       operationId: createParticipant
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Participant by id
+      tags:
+      - objectives-and-key-results-tracker
       operationId: getParticipant
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Participant
+      tags:
+      - objectives-and-key-results-tracker
       operationId: updateParticipant
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Participant
+      tags:
+      - objectives-and-key-results-tracker
       operationId: replaceParticipant
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Participant
+      tags:
+      - objectives-and-key-results-tracker
       operationId: deleteParticipant
       responses:
         '200':
@@ -1744,6 +1838,8 @@ paths:
   /api/objectives-and-key-results-tracker/reporters:
     get:
       summary: List Reporter records
+      tags:
+      - objectives-and-key-results-tracker
       operationId: listReporter
       parameters:
       - name: limit
@@ -1796,6 +1892,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Reporter
+      tags:
+      - objectives-and-key-results-tracker
       operationId: createReporter
       requestBody:
         required: true
@@ -1849,6 +1947,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Reporter by id
+      tags:
+      - objectives-and-key-results-tracker
       operationId: getReporter
       responses:
         '200':
@@ -1876,6 +1976,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Reporter
+      tags:
+      - objectives-and-key-results-tracker
       operationId: updateReporter
       requestBody:
         required: true
@@ -1921,6 +2023,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Reporter
+      tags:
+      - objectives-and-key-results-tracker
       operationId: replaceReporter
       requestBody:
         required: true
@@ -1966,6 +2070,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Reporter
+      tags:
+      - objectives-and-key-results-tracker
       operationId: deleteReporter
       responses:
         '200':

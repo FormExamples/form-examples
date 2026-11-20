@@ -5,10 +5,19 @@ info:
   title: Expense Reimbursement — ExpenseReimbursementGradeFlag
   version: 1.0.0
   description: Fraud-prevention and policy flags raised for this claim, independent of the three axes.
+x-namespace:
+  form: expense-reimbursement
+  apiPrefix: /api/expense-reimbursement/
+  sqlSchema: expense_reimbursement
+  xmlNamespace: https://formexamples.github.io/expense-reimbursement/xml
+tags:
+  - name: expense-reimbursement
+    description: Expense Reimbursement form
 paths:
   /api/expense-reimbursement/expense_reimbursement_grade_flags:
     get:
       summary: List ExpenseReimbursementGradeFlag records
+      tags: [expense-reimbursement]
       operationId: listExpenseReimbursementGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ExpenseReimbursementGradeFlag
+      tags: [expense-reimbursement]
       operationId: createExpenseReimbursementGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ExpenseReimbursementGradeFlag by id
+      tags: [expense-reimbursement]
       operationId: getExpenseReimbursementGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ExpenseReimbursementGradeFlag
+      tags: [expense-reimbursement]
       operationId: updateExpenseReimbursementGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ExpenseReimbursementGradeFlag
+      tags: [expense-reimbursement]
       operationId: replaceExpenseReimbursementGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ExpenseReimbursementGradeFlag
+      tags: [expense-reimbursement]
       operationId: deleteExpenseReimbursementGradeFlag
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT diabetes_rule (id,created_at,updated_at,deleted_at,code,category,description,concern_level)>
+<!ATTLIST diabetes_rule xmlns CDATA #FIXED "https://formexamples.github.io/diabetes-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Zarit Burden Interview — ZaritBurdenInterviewGradeFlag
   version: 1.0.0
   description: Red-flag issues that fire independently of the burden band, with priority and a suggested action for the carer-support team.
+x-namespace:
+  form: zarit-burden-interview
+  apiPrefix: /api/zarit-burden-interview/
+  sqlSchema: zarit_burden_interview
+  xmlNamespace: https://formexamples.github.io/zarit-burden-interview/xml
+tags:
+  - name: zarit-burden-interview
+    description: Zarit Burden Interview form
 paths:
   /api/zarit-burden-interview/zarit_burden_interview_grade_flags:
     get:
       summary: List ZaritBurdenInterviewGradeFlag records
+      tags: [zarit-burden-interview]
       operationId: listZaritBurdenInterviewGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ZaritBurdenInterviewGradeFlag
+      tags: [zarit-burden-interview]
       operationId: createZaritBurdenInterviewGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ZaritBurdenInterviewGradeFlag by id
+      tags: [zarit-burden-interview]
       operationId: getZaritBurdenInterviewGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ZaritBurdenInterviewGradeFlag
+      tags: [zarit-burden-interview]
       operationId: updateZaritBurdenInterviewGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ZaritBurdenInterviewGradeFlag
+      tags: [zarit-burden-interview]
       operationId: replaceZaritBurdenInterviewGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ZaritBurdenInterviewGradeFlag
+      tags: [zarit-burden-interview]
       operationId: deleteZaritBurdenInterviewGradeFlag
       responses:
         "200":

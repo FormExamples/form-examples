@@ -5,10 +5,19 @@ info:
   title: Colonoscopy Test Result — ColonoscopyTestResultGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.
+x-namespace:
+  form: colonoscopy-test-result
+  apiPrefix: /api/colonoscopy-test-result/
+  sqlSchema: colonoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/colonoscopy-test-result/xml
+tags:
+  - name: colonoscopy-test-result
+    description: Colonoscopy Test Result form
 paths:
   /api/colonoscopy-test-result/colonoscopy_test_result_grade_flags:
     get:
       summary: List ColonoscopyTestResultGradeFlag records
+      tags: [colonoscopy-test-result]
       operationId: listColonoscopyTestResultGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ColonoscopyTestResultGradeFlag
+      tags: [colonoscopy-test-result]
       operationId: createColonoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ColonoscopyTestResultGradeFlag by id
+      tags: [colonoscopy-test-result]
       operationId: getColonoscopyTestResultGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ColonoscopyTestResultGradeFlag
+      tags: [colonoscopy-test-result]
       operationId: updateColonoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ColonoscopyTestResultGradeFlag
+      tags: [colonoscopy-test-result]
       operationId: replaceColonoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ColonoscopyTestResultGradeFlag
+      tags: [colonoscopy-test-result]
       operationId: deleteColonoscopyTestResultGradeFlag
       responses:
         "200":

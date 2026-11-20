@@ -1,4 +1,5 @@
 <!ELEMENT history_and_physical_examination (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clerked_at,clinician_role,registration_number,care_setting,admission_source,patient_identifier,age_band,sex,presenting_complaint,history_of_presenting_complaint,past_medical_surgical_history,drug_history,allergy_status,allergy_detail,family_history,social_history,systems_review,temperature,heart_rate,respiratory_rate,systolic_blood_pressure,oxygen_saturation,consciousness_level,exam_cardiovascular,exam_respiratory,exam_abdominal,exam_neurological,exam_other,investigations,impression,red_flag_findings,management_plan,clinical_note)>
+<!ATTLIST history_and_physical_examination xmlns CDATA #FIXED "https://formexamples.github.io/history-and-physical-examination/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

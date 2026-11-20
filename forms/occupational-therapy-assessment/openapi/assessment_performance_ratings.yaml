@@ -5,10 +5,19 @@ info:
   title: Occupational Therapy Assessment — AssessmentPerformanceRatings
   version: 1.0.0
   description: "COPM performance ratings section: patient-rated performance scores (1-10) across occupational domains. One-to-one child of assessment."
+x-namespace:
+  form: occupational-therapy-assessment
+  apiPrefix: /api/occupational-therapy-assessment/
+  sqlSchema: occupational_therapy_assessment
+  xmlNamespace: https://formexamples.github.io/occupational-therapy-assessment/xml
+tags:
+  - name: occupational-therapy-assessment
+    description: Occupational Therapy Assessment form
 paths:
   /api/occupational-therapy-assessment/assessment_performance_ratings:
     get:
       summary: List AssessmentPerformanceRatings records
+      tags: [occupational-therapy-assessment]
       operationId: listAssessmentPerformanceRatings
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentPerformanceRatings
+      tags: [occupational-therapy-assessment]
       operationId: createAssessmentPerformanceRatings
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentPerformanceRatings by id
+      tags: [occupational-therapy-assessment]
       operationId: getAssessmentPerformanceRatings
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentPerformanceRatings
+      tags: [occupational-therapy-assessment]
       operationId: updateAssessmentPerformanceRatings
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentPerformanceRatings
+      tags: [occupational-therapy-assessment]
       operationId: replaceAssessmentPerformanceRatings
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentPerformanceRatings
+      tags: [occupational-therapy-assessment]
       operationId: deleteAssessmentPerformanceRatings
       responses:
         "200":

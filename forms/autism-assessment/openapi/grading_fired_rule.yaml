@@ -5,10 +5,19 @@ info:
   title: Autism Assessment — GradingFiredRule
   version: 1.0.0
   description: Individual AQ-10 screening rules that evaluated to true during grading.
+x-namespace:
+  form: autism-assessment
+  apiPrefix: /api/autism-assessment/
+  sqlSchema: autism_assessment
+  xmlNamespace: https://formexamples.github.io/autism-assessment/xml
+tags:
+  - name: autism-assessment
+    description: Autism Assessment form
 paths:
   /api/autism-assessment/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags: [autism-assessment]
       operationId: listGradingFiredRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingFiredRule
+      tags: [autism-assessment]
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags: [autism-assessment]
       operationId: getGradingFiredRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingFiredRule
+      tags: [autism-assessment]
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingFiredRule
+      tags: [autism-assessment]
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingFiredRule
+      tags: [autism-assessment]
       operationId: deleteGradingFiredRule
       responses:
         "200":

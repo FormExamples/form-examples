@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000061",
+    "id": "a941b7fb-f8f6-587a-923a-41f938b96b27",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "6be03069-060c-5133-856b-1375512ddb94",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "allergySkinTestResult": {
-    "id": "550e8400-e29b-41d4-a716-000000000081",
+    "id": "ca17361e-a543-5c1e-9137-39d180042b3a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000085",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000086",
+    "patientId": "583c91c8-0ffb-58b2-868b-be1389c9ac82",
+    "clinicianId": "50f78c55-8ac8-59d9-8314-9dad196aed75",
     "originatingRequestReference": "",
     "testType": "skin-prick-test",
     "reportStatus": "preliminary",
@@ -67,11 +67,11 @@
     "reportedTo": ""
   },
   "allergySkinTestResultGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000009e",
+    "id": "87db6bc3-daa1-5bd9-8f3c-fc64a3cb7a2c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "allergySkinTestResultId": "550e8400-e29b-41d4-a716-0000000000a2",
+    "allergySkinTestResultId": "e2dda61d-be0b-5a58-a12a-868d666783bd",
     "resultClassification": "normal",
     "abnormalitySeverity": "none",
     "reportingCategory": "",
@@ -85,22 +85,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "allergySkinTestResultGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ae",
+    "id": "a27c21ae-331e-59d4-8ce0-91e229c3bf79",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "allergySkinTestResultGradeId": "550e8400-e29b-41d4-a716-0000000000b2",
+    "allergySkinTestResultGradeId": "b4cecb66-3286-5914-a5fe-065dc9ec36d6",
     "ruleId": "",
     "axis": "classification",
     "category": "",
     "description": ""
   },
   "allergySkinTestResultGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b7",
+    "id": "c4e4b1e2-aa81-5681-af24-7774fbe17dfa",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "allergySkinTestResultGradeId": "550e8400-e29b-41d4-a716-0000000000bb",
+    "allergySkinTestResultGradeId": "27e3cb2e-e459-5539-a002-2864f9d20b59",
     "flagId": "",
     "category": "critical-result-alert",
     "priority": "low",

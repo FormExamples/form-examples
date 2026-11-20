@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE newborn_and_infant_physical_examination_grade SYSTEM "newborn_and_infant_physical_examination_grade.dtd">
-<newborn_and_infant_physical_examination_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<newborn_and_infant_physical_examination_grade xmlns="https://formexamples.github.io/newborn-and-infant-physical-examination/xml">
+<id>027b3587-87d6-53b6-90f7-692d3999483e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<newborn_and_infant_physical_examination_id>770e8400-e29b-41d4-a716-446655440002</newborn_and_infant_physical_examination_id>
+<newborn_and_infant_physical_examination_id>05f109fe-b6aa-5f45-b5ec-e953f57332a2</newborn_and_infant_physical_examination_id>
 <eyes_result>satisfactory</eyes_result>
 <heart_result>satisfactory</heart_result>
 <hips_result>satisfactory</hips_result>

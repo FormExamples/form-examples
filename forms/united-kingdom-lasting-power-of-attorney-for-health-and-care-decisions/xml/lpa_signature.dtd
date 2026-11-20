@@ -1,4 +1,5 @@
 <!ELEMENT lpa_signature (id,created_at,updated_at,deleted_at,lpa_id,signer_role,signer_id,signed_at,signature_method,signature_data,witness_name,witness_address,witness_signed_at,witness_is_attorney)>
+<!ATTLIST lpa_signature xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

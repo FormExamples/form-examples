@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE psychiatry_waiting_list_card SYSTEM "psychiatry_waiting_list_card.dtd">
-<psychiatry_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<psychiatry_waiting_list_card xmlns="https://formexamples.github.io/psychiatry-waiting-list-card/xml">
+<id>3ad1b105-12e2-5d1d-88ea-ee1d4cb9942b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>a3ddeb7a-0897-5933-87c7-45db61e8a2a9</patient_id>
+<practitioner_id>4813c972-e1e7-5fab-ac40-04d7deba8912</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

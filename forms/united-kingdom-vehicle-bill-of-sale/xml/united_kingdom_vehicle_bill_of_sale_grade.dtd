@@ -1,4 +1,5 @@
 <!ELEMENT united_kingdom_vehicle_bill_of_sale_grade (id,created_at,updated_at,deleted_at,united_kingdom_vehicle_bill_of_sale_id,classification,missing_item_count,risk_flag_count,graded_at)>
+<!ATTLIST united_kingdom_vehicle_bill_of_sale_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-vehicle-bill-of-sale/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000069",
+    "id": "036d6372-100b-5da0-9fa8-8cf788ec970a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000007b",
+    "id": "1e30c23d-96fb-529e-911e-7f347f488eba",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "mentalHealthActAssessment": {
-    "id": "550e8400-e29b-41d4-a716-000000000088",
+    "id": "9b0c9c2a-5a9f-5608-a759-ef6e11c00e1e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000008c",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000008d",
+    "patientId": "a857621a-2c89-5f23-903d-306e9e3162d7",
+    "clinicianId": "482409c0-09b2-5277-a636-037f7a977753",
     "assessedAt": null,
     "location": "hospital-ward",
     "referralSource": "",
@@ -82,33 +82,33 @@
     "clinicalLegalNote": ""
   },
   "mentalHealthActAssessmentGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b5",
+    "id": "5ee949ae-d670-5c94-9601-0d909054ae3d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "mentalHealthActAssessmentId": "550e8400-e29b-41d4-a716-0000000000b9",
+    "mentalHealthActAssessmentId": "b54adaa1-b63d-5f3d-8e6d-50ff77412b16",
     "completenessStatus": "valid",
     "recommendedSectionClass": "section-2",
     "urgency": "routine",
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "mentalHealthActAssessmentGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000be",
+    "id": "eaa6f8f5-3509-5683-a307-598e86b96210",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "mentalHealthActAssessmentGradeId": "550e8400-e29b-41d4-a716-0000000000c2",
+    "mentalHealthActAssessmentGradeId": "c41f4ae3-eb89-5fa5-aaeb-feb9610609e4",
     "ruleId": "",
     "section": "signatories",
     "category": "",
     "description": ""
   },
   "mentalHealthActAssessmentGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c7",
+    "id": "5e78d747-0d2c-57ab-9280-c9ab3ddcc431",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "mentalHealthActAssessmentGradeId": "550e8400-e29b-41d4-a716-0000000000cb",
+    "mentalHealthActAssessmentGradeId": "b51dd38b-84fc-551a-be4e-1b2b09bae0d2",
     "flagId": "",
     "category": "criteria-not-met",
     "priority": "low",

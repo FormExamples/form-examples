@@ -1,4 +1,5 @@
 <!ELEMENT fluid_balance_chart_grade (id,created_at,updated_at,deleted_at,fluid_balance_chart_id,total_intake_ml,total_output_ml,net_balance_ml,urine_output_ml,hours_observed,weight_kg,urine_output_ml_kg_h,fluid_status,graded_at)>
+<!ATTLIST fluid_balance_chart_grade xmlns CDATA #FIXED "https://formexamples.github.io/fluid-balance-chart/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

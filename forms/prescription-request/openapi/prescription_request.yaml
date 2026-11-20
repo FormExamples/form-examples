@@ -5,10 +5,19 @@ info:
   title: Prescription Request — PrescriptionRequest
   version: 1.0.0
   description: Top-level prescription request linking patient and clinician. Parent entity for all prescription sections.
+x-namespace:
+  form: prescription-request
+  apiPrefix: /api/prescription-request/
+  sqlSchema: prescription_request
+  xmlNamespace: https://formexamples.github.io/prescription-request/xml
+tags:
+  - name: prescription-request
+    description: Prescription Request form
 paths:
   /api/prescription-request/prescription_requests:
     get:
       summary: List PrescriptionRequest records
+      tags: [prescription-request]
       operationId: listPrescriptionRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PrescriptionRequest
+      tags: [prescription-request]
       operationId: createPrescriptionRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PrescriptionRequest by id
+      tags: [prescription-request]
       operationId: getPrescriptionRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PrescriptionRequest
+      tags: [prescription-request]
       operationId: updatePrescriptionRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PrescriptionRequest
+      tags: [prescription-request]
       operationId: replacePrescriptionRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PrescriptionRequest
+      tags: [prescription-request]
       operationId: deletePrescriptionRequest
       responses:
         "200":

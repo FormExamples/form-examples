@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE radiology_waiting_list_card_grade SYSTEM "radiology_waiting_list_card_grade.dtd">
-<radiology_waiting_list_card_grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<radiology_waiting_list_card_grade xmlns="https://formexamples.github.io/radiology-waiting-list-card/xml">
+<id>6c0e4757-04c2-52b8-990b-4190ba29642f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<radiology_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</radiology_waiting_list_card_id>
+<radiology_waiting_list_card_id>0eb91a9f-99b8-5b93-a43e-c061cafcc91c</radiology_waiting_list_card_id>
 <waiting_time_status>within-target</waiting_time_status>
 <clinical_priority>P1a</clinical_priority>
 <target_wait_weeks>0.0</target_wait_weeks>

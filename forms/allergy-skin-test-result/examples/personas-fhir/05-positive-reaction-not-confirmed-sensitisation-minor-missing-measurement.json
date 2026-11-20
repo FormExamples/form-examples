@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "ca409db2-461c-4c75-af58-a18f10118aa0",
+  "id": "1a2615ba-9d10-535e-bf54-b7dfadae2c4f",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432",
+      "fullUrl": "urn:uuid:cc6f89a2-909f-5c7e-8329-78a7c3fbcc3c",
       "resource": {
         "resourceType": "Patient",
-        "id": "8902dbbb-913b-4c64-aacf-1ad139063432",
+        "id": "cc6f89a2-909f-5c7e-8329-78a7c3fbcc3c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:c0c077aa-937a-4aa4-a2f3-f1927b3e3861",
+      "fullUrl": "urn:uuid:8f5b17c1-e6f0-52ab-ba7c-e63cc6c51c2b",
       "resource": {
         "resourceType": "Observation",
-        "id": "c0c077aa-937a-4aa4-a2f3-f1927b3e3861",
+        "id": "8f5b17c1-e6f0-52ab-ba7c-e63cc6c51c2b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+          "reference": "urn:uuid:cc6f89a2-909f-5c7e-8329-78a7c3fbcc3c"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a380537b-a1fd-45d2-a796-1bbb136bc419",
+      "fullUrl": "urn:uuid:aacf51bf-8013-56fa-814d-14ada1936d54",
       "resource": {
         "resourceType": "Observation",
-        "id": "a380537b-a1fd-45d2-a796-1bbb136bc419",
+        "id": "aacf51bf-8013-56fa-814d-14ada1936d54",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+          "reference": "urn:uuid:cc6f89a2-909f-5c7e-8329-78a7c3fbcc3c"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -502,10 +502,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a9ae09f9-7dbc-4aa2-ad4f-8e10ee1ea923",
+      "fullUrl": "urn:uuid:6f6a8124-ed0f-5bf7-b831-959125e23516",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "a9ae09f9-7dbc-4aa2-ad4f-8e10ee1ea923",
+        "id": "6f6a8124-ed0f-5bf7-b831-959125e23516",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -514,7 +514,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+          "reference": "urn:uuid:cc6f89a2-909f-5c7e-8329-78a7c3fbcc3c"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -523,10 +523,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:f1ef385d-30ea-45b2-affe-7a65497ab895",
+      "fullUrl": "urn:uuid:58cce4e3-cc87-5f2a-8368-8062111c0da9",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "f1ef385d-30ea-45b2-affe-7a65497ab895",
+        "id": "58cce4e3-cc87-5f2a-8368-8062111c0da9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -556,17 +556,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+          "reference": "urn:uuid:cc6f89a2-909f-5c7e-8329-78a7c3fbcc3c"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "One or more positive reactions are present (sensitisation, not necessarily clinical allergy); classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:f1ca1376-68cb-4114-a8ff-c0d9a743eaab",
+      "fullUrl": "urn:uuid:a0403e03-7ea2-552d-8209-bf8c2e59ec5e",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "f1ca1376-68cb-4114-a8ff-c0d9a743eaab",
+        "id": "a0403e03-7ea2-552d-8209-bf8c2e59ec5e",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -596,17 +596,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+          "reference": "urn:uuid:cc6f89a2-909f-5c7e-8329-78a7c3fbcc3c"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Positive reaction(s) present without confirmed clinical relevance (sensitisation only); abnormality severity graded minor."
       }
     },
     {
-      "fullUrl": "urn:uuid:23e0f3e0-c9c8-428e-a78f-e712115054dd",
+      "fullUrl": "urn:uuid:89858552-051a-55fb-ba35-8499df498e8f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "23e0f3e0-c9c8-428e-a78f-e712115054dd",
+        "id": "89858552-051a-55fb-ba35-8499df498e8f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -636,17 +636,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+          "reference": "urn:uuid:cc6f89a2-909f-5c7e-8329-78a7c3fbcc3c"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: impression."
       }
     },
     {
-      "fullUrl": "urn:uuid:5078e1ae-983c-414a-ac27-9bc6c6b534c5",
+      "fullUrl": "urn:uuid:3f1b075c-29cf-5aec-be72-0f1b8076d9db",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "5078e1ae-983c-414a-ac27-9bc6c6b534c5",
+        "id": "3f1b075c-29cf-5aec-be72-0f1b8076d9db",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -676,17 +676,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+          "reference": "urn:uuid:cc6f89a2-909f-5c7e-8329-78a7c3fbcc3c"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Positive reaction (sensitisation only); correlate with clinical history and consider further evaluation."
       }
     },
     {
-      "fullUrl": "urn:uuid:22cc68aa-032a-4b0a-a89d-28fa2d6019c8",
+      "fullUrl": "urn:uuid:05649747-22e1-5876-8492-7db38340cdc1",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "22cc68aa-032a-4b0a-a89d-28fa2d6019c8",
+        "id": "05649747-22e1-5876-8492-7db38340cdc1",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -716,7 +716,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+          "reference": "urn:uuid:cc6f89a2-909f-5c7e-8329-78a7c3fbcc3c"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Positive reaction(s) present; sensitisation versus clinical allergy needs review.",
@@ -730,10 +730,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:df883026-63f9-4dde-a284-f9e386f9d10d",
+      "fullUrl": "urn:uuid:8af2e2f3-0ae5-5aa6-b4bb-65372a496631",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "df883026-63f9-4dde-a284-f9e386f9d10d",
+        "id": "8af2e2f3-0ae5-5aa6-b4bb-65372a496631",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -763,7 +763,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+          "reference": "urn:uuid:cc6f89a2-909f-5c7e-8329-78a7c3fbcc3c"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
@@ -777,10 +777,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:b1cba73a-c7eb-46d9-ae5d-d568ee15cc73",
+      "fullUrl": "urn:uuid:ea437120-eba4-51ab-a329-33e84e4ab9d4",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "b1cba73a-c7eb-46d9-ae5d-d568ee15cc73",
+        "id": "ea437120-eba4-51ab-a329-33e84e4ab9d4",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -810,7 +810,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:8902dbbb-913b-4c64-aacf-1ad139063432"
+          "reference": "urn:uuid:cc6f89a2-909f-5c7e-8329-78a7c3fbcc3c"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A positive reaction is reported but no weal sizes or specific-IgE results were recorded.",

@@ -1,4 +1,5 @@
 <!ELEMENT electroencephalogram_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,eeg_type,primary_indication,clinical_question,relevant_history,seizure_frequency,first_seizure,known_epilepsy,current_antiepileptics,recent_seizure,suspected_status_epilepticus,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST electroencephalogram_test_request xmlns CDATA #FIXED "https://formexamples.github.io/electroencephalogram-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

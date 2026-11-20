@@ -5,10 +5,19 @@ info:
   title: Pre Anaesthesia Assessment — PreAnaesthesiaAssessmentGradeRule
   version: 1.0.0
   description: Audit trail of every ASA / Mallampati / RCRI / STOP-BANG / frailty rule that fired for this assessment.
+x-namespace:
+  form: pre-anaesthesia-assessment
+  apiPrefix: /api/pre-anaesthesia-assessment/
+  sqlSchema: pre_anaesthesia_assessment
+  xmlNamespace: https://formexamples.github.io/pre-anaesthesia-assessment/xml
+tags:
+  - name: pre-anaesthesia-assessment
+    description: Pre Anaesthesia Assessment form
 paths:
   /api/pre-anaesthesia-assessment/pre_anaesthesia_assessment_grade_rules:
     get:
       summary: List PreAnaesthesiaAssessmentGradeRule records
+      tags: [pre-anaesthesia-assessment]
       operationId: listPreAnaesthesiaAssessmentGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PreAnaesthesiaAssessmentGradeRule
+      tags: [pre-anaesthesia-assessment]
       operationId: createPreAnaesthesiaAssessmentGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PreAnaesthesiaAssessmentGradeRule by id
+      tags: [pre-anaesthesia-assessment]
       operationId: getPreAnaesthesiaAssessmentGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PreAnaesthesiaAssessmentGradeRule
+      tags: [pre-anaesthesia-assessment]
       operationId: updatePreAnaesthesiaAssessmentGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PreAnaesthesiaAssessmentGradeRule
+      tags: [pre-anaesthesia-assessment]
       operationId: replacePreAnaesthesiaAssessmentGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PreAnaesthesiaAssessmentGradeRule
+      tags: [pre-anaesthesia-assessment]
       operationId: deletePreAnaesthesiaAssessmentGradeRule
       responses:
         "200":

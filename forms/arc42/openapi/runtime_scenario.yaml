@@ -5,10 +5,19 @@ info:
   title: Arc42 — RuntimeScenario
   version: 1.0.0
   description: Runtime scenario captured in §6 Runtime View of the arc42 documentation.
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+  - name: arc42
+    description: Arc42 form
 paths:
   /api/arc42/runtime_scenarios:
     get:
       summary: List RuntimeScenario records
+      tags: [arc42]
       operationId: listRuntimeScenario
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RuntimeScenario
+      tags: [arc42]
       operationId: createRuntimeScenario
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RuntimeScenario by id
+      tags: [arc42]
       operationId: getRuntimeScenario
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RuntimeScenario
+      tags: [arc42]
       operationId: updateRuntimeScenario
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RuntimeScenario
+      tags: [arc42]
       operationId: replaceRuntimeScenario
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RuntimeScenario
+      tags: [arc42]
       operationId: deleteRuntimeScenario
       responses:
         "200":

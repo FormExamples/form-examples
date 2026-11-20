@@ -1,4 +1,5 @@
 <!ELEMENT sequential_organ_failure_assessment (id,created_at,updated_at,deleted_at,patient_id,clinician_id,assessor_name,assessor_role,assessor_registration_number,assessed_at,care_location,hours_since_admission,patient_identifier,age_years,sex,admission_diagnosis,suspected_infection,baseline_sofa_total,pao2,fio2,pao2_fio2_ratio,respiratory_support,platelets,bilirubin,map,vasopressor,vasopressor_dose,glasgow_coma_scale,sedated,creatinine,urine_output,clinical_note)>
+<!ATTLIST sequential_organ_failure_assessment xmlns CDATA #FIXED "https://formexamples.github.io/sequential-organ-failure-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

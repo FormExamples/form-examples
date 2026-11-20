@@ -72,6 +72,10 @@ resource:
 
 ## Conventions
 
+- Every document has a top-level tag named for the form's slug, every
+  operation is tagged with it, and a top-level `x-namespace` object names the
+  form's API prefix, SQL schema and XML namespace
+  ([`spec/form-namespacing/`](../spec/form-namespacing/)).
 - Property names in the per-entity files follow SQL `snake_case`, because
   they describe storage. The combined document, which each crate serves at
   `GET /api/<slug>/openapi.yaml`, renames them to `camelCase`, as the crates send

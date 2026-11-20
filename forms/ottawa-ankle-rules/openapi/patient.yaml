@@ -5,10 +5,19 @@ info:
   title: Ottawa Ankle Rules — Patient
   version: 1.0.0
   description: Patient demographic information used by the Ottawa Ankle Rules assessment record.
+x-namespace:
+  form: ottawa-ankle-rules
+  apiPrefix: /api/ottawa-ankle-rules/
+  sqlSchema: ottawa_ankle_rules
+  xmlNamespace: https://formexamples.github.io/ottawa-ankle-rules/xml
+tags:
+  - name: ottawa-ankle-rules
+    description: Ottawa Ankle Rules form
 paths:
   /api/ottawa-ankle-rules/patients:
     get:
       summary: List Patient records
+      tags: [ottawa-ankle-rules]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [ottawa-ankle-rules]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [ottawa-ankle-rules]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [ottawa-ankle-rules]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [ottawa-ankle-rules]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [ottawa-ankle-rules]
       operationId: deletePatient
       responses:
         "200":

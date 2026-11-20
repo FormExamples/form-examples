@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE orthopaedics_waiting_list_card_grade_flag SYSTEM "orthopaedics_waiting_list_card_grade_flag.dtd">
-<orthopaedics_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<orthopaedics_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/orthopaedics-waiting-list-card/xml">
+<id>ec8cd6b0-acb0-5d6c-b169-483d3b1da191</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<orthopaedics_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</orthopaedics_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<orthopaedics_waiting_list_card_grade_id>4db403d1-c328-5ab6-8d31-3eb7160fb787</orthopaedics_waiting_list_card_grade_id>
+<flag_id>6de88c84-e9ac-5270-a788-99988f33521b</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

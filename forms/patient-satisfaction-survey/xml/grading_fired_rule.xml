@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/patient-satisfaction-survey/xml">
+<id>dfd55227-85f6-5234-a94d-c1bd8bea3d42</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>880e8400-e29b-41d4-a716-446655440003</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>776670c3-48a4-55a3-b7fe-c406abd14968</grade_id>
+<rule_id>37b89cee-6fda-53be-8c2b-a42a932cf388</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>low</severity_level>

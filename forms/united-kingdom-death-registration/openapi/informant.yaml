@@ -5,10 +5,19 @@ info:
   title: United Kingdom Death Registration — Informant
   version: 1.0.0
   description: The informant who gives the particulars of the death to the registrar.
+x-namespace:
+  form: united-kingdom-death-registration
+  apiPrefix: /api/united-kingdom-death-registration/
+  sqlSchema: united_kingdom_death_registration
+  xmlNamespace: https://formexamples.github.io/united-kingdom-death-registration/xml
+tags:
+  - name: united-kingdom-death-registration
+    description: United Kingdom Death Registration form
 paths:
   /api/united-kingdom-death-registration/informants:
     get:
       summary: List Informant records
+      tags: [united-kingdom-death-registration]
       operationId: listInformant
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Informant
+      tags: [united-kingdom-death-registration]
       operationId: createInformant
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Informant by id
+      tags: [united-kingdom-death-registration]
       operationId: getInformant
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Informant
+      tags: [united-kingdom-death-registration]
       operationId: updateInformant
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Informant
+      tags: [united-kingdom-death-registration]
       operationId: replaceInformant
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Informant
+      tags: [united-kingdom-death-registration]
       operationId: deleteInformant
       responses:
         "200":

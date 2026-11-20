@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE restrictions_limitations SYSTEM "restrictions_limitations.dtd">
-<restrictions_limitations>
-<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<restrictions_limitations xmlns="https://formexamples.github.io/medical-records-release-permission/xml">
+<id>0a972d9f-93b4-50cd-b0c1-e328b176a733</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<release_form_id>770e8400-e29b-41d4-a716-446655440002</release_form_id>
+<release_form_id>2ca1647a-308b-5830-b3fc-a8c4deac9251</release_form_id>
 <exclude_hiv>yes</exclude_hiv>
 <exclude_substance_abuse>yes</exclude_substance_abuse>
 <exclude_mental_health>yes</exclude_mental_health>

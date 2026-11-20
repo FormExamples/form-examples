@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nerve_conduction_study_test_request SYSTEM "nerve_conduction_study_test_request.dtd">
-<nerve_conduction_study_test_request>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<nerve_conduction_study_test_request xmlns="https://formexamples.github.io/nerve-conduction-study-test-request/xml">
+<id>15d584f0-2d8a-5bcc-9386-99e95f738439</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>76557095-5123-515d-8d23-9dcb9afe2142</patient_id>
+<clinician_id>84caa3ae-67b3-52a8-bd69-09c03456b9dc</clinician_id>
 <status>draft</status>
 <site_name>Example</site_name>
 <setting>outpatient</setting>

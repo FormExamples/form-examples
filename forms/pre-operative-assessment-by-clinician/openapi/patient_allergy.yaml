@@ -5,10 +5,19 @@ info:
   title: Pre Operative Assessment By Clinician — PatientAllergy
   version: 1.0.0
   description: Patient allergy.
+x-namespace:
+  form: pre-operative-assessment-by-clinician
+  apiPrefix: /api/pre-operative-assessment-by-clinician/
+  sqlSchema: pre_operative_assessment_by_clinician
+  xmlNamespace: https://formexamples.github.io/pre-operative-assessment-by-clinician/xml
+tags:
+  - name: pre-operative-assessment-by-clinician
+    description: Pre Operative Assessment By Clinician form
 paths:
   /api/pre-operative-assessment-by-clinician/patient_allergies:
     get:
       summary: List PatientAllergy records
+      tags: [pre-operative-assessment-by-clinician]
       operationId: listPatientAllergy
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PatientAllergy
+      tags: [pre-operative-assessment-by-clinician]
       operationId: createPatientAllergy
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PatientAllergy by id
+      tags: [pre-operative-assessment-by-clinician]
       operationId: getPatientAllergy
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PatientAllergy
+      tags: [pre-operative-assessment-by-clinician]
       operationId: updatePatientAllergy
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PatientAllergy
+      tags: [pre-operative-assessment-by-clinician]
       operationId: replacePatientAllergy
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PatientAllergy
+      tags: [pre-operative-assessment-by-clinician]
       operationId: deletePatientAllergy
       responses:
         "200":

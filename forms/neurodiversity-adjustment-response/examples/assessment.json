@@ -1,6 +1,6 @@
 {
   "worker": {
-    "id": "550e8400-e29b-41d4-a716-000000000065",
+    "id": "2034ffac-028c-55de-9751-f4b801e2a9f4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "employmentStartDate": null
   },
   "manager": {
-    "id": "550e8400-e29b-41d4-a716-000000000076",
+    "id": "b54b3cbf-a6fb-53e9-887a-327df98fc25b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -34,12 +34,12 @@
     "department": ""
   },
   "neurodiversityAdjustmentResponse": {
-    "id": "550e8400-e29b-41d4-a716-000000000083",
+    "id": "5341b993-9841-5187-9334-d8e92d8d42ca",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "workerId": "550e8400-e29b-41d4-a716-000000000087",
-    "managerId": "550e8400-e29b-41d4-a716-000000000088",
+    "workerId": "c44df40c-88e8-531b-95e3-354e59d49692",
+    "managerId": "d79ba64c-9803-500d-a45d-2928ea90e195",
     "responseStatus": "draft",
     "requestReference": "",
     "handlingMethod": "meeting",
@@ -73,11 +73,11 @@
     "notes": ""
   },
   "neurodiversityAdjustmentResponseGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a8",
+    "id": "d7464972-1415-52c9-9e68-fe6cde319247",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "neurodiversityAdjustmentResponseId": "550e8400-e29b-41d4-a716-0000000000ac",
+    "neurodiversityAdjustmentResponseId": "96400e34-f57b-5cfb-8971-54a9ce96322a",
     "outcomeClassification": "fully-agreed",
     "legalRiskBand": "ok",
     "completenessPercent": 50,
@@ -89,22 +89,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "neurodiversityAdjustmentResponseGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b6",
+    "id": "13462dbf-f729-5517-bc5b-01cab1a96df8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "neurodiversityAdjustmentResponseGradeId": "550e8400-e29b-41d4-a716-0000000000ba",
+    "neurodiversityAdjustmentResponseGradeId": "dc8de810-be6a-5e1c-8b62-c496a222de7f",
     "ruleId": "",
     "axis": "outcome",
     "category": "",
     "description": ""
   },
   "neurodiversityAdjustmentResponseGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bf",
+    "id": "64e6fe4e-23f7-5642-9f3a-7fd5c69b229e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "neurodiversityAdjustmentResponseGradeId": "550e8400-e29b-41d4-a716-0000000000c3",
+    "neurodiversityAdjustmentResponseGradeId": "3f787d49-a450-52c5-98e5-5f1cc82aa28a",
     "flagId": "",
     "category": "discrimination-risk",
     "priority": "low",

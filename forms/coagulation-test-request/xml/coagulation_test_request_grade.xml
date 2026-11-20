@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE coagulation_test_request_grade SYSTEM "coagulation_test_request_grade.dtd">
-<coagulation_test_request_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<coagulation_test_request_grade xmlns="https://formexamples.github.io/coagulation-test-request/xml">
+<id>662072b7-a906-5143-9eb2-fc26049eea0f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<coagulation_test_request_id>770e8400-e29b-41d4-a716-446655440002</coagulation_test_request_id>
+<coagulation_test_request_id>21b5feaf-ce51-51b1-afc9-fa22937c973e</coagulation_test_request_id>
 <appropriateness_score>5</appropriateness_score>
 <appropriateness_band>usually-appropriate</appropriateness_band>
 <preanalytical_band>ok</preanalytical_band>

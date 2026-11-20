@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005c",
+    "id": "fe8218cb-a75a-5fd7-a9b7-555e3d21c159",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006e",
+    "id": "f6b969aa-8a43-56b8-a04f-985b0046829b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "glasgowBlatchfordBleedingScore": {
-    "id": "550e8400-e29b-41d4-a716-00000000007b",
+    "id": "79d06f5c-9189-5664-8dd4-6f891f7ed733",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007f",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000080",
+    "patientId": "1bff2441-d890-5474-bb79-110bc947265b",
+    "clinicianId": "b74222ca-5580-53c5-93f1-5eb8f2cbc839",
     "clinicianName": "",
     "clinicianRole": "doctor",
     "assessedAt": null,
@@ -60,11 +60,11 @@
     "clinicalNote": ""
   },
   "glasgowBlatchfordBleedingScoreGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "b15a65a8-43fc-5a4a-a1e4-fc27c45cdf4e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "glasgowBlatchfordBleedingScoreId": "550e8400-e29b-41d4-a716-000000000096",
+    "glasgowBlatchfordBleedingScoreId": "dd5285ae-3433-503e-a64c-92af32c29350",
     "bloodUreaPoints": null,
     "haemoglobinPoints": null,
     "systolicBloodPressurePoints": null,
@@ -79,11 +79,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "glasgowBlatchfordBleedingScoreGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a3",
+    "id": "7f203e35-9159-5be0-8dc3-ef75ce583c39",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "glasgowBlatchfordBleedingScoreGradeId": "550e8400-e29b-41d4-a716-0000000000a7",
+    "glasgowBlatchfordBleedingScoreGradeId": "a0c0dfa3-75bd-56e1-a951-9d62fd8b6b3f",
     "ruleId": "",
     "parameter": "blood-urea",
     "points": null,
@@ -91,11 +91,11 @@
     "description": ""
   },
   "glasgowBlatchfordBleedingScoreGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ad",
+    "id": "6b230d68-3f61-5f95-8880-bc6174b4dee6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "glasgowBlatchfordBleedingScoreGradeId": "550e8400-e29b-41d4-a716-0000000000b1",
+    "glasgowBlatchfordBleedingScoreGradeId": "2bb91205-ecbe-5b70-9de7-590a8198c311",
     "flagId": "",
     "category": "high-score-admit",
     "priority": "info",

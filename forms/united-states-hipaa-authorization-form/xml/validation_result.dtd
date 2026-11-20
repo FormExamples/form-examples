@@ -1,4 +1,5 @@
 <!ELEMENT validation_result (id,created_at,updated_at,deleted_at,hipaa_authorization_id,validity_status,completeness_score,completeness_status,validated_at,validator_version)>
+<!ATTLIST validation_result xmlns CDATA #FIXED "https://formexamples.github.io/united-states-hipaa-authorization-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

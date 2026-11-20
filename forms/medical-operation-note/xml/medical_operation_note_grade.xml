@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE medical_operation_note_grade SYSTEM "medical_operation_note_grade.dtd">
-<medical_operation_note_grade>
-<id>ff0e8400-e29b-41d4-a716-44665544000a</id>
+<medical_operation_note_grade xmlns="https://formexamples.github.io/medical-operation-note/xml">
+<id>aaab51de-c5e5-5eb6-a70f-f8976284f4d1</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<medical_operation_note_id>770e8400-e29b-41d4-a716-446655440002</medical_operation_note_id>
+<medical_operation_note_id>d0fac25f-1856-53e9-837c-93d000087169</medical_operation_note_id>
 <computed_composite_risk>routine</computed_composite_risk>
 <final_composite_risk>routine</final_composite_risk>
 <override_reason>Example text.</override_reason>

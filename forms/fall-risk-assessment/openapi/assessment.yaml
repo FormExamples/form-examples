@@ -5,10 +5,19 @@ info:
   title: Fall Risk Assessment — Assessment
   version: 1.0.0
   description: Top-level assessment instance for fall-risk-assessment. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: fall-risk-assessment
+  apiPrefix: /api/fall-risk-assessment/
+  sqlSchema: fall_risk_assessment
+  xmlNamespace: https://formexamples.github.io/fall-risk-assessment/xml
+tags:
+  - name: fall-risk-assessment
+    description: Fall Risk Assessment form
 paths:
   /api/fall-risk-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [fall-risk-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [fall-risk-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [fall-risk-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [fall-risk-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [fall-risk-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [fall-risk-assessment]
       operationId: deleteAssessment
       responses:
         "200":

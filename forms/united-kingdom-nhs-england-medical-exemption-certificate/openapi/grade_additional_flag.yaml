@@ -5,10 +5,19 @@ info:
   title: United Kingdom Nhs England Medical Exemption Certificate — GradeAdditionalFlag
   version: 1.0.0
   description: Per-grade advisory flags surfaced to the practitioner.
+x-namespace:
+  form: united-kingdom-nhs-england-medical-exemption-certificate
+  apiPrefix: /api/united-kingdom-nhs-england-medical-exemption-certificate/
+  sqlSchema: united_kingdom_nhs_england_medical_exemption_certificate
+  xmlNamespace: https://formexamples.github.io/united-kingdom-nhs-england-medical-exemption-certificate/xml
+tags:
+  - name: united-kingdom-nhs-england-medical-exemption-certificate
+    description: United Kingdom Nhs England Medical Exemption Certificate form
 paths:
   /api/united-kingdom-nhs-england-medical-exemption-certificate/grade_additional_flags:
     get:
       summary: List GradeAdditionalFlag records
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: listGradeAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradeAdditionalFlag
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: createGradeAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradeAdditionalFlag by id
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: getGradeAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradeAdditionalFlag
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: updateGradeAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradeAdditionalFlag
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: replaceGradeAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradeAdditionalFlag
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: deleteGradeAdditionalFlag
       responses:
         "200":

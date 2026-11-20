@@ -5,10 +5,19 @@ info:
   title: United Kingdom Council Tax Discount Application — Applicant
   version: 1.0.0
   description: "The liable person applying for the Council Tax discount: name, birth date and contact details."
+x-namespace:
+  form: united-kingdom-council-tax-discount-application
+  apiPrefix: /api/united-kingdom-council-tax-discount-application/
+  sqlSchema: united_kingdom_council_tax_discount_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-council-tax-discount-application/xml
+tags:
+  - name: united-kingdom-council-tax-discount-application
+    description: United Kingdom Council Tax Discount Application form
 paths:
   /api/united-kingdom-council-tax-discount-application/applicants:
     get:
       summary: List Applicant records
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: listApplicant
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Applicant
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: createApplicant
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Applicant by id
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: getApplicant
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Applicant
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: updateApplicant
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Applicant
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: replaceApplicant
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Applicant
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: deleteApplicant
       responses:
         "200":

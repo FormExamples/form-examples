@@ -1,4 +1,5 @@
 <!ELEMENT bowel_cancer_screening_fit_grade (id,created_at,updated_at,deleted_at,bowel_cancer_screening_fit_id,result_class,management_action,symptomatic_pathway,status,graded_at)>
+<!ATTLIST bowel_cancer_screening_fit_grade xmlns CDATA #FIXED "https://formexamples.github.io/bowel-cancer-screening-with-faecal-immunochemical-test/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Cystoscopy Test Result — CystoscopyTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A bladder tumour or suspicious lesion auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: cystoscopy-test-result
+  apiPrefix: /api/cystoscopy-test-result/
+  sqlSchema: cystoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/cystoscopy-test-result/xml
+tags:
+  - name: cystoscopy-test-result
+    description: Cystoscopy Test Result form
 paths:
   /api/cystoscopy-test-result/cystoscopy_test_result_grades:
     get:
       summary: List CystoscopyTestResultGrade records
+      tags: [cystoscopy-test-result]
       operationId: listCystoscopyTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CystoscopyTestResultGrade
+      tags: [cystoscopy-test-result]
       operationId: createCystoscopyTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CystoscopyTestResultGrade by id
+      tags: [cystoscopy-test-result]
       operationId: getCystoscopyTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CystoscopyTestResultGrade
+      tags: [cystoscopy-test-result]
       operationId: updateCystoscopyTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CystoscopyTestResultGrade
+      tags: [cystoscopy-test-result]
       operationId: replaceCystoscopyTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CystoscopyTestResultGrade
+      tags: [cystoscopy-test-result]
       operationId: deleteCystoscopyTestResultGrade
       responses:
         "200":

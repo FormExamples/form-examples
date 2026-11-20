@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "ce12aab3-d9db-49f1-a2f2-ab30ee88bc82",
+  "id": "7555ee83-cd43-5267-8572-90e2cdd6287d",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:bbbed653-04ac-4035-aa80-e2986939851e",
+      "fullUrl": "urn:uuid:41b510a8-b2ae-5e0d-8724-e68ba6782a82",
       "resource": {
         "resourceType": "Patient",
-        "id": "bbbed653-04ac-4035-aa80-e2986939851e",
+        "id": "41b510a8-b2ae-5e0d-8724-e68ba6782a82",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:f9187fc2-fa10-42e6-a137-152a61eb0e16",
+      "fullUrl": "urn:uuid:9f9398cf-4947-55ce-97cc-68675303ce40",
       "resource": {
         "resourceType": "Observation",
-        "id": "f9187fc2-fa10-42e6-a137-152a61eb0e16",
+        "id": "9f9398cf-4947-55ce-97cc-68675303ce40",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:bbbed653-04ac-4035-aa80-e2986939851e"
+          "reference": "urn:uuid:41b510a8-b2ae-5e0d-8724-e68ba6782a82"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:66c1e8f2-f189-412e-abe5-54396a873f49",
+      "fullUrl": "urn:uuid:dc611b1e-409d-5408-9955-65dcac2ff7fe",
       "resource": {
         "resourceType": "Observation",
-        "id": "66c1e8f2-f189-412e-abe5-54396a873f49",
+        "id": "dc611b1e-409d-5408-9955-65dcac2ff7fe",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:bbbed653-04ac-4035-aa80-e2986939851e"
+          "reference": "urn:uuid:41b510a8-b2ae-5e0d-8724-e68ba6782a82"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -639,10 +639,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:c8551c0a-5e97-49ba-aa0e-68b6dfacee2a",
+      "fullUrl": "urn:uuid:d773610b-dc1a-5f0f-8865-ab5b215a4b03",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "c8551c0a-5e97-49ba-aa0e-68b6dfacee2a",
+        "id": "d773610b-dc1a-5f0f-8865-ab5b215a4b03",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -651,7 +651,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:bbbed653-04ac-4035-aa80-e2986939851e"
+          "reference": "urn:uuid:41b510a8-b2ae-5e0d-8724-e68ba6782a82"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -660,10 +660,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:0ce64803-eaa2-43e1-a23f-e4e26039eadc",
+      "fullUrl": "urn:uuid:f938ee5a-5e9f-571e-bca9-6d791918f049",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "0ce64803-eaa2-43e1-a23f-e4e26039eadc",
+        "id": "f938ee5a-5e9f-571e-bca9-6d791918f049",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -693,17 +693,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:bbbed653-04ac-4035-aa80-e2986939851e"
+          "reference": "urn:uuid:41b510a8-b2ae-5e0d-8724-e68ba6782a82"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "One or more abnormal structured findings are present; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:ea3a20c2-471b-4c1d-a508-bbaec2fe1b7a",
+      "fullUrl": "urn:uuid:26f44e3b-188c-58cb-916a-b227d58c8098",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ea3a20c2-471b-4c1d-a508-bbaec2fe1b7a",
+        "id": "26f44e3b-188c-58cb-916a-b227d58c8098",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -733,17 +733,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:bbbed653-04ac-4035-aa80-e2986939851e"
+          "reference": "urn:uuid:41b510a8-b2ae-5e0d-8724-e68ba6782a82"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An actionable abnormal finding (hearing loss present or conductive component) is present; severity graded moderate."
       }
     },
     {
-      "fullUrl": "urn:uuid:595c275a-3497-40d0-a2b6-0b3b2bb436ba",
+      "fullUrl": "urn:uuid:7aa1b485-3396-59cd-bcc6-5f641679c98d",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "595c275a-3497-40d0-a2b6-0b3b2bb436ba",
+        "id": "7aa1b485-3396-59cd-bcc6-5f641679c98d",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -773,17 +773,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:bbbed653-04ac-4035-aa80-e2986939851e"
+          "reference": "urn:uuid:41b510a8-b2ae-5e0d-8724-e68ba6782a82"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Moderate abnormality present; follow-up recommended."
       }
     },
     {
-      "fullUrl": "urn:uuid:e5f87c60-873b-415c-a329-4614643f6957",
+      "fullUrl": "urn:uuid:6351ce24-d378-52e1-b70c-fa18789ffa77",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "e5f87c60-873b-415c-a329-4614643f6957",
+        "id": "6351ce24-d378-52e1-b70c-fa18789ffa77",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -813,7 +813,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:bbbed653-04ac-4035-aa80-e2986939851e"
+          "reference": "urn:uuid:41b510a8-b2ae-5e0d-8724-e68ba6782a82"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Hearing loss is present and may require timely management.",
@@ -827,10 +827,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:2ae45d83-4300-4780-a1a4-68d7be097eb1",
+      "fullUrl": "urn:uuid:38eef781-65cd-5022-94ec-53dac9e5b49b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "2ae45d83-4300-4780-a1a4-68d7be097eb1",
+        "id": "38eef781-65cd-5022-94ec-53dac9e5b49b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -860,7 +860,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:bbbed653-04ac-4035-aa80-e2986939851e"
+          "reference": "urn:uuid:41b510a8-b2ae-5e0d-8724-e68ba6782a82"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A conductive component is present and may warrant ENT referral.",

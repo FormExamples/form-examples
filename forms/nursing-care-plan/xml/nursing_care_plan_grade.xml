@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nursing_care_plan_grade SYSTEM "nursing_care_plan_grade.dtd">
-<nursing_care_plan_grade>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<nursing_care_plan_grade xmlns="https://formexamples.github.io/nursing-care-plan/xml">
+<id>e10ef3fa-779c-5338-8a69-f4e9857c2516</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<nursing_care_plan_id>770e8400-e29b-41d4-a716-446655440002</nursing_care_plan_id>
+<nursing_care_plan_id>a1c8ce1e-e2ef-551a-9194-12bdcf67a5e0</nursing_care_plan_id>
 <status>complete</status>
 <completeness_percent>1</completeness_percent>
 <graded_at>2026-04-09T10:00:00Z</graded_at>

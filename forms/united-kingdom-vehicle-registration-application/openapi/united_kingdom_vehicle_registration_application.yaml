@@ -5,10 +5,19 @@ info:
   title: United Kingdom Vehicle Registration Application — UnitedKingdomVehicleRegistrationApplication
   version: 1.0.0
   description: "Main vehicle registration application record: V62 replacement V5C, V55/4 or V55/5 first registration, imported vehicle, or V627/1 rebuilt or kit vehicle, with keeper, vehicle identity, supporting evidence, fee, and declaration."
+x-namespace:
+  form: united-kingdom-vehicle-registration-application
+  apiPrefix: /api/united-kingdom-vehicle-registration-application/
+  sqlSchema: united_kingdom_vehicle_registration_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-vehicle-registration-application/xml
+tags:
+  - name: united-kingdom-vehicle-registration-application
+    description: United Kingdom Vehicle Registration Application form
 paths:
   /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_applications:
     get:
       summary: List UnitedKingdomVehicleRegistrationApplication records
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: listUnitedKingdomVehicleRegistrationApplication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomVehicleRegistrationApplication
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: createUnitedKingdomVehicleRegistrationApplication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomVehicleRegistrationApplication by id
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: getUnitedKingdomVehicleRegistrationApplication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomVehicleRegistrationApplication
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: updateUnitedKingdomVehicleRegistrationApplication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomVehicleRegistrationApplication
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: replaceUnitedKingdomVehicleRegistrationApplication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomVehicleRegistrationApplication
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: deleteUnitedKingdomVehicleRegistrationApplication
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT paeds_surgery_waiting_list_card_grade_flag (id,created_at,updated_at,deleted_at,paeds_surgery_waiting_list_card_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST paeds_surgery_waiting_list_card_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/paediatric-surgery-waiting-list-card/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

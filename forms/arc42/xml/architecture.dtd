@@ -1,4 +1,5 @@
 <!ELEMENT architecture (id,created_at,updated_at,deleted_at,name,version,owner,status,description)>
+<!ATTLIST architecture xmlns CDATA #FIXED "https://formexamples.github.io/arc42/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

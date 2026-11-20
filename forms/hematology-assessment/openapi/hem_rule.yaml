@@ -5,10 +5,19 @@ info:
   title: Hematology Assessment — HemRule
   version: 1.0.0
   description: Catalogue of 20 hematology rules evaluated during grading.
+x-namespace:
+  form: hematology-assessment
+  apiPrefix: /api/hematology-assessment/
+  sqlSchema: hematology_assessment
+  xmlNamespace: https://formexamples.github.io/hematology-assessment/xml
+tags:
+  - name: hematology-assessment
+    description: Hematology Assessment form
 paths:
   /api/hematology-assessment/hem_rules:
     get:
       summary: List HemRule records
+      tags: [hematology-assessment]
       operationId: listHemRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HemRule
+      tags: [hematology-assessment]
       operationId: createHemRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HemRule by id
+      tags: [hematology-assessment]
       operationId: getHemRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HemRule
+      tags: [hematology-assessment]
       operationId: updateHemRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HemRule
+      tags: [hematology-assessment]
       operationId: replaceHemRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HemRule
+      tags: [hematology-assessment]
       operationId: deleteHemRule
       responses:
         "200":

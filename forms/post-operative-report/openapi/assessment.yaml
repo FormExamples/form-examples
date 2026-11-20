@@ -5,10 +5,19 @@ info:
   title: Post Operative Report — Assessment
   version: 1.0.0
   description: Top-level assessment instance for post-operative-report. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: post-operative-report
+  apiPrefix: /api/post-operative-report/
+  sqlSchema: post_operative_report
+  xmlNamespace: https://formexamples.github.io/post-operative-report/xml
+tags:
+  - name: post-operative-report
+    description: Post Operative Report form
 paths:
   /api/post-operative-report/assessments:
     get:
       summary: List Assessment records
+      tags: [post-operative-report]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [post-operative-report]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [post-operative-report]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [post-operative-report]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [post-operative-report]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [post-operative-report]
       operationId: deleteAssessment
       responses:
         "200":

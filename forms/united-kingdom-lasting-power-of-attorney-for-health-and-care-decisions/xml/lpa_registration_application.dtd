@@ -1,4 +1,5 @@
 <!ELEMENT lpa_registration_application (id,created_at,updated_at,deleted_at,lpa_id,applicant_role,applicant_signed_at,fee_amount_pounds,fee_remission,fee_remission_reason,submitted_at,submission_channel)>
+<!ATTLIST lpa_registration_application xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

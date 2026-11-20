@@ -1,4 +1,5 @@
 <!ELEMENT assessment_allergy_item (id,created_at,updated_at,deleted_at,allergies_id,allergen,allergy_type,reaction,severity,sort_order)>
+<!ATTLIST assessment_allergy_item xmlns CDATA #FIXED "https://formexamples.github.io/patient-intake/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

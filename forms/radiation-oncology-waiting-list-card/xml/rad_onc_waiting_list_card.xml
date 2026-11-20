@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rad_onc_waiting_list_card SYSTEM "rad_onc_waiting_list_card.dtd">
-<rad_onc_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<rad_onc_waiting_list_card xmlns="https://formexamples.github.io/radiation-oncology-waiting-list-card/xml">
+<id>386e363e-1ee0-57d2-8bd6-843ae455df4a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>69af8a82-a390-5b19-a365-fc780e7c832e</patient_id>
+<practitioner_id>6c461da2-93ac-5847-9da4-8435864c22e2</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

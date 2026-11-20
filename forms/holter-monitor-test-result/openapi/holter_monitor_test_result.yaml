@@ -5,10 +5,19 @@ info:
   title: Holter Monitor Test Result — HolterMonitorTestResult
   version: 1.0.0
   description: Ambulatory ECG (Holter) monitor result (report). Captures the monitor type and recording quality, clinical history, the rhythm and rate summary (mean / minimum / maximum heart rate, longest pause, ectopy burden), structured findings (AF, significant pauses, VT, SVT, high-grade AV block, symptom-rhythm correlation, normal study), the narrative and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: holter-monitor-test-result
+  apiPrefix: /api/holter-monitor-test-result/
+  sqlSchema: holter_monitor_test_result
+  xmlNamespace: https://formexamples.github.io/holter-monitor-test-result/xml
+tags:
+  - name: holter-monitor-test-result
+    description: Holter Monitor Test Result form
 paths:
   /api/holter-monitor-test-result/holter_monitor_test_results:
     get:
       summary: List HolterMonitorTestResult records
+      tags: [holter-monitor-test-result]
       operationId: listHolterMonitorTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HolterMonitorTestResult
+      tags: [holter-monitor-test-result]
       operationId: createHolterMonitorTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HolterMonitorTestResult by id
+      tags: [holter-monitor-test-result]
       operationId: getHolterMonitorTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HolterMonitorTestResult
+      tags: [holter-monitor-test-result]
       operationId: updateHolterMonitorTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HolterMonitorTestResult
+      tags: [holter-monitor-test-result]
       operationId: replaceHolterMonitorTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HolterMonitorTestResult
+      tags: [holter-monitor-test-result]
       operationId: deleteHolterMonitorTestResult
       responses:
         "200":

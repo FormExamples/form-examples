@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Chronic Kidney Disease Annual Review form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: chronic-kidney-disease-review
+  apiPrefix: /api/chronic-kidney-disease-review/
+  sqlSchema: chronic_kidney_disease_review
+  xmlNamespace: https://formexamples.github.io/chronic-kidney-disease-review/xml
+tags:
+- name: chronic-kidney-disease-review
+  description: Chronic Kidney Disease Annual Review form
 paths:
   /api/chronic-kidney-disease-review/chronic_kidney_disease_review_grade_flags:
     get:
       summary: List ChronicKidneyDiseaseReviewGradeFlag records
+      tags:
+      - chronic-kidney-disease-review
       operationId: listChronicKidneyDiseaseReviewGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ChronicKidneyDiseaseReviewGradeFlag
+      tags:
+      - chronic-kidney-disease-review
       operationId: createChronicKidneyDiseaseReviewGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ChronicKidneyDiseaseReviewGradeFlag by id
+      tags:
+      - chronic-kidney-disease-review
       operationId: getChronicKidneyDiseaseReviewGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ChronicKidneyDiseaseReviewGradeFlag
+      tags:
+      - chronic-kidney-disease-review
       operationId: updateChronicKidneyDiseaseReviewGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ChronicKidneyDiseaseReviewGradeFlag
+      tags:
+      - chronic-kidney-disease-review
       operationId: replaceChronicKidneyDiseaseReviewGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ChronicKidneyDiseaseReviewGradeFlag
+      tags:
+      - chronic-kidney-disease-review
       operationId: deleteChronicKidneyDiseaseReviewGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/chronic-kidney-disease-review/chronic_kidney_disease_review_grade_rules:
     get:
       summary: List ChronicKidneyDiseaseReviewGradeRule records
+      tags:
+      - chronic-kidney-disease-review
       operationId: listChronicKidneyDiseaseReviewGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ChronicKidneyDiseaseReviewGradeRule
+      tags:
+      - chronic-kidney-disease-review
       operationId: createChronicKidneyDiseaseReviewGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ChronicKidneyDiseaseReviewGradeRule by id
+      tags:
+      - chronic-kidney-disease-review
       operationId: getChronicKidneyDiseaseReviewGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ChronicKidneyDiseaseReviewGradeRule
+      tags:
+      - chronic-kidney-disease-review
       operationId: updateChronicKidneyDiseaseReviewGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ChronicKidneyDiseaseReviewGradeRule
+      tags:
+      - chronic-kidney-disease-review
       operationId: replaceChronicKidneyDiseaseReviewGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ChronicKidneyDiseaseReviewGradeRule
+      tags:
+      - chronic-kidney-disease-review
       operationId: deleteChronicKidneyDiseaseReviewGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/chronic-kidney-disease-review/chronic_kidney_disease_review_grades:
     get:
       summary: List ChronicKidneyDiseaseReviewGrade records
+      tags:
+      - chronic-kidney-disease-review
       operationId: listChronicKidneyDiseaseReviewGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ChronicKidneyDiseaseReviewGrade
+      tags:
+      - chronic-kidney-disease-review
       operationId: createChronicKidneyDiseaseReviewGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ChronicKidneyDiseaseReviewGrade by id
+      tags:
+      - chronic-kidney-disease-review
       operationId: getChronicKidneyDiseaseReviewGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ChronicKidneyDiseaseReviewGrade
+      tags:
+      - chronic-kidney-disease-review
       operationId: updateChronicKidneyDiseaseReviewGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ChronicKidneyDiseaseReviewGrade
+      tags:
+      - chronic-kidney-disease-review
       operationId: replaceChronicKidneyDiseaseReviewGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ChronicKidneyDiseaseReviewGrade
+      tags:
+      - chronic-kidney-disease-review
       operationId: deleteChronicKidneyDiseaseReviewGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/chronic-kidney-disease-review/chronic_kidney_disease_reviews:
     get:
       summary: List ChronicKidneyDiseaseReview records
+      tags:
+      - chronic-kidney-disease-review
       operationId: listChronicKidneyDiseaseReview
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ChronicKidneyDiseaseReview
+      tags:
+      - chronic-kidney-disease-review
       operationId: createChronicKidneyDiseaseReview
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ChronicKidneyDiseaseReview by id
+      tags:
+      - chronic-kidney-disease-review
       operationId: getChronicKidneyDiseaseReview
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ChronicKidneyDiseaseReview
+      tags:
+      - chronic-kidney-disease-review
       operationId: updateChronicKidneyDiseaseReview
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ChronicKidneyDiseaseReview
+      tags:
+      - chronic-kidney-disease-review
       operationId: replaceChronicKidneyDiseaseReview
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ChronicKidneyDiseaseReview
+      tags:
+      - chronic-kidney-disease-review
       operationId: deleteChronicKidneyDiseaseReview
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/chronic-kidney-disease-review/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - chronic-kidney-disease-review
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - chronic-kidney-disease-review
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - chronic-kidney-disease-review
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - chronic-kidney-disease-review
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - chronic-kidney-disease-review
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - chronic-kidney-disease-review
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - chronic-kidney-disease-review
   /api/chronic-kidney-disease-review/patients:
     get:
       summary: List Patient records
+      tags:
+      - chronic-kidney-disease-review
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - chronic-kidney-disease-review
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - chronic-kidney-disease-review
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - chronic-kidney-disease-review
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - chronic-kidney-disease-review
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - chronic-kidney-disease-review
       operationId: deletePatient
       responses:
         '200':

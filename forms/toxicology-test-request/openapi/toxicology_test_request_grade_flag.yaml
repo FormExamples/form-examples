@@ -5,10 +5,19 @@ info:
   title: Toxicology Test Request — ToxicologyTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the toxicology / vetting team.
+x-namespace:
+  form: toxicology-test-request
+  apiPrefix: /api/toxicology-test-request/
+  sqlSchema: toxicology_test_request
+  xmlNamespace: https://formexamples.github.io/toxicology-test-request/xml
+tags:
+  - name: toxicology-test-request
+    description: Toxicology Test Request form
 paths:
   /api/toxicology-test-request/toxicology_test_request_grade_flags:
     get:
       summary: List ToxicologyTestRequestGradeFlag records
+      tags: [toxicology-test-request]
       operationId: listToxicologyTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ToxicologyTestRequestGradeFlag
+      tags: [toxicology-test-request]
       operationId: createToxicologyTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ToxicologyTestRequestGradeFlag by id
+      tags: [toxicology-test-request]
       operationId: getToxicologyTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ToxicologyTestRequestGradeFlag
+      tags: [toxicology-test-request]
       operationId: updateToxicologyTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ToxicologyTestRequestGradeFlag
+      tags: [toxicology-test-request]
       operationId: replaceToxicologyTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ToxicologyTestRequestGradeFlag
+      tags: [toxicology-test-request]
       operationId: deleteToxicologyTestRequestGradeFlag
       responses:
         "200":

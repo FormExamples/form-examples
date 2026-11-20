@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE eye_vision_test_result SYSTEM "eye_vision_test_result.dtd">
-<eye_vision_test_result>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<eye_vision_test_result xmlns="https://formexamples.github.io/eye-vision-test-result/xml">
+<id>e4cda81a-21ef-56cf-8de4-d51b97f87d16</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>897910cf-6ed9-5d60-b054-89bba96d87d4</patient_id>
+<clinician_id>fae0d93e-49df-5cfb-8bf5-8e087de92176</clinician_id>
 <originating_request_reference></originating_request_reference>
 <report_status>preliminary</report_status>
 <test_type>visual-acuity</test_type>

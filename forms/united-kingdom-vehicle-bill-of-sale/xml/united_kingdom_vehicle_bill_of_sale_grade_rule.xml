@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_vehicle_bill_of_sale_grade_rule SYSTEM "united_kingdom_vehicle_bill_of_sale_grade_rule.dtd">
-<united_kingdom_vehicle_bill_of_sale_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<united_kingdom_vehicle_bill_of_sale_grade_rule xmlns="https://formexamples.github.io/united-kingdom-vehicle-bill-of-sale/xml">
+<id>c259251d-f64c-5460-966a-7dcb3dc5ecac</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<united_kingdom_vehicle_bill_of_sale_grade_id>880e8400-e29b-41d4-a716-446655440003</united_kingdom_vehicle_bill_of_sale_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<united_kingdom_vehicle_bill_of_sale_grade_id>b414aff1-31a8-52d1-850a-e1400f53bc43</united_kingdom_vehicle_bill_of_sale_grade_id>
+<rule_id>138d9fb1-82a3-5a92-8715-e979f52b898f</rule_id>
 <dimension>parties</dimension>
 <category>General</category>
 <description>Example text.</description>

@@ -5,10 +5,19 @@ info:
   title: Medical Fit Note — MedicalFitNoteGrade
   version: 1.0.0
   description: Medical fit note grade.
+x-namespace:
+  form: medical-fit-note
+  apiPrefix: /api/medical-fit-note/
+  sqlSchema: medical_fit_note
+  xmlNamespace: https://formexamples.github.io/medical-fit-note/xml
+tags:
+  - name: medical-fit-note
+    description: Medical Fit Note form
 paths:
   /api/medical-fit-note/medical_fit_note_grades:
     get:
       summary: List MedicalFitNoteGrade records
+      tags: [medical-fit-note]
       operationId: listMedicalFitNoteGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalFitNoteGrade
+      tags: [medical-fit-note]
       operationId: createMedicalFitNoteGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalFitNoteGrade by id
+      tags: [medical-fit-note]
       operationId: getMedicalFitNoteGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalFitNoteGrade
+      tags: [medical-fit-note]
       operationId: updateMedicalFitNoteGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalFitNoteGrade
+      tags: [medical-fit-note]
       operationId: replaceMedicalFitNoteGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalFitNoteGrade
+      tags: [medical-fit-note]
       operationId: deleteMedicalFitNoteGrade
       responses:
         "200":

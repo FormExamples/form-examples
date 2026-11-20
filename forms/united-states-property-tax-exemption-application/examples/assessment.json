@@ -1,6 +1,6 @@
 {
   "applicant": {
-    "id": "550e8400-e29b-41d4-a716-00000000005d",
+    "id": "77f8aba4-88d7-57c7-a06b-c4a3f6ecc104",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -12,7 +12,7 @@
     "zipCode": ""
   },
   "assessor": {
-    "id": "550e8400-e29b-41d4-a716-000000000067",
+    "id": "31eece25-a6f2-5d0a-9349-2fc33f2524c6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -25,12 +25,12 @@
     "role": "assessor"
   },
   "propertyTaxExemptionApplication": {
-    "id": "550e8400-e29b-41d4-a716-000000000072",
+    "id": "ae26157a-999e-5f48-98f8-4c9c293cbcff",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "applicantId": "550e8400-e29b-41d4-a716-000000000076",
-    "assessorId": "550e8400-e29b-41d4-a716-000000000077",
+    "applicantId": "54059d36-5782-5171-bef6-7065124f4617",
+    "assessorId": "f434ad04-581b-5d02-a4dd-d77027a17688",
     "applicantName": "",
     "dateOfBirth": null,
     "ageOnAssessmentDate": null,
@@ -69,11 +69,11 @@
     "signatureDate": null
   },
   "propertyTaxExemptionApplicationGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000009c",
+    "id": "84d29f9f-c84c-500c-9f07-71b876091b46",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "propertyTaxExemptionApplicationId": "550e8400-e29b-41d4-a716-0000000000a0",
+    "propertyTaxExemptionApplicationId": "38103222-3f77-5d7f-98b8-d5e06ec11efb",
     "eligibilityClass": "likely-eligible",
     "filingDeadline": null,
     "filedLate": "yes",
@@ -81,22 +81,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "propertyTaxExemptionApplicationGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a6",
+    "id": "95b2a17c-9d7d-58cc-8fc8-c7ec952560d9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "propertyTaxExemptionApplicationGradeId": "550e8400-e29b-41d4-a716-0000000000aa",
+    "propertyTaxExemptionApplicationGradeId": "e2597d12-9f6d-5a6e-879a-ed38f2ae31f0",
     "ruleId": "",
     "dimension": "ownership",
     "category": "",
     "description": ""
   },
   "propertyTaxExemptionApplicationGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000af",
+    "id": "85221525-fd9a-5873-90e0-a7638e3202a3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "propertyTaxExemptionApplicationGradeId": "550e8400-e29b-41d4-a716-0000000000b3",
+    "propertyTaxExemptionApplicationGradeId": "3d21d26e-5358-511f-aaf6-67d7be86df17",
     "flagId": "",
     "category": "ownership",
     "priority": "low",

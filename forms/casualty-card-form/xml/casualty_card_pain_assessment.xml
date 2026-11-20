@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE casualty_card_pain_assessment SYSTEM "casualty_card_pain_assessment.dtd">
-<casualty_card_pain_assessment>
-<id>dd0e8400-e29b-41d4-a716-446655440008</id>
+<casualty_card_pain_assessment xmlns="https://formexamples.github.io/casualty-card-form/xml">
+<id>7dfade1f-7b22-5b94-8826-4ba66c581341</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<casualty_card_id>770e8400-e29b-41d4-a716-446655440002</casualty_card_id>
+<casualty_card_id>8adbfe12-8ed7-5b00-800a-0bdbdfa13f84</casualty_card_id>
 <pain_present>yes</pain_present>
 <pain_score>5</pain_score>
 <pain_location>Example location</pain_location>

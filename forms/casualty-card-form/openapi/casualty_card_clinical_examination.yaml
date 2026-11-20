@@ -5,10 +5,19 @@ info:
   title: Casualty Card Form — CasualtyCardClinicalExamination
   version: 1.0.0
   description: 1:1 with casualty_card. Systems-based clinical examination findings.
+x-namespace:
+  form: casualty-card-form
+  apiPrefix: /api/casualty-card-form/
+  sqlSchema: casualty_card_form
+  xmlNamespace: https://formexamples.github.io/casualty-card-form/xml
+tags:
+  - name: casualty-card-form
+    description: Casualty Card Form form
 paths:
   /api/casualty-card-form/casualty_card_clinical_examinations:
     get:
       summary: List CasualtyCardClinicalExamination records
+      tags: [casualty-card-form]
       operationId: listCasualtyCardClinicalExamination
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CasualtyCardClinicalExamination
+      tags: [casualty-card-form]
       operationId: createCasualtyCardClinicalExamination
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CasualtyCardClinicalExamination by id
+      tags: [casualty-card-form]
       operationId: getCasualtyCardClinicalExamination
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CasualtyCardClinicalExamination
+      tags: [casualty-card-form]
       operationId: updateCasualtyCardClinicalExamination
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CasualtyCardClinicalExamination
+      tags: [casualty-card-form]
       operationId: replaceCasualtyCardClinicalExamination
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CasualtyCardClinicalExamination
+      tags: [casualty-card-form]
       operationId: deleteCasualtyCardClinicalExamination
       responses:
         "200":

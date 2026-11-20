@@ -5,10 +5,19 @@ info:
   title: Seasonal Affective Disorder Assessment — GradingAdditionalFlag
   version: 1.0.0
   description: Additional safety-critical flags detected during SAD assessment grading (e.g. suicidal ideation, severe PHQ-9 score).
+x-namespace:
+  form: seasonal-affective-disorder-assessment
+  apiPrefix: /api/seasonal-affective-disorder-assessment/
+  sqlSchema: seasonal_affective_disorder_assessment
+  xmlNamespace: https://formexamples.github.io/seasonal-affective-disorder-assessment/xml
+tags:
+  - name: seasonal-affective-disorder-assessment
+    description: Seasonal Affective Disorder Assessment form
 paths:
   /api/seasonal-affective-disorder-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [seasonal-affective-disorder-assessment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [seasonal-affective-disorder-assessment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [seasonal-affective-disorder-assessment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [seasonal-affective-disorder-assessment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [seasonal-affective-disorder-assessment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [seasonal-affective-disorder-assessment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

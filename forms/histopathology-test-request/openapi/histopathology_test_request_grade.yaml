@@ -5,10 +5,19 @@ info:
   title: Histopathology Test Request — HistopathologyTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (indication match / RCPath cancer datasets, 1-9), specimen quality, request completeness, and urgency / triage priority."
+x-namespace:
+  form: histopathology-test-request
+  apiPrefix: /api/histopathology-test-request/
+  sqlSchema: histopathology_test_request
+  xmlNamespace: https://formexamples.github.io/histopathology-test-request/xml
+tags:
+  - name: histopathology-test-request
+    description: Histopathology Test Request form
 paths:
   /api/histopathology-test-request/histopathology_test_request_grades:
     get:
       summary: List HistopathologyTestRequestGrade records
+      tags: [histopathology-test-request]
       operationId: listHistopathologyTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HistopathologyTestRequestGrade
+      tags: [histopathology-test-request]
       operationId: createHistopathologyTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HistopathologyTestRequestGrade by id
+      tags: [histopathology-test-request]
       operationId: getHistopathologyTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HistopathologyTestRequestGrade
+      tags: [histopathology-test-request]
       operationId: updateHistopathologyTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HistopathologyTestRequestGrade
+      tags: [histopathology-test-request]
       operationId: replaceHistopathologyTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HistopathologyTestRequestGrade
+      tags: [histopathology-test-request]
       operationId: deleteHistopathologyTestRequestGrade
       responses:
         "200":

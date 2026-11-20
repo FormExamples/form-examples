@@ -5,10 +5,19 @@ info:
   title: Arc42 — TechnologyDecision
   version: 1.0.0
   description: Technology decision captured in §4 Solution Strategy of the arc42 documentation.
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+  - name: arc42
+    description: Arc42 form
 paths:
   /api/arc42/technology_decisions:
     get:
       summary: List TechnologyDecision records
+      tags: [arc42]
       operationId: listTechnologyDecision
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new TechnologyDecision
+      tags: [arc42]
       operationId: createTechnologyDecision
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one TechnologyDecision by id
+      tags: [arc42]
       operationId: getTechnologyDecision
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing TechnologyDecision
+      tags: [arc42]
       operationId: updateTechnologyDecision
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing TechnologyDecision
+      tags: [arc42]
       operationId: replaceTechnologyDecision
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a TechnologyDecision
+      tags: [arc42]
       operationId: deleteTechnologyDecision
       responses:
         "200":

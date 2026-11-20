@@ -1,4 +1,5 @@
 <!ELEMENT vehicle_title_application_grade (id,created_at,updated_at,deleted_at,vehicle_title_application_id,application_class,vin_status,odometer_disclosure_required,brand_or_lien_issue,outstanding_item_count,state_rule_known,graded_at)>
+<!ATTLIST vehicle_title_application_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-states-vehicle-title-and-registration-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

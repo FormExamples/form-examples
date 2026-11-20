@@ -5,10 +5,19 @@ info:
   title: United States Last Will And Testament — UnitedStatesLastWillAndTestamentGrade
   version: 1.0.0
   description: "Computed completeness and validity-classification result for a will plan: validity class (valid-ready-to-execute/incomplete/formality-risk), residuary total, estimated spousal elective share, witness count, whether self-proved, federal estate-tax exposure, and the source of the state rule."
+x-namespace:
+  form: united-states-last-will-and-testament
+  apiPrefix: /api/united-states-last-will-and-testament/
+  sqlSchema: united_states_last_will_and_testament
+  xmlNamespace: https://formexamples.github.io/united-states-last-will-and-testament/xml
+tags:
+  - name: united-states-last-will-and-testament
+    description: United States Last Will And Testament form
 paths:
   /api/united-states-last-will-and-testament/united_states_last_will_and_testament_grades:
     get:
       summary: List UnitedStatesLastWillAndTestamentGrade records
+      tags: [united-states-last-will-and-testament]
       operationId: listUnitedStatesLastWillAndTestamentGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesLastWillAndTestamentGrade
+      tags: [united-states-last-will-and-testament]
       operationId: createUnitedStatesLastWillAndTestamentGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesLastWillAndTestamentGrade by id
+      tags: [united-states-last-will-and-testament]
       operationId: getUnitedStatesLastWillAndTestamentGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesLastWillAndTestamentGrade
+      tags: [united-states-last-will-and-testament]
       operationId: updateUnitedStatesLastWillAndTestamentGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesLastWillAndTestamentGrade
+      tags: [united-states-last-will-and-testament]
       operationId: replaceUnitedStatesLastWillAndTestamentGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesLastWillAndTestamentGrade
+      tags: [united-states-last-will-and-testament]
       operationId: deleteUnitedStatesLastWillAndTestamentGrade
       responses:
         "200":

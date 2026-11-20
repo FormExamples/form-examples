@@ -5,10 +5,19 @@ info:
   title: Medical Operation Note — MedicalOperationNoteGrade
   version: 1.0.0
   description: Computed and signed-off operative-risk grading result. Stores both the engine-computed composite risk grade and the surgeon-final grade with an override reason.
+x-namespace:
+  form: medical-operation-note
+  apiPrefix: /api/medical-operation-note/
+  sqlSchema: medical_operation_note
+  xmlNamespace: https://formexamples.github.io/medical-operation-note/xml
+tags:
+  - name: medical-operation-note
+    description: Medical Operation Note form
 paths:
   /api/medical-operation-note/medical_operation_note_grades:
     get:
       summary: List MedicalOperationNoteGrade records
+      tags: [medical-operation-note]
       operationId: listMedicalOperationNoteGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalOperationNoteGrade
+      tags: [medical-operation-note]
       operationId: createMedicalOperationNoteGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalOperationNoteGrade by id
+      tags: [medical-operation-note]
       operationId: getMedicalOperationNoteGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalOperationNoteGrade
+      tags: [medical-operation-note]
       operationId: updateMedicalOperationNoteGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalOperationNoteGrade
+      tags: [medical-operation-note]
       operationId: replaceMedicalOperationNoteGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalOperationNoteGrade
+      tags: [medical-operation-note]
       operationId: deleteMedicalOperationNoteGrade
       responses:
         "200":

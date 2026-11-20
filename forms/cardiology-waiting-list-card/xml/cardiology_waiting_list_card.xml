@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cardiology_waiting_list_card SYSTEM "cardiology_waiting_list_card.dtd">
-<cardiology_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<cardiology_waiting_list_card xmlns="https://formexamples.github.io/cardiology-waiting-list-card/xml">
+<id>d3e18ac2-a455-5672-a139-dd1dcff1df6c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>c75542a7-262c-5d71-8991-b35fe158a0eb</patient_id>
+<practitioner_id>08b8862e-aaea-57fb-b798-af106603cc0c</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dexa_bone_density_test_result_grade_rule SYSTEM "dexa_bone_density_test_result_grade_rule.dtd">
-<dexa_bone_density_test_result_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<dexa_bone_density_test_result_grade_rule xmlns="https://formexamples.github.io/dexa-bone-density-test-result/xml">
+<id>8d5919e9-0d1c-5e44-a0d4-83ff72a0a50a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<dexa_bone_density_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</dexa_bone_density_test_result_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<dexa_bone_density_test_result_grade_id>6944f103-54f6-575b-871a-30724cc54408</dexa_bone_density_test_result_grade_id>
+<rule_id>3099b38d-0d5c-518d-87bb-84c05795ce78</rule_id>
 <axis>classification</axis>
 <category>General</category>
 <description>Example text.</description>

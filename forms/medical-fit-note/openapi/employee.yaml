@@ -5,10 +5,19 @@ info:
   title: Medical Fit Note — Employee
   version: 1.0.0
   description: Employee.
+x-namespace:
+  form: medical-fit-note
+  apiPrefix: /api/medical-fit-note/
+  sqlSchema: medical_fit_note
+  xmlNamespace: https://formexamples.github.io/medical-fit-note/xml
+tags:
+  - name: medical-fit-note
+    description: Medical Fit Note form
 paths:
   /api/medical-fit-note/employees:
     get:
       summary: List Employee records
+      tags: [medical-fit-note]
       operationId: listEmployee
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Employee
+      tags: [medical-fit-note]
       operationId: createEmployee
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Employee by id
+      tags: [medical-fit-note]
       operationId: getEmployee
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Employee
+      tags: [medical-fit-note]
       operationId: updateEmployee
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Employee
+      tags: [medical-fit-note]
       operationId: replaceEmployee
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Employee
+      tags: [medical-fit-note]
       operationId: deleteEmployee
       responses:
         "200":

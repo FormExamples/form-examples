@@ -5,10 +5,19 @@ info:
   title: Newborn Blood Spot Screening — Patient
   version: 1.0.0
   description: Patient demographic information for the newborn (infant) documented by the newborn-blood-spot-screening record.
+x-namespace:
+  form: newborn-blood-spot-screening
+  apiPrefix: /api/newborn-blood-spot-screening/
+  sqlSchema: newborn_blood_spot_screening
+  xmlNamespace: https://formexamples.github.io/newborn-blood-spot-screening/xml
+tags:
+  - name: newborn-blood-spot-screening
+    description: Newborn Blood Spot Screening form
 paths:
   /api/newborn-blood-spot-screening/patients:
     get:
       summary: List Patient records
+      tags: [newborn-blood-spot-screening]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [newborn-blood-spot-screening]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [newborn-blood-spot-screening]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [newborn-blood-spot-screening]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [newborn-blood-spot-screening]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [newborn-blood-spot-screening]
       operationId: deletePatient
       responses:
         "200":

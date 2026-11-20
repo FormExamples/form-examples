@@ -5,10 +5,19 @@ info:
   title: Columbia Suicide Severity Rating Scale — Clinician
   version: 1.0.0
   description: Clinician identifying information for the member of staff who performed the C-SSRS suicide-risk assessment.
+x-namespace:
+  form: columbia-suicide-severity-rating-scale
+  apiPrefix: /api/columbia-suicide-severity-rating-scale/
+  sqlSchema: columbia_suicide_severity_rating_scale
+  xmlNamespace: https://formexamples.github.io/columbia-suicide-severity-rating-scale/xml
+tags:
+  - name: columbia-suicide-severity-rating-scale
+    description: Columbia Suicide Severity Rating Scale form
 paths:
   /api/columbia-suicide-severity-rating-scale/clinicians:
     get:
       summary: List Clinician records
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [columbia-suicide-severity-rating-scale]
       operationId: deleteClinician
       responses:
         "200":

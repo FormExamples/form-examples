@@ -5,10 +5,19 @@ info:
   title: Venereology Waiting List Card — VenereologyWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a venereology waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: venereology-waiting-list-card
+  apiPrefix: /api/venereology-waiting-list-card/
+  sqlSchema: venereology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/venereology-waiting-list-card/xml
+tags:
+  - name: venereology-waiting-list-card
+    description: Venereology Waiting List Card form
 paths:
   /api/venereology-waiting-list-card/venereology_waiting_list_cards:
     get:
       summary: List VenereologyWaitingListCard records
+      tags: [venereology-waiting-list-card]
       operationId: listVenereologyWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new VenereologyWaitingListCard
+      tags: [venereology-waiting-list-card]
       operationId: createVenereologyWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one VenereologyWaitingListCard by id
+      tags: [venereology-waiting-list-card]
       operationId: getVenereologyWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing VenereologyWaitingListCard
+      tags: [venereology-waiting-list-card]
       operationId: updateVenereologyWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing VenereologyWaitingListCard
+      tags: [venereology-waiting-list-card]
       operationId: replaceVenereologyWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a VenereologyWaitingListCard
+      tags: [venereology-waiting-list-card]
       operationId: deleteVenereologyWaitingListCard
       responses:
         "200":

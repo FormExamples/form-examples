@@ -1,4 +1,5 @@
 <!ELEMENT united_states_vehicle_bill_of_sale_grade (id,created_at,updated_at,deleted_at,united_states_vehicle_bill_of_sale_id,completeness_class,odometer_disclosure_exempt,state_rule_known,graded_at)>
+<!ATTLIST united_states_vehicle_bill_of_sale_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-states-vehicle-bill-of-sale/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

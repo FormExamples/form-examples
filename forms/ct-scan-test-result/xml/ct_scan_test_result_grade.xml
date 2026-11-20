@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ct_scan_test_result_grade SYSTEM "ct_scan_test_result_grade.dtd">
-<ct_scan_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<ct_scan_test_result_grade xmlns="https://formexamples.github.io/ct-scan-test-result/xml">
+<id>babc4465-eca6-573e-b903-16c794c7d306</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<ct_scan_test_result_id>770e8400-e29b-41d4-a716-446655440002</ct_scan_test_result_id>
+<ct_scan_test_result_id>08b27458-3f99-50aa-8903-ab88b95d9c3c</ct_scan_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

@@ -5,10 +5,19 @@ info:
   title: Genetic Assessment — AssessmentFamilyPedigree
   version: 1.0.0
   description: "Family pedigree section: family structure, consanguinity, and adoption status. One-to-one child of assessment."
+x-namespace:
+  form: genetic-assessment
+  apiPrefix: /api/genetic-assessment/
+  sqlSchema: genetic_assessment
+  xmlNamespace: https://formexamples.github.io/genetic-assessment/xml
+tags:
+  - name: genetic-assessment
+    description: Genetic Assessment form
 paths:
   /api/genetic-assessment/assessment_family_pedigrees:
     get:
       summary: List AssessmentFamilyPedigree records
+      tags: [genetic-assessment]
       operationId: listAssessmentFamilyPedigree
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentFamilyPedigree
+      tags: [genetic-assessment]
       operationId: createAssessmentFamilyPedigree
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentFamilyPedigree by id
+      tags: [genetic-assessment]
       operationId: getAssessmentFamilyPedigree
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentFamilyPedigree
+      tags: [genetic-assessment]
       operationId: updateAssessmentFamilyPedigree
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentFamilyPedigree
+      tags: [genetic-assessment]
       operationId: replaceAssessmentFamilyPedigree
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentFamilyPedigree
+      tags: [genetic-assessment]
       operationId: deleteAssessmentFamilyPedigree
       responses:
         "200":

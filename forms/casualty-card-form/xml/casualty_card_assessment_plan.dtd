@@ -1,4 +1,5 @@
 <!ELEMENT casualty_card_assessment_plan (id,created_at,updated_at,deleted_at,casualty_card_id,working_diagnosis,differential_diagnoses,clinical_impression,risk_stratification)>
+<!ATTLIST casualty_card_assessment_plan xmlns CDATA #FIXED "https://formexamples.github.io/casualty-card-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

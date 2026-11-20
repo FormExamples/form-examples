@@ -5,10 +5,19 @@ info:
   title: Histopathology Test Result — HistopathologyTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. an unexpected malignancy) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: histopathology-test-result
+  apiPrefix: /api/histopathology-test-result/
+  sqlSchema: histopathology_test_result
+  xmlNamespace: https://formexamples.github.io/histopathology-test-result/xml
+tags:
+  - name: histopathology-test-result
+    description: Histopathology Test Result form
 paths:
   /api/histopathology-test-result/histopathology_test_result_grades:
     get:
       summary: List HistopathologyTestResultGrade records
+      tags: [histopathology-test-result]
       operationId: listHistopathologyTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HistopathologyTestResultGrade
+      tags: [histopathology-test-result]
       operationId: createHistopathologyTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HistopathologyTestResultGrade by id
+      tags: [histopathology-test-result]
       operationId: getHistopathologyTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HistopathologyTestResultGrade
+      tags: [histopathology-test-result]
       operationId: updateHistopathologyTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HistopathologyTestResultGrade
+      tags: [histopathology-test-result]
       operationId: replaceHistopathologyTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HistopathologyTestResultGrade
+      tags: [histopathology-test-result]
       operationId: deleteHistopathologyTestResultGrade
       responses:
         "200":

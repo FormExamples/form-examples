@@ -5,10 +5,19 @@ info:
   title: General Surgery Waiting List Card — GenSurgeryWaitingListCardAppointment
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+x-namespace:
+  form: general-surgery-waiting-list-card
+  apiPrefix: /api/general-surgery-waiting-list-card/
+  sqlSchema: general_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/general-surgery-waiting-list-card/xml
+tags:
+  - name: general-surgery-waiting-list-card
+    description: General Surgery Waiting List Card form
 paths:
   /api/general-surgery-waiting-list-card/gen_surgery_waiting_list_card_appointments:
     get:
       summary: List GenSurgeryWaitingListCardAppointment records
+      tags: [general-surgery-waiting-list-card]
       operationId: listGenSurgeryWaitingListCardAppointment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GenSurgeryWaitingListCardAppointment
+      tags: [general-surgery-waiting-list-card]
       operationId: createGenSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GenSurgeryWaitingListCardAppointment by id
+      tags: [general-surgery-waiting-list-card]
       operationId: getGenSurgeryWaitingListCardAppointment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GenSurgeryWaitingListCardAppointment
+      tags: [general-surgery-waiting-list-card]
       operationId: updateGenSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GenSurgeryWaitingListCardAppointment
+      tags: [general-surgery-waiting-list-card]
       operationId: replaceGenSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GenSurgeryWaitingListCardAppointment
+      tags: [general-surgery-waiting-list-card]
       operationId: deleteGenSurgeryWaitingListCardAppointment
       responses:
         "200":

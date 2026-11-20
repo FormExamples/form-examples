@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Oncology Waiting List Card form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: oncology-waiting-list-card
+  apiPrefix: /api/oncology-waiting-list-card/
+  sqlSchema: oncology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/oncology-waiting-list-card/xml
+tags:
+- name: oncology-waiting-list-card
+  description: Oncology Waiting List Card form
 paths:
   /api/oncology-waiting-list-card/oncology_waiting_list_card_appointments:
     get:
       summary: List OncologyWaitingListCardAppointment records
+      tags:
+      - oncology-waiting-list-card
       operationId: listOncologyWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OncologyWaitingListCardAppointment
+      tags:
+      - oncology-waiting-list-card
       operationId: createOncologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OncologyWaitingListCardAppointment by id
+      tags:
+      - oncology-waiting-list-card
       operationId: getOncologyWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OncologyWaitingListCardAppointment
+      tags:
+      - oncology-waiting-list-card
       operationId: updateOncologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OncologyWaitingListCardAppointment
+      tags:
+      - oncology-waiting-list-card
       operationId: replaceOncologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OncologyWaitingListCardAppointment
+      tags:
+      - oncology-waiting-list-card
       operationId: deleteOncologyWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/oncology-waiting-list-card/oncology_waiting_list_card_grade_flags:
     get:
       summary: List OncologyWaitingListCardGradeFlag records
+      tags:
+      - oncology-waiting-list-card
       operationId: listOncologyWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OncologyWaitingListCardGradeFlag
+      tags:
+      - oncology-waiting-list-card
       operationId: createOncologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OncologyWaitingListCardGradeFlag by id
+      tags:
+      - oncology-waiting-list-card
       operationId: getOncologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OncologyWaitingListCardGradeFlag
+      tags:
+      - oncology-waiting-list-card
       operationId: updateOncologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OncologyWaitingListCardGradeFlag
+      tags:
+      - oncology-waiting-list-card
       operationId: replaceOncologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OncologyWaitingListCardGradeFlag
+      tags:
+      - oncology-waiting-list-card
       operationId: deleteOncologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/oncology-waiting-list-card/oncology_waiting_list_card_grade_rules:
     get:
       summary: List OncologyWaitingListCardGradeRule records
+      tags:
+      - oncology-waiting-list-card
       operationId: listOncologyWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OncologyWaitingListCardGradeRule
+      tags:
+      - oncology-waiting-list-card
       operationId: createOncologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OncologyWaitingListCardGradeRule by id
+      tags:
+      - oncology-waiting-list-card
       operationId: getOncologyWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OncologyWaitingListCardGradeRule
+      tags:
+      - oncology-waiting-list-card
       operationId: updateOncologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OncologyWaitingListCardGradeRule
+      tags:
+      - oncology-waiting-list-card
       operationId: replaceOncologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OncologyWaitingListCardGradeRule
+      tags:
+      - oncology-waiting-list-card
       operationId: deleteOncologyWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/oncology-waiting-list-card/oncology_waiting_list_card_grades:
     get:
       summary: List OncologyWaitingListCardGrade records
+      tags:
+      - oncology-waiting-list-card
       operationId: listOncologyWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OncologyWaitingListCardGrade
+      tags:
+      - oncology-waiting-list-card
       operationId: createOncologyWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OncologyWaitingListCardGrade by id
+      tags:
+      - oncology-waiting-list-card
       operationId: getOncologyWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OncologyWaitingListCardGrade
+      tags:
+      - oncology-waiting-list-card
       operationId: updateOncologyWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OncologyWaitingListCardGrade
+      tags:
+      - oncology-waiting-list-card
       operationId: replaceOncologyWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OncologyWaitingListCardGrade
+      tags:
+      - oncology-waiting-list-card
       operationId: deleteOncologyWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/oncology-waiting-list-card/oncology_waiting_list_cards:
     get:
       summary: List OncologyWaitingListCard records
+      tags:
+      - oncology-waiting-list-card
       operationId: listOncologyWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OncologyWaitingListCard
+      tags:
+      - oncology-waiting-list-card
       operationId: createOncologyWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OncologyWaitingListCard by id
+      tags:
+      - oncology-waiting-list-card
       operationId: getOncologyWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OncologyWaitingListCard
+      tags:
+      - oncology-waiting-list-card
       operationId: updateOncologyWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OncologyWaitingListCard
+      tags:
+      - oncology-waiting-list-card
       operationId: replaceOncologyWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OncologyWaitingListCard
+      tags:
+      - oncology-waiting-list-card
       operationId: deleteOncologyWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - oncology-waiting-list-card
   /api/oncology-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - oncology-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - oncology-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - oncology-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - oncology-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - oncology-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - oncology-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/oncology-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - oncology-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - oncology-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - oncology-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - oncology-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - oncology-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - oncology-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

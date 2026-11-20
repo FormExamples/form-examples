@@ -1,4 +1,5 @@
 <!ELEMENT assessment_family_pedigree (id,created_at,updated_at,deleted_at,assessment_id,total_first_degree_relatives,total_second_degree_relatives,consanguinity_in_family,consanguinity_details,adoption_status,pedigree_notes,three_generation_pedigree_drawn)>
+<!ATTLIST assessment_family_pedigree xmlns CDATA #FIXED "https://formexamples.github.io/genetic-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

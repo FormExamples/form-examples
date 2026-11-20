@@ -5,10 +5,19 @@ info:
   title: Return To Work — ReturnToWorkRestriction
   version: 1.0.0
   description: Individual workplace restriction or reasonable adjustment associated with a Return to Work record. Many-to-one relation to return_to_work.
+x-namespace:
+  form: return-to-work
+  apiPrefix: /api/return-to-work/
+  sqlSchema: return_to_work
+  xmlNamespace: https://formexamples.github.io/return-to-work/xml
+tags:
+  - name: return-to-work
+    description: Return To Work form
 paths:
   /api/return-to-work/return_to_work_restrictions:
     get:
       summary: List ReturnToWorkRestriction records
+      tags: [return-to-work]
       operationId: listReturnToWorkRestriction
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ReturnToWorkRestriction
+      tags: [return-to-work]
       operationId: createReturnToWorkRestriction
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ReturnToWorkRestriction by id
+      tags: [return-to-work]
       operationId: getReturnToWorkRestriction
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ReturnToWorkRestriction
+      tags: [return-to-work]
       operationId: updateReturnToWorkRestriction
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ReturnToWorkRestriction
+      tags: [return-to-work]
       operationId: replaceReturnToWorkRestriction
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ReturnToWorkRestriction
+      tags: [return-to-work]
       operationId: deleteReturnToWorkRestriction
       responses:
         "200":

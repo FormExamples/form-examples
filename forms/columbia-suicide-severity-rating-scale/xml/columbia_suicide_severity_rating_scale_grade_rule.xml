@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE columbia_suicide_severity_rating_scale_grade_rule SYSTEM "columbia_suicide_severity_rating_scale_grade_rule.dtd">
-<columbia_suicide_severity_rating_scale_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<columbia_suicide_severity_rating_scale_grade_rule xmlns="https://formexamples.github.io/columbia-suicide-severity-rating-scale/xml">
+<id>72482123-01ef-5cbd-8701-e623fdb6be56</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<columbia_suicide_severity_rating_scale_grade_id>880e8400-e29b-41d4-a716-446655440003</columbia_suicide_severity_rating_scale_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<columbia_suicide_severity_rating_scale_grade_id>c1fedc31-72c0-56b3-a1b9-635b57722f64</columbia_suicide_severity_rating_scale_grade_id>
+<rule_id>51c33ae6-f3b5-56b8-80ad-164db7fcfef1</rule_id>
 <dimension>ideation</dimension>
 <tier>low</tier>
 <category>General</category>

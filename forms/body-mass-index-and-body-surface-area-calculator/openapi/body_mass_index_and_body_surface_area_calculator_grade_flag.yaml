@@ -5,10 +5,19 @@ info:
   title: Body Mass Index And Body Surface Area Calculator — BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the BMI category, with priority and a suggested action for the recording clinician.
+x-namespace:
+  form: body-mass-index-and-body-surface-area-calculator
+  apiPrefix: /api/body-mass-index-and-body-surface-area-calculator/
+  sqlSchema: body_mass_index_and_body_surface_area_calculator
+  xmlNamespace: https://formexamples.github.io/body-mass-index-and-body-surface-area-calculator/xml
+tags:
+  - name: body-mass-index-and-body-surface-area-calculator
+    description: Body Mass Index And Body Surface Area Calculator form
 paths:
   /api/body-mass-index-and-body-surface-area-calculator/body_mass_index_and_body_surface_area_calculator_grade_flags:
     get:
       summary: List BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag records
+      tags: [body-mass-index-and-body-surface-area-calculator]
       operationId: listBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      tags: [body-mass-index-and-body-surface-area-calculator]
       operationId: createBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag by id
+      tags: [body-mass-index-and-body-surface-area-calculator]
       operationId: getBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      tags: [body-mass-index-and-body-surface-area-calculator]
       operationId: updateBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      tags: [body-mass-index-and-body-surface-area-calculator]
       operationId: replaceBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
+      tags: [body-mass-index-and-body-surface-area-calculator]
       operationId: deleteBodyMassIndexAndBodySurfaceAreaCalculatorGradeFlag
       responses:
         "200":

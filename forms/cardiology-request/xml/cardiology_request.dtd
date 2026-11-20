@@ -1,4 +1,5 @@
 <!ELEMENT cardiology_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,requested_service,referral_reason,clinical_question,relevant_history,symptom_chest_pain,chest_pain_character,symptom_breathlessness,nyha_class,symptom_palpitations,symptom_syncope,symptom_oedema,suspected_acs,exertional_syncope,new_onset_heart_failure,ecg_done,ecg_findings,troponin_status,bnp_status,known_coronary_artery_disease,previous_mi,heart_failure,valve_disease,arrhythmia,hypertension,diabetes,current_medications,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST cardiology_request xmlns CDATA #FIXED "https://formexamples.github.io/cardiology-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

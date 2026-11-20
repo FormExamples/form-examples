@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "a5991e77-8526-4608-a152-09e9c7e521a6",
+  "id": "b03b1eeb-0c25-5e73-a5a5-48e59d962411",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c",
+      "fullUrl": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f",
       "resource": {
         "resourceType": "Patient",
-        "id": "d30ef46a-d73d-4cba-a033-867be79a988c",
+        "id": "a002270f-f0cb-578a-9bd9-30ba729aa66f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:6d4bc153-cb9c-43a4-a125-8ec70a4a9a59",
+      "fullUrl": "urn:uuid:7d7e044a-1800-5934-bf7d-ce69822bc237",
       "resource": {
         "resourceType": "Observation",
-        "id": "6d4bc153-cb9c-43a4-a125-8ec70a4a9a59",
+        "id": "7d7e044a-1800-5934-bf7d-ce69822bc237",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:b836baa0-1949-45a0-aa40-8a30aaa85bf0",
+      "fullUrl": "urn:uuid:876513a3-3407-5971-b4e6-09419bcd6957",
       "resource": {
         "resourceType": "Observation",
-        "id": "b836baa0-1949-45a0-aa40-8a30aaa85bf0",
+        "id": "876513a3-3407-5971-b4e6-09419bcd6957",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -530,10 +530,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:4b484159-31b9-4962-aacb-7c34ef8047c9",
+      "fullUrl": "urn:uuid:6bcb8ece-a660-521a-b58a-81f4a986eaa5",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "4b484159-31b9-4962-aacb-7c34ef8047c9",
+        "id": "6bcb8ece-a660-521a-b58a-81f4a986eaa5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -542,7 +542,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -551,10 +551,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:20b6c70c-92cf-4613-ab2d-1a2138b737c4",
+      "fullUrl": "urn:uuid:c37e3bfd-25db-555d-897b-d81273847185",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "20b6c70c-92cf-4613-ab2d-1a2138b737c4",
+        "id": "c37e3bfd-25db-555d-897b-d81273847185",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -584,17 +584,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical organism / result (positive blood culture, CSF isolate, CPE, or flagged critical organism) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:2cf5213d-5aec-43a5-aa83-2850f1803d06",
+      "fullUrl": "urn:uuid:3b55285e-f76b-5331-9036-ebeb04e66ea2",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "2cf5213d-5aec-43a5-aa83-2850f1803d06",
+        "id": "3b55285e-f76b-5331-9036-ebeb04e66ea2",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -624,17 +624,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical organism / result present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:541d1a7e-cd63-4d3a-a5dc-1e033d331ded",
+      "fullUrl": "urn:uuid:ed77d447-2aaf-5b68-a167-5b747ca69d82",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "541d1a7e-cd63-4d3a-a5dc-1e033d331ded",
+        "id": "ed77d447-2aaf-5b68-a167-5b747ca69d82",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -664,17 +664,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: clinical history."
       }
     },
     {
-      "fullUrl": "urn:uuid:1c479b09-da65-48ea-a3df-8083c09d9971",
+      "fullUrl": "urn:uuid:52f698ca-374e-5ce7-aff6-370447410d68",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "1c479b09-da65-48ea-a3df-8083c09d9971",
+        "id": "52f698ca-374e-5ce7-aff6-370447410d68",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -704,17 +704,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: antibiotic sensitivities."
       }
     },
     {
-      "fullUrl": "urn:uuid:1f144847-baec-47ba-a7d3-4b791a3b51f4",
+      "fullUrl": "urn:uuid:f8e534e2-aac7-5c35-9a06-a654e6e02b11",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "1f144847-baec-47ba-a7d3-4b791a3b51f4",
+        "id": "f8e534e2-aac7-5c35-9a06-a654e6e02b11",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -744,17 +744,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: impression."
       }
     },
     {
-      "fullUrl": "urn:uuid:cff4f7e4-8837-42db-abc7-a7be36c06aa0",
+      "fullUrl": "urn:uuid:8ec07837-c79f-5af3-9f18-49fd3fd2874a",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "cff4f7e4-8837-42db-abc7-a7be36c06aa0",
+        "id": "8ec07837-c79f-5af3-9f18-49fd3fd2874a",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -784,17 +784,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical organism / result auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:29a4ac5f-befb-459c-abcf-343ca9ed469e",
+      "fullUrl": "urn:uuid:0c286a0b-d978-5d78-94af-78ffa95cde46",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "29a4ac5f-befb-459c-abcf-343ca9ed469e",
+        "id": "0c286a0b-d978-5d78-94af-78ffa95cde46",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -824,7 +824,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical organism / result (positive blood culture, CSF isolate, CPE, or flagged critical organism) is present.",
@@ -838,10 +838,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:4e5859bb-dd5e-485f-a0e5-78ccdd143302",
+      "fullUrl": "urn:uuid:3a3cd603-3301-5cb5-b898-d6d89fcb46d8",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "4e5859bb-dd5e-485f-a0e5-78ccdd143302",
+        "id": "3a3cd603-3301-5cb5-b898-d6d89fcb46d8",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -871,7 +871,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical organism / result present but the result has not been recorded as communicated.",
@@ -885,10 +885,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:66bc1440-2d06-4c34-ade7-39f08236ab05",
+      "fullUrl": "urn:uuid:623d1682-d141-54d2-b264-83310b18346b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "66bc1440-2d06-4c34-ade7-39f08236ab05",
+        "id": "623d1682-d141-54d2-b264-83310b18346b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -918,7 +918,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
@@ -932,10 +932,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:0570bf80-1772-401f-a5c5-ec0e434f92b2",
+      "fullUrl": "urn:uuid:80ddebf5-bdd2-56fd-8a96-18503218d62e",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "0570bf80-1772-401f-a5c5-ec0e434f92b2",
+        "id": "80ddebf5-bdd2-56fd-8a96-18503218d62e",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -965,7 +965,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An organism was isolated but no antibiotic sensitivities were recorded.",
@@ -979,10 +979,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:536a063b-ad6b-42ab-a34b-332307792692",
+      "fullUrl": "urn:uuid:73da0c82-bdab-5bff-bfe1-3f632e77ce6f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "536a063b-ad6b-42ab-a34b-332307792692",
+        "id": "73da0c82-bdab-5bff-bfe1-3f632e77ce6f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -1012,7 +1012,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:d30ef46a-d73d-4cba-a033-867be79a988c"
+          "reference": "urn:uuid:a002270f-f0cb-578a-9bd9-30ba729aa66f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A significant result is present but no originating request reference is recorded.",

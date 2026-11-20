@@ -5,10 +5,19 @@ info:
   title: Vaccinations Checklist — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: vaccinations-checklist
+  apiPrefix: /api/vaccinations-checklist/
+  sqlSchema: vaccinations_checklist
+  xmlNamespace: https://formexamples.github.io/vaccinations-checklist/xml
+tags:
+  - name: vaccinations-checklist
+    description: Vaccinations Checklist form
 paths:
   /api/vaccinations-checklist/patients:
     get:
       summary: List Patient records
+      tags: [vaccinations-checklist]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [vaccinations-checklist]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [vaccinations-checklist]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [vaccinations-checklist]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [vaccinations-checklist]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [vaccinations-checklist]
       operationId: deletePatient
       responses:
         "200":

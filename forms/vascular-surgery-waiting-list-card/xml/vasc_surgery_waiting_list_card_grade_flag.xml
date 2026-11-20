@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE vasc_surgery_waiting_list_card_grade_flag SYSTEM "vasc_surgery_waiting_list_card_grade_flag.dtd">
-<vasc_surgery_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<vasc_surgery_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/vascular-surgery-waiting-list-card/xml">
+<id>d7508f06-48d9-5a03-ae49-94c351afc3ba</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<vasc_surgery_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</vasc_surgery_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<vasc_surgery_waiting_list_card_grade_id>a6416f6a-0536-5b13-9a9b-6c3d76d0ad74</vasc_surgery_waiting_list_card_grade_id>
+<flag_id>11966f22-6a33-5694-8e7d-c2e9e236e36f</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

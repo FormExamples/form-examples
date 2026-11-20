@@ -5,10 +5,19 @@ info:
   title: Post Anaesthesia Care Unit Record — PostAnaesthesiaCareUnitRecordGradeFlag
   version: 1.0.0
   description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the recovery team.
+x-namespace:
+  form: post-anaesthesia-care-unit-record
+  apiPrefix: /api/post-anaesthesia-care-unit-record/
+  sqlSchema: post_anaesthesia_care_unit_record
+  xmlNamespace: https://formexamples.github.io/post-anaesthesia-care-unit-record/xml
+tags:
+  - name: post-anaesthesia-care-unit-record
+    description: Post Anaesthesia Care Unit Record form
 paths:
   /api/post-anaesthesia-care-unit-record/post_anaesthesia_care_unit_record_grade_flags:
     get:
       summary: List PostAnaesthesiaCareUnitRecordGradeFlag records
+      tags: [post-anaesthesia-care-unit-record]
       operationId: listPostAnaesthesiaCareUnitRecordGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PostAnaesthesiaCareUnitRecordGradeFlag
+      tags: [post-anaesthesia-care-unit-record]
       operationId: createPostAnaesthesiaCareUnitRecordGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PostAnaesthesiaCareUnitRecordGradeFlag by id
+      tags: [post-anaesthesia-care-unit-record]
       operationId: getPostAnaesthesiaCareUnitRecordGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PostAnaesthesiaCareUnitRecordGradeFlag
+      tags: [post-anaesthesia-care-unit-record]
       operationId: updatePostAnaesthesiaCareUnitRecordGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PostAnaesthesiaCareUnitRecordGradeFlag
+      tags: [post-anaesthesia-care-unit-record]
       operationId: replacePostAnaesthesiaCareUnitRecordGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PostAnaesthesiaCareUnitRecordGradeFlag
+      tags: [post-anaesthesia-care-unit-record]
       operationId: deletePostAnaesthesiaCareUnitRecordGradeFlag
       responses:
         "200":

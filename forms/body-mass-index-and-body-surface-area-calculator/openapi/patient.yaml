@@ -5,10 +5,19 @@ info:
   title: Body Mass Index And Body Surface Area Calculator — Patient
   version: 1.0.0
   description: Patient demographic information used by the body-mass-index-and-body-surface-area-calculator record.
+x-namespace:
+  form: body-mass-index-and-body-surface-area-calculator
+  apiPrefix: /api/body-mass-index-and-body-surface-area-calculator/
+  sqlSchema: body_mass_index_and_body_surface_area_calculator
+  xmlNamespace: https://formexamples.github.io/body-mass-index-and-body-surface-area-calculator/xml
+tags:
+  - name: body-mass-index-and-body-surface-area-calculator
+    description: Body Mass Index And Body Surface Area Calculator form
 paths:
   /api/body-mass-index-and-body-surface-area-calculator/patients:
     get:
       summary: List Patient records
+      tags: [body-mass-index-and-body-surface-area-calculator]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [body-mass-index-and-body-surface-area-calculator]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [body-mass-index-and-body-surface-area-calculator]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [body-mass-index-and-body-surface-area-calculator]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [body-mass-index-and-body-surface-area-calculator]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [body-mass-index-and-body-surface-area-calculator]
       operationId: deletePatient
       responses:
         "200":

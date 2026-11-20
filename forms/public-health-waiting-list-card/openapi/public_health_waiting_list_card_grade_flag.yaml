@@ -5,10 +5,19 @@ info:
   title: Public Health Waiting List Card — PublicHealthWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: public-health-waiting-list-card
+  apiPrefix: /api/public-health-waiting-list-card/
+  sqlSchema: public_health_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/public-health-waiting-list-card/xml
+tags:
+  - name: public-health-waiting-list-card
+    description: Public Health Waiting List Card form
 paths:
   /api/public-health-waiting-list-card/public_health_waiting_list_card_grade_flags:
     get:
       summary: List PublicHealthWaitingListCardGradeFlag records
+      tags: [public-health-waiting-list-card]
       operationId: listPublicHealthWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PublicHealthWaitingListCardGradeFlag
+      tags: [public-health-waiting-list-card]
       operationId: createPublicHealthWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PublicHealthWaitingListCardGradeFlag by id
+      tags: [public-health-waiting-list-card]
       operationId: getPublicHealthWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PublicHealthWaitingListCardGradeFlag
+      tags: [public-health-waiting-list-card]
       operationId: updatePublicHealthWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PublicHealthWaitingListCardGradeFlag
+      tags: [public-health-waiting-list-card]
       operationId: replacePublicHealthWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PublicHealthWaitingListCardGradeFlag
+      tags: [public-health-waiting-list-card]
       operationId: deletePublicHealthWaitingListCardGradeFlag
       responses:
         "200":

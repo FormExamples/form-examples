@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,completion_percentage,completion_status,overall_risk_level,items_completed,items_total,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/employee-onboarding-checklist/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

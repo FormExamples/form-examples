@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Pulmonary Function Test Result form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: pulmonary-function-test-result
+  apiPrefix: /api/pulmonary-function-test-result/
+  sqlSchema: pulmonary_function_test_result
+  xmlNamespace: https://formexamples.github.io/pulmonary-function-test-result/xml
+tags:
+- name: pulmonary-function-test-result
+  description: Pulmonary Function Test Result form
 paths:
   /api/pulmonary-function-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - pulmonary-function-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - pulmonary-function-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - pulmonary-function-test-result
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - pulmonary-function-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - pulmonary-function-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - pulmonary-function-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - pulmonary-function-test-result
   /api/pulmonary-function-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - pulmonary-function-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - pulmonary-function-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - pulmonary-function-test-result
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - pulmonary-function-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - pulmonary-function-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - pulmonary-function-test-result
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/pulmonary-function-test-result/pulmonary_function_test_result_grade_flags:
     get:
       summary: List PulmonaryFunctionTestResultGradeFlag records
+      tags:
+      - pulmonary-function-test-result
       operationId: listPulmonaryFunctionTestResultGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PulmonaryFunctionTestResultGradeFlag
+      tags:
+      - pulmonary-function-test-result
       operationId: createPulmonaryFunctionTestResultGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PulmonaryFunctionTestResultGradeFlag by id
+      tags:
+      - pulmonary-function-test-result
       operationId: getPulmonaryFunctionTestResultGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PulmonaryFunctionTestResultGradeFlag
+      tags:
+      - pulmonary-function-test-result
       operationId: updatePulmonaryFunctionTestResultGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PulmonaryFunctionTestResultGradeFlag
+      tags:
+      - pulmonary-function-test-result
       operationId: replacePulmonaryFunctionTestResultGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PulmonaryFunctionTestResultGradeFlag
+      tags:
+      - pulmonary-function-test-result
       operationId: deletePulmonaryFunctionTestResultGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/pulmonary-function-test-result/pulmonary_function_test_result_grade_rules:
     get:
       summary: List PulmonaryFunctionTestResultGradeRule records
+      tags:
+      - pulmonary-function-test-result
       operationId: listPulmonaryFunctionTestResultGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PulmonaryFunctionTestResultGradeRule
+      tags:
+      - pulmonary-function-test-result
       operationId: createPulmonaryFunctionTestResultGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PulmonaryFunctionTestResultGradeRule by id
+      tags:
+      - pulmonary-function-test-result
       operationId: getPulmonaryFunctionTestResultGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PulmonaryFunctionTestResultGradeRule
+      tags:
+      - pulmonary-function-test-result
       operationId: updatePulmonaryFunctionTestResultGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PulmonaryFunctionTestResultGradeRule
+      tags:
+      - pulmonary-function-test-result
       operationId: replacePulmonaryFunctionTestResultGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PulmonaryFunctionTestResultGradeRule
+      tags:
+      - pulmonary-function-test-result
       operationId: deletePulmonaryFunctionTestResultGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/pulmonary-function-test-result/pulmonary_function_test_result_grades:
     get:
       summary: List PulmonaryFunctionTestResultGrade records
+      tags:
+      - pulmonary-function-test-result
       operationId: listPulmonaryFunctionTestResultGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PulmonaryFunctionTestResultGrade
+      tags:
+      - pulmonary-function-test-result
       operationId: createPulmonaryFunctionTestResultGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PulmonaryFunctionTestResultGrade by id
+      tags:
+      - pulmonary-function-test-result
       operationId: getPulmonaryFunctionTestResultGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PulmonaryFunctionTestResultGrade
+      tags:
+      - pulmonary-function-test-result
       operationId: updatePulmonaryFunctionTestResultGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PulmonaryFunctionTestResultGrade
+      tags:
+      - pulmonary-function-test-result
       operationId: replacePulmonaryFunctionTestResultGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PulmonaryFunctionTestResultGrade
+      tags:
+      - pulmonary-function-test-result
       operationId: deletePulmonaryFunctionTestResultGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/pulmonary-function-test-result/pulmonary_function_test_results:
     get:
       summary: List PulmonaryFunctionTestResult records
+      tags:
+      - pulmonary-function-test-result
       operationId: listPulmonaryFunctionTestResult
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PulmonaryFunctionTestResult
+      tags:
+      - pulmonary-function-test-result
       operationId: createPulmonaryFunctionTestResult
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PulmonaryFunctionTestResult by id
+      tags:
+      - pulmonary-function-test-result
       operationId: getPulmonaryFunctionTestResult
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PulmonaryFunctionTestResult
+      tags:
+      - pulmonary-function-test-result
       operationId: updatePulmonaryFunctionTestResult
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PulmonaryFunctionTestResult
+      tags:
+      - pulmonary-function-test-result
       operationId: replacePulmonaryFunctionTestResult
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PulmonaryFunctionTestResult
+      tags:
+      - pulmonary-function-test-result
       operationId: deletePulmonaryFunctionTestResult
       responses:
         '200':

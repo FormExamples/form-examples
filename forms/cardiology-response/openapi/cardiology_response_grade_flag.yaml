@@ -5,10 +5,19 @@ info:
   title: Cardiology Response — CardiologyResponseGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the responsible team.
+x-namespace:
+  form: cardiology-response
+  apiPrefix: /api/cardiology-response/
+  sqlSchema: cardiology_response
+  xmlNamespace: https://formexamples.github.io/cardiology-response/xml
+tags:
+  - name: cardiology-response
+    description: Cardiology Response form
 paths:
   /api/cardiology-response/cardiology_response_grade_flags:
     get:
       summary: List CardiologyResponseGradeFlag records
+      tags: [cardiology-response]
       operationId: listCardiologyResponseGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiologyResponseGradeFlag
+      tags: [cardiology-response]
       operationId: createCardiologyResponseGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiologyResponseGradeFlag by id
+      tags: [cardiology-response]
       operationId: getCardiologyResponseGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiologyResponseGradeFlag
+      tags: [cardiology-response]
       operationId: updateCardiologyResponseGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiologyResponseGradeFlag
+      tags: [cardiology-response]
       operationId: replaceCardiologyResponseGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiologyResponseGradeFlag
+      tags: [cardiology-response]
       operationId: deleteCardiologyResponseGradeFlag
       responses:
         "200":

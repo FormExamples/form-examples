@@ -5,10 +5,19 @@ info:
   title: Chronic Kidney Disease Review — ChronicKidneyDiseaseReviewGradeFlag
   version: 1.0.0
   description: Flags that fire independently of the risk zone and completeness status, with priority and a suggested action for the clinician or governance team.
+x-namespace:
+  form: chronic-kidney-disease-review
+  apiPrefix: /api/chronic-kidney-disease-review/
+  sqlSchema: chronic_kidney_disease_review
+  xmlNamespace: https://formexamples.github.io/chronic-kidney-disease-review/xml
+tags:
+  - name: chronic-kidney-disease-review
+    description: Chronic Kidney Disease Review form
 paths:
   /api/chronic-kidney-disease-review/chronic_kidney_disease_review_grade_flags:
     get:
       summary: List ChronicKidneyDiseaseReviewGradeFlag records
+      tags: [chronic-kidney-disease-review]
       operationId: listChronicKidneyDiseaseReviewGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ChronicKidneyDiseaseReviewGradeFlag
+      tags: [chronic-kidney-disease-review]
       operationId: createChronicKidneyDiseaseReviewGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ChronicKidneyDiseaseReviewGradeFlag by id
+      tags: [chronic-kidney-disease-review]
       operationId: getChronicKidneyDiseaseReviewGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ChronicKidneyDiseaseReviewGradeFlag
+      tags: [chronic-kidney-disease-review]
       operationId: updateChronicKidneyDiseaseReviewGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ChronicKidneyDiseaseReviewGradeFlag
+      tags: [chronic-kidney-disease-review]
       operationId: replaceChronicKidneyDiseaseReviewGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ChronicKidneyDiseaseReviewGradeFlag
+      tags: [chronic-kidney-disease-review]
       operationId: deleteChronicKidneyDiseaseReviewGradeFlag
       responses:
         "200":

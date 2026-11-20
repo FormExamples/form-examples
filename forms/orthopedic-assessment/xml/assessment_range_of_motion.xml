@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment_range_of_motion SYSTEM "assessment_range_of_motion.dtd">
-<assessment_range_of_motion>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<assessment_range_of_motion xmlns="https://formexamples.github.io/orthopedic-assessment/xml">
+<id>b972d378-7f50-51af-a9c2-ad96aa157fd7</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>908a8f62-1ced-5f89-a01d-962bbdbf765b</assessment_id>
 <joint_assessed>shoulder</joint_assessed>
 <side_assessed>left</side_assessed>
 <overall_rom_status>full</overall_rom_status>

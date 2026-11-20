@@ -5,10 +5,19 @@ info:
   title: Mobility Assessment — Grade
   version: 1.0.0
   description: Computed Tinetti grading result for the mobility assessment. One-to-one child of assessment.
+x-namespace:
+  form: mobility-assessment
+  apiPrefix: /api/mobility-assessment/
+  sqlSchema: mobility_assessment
+  xmlNamespace: https://formexamples.github.io/mobility-assessment/xml
+tags:
+  - name: mobility-assessment
+    description: Mobility Assessment form
 paths:
   /api/mobility-assessment/grades:
     get:
       summary: List Grade records
+      tags: [mobility-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [mobility-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [mobility-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [mobility-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [mobility-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [mobility-assessment]
       operationId: deleteGrade
       responses:
         "200":

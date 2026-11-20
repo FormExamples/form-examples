@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Newborn and Infant Physical Examination (NIPE) form,
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: newborn-and-infant-physical-examination
+  apiPrefix: /api/newborn-and-infant-physical-examination/
+  sqlSchema: newborn_and_infant_physical_examination
+  xmlNamespace: https://formexamples.github.io/newborn-and-infant-physical-examination/xml
+tags:
+- name: newborn-and-infant-physical-examination
+  description: Newborn and Infant Physical Examination (NIPE) form
 paths:
   /api/newborn-and-infant-physical-examination/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/newborn-and-infant-physical-examination/newborn_and_infant_physical_examination_grade_flags:
     get:
       summary: List NewbornAndInfantPhysicalExaminationGradeFlag records
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: listNewbornAndInfantPhysicalExaminationGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NewbornAndInfantPhysicalExaminationGradeFlag
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: createNewbornAndInfantPhysicalExaminationGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NewbornAndInfantPhysicalExaminationGradeFlag by id
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: getNewbornAndInfantPhysicalExaminationGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NewbornAndInfantPhysicalExaminationGradeFlag
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: updateNewbornAndInfantPhysicalExaminationGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NewbornAndInfantPhysicalExaminationGradeFlag
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: replaceNewbornAndInfantPhysicalExaminationGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NewbornAndInfantPhysicalExaminationGradeFlag
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: deleteNewbornAndInfantPhysicalExaminationGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/newborn-and-infant-physical-examination/newborn_and_infant_physical_examination_grade_rules:
     get:
       summary: List NewbornAndInfantPhysicalExaminationGradeRule records
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: listNewbornAndInfantPhysicalExaminationGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NewbornAndInfantPhysicalExaminationGradeRule
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: createNewbornAndInfantPhysicalExaminationGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NewbornAndInfantPhysicalExaminationGradeRule by id
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: getNewbornAndInfantPhysicalExaminationGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NewbornAndInfantPhysicalExaminationGradeRule
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: updateNewbornAndInfantPhysicalExaminationGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NewbornAndInfantPhysicalExaminationGradeRule
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: replaceNewbornAndInfantPhysicalExaminationGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NewbornAndInfantPhysicalExaminationGradeRule
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: deleteNewbornAndInfantPhysicalExaminationGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/newborn-and-infant-physical-examination/newborn_and_infant_physical_examination_grades:
     get:
       summary: List NewbornAndInfantPhysicalExaminationGrade records
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: listNewbornAndInfantPhysicalExaminationGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NewbornAndInfantPhysicalExaminationGrade
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: createNewbornAndInfantPhysicalExaminationGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NewbornAndInfantPhysicalExaminationGrade by id
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: getNewbornAndInfantPhysicalExaminationGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NewbornAndInfantPhysicalExaminationGrade
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: updateNewbornAndInfantPhysicalExaminationGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NewbornAndInfantPhysicalExaminationGrade
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: replaceNewbornAndInfantPhysicalExaminationGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NewbornAndInfantPhysicalExaminationGrade
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: deleteNewbornAndInfantPhysicalExaminationGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/newborn-and-infant-physical-examination/newborn_and_infant_physical_examinations:
     get:
       summary: List NewbornAndInfantPhysicalExamination records
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: listNewbornAndInfantPhysicalExamination
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NewbornAndInfantPhysicalExamination
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: createNewbornAndInfantPhysicalExamination
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NewbornAndInfantPhysicalExamination by id
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: getNewbornAndInfantPhysicalExamination
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NewbornAndInfantPhysicalExamination
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: updateNewbornAndInfantPhysicalExamination
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NewbornAndInfantPhysicalExamination
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: replaceNewbornAndInfantPhysicalExamination
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NewbornAndInfantPhysicalExamination
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: deleteNewbornAndInfantPhysicalExamination
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - newborn-and-infant-physical-examination
   /api/newborn-and-infant-physical-examination/patients:
     get:
       summary: List Patient records
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - newborn-and-infant-physical-examination
       operationId: deletePatient
       responses:
         '200':

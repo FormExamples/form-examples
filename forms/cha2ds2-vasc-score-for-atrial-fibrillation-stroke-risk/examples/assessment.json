@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000059",
+    "id": "de363912-90f6-52b2-ba62-6756b5eda8a6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006b",
+    "id": "f21ad797-1de5-50fa-82b7-d4ffe78fc9fc",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "cha2ds2Vasc": {
-    "id": "550e8400-e29b-41d4-a716-000000000078",
+    "id": "a4c10656-cbda-5d8d-ab29-3b1b0efe2b4b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007c",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007d",
+    "patientId": "d7d72389-37db-5d36-9c87-25974ec4a85b",
+    "clinicianId": "4e5fc465-8987-53fb-a54f-3cc6430d159b",
     "clinicianName": "",
     "clinicianRole": "doctor",
     "assessedAt": null,
@@ -57,11 +57,11 @@
     "clinicalNote": ""
   },
   "cha2ds2VascGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008c",
+    "id": "6aa5b0ed-b1e3-57d7-96e4-20d6d18fdfd6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cha2ds2VascId": "550e8400-e29b-41d4-a716-000000000090",
+    "cha2ds2VascId": "5e3dfb60-462f-5858-a741-5e780f2c523a",
     "congestiveHeartFailurePoints": null,
     "hypertensionPoints": null,
     "agePoints": null,
@@ -76,11 +76,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "cha2ds2VascGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000009d",
+    "id": "a81943ce-864f-565d-a750-7af446d6ffe7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cha2ds2VascGradeId": "550e8400-e29b-41d4-a716-0000000000a1",
+    "cha2ds2VascGradeId": "ece297b8-12d1-51b6-a423-e9c6f4a27e8a",
     "ruleId": "",
     "criterion": "congestive-heart-failure",
     "points": null,
@@ -88,11 +88,11 @@
     "description": ""
   },
   "cha2ds2VascGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a7",
+    "id": "a2e80539-feed-55b7-a45b-7bba933b81e5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cha2ds2VascGradeId": "550e8400-e29b-41d4-a716-0000000000ab",
+    "cha2ds2VascGradeId": "576f3ec4-308d-5208-a7ab-c15edd9c77d8",
     "flagId": "",
     "category": "anticoagulation-recommended",
     "priority": "low",

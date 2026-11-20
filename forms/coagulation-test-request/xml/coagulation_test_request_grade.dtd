@@ -1,4 +1,5 @@
 <!ELEMENT coagulation_test_request_grade (id,created_at,updated_at,deleted_at,coagulation_test_request_id,appropriateness_score,appropriateness_band,preanalytical_band,completeness_percent,triage_tier,target_timeframe,recommendation,clinician_notes,signed_at,graded_at)>
+<!ATTLIST coagulation_test_request_grade xmlns CDATA #FIXED "https://formexamples.github.io/coagulation-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

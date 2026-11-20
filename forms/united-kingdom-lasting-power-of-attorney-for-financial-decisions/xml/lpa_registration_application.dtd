@@ -1,4 +1,5 @@
 <!ELEMENT lpa_registration_application (id,created_at,updated_at,deleted_at,lpa_id,applicant_kind,payment_method,card_payment_phone,reduced_fee_requested,has_lpa120a_evidence,is_repeat_application,repeat_case_number,payment_reference,payment_date,payment_amount)>
+<!ATTLIST lpa_registration_application xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

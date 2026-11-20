@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United States Vehicle Title and Registration Application
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-states-vehicle-title-and-registration-application
+  apiPrefix: /api/united-states-vehicle-title-and-registration-application/
+  sqlSchema: united_states_vehicle_title_and_registration_application
+  xmlNamespace: https://formexamples.github.io/united-states-vehicle-title-and-registration-application/xml
+tags:
+- name: united-states-vehicle-title-and-registration-application
+  description: United States Vehicle Title and Registration Application form
 paths:
   /api/united-states-vehicle-title-and-registration-application/applicants:
     get:
       summary: List Applicant records
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: listApplicant
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Applicant
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: createApplicant
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Applicant by id
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: getApplicant
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Applicant
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: updateApplicant
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Applicant
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: replaceApplicant
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Applicant
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: deleteApplicant
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/united-states-vehicle-title-and-registration-application/lienholders:
     get:
       summary: List Lienholder records
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: listLienholder
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Lienholder
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: createLienholder
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Lienholder by id
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: getLienholder
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Lienholder
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: updateLienholder
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Lienholder
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: replaceLienholder
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Lienholder
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: deleteLienholder
       responses:
         '200':
@@ -511,9 +543,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-states-vehicle-title-and-registration-application
   /api/united-states-vehicle-title-and-registration-application/vehicle_title_application_grade_flags:
     get:
       summary: List VehicleTitleApplicationGradeFlag records
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: listVehicleTitleApplicationGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VehicleTitleApplicationGradeFlag
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: createVehicleTitleApplicationGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VehicleTitleApplicationGradeFlag by id
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: getVehicleTitleApplicationGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VehicleTitleApplicationGradeFlag
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: updateVehicleTitleApplicationGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VehicleTitleApplicationGradeFlag
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: replaceVehicleTitleApplicationGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VehicleTitleApplicationGradeFlag
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: deleteVehicleTitleApplicationGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-states-vehicle-title-and-registration-application/vehicle_title_application_grade_rules:
     get:
       summary: List VehicleTitleApplicationGradeRule records
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: listVehicleTitleApplicationGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VehicleTitleApplicationGradeRule
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: createVehicleTitleApplicationGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VehicleTitleApplicationGradeRule by id
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: getVehicleTitleApplicationGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VehicleTitleApplicationGradeRule
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: updateVehicleTitleApplicationGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VehicleTitleApplicationGradeRule
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: replaceVehicleTitleApplicationGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VehicleTitleApplicationGradeRule
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: deleteVehicleTitleApplicationGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-states-vehicle-title-and-registration-application/vehicle_title_application_grades:
     get:
       summary: List VehicleTitleApplicationGrade records
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: listVehicleTitleApplicationGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VehicleTitleApplicationGrade
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: createVehicleTitleApplicationGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VehicleTitleApplicationGrade by id
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: getVehicleTitleApplicationGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VehicleTitleApplicationGrade
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: updateVehicleTitleApplicationGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VehicleTitleApplicationGrade
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: replaceVehicleTitleApplicationGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VehicleTitleApplicationGrade
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: deleteVehicleTitleApplicationGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-states-vehicle-title-and-registration-application/vehicle_title_applications:
     get:
       summary: List VehicleTitleApplication records
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: listVehicleTitleApplication
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VehicleTitleApplication
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: createVehicleTitleApplication
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VehicleTitleApplication by id
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: getVehicleTitleApplication
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VehicleTitleApplication
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: updateVehicleTitleApplication
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VehicleTitleApplication
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: replaceVehicleTitleApplication
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VehicleTitleApplication
+      tags:
+      - united-states-vehicle-title-and-registration-application
       operationId: deleteVehicleTitleApplication
       responses:
         '200':

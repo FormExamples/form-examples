@@ -20,6 +20,9 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "lib"))
+from example_ids import example_uuid  # noqa: E402
+
 FORMS_DIR = Path(__file__).resolve().parent.parent.parent / "forms"
 
 # Consistent example UUIDs
@@ -62,12 +65,14 @@ DOB_EXAMPLE = "1965-06-15"
 
 table_uuid_map = {}
 uuid_counter = 0
+# The form being generated; example ids are UUIDv5 names within it (bin/lib/example_ids.py).
+CURRENT_SLUG = ""
 
 
 def get_uuid(table_name):
     global uuid_counter
     if table_name not in table_uuid_map:
-        table_uuid_map[table_name] = UUIDS[uuid_counter % len(UUIDS)]
+        table_uuid_map[table_name] = example_uuid(CURRENT_SLUG, table_name)
         uuid_counter += 1
     return table_uuid_map[table_name]
 
@@ -916,8 +921,9 @@ def build_fhir_resource(table_name, columns, form_slug, main_table=None, has_pat
 
 def process_form(form_dir):
     """Process a single form's SQL migrations and generate FHIR R5 representations."""
-    global uuid_counter
+    global uuid_counter, CURRENT_SLUG
     uuid_counter = 0
+    CURRENT_SLUG = form_dir.name
     table_uuid_map.clear()
 
     sql_dir = form_dir / "sql"

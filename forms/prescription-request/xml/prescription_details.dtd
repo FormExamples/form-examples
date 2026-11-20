@@ -1,4 +1,5 @@
 <!ELEMENT prescription_details (id,created_at,updated_at,deleted_at,prescription_request_id,request_date,medication_name,dosage,frequency,route_of_administration,treatment_instructions)>
+<!ATTLIST prescription_details xmlns CDATA #FIXED "https://formexamples.github.io/prescription-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,4 +1,5 @@
 <!ELEMENT venereology_waiting_list_card (id,created_at,updated_at,deleted_at,patient_id,practitioner_id,status,entry_date,entry_time,referral_source,referral_date,referral_letter_reference,reason_for_referral,presenting_condition,icd_10_code,snomed_ct_code,suspected_cancer,list_name,specialty,sub_specialty,procedure_description,opcs_4_code,clinical_priority,rtt_clock_start_date,expected_procedure_type,expected_wait_weeks,consent_to_reminders,communication_notes,additional_notes,signed_at)>
+<!ATTLIST venereology_waiting_list_card xmlns CDATA #FIXED "https://formexamples.github.io/venereology-waiting-list-card/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

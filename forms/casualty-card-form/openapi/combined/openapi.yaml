@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Casualty Card Form form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: casualty-card-form
+  apiPrefix: /api/casualty-card-form/
+  sqlSchema: casualty_card_form
+  xmlNamespace: https://formexamples.github.io/casualty-card-form/xml
+tags:
+- name: casualty-card-form
+  description: Casualty Card Form form
 paths:
   /api/casualty-card-form/casualty_card_allergies:
     get:
       summary: List CasualtyCardAllergy records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardAllergy
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardAllergy
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardAllergy
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardAllergy by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardAllergy
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardAllergy
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardAllergy
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardAllergy
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardAllergy
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardAllergy
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardAllergy
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/casualty-card-form/casualty_card_arrival_triages:
     get:
       summary: List CasualtyCardArrivalTriage records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardArrivalTriage
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardArrivalTriage
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardArrivalTriage
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardArrivalTriage by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardArrivalTriage
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardArrivalTriage
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardArrivalTriage
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardArrivalTriage
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardArrivalTriage
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardArrivalTriage
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardArrivalTriage
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/casualty-card-form/casualty_card_assessment_plans:
     get:
       summary: List CasualtyCardAssessmentPlan records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardAssessmentPlan
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardAssessmentPlan
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardAssessmentPlan
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardAssessmentPlan by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardAssessmentPlan
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardAssessmentPlan
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardAssessmentPlan
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardAssessmentPlan
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardAssessmentPlan
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardAssessmentPlan
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardAssessmentPlan
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/casualty-card-form/casualty_card_clinical_examinations:
     get:
       summary: List CasualtyCardClinicalExamination records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardClinicalExamination
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardClinicalExamination
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardClinicalExamination
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardClinicalExamination by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardClinicalExamination
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardClinicalExamination
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardClinicalExamination
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardClinicalExamination
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardClinicalExamination
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardClinicalExamination
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardClinicalExamination
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/casualty-card-form/casualty_card_demographics:
     get:
       summary: List CasualtyCardDemographics records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardDemographics
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardDemographics
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardDemographics
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardDemographics by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardDemographics
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardDemographics
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardDemographics
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardDemographics
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardDemographics
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardDemographics
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardDemographics
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/casualty-card-form/casualty_card_dispositions:
     get:
       summary: List CasualtyCardDisposition records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardDisposition
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardDisposition
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardDisposition
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardDisposition by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardDisposition
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardDisposition
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardDisposition
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardDisposition
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardDisposition
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardDisposition
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardDisposition
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/casualty-card-form/casualty_card_gps:
     get:
       summary: List CasualtyCardGp records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardGp
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardGp
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardGp
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardGp by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardGp
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardGp
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardGp
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardGp
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardGp
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardGp
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardGp
       responses:
         '200':
@@ -1733,6 +1825,8 @@ paths:
   /api/casualty-card-form/casualty_card_investigations:
     get:
       summary: List CasualtyCardInvestigations records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardInvestigations
       parameters:
       - name: limit
@@ -1785,6 +1879,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardInvestigations
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardInvestigations
       requestBody:
         required: true
@@ -1838,6 +1934,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardInvestigations by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardInvestigations
       responses:
         '200':
@@ -1865,6 +1963,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardInvestigations
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardInvestigations
       requestBody:
         required: true
@@ -1910,6 +2010,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardInvestigations
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardInvestigations
       requestBody:
         required: true
@@ -1955,6 +2057,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardInvestigations
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardInvestigations
       responses:
         '200':
@@ -1979,6 +2083,8 @@ paths:
   /api/casualty-card-form/casualty_card_medical_histories:
     get:
       summary: List CasualtyCardMedicalHistory records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardMedicalHistory
       parameters:
       - name: limit
@@ -2031,6 +2137,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardMedicalHistory
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardMedicalHistory
       requestBody:
         required: true
@@ -2084,6 +2192,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardMedicalHistory by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardMedicalHistory
       responses:
         '200':
@@ -2111,6 +2221,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardMedicalHistory
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardMedicalHistory
       requestBody:
         required: true
@@ -2156,6 +2268,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardMedicalHistory
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardMedicalHistory
       requestBody:
         required: true
@@ -2201,6 +2315,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardMedicalHistory
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardMedicalHistory
       responses:
         '200':
@@ -2225,6 +2341,8 @@ paths:
   /api/casualty-card-form/casualty_card_medications:
     get:
       summary: List CasualtyCardMedication records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardMedication
       parameters:
       - name: limit
@@ -2277,6 +2395,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardMedication
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardMedication
       requestBody:
         required: true
@@ -2330,6 +2450,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardMedication by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardMedication
       responses:
         '200':
@@ -2357,6 +2479,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardMedication
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardMedication
       requestBody:
         required: true
@@ -2402,6 +2526,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardMedication
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardMedication
       requestBody:
         required: true
@@ -2447,6 +2573,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardMedication
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardMedication
       responses:
         '200':
@@ -2471,6 +2599,8 @@ paths:
   /api/casualty-card-form/casualty_card_next_of_kins:
     get:
       summary: List CasualtyCardNextOfKin records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardNextOfKin
       parameters:
       - name: limit
@@ -2523,6 +2653,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardNextOfKin
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardNextOfKin
       requestBody:
         required: true
@@ -2576,6 +2708,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardNextOfKin by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardNextOfKin
       responses:
         '200':
@@ -2603,6 +2737,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardNextOfKin
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardNextOfKin
       requestBody:
         required: true
@@ -2648,6 +2784,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardNextOfKin
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardNextOfKin
       requestBody:
         required: true
@@ -2693,6 +2831,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardNextOfKin
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardNextOfKin
       responses:
         '200':
@@ -2717,6 +2857,8 @@ paths:
   /api/casualty-card-form/casualty_card_pain_assessments:
     get:
       summary: List CasualtyCardPainAssessment records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardPainAssessment
       parameters:
       - name: limit
@@ -2769,6 +2911,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardPainAssessment
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardPainAssessment
       requestBody:
         required: true
@@ -2822,6 +2966,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardPainAssessment by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardPainAssessment
       responses:
         '200':
@@ -2849,6 +2995,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardPainAssessment
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardPainAssessment
       requestBody:
         required: true
@@ -2894,6 +3042,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardPainAssessment
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardPainAssessment
       requestBody:
         required: true
@@ -2939,6 +3089,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardPainAssessment
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardPainAssessment
       responses:
         '200':
@@ -2963,6 +3115,8 @@ paths:
   /api/casualty-card-form/casualty_card_presenting_complaints:
     get:
       summary: List CasualtyCardPresentingComplaint records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardPresentingComplaint
       parameters:
       - name: limit
@@ -3015,6 +3169,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardPresentingComplaint
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardPresentingComplaint
       requestBody:
         required: true
@@ -3068,6 +3224,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardPresentingComplaint by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardPresentingComplaint
       responses:
         '200':
@@ -3095,6 +3253,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardPresentingComplaint
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardPresentingComplaint
       requestBody:
         required: true
@@ -3140,6 +3300,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardPresentingComplaint
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardPresentingComplaint
       requestBody:
         required: true
@@ -3185,6 +3347,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardPresentingComplaint
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardPresentingComplaint
       responses:
         '200':
@@ -3209,6 +3373,8 @@ paths:
   /api/casualty-card-form/casualty_card_primary_surveys:
     get:
       summary: List CasualtyCardPrimarySurvey records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardPrimarySurvey
       parameters:
       - name: limit
@@ -3261,6 +3427,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardPrimarySurvey
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardPrimarySurvey
       requestBody:
         required: true
@@ -3314,6 +3482,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardPrimarySurvey by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardPrimarySurvey
       responses:
         '200':
@@ -3341,6 +3511,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardPrimarySurvey
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardPrimarySurvey
       requestBody:
         required: true
@@ -3386,6 +3558,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardPrimarySurvey
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardPrimarySurvey
       requestBody:
         required: true
@@ -3431,6 +3605,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardPrimarySurvey
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardPrimarySurvey
       responses:
         '200':
@@ -3455,6 +3631,8 @@ paths:
   /api/casualty-card-form/casualty_card_safeguarding_consents:
     get:
       summary: List CasualtyCardSafeguardingConsent records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardSafeguardingConsent
       parameters:
       - name: limit
@@ -3507,6 +3685,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardSafeguardingConsent
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardSafeguardingConsent
       requestBody:
         required: true
@@ -3560,6 +3740,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardSafeguardingConsent by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardSafeguardingConsent
       responses:
         '200':
@@ -3587,6 +3769,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardSafeguardingConsent
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardSafeguardingConsent
       requestBody:
         required: true
@@ -3632,6 +3816,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardSafeguardingConsent
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardSafeguardingConsent
       requestBody:
         required: true
@@ -3677,6 +3863,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardSafeguardingConsent
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardSafeguardingConsent
       responses:
         '200':
@@ -3701,6 +3889,8 @@ paths:
   /api/casualty-card-form/casualty_card_treatments:
     get:
       summary: List CasualtyCardTreatment records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardTreatment
       parameters:
       - name: limit
@@ -3753,6 +3943,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardTreatment
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardTreatment
       requestBody:
         required: true
@@ -3806,6 +3998,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardTreatment by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardTreatment
       responses:
         '200':
@@ -3833,6 +4027,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardTreatment
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardTreatment
       requestBody:
         required: true
@@ -3878,6 +4074,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardTreatment
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardTreatment
       requestBody:
         required: true
@@ -3923,6 +4121,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardTreatment
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardTreatment
       responses:
         '200':
@@ -3947,6 +4147,8 @@ paths:
   /api/casualty-card-form/casualty_card_vital_signs:
     get:
       summary: List CasualtyCardVitalSigns records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCardVitalSigns
       parameters:
       - name: limit
@@ -3999,6 +4201,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCardVitalSigns
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCardVitalSigns
       requestBody:
         required: true
@@ -4052,6 +4256,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCardVitalSigns by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCardVitalSigns
       responses:
         '200':
@@ -4079,6 +4285,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCardVitalSigns
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCardVitalSigns
       requestBody:
         required: true
@@ -4124,6 +4332,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCardVitalSigns
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCardVitalSigns
       requestBody:
         required: true
@@ -4169,6 +4379,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCardVitalSigns
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCardVitalSigns
       responses:
         '200':
@@ -4193,6 +4405,8 @@ paths:
   /api/casualty-card-form/casualty_cards:
     get:
       summary: List CasualtyCard records
+      tags:
+      - casualty-card-form
       operationId: listCasualtyCard
       parameters:
       - name: limit
@@ -4245,6 +4459,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CasualtyCard
+      tags:
+      - casualty-card-form
       operationId: createCasualtyCard
       requestBody:
         required: true
@@ -4298,6 +4514,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CasualtyCard by id
+      tags:
+      - casualty-card-form
       operationId: getCasualtyCard
       responses:
         '200':
@@ -4325,6 +4543,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CasualtyCard
+      tags:
+      - casualty-card-form
       operationId: updateCasualtyCard
       requestBody:
         required: true
@@ -4370,6 +4590,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CasualtyCard
+      tags:
+      - casualty-card-form
       operationId: replaceCasualtyCard
       requestBody:
         required: true
@@ -4415,6 +4637,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CasualtyCard
+      tags:
+      - casualty-card-form
       operationId: deleteCasualtyCard
       responses:
         '200':
@@ -4439,6 +4663,8 @@ paths:
   /api/casualty-card-form/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - casualty-card-form
       operationId: listClinician
       parameters:
       - name: limit
@@ -4491,6 +4717,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - casualty-card-form
       operationId: createClinician
       requestBody:
         required: true
@@ -4544,6 +4772,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - casualty-card-form
       operationId: getClinician
       responses:
         '200':
@@ -4571,6 +4801,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - casualty-card-form
       operationId: updateClinician
       requestBody:
         required: true
@@ -4616,6 +4848,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - casualty-card-form
       operationId: replaceClinician
       requestBody:
         required: true
@@ -4661,6 +4895,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - casualty-card-form
       operationId: deleteClinician
       responses:
         '200':
@@ -4685,6 +4921,8 @@ paths:
   /api/casualty-card-form/flagged_issues:
     get:
       summary: List FlaggedIssue records
+      tags:
+      - casualty-card-form
       operationId: listFlaggedIssue
       parameters:
       - name: limit
@@ -4737,6 +4975,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FlaggedIssue
+      tags:
+      - casualty-card-form
       operationId: createFlaggedIssue
       requestBody:
         required: true
@@ -4790,6 +5030,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one FlaggedIssue by id
+      tags:
+      - casualty-card-form
       operationId: getFlaggedIssue
       responses:
         '200':
@@ -4817,6 +5059,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FlaggedIssue
+      tags:
+      - casualty-card-form
       operationId: updateFlaggedIssue
       requestBody:
         required: true
@@ -4862,6 +5106,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing FlaggedIssue
+      tags:
+      - casualty-card-form
       operationId: replaceFlaggedIssue
       requestBody:
         required: true
@@ -4907,6 +5153,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a FlaggedIssue
+      tags:
+      - casualty-card-form
       operationId: deleteFlaggedIssue
       responses:
         '200':
@@ -4931,6 +5179,8 @@ paths:
   /api/casualty-card-form/news2_results:
     get:
       summary: List News2Result records
+      tags:
+      - casualty-card-form
       operationId: listNews2Result
       parameters:
       - name: limit
@@ -4983,6 +5233,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new News2Result
+      tags:
+      - casualty-card-form
       operationId: createNews2Result
       requestBody:
         required: true
@@ -5036,6 +5288,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one News2Result by id
+      tags:
+      - casualty-card-form
       operationId: getNews2Result
       responses:
         '200':
@@ -5063,6 +5317,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing News2Result
+      tags:
+      - casualty-card-form
       operationId: updateNews2Result
       requestBody:
         required: true
@@ -5108,6 +5364,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing News2Result
+      tags:
+      - casualty-card-form
       operationId: replaceNews2Result
       requestBody:
         required: true
@@ -5153,6 +5411,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a News2Result
+      tags:
+      - casualty-card-form
       operationId: deleteNews2Result
       responses:
         '200':
@@ -5185,9 +5445,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - casualty-card-form
   /api/casualty-card-form/patients:
     get:
       summary: List Patient records
+      tags:
+      - casualty-card-form
       operationId: listPatient
       parameters:
       - name: limit
@@ -5240,6 +5504,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - casualty-card-form
       operationId: createPatient
       requestBody:
         required: true
@@ -5293,6 +5559,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - casualty-card-form
       operationId: getPatient
       responses:
         '200':
@@ -5320,6 +5588,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - casualty-card-form
       operationId: updatePatient
       requestBody:
         required: true
@@ -5365,6 +5635,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - casualty-card-form
       operationId: replacePatient
       requestBody:
         required: true
@@ -5410,6 +5682,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - casualty-card-form
       operationId: deletePatient
       responses:
         '200':

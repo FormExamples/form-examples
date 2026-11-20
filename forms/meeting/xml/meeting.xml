@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE meeting SYSTEM "meeting.dtd">
-<meeting>
-<id>660e8400-e29b-41d4-a716-446655440001</id>
+<meeting xmlns="https://formexamples.github.io/meeting/xml">
+<id>9179f730-f218-5cd8-84b4-e16695af1a8f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<organizer_id>550e8400-e29b-41d4-a716-446655440000</organizer_id>
+<organizer_id>75670d32-e697-5fad-9dbb-4b06bd5bec65</organizer_id>
 <status>draft</status>
 <title>Example Title</title>
 <purpose></purpose>

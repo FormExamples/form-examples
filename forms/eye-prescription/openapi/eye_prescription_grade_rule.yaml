@@ -5,10 +5,19 @@ info:
   title: Eye Prescription — EyePrescriptionGradeRule
   version: 1.0.0
   description: Audit trail of every sphere / cylinder / addition / anisometropia / prism / change rule that fired during classification.
+x-namespace:
+  form: eye-prescription
+  apiPrefix: /api/eye-prescription/
+  sqlSchema: eye_prescription
+  xmlNamespace: https://formexamples.github.io/eye-prescription/xml
+tags:
+  - name: eye-prescription
+    description: Eye Prescription form
 paths:
   /api/eye-prescription/eye_prescription_grade_rules:
     get:
       summary: List EyePrescriptionGradeRule records
+      tags: [eye-prescription]
       operationId: listEyePrescriptionGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EyePrescriptionGradeRule
+      tags: [eye-prescription]
       operationId: createEyePrescriptionGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EyePrescriptionGradeRule by id
+      tags: [eye-prescription]
       operationId: getEyePrescriptionGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EyePrescriptionGradeRule
+      tags: [eye-prescription]
       operationId: updateEyePrescriptionGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EyePrescriptionGradeRule
+      tags: [eye-prescription]
       operationId: replaceEyePrescriptionGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EyePrescriptionGradeRule
+      tags: [eye-prescription]
       operationId: deleteEyePrescriptionGradeRule
       responses:
         "200":

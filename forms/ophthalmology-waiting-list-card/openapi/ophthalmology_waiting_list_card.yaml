@@ -5,10 +5,19 @@ info:
   title: Ophthalmology Waiting List Card — OphthalmologyWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a ophthalmology waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: ophthalmology-waiting-list-card
+  apiPrefix: /api/ophthalmology-waiting-list-card/
+  sqlSchema: ophthalmology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/ophthalmology-waiting-list-card/xml
+tags:
+  - name: ophthalmology-waiting-list-card
+    description: Ophthalmology Waiting List Card form
 paths:
   /api/ophthalmology-waiting-list-card/ophthalmology_waiting_list_cards:
     get:
       summary: List OphthalmologyWaitingListCard records
+      tags: [ophthalmology-waiting-list-card]
       operationId: listOphthalmologyWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OphthalmologyWaitingListCard
+      tags: [ophthalmology-waiting-list-card]
       operationId: createOphthalmologyWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OphthalmologyWaitingListCard by id
+      tags: [ophthalmology-waiting-list-card]
       operationId: getOphthalmologyWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OphthalmologyWaitingListCard
+      tags: [ophthalmology-waiting-list-card]
       operationId: updateOphthalmologyWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OphthalmologyWaitingListCard
+      tags: [ophthalmology-waiting-list-card]
       operationId: replaceOphthalmologyWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OphthalmologyWaitingListCard
+      tags: [ophthalmology-waiting-list-card]
       operationId: deleteOphthalmologyWaitingListCard
       responses:
         "200":

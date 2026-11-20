@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Centor Score for Streptococcal Pharyngitis form,
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: centor-score-for-streptococcal-pharyngitis
+  apiPrefix: /api/centor-score-for-streptococcal-pharyngitis/
+  sqlSchema: centor_score_for_streptococcal_pharyngitis
+  xmlNamespace: https://formexamples.github.io/centor-score-for-streptococcal-pharyngitis/xml
+tags:
+- name: centor-score-for-streptococcal-pharyngitis
+  description: Centor Score for Streptococcal Pharyngitis form
 paths:
   /api/centor-score-for-streptococcal-pharyngitis/centor_score_for_streptococcal_pharyngitis:
     get:
       summary: List CentorScoreForStreptococcalPharyngitis records
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: listCentorScoreForStreptococcalPharyngitis
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CentorScoreForStreptococcalPharyngitis
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: createCentorScoreForStreptococcalPharyngitis
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CentorScoreForStreptococcalPharyngitis by id
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: getCentorScoreForStreptococcalPharyngitis
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CentorScoreForStreptococcalPharyngitis
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: updateCentorScoreForStreptococcalPharyngitis
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CentorScoreForStreptococcalPharyngitis
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: replaceCentorScoreForStreptococcalPharyngitis
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CentorScoreForStreptococcalPharyngitis
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: deleteCentorScoreForStreptococcalPharyngitis
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/centor-score-for-streptococcal-pharyngitis/centor_score_for_streptococcal_pharyngitis_grade_flags:
     get:
       summary: List CentorScoreForStreptococcalPharyngitisGradeFlag records
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: listCentorScoreForStreptococcalPharyngitisGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CentorScoreForStreptococcalPharyngitisGradeFlag
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: createCentorScoreForStreptococcalPharyngitisGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CentorScoreForStreptococcalPharyngitisGradeFlag by id
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: getCentorScoreForStreptococcalPharyngitisGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CentorScoreForStreptococcalPharyngitisGradeFlag
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: updateCentorScoreForStreptococcalPharyngitisGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CentorScoreForStreptococcalPharyngitisGradeFlag
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: replaceCentorScoreForStreptococcalPharyngitisGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CentorScoreForStreptococcalPharyngitisGradeFlag
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: deleteCentorScoreForStreptococcalPharyngitisGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/centor-score-for-streptococcal-pharyngitis/centor_score_for_streptococcal_pharyngitis_grade_rules:
     get:
       summary: List CentorScoreForStreptococcalPharyngitisGradeRule records
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: listCentorScoreForStreptococcalPharyngitisGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CentorScoreForStreptococcalPharyngitisGradeRule
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: createCentorScoreForStreptococcalPharyngitisGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CentorScoreForStreptococcalPharyngitisGradeRule by id
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: getCentorScoreForStreptococcalPharyngitisGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CentorScoreForStreptococcalPharyngitisGradeRule
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: updateCentorScoreForStreptococcalPharyngitisGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CentorScoreForStreptococcalPharyngitisGradeRule
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: replaceCentorScoreForStreptococcalPharyngitisGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CentorScoreForStreptococcalPharyngitisGradeRule
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: deleteCentorScoreForStreptococcalPharyngitisGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/centor-score-for-streptococcal-pharyngitis/centor_score_for_streptococcal_pharyngitis_grades:
     get:
       summary: List CentorScoreForStreptococcalPharyngitisGrade records
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: listCentorScoreForStreptococcalPharyngitisGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CentorScoreForStreptococcalPharyngitisGrade
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: createCentorScoreForStreptococcalPharyngitisGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CentorScoreForStreptococcalPharyngitisGrade by id
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: getCentorScoreForStreptococcalPharyngitisGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CentorScoreForStreptococcalPharyngitisGrade
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: updateCentorScoreForStreptococcalPharyngitisGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CentorScoreForStreptococcalPharyngitisGrade
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: replaceCentorScoreForStreptococcalPharyngitisGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CentorScoreForStreptococcalPharyngitisGrade
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: deleteCentorScoreForStreptococcalPharyngitisGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/centor-score-for-streptococcal-pharyngitis/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
   /api/centor-score-for-streptococcal-pharyngitis/patients:
     get:
       summary: List Patient records
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - centor-score-for-streptococcal-pharyngitis
       operationId: deletePatient
       responses:
         '200':

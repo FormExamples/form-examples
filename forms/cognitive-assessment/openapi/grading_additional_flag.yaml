@@ -5,10 +5,19 @@ info:
   title: Cognitive Assessment — GradingAdditionalFlag
   version: 1.0.0
   description: Additional clinical flags detected during cognitive assessment grading (e.g. driving safety, safeguarding, functional decline).
+x-namespace:
+  form: cognitive-assessment
+  apiPrefix: /api/cognitive-assessment/
+  sqlSchema: cognitive_assessment
+  xmlNamespace: https://formexamples.github.io/cognitive-assessment/xml
+tags:
+  - name: cognitive-assessment
+    description: Cognitive Assessment form
 paths:
   /api/cognitive-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [cognitive-assessment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [cognitive-assessment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [cognitive-assessment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [cognitive-assessment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [cognitive-assessment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [cognitive-assessment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

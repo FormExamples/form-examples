@@ -5,10 +5,19 @@ info:
   title: Heart Health Check — BloodPressure
   version: 1.0.0
   description: Blood pressure readings and antihypertensive treatment status.
+x-namespace:
+  form: heart-health-check
+  apiPrefix: /api/heart-health-check/
+  sqlSchema: heart_health_check
+  xmlNamespace: https://formexamples.github.io/heart-health-check/xml
+tags:
+  - name: heart-health-check
+    description: Heart Health Check form
 paths:
   /api/heart-health-check/blood_pressures:
     get:
       summary: List BloodPressure records
+      tags: [heart-health-check]
       operationId: listBloodPressure
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BloodPressure
+      tags: [heart-health-check]
       operationId: createBloodPressure
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BloodPressure by id
+      tags: [heart-health-check]
       operationId: getBloodPressure
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BloodPressure
+      tags: [heart-health-check]
       operationId: updateBloodPressure
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BloodPressure
+      tags: [heart-health-check]
       operationId: replaceBloodPressure
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BloodPressure
+      tags: [heart-health-check]
       operationId: deleteBloodPressure
       responses:
         "200":

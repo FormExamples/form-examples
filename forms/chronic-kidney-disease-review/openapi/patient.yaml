@@ -5,10 +5,19 @@ info:
   title: Chronic Kidney Disease Review — Patient
   version: 1.0.0
   description: Patient demographic information used by the chronic kidney disease annual-review record.
+x-namespace:
+  form: chronic-kidney-disease-review
+  apiPrefix: /api/chronic-kidney-disease-review/
+  sqlSchema: chronic_kidney_disease_review
+  xmlNamespace: https://formexamples.github.io/chronic-kidney-disease-review/xml
+tags:
+  - name: chronic-kidney-disease-review
+    description: Chronic Kidney Disease Review form
 paths:
   /api/chronic-kidney-disease-review/patients:
     get:
       summary: List Patient records
+      tags: [chronic-kidney-disease-review]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [chronic-kidney-disease-review]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [chronic-kidney-disease-review]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [chronic-kidney-disease-review]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [chronic-kidney-disease-review]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [chronic-kidney-disease-review]
       operationId: deletePatient
       responses:
         "200":

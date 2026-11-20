@@ -5,10 +5,19 @@ info:
   title: Four A Test For Delirium — FourATestForDeliriumGradeRule
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during 4AT computation: item, points contributed, category, and description."
+x-namespace:
+  form: four-a-test-for-delirium
+  apiPrefix: /api/four-a-test-for-delirium/
+  sqlSchema: four_a_test_for_delirium
+  xmlNamespace: https://formexamples.github.io/four-a-test-for-delirium/xml
+tags:
+  - name: four-a-test-for-delirium
+    description: Four A Test For Delirium form
 paths:
   /api/four-a-test-for-delirium/four_a_test_for_delirium_grade_rules:
     get:
       summary: List FourATestForDeliriumGradeRule records
+      tags: [four-a-test-for-delirium]
       operationId: listFourATestForDeliriumGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new FourATestForDeliriumGradeRule
+      tags: [four-a-test-for-delirium]
       operationId: createFourATestForDeliriumGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one FourATestForDeliriumGradeRule by id
+      tags: [four-a-test-for-delirium]
       operationId: getFourATestForDeliriumGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing FourATestForDeliriumGradeRule
+      tags: [four-a-test-for-delirium]
       operationId: updateFourATestForDeliriumGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing FourATestForDeliriumGradeRule
+      tags: [four-a-test-for-delirium]
       operationId: replaceFourATestForDeliriumGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a FourATestForDeliriumGradeRule
+      tags: [four-a-test-for-delirium]
       operationId: deleteFourATestForDeliriumGradeRule
       responses:
         "200":

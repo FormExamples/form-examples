@@ -1,4 +1,5 @@
 <!ELEMENT national_early_warning_score_2 (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,observation_at,ward_or_location,spo2_scale,spo2_scale2_endorsed,respiratory_rate,spo2,on_oxygen,oxygen_device,oxygen_flow_rate_l_min,inspired_oxygen_fraction_percent,systolic_blood_pressure,pulse,consciousness_acvpu,temperature,is_under_16,is_pregnant,has_spinal_cord_injury,clinical_notes)>
+<!ATTLIST national_early_warning_score_2 xmlns CDATA #FIXED "https://formexamples.github.io/national-early-warning-score-2/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

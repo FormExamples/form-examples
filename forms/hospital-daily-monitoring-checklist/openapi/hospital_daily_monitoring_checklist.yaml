@@ -5,10 +5,19 @@ info:
   title: Hospital Daily Monitoring Checklist — HospitalDailyMonitoringChecklist
   version: 1.0.0
   description: "One daily-monitoring inspection round at one hospital site: who inspected, when, and the sign-off notes."
+x-namespace:
+  form: hospital-daily-monitoring-checklist
+  apiPrefix: /api/hospital-daily-monitoring-checklist/
+  sqlSchema: hospital_daily_monitoring_checklist
+  xmlNamespace: https://formexamples.github.io/hospital-daily-monitoring-checklist/xml
+tags:
+  - name: hospital-daily-monitoring-checklist
+    description: Hospital Daily Monitoring Checklist form
 paths:
   /api/hospital-daily-monitoring-checklist/hospital_daily_monitoring_checklists:
     get:
       summary: List HospitalDailyMonitoringChecklist records
+      tags: [hospital-daily-monitoring-checklist]
       operationId: listHospitalDailyMonitoringChecklist
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HospitalDailyMonitoringChecklist
+      tags: [hospital-daily-monitoring-checklist]
       operationId: createHospitalDailyMonitoringChecklist
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HospitalDailyMonitoringChecklist by id
+      tags: [hospital-daily-monitoring-checklist]
       operationId: getHospitalDailyMonitoringChecklist
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HospitalDailyMonitoringChecklist
+      tags: [hospital-daily-monitoring-checklist]
       operationId: updateHospitalDailyMonitoringChecklist
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HospitalDailyMonitoringChecklist
+      tags: [hospital-daily-monitoring-checklist]
       operationId: replaceHospitalDailyMonitoringChecklist
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HospitalDailyMonitoringChecklist
+      tags: [hospital-daily-monitoring-checklist]
       operationId: deleteHospitalDailyMonitoringChecklist
       responses:
         "200":

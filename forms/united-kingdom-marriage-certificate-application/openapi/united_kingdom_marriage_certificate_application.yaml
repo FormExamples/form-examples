@@ -5,10 +5,19 @@ info:
   title: United Kingdom Marriage Certificate Application — UnitedKingdomMarriageCertificateApplication
   version: 1.0.0
   description: "Main United Kingdom marriage certificate application record: notice of marriage or civil partnership in England and Wales, planned ceremony, both parties' residence, identity, prior-relationship and immigration evidence, witnesses, and the GRO certificate order. Classification, fired rules, and flags live in child tables."
+x-namespace:
+  form: united-kingdom-marriage-certificate-application
+  apiPrefix: /api/united-kingdom-marriage-certificate-application/
+  sqlSchema: united_kingdom_marriage_certificate_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-marriage-certificate-application/xml
+tags:
+  - name: united-kingdom-marriage-certificate-application
+    description: United Kingdom Marriage Certificate Application form
 paths:
   /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_applications:
     get:
       summary: List UnitedKingdomMarriageCertificateApplication records
+      tags: [united-kingdom-marriage-certificate-application]
       operationId: listUnitedKingdomMarriageCertificateApplication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomMarriageCertificateApplication
+      tags: [united-kingdom-marriage-certificate-application]
       operationId: createUnitedKingdomMarriageCertificateApplication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomMarriageCertificateApplication by id
+      tags: [united-kingdom-marriage-certificate-application]
       operationId: getUnitedKingdomMarriageCertificateApplication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomMarriageCertificateApplication
+      tags: [united-kingdom-marriage-certificate-application]
       operationId: updateUnitedKingdomMarriageCertificateApplication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomMarriageCertificateApplication
+      tags: [united-kingdom-marriage-certificate-application]
       operationId: replaceUnitedKingdomMarriageCertificateApplication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomMarriageCertificateApplication
+      tags: [united-kingdom-marriage-certificate-application]
       operationId: deleteUnitedKingdomMarriageCertificateApplication
       responses:
         "200":

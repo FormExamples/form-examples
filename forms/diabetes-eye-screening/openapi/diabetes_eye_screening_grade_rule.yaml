@@ -5,10 +5,19 @@ info:
   title: Diabetes Eye Screening — DiabetesEyeScreeningGradeRule
   version: 1.0.0
   description: "Audit trail of every classification rule that fired during grading: pathway stage, category, and description."
+x-namespace:
+  form: diabetes-eye-screening
+  apiPrefix: /api/diabetes-eye-screening/
+  sqlSchema: diabetes_eye_screening
+  xmlNamespace: https://formexamples.github.io/diabetes-eye-screening/xml
+tags:
+  - name: diabetes-eye-screening
+    description: Diabetes Eye Screening form
 paths:
   /api/diabetes-eye-screening/diabetes_eye_screening_grade_rules:
     get:
       summary: List DiabetesEyeScreeningGradeRule records
+      tags: [diabetes-eye-screening]
       operationId: listDiabetesEyeScreeningGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DiabetesEyeScreeningGradeRule
+      tags: [diabetes-eye-screening]
       operationId: createDiabetesEyeScreeningGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DiabetesEyeScreeningGradeRule by id
+      tags: [diabetes-eye-screening]
       operationId: getDiabetesEyeScreeningGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DiabetesEyeScreeningGradeRule
+      tags: [diabetes-eye-screening]
       operationId: updateDiabetesEyeScreeningGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DiabetesEyeScreeningGradeRule
+      tags: [diabetes-eye-screening]
       operationId: replaceDiabetesEyeScreeningGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DiabetesEyeScreeningGradeRule
+      tags: [diabetes-eye-screening]
       operationId: deleteDiabetesEyeScreeningGradeRule
       responses:
         "200":

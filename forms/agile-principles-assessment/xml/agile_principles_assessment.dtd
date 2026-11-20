@@ -1,4 +1,5 @@
 <!ELEMENT agile_principles_assessment (id,created_at,updated_at,deleted_at,respondent_id,status,is_anonymous,assessment_date,assessment_period,p01_customer_satisfaction,p01_comment,p01_weight,p02_welcome_change,p02_comment,p02_weight,p03_deliver_frequently,p03_comment,p03_weight,p04_collaboration,p04_comment,p04_weight,p05_motivated_individuals,p05_comment,p05_weight,p06_face_to_face,p06_comment,p06_weight,p07_working_software,p07_comment,p07_weight,p08_sustainable_development,p08_comment,p08_weight,p09_technical_excellence,p09_comment,p09_weight,p10_simplicity,p10_comment,p10_weight,p11_self_organising_teams,p11_comment,p11_weight,p12_regular_reflection,p12_comment,p12_weight,overall_notes)>
+<!ATTLIST agile_principles_assessment xmlns CDATA #FIXED "https://formexamples.github.io/agile-principles-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

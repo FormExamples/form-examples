@@ -1,4 +1,5 @@
 <!ELEMENT united_kingdom_last_will_and_testament_grade (id,created_at,updated_at,deleted_at,united_kingdom_last_will_and_testament_id,validity_class,shares_total_percent,witness_count,formality_risk,graded_at)>
+<!ATTLIST united_kingdom_last_will_and_testament_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-last-will-and-testament/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

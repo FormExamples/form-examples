@@ -1,4 +1,5 @@
 <!ELEMENT purpose_of_disclosure (id,created_at,updated_at,deleted_at,hipaa_authorization_id,purposes,primary_purpose,other_details)>
+<!ATTLIST purpose_of_disclosure xmlns CDATA #FIXED "https://formexamples.github.io/united-states-hipaa-authorization-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

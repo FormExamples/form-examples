@@ -5,10 +5,19 @@ info:
   title: Hematology Waiting List Card — HematologyWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: hematology-waiting-list-card
+  apiPrefix: /api/hematology-waiting-list-card/
+  sqlSchema: hematology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/hematology-waiting-list-card/xml
+tags:
+  - name: hematology-waiting-list-card
+    description: Hematology Waiting List Card form
 paths:
   /api/hematology-waiting-list-card/hematology_waiting_list_card_grades:
     get:
       summary: List HematologyWaitingListCardGrade records
+      tags: [hematology-waiting-list-card]
       operationId: listHematologyWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HematologyWaitingListCardGrade
+      tags: [hematology-waiting-list-card]
       operationId: createHematologyWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HematologyWaitingListCardGrade by id
+      tags: [hematology-waiting-list-card]
       operationId: getHematologyWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HematologyWaitingListCardGrade
+      tags: [hematology-waiting-list-card]
       operationId: updateHematologyWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HematologyWaitingListCardGrade
+      tags: [hematology-waiting-list-card]
       operationId: replaceHematologyWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HematologyWaitingListCardGrade
+      tags: [hematology-waiting-list-card]
       operationId: deleteHematologyWaitingListCardGrade
       responses:
         "200":

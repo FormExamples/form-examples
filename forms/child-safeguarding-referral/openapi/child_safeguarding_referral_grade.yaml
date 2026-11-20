@@ -5,10 +5,19 @@ info:
   title: Child Safeguarding Referral — ChildSafeguardingReferralGrade
   version: 1.0.0
   description: "Computed grading result for a child safeguarding referral: completeness/validity status (complete/partial/incomplete), urgency classification (emergency/urgent/standard), and completeness percentage."
+x-namespace:
+  form: child-safeguarding-referral
+  apiPrefix: /api/child-safeguarding-referral/
+  sqlSchema: child_safeguarding_referral
+  xmlNamespace: https://formexamples.github.io/child-safeguarding-referral/xml
+tags:
+  - name: child-safeguarding-referral
+    description: Child Safeguarding Referral form
 paths:
   /api/child-safeguarding-referral/child_safeguarding_referral_grades:
     get:
       summary: List ChildSafeguardingReferralGrade records
+      tags: [child-safeguarding-referral]
       operationId: listChildSafeguardingReferralGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ChildSafeguardingReferralGrade
+      tags: [child-safeguarding-referral]
       operationId: createChildSafeguardingReferralGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ChildSafeguardingReferralGrade by id
+      tags: [child-safeguarding-referral]
       operationId: getChildSafeguardingReferralGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ChildSafeguardingReferralGrade
+      tags: [child-safeguarding-referral]
       operationId: updateChildSafeguardingReferralGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ChildSafeguardingReferralGrade
+      tags: [child-safeguarding-referral]
       operationId: replaceChildSafeguardingReferralGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ChildSafeguardingReferralGrade
+      tags: [child-safeguarding-referral]
       operationId: deleteChildSafeguardingReferralGrade
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Caprini Venous Thromboembolism Risk Assessment — CapriniVenousThromboembolismRiskAssessmentGradeRule
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during Caprini computation: fired factor (or age band), weight group, points contributed, category, and description."
+x-namespace:
+  form: caprini-venous-thromboembolism-risk-assessment
+  apiPrefix: /api/caprini-venous-thromboembolism-risk-assessment/
+  sqlSchema: caprini_venous_thromboembolism_risk_assessment
+  xmlNamespace: https://formexamples.github.io/caprini-venous-thromboembolism-risk-assessment/xml
+tags:
+  - name: caprini-venous-thromboembolism-risk-assessment
+    description: Caprini Venous Thromboembolism Risk Assessment form
 paths:
   /api/caprini-venous-thromboembolism-risk-assessment/caprini_venous_thromboembolism_risk_assessment_grade_rules:
     get:
       summary: List CapriniVenousThromboembolismRiskAssessmentGradeRule records
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: listCapriniVenousThromboembolismRiskAssessmentGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CapriniVenousThromboembolismRiskAssessmentGradeRule
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: createCapriniVenousThromboembolismRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CapriniVenousThromboembolismRiskAssessmentGradeRule by id
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: getCapriniVenousThromboembolismRiskAssessmentGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CapriniVenousThromboembolismRiskAssessmentGradeRule
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: updateCapriniVenousThromboembolismRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CapriniVenousThromboembolismRiskAssessmentGradeRule
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: replaceCapriniVenousThromboembolismRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CapriniVenousThromboembolismRiskAssessmentGradeRule
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: deleteCapriniVenousThromboembolismRiskAssessmentGradeRule
       responses:
         "200":

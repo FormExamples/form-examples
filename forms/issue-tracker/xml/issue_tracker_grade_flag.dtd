@@ -1,4 +1,5 @@
 <!ELEMENT issue_tracker_grade_flag (id,created_at,updated_at,deleted_at,issue_tracker_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST issue_tracker_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/issue-tracker/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the QRISK3 Cardiovascular Disease Risk Score form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: qrisk3-cardiovascular-disease-risk-score
+  apiPrefix: /api/qrisk3-cardiovascular-disease-risk-score/
+  sqlSchema: qrisk3_cardiovascular_disease_risk_score
+  xmlNamespace: https://formexamples.github.io/qrisk3-cardiovascular-disease-risk-score/xml
+tags:
+- name: qrisk3-cardiovascular-disease-risk-score
+  description: QRISK3 Cardiovascular Disease Risk Score form
 paths:
   /api/qrisk3-cardiovascular-disease-risk-score/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
   /api/qrisk3-cardiovascular-disease-risk-score/patients:
     get:
       summary: List Patient records
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/qrisk3-cardiovascular-disease-risk-score/qrisk3_cardiovascular_disease_risk_score_grade_flags:
     get:
       summary: List Qrisk3CardiovascularDiseaseRiskScoreGradeFlag records
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: listQrisk3CardiovascularDiseaseRiskScoreGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Qrisk3CardiovascularDiseaseRiskScoreGradeFlag
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: createQrisk3CardiovascularDiseaseRiskScoreGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Qrisk3CardiovascularDiseaseRiskScoreGradeFlag by id
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: getQrisk3CardiovascularDiseaseRiskScoreGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Qrisk3CardiovascularDiseaseRiskScoreGradeFlag
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: updateQrisk3CardiovascularDiseaseRiskScoreGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Qrisk3CardiovascularDiseaseRiskScoreGradeFlag
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: replaceQrisk3CardiovascularDiseaseRiskScoreGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Qrisk3CardiovascularDiseaseRiskScoreGradeFlag
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: deleteQrisk3CardiovascularDiseaseRiskScoreGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/qrisk3-cardiovascular-disease-risk-score/qrisk3_cardiovascular_disease_risk_score_grade_rules:
     get:
       summary: List Qrisk3CardiovascularDiseaseRiskScoreGradeRule records
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: listQrisk3CardiovascularDiseaseRiskScoreGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Qrisk3CardiovascularDiseaseRiskScoreGradeRule
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: createQrisk3CardiovascularDiseaseRiskScoreGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Qrisk3CardiovascularDiseaseRiskScoreGradeRule by id
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: getQrisk3CardiovascularDiseaseRiskScoreGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Qrisk3CardiovascularDiseaseRiskScoreGradeRule
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: updateQrisk3CardiovascularDiseaseRiskScoreGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Qrisk3CardiovascularDiseaseRiskScoreGradeRule
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: replaceQrisk3CardiovascularDiseaseRiskScoreGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Qrisk3CardiovascularDiseaseRiskScoreGradeRule
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: deleteQrisk3CardiovascularDiseaseRiskScoreGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/qrisk3-cardiovascular-disease-risk-score/qrisk3_cardiovascular_disease_risk_score_grades:
     get:
       summary: List Qrisk3CardiovascularDiseaseRiskScoreGrade records
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: listQrisk3CardiovascularDiseaseRiskScoreGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Qrisk3CardiovascularDiseaseRiskScoreGrade
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: createQrisk3CardiovascularDiseaseRiskScoreGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Qrisk3CardiovascularDiseaseRiskScoreGrade by id
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: getQrisk3CardiovascularDiseaseRiskScoreGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Qrisk3CardiovascularDiseaseRiskScoreGrade
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: updateQrisk3CardiovascularDiseaseRiskScoreGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Qrisk3CardiovascularDiseaseRiskScoreGrade
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: replaceQrisk3CardiovascularDiseaseRiskScoreGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Qrisk3CardiovascularDiseaseRiskScoreGrade
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: deleteQrisk3CardiovascularDiseaseRiskScoreGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/qrisk3-cardiovascular-disease-risk-score/qrisk3_cardiovascular_disease_risk_scores:
     get:
       summary: List Qrisk3CardiovascularDiseaseRiskScore records
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: listQrisk3CardiovascularDiseaseRiskScore
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Qrisk3CardiovascularDiseaseRiskScore
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: createQrisk3CardiovascularDiseaseRiskScore
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Qrisk3CardiovascularDiseaseRiskScore by id
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: getQrisk3CardiovascularDiseaseRiskScore
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Qrisk3CardiovascularDiseaseRiskScore
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: updateQrisk3CardiovascularDiseaseRiskScore
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Qrisk3CardiovascularDiseaseRiskScore
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: replaceQrisk3CardiovascularDiseaseRiskScore
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Qrisk3CardiovascularDiseaseRiskScore
+      tags:
+      - qrisk3-cardiovascular-disease-risk-score
       operationId: deleteQrisk3CardiovascularDiseaseRiskScore
       responses:
         '200':

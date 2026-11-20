@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Mammography Test Request form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: mammography-test-request
+  apiPrefix: /api/mammography-test-request/
+  sqlSchema: mammography_test_request
+  xmlNamespace: https://formexamples.github.io/mammography-test-request/xml
+tags:
+- name: mammography-test-request
+  description: Mammography Test Request form
 paths:
   /api/mammography-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - mammography-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - mammography-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - mammography-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - mammography-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - mammography-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - mammography-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/mammography-test-request/mammography_test_request_grade_flags:
     get:
       summary: List MammographyTestRequestGradeFlag records
+      tags:
+      - mammography-test-request
       operationId: listMammographyTestRequestGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MammographyTestRequestGradeFlag
+      tags:
+      - mammography-test-request
       operationId: createMammographyTestRequestGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MammographyTestRequestGradeFlag by id
+      tags:
+      - mammography-test-request
       operationId: getMammographyTestRequestGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MammographyTestRequestGradeFlag
+      tags:
+      - mammography-test-request
       operationId: updateMammographyTestRequestGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MammographyTestRequestGradeFlag
+      tags:
+      - mammography-test-request
       operationId: replaceMammographyTestRequestGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MammographyTestRequestGradeFlag
+      tags:
+      - mammography-test-request
       operationId: deleteMammographyTestRequestGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/mammography-test-request/mammography_test_request_grade_rules:
     get:
       summary: List MammographyTestRequestGradeRule records
+      tags:
+      - mammography-test-request
       operationId: listMammographyTestRequestGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MammographyTestRequestGradeRule
+      tags:
+      - mammography-test-request
       operationId: createMammographyTestRequestGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MammographyTestRequestGradeRule by id
+      tags:
+      - mammography-test-request
       operationId: getMammographyTestRequestGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MammographyTestRequestGradeRule
+      tags:
+      - mammography-test-request
       operationId: updateMammographyTestRequestGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MammographyTestRequestGradeRule
+      tags:
+      - mammography-test-request
       operationId: replaceMammographyTestRequestGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MammographyTestRequestGradeRule
+      tags:
+      - mammography-test-request
       operationId: deleteMammographyTestRequestGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/mammography-test-request/mammography_test_request_grades:
     get:
       summary: List MammographyTestRequestGrade records
+      tags:
+      - mammography-test-request
       operationId: listMammographyTestRequestGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MammographyTestRequestGrade
+      tags:
+      - mammography-test-request
       operationId: createMammographyTestRequestGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MammographyTestRequestGrade by id
+      tags:
+      - mammography-test-request
       operationId: getMammographyTestRequestGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MammographyTestRequestGrade
+      tags:
+      - mammography-test-request
       operationId: updateMammographyTestRequestGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MammographyTestRequestGrade
+      tags:
+      - mammography-test-request
       operationId: replaceMammographyTestRequestGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MammographyTestRequestGrade
+      tags:
+      - mammography-test-request
       operationId: deleteMammographyTestRequestGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/mammography-test-request/mammography_test_requests:
     get:
       summary: List MammographyTestRequest records
+      tags:
+      - mammography-test-request
       operationId: listMammographyTestRequest
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MammographyTestRequest
+      tags:
+      - mammography-test-request
       operationId: createMammographyTestRequest
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MammographyTestRequest by id
+      tags:
+      - mammography-test-request
       operationId: getMammographyTestRequest
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MammographyTestRequest
+      tags:
+      - mammography-test-request
       operationId: updateMammographyTestRequest
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MammographyTestRequest
+      tags:
+      - mammography-test-request
       operationId: replaceMammographyTestRequest
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MammographyTestRequest
+      tags:
+      - mammography-test-request
       operationId: deleteMammographyTestRequest
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - mammography-test-request
   /api/mammography-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - mammography-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - mammography-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - mammography-test-request
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - mammography-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - mammography-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - mammography-test-request
       operationId: deletePatient
       responses:
         '200':

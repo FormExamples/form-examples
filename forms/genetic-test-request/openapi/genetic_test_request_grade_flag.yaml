@@ -5,10 +5,19 @@ info:
   title: Genetic Test Request — GeneticTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the genomic laboratory hub / vetting team.
+x-namespace:
+  form: genetic-test-request
+  apiPrefix: /api/genetic-test-request/
+  sqlSchema: genetic_test_request
+  xmlNamespace: https://formexamples.github.io/genetic-test-request/xml
+tags:
+  - name: genetic-test-request
+    description: Genetic Test Request form
 paths:
   /api/genetic-test-request/genetic_test_request_grade_flags:
     get:
       summary: List GeneticTestRequestGradeFlag records
+      tags: [genetic-test-request]
       operationId: listGeneticTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GeneticTestRequestGradeFlag
+      tags: [genetic-test-request]
       operationId: createGeneticTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GeneticTestRequestGradeFlag by id
+      tags: [genetic-test-request]
       operationId: getGeneticTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GeneticTestRequestGradeFlag
+      tags: [genetic-test-request]
       operationId: updateGeneticTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GeneticTestRequestGradeFlag
+      tags: [genetic-test-request]
       operationId: replaceGeneticTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GeneticTestRequestGradeFlag
+      tags: [genetic-test-request]
       operationId: deleteGeneticTestRequestGradeFlag
       responses:
         "200":

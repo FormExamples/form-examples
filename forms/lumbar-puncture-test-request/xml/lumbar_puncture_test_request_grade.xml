@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE lumbar_puncture_test_request_grade SYSTEM "lumbar_puncture_test_request_grade.dtd">
-<lumbar_puncture_test_request_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<lumbar_puncture_test_request_grade xmlns="https://formexamples.github.io/lumbar-puncture-test-request/xml">
+<id>ca52c19c-3e72-5c6f-ac7b-239aaac3fdc0</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<lumbar_puncture_test_request_id>770e8400-e29b-41d4-a716-446655440002</lumbar_puncture_test_request_id>
+<lumbar_puncture_test_request_id>196ed463-3ca6-53cd-86b5-08de4cdbed04</lumbar_puncture_test_request_id>
 <appropriateness_score>5</appropriateness_score>
 <appropriateness_band>usually-appropriate</appropriateness_band>
 <contraindication_band>ok</contraindication_band>

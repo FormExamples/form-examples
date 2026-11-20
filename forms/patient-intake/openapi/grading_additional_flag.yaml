@@ -5,10 +5,19 @@ info:
   title: Patient Intake — GradingAdditionalFlag
   version: 1.0.0
   description: Additional flags detected during patient intake grading, such as missing critical information, allergy alerts, or safeguarding concerns.
+x-namespace:
+  form: patient-intake
+  apiPrefix: /api/patient-intake/
+  sqlSchema: patient_intake
+  xmlNamespace: https://formexamples.github.io/patient-intake/xml
+tags:
+  - name: patient-intake
+    description: Patient Intake form
 paths:
   /api/patient-intake/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [patient-intake]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [patient-intake]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [patient-intake]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [patient-intake]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [patient-intake]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [patient-intake]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

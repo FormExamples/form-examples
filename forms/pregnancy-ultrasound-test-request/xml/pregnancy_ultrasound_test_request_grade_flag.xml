@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pregnancy_ultrasound_test_request_grade_flag SYSTEM "pregnancy_ultrasound_test_request_grade_flag.dtd">
-<pregnancy_ultrasound_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<pregnancy_ultrasound_test_request_grade_flag xmlns="https://formexamples.github.io/pregnancy-ultrasound-test-request/xml">
+<id>c8aae7e0-5e73-5c11-b70e-4b6bd414e73c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pregnancy_ultrasound_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</pregnancy_ultrasound_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<pregnancy_ultrasound_test_request_grade_id>7369f3d0-6bfb-5f15-a991-0c218e802a77</pregnancy_ultrasound_test_request_grade_id>
+<flag_id>39c7fe7f-d279-5fb0-a120-0f34903aab1f</flag_id>
 <category>suspected-ectopic</category>
 <priority>low</priority>
 <description>Example text.</description>

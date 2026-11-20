@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE perioperative_optimization_grade_flag SYSTEM "perioperative_optimization_grade_flag.dtd">
-<perioperative_optimization_grade_flag>
-<id>ee0e8400-e29b-41d4-a716-446655440009</id>
+<perioperative_optimization_grade_flag xmlns="https://formexamples.github.io/perioperative-optimization/xml">
+<id>aaea54de-c487-5440-a28f-c2b3ad77f542</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<perioperative_optimization_grade_id>cc0e8400-e29b-41d4-a716-446655440007</perioperative_optimization_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<perioperative_optimization_grade_id>0376d9d3-20e0-576f-b8d7-7e328537ab14</perioperative_optimization_grade_id>
+<flag_id>3bc25b7c-d34c-506d-a22d-92499a80bbd1</flag_id>
 <category>severe-anaemia</category>
 <priority>low</priority>
 <domain></domain>

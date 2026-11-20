@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hernia_diagnostic_evaluation_grade_flag SYSTEM "hernia_diagnostic_evaluation_grade_flag.dtd">
-<hernia_diagnostic_evaluation_grade_flag>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<hernia_diagnostic_evaluation_grade_flag xmlns="https://formexamples.github.io/hernia-diagnostic-evaluation/xml">
+<id>c159bc24-8632-5b23-b543-75300530de66</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<hernia_diagnostic_evaluation_grade_id>880e8400-e29b-41d4-a716-446655440003</hernia_diagnostic_evaluation_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<hernia_diagnostic_evaluation_grade_id>fab47def-c279-5122-bfc9-f584f8d73143</hernia_diagnostic_evaluation_grade_id>
+<flag_id>16430b5c-177b-5faa-af05-ddb996db75bd</flag_id>
 <category>strangulation-suspected</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -5,10 +5,19 @@ info:
   title: United States Vehicle Bill Of Sale — UnitedStatesVehicleBillOfSaleGradeFlag
   version: 1.0.0
   description: Flagged issues that fire independently of the completeness class, with priority and a suggested action for the seller, buyer, or notary.
+x-namespace:
+  form: united-states-vehicle-bill-of-sale
+  apiPrefix: /api/united-states-vehicle-bill-of-sale/
+  sqlSchema: united_states_vehicle_bill_of_sale
+  xmlNamespace: https://formexamples.github.io/united-states-vehicle-bill-of-sale/xml
+tags:
+  - name: united-states-vehicle-bill-of-sale
+    description: United States Vehicle Bill Of Sale form
 paths:
   /api/united-states-vehicle-bill-of-sale/united_states_vehicle_bill_of_sale_grade_flags:
     get:
       summary: List UnitedStatesVehicleBillOfSaleGradeFlag records
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: listUnitedStatesVehicleBillOfSaleGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesVehicleBillOfSaleGradeFlag
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: createUnitedStatesVehicleBillOfSaleGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesVehicleBillOfSaleGradeFlag by id
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: getUnitedStatesVehicleBillOfSaleGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesVehicleBillOfSaleGradeFlag
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: updateUnitedStatesVehicleBillOfSaleGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesVehicleBillOfSaleGradeFlag
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: replaceUnitedStatesVehicleBillOfSaleGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesVehicleBillOfSaleGradeFlag
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: deleteUnitedStatesVehicleBillOfSaleGradeFlag
       responses:
         "200":

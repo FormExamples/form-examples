@@ -1,4 +1,5 @@
 <!ELEMENT waterlow_pressure_ulcer_risk_assessment (id,created_at,updated_at,deleted_at,patient_id,clinician_id,nurse_name,nurse_role,assessed_at,care_setting,assessment_reason,patient_identifier,age_band,sex,build_weight_for_height,skin_type,continence,mobility,tissue_malnutrition,neurological_deficit,major_surgery_trauma,medication,existing_pressure_damage,clinical_note)>
+<!ATTLIST waterlow_pressure_ulcer_risk_assessment xmlns CDATA #FIXED "https://formexamples.github.io/waterlow-pressure-ulcer-risk-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

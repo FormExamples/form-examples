@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE national_early_warning_score_2_grade SYSTEM "national_early_warning_score_2_grade.dtd">
-<national_early_warning_score_2_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<national_early_warning_score_2_grade xmlns="https://formexamples.github.io/national-early-warning-score-2/xml">
+<id>52af0b34-ace3-54f9-8caf-934d6bf690c5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<national_early_warning_score_2_id>770e8400-e29b-41d4-a716-446655440002</national_early_warning_score_2_id>
+<national_early_warning_score_2_id>18a5d768-bfc8-5a72-9b9e-53afeba389a8</national_early_warning_score_2_id>
 <aggregate_score>5</aggregate_score>
 <respiratory_rate_score>5</respiratory_rate_score>
 <spo2_score>5</spo2_score>

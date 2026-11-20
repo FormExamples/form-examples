@@ -5,10 +5,19 @@ info:
   title: Meeting — MeetingGrade
   version: 1.0.0
   description: Computed and signed-off validation result for a meeting. One-to-one with meeting. Stores the derived counts and completion status from validateMeeting() plus the organiser sign-off.
+x-namespace:
+  form: meeting
+  apiPrefix: /api/meeting/
+  sqlSchema: meeting
+  xmlNamespace: https://formexamples.github.io/meeting/xml
+tags:
+  - name: meeting
+    description: Meeting form
 paths:
   /api/meeting/meeting_grades:
     get:
       summary: List MeetingGrade records
+      tags: [meeting]
       operationId: listMeetingGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MeetingGrade
+      tags: [meeting]
       operationId: createMeetingGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MeetingGrade by id
+      tags: [meeting]
       operationId: getMeetingGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MeetingGrade
+      tags: [meeting]
       operationId: updateMeetingGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MeetingGrade
+      tags: [meeting]
       operationId: replaceMeetingGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MeetingGrade
+      tags: [meeting]
       operationId: deleteMeetingGrade
       responses:
         "200":

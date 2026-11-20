@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000070",
+    "id": "2dbdfc0e-ef67-59db-adcd-35ad482a46a7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000082",
+    "id": "3c24ee9a-6e2f-555e-9607-08e410d48f37",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "bloodTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-000000000090",
+    "id": "cdd2361f-2246-5071-835d-94953c97d1ed",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000094",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000095",
+    "patientId": "77909986-2b17-57e9-9551-4bf0f3434c66",
+    "clinicianId": "47266e1d-affc-5a34-bf81-cb7b33e73638",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -82,11 +82,11 @@
     "notes": ""
   },
   "bloodTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bc",
+    "id": "fcc2a9a5-938b-5972-9a5b-f93c31fd9aaa",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "bloodTestRequestId": "550e8400-e29b-41d4-a716-0000000000c0",
+    "bloodTestRequestId": "da1f92f3-1203-5e37-b597-f6e0061f1f2d",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "preanalyticalBand": "ok",
@@ -100,22 +100,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "bloodTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000cc",
+    "id": "3f873b06-413d-58cb-a70e-b531015db676",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "bloodTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000d0",
+    "bloodTestRequestGradeId": "75c58592-92af-5919-b6a8-c37b1c7c1610",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "bloodTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d5",
+    "id": "113a4620-a70e-52bd-a8ae-d53a413e841d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "bloodTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000d9",
+    "bloodTestRequestGradeId": "aaa910dd-c389-5a5a-8705-3ba91e07bdb7",
     "flagId": "",
     "category": "duplicate-recent-test",
     "priority": "low",

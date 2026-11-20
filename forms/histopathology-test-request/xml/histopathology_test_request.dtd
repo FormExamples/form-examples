@@ -1,4 +1,5 @@
 <!ELEMENT histopathology_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,specimen_type,specimen_site,number_of_specimens,fixative,primary_indication,clinical_question,clinical_details,provisional_diagnosis,previous_histology,urgent_frozen_section,two_week_wait,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST histopathology_test_request xmlns CDATA #FIXED "https://formexamples.github.io/histopathology-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

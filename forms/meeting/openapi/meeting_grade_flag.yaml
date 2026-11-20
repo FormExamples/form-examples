@@ -5,10 +5,19 @@ info:
   title: Meeting — MeetingGradeFlag
   version: 1.0.0
   description: Non-blocking validation flags that fire independently of the completion status. Surfaced in the dashboard for the organiser to address.
+x-namespace:
+  form: meeting
+  apiPrefix: /api/meeting/
+  sqlSchema: meeting
+  xmlNamespace: https://formexamples.github.io/meeting/xml
+tags:
+  - name: meeting
+    description: Meeting form
 paths:
   /api/meeting/meeting_grade_flags:
     get:
       summary: List MeetingGradeFlag records
+      tags: [meeting]
       operationId: listMeetingGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MeetingGradeFlag
+      tags: [meeting]
       operationId: createMeetingGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MeetingGradeFlag by id
+      tags: [meeting]
       operationId: getMeetingGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MeetingGradeFlag
+      tags: [meeting]
       operationId: updateMeetingGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MeetingGradeFlag
+      tags: [meeting]
       operationId: replaceMeetingGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MeetingGradeFlag
+      tags: [meeting]
       operationId: deleteMeetingGradeFlag
       responses:
         "200":

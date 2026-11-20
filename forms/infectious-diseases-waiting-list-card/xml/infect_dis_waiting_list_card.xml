@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE infect_dis_waiting_list_card SYSTEM "infect_dis_waiting_list_card.dtd">
-<infect_dis_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<infect_dis_waiting_list_card xmlns="https://formexamples.github.io/infectious-diseases-waiting-list-card/xml">
+<id>e51475cd-3108-50ee-92b0-c98e34da7fbf</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>d60c08be-e901-5b52-bc58-cdc1ba440e28</patient_id>
+<practitioner_id>a8d311cf-f62f-5dea-9f2c-52e3c420ae74</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

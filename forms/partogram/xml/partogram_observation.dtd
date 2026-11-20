@@ -1,4 +1,5 @@
 <!ELEMENT partogram_observation (id,created_at,updated_at,deleted_at,partogram_id,observed_at,cervical_dilatation_cm,descent_fifths,contractions_per_10_min,contraction_duration_band,contraction_strength,fetal_heart_rate,liquor_state,moulding,systolic_blood_pressure,diastolic_blood_pressure,pulse,temperature,urine_volume_ml,urine_protein,urine_ketones,urine_glucose,oxytocin_rate,drugs_and_fluids)>
+<!ATTLIST partogram_observation xmlns CDATA #FIXED "https://formexamples.github.io/partogram/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

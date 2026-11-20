@@ -5,10 +5,19 @@ info:
   title: Vaccinations Assessment — FiredRule
   version: 1.0.0
   description: Vaccination rules that fired during assessment grading. Many-to-one child of grade.
+x-namespace:
+  form: vaccinations-assessment
+  apiPrefix: /api/vaccinations-assessment/
+  sqlSchema: vaccinations_assessment
+  xmlNamespace: https://formexamples.github.io/vaccinations-assessment/xml
+tags:
+  - name: vaccinations-assessment
+    description: Vaccinations Assessment form
 paths:
   /api/vaccinations-assessment/fired_rules:
     get:
       summary: List FiredRule records
+      tags: [vaccinations-assessment]
       operationId: listFiredRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new FiredRule
+      tags: [vaccinations-assessment]
       operationId: createFiredRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one FiredRule by id
+      tags: [vaccinations-assessment]
       operationId: getFiredRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing FiredRule
+      tags: [vaccinations-assessment]
       operationId: updateFiredRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing FiredRule
+      tags: [vaccinations-assessment]
       operationId: replaceFiredRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a FiredRule
+      tags: [vaccinations-assessment]
       operationId: deleteFiredRule
       responses:
         "200":

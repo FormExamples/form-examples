@@ -1,4 +1,5 @@
 <!ELEMENT emergency_department_triage_note_grade_rule (id,created_at,updated_at,deleted_at,emergency_department_triage_note_grade_id,rule_id,instrument,band,category,description)>
+<!ATTLIST emergency_department_triage_note_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/emergency-department-triage-note/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

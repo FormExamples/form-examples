@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-0000000000e0",
+    "id": "081c883b-9c86-5fa4-96bf-5a8012a4e32d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-0000000000f2",
+    "id": "a382a2af-513b-52b9-8983-7f25bb209573",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,19 +36,19 @@
     "unitedKingdomNhsNumber": ""
   },
   "assessment": {
-    "id": "550e8400-e29b-41d4-a716-000000000094",
+    "id": "92928739-4cc6-502e-860f-de9f91d98764",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000098",
+    "patientId": "e5a79edc-64e1-502b-b162-51c8da761cd2",
     "status": "draft"
   },
   "assessmentCancerHistory": {
-    "id": "550e8400-e29b-41d4-a716-00000000009a",
+    "id": "aea43501-fa42-5865-b79d-89bb6da637a0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-00000000009e",
+    "assessmentId": "b44a530c-41ba-5936-8a54-607c20544e5d",
     "familyCancerHistory": "yes",
     "multipleFamilyCancers": "yes",
     "earlyOnsetCancer": "yes",
@@ -60,11 +60,11 @@
     "cancerRiskScore": null
   },
   "assessmentCancerHistoryItem": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a8",
+    "id": "4784ce11-6f9d-5f4b-80c9-60f9aa40443d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cancerHistoryId": "550e8400-e29b-41d4-a716-0000000000ac",
+    "cancerHistoryId": "813f44da-28b4-505d-8a3d-8eeaf5cac820",
     "relativeRelationship": "",
     "cancerType": "",
     "ageAtDiagnosis": null,
@@ -72,11 +72,11 @@
     "sortOrder": 0
   },
   "assessmentFamilyPedigree": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b2",
+    "id": "e4e814e3-7461-574a-9c19-937e1c542d57",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000b6",
+    "assessmentId": "8321b991-59a4-543e-9e45-f9cc6cd91973",
     "totalFirstDegreeRelatives": null,
     "totalSecondDegreeRelatives": null,
     "consanguinityInFamily": "yes",
@@ -86,11 +86,11 @@
     "threeGenerationPedigreeDrawn": "yes"
   },
   "assessmentFamilyPedigreeMember": {
-    "id": "550e8400-e29b-41d4-a716-0000000000be",
+    "id": "e4fb6110-7c83-596b-b4e0-759056e022ed",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "familyPedigreeId": "550e8400-e29b-41d4-a716-0000000000c2",
+    "familyPedigreeId": "06fd5553-eb98-549a-82e7-97bbecd99373",
     "relationship": "",
     "sex": "male",
     "age": null,
@@ -101,11 +101,11 @@
     "sortOrder": 0
   },
   "grade": {
-    "id": "550e8400-e29b-41d4-a716-000000000109",
+    "id": "ec27150b-95b6-58a9-a27a-25605084f20c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-00000000010d",
+    "assessmentId": "6a849db5-23db-5da6-a1c8-1f45d43c7b54",
     "riskLevel": "low",
     "totalRiskScore": 0,
     "cancerGeneticsScore": 0,
@@ -115,22 +115,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "gradingFiredRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000115",
+    "id": "9692746e-7d39-5132-8253-d42547dd0e31",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-000000000119",
+    "gradeId": "ca50b967-8127-5640-8428-8ff9cac14ee5",
     "ruleId": "",
     "category": "",
     "description": "",
     "riskLevel": "low"
   },
   "gradingAdditionalFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000011e",
+    "id": "740df95c-9711-5293-8ae5-f8a4e5ae357a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-000000000122",
+    "gradeId": "dc2425f7-ae43-5340-a1cc-6c99b9bf65d5",
     "flagId": "",
     "category": "",
     "message": "",

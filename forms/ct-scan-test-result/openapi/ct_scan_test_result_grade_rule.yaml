@@ -5,10 +5,19 @@ info:
   title: Ct Scan Test Result — CtScanTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: ct-scan-test-result
+  apiPrefix: /api/ct-scan-test-result/
+  sqlSchema: ct_scan_test_result
+  xmlNamespace: https://formexamples.github.io/ct-scan-test-result/xml
+tags:
+  - name: ct-scan-test-result
+    description: Ct Scan Test Result form
 paths:
   /api/ct-scan-test-result/ct_scan_test_result_grade_rules:
     get:
       summary: List CtScanTestResultGradeRule records
+      tags: [ct-scan-test-result]
       operationId: listCtScanTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CtScanTestResultGradeRule
+      tags: [ct-scan-test-result]
       operationId: createCtScanTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CtScanTestResultGradeRule by id
+      tags: [ct-scan-test-result]
       operationId: getCtScanTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CtScanTestResultGradeRule
+      tags: [ct-scan-test-result]
       operationId: updateCtScanTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CtScanTestResultGradeRule
+      tags: [ct-scan-test-result]
       operationId: replaceCtScanTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CtScanTestResultGradeRule
+      tags: [ct-scan-test-result]
       operationId: deleteCtScanTestResultGradeRule
       responses:
         "200":

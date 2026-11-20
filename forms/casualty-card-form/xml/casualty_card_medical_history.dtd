@@ -1,4 +1,5 @@
 <!ELEMENT casualty_card_medical_history (id,created_at,updated_at,deleted_at,casualty_card_id,past_medical_history,past_surgical_history,tetanus_status,smoking_status,alcohol_consumption,recreational_drug_use,last_oral_intake)>
+<!ATTLIST casualty_card_medical_history xmlns CDATA #FIXED "https://formexamples.github.io/casualty-card-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

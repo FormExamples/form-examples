@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "d69a5a96-1e4e-53e2-9112-76fa541d7b7c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "89e2d2e0-7ae7-5c7d-8ddf-fba17c6240e6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "oncologyWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "abad6108-b8a8-52b5-984b-9202eff9e649",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000096",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000097",
+    "patientId": "cd8557f5-423e-5316-aa78-844fc22e7f53",
+    "practitionerId": "49ec47b2-1156-573c-9af6-f98f72d8b963",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "oncologyWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "30eb2a16-d527-5fcb-b8c4-dad06a7f4a28",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "oncologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "oncologyWaitingListCardId": "7f1c5fe9-e08a-565f-829a-eee084b20bda",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "oncologyWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "70a507be-0c56-5692-adff-e6717dd821ac",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "oncologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "oncologyWaitingListCardId": "9fa461e0-6248-55cf-9fc7-286055df99bc",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "oncologyWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d1",
+    "id": "2d176bf6-0859-5958-9014-94d02386630e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "oncologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "oncologyWaitingListCardGradeId": "09dd38aa-1249-5d2a-8b71-dbf0381ca6ca",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "oncologyWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000db",
+    "id": "3e51542d-9808-515d-8ca8-92cf07c4d971",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "oncologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000df",
+    "oncologyWaitingListCardGradeId": "12a6abd0-ca68-5278-b7be-e2cfbf4360fc",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

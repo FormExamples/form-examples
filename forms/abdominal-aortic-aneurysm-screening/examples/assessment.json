@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000057",
+    "id": "2c8864fa-08c0-54f5-abf8-128561066c65",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000069",
+    "id": "2da60076-1cb6-51f6-891a-9f2d093603e3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "abdominalAorticAneurysmScreening": {
-    "id": "550e8400-e29b-41d4-a716-000000000076",
+    "id": "55bb36bd-92eb-5e31-836d-ec19723c1ba1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007a",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007b",
+    "patientId": "37882d33-ef56-5a85-8253-5fb7c9685de8",
+    "clinicianId": "54d49af3-8c30-513d-86e9-20aa2648ea1e",
     "technicianName": "",
     "technicianRole": "screening-technician",
     "clinicSite": "",
@@ -63,11 +63,11 @@
     "resultNote": ""
   },
   "abdominalAorticAneurysmScreeningGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000090",
+    "id": "07635c01-0502-5eec-934e-039481c935c4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "abdominalAorticAneurysmScreeningId": "550e8400-e29b-41d4-a716-000000000094",
+    "abdominalAorticAneurysmScreeningId": "8f9233a4-e61f-5350-8664-a124052d9b6c",
     "category": "normal",
     "surveillanceBand": "discharge",
     "recommendedAction": "",
@@ -75,22 +75,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "abdominalAorticAneurysmScreeningGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000009a",
+    "id": "4b0d0477-2d10-5a7e-9c3a-00de4a7271fc",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "abdominalAorticAneurysmScreeningGradeId": "550e8400-e29b-41d4-a716-00000000009e",
+    "abdominalAorticAneurysmScreeningGradeId": "abd77fa8-88a6-5fc3-939b-8e6c4b41b022",
     "ruleId": "",
     "stage": "visualisation",
     "category": "",
     "description": ""
   },
   "abdominalAorticAneurysmScreeningGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a3",
+    "id": "7eb0ff4e-eb0c-5d64-9b8b-55d6bef3db69",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "abdominalAorticAneurysmScreeningGradeId": "550e8400-e29b-41d4-a716-0000000000a7",
+    "abdominalAorticAneurysmScreeningGradeId": "2a4defb0-20a2-5a64-a98b-de76929883a5",
     "flagId": "",
     "category": "vascular-referral",
     "priority": "low",

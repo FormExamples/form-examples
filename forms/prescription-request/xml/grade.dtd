@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,prescription_request_id,priority_level,rule_count,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/prescription-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

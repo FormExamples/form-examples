@@ -1,4 +1,5 @@
 <!ELEMENT fluid_balance_chart_grade_rule (id,created_at,updated_at,deleted_at,fluid_balance_chart_grade_id,rule_id,category,description)>
+<!ATTLIST fluid_balance_chart_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/fluid-balance-chart/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

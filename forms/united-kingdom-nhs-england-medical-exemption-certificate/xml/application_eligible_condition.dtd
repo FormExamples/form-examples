@@ -1,4 +1,5 @@
 <!ELEMENT application_eligible_condition (id,created_at,updated_at,deleted_at,application_id,eligible_condition_id,diagnosis_date,snomed_ct_code,icd10_code,treatment_detail,fistula_site,appliance_type,substitution_therapy,on_substitution_therapy,diabetes_treatment_mode,anticonvulsant,continuous_anticonvulsant_therapy,cannot_leave_home_unaided,disability_carer_detail,disability_expected_to_be_permanent,cancer_site,cancer_treatment_phase,histology_confirmed,practitioner_attestation_notes)>
+<!ATTLIST application_eligible_condition xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-nhs-england-medical-exemption-certificate/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

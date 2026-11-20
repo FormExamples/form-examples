@@ -5,10 +5,19 @@ info:
   title: Ct Scan Test Result — CtScanTestResult
   version: 1.0.0
   description: CT (computed tomography) scan result (report). Captures the performed examination, contrast and technique, clinical history, the narrative and structured findings, key measurements and radiation dose (DLP), the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: ct-scan-test-result
+  apiPrefix: /api/ct-scan-test-result/
+  sqlSchema: ct_scan_test_result
+  xmlNamespace: https://formexamples.github.io/ct-scan-test-result/xml
+tags:
+  - name: ct-scan-test-result
+    description: Ct Scan Test Result form
 paths:
   /api/ct-scan-test-result/ct_scan_test_results:
     get:
       summary: List CtScanTestResult records
+      tags: [ct-scan-test-result]
       operationId: listCtScanTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CtScanTestResult
+      tags: [ct-scan-test-result]
       operationId: createCtScanTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CtScanTestResult by id
+      tags: [ct-scan-test-result]
       operationId: getCtScanTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CtScanTestResult
+      tags: [ct-scan-test-result]
       operationId: updateCtScanTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CtScanTestResult
+      tags: [ct-scan-test-result]
       operationId: replaceCtScanTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CtScanTestResult
+      tags: [ct-scan-test-result]
       operationId: deleteCtScanTestResult
       responses:
         "200":

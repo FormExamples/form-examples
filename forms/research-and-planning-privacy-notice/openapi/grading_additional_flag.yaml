@@ -5,10 +5,19 @@ info:
   title: Research And Planning Privacy Notice — GradingAdditionalFlag
   version: 1.0.0
   description: Safety-critical clinical flags raised alongside the grading result.
+x-namespace:
+  form: research-and-planning-privacy-notice
+  apiPrefix: /api/research-and-planning-privacy-notice/
+  sqlSchema: research_and_planning_privacy_notice
+  xmlNamespace: https://formexamples.github.io/research-and-planning-privacy-notice/xml
+tags:
+  - name: research-and-planning-privacy-notice
+    description: Research And Planning Privacy Notice form
 paths:
   /api/research-and-planning-privacy-notice/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [research-and-planning-privacy-notice]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [research-and-planning-privacy-notice]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [research-and-planning-privacy-notice]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [research-and-planning-privacy-notice]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [research-and-planning-privacy-notice]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [research-and-planning-privacy-notice]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Structured Medication Review — StructuredMedicationReviewMedicine
   version: 1.0.0
   description: "Medicines reviewed within a structured medication review: name, form and strength, dose, indication, regular/high-risk flags, adherence, anticholinergic burden, monitoring, deprescribing candidacy, and STOPP/START criteria."
+x-namespace:
+  form: structured-medication-review
+  apiPrefix: /api/structured-medication-review/
+  sqlSchema: structured_medication_review
+  xmlNamespace: https://formexamples.github.io/structured-medication-review/xml
+tags:
+  - name: structured-medication-review
+    description: Structured Medication Review form
 paths:
   /api/structured-medication-review/structured_medication_review_medicines:
     get:
       summary: List StructuredMedicationReviewMedicine records
+      tags: [structured-medication-review]
       operationId: listStructuredMedicationReviewMedicine
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new StructuredMedicationReviewMedicine
+      tags: [structured-medication-review]
       operationId: createStructuredMedicationReviewMedicine
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one StructuredMedicationReviewMedicine by id
+      tags: [structured-medication-review]
       operationId: getStructuredMedicationReviewMedicine
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing StructuredMedicationReviewMedicine
+      tags: [structured-medication-review]
       operationId: updateStructuredMedicationReviewMedicine
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing StructuredMedicationReviewMedicine
+      tags: [structured-medication-review]
       operationId: replaceStructuredMedicationReviewMedicine
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a StructuredMedicationReviewMedicine
+      tags: [structured-medication-review]
       operationId: deleteStructuredMedicationReviewMedicine
       responses:
         "200":

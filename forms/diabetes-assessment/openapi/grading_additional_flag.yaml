@@ -5,10 +5,19 @@ info:
   title: Diabetes Assessment — GradingAdditionalFlag
   version: 1.0.0
   description: Many-to-one with grade. Safety-critical alerts detected by the flagged issues engine.
+x-namespace:
+  form: diabetes-assessment
+  apiPrefix: /api/diabetes-assessment/
+  sqlSchema: diabetes_assessment
+  xmlNamespace: https://formexamples.github.io/diabetes-assessment/xml
+tags:
+  - name: diabetes-assessment
+    description: Diabetes Assessment form
 paths:
   /api/diabetes-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [diabetes-assessment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [diabetes-assessment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [diabetes-assessment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [diabetes-assessment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [diabetes-assessment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [diabetes-assessment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

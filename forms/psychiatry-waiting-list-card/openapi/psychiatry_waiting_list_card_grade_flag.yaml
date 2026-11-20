@@ -5,10 +5,19 @@ info:
   title: Psychiatry Waiting List Card — PsychiatryWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: psychiatry-waiting-list-card
+  apiPrefix: /api/psychiatry-waiting-list-card/
+  sqlSchema: psychiatry_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/psychiatry-waiting-list-card/xml
+tags:
+  - name: psychiatry-waiting-list-card
+    description: Psychiatry Waiting List Card form
 paths:
   /api/psychiatry-waiting-list-card/psychiatry_waiting_list_card_grade_flags:
     get:
       summary: List PsychiatryWaitingListCardGradeFlag records
+      tags: [psychiatry-waiting-list-card]
       operationId: listPsychiatryWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PsychiatryWaitingListCardGradeFlag
+      tags: [psychiatry-waiting-list-card]
       operationId: createPsychiatryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PsychiatryWaitingListCardGradeFlag by id
+      tags: [psychiatry-waiting-list-card]
       operationId: getPsychiatryWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PsychiatryWaitingListCardGradeFlag
+      tags: [psychiatry-waiting-list-card]
       operationId: updatePsychiatryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PsychiatryWaitingListCardGradeFlag
+      tags: [psychiatry-waiting-list-card]
       operationId: replacePsychiatryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PsychiatryWaitingListCardGradeFlag
+      tags: [psychiatry-waiting-list-card]
       operationId: deletePsychiatryWaitingListCardGradeFlag
       responses:
         "200":

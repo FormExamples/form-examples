@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_states_standard_certificate_of_death_grade SYSTEM "united_states_standard_certificate_of_death_grade.dtd">
-<united_states_standard_certificate_of_death_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<united_states_standard_certificate_of_death_grade xmlns="https://formexamples.github.io/united-states-standard-certificate-of-death/xml">
+<id>7db493db-b91d-5a08-b4c8-2548c3736c13</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<united_states_standard_certificate_of_death_id>770e8400-e29b-41d4-a716-446655440002</united_states_standard_certificate_of_death_id>
+<united_states_standard_certificate_of_death_id>be2872db-bcbf-571e-8cf9-ddc37681d038</united_states_standard_certificate_of_death_id>
 <validity_class>valid</validity_class>
 <underlying_cause></underlying_cause>
 <referral_indicated>yes</referral_indicated>

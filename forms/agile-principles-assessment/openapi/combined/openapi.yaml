@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Agile Principles Assessment form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: agile-principles-assessment
+  apiPrefix: /api/agile-principles-assessment/
+  sqlSchema: agile_principles_assessment
+  xmlNamespace: https://formexamples.github.io/agile-principles-assessment/xml
+tags:
+- name: agile-principles-assessment
+  description: Agile Principles Assessment form
 paths:
   /api/agile-principles-assessment/agile_principles_assessment_grade_flags:
     get:
       summary: List AgilePrinciplesAssessmentGradeFlag records
+      tags:
+      - agile-principles-assessment
       operationId: listAgilePrinciplesAssessmentGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AgilePrinciplesAssessmentGradeFlag
+      tags:
+      - agile-principles-assessment
       operationId: createAgilePrinciplesAssessmentGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AgilePrinciplesAssessmentGradeFlag by id
+      tags:
+      - agile-principles-assessment
       operationId: getAgilePrinciplesAssessmentGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AgilePrinciplesAssessmentGradeFlag
+      tags:
+      - agile-principles-assessment
       operationId: updateAgilePrinciplesAssessmentGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AgilePrinciplesAssessmentGradeFlag
+      tags:
+      - agile-principles-assessment
       operationId: replaceAgilePrinciplesAssessmentGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AgilePrinciplesAssessmentGradeFlag
+      tags:
+      - agile-principles-assessment
       operationId: deleteAgilePrinciplesAssessmentGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/agile-principles-assessment/agile_principles_assessment_grade_rules:
     get:
       summary: List AgilePrinciplesAssessmentGradeRule records
+      tags:
+      - agile-principles-assessment
       operationId: listAgilePrinciplesAssessmentGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AgilePrinciplesAssessmentGradeRule
+      tags:
+      - agile-principles-assessment
       operationId: createAgilePrinciplesAssessmentGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AgilePrinciplesAssessmentGradeRule by id
+      tags:
+      - agile-principles-assessment
       operationId: getAgilePrinciplesAssessmentGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AgilePrinciplesAssessmentGradeRule
+      tags:
+      - agile-principles-assessment
       operationId: updateAgilePrinciplesAssessmentGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AgilePrinciplesAssessmentGradeRule
+      tags:
+      - agile-principles-assessment
       operationId: replaceAgilePrinciplesAssessmentGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AgilePrinciplesAssessmentGradeRule
+      tags:
+      - agile-principles-assessment
       operationId: deleteAgilePrinciplesAssessmentGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/agile-principles-assessment/agile_principles_assessment_grades:
     get:
       summary: List AgilePrinciplesAssessmentGrade records
+      tags:
+      - agile-principles-assessment
       operationId: listAgilePrinciplesAssessmentGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AgilePrinciplesAssessmentGrade
+      tags:
+      - agile-principles-assessment
       operationId: createAgilePrinciplesAssessmentGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AgilePrinciplesAssessmentGrade by id
+      tags:
+      - agile-principles-assessment
       operationId: getAgilePrinciplesAssessmentGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AgilePrinciplesAssessmentGrade
+      tags:
+      - agile-principles-assessment
       operationId: updateAgilePrinciplesAssessmentGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AgilePrinciplesAssessmentGrade
+      tags:
+      - agile-principles-assessment
       operationId: replaceAgilePrinciplesAssessmentGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AgilePrinciplesAssessmentGrade
+      tags:
+      - agile-principles-assessment
       operationId: deleteAgilePrinciplesAssessmentGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/agile-principles-assessment/agile_principles_assessments:
     get:
       summary: List AgilePrinciplesAssessment records
+      tags:
+      - agile-principles-assessment
       operationId: listAgilePrinciplesAssessment
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AgilePrinciplesAssessment
+      tags:
+      - agile-principles-assessment
       operationId: createAgilePrinciplesAssessment
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AgilePrinciplesAssessment by id
+      tags:
+      - agile-principles-assessment
       operationId: getAgilePrinciplesAssessment
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AgilePrinciplesAssessment
+      tags:
+      - agile-principles-assessment
       operationId: updateAgilePrinciplesAssessment
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AgilePrinciplesAssessment
+      tags:
+      - agile-principles-assessment
       operationId: replaceAgilePrinciplesAssessment
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AgilePrinciplesAssessment
+      tags:
+      - agile-principles-assessment
       operationId: deleteAgilePrinciplesAssessment
       responses:
         '200':
@@ -1003,9 +1059,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - agile-principles-assessment
   /api/agile-principles-assessment/respondents:
     get:
       summary: List Respondent records
+      tags:
+      - agile-principles-assessment
       operationId: listRespondent
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Respondent
+      tags:
+      - agile-principles-assessment
       operationId: createRespondent
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Respondent by id
+      tags:
+      - agile-principles-assessment
       operationId: getRespondent
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Respondent
+      tags:
+      - agile-principles-assessment
       operationId: updateRespondent
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Respondent
+      tags:
+      - agile-principles-assessment
       operationId: replaceRespondent
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Respondent
+      tags:
+      - agile-principles-assessment
       operationId: deleteRespondent
       responses:
         '200':

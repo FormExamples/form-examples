@@ -1,4 +1,5 @@
 <!ELEMENT agile_consulting_scorecard_for_hiring_help_grade (id,created_at,updated_at,deleted_at,agile_consulting_scorecard_id,score_total,manifesto_subtotal,principles_subtotal,computed_band,final_band,override_reason,recommendation,recommended_focus_areas,review_notes,signed_by,signed_at,graded_at)>
+<!ATTLIST agile_consulting_scorecard_for_hiring_help_grade xmlns CDATA #FIXED "https://formexamples.github.io/agile-consulting-scorecard-for-hiring-help/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

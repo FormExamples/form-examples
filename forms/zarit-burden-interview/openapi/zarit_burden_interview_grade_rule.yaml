@@ -5,10 +5,19 @@ info:
   title: Zarit Burden Interview — ZaritBurdenInterviewGradeRule
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during Zarit Burden Interview computation: item number, points contributed, category, and description."
+x-namespace:
+  form: zarit-burden-interview
+  apiPrefix: /api/zarit-burden-interview/
+  sqlSchema: zarit_burden_interview
+  xmlNamespace: https://formexamples.github.io/zarit-burden-interview/xml
+tags:
+  - name: zarit-burden-interview
+    description: Zarit Burden Interview form
 paths:
   /api/zarit-burden-interview/zarit_burden_interview_grade_rules:
     get:
       summary: List ZaritBurdenInterviewGradeRule records
+      tags: [zarit-burden-interview]
       operationId: listZaritBurdenInterviewGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ZaritBurdenInterviewGradeRule
+      tags: [zarit-burden-interview]
       operationId: createZaritBurdenInterviewGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ZaritBurdenInterviewGradeRule by id
+      tags: [zarit-burden-interview]
       operationId: getZaritBurdenInterviewGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ZaritBurdenInterviewGradeRule
+      tags: [zarit-burden-interview]
       operationId: updateZaritBurdenInterviewGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ZaritBurdenInterviewGradeRule
+      tags: [zarit-burden-interview]
       operationId: replaceZaritBurdenInterviewGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ZaritBurdenInterviewGradeRule
+      tags: [zarit-burden-interview]
       operationId: deleteZaritBurdenInterviewGradeRule
       responses:
         "200":

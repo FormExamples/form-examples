@@ -5,10 +5,19 @@ info:
   title: Agile Consulting Scorecard For Hiring Help — AgileConsultingScorecardForHiringHelp
   version: 1.0.0
   description: A single agile-consulting readiness scorecard for an organization, captured via a 6-step single-page wizard. Holds organization/respondent FKs, the 16 yes/no items (4 manifesto + 12 principles), and per-item evidence text. Computed scores live in the *_grade child table.
+x-namespace:
+  form: agile-consulting-scorecard-for-hiring-help
+  apiPrefix: /api/agile-consulting-scorecard-for-hiring-help/
+  sqlSchema: agile_consulting_scorecard_for_hiring_help
+  xmlNamespace: https://formexamples.github.io/agile-consulting-scorecard-for-hiring-help/xml
+tags:
+  - name: agile-consulting-scorecard-for-hiring-help
+    description: Agile Consulting Scorecard For Hiring Help form
 paths:
   /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_helps:
     get:
       summary: List AgileConsultingScorecardForHiringHelp records
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: listAgileConsultingScorecardForHiringHelp
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AgileConsultingScorecardForHiringHelp
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: createAgileConsultingScorecardForHiringHelp
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AgileConsultingScorecardForHiringHelp by id
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: getAgileConsultingScorecardForHiringHelp
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AgileConsultingScorecardForHiringHelp
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: updateAgileConsultingScorecardForHiringHelp
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AgileConsultingScorecardForHiringHelp
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: replaceAgileConsultingScorecardForHiringHelp
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AgileConsultingScorecardForHiringHelp
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: deleteAgileConsultingScorecardForHiringHelp
       responses:
         "200":

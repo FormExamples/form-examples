@@ -1,4 +1,5 @@
 <!ELEMENT news2_result (id,created_at,updated_at,deleted_at,casualty_card_id,total_score,clinical_response,has_any_single_score_3,parameter_scores,scored_at)>
+<!ATTLIST news2_result xmlns CDATA #FIXED "https://formexamples.github.io/casualty-card-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

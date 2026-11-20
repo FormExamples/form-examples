@@ -5,10 +5,19 @@ info:
   title: Hormone Replacement Therapy Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: hormone-replacement-therapy-assessment
+  apiPrefix: /api/hormone-replacement-therapy-assessment/
+  sqlSchema: hormone_replacement_therapy_assessment
+  xmlNamespace: https://formexamples.github.io/hormone-replacement-therapy-assessment/xml
+tags:
+  - name: hormone-replacement-therapy-assessment
+    description: Hormone Replacement Therapy Assessment form
 paths:
   /api/hormone-replacement-therapy-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [hormone-replacement-therapy-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [hormone-replacement-therapy-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [hormone-replacement-therapy-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [hormone-replacement-therapy-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [hormone-replacement-therapy-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [hormone-replacement-therapy-assessment]
       operationId: deleteClinician
       responses:
         "200":

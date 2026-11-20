@@ -1,4 +1,5 @@
 <!ELEMENT architecture_decision_record_note (id,created_at,updated_at,architecture_decision_record_id,noted_at,noted_by,body)>
+<!ATTLIST architecture_decision_record_note xmlns CDATA #FIXED "https://formexamples.github.io/architecture-decision-record/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

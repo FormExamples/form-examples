@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000056",
+    "id": "d1b7d530-6d0a-5949-8470-957af325afd1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000068",
+    "id": "01b5c76c-237a-5ce1-8205-b5ee3ad5e04b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "bhutaniBilirubinNomogram": {
-    "id": "550e8400-e29b-41d4-a716-000000000075",
+    "id": "cea576ef-4dd9-5e2f-a4dc-bab12ba58d84",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000079",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007a",
+    "patientId": "7c690c50-eb6f-54bc-9833-e17385b6f7ef",
+    "clinicianId": "87cfecf6-1d71-5657-a169-0818fdfd6b19",
     "clinicianName": "",
     "clinicianRole": "midwife",
     "assessedAt": null,
@@ -61,11 +61,11 @@
     "clinicalNote": ""
   },
   "bhutaniBilirubinNomogramGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008d",
+    "id": "87ddf781-6b89-5511-9b99-239018b9ba80",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "bhutaniBilirubinNomogramId": "550e8400-e29b-41d4-a716-000000000091",
+    "bhutaniBilirubinNomogramId": "4ad84c00-1e90-5a24-ba62-c144d6e51c39",
     "riskZone": "low",
     "percentileBand": "<40",
     "phototherapyThresholdUmolL": null,
@@ -75,21 +75,21 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "bhutaniBilirubinNomogramGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000099",
+    "id": "d6f672d3-c912-5776-a77e-f11fafd56047",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "bhutaniBilirubinNomogramGradeId": "550e8400-e29b-41d4-a716-00000000009d",
+    "bhutaniBilirubinNomogramGradeId": "26872c5d-1438-5d81-b226-3db697a0276e",
     "ruleId": "",
     "category": "",
     "description": ""
   },
   "bhutaniBilirubinNomogramGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a1",
+    "id": "e375ca76-a7bc-537b-8f3b-42ac89275f7e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "bhutaniBilirubinNomogramGradeId": "550e8400-e29b-41d4-a716-0000000000a5",
+    "bhutaniBilirubinNomogramGradeId": "8b84dd50-005c-53c9-86bb-3850aa1c180f",
     "flagId": "",
     "category": "above-exchange",
     "priority": "low",

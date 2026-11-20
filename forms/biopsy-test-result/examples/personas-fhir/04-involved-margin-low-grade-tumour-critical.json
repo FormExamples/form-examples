@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "f1a76e69-292b-4fc6-a2bf-76c81b76caa5",
+  "id": "08180e97-de1b-5604-8e51-0e221fc8934c",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:3d18f136-3a11-441f-af8f-66d221111659",
+      "fullUrl": "urn:uuid:238c2c5b-e1b8-5ece-bff7-9df79233b62f",
       "resource": {
         "resourceType": "Patient",
-        "id": "3d18f136-3a11-441f-af8f-66d221111659",
+        "id": "238c2c5b-e1b8-5ece-bff7-9df79233b62f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:59eda24d-0a61-4fe3-aa5e-0b5b111887f0",
+      "fullUrl": "urn:uuid:df932a72-05c5-5249-aa4a-10a56c0f87fd",
       "resource": {
         "resourceType": "Observation",
-        "id": "59eda24d-0a61-4fe3-aa5e-0b5b111887f0",
+        "id": "df932a72-05c5-5249-aa4a-10a56c0f87fd",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:3d18f136-3a11-441f-af8f-66d221111659"
+          "reference": "urn:uuid:238c2c5b-e1b8-5ece-bff7-9df79233b62f"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:893dcceb-1602-49de-a790-b89ab1f6cfce",
+      "fullUrl": "urn:uuid:5ced7224-282e-596c-924a-326fb8b8920e",
       "resource": {
         "resourceType": "Observation",
-        "id": "893dcceb-1602-49de-a790-b89ab1f6cfce",
+        "id": "5ced7224-282e-596c-924a-326fb8b8920e",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:3d18f136-3a11-441f-af8f-66d221111659"
+          "reference": "urn:uuid:238c2c5b-e1b8-5ece-bff7-9df79233b62f"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -554,10 +554,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:f936cd01-a7e0-49bf-af22-d405efa25523",
+      "fullUrl": "urn:uuid:5dc4fb63-e8d4-5d0b-8779-b9386ee25897",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "f936cd01-a7e0-49bf-af22-d405efa25523",
+        "id": "5dc4fb63-e8d4-5d0b-8779-b9386ee25897",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -566,7 +566,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:3d18f136-3a11-441f-af8f-66d221111659"
+          "reference": "urn:uuid:238c2c5b-e1b8-5ece-bff7-9df79233b62f"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -575,10 +575,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:d8301ee1-9d39-4afd-afb1-e4cfd9f17c9f",
+      "fullUrl": "urn:uuid:c7c3fae9-23c8-57f0-ba65-7e6a8d64768b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "d8301ee1-9d39-4afd-afb1-e4cfd9f17c9f",
+        "id": "c7c3fae9-23c8-57f0-ba65-7e6a8d64768b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -608,17 +608,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:3d18f136-3a11-441f-af8f-66d221111659"
+          "reference": "urn:uuid:238c2c5b-e1b8-5ece-bff7-9df79233b62f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (unexpected malignancy or an involved resection margin) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:6a34b9ac-202d-4db4-a29a-36c4446f6f2d",
+      "fullUrl": "urn:uuid:3dc1c7e7-a8c6-54cd-ae4b-81b0b0a2bfe6",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "6a34b9ac-202d-4db4-a29a-36c4446f6f2d",
+        "id": "3dc1c7e7-a8c6-54cd-ae4b-81b0b0a2bfe6",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -648,17 +648,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:3d18f136-3a11-441f-af8f-66d221111659"
+          "reference": "urn:uuid:238c2c5b-e1b8-5ece-bff7-9df79233b62f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding (unexpected malignancy or involved margin) present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:bd65812d-d60e-40b2-a214-aef4c179215c",
+      "fullUrl": "urn:uuid:142d9c49-5713-551e-915b-bab50a20b5f5",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "bd65812d-d60e-40b2-a214-aef4c179215c",
+        "id": "142d9c49-5713-551e-915b-bab50a20b5f5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -688,17 +688,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:3d18f136-3a11-441f-af8f-66d221111659"
+          "reference": "urn:uuid:238c2c5b-e1b8-5ece-bff7-9df79233b62f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding auto-escalates follow-up urgency to critical-alert and urgent MDT regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:e4968fd5-9123-4cc3-a70b-34619231b949",
+      "fullUrl": "urn:uuid:1009b2f1-1ec4-59b4-98c7-a482c9ae023b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "e4968fd5-9123-4cc3-a70b-34619231b949",
+        "id": "1009b2f1-1ec4-59b4-98c7-a482c9ae023b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -728,7 +728,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:3d18f136-3a11-441f-af8f-66d221111659"
+          "reference": "urn:uuid:238c2c5b-e1b8-5ece-bff7-9df79233b62f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (unexpected malignancy or an involved resection margin) is present.",
@@ -742,10 +742,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:4b4bcb52-edb7-48f5-a42a-a6769ff2072e",
+      "fullUrl": "urn:uuid:e5d498e5-6dbb-5024-a64c-7c14f9a395f0",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "4b4bcb52-edb7-48f5-a42a-a6769ff2072e",
+        "id": "e5d498e5-6dbb-5024-a64c-7c14f9a395f0",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -775,7 +775,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:3d18f136-3a11-441f-af8f-66d221111659"
+          "reference": "urn:uuid:238c2c5b-e1b8-5ece-bff7-9df79233b62f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",
@@ -789,10 +789,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:c597a3b0-f981-435c-af4a-864c747017be",
+      "fullUrl": "urn:uuid:41fdb225-bfdc-5d93-b554-3c3553a309dc",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "c597a3b0-f981-435c-af4a-864c747017be",
+        "id": "41fdb225-bfdc-5d93-b554-3c3553a309dc",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -822,7 +822,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:3d18f136-3a11-441f-af8f-66d221111659"
+          "reference": "urn:uuid:238c2c5b-e1b8-5ece-bff7-9df79233b62f"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "The resection margin is involved (tumour at the cut edge).",

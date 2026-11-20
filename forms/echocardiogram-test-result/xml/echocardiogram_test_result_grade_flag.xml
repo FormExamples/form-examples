@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE echocardiogram_test_result_grade_flag SYSTEM "echocardiogram_test_result_grade_flag.dtd">
-<echocardiogram_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<echocardiogram_test_result_grade_flag xmlns="https://formexamples.github.io/echocardiogram-test-result/xml">
+<id>802eaae3-400a-54e8-bf55-78ad9f1f4eb2</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<echocardiogram_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</echocardiogram_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<echocardiogram_test_result_grade_id>0acb5922-68df-5887-ab61-e4f24e79b38e</echocardiogram_test_result_grade_id>
+<flag_id>1f6f447d-4e7b-5c22-8d8d-4d11980f5387</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

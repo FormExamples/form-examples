@@ -1,6 +1,6 @@
 {
   "seller": {
-    "id": "550e8400-e29b-41d4-a716-000000000057",
+    "id": "c1947015-61d8-5505-8013-9e8e22c8d646",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -12,7 +12,7 @@
     "countryAsIso31661Alpha2": ""
   },
   "buyer": {
-    "id": "550e8400-e29b-41d4-a716-000000000061",
+    "id": "568c0ee4-5dee-5cd5-8607-0869b88184dd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -24,12 +24,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "unitedKingdomVehicleBillOfSale": {
-    "id": "550e8400-e29b-41d4-a716-00000000006b",
+    "id": "413861ff-77ac-5c45-b4c0-d2de20590afa",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "sellerId": "550e8400-e29b-41d4-a716-00000000006f",
-    "buyerId": "550e8400-e29b-41d4-a716-000000000070",
+    "sellerId": "ee6723d3-2720-50c7-8ed7-ae3d04568b67",
+    "buyerId": "6f775891-9aa8-5e36-8c1f-71172d59d6d1",
     "saleDate": null,
     "salePlace": "",
     "sellerCapacity": "private",
@@ -64,33 +64,33 @@
     "note": ""
   },
   "unitedKingdomVehicleBillOfSaleGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000091",
+    "id": "27eba498-f0c3-5466-9a11-b4ec513ae1b2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedKingdomVehicleBillOfSaleId": "550e8400-e29b-41d4-a716-000000000095",
+    "unitedKingdomVehicleBillOfSaleId": "4e0e0dc9-08bb-5e24-b1e8-3aefdcec3240",
     "classification": "complete",
     "missingItemCount": null,
     "riskFlagCount": null,
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "unitedKingdomVehicleBillOfSaleGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000009a",
+    "id": "f0c9f9a4-f216-58e7-afef-959142d633f6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedKingdomVehicleBillOfSaleGradeId": "550e8400-e29b-41d4-a716-00000000009e",
+    "unitedKingdomVehicleBillOfSaleGradeId": "331efde3-3dd6-59a2-876d-282d4fa25213",
     "ruleId": "",
     "dimension": "parties",
     "category": "",
     "description": ""
   },
   "unitedKingdomVehicleBillOfSaleGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a3",
+    "id": "060975b3-03ae-5ebc-8a78-46571b76ea04",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedKingdomVehicleBillOfSaleGradeId": "550e8400-e29b-41d4-a716-0000000000a7",
+    "unitedKingdomVehicleBillOfSaleGradeId": "eaa91b71-4f19-50b1-a370-3dfa5ed3b444",
     "flagId": "",
     "category": "no-vin",
     "priority": "low",

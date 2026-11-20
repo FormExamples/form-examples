@@ -5,10 +5,19 @@ info:
   title: Ambulatory Blood Pressure Test Result — AmbulatoryBloodPressureTestResult
   version: 1.0.0
   description: Ambulatory blood pressure monitoring (ABPM) result (report). Captures the monitoring type, recording adequacy, clinical history, the daytime / nighttime / 24-hour averaged blood pressures, the nocturnal dip and dipper status, the narrative and structured interpretation, the impression, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: ambulatory-blood-pressure-test-result
+  apiPrefix: /api/ambulatory-blood-pressure-test-result/
+  sqlSchema: ambulatory_blood_pressure_test_result
+  xmlNamespace: https://formexamples.github.io/ambulatory-blood-pressure-test-result/xml
+tags:
+  - name: ambulatory-blood-pressure-test-result
+    description: Ambulatory Blood Pressure Test Result form
 paths:
   /api/ambulatory-blood-pressure-test-result/ambulatory_blood_pressure_test_results:
     get:
       summary: List AmbulatoryBloodPressureTestResult records
+      tags: [ambulatory-blood-pressure-test-result]
       operationId: listAmbulatoryBloodPressureTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AmbulatoryBloodPressureTestResult
+      tags: [ambulatory-blood-pressure-test-result]
       operationId: createAmbulatoryBloodPressureTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AmbulatoryBloodPressureTestResult by id
+      tags: [ambulatory-blood-pressure-test-result]
       operationId: getAmbulatoryBloodPressureTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AmbulatoryBloodPressureTestResult
+      tags: [ambulatory-blood-pressure-test-result]
       operationId: updateAmbulatoryBloodPressureTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AmbulatoryBloodPressureTestResult
+      tags: [ambulatory-blood-pressure-test-result]
       operationId: replaceAmbulatoryBloodPressureTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AmbulatoryBloodPressureTestResult
+      tags: [ambulatory-blood-pressure-test-result]
       operationId: deleteAmbulatoryBloodPressureTestResult
       responses:
         "200":

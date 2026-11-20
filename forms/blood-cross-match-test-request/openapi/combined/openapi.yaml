@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Blood Cross-Match Test Request form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: blood-cross-match-test-request
+  apiPrefix: /api/blood-cross-match-test-request/
+  sqlSchema: blood_cross_match_test_request
+  xmlNamespace: https://formexamples.github.io/blood-cross-match-test-request/xml
+tags:
+- name: blood-cross-match-test-request
+  description: Blood Cross-Match Test Request form
 paths:
   /api/blood-cross-match-test-request/blood_cross_match_test_request_grade_flags:
     get:
       summary: List BloodCrossMatchTestRequestGradeFlag records
+      tags:
+      - blood-cross-match-test-request
       operationId: listBloodCrossMatchTestRequestGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BloodCrossMatchTestRequestGradeFlag
+      tags:
+      - blood-cross-match-test-request
       operationId: createBloodCrossMatchTestRequestGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BloodCrossMatchTestRequestGradeFlag by id
+      tags:
+      - blood-cross-match-test-request
       operationId: getBloodCrossMatchTestRequestGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BloodCrossMatchTestRequestGradeFlag
+      tags:
+      - blood-cross-match-test-request
       operationId: updateBloodCrossMatchTestRequestGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BloodCrossMatchTestRequestGradeFlag
+      tags:
+      - blood-cross-match-test-request
       operationId: replaceBloodCrossMatchTestRequestGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BloodCrossMatchTestRequestGradeFlag
+      tags:
+      - blood-cross-match-test-request
       operationId: deleteBloodCrossMatchTestRequestGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/blood-cross-match-test-request/blood_cross_match_test_request_grade_rules:
     get:
       summary: List BloodCrossMatchTestRequestGradeRule records
+      tags:
+      - blood-cross-match-test-request
       operationId: listBloodCrossMatchTestRequestGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BloodCrossMatchTestRequestGradeRule
+      tags:
+      - blood-cross-match-test-request
       operationId: createBloodCrossMatchTestRequestGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BloodCrossMatchTestRequestGradeRule by id
+      tags:
+      - blood-cross-match-test-request
       operationId: getBloodCrossMatchTestRequestGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BloodCrossMatchTestRequestGradeRule
+      tags:
+      - blood-cross-match-test-request
       operationId: updateBloodCrossMatchTestRequestGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BloodCrossMatchTestRequestGradeRule
+      tags:
+      - blood-cross-match-test-request
       operationId: replaceBloodCrossMatchTestRequestGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BloodCrossMatchTestRequestGradeRule
+      tags:
+      - blood-cross-match-test-request
       operationId: deleteBloodCrossMatchTestRequestGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/blood-cross-match-test-request/blood_cross_match_test_request_grades:
     get:
       summary: List BloodCrossMatchTestRequestGrade records
+      tags:
+      - blood-cross-match-test-request
       operationId: listBloodCrossMatchTestRequestGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BloodCrossMatchTestRequestGrade
+      tags:
+      - blood-cross-match-test-request
       operationId: createBloodCrossMatchTestRequestGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BloodCrossMatchTestRequestGrade by id
+      tags:
+      - blood-cross-match-test-request
       operationId: getBloodCrossMatchTestRequestGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BloodCrossMatchTestRequestGrade
+      tags:
+      - blood-cross-match-test-request
       operationId: updateBloodCrossMatchTestRequestGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BloodCrossMatchTestRequestGrade
+      tags:
+      - blood-cross-match-test-request
       operationId: replaceBloodCrossMatchTestRequestGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BloodCrossMatchTestRequestGrade
+      tags:
+      - blood-cross-match-test-request
       operationId: deleteBloodCrossMatchTestRequestGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/blood-cross-match-test-request/blood_cross_match_test_requests:
     get:
       summary: List BloodCrossMatchTestRequest records
+      tags:
+      - blood-cross-match-test-request
       operationId: listBloodCrossMatchTestRequest
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BloodCrossMatchTestRequest
+      tags:
+      - blood-cross-match-test-request
       operationId: createBloodCrossMatchTestRequest
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BloodCrossMatchTestRequest by id
+      tags:
+      - blood-cross-match-test-request
       operationId: getBloodCrossMatchTestRequest
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BloodCrossMatchTestRequest
+      tags:
+      - blood-cross-match-test-request
       operationId: updateBloodCrossMatchTestRequest
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BloodCrossMatchTestRequest
+      tags:
+      - blood-cross-match-test-request
       operationId: replaceBloodCrossMatchTestRequest
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BloodCrossMatchTestRequest
+      tags:
+      - blood-cross-match-test-request
       operationId: deleteBloodCrossMatchTestRequest
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/blood-cross-match-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - blood-cross-match-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - blood-cross-match-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - blood-cross-match-test-request
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - blood-cross-match-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - blood-cross-match-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - blood-cross-match-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - blood-cross-match-test-request
   /api/blood-cross-match-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - blood-cross-match-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - blood-cross-match-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - blood-cross-match-test-request
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - blood-cross-match-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - blood-cross-match-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - blood-cross-match-test-request
       operationId: deletePatient
       responses:
         '200':

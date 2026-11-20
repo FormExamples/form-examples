@@ -5,10 +5,19 @@ info:
   title: Chronic Obstructive Pulmonary Disease Review — Patient
   version: 1.0.0
   description: Patient demographic information used by the COPD annual-review record.
+x-namespace:
+  form: chronic-obstructive-pulmonary-disease-review
+  apiPrefix: /api/chronic-obstructive-pulmonary-disease-review/
+  sqlSchema: chronic_obstructive_pulmonary_disease_review
+  xmlNamespace: https://formexamples.github.io/chronic-obstructive-pulmonary-disease-review/xml
+tags:
+  - name: chronic-obstructive-pulmonary-disease-review
+    description: Chronic Obstructive Pulmonary Disease Review form
 paths:
   /api/chronic-obstructive-pulmonary-disease-review/patients:
     get:
       summary: List Patient records
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: deletePatient
       responses:
         "200":

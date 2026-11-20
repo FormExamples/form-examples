@@ -5,10 +5,19 @@ info:
   title: Casualty Card Form — CasualtyCardAllergy
   version: 1.0.0
   description: Many-to-one with casualty_card. Each row is one documented allergy.
+x-namespace:
+  form: casualty-card-form
+  apiPrefix: /api/casualty-card-form/
+  sqlSchema: casualty_card_form
+  xmlNamespace: https://formexamples.github.io/casualty-card-form/xml
+tags:
+  - name: casualty-card-form
+    description: Casualty Card Form form
 paths:
   /api/casualty-card-form/casualty_card_allergies:
     get:
       summary: List CasualtyCardAllergy records
+      tags: [casualty-card-form]
       operationId: listCasualtyCardAllergy
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CasualtyCardAllergy
+      tags: [casualty-card-form]
       operationId: createCasualtyCardAllergy
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CasualtyCardAllergy by id
+      tags: [casualty-card-form]
       operationId: getCasualtyCardAllergy
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CasualtyCardAllergy
+      tags: [casualty-card-form]
       operationId: updateCasualtyCardAllergy
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CasualtyCardAllergy
+      tags: [casualty-card-form]
       operationId: replaceCasualtyCardAllergy
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CasualtyCardAllergy
+      tags: [casualty-card-form]
       operationId: deleteCasualtyCardAllergy
       responses:
         "200":

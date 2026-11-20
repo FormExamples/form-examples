@@ -5,10 +5,19 @@ info:
   title: Systematic Coronary Risk Evaluation 2 Diabetes — GradingAdditionalFlag
   version: 1.0.0
   description: Additional safety-critical flags detected during SCORE2-Diabetes assessment grading.
+x-namespace:
+  form: systematic-coronary-risk-evaluation-2-diabetes
+  apiPrefix: /api/systematic-coronary-risk-evaluation-2-diabetes/
+  sqlSchema: systematic_coronary_risk_evaluation_2_diabetes
+  xmlNamespace: https://formexamples.github.io/systematic-coronary-risk-evaluation-2-diabetes/xml
+tags:
+  - name: systematic-coronary-risk-evaluation-2-diabetes
+    description: Systematic Coronary Risk Evaluation 2 Diabetes form
 paths:
   /api/systematic-coronary-risk-evaluation-2-diabetes/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [systematic-coronary-risk-evaluation-2-diabetes]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [systematic-coronary-risk-evaluation-2-diabetes]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [systematic-coronary-risk-evaluation-2-diabetes]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [systematic-coronary-risk-evaluation-2-diabetes]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [systematic-coronary-risk-evaluation-2-diabetes]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [systematic-coronary-risk-evaluation-2-diabetes]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Neurodiversity Adjustment Review — NeurodiversityAdjustmentReviewGrade
   version: 1.0.0
   description: "Computed four-axis grade for a neurodiversity reasonable-adjustments review: overall effectiveness, wellbeing risk, review completeness, and next-step urgency. Any adjustment reported as not-working, a dissatisfied worker, declining wellbeing, or an escalation drives the wellbeing-risk axis and the next-step urgency regardless of the other axes."
+x-namespace:
+  form: neurodiversity-adjustment-review
+  apiPrefix: /api/neurodiversity-adjustment-review/
+  sqlSchema: neurodiversity_adjustment_review
+  xmlNamespace: https://formexamples.github.io/neurodiversity-adjustment-review/xml
+tags:
+  - name: neurodiversity-adjustment-review
+    description: Neurodiversity Adjustment Review form
 paths:
   /api/neurodiversity-adjustment-review/neurodiversity_adjustment_review_grades:
     get:
       summary: List NeurodiversityAdjustmentReviewGrade records
+      tags: [neurodiversity-adjustment-review]
       operationId: listNeurodiversityAdjustmentReviewGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeurodiversityAdjustmentReviewGrade
+      tags: [neurodiversity-adjustment-review]
       operationId: createNeurodiversityAdjustmentReviewGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NeurodiversityAdjustmentReviewGrade by id
+      tags: [neurodiversity-adjustment-review]
       operationId: getNeurodiversityAdjustmentReviewGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeurodiversityAdjustmentReviewGrade
+      tags: [neurodiversity-adjustment-review]
       operationId: updateNeurodiversityAdjustmentReviewGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NeurodiversityAdjustmentReviewGrade
+      tags: [neurodiversity-adjustment-review]
       operationId: replaceNeurodiversityAdjustmentReviewGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NeurodiversityAdjustmentReviewGrade
+      tags: [neurodiversity-adjustment-review]
       operationId: deleteNeurodiversityAdjustmentReviewGrade
       responses:
         "200":

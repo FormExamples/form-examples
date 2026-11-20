@@ -5,10 +5,19 @@ info:
   title: Mast Cell Activation Syndrome Assessment — Grade
   version: 1.0.0
   description: Computed MCAS symptom grading result across multiple organ systems. One-to-one child of assessment.
+x-namespace:
+  form: mast-cell-activation-syndrome-assessment
+  apiPrefix: /api/mast-cell-activation-syndrome-assessment/
+  sqlSchema: mast_cell_activation_syndrome_assessment
+  xmlNamespace: https://formexamples.github.io/mast-cell-activation-syndrome-assessment/xml
+tags:
+  - name: mast-cell-activation-syndrome-assessment
+    description: Mast Cell Activation Syndrome Assessment form
 paths:
   /api/mast-cell-activation-syndrome-assessment/grades:
     get:
       summary: List Grade records
+      tags: [mast-cell-activation-syndrome-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [mast-cell-activation-syndrome-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [mast-cell-activation-syndrome-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [mast-cell-activation-syndrome-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [mast-cell-activation-syndrome-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [mast-cell-activation-syndrome-assessment]
       operationId: deleteGrade
       responses:
         "200":

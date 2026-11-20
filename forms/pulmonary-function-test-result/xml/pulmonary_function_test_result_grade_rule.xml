@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pulmonary_function_test_result_grade_rule SYSTEM "pulmonary_function_test_result_grade_rule.dtd">
-<pulmonary_function_test_result_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<pulmonary_function_test_result_grade_rule xmlns="https://formexamples.github.io/pulmonary-function-test-result/xml">
+<id>6c068dee-3b38-5c3e-9b92-90e0650a1174</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pulmonary_function_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</pulmonary_function_test_result_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<pulmonary_function_test_result_grade_id>96ddc4a7-2683-594a-9a3f-343cd54a3b38</pulmonary_function_test_result_grade_id>
+<rule_id>7e4b70db-d84e-5f38-8249-84df76d28e63</rule_id>
 <axis>classification</axis>
 <category>General</category>
 <description>Example text.</description>

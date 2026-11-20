@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE agile_consulting_scorecard_for_hiring_help SYSTEM "agile_consulting_scorecard_for_hiring_help.dtd">
-<agile_consulting_scorecard_for_hiring_help>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<agile_consulting_scorecard_for_hiring_help xmlns="https://formexamples.github.io/agile-consulting-scorecard-for-hiring-help/xml">
+<id>1222bb50-c339-583e-921c-7dba15bc7f61</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<organization_id>550e8400-e29b-41d4-a716-446655440000</organization_id>
-<respondent_id>660e8400-e29b-41d4-a716-446655440001</respondent_id>
+<organization_id>1f680dfc-dfff-51ba-9509-1afe837ca308</organization_id>
+<respondent_id>6f6bb498-a653-5ec1-b5fd-f43331575236</respondent_id>
 <status>draft</status>
 <assessment_date>2026-01-15</assessment_date>
 <submitted_at>2026-04-09T10:00:00Z</submitted_at>

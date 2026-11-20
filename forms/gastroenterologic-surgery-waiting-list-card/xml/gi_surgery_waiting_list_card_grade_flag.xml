@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE gi_surgery_waiting_list_card_grade_flag SYSTEM "gi_surgery_waiting_list_card_grade_flag.dtd">
-<gi_surgery_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<gi_surgery_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/gastroenterologic-surgery-waiting-list-card/xml">
+<id>1578eb35-4f6c-521d-9b7a-5dbe7e800d4b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<gi_surgery_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</gi_surgery_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<gi_surgery_waiting_list_card_grade_id>9603ca3a-e92c-575e-ab18-b6cfd8295475</gi_surgery_waiting_list_card_grade_id>
+<flag_id>969e12bd-3bc9-59c1-9b7a-2351e4602c41</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

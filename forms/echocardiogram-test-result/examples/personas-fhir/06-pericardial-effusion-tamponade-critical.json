@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "9bb6c5d1-decb-49bd-aa76-c8565607e081",
+  "id": "a4dbaecf-70e4-5006-9e1c-fec17cb3163e",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:8a97aa81-be7c-4419-a471-83743c63bca8",
+      "fullUrl": "urn:uuid:44beb529-9e29-5abf-910f-87bb6e367682",
       "resource": {
         "resourceType": "Patient",
-        "id": "8a97aa81-be7c-4419-a471-83743c63bca8",
+        "id": "44beb529-9e29-5abf-910f-87bb6e367682",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:407236a3-6c41-45af-a491-d5b56d106abd",
+      "fullUrl": "urn:uuid:3721b5d4-c6fe-54c7-ae9e-44f97836c3c5",
       "resource": {
         "resourceType": "Observation",
-        "id": "407236a3-6c41-45af-a491-d5b56d106abd",
+        "id": "3721b5d4-c6fe-54c7-ae9e-44f97836c3c5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:8a97aa81-be7c-4419-a471-83743c63bca8"
+          "reference": "urn:uuid:44beb529-9e29-5abf-910f-87bb6e367682"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:05788076-54e9-433a-a7a1-02340d9ddeb1",
+      "fullUrl": "urn:uuid:5b9ef769-23b6-57fa-b066-249a7fc24a41",
       "resource": {
         "resourceType": "Observation",
-        "id": "05788076-54e9-433a-a7a1-02340d9ddeb1",
+        "id": "5b9ef769-23b6-57fa-b066-249a7fc24a41",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:8a97aa81-be7c-4419-a471-83743c63bca8"
+          "reference": "urn:uuid:44beb529-9e29-5abf-910f-87bb6e367682"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -658,10 +658,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:7e8e7c80-8cdb-414e-a4a5-0b82b4fd8a66",
+      "fullUrl": "urn:uuid:a41f1791-fdf2-5877-a2b2-cd68b0e2fd20",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "7e8e7c80-8cdb-414e-a4a5-0b82b4fd8a66",
+        "id": "a41f1791-fdf2-5877-a2b2-cd68b0e2fd20",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -670,7 +670,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:8a97aa81-be7c-4419-a471-83743c63bca8"
+          "reference": "urn:uuid:44beb529-9e29-5abf-910f-87bb6e367682"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -679,10 +679,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:ee1a9737-2f6e-403e-a056-7c3a7f418125",
+      "fullUrl": "urn:uuid:27ce8caf-1a25-5924-a968-cbf7c0ad3438",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ee1a9737-2f6e-403e-a056-7c3a7f418125",
+        "id": "27ce8caf-1a25-5924-a968-cbf7c0ad3438",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -712,17 +712,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:8a97aa81-be7c-4419-a471-83743c63bca8"
+          "reference": "urn:uuid:44beb529-9e29-5abf-910f-87bb6e367682"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical structured finding (severe valve disease, vegetation, pericardial effusion, severe LV impairment, or intracardiac thrombus) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:cb8b8027-122d-4d9f-a3ae-18c3cc71f5d8",
+      "fullUrl": "urn:uuid:ba2e4501-d6a4-541c-aace-5a83f6df37fc",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "cb8b8027-122d-4d9f-a3ae-18c3cc71f5d8",
+        "id": "ba2e4501-d6a4-541c-aace-5a83f6df37fc",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -752,17 +752,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:8a97aa81-be7c-4419-a471-83743c63bca8"
+          "reference": "urn:uuid:44beb529-9e29-5abf-910f-87bb6e367682"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:aea1763f-457a-476c-a4d5-40c5938ceaca",
+      "fullUrl": "urn:uuid:0f051a57-40b8-5504-ad4d-78faeb2fb027",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "aea1763f-457a-476c-a4d5-40c5938ceaca",
+        "id": "0f051a57-40b8-5504-ad4d-78faeb2fb027",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -792,17 +792,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:8a97aa81-be7c-4419-a471-83743c63bca8"
+          "reference": "urn:uuid:44beb529-9e29-5abf-910f-87bb6e367682"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:e2f3b407-0c85-44c6-a061-e94220014f41",
+      "fullUrl": "urn:uuid:ae498c86-9554-50b2-9a26-b27290cf8925",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "e2f3b407-0c85-44c6-a061-e94220014f41",
+        "id": "ae498c86-9554-50b2-9a26-b27290cf8925",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -832,7 +832,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:8a97aa81-be7c-4419-a471-83743c63bca8"
+          "reference": "urn:uuid:44beb529-9e29-5abf-910f-87bb6e367682"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (severe valve disease, vegetation, pericardial effusion, severe LV impairment, or intracardiac thrombus) is present.",
@@ -846,10 +846,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:fbc6d4e1-2267-4628-a672-989b0a5d78ed",
+      "fullUrl": "urn:uuid:e19a718f-3dad-5bcf-9ef9-388833afc615",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "fbc6d4e1-2267-4628-a672-989b0a5d78ed",
+        "id": "e19a718f-3dad-5bcf-9ef9-388833afc615",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -879,7 +879,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:8a97aa81-be7c-4419-a471-83743c63bca8"
+          "reference": "urn:uuid:44beb529-9e29-5abf-910f-87bb6e367682"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",
@@ -893,10 +893,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:3db7d2d0-2dbf-4bed-ab51-4fcc3e66fa00",
+      "fullUrl": "urn:uuid:becf589c-88d7-5c55-8c95-d140ca9c431f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "3db7d2d0-2dbf-4bed-ab51-4fcc3e66fa00",
+        "id": "becf589c-88d7-5c55-8c95-d140ca9c431f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -926,7 +926,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:8a97aa81-be7c-4419-a471-83743c63bca8"
+          "reference": "urn:uuid:44beb529-9e29-5abf-910f-87bb6e367682"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A pericardial effusion is present, with potential tamponade risk.",

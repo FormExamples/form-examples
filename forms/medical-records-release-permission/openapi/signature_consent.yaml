@@ -5,10 +5,19 @@ info:
   title: Medical Records Release Permission — SignatureConsent
   version: 1.0.0
   description: Signature and consent confirmations for the release form. One-to-one child of release_form.
+x-namespace:
+  form: medical-records-release-permission
+  apiPrefix: /api/medical-records-release-permission/
+  sqlSchema: medical_records_release_permission
+  xmlNamespace: https://formexamples.github.io/medical-records-release-permission/xml
+tags:
+  - name: medical-records-release-permission
+    description: Medical Records Release Permission form
 paths:
   /api/medical-records-release-permission/signature_consents:
     get:
       summary: List SignatureConsent records
+      tags: [medical-records-release-permission]
       operationId: listSignatureConsent
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SignatureConsent
+      tags: [medical-records-release-permission]
       operationId: createSignatureConsent
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one SignatureConsent by id
+      tags: [medical-records-release-permission]
       operationId: getSignatureConsent
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SignatureConsent
+      tags: [medical-records-release-permission]
       operationId: updateSignatureConsent
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing SignatureConsent
+      tags: [medical-records-release-permission]
       operationId: replaceSignatureConsent
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SignatureConsent
+      tags: [medical-records-release-permission]
       operationId: deleteSignatureConsent
       responses:
         "200":

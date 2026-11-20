@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pulmonary_function_test_request_grade SYSTEM "pulmonary_function_test_request_grade.dtd">
-<pulmonary_function_test_request_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<pulmonary_function_test_request_grade xmlns="https://formexamples.github.io/pulmonary-function-test-request/xml">
+<id>4437a9c7-525a-56e1-8bb0-1256d12a9270</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pulmonary_function_test_request_id>770e8400-e29b-41d4-a716-446655440002</pulmonary_function_test_request_id>
+<pulmonary_function_test_request_id>b7e2358b-df85-57c6-b643-32aa09d58f44</pulmonary_function_test_request_id>
 <appropriateness_score>5</appropriateness_score>
 <appropriateness_band>usually-appropriate</appropriateness_band>
 <contraindication_band>ok</contraindication_band>

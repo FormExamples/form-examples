@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mental_health_act_assessment SYSTEM "mental_health_act_assessment.dtd">
-<mental_health_act_assessment>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<mental_health_act_assessment xmlns="https://formexamples.github.io/mental-health-act-assessment/xml">
+<id>35d1c0e6-c012-56aa-8e1c-413a24754bab</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>ded02949-c04b-5a18-8f99-a9e3325ab08d</patient_id>
+<clinician_id>829f85aa-78b5-5232-a320-f7520ba9e92a</clinician_id>
 <assessed_at>2026-04-09T10:00:00Z</assessed_at>
 <location>hospital-ward</location>
 <referral_source></referral_source>

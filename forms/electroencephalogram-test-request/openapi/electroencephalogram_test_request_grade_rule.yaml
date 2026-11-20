@@ -5,10 +5,19 @@ info:
   title: Electroencephalogram Test Request — ElectroencephalogramTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / urgency / completeness / priority rule that fired for this request.
+x-namespace:
+  form: electroencephalogram-test-request
+  apiPrefix: /api/electroencephalogram-test-request/
+  sqlSchema: electroencephalogram_test_request
+  xmlNamespace: https://formexamples.github.io/electroencephalogram-test-request/xml
+tags:
+  - name: electroencephalogram-test-request
+    description: Electroencephalogram Test Request form
 paths:
   /api/electroencephalogram-test-request/electroencephalogram_test_request_grade_rules:
     get:
       summary: List ElectroencephalogramTestRequestGradeRule records
+      tags: [electroencephalogram-test-request]
       operationId: listElectroencephalogramTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ElectroencephalogramTestRequestGradeRule
+      tags: [electroencephalogram-test-request]
       operationId: createElectroencephalogramTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ElectroencephalogramTestRequestGradeRule by id
+      tags: [electroencephalogram-test-request]
       operationId: getElectroencephalogramTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ElectroencephalogramTestRequestGradeRule
+      tags: [electroencephalogram-test-request]
       operationId: updateElectroencephalogramTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ElectroencephalogramTestRequestGradeRule
+      tags: [electroencephalogram-test-request]
       operationId: replaceElectroencephalogramTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ElectroencephalogramTestRequestGradeRule
+      tags: [electroencephalogram-test-request]
       operationId: deleteElectroencephalogramTestRequestGradeRule
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_additional_flag SYSTEM "grading_additional_flag.dtd">
-<grading_additional_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<grading_additional_flag xmlns="https://formexamples.github.io/pre-operative-assessment-by-patient/xml">
+<id>f316eb5d-c21b-5ad7-9e7e-866c3584cb10</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>990e8400-e29b-41d4-a716-446655440004</grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<grade_id>a93914ef-e77f-584c-bc25-488217859b24</grade_id>
+<flag_id>c3c56986-eb3b-52cd-9087-2554f3fac694</flag_id>
 <category>difficult-airway</category>
 <priority>low</priority>
 <description>Example text.</description>

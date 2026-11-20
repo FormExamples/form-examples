@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE toxicology_test_request_grade_flag SYSTEM "toxicology_test_request_grade_flag.dtd">
-<toxicology_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<toxicology_test_request_grade_flag xmlns="https://formexamples.github.io/toxicology-test-request/xml">
+<id>8abf1354-3292-5f25-845b-c3575d64093b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<toxicology_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</toxicology_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<toxicology_test_request_grade_id>a471b3fd-0dc4-5606-8c6e-92bde41c08e9</toxicology_test_request_grade_id>
+<flag_id>dc9305bd-0262-5f02-a6f7-cb3e44141b57</flag_id>
 <category>suspected-overdose-stat</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -5,10 +5,19 @@ info:
   title: First Aid Training Checklist — GradingAdditionalFlag
   version: 1.0.0
   description: Safety-critical clinical flags raised alongside the grading result.
+x-namespace:
+  form: first-aid-training-checklist
+  apiPrefix: /api/first-aid-training-checklist/
+  sqlSchema: first_aid_training_checklist
+  xmlNamespace: https://formexamples.github.io/first-aid-training-checklist/xml
+tags:
+  - name: first-aid-training-checklist
+    description: First Aid Training Checklist form
 paths:
   /api/first-aid-training-checklist/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [first-aid-training-checklist]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [first-aid-training-checklist]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [first-aid-training-checklist]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [first-aid-training-checklist]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [first-aid-training-checklist]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [first-aid-training-checklist]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

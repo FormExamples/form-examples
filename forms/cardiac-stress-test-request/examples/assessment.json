@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000060",
+    "id": "49e591b2-6b66-5f1b-9fa1-86da810695c9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000072",
+    "id": "296533c2-1133-5cf1-a467-cac640ab323d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "cardiacStressTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-000000000080",
+    "id": "d2fd121b-fc68-5bc1-8be8-b42fdc2551c2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000084",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000085",
+    "patientId": "8d9181e4-3b52-5e89-bd83-120f38b149e2",
+    "clinicianId": "a396fb8a-995c-5df5-9137-c1619ca1b7a5",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -67,11 +67,11 @@
     "notes": ""
   },
   "cardiacStressTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000009d",
+    "id": "e707dc2e-0cad-5ae4-91cc-c2358257e131",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cardiacStressTestRequestId": "550e8400-e29b-41d4-a716-0000000000a1",
+    "cardiacStressTestRequestId": "539dfe2d-2def-528c-81b9-013b4be8e4e6",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "contraindicationBand": "ok",
@@ -84,22 +84,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "cardiacStressTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ac",
+    "id": "55f46474-ed12-50e6-b041-02c073b6906d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cardiacStressTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b0",
+    "cardiacStressTestRequestGradeId": "e61bf181-049b-55f3-b50e-3e8400dcb9fc",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "cardiacStressTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b5",
+    "id": "6f271c51-c684-5bc4-82c1-7c25f04ad3a2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cardiacStressTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b9",
+    "cardiacStressTestRequestGradeId": "d435f88b-35fc-5d48-8890-4a253e4b8e07",
     "flagId": "",
     "category": "recent-acs-contraindication",
     "priority": "low",

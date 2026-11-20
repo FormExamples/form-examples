@@ -1,4 +1,5 @@
 <!ELEMENT medication_reconciliation_grade (id,created_at,updated_at,deleted_at,medication_reconciliation_id,status,source_count,unintentional_count,high_risk_unintentional_count,graded_at)>
+<!ATTLIST medication_reconciliation_grade xmlns CDATA #FIXED "https://formexamples.github.io/medication-reconciliation/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

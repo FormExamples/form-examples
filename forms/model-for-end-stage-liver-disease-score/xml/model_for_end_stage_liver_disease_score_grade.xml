@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE model_for_end_stage_liver_disease_score_grade SYSTEM "model_for_end_stage_liver_disease_score_grade.dtd">
-<model_for_end_stage_liver_disease_score_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<model_for_end_stage_liver_disease_score_grade xmlns="https://formexamples.github.io/model-for-end-stage-liver-disease-score/xml">
+<id>faed6370-3cfb-53ea-b3fe-d503200a1f58</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<model_for_end_stage_liver_disease_score_id>770e8400-e29b-41d4-a716-446655440002</model_for_end_stage_liver_disease_score_id>
+<model_for_end_stage_liver_disease_score_id>bac84952-80bd-50d7-9eff-535b7ba3ec11</model_for_end_stage_liver_disease_score_id>
 <bilirubin_mg_dl>0.0</bilirubin_mg_dl>
 <creatinine_mg_dl>0.0</creatinine_mg_dl>
 <creatinine_adjusted>0.0</creatinine_adjusted>

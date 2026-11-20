@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pulmonary_function_test_result_grade_flag SYSTEM "pulmonary_function_test_result_grade_flag.dtd">
-<pulmonary_function_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<pulmonary_function_test_result_grade_flag xmlns="https://formexamples.github.io/pulmonary-function-test-result/xml">
+<id>6d93573e-66d1-5294-93c8-abe4896f8889</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pulmonary_function_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</pulmonary_function_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<pulmonary_function_test_result_grade_id>96ddc4a7-2683-594a-9a3f-343cd54a3b38</pulmonary_function_test_result_grade_id>
+<flag_id>0c0bfb2e-fe7b-5409-8e0f-0a875c9e0780</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -5,10 +5,19 @@ info:
   title: Dietic Assessment — DieticAssessmentGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the MUST score, with a priority and a suggested action for the dietetic or nutrition-support team.
+x-namespace:
+  form: dietic-assessment
+  apiPrefix: /api/dietic-assessment/
+  sqlSchema: dietic_assessment
+  xmlNamespace: https://formexamples.github.io/dietic-assessment/xml
+tags:
+  - name: dietic-assessment
+    description: Dietic Assessment form
 paths:
   /api/dietic-assessment/dietic_assessment_grade_flags:
     get:
       summary: List DieticAssessmentGradeFlag records
+      tags: [dietic-assessment]
       operationId: listDieticAssessmentGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DieticAssessmentGradeFlag
+      tags: [dietic-assessment]
       operationId: createDieticAssessmentGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DieticAssessmentGradeFlag by id
+      tags: [dietic-assessment]
       operationId: getDieticAssessmentGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DieticAssessmentGradeFlag
+      tags: [dietic-assessment]
       operationId: updateDieticAssessmentGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DieticAssessmentGradeFlag
+      tags: [dietic-assessment]
       operationId: replaceDieticAssessmentGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DieticAssessmentGradeFlag
+      tags: [dietic-assessment]
       operationId: deleteDieticAssessmentGradeFlag
       responses:
         "200":

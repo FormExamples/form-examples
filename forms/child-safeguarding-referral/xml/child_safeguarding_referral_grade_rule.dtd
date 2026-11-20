@@ -1,4 +1,5 @@
 <!ELEMENT child_safeguarding_referral_grade_rule (id,created_at,updated_at,deleted_at,child_safeguarding_referral_grade_id,rule_id,section,category,description)>
+<!ATTLIST child_safeguarding_referral_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/child-safeguarding-referral/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

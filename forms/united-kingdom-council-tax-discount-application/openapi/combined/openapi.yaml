@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United Kingdom Council Tax Discount Application
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-kingdom-council-tax-discount-application
+  apiPrefix: /api/united-kingdom-council-tax-discount-application/
+  sqlSchema: united_kingdom_council_tax_discount_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-council-tax-discount-application/xml
+tags:
+- name: united-kingdom-council-tax-discount-application
+  description: United Kingdom Council Tax Discount Application form
 paths:
   /api/united-kingdom-council-tax-discount-application/applicants:
     get:
       summary: List Applicant records
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: listApplicant
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Applicant
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: createApplicant
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Applicant by id
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: getApplicant
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Applicant
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: updateApplicant
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Applicant
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: replaceApplicant
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Applicant
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: deleteApplicant
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/united-kingdom-council-tax-discount-application/billing_authorities:
     get:
       summary: List BillingAuthority records
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: listBillingAuthority
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BillingAuthority
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: createBillingAuthority
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BillingAuthority by id
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: getBillingAuthority
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BillingAuthority
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: updateBillingAuthority
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BillingAuthority
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: replaceBillingAuthority
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BillingAuthority
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: deleteBillingAuthority
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/united-kingdom-council-tax-discount-application/occupants:
     get:
       summary: List Occupant records
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: listOccupant
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Occupant
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: createOccupant
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Occupant by id
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: getOccupant
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Occupant
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: updateOccupant
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Occupant
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: replaceOccupant
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Occupant
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: deleteOccupant
       responses:
         '200':
@@ -757,9 +801,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-kingdom-council-tax-discount-application
   /api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_application_grade_flags:
     get:
       summary: List UnitedKingdomCouncilTaxDiscountApplicationGradeFlag records
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: listUnitedKingdomCouncilTaxDiscountApplicationGradeFlag
       parameters:
       - name: limit
@@ -813,6 +861,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomCouncilTaxDiscountApplicationGradeFlag
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: createUnitedKingdomCouncilTaxDiscountApplicationGradeFlag
       requestBody:
         required: true
@@ -866,6 +916,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomCouncilTaxDiscountApplicationGradeFlag by id
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: getUnitedKingdomCouncilTaxDiscountApplicationGradeFlag
       responses:
         '200':
@@ -893,6 +945,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomCouncilTaxDiscountApplicationGradeFlag
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: updateUnitedKingdomCouncilTaxDiscountApplicationGradeFlag
       requestBody:
         required: true
@@ -938,6 +992,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomCouncilTaxDiscountApplicationGradeFlag
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: replaceUnitedKingdomCouncilTaxDiscountApplicationGradeFlag
       requestBody:
         required: true
@@ -983,6 +1039,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomCouncilTaxDiscountApplicationGradeFlag
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: deleteUnitedKingdomCouncilTaxDiscountApplicationGradeFlag
       responses:
         '200':
@@ -1007,6 +1065,8 @@ paths:
   /api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_application_grade_rules:
     get:
       summary: List UnitedKingdomCouncilTaxDiscountApplicationGradeRule records
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: listUnitedKingdomCouncilTaxDiscountApplicationGradeRule
       parameters:
       - name: limit
@@ -1060,6 +1120,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomCouncilTaxDiscountApplicationGradeRule
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: createUnitedKingdomCouncilTaxDiscountApplicationGradeRule
       requestBody:
         required: true
@@ -1113,6 +1175,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomCouncilTaxDiscountApplicationGradeRule by id
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: getUnitedKingdomCouncilTaxDiscountApplicationGradeRule
       responses:
         '200':
@@ -1140,6 +1204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomCouncilTaxDiscountApplicationGradeRule
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: updateUnitedKingdomCouncilTaxDiscountApplicationGradeRule
       requestBody:
         required: true
@@ -1185,6 +1251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomCouncilTaxDiscountApplicationGradeRule
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: replaceUnitedKingdomCouncilTaxDiscountApplicationGradeRule
       requestBody:
         required: true
@@ -1230,6 +1298,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomCouncilTaxDiscountApplicationGradeRule
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: deleteUnitedKingdomCouncilTaxDiscountApplicationGradeRule
       responses:
         '200':
@@ -1254,6 +1324,8 @@ paths:
   /api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_application_grades:
     get:
       summary: List UnitedKingdomCouncilTaxDiscountApplicationGrade records
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: listUnitedKingdomCouncilTaxDiscountApplicationGrade
       parameters:
       - name: limit
@@ -1306,6 +1378,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomCouncilTaxDiscountApplicationGrade
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: createUnitedKingdomCouncilTaxDiscountApplicationGrade
       requestBody:
         required: true
@@ -1359,6 +1433,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomCouncilTaxDiscountApplicationGrade by id
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: getUnitedKingdomCouncilTaxDiscountApplicationGrade
       responses:
         '200':
@@ -1386,6 +1462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomCouncilTaxDiscountApplicationGrade
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: updateUnitedKingdomCouncilTaxDiscountApplicationGrade
       requestBody:
         required: true
@@ -1431,6 +1509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomCouncilTaxDiscountApplicationGrade
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: replaceUnitedKingdomCouncilTaxDiscountApplicationGrade
       requestBody:
         required: true
@@ -1476,6 +1556,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomCouncilTaxDiscountApplicationGrade
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: deleteUnitedKingdomCouncilTaxDiscountApplicationGrade
       responses:
         '200':
@@ -1500,6 +1582,8 @@ paths:
   /api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_applications:
     get:
       summary: List UnitedKingdomCouncilTaxDiscountApplication records
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: listUnitedKingdomCouncilTaxDiscountApplication
       parameters:
       - name: limit
@@ -1552,6 +1636,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomCouncilTaxDiscountApplication
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: createUnitedKingdomCouncilTaxDiscountApplication
       requestBody:
         required: true
@@ -1605,6 +1691,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomCouncilTaxDiscountApplication by id
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: getUnitedKingdomCouncilTaxDiscountApplication
       responses:
         '200':
@@ -1632,6 +1720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomCouncilTaxDiscountApplication
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: updateUnitedKingdomCouncilTaxDiscountApplication
       requestBody:
         required: true
@@ -1677,6 +1767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomCouncilTaxDiscountApplication
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: replaceUnitedKingdomCouncilTaxDiscountApplication
       requestBody:
         required: true
@@ -1722,6 +1814,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomCouncilTaxDiscountApplication
+      tags:
+      - united-kingdom-council-tax-discount-application
       operationId: deleteUnitedKingdomCouncilTaxDiscountApplication
       responses:
         '200':

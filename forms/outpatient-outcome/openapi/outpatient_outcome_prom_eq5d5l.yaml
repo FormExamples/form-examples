@@ -5,10 +5,19 @@ info:
   title: Outpatient Outcome — OutpatientOutcomePromEq5d5l
   version: 1.0.0
   description: "EQ-5D-5L PROM responses (before and after treatment): five dimensions (1-5) and VAS (0-100). © EuroQol Research Foundation; item wording paraphrased in the UI; production use requires a licence."
+x-namespace:
+  form: outpatient-outcome
+  apiPrefix: /api/outpatient-outcome/
+  sqlSchema: outpatient_outcome
+  xmlNamespace: https://formexamples.github.io/outpatient-outcome/xml
+tags:
+  - name: outpatient-outcome
+    description: Outpatient Outcome form
 paths:
   /api/outpatient-outcome/outpatient_outcome_prom_eq5d5ls:
     get:
       summary: List OutpatientOutcomePromEq5d5l records
+      tags: [outpatient-outcome]
       operationId: listOutpatientOutcomePromEq5d5l
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OutpatientOutcomePromEq5d5l
+      tags: [outpatient-outcome]
       operationId: createOutpatientOutcomePromEq5d5l
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OutpatientOutcomePromEq5d5l by id
+      tags: [outpatient-outcome]
       operationId: getOutpatientOutcomePromEq5d5l
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OutpatientOutcomePromEq5d5l
+      tags: [outpatient-outcome]
       operationId: updateOutpatientOutcomePromEq5d5l
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OutpatientOutcomePromEq5d5l
+      tags: [outpatient-outcome]
       operationId: replaceOutpatientOutcomePromEq5d5l
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OutpatientOutcomePromEq5d5l
+      tags: [outpatient-outcome]
       operationId: deleteOutpatientOutcomePromEq5d5l
       responses:
         "200":

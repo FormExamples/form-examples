@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the CURB-65 Pneumonia Severity Score form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: curb-65-pneumonia-severity-score
+  apiPrefix: /api/curb-65-pneumonia-severity-score/
+  sqlSchema: curb_65_pneumonia_severity_score
+  xmlNamespace: https://formexamples.github.io/curb-65-pneumonia-severity-score/xml
+tags:
+- name: curb-65-pneumonia-severity-score
+  description: CURB-65 Pneumonia Severity Score form
 paths:
   /api/curb-65-pneumonia-severity-score/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_score_grade_flags:
     get:
       summary: List Curb65PneumoniaSeverityScoreGradeFlag records
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: listCurb65PneumoniaSeverityScoreGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Curb65PneumoniaSeverityScoreGradeFlag
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: createCurb65PneumoniaSeverityScoreGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Curb65PneumoniaSeverityScoreGradeFlag by id
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: getCurb65PneumoniaSeverityScoreGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Curb65PneumoniaSeverityScoreGradeFlag
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: updateCurb65PneumoniaSeverityScoreGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Curb65PneumoniaSeverityScoreGradeFlag
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: replaceCurb65PneumoniaSeverityScoreGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Curb65PneumoniaSeverityScoreGradeFlag
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: deleteCurb65PneumoniaSeverityScoreGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_score_grade_rules:
     get:
       summary: List Curb65PneumoniaSeverityScoreGradeRule records
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: listCurb65PneumoniaSeverityScoreGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Curb65PneumoniaSeverityScoreGradeRule
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: createCurb65PneumoniaSeverityScoreGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Curb65PneumoniaSeverityScoreGradeRule by id
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: getCurb65PneumoniaSeverityScoreGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Curb65PneumoniaSeverityScoreGradeRule
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: updateCurb65PneumoniaSeverityScoreGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Curb65PneumoniaSeverityScoreGradeRule
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: replaceCurb65PneumoniaSeverityScoreGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Curb65PneumoniaSeverityScoreGradeRule
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: deleteCurb65PneumoniaSeverityScoreGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_score_grades:
     get:
       summary: List Curb65PneumoniaSeverityScoreGrade records
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: listCurb65PneumoniaSeverityScoreGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Curb65PneumoniaSeverityScoreGrade
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: createCurb65PneumoniaSeverityScoreGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Curb65PneumoniaSeverityScoreGrade by id
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: getCurb65PneumoniaSeverityScoreGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Curb65PneumoniaSeverityScoreGrade
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: updateCurb65PneumoniaSeverityScoreGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Curb65PneumoniaSeverityScoreGrade
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: replaceCurb65PneumoniaSeverityScoreGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Curb65PneumoniaSeverityScoreGrade
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: deleteCurb65PneumoniaSeverityScoreGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_scores:
     get:
       summary: List Curb65PneumoniaSeverityScore records
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: listCurb65PneumoniaSeverityScore
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Curb65PneumoniaSeverityScore
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: createCurb65PneumoniaSeverityScore
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Curb65PneumoniaSeverityScore by id
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: getCurb65PneumoniaSeverityScore
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Curb65PneumoniaSeverityScore
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: updateCurb65PneumoniaSeverityScore
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Curb65PneumoniaSeverityScore
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: replaceCurb65PneumoniaSeverityScore
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Curb65PneumoniaSeverityScore
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: deleteCurb65PneumoniaSeverityScore
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - curb-65-pneumonia-severity-score
   /api/curb-65-pneumonia-severity-score/patients:
     get:
       summary: List Patient records
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - curb-65-pneumonia-severity-score
       operationId: deletePatient
       responses:
         '200':

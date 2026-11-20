@@ -5,10 +5,19 @@ info:
   title: Fluid Balance Chart — Clinician
   version: 1.0.0
   description: Clinician identifying information for the charting professional who records the fluid balance chart.
+x-namespace:
+  form: fluid-balance-chart
+  apiPrefix: /api/fluid-balance-chart/
+  sqlSchema: fluid_balance_chart
+  xmlNamespace: https://formexamples.github.io/fluid-balance-chart/xml
+tags:
+  - name: fluid-balance-chart
+    description: Fluid Balance Chart form
 paths:
   /api/fluid-balance-chart/clinicians:
     get:
       summary: List Clinician records
+      tags: [fluid-balance-chart]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [fluid-balance-chart]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [fluid-balance-chart]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [fluid-balance-chart]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [fluid-balance-chart]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [fluid-balance-chart]
       operationId: deleteClinician
       responses:
         "200":

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_death_registration_grade SYSTEM "united_kingdom_death_registration_grade.dtd">
-<united_kingdom_death_registration_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<united_kingdom_death_registration_grade xmlns="https://formexamples.github.io/united-kingdom-death-registration/xml">
+<id>86c2b16a-9344-5a3d-98e2-96130dcdcd14</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<united_kingdom_death_registration_id>770e8400-e29b-41d4-a716-446655440002</united_kingdom_death_registration_id>
+<united_kingdom_death_registration_id>c0d5b8cc-d409-546b-ae11-8ff9d98510e5</united_kingdom_death_registration_id>
 <registration_class>ready-to-register</registration_class>
 <deadline_status>not-started</deadline_status>
 <days_since_confirmation>1</days_since_confirmation>

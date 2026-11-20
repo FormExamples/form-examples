@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE genetic_test_request_grade SYSTEM "genetic_test_request_grade.dtd">
-<genetic_test_request_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<genetic_test_request_grade xmlns="https://formexamples.github.io/genetic-test-request/xml">
+<id>032e56e3-6a27-5b00-8da4-8b27e04812f0</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<genetic_test_request_id>770e8400-e29b-41d4-a716-446655440002</genetic_test_request_id>
+<genetic_test_request_id>8e3af353-20dd-5a81-a4e2-acea11df3d60</genetic_test_request_id>
 <appropriateness_score>5</appropriateness_score>
 <appropriateness_band>usually-appropriate</appropriateness_band>
 <consent_counselling_band>ok</consent_counselling_band>

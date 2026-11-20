@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE histopathology_test_result_grade SYSTEM "histopathology_test_result_grade.dtd">
-<histopathology_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<histopathology_test_result_grade xmlns="https://formexamples.github.io/histopathology-test-result/xml">
+<id>7ea6ab0f-5b8d-58ed-860b-0807093c7585</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<histopathology_test_result_id>770e8400-e29b-41d4-a716-446655440002</histopathology_test_result_id>
+<histopathology_test_result_id>6e695505-7dbb-5904-82e5-52393328c03d</histopathology_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

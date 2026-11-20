@@ -1,4 +1,5 @@
 <!ELEMENT ct_scan_test_request_grade (id,created_at,updated_at,deleted_at,ct_scan_test_request_id,appropriateness_score,appropriateness_band,contrast_safety_band,estimated_dose_band,renal_risk,completeness_percent,triage_tier,target_timeframe,recommendation,clinician_notes,signed_at,graded_at)>
+<!ATTLIST ct_scan_test_request_grade xmlns CDATA #FIXED "https://formexamples.github.io/ct-scan-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000057",
+    "id": "463ee3c5-f43e-5ffa-b5e4-e2eb6266abe6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000069",
+    "id": "dd00920c-9058-5294-a2d7-56b1b11318f6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "breastScreening": {
-    "id": "550e8400-e29b-41d4-a716-000000000076",
+    "id": "c5f1d93a-ea4b-5538-8599-6434b892d441",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007a",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007b",
+    "patientId": "9fb75949-d53c-54db-8bec-420ef4ba023c",
+    "clinicianId": "91f7a431-9a3a-55db-9e8b-1e2af568d13e",
     "reportingClinicianRole": "mammographer",
     "reportedAt": null,
     "screeningUnit": "",
@@ -63,11 +63,11 @@
     "clinicalContext": ""
   },
   "breastScreeningGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000090",
+    "id": "2b02b3aa-2cdc-56fe-80fe-b98f703bc82b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "breastScreeningId": "550e8400-e29b-41d4-a716-000000000094",
+    "breastScreeningId": "793fec93-4b20-59ba-9987-c26f57d70adf",
     "eligibilityStatus": "eligible",
     "resultClass": "routine",
     "managementAction": "routine-recall",
@@ -75,22 +75,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "breastScreeningGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000009a",
+    "id": "0884e3f0-dd59-52d6-ac10-27f218c9bcf0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "breastScreeningGradeId": "550e8400-e29b-41d4-a716-00000000009e",
+    "breastScreeningGradeId": "d7df7842-a129-5a92-8974-0fe7a14e4463",
     "ruleId": "",
     "stage": "eligibility",
     "category": "",
     "description": ""
   },
   "breastScreeningGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a3",
+    "id": "f177184a-6671-5470-9ce8-4d246685252f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "breastScreeningGradeId": "550e8400-e29b-41d4-a716-0000000000a7",
+    "breastScreeningGradeId": "e5420b37-ef52-5445-a340-a6bcc4f26b07",
     "flagId": "",
     "category": "symptomatic-wrong-pathway",
     "priority": "low",

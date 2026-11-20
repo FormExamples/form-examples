@@ -5,10 +5,19 @@ info:
   title: General Practitioner Referral Letter — GeneralPractitionerReferralLetterGradeRule
   version: 1.0.0
   description: "Audit trail of every completeness rule that fired during grading: category and description."
+x-namespace:
+  form: general-practitioner-referral-letter
+  apiPrefix: /api/general-practitioner-referral-letter/
+  sqlSchema: general_practitioner_referral_letter
+  xmlNamespace: https://formexamples.github.io/general-practitioner-referral-letter/xml
+tags:
+  - name: general-practitioner-referral-letter
+    description: General Practitioner Referral Letter form
 paths:
   /api/general-practitioner-referral-letter/general_practitioner_referral_letter_grade_rules:
     get:
       summary: List GeneralPractitionerReferralLetterGradeRule records
+      tags: [general-practitioner-referral-letter]
       operationId: listGeneralPractitionerReferralLetterGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GeneralPractitionerReferralLetterGradeRule
+      tags: [general-practitioner-referral-letter]
       operationId: createGeneralPractitionerReferralLetterGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GeneralPractitionerReferralLetterGradeRule by id
+      tags: [general-practitioner-referral-letter]
       operationId: getGeneralPractitionerReferralLetterGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GeneralPractitionerReferralLetterGradeRule
+      tags: [general-practitioner-referral-letter]
       operationId: updateGeneralPractitionerReferralLetterGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GeneralPractitionerReferralLetterGradeRule
+      tags: [general-practitioner-referral-letter]
       operationId: replaceGeneralPractitionerReferralLetterGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GeneralPractitionerReferralLetterGradeRule
+      tags: [general-practitioner-referral-letter]
       operationId: deleteGeneralPractitionerReferralLetterGradeRule
       responses:
         "200":

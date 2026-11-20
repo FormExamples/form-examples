@@ -5,10 +5,19 @@ info:
   title: Health Screening Questionnaire — Patient
   version: 1.0.0
   description: Patient, i.e. the person being screened.
+x-namespace:
+  form: health-screening-questionnaire
+  apiPrefix: /api/health-screening-questionnaire/
+  sqlSchema: health_screening_questionnaire
+  xmlNamespace: https://formexamples.github.io/health-screening-questionnaire/xml
+tags:
+  - name: health-screening-questionnaire
+    description: Health Screening Questionnaire form
 paths:
   /api/health-screening-questionnaire/patients:
     get:
       summary: List Patient records
+      tags: [health-screening-questionnaire]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [health-screening-questionnaire]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [health-screening-questionnaire]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [health-screening-questionnaire]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [health-screening-questionnaire]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [health-screening-questionnaire]
       operationId: deletePatient
       responses:
         "200":

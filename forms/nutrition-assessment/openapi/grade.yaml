@@ -5,10 +5,19 @@ info:
   title: Nutrition Assessment — Grade
   version: 1.0.0
   description: Computed MUST nutritional screening grading result. Total score 0 = low risk, 1 = medium risk, >=2 = high risk. One-to-one child of assessment.
+x-namespace:
+  form: nutrition-assessment
+  apiPrefix: /api/nutrition-assessment/
+  sqlSchema: nutrition_assessment
+  xmlNamespace: https://formexamples.github.io/nutrition-assessment/xml
+tags:
+  - name: nutrition-assessment
+    description: Nutrition Assessment form
 paths:
   /api/nutrition-assessment/grades:
     get:
       summary: List Grade records
+      tags: [nutrition-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [nutrition-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [nutrition-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [nutrition-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [nutrition-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [nutrition-assessment]
       operationId: deleteGrade
       responses:
         "200":

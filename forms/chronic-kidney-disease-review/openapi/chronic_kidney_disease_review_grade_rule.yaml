@@ -5,10 +5,19 @@ info:
   title: Chronic Kidney Disease Review — ChronicKidneyDiseaseReviewGradeRule
   version: 1.0.0
   description: "Audit trail of every classification or completeness rule that fired during grading: section, category, and description."
+x-namespace:
+  form: chronic-kidney-disease-review
+  apiPrefix: /api/chronic-kidney-disease-review/
+  sqlSchema: chronic_kidney_disease_review
+  xmlNamespace: https://formexamples.github.io/chronic-kidney-disease-review/xml
+tags:
+  - name: chronic-kidney-disease-review
+    description: Chronic Kidney Disease Review form
 paths:
   /api/chronic-kidney-disease-review/chronic_kidney_disease_review_grade_rules:
     get:
       summary: List ChronicKidneyDiseaseReviewGradeRule records
+      tags: [chronic-kidney-disease-review]
       operationId: listChronicKidneyDiseaseReviewGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ChronicKidneyDiseaseReviewGradeRule
+      tags: [chronic-kidney-disease-review]
       operationId: createChronicKidneyDiseaseReviewGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ChronicKidneyDiseaseReviewGradeRule by id
+      tags: [chronic-kidney-disease-review]
       operationId: getChronicKidneyDiseaseReviewGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ChronicKidneyDiseaseReviewGradeRule
+      tags: [chronic-kidney-disease-review]
       operationId: updateChronicKidneyDiseaseReviewGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ChronicKidneyDiseaseReviewGradeRule
+      tags: [chronic-kidney-disease-review]
       operationId: replaceChronicKidneyDiseaseReviewGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ChronicKidneyDiseaseReviewGradeRule
+      tags: [chronic-kidney-disease-review]
       operationId: deleteChronicKidneyDiseaseReviewGradeRule
       responses:
         "200":

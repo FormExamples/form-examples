@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Nuclear Medicine Test Request form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: nuclear-medicine-test-request
+  apiPrefix: /api/nuclear-medicine-test-request/
+  sqlSchema: nuclear_medicine_test_request
+  xmlNamespace: https://formexamples.github.io/nuclear-medicine-test-request/xml
+tags:
+- name: nuclear-medicine-test-request
+  description: Nuclear Medicine Test Request form
 paths:
   /api/nuclear-medicine-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - nuclear-medicine-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - nuclear-medicine-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - nuclear-medicine-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - nuclear-medicine-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - nuclear-medicine-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - nuclear-medicine-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/nuclear-medicine-test-request/nuclear_medicine_test_request_grade_flags:
     get:
       summary: List NuclearMedicineTestRequestGradeFlag records
+      tags:
+      - nuclear-medicine-test-request
       operationId: listNuclearMedicineTestRequestGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NuclearMedicineTestRequestGradeFlag
+      tags:
+      - nuclear-medicine-test-request
       operationId: createNuclearMedicineTestRequestGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NuclearMedicineTestRequestGradeFlag by id
+      tags:
+      - nuclear-medicine-test-request
       operationId: getNuclearMedicineTestRequestGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NuclearMedicineTestRequestGradeFlag
+      tags:
+      - nuclear-medicine-test-request
       operationId: updateNuclearMedicineTestRequestGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NuclearMedicineTestRequestGradeFlag
+      tags:
+      - nuclear-medicine-test-request
       operationId: replaceNuclearMedicineTestRequestGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NuclearMedicineTestRequestGradeFlag
+      tags:
+      - nuclear-medicine-test-request
       operationId: deleteNuclearMedicineTestRequestGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/nuclear-medicine-test-request/nuclear_medicine_test_request_grade_rules:
     get:
       summary: List NuclearMedicineTestRequestGradeRule records
+      tags:
+      - nuclear-medicine-test-request
       operationId: listNuclearMedicineTestRequestGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NuclearMedicineTestRequestGradeRule
+      tags:
+      - nuclear-medicine-test-request
       operationId: createNuclearMedicineTestRequestGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NuclearMedicineTestRequestGradeRule by id
+      tags:
+      - nuclear-medicine-test-request
       operationId: getNuclearMedicineTestRequestGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NuclearMedicineTestRequestGradeRule
+      tags:
+      - nuclear-medicine-test-request
       operationId: updateNuclearMedicineTestRequestGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NuclearMedicineTestRequestGradeRule
+      tags:
+      - nuclear-medicine-test-request
       operationId: replaceNuclearMedicineTestRequestGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NuclearMedicineTestRequestGradeRule
+      tags:
+      - nuclear-medicine-test-request
       operationId: deleteNuclearMedicineTestRequestGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/nuclear-medicine-test-request/nuclear_medicine_test_request_grades:
     get:
       summary: List NuclearMedicineTestRequestGrade records
+      tags:
+      - nuclear-medicine-test-request
       operationId: listNuclearMedicineTestRequestGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NuclearMedicineTestRequestGrade
+      tags:
+      - nuclear-medicine-test-request
       operationId: createNuclearMedicineTestRequestGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NuclearMedicineTestRequestGrade by id
+      tags:
+      - nuclear-medicine-test-request
       operationId: getNuclearMedicineTestRequestGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NuclearMedicineTestRequestGrade
+      tags:
+      - nuclear-medicine-test-request
       operationId: updateNuclearMedicineTestRequestGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NuclearMedicineTestRequestGrade
+      tags:
+      - nuclear-medicine-test-request
       operationId: replaceNuclearMedicineTestRequestGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NuclearMedicineTestRequestGrade
+      tags:
+      - nuclear-medicine-test-request
       operationId: deleteNuclearMedicineTestRequestGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/nuclear-medicine-test-request/nuclear_medicine_test_requests:
     get:
       summary: List NuclearMedicineTestRequest records
+      tags:
+      - nuclear-medicine-test-request
       operationId: listNuclearMedicineTestRequest
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NuclearMedicineTestRequest
+      tags:
+      - nuclear-medicine-test-request
       operationId: createNuclearMedicineTestRequest
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NuclearMedicineTestRequest by id
+      tags:
+      - nuclear-medicine-test-request
       operationId: getNuclearMedicineTestRequest
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NuclearMedicineTestRequest
+      tags:
+      - nuclear-medicine-test-request
       operationId: updateNuclearMedicineTestRequest
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NuclearMedicineTestRequest
+      tags:
+      - nuclear-medicine-test-request
       operationId: replaceNuclearMedicineTestRequest
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NuclearMedicineTestRequest
+      tags:
+      - nuclear-medicine-test-request
       operationId: deleteNuclearMedicineTestRequest
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - nuclear-medicine-test-request
   /api/nuclear-medicine-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - nuclear-medicine-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - nuclear-medicine-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - nuclear-medicine-test-request
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - nuclear-medicine-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - nuclear-medicine-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - nuclear-medicine-test-request
       operationId: deletePatient
       responses:
         '200':

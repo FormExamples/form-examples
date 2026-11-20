@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hip_replacement_surgery_evaluation_grade SYSTEM "hip_replacement_surgery_evaluation_grade.dtd">
-<hip_replacement_surgery_evaluation_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<hip_replacement_surgery_evaluation_grade xmlns="https://formexamples.github.io/hip-replacement-surgery-evaluation/xml">
+<id>dc59f410-0eb6-5305-8244-e66fc80b02f5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<hip_replacement_surgery_evaluation_id>770e8400-e29b-41d4-a716-446655440002</hip_replacement_surgery_evaluation_id>
+<hip_replacement_surgery_evaluation_id>530540b9-0207-51a3-94c0-61dd78bc29a0</hip_replacement_surgery_evaluation_id>
 <ohs_total>1</ohs_total>
 <ohs_category>severe</ohs_category>
 <computed_candidacy>strong-candidate</computed_candidacy>

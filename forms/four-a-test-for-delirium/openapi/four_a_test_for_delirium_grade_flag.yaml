@@ -5,10 +5,19 @@ info:
   title: Four A Test For Delirium — FourATestForDeliriumGradeFlag
   version: 1.0.0
   description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.
+x-namespace:
+  form: four-a-test-for-delirium
+  apiPrefix: /api/four-a-test-for-delirium/
+  sqlSchema: four_a_test_for_delirium
+  xmlNamespace: https://formexamples.github.io/four-a-test-for-delirium/xml
+tags:
+  - name: four-a-test-for-delirium
+    description: Four A Test For Delirium form
 paths:
   /api/four-a-test-for-delirium/four_a_test_for_delirium_grade_flags:
     get:
       summary: List FourATestForDeliriumGradeFlag records
+      tags: [four-a-test-for-delirium]
       operationId: listFourATestForDeliriumGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new FourATestForDeliriumGradeFlag
+      tags: [four-a-test-for-delirium]
       operationId: createFourATestForDeliriumGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one FourATestForDeliriumGradeFlag by id
+      tags: [four-a-test-for-delirium]
       operationId: getFourATestForDeliriumGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing FourATestForDeliriumGradeFlag
+      tags: [four-a-test-for-delirium]
       operationId: updateFourATestForDeliriumGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing FourATestForDeliriumGradeFlag
+      tags: [four-a-test-for-delirium]
       operationId: replaceFourATestForDeliriumGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a FourATestForDeliriumGradeFlag
+      tags: [four-a-test-for-delirium]
       operationId: deleteFourATestForDeliriumGradeFlag
       responses:
         "200":

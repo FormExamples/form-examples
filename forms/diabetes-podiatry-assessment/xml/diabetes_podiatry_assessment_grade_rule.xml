@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE diabetes_podiatry_assessment_grade_rule SYSTEM "diabetes_podiatry_assessment_grade_rule.dtd">
-<diabetes_podiatry_assessment_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<diabetes_podiatry_assessment_grade_rule xmlns="https://formexamples.github.io/diabetes-podiatry-assessment/xml">
+<id>e10711df-bb12-5f93-98f8-0724c018c9a1</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<diabetes_podiatry_assessment_grade_id>880e8400-e29b-41d4-a716-446655440003</diabetes_podiatry_assessment_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<diabetes_podiatry_assessment_grade_id>0b901d72-ab41-5e48-b074-96231aef2b7a</diabetes_podiatry_assessment_grade_id>
+<rule_id>7961d075-9d6e-55e1-835e-bc321c038b50</rule_id>
 <stage>per-foot</stage>
 <category>General</category>
 <description>Example text.</description>

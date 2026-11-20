@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Perioperative Optimization form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: perioperative-optimization
+  apiPrefix: /api/perioperative-optimization/
+  sqlSchema: perioperative_optimization
+  xmlNamespace: https://formexamples.github.io/perioperative-optimization/xml
+tags:
+- name: perioperative-optimization
+  description: Perioperative Optimization form
 paths:
   /api/perioperative-optimization/allergies:
     get:
       summary: List Allergy records
+      tags:
+      - perioperative-optimization
       operationId: listAllergy
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Allergy
+      tags:
+      - perioperative-optimization
       operationId: createAllergy
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Allergy by id
+      tags:
+      - perioperative-optimization
       operationId: getAllergy
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Allergy
+      tags:
+      - perioperative-optimization
       operationId: updateAllergy
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Allergy
+      tags:
+      - perioperative-optimization
       operationId: replaceAllergy
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Allergy
+      tags:
+      - perioperative-optimization
       operationId: deleteAllergy
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/perioperative-optimization/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - perioperative-optimization
       operationId: listClinician
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - perioperative-optimization
       operationId: createClinician
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - perioperative-optimization
       operationId: getClinician
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - perioperative-optimization
       operationId: updateClinician
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - perioperative-optimization
       operationId: replaceClinician
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - perioperative-optimization
       operationId: deleteClinician
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/perioperative-optimization/medications:
     get:
       summary: List Medication records
+      tags:
+      - perioperative-optimization
       operationId: listMedication
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Medication
+      tags:
+      - perioperative-optimization
       operationId: createMedication
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Medication by id
+      tags:
+      - perioperative-optimization
       operationId: getMedication
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Medication
+      tags:
+      - perioperative-optimization
       operationId: updateMedication
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Medication
+      tags:
+      - perioperative-optimization
       operationId: replaceMedication
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Medication
+      tags:
+      - perioperative-optimization
       operationId: deleteMedication
       responses:
         '200':
@@ -757,9 +801,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - perioperative-optimization
   /api/perioperative-optimization/patient_allergies:
     get:
       summary: List PatientAllergy records
+      tags:
+      - perioperative-optimization
       operationId: listPatientAllergy
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PatientAllergy
+      tags:
+      - perioperative-optimization
       operationId: createPatientAllergy
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PatientAllergy by id
+      tags:
+      - perioperative-optimization
       operationId: getPatientAllergy
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PatientAllergy
+      tags:
+      - perioperative-optimization
       operationId: updatePatientAllergy
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PatientAllergy
+      tags:
+      - perioperative-optimization
       operationId: replacePatientAllergy
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PatientAllergy
+      tags:
+      - perioperative-optimization
       operationId: deletePatientAllergy
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/perioperative-optimization/patient_medications:
     get:
       summary: List PatientMedication records
+      tags:
+      - perioperative-optimization
       operationId: listPatientMedication
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PatientMedication
+      tags:
+      - perioperative-optimization
       operationId: createPatientMedication
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PatientMedication by id
+      tags:
+      - perioperative-optimization
       operationId: getPatientMedication
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PatientMedication
+      tags:
+      - perioperative-optimization
       operationId: updatePatientMedication
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PatientMedication
+      tags:
+      - perioperative-optimization
       operationId: replacePatientMedication
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PatientMedication
+      tags:
+      - perioperative-optimization
       operationId: deletePatientMedication
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/perioperative-optimization/patients:
     get:
       summary: List Patient records
+      tags:
+      - perioperative-optimization
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - perioperative-optimization
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - perioperative-optimization
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - perioperative-optimization
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - perioperative-optimization
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - perioperative-optimization
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/perioperative-optimization/perioperative_optimization_grade_domains:
     get:
       summary: List PerioperativeOptimizationGradeDomain records
+      tags:
+      - perioperative-optimization
       operationId: listPerioperativeOptimizationGradeDomain
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PerioperativeOptimizationGradeDomain
+      tags:
+      - perioperative-optimization
       operationId: createPerioperativeOptimizationGradeDomain
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PerioperativeOptimizationGradeDomain by id
+      tags:
+      - perioperative-optimization
       operationId: getPerioperativeOptimizationGradeDomain
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PerioperativeOptimizationGradeDomain
+      tags:
+      - perioperative-optimization
       operationId: updatePerioperativeOptimizationGradeDomain
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PerioperativeOptimizationGradeDomain
+      tags:
+      - perioperative-optimization
       operationId: replacePerioperativeOptimizationGradeDomain
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PerioperativeOptimizationGradeDomain
+      tags:
+      - perioperative-optimization
       operationId: deletePerioperativeOptimizationGradeDomain
       responses:
         '200':
@@ -1744,6 +1838,8 @@ paths:
   /api/perioperative-optimization/perioperative_optimization_grade_flags:
     get:
       summary: List PerioperativeOptimizationGradeFlag records
+      tags:
+      - perioperative-optimization
       operationId: listPerioperativeOptimizationGradeFlag
       parameters:
       - name: limit
@@ -1796,6 +1892,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PerioperativeOptimizationGradeFlag
+      tags:
+      - perioperative-optimization
       operationId: createPerioperativeOptimizationGradeFlag
       requestBody:
         required: true
@@ -1849,6 +1947,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PerioperativeOptimizationGradeFlag by id
+      tags:
+      - perioperative-optimization
       operationId: getPerioperativeOptimizationGradeFlag
       responses:
         '200':
@@ -1876,6 +1976,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PerioperativeOptimizationGradeFlag
+      tags:
+      - perioperative-optimization
       operationId: updatePerioperativeOptimizationGradeFlag
       requestBody:
         required: true
@@ -1921,6 +2023,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PerioperativeOptimizationGradeFlag
+      tags:
+      - perioperative-optimization
       operationId: replacePerioperativeOptimizationGradeFlag
       requestBody:
         required: true
@@ -1966,6 +2070,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PerioperativeOptimizationGradeFlag
+      tags:
+      - perioperative-optimization
       operationId: deletePerioperativeOptimizationGradeFlag
       responses:
         '200':
@@ -1990,6 +2096,8 @@ paths:
   /api/perioperative-optimization/perioperative_optimization_grades:
     get:
       summary: List PerioperativeOptimizationGrade records
+      tags:
+      - perioperative-optimization
       operationId: listPerioperativeOptimizationGrade
       parameters:
       - name: limit
@@ -2042,6 +2150,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PerioperativeOptimizationGrade
+      tags:
+      - perioperative-optimization
       operationId: createPerioperativeOptimizationGrade
       requestBody:
         required: true
@@ -2095,6 +2205,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PerioperativeOptimizationGrade by id
+      tags:
+      - perioperative-optimization
       operationId: getPerioperativeOptimizationGrade
       responses:
         '200':
@@ -2122,6 +2234,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PerioperativeOptimizationGrade
+      tags:
+      - perioperative-optimization
       operationId: updatePerioperativeOptimizationGrade
       requestBody:
         required: true
@@ -2167,6 +2281,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PerioperativeOptimizationGrade
+      tags:
+      - perioperative-optimization
       operationId: replacePerioperativeOptimizationGrade
       requestBody:
         required: true
@@ -2212,6 +2328,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PerioperativeOptimizationGrade
+      tags:
+      - perioperative-optimization
       operationId: deletePerioperativeOptimizationGrade
       responses:
         '200':
@@ -2236,6 +2354,8 @@ paths:
   /api/perioperative-optimization/perioperative_optimizations:
     get:
       summary: List PerioperativeOptimization records
+      tags:
+      - perioperative-optimization
       operationId: listPerioperativeOptimization
       parameters:
       - name: limit
@@ -2288,6 +2408,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PerioperativeOptimization
+      tags:
+      - perioperative-optimization
       operationId: createPerioperativeOptimization
       requestBody:
         required: true
@@ -2341,6 +2463,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PerioperativeOptimization by id
+      tags:
+      - perioperative-optimization
       operationId: getPerioperativeOptimization
       responses:
         '200':
@@ -2368,6 +2492,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PerioperativeOptimization
+      tags:
+      - perioperative-optimization
       operationId: updatePerioperativeOptimization
       requestBody:
         required: true
@@ -2413,6 +2539,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PerioperativeOptimization
+      tags:
+      - perioperative-optimization
       operationId: replacePerioperativeOptimization
       requestBody:
         required: true
@@ -2458,6 +2586,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PerioperativeOptimization
+      tags:
+      - perioperative-optimization
       operationId: deletePerioperativeOptimization
       responses:
         '200':

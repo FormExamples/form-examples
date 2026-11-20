@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,vaccination_level,vaccination_score,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/vaccinations-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

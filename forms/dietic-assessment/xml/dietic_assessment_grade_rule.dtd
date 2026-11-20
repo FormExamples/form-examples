@@ -1,4 +1,5 @@
 <!ELEMENT dietic_assessment_grade_rule (id,created_at,updated_at,deleted_at,dietic_assessment_grade_id,rule_id,instrument,component,score,band,category,description)>
+<!ATTLIST dietic_assessment_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/dietic-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

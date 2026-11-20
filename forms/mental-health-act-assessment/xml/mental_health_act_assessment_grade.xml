@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mental_health_act_assessment_grade SYSTEM "mental_health_act_assessment_grade.dtd">
-<mental_health_act_assessment_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<mental_health_act_assessment_grade xmlns="https://formexamples.github.io/mental-health-act-assessment/xml">
+<id>413c029f-f844-5d4a-b983-a963c8791ad5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<mental_health_act_assessment_id>770e8400-e29b-41d4-a716-446655440002</mental_health_act_assessment_id>
+<mental_health_act_assessment_id>35d1c0e6-c012-56aa-8e1c-413a24754bab</mental_health_act_assessment_id>
 <completeness_status>valid</completeness_status>
 <recommended_section_class>section-2</recommended_section_class>
 <urgency>routine</urgency>

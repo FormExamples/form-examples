@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Bowel Cancer Screening with Faecal Immunochemical
     Test (FIT) form, merged from the per-entity specs in this directory. One RESTful resource per routed
     SQL table, and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: bowel-cancer-screening-with-faecal-immunochemical-test
+  apiPrefix: /api/bowel-cancer-screening-with-faecal-immunochemical-test/
+  sqlSchema: bowel_cancer_screening_with_faecal_immunochemical_test
+  xmlNamespace: https://formexamples.github.io/bowel-cancer-screening-with-faecal-immunochemical-test/xml
+tags:
+- name: bowel-cancer-screening-with-faecal-immunochemical-test
+  description: Bowel Cancer Screening with Faecal Immunochemical Test (FIT) form
 paths:
   /api/bowel-cancer-screening-with-faecal-immunochemical-test/bowel_cancer_screening_fit_grade_flags:
     get:
       summary: List BowelCancerScreeningFitGradeFlag records
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: listBowelCancerScreeningFitGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BowelCancerScreeningFitGradeFlag
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: createBowelCancerScreeningFitGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BowelCancerScreeningFitGradeFlag by id
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: getBowelCancerScreeningFitGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BowelCancerScreeningFitGradeFlag
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: updateBowelCancerScreeningFitGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BowelCancerScreeningFitGradeFlag
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: replaceBowelCancerScreeningFitGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BowelCancerScreeningFitGradeFlag
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: deleteBowelCancerScreeningFitGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/bowel-cancer-screening-with-faecal-immunochemical-test/bowel_cancer_screening_fit_grade_rules:
     get:
       summary: List BowelCancerScreeningFitGradeRule records
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: listBowelCancerScreeningFitGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BowelCancerScreeningFitGradeRule
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: createBowelCancerScreeningFitGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BowelCancerScreeningFitGradeRule by id
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: getBowelCancerScreeningFitGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BowelCancerScreeningFitGradeRule
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: updateBowelCancerScreeningFitGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BowelCancerScreeningFitGradeRule
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: replaceBowelCancerScreeningFitGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BowelCancerScreeningFitGradeRule
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: deleteBowelCancerScreeningFitGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/bowel-cancer-screening-with-faecal-immunochemical-test/bowel_cancer_screening_fit_grades:
     get:
       summary: List BowelCancerScreeningFitGrade records
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: listBowelCancerScreeningFitGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BowelCancerScreeningFitGrade
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: createBowelCancerScreeningFitGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BowelCancerScreeningFitGrade by id
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: getBowelCancerScreeningFitGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BowelCancerScreeningFitGrade
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: updateBowelCancerScreeningFitGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BowelCancerScreeningFitGrade
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: replaceBowelCancerScreeningFitGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BowelCancerScreeningFitGrade
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: deleteBowelCancerScreeningFitGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/bowel-cancer-screening-with-faecal-immunochemical-test/bowel_cancer_screening_fits:
     get:
       summary: List BowelCancerScreeningFit records
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: listBowelCancerScreeningFit
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BowelCancerScreeningFit
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: createBowelCancerScreeningFit
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BowelCancerScreeningFit by id
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: getBowelCancerScreeningFit
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BowelCancerScreeningFit
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: updateBowelCancerScreeningFit
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BowelCancerScreeningFit
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: replaceBowelCancerScreeningFit
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BowelCancerScreeningFit
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: deleteBowelCancerScreeningFit
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/bowel-cancer-screening-with-faecal-immunochemical-test/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
   /api/bowel-cancer-screening-with-faecal-immunochemical-test/patients:
     get:
       summary: List Patient records
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - bowel-cancer-screening-with-faecal-immunochemical-test
       operationId: deletePatient
       responses:
         '200':

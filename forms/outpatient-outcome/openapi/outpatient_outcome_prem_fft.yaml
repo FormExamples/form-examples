@@ -5,10 +5,19 @@ info:
   title: Outpatient Outcome — OutpatientOutcomePremFft
   version: 1.0.0
   description: NHS Friends and Family Test PREM response and free-text comment. Open Government Licence v3.0.
+x-namespace:
+  form: outpatient-outcome
+  apiPrefix: /api/outpatient-outcome/
+  sqlSchema: outpatient_outcome
+  xmlNamespace: https://formexamples.github.io/outpatient-outcome/xml
+tags:
+  - name: outpatient-outcome
+    description: Outpatient Outcome form
 paths:
   /api/outpatient-outcome/outpatient_outcome_prem_ffts:
     get:
       summary: List OutpatientOutcomePremFft records
+      tags: [outpatient-outcome]
       operationId: listOutpatientOutcomePremFft
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OutpatientOutcomePremFft
+      tags: [outpatient-outcome]
       operationId: createOutpatientOutcomePremFft
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OutpatientOutcomePremFft by id
+      tags: [outpatient-outcome]
       operationId: getOutpatientOutcomePremFft
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OutpatientOutcomePremFft
+      tags: [outpatient-outcome]
       operationId: updateOutpatientOutcomePremFft
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OutpatientOutcomePremFft
+      tags: [outpatient-outcome]
       operationId: replaceOutpatientOutcomePremFft
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OutpatientOutcomePremFft
+      tags: [outpatient-outcome]
       operationId: deleteOutpatientOutcomePremFft
       responses:
         "200":

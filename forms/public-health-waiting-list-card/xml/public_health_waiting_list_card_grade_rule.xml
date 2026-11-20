@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE public_health_waiting_list_card_grade_rule SYSTEM "public_health_waiting_list_card_grade_rule.dtd">
-<public_health_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<public_health_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/public-health-waiting-list-card/xml">
+<id>fbdb6bcc-7ada-5406-8fc1-3af900832e2e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<public_health_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</public_health_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<public_health_waiting_list_card_grade_id>711786ec-34a1-5e79-a0d6-362cc6d9a325</public_health_waiting_list_card_grade_id>
+<rule_id>bca4452f-c02e-549d-900b-7f1392d4baa0</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

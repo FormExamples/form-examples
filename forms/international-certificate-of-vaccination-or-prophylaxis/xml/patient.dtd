@@ -1,4 +1,5 @@
 <!ELEMENT patient (id,created_at,updated_at,deleted_at,surname,given_names,birth_date,sex,nationality_as_iso_3166_1_alpha_3,travel_document_kind,travel_document_number,travel_document_issuer_as_iso_3166_1_alpha_3,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,consented_to_data_sharing,signature_image_data_url)>
+<!ATTLIST patient xmlns CDATA #FIXED "https://formexamples.github.io/international-certificate-of-vaccination-or-prophylaxis/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

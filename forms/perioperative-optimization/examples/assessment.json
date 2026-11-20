@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000160",
+    "id": "f8aed4ea-9351-570a-8833-fdda605d4469",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -23,7 +23,7 @@
     "ethnicity": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000175",
+    "id": "0b517599-53cc-56cd-8fdc-53c0f696b748",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -40,7 +40,7 @@
     "unitedKingdomNhsNumber": ""
   },
   "medication": {
-    "id": "550e8400-e29b-41d4-a716-000000000184",
+    "id": "e44d287d-a5ea-5eba-bd5a-3553fb150dfb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -55,12 +55,12 @@
     "description": ""
   },
   "patientMedication": {
-    "id": "550e8400-e29b-41d4-a716-000000000191",
+    "id": "177233cd-2051-50b6-9033-1c30ec409795",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000195",
-    "medicationId": "550e8400-e29b-41d4-a716-000000000196",
+    "patientId": "9a1d9804-b503-5561-9265-29291d3db583",
+    "medicationId": "31516739-7e42-56fc-9336-66db460efccf",
     "dose": "",
     "frequency": "",
     "route": "oral",
@@ -77,7 +77,7 @@
     "notes": ""
   },
   "allergy": {
-    "id": "550e8400-e29b-41d4-a716-0000000001a5",
+    "id": "85023259-a639-558c-89f1-5ebce9716ae1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -89,12 +89,12 @@
     "isRegulatedFoodAllergen": true
   },
   "patientAllergy": {
-    "id": "550e8400-e29b-41d4-a716-0000000001af",
+    "id": "a0b5ca4b-9621-5a48-b385-5b1f5c7b29ea",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000001b3",
-    "allergyId": "550e8400-e29b-41d4-a716-0000000001b4",
+    "patientId": "ce5338b3-d976-5691-801f-f9fc9010fbbc",
+    "allergyId": "0438061d-db37-5fcf-9fda-81d79b99615c",
     "reaction": "",
     "severity": "mild",
     "kind": "allergy",
@@ -104,12 +104,12 @@
     "notes": ""
   },
   "perioperativeOptimization": {
-    "id": "550e8400-e29b-41d4-a716-0000000001bc",
+    "id": "48e12f65-1b63-5d55-af53-70a36c2c8a1e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000001c0",
-    "clinicianId": "550e8400-e29b-41d4-a716-0000000001c1",
+    "patientId": "8b393756-0e00-5301-9c91-1736e43fadb9",
+    "clinicianId": "f5791fdf-974a-54b0-a874-577e6c78f5bd",
     "status": "draft",
     "assessmentDate": null,
     "assessmentTime": null,
@@ -311,11 +311,11 @@
     "additionalNotes": ""
   },
   "perioperativeOptimizationGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000289",
+    "id": "7251232d-ad1e-55b4-a302-c9dd6e26f70c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "perioperativeOptimizationId": "550e8400-e29b-41d4-a716-00000000028d",
+    "perioperativeOptimizationId": "dd965388-cf14-5f5a-9bcc-8666a68f6161",
     "weeksToSurgery": null,
     "gatingApplied": true,
     "mustScore": 3,
@@ -339,11 +339,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "perioperativeOptimizationGradeDomain": {
-    "id": "550e8400-e29b-41d4-a716-0000000002a3",
+    "id": "feee4c8d-dd90-52a2-9bec-3a3df39bf5f8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "perioperativeOptimizationGradeId": "550e8400-e29b-41d4-a716-0000000002a7",
+    "perioperativeOptimizationGradeId": "550cffbc-9b0d-58ab-8cc1-658283135b89",
     "domain": "anaemia",
     "status": "optimized",
     "triggered": true,
@@ -358,11 +358,11 @@
     "startDate": null
   },
   "perioperativeOptimizationGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000002b4",
+    "id": "b3f67212-7676-5d73-a404-eed39e0b6eac",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "perioperativeOptimizationGradeId": "550e8400-e29b-41d4-a716-0000000002b8",
+    "perioperativeOptimizationGradeId": "4fc683c7-ac87-5af3-803b-6c5e4d7d0343",
     "flagId": "",
     "category": "severe-anaemia",
     "priority": "low",

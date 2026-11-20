@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE uk_nhs_digital_technology_assessment_criteria_grade_rule SYSTEM "uk_nhs_digital_technology_assessment_criteria_grade_rule.dtd">
-<uk_nhs_digital_technology_assessment_criteria_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<uk_nhs_digital_technology_assessment_criteria_grade_rule xmlns="https://formexamples.github.io/uk-nhs-digital-technology-assessment-criteria/xml">
+<id>49e375ee-1272-5c95-ad30-2d2fb26974a8</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>660e8400-e29b-41d4-a716-446655440001</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>ab8fefdc-1a30-5c5b-86ef-6c6fe89cab41</grade_id>
+<rule_id>9a5dd227-be04-5f50-8a07-b4a3444c25cf</rule_id>
 <section>a</section>
-<criterion_id>660e8400-e29b-41d4-a716-446655440001</criterion_id>
+<criterion_id>33d2b46c-e06d-5f59-8102-d3283858b7c7</criterion_id>
 <status>met</status>
 <mandatory>true</mandatory>
 <description>Example text.</description>

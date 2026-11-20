@@ -5,10 +5,19 @@ info:
   title: Patient Reported Outcome Measures — PatientReportedOutcomeMeasures
   version: 1.0.0
   description: One completed PRO-measure battery (SF-36v2, NDI, mJOA, EQ-5D-3L) at one patient visit; raw responses only, computed scores are in the sibling _score table.
+x-namespace:
+  form: patient-reported-outcome-measures
+  apiPrefix: /api/patient-reported-outcome-measures/
+  sqlSchema: patient_reported_outcome_measures
+  xmlNamespace: https://formexamples.github.io/patient-reported-outcome-measures/xml
+tags:
+  - name: patient-reported-outcome-measures
+    description: Patient Reported Outcome Measures form
 paths:
   /api/patient-reported-outcome-measures/patient_reported_outcome_measures:
     get:
       summary: List PatientReportedOutcomeMeasures records
+      tags: [patient-reported-outcome-measures]
       operationId: listPatientReportedOutcomeMeasures
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PatientReportedOutcomeMeasures
+      tags: [patient-reported-outcome-measures]
       operationId: createPatientReportedOutcomeMeasures
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PatientReportedOutcomeMeasures by id
+      tags: [patient-reported-outcome-measures]
       operationId: getPatientReportedOutcomeMeasures
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PatientReportedOutcomeMeasures
+      tags: [patient-reported-outcome-measures]
       operationId: updatePatientReportedOutcomeMeasures
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PatientReportedOutcomeMeasures
+      tags: [patient-reported-outcome-measures]
       operationId: replacePatientReportedOutcomeMeasures
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PatientReportedOutcomeMeasures
+      tags: [patient-reported-outcome-measures]
       operationId: deletePatientReportedOutcomeMeasures
       responses:
         "200":

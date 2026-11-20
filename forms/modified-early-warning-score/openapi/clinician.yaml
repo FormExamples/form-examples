@@ -5,10 +5,19 @@ info:
   title: Modified Early Warning Score — Clinician
   version: 1.0.0
   description: Clinician identifying information for the person who recorded the MEWS observation set.
+x-namespace:
+  form: modified-early-warning-score
+  apiPrefix: /api/modified-early-warning-score/
+  sqlSchema: modified_early_warning_score
+  xmlNamespace: https://formexamples.github.io/modified-early-warning-score/xml
+tags:
+  - name: modified-early-warning-score
+    description: Modified Early Warning Score form
 paths:
   /api/modified-early-warning-score/clinicians:
     get:
       summary: List Clinician records
+      tags: [modified-early-warning-score]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [modified-early-warning-score]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [modified-early-warning-score]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [modified-early-warning-score]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [modified-early-warning-score]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [modified-early-warning-score]
       operationId: deleteClinician
       responses:
         "200":

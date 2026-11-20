@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ottawa_ankle_rules SYSTEM "ottawa_ankle_rules.dtd">
-<ottawa_ankle_rules>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<ottawa_ankle_rules xmlns="https://formexamples.github.io/ottawa-ankle-rules/xml">
+<id>607d1bc4-9b6e-5bff-8290-db279296bed8</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>329324af-ff6a-59c5-8fba-f88dd4edc0cf</patient_id>
+<clinician_id>40151046-05fc-53a2-9c50-edf3adaa54a4</clinician_id>
 <status>draft</status>
 <patient_identifier></patient_identifier>
 <assessed_at>2026-04-09T10:00:00Z</assessed_at>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE heart_failure_review SYSTEM "heart_failure_review.dtd">
-<heart_failure_review>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<heart_failure_review xmlns="https://formexamples.github.io/heart-failure-review/xml">
+<id>3eb08744-060f-5cec-88cd-02bcca6a3f31</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>a0577e9b-c6d2-5fc4-87ed-387ced8ba99e</patient_id>
+<clinician_id>e4b7186f-4eeb-58a5-a76c-f99a108c279f</clinician_id>
 <clinician_name>Example</clinician_name>
 <clinician_role>gp</clinician_role>
 <review_date>2026-01-15</review_date>

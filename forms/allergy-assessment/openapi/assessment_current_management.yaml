@@ -5,10 +5,19 @@ info:
   title: Allergy Assessment — AssessmentCurrentManagement
   version: 1.0.0
   description: "Current allergy management: medications, immunotherapy, biologics, and avoidance strategies. One-to-one child of assessment."
+x-namespace:
+  form: allergy-assessment
+  apiPrefix: /api/allergy-assessment/
+  sqlSchema: allergy_assessment
+  xmlNamespace: https://formexamples.github.io/allergy-assessment/xml
+tags:
+  - name: allergy-assessment
+    description: Allergy Assessment form
 paths:
   /api/allergy-assessment/assessment_current_managements:
     get:
       summary: List AssessmentCurrentManagement records
+      tags: [allergy-assessment]
       operationId: listAssessmentCurrentManagement
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentCurrentManagement
+      tags: [allergy-assessment]
       operationId: createAssessmentCurrentManagement
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentCurrentManagement by id
+      tags: [allergy-assessment]
       operationId: getAssessmentCurrentManagement
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentCurrentManagement
+      tags: [allergy-assessment]
       operationId: updateAssessmentCurrentManagement
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentCurrentManagement
+      tags: [allergy-assessment]
       operationId: replaceAssessmentCurrentManagement
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentCurrentManagement
+      tags: [allergy-assessment]
       operationId: deleteAssessmentCurrentManagement
       responses:
         "200":

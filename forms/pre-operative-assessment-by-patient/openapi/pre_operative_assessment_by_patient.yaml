@@ -5,10 +5,19 @@ info:
   title: Pre Operative Assessment By Patient — PreOperativeAssessmentByPatient
   version: 1.0.0
   description: Pre operative assessment by patient.
+x-namespace:
+  form: pre-operative-assessment-by-patient
+  apiPrefix: /api/pre-operative-assessment-by-patient/
+  sqlSchema: pre_operative_assessment_by_patient
+  xmlNamespace: https://formexamples.github.io/pre-operative-assessment-by-patient/xml
+tags:
+  - name: pre-operative-assessment-by-patient
+    description: Pre Operative Assessment By Patient form
 paths:
   /api/pre-operative-assessment-by-patient/pre_operative_assessment_by_patients:
     get:
       summary: List PreOperativeAssessmentByPatient records
+      tags: [pre-operative-assessment-by-patient]
       operationId: listPreOperativeAssessmentByPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PreOperativeAssessmentByPatient
+      tags: [pre-operative-assessment-by-patient]
       operationId: createPreOperativeAssessmentByPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PreOperativeAssessmentByPatient by id
+      tags: [pre-operative-assessment-by-patient]
       operationId: getPreOperativeAssessmentByPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PreOperativeAssessmentByPatient
+      tags: [pre-operative-assessment-by-patient]
       operationId: updatePreOperativeAssessmentByPatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PreOperativeAssessmentByPatient
+      tags: [pre-operative-assessment-by-patient]
       operationId: replacePreOperativeAssessmentByPatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PreOperativeAssessmentByPatient
+      tags: [pre-operative-assessment-by-patient]
       operationId: deletePreOperativeAssessmentByPatient
       responses:
         "200":

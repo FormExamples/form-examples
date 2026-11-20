@@ -1,4 +1,5 @@
 <!ELEMENT glasgow_blatchford_bleeding_score_grade (id,created_at,updated_at,deleted_at,glasgow_blatchford_bleeding_score_id,blood_urea_points,haemoglobin_points,systolic_blood_pressure_points,pulse_point,melaena_point,syncope_point,hepatic_disease_point,cardiac_failure_point,total_score,risk_band,recommended_management,graded_at)>
+<!ATTLIST glasgow_blatchford_bleeding_score_grade xmlns CDATA #FIXED "https://formexamples.github.io/glasgow-blatchford-bleeding-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

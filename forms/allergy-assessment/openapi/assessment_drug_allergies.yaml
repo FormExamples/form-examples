@@ -5,10 +5,19 @@ info:
   title: Allergy Assessment — AssessmentDrugAllergies
   version: 1.0.0
   description: Drug allergies section header. One-to-one child of assessment.
+x-namespace:
+  form: allergy-assessment
+  apiPrefix: /api/allergy-assessment/
+  sqlSchema: allergy_assessment
+  xmlNamespace: https://formexamples.github.io/allergy-assessment/xml
+tags:
+  - name: allergy-assessment
+    description: Allergy Assessment form
 paths:
   /api/allergy-assessment/assessment_drug_allergies:
     get:
       summary: List AssessmentDrugAllergies records
+      tags: [allergy-assessment]
       operationId: listAssessmentDrugAllergies
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentDrugAllergies
+      tags: [allergy-assessment]
       operationId: createAssessmentDrugAllergies
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentDrugAllergies by id
+      tags: [allergy-assessment]
       operationId: getAssessmentDrugAllergies
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentDrugAllergies
+      tags: [allergy-assessment]
       operationId: updateAssessmentDrugAllergies
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentDrugAllergies
+      tags: [allergy-assessment]
       operationId: replaceAssessmentDrugAllergies
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentDrugAllergies
+      tags: [allergy-assessment]
       operationId: deleteAssessmentDrugAllergies
       responses:
         "200":

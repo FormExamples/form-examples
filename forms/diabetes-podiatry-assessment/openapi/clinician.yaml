@@ -5,10 +5,19 @@ info:
   title: Diabetes Podiatry Assessment — Clinician
   version: 1.0.0
   description: Clinician identifying information for the professional who performed the diabetic foot risk assessment.
+x-namespace:
+  form: diabetes-podiatry-assessment
+  apiPrefix: /api/diabetes-podiatry-assessment/
+  sqlSchema: diabetes_podiatry_assessment
+  xmlNamespace: https://formexamples.github.io/diabetes-podiatry-assessment/xml
+tags:
+  - name: diabetes-podiatry-assessment
+    description: Diabetes Podiatry Assessment form
 paths:
   /api/diabetes-podiatry-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [diabetes-podiatry-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [diabetes-podiatry-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [diabetes-podiatry-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [diabetes-podiatry-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [diabetes-podiatry-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [diabetes-podiatry-assessment]
       operationId: deleteClinician
       responses:
         "200":

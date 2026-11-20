@@ -5,10 +5,19 @@ info:
   title: Employee Offboarding Checklist — Grade
   version: 1.0.0
   description: Computed grading / scoring result. One-to-one child of assessment. The result_category column holds a form-specific label (e.g. Low, Moderate, High, or Complete/Incomplete); result_score is optional for numeric instruments.
+x-namespace:
+  form: employee-offboarding-checklist
+  apiPrefix: /api/employee-offboarding-checklist/
+  sqlSchema: employee_offboarding_checklist
+  xmlNamespace: https://formexamples.github.io/employee-offboarding-checklist/xml
+tags:
+  - name: employee-offboarding-checklist
+    description: Employee Offboarding Checklist form
 paths:
   /api/employee-offboarding-checklist/grades:
     get:
       summary: List Grade records
+      tags: [employee-offboarding-checklist]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [employee-offboarding-checklist]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [employee-offboarding-checklist]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [employee-offboarding-checklist]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [employee-offboarding-checklist]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [employee-offboarding-checklist]
       operationId: deleteGrade
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/employee-onboarding-checklist/xml">
+<id>dbf7e9ec-6ba6-5072-97a2-1bf0794a3faa</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>990e8400-e29b-41d4-a716-446655440004</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>96be6a00-7fec-5a1b-8070-d2e33b1af798</grade_id>
+<rule_id>03ae4c92-ecc4-598c-9b35-95c8a6bf2a8b</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>low</severity_level>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE uk_nhs_digital_technology_assessment_criteria SYSTEM "uk_nhs_digital_technology_assessment_criteria.dtd">
-<uk_nhs_digital_technology_assessment_criteria>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<uk_nhs_digital_technology_assessment_criteria xmlns="https://formexamples.github.io/uk-nhs-digital-technology-assessment-criteria/xml">
+<id>599dbb07-aae5-53ed-9e9a-88fd1adaba39</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<supplier_id>550e8400-e29b-41d4-a716-446655440000</supplier_id>
-<product_id>770e8400-e29b-41d4-a716-446655440002</product_id>
-<assessor_id>660e8400-e29b-41d4-a716-446655440001</assessor_id>
+<supplier_id>702f71b5-f430-5a6c-aea9-704d7d2a5591</supplier_id>
+<product_id>d6fe1c08-fe46-52ec-945f-d3ec70b683ec</product_id>
+<assessor_id>28f728db-707d-510a-a88f-835e4ae754fb</assessor_id>
 <status>draft</status>
 <assessment_date>2026-01-15</assessment_date>
 <review_due_date>2026-01-15</review_due_date>

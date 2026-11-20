@@ -5,10 +5,19 @@ info:
   title: Newborn And Infant Physical Examination — Patient
   version: 1.0.0
   description: Patient demographic information for the infant examined by the NIPE screening record.
+x-namespace:
+  form: newborn-and-infant-physical-examination
+  apiPrefix: /api/newborn-and-infant-physical-examination/
+  sqlSchema: newborn_and_infant_physical_examination
+  xmlNamespace: https://formexamples.github.io/newborn-and-infant-physical-examination/xml
+tags:
+  - name: newborn-and-infant-physical-examination
+    description: Newborn And Infant Physical Examination form
 paths:
   /api/newborn-and-infant-physical-examination/patients:
     get:
       summary: List Patient records
+      tags: [newborn-and-infant-physical-examination]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [newborn-and-infant-physical-examination]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [newborn-and-infant-physical-examination]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [newborn-and-infant-physical-examination]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [newborn-and-infant-physical-examination]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [newborn-and-infant-physical-examination]
       operationId: deletePatient
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT patient (id,created_at,updated_at,deleted_at,name,birth_date,sex_at_birth,nationality_as_iso_3166_1_alpha_2,passport_number,united_kingdom_nhs_number,national_health_id,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,emergency_contact_name,emergency_contact_relationship,emergency_contact_phone,weight_as_kg,height_as_cm)>
+<!ATTLIST patient xmlns CDATA #FIXED "https://formexamples.github.io/medical-information-form-for-air-travel/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

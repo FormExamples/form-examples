@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE clin_chem_waiting_list_card SYSTEM "clin_chem_waiting_list_card.dtd">
-<clin_chem_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<clin_chem_waiting_list_card xmlns="https://formexamples.github.io/clinical-chemistry-waiting-list-card/xml">
+<id>07887c20-599b-5e1d-b65b-3a8f2c088cf7</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>0adf66aa-baf4-58d9-b334-8e49ca357cf1</patient_id>
+<practitioner_id>9b5deefa-bdee-540f-b797-aba3beeddc23</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

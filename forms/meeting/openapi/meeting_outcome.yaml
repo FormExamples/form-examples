@@ -5,10 +5,19 @@ info:
   title: Meeting — MeetingOutcome
   version: 1.0.0
   description: "The impact or change resulting from the meeting: goal reached, risk identified, alignment achieved, decision recorded. Distinct from meeting_output: outputs are things, outcomes are changes."
+x-namespace:
+  form: meeting
+  apiPrefix: /api/meeting/
+  sqlSchema: meeting
+  xmlNamespace: https://formexamples.github.io/meeting/xml
+tags:
+  - name: meeting
+    description: Meeting form
 paths:
   /api/meeting/meeting_outcomes:
     get:
       summary: List MeetingOutcome records
+      tags: [meeting]
       operationId: listMeetingOutcome
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MeetingOutcome
+      tags: [meeting]
       operationId: createMeetingOutcome
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MeetingOutcome by id
+      tags: [meeting]
       operationId: getMeetingOutcome
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MeetingOutcome
+      tags: [meeting]
       operationId: updateMeetingOutcome
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MeetingOutcome
+      tags: [meeting]
       operationId: replaceMeetingOutcome
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MeetingOutcome
+      tags: [meeting]
       operationId: deleteMeetingOutcome
       responses:
         "200":

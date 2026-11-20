@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "939cf314-c818-5882-9a60-cce0d61787b1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "f0514ee3-699d-5df0-b172-14e6aca3b2c6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "gastroWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "7ad8d6b3-7bec-55c2-b840-2503d1a8b565",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000096",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000097",
+    "patientId": "8b175fe8-5320-5055-9aa5-c916abfedf14",
+    "practitionerId": "46728063-abae-5ddf-9d5f-bcc5ce127bb5",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "gastroWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "31bb633e-ec3e-55e9-9453-9c6195dc83e3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gastroWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "gastroWaitingListCardId": "7d5505bd-fd5c-56a5-b842-286d904bb7d6",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "gastroWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "d5734984-84fc-5383-9ff3-d6329b3ac311",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gastroWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "gastroWaitingListCardId": "dd75115b-a187-5a95-842d-8cca9652c3de",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "gastroWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d1",
+    "id": "5efbaef8-8596-580c-98e0-e5459ad53ba8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gastroWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "gastroWaitingListCardGradeId": "e46f4f16-bd83-5841-94e9-b32f0b56dab9",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "gastroWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000db",
+    "id": "e46f39c2-ae7d-522b-9205-9a049e6bee55",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gastroWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000df",
+    "gastroWaitingListCardGradeId": "507d6ff0-d43f-5239-b419-815c408b5a6f",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

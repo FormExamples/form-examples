@@ -5,10 +5,19 @@ info:
   title: Pre Operative Assessment By Patient — AsaRule
   version: 1.0.0
   description: Reference table of ASA grading rules. Seed data mirrors asa-rules.ts. Used for audit trail.
+x-namespace:
+  form: pre-operative-assessment-by-patient
+  apiPrefix: /api/pre-operative-assessment-by-patient/
+  sqlSchema: pre_operative_assessment_by_patient
+  xmlNamespace: https://formexamples.github.io/pre-operative-assessment-by-patient/xml
+tags:
+  - name: pre-operative-assessment-by-patient
+    description: Pre Operative Assessment By Patient form
 paths:
   /api/pre-operative-assessment-by-patient/asa_rules:
     get:
       summary: List AsaRule records
+      tags: [pre-operative-assessment-by-patient]
       operationId: listAsaRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AsaRule
+      tags: [pre-operative-assessment-by-patient]
       operationId: createAsaRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AsaRule by id
+      tags: [pre-operative-assessment-by-patient]
       operationId: getAsaRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AsaRule
+      tags: [pre-operative-assessment-by-patient]
       operationId: updateAsaRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AsaRule
+      tags: [pre-operative-assessment-by-patient]
       operationId: replaceAsaRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AsaRule
+      tags: [pre-operative-assessment-by-patient]
       operationId: deleteAsaRule
       responses:
         "200":

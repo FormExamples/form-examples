@@ -5,10 +5,19 @@ info:
   title: Knee Replacement Surgery Evaluation — KneeReplacementSurgeryEvaluationGrade
   version: 1.0.0
   description: Computed and signed-off grading result for one knee replacement surgery evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.
+x-namespace:
+  form: knee-replacement-surgery-evaluation
+  apiPrefix: /api/knee-replacement-surgery-evaluation/
+  sqlSchema: knee_replacement_surgery_evaluation
+  xmlNamespace: https://formexamples.github.io/knee-replacement-surgery-evaluation/xml
+tags:
+  - name: knee-replacement-surgery-evaluation
+    description: Knee Replacement Surgery Evaluation form
 paths:
   /api/knee-replacement-surgery-evaluation/knee_replacement_surgery_evaluation_grades:
     get:
       summary: List KneeReplacementSurgeryEvaluationGrade records
+      tags: [knee-replacement-surgery-evaluation]
       operationId: listKneeReplacementSurgeryEvaluationGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new KneeReplacementSurgeryEvaluationGrade
+      tags: [knee-replacement-surgery-evaluation]
       operationId: createKneeReplacementSurgeryEvaluationGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one KneeReplacementSurgeryEvaluationGrade by id
+      tags: [knee-replacement-surgery-evaluation]
       operationId: getKneeReplacementSurgeryEvaluationGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing KneeReplacementSurgeryEvaluationGrade
+      tags: [knee-replacement-surgery-evaluation]
       operationId: updateKneeReplacementSurgeryEvaluationGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing KneeReplacementSurgeryEvaluationGrade
+      tags: [knee-replacement-surgery-evaluation]
       operationId: replaceKneeReplacementSurgeryEvaluationGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a KneeReplacementSurgeryEvaluationGrade
+      tags: [knee-replacement-surgery-evaluation]
       operationId: deleteKneeReplacementSurgeryEvaluationGrade
       responses:
         "200":

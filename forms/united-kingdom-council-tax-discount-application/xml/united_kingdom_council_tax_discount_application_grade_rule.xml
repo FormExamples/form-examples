@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_council_tax_discount_application_grade_rule SYSTEM "united_kingdom_council_tax_discount_application_grade_rule.dtd">
-<united_kingdom_council_tax_discount_application_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<united_kingdom_council_tax_discount_application_grade_rule xmlns="https://formexamples.github.io/united-kingdom-council-tax-discount-application/xml">
+<id>595852d6-c685-5b8e-9b5f-11ac58fa426d</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<united_kingdom_council_tax_discount_application_grade_id>990e8400-e29b-41d4-a716-446655440004</united_kingdom_council_tax_discount_application_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<united_kingdom_council_tax_discount_application_grade_id>b1d99c81-5276-5d73-9593-87f32a86a61b</united_kingdom_council_tax_discount_application_grade_id>
+<rule_id>7ef6a28d-68a9-5ffc-afb3-cdde6354816c</rule_id>
 <dimension>claim</dimension>
 <category>General</category>
 <description>Example text.</description>

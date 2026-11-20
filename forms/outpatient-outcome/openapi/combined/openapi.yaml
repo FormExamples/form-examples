@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Outpatient Outcome Report form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: outpatient-outcome
+  apiPrefix: /api/outpatient-outcome/
+  sqlSchema: outpatient_outcome
+  xmlNamespace: https://formexamples.github.io/outpatient-outcome/xml
+tags:
+- name: outpatient-outcome
+  description: Outpatient Outcome Report form
 paths:
   /api/outpatient-outcome/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - outpatient-outcome
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - outpatient-outcome
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - outpatient-outcome
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - outpatient-outcome
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - outpatient-outcome
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - outpatient-outcome
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - outpatient-outcome
   /api/outpatient-outcome/outpatient_outcome_clinicals:
     get:
       summary: List OutpatientOutcomeClinical records
+      tags:
+      - outpatient-outcome
       operationId: listOutpatientOutcomeClinical
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomeClinical
+      tags:
+      - outpatient-outcome
       operationId: createOutpatientOutcomeClinical
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OutpatientOutcomeClinical by id
+      tags:
+      - outpatient-outcome
       operationId: getOutpatientOutcomeClinical
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomeClinical
+      tags:
+      - outpatient-outcome
       operationId: updateOutpatientOutcomeClinical
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OutpatientOutcomeClinical
+      tags:
+      - outpatient-outcome
       operationId: replaceOutpatientOutcomeClinical
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OutpatientOutcomeClinical
+      tags:
+      - outpatient-outcome
       operationId: deleteOutpatientOutcomeClinical
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/outpatient-outcome/outpatient_outcome_encounters:
     get:
       summary: List OutpatientOutcomeEncounter records
+      tags:
+      - outpatient-outcome
       operationId: listOutpatientOutcomeEncounter
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomeEncounter
+      tags:
+      - outpatient-outcome
       operationId: createOutpatientOutcomeEncounter
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OutpatientOutcomeEncounter by id
+      tags:
+      - outpatient-outcome
       operationId: getOutpatientOutcomeEncounter
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomeEncounter
+      tags:
+      - outpatient-outcome
       operationId: updateOutpatientOutcomeEncounter
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OutpatientOutcomeEncounter
+      tags:
+      - outpatient-outcome
       operationId: replaceOutpatientOutcomeEncounter
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OutpatientOutcomeEncounter
+      tags:
+      - outpatient-outcome
       operationId: deleteOutpatientOutcomeEncounter
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/outpatient-outcome/outpatient_outcome_followups:
     get:
       summary: List OutpatientOutcomeFollowup records
+      tags:
+      - outpatient-outcome
       operationId: listOutpatientOutcomeFollowup
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomeFollowup
+      tags:
+      - outpatient-outcome
       operationId: createOutpatientOutcomeFollowup
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OutpatientOutcomeFollowup by id
+      tags:
+      - outpatient-outcome
       operationId: getOutpatientOutcomeFollowup
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomeFollowup
+      tags:
+      - outpatient-outcome
       operationId: updateOutpatientOutcomeFollowup
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OutpatientOutcomeFollowup
+      tags:
+      - outpatient-outcome
       operationId: replaceOutpatientOutcomeFollowup
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OutpatientOutcomeFollowup
+      tags:
+      - outpatient-outcome
       operationId: deleteOutpatientOutcomeFollowup
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/outpatient-outcome/outpatient_outcome_grade_flags:
     get:
       summary: List OutpatientOutcomeGradeFlag records
+      tags:
+      - outpatient-outcome
       operationId: listOutpatientOutcomeGradeFlag
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomeGradeFlag
+      tags:
+      - outpatient-outcome
       operationId: createOutpatientOutcomeGradeFlag
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OutpatientOutcomeGradeFlag by id
+      tags:
+      - outpatient-outcome
       operationId: getOutpatientOutcomeGradeFlag
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomeGradeFlag
+      tags:
+      - outpatient-outcome
       operationId: updateOutpatientOutcomeGradeFlag
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OutpatientOutcomeGradeFlag
+      tags:
+      - outpatient-outcome
       operationId: replaceOutpatientOutcomeGradeFlag
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OutpatientOutcomeGradeFlag
+      tags:
+      - outpatient-outcome
       operationId: deleteOutpatientOutcomeGradeFlag
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/outpatient-outcome/outpatient_outcome_grade_rules:
     get:
       summary: List OutpatientOutcomeGradeRule records
+      tags:
+      - outpatient-outcome
       operationId: listOutpatientOutcomeGradeRule
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomeGradeRule
+      tags:
+      - outpatient-outcome
       operationId: createOutpatientOutcomeGradeRule
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OutpatientOutcomeGradeRule by id
+      tags:
+      - outpatient-outcome
       operationId: getOutpatientOutcomeGradeRule
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomeGradeRule
+      tags:
+      - outpatient-outcome
       operationId: updateOutpatientOutcomeGradeRule
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OutpatientOutcomeGradeRule
+      tags:
+      - outpatient-outcome
       operationId: replaceOutpatientOutcomeGradeRule
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OutpatientOutcomeGradeRule
+      tags:
+      - outpatient-outcome
       operationId: deleteOutpatientOutcomeGradeRule
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/outpatient-outcome/outpatient_outcome_grades:
     get:
       summary: List OutpatientOutcomeGrade records
+      tags:
+      - outpatient-outcome
       operationId: listOutpatientOutcomeGrade
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomeGrade
+      tags:
+      - outpatient-outcome
       operationId: createOutpatientOutcomeGrade
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OutpatientOutcomeGrade by id
+      tags:
+      - outpatient-outcome
       operationId: getOutpatientOutcomeGrade
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomeGrade
+      tags:
+      - outpatient-outcome
       operationId: updateOutpatientOutcomeGrade
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OutpatientOutcomeGrade
+      tags:
+      - outpatient-outcome
       operationId: replaceOutpatientOutcomeGrade
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OutpatientOutcomeGrade
+      tags:
+      - outpatient-outcome
       operationId: deleteOutpatientOutcomeGrade
       responses:
         '200':
@@ -1744,6 +1838,8 @@ paths:
   /api/outpatient-outcome/outpatient_outcome_operationals:
     get:
       summary: List OutpatientOutcomeOperational records
+      tags:
+      - outpatient-outcome
       operationId: listOutpatientOutcomeOperational
       parameters:
       - name: limit
@@ -1796,6 +1892,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomeOperational
+      tags:
+      - outpatient-outcome
       operationId: createOutpatientOutcomeOperational
       requestBody:
         required: true
@@ -1849,6 +1947,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OutpatientOutcomeOperational by id
+      tags:
+      - outpatient-outcome
       operationId: getOutpatientOutcomeOperational
       responses:
         '200':
@@ -1876,6 +1976,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomeOperational
+      tags:
+      - outpatient-outcome
       operationId: updateOutpatientOutcomeOperational
       requestBody:
         required: true
@@ -1921,6 +2023,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OutpatientOutcomeOperational
+      tags:
+      - outpatient-outcome
       operationId: replaceOutpatientOutcomeOperational
       requestBody:
         required: true
@@ -1966,6 +2070,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OutpatientOutcomeOperational
+      tags:
+      - outpatient-outcome
       operationId: deleteOutpatientOutcomeOperational
       responses:
         '200':
@@ -1990,6 +2096,8 @@ paths:
   /api/outpatient-outcome/outpatient_outcome_prem_ffts:
     get:
       summary: List OutpatientOutcomePremFft records
+      tags:
+      - outpatient-outcome
       operationId: listOutpatientOutcomePremFft
       parameters:
       - name: limit
@@ -2042,6 +2150,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomePremFft
+      tags:
+      - outpatient-outcome
       operationId: createOutpatientOutcomePremFft
       requestBody:
         required: true
@@ -2095,6 +2205,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OutpatientOutcomePremFft by id
+      tags:
+      - outpatient-outcome
       operationId: getOutpatientOutcomePremFft
       responses:
         '200':
@@ -2122,6 +2234,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomePremFft
+      tags:
+      - outpatient-outcome
       operationId: updateOutpatientOutcomePremFft
       requestBody:
         required: true
@@ -2167,6 +2281,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OutpatientOutcomePremFft
+      tags:
+      - outpatient-outcome
       operationId: replaceOutpatientOutcomePremFft
       requestBody:
         required: true
@@ -2212,6 +2328,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OutpatientOutcomePremFft
+      tags:
+      - outpatient-outcome
       operationId: deleteOutpatientOutcomePremFft
       responses:
         '200':
@@ -2236,6 +2354,8 @@ paths:
   /api/outpatient-outcome/outpatient_outcome_prom_eq5d5ls:
     get:
       summary: List OutpatientOutcomePromEq5d5l records
+      tags:
+      - outpatient-outcome
       operationId: listOutpatientOutcomePromEq5d5l
       parameters:
       - name: limit
@@ -2288,6 +2408,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomePromEq5d5l
+      tags:
+      - outpatient-outcome
       operationId: createOutpatientOutcomePromEq5d5l
       requestBody:
         required: true
@@ -2341,6 +2463,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OutpatientOutcomePromEq5d5l by id
+      tags:
+      - outpatient-outcome
       operationId: getOutpatientOutcomePromEq5d5l
       responses:
         '200':
@@ -2368,6 +2492,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomePromEq5d5l
+      tags:
+      - outpatient-outcome
       operationId: updateOutpatientOutcomePromEq5d5l
       requestBody:
         required: true
@@ -2413,6 +2539,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OutpatientOutcomePromEq5d5l
+      tags:
+      - outpatient-outcome
       operationId: replaceOutpatientOutcomePromEq5d5l
       requestBody:
         required: true
@@ -2458,6 +2586,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OutpatientOutcomePromEq5d5l
+      tags:
+      - outpatient-outcome
       operationId: deleteOutpatientOutcomePromEq5d5l
       responses:
         '200':
@@ -2482,6 +2612,8 @@ paths:
   /api/outpatient-outcome/outpatient_outcome_prom_grcs:
     get:
       summary: List OutpatientOutcomePromGrc records
+      tags:
+      - outpatient-outcome
       operationId: listOutpatientOutcomePromGrc
       parameters:
       - name: limit
@@ -2534,6 +2666,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomePromGrc
+      tags:
+      - outpatient-outcome
       operationId: createOutpatientOutcomePromGrc
       requestBody:
         required: true
@@ -2587,6 +2721,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OutpatientOutcomePromGrc by id
+      tags:
+      - outpatient-outcome
       operationId: getOutpatientOutcomePromGrc
       responses:
         '200':
@@ -2614,6 +2750,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomePromGrc
+      tags:
+      - outpatient-outcome
       operationId: updateOutpatientOutcomePromGrc
       requestBody:
         required: true
@@ -2659,6 +2797,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OutpatientOutcomePromGrc
+      tags:
+      - outpatient-outcome
       operationId: replaceOutpatientOutcomePromGrc
       requestBody:
         required: true
@@ -2704,6 +2844,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OutpatientOutcomePromGrc
+      tags:
+      - outpatient-outcome
       operationId: deleteOutpatientOutcomePromGrc
       responses:
         '200':
@@ -2728,6 +2870,8 @@ paths:
   /api/outpatient-outcome/outpatient_outcome_prom_promis:
     get:
       summary: List OutpatientOutcomePromPromis records
+      tags:
+      - outpatient-outcome
       operationId: listOutpatientOutcomePromPromis
       parameters:
       - name: limit
@@ -2780,6 +2924,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomePromPromis
+      tags:
+      - outpatient-outcome
       operationId: createOutpatientOutcomePromPromis
       requestBody:
         required: true
@@ -2833,6 +2979,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OutpatientOutcomePromPromis by id
+      tags:
+      - outpatient-outcome
       operationId: getOutpatientOutcomePromPromis
       responses:
         '200':
@@ -2860,6 +3008,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomePromPromis
+      tags:
+      - outpatient-outcome
       operationId: updateOutpatientOutcomePromPromis
       requestBody:
         required: true
@@ -2905,6 +3055,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OutpatientOutcomePromPromis
+      tags:
+      - outpatient-outcome
       operationId: replaceOutpatientOutcomePromPromis
       requestBody:
         required: true
@@ -2950,6 +3102,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OutpatientOutcomePromPromis
+      tags:
+      - outpatient-outcome
       operationId: deleteOutpatientOutcomePromPromis
       responses:
         '200':
@@ -2974,6 +3128,8 @@ paths:
   /api/outpatient-outcome/outpatient_outcome_signoffs:
     get:
       summary: List OutpatientOutcomeSignoff records
+      tags:
+      - outpatient-outcome
       operationId: listOutpatientOutcomeSignoff
       parameters:
       - name: limit
@@ -3026,6 +3182,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomeSignoff
+      tags:
+      - outpatient-outcome
       operationId: createOutpatientOutcomeSignoff
       requestBody:
         required: true
@@ -3079,6 +3237,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OutpatientOutcomeSignoff by id
+      tags:
+      - outpatient-outcome
       operationId: getOutpatientOutcomeSignoff
       responses:
         '200':
@@ -3106,6 +3266,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomeSignoff
+      tags:
+      - outpatient-outcome
       operationId: updateOutpatientOutcomeSignoff
       requestBody:
         required: true
@@ -3151,6 +3313,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OutpatientOutcomeSignoff
+      tags:
+      - outpatient-outcome
       operationId: replaceOutpatientOutcomeSignoff
       requestBody:
         required: true
@@ -3196,6 +3360,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OutpatientOutcomeSignoff
+      tags:
+      - outpatient-outcome
       operationId: deleteOutpatientOutcomeSignoff
       responses:
         '200':
@@ -3220,6 +3386,8 @@ paths:
   /api/outpatient-outcome/outpatient_outcomes:
     get:
       summary: List OutpatientOutcome records
+      tags:
+      - outpatient-outcome
       operationId: listOutpatientOutcome
       parameters:
       - name: limit
@@ -3272,6 +3440,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcome
+      tags:
+      - outpatient-outcome
       operationId: createOutpatientOutcome
       requestBody:
         required: true
@@ -3325,6 +3495,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OutpatientOutcome by id
+      tags:
+      - outpatient-outcome
       operationId: getOutpatientOutcome
       responses:
         '200':
@@ -3352,6 +3524,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcome
+      tags:
+      - outpatient-outcome
       operationId: updateOutpatientOutcome
       requestBody:
         required: true
@@ -3397,6 +3571,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OutpatientOutcome
+      tags:
+      - outpatient-outcome
       operationId: replaceOutpatientOutcome
       requestBody:
         required: true
@@ -3442,6 +3618,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OutpatientOutcome
+      tags:
+      - outpatient-outcome
       operationId: deleteOutpatientOutcome
       responses:
         '200':
@@ -3466,6 +3644,8 @@ paths:
   /api/outpatient-outcome/patients:
     get:
       summary: List Patient records
+      tags:
+      - outpatient-outcome
       operationId: listPatient
       parameters:
       - name: limit
@@ -3518,6 +3698,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - outpatient-outcome
       operationId: createPatient
       requestBody:
         required: true
@@ -3571,6 +3753,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - outpatient-outcome
       operationId: getPatient
       responses:
         '200':
@@ -3598,6 +3782,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - outpatient-outcome
       operationId: updatePatient
       requestBody:
         required: true
@@ -3643,6 +3829,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - outpatient-outcome
       operationId: replacePatient
       requestBody:
         required: true
@@ -3688,6 +3876,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - outpatient-outcome
       operationId: deletePatient
       responses:
         '200':

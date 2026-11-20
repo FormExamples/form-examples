@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Nerve Conduction Study Test Request form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: nerve-conduction-study-test-request
+  apiPrefix: /api/nerve-conduction-study-test-request/
+  sqlSchema: nerve_conduction_study_test_request
+  xmlNamespace: https://formexamples.github.io/nerve-conduction-study-test-request/xml
+tags:
+- name: nerve-conduction-study-test-request
+  description: Nerve Conduction Study Test Request form
 paths:
   /api/nerve-conduction-study-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - nerve-conduction-study-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - nerve-conduction-study-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - nerve-conduction-study-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - nerve-conduction-study-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - nerve-conduction-study-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - nerve-conduction-study-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/nerve-conduction-study-test-request/nerve_conduction_study_test_request_grade_flags:
     get:
       summary: List NerveConductionStudyTestRequestGradeFlag records
+      tags:
+      - nerve-conduction-study-test-request
       operationId: listNerveConductionStudyTestRequestGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NerveConductionStudyTestRequestGradeFlag
+      tags:
+      - nerve-conduction-study-test-request
       operationId: createNerveConductionStudyTestRequestGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NerveConductionStudyTestRequestGradeFlag by id
+      tags:
+      - nerve-conduction-study-test-request
       operationId: getNerveConductionStudyTestRequestGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NerveConductionStudyTestRequestGradeFlag
+      tags:
+      - nerve-conduction-study-test-request
       operationId: updateNerveConductionStudyTestRequestGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NerveConductionStudyTestRequestGradeFlag
+      tags:
+      - nerve-conduction-study-test-request
       operationId: replaceNerveConductionStudyTestRequestGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NerveConductionStudyTestRequestGradeFlag
+      tags:
+      - nerve-conduction-study-test-request
       operationId: deleteNerveConductionStudyTestRequestGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/nerve-conduction-study-test-request/nerve_conduction_study_test_request_grade_rules:
     get:
       summary: List NerveConductionStudyTestRequestGradeRule records
+      tags:
+      - nerve-conduction-study-test-request
       operationId: listNerveConductionStudyTestRequestGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NerveConductionStudyTestRequestGradeRule
+      tags:
+      - nerve-conduction-study-test-request
       operationId: createNerveConductionStudyTestRequestGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NerveConductionStudyTestRequestGradeRule by id
+      tags:
+      - nerve-conduction-study-test-request
       operationId: getNerveConductionStudyTestRequestGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NerveConductionStudyTestRequestGradeRule
+      tags:
+      - nerve-conduction-study-test-request
       operationId: updateNerveConductionStudyTestRequestGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NerveConductionStudyTestRequestGradeRule
+      tags:
+      - nerve-conduction-study-test-request
       operationId: replaceNerveConductionStudyTestRequestGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NerveConductionStudyTestRequestGradeRule
+      tags:
+      - nerve-conduction-study-test-request
       operationId: deleteNerveConductionStudyTestRequestGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/nerve-conduction-study-test-request/nerve_conduction_study_test_request_grades:
     get:
       summary: List NerveConductionStudyTestRequestGrade records
+      tags:
+      - nerve-conduction-study-test-request
       operationId: listNerveConductionStudyTestRequestGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NerveConductionStudyTestRequestGrade
+      tags:
+      - nerve-conduction-study-test-request
       operationId: createNerveConductionStudyTestRequestGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NerveConductionStudyTestRequestGrade by id
+      tags:
+      - nerve-conduction-study-test-request
       operationId: getNerveConductionStudyTestRequestGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NerveConductionStudyTestRequestGrade
+      tags:
+      - nerve-conduction-study-test-request
       operationId: updateNerveConductionStudyTestRequestGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NerveConductionStudyTestRequestGrade
+      tags:
+      - nerve-conduction-study-test-request
       operationId: replaceNerveConductionStudyTestRequestGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NerveConductionStudyTestRequestGrade
+      tags:
+      - nerve-conduction-study-test-request
       operationId: deleteNerveConductionStudyTestRequestGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/nerve-conduction-study-test-request/nerve_conduction_study_test_requests:
     get:
       summary: List NerveConductionStudyTestRequest records
+      tags:
+      - nerve-conduction-study-test-request
       operationId: listNerveConductionStudyTestRequest
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NerveConductionStudyTestRequest
+      tags:
+      - nerve-conduction-study-test-request
       operationId: createNerveConductionStudyTestRequest
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NerveConductionStudyTestRequest by id
+      tags:
+      - nerve-conduction-study-test-request
       operationId: getNerveConductionStudyTestRequest
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NerveConductionStudyTestRequest
+      tags:
+      - nerve-conduction-study-test-request
       operationId: updateNerveConductionStudyTestRequest
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NerveConductionStudyTestRequest
+      tags:
+      - nerve-conduction-study-test-request
       operationId: replaceNerveConductionStudyTestRequest
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NerveConductionStudyTestRequest
+      tags:
+      - nerve-conduction-study-test-request
       operationId: deleteNerveConductionStudyTestRequest
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - nerve-conduction-study-test-request
   /api/nerve-conduction-study-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - nerve-conduction-study-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - nerve-conduction-study-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - nerve-conduction-study-test-request
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - nerve-conduction-study-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - nerve-conduction-study-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - nerve-conduction-study-test-request
       operationId: deletePatient
       responses:
         '200':

@@ -5,10 +5,19 @@ info:
   title: Eye Prescription — EyePrescriptionOcularHealthFinding
   version: 1.0.0
   description: "Optional ocular health findings recorded during the sight test: slit-lamp, fundus, intraocular pressure, OCT, visual fields, pathology flag."
+x-namespace:
+  form: eye-prescription
+  apiPrefix: /api/eye-prescription/
+  sqlSchema: eye_prescription
+  xmlNamespace: https://formexamples.github.io/eye-prescription/xml
+tags:
+  - name: eye-prescription
+    description: Eye Prescription form
 paths:
   /api/eye-prescription/eye_prescription_ocular_health_findings:
     get:
       summary: List EyePrescriptionOcularHealthFinding records
+      tags: [eye-prescription]
       operationId: listEyePrescriptionOcularHealthFinding
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EyePrescriptionOcularHealthFinding
+      tags: [eye-prescription]
       operationId: createEyePrescriptionOcularHealthFinding
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EyePrescriptionOcularHealthFinding by id
+      tags: [eye-prescription]
       operationId: getEyePrescriptionOcularHealthFinding
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EyePrescriptionOcularHealthFinding
+      tags: [eye-prescription]
       operationId: updateEyePrescriptionOcularHealthFinding
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EyePrescriptionOcularHealthFinding
+      tags: [eye-prescription]
       operationId: replaceEyePrescriptionOcularHealthFinding
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EyePrescriptionOcularHealthFinding
+      tags: [eye-prescription]
       operationId: deleteEyePrescriptionOcularHealthFinding
       responses:
         "200":

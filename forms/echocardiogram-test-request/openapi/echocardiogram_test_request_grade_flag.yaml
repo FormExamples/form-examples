@@ -5,10 +5,19 @@ info:
   title: Echocardiogram Test Request — EchocardiogramTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the imaging / physiology team.
+x-namespace:
+  form: echocardiogram-test-request
+  apiPrefix: /api/echocardiogram-test-request/
+  sqlSchema: echocardiogram_test_request
+  xmlNamespace: https://formexamples.github.io/echocardiogram-test-request/xml
+tags:
+  - name: echocardiogram-test-request
+    description: Echocardiogram Test Request form
 paths:
   /api/echocardiogram-test-request/echocardiogram_test_request_grade_flags:
     get:
       summary: List EchocardiogramTestRequestGradeFlag records
+      tags: [echocardiogram-test-request]
       operationId: listEchocardiogramTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EchocardiogramTestRequestGradeFlag
+      tags: [echocardiogram-test-request]
       operationId: createEchocardiogramTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EchocardiogramTestRequestGradeFlag by id
+      tags: [echocardiogram-test-request]
       operationId: getEchocardiogramTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EchocardiogramTestRequestGradeFlag
+      tags: [echocardiogram-test-request]
       operationId: updateEchocardiogramTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EchocardiogramTestRequestGradeFlag
+      tags: [echocardiogram-test-request]
       operationId: replaceEchocardiogramTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EchocardiogramTestRequestGradeFlag
+      tags: [echocardiogram-test-request]
       operationId: deleteEchocardiogramTestRequestGradeFlag
       responses:
         "200":

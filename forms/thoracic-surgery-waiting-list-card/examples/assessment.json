@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "88a88785-d4b0-5003-807e-65fd81ff9010",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "c3db6092-633c-5342-a998-1790d5e5b893",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "thoracicSurgWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "344f4340-13de-5fb1-a726-a1a8cae66982",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000096",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000097",
+    "patientId": "28d2b644-4285-505a-b2c9-e1240fda6e0d",
+    "practitionerId": "174555df-5146-5fc5-b4be-894e3d240584",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "thoracicSurgWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "5c358c8b-950b-5b22-85de-6bd460446e26",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "thoracicSurgWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "thoracicSurgWaitingListCardId": "2eb6b26d-8e2e-56a8-b93d-d42719a6597a",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "thoracicSurgWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "2e0de1fc-20c1-5176-b432-d9c916d01eee",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "thoracicSurgWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "thoracicSurgWaitingListCardId": "8160aa84-e5b3-5205-a299-bdfb236cbf84",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "thoracicSurgWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d1",
+    "id": "29ce160b-5f60-55da-98f4-04b2ae2cd54c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "thoracicSurgWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "thoracicSurgWaitingListCardGradeId": "bd656db6-6851-558b-ad72-7299106b9031",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "thoracicSurgWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000db",
+    "id": "02646b76-d3d0-5aa9-8841-34efc4576fb6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "thoracicSurgWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000df",
+    "thoracicSurgWaitingListCardGradeId": "02935bb5-8924-50ed-b244-3fe1117d933f",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

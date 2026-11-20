@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE child_pugh_score_grade SYSTEM "child_pugh_score_grade.dtd">
-<child_pugh_score_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<child_pugh_score_grade xmlns="https://formexamples.github.io/child-pugh-score/xml">
+<id>4cafb70d-30ae-5163-8a50-901ac8639310</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<child_pugh_score_id>770e8400-e29b-41d4-a716-446655440002</child_pugh_score_id>
+<child_pugh_score_id>36ead1c9-d672-54a2-8bc1-4b9850d38dba</child_pugh_score_id>
 <bilirubin_points>1</bilirubin_points>
 <albumin_points>1</albumin_points>
 <coagulation_points>1</coagulation_points>

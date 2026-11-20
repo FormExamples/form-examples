@@ -1,4 +1,5 @@
 <!ELEMENT hospital_performance_indicators (id,created_at,updated_at,deleted_at,hospital_name,period_month,period_year,prepared_by_name,overall_notes,status,signed_at)>
+<!ATTLIST hospital_performance_indicators xmlns CDATA #FIXED "https://formexamples.github.io/hospital-performance-indicators/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

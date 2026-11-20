@@ -1,4 +1,5 @@
 <!ELEMENT zarit_burden_interview (id,created_at,updated_at,deleted_at,patient_id,clinician_id,practitioner_name,practitioner_role,assessed_at,care_setting,instrument_form,carer_identifier,carer_relationship,carer_co_resident,care_hours_per_week,recipient_identifier,recipient_condition,item_1,item_2,item_3,item_4,item_5,item_6,item_7,item_8,item_9,item_10,item_11,item_12,item_13,item_14,item_15,item_16,item_17,item_18,item_19,item_20,item_21,item_22,clinical_note)>
+<!ATTLIST zarit_burden_interview xmlns CDATA #FIXED "https://formexamples.github.io/zarit-burden-interview/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

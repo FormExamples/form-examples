@@ -1,4 +1,5 @@
 <!ELEMENT casualty_card (id,created_at,updated_at,deleted_at,patient_id,status,attendance_date,arrival_time)>
+<!ATTLIST casualty_card xmlns CDATA #FIXED "https://formexamples.github.io/casualty-card-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

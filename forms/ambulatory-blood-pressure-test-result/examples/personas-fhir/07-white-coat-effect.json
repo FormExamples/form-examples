@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "999c1d00-b701-45bd-ac63-f8e3e8356ad0",
+  "id": "fb52caaf-ad42-56a7-95ef-32e191aa8374",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:2daa0499-1dae-436c-afd9-7936586e20f9",
+      "fullUrl": "urn:uuid:1916ca92-2fb2-53fb-8371-c6a31e631261",
       "resource": {
         "resourceType": "Patient",
-        "id": "2daa0499-1dae-436c-afd9-7936586e20f9",
+        "id": "1916ca92-2fb2-53fb-8371-c6a31e631261",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:206c48b2-1272-4342-a470-43fcf0d82ccb",
+      "fullUrl": "urn:uuid:6f4b738f-21f2-5ea1-b1b8-ecc1c549ccb1",
       "resource": {
         "resourceType": "Observation",
-        "id": "206c48b2-1272-4342-a470-43fcf0d82ccb",
+        "id": "6f4b738f-21f2-5ea1-b1b8-ecc1c549ccb1",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:2daa0499-1dae-436c-afd9-7936586e20f9"
+          "reference": "urn:uuid:1916ca92-2fb2-53fb-8371-c6a31e631261"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:18a184ff-9e4c-4053-a8ac-5ef2f82ba27e",
+      "fullUrl": "urn:uuid:ebcfac41-7bf6-561e-8f83-d392960a0339",
       "resource": {
         "resourceType": "Observation",
-        "id": "18a184ff-9e4c-4053-a8ac-5ef2f82ba27e",
+        "id": "ebcfac41-7bf6-561e-8f83-d392960a0339",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:2daa0499-1dae-436c-afd9-7936586e20f9"
+          "reference": "urn:uuid:1916ca92-2fb2-53fb-8371-c6a31e631261"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -645,10 +645,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:c3a2e440-62a5-4b54-ae32-cafe32e87a39",
+      "fullUrl": "urn:uuid:a7a6c741-edd7-5404-aef4-fb36e7802309",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "c3a2e440-62a5-4b54-ae32-cafe32e87a39",
+        "id": "a7a6c741-edd7-5404-aef4-fb36e7802309",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -657,7 +657,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:2daa0499-1dae-436c-afd9-7936586e20f9"
+          "reference": "urn:uuid:1916ca92-2fb2-53fb-8371-c6a31e631261"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -666,10 +666,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:ccd823e9-a964-45f4-ae8c-edf5e586bc77",
+      "fullUrl": "urn:uuid:d6e9181c-1cd7-5646-9354-e8d4f6193e5a",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ccd823e9-a964-45f4-ae8c-edf5e586bc77",
+        "id": "d6e9181c-1cd7-5646-9354-e8d4f6193e5a",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -699,17 +699,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:2daa0499-1dae-436c-afd9-7936586e20f9"
+          "reference": "urn:uuid:1916ca92-2fb2-53fb-8371-c6a31e631261"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "White-coat effect present (raised clinic BP but normal ambulatory averages); classified as abnormal (not a normal study)."
       }
     },
     {
-      "fullUrl": "urn:uuid:88939b74-3938-45df-a6c0-9bcd016aaad1",
+      "fullUrl": "urn:uuid:b70a7a19-b090-573f-8114-6fe489b17ab7",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "88939b74-3938-45df-a6c0-9bcd016aaad1",
+        "id": "b70a7a19-b090-573f-8114-6fe489b17ab7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -739,17 +739,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:2daa0499-1dae-436c-afd9-7936586e20f9"
+          "reference": "urn:uuid:1916ca92-2fb2-53fb-8371-c6a31e631261"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "White-coat effect present; severity graded minor."
       }
     },
     {
-      "fullUrl": "urn:uuid:46c38f6c-2c25-47ce-a190-4ab12288a1e0",
+      "fullUrl": "urn:uuid:348b92fb-6524-539c-9d58-4a5261ac6fd2",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "46c38f6c-2c25-47ce-a190-4ab12288a1e0",
+        "id": "348b92fb-6524-539c-9d58-4a5261ac6fd2",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -779,17 +779,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:2daa0499-1dae-436c-afd9-7936586e20f9"
+          "reference": "urn:uuid:1916ca92-2fb2-53fb-8371-c6a31e631261"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Minor abnormality (stage 1, nocturnal, or white-coat); structured follow-up recommended."
       }
     },
     {
-      "fullUrl": "urn:uuid:60ab5b98-f24b-4021-ac86-cb45d37bd7d6",
+      "fullUrl": "urn:uuid:2a27fca9-1317-5c25-a2af-ff768c3d4879",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "60ab5b98-f24b-4021-ac86-cb45d37bd7d6",
+        "id": "2a27fca9-1317-5c25-a2af-ff768c3d4879",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -819,7 +819,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:2daa0499-1dae-436c-afd9-7936586e20f9"
+          "reference": "urn:uuid:1916ca92-2fb2-53fb-8371-c6a31e631261"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A white-coat effect is documented (raised clinic BP but normal ambulatory averages).",

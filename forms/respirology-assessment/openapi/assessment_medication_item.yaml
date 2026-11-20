@@ -5,10 +5,19 @@ info:
   title: Respirology Assessment — AssessmentMedicationItem
   version: 1.0.0
   description: Individual medication entry with name, dose, frequency, and route.
+x-namespace:
+  form: respirology-assessment
+  apiPrefix: /api/respirology-assessment/
+  sqlSchema: respirology_assessment
+  xmlNamespace: https://formexamples.github.io/respirology-assessment/xml
+tags:
+  - name: respirology-assessment
+    description: Respirology Assessment form
 paths:
   /api/respirology-assessment/assessment_medication_items:
     get:
       summary: List AssessmentMedicationItem records
+      tags: [respirology-assessment]
       operationId: listAssessmentMedicationItem
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentMedicationItem
+      tags: [respirology-assessment]
       operationId: createAssessmentMedicationItem
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentMedicationItem by id
+      tags: [respirology-assessment]
       operationId: getAssessmentMedicationItem
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentMedicationItem
+      tags: [respirology-assessment]
       operationId: updateAssessmentMedicationItem
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentMedicationItem
+      tags: [respirology-assessment]
       operationId: replaceAssessmentMedicationItem
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentMedicationItem
+      tags: [respirology-assessment]
       operationId: deleteAssessmentMedicationItem
       responses:
         "200":

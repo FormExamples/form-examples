@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000060",
+    "id": "e68117c0-ac5d-538b-b3fb-64876f5b2bab",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000072",
+    "id": "82731e91-b152-53c4-918f-25894d105928",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "allergySkinTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-000000000080",
+    "id": "38e7db7a-ee65-58ab-a756-5c265add0df5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000084",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000085",
+    "patientId": "4c3b1985-b909-53cd-9a47-99c8a9241e3a",
+    "clinicianId": "f0e483c9-8700-5980-a6a4-445d8ded0776",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -67,11 +67,11 @@
     "notes": ""
   },
   "allergySkinTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000009d",
+    "id": "317b6c83-1424-59ec-b5be-520e85f5055f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "allergySkinTestRequestId": "550e8400-e29b-41d4-a716-0000000000a1",
+    "allergySkinTestRequestId": "abd26027-bef9-5fa1-9360-330b2ce98d78",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "validitySafetyBand": "ok",
@@ -84,22 +84,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "allergySkinTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ac",
+    "id": "1f288c3f-8644-5f59-b8b3-8e13b2d1ba9e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "allergySkinTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b0",
+    "allergySkinTestRequestGradeId": "bc020391-d513-5bce-85bd-9ecf9b7b15e1",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "allergySkinTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b5",
+    "id": "d15c0fc5-9acc-5132-bf2b-6faf8919d902",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "allergySkinTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b9",
+    "allergySkinTestRequestGradeId": "2df3252f-4f52-5f97-b665-a6ca19209a2b",
     "flagId": "",
     "category": "previous-anaphylaxis-resus-ready",
     "priority": "low",

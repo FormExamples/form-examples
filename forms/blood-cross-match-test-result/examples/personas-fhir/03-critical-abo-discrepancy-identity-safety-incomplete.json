@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "7fa31c07-ed0a-4fac-ab0d-c91e236d8b33",
+  "id": "386c6650-9453-5579-b636-a73ea60db6cf",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96",
+      "fullUrl": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9",
       "resource": {
         "resourceType": "Patient",
-        "id": "169fb216-347b-402a-ab37-3f5bbeeabd96",
+        "id": "008ebc73-cf1b-5b73-a3f3-af87a4fcbec9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:560846ed-4282-4001-a6b6-04b48be4fd91",
+      "fullUrl": "urn:uuid:49688c2d-51da-5049-8478-955a55d0c1c4",
       "resource": {
         "resourceType": "Observation",
-        "id": "560846ed-4282-4001-a6b6-04b48be4fd91",
+        "id": "49688c2d-51da-5049-8478-955a55d0c1c4",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:7c5d3364-5599-4901-ab34-736fbdb7b7dc",
+      "fullUrl": "urn:uuid:adf1909c-29bb-56c5-87ee-dac8fb98cee2",
       "resource": {
         "resourceType": "Observation",
-        "id": "7c5d3364-5599-4901-ab34-736fbdb7b7dc",
+        "id": "adf1909c-29bb-56c5-87ee-dac8fb98cee2",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -525,10 +525,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:acfae62c-bd85-4198-ac7d-2018b92eb67f",
+      "fullUrl": "urn:uuid:2c99bd2d-c9eb-570a-9929-8730cb1af6c4",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "acfae62c-bd85-4198-ac7d-2018b92eb67f",
+        "id": "2c99bd2d-c9eb-570a-9929-8730cb1af6c4",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -537,7 +537,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -546,10 +546,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:b658eacc-0f04-4aae-a0fd-5aad76cf2cba",
+      "fullUrl": "urn:uuid:2ef73655-5989-5390-a951-2b557a773d45",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "b658eacc-0f04-4aae-a0fd-5aad76cf2cba",
+        "id": "2ef73655-5989-5390-a951-2b557a773d45",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -579,17 +579,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An ABO discrepancy (historical-group non-concordance) or an unmet two-sample group-check rule is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:8c5445d5-c287-4a22-a741-262deef176a7",
+      "fullUrl": "urn:uuid:4f499f2d-5834-5387-a9cf-95f3978a49d5",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "8c5445d5-c287-4a22-a741-262deef176a7",
+        "id": "4f499f2d-5834-5387-a9cf-95f3978a49d5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -619,17 +619,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An ABO discrepancy or unmet two-sample rule is present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:9f9b0440-417b-4b49-a57f-2889a186ff92",
+      "fullUrl": "urn:uuid:a1abc010-e931-56be-9852-b3d274a3804e",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "9f9b0440-417b-4b49-a57f-2889a186ff92",
+        "id": "a1abc010-e931-56be-9852-b3d274a3804e",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -659,17 +659,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: clinical history."
       }
     },
     {
-      "fullUrl": "urn:uuid:0bab8077-2e91-4b47-a878-b9a8adbd3a25",
+      "fullUrl": "urn:uuid:42e7be43-bddf-55ef-aab7-3c8e4dea2110",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "0bab8077-2e91-4b47-a878-b9a8adbd3a25",
+        "id": "42e7be43-bddf-55ef-aab7-3c8e4dea2110",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -699,17 +699,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: antibody screen."
       }
     },
     {
-      "fullUrl": "urn:uuid:78d5b0db-9dc4-4abe-a822-7c163435b343",
+      "fullUrl": "urn:uuid:c3b02060-47d7-5a1e-91c0-e4c3c73a4752",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "78d5b0db-9dc4-4abe-a822-7c163435b343",
+        "id": "c3b02060-47d7-5a1e-91c0-e4c3c73a4752",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -739,17 +739,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: impression."
       }
     },
     {
-      "fullUrl": "urn:uuid:0ca5c831-40ac-4fd9-ad8a-85c78c2cbd77",
+      "fullUrl": "urn:uuid:28e3abb2-5aca-5ae1-91aa-62c22e82e966",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "0ca5c831-40ac-4fd9-ad8a-85c78c2cbd77",
+        "id": "28e3abb2-5aca-5ae1-91aa-62c22e82e966",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -779,17 +779,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical result (incompatible crossmatch, clinically-significant antibodies, ABO discrepancy, or unmet two-sample rule) auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:2fef3113-505c-4a9f-ad61-962c2d706e5b",
+      "fullUrl": "urn:uuid:6a108055-eb21-5ae6-91e2-60fd58a7721c",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "2fef3113-505c-4a9f-ad61-962c2d706e5b",
+        "id": "6a108055-eb21-5ae6-91e2-60fd58a7721c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -819,7 +819,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical result (incompatible crossmatch, clinically-significant antibodies, ABO discrepancy, or unmet two-sample rule) is present.",
@@ -833,10 +833,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:97ba4756-f26e-40ca-a5a4-ff6cb3fde5ad",
+      "fullUrl": "urn:uuid:0d9474fd-1de8-5477-bca0-a1a7206a70c3",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "97ba4756-f26e-40ca-a5a4-ff6cb3fde5ad",
+        "id": "0d9474fd-1de8-5477-bca0-a1a7206a70c3",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -866,7 +866,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical result present but it has not been recorded as communicated.",
@@ -880,10 +880,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:513bb0de-3cb6-4adc-a1e5-c15ab2602078",
+      "fullUrl": "urn:uuid:e23f7160-8d8f-5470-8678-bb487f12e45f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "513bb0de-3cb6-4adc-a1e5-c15ab2602078",
+        "id": "e23f7160-8d8f-5470-8678-bb487f12e45f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -913,7 +913,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An ABO discrepancy (historical-group non-concordance) or an unmet two-sample group-check rule indicates a possible Wrong-Blood-in-Tube / identity event.",
@@ -927,10 +927,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:0887ba74-cac2-4542-ad79-facc6cf189f7",
+      "fullUrl": "urn:uuid:738d9ba7-fa84-5262-9f7e-6a19292b7ccd",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "0887ba74-cac2-4542-ad79-facc6cf189f7",
+        "id": "738d9ba7-fa84-5262-9f7e-6a19292b7ccd",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -960,7 +960,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A crossmatch / compatibility test was not performed for a crossmatch or emergency-issue request.",
@@ -974,10 +974,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:d3e46309-bf09-4af0-a8b8-258fd94d2a4a",
+      "fullUrl": "urn:uuid:566eb4d6-ff3a-5a1d-81e4-f39dd1abb21c",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "d3e46309-bf09-4af0-a8b8-258fd94d2a4a",
+        "id": "566eb4d6-ff3a-5a1d-81e4-f39dd1abb21c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -1007,7 +1007,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:169fb216-347b-402a-ab37-3f5bbeeabd96"
+          "reference": "urn:uuid:008ebc73-cf1b-5b73-a3f3-af87a4fcbec9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",

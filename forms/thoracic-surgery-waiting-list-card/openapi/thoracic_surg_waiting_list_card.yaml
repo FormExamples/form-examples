@@ -5,10 +5,19 @@ info:
   title: Thoracic Surgery Waiting List Card — ThoracicSurgWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a thoracic surgery waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: thoracic-surgery-waiting-list-card
+  apiPrefix: /api/thoracic-surgery-waiting-list-card/
+  sqlSchema: thoracic_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/thoracic-surgery-waiting-list-card/xml
+tags:
+  - name: thoracic-surgery-waiting-list-card
+    description: Thoracic Surgery Waiting List Card form
 paths:
   /api/thoracic-surgery-waiting-list-card/thoracic_surg_waiting_list_cards:
     get:
       summary: List ThoracicSurgWaitingListCard records
+      tags: [thoracic-surgery-waiting-list-card]
       operationId: listThoracicSurgWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ThoracicSurgWaitingListCard
+      tags: [thoracic-surgery-waiting-list-card]
       operationId: createThoracicSurgWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ThoracicSurgWaitingListCard by id
+      tags: [thoracic-surgery-waiting-list-card]
       operationId: getThoracicSurgWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ThoracicSurgWaitingListCard
+      tags: [thoracic-surgery-waiting-list-card]
       operationId: updateThoracicSurgWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ThoracicSurgWaitingListCard
+      tags: [thoracic-surgery-waiting-list-card]
       operationId: replaceThoracicSurgWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ThoracicSurgWaitingListCard
+      tags: [thoracic-surgery-waiting-list-card]
       operationId: deleteThoracicSurgWaitingListCard
       responses:
         "200":

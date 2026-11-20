@@ -1,4 +1,5 @@
 <!ELEMENT registrant (id,created_at,updated_at,deleted_at,name,birth_date,sex,place_of_birth,county_of_birth,birth_state,birth_facility,mother_name_before_first_marriage,father_name,is_deceased,is_adopted)>
+<!ATTLIST registrant xmlns CDATA #FIXED "https://formexamples.github.io/united-states-birth-certificate-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

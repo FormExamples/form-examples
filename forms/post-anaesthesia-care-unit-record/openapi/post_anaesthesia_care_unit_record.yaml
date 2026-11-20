@@ -5,10 +5,19 @@ info:
   title: Post Anaesthesia Care Unit Record — PostAnaesthesiaCareUnitRecord
   version: 1.0.0
   description: "Main PACU recovery record: recovery context, patient identification, the five Modified Aldrete parameter inputs, airway / pain / PONV observations, and the optional PADSS criterion inputs for day-surgery discharge."
+x-namespace:
+  form: post-anaesthesia-care-unit-record
+  apiPrefix: /api/post-anaesthesia-care-unit-record/
+  sqlSchema: post_anaesthesia_care_unit_record
+  xmlNamespace: https://formexamples.github.io/post-anaesthesia-care-unit-record/xml
+tags:
+  - name: post-anaesthesia-care-unit-record
+    description: Post Anaesthesia Care Unit Record form
 paths:
   /api/post-anaesthesia-care-unit-record/post_anaesthesia_care_unit_records:
     get:
       summary: List PostAnaesthesiaCareUnitRecord records
+      tags: [post-anaesthesia-care-unit-record]
       operationId: listPostAnaesthesiaCareUnitRecord
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PostAnaesthesiaCareUnitRecord
+      tags: [post-anaesthesia-care-unit-record]
       operationId: createPostAnaesthesiaCareUnitRecord
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PostAnaesthesiaCareUnitRecord by id
+      tags: [post-anaesthesia-care-unit-record]
       operationId: getPostAnaesthesiaCareUnitRecord
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PostAnaesthesiaCareUnitRecord
+      tags: [post-anaesthesia-care-unit-record]
       operationId: updatePostAnaesthesiaCareUnitRecord
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PostAnaesthesiaCareUnitRecord
+      tags: [post-anaesthesia-care-unit-record]
       operationId: replacePostAnaesthesiaCareUnitRecord
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PostAnaesthesiaCareUnitRecord
+      tags: [post-anaesthesia-care-unit-record]
       operationId: deletePostAnaesthesiaCareUnitRecord
       responses:
         "200":

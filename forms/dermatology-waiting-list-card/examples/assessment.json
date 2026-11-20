@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "43f5857c-a425-5d68-871e-b34ce4f19f25",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "e8af7d4b-7ff9-59c4-a2f9-1f125aa498c3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "dermatologyWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "14edda8c-f815-5f55-85c3-1d206d03563b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000096",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000097",
+    "patientId": "45a1baa1-d85c-5600-9ea1-21bf64761779",
+    "practitionerId": "f81f4ca3-0084-59a0-8a69-91ba6365acd5",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "dermatologyWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "b20a38da-67ea-5505-b34f-db6653b839fb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "dermatologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "dermatologyWaitingListCardId": "acd3997e-45c1-560c-9bb9-510828a11ac1",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "dermatologyWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "a093faec-42c4-5b0e-99e2-848ea5542308",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "dermatologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "dermatologyWaitingListCardId": "91b90875-f960-5cf0-a58a-c60f6e887767",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "dermatologyWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d1",
+    "id": "5161fea4-7e7e-5b12-bfb7-a7327e7b9db7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "dermatologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "dermatologyWaitingListCardGradeId": "932af7aa-1fa9-561d-a05e-d158cd230da1",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "dermatologyWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000db",
+    "id": "9df8f08e-0ae5-562f-a2b6-bd9bcdca1fcc",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "dermatologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000df",
+    "dermatologyWaitingListCardGradeId": "6a18fc84-c791-5f29-a08a-6e8c6867e197",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE prescriber SYSTEM "prescriber.dtd">
-<prescriber>
-<id>660e8400-e29b-41d4-a716-446655440001</id>
+<prescriber xmlns="https://formexamples.github.io/eye-prescription/xml">
+<id>69ce9107-a1a9-533a-b5ae-d50e5d075959</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>

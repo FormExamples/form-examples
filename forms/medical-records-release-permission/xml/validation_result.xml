@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE validation_result SYSTEM "validation_result.dtd">
-<validation_result>
-<id>ff0e8400-e29b-41d4-a716-44665544000a</id>
+<validation_result xmlns="https://formexamples.github.io/medical-records-release-permission/xml">
+<id>6e395bbf-d4e5-5657-b7cf-bbd0c373a22a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<release_form_id>770e8400-e29b-41d4-a716-446655440002</release_form_id>
+<release_form_id>2ca1647a-308b-5830-b3fc-a8c4deac9251</release_form_id>
 <completeness_score>5</completeness_score>
 <completeness_status>active</completeness_status>
 <validation_status>active</validation_status>

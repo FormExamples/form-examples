@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_council_tax_discount_application SYSTEM "united_kingdom_council_tax_discount_application.dtd">
-<united_kingdom_council_tax_discount_application>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<united_kingdom_council_tax_discount_application xmlns="https://formexamples.github.io/united-kingdom-council-tax-discount-application/xml">
+<id>efbc7134-435c-5e4e-ba8e-32680b637661</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<applicant_id>550e8400-e29b-41d4-a716-446655440000</applicant_id>
-<billing_authority_id>660e8400-e29b-41d4-a716-446655440001</billing_authority_id>
+<applicant_id>033965ca-ddc6-5ffd-b9a3-6cf4c41747dc</applicant_id>
+<billing_authority_id>46e68840-1066-5eea-b5d9-d4f581d52370</billing_authority_id>
 <claim_type>single-person-discount</claim_type>
 <account_reference></account_reference>
 <application_date>2026-01-15</application_date>

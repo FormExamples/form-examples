@@ -1,4 +1,5 @@
 <!ELEMENT eye_prescription_lens_recommendation (id,created_at,updated_at,deleted_at,eye_prescription_id,lens_type,material,refractive_index,aspheric,coating_anti_reflective,coating_scratch_resistant,coating_hydrophobic,coating_blue_light,coating_photochromic,coating_polarised,coating_uv_400,tint_description,tint_percent,dispenser_notes)>
+<!ATTLIST eye_prescription_lens_recommendation xmlns CDATA #FIXED "https://formexamples.github.io/eye-prescription/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

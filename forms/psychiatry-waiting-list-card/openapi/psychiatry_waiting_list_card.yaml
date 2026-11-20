@@ -5,10 +5,19 @@ info:
   title: Psychiatry Waiting List Card — PsychiatryWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a psychiatry waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: psychiatry-waiting-list-card
+  apiPrefix: /api/psychiatry-waiting-list-card/
+  sqlSchema: psychiatry_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/psychiatry-waiting-list-card/xml
+tags:
+  - name: psychiatry-waiting-list-card
+    description: Psychiatry Waiting List Card form
 paths:
   /api/psychiatry-waiting-list-card/psychiatry_waiting_list_cards:
     get:
       summary: List PsychiatryWaitingListCard records
+      tags: [psychiatry-waiting-list-card]
       operationId: listPsychiatryWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PsychiatryWaitingListCard
+      tags: [psychiatry-waiting-list-card]
       operationId: createPsychiatryWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PsychiatryWaitingListCard by id
+      tags: [psychiatry-waiting-list-card]
       operationId: getPsychiatryWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PsychiatryWaitingListCard
+      tags: [psychiatry-waiting-list-card]
       operationId: updatePsychiatryWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PsychiatryWaitingListCard
+      tags: [psychiatry-waiting-list-card]
       operationId: replacePsychiatryWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PsychiatryWaitingListCard
+      tags: [psychiatry-waiting-list-card]
       operationId: deletePsychiatryWaitingListCard
       responses:
         "200":

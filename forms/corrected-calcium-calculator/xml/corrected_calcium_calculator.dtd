@@ -1,4 +1,5 @@
 <!ELEMENT corrected_calcium_calculator (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,sample_reference,patient_identifier,age_band,sex,total_calcium_mmol_l,albumin_g_l,symptomatic)>
+<!ATTLIST corrected_calcium_calculator xmlns CDATA #FIXED "https://formexamples.github.io/corrected-calcium-calculator/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

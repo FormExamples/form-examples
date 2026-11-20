@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Medical Fit Note form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: medical-fit-note
+  apiPrefix: /api/medical-fit-note/
+  sqlSchema: medical_fit_note
+  xmlNamespace: https://formexamples.github.io/medical-fit-note/xml
+tags:
+- name: medical-fit-note
+  description: Medical Fit Note form
 paths:
   /api/medical-fit-note/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - medical-fit-note
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - medical-fit-note
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - medical-fit-note
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - medical-fit-note
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - medical-fit-note
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - medical-fit-note
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/medical-fit-note/employees:
     get:
       summary: List Employee records
+      tags:
+      - medical-fit-note
       operationId: listEmployee
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Employee
+      tags:
+      - medical-fit-note
       operationId: createEmployee
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Employee by id
+      tags:
+      - medical-fit-note
       operationId: getEmployee
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Employee
+      tags:
+      - medical-fit-note
       operationId: updateEmployee
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Employee
+      tags:
+      - medical-fit-note
       operationId: replaceEmployee
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Employee
+      tags:
+      - medical-fit-note
       operationId: deleteEmployee
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/medical-fit-note/medical_fit_note_grade_flags:
     get:
       summary: List MedicalFitNoteGradeFlag records
+      tags:
+      - medical-fit-note
       operationId: listMedicalFitNoteGradeFlag
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalFitNoteGradeFlag
+      tags:
+      - medical-fit-note
       operationId: createMedicalFitNoteGradeFlag
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalFitNoteGradeFlag by id
+      tags:
+      - medical-fit-note
       operationId: getMedicalFitNoteGradeFlag
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalFitNoteGradeFlag
+      tags:
+      - medical-fit-note
       operationId: updateMedicalFitNoteGradeFlag
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalFitNoteGradeFlag
+      tags:
+      - medical-fit-note
       operationId: replaceMedicalFitNoteGradeFlag
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalFitNoteGradeFlag
+      tags:
+      - medical-fit-note
       operationId: deleteMedicalFitNoteGradeFlag
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/medical-fit-note/medical_fit_note_grade_rules:
     get:
       summary: List MedicalFitNoteGradeRule records
+      tags:
+      - medical-fit-note
       operationId: listMedicalFitNoteGradeRule
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalFitNoteGradeRule
+      tags:
+      - medical-fit-note
       operationId: createMedicalFitNoteGradeRule
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalFitNoteGradeRule by id
+      tags:
+      - medical-fit-note
       operationId: getMedicalFitNoteGradeRule
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalFitNoteGradeRule
+      tags:
+      - medical-fit-note
       operationId: updateMedicalFitNoteGradeRule
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalFitNoteGradeRule
+      tags:
+      - medical-fit-note
       operationId: replaceMedicalFitNoteGradeRule
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalFitNoteGradeRule
+      tags:
+      - medical-fit-note
       operationId: deleteMedicalFitNoteGradeRule
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/medical-fit-note/medical_fit_note_grades:
     get:
       summary: List MedicalFitNoteGrade records
+      tags:
+      - medical-fit-note
       operationId: listMedicalFitNoteGrade
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalFitNoteGrade
+      tags:
+      - medical-fit-note
       operationId: createMedicalFitNoteGrade
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalFitNoteGrade by id
+      tags:
+      - medical-fit-note
       operationId: getMedicalFitNoteGrade
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalFitNoteGrade
+      tags:
+      - medical-fit-note
       operationId: updateMedicalFitNoteGrade
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalFitNoteGrade
+      tags:
+      - medical-fit-note
       operationId: replaceMedicalFitNoteGrade
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalFitNoteGrade
+      tags:
+      - medical-fit-note
       operationId: deleteMedicalFitNoteGrade
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/medical-fit-note/medical_fit_notes:
     get:
       summary: List MedicalFitNote records
+      tags:
+      - medical-fit-note
       operationId: listMedicalFitNote
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalFitNote
+      tags:
+      - medical-fit-note
       operationId: createMedicalFitNote
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalFitNote by id
+      tags:
+      - medical-fit-note
       operationId: getMedicalFitNote
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalFitNote
+      tags:
+      - medical-fit-note
       operationId: updateMedicalFitNote
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalFitNote
+      tags:
+      - medical-fit-note
       operationId: replaceMedicalFitNote
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalFitNote
+      tags:
+      - medical-fit-note
       operationId: deleteMedicalFitNote
       responses:
         '200':
@@ -1495,6 +1575,8 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - medical-fit-note
 components:
   schemas:
     Clinician:

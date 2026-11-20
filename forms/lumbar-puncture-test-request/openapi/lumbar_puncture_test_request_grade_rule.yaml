@@ -5,10 +5,19 @@ info:
   title: Lumbar Puncture Test Request — LumbarPunctureTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.
+x-namespace:
+  form: lumbar-puncture-test-request
+  apiPrefix: /api/lumbar-puncture-test-request/
+  sqlSchema: lumbar_puncture_test_request
+  xmlNamespace: https://formexamples.github.io/lumbar-puncture-test-request/xml
+tags:
+  - name: lumbar-puncture-test-request
+    description: Lumbar Puncture Test Request form
 paths:
   /api/lumbar-puncture-test-request/lumbar_puncture_test_request_grade_rules:
     get:
       summary: List LumbarPunctureTestRequestGradeRule records
+      tags: [lumbar-puncture-test-request]
       operationId: listLumbarPunctureTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LumbarPunctureTestRequestGradeRule
+      tags: [lumbar-puncture-test-request]
       operationId: createLumbarPunctureTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LumbarPunctureTestRequestGradeRule by id
+      tags: [lumbar-puncture-test-request]
       operationId: getLumbarPunctureTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LumbarPunctureTestRequestGradeRule
+      tags: [lumbar-puncture-test-request]
       operationId: updateLumbarPunctureTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LumbarPunctureTestRequestGradeRule
+      tags: [lumbar-puncture-test-request]
       operationId: replaceLumbarPunctureTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LumbarPunctureTestRequestGradeRule
+      tags: [lumbar-puncture-test-request]
       operationId: deleteLumbarPunctureTestRequestGradeRule
       responses:
         "200":

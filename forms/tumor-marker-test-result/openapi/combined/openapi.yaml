@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Tumor Marker Test Result form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: tumor-marker-test-result
+  apiPrefix: /api/tumor-marker-test-result/
+  sqlSchema: tumor_marker_test_result
+  xmlNamespace: https://formexamples.github.io/tumor-marker-test-result/xml
+tags:
+- name: tumor-marker-test-result
+  description: Tumor Marker Test Result form
 paths:
   /api/tumor-marker-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - tumor-marker-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - tumor-marker-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - tumor-marker-test-result
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - tumor-marker-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - tumor-marker-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - tumor-marker-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - tumor-marker-test-result
   /api/tumor-marker-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - tumor-marker-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - tumor-marker-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - tumor-marker-test-result
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - tumor-marker-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - tumor-marker-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - tumor-marker-test-result
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/tumor-marker-test-result/tumor_marker_test_result_grade_flags:
     get:
       summary: List TumorMarkerTestResultGradeFlag records
+      tags:
+      - tumor-marker-test-result
       operationId: listTumorMarkerTestResultGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TumorMarkerTestResultGradeFlag
+      tags:
+      - tumor-marker-test-result
       operationId: createTumorMarkerTestResultGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TumorMarkerTestResultGradeFlag by id
+      tags:
+      - tumor-marker-test-result
       operationId: getTumorMarkerTestResultGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TumorMarkerTestResultGradeFlag
+      tags:
+      - tumor-marker-test-result
       operationId: updateTumorMarkerTestResultGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TumorMarkerTestResultGradeFlag
+      tags:
+      - tumor-marker-test-result
       operationId: replaceTumorMarkerTestResultGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TumorMarkerTestResultGradeFlag
+      tags:
+      - tumor-marker-test-result
       operationId: deleteTumorMarkerTestResultGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/tumor-marker-test-result/tumor_marker_test_result_grade_rules:
     get:
       summary: List TumorMarkerTestResultGradeRule records
+      tags:
+      - tumor-marker-test-result
       operationId: listTumorMarkerTestResultGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TumorMarkerTestResultGradeRule
+      tags:
+      - tumor-marker-test-result
       operationId: createTumorMarkerTestResultGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TumorMarkerTestResultGradeRule by id
+      tags:
+      - tumor-marker-test-result
       operationId: getTumorMarkerTestResultGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TumorMarkerTestResultGradeRule
+      tags:
+      - tumor-marker-test-result
       operationId: updateTumorMarkerTestResultGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TumorMarkerTestResultGradeRule
+      tags:
+      - tumor-marker-test-result
       operationId: replaceTumorMarkerTestResultGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TumorMarkerTestResultGradeRule
+      tags:
+      - tumor-marker-test-result
       operationId: deleteTumorMarkerTestResultGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/tumor-marker-test-result/tumor_marker_test_result_grades:
     get:
       summary: List TumorMarkerTestResultGrade records
+      tags:
+      - tumor-marker-test-result
       operationId: listTumorMarkerTestResultGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TumorMarkerTestResultGrade
+      tags:
+      - tumor-marker-test-result
       operationId: createTumorMarkerTestResultGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TumorMarkerTestResultGrade by id
+      tags:
+      - tumor-marker-test-result
       operationId: getTumorMarkerTestResultGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TumorMarkerTestResultGrade
+      tags:
+      - tumor-marker-test-result
       operationId: updateTumorMarkerTestResultGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TumorMarkerTestResultGrade
+      tags:
+      - tumor-marker-test-result
       operationId: replaceTumorMarkerTestResultGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TumorMarkerTestResultGrade
+      tags:
+      - tumor-marker-test-result
       operationId: deleteTumorMarkerTestResultGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/tumor-marker-test-result/tumor_marker_test_results:
     get:
       summary: List TumorMarkerTestResult records
+      tags:
+      - tumor-marker-test-result
       operationId: listTumorMarkerTestResult
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TumorMarkerTestResult
+      tags:
+      - tumor-marker-test-result
       operationId: createTumorMarkerTestResult
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TumorMarkerTestResult by id
+      tags:
+      - tumor-marker-test-result
       operationId: getTumorMarkerTestResult
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TumorMarkerTestResult
+      tags:
+      - tumor-marker-test-result
       operationId: updateTumorMarkerTestResult
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TumorMarkerTestResult
+      tags:
+      - tumor-marker-test-result
       operationId: replaceTumorMarkerTestResult
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TumorMarkerTestResult
+      tags:
+      - tumor-marker-test-result
       operationId: deleteTumorMarkerTestResult
       responses:
         '200':

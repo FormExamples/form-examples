@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Waterlow Pressure Ulcer Risk Assessment form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: waterlow-pressure-ulcer-risk-assessment
+  apiPrefix: /api/waterlow-pressure-ulcer-risk-assessment/
+  sqlSchema: waterlow_pressure_ulcer_risk_assessment
+  xmlNamespace: https://formexamples.github.io/waterlow-pressure-ulcer-risk-assessment/xml
+tags:
+- name: waterlow-pressure-ulcer-risk-assessment
+  description: Waterlow Pressure Ulcer Risk Assessment form
 paths:
   /api/waterlow-pressure-ulcer-risk-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
   /api/waterlow-pressure-ulcer-risk-assessment/patients:
     get:
       summary: List Patient records
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/waterlow-pressure-ulcer-risk-assessment/waterlow_pressure_ulcer_risk_assessment_grade_flags:
     get:
       summary: List WaterlowPressureUlcerRiskAssessmentGradeFlag records
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: listWaterlowPressureUlcerRiskAssessmentGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WaterlowPressureUlcerRiskAssessmentGradeFlag
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: createWaterlowPressureUlcerRiskAssessmentGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WaterlowPressureUlcerRiskAssessmentGradeFlag by id
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: getWaterlowPressureUlcerRiskAssessmentGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WaterlowPressureUlcerRiskAssessmentGradeFlag
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: updateWaterlowPressureUlcerRiskAssessmentGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WaterlowPressureUlcerRiskAssessmentGradeFlag
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: replaceWaterlowPressureUlcerRiskAssessmentGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WaterlowPressureUlcerRiskAssessmentGradeFlag
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: deleteWaterlowPressureUlcerRiskAssessmentGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/waterlow-pressure-ulcer-risk-assessment/waterlow_pressure_ulcer_risk_assessment_grade_rules:
     get:
       summary: List WaterlowPressureUlcerRiskAssessmentGradeRule records
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: listWaterlowPressureUlcerRiskAssessmentGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WaterlowPressureUlcerRiskAssessmentGradeRule
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: createWaterlowPressureUlcerRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WaterlowPressureUlcerRiskAssessmentGradeRule by id
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: getWaterlowPressureUlcerRiskAssessmentGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WaterlowPressureUlcerRiskAssessmentGradeRule
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: updateWaterlowPressureUlcerRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WaterlowPressureUlcerRiskAssessmentGradeRule
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: replaceWaterlowPressureUlcerRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WaterlowPressureUlcerRiskAssessmentGradeRule
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: deleteWaterlowPressureUlcerRiskAssessmentGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/waterlow-pressure-ulcer-risk-assessment/waterlow_pressure_ulcer_risk_assessment_grades:
     get:
       summary: List WaterlowPressureUlcerRiskAssessmentGrade records
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: listWaterlowPressureUlcerRiskAssessmentGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WaterlowPressureUlcerRiskAssessmentGrade
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: createWaterlowPressureUlcerRiskAssessmentGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WaterlowPressureUlcerRiskAssessmentGrade by id
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: getWaterlowPressureUlcerRiskAssessmentGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WaterlowPressureUlcerRiskAssessmentGrade
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: updateWaterlowPressureUlcerRiskAssessmentGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WaterlowPressureUlcerRiskAssessmentGrade
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: replaceWaterlowPressureUlcerRiskAssessmentGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WaterlowPressureUlcerRiskAssessmentGrade
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: deleteWaterlowPressureUlcerRiskAssessmentGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/waterlow-pressure-ulcer-risk-assessment/waterlow_pressure_ulcer_risk_assessments:
     get:
       summary: List WaterlowPressureUlcerRiskAssessment records
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: listWaterlowPressureUlcerRiskAssessment
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WaterlowPressureUlcerRiskAssessment
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: createWaterlowPressureUlcerRiskAssessment
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WaterlowPressureUlcerRiskAssessment by id
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: getWaterlowPressureUlcerRiskAssessment
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WaterlowPressureUlcerRiskAssessment
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: updateWaterlowPressureUlcerRiskAssessment
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WaterlowPressureUlcerRiskAssessment
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: replaceWaterlowPressureUlcerRiskAssessment
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WaterlowPressureUlcerRiskAssessment
+      tags:
+      - waterlow-pressure-ulcer-risk-assessment
       operationId: deleteWaterlowPressureUlcerRiskAssessment
       responses:
         '200':

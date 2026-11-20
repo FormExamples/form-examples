@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE glasgow_coma_scale_grade_rule SYSTEM "glasgow_coma_scale_grade_rule.dtd">
-<glasgow_coma_scale_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<glasgow_coma_scale_grade_rule xmlns="https://formexamples.github.io/glasgow-coma-scale/xml">
+<id>fe8c5bc9-df74-581b-8428-47b5521fc8f3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<glasgow_coma_scale_grade_id>880e8400-e29b-41d4-a716-446655440003</glasgow_coma_scale_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<glasgow_coma_scale_grade_id>fe9eab5b-04cc-5e80-8397-f7eaab2b96f6</glasgow_coma_scale_grade_id>
+<rule_id>67110c90-1130-52f8-b10d-98809be12220</rule_id>
 <component>eye</component>
 <points>1</points>
 <category>General</category>

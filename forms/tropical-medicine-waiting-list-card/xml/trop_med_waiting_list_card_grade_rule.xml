@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE trop_med_waiting_list_card_grade_rule SYSTEM "trop_med_waiting_list_card_grade_rule.dtd">
-<trop_med_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<trop_med_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/tropical-medicine-waiting-list-card/xml">
+<id>2af88963-d302-52e5-918c-d72657da2608</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<trop_med_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</trop_med_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<trop_med_waiting_list_card_grade_id>6d35dfbc-c530-56f3-ba87-a0d06b79dafb</trop_med_waiting_list_card_grade_id>
+<rule_id>c35ee3a0-8804-587c-87fd-5b4749b9be02</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

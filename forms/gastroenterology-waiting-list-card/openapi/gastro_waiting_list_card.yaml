@@ -5,10 +5,19 @@ info:
   title: Gastroenterology Waiting List Card — GastroWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a gastroenterology waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: gastroenterology-waiting-list-card
+  apiPrefix: /api/gastroenterology-waiting-list-card/
+  sqlSchema: gastroenterology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/gastroenterology-waiting-list-card/xml
+tags:
+  - name: gastroenterology-waiting-list-card
+    description: Gastroenterology Waiting List Card form
 paths:
   /api/gastroenterology-waiting-list-card/gastro_waiting_list_cards:
     get:
       summary: List GastroWaitingListCard records
+      tags: [gastroenterology-waiting-list-card]
       operationId: listGastroWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GastroWaitingListCard
+      tags: [gastroenterology-waiting-list-card]
       operationId: createGastroWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GastroWaitingListCard by id
+      tags: [gastroenterology-waiting-list-card]
       operationId: getGastroWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GastroWaitingListCard
+      tags: [gastroenterology-waiting-list-card]
       operationId: updateGastroWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GastroWaitingListCard
+      tags: [gastroenterology-waiting-list-card]
       operationId: replaceGastroWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GastroWaitingListCard
+      tags: [gastroenterology-waiting-list-card]
       operationId: deleteGastroWaitingListCard
       responses:
         "200":

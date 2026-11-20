@@ -1,4 +1,5 @@
 <!ELEMENT assessment_performance_ratings (id,created_at,updated_at,deleted_at,assessment_id,overall_performance_score,self_care_performance_score,productivity_performance_score,leisure_performance_score,performance_notes)>
+<!ATTLIST assessment_performance_ratings xmlns CDATA #FIXED "https://formexamples.github.io/occupational-therapy-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Neurodiversity Adjustment Review — NeurodiversityAdjustmentReview
   version: 1.0.0
   description: "Neurodiversity reasonable-adjustments review: a periodic check of whether the agreed adjustments are still working, completed by the manager / HR with the worker. Captures the per-category effectiveness of the adjustments in place, the worker's feedback and outcomes, any changes arising, and the next review date. This is the source-of-truth record that the four-axis grade is computed from. It is the review half of the ACAS request / confirmation / review cycle and follows the ACAS reasonable-adjustments review template."
+x-namespace:
+  form: neurodiversity-adjustment-review
+  apiPrefix: /api/neurodiversity-adjustment-review/
+  sqlSchema: neurodiversity_adjustment_review
+  xmlNamespace: https://formexamples.github.io/neurodiversity-adjustment-review/xml
+tags:
+  - name: neurodiversity-adjustment-review
+    description: Neurodiversity Adjustment Review form
 paths:
   /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews:
     get:
       summary: List NeurodiversityAdjustmentReview records
+      tags: [neurodiversity-adjustment-review]
       operationId: listNeurodiversityAdjustmentReview
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeurodiversityAdjustmentReview
+      tags: [neurodiversity-adjustment-review]
       operationId: createNeurodiversityAdjustmentReview
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NeurodiversityAdjustmentReview by id
+      tags: [neurodiversity-adjustment-review]
       operationId: getNeurodiversityAdjustmentReview
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeurodiversityAdjustmentReview
+      tags: [neurodiversity-adjustment-review]
       operationId: updateNeurodiversityAdjustmentReview
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NeurodiversityAdjustmentReview
+      tags: [neurodiversity-adjustment-review]
       operationId: replaceNeurodiversityAdjustmentReview
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NeurodiversityAdjustmentReview
+      tags: [neurodiversity-adjustment-review]
       operationId: deleteNeurodiversityAdjustmentReview
       responses:
         "200":

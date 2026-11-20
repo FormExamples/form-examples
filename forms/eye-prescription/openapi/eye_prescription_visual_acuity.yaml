@@ -5,10 +5,19 @@ info:
   title: Eye Prescription — EyePrescriptionVisualAcuity
   version: 1.0.0
   description: "Visual acuity measurements: Snellen distance and near, unaided and corrected, per eye and binocular, plus pinhole VA and dominant eye."
+x-namespace:
+  form: eye-prescription
+  apiPrefix: /api/eye-prescription/
+  sqlSchema: eye_prescription
+  xmlNamespace: https://formexamples.github.io/eye-prescription/xml
+tags:
+  - name: eye-prescription
+    description: Eye Prescription form
 paths:
   /api/eye-prescription/eye_prescription_visual_acuities:
     get:
       summary: List EyePrescriptionVisualAcuity records
+      tags: [eye-prescription]
       operationId: listEyePrescriptionVisualAcuity
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EyePrescriptionVisualAcuity
+      tags: [eye-prescription]
       operationId: createEyePrescriptionVisualAcuity
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EyePrescriptionVisualAcuity by id
+      tags: [eye-prescription]
       operationId: getEyePrescriptionVisualAcuity
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EyePrescriptionVisualAcuity
+      tags: [eye-prescription]
       operationId: updateEyePrescriptionVisualAcuity
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EyePrescriptionVisualAcuity
+      tags: [eye-prescription]
       operationId: replaceEyePrescriptionVisualAcuity
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EyePrescriptionVisualAcuity
+      tags: [eye-prescription]
       operationId: deleteEyePrescriptionVisualAcuity
       responses:
         "200":

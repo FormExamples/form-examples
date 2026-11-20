@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE return_to_work_grade_flag SYSTEM "return_to_work_grade_flag.dtd">
-<return_to_work_grade_flag>
-<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<return_to_work_grade_flag xmlns="https://formexamples.github.io/return-to-work/xml">
+<id>c4f0cd32-4d27-57da-b02d-d40594bb5613</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<return_to_work_grade_id>aa0e8400-e29b-41d4-a716-446655440005</return_to_work_grade_id>
+<return_to_work_grade_id>fe6d2577-21e2-52ad-a6c5-cf704175eae2</return_to_work_grade_id>
 <flag_code>ABC123</flag_code>
 <flag_title>Example Title</flag_title>
 <flag_category>safety-critical-role</flag_category>

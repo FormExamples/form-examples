@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE lab_med_waiting_list_card_appointment SYSTEM "lab_med_waiting_list_card_appointment.dtd">
-<lab_med_waiting_list_card_appointment>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<lab_med_waiting_list_card_appointment xmlns="https://formexamples.github.io/laboratory-medicine-waiting-list-card/xml">
+<id>7bf1cf5c-d2de-50f9-b04f-fc571a0ea2f5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<lab_med_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</lab_med_waiting_list_card_id>
+<lab_med_waiting_list_card_id>7cc35b89-6daf-5d6b-abce-62984f193a00</lab_med_waiting_list_card_id>
 <appointment_date>2026-01-15</appointment_date>
 <appointment_time></appointment_time>
 <duration_minutes>1</duration_minutes>

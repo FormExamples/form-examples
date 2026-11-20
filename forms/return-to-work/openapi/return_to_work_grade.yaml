@@ -5,10 +5,19 @@ info:
   title: Return To Work — ReturnToWorkGrade
   version: 1.0.0
   description: "Computed Return to Work grading result: the engine-derived fitness statement plus the composite restriction-priority grade. One-to-one child of return_to_work."
+x-namespace:
+  form: return-to-work
+  apiPrefix: /api/return-to-work/
+  sqlSchema: return_to_work
+  xmlNamespace: https://formexamples.github.io/return-to-work/xml
+tags:
+  - name: return-to-work
+    description: Return To Work form
 paths:
   /api/return-to-work/return_to_work_grades:
     get:
       summary: List ReturnToWorkGrade records
+      tags: [return-to-work]
       operationId: listReturnToWorkGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ReturnToWorkGrade
+      tags: [return-to-work]
       operationId: createReturnToWorkGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ReturnToWorkGrade by id
+      tags: [return-to-work]
       operationId: getReturnToWorkGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ReturnToWorkGrade
+      tags: [return-to-work]
       operationId: updateReturnToWorkGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ReturnToWorkGrade
+      tags: [return-to-work]
       operationId: replaceReturnToWorkGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ReturnToWorkGrade
+      tags: [return-to-work]
       operationId: deleteReturnToWorkGrade
       responses:
         "200":

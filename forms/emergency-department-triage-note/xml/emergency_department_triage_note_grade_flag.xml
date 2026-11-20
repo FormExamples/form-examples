@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE emergency_department_triage_note_grade_flag SYSTEM "emergency_department_triage_note_grade_flag.dtd">
-<emergency_department_triage_note_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<emergency_department_triage_note_grade_flag xmlns="https://formexamples.github.io/emergency-department-triage-note/xml">
+<id>90bf6ca2-44b7-5dd3-8881-2e463ad38ecb</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<emergency_department_triage_note_grade_id>880e8400-e29b-41d4-a716-446655440003</emergency_department_triage_note_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<emergency_department_triage_note_grade_id>05641b7b-c2de-5478-ac76-62a9d7a4eff8</emergency_department_triage_note_grade_id>
+<flag_id>10f8b0fa-0071-52da-91c8-b641d46886df</flag_id>
 <category>resus-immediate</category>
 <priority>low</priority>
 <description>Example text.</description>

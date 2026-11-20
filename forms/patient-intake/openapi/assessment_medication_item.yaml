@@ -5,10 +5,19 @@ info:
   title: Patient Intake — AssessmentMedicationItem
   version: 1.0.0
   description: Individual medication entry with name, dose, frequency, and prescriber.
+x-namespace:
+  form: patient-intake
+  apiPrefix: /api/patient-intake/
+  sqlSchema: patient_intake
+  xmlNamespace: https://formexamples.github.io/patient-intake/xml
+tags:
+  - name: patient-intake
+    description: Patient Intake form
 paths:
   /api/patient-intake/assessment_medication_items:
     get:
       summary: List AssessmentMedicationItem records
+      tags: [patient-intake]
       operationId: listAssessmentMedicationItem
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentMedicationItem
+      tags: [patient-intake]
       operationId: createAssessmentMedicationItem
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentMedicationItem by id
+      tags: [patient-intake]
       operationId: getAssessmentMedicationItem
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentMedicationItem
+      tags: [patient-intake]
       operationId: updateAssessmentMedicationItem
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentMedicationItem
+      tags: [patient-intake]
       operationId: replaceAssessmentMedicationItem
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentMedicationItem
+      tags: [patient-intake]
       operationId: deleteAssessmentMedicationItem
       responses:
         "200":

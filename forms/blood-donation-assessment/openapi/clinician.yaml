@@ -5,10 +5,19 @@ info:
   title: Blood Donation Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: blood-donation-assessment
+  apiPrefix: /api/blood-donation-assessment/
+  sqlSchema: blood_donation_assessment
+  xmlNamespace: https://formexamples.github.io/blood-donation-assessment/xml
+tags:
+  - name: blood-donation-assessment
+    description: Blood Donation Assessment form
 paths:
   /api/blood-donation-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [blood-donation-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [blood-donation-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [blood-donation-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [blood-donation-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [blood-donation-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [blood-donation-assessment]
       operationId: deleteClinician
       responses:
         "200":

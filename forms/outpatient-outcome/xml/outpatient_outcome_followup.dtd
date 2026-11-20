@@ -1,4 +1,5 @@
 <!ELEMENT outpatient_outcome_followup (id,created_at,updated_at,deleted_at,outpatient_outcome_id,disposition,next_appointment_date,onward_referral_specialty,followup_notes)>
+<!ATTLIST outpatient_outcome_followup xmlns CDATA #FIXED "https://formexamples.github.io/outpatient-outcome/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

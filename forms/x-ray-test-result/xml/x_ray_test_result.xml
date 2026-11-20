@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE x_ray_test_result SYSTEM "x_ray_test_result.dtd">
-<x_ray_test_result>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<x_ray_test_result xmlns="https://formexamples.github.io/x-ray-test-result/xml">
+<id>1517d7b0-c805-59ad-8e9d-086af08bd4bb</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>84158984-f60e-52a6-8ca7-35b535d78ffa</patient_id>
+<clinician_id>a6ebab88-8f09-59af-94ab-5538830480f5</clinician_id>
 <originating_request_reference></originating_request_reference>
 <report_status>preliminary</report_status>
 <performed_date>2026-01-15</performed_date>

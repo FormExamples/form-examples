@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ultrasound_test_result SYSTEM "ultrasound_test_result.dtd">
-<ultrasound_test_result>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<ultrasound_test_result xmlns="https://formexamples.github.io/ultrasound-test-result/xml">
+<id>4c35b83c-7bf7-55c3-a2cb-925ae149424f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>170ecd87-3c69-584c-b669-1a349771b690</patient_id>
+<clinician_id>223f2941-db0a-5723-a2e8-d242b00f961e</clinician_id>
 <originating_request_reference></originating_request_reference>
 <report_status>preliminary</report_status>
 <performed_date>2026-01-15</performed_date>

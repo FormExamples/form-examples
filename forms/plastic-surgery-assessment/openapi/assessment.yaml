@@ -5,10 +5,19 @@ info:
   title: Plastic Surgery Assessment — Assessment
   version: 1.0.0
   description: Plastic surgery assessment form using ASA Physical Status, Wound Classification, and Surgical Complexity scoring. Parent entity for all assessment sections.
+x-namespace:
+  form: plastic-surgery-assessment
+  apiPrefix: /api/plastic-surgery-assessment/
+  sqlSchema: plastic_surgery_assessment
+  xmlNamespace: https://formexamples.github.io/plastic-surgery-assessment/xml
+tags:
+  - name: plastic-surgery-assessment
+    description: Plastic Surgery Assessment form
 paths:
   /api/plastic-surgery-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [plastic-surgery-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [plastic-surgery-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [plastic-surgery-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [plastic-surgery-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [plastic-surgery-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [plastic-surgery-assessment]
       operationId: deleteAssessment
       responses:
         "200":

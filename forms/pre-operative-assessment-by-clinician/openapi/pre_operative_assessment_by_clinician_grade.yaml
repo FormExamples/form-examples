@@ -5,10 +5,19 @@ info:
   title: Pre Operative Assessment By Clinician — PreOperativeAssessmentByClinicianGrade
   version: 1.0.0
   description: Computed and signed-off grading result. Stores both the engine-computed ASA grade and the clinician-final grade with an override reason.
+x-namespace:
+  form: pre-operative-assessment-by-clinician
+  apiPrefix: /api/pre-operative-assessment-by-clinician/
+  sqlSchema: pre_operative_assessment_by_clinician
+  xmlNamespace: https://formexamples.github.io/pre-operative-assessment-by-clinician/xml
+tags:
+  - name: pre-operative-assessment-by-clinician
+    description: Pre Operative Assessment By Clinician form
 paths:
   /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinician_grades:
     get:
       summary: List PreOperativeAssessmentByClinicianGrade records
+      tags: [pre-operative-assessment-by-clinician]
       operationId: listPreOperativeAssessmentByClinicianGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PreOperativeAssessmentByClinicianGrade
+      tags: [pre-operative-assessment-by-clinician]
       operationId: createPreOperativeAssessmentByClinicianGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PreOperativeAssessmentByClinicianGrade by id
+      tags: [pre-operative-assessment-by-clinician]
       operationId: getPreOperativeAssessmentByClinicianGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PreOperativeAssessmentByClinicianGrade
+      tags: [pre-operative-assessment-by-clinician]
       operationId: updatePreOperativeAssessmentByClinicianGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PreOperativeAssessmentByClinicianGrade
+      tags: [pre-operative-assessment-by-clinician]
       operationId: replacePreOperativeAssessmentByClinicianGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PreOperativeAssessmentByClinicianGrade
+      tags: [pre-operative-assessment-by-clinician]
       operationId: deletePreOperativeAssessmentByClinicianGrade
       responses:
         "200":

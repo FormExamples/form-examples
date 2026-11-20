@@ -5,10 +5,19 @@ info:
   title: X Ray Test Result — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: x-ray-test-result
+  apiPrefix: /api/x-ray-test-result/
+  sqlSchema: x_ray_test_result
+  xmlNamespace: https://formexamples.github.io/x-ray-test-result/xml
+tags:
+  - name: x-ray-test-result
+    description: X Ray Test Result form
 paths:
   /api/x-ray-test-result/patients:
     get:
       summary: List Patient records
+      tags: [x-ray-test-result]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [x-ray-test-result]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [x-ray-test-result]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [x-ray-test-result]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [x-ray-test-result]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [x-ray-test-result]
       operationId: deletePatient
       responses:
         "200":

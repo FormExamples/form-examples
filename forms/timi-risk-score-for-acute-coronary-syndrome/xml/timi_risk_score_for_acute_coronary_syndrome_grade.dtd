@@ -1,4 +1,5 @@
 <!ELEMENT timi_risk_score_for_acute_coronary_syndrome_grade (id,created_at,updated_at,deleted_at,timi_risk_score_for_acute_coronary_syndrome_id,total_score,risk_band,fourteen_day_event_risk_percent,management,graded_at)>
+<!ATTLIST timi_risk_score_for_acute_coronary_syndrome_grade xmlns CDATA #FIXED "https://formexamples.github.io/timi-risk-score-for-acute-coronary-syndrome/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

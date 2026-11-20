@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE epilepsy_review SYSTEM "epilepsy_review.dtd">
-<epilepsy_review>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<epilepsy_review xmlns="https://formexamples.github.io/epilepsy-review/xml">
+<id>98a7b994-1c5b-5453-becf-ec583d4eaf79</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>95d8ec35-53eb-539b-8c97-60a1b28925d1</patient_id>
+<clinician_id>a2007ef9-3ca1-515e-9802-ed68e305ac76</clinician_id>
 <reviewer_name>Example</reviewer_name>
 <reviewer_role>gp</reviewer_role>
 <reviewed_at>2026-01-15</reviewed_at>

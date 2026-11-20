@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Glasgow-Blatchford Bleeding Score (GBS) form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: glasgow-blatchford-bleeding-score
+  apiPrefix: /api/glasgow-blatchford-bleeding-score/
+  sqlSchema: glasgow_blatchford_bleeding_score
+  xmlNamespace: https://formexamples.github.io/glasgow-blatchford-bleeding-score/xml
+tags:
+- name: glasgow-blatchford-bleeding-score
+  description: Glasgow-Blatchford Bleeding Score (GBS) form
 paths:
   /api/glasgow-blatchford-bleeding-score/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/glasgow-blatchford-bleeding-score/glasgow_blatchford_bleeding_score_grade_flags:
     get:
       summary: List GlasgowBlatchfordBleedingScoreGradeFlag records
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: listGlasgowBlatchfordBleedingScoreGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GlasgowBlatchfordBleedingScoreGradeFlag
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: createGlasgowBlatchfordBleedingScoreGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GlasgowBlatchfordBleedingScoreGradeFlag by id
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: getGlasgowBlatchfordBleedingScoreGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GlasgowBlatchfordBleedingScoreGradeFlag
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: updateGlasgowBlatchfordBleedingScoreGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GlasgowBlatchfordBleedingScoreGradeFlag
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: replaceGlasgowBlatchfordBleedingScoreGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GlasgowBlatchfordBleedingScoreGradeFlag
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: deleteGlasgowBlatchfordBleedingScoreGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/glasgow-blatchford-bleeding-score/glasgow_blatchford_bleeding_score_grade_rules:
     get:
       summary: List GlasgowBlatchfordBleedingScoreGradeRule records
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: listGlasgowBlatchfordBleedingScoreGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GlasgowBlatchfordBleedingScoreGradeRule
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: createGlasgowBlatchfordBleedingScoreGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GlasgowBlatchfordBleedingScoreGradeRule by id
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: getGlasgowBlatchfordBleedingScoreGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GlasgowBlatchfordBleedingScoreGradeRule
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: updateGlasgowBlatchfordBleedingScoreGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GlasgowBlatchfordBleedingScoreGradeRule
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: replaceGlasgowBlatchfordBleedingScoreGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GlasgowBlatchfordBleedingScoreGradeRule
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: deleteGlasgowBlatchfordBleedingScoreGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/glasgow-blatchford-bleeding-score/glasgow_blatchford_bleeding_score_grades:
     get:
       summary: List GlasgowBlatchfordBleedingScoreGrade records
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: listGlasgowBlatchfordBleedingScoreGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GlasgowBlatchfordBleedingScoreGrade
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: createGlasgowBlatchfordBleedingScoreGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GlasgowBlatchfordBleedingScoreGrade by id
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: getGlasgowBlatchfordBleedingScoreGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GlasgowBlatchfordBleedingScoreGrade
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: updateGlasgowBlatchfordBleedingScoreGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GlasgowBlatchfordBleedingScoreGrade
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: replaceGlasgowBlatchfordBleedingScoreGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GlasgowBlatchfordBleedingScoreGrade
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: deleteGlasgowBlatchfordBleedingScoreGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/glasgow-blatchford-bleeding-score/glasgow_blatchford_bleeding_scores:
     get:
       summary: List GlasgowBlatchfordBleedingScore records
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: listGlasgowBlatchfordBleedingScore
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GlasgowBlatchfordBleedingScore
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: createGlasgowBlatchfordBleedingScore
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GlasgowBlatchfordBleedingScore by id
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: getGlasgowBlatchfordBleedingScore
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GlasgowBlatchfordBleedingScore
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: updateGlasgowBlatchfordBleedingScore
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GlasgowBlatchfordBleedingScore
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: replaceGlasgowBlatchfordBleedingScore
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GlasgowBlatchfordBleedingScore
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: deleteGlasgowBlatchfordBleedingScore
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - glasgow-blatchford-bleeding-score
   /api/glasgow-blatchford-bleeding-score/patients:
     get:
       summary: List Patient records
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - glasgow-blatchford-bleeding-score
       operationId: deletePatient
       responses:
         '200':

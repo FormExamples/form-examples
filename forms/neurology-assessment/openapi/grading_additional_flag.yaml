@@ -5,10 +5,19 @@ info:
   title: Neurology Assessment — GradingAdditionalFlag
   version: 1.0.0
   description: Additional safety-critical flags detected during neurology assessment grading (e.g. acute stroke indicators, thunderclap headache, status epilepticus).
+x-namespace:
+  form: neurology-assessment
+  apiPrefix: /api/neurology-assessment/
+  sqlSchema: neurology_assessment
+  xmlNamespace: https://formexamples.github.io/neurology-assessment/xml
+tags:
+  - name: neurology-assessment
+    description: Neurology Assessment form
 paths:
   /api/neurology-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [neurology-assessment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [neurology-assessment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [neurology-assessment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [neurology-assessment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [neurology-assessment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [neurology-assessment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

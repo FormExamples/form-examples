@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dermatology_waiting_list_card_appointment SYSTEM "dermatology_waiting_list_card_appointment.dtd">
-<dermatology_waiting_list_card_appointment>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<dermatology_waiting_list_card_appointment xmlns="https://formexamples.github.io/dermatology-waiting-list-card/xml">
+<id>5e330d46-1c35-549b-97ef-c582b830258b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<dermatology_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</dermatology_waiting_list_card_id>
+<dermatology_waiting_list_card_id>c3a48fe1-b3d6-57d2-b30a-dd10fc204496</dermatology_waiting_list_card_id>
 <appointment_date>2026-01-15</appointment_date>
 <appointment_time></appointment_time>
 <duration_minutes>1</duration_minutes>

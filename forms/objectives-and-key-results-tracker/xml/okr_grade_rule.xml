@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE okr_grade_rule SYSTEM "okr_grade_rule.dtd">
-<okr_grade_rule>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<okr_grade_rule xmlns="https://formexamples.github.io/objectives-and-key-results-tracker/xml">
+<id>5ea8d675-0ebd-5ac8-ad50-3536d221bb7c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<okr_grade_id>aa0e8400-e29b-41d4-a716-446655440005</okr_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<okr_grade_id>02637077-314c-588b-9eca-06ea1c0c7ed9</okr_grade_id>
+<rule_id>b747972a-df5c-51e7-8add-08107f650f05</rule_id>
 <instrument>progress</instrument>
 <grade></grade>
 <category>General</category>

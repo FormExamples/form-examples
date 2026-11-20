@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000014a",
+    "id": "5f3f8455-3c06-576a-a4c8-32ee2728b871",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000015c",
+    "id": "66e0a094-ec49-5b39-b87c-479e41fc8b39",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,11 +36,11 @@
     "unitedKingdomNhsNumber": ""
   },
   "preOperativeAssessmentByPatient": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b1",
+    "id": "1d5ecdea-b410-5f55-b1ce-17aa355a26d5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000000b5",
+    "patientId": "efdfb8e9-3182-5586-ab75-06cd31632d3f",
     "weight": null,
     "height": null,
     "bmi": null,
@@ -136,7 +136,7 @@
     "gestationWeeks": null
   },
   "asaRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000113",
+    "id": "535d50a7-f3e0-5d10-9b3c-ab3a0ba0873c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -146,11 +146,11 @@
     "grade": 3
   },
   "grade": {
-    "id": "550e8400-e29b-41d4-a716-00000000016a",
+    "id": "6ab510e6-b0c2-598c-836e-2bb40ee2cb4d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "preOperativeAssessmentByPatientId": "550e8400-e29b-41d4-a716-00000000016e",
+    "preOperativeAssessmentByPatientId": "d4f8f318-b519-5cdc-8187-cb14a324a3b1",
     "computedAsaGrade": "I",
     "finalAsaGrade": "I",
     "asaEmergencySuffix": "E",
@@ -166,11 +166,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "gradingFiredRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000017c",
+    "id": "7bab1b93-47ba-56de-b14c-434c9375bdbf",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-000000000180",
+    "gradeId": "400eefa2-6ffc-5bf8-9e85-32cf79748593",
     "ruleId": "",
     "instrument": "asa",
     "grade": "",
@@ -178,11 +178,11 @@
     "description": ""
   },
   "gradingAdditionalFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000186",
+    "id": "18a9253c-08ec-59d7-86ef-7f0f3d70d2cb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-00000000018a",
+    "gradeId": "759be6d7-acea-5fda-ab3e-004fe19a5110",
     "flagId": "",
     "category": "difficult-airway",
     "priority": "low",

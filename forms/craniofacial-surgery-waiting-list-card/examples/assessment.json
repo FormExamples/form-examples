@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "64257c42-6e58-5acc-989e-f0746012fcea",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "ae936bb5-25f8-5166-98f9-79eca8f6ff73",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "cranioSurgeryWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "c5b56ed7-d65d-53e4-b426-4b63fbf07450",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000096",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000097",
+    "patientId": "95d01da1-f1ae-5468-8569-68c574308582",
+    "practitionerId": "2ad7ff81-2b9e-5d8c-8098-a7621656ae20",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "cranioSurgeryWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "2d9b6475-c9e6-51a9-997c-60304268f610",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cranioSurgeryWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "cranioSurgeryWaitingListCardId": "6e48be0c-3cb3-51a0-bd0b-6e9210025e01",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "cranioSurgeryWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "c669107f-1605-5db1-baf4-a6d6d4cd770e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cranioSurgeryWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "cranioSurgeryWaitingListCardId": "d24161bc-72ed-5af8-8fec-5a2013482603",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "cranioSurgeryWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d1",
+    "id": "d25610d3-109b-5f9f-83d2-3430db0c3681",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cranioSurgeryWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "cranioSurgeryWaitingListCardGradeId": "714ac865-3a4f-5b5d-af18-9925359d1248",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "cranioSurgeryWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000db",
+    "id": "b5d8d49c-a6d9-543f-a13b-39de2a6372cb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cranioSurgeryWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000df",
+    "cranioSurgeryWaitingListCardGradeId": "33ecbd57-46fa-5d12-9576-f3b315a8dbe1",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

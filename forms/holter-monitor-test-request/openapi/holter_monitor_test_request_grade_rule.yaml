@@ -5,10 +5,19 @@ info:
   title: Holter Monitor Test Request — HolterMonitorTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / urgency / completeness / priority rule that fired for this request.
+x-namespace:
+  form: holter-monitor-test-request
+  apiPrefix: /api/holter-monitor-test-request/
+  sqlSchema: holter_monitor_test_request
+  xmlNamespace: https://formexamples.github.io/holter-monitor-test-request/xml
+tags:
+  - name: holter-monitor-test-request
+    description: Holter Monitor Test Request form
 paths:
   /api/holter-monitor-test-request/holter_monitor_test_request_grade_rules:
     get:
       summary: List HolterMonitorTestRequestGradeRule records
+      tags: [holter-monitor-test-request]
       operationId: listHolterMonitorTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HolterMonitorTestRequestGradeRule
+      tags: [holter-monitor-test-request]
       operationId: createHolterMonitorTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HolterMonitorTestRequestGradeRule by id
+      tags: [holter-monitor-test-request]
       operationId: getHolterMonitorTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HolterMonitorTestRequestGradeRule
+      tags: [holter-monitor-test-request]
       operationId: updateHolterMonitorTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HolterMonitorTestRequestGradeRule
+      tags: [holter-monitor-test-request]
       operationId: replaceHolterMonitorTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HolterMonitorTestRequestGradeRule
+      tags: [holter-monitor-test-request]
       operationId: deleteHolterMonitorTestRequestGradeRule
       responses:
         "200":

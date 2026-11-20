@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE keeper SYSTEM "keeper.dtd">
-<keeper>
-<id>660e8400-e29b-41d4-a716-446655440001</id>
+<keeper xmlns="https://formexamples.github.io/united-kingdom-vehicle-registration-application/xml">
+<id>635e15fe-fd74-5f39-849b-520b26f90027</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>

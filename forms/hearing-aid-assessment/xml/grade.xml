@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<grade xmlns="https://formexamples.github.io/hearing-aid-assessment/xml">
+<id>3acc76e0-7bec-5e9d-bb80-82d30a91ea65</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>d11ca511-8124-56f1-a556-f511d3953681</assessment_id>
 <handicap_level>no-handicap</handicap_level>
 <hhies_total_score>5</hhies_total_score>
 <hearing_aid_candidacy>recommended</hearing_aid_candidacy>

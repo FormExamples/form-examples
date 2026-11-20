@@ -5,10 +5,19 @@ info:
   title: United States Health Care Power Of Attorney — UnitedStatesHealthCarePowerOfAttorneyGrade
   version: 1.0.0
   description: "Computed readiness classification for a health care power of attorney: ready-to-execute, incomplete, or execution-risk, plus the state rule set applied."
+x-namespace:
+  form: united-states-health-care-power-of-attorney
+  apiPrefix: /api/united-states-health-care-power-of-attorney/
+  sqlSchema: united_states_health_care_power_of_attorney
+  xmlNamespace: https://formexamples.github.io/united-states-health-care-power-of-attorney/xml
+tags:
+  - name: united-states-health-care-power-of-attorney
+    description: United States Health Care Power Of Attorney form
 paths:
   /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorney_grades:
     get:
       summary: List UnitedStatesHealthCarePowerOfAttorneyGrade records
+      tags: [united-states-health-care-power-of-attorney]
       operationId: listUnitedStatesHealthCarePowerOfAttorneyGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesHealthCarePowerOfAttorneyGrade
+      tags: [united-states-health-care-power-of-attorney]
       operationId: createUnitedStatesHealthCarePowerOfAttorneyGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesHealthCarePowerOfAttorneyGrade by id
+      tags: [united-states-health-care-power-of-attorney]
       operationId: getUnitedStatesHealthCarePowerOfAttorneyGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesHealthCarePowerOfAttorneyGrade
+      tags: [united-states-health-care-power-of-attorney]
       operationId: updateUnitedStatesHealthCarePowerOfAttorneyGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesHealthCarePowerOfAttorneyGrade
+      tags: [united-states-health-care-power-of-attorney]
       operationId: replaceUnitedStatesHealthCarePowerOfAttorneyGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesHealthCarePowerOfAttorneyGrade
+      tags: [united-states-health-care-power-of-attorney]
       operationId: deleteUnitedStatesHealthCarePowerOfAttorneyGrade
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Encounter Satisfaction — Communication
   version: 1.0.0
   description: "1:1 with encounter_satisfaction. Communication domain: 4 Likert-scale satisfaction questions."
+x-namespace:
+  form: encounter-satisfaction
+  apiPrefix: /api/encounter-satisfaction/
+  sqlSchema: encounter_satisfaction
+  xmlNamespace: https://formexamples.github.io/encounter-satisfaction/xml
+tags:
+  - name: encounter-satisfaction
+    description: Encounter Satisfaction form
 paths:
   /api/encounter-satisfaction/communications:
     get:
       summary: List Communication records
+      tags: [encounter-satisfaction]
       operationId: listCommunication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Communication
+      tags: [encounter-satisfaction]
       operationId: createCommunication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Communication by id
+      tags: [encounter-satisfaction]
       operationId: getCommunication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Communication
+      tags: [encounter-satisfaction]
       operationId: updateCommunication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Communication
+      tags: [encounter-satisfaction]
       operationId: replaceCommunication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Communication
+      tags: [encounter-satisfaction]
       operationId: deleteCommunication
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE genetic_test_result_grade_rule SYSTEM "genetic_test_result_grade_rule.dtd">
-<genetic_test_result_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<genetic_test_result_grade_rule xmlns="https://formexamples.github.io/genetic-test-result/xml">
+<id>50cc9e5a-772e-5ba1-be3e-46f16bf2c709</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<genetic_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</genetic_test_result_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<genetic_test_result_grade_id>9702f755-30a9-5ba7-9d30-f3e4bc5d80fd</genetic_test_result_grade_id>
+<rule_id>39fa44ec-efd3-5ad7-a96a-3bc0bd283239</rule_id>
 <axis>classification</axis>
 <category>General</category>
 <description>Example text.</description>

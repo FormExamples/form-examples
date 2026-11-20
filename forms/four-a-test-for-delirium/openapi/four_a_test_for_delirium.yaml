@@ -5,10 +5,19 @@ info:
   title: Four A Test For Delirium — FourATestForDelirium
   version: 1.0.0
   description: "Main 4AT assessment record: patient and assessment identification, context, and the four scored item inputs (alertness, AMT4, attention via months-backwards, and acute change or fluctuating course)."
+x-namespace:
+  form: four-a-test-for-delirium
+  apiPrefix: /api/four-a-test-for-delirium/
+  sqlSchema: four_a_test_for_delirium
+  xmlNamespace: https://formexamples.github.io/four-a-test-for-delirium/xml
+tags:
+  - name: four-a-test-for-delirium
+    description: Four A Test For Delirium form
 paths:
   /api/four-a-test-for-delirium/four_a_test_for_deliriums:
     get:
       summary: List FourATestForDelirium records
+      tags: [four-a-test-for-delirium]
       operationId: listFourATestForDelirium
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new FourATestForDelirium
+      tags: [four-a-test-for-delirium]
       operationId: createFourATestForDelirium
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one FourATestForDelirium by id
+      tags: [four-a-test-for-delirium]
       operationId: getFourATestForDelirium
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing FourATestForDelirium
+      tags: [four-a-test-for-delirium]
       operationId: updateFourATestForDelirium
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing FourATestForDelirium
+      tags: [four-a-test-for-delirium]
       operationId: replaceFourATestForDelirium
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a FourATestForDelirium
+      tags: [four-a-test-for-delirium]
       operationId: deleteFourATestForDelirium
       responses:
         "200":

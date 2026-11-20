@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000061",
+    "id": "998beb96-5cd5-5c6d-876c-fe35791f38ad",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "c1d59f2e-ec61-5289-9971-41a39fcffc63",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "petScanTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-000000000081",
+    "id": "6613f00a-9d3a-57e9-adb0-07f5c987984f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000085",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000086",
+    "patientId": "cebf752f-cb23-5905-8071-dd8d179b811f",
+    "clinicianId": "e9046cda-764a-5c94-b32b-2faf5bf4e0f6",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -67,11 +67,11 @@
     "notes": ""
   },
   "petScanTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000009e",
+    "id": "d059313d-1037-53d1-b13d-acf811b95114",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "petScanTestRequestId": "550e8400-e29b-41d4-a716-0000000000a2",
+    "petScanTestRequestId": "9d7e7fc5-535e-53b6-80a2-d8697b3728cf",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "prepSafetyBand": "ok",
@@ -85,22 +85,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "petScanTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ae",
+    "id": "599b3454-12d6-5d84-aae9-e9d2f2a71286",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "petScanTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b2",
+    "petScanTestRequestGradeId": "b22ddbba-8281-5e00-af7d-4ad12b525c25",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "petScanTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b7",
+    "id": "9e8d9206-7e05-5354-8c97-375c6d85c90f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "petScanTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000bb",
+    "petScanTestRequestGradeId": "649458e8-af81-5ee6-92ca-d3d68f63c0ee",
     "flagId": "",
     "category": "pregnancy",
     "priority": "low",

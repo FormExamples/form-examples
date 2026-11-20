@@ -5,10 +5,19 @@ info:
   title: Cytology Test Request — CytologyTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (NHS Cervical Screening / indication match, 1-9), pre-analytical specimen adequacy, request completeness, and triage priority."
+x-namespace:
+  form: cytology-test-request
+  apiPrefix: /api/cytology-test-request/
+  sqlSchema: cytology_test_request
+  xmlNamespace: https://formexamples.github.io/cytology-test-request/xml
+tags:
+  - name: cytology-test-request
+    description: Cytology Test Request form
 paths:
   /api/cytology-test-request/cytology_test_request_grades:
     get:
       summary: List CytologyTestRequestGrade records
+      tags: [cytology-test-request]
       operationId: listCytologyTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CytologyTestRequestGrade
+      tags: [cytology-test-request]
       operationId: createCytologyTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CytologyTestRequestGrade by id
+      tags: [cytology-test-request]
       operationId: getCytologyTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CytologyTestRequestGrade
+      tags: [cytology-test-request]
       operationId: updateCytologyTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CytologyTestRequestGrade
+      tags: [cytology-test-request]
       operationId: replaceCytologyTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CytologyTestRequestGrade
+      tags: [cytology-test-request]
       operationId: deleteCytologyTestRequestGrade
       responses:
         "200":

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Electroencephalogram Test Request form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: electroencephalogram-test-request
+  apiPrefix: /api/electroencephalogram-test-request/
+  sqlSchema: electroencephalogram_test_request
+  xmlNamespace: https://formexamples.github.io/electroencephalogram-test-request/xml
+tags:
+- name: electroencephalogram-test-request
+  description: Electroencephalogram Test Request form
 paths:
   /api/electroencephalogram-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - electroencephalogram-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - electroencephalogram-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - electroencephalogram-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - electroencephalogram-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - electroencephalogram-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - electroencephalogram-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/electroencephalogram-test-request/electroencephalogram_test_request_grade_flags:
     get:
       summary: List ElectroencephalogramTestRequestGradeFlag records
+      tags:
+      - electroencephalogram-test-request
       operationId: listElectroencephalogramTestRequestGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ElectroencephalogramTestRequestGradeFlag
+      tags:
+      - electroencephalogram-test-request
       operationId: createElectroencephalogramTestRequestGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ElectroencephalogramTestRequestGradeFlag by id
+      tags:
+      - electroencephalogram-test-request
       operationId: getElectroencephalogramTestRequestGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ElectroencephalogramTestRequestGradeFlag
+      tags:
+      - electroencephalogram-test-request
       operationId: updateElectroencephalogramTestRequestGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ElectroencephalogramTestRequestGradeFlag
+      tags:
+      - electroencephalogram-test-request
       operationId: replaceElectroencephalogramTestRequestGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ElectroencephalogramTestRequestGradeFlag
+      tags:
+      - electroencephalogram-test-request
       operationId: deleteElectroencephalogramTestRequestGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/electroencephalogram-test-request/electroencephalogram_test_request_grade_rules:
     get:
       summary: List ElectroencephalogramTestRequestGradeRule records
+      tags:
+      - electroencephalogram-test-request
       operationId: listElectroencephalogramTestRequestGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ElectroencephalogramTestRequestGradeRule
+      tags:
+      - electroencephalogram-test-request
       operationId: createElectroencephalogramTestRequestGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ElectroencephalogramTestRequestGradeRule by id
+      tags:
+      - electroencephalogram-test-request
       operationId: getElectroencephalogramTestRequestGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ElectroencephalogramTestRequestGradeRule
+      tags:
+      - electroencephalogram-test-request
       operationId: updateElectroencephalogramTestRequestGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ElectroencephalogramTestRequestGradeRule
+      tags:
+      - electroencephalogram-test-request
       operationId: replaceElectroencephalogramTestRequestGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ElectroencephalogramTestRequestGradeRule
+      tags:
+      - electroencephalogram-test-request
       operationId: deleteElectroencephalogramTestRequestGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/electroencephalogram-test-request/electroencephalogram_test_request_grades:
     get:
       summary: List ElectroencephalogramTestRequestGrade records
+      tags:
+      - electroencephalogram-test-request
       operationId: listElectroencephalogramTestRequestGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ElectroencephalogramTestRequestGrade
+      tags:
+      - electroencephalogram-test-request
       operationId: createElectroencephalogramTestRequestGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ElectroencephalogramTestRequestGrade by id
+      tags:
+      - electroencephalogram-test-request
       operationId: getElectroencephalogramTestRequestGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ElectroencephalogramTestRequestGrade
+      tags:
+      - electroencephalogram-test-request
       operationId: updateElectroencephalogramTestRequestGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ElectroencephalogramTestRequestGrade
+      tags:
+      - electroencephalogram-test-request
       operationId: replaceElectroencephalogramTestRequestGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ElectroencephalogramTestRequestGrade
+      tags:
+      - electroencephalogram-test-request
       operationId: deleteElectroencephalogramTestRequestGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/electroencephalogram-test-request/electroencephalogram_test_requests:
     get:
       summary: List ElectroencephalogramTestRequest records
+      tags:
+      - electroencephalogram-test-request
       operationId: listElectroencephalogramTestRequest
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ElectroencephalogramTestRequest
+      tags:
+      - electroencephalogram-test-request
       operationId: createElectroencephalogramTestRequest
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ElectroencephalogramTestRequest by id
+      tags:
+      - electroencephalogram-test-request
       operationId: getElectroencephalogramTestRequest
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ElectroencephalogramTestRequest
+      tags:
+      - electroencephalogram-test-request
       operationId: updateElectroencephalogramTestRequest
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ElectroencephalogramTestRequest
+      tags:
+      - electroencephalogram-test-request
       operationId: replaceElectroencephalogramTestRequest
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ElectroencephalogramTestRequest
+      tags:
+      - electroencephalogram-test-request
       operationId: deleteElectroencephalogramTestRequest
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - electroencephalogram-test-request
   /api/electroencephalogram-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - electroencephalogram-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - electroencephalogram-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - electroencephalogram-test-request
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - electroencephalogram-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - electroencephalogram-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - electroencephalogram-test-request
       operationId: deletePatient
       responses:
         '200':

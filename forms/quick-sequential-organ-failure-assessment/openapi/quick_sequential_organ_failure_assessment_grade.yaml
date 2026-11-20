@@ -5,10 +5,19 @@ info:
   title: Quick Sequential Organ Failure Assessment — QuickSequentialOrganFailureAssessmentGrade
   version: 1.0.0
   description: "Computed qSOFA grading result: per-criterion 0-1 points, summed total (0-3), derived risk band (lower/higher), and whether the >= 2 escalation threshold was met."
+x-namespace:
+  form: quick-sequential-organ-failure-assessment
+  apiPrefix: /api/quick-sequential-organ-failure-assessment/
+  sqlSchema: quick_sequential_organ_failure_assessment
+  xmlNamespace: https://formexamples.github.io/quick-sequential-organ-failure-assessment/xml
+tags:
+  - name: quick-sequential-organ-failure-assessment
+    description: Quick Sequential Organ Failure Assessment form
 paths:
   /api/quick-sequential-organ-failure-assessment/quick_sequential_organ_failure_assessment_grades:
     get:
       summary: List QuickSequentialOrganFailureAssessmentGrade records
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: listQuickSequentialOrganFailureAssessmentGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new QuickSequentialOrganFailureAssessmentGrade
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: createQuickSequentialOrganFailureAssessmentGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one QuickSequentialOrganFailureAssessmentGrade by id
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: getQuickSequentialOrganFailureAssessmentGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing QuickSequentialOrganFailureAssessmentGrade
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: updateQuickSequentialOrganFailureAssessmentGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing QuickSequentialOrganFailureAssessmentGrade
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: replaceQuickSequentialOrganFailureAssessmentGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a QuickSequentialOrganFailureAssessmentGrade
+      tags: [quick-sequential-organ-failure-assessment]
       operationId: deleteQuickSequentialOrganFailureAssessmentGrade
       responses:
         "200":

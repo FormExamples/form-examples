@@ -1,4 +1,5 @@
 <!ELEMENT waterlow_pressure_ulcer_risk_assessment_grade_rule (id,created_at,updated_at,deleted_at,waterlow_pressure_ulcer_risk_assessment_grade_id,rule_id,category,points,label,description)>
+<!ATTLIST waterlow_pressure_ulcer_risk_assessment_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/waterlow-pressure-ulcer-risk-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

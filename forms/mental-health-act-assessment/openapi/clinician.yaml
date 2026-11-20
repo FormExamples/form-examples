@@ -5,10 +5,19 @@ info:
   title: Mental Health Act Assessment — Clinician
   version: 1.0.0
   description: Professional identifying information for the AMHP and the medical practitioners who conduct a Mental Health Act assessment.
+x-namespace:
+  form: mental-health-act-assessment
+  apiPrefix: /api/mental-health-act-assessment/
+  sqlSchema: mental_health_act_assessment
+  xmlNamespace: https://formexamples.github.io/mental-health-act-assessment/xml
+tags:
+  - name: mental-health-act-assessment
+    description: Mental Health Act Assessment form
 paths:
   /api/mental-health-act-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [mental-health-act-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [mental-health-act-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [mental-health-act-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [mental-health-act-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [mental-health-act-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [mental-health-act-assessment]
       operationId: deleteClinician
       responses:
         "200":

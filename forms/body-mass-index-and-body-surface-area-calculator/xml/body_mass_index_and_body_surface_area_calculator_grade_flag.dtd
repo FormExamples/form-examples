@@ -1,4 +1,5 @@
 <!ELEMENT body_mass_index_and_body_surface_area_calculator_grade_flag (id,created_at,updated_at,deleted_at,body_mass_index_and_body_surface_area_calculator_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST body_mass_index_and_body_surface_area_calculator_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/body-mass-index-and-body-surface-area-calculator/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

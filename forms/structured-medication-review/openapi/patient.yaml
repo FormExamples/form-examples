@@ -5,10 +5,19 @@ info:
   title: Structured Medication Review — Patient
   version: 1.0.0
   description: Patient demographic information used by the structured medication review record.
+x-namespace:
+  form: structured-medication-review
+  apiPrefix: /api/structured-medication-review/
+  sqlSchema: structured_medication_review
+  xmlNamespace: https://formexamples.github.io/structured-medication-review/xml
+tags:
+  - name: structured-medication-review
+    description: Structured Medication Review form
 paths:
   /api/structured-medication-review/patients:
     get:
       summary: List Patient records
+      tags: [structured-medication-review]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [structured-medication-review]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [structured-medication-review]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [structured-medication-review]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [structured-medication-review]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [structured-medication-review]
       operationId: deletePatient
       responses:
         "200":

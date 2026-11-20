@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000065",
+    "id": "dd4627e6-6cfd-5cbb-b4c1-ab667530fca6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000077",
+    "id": "87523a0c-fab2-57cf-9385-bdfb7422f728",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "postAnaesthesiaCareUnitRecord": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "43f9c300-4bfb-5796-a163-ae3e25d21a50",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000088",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000089",
+    "patientId": "b9cd4129-9f67-5d4f-a6c2-3ca091de6b5b",
+    "clinicianId": "a014bdad-7344-5fec-9bbb-bdb0e2f68559",
     "nurseName": "",
     "nurseRole": "recovery-nurse",
     "anaesthetistName": "",
@@ -71,11 +71,11 @@
     "recoveryNote": ""
   },
   "postAnaesthesiaCareUnitRecordGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a6",
+    "id": "7bcc9013-f624-53c9-8ff2-cb26cb4a28f2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "postAnaesthesiaCareUnitRecordId": "550e8400-e29b-41d4-a716-0000000000aa",
+    "postAnaesthesiaCareUnitRecordId": "af2dece9-6206-53aa-9733-7d7ce31140f0",
     "activityScore": null,
     "respirationScore": null,
     "circulationScore": null,
@@ -88,11 +88,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "postAnaesthesiaCareUnitRecordGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b5",
+    "id": "e76f1619-69b8-5004-8506-9a0e81efa2d6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "postAnaesthesiaCareUnitRecordGradeId": "550e8400-e29b-41d4-a716-0000000000b9",
+    "postAnaesthesiaCareUnitRecordGradeId": "41afa516-3df4-5e2f-a758-101ab3f48a37",
     "ruleId": "",
     "parameter": "activity",
     "points": null,
@@ -100,11 +100,11 @@
     "description": ""
   },
   "postAnaesthesiaCareUnitRecordGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bf",
+    "id": "cf59cf77-f040-58a0-b483-03d5af362f17",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "postAnaesthesiaCareUnitRecordGradeId": "550e8400-e29b-41d4-a716-0000000000c3",
+    "postAnaesthesiaCareUnitRecordGradeId": "441caca0-57fb-56fd-b0db-221ff11d5b4a",
     "flagId": "",
     "category": "not-ready-for-discharge",
     "priority": "low",

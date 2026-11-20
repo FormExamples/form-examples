@@ -5,10 +5,19 @@ info:
   title: Orthopedic Assessment — AssessmentStrengthTesting
   version: 1.0.0
   description: "Strength testing section header: grip strength and overall status. One-to-one child of assessment."
+x-namespace:
+  form: orthopedic-assessment
+  apiPrefix: /api/orthopedic-assessment/
+  sqlSchema: orthopedic_assessment
+  xmlNamespace: https://formexamples.github.io/orthopedic-assessment/xml
+tags:
+  - name: orthopedic-assessment
+    description: Orthopedic Assessment form
 paths:
   /api/orthopedic-assessment/assessment_strength_testings:
     get:
       summary: List AssessmentStrengthTesting records
+      tags: [orthopedic-assessment]
       operationId: listAssessmentStrengthTesting
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentStrengthTesting
+      tags: [orthopedic-assessment]
       operationId: createAssessmentStrengthTesting
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentStrengthTesting by id
+      tags: [orthopedic-assessment]
       operationId: getAssessmentStrengthTesting
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentStrengthTesting
+      tags: [orthopedic-assessment]
       operationId: updateAssessmentStrengthTesting
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentStrengthTesting
+      tags: [orthopedic-assessment]
       operationId: replaceAssessmentStrengthTesting
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentStrengthTesting
+      tags: [orthopedic-assessment]
       operationId: deleteAssessmentStrengthTesting
       responses:
         "200":

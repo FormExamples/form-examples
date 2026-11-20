@@ -5,10 +5,19 @@ info:
   title: Pulmonary Function Test Result — PulmonaryFunctionTestResult
   version: 1.0.0
   description: Pulmonary function test (lung-function / spirometry) result (report). Captures the performed test type and quality, clinical history, the measured spirometry / gas-transfer values, the structured ventilatory interpretation (pattern, severity, bronchodilator reversibility), the narrative and structured findings, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: pulmonary-function-test-result
+  apiPrefix: /api/pulmonary-function-test-result/
+  sqlSchema: pulmonary_function_test_result
+  xmlNamespace: https://formexamples.github.io/pulmonary-function-test-result/xml
+tags:
+  - name: pulmonary-function-test-result
+    description: Pulmonary Function Test Result form
 paths:
   /api/pulmonary-function-test-result/pulmonary_function_test_results:
     get:
       summary: List PulmonaryFunctionTestResult records
+      tags: [pulmonary-function-test-result]
       operationId: listPulmonaryFunctionTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PulmonaryFunctionTestResult
+      tags: [pulmonary-function-test-result]
       operationId: createPulmonaryFunctionTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PulmonaryFunctionTestResult by id
+      tags: [pulmonary-function-test-result]
       operationId: getPulmonaryFunctionTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PulmonaryFunctionTestResult
+      tags: [pulmonary-function-test-result]
       operationId: updatePulmonaryFunctionTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PulmonaryFunctionTestResult
+      tags: [pulmonary-function-test-result]
       operationId: replacePulmonaryFunctionTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PulmonaryFunctionTestResult
+      tags: [pulmonary-function-test-result]
       operationId: deletePulmonaryFunctionTestResult
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Issue Tracker — IssueTrackerGradeRule
   version: 1.0.0
   description: Audit trail of every scoring rule that fired for this issue, across the seven scoring instruments plus the composite grader.
+x-namespace:
+  form: issue-tracker
+  apiPrefix: /api/issue-tracker/
+  sqlSchema: issue_tracker
+  xmlNamespace: https://formexamples.github.io/issue-tracker/xml
+tags:
+  - name: issue-tracker
+    description: Issue Tracker form
 paths:
   /api/issue-tracker/issue_tracker_grade_rules:
     get:
       summary: List IssueTrackerGradeRule records
+      tags: [issue-tracker]
       operationId: listIssueTrackerGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new IssueTrackerGradeRule
+      tags: [issue-tracker]
       operationId: createIssueTrackerGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one IssueTrackerGradeRule by id
+      tags: [issue-tracker]
       operationId: getIssueTrackerGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing IssueTrackerGradeRule
+      tags: [issue-tracker]
       operationId: updateIssueTrackerGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing IssueTrackerGradeRule
+      tags: [issue-tracker]
       operationId: replaceIssueTrackerGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a IssueTrackerGradeRule
+      tags: [issue-tracker]
       operationId: deleteIssueTrackerGradeRule
       responses:
         "200":

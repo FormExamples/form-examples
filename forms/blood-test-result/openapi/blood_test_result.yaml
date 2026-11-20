@@ -5,10 +5,19 @@ info:
   title: Blood Test Result — BloodTestResult
   version: 1.0.0
   description: Blood / pathology test result (report). Captures the specimen, clinical history, the quantitative analyte result values (full blood count, urea & electrolytes / renal, liver function, inflammation, glycaemic, endocrine, haematinics, and coagulation), the overall interpretation summary with abnormal- and critical-value flags, the narrative and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: blood-test-result
+  apiPrefix: /api/blood-test-result/
+  sqlSchema: blood_test_result
+  xmlNamespace: https://formexamples.github.io/blood-test-result/xml
+tags:
+  - name: blood-test-result
+    description: Blood Test Result form
 paths:
   /api/blood-test-result/blood_test_results:
     get:
       summary: List BloodTestResult records
+      tags: [blood-test-result]
       operationId: listBloodTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BloodTestResult
+      tags: [blood-test-result]
       operationId: createBloodTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BloodTestResult by id
+      tags: [blood-test-result]
       operationId: getBloodTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BloodTestResult
+      tags: [blood-test-result]
       operationId: updateBloodTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BloodTestResult
+      tags: [blood-test-result]
       operationId: replaceBloodTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BloodTestResult
+      tags: [blood-test-result]
       operationId: deleteBloodTestResult
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT medical_certificate_of_cause_of_death (id,created_at,updated_at,deleted_at,patient_id,clinician_id,certifying_doctor_name,certifying_doctor_grade,gmc_reference,place_of_certification,certification_date,attended_deceased,last_seen_alive_date,qualifications,attendance_mode,deceased_name,sex,date_of_birth,age_years,patient_identifier,ethnicity,pregnancy_status,date_of_death,time_of_death,place_of_death,seen_after_death_by,implanted_device_status,implanted_devices,cause_ia_condition,cause_ia_interval,cause_ib_condition,cause_ib_interval,cause_ic_condition,cause_ic_interval,cause_id_condition,cause_id_interval,part_ii_conditions,part_ii_interval,referred_to_coroner,coroner_reason,medical_examiner_status,bereaved_family_discussed,certifier_note)>
+<!ATTLIST medical_certificate_of_cause_of_death xmlns CDATA #FIXED "https://formexamples.github.io/medical-certificate-of-cause-of-death/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

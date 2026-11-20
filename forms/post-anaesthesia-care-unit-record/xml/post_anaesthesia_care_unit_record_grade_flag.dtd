@@ -1,4 +1,5 @@
 <!ELEMENT post_anaesthesia_care_unit_record_grade_flag (id,created_at,updated_at,deleted_at,post_anaesthesia_care_unit_record_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST post_anaesthesia_care_unit_record_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/post-anaesthesia-care-unit-record/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

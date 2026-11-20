@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United Kingdom Vehicle Registration Application
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-kingdom-vehicle-registration-application
+  apiPrefix: /api/united-kingdom-vehicle-registration-application/
+  sqlSchema: united_kingdom_vehicle_registration_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-vehicle-registration-application/xml
+tags:
+- name: united-kingdom-vehicle-registration-application
+  description: United Kingdom Vehicle Registration Application form
 paths:
   /api/united-kingdom-vehicle-registration-application/applicants:
     get:
       summary: List Applicant records
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: listApplicant
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Applicant
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: createApplicant
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Applicant by id
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: getApplicant
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Applicant
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: updateApplicant
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Applicant
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: replaceApplicant
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Applicant
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: deleteApplicant
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/united-kingdom-vehicle-registration-application/keepers:
     get:
       summary: List Keeper records
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: listKeeper
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Keeper
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: createKeeper
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Keeper by id
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: getKeeper
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Keeper
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: updateKeeper
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Keeper
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: replaceKeeper
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Keeper
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: deleteKeeper
       responses:
         '200':
@@ -511,9 +543,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-kingdom-vehicle-registration-application
   /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_application_grade_flags:
     get:
       summary: List UnitedKingdomVehicleRegistrationApplicationGradeFlag records
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: listUnitedKingdomVehicleRegistrationApplicationGradeFlag
       parameters:
       - name: limit
@@ -567,6 +603,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomVehicleRegistrationApplicationGradeFlag
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: createUnitedKingdomVehicleRegistrationApplicationGradeFlag
       requestBody:
         required: true
@@ -620,6 +658,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomVehicleRegistrationApplicationGradeFlag by id
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: getUnitedKingdomVehicleRegistrationApplicationGradeFlag
       responses:
         '200':
@@ -647,6 +687,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomVehicleRegistrationApplicationGradeFlag
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: updateUnitedKingdomVehicleRegistrationApplicationGradeFlag
       requestBody:
         required: true
@@ -692,6 +734,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomVehicleRegistrationApplicationGradeFlag
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: replaceUnitedKingdomVehicleRegistrationApplicationGradeFlag
       requestBody:
         required: true
@@ -737,6 +781,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomVehicleRegistrationApplicationGradeFlag
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: deleteUnitedKingdomVehicleRegistrationApplicationGradeFlag
       responses:
         '200':
@@ -761,6 +807,8 @@ paths:
   /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_application_grade_rules:
     get:
       summary: List UnitedKingdomVehicleRegistrationApplicationGradeRule records
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: listUnitedKingdomVehicleRegistrationApplicationGradeRule
       parameters:
       - name: limit
@@ -814,6 +862,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomVehicleRegistrationApplicationGradeRule
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: createUnitedKingdomVehicleRegistrationApplicationGradeRule
       requestBody:
         required: true
@@ -867,6 +917,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomVehicleRegistrationApplicationGradeRule by id
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: getUnitedKingdomVehicleRegistrationApplicationGradeRule
       responses:
         '200':
@@ -894,6 +946,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomVehicleRegistrationApplicationGradeRule
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: updateUnitedKingdomVehicleRegistrationApplicationGradeRule
       requestBody:
         required: true
@@ -939,6 +993,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomVehicleRegistrationApplicationGradeRule
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: replaceUnitedKingdomVehicleRegistrationApplicationGradeRule
       requestBody:
         required: true
@@ -984,6 +1040,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomVehicleRegistrationApplicationGradeRule
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: deleteUnitedKingdomVehicleRegistrationApplicationGradeRule
       responses:
         '200':
@@ -1008,6 +1066,8 @@ paths:
   /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_application_grades:
     get:
       summary: List UnitedKingdomVehicleRegistrationApplicationGrade records
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: listUnitedKingdomVehicleRegistrationApplicationGrade
       parameters:
       - name: limit
@@ -1060,6 +1120,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomVehicleRegistrationApplicationGrade
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: createUnitedKingdomVehicleRegistrationApplicationGrade
       requestBody:
         required: true
@@ -1113,6 +1175,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomVehicleRegistrationApplicationGrade by id
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: getUnitedKingdomVehicleRegistrationApplicationGrade
       responses:
         '200':
@@ -1140,6 +1204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomVehicleRegistrationApplicationGrade
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: updateUnitedKingdomVehicleRegistrationApplicationGrade
       requestBody:
         required: true
@@ -1185,6 +1251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomVehicleRegistrationApplicationGrade
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: replaceUnitedKingdomVehicleRegistrationApplicationGrade
       requestBody:
         required: true
@@ -1230,6 +1298,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomVehicleRegistrationApplicationGrade
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: deleteUnitedKingdomVehicleRegistrationApplicationGrade
       responses:
         '200':
@@ -1254,6 +1324,8 @@ paths:
   /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_applications:
     get:
       summary: List UnitedKingdomVehicleRegistrationApplication records
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: listUnitedKingdomVehicleRegistrationApplication
       parameters:
       - name: limit
@@ -1306,6 +1378,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomVehicleRegistrationApplication
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: createUnitedKingdomVehicleRegistrationApplication
       requestBody:
         required: true
@@ -1359,6 +1433,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomVehicleRegistrationApplication by id
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: getUnitedKingdomVehicleRegistrationApplication
       responses:
         '200':
@@ -1386,6 +1462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomVehicleRegistrationApplication
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: updateUnitedKingdomVehicleRegistrationApplication
       requestBody:
         required: true
@@ -1431,6 +1509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomVehicleRegistrationApplication
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: replaceUnitedKingdomVehicleRegistrationApplication
       requestBody:
         required: true
@@ -1476,6 +1556,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomVehicleRegistrationApplication
+      tags:
+      - united-kingdom-vehicle-registration-application
       operationId: deleteUnitedKingdomVehicleRegistrationApplication
       responses:
         '200':

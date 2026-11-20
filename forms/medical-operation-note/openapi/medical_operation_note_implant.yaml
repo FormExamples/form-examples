@@ -5,10 +5,19 @@ info:
   title: Medical Operation Note — MedicalOperationNoteImplant
   version: 1.0.0
   description: Implants, prostheses, sutures, and other materials applied to or left in the patient during a procedure, with regulatory traceability.
+x-namespace:
+  form: medical-operation-note
+  apiPrefix: /api/medical-operation-note/
+  sqlSchema: medical_operation_note
+  xmlNamespace: https://formexamples.github.io/medical-operation-note/xml
+tags:
+  - name: medical-operation-note
+    description: Medical Operation Note form
 paths:
   /api/medical-operation-note/medical_operation_note_implants:
     get:
       summary: List MedicalOperationNoteImplant records
+      tags: [medical-operation-note]
       operationId: listMedicalOperationNoteImplant
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalOperationNoteImplant
+      tags: [medical-operation-note]
       operationId: createMedicalOperationNoteImplant
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalOperationNoteImplant by id
+      tags: [medical-operation-note]
       operationId: getMedicalOperationNoteImplant
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalOperationNoteImplant
+      tags: [medical-operation-note]
       operationId: updateMedicalOperationNoteImplant
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalOperationNoteImplant
+      tags: [medical-operation-note]
       operationId: replaceMedicalOperationNoteImplant
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalOperationNoteImplant
+      tags: [medical-operation-note]
       operationId: deleteMedicalOperationNoteImplant
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT public_health_waiting_list_card_grade_rule (id,created_at,updated_at,deleted_at,public_health_waiting_list_card_grade_id,rule_id,instrument,band,category,description)>
+<!ATTLIST public_health_waiting_list_card_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/public-health-waiting-list-card/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

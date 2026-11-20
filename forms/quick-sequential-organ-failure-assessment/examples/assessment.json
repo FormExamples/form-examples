@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000053",
+    "id": "89c88b80-d4df-5cc2-bacf-c62938876d03",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000065",
+    "id": "28fe950a-8551-56fb-8a40-7e9851c7cd54",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "quickSequentialOrganFailureAssessment": {
-    "id": "550e8400-e29b-41d4-a716-000000000072",
+    "id": "ce338f7c-8b05-501a-93c2-5ab491dbaacc",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000076",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000077",
+    "patientId": "9087e921-95b6-5c0e-942d-dcc5fcf888c4",
+    "clinicianId": "f087e07b-cb30-589f-a16a-6c9c32dba29d",
     "clinicianName": "",
     "clinicianRole": "doctor",
     "assessedAt": null,
@@ -56,11 +56,11 @@
     "clinicalNote": ""
   },
   "quickSequentialOrganFailureAssessmentGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000085",
+    "id": "514e25cc-2160-5c7e-b3e5-1521fac4afcd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "quickSequentialOrganFailureAssessmentId": "550e8400-e29b-41d4-a716-000000000089",
+    "quickSequentialOrganFailureAssessmentId": "7a0355e3-5bda-5147-bd2b-c6bd57f12895",
     "respiratoryRatePoint": null,
     "mentationPoint": null,
     "systolicBloodPressurePoint": null,
@@ -70,11 +70,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "quickSequentialOrganFailureAssessmentGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000091",
+    "id": "080dc556-59aa-5a4d-89e1-86ba9f3486e2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "quickSequentialOrganFailureAssessmentGradeId": "550e8400-e29b-41d4-a716-000000000095",
+    "quickSequentialOrganFailureAssessmentGradeId": "3719d00c-0201-5c03-9559-d6092ea3db1f",
     "ruleId": "",
     "criterion": "respiratory-rate",
     "points": null,
@@ -82,11 +82,11 @@
     "description": ""
   },
   "quickSequentialOrganFailureAssessmentGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000009b",
+    "id": "44d44a95-b043-50d9-b1df-2eeb84dce9a5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "quickSequentialOrganFailureAssessmentGradeId": "550e8400-e29b-41d4-a716-00000000009f",
+    "quickSequentialOrganFailureAssessmentGradeId": "48b9fe2e-f34c-5d71-9c90-d16848664852",
     "flagId": "",
     "category": "sepsis-escalation",
     "priority": "low",

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000051",
+    "id": "641c5746-a3a0-56eb-9315-5c6387755ef0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000063",
+    "id": "dabd7985-8cc1-535a-8644-826a199424fa",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "anionGapCalculator": {
-    "id": "550e8400-e29b-41d4-a716-000000000070",
+    "id": "4da4ce7e-b190-58a6-91a7-c40851ff3204",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000074",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000075",
+    "patientId": "0bce42c3-9a5c-5df3-81b9-9d67c24586d6",
+    "clinicianId": "6bbb4402-b641-5b65-88f7-4b907081cf21",
     "clinicianName": "",
     "clinicianRole": "doctor",
     "calculatedAt": null,
@@ -57,22 +57,22 @@
     "includePotassium": "yes"
   },
   "anionGapCalculatorGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "a690ee79-7311-537a-a1d4-45796fc1a624",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "anionGapCalculatorId": "550e8400-e29b-41d4-a716-000000000088",
+    "anionGapCalculatorId": "0cf02789-faa3-5014-abf2-70e52059f4f5",
     "anionGap": null,
     "correctedAnionGap": null,
     "classification": "normal",
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "anionGapCalculatorGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000008d",
+    "id": "02d46bc4-83b7-58b2-a3cd-66cca68605ea",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "anionGapCalculatorGradeId": "550e8400-e29b-41d4-a716-000000000091",
+    "anionGapCalculatorGradeId": "c7278481-fc14-5db0-94ce-33ed8ef71f03",
     "ruleId": "",
     "instrument": "formula",
     "band": "normal",
@@ -80,11 +80,11 @@
     "description": ""
   },
   "anionGapCalculatorGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000097",
+    "id": "2e0645ca-7f03-5779-9dd6-c30b23d0bc35",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "anionGapCalculatorGradeId": "550e8400-e29b-41d4-a716-00000000009b",
+    "anionGapCalculatorGradeId": "ab04c486-c06d-5440-aed2-68a9aaa603ca",
     "flagId": "",
     "category": "very-high",
     "priority": "low",

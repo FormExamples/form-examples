@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE clin_biology_waiting_list_card SYSTEM "clin_biology_waiting_list_card.dtd">
-<clin_biology_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<clin_biology_waiting_list_card xmlns="https://formexamples.github.io/clinical-biology-waiting-list-card/xml">
+<id>ec495249-4af8-501e-b8c9-9a951779114c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>84efbf31-c5ab-5c55-8a77-6505384a8e4e</patient_id>
+<practitioner_id>f1441129-0773-5562-b52b-dd91607ba6d9</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

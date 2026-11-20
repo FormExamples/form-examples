@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ed",
+    "id": "d42176d8-b9e6-55ce-bf3f-446f6946a907",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000109",
+    "id": "45dc6e98-f658-5090-a3eb-31734e9e8186",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,30 +36,30 @@
     "unitedKingdomNhsNumber": ""
   },
   "assessment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b5",
+    "id": "9cfe71a8-fffc-5243-ae6a-df9718abb092",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000000b9",
+    "patientId": "ee3e8482-dfd7-5211-9cc5-cbfb914b8b20",
     "status": "draft"
   },
   "demographicsEthnicity": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bb",
+    "id": "6bfb10fa-e9f6-583f-8e5c-fb8218adee49",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000bf",
+    "assessmentId": "d9ee15da-997c-55a2-b7c2-ebe8d9f61640",
     "age": null,
     "sex": "male",
     "ethnicity": "",
     "townsendDeprivation": null
   },
   "bloodPressure": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c4",
+    "id": "b0ff6849-3e60-56df-8dff-64c9f2974df9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000c8",
+    "assessmentId": "fd7a8275-3444-52b3-9d01-46136f2c21a6",
     "systolicBp": null,
     "systolicBpSd": null,
     "diastolicBp": null,
@@ -67,22 +67,22 @@
     "numberOfBpMedications": null
   },
   "cholesterol": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ce",
+    "id": "9f2bcb2f-e584-5867-9bc3-200acb4b7fcb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000d2",
+    "assessmentId": "e4193df4-f481-5453-996d-1102601e5832",
     "totalCholesterol": null,
     "hdlCholesterol": null,
     "totalHdlRatio": null,
     "onStatin": "yes"
   },
   "medicalConditions": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d7",
+    "id": "ef7a0092-492e-59ec-803a-c2ffe365015e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000db",
+    "assessmentId": "06499be7-678e-5aa4-a224-756a16343103",
     "hasDiabetes": "no",
     "hasAtrialFibrillation": "yes",
     "hasRheumatoidArthritis": "yes",
@@ -94,21 +94,21 @@
     "onCorticosteroids": "yes"
   },
   "familyHistory": {
-    "id": "550e8400-e29b-41d4-a716-0000000000e5",
+    "id": "8be2a75f-551d-5504-9115-89863bca7c67",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000e9",
+    "assessmentId": "b1874787-9a3d-5770-982d-000b9c6244e4",
     "familyCvdUnder60": "yes",
     "familyCvdRelationship": "parent",
     "familyDiabetesHistory": "yes"
   },
   "smokingAlcohol": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ff",
+    "id": "dd2fe610-03d1-52d2-b09b-55e03987e85b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-000000000103",
+    "assessmentId": "b8461d81-edeb-5b1a-aafc-186ae0ef4643",
     "smokingStatus": "nonSmoker",
     "cigarettesPerDay": null,
     "yearsSinceQuit": null,
@@ -116,22 +116,22 @@
     "alcoholFrequency": "never"
   },
   "gradingAdditionalFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000160",
+    "id": "91678269-b92e-5df7-b39d-92a502ac4f9a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-000000000164",
+    "gradeId": "1cd88a9d-4736-5c1a-b3f1-6f4938a6ff1c",
     "flagId": "",
     "category": "",
     "message": "",
     "priority": "high"
   },
   "physicalActivityDiet": {
-    "id": "550e8400-e29b-41d4-a716-000000000117",
+    "id": "f91ae0a9-b292-54c7-aaa2-71d38fdf59c4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-00000000011b",
+    "assessmentId": "80679d22-be63-53fa-b629-82da7c8c8972",
     "physicalActivityMinutesPerWeek": null,
     "activityIntensity": "light",
     "fruitVegPortionsPerDay": null,
@@ -139,44 +139,44 @@
     "saltIntake": "low"
   },
   "bodyMeasurements": {
-    "id": "550e8400-e29b-41d4-a716-000000000121",
+    "id": "3effdc3c-1ddf-5ccc-a39e-593c2af58d40",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-000000000125",
+    "assessmentId": "e3d8e6f4-6f6d-55a5-a652-9a361ebc5ca8",
     "heightCm": null,
     "weightKg": null,
     "bmi": null,
     "waistCircumferenceCm": null
   },
   "reviewCalculate": {
-    "id": "550e8400-e29b-41d4-a716-00000000012a",
+    "id": "9ceccbbf-1b57-53b8-84e4-db45c109d2c5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-00000000012e",
+    "assessmentId": "ef0c496f-8061-5384-8b19-998876becfe8",
     "clinicianName": "",
     "reviewDate": null,
     "clinicalNotes": "",
     "auditScore": null
   },
   "grade": {
-    "id": "550e8400-e29b-41d4-a716-00000000014e",
+    "id": "de7b5831-e82a-5f82-8131-5771dc1a2ab6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-000000000152",
+    "assessmentId": "7086ff66-63e9-5710-8683-1cc2bbd7659b",
     "riskCategory": "draft",
     "tenYearRiskPercent": 0.0,
     "heartAge": null,
     "gradedAt": null
   },
   "gradingFiredRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000157",
+    "id": "a5d81a05-c507-5d17-b84a-b96b7d443b26",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-00000000015b",
+    "gradeId": "b376f077-dfe0-5c67-bad7-6367895d264d",
     "ruleId": "",
     "category": "",
     "description": "",

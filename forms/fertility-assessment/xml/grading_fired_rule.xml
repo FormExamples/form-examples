@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/fertility-assessment/xml">
+<id>a1cf3d4a-a7d4-509c-8db2-85a8f6050797</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>880e8400-e29b-41d4-a716-446655440003</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>b1cab12b-5b2c-5029-99f9-f772c2432905</grade_id>
+<rule_id>82b37845-ce78-50de-a758-4857c23b6fe5</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>low</severity_level>

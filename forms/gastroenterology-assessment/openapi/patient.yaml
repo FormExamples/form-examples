@@ -5,10 +5,19 @@ info:
   title: Gastroenterology Assessment — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: gastroenterology-assessment
+  apiPrefix: /api/gastroenterology-assessment/
+  sqlSchema: gastroenterology_assessment
+  xmlNamespace: https://formexamples.github.io/gastroenterology-assessment/xml
+tags:
+  - name: gastroenterology-assessment
+    description: Gastroenterology Assessment form
 paths:
   /api/gastroenterology-assessment/patients:
     get:
       summary: List Patient records
+      tags: [gastroenterology-assessment]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [gastroenterology-assessment]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [gastroenterology-assessment]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [gastroenterology-assessment]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [gastroenterology-assessment]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [gastroenterology-assessment]
       operationId: deletePatient
       responses:
         "200":

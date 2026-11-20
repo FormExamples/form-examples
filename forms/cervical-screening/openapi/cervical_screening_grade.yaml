@@ -5,10 +5,19 @@ info:
   title: Cervical Screening — CervicalScreeningGrade
   version: 1.0.0
   description: "Computed result classification for a cervical-screening record: result class, recommended management action, and completeness status."
+x-namespace:
+  form: cervical-screening
+  apiPrefix: /api/cervical-screening/
+  sqlSchema: cervical_screening
+  xmlNamespace: https://formexamples.github.io/cervical-screening/xml
+tags:
+  - name: cervical-screening
+    description: Cervical Screening form
 paths:
   /api/cervical-screening/cervical_screening_grades:
     get:
       summary: List CervicalScreeningGrade records
+      tags: [cervical-screening]
       operationId: listCervicalScreeningGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CervicalScreeningGrade
+      tags: [cervical-screening]
       operationId: createCervicalScreeningGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CervicalScreeningGrade by id
+      tags: [cervical-screening]
       operationId: getCervicalScreeningGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CervicalScreeningGrade
+      tags: [cervical-screening]
       operationId: updateCervicalScreeningGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CervicalScreeningGrade
+      tags: [cervical-screening]
       operationId: replaceCervicalScreeningGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CervicalScreeningGrade
+      tags: [cervical-screening]
       operationId: deleteCervicalScreeningGrade
       responses:
         "200":

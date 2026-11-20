@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<grade xmlns="https://formexamples.github.io/first-aid-training-checklist/xml">
+<id>cce5f6e9-8b97-52f5-b8e2-a970a4448501</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>f4692821-a9c1-518c-ab7c-7b51b453e5e4</assessment_id>
 <result_category>Normal</result_category>
 <result_score>5.0</result_score>
 <result_notes>Example text.</result_notes>

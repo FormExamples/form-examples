@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Cervical Screening record form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: cervical-screening
+  apiPrefix: /api/cervical-screening/
+  sqlSchema: cervical_screening
+  xmlNamespace: https://formexamples.github.io/cervical-screening/xml
+tags:
+- name: cervical-screening
+  description: Cervical Screening record form
 paths:
   /api/cervical-screening/cervical_screening_grade_flags:
     get:
       summary: List CervicalScreeningGradeFlag records
+      tags:
+      - cervical-screening
       operationId: listCervicalScreeningGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CervicalScreeningGradeFlag
+      tags:
+      - cervical-screening
       operationId: createCervicalScreeningGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CervicalScreeningGradeFlag by id
+      tags:
+      - cervical-screening
       operationId: getCervicalScreeningGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CervicalScreeningGradeFlag
+      tags:
+      - cervical-screening
       operationId: updateCervicalScreeningGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CervicalScreeningGradeFlag
+      tags:
+      - cervical-screening
       operationId: replaceCervicalScreeningGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CervicalScreeningGradeFlag
+      tags:
+      - cervical-screening
       operationId: deleteCervicalScreeningGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/cervical-screening/cervical_screening_grade_rules:
     get:
       summary: List CervicalScreeningGradeRule records
+      tags:
+      - cervical-screening
       operationId: listCervicalScreeningGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CervicalScreeningGradeRule
+      tags:
+      - cervical-screening
       operationId: createCervicalScreeningGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CervicalScreeningGradeRule by id
+      tags:
+      - cervical-screening
       operationId: getCervicalScreeningGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CervicalScreeningGradeRule
+      tags:
+      - cervical-screening
       operationId: updateCervicalScreeningGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CervicalScreeningGradeRule
+      tags:
+      - cervical-screening
       operationId: replaceCervicalScreeningGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CervicalScreeningGradeRule
+      tags:
+      - cervical-screening
       operationId: deleteCervicalScreeningGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/cervical-screening/cervical_screening_grades:
     get:
       summary: List CervicalScreeningGrade records
+      tags:
+      - cervical-screening
       operationId: listCervicalScreeningGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CervicalScreeningGrade
+      tags:
+      - cervical-screening
       operationId: createCervicalScreeningGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CervicalScreeningGrade by id
+      tags:
+      - cervical-screening
       operationId: getCervicalScreeningGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CervicalScreeningGrade
+      tags:
+      - cervical-screening
       operationId: updateCervicalScreeningGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CervicalScreeningGrade
+      tags:
+      - cervical-screening
       operationId: replaceCervicalScreeningGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CervicalScreeningGrade
+      tags:
+      - cervical-screening
       operationId: deleteCervicalScreeningGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/cervical-screening/cervical_screenings:
     get:
       summary: List CervicalScreening records
+      tags:
+      - cervical-screening
       operationId: listCervicalScreening
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CervicalScreening
+      tags:
+      - cervical-screening
       operationId: createCervicalScreening
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CervicalScreening by id
+      tags:
+      - cervical-screening
       operationId: getCervicalScreening
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CervicalScreening
+      tags:
+      - cervical-screening
       operationId: updateCervicalScreening
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CervicalScreening
+      tags:
+      - cervical-screening
       operationId: replaceCervicalScreening
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CervicalScreening
+      tags:
+      - cervical-screening
       operationId: deleteCervicalScreening
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/cervical-screening/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - cervical-screening
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - cervical-screening
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - cervical-screening
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - cervical-screening
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - cervical-screening
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - cervical-screening
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - cervical-screening
   /api/cervical-screening/patients:
     get:
       summary: List Patient records
+      tags:
+      - cervical-screening
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - cervical-screening
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - cervical-screening
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - cervical-screening
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - cervical-screening
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - cervical-screening
       operationId: deletePatient
       responses:
         '200':

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE coagulation_test_result SYSTEM "coagulation_test_result.dtd">
-<coagulation_test_result>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<coagulation_test_result xmlns="https://formexamples.github.io/coagulation-test-result/xml">
+<id>0a056a96-975d-553f-bceb-34b970f064a6</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>0be9a513-0841-5d14-bef7-49bcdddbb238</patient_id>
+<clinician_id>723d886f-b6a8-501d-8c37-616fdf1b3a73</clinician_id>
 <originating_request_reference></originating_request_reference>
 <report_status>preliminary</report_status>
 <performed_date>2026-01-15</performed_date>

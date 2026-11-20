@@ -5,10 +5,19 @@ info:
   title: Allergy Assessment — AssessmentDrugAllergyItem
   version: 1.0.0
   description: Individual drug allergy entry with allergen, reaction type, and severity.
+x-namespace:
+  form: allergy-assessment
+  apiPrefix: /api/allergy-assessment/
+  sqlSchema: allergy_assessment
+  xmlNamespace: https://formexamples.github.io/allergy-assessment/xml
+tags:
+  - name: allergy-assessment
+    description: Allergy Assessment form
 paths:
   /api/allergy-assessment/assessment_drug_allergy_items:
     get:
       summary: List AssessmentDrugAllergyItem records
+      tags: [allergy-assessment]
       operationId: listAssessmentDrugAllergyItem
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentDrugAllergyItem
+      tags: [allergy-assessment]
       operationId: createAssessmentDrugAllergyItem
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentDrugAllergyItem by id
+      tags: [allergy-assessment]
       operationId: getAssessmentDrugAllergyItem
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentDrugAllergyItem
+      tags: [allergy-assessment]
       operationId: updateAssessmentDrugAllergyItem
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentDrugAllergyItem
+      tags: [allergy-assessment]
       operationId: replaceAssessmentDrugAllergyItem
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentDrugAllergyItem
+      tags: [allergy-assessment]
       operationId: deleteAssessmentDrugAllergyItem
       responses:
         "200":

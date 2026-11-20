@@ -5,10 +5,19 @@ info:
   title: Lumbar Puncture Test Request — LumbarPunctureTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the procedure team.
+x-namespace:
+  form: lumbar-puncture-test-request
+  apiPrefix: /api/lumbar-puncture-test-request/
+  sqlSchema: lumbar_puncture_test_request
+  xmlNamespace: https://formexamples.github.io/lumbar-puncture-test-request/xml
+tags:
+  - name: lumbar-puncture-test-request
+    description: Lumbar Puncture Test Request form
 paths:
   /api/lumbar-puncture-test-request/lumbar_puncture_test_request_grade_flags:
     get:
       summary: List LumbarPunctureTestRequestGradeFlag records
+      tags: [lumbar-puncture-test-request]
       operationId: listLumbarPunctureTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LumbarPunctureTestRequestGradeFlag
+      tags: [lumbar-puncture-test-request]
       operationId: createLumbarPunctureTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LumbarPunctureTestRequestGradeFlag by id
+      tags: [lumbar-puncture-test-request]
       operationId: getLumbarPunctureTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LumbarPunctureTestRequestGradeFlag
+      tags: [lumbar-puncture-test-request]
       operationId: updateLumbarPunctureTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LumbarPunctureTestRequestGradeFlag
+      tags: [lumbar-puncture-test-request]
       operationId: replaceLumbarPunctureTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LumbarPunctureTestRequestGradeFlag
+      tags: [lumbar-puncture-test-request]
       operationId: deleteLumbarPunctureTestRequestGradeFlag
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Diabetes Assessment — DiabetesRule
   version: 1.0.0
   description: Reference catalogue of all 22 diabetes assessment rules (DM-001 to DM-022). Seeded at deployment.
+x-namespace:
+  form: diabetes-assessment
+  apiPrefix: /api/diabetes-assessment/
+  sqlSchema: diabetes_assessment
+  xmlNamespace: https://formexamples.github.io/diabetes-assessment/xml
+tags:
+  - name: diabetes-assessment
+    description: Diabetes Assessment form
 paths:
   /api/diabetes-assessment/diabetes_rules:
     get:
       summary: List DiabetesRule records
+      tags: [diabetes-assessment]
       operationId: listDiabetesRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DiabetesRule
+      tags: [diabetes-assessment]
       operationId: createDiabetesRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DiabetesRule by id
+      tags: [diabetes-assessment]
       operationId: getDiabetesRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DiabetesRule
+      tags: [diabetes-assessment]
       operationId: updateDiabetesRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DiabetesRule
+      tags: [diabetes-assessment]
       operationId: replaceDiabetesRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DiabetesRule
+      tags: [diabetes-assessment]
       operationId: deleteDiabetesRule
       responses:
         "200":

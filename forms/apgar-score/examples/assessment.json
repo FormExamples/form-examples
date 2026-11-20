@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000061",
+    "id": "1908cadf-77f9-5403-ab42-69b996d17095",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "a949c9a6-f8fc-5d35-b659-a8fafdbc298f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "apgarScore": {
-    "id": "550e8400-e29b-41d4-a716-000000000080",
+    "id": "a856e2bc-6a98-537c-8fa6-36466acf0628",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000084",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000085",
+    "patientId": "30652185-27a6-5e0b-ae40-cdd3bdbec5c6",
+    "clinicianId": "2b04ba53-26ed-5447-8c84-1d4ca54cc920",
     "clinicianName": "",
     "clinicianRole": "midwife",
     "bornAt": null,
@@ -54,11 +54,11 @@
     "clinicianNote": ""
   },
   "apgarScoreTimepoint": {
-    "id": "550e8400-e29b-41d4-a716-000000000091",
+    "id": "a1c667da-7eb7-548f-8f13-da104dd113f9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "apgarScoreId": "550e8400-e29b-41d4-a716-000000000095",
+    "apgarScoreId": "a1530e22-f4c3-5c8c-b7b0-3c3a3094cea3",
     "timepointMinutes": null,
     "appearance": "0",
     "pulse": "0",
@@ -69,11 +69,11 @@
     "band": "reassuring"
   },
   "apgarScoreGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000009e",
+    "id": "1fafbfe0-68d8-581d-abab-c40e3efe93c3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "apgarScoreId": "550e8400-e29b-41d4-a716-0000000000a2",
+    "apgarScoreId": "cf664a48-6ab5-5968-aa04-6c3af8d9d7b3",
     "totalOneMinute": null,
     "totalFiveMinute": null,
     "totalTenMinute": null,
@@ -85,11 +85,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "apgarScoreGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ac",
+    "id": "07a2e252-b95f-5ae1-afd5-50ded5444eb2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "apgarScoreGradeId": "550e8400-e29b-41d4-a716-0000000000b0",
+    "apgarScoreGradeId": "92994384-336d-5ca8-a0fa-a71f085a448e",
     "ruleId": "",
     "timepointMinutes": null,
     "sign": "appearance",
@@ -98,11 +98,11 @@
     "description": ""
   },
   "apgarScoreGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b7",
+    "id": "98e31143-bac4-5e6a-be14-8c990e908f95",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "apgarScoreGradeId": "550e8400-e29b-41d4-a716-0000000000bb",
+    "apgarScoreGradeId": "7f0e2a09-2672-5a65-8311-cc0ea9cd9ac4",
     "flagId": "",
     "category": "resuscitation-needed",
     "priority": "low",

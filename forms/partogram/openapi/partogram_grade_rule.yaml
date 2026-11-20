@@ -5,10 +5,19 @@ info:
   title: Partogram — PartogramGradeRule
   version: 1.0.0
   description: "Audit trail of every progress rule that fired during grading: category and description."
+x-namespace:
+  form: partogram
+  apiPrefix: /api/partogram/
+  sqlSchema: partogram
+  xmlNamespace: https://formexamples.github.io/partogram/xml
+tags:
+  - name: partogram
+    description: Partogram form
 paths:
   /api/partogram/partogram_grade_rules:
     get:
       summary: List PartogramGradeRule records
+      tags: [partogram]
       operationId: listPartogramGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PartogramGradeRule
+      tags: [partogram]
       operationId: createPartogramGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PartogramGradeRule by id
+      tags: [partogram]
       operationId: getPartogramGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PartogramGradeRule
+      tags: [partogram]
       operationId: updatePartogramGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PartogramGradeRule
+      tags: [partogram]
       operationId: replacePartogramGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PartogramGradeRule
+      tags: [partogram]
       operationId: deletePartogramGradeRule
       responses:
         "200":

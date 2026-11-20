@@ -1,4 +1,5 @@
 <!ELEMENT ottawa_knee_rule_grade (id,created_at,updated_at,deleted_at,ottawa_knee_rule_id,xray_indicated,decision,recommended_action,graded_at)>
+<!ATTLIST ottawa_knee_rule_grade xmlns CDATA #FIXED "https://formexamples.github.io/ottawa-knee-rule/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

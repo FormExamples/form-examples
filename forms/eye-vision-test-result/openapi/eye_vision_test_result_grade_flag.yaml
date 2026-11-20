@@ -5,10 +5,19 @@ info:
   title: Eye Vision Test Result — EyeVisionTestResultGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.
+x-namespace:
+  form: eye-vision-test-result
+  apiPrefix: /api/eye-vision-test-result/
+  sqlSchema: eye_vision_test_result
+  xmlNamespace: https://formexamples.github.io/eye-vision-test-result/xml
+tags:
+  - name: eye-vision-test-result
+    description: Eye Vision Test Result form
 paths:
   /api/eye-vision-test-result/eye_vision_test_result_grade_flags:
     get:
       summary: List EyeVisionTestResultGradeFlag records
+      tags: [eye-vision-test-result]
       operationId: listEyeVisionTestResultGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EyeVisionTestResultGradeFlag
+      tags: [eye-vision-test-result]
       operationId: createEyeVisionTestResultGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EyeVisionTestResultGradeFlag by id
+      tags: [eye-vision-test-result]
       operationId: getEyeVisionTestResultGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EyeVisionTestResultGradeFlag
+      tags: [eye-vision-test-result]
       operationId: updateEyeVisionTestResultGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EyeVisionTestResultGradeFlag
+      tags: [eye-vision-test-result]
       operationId: replaceEyeVisionTestResultGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EyeVisionTestResultGradeFlag
+      tags: [eye-vision-test-result]
       operationId: deleteEyeVisionTestResultGradeFlag
       responses:
         "200":

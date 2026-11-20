@@ -1,4 +1,5 @@
 <!ELEMENT address (id,created_at,updated_at,deleted_at,address_line_1,address_line_2,address_line_3,postcode,country_as_iso_3166_1_alpha_2)>
+<!ATTLIST address xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

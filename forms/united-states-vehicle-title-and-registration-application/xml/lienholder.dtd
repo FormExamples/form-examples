@@ -1,4 +1,5 @@
 <!ELEMENT lienholder (id,created_at,updated_at,deleted_at,name,email,phone,postal_address_as_full_text,state_code,postcode,electronic_lien_identifier)>
+<!ATTLIST lienholder xmlns CDATA #FIXED "https://formexamples.github.io/united-states-vehicle-title-and-registration-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Cardiac Stress Test Request — CardiacStressTestRequest
   version: 1.0.0
   description: Cardiac stress / exercise test request (referral). Captures the requested test type, the clinical indication and question, relevant history, presenting symptoms, ability to exercise, and the cardiac risk / safety factors (known CAD, recent ACS, aortic stenosis, uncontrolled hypertension, beta-blocker), plus triage urgency.
+x-namespace:
+  form: cardiac-stress-test-request
+  apiPrefix: /api/cardiac-stress-test-request/
+  sqlSchema: cardiac_stress_test_request
+  xmlNamespace: https://formexamples.github.io/cardiac-stress-test-request/xml
+tags:
+  - name: cardiac-stress-test-request
+    description: Cardiac Stress Test Request form
 paths:
   /api/cardiac-stress-test-request/cardiac_stress_test_requests:
     get:
       summary: List CardiacStressTestRequest records
+      tags: [cardiac-stress-test-request]
       operationId: listCardiacStressTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiacStressTestRequest
+      tags: [cardiac-stress-test-request]
       operationId: createCardiacStressTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiacStressTestRequest by id
+      tags: [cardiac-stress-test-request]
       operationId: getCardiacStressTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiacStressTestRequest
+      tags: [cardiac-stress-test-request]
       operationId: updateCardiacStressTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiacStressTestRequest
+      tags: [cardiac-stress-test-request]
       operationId: replaceCardiacStressTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiacStressTestRequest
+      tags: [cardiac-stress-test-request]
       operationId: deleteCardiacStressTestRequest
       responses:
         "200":

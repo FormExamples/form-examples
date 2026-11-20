@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ottawa_ankle_rules_grade SYSTEM "ottawa_ankle_rules_grade.dtd">
-<ottawa_ankle_rules_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<ottawa_ankle_rules_grade xmlns="https://formexamples.github.io/ottawa-ankle-rules/xml">
+<id>af48c3cc-3550-57b9-9205-17d700078f79</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<ottawa_ankle_rules_id>770e8400-e29b-41d4-a716-446655440002</ottawa_ankle_rules_id>
+<ottawa_ankle_rules_id>607d1bc4-9b6e-5bff-8290-db279296bed8</ottawa_ankle_rules_id>
 <unable_to_bear_weight>yes</unable_to_bear_weight>
 <ankle_xray_indicated>yes</ankle_xray_indicated>
 <foot_xray_indicated>yes</foot_xray_indicated>

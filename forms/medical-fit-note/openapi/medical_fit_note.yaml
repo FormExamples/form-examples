@@ -5,10 +5,19 @@ info:
   title: Medical Fit Note — MedicalFitNote
   version: 1.0.0
   description: Medical fit note.
+x-namespace:
+  form: medical-fit-note
+  apiPrefix: /api/medical-fit-note/
+  sqlSchema: medical_fit_note
+  xmlNamespace: https://formexamples.github.io/medical-fit-note/xml
+tags:
+  - name: medical-fit-note
+    description: Medical Fit Note form
 paths:
   /api/medical-fit-note/medical_fit_notes:
     get:
       summary: List MedicalFitNote records
+      tags: [medical-fit-note]
       operationId: listMedicalFitNote
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalFitNote
+      tags: [medical-fit-note]
       operationId: createMedicalFitNote
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalFitNote by id
+      tags: [medical-fit-note]
       operationId: getMedicalFitNote
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalFitNote
+      tags: [medical-fit-note]
       operationId: updateMedicalFitNote
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalFitNote
+      tags: [medical-fit-note]
       operationId: replaceMedicalFitNote
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalFitNote
+      tags: [medical-fit-note]
       operationId: deleteMedicalFitNote
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Hearing Test Request — HearingTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the audiology / ENT team.
+x-namespace:
+  form: hearing-test-request
+  apiPrefix: /api/hearing-test-request/
+  sqlSchema: hearing_test_request
+  xmlNamespace: https://formexamples.github.io/hearing-test-request/xml
+tags:
+  - name: hearing-test-request
+    description: Hearing Test Request form
 paths:
   /api/hearing-test-request/hearing_test_request_grade_flags:
     get:
       summary: List HearingTestRequestGradeFlag records
+      tags: [hearing-test-request]
       operationId: listHearingTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HearingTestRequestGradeFlag
+      tags: [hearing-test-request]
       operationId: createHearingTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HearingTestRequestGradeFlag by id
+      tags: [hearing-test-request]
       operationId: getHearingTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HearingTestRequestGradeFlag
+      tags: [hearing-test-request]
       operationId: updateHearingTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HearingTestRequestGradeFlag
+      tags: [hearing-test-request]
       operationId: replaceHearingTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HearingTestRequestGradeFlag
+      tags: [hearing-test-request]
       operationId: deleteHearingTestRequestGradeFlag
       responses:
         "200":

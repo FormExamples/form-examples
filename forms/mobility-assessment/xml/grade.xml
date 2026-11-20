@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<grade xmlns="https://formexamples.github.io/mobility-assessment/xml">
+<id>c9013bda-72c6-5813-8c92-0c96d0d098c7</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>8e1d7200-fe64-500e-83c5-7b395656777c</assessment_id>
 <balance_score>5</balance_score>
 <gait_score>5</gait_score>
 <total_tinetti_score>5</total_tinetti_score>

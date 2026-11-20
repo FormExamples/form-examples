@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment SYSTEM "assessment.dtd">
-<assessment>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<assessment xmlns="https://formexamples.github.io/gynecology-assessment/xml">
+<id>a8f6b881-8195-50b7-b224-2cace1a97cb3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<patient_id>c0ba8eaa-a23c-5a15-a1d1-c72a916e664f</patient_id>
 <status>draft</status>
 </assessment>

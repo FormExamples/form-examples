@@ -5,10 +5,19 @@ info:
   title: Alcohol Use Disorders Identification Test Consumption — AuditCGradeFlag
   version: 1.0.0
   description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.
+x-namespace:
+  form: alcohol-use-disorders-identification-test-consumption
+  apiPrefix: /api/alcohol-use-disorders-identification-test-consumption/
+  sqlSchema: alcohol_use_disorders_identification_test_consumption
+  xmlNamespace: https://formexamples.github.io/alcohol-use-disorders-identification-test-consumption/xml
+tags:
+  - name: alcohol-use-disorders-identification-test-consumption
+    description: Alcohol Use Disorders Identification Test Consumption form
 paths:
   /api/alcohol-use-disorders-identification-test-consumption/audit_c_grade_flags:
     get:
       summary: List AuditCGradeFlag records
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: listAuditCGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AuditCGradeFlag
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: createAuditCGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AuditCGradeFlag by id
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: getAuditCGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AuditCGradeFlag
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: updateAuditCGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AuditCGradeFlag
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: replaceAuditCGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AuditCGradeFlag
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: deleteAuditCGradeFlag
       responses:
         "200":

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cystoscopy_test_request_grade SYSTEM "cystoscopy_test_request_grade.dtd">
-<cystoscopy_test_request_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<cystoscopy_test_request_grade xmlns="https://formexamples.github.io/cystoscopy-test-request/xml">
+<id>80bf49a4-4d4a-512e-9ef4-6e0180b78a17</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cystoscopy_test_request_id>770e8400-e29b-41d4-a716-446655440002</cystoscopy_test_request_id>
+<cystoscopy_test_request_id>3b9c78a2-cb35-5338-8df7-71b422ff1912</cystoscopy_test_request_id>
 <appropriateness_score>5</appropriateness_score>
 <appropriateness_band>usually-appropriate</appropriateness_band>
 <triage_tier>routine</triage_tier>

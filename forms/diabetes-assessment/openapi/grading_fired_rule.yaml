@@ -5,10 +5,19 @@ info:
   title: Diabetes Assessment — GradingFiredRule
   version: 1.0.0
   description: Many-to-one with grade. Each row is one diabetes rule that fired. Denormalized for audit.
+x-namespace:
+  form: diabetes-assessment
+  apiPrefix: /api/diabetes-assessment/
+  sqlSchema: diabetes_assessment
+  xmlNamespace: https://formexamples.github.io/diabetes-assessment/xml
+tags:
+  - name: diabetes-assessment
+    description: Diabetes Assessment form
 paths:
   /api/diabetes-assessment/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags: [diabetes-assessment]
       operationId: listGradingFiredRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingFiredRule
+      tags: [diabetes-assessment]
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags: [diabetes-assessment]
       operationId: getGradingFiredRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingFiredRule
+      tags: [diabetes-assessment]
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingFiredRule
+      tags: [diabetes-assessment]
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingFiredRule
+      tags: [diabetes-assessment]
       operationId: deleteGradingFiredRule
       responses:
         "200":

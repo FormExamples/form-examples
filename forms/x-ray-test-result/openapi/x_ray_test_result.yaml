@@ -5,10 +5,19 @@ info:
   title: X Ray Test Result — XRayTestResult
   version: 1.0.0
   description: Plain-radiograph (X-ray) result (report). Captures the performed examination (body region, laterality, projections, adequacy), clinical history, the narrative and structured findings, the impression and structured reporting category, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: x-ray-test-result
+  apiPrefix: /api/x-ray-test-result/
+  sqlSchema: x_ray_test_result
+  xmlNamespace: https://formexamples.github.io/x-ray-test-result/xml
+tags:
+  - name: x-ray-test-result
+    description: X Ray Test Result form
 paths:
   /api/x-ray-test-result/x_ray_test_results:
     get:
       summary: List XRayTestResult records
+      tags: [x-ray-test-result]
       operationId: listXRayTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new XRayTestResult
+      tags: [x-ray-test-result]
       operationId: createXRayTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one XRayTestResult by id
+      tags: [x-ray-test-result]
       operationId: getXRayTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing XRayTestResult
+      tags: [x-ray-test-result]
       operationId: updateXRayTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing XRayTestResult
+      tags: [x-ray-test-result]
       operationId: replaceXRayTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a XRayTestResult
+      tags: [x-ray-test-result]
       operationId: deleteXRayTestResult
       responses:
         "200":

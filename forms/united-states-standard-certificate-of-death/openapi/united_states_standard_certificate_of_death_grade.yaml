@@ -5,10 +5,19 @@ info:
   title: United States Standard Certificate Of Death — UnitedStatesStandardCertificateOfDeathGrade
   version: 1.0.0
   description: "Computed completeness and validity-classification result for a US Standard Certificate of Death: validity class (valid/incomplete/refer-to-medical-examiner-or-coroner), derived underlying cause, and whether a referral criterion is indicated."
+x-namespace:
+  form: united-states-standard-certificate-of-death
+  apiPrefix: /api/united-states-standard-certificate-of-death/
+  sqlSchema: united_states_standard_certificate_of_death
+  xmlNamespace: https://formexamples.github.io/united-states-standard-certificate-of-death/xml
+tags:
+  - name: united-states-standard-certificate-of-death
+    description: United States Standard Certificate Of Death form
 paths:
   /api/united-states-standard-certificate-of-death/united_states_standard_certificate_of_death_grades:
     get:
       summary: List UnitedStatesStandardCertificateOfDeathGrade records
+      tags: [united-states-standard-certificate-of-death]
       operationId: listUnitedStatesStandardCertificateOfDeathGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesStandardCertificateOfDeathGrade
+      tags: [united-states-standard-certificate-of-death]
       operationId: createUnitedStatesStandardCertificateOfDeathGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesStandardCertificateOfDeathGrade by id
+      tags: [united-states-standard-certificate-of-death]
       operationId: getUnitedStatesStandardCertificateOfDeathGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesStandardCertificateOfDeathGrade
+      tags: [united-states-standard-certificate-of-death]
       operationId: updateUnitedStatesStandardCertificateOfDeathGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesStandardCertificateOfDeathGrade
+      tags: [united-states-standard-certificate-of-death]
       operationId: replaceUnitedStatesStandardCertificateOfDeathGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesStandardCertificateOfDeathGrade
+      tags: [united-states-standard-certificate-of-death]
       operationId: deleteUnitedStatesStandardCertificateOfDeathGrade
       responses:
         "200":

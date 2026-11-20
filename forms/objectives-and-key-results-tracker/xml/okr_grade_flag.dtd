@@ -1,4 +1,5 @@
 <!ELEMENT okr_grade_flag (id,created_at,updated_at,deleted_at,okr_grade_id,flag_code,priority,description)>
+<!ATTLIST okr_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/objectives-and-key-results-tracker/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

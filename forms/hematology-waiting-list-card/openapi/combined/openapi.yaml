@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Hematology Waiting List Card form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: hematology-waiting-list-card
+  apiPrefix: /api/hematology-waiting-list-card/
+  sqlSchema: hematology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/hematology-waiting-list-card/xml
+tags:
+- name: hematology-waiting-list-card
+  description: Hematology Waiting List Card form
 paths:
   /api/hematology-waiting-list-card/hematology_waiting_list_card_appointments:
     get:
       summary: List HematologyWaitingListCardAppointment records
+      tags:
+      - hematology-waiting-list-card
       operationId: listHematologyWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HematologyWaitingListCardAppointment
+      tags:
+      - hematology-waiting-list-card
       operationId: createHematologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HematologyWaitingListCardAppointment by id
+      tags:
+      - hematology-waiting-list-card
       operationId: getHematologyWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HematologyWaitingListCardAppointment
+      tags:
+      - hematology-waiting-list-card
       operationId: updateHematologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HematologyWaitingListCardAppointment
+      tags:
+      - hematology-waiting-list-card
       operationId: replaceHematologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HematologyWaitingListCardAppointment
+      tags:
+      - hematology-waiting-list-card
       operationId: deleteHematologyWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/hematology-waiting-list-card/hematology_waiting_list_card_grade_flags:
     get:
       summary: List HematologyWaitingListCardGradeFlag records
+      tags:
+      - hematology-waiting-list-card
       operationId: listHematologyWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HematologyWaitingListCardGradeFlag
+      tags:
+      - hematology-waiting-list-card
       operationId: createHematologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HematologyWaitingListCardGradeFlag by id
+      tags:
+      - hematology-waiting-list-card
       operationId: getHematologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HematologyWaitingListCardGradeFlag
+      tags:
+      - hematology-waiting-list-card
       operationId: updateHematologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HematologyWaitingListCardGradeFlag
+      tags:
+      - hematology-waiting-list-card
       operationId: replaceHematologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HematologyWaitingListCardGradeFlag
+      tags:
+      - hematology-waiting-list-card
       operationId: deleteHematologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/hematology-waiting-list-card/hematology_waiting_list_card_grade_rules:
     get:
       summary: List HematologyWaitingListCardGradeRule records
+      tags:
+      - hematology-waiting-list-card
       operationId: listHematologyWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HematologyWaitingListCardGradeRule
+      tags:
+      - hematology-waiting-list-card
       operationId: createHematologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HematologyWaitingListCardGradeRule by id
+      tags:
+      - hematology-waiting-list-card
       operationId: getHematologyWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HematologyWaitingListCardGradeRule
+      tags:
+      - hematology-waiting-list-card
       operationId: updateHematologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HematologyWaitingListCardGradeRule
+      tags:
+      - hematology-waiting-list-card
       operationId: replaceHematologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HematologyWaitingListCardGradeRule
+      tags:
+      - hematology-waiting-list-card
       operationId: deleteHematologyWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/hematology-waiting-list-card/hematology_waiting_list_card_grades:
     get:
       summary: List HematologyWaitingListCardGrade records
+      tags:
+      - hematology-waiting-list-card
       operationId: listHematologyWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HematologyWaitingListCardGrade
+      tags:
+      - hematology-waiting-list-card
       operationId: createHematologyWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HematologyWaitingListCardGrade by id
+      tags:
+      - hematology-waiting-list-card
       operationId: getHematologyWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HematologyWaitingListCardGrade
+      tags:
+      - hematology-waiting-list-card
       operationId: updateHematologyWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HematologyWaitingListCardGrade
+      tags:
+      - hematology-waiting-list-card
       operationId: replaceHematologyWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HematologyWaitingListCardGrade
+      tags:
+      - hematology-waiting-list-card
       operationId: deleteHematologyWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/hematology-waiting-list-card/hematology_waiting_list_cards:
     get:
       summary: List HematologyWaitingListCard records
+      tags:
+      - hematology-waiting-list-card
       operationId: listHematologyWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HematologyWaitingListCard
+      tags:
+      - hematology-waiting-list-card
       operationId: createHematologyWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HematologyWaitingListCard by id
+      tags:
+      - hematology-waiting-list-card
       operationId: getHematologyWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HematologyWaitingListCard
+      tags:
+      - hematology-waiting-list-card
       operationId: updateHematologyWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HematologyWaitingListCard
+      tags:
+      - hematology-waiting-list-card
       operationId: replaceHematologyWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HematologyWaitingListCard
+      tags:
+      - hematology-waiting-list-card
       operationId: deleteHematologyWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - hematology-waiting-list-card
   /api/hematology-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - hematology-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - hematology-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - hematology-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - hematology-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - hematology-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - hematology-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/hematology-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - hematology-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - hematology-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - hematology-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - hematology-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - hematology-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - hematology-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE orthopaedics_waiting_list_card_grade SYSTEM "orthopaedics_waiting_list_card_grade.dtd">
-<orthopaedics_waiting_list_card_grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<orthopaedics_waiting_list_card_grade xmlns="https://formexamples.github.io/orthopaedics-waiting-list-card/xml">
+<id>4db403d1-c328-5ab6-8d31-3eb7160fb787</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<orthopaedics_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</orthopaedics_waiting_list_card_id>
+<orthopaedics_waiting_list_card_id>24940280-6371-5533-bde5-dfaa75add3da</orthopaedics_waiting_list_card_id>
 <waiting_time_status>within-target</waiting_time_status>
 <clinical_priority>P1a</clinical_priority>
 <target_wait_weeks>0.0</target_wait_weeks>

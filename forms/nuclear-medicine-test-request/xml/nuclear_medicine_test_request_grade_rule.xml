@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nuclear_medicine_test_request_grade_rule SYSTEM "nuclear_medicine_test_request_grade_rule.dtd">
-<nuclear_medicine_test_request_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<nuclear_medicine_test_request_grade_rule xmlns="https://formexamples.github.io/nuclear-medicine-test-request/xml">
+<id>258d1192-8cdb-5b97-900d-7d21060229df</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<nuclear_medicine_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</nuclear_medicine_test_request_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<nuclear_medicine_test_request_grade_id>b67c0a19-cebb-5e29-934d-cff213468fd3</nuclear_medicine_test_request_grade_id>
+<rule_id>9ef74023-f186-5ec4-b722-ecea8d0390f9</rule_id>
 <axis>appropriateness</axis>
 <category>General</category>
 <description>Example text.</description>

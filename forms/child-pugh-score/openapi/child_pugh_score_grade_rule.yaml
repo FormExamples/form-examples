@@ -5,10 +5,19 @@ info:
   title: Child Pugh Score — ChildPughScoreGradeRule
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during Child-Pugh computation: parameter, points contributed, category, and description."
+x-namespace:
+  form: child-pugh-score
+  apiPrefix: /api/child-pugh-score/
+  sqlSchema: child_pugh_score
+  xmlNamespace: https://formexamples.github.io/child-pugh-score/xml
+tags:
+  - name: child-pugh-score
+    description: Child Pugh Score form
 paths:
   /api/child-pugh-score/child_pugh_score_grade_rules:
     get:
       summary: List ChildPughScoreGradeRule records
+      tags: [child-pugh-score]
       operationId: listChildPughScoreGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ChildPughScoreGradeRule
+      tags: [child-pugh-score]
       operationId: createChildPughScoreGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ChildPughScoreGradeRule by id
+      tags: [child-pugh-score]
       operationId: getChildPughScoreGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ChildPughScoreGradeRule
+      tags: [child-pugh-score]
       operationId: updateChildPughScoreGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ChildPughScoreGradeRule
+      tags: [child-pugh-score]
       operationId: replaceChildPughScoreGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ChildPughScoreGradeRule
+      tags: [child-pugh-score]
       operationId: deleteChildPughScoreGradeRule
       responses:
         "200":

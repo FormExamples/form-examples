@@ -5,10 +5,19 @@ info:
   title: Coagulation Test Result — CoagulationTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: coagulation-test-result
+  apiPrefix: /api/coagulation-test-result/
+  sqlSchema: coagulation_test_result
+  xmlNamespace: https://formexamples.github.io/coagulation-test-result/xml
+tags:
+  - name: coagulation-test-result
+    description: Coagulation Test Result form
 paths:
   /api/coagulation-test-result/coagulation_test_result_grade_rules:
     get:
       summary: List CoagulationTestResultGradeRule records
+      tags: [coagulation-test-result]
       operationId: listCoagulationTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CoagulationTestResultGradeRule
+      tags: [coagulation-test-result]
       operationId: createCoagulationTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CoagulationTestResultGradeRule by id
+      tags: [coagulation-test-result]
       operationId: getCoagulationTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CoagulationTestResultGradeRule
+      tags: [coagulation-test-result]
       operationId: updateCoagulationTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CoagulationTestResultGradeRule
+      tags: [coagulation-test-result]
       operationId: replaceCoagulationTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CoagulationTestResultGradeRule
+      tags: [coagulation-test-result]
       operationId: deleteCoagulationTestResultGradeRule
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mental_health_act_assessment_grade_flag SYSTEM "mental_health_act_assessment_grade_flag.dtd">
-<mental_health_act_assessment_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<mental_health_act_assessment_grade_flag xmlns="https://formexamples.github.io/mental-health-act-assessment/xml">
+<id>a4a227b4-9d4b-561b-accc-1d24b48b2344</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<mental_health_act_assessment_grade_id>880e8400-e29b-41d4-a716-446655440003</mental_health_act_assessment_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<mental_health_act_assessment_grade_id>413c029f-f844-5d4a-b983-a963c8791ad5</mental_health_act_assessment_grade_id>
+<flag_id>fa1b31ca-7b9a-56f0-bf39-fe2cfa84fd2b</flag_id>
 <category>criteria-not-met</category>
 <priority>low</priority>
 <description>Example text.</description>

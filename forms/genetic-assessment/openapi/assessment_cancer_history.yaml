@@ -5,10 +5,19 @@ info:
   title: Genetic Assessment — AssessmentCancerHistory
   version: 1.0.0
   description: "Cancer history section: family cancer patterns, early onset, bilateral cancers, and known syndromes. One-to-one child of assessment."
+x-namespace:
+  form: genetic-assessment
+  apiPrefix: /api/genetic-assessment/
+  sqlSchema: genetic_assessment
+  xmlNamespace: https://formexamples.github.io/genetic-assessment/xml
+tags:
+  - name: genetic-assessment
+    description: Genetic Assessment form
 paths:
   /api/genetic-assessment/assessment_cancer_histories:
     get:
       summary: List AssessmentCancerHistory records
+      tags: [genetic-assessment]
       operationId: listAssessmentCancerHistory
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentCancerHistory
+      tags: [genetic-assessment]
       operationId: createAssessmentCancerHistory
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentCancerHistory by id
+      tags: [genetic-assessment]
       operationId: getAssessmentCancerHistory
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentCancerHistory
+      tags: [genetic-assessment]
       operationId: updateAssessmentCancerHistory
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentCancerHistory
+      tags: [genetic-assessment]
       operationId: replaceAssessmentCancerHistory
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentCancerHistory
+      tags: [genetic-assessment]
       operationId: deleteAssessmentCancerHistory
       responses:
         "200":

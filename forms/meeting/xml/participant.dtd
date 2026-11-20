@@ -1,4 +1,5 @@
 <!ELEMENT participant (id,created_at,updated_at,deleted_at,meeting_id,position,name,email,organisation,role,response_status,attendance_status,notes)>
+<!ATTLIST participant xmlns CDATA #FIXED "https://formexamples.github.io/meeting/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

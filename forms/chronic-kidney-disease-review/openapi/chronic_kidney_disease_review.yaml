@@ -5,10 +5,19 @@ info:
   title: Chronic Kidney Disease Review — ChronicKidneyDiseaseReview
   version: 1.0.0
   description: "Main chronic kidney disease annual-review record (NICE NG203): patient and clinician identification, review context, the two KDIGO staging measurements (current eGFR and urine ACR), the prior eGFR for the decline check, blood pressure, a structured medication review, and the core CKD bloods. The derived G-stage, albuminuria stage, KDIGO risk zone, completeness grade, fired rules, and flags live in child tables."
+x-namespace:
+  form: chronic-kidney-disease-review
+  apiPrefix: /api/chronic-kidney-disease-review/
+  sqlSchema: chronic_kidney_disease_review
+  xmlNamespace: https://formexamples.github.io/chronic-kidney-disease-review/xml
+tags:
+  - name: chronic-kidney-disease-review
+    description: Chronic Kidney Disease Review form
 paths:
   /api/chronic-kidney-disease-review/chronic_kidney_disease_reviews:
     get:
       summary: List ChronicKidneyDiseaseReview records
+      tags: [chronic-kidney-disease-review]
       operationId: listChronicKidneyDiseaseReview
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ChronicKidneyDiseaseReview
+      tags: [chronic-kidney-disease-review]
       operationId: createChronicKidneyDiseaseReview
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ChronicKidneyDiseaseReview by id
+      tags: [chronic-kidney-disease-review]
       operationId: getChronicKidneyDiseaseReview
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ChronicKidneyDiseaseReview
+      tags: [chronic-kidney-disease-review]
       operationId: updateChronicKidneyDiseaseReview
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ChronicKidneyDiseaseReview
+      tags: [chronic-kidney-disease-review]
       operationId: replaceChronicKidneyDiseaseReview
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ChronicKidneyDiseaseReview
+      tags: [chronic-kidney-disease-review]
       operationId: deleteChronicKidneyDiseaseReview
       responses:
         "200":

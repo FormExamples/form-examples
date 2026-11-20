@@ -1,4 +1,5 @@
 <!ELEMENT rockall_score_for_upper_gastrointestinal_bleeding (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,presenting_complaint,patient_identifier,age_years,sex,systolic_blood_pressure_mmhg,heart_rate_bpm,comorbidity,endoscopy_performed,diagnosis,stigmata_recent_haemorrhage,clinical_note)>
+<!ATTLIST rockall_score_for_upper_gastrointestinal_bleeding xmlns CDATA #FIXED "https://formexamples.github.io/rockall-score-for-upper-gastrointestinal-bleeding/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

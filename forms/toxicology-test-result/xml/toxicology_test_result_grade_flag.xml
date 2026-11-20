@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE toxicology_test_result_grade_flag SYSTEM "toxicology_test_result_grade_flag.dtd">
-<toxicology_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<toxicology_test_result_grade_flag xmlns="https://formexamples.github.io/toxicology-test-result/xml">
+<id>ac9b121b-eea3-5b88-9db7-c1fe0e0b3c2f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<toxicology_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</toxicology_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<toxicology_test_result_grade_id>fdb5a30f-31a6-58e1-853b-281b2e3fb13d</toxicology_test_result_grade_id>
+<flag_id>74fe60a1-d941-5725-832d-3a5dfba09221</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

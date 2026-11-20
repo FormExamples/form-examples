@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<grade xmlns="https://formexamples.github.io/genetic-assessment/xml">
+<id>4a25a758-c294-5faf-aa8e-214a4143eee2</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>dc14ec7e-146f-5837-a49f-aa9c9f1bf8d5</assessment_id>
 <risk_level>low</risk_level>
 <total_risk_score>5</total_risk_score>
 <cancer_genetics_score>5</cancer_genetics_score>

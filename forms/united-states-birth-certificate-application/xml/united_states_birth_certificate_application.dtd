@@ -1,4 +1,5 @@
 <!ELEMENT united_states_birth_certificate_application (id,created_at,updated_at,deleted_at,applicant_id,registrant_id,requester_relationship,purpose,needs_apostille,apostille_country,certificate_type,copies,delivery_method,fee_enclosed_usd,id_type,id_unexpired,proof_of_relationship,authority_document,notarized_sworn_statement,declaration_signed,application_note)>
+<!ATTLIST united_states_birth_certificate_application xmlns CDATA #FIXED "https://formexamples.github.io/united-states-birth-certificate-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

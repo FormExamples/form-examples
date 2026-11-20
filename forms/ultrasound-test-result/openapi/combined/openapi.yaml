@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Ultrasound Test Result form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: ultrasound-test-result
+  apiPrefix: /api/ultrasound-test-result/
+  sqlSchema: ultrasound_test_result
+  xmlNamespace: https://formexamples.github.io/ultrasound-test-result/xml
+tags:
+- name: ultrasound-test-result
+  description: Ultrasound Test Result form
 paths:
   /api/ultrasound-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - ultrasound-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - ultrasound-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - ultrasound-test-result
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - ultrasound-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - ultrasound-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - ultrasound-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - ultrasound-test-result
   /api/ultrasound-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - ultrasound-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - ultrasound-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - ultrasound-test-result
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - ultrasound-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - ultrasound-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - ultrasound-test-result
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/ultrasound-test-result/ultrasound_test_result_grade_flags:
     get:
       summary: List UltrasoundTestResultGradeFlag records
+      tags:
+      - ultrasound-test-result
       operationId: listUltrasoundTestResultGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UltrasoundTestResultGradeFlag
+      tags:
+      - ultrasound-test-result
       operationId: createUltrasoundTestResultGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UltrasoundTestResultGradeFlag by id
+      tags:
+      - ultrasound-test-result
       operationId: getUltrasoundTestResultGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UltrasoundTestResultGradeFlag
+      tags:
+      - ultrasound-test-result
       operationId: updateUltrasoundTestResultGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UltrasoundTestResultGradeFlag
+      tags:
+      - ultrasound-test-result
       operationId: replaceUltrasoundTestResultGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UltrasoundTestResultGradeFlag
+      tags:
+      - ultrasound-test-result
       operationId: deleteUltrasoundTestResultGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/ultrasound-test-result/ultrasound_test_result_grade_rules:
     get:
       summary: List UltrasoundTestResultGradeRule records
+      tags:
+      - ultrasound-test-result
       operationId: listUltrasoundTestResultGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UltrasoundTestResultGradeRule
+      tags:
+      - ultrasound-test-result
       operationId: createUltrasoundTestResultGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UltrasoundTestResultGradeRule by id
+      tags:
+      - ultrasound-test-result
       operationId: getUltrasoundTestResultGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UltrasoundTestResultGradeRule
+      tags:
+      - ultrasound-test-result
       operationId: updateUltrasoundTestResultGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UltrasoundTestResultGradeRule
+      tags:
+      - ultrasound-test-result
       operationId: replaceUltrasoundTestResultGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UltrasoundTestResultGradeRule
+      tags:
+      - ultrasound-test-result
       operationId: deleteUltrasoundTestResultGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/ultrasound-test-result/ultrasound_test_result_grades:
     get:
       summary: List UltrasoundTestResultGrade records
+      tags:
+      - ultrasound-test-result
       operationId: listUltrasoundTestResultGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UltrasoundTestResultGrade
+      tags:
+      - ultrasound-test-result
       operationId: createUltrasoundTestResultGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UltrasoundTestResultGrade by id
+      tags:
+      - ultrasound-test-result
       operationId: getUltrasoundTestResultGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UltrasoundTestResultGrade
+      tags:
+      - ultrasound-test-result
       operationId: updateUltrasoundTestResultGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UltrasoundTestResultGrade
+      tags:
+      - ultrasound-test-result
       operationId: replaceUltrasoundTestResultGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UltrasoundTestResultGrade
+      tags:
+      - ultrasound-test-result
       operationId: deleteUltrasoundTestResultGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/ultrasound-test-result/ultrasound_test_results:
     get:
       summary: List UltrasoundTestResult records
+      tags:
+      - ultrasound-test-result
       operationId: listUltrasoundTestResult
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UltrasoundTestResult
+      tags:
+      - ultrasound-test-result
       operationId: createUltrasoundTestResult
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UltrasoundTestResult by id
+      tags:
+      - ultrasound-test-result
       operationId: getUltrasoundTestResult
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UltrasoundTestResult
+      tags:
+      - ultrasound-test-result
       operationId: updateUltrasoundTestResult
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UltrasoundTestResult
+      tags:
+      - ultrasound-test-result
       operationId: replaceUltrasoundTestResult
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UltrasoundTestResult
+      tags:
+      - ultrasound-test-result
       operationId: deleteUltrasoundTestResult
       responses:
         '200':

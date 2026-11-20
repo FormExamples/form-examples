@@ -5,10 +5,19 @@ info:
   title: Cardiology Response — Clinician
   version: 1.0.0
   description: Responding cardiology clinician (consultant cardiologist, registrar, or specialist nurse) who authors and signs the cardiology response.
+x-namespace:
+  form: cardiology-response
+  apiPrefix: /api/cardiology-response/
+  sqlSchema: cardiology_response
+  xmlNamespace: https://formexamples.github.io/cardiology-response/xml
+tags:
+  - name: cardiology-response
+    description: Cardiology Response form
 paths:
   /api/cardiology-response/clinicians:
     get:
       summary: List Clinician records
+      tags: [cardiology-response]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [cardiology-response]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [cardiology-response]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [cardiology-response]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [cardiology-response]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [cardiology-response]
       operationId: deleteClinician
       responses:
         "200":

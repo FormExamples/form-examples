@@ -5,10 +5,19 @@ info:
   title: Podiatric Surgery Waiting List Card — PodiatricSurgWaitingListCardAppointment
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+x-namespace:
+  form: podiatric-surgery-waiting-list-card
+  apiPrefix: /api/podiatric-surgery-waiting-list-card/
+  sqlSchema: podiatric_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/podiatric-surgery-waiting-list-card/xml
+tags:
+  - name: podiatric-surgery-waiting-list-card
+    description: Podiatric Surgery Waiting List Card form
 paths:
   /api/podiatric-surgery-waiting-list-card/podiatric_surg_waiting_list_card_appointments:
     get:
       summary: List PodiatricSurgWaitingListCardAppointment records
+      tags: [podiatric-surgery-waiting-list-card]
       operationId: listPodiatricSurgWaitingListCardAppointment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PodiatricSurgWaitingListCardAppointment
+      tags: [podiatric-surgery-waiting-list-card]
       operationId: createPodiatricSurgWaitingListCardAppointment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PodiatricSurgWaitingListCardAppointment by id
+      tags: [podiatric-surgery-waiting-list-card]
       operationId: getPodiatricSurgWaitingListCardAppointment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PodiatricSurgWaitingListCardAppointment
+      tags: [podiatric-surgery-waiting-list-card]
       operationId: updatePodiatricSurgWaitingListCardAppointment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PodiatricSurgWaitingListCardAppointment
+      tags: [podiatric-surgery-waiting-list-card]
       operationId: replacePodiatricSurgWaitingListCardAppointment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PodiatricSurgWaitingListCardAppointment
+      tags: [podiatric-surgery-waiting-list-card]
       operationId: deletePodiatricSurgWaitingListCardAppointment
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Seasonal Affective Disorder Assessment — Grade
   version: 1.0.0
   description: Computed SAD grading result. SPAQ GSS 0-24, PHQ-9 0-27, combined severity. One-to-one child of assessment.
+x-namespace:
+  form: seasonal-affective-disorder-assessment
+  apiPrefix: /api/seasonal-affective-disorder-assessment/
+  sqlSchema: seasonal_affective_disorder_assessment
+  xmlNamespace: https://formexamples.github.io/seasonal-affective-disorder-assessment/xml
+tags:
+  - name: seasonal-affective-disorder-assessment
+    description: Seasonal Affective Disorder Assessment form
 paths:
   /api/seasonal-affective-disorder-assessment/grades:
     get:
       summary: List Grade records
+      tags: [seasonal-affective-disorder-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [seasonal-affective-disorder-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [seasonal-affective-disorder-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [seasonal-affective-disorder-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [seasonal-affective-disorder-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [seasonal-affective-disorder-assessment]
       operationId: deleteGrade
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT lpa_certificate_provider (id,created_at,updated_at,deleted_at,lpa_id,person_id,knows_donor_as,is_over_eighteen,read_lpa,no_restrictions_on_acting,eligibility_confirmation_at)>
+<!ATTLIST lpa_certificate_provider xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

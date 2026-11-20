@@ -1,4 +1,5 @@
 <!ELEMENT patient (id,created_at,updated_at,deleted_at,name,birth_date,sex,united_kingdom_nhs_number,medical_record_number,weight_as_kg)>
+<!ATTLIST patient xmlns CDATA #FIXED "https://formexamples.github.io/who-surgical-safety-checklist/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

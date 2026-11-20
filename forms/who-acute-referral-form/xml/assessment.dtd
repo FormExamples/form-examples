@@ -1,4 +1,5 @@
 <!ELEMENT assessment (id,created_at,updated_at,deleted_at,patient_id,status)>
+<!ATTLIST assessment xmlns CDATA #FIXED "https://formexamples.github.io/who-acute-referral-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

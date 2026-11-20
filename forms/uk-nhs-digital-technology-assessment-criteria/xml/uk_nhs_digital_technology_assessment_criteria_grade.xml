@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE uk_nhs_digital_technology_assessment_criteria_grade SYSTEM "uk_nhs_digital_technology_assessment_criteria_grade.dtd">
-<uk_nhs_digital_technology_assessment_criteria_grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<uk_nhs_digital_technology_assessment_criteria_grade xmlns="https://formexamples.github.io/uk-nhs-digital-technology-assessment-criteria/xml">
+<id>99766dbb-107f-5059-8b72-ddb09322fd61</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<uk_nhs_digital_technology_assessment_criteria_id>880e8400-e29b-41d4-a716-446655440003</uk_nhs_digital_technology_assessment_criteria_id>
+<uk_nhs_digital_technology_assessment_criteria_id>599dbb07-aae5-53ed-9e9a-88fd1adaba39</uk_nhs_digital_technology_assessment_criteria_id>
 <outcome>meets</outcome>
 <mandatory_total>1</mandatory_total>
 <mandatory_met>1</mandatory_met>

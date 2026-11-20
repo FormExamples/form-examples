@@ -1,4 +1,5 @@
 <!ELEMENT bone_marrow_donation_assessment (id,created_at,updated_at,deleted_at,patient_id,status)>
+<!ATTLIST bone_marrow_donation_assessment xmlns CDATA #FIXED "https://formexamples.github.io/bone-marrow-donation-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

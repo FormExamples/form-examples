@@ -5,10 +5,19 @@ info:
   title: Encounter Satisfaction — CareQuality
   version: 1.0.0
   description: "1:1 with encounter_satisfaction. Care Quality domain: 3 Likert-scale satisfaction questions."
+x-namespace:
+  form: encounter-satisfaction
+  apiPrefix: /api/encounter-satisfaction/
+  sqlSchema: encounter_satisfaction
+  xmlNamespace: https://formexamples.github.io/encounter-satisfaction/xml
+tags:
+  - name: encounter-satisfaction
+    description: Encounter Satisfaction form
 paths:
   /api/encounter-satisfaction/care_qualities:
     get:
       summary: List CareQuality records
+      tags: [encounter-satisfaction]
       operationId: listCareQuality
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CareQuality
+      tags: [encounter-satisfaction]
       operationId: createCareQuality
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CareQuality by id
+      tags: [encounter-satisfaction]
       operationId: getCareQuality
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CareQuality
+      tags: [encounter-satisfaction]
       operationId: updateCareQuality
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CareQuality
+      tags: [encounter-satisfaction]
       operationId: replaceCareQuality
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CareQuality
+      tags: [encounter-satisfaction]
       operationId: deleteCareQuality
       responses:
         "200":

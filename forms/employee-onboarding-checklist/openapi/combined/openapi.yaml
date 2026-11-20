@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Employee Onboarding Checklist form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: employee-onboarding-checklist
+  apiPrefix: /api/employee-onboarding-checklist/
+  sqlSchema: employee_onboarding_checklist
+  xmlNamespace: https://formexamples.github.io/employee-onboarding-checklist/xml
+tags:
+- name: employee-onboarding-checklist
+  description: Employee Onboarding Checklist form
 paths:
   /api/employee-onboarding-checklist/assessments:
     get:
       summary: List Assessment records
+      tags:
+      - employee-onboarding-checklist
       operationId: listAssessment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessment
+      tags:
+      - employee-onboarding-checklist
       operationId: createAssessment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags:
+      - employee-onboarding-checklist
       operationId: getAssessment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessment
+      tags:
+      - employee-onboarding-checklist
       operationId: updateAssessment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Assessment
+      tags:
+      - employee-onboarding-checklist
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Assessment
+      tags:
+      - employee-onboarding-checklist
       operationId: deleteAssessment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/employee-onboarding-checklist/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - employee-onboarding-checklist
       operationId: listClinician
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - employee-onboarding-checklist
       operationId: createClinician
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - employee-onboarding-checklist
       operationId: getClinician
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - employee-onboarding-checklist
       operationId: updateClinician
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - employee-onboarding-checklist
       operationId: replaceClinician
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - employee-onboarding-checklist
       operationId: deleteClinician
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/employee-onboarding-checklist/employees:
     get:
       summary: List Employee records
+      tags:
+      - employee-onboarding-checklist
       operationId: listEmployee
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Employee
+      tags:
+      - employee-onboarding-checklist
       operationId: createEmployee
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Employee by id
+      tags:
+      - employee-onboarding-checklist
       operationId: getEmployee
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Employee
+      tags:
+      - employee-onboarding-checklist
       operationId: updateEmployee
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Employee
+      tags:
+      - employee-onboarding-checklist
       operationId: replaceEmployee
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Employee
+      tags:
+      - employee-onboarding-checklist
       operationId: deleteEmployee
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/employee-onboarding-checklist/grades:
     get:
       summary: List Grade records
+      tags:
+      - employee-onboarding-checklist
       operationId: listGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Grade
+      tags:
+      - employee-onboarding-checklist
       operationId: createGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Grade by id
+      tags:
+      - employee-onboarding-checklist
       operationId: getGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Grade
+      tags:
+      - employee-onboarding-checklist
       operationId: updateGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Grade
+      tags:
+      - employee-onboarding-checklist
       operationId: replaceGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Grade
+      tags:
+      - employee-onboarding-checklist
       operationId: deleteGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/employee-onboarding-checklist/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags:
+      - employee-onboarding-checklist
       operationId: listGradingAdditionalFlag
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingAdditionalFlag
+      tags:
+      - employee-onboarding-checklist
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags:
+      - employee-onboarding-checklist
       operationId: getGradingAdditionalFlag
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags:
+      - employee-onboarding-checklist
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags:
+      - employee-onboarding-checklist
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags:
+      - employee-onboarding-checklist
       operationId: deleteGradingAdditionalFlag
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/employee-onboarding-checklist/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags:
+      - employee-onboarding-checklist
       operationId: listGradingFiredRule
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingFiredRule
+      tags:
+      - employee-onboarding-checklist
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags:
+      - employee-onboarding-checklist
       operationId: getGradingFiredRule
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingFiredRule
+      tags:
+      - employee-onboarding-checklist
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingFiredRule
+      tags:
+      - employee-onboarding-checklist
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingFiredRule
+      tags:
+      - employee-onboarding-checklist
       operationId: deleteGradingFiredRule
       responses:
         '200':
@@ -1495,9 +1575,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - employee-onboarding-checklist
   /api/employee-onboarding-checklist/patients:
     get:
       summary: List Patient records
+      tags:
+      - employee-onboarding-checklist
       operationId: listPatient
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - employee-onboarding-checklist
       operationId: createPatient
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - employee-onboarding-checklist
       operationId: getPatient
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - employee-onboarding-checklist
       operationId: updatePatient
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - employee-onboarding-checklist
       operationId: replacePatient
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - employee-onboarding-checklist
       operationId: deletePatient
       responses:
         '200':

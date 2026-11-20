@@ -1,4 +1,5 @@
 <!ELEMENT lpa_continuation_sheet (id,created_at,updated_at,deleted_at,lpa_id,kind,body_text,signed_on,ordinal)>
+<!ATTLIST lpa_continuation_sheet xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE echocardiogram_test_request_grade SYSTEM "echocardiogram_test_request_grade.dtd">
-<echocardiogram_test_request_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<echocardiogram_test_request_grade xmlns="https://formexamples.github.io/echocardiogram-test-request/xml">
+<id>f2714994-442e-50e2-a84f-03f47e1ec623</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<echocardiogram_test_request_id>770e8400-e29b-41d4-a716-446655440002</echocardiogram_test_request_id>
+<echocardiogram_test_request_id>9a3c96bc-9a1c-5a48-9d71-252b41b886f1</echocardiogram_test_request_id>
 <appropriateness_score>5</appropriateness_score>
 <appropriateness_band>appropriate</appropriateness_band>
 <triage_tier>routine</triage_tier>

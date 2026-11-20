@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE breast_screening_grade_flag SYSTEM "breast_screening_grade_flag.dtd">
-<breast_screening_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<breast_screening_grade_flag xmlns="https://formexamples.github.io/breast-screening/xml">
+<id>4e7e2152-f1d1-5e3a-ada9-9b632038f7aa</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<breast_screening_grade_id>880e8400-e29b-41d4-a716-446655440003</breast_screening_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<breast_screening_grade_id>826b8918-8bd5-5738-b262-0270717ce199</breast_screening_grade_id>
+<flag_id>5de8ada8-b25e-5cb4-8912-12eeab534faa</flag_id>
 <category>symptomatic-wrong-pathway</category>
 <priority>low</priority>
 <description>Example text.</description>

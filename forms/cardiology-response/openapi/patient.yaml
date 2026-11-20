@@ -5,10 +5,19 @@ info:
   title: Cardiology Response — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: cardiology-response
+  apiPrefix: /api/cardiology-response/
+  sqlSchema: cardiology_response
+  xmlNamespace: https://formexamples.github.io/cardiology-response/xml
+tags:
+  - name: cardiology-response
+    description: Cardiology Response form
 paths:
   /api/cardiology-response/patients:
     get:
       summary: List Patient records
+      tags: [cardiology-response]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [cardiology-response]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [cardiology-response]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [cardiology-response]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [cardiology-response]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [cardiology-response]
       operationId: deletePatient
       responses:
         "200":

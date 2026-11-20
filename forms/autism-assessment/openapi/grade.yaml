@@ -5,10 +5,19 @@ info:
   title: Autism Assessment — Grade
   version: 1.0.0
   description: Computed AQ-10 grading result. Score 0-5 is below threshold; score 6-10 indicates referral for diagnostic assessment is recommended. One-to-one child of assessment.
+x-namespace:
+  form: autism-assessment
+  apiPrefix: /api/autism-assessment/
+  sqlSchema: autism_assessment
+  xmlNamespace: https://formexamples.github.io/autism-assessment/xml
+tags:
+  - name: autism-assessment
+    description: Autism Assessment form
 paths:
   /api/autism-assessment/grades:
     get:
       summary: List Grade records
+      tags: [autism-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [autism-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [autism-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [autism-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [autism-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [autism-assessment]
       operationId: deleteGrade
       responses:
         "200":

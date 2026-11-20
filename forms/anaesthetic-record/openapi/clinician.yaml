@@ -5,10 +5,19 @@ info:
   title: Anaesthetic Record — Clinician
   version: 1.0.0
   description: Clinician identifying information for members of the anaesthetic team.
+x-namespace:
+  form: anaesthetic-record
+  apiPrefix: /api/anaesthetic-record/
+  sqlSchema: anaesthetic_record
+  xmlNamespace: https://formexamples.github.io/anaesthetic-record/xml
+tags:
+  - name: anaesthetic-record
+    description: Anaesthetic Record form
 paths:
   /api/anaesthetic-record/clinicians:
     get:
       summary: List Clinician records
+      tags: [anaesthetic-record]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [anaesthetic-record]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [anaesthetic-record]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [anaesthetic-record]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [anaesthetic-record]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [anaesthetic-record]
       operationId: deleteClinician
       responses:
         "200":

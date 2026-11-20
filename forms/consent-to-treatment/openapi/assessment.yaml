@@ -5,10 +5,19 @@ info:
   title: Consent To Treatment — Assessment
   version: 1.0.0
   description: Consent to treatment form with completeness validation. Parent entity for all consent sections.
+x-namespace:
+  form: consent-to-treatment
+  apiPrefix: /api/consent-to-treatment/
+  sqlSchema: consent_to_treatment
+  xmlNamespace: https://formexamples.github.io/consent-to-treatment/xml
+tags:
+  - name: consent-to-treatment
+    description: Consent To Treatment form
 paths:
   /api/consent-to-treatment/assessments:
     get:
       summary: List Assessment records
+      tags: [consent-to-treatment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [consent-to-treatment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [consent-to-treatment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [consent-to-treatment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [consent-to-treatment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [consent-to-treatment]
       operationId: deleteAssessment
       responses:
         "200":

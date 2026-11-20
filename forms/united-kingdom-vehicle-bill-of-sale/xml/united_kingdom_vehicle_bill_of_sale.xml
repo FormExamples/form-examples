@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_vehicle_bill_of_sale SYSTEM "united_kingdom_vehicle_bill_of_sale.dtd">
-<united_kingdom_vehicle_bill_of_sale>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<united_kingdom_vehicle_bill_of_sale xmlns="https://formexamples.github.io/united-kingdom-vehicle-bill-of-sale/xml">
+<id>5654a95f-be4f-562c-bc53-96c9c3d939af</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<seller_id>550e8400-e29b-41d4-a716-446655440000</seller_id>
-<buyer_id>660e8400-e29b-41d4-a716-446655440001</buyer_id>
+<seller_id>1bf4428f-e1dc-582c-b86c-331f622ca104</seller_id>
+<buyer_id>420bee23-b103-5d0e-b568-18d2b28ffd56</buyer_id>
 <sale_date>2026-01-15</sale_date>
 <sale_place></sale_place>
 <seller_capacity>private</seller_capacity>

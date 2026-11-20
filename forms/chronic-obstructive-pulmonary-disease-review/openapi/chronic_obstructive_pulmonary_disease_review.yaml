@@ -5,10 +5,19 @@ info:
   title: Chronic Obstructive Pulmonary Disease Review — ChronicObstructivePulmonaryDiseaseReview
   version: 1.0.0
   description: "Main COPD annual-review record (NICE NG115, GOLD 2023+): patient and clinician identification, review context, diagnosis and exposure history, post-bronchodilator spirometry, symptom burden (MRC / mMRC / CAT), exacerbation history, smoking and cessation, inhaler therapy, technique and adherence, vaccinations, pulmonary rehabilitation, oxygen, comorbidities, and self-management plan. The computed GOLD airflow grade, ABE group, review-completeness grade, fired rules, and flags live in child tables."
+x-namespace:
+  form: chronic-obstructive-pulmonary-disease-review
+  apiPrefix: /api/chronic-obstructive-pulmonary-disease-review/
+  sqlSchema: chronic_obstructive_pulmonary_disease_review
+  xmlNamespace: https://formexamples.github.io/chronic-obstructive-pulmonary-disease-review/xml
+tags:
+  - name: chronic-obstructive-pulmonary-disease-review
+    description: Chronic Obstructive Pulmonary Disease Review form
 paths:
   /api/chronic-obstructive-pulmonary-disease-review/chronic_obstructive_pulmonary_disease_reviews:
     get:
       summary: List ChronicObstructivePulmonaryDiseaseReview records
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: listChronicObstructivePulmonaryDiseaseReview
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ChronicObstructivePulmonaryDiseaseReview
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: createChronicObstructivePulmonaryDiseaseReview
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ChronicObstructivePulmonaryDiseaseReview by id
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: getChronicObstructivePulmonaryDiseaseReview
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ChronicObstructivePulmonaryDiseaseReview
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: updateChronicObstructivePulmonaryDiseaseReview
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ChronicObstructivePulmonaryDiseaseReview
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: replaceChronicObstructivePulmonaryDiseaseReview
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ChronicObstructivePulmonaryDiseaseReview
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: deleteChronicObstructivePulmonaryDiseaseReview
       responses:
         "200":

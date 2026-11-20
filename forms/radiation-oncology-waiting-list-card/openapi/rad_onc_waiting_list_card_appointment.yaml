@@ -5,10 +5,19 @@ info:
   title: Radiation Oncology Waiting List Card — RadOncWaitingListCardAppointment
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+x-namespace:
+  form: radiation-oncology-waiting-list-card
+  apiPrefix: /api/radiation-oncology-waiting-list-card/
+  sqlSchema: radiation_oncology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/radiation-oncology-waiting-list-card/xml
+tags:
+  - name: radiation-oncology-waiting-list-card
+    description: Radiation Oncology Waiting List Card form
 paths:
   /api/radiation-oncology-waiting-list-card/rad_onc_waiting_list_card_appointments:
     get:
       summary: List RadOncWaitingListCardAppointment records
+      tags: [radiation-oncology-waiting-list-card]
       operationId: listRadOncWaitingListCardAppointment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RadOncWaitingListCardAppointment
+      tags: [radiation-oncology-waiting-list-card]
       operationId: createRadOncWaitingListCardAppointment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RadOncWaitingListCardAppointment by id
+      tags: [radiation-oncology-waiting-list-card]
       operationId: getRadOncWaitingListCardAppointment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RadOncWaitingListCardAppointment
+      tags: [radiation-oncology-waiting-list-card]
       operationId: updateRadOncWaitingListCardAppointment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RadOncWaitingListCardAppointment
+      tags: [radiation-oncology-waiting-list-card]
       operationId: replaceRadOncWaitingListCardAppointment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RadOncWaitingListCardAppointment
+      tags: [radiation-oncology-waiting-list-card]
       operationId: deleteRadOncWaitingListCardAppointment
       responses:
         "200":

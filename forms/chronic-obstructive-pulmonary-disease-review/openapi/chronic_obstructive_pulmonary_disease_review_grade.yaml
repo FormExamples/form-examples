@@ -5,10 +5,19 @@ info:
   title: Chronic Obstructive Pulmonary Disease Review — ChronicObstructivePulmonaryDiseaseReviewGrade
   version: 1.0.0
   description: "Computed GOLD airflow-grade, ABE-group and completeness grading result for a COPD annual review: GOLD airflow-limitation grade (1-4), symptom and exacerbation axes, combined ABE assessment group, and review-completeness status. 1:1 with the parent review."
+x-namespace:
+  form: chronic-obstructive-pulmonary-disease-review
+  apiPrefix: /api/chronic-obstructive-pulmonary-disease-review/
+  sqlSchema: chronic_obstructive_pulmonary_disease_review
+  xmlNamespace: https://formexamples.github.io/chronic-obstructive-pulmonary-disease-review/xml
+tags:
+  - name: chronic-obstructive-pulmonary-disease-review
+    description: Chronic Obstructive Pulmonary Disease Review form
 paths:
   /api/chronic-obstructive-pulmonary-disease-review/chronic_obstructive_pulmonary_disease_review_grades:
     get:
       summary: List ChronicObstructivePulmonaryDiseaseReviewGrade records
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: listChronicObstructivePulmonaryDiseaseReviewGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ChronicObstructivePulmonaryDiseaseReviewGrade
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: createChronicObstructivePulmonaryDiseaseReviewGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ChronicObstructivePulmonaryDiseaseReviewGrade by id
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: getChronicObstructivePulmonaryDiseaseReviewGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ChronicObstructivePulmonaryDiseaseReviewGrade
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: updateChronicObstructivePulmonaryDiseaseReviewGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ChronicObstructivePulmonaryDiseaseReviewGrade
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: replaceChronicObstructivePulmonaryDiseaseReviewGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ChronicObstructivePulmonaryDiseaseReviewGrade
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: deleteChronicObstructivePulmonaryDiseaseReviewGrade
       responses:
         "200":

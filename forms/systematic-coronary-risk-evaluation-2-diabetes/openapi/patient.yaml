@@ -5,10 +5,19 @@ info:
   title: Systematic Coronary Risk Evaluation 2 Diabetes — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: systematic-coronary-risk-evaluation-2-diabetes
+  apiPrefix: /api/systematic-coronary-risk-evaluation-2-diabetes/
+  sqlSchema: systematic_coronary_risk_evaluation_2_diabetes
+  xmlNamespace: https://formexamples.github.io/systematic-coronary-risk-evaluation-2-diabetes/xml
+tags:
+  - name: systematic-coronary-risk-evaluation-2-diabetes
+    description: Systematic Coronary Risk Evaluation 2 Diabetes form
 paths:
   /api/systematic-coronary-risk-evaluation-2-diabetes/patients:
     get:
       summary: List Patient records
+      tags: [systematic-coronary-risk-evaluation-2-diabetes]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [systematic-coronary-risk-evaluation-2-diabetes]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [systematic-coronary-risk-evaluation-2-diabetes]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [systematic-coronary-risk-evaluation-2-diabetes]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [systematic-coronary-risk-evaluation-2-diabetes]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [systematic-coronary-risk-evaluation-2-diabetes]
       operationId: deletePatient
       responses:
         "200":

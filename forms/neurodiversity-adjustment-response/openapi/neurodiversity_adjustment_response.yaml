@@ -5,10 +5,19 @@ info:
   title: Neurodiversity Adjustment Response — NeurodiversityAdjustmentResponse
   version: 1.0.0
   description: "Neurodiversity reasonable-adjustments response: the employer's decision, written confirmation, and review arrangements in answer to a request. Captures the overall decision and rationale, which adjustments were agreed (and any alternatives offered), the trial period and review date, support / resources / responsibilities, and any escalation. This is the source-of-truth record that the four-axis grade is computed from. Aligned with the ACAS reasonable-adjustment confirmation and review templates and the Equality Act 2010 duty to make reasonable adjustments."
+x-namespace:
+  form: neurodiversity-adjustment-response
+  apiPrefix: /api/neurodiversity-adjustment-response/
+  sqlSchema: neurodiversity_adjustment_response
+  xmlNamespace: https://formexamples.github.io/neurodiversity-adjustment-response/xml
+tags:
+  - name: neurodiversity-adjustment-response
+    description: Neurodiversity Adjustment Response form
 paths:
   /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses:
     get:
       summary: List NeurodiversityAdjustmentResponse records
+      tags: [neurodiversity-adjustment-response]
       operationId: listNeurodiversityAdjustmentResponse
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeurodiversityAdjustmentResponse
+      tags: [neurodiversity-adjustment-response]
       operationId: createNeurodiversityAdjustmentResponse
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NeurodiversityAdjustmentResponse by id
+      tags: [neurodiversity-adjustment-response]
       operationId: getNeurodiversityAdjustmentResponse
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeurodiversityAdjustmentResponse
+      tags: [neurodiversity-adjustment-response]
       operationId: updateNeurodiversityAdjustmentResponse
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NeurodiversityAdjustmentResponse
+      tags: [neurodiversity-adjustment-response]
       operationId: replaceNeurodiversityAdjustmentResponse
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NeurodiversityAdjustmentResponse
+      tags: [neurodiversity-adjustment-response]
       operationId: deleteNeurodiversityAdjustmentResponse
       responses:
         "200":

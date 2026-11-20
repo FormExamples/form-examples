@@ -5,10 +5,19 @@ info:
   title: Pre Anaesthesia Assessment — PreAnaesthesiaAssessment
   version: 1.0.0
   description: "Clinician-led pre-operative assessment: objective findings, scoring inputs (ASA, Mallampati, RCRI, STOP-BANG, Clinical Frailty Scale), planned anaesthesia strategy, and safety flags for adult elective and urgent surgery."
+x-namespace:
+  form: pre-anaesthesia-assessment
+  apiPrefix: /api/pre-anaesthesia-assessment/
+  sqlSchema: pre_anaesthesia_assessment
+  xmlNamespace: https://formexamples.github.io/pre-anaesthesia-assessment/xml
+tags:
+  - name: pre-anaesthesia-assessment
+    description: Pre Anaesthesia Assessment form
 paths:
   /api/pre-anaesthesia-assessment/pre_anaesthesia_assessments:
     get:
       summary: List PreAnaesthesiaAssessment records
+      tags: [pre-anaesthesia-assessment]
       operationId: listPreAnaesthesiaAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PreAnaesthesiaAssessment
+      tags: [pre-anaesthesia-assessment]
       operationId: createPreAnaesthesiaAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PreAnaesthesiaAssessment by id
+      tags: [pre-anaesthesia-assessment]
       operationId: getPreAnaesthesiaAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PreAnaesthesiaAssessment
+      tags: [pre-anaesthesia-assessment]
       operationId: updatePreAnaesthesiaAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PreAnaesthesiaAssessment
+      tags: [pre-anaesthesia-assessment]
       operationId: replacePreAnaesthesiaAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PreAnaesthesiaAssessment
+      tags: [pre-anaesthesia-assessment]
       operationId: deletePreAnaesthesiaAssessment
       responses:
         "200":

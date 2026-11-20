@@ -1,4 +1,5 @@
 <!ELEMENT cytology_test_result (id,created_at,updated_at,deleted_at,patient_id,clinician_id,originating_request_reference,report_status,performed_date,reported_date,specimen_type,specimen_adequacy,clinical_history,comparison_with_previous,cytology_result_category,hpv_result,malignancy_present,dysplasia_present,microscopic_description,diagnosis,impression,reporting_category,recommended_follow_up,critical_result_communicated,reported_to)>
+<!ATTLIST cytology_test_result xmlns CDATA #FIXED "https://formexamples.github.io/cytology-test-result/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

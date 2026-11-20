@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rockall_score_for_upper_gastrointestinal_bleeding_grade SYSTEM "rockall_score_for_upper_gastrointestinal_bleeding_grade.dtd">
-<rockall_score_for_upper_gastrointestinal_bleeding_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<rockall_score_for_upper_gastrointestinal_bleeding_grade xmlns="https://formexamples.github.io/rockall-score-for-upper-gastrointestinal-bleeding/xml">
+<id>a7e7b809-29e9-5371-a5a3-1b63210974eb</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<rockall_score_for_upper_gastrointestinal_bleeding_id>770e8400-e29b-41d4-a716-446655440002</rockall_score_for_upper_gastrointestinal_bleeding_id>
+<rockall_score_for_upper_gastrointestinal_bleeding_id>76d21b5b-176a-5330-8ae2-d7821ea55778</rockall_score_for_upper_gastrointestinal_bleeding_id>
 <age_points>45</age_points>
 <shock_points>1</shock_points>
 <comorbidity_points>1</comorbidity_points>

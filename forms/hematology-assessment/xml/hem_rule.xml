@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hem_rule SYSTEM "hem_rule.dtd">
-<hem_rule>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<hem_rule xmlns="https://formexamples.github.io/hematology-assessment/xml">
+<id>9ed07ec2-d16b-5d49-947d-02a3217ac6a3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>

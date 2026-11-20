@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE resp_med_waiting_list_card_grade SYSTEM "resp_med_waiting_list_card_grade.dtd">
-<resp_med_waiting_list_card_grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<resp_med_waiting_list_card_grade xmlns="https://formexamples.github.io/respiratory-medicine-waiting-list-card/xml">
+<id>5e6f5185-0d32-5cc1-9da6-80b39c5eea8a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<resp_med_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</resp_med_waiting_list_card_id>
+<resp_med_waiting_list_card_id>4a6dabdf-e7f1-5e78-9d66-9d9385042a3e</resp_med_waiting_list_card_id>
 <waiting_time_status>within-target</waiting_time_status>
 <clinical_priority>P1a</clinical_priority>
 <target_wait_weeks>0.0</target_wait_weeks>

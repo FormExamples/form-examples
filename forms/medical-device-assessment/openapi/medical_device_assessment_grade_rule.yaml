@@ -5,10 +5,19 @@ info:
   title: Medical Device Assessment — MedicalDeviceAssessmentGradeRule
   version: 1.0.0
   description: Medical device assessment grade rule.
+x-namespace:
+  form: medical-device-assessment
+  apiPrefix: /api/medical-device-assessment/
+  sqlSchema: medical_device_assessment
+  xmlNamespace: https://formexamples.github.io/medical-device-assessment/xml
+tags:
+  - name: medical-device-assessment
+    description: Medical Device Assessment form
 paths:
   /api/medical-device-assessment/medical_device_assessment_grade_rules:
     get:
       summary: List MedicalDeviceAssessmentGradeRule records
+      tags: [medical-device-assessment]
       operationId: listMedicalDeviceAssessmentGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalDeviceAssessmentGradeRule
+      tags: [medical-device-assessment]
       operationId: createMedicalDeviceAssessmentGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalDeviceAssessmentGradeRule by id
+      tags: [medical-device-assessment]
       operationId: getMedicalDeviceAssessmentGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalDeviceAssessmentGradeRule
+      tags: [medical-device-assessment]
       operationId: updateMedicalDeviceAssessmentGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalDeviceAssessmentGradeRule
+      tags: [medical-device-assessment]
       operationId: replaceMedicalDeviceAssessmentGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalDeviceAssessmentGradeRule
+      tags: [medical-device-assessment]
       operationId: deleteMedicalDeviceAssessmentGradeRule
       responses:
         "200":

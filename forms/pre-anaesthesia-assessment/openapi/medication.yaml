@@ -5,10 +5,19 @@ info:
   title: Pre Anaesthesia Assessment — Medication
   version: 1.0.0
   description: Medicine
+x-namespace:
+  form: pre-anaesthesia-assessment
+  apiPrefix: /api/pre-anaesthesia-assessment/
+  sqlSchema: pre_anaesthesia_assessment
+  xmlNamespace: https://formexamples.github.io/pre-anaesthesia-assessment/xml
+tags:
+  - name: pre-anaesthesia-assessment
+    description: Pre Anaesthesia Assessment form
 paths:
   /api/pre-anaesthesia-assessment/medications:
     get:
       summary: List Medication records
+      tags: [pre-anaesthesia-assessment]
       operationId: listMedication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Medication
+      tags: [pre-anaesthesia-assessment]
       operationId: createMedication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Medication by id
+      tags: [pre-anaesthesia-assessment]
       operationId: getMedication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Medication
+      tags: [pre-anaesthesia-assessment]
       operationId: updateMedication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Medication
+      tags: [pre-anaesthesia-assessment]
       operationId: replaceMedication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Medication
+      tags: [pre-anaesthesia-assessment]
       operationId: deleteMedication
       responses:
         "200":

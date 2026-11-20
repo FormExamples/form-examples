@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE public_health_waiting_list_card_grade_flag SYSTEM "public_health_waiting_list_card_grade_flag.dtd">
-<public_health_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<public_health_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/public-health-waiting-list-card/xml">
+<id>a785fca8-18b6-5143-9a9d-4b08dde022e7</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<public_health_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</public_health_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<public_health_waiting_list_card_grade_id>711786ec-34a1-5e79-a0d6-362cc6d9a325</public_health_waiting_list_card_grade_id>
+<flag_id>ee814bf8-41c4-521a-831d-67fe30dfb30a</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

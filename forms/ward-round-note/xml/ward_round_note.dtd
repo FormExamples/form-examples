@@ -1,4 +1,5 @@
 <!ELEMENT ward_round_note (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_grade,reviewed_at,ward,patient_identifier,admission_date,primary_diagnosis,overnight_events,no_overnight_events,problem_list,examination_summary,news2_total,news2_single_param_three,observation_trend,investigations_reviewed,no_investigations_outstanding,abnormal_result_flagged,abnormal_result_actioned,vte_status,vte_prophylaxis_in_place,medication_changes,no_medication_changes,plan_and_jobs,escalation_status,senior_review_present,estimated_discharge_date,discharge_not_estimable,clinical_note)>
+<!ATTLIST ward_round_note xmlns CDATA #FIXED "https://formexamples.github.io/ward-round-note/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

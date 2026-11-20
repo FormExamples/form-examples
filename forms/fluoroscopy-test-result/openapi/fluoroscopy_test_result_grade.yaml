@@ -5,10 +5,19 @@ info:
   title: Fluoroscopy Test Result — FluoroscopyTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical finding (perforation / leak, high-grade obstruction) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: fluoroscopy-test-result
+  apiPrefix: /api/fluoroscopy-test-result/
+  sqlSchema: fluoroscopy_test_result
+  xmlNamespace: https://formexamples.github.io/fluoroscopy-test-result/xml
+tags:
+  - name: fluoroscopy-test-result
+    description: Fluoroscopy Test Result form
 paths:
   /api/fluoroscopy-test-result/fluoroscopy_test_result_grades:
     get:
       summary: List FluoroscopyTestResultGrade records
+      tags: [fluoroscopy-test-result]
       operationId: listFluoroscopyTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new FluoroscopyTestResultGrade
+      tags: [fluoroscopy-test-result]
       operationId: createFluoroscopyTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one FluoroscopyTestResultGrade by id
+      tags: [fluoroscopy-test-result]
       operationId: getFluoroscopyTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing FluoroscopyTestResultGrade
+      tags: [fluoroscopy-test-result]
       operationId: updateFluoroscopyTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing FluoroscopyTestResultGrade
+      tags: [fluoroscopy-test-result]
       operationId: replaceFluoroscopyTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a FluoroscopyTestResultGrade
+      tags: [fluoroscopy-test-result]
       operationId: deleteFluoroscopyTestResultGrade
       responses:
         "200":

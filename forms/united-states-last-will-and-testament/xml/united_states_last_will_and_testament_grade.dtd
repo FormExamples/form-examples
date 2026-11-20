@@ -1,4 +1,5 @@
 <!ELEMENT united_states_last_will_and_testament_grade (id,created_at,updated_at,deleted_at,united_states_last_will_and_testament_id,validity_class,residuary_percent_total,elective_share_amount,witness_count,self_proved,federal_estate_tax_exposure,state_rule_source,graded_at)>
+<!ATTLIST united_states_last_will_and_testament_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-states-last-will-and-testament/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Histopathology Test Request — HistopathologyTestRequest
   version: 1.0.0
   description: Tissue histopathology specimen request (referral). Captures the specimen, the clinical indication and question, clinical details, provisional diagnosis, previous histology, and triage urgency.
+x-namespace:
+  form: histopathology-test-request
+  apiPrefix: /api/histopathology-test-request/
+  sqlSchema: histopathology_test_request
+  xmlNamespace: https://formexamples.github.io/histopathology-test-request/xml
+tags:
+  - name: histopathology-test-request
+    description: Histopathology Test Request form
 paths:
   /api/histopathology-test-request/histopathology_test_requests:
     get:
       summary: List HistopathologyTestRequest records
+      tags: [histopathology-test-request]
       operationId: listHistopathologyTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HistopathologyTestRequest
+      tags: [histopathology-test-request]
       operationId: createHistopathologyTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HistopathologyTestRequest by id
+      tags: [histopathology-test-request]
       operationId: getHistopathologyTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HistopathologyTestRequest
+      tags: [histopathology-test-request]
       operationId: updateHistopathologyTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HistopathologyTestRequest
+      tags: [histopathology-test-request]
       operationId: replaceHistopathologyTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HistopathologyTestRequest
+      tags: [histopathology-test-request]
       operationId: deleteHistopathologyTestRequest
       responses:
         "200":

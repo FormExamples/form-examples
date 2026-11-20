@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE curb_65_pneumonia_severity_score_grade_flag SYSTEM "curb_65_pneumonia_severity_score_grade_flag.dtd">
-<curb_65_pneumonia_severity_score_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<curb_65_pneumonia_severity_score_grade_flag xmlns="https://formexamples.github.io/curb-65-pneumonia-severity-score/xml">
+<id>8cd7ba4c-bf1a-5aeb-a0ae-e46ce60999f5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<curb_65_pneumonia_severity_score_grade_id>880e8400-e29b-41d4-a716-446655440003</curb_65_pneumonia_severity_score_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<curb_65_pneumonia_severity_score_grade_id>4970a900-d58e-5c5b-86d3-a4ee0035f459</curb_65_pneumonia_severity_score_grade_id>
+<flag_id>f40e88f6-f863-551b-86ab-ad8387b4267b</flag_id>
 <category>high-severity-admit</category>
 <priority>low</priority>
 <description>Example text.</description>

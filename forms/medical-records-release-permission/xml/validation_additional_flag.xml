@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE validation_additional_flag SYSTEM "validation_additional_flag.dtd">
-<validation_additional_flag>
-<id>220e8400-e29b-41d4-a716-44665544000c</id>
+<validation_additional_flag xmlns="https://formexamples.github.io/medical-records-release-permission/xml">
+<id>45fa7180-3132-54a6-a45f-edb964bf8075</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<validation_result_id>ff0e8400-e29b-41d4-a716-44665544000a</validation_result_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<validation_result_id>6e395bbf-d4e5-5657-b7cf-bbd0c373a22a</validation_result_id>
+<flag_id>65397218-90c9-5f26-bde9-bea00170deaf</flag_id>
 <category>General</category>
 <message></message>
 <priority>high</priority>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE echocardiogram_test_result_grade_rule SYSTEM "echocardiogram_test_result_grade_rule.dtd">
-<echocardiogram_test_result_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<echocardiogram_test_result_grade_rule xmlns="https://formexamples.github.io/echocardiogram-test-result/xml">
+<id>9f85420e-b9d4-5c64-b37c-587b409a69d0</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<echocardiogram_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</echocardiogram_test_result_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<echocardiogram_test_result_grade_id>0acb5922-68df-5887-ab61-e4f24e79b38e</echocardiogram_test_result_grade_id>
+<rule_id>96f0ff24-2cb5-5ca5-abf6-ba3d877cf48e</rule_id>
 <axis>classification</axis>
 <category>General</category>
 <description>Example text.</description>

@@ -5,10 +5,19 @@ info:
   title: Mri Scan Test Request — MriScanTestRequest
   version: 1.0.0
   description: MRI scan request (referral). Captures the requested examination (body region, indication, clinical question), contrast and gadolinium / renal (NSF) risk, MRI safety screening for ferromagnetic and electronic implants, and triage urgency.
+x-namespace:
+  form: mri-scan-test-request
+  apiPrefix: /api/mri-scan-test-request/
+  sqlSchema: mri_scan_test_request
+  xmlNamespace: https://formexamples.github.io/mri-scan-test-request/xml
+tags:
+  - name: mri-scan-test-request
+    description: Mri Scan Test Request form
 paths:
   /api/mri-scan-test-request/mri_scan_test_requests:
     get:
       summary: List MriScanTestRequest records
+      tags: [mri-scan-test-request]
       operationId: listMriScanTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MriScanTestRequest
+      tags: [mri-scan-test-request]
       operationId: createMriScanTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MriScanTestRequest by id
+      tags: [mri-scan-test-request]
       operationId: getMriScanTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MriScanTestRequest
+      tags: [mri-scan-test-request]
       operationId: updateMriScanTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MriScanTestRequest
+      tags: [mri-scan-test-request]
       operationId: replaceMriScanTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MriScanTestRequest
+      tags: [mri-scan-test-request]
       operationId: deleteMriScanTestRequest
       responses:
         "200":

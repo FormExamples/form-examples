@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hypertension_review_grade_flag SYSTEM "hypertension_review_grade_flag.dtd">
-<hypertension_review_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<hypertension_review_grade_flag xmlns="https://formexamples.github.io/hypertension-review/xml">
+<id>70d30791-fd44-50be-8c92-5db4bd80aea9</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<hypertension_review_grade_id>880e8400-e29b-41d4-a716-446655440003</hypertension_review_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<hypertension_review_grade_id>910c5e9d-6eea-5713-a7ab-495590414a2b</hypertension_review_grade_id>
+<flag_id>293f4f90-7c3f-5e9d-bf5b-6709684b12b5</flag_id>
 <category>severe-hypertension</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -5,10 +5,19 @@ info:
   title: Recognition Of Stroke In The Emergency Room — Clinician
   version: 1.0.0
   description: Clinician identifying information for the assessing clinician.
+x-namespace:
+  form: recognition-of-stroke-in-the-emergency-room
+  apiPrefix: /api/recognition-of-stroke-in-the-emergency-room/
+  sqlSchema: recognition_of_stroke_in_the_emergency_room
+  xmlNamespace: https://formexamples.github.io/recognition-of-stroke-in-the-emergency-room/xml
+tags:
+  - name: recognition-of-stroke-in-the-emergency-room
+    description: Recognition Of Stroke In The Emergency Room form
 paths:
   /api/recognition-of-stroke-in-the-emergency-room/clinicians:
     get:
       summary: List Clinician records
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: deleteClinician
       responses:
         "200":

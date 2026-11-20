@@ -1,4 +1,5 @@
 <!ELEMENT toxicology_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,paracetamol_level,salicylate_level,alcohol_level,drugs_of_abuse_screen,lithium_level,digoxin_level,antiepileptic_drug_level,carboxyhaemoglobin,heavy_metals,specific_drug_level,primary_indication,clinical_details,suspected_agent,time_since_ingestion_hours,deliberate_overdose,symptomatic,specimen_collected,collection_datetime,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST toxicology_test_request xmlns CDATA #FIXED "https://formexamples.github.io/toxicology-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_marriage_certificate_application_grade_rule SYSTEM "united_kingdom_marriage_certificate_application_grade_rule.dtd">
-<united_kingdom_marriage_certificate_application_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<united_kingdom_marriage_certificate_application_grade_rule xmlns="https://formexamples.github.io/united-kingdom-marriage-certificate-application/xml">
+<id>20697a54-82cd-5ba8-bbe3-06bafee42eab</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<united_kingdom_marriage_certificate_application_grade_id>880e8400-e29b-41d4-a716-446655440003</united_kingdom_marriage_certificate_application_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<united_kingdom_marriage_certificate_application_grade_id>f5721670-f808-50b7-ba23-37d353866e12</united_kingdom_marriage_certificate_application_grade_id>
+<rule_id>20f1bb56-4f72-5faf-9617-53b2a7bdbde8</rule_id>
 <dimension>eligibility</dimension>
 <category>General</category>
 <description>Example text.</description>

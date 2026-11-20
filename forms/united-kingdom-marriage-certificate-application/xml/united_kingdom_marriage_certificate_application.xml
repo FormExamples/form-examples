@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_marriage_certificate_application SYSTEM "united_kingdom_marriage_certificate_application.dtd">
-<united_kingdom_marriage_certificate_application>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<united_kingdom_marriage_certificate_application xmlns="https://formexamples.github.io/united-kingdom-marriage-certificate-application/xml">
+<id>0ba2e263-80fe-53df-ad6f-539218ee8d9b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<applicant_id>550e8400-e29b-41d4-a716-446655440000</applicant_id>
-<registrar_id>660e8400-e29b-41d4-a716-446655440001</registrar_id>
+<applicant_id>fb84f484-6965-5179-b982-0be50d9a0d7f</applicant_id>
+<registrar_id>93035f68-045a-58e2-94f9-21c37a33ff64</registrar_id>
 <notice_type>marriage</notice_type>
 <notice_date>2026-01-15</notice_date>
 <registration_district></registration_district>

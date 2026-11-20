@@ -5,10 +5,19 @@ info:
   title: Gerontology Assessment — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: gerontology-assessment
+  apiPrefix: /api/gerontology-assessment/
+  sqlSchema: gerontology_assessment
+  xmlNamespace: https://formexamples.github.io/gerontology-assessment/xml
+tags:
+  - name: gerontology-assessment
+    description: Gerontology Assessment form
 paths:
   /api/gerontology-assessment/patients:
     get:
       summary: List Patient records
+      tags: [gerontology-assessment]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [gerontology-assessment]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [gerontology-assessment]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [gerontology-assessment]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [gerontology-assessment]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [gerontology-assessment]
       operationId: deletePatient
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ward_round_note_grade_flag SYSTEM "ward_round_note_grade_flag.dtd">
-<ward_round_note_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<ward_round_note_grade_flag xmlns="https://formexamples.github.io/ward-round-note/xml">
+<id>6ac9a40a-e757-52a6-b863-1397b20615c3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<ward_round_note_grade_id>880e8400-e29b-41d4-a716-446655440003</ward_round_note_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<ward_round_note_grade_id>4aa330e8-5d1e-54e5-9617-d8b5f227eacc</ward_round_note_grade_id>
+<flag_id>c08a18f8-3ca2-5a15-9b22-3662a3c81949</flag_id>
 <category>deteriorating-news2-escalation</category>
 <priority>low</priority>
 <description>Example text.</description>

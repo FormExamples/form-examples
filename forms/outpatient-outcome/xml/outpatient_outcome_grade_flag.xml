@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE outpatient_outcome_grade_flag SYSTEM "outpatient_outcome_grade_flag.dtd">
-<outpatient_outcome_grade_flag>
-<id>440e8400-e29b-41d4-a716-44665544000e</id>
+<outpatient_outcome_grade_flag xmlns="https://formexamples.github.io/outpatient-outcome/xml">
+<id>979a903f-7e46-5f65-8f0b-b470f582dd44</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>660e8400-e29b-41d4-a716-446655440001</grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<grade_id>3ef97bf4-b993-5b4c-9313-9a82908c2805</grade_id>
+<flag_id>f03ec572-4219-528f-b73c-32dacbec9d00</flag_id>
 <category>General</category>
 <description>Example text.</description>
 <priority>low</priority>

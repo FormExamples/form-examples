@@ -5,10 +5,19 @@ info:
   title: United Kingdom Vehicle Registration Application — Keeper
   version: 1.0.0
   description: "Registered keeper of the vehicle: the person or organization responsible for registering and taxing it, who may differ from the applicant and the owner."
+x-namespace:
+  form: united-kingdom-vehicle-registration-application
+  apiPrefix: /api/united-kingdom-vehicle-registration-application/
+  sqlSchema: united_kingdom_vehicle_registration_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-vehicle-registration-application/xml
+tags:
+  - name: united-kingdom-vehicle-registration-application
+    description: United Kingdom Vehicle Registration Application form
 paths:
   /api/united-kingdom-vehicle-registration-application/keepers:
     get:
       summary: List Keeper records
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: listKeeper
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Keeper
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: createKeeper
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Keeper by id
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: getKeeper
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Keeper
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: updateKeeper
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Keeper
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: replaceKeeper
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Keeper
+      tags: [united-kingdom-vehicle-registration-application]
       operationId: deleteKeeper
       responses:
         "200":

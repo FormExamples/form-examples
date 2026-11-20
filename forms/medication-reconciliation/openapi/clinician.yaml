@@ -5,10 +5,19 @@ info:
   title: Medication Reconciliation — Clinician
   version: 1.0.0
   description: Clinician identifying information for the professional who reconciled the patient's medicines.
+x-namespace:
+  form: medication-reconciliation
+  apiPrefix: /api/medication-reconciliation/
+  sqlSchema: medication_reconciliation
+  xmlNamespace: https://formexamples.github.io/medication-reconciliation/xml
+tags:
+  - name: medication-reconciliation
+    description: Medication Reconciliation form
 paths:
   /api/medication-reconciliation/clinicians:
     get:
       summary: List Clinician records
+      tags: [medication-reconciliation]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [medication-reconciliation]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [medication-reconciliation]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [medication-reconciliation]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [medication-reconciliation]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [medication-reconciliation]
       operationId: deleteClinician
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Knee Replacement Surgery Evaluation — Clinician
   version: 1.0.0
   description: Clinician, i.e. the orthopaedic surgeon or extended-scope physiotherapist who conducts the knee-replacement surgery evaluation.
+x-namespace:
+  form: knee-replacement-surgery-evaluation
+  apiPrefix: /api/knee-replacement-surgery-evaluation/
+  sqlSchema: knee_replacement_surgery_evaluation
+  xmlNamespace: https://formexamples.github.io/knee-replacement-surgery-evaluation/xml
+tags:
+  - name: knee-replacement-surgery-evaluation
+    description: Knee Replacement Surgery Evaluation form
 paths:
   /api/knee-replacement-surgery-evaluation/clinicians:
     get:
       summary: List Clinician records
+      tags: [knee-replacement-surgery-evaluation]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [knee-replacement-surgery-evaluation]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [knee-replacement-surgery-evaluation]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [knee-replacement-surgery-evaluation]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [knee-replacement-surgery-evaluation]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [knee-replacement-surgery-evaluation]
       operationId: deleteClinician
       responses:
         "200":

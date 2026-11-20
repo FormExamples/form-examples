@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "d98eba06-0919-464b-a589-86d8d7dfc0e2",
+  "id": "c3c7550b-e599-5b34-af3a-1b22b1ca5d56",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:474e7dc4-1f50-4a5e-a7c2-42829a32ef19",
+      "fullUrl": "urn:uuid:4466c2dc-2b79-5ba9-b93e-5baf24b2dd18",
       "resource": {
         "resourceType": "Patient",
-        "id": "474e7dc4-1f50-4a5e-a7c2-42829a32ef19",
+        "id": "4466c2dc-2b79-5ba9-b93e-5baf24b2dd18",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:290bbfb6-da0f-44b4-a884-f6ef5a34f835",
+      "fullUrl": "urn:uuid:29190769-db35-59f1-b80e-cdfb421bd2b8",
       "resource": {
         "resourceType": "Observation",
-        "id": "290bbfb6-da0f-44b4-a884-f6ef5a34f835",
+        "id": "29190769-db35-59f1-b80e-cdfb421bd2b8",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:474e7dc4-1f50-4a5e-a7c2-42829a32ef19"
+          "reference": "urn:uuid:4466c2dc-2b79-5ba9-b93e-5baf24b2dd18"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:0f96a60f-0698-4331-ab87-2a41bf8325e3",
+      "fullUrl": "urn:uuid:8a6c9e28-5a25-5c77-b472-0ff1520728a7",
       "resource": {
         "resourceType": "Observation",
-        "id": "0f96a60f-0698-4331-ab87-2a41bf8325e3",
+        "id": "8a6c9e28-5a25-5c77-b472-0ff1520728a7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:474e7dc4-1f50-4a5e-a7c2-42829a32ef19"
+          "reference": "urn:uuid:4466c2dc-2b79-5ba9-b93e-5baf24b2dd18"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -625,10 +625,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:25884af9-e59a-464c-a5ee-2b27ec9263d6",
+      "fullUrl": "urn:uuid:246936fa-5a96-5624-b4de-70d89636b07e",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "25884af9-e59a-464c-a5ee-2b27ec9263d6",
+        "id": "246936fa-5a96-5624-b4de-70d89636b07e",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -637,7 +637,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:474e7dc4-1f50-4a5e-a7c2-42829a32ef19"
+          "reference": "urn:uuid:4466c2dc-2b79-5ba9-b93e-5baf24b2dd18"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -646,10 +646,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:0772c329-7a80-43d0-a0b5-1fd240e1fb88",
+      "fullUrl": "urn:uuid:eebfe14d-427b-5723-86e1-72c3aeccf0be",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "0772c329-7a80-43d0-a0b5-1fd240e1fb88",
+        "id": "eebfe14d-427b-5723-86e1-72c3aeccf0be",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -679,17 +679,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:474e7dc4-1f50-4a5e-a7c2-42829a32ef19"
+          "reference": "urn:uuid:4466c2dc-2b79-5ba9-b93e-5baf24b2dd18"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical result (strongly positive test, exertional hypotension, ischaemia at low workload, or a high-risk Duke treadmill score) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:23584047-eea3-446c-af78-8a028c7d1620",
+      "fullUrl": "urn:uuid:c1fc0b52-93cc-516c-9993-0854aae64106",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "23584047-eea3-446c-af78-8a028c7d1620",
+        "id": "c1fc0b52-93cc-516c-9993-0854aae64106",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -719,17 +719,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:474e7dc4-1f50-4a5e-a7c2-42829a32ef19"
+          "reference": "urn:uuid:4466c2dc-2b79-5ba9-b93e-5baf24b2dd18"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical result present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:a6bc651c-77fb-4cc9-a0d4-fe7b6c642e7e",
+      "fullUrl": "urn:uuid:ca892a94-06ba-582e-9d6c-2407ef9de661",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "a6bc651c-77fb-4cc9-a0d4-fe7b6c642e7e",
+        "id": "ca892a94-06ba-582e-9d6c-2407ef9de661",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -759,17 +759,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:474e7dc4-1f50-4a5e-a7c2-42829a32ef19"
+          "reference": "urn:uuid:4466c2dc-2b79-5ba9-b93e-5baf24b2dd18"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical result auto-escalates follow-up urgency to critical-alert with an urgent cardiology referral, regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:f40dd174-bf06-4a80-ada6-026b2f89fc4f",
+      "fullUrl": "urn:uuid:9aaafc4c-d9f9-5909-a888-70056c5ee54f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "f40dd174-bf06-4a80-ada6-026b2f89fc4f",
+        "id": "9aaafc4c-d9f9-5909-a888-70056c5ee54f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -799,7 +799,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:474e7dc4-1f50-4a5e-a7c2-42829a32ef19"
+          "reference": "urn:uuid:4466c2dc-2b79-5ba9-b93e-5baf24b2dd18"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical result (strongly positive test, exertional hypotension, ischaemia at low workload, or a high-risk Duke treadmill score) is present.",
@@ -813,10 +813,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:51249634-1443-44d2-a402-e885925ddbe3",
+      "fullUrl": "urn:uuid:1d40d6b8-3b47-5576-a4b5-574a8e7d5bdc",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "51249634-1443-44d2-a402-e885925ddbe3",
+        "id": "1d40d6b8-3b47-5576-a4b5-574a8e7d5bdc",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -846,7 +846,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:474e7dc4-1f50-4a5e-a7c2-42829a32ef19"
+          "reference": "urn:uuid:4466c2dc-2b79-5ba9-b93e-5baf24b2dd18"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Test was terminated early or submaximal (target heart rate not reached); diagnostic confidence may be reduced.",

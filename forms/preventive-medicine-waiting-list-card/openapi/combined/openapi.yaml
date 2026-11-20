@@ -7,6 +7,14 @@ info:
   description: Combined OpenAPI specification for the Preventive Medicine Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: preventive-medicine-waiting-list-card
+  apiPrefix: /api/preventive-medicine-waiting-list-card/
+  sqlSchema: preventive_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/preventive-medicine-waiting-list-card/xml
+tags:
+- name: preventive-medicine-waiting-list-card
+  description: Preventive Medicine Waiting List Card form
 paths:
   /api/preventive-medicine-waiting-list-card/openapi.yaml:
     get:
@@ -19,9 +27,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - preventive-medicine-waiting-list-card
   /api/preventive-medicine-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -74,6 +86,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -127,6 +141,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -154,6 +170,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -199,6 +217,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -244,6 +264,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -268,6 +290,8 @@ paths:
   /api/preventive-medicine-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/preventive-medicine-waiting-list-card/prev_med_waiting_list_card_appointments:
     get:
       summary: List PrevMedWaitingListCardAppointment records
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: listPrevMedWaitingListCardAppointment
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PrevMedWaitingListCardAppointment
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: createPrevMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PrevMedWaitingListCardAppointment by id
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: getPrevMedWaitingListCardAppointment
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PrevMedWaitingListCardAppointment
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: updatePrevMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PrevMedWaitingListCardAppointment
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: replacePrevMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PrevMedWaitingListCardAppointment
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: deletePrevMedWaitingListCardAppointment
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/preventive-medicine-waiting-list-card/prev_med_waiting_list_card_grade_flags:
     get:
       summary: List PrevMedWaitingListCardGradeFlag records
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: listPrevMedWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PrevMedWaitingListCardGradeFlag
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: createPrevMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PrevMedWaitingListCardGradeFlag by id
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: getPrevMedWaitingListCardGradeFlag
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PrevMedWaitingListCardGradeFlag
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: updatePrevMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PrevMedWaitingListCardGradeFlag
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: replacePrevMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PrevMedWaitingListCardGradeFlag
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: deletePrevMedWaitingListCardGradeFlag
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/preventive-medicine-waiting-list-card/prev_med_waiting_list_card_grade_rules:
     get:
       summary: List PrevMedWaitingListCardGradeRule records
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: listPrevMedWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PrevMedWaitingListCardGradeRule
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: createPrevMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PrevMedWaitingListCardGradeRule by id
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: getPrevMedWaitingListCardGradeRule
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PrevMedWaitingListCardGradeRule
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: updatePrevMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PrevMedWaitingListCardGradeRule
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: replacePrevMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PrevMedWaitingListCardGradeRule
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: deletePrevMedWaitingListCardGradeRule
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/preventive-medicine-waiting-list-card/prev_med_waiting_list_card_grades:
     get:
       summary: List PrevMedWaitingListCardGrade records
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: listPrevMedWaitingListCardGrade
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PrevMedWaitingListCardGrade
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: createPrevMedWaitingListCardGrade
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PrevMedWaitingListCardGrade by id
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: getPrevMedWaitingListCardGrade
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PrevMedWaitingListCardGrade
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: updatePrevMedWaitingListCardGrade
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PrevMedWaitingListCardGrade
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: replacePrevMedWaitingListCardGrade
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PrevMedWaitingListCardGrade
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: deletePrevMedWaitingListCardGrade
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/preventive-medicine-waiting-list-card/prev_med_waiting_list_cards:
     get:
       summary: List PrevMedWaitingListCard records
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: listPrevMedWaitingListCard
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PrevMedWaitingListCard
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: createPrevMedWaitingListCard
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PrevMedWaitingListCard by id
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: getPrevMedWaitingListCard
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PrevMedWaitingListCard
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: updatePrevMedWaitingListCard
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PrevMedWaitingListCard
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: replacePrevMedWaitingListCard
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PrevMedWaitingListCard
+      tags:
+      - preventive-medicine-waiting-list-card
       operationId: deletePrevMedWaitingListCard
       responses:
         '200':

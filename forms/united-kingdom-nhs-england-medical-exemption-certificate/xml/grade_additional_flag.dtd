@@ -1,4 +1,5 @@
 <!ELEMENT grade_additional_flag (id,created_at,updated_at,deleted_at,grade_id,flag_id,category,description,priority)>
+<!ATTLIST grade_additional_flag xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-nhs-england-medical-exemption-certificate/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

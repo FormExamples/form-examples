@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE audit_c SYSTEM "audit_c.dtd">
-<audit_c>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<audit_c xmlns="https://formexamples.github.io/alcohol-use-disorders-identification-test-consumption/xml">
+<id>c0fbb043-b528-5c41-8fab-30fa09c7a38b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>00902c3d-eea9-5359-ad6c-415e34d53889</patient_id>
+<clinician_id>3661d406-0bf1-5d62-8cb5-65656d413105</clinician_id>
 <clinician_name>Example</clinician_name>
 <clinician_role>gp</clinician_role>
 <assessed_at>2026-04-09T10:00:00Z</assessed_at>

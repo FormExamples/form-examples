@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment SYSTEM "assessment.dtd">
-<assessment>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<assessment xmlns="https://formexamples.github.io/pulmonology-assessment/xml">
+<id>59160757-3e4f-5c1c-89ec-f307c4baec7e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<patient_id>d91eb4ae-6608-58f3-a03c-b37fef6dac55</patient_id>
 <status>draft</status>
 </assessment>

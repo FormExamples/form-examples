@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE paediatrics_waiting_list_card_grade_flag SYSTEM "paediatrics_waiting_list_card_grade_flag.dtd">
-<paediatrics_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<paediatrics_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/paediatrics-waiting-list-card/xml">
+<id>ba4d698e-4dbf-546a-89d9-d5277f97aa77</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<paediatrics_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</paediatrics_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<paediatrics_waiting_list_card_grade_id>3da5af7f-75dd-52bd-8623-cf61319cba9e</paediatrics_waiting_list_card_grade_id>
+<flag_id>77bec614-370d-56fb-b9a9-e7ae5fded93d</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

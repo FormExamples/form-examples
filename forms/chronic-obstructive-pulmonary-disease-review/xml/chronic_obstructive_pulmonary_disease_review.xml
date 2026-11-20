@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chronic_obstructive_pulmonary_disease_review SYSTEM "chronic_obstructive_pulmonary_disease_review.dtd">
-<chronic_obstructive_pulmonary_disease_review>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<chronic_obstructive_pulmonary_disease_review xmlns="https://formexamples.github.io/chronic-obstructive-pulmonary-disease-review/xml">
+<id>f052d689-7d9c-5b56-ab9e-3660ac561870</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>887f51b1-66ee-57a7-a1fd-4748e21144b6</patient_id>
+<clinician_id>ac01f09f-7d3f-50ad-8838-452d6e3cc199</clinician_id>
 <clinician_name>Example</clinician_name>
 <clinician_role>gp</clinician_role>
 <reviewed_at>2026-01-15</reviewed_at>

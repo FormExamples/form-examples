@@ -5,10 +5,19 @@ info:
   title: Geriatrics Waiting List Card — GeriatricsWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: geriatrics-waiting-list-card
+  apiPrefix: /api/geriatrics-waiting-list-card/
+  sqlSchema: geriatrics_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/geriatrics-waiting-list-card/xml
+tags:
+  - name: geriatrics-waiting-list-card
+    description: Geriatrics Waiting List Card form
 paths:
   /api/geriatrics-waiting-list-card/geriatrics_waiting_list_card_grades:
     get:
       summary: List GeriatricsWaitingListCardGrade records
+      tags: [geriatrics-waiting-list-card]
       operationId: listGeriatricsWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GeriatricsWaitingListCardGrade
+      tags: [geriatrics-waiting-list-card]
       operationId: createGeriatricsWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GeriatricsWaitingListCardGrade by id
+      tags: [geriatrics-waiting-list-card]
       operationId: getGeriatricsWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GeriatricsWaitingListCardGrade
+      tags: [geriatrics-waiting-list-card]
       operationId: updateGeriatricsWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GeriatricsWaitingListCardGrade
+      tags: [geriatrics-waiting-list-card]
       operationId: replaceGeriatricsWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GeriatricsWaitingListCardGrade
+      tags: [geriatrics-waiting-list-card]
       operationId: deleteGeriatricsWaitingListCardGrade
       responses:
         "200":

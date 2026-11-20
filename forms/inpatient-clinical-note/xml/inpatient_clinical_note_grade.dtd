@@ -1,4 +1,5 @@
 <!ELEMENT inpatient_clinical_note_grade (id,created_at,updated_at,deleted_at,inpatient_clinical_note_id,status,completeness_percent,required_component_count,documented_component_count,acuity_band,computed_acuity_band,news2_total,header_documented,interval_history_documented,observations_documented,examination_documented,investigations_documented,problems_documented,medications_documented,risk_assessments_documented,impression_documented,plan_documented,escalation_documented,communication_documented,graded_at)>
+<!ATTLIST inpatient_clinical_note_grade xmlns CDATA #FIXED "https://formexamples.github.io/inpatient-clinical-note/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

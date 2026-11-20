@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Learning Disability Annual Health Check form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: learning-disability-annual-health-check
+  apiPrefix: /api/learning-disability-annual-health-check/
+  sqlSchema: learning_disability_annual_health_check
+  xmlNamespace: https://formexamples.github.io/learning-disability-annual-health-check/xml
+tags:
+- name: learning-disability-annual-health-check
+  description: Learning Disability Annual Health Check form
 paths:
   /api/learning-disability-annual-health-check/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - learning-disability-annual-health-check
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - learning-disability-annual-health-check
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - learning-disability-annual-health-check
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - learning-disability-annual-health-check
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - learning-disability-annual-health-check
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - learning-disability-annual-health-check
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/learning-disability-annual-health-check/learning_disability_annual_health_check_grade_flags:
     get:
       summary: List LearningDisabilityAnnualHealthCheckGradeFlag records
+      tags:
+      - learning-disability-annual-health-check
       operationId: listLearningDisabilityAnnualHealthCheckGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LearningDisabilityAnnualHealthCheckGradeFlag
+      tags:
+      - learning-disability-annual-health-check
       operationId: createLearningDisabilityAnnualHealthCheckGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LearningDisabilityAnnualHealthCheckGradeFlag by id
+      tags:
+      - learning-disability-annual-health-check
       operationId: getLearningDisabilityAnnualHealthCheckGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LearningDisabilityAnnualHealthCheckGradeFlag
+      tags:
+      - learning-disability-annual-health-check
       operationId: updateLearningDisabilityAnnualHealthCheckGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LearningDisabilityAnnualHealthCheckGradeFlag
+      tags:
+      - learning-disability-annual-health-check
       operationId: replaceLearningDisabilityAnnualHealthCheckGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LearningDisabilityAnnualHealthCheckGradeFlag
+      tags:
+      - learning-disability-annual-health-check
       operationId: deleteLearningDisabilityAnnualHealthCheckGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/learning-disability-annual-health-check/learning_disability_annual_health_check_grade_rules:
     get:
       summary: List LearningDisabilityAnnualHealthCheckGradeRule records
+      tags:
+      - learning-disability-annual-health-check
       operationId: listLearningDisabilityAnnualHealthCheckGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LearningDisabilityAnnualHealthCheckGradeRule
+      tags:
+      - learning-disability-annual-health-check
       operationId: createLearningDisabilityAnnualHealthCheckGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LearningDisabilityAnnualHealthCheckGradeRule by id
+      tags:
+      - learning-disability-annual-health-check
       operationId: getLearningDisabilityAnnualHealthCheckGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LearningDisabilityAnnualHealthCheckGradeRule
+      tags:
+      - learning-disability-annual-health-check
       operationId: updateLearningDisabilityAnnualHealthCheckGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LearningDisabilityAnnualHealthCheckGradeRule
+      tags:
+      - learning-disability-annual-health-check
       operationId: replaceLearningDisabilityAnnualHealthCheckGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LearningDisabilityAnnualHealthCheckGradeRule
+      tags:
+      - learning-disability-annual-health-check
       operationId: deleteLearningDisabilityAnnualHealthCheckGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/learning-disability-annual-health-check/learning_disability_annual_health_check_grades:
     get:
       summary: List LearningDisabilityAnnualHealthCheckGrade records
+      tags:
+      - learning-disability-annual-health-check
       operationId: listLearningDisabilityAnnualHealthCheckGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LearningDisabilityAnnualHealthCheckGrade
+      tags:
+      - learning-disability-annual-health-check
       operationId: createLearningDisabilityAnnualHealthCheckGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LearningDisabilityAnnualHealthCheckGrade by id
+      tags:
+      - learning-disability-annual-health-check
       operationId: getLearningDisabilityAnnualHealthCheckGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LearningDisabilityAnnualHealthCheckGrade
+      tags:
+      - learning-disability-annual-health-check
       operationId: updateLearningDisabilityAnnualHealthCheckGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LearningDisabilityAnnualHealthCheckGrade
+      tags:
+      - learning-disability-annual-health-check
       operationId: replaceLearningDisabilityAnnualHealthCheckGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LearningDisabilityAnnualHealthCheckGrade
+      tags:
+      - learning-disability-annual-health-check
       operationId: deleteLearningDisabilityAnnualHealthCheckGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/learning-disability-annual-health-check/learning_disability_annual_health_checks:
     get:
       summary: List LearningDisabilityAnnualHealthCheck records
+      tags:
+      - learning-disability-annual-health-check
       operationId: listLearningDisabilityAnnualHealthCheck
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LearningDisabilityAnnualHealthCheck
+      tags:
+      - learning-disability-annual-health-check
       operationId: createLearningDisabilityAnnualHealthCheck
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one LearningDisabilityAnnualHealthCheck by id
+      tags:
+      - learning-disability-annual-health-check
       operationId: getLearningDisabilityAnnualHealthCheck
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing LearningDisabilityAnnualHealthCheck
+      tags:
+      - learning-disability-annual-health-check
       operationId: updateLearningDisabilityAnnualHealthCheck
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing LearningDisabilityAnnualHealthCheck
+      tags:
+      - learning-disability-annual-health-check
       operationId: replaceLearningDisabilityAnnualHealthCheck
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LearningDisabilityAnnualHealthCheck
+      tags:
+      - learning-disability-annual-health-check
       operationId: deleteLearningDisabilityAnnualHealthCheck
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - learning-disability-annual-health-check
   /api/learning-disability-annual-health-check/patients:
     get:
       summary: List Patient records
+      tags:
+      - learning-disability-annual-health-check
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - learning-disability-annual-health-check
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - learning-disability-annual-health-check
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - learning-disability-annual-health-check
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - learning-disability-annual-health-check
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - learning-disability-annual-health-check
       operationId: deletePatient
       responses:
         '200':

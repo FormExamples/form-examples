@@ -5,10 +5,19 @@ info:
   title: Architecture Decision Record — ArchitectureDecisionRecord
   version: 1.0.0
   description: Architecture decision record (Tyree & Akerman 14-section template).
+x-namespace:
+  form: architecture-decision-record
+  apiPrefix: /api/architecture-decision-record/
+  sqlSchema: architecture_decision_record
+  xmlNamespace: https://formexamples.github.io/architecture-decision-record/xml
+tags:
+  - name: architecture-decision-record
+    description: Architecture Decision Record form
 paths:
   /api/architecture-decision-record/architecture_decision_records:
     get:
       summary: List ArchitectureDecisionRecord records
+      tags: [architecture-decision-record]
       operationId: listArchitectureDecisionRecord
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ArchitectureDecisionRecord
+      tags: [architecture-decision-record]
       operationId: createArchitectureDecisionRecord
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ArchitectureDecisionRecord by id
+      tags: [architecture-decision-record]
       operationId: getArchitectureDecisionRecord
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ArchitectureDecisionRecord
+      tags: [architecture-decision-record]
       operationId: updateArchitectureDecisionRecord
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ArchitectureDecisionRecord
+      tags: [architecture-decision-record]
       operationId: replaceArchitectureDecisionRecord
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ArchitectureDecisionRecord
+      tags: [architecture-decision-record]
       operationId: deleteArchitectureDecisionRecord
       responses:
         "200":

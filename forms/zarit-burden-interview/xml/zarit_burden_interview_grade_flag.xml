@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE zarit_burden_interview_grade_flag SYSTEM "zarit_burden_interview_grade_flag.dtd">
-<zarit_burden_interview_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<zarit_burden_interview_grade_flag xmlns="https://formexamples.github.io/zarit-burden-interview/xml">
+<id>6ff05ed7-a462-5809-b952-982df58656a4</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<zarit_burden_interview_grade_id>880e8400-e29b-41d4-a716-446655440003</zarit_burden_interview_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<zarit_burden_interview_grade_id>ce83564a-948a-5629-bba5-be14edf862a4</zarit_burden_interview_grade_id>
+<flag_id>8118ae9a-a066-51a3-a600-e069192aaf67</flag_id>
 <category>severe-burden</category>
 <priority>low</priority>
 <description>Example text.</description>

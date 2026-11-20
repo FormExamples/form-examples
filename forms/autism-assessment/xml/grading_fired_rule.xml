@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/autism-assessment/xml">
+<id>09b729ee-ba8e-5b8a-bf50-0266b275ec7a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>880e8400-e29b-41d4-a716-446655440003</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>93a4fbf0-366d-581a-be2a-9ccc515b7871</grade_id>
+<rule_id>f2ba542a-6261-5b08-8ea1-03e27f75e64b</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>below_threshold</severity_level>

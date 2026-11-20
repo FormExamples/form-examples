@@ -5,10 +5,19 @@ info:
   title: Hypertension Review — HypertensionReviewGradeRule
   version: 1.0.0
   description: "Audit trail of every classification or completeness rule that fired during grading: section, category, and description."
+x-namespace:
+  form: hypertension-review
+  apiPrefix: /api/hypertension-review/
+  sqlSchema: hypertension_review
+  xmlNamespace: https://formexamples.github.io/hypertension-review/xml
+tags:
+  - name: hypertension-review
+    description: Hypertension Review form
 paths:
   /api/hypertension-review/hypertension_review_grade_rules:
     get:
       summary: List HypertensionReviewGradeRule records
+      tags: [hypertension-review]
       operationId: listHypertensionReviewGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HypertensionReviewGradeRule
+      tags: [hypertension-review]
       operationId: createHypertensionReviewGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HypertensionReviewGradeRule by id
+      tags: [hypertension-review]
       operationId: getHypertensionReviewGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HypertensionReviewGradeRule
+      tags: [hypertension-review]
       operationId: updateHypertensionReviewGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HypertensionReviewGradeRule
+      tags: [hypertension-review]
       operationId: replaceHypertensionReviewGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HypertensionReviewGradeRule
+      tags: [hypertension-review]
       operationId: deleteHypertensionReviewGradeRule
       responses:
         "200":

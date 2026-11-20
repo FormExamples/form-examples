@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment SYSTEM "assessment.dtd">
-<assessment>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<assessment xmlns="https://formexamples.github.io/dyslexia-assessment/xml">
+<id>21cd0813-86ed-539a-8fd1-f75bb7246c97</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<patient_id>727c2a91-4df5-5e09-b5a6-d3eb5e1120d9</patient_id>
 <status>draft</status>
 </assessment>

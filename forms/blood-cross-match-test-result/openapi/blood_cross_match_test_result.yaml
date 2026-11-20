@@ -5,10 +5,19 @@ info:
   title: Blood Cross Match Test Result — BloodCrossMatchTestResult
   version: 1.0.0
   description: Blood cross-match / transfusion compatibility test result (report). Captures the ABO/Rh group, antibody screen and identification, the crossmatch / compatibility outcome and component availability, two-sample-rule and historical-group concordance for identity safety, special component requirements, the overall result status, narrative findings, impression, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: blood-cross-match-test-result
+  apiPrefix: /api/blood-cross-match-test-result/
+  sqlSchema: blood_cross_match_test_result
+  xmlNamespace: https://formexamples.github.io/blood-cross-match-test-result/xml
+tags:
+  - name: blood-cross-match-test-result
+    description: Blood Cross Match Test Result form
 paths:
   /api/blood-cross-match-test-result/blood_cross_match_test_results:
     get:
       summary: List BloodCrossMatchTestResult records
+      tags: [blood-cross-match-test-result]
       operationId: listBloodCrossMatchTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BloodCrossMatchTestResult
+      tags: [blood-cross-match-test-result]
       operationId: createBloodCrossMatchTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BloodCrossMatchTestResult by id
+      tags: [blood-cross-match-test-result]
       operationId: getBloodCrossMatchTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BloodCrossMatchTestResult
+      tags: [blood-cross-match-test-result]
       operationId: updateBloodCrossMatchTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BloodCrossMatchTestResult
+      tags: [blood-cross-match-test-result]
       operationId: replaceBloodCrossMatchTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BloodCrossMatchTestResult
+      tags: [blood-cross-match-test-result]
       operationId: deleteBloodCrossMatchTestResult
       responses:
         "200":

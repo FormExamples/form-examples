@@ -5,10 +5,19 @@ info:
   title: Mri Scan Test Result — MriScanTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical finding (e.g. cord compression, large haemorrhage) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: mri-scan-test-result
+  apiPrefix: /api/mri-scan-test-result/
+  sqlSchema: mri_scan_test_result
+  xmlNamespace: https://formexamples.github.io/mri-scan-test-result/xml
+tags:
+  - name: mri-scan-test-result
+    description: Mri Scan Test Result form
 paths:
   /api/mri-scan-test-result/mri_scan_test_result_grades:
     get:
       summary: List MriScanTestResultGrade records
+      tags: [mri-scan-test-result]
       operationId: listMriScanTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MriScanTestResultGrade
+      tags: [mri-scan-test-result]
       operationId: createMriScanTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MriScanTestResultGrade by id
+      tags: [mri-scan-test-result]
       operationId: getMriScanTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MriScanTestResultGrade
+      tags: [mri-scan-test-result]
       operationId: updateMriScanTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MriScanTestResultGrade
+      tags: [mri-scan-test-result]
       operationId: replaceMriScanTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MriScanTestResultGrade
+      tags: [mri-scan-test-result]
       operationId: deleteMriScanTestResultGrade
       responses:
         "200":

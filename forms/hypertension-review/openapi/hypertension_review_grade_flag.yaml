@@ -5,10 +5,19 @@ info:
   title: Hypertension Review — HypertensionReviewGradeFlag
   version: 1.0.0
   description: Flags that fire independently of the control class and completeness status, with priority and a suggested action for the clinician or governance team.
+x-namespace:
+  form: hypertension-review
+  apiPrefix: /api/hypertension-review/
+  sqlSchema: hypertension_review
+  xmlNamespace: https://formexamples.github.io/hypertension-review/xml
+tags:
+  - name: hypertension-review
+    description: Hypertension Review form
 paths:
   /api/hypertension-review/hypertension_review_grade_flags:
     get:
       summary: List HypertensionReviewGradeFlag records
+      tags: [hypertension-review]
       operationId: listHypertensionReviewGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HypertensionReviewGradeFlag
+      tags: [hypertension-review]
       operationId: createHypertensionReviewGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HypertensionReviewGradeFlag by id
+      tags: [hypertension-review]
       operationId: getHypertensionReviewGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HypertensionReviewGradeFlag
+      tags: [hypertension-review]
       operationId: updateHypertensionReviewGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HypertensionReviewGradeFlag
+      tags: [hypertension-review]
       operationId: replaceHypertensionReviewGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HypertensionReviewGradeFlag
+      tags: [hypertension-review]
       operationId: deleteHypertensionReviewGradeFlag
       responses:
         "200":

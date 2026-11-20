@@ -5,10 +5,19 @@ info:
   title: Meeting — AgendaItem
   version: 1.0.0
   description: One topic on the meeting agenda. Ordered by position. Captures presenter, planned duration, and free-text notes.
+x-namespace:
+  form: meeting
+  apiPrefix: /api/meeting/
+  sqlSchema: meeting
+  xmlNamespace: https://formexamples.github.io/meeting/xml
+tags:
+  - name: meeting
+    description: Meeting form
 paths:
   /api/meeting/agenda_items:
     get:
       summary: List AgendaItem records
+      tags: [meeting]
       operationId: listAgendaItem
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AgendaItem
+      tags: [meeting]
       operationId: createAgendaItem
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AgendaItem by id
+      tags: [meeting]
       operationId: getAgendaItem
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AgendaItem
+      tags: [meeting]
       operationId: updateAgendaItem
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AgendaItem
+      tags: [meeting]
       operationId: replaceAgendaItem
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AgendaItem
+      tags: [meeting]
       operationId: deleteAgendaItem
       responses:
         "200":

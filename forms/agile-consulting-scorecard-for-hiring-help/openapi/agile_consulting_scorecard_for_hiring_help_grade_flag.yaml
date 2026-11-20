@@ -5,10 +5,19 @@ info:
   title: Agile Consulting Scorecard For Hiring Help — AgileConsultingScorecardForHiringHelpGradeFlag
   version: 1.0.0
   description: "Readiness flags that fire independently of the band: each identifies a specific gap that would block a successful consulting engagement until addressed."
+x-namespace:
+  form: agile-consulting-scorecard-for-hiring-help
+  apiPrefix: /api/agile-consulting-scorecard-for-hiring-help/
+  sqlSchema: agile_consulting_scorecard_for_hiring_help
+  xmlNamespace: https://formexamples.github.io/agile-consulting-scorecard-for-hiring-help/xml
+tags:
+  - name: agile-consulting-scorecard-for-hiring-help
+    description: Agile Consulting Scorecard For Hiring Help form
 paths:
   /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_help_grade_flags:
     get:
       summary: List AgileConsultingScorecardForHiringHelpGradeFlag records
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: listAgileConsultingScorecardForHiringHelpGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AgileConsultingScorecardForHiringHelpGradeFlag
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: createAgileConsultingScorecardForHiringHelpGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AgileConsultingScorecardForHiringHelpGradeFlag by id
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: getAgileConsultingScorecardForHiringHelpGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AgileConsultingScorecardForHiringHelpGradeFlag
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: updateAgileConsultingScorecardForHiringHelpGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AgileConsultingScorecardForHiringHelpGradeFlag
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: replaceAgileConsultingScorecardForHiringHelpGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AgileConsultingScorecardForHiringHelpGradeFlag
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: deleteAgileConsultingScorecardForHiringHelpGradeFlag
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE four_a_test_for_delirium_grade_rule SYSTEM "four_a_test_for_delirium_grade_rule.dtd">
-<four_a_test_for_delirium_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<four_a_test_for_delirium_grade_rule xmlns="https://formexamples.github.io/four-a-test-for-delirium/xml">
+<id>29fcfffc-9c1f-5d3d-b72d-c6d93d6e0e4e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<four_a_test_for_delirium_grade_id>880e8400-e29b-41d4-a716-446655440003</four_a_test_for_delirium_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<four_a_test_for_delirium_grade_id>71236860-9892-524c-9d96-a7610070becf</four_a_test_for_delirium_grade_id>
+<rule_id>3278e4e6-fe7b-51cc-b63e-d286406a7c4c</rule_id>
 <item>alertness</item>
 <points>1</points>
 <category>General</category>

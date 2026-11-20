@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_additional_flag SYSTEM "grading_additional_flag.dtd">
-<grading_additional_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<grading_additional_flag xmlns="https://formexamples.github.io/framingham-risk-score-for-hard-coronary-heart-disease/xml">
+<id>053bcc42-8730-5468-89ff-5657b94292c5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>880e8400-e29b-41d4-a716-446655440003</grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<grade_id>22942e17-22e0-5ad3-b856-4af08f9c4e8e</grade_id>
+<flag_id>b538d4ed-fedf-5578-bd27-6895634f57b1</flag_id>
 <category>General</category>
 <message></message>
 <priority>high</priority>

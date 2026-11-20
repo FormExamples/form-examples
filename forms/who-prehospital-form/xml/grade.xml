@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<grade xmlns="https://formexamples.github.io/who-prehospital-form/xml">
+<id>f59757e3-91ba-5286-9218-aafc04d25057</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>76469d01-89da-5349-a308-1e3fa01f3c76</assessment_id>
 <result_category>Normal</result_category>
 <result_score>5.0</result_score>
 <result_notes>Example text.</result_notes>

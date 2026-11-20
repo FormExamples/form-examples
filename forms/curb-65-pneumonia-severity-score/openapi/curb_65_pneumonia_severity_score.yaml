@@ -5,10 +5,19 @@ info:
   title: Curb 65 Pneumonia Severity Score — Curb65PneumoniaSeverityScore
   version: 1.0.0
   description: "Main CURB-65 pneumonia severity assessment record: assessment context, patient identification, the five scored criterion inputs (confusion, urea, respiratory rate, blood pressure, age), advisory adjuncts, and the clinician disposition override."
+x-namespace:
+  form: curb-65-pneumonia-severity-score
+  apiPrefix: /api/curb-65-pneumonia-severity-score/
+  sqlSchema: curb_65_pneumonia_severity_score
+  xmlNamespace: https://formexamples.github.io/curb-65-pneumonia-severity-score/xml
+tags:
+  - name: curb-65-pneumonia-severity-score
+    description: Curb 65 Pneumonia Severity Score form
 paths:
   /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_scores:
     get:
       summary: List Curb65PneumoniaSeverityScore records
+      tags: [curb-65-pneumonia-severity-score]
       operationId: listCurb65PneumoniaSeverityScore
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Curb65PneumoniaSeverityScore
+      tags: [curb-65-pneumonia-severity-score]
       operationId: createCurb65PneumoniaSeverityScore
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Curb65PneumoniaSeverityScore by id
+      tags: [curb-65-pneumonia-severity-score]
       operationId: getCurb65PneumoniaSeverityScore
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Curb65PneumoniaSeverityScore
+      tags: [curb-65-pneumonia-severity-score]
       operationId: updateCurb65PneumoniaSeverityScore
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Curb65PneumoniaSeverityScore
+      tags: [curb-65-pneumonia-severity-score]
       operationId: replaceCurb65PneumoniaSeverityScore
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Curb65PneumoniaSeverityScore
+      tags: [curb-65-pneumonia-severity-score]
       operationId: deleteCurb65PneumoniaSeverityScore
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Ottawa Knee Rule — OttawaKneeRuleGradeRule
   version: 1.0.0
   description: "Audit trail of every decision rule evaluated during Ottawa Knee Rule computation: instrument, criterion, whether it fired, category, and description."
+x-namespace:
+  form: ottawa-knee-rule
+  apiPrefix: /api/ottawa-knee-rule/
+  sqlSchema: ottawa_knee_rule
+  xmlNamespace: https://formexamples.github.io/ottawa-knee-rule/xml
+tags:
+  - name: ottawa-knee-rule
+    description: Ottawa Knee Rule form
 paths:
   /api/ottawa-knee-rule/ottawa_knee_rule_grade_rules:
     get:
       summary: List OttawaKneeRuleGradeRule records
+      tags: [ottawa-knee-rule]
       operationId: listOttawaKneeRuleGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OttawaKneeRuleGradeRule
+      tags: [ottawa-knee-rule]
       operationId: createOttawaKneeRuleGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OttawaKneeRuleGradeRule by id
+      tags: [ottawa-knee-rule]
       operationId: getOttawaKneeRuleGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OttawaKneeRuleGradeRule
+      tags: [ottawa-knee-rule]
       operationId: updateOttawaKneeRuleGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OttawaKneeRuleGradeRule
+      tags: [ottawa-knee-rule]
       operationId: replaceOttawaKneeRuleGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OttawaKneeRuleGradeRule
+      tags: [ottawa-knee-rule]
       operationId: deleteOttawaKneeRuleGradeRule
       responses:
         "200":

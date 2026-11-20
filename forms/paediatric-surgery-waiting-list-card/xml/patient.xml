@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE patient SYSTEM "patient.dtd">
-<patient>
-<id>550e8400-e29b-41d4-a716-446655440000</id>
+<patient xmlns="https://formexamples.github.io/paediatric-surgery-waiting-list-card/xml">
+<id>80f7e9ca-b360-57a5-bd66-6d2960b8afd4</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>

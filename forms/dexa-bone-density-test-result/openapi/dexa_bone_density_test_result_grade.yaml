@@ -5,10 +5,19 @@ info:
   title: Dexa Bone Density Test Result — DexaBoneDensityTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category (WHO densitometric classification), report completeness, and follow-up urgency. Severe osteoporosis or an identified vertebral fracture auto-escalates the follow-up urgency to urgent / critical-alert regardless of the other axes."
+x-namespace:
+  form: dexa-bone-density-test-result
+  apiPrefix: /api/dexa-bone-density-test-result/
+  sqlSchema: dexa_bone_density_test_result
+  xmlNamespace: https://formexamples.github.io/dexa-bone-density-test-result/xml
+tags:
+  - name: dexa-bone-density-test-result
+    description: Dexa Bone Density Test Result form
 paths:
   /api/dexa-bone-density-test-result/dexa_bone_density_test_result_grades:
     get:
       summary: List DexaBoneDensityTestResultGrade records
+      tags: [dexa-bone-density-test-result]
       operationId: listDexaBoneDensityTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DexaBoneDensityTestResultGrade
+      tags: [dexa-bone-density-test-result]
       operationId: createDexaBoneDensityTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DexaBoneDensityTestResultGrade by id
+      tags: [dexa-bone-density-test-result]
       operationId: getDexaBoneDensityTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DexaBoneDensityTestResultGrade
+      tags: [dexa-bone-density-test-result]
       operationId: updateDexaBoneDensityTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DexaBoneDensityTestResultGrade
+      tags: [dexa-bone-density-test-result]
       operationId: replaceDexaBoneDensityTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DexaBoneDensityTestResultGrade
+      tags: [dexa-bone-density-test-result]
       operationId: deleteDexaBoneDensityTestResultGrade
       responses:
         "200":

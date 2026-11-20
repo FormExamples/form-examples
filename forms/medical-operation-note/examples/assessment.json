@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "id": "e34012b8-62c6-5cae-85c8-8e7a263fd0bb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000013",
+    "id": "6876727e-bb14-5421-a8ac-bdb47903933d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "medicalOperationNote": {
-    "id": "550e8400-e29b-41d4-a716-000000000020",
+    "id": "f51cb29d-34e3-5125-ba8c-947cd3e19ef1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000024",
-    "leadSurgeonId": "550e8400-e29b-41d4-a716-000000000025",
+    "patientId": "cc3fe41c-a16d-5ff1-a6d4-9cf26acb4e7d",
+    "leadSurgeonId": "5f81119a-2328-50c0-83db-4c8d7ab1c1df",
     "status": "draft",
     "hospitalName": "",
     "theatreNumber": "",
@@ -132,23 +132,23 @@
     "signedAt": null
   },
   "medicalOperationNoteTeamMember": {
-    "id": "550e8400-e29b-41d4-a716-00000000007f",
+    "id": "76b7c12d-afd4-5a72-bf54-7cbaf1694553",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalOperationNoteId": "550e8400-e29b-41d4-a716-000000000083",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000084",
+    "medicalOperationNoteId": "dba80e13-405f-50ce-935f-83240f868244",
+    "clinicianId": "2672a998-1362-5b10-8b99-37d413d0bc6e",
     "teamRole": "lead-surgeon",
     "arrivedAt": null,
     "leftAt": null,
     "notes": ""
   },
   "medicalOperationNoteProcedure": {
-    "id": "550e8400-e29b-41d4-a716-000000000089",
+    "id": "82bd2233-36b8-52c0-bbed-392d5b8f2268",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalOperationNoteId": "550e8400-e29b-41d4-a716-00000000008d",
+    "medicalOperationNoteId": "428b7e13-11c0-5e39-9341-6f95f1e0c2c5",
     "role": "planned-primary",
     "opcs4Code": "",
     "name": "",
@@ -157,21 +157,21 @@
     "sequenceIndex": 0
   },
   "medicalOperationNoteStep": {
-    "id": "550e8400-e29b-41d4-a716-000000000094",
+    "id": "e3ce1483-2ead-51df-802c-e3d8786ef211",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalOperationNoteId": "550e8400-e29b-41d4-a716-000000000098",
+    "medicalOperationNoteId": "776a327a-f143-5ce2-abe8-2714f5dd8908",
     "stepNumber": 0,
     "title": "",
     "description": ""
   },
   "medicalOperationNoteImplant": {
-    "id": "550e8400-e29b-41d4-a716-00000000009c",
+    "id": "4135e70e-cded-535d-b26c-5ce4a385e55a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalOperationNoteId": "550e8400-e29b-41d4-a716-0000000000a0",
+    "medicalOperationNoteId": "1a8280f2-53cf-5bac-9725-901b9c4b3859",
     "category": "suture",
     "name": "",
     "sizeOrGauge": "",
@@ -188,11 +188,11 @@
     "notes": ""
   },
   "medicalOperationNoteDrain": {
-    "id": "550e8400-e29b-41d4-a716-0000000000af",
+    "id": "5e88a64a-2b76-5559-b51f-5279b1b35558",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalOperationNoteId": "550e8400-e29b-41d4-a716-0000000000b3",
+    "medicalOperationNoteId": "5d17a817-123d-5859-83b6-c436334853ee",
     "deviceType": "closed-suction",
     "name": "",
     "site": "",
@@ -204,11 +204,11 @@
     "notes": ""
   },
   "medicalOperationNoteSpecimen": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bd",
+    "id": "ff3cd465-3cc8-5efd-8c3e-1619d7d81550",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalOperationNoteId": "550e8400-e29b-41d4-a716-0000000000c1",
+    "medicalOperationNoteId": "7540518d-7e04-5549-ab0f-0c5cfc252584",
     "label": "",
     "specimenType": "tissue",
     "anatomicalSite": "",
@@ -221,11 +221,11 @@
     "notes": ""
   },
   "medicalOperationNoteComplication": {
-    "id": "550e8400-e29b-41d4-a716-0000000000cc",
+    "id": "d6f9f907-abb2-5202-aafb-a153a9b710f1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalOperationNoteId": "550e8400-e29b-41d4-a716-0000000000d0",
+    "medicalOperationNoteId": "f72dba5d-0699-5c56-92a1-1f3b8f433bad",
     "category": "haemorrhage",
     "description": "",
     "clavienDindoGrade": "0",
@@ -235,11 +235,11 @@
     "reportedToGovernance": "yes"
   },
   "medicalOperationNoteGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d8",
+    "id": "4ed16dde-cbb6-514d-9b7a-c00aac632c9e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalOperationNoteId": "550e8400-e29b-41d4-a716-0000000000dc",
+    "medicalOperationNoteId": "b1017fba-3c87-52d4-a0b1-284f768a369e",
     "computedCompositeRisk": "routine",
     "finalCompositeRisk": "routine",
     "overrideReason": "",
@@ -254,11 +254,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "medicalOperationNoteGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000e9",
+    "id": "3d0c4c72-c438-539d-b2d5-d55c8f013a9c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalOperationNoteGradeId": "550e8400-e29b-41d4-a716-0000000000ed",
+    "medicalOperationNoteGradeId": "68f1767e-8efb-5dca-b646-67d894dd1948",
     "ruleId": "",
     "instrument": "blood-loss",
     "band": "routine",
@@ -266,11 +266,11 @@
     "description": ""
   },
   "medicalOperationNoteGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000f3",
+    "id": "70a9d027-b224-5150-a1df-b56de3e2baf6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalOperationNoteGradeId": "550e8400-e29b-41d4-a716-0000000000f7",
+    "medicalOperationNoteGradeId": "e84e4611-8411-5cc7-a6e5-a4a5d3b8bc2a",
     "flagId": "",
     "category": "incorrect-count",
     "priority": "low",

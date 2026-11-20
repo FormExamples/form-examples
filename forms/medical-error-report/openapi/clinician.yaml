@@ -5,10 +5,19 @@ info:
   title: Medical Error Report — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: medical-error-report
+  apiPrefix: /api/medical-error-report/
+  sqlSchema: medical_error_report
+  xmlNamespace: https://formexamples.github.io/medical-error-report/xml
+tags:
+  - name: medical-error-report
+    description: Medical Error Report form
 paths:
   /api/medical-error-report/clinicians:
     get:
       summary: List Clinician records
+      tags: [medical-error-report]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [medical-error-report]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [medical-error-report]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [medical-error-report]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [medical-error-report]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [medical-error-report]
       operationId: deleteClinician
       responses:
         "200":

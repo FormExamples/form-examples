@@ -5,10 +5,19 @@ info:
   title: Fall Risk Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: fall-risk-assessment
+  apiPrefix: /api/fall-risk-assessment/
+  sqlSchema: fall_risk_assessment
+  xmlNamespace: https://formexamples.github.io/fall-risk-assessment/xml
+tags:
+  - name: fall-risk-assessment
+    description: Fall Risk Assessment form
 paths:
   /api/fall-risk-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [fall-risk-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [fall-risk-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [fall-risk-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [fall-risk-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [fall-risk-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [fall-risk-assessment]
       operationId: deleteClinician
       responses:
         "200":

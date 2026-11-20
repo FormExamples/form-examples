@@ -7,6 +7,14 @@ info:
   description: Combined OpenAPI specification for the Pharmacology Waiting List Card form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: pharmacology-waiting-list-card
+  apiPrefix: /api/pharmacology-waiting-list-card/
+  sqlSchema: pharmacology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/pharmacology-waiting-list-card/xml
+tags:
+- name: pharmacology-waiting-list-card
+  description: Pharmacology Waiting List Card form
 paths:
   /api/pharmacology-waiting-list-card/openapi.yaml:
     get:
@@ -19,9 +27,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - pharmacology-waiting-list-card
   /api/pharmacology-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - pharmacology-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -74,6 +86,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - pharmacology-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -127,6 +141,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - pharmacology-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -154,6 +170,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - pharmacology-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -199,6 +217,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - pharmacology-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -244,6 +264,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - pharmacology-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -268,6 +290,8 @@ paths:
   /api/pharmacology-waiting-list-card/pharmacology_waiting_list_card_appointments:
     get:
       summary: List PharmacologyWaitingListCardAppointment records
+      tags:
+      - pharmacology-waiting-list-card
       operationId: listPharmacologyWaitingListCardAppointment
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PharmacologyWaitingListCardAppointment
+      tags:
+      - pharmacology-waiting-list-card
       operationId: createPharmacologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PharmacologyWaitingListCardAppointment by id
+      tags:
+      - pharmacology-waiting-list-card
       operationId: getPharmacologyWaitingListCardAppointment
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PharmacologyWaitingListCardAppointment
+      tags:
+      - pharmacology-waiting-list-card
       operationId: updatePharmacologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PharmacologyWaitingListCardAppointment
+      tags:
+      - pharmacology-waiting-list-card
       operationId: replacePharmacologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PharmacologyWaitingListCardAppointment
+      tags:
+      - pharmacology-waiting-list-card
       operationId: deletePharmacologyWaitingListCardAppointment
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/pharmacology-waiting-list-card/pharmacology_waiting_list_card_grade_flags:
     get:
       summary: List PharmacologyWaitingListCardGradeFlag records
+      tags:
+      - pharmacology-waiting-list-card
       operationId: listPharmacologyWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PharmacologyWaitingListCardGradeFlag
+      tags:
+      - pharmacology-waiting-list-card
       operationId: createPharmacologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PharmacologyWaitingListCardGradeFlag by id
+      tags:
+      - pharmacology-waiting-list-card
       operationId: getPharmacologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PharmacologyWaitingListCardGradeFlag
+      tags:
+      - pharmacology-waiting-list-card
       operationId: updatePharmacologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PharmacologyWaitingListCardGradeFlag
+      tags:
+      - pharmacology-waiting-list-card
       operationId: replacePharmacologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PharmacologyWaitingListCardGradeFlag
+      tags:
+      - pharmacology-waiting-list-card
       operationId: deletePharmacologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/pharmacology-waiting-list-card/pharmacology_waiting_list_card_grade_rules:
     get:
       summary: List PharmacologyWaitingListCardGradeRule records
+      tags:
+      - pharmacology-waiting-list-card
       operationId: listPharmacologyWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PharmacologyWaitingListCardGradeRule
+      tags:
+      - pharmacology-waiting-list-card
       operationId: createPharmacologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PharmacologyWaitingListCardGradeRule by id
+      tags:
+      - pharmacology-waiting-list-card
       operationId: getPharmacologyWaitingListCardGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PharmacologyWaitingListCardGradeRule
+      tags:
+      - pharmacology-waiting-list-card
       operationId: updatePharmacologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PharmacologyWaitingListCardGradeRule
+      tags:
+      - pharmacology-waiting-list-card
       operationId: replacePharmacologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PharmacologyWaitingListCardGradeRule
+      tags:
+      - pharmacology-waiting-list-card
       operationId: deletePharmacologyWaitingListCardGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/pharmacology-waiting-list-card/pharmacology_waiting_list_card_grades:
     get:
       summary: List PharmacologyWaitingListCardGrade records
+      tags:
+      - pharmacology-waiting-list-card
       operationId: listPharmacologyWaitingListCardGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PharmacologyWaitingListCardGrade
+      tags:
+      - pharmacology-waiting-list-card
       operationId: createPharmacologyWaitingListCardGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PharmacologyWaitingListCardGrade by id
+      tags:
+      - pharmacology-waiting-list-card
       operationId: getPharmacologyWaitingListCardGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PharmacologyWaitingListCardGrade
+      tags:
+      - pharmacology-waiting-list-card
       operationId: updatePharmacologyWaitingListCardGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PharmacologyWaitingListCardGrade
+      tags:
+      - pharmacology-waiting-list-card
       operationId: replacePharmacologyWaitingListCardGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PharmacologyWaitingListCardGrade
+      tags:
+      - pharmacology-waiting-list-card
       operationId: deletePharmacologyWaitingListCardGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/pharmacology-waiting-list-card/pharmacology_waiting_list_cards:
     get:
       summary: List PharmacologyWaitingListCard records
+      tags:
+      - pharmacology-waiting-list-card
       operationId: listPharmacologyWaitingListCard
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PharmacologyWaitingListCard
+      tags:
+      - pharmacology-waiting-list-card
       operationId: createPharmacologyWaitingListCard
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PharmacologyWaitingListCard by id
+      tags:
+      - pharmacology-waiting-list-card
       operationId: getPharmacologyWaitingListCard
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PharmacologyWaitingListCard
+      tags:
+      - pharmacology-waiting-list-card
       operationId: updatePharmacologyWaitingListCard
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PharmacologyWaitingListCard
+      tags:
+      - pharmacology-waiting-list-card
       operationId: replacePharmacologyWaitingListCard
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PharmacologyWaitingListCard
+      tags:
+      - pharmacology-waiting-list-card
       operationId: deletePharmacologyWaitingListCard
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/pharmacology-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - pharmacology-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - pharmacology-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - pharmacology-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - pharmacology-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - pharmacology-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - pharmacology-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

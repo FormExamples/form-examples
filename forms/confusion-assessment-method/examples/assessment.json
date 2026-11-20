@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000063",
+    "id": "f60538f6-fc5b-5b43-a173-da70a60c7ff4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000075",
+    "id": "408bdafe-0b62-504a-9e3a-88c456456bb3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "confusionAssessmentMethod": {
-    "id": "550e8400-e29b-41d4-a716-000000000082",
+    "id": "bbe899aa-0ebc-5b12-8800-f2fe7676cfbb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000086",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000087",
+    "patientId": "6332a112-175d-5a9a-b39d-3fe11ddd2450",
+    "clinicianId": "3a92f47f-9a5a-5a6d-a9fc-5fa16f660c54",
     "assessorName": "",
     "assessorRole": "nurse",
     "assessedAt": null,
@@ -70,11 +70,11 @@
     "clinicalNote": ""
   },
   "confusionAssessmentMethodGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a3",
+    "id": "4966d49a-ce53-59e8-b7af-70968310f55b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "confusionAssessmentMethodId": "550e8400-e29b-41d4-a716-0000000000a7",
+    "confusionAssessmentMethodId": "44132afd-bbd4-527f-b5f7-39cf2e6606f0",
     "classification": "present",
     "deliriumPresent": true,
     "feature1Positive": true,
@@ -86,11 +86,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "confusionAssessmentMethodGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b1",
+    "id": "9bdc602d-5683-53f7-b1d1-db6c326ce055",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "confusionAssessmentMethodGradeId": "550e8400-e29b-41d4-a716-0000000000b5",
+    "confusionAssessmentMethodGradeId": "03e4eee5-d8fb-58a1-b6ce-398b6a02a628",
     "ruleId": "",
     "feature": "acute-onset-fluctuating",
     "positive": true,
@@ -98,11 +98,11 @@
     "description": ""
   },
   "confusionAssessmentMethodGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bb",
+    "id": "870a5988-6f8f-56d6-88e2-39e1cdc46013",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "confusionAssessmentMethodGradeId": "550e8400-e29b-41d4-a716-0000000000bf",
+    "confusionAssessmentMethodGradeId": "06291724-9288-5771-995f-8b38ae95f057",
     "flagId": "",
     "category": "delirium-present",
     "priority": "low",

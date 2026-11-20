@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_council_tax_discount_application_grade SYSTEM "united_kingdom_council_tax_discount_application_grade.dtd">
-<united_kingdom_council_tax_discount_application_grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<united_kingdom_council_tax_discount_application_grade xmlns="https://formexamples.github.io/united-kingdom-council-tax-discount-application/xml">
+<id>b1d99c81-5276-5d73-9593-87f32a86a61b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<united_kingdom_council_tax_discount_application_id>770e8400-e29b-41d4-a716-446655440002</united_kingdom_council_tax_discount_application_id>
+<united_kingdom_council_tax_discount_application_id>efbc7134-435c-5e4e-ba8e-32680b637661</united_kingdom_council_tax_discount_application_id>
 <eligibility_class>likely-eligible</eligibility_class>
 <counted_adults>2</counted_adults>
 <indicative_outcome>25-percent-discount</indicative_outcome>

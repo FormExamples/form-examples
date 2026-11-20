@@ -6,10 +6,20 @@ info:
   version: 1.0.0
   description: Combined OpenAPI specification for the arc42 form, merged from the per-entity specs in
     this directory. One RESTful resource per routed SQL table, and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+- name: arc42
+  description: arc42 form
 paths:
   /api/arc42/arc42_documentation_grade_flags:
     get:
       summary: List Arc42DocumentationGradeFlag records
+      tags:
+      - arc42
       operationId: listArc42DocumentationGradeFlag
       parameters:
       - name: limit
@@ -62,6 +72,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Arc42DocumentationGradeFlag
+      tags:
+      - arc42
       operationId: createArc42DocumentationGradeFlag
       requestBody:
         required: true
@@ -115,6 +127,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Arc42DocumentationGradeFlag by id
+      tags:
+      - arc42
       operationId: getArc42DocumentationGradeFlag
       responses:
         '200':
@@ -142,6 +156,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Arc42DocumentationGradeFlag
+      tags:
+      - arc42
       operationId: updateArc42DocumentationGradeFlag
       requestBody:
         required: true
@@ -187,6 +203,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Arc42DocumentationGradeFlag
+      tags:
+      - arc42
       operationId: replaceArc42DocumentationGradeFlag
       requestBody:
         required: true
@@ -232,6 +250,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Arc42DocumentationGradeFlag
+      tags:
+      - arc42
       operationId: deleteArc42DocumentationGradeFlag
       responses:
         '200':
@@ -256,6 +276,8 @@ paths:
   /api/arc42/arc42_documentation_grade_rules:
     get:
       summary: List Arc42DocumentationGradeRule records
+      tags:
+      - arc42
       operationId: listArc42DocumentationGradeRule
       parameters:
       - name: limit
@@ -308,6 +330,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Arc42DocumentationGradeRule
+      tags:
+      - arc42
       operationId: createArc42DocumentationGradeRule
       requestBody:
         required: true
@@ -361,6 +385,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Arc42DocumentationGradeRule by id
+      tags:
+      - arc42
       operationId: getArc42DocumentationGradeRule
       responses:
         '200':
@@ -388,6 +414,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Arc42DocumentationGradeRule
+      tags:
+      - arc42
       operationId: updateArc42DocumentationGradeRule
       requestBody:
         required: true
@@ -433,6 +461,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Arc42DocumentationGradeRule
+      tags:
+      - arc42
       operationId: replaceArc42DocumentationGradeRule
       requestBody:
         required: true
@@ -478,6 +508,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Arc42DocumentationGradeRule
+      tags:
+      - arc42
       operationId: deleteArc42DocumentationGradeRule
       responses:
         '200':
@@ -502,6 +534,8 @@ paths:
   /api/arc42/arc42_documentation_grades:
     get:
       summary: List Arc42DocumentationGrade records
+      tags:
+      - arc42
       operationId: listArc42DocumentationGrade
       parameters:
       - name: limit
@@ -554,6 +588,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Arc42DocumentationGrade
+      tags:
+      - arc42
       operationId: createArc42DocumentationGrade
       requestBody:
         required: true
@@ -607,6 +643,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Arc42DocumentationGrade by id
+      tags:
+      - arc42
       operationId: getArc42DocumentationGrade
       responses:
         '200':
@@ -634,6 +672,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Arc42DocumentationGrade
+      tags:
+      - arc42
       operationId: updateArc42DocumentationGrade
       requestBody:
         required: true
@@ -679,6 +719,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Arc42DocumentationGrade
+      tags:
+      - arc42
       operationId: replaceArc42DocumentationGrade
       requestBody:
         required: true
@@ -724,6 +766,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Arc42DocumentationGrade
+      tags:
+      - arc42
       operationId: deleteArc42DocumentationGrade
       responses:
         '200':
@@ -748,6 +792,8 @@ paths:
   /api/arc42/arc42_documentations:
     get:
       summary: List Arc42Documentation records
+      tags:
+      - arc42
       operationId: listArc42Documentation
       parameters:
       - name: limit
@@ -800,6 +846,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Arc42Documentation
+      tags:
+      - arc42
       operationId: createArc42Documentation
       requestBody:
         required: true
@@ -853,6 +901,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Arc42Documentation by id
+      tags:
+      - arc42
       operationId: getArc42Documentation
       responses:
         '200':
@@ -880,6 +930,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Arc42Documentation
+      tags:
+      - arc42
       operationId: updateArc42Documentation
       requestBody:
         required: true
@@ -925,6 +977,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Arc42Documentation
+      tags:
+      - arc42
       operationId: replaceArc42Documentation
       requestBody:
         required: true
@@ -970,6 +1024,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Arc42Documentation
+      tags:
+      - arc42
       operationId: deleteArc42Documentation
       responses:
         '200':
@@ -994,6 +1050,8 @@ paths:
   /api/arc42/architectural_decisions:
     get:
       summary: List ArchitecturalDecision records
+      tags:
+      - arc42
       operationId: listArchitecturalDecision
       parameters:
       - name: limit
@@ -1046,6 +1104,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ArchitecturalDecision
+      tags:
+      - arc42
       operationId: createArchitecturalDecision
       requestBody:
         required: true
@@ -1099,6 +1159,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ArchitecturalDecision by id
+      tags:
+      - arc42
       operationId: getArchitecturalDecision
       responses:
         '200':
@@ -1126,6 +1188,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ArchitecturalDecision
+      tags:
+      - arc42
       operationId: updateArchitecturalDecision
       requestBody:
         required: true
@@ -1171,6 +1235,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ArchitecturalDecision
+      tags:
+      - arc42
       operationId: replaceArchitecturalDecision
       requestBody:
         required: true
@@ -1216,6 +1282,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ArchitecturalDecision
+      tags:
+      - arc42
       operationId: deleteArchitecturalDecision
       responses:
         '200':
@@ -1240,6 +1308,8 @@ paths:
   /api/arc42/architectures:
     get:
       summary: List Architecture records
+      tags:
+      - arc42
       operationId: listArchitecture
       parameters:
       - name: limit
@@ -1292,6 +1362,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Architecture
+      tags:
+      - arc42
       operationId: createArchitecture
       requestBody:
         required: true
@@ -1345,6 +1417,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Architecture by id
+      tags:
+      - arc42
       operationId: getArchitecture
       responses:
         '200':
@@ -1372,6 +1446,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Architecture
+      tags:
+      - arc42
       operationId: updateArchitecture
       requestBody:
         required: true
@@ -1417,6 +1493,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Architecture
+      tags:
+      - arc42
       operationId: replaceArchitecture
       requestBody:
         required: true
@@ -1462,6 +1540,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Architecture
+      tags:
+      - arc42
       operationId: deleteArchitecture
       responses:
         '200':
@@ -1486,6 +1566,8 @@ paths:
   /api/arc42/building_blocks:
     get:
       summary: List BuildingBlock records
+      tags:
+      - arc42
       operationId: listBuildingBlock
       parameters:
       - name: limit
@@ -1538,6 +1620,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BuildingBlock
+      tags:
+      - arc42
       operationId: createBuildingBlock
       requestBody:
         required: true
@@ -1591,6 +1675,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BuildingBlock by id
+      tags:
+      - arc42
       operationId: getBuildingBlock
       responses:
         '200':
@@ -1618,6 +1704,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BuildingBlock
+      tags:
+      - arc42
       operationId: updateBuildingBlock
       requestBody:
         required: true
@@ -1663,6 +1751,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BuildingBlock
+      tags:
+      - arc42
       operationId: replaceBuildingBlock
       requestBody:
         required: true
@@ -1708,6 +1798,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BuildingBlock
+      tags:
+      - arc42
       operationId: deleteBuildingBlock
       responses:
         '200':
@@ -1732,6 +1824,8 @@ paths:
   /api/arc42/business_goals:
     get:
       summary: List BusinessGoal records
+      tags:
+      - arc42
       operationId: listBusinessGoal
       parameters:
       - name: limit
@@ -1784,6 +1878,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BusinessGoal
+      tags:
+      - arc42
       operationId: createBusinessGoal
       requestBody:
         required: true
@@ -1837,6 +1933,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BusinessGoal by id
+      tags:
+      - arc42
       operationId: getBusinessGoal
       responses:
         '200':
@@ -1864,6 +1962,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BusinessGoal
+      tags:
+      - arc42
       operationId: updateBusinessGoal
       requestBody:
         required: true
@@ -1909,6 +2009,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BusinessGoal
+      tags:
+      - arc42
       operationId: replaceBusinessGoal
       requestBody:
         required: true
@@ -1954,6 +2056,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BusinessGoal
+      tags:
+      - arc42
       operationId: deleteBusinessGoal
       responses:
         '200':
@@ -1978,6 +2082,8 @@ paths:
   /api/arc42/constraint_items:
     get:
       summary: List ConstraintItem records
+      tags:
+      - arc42
       operationId: listConstraintItem
       parameters:
       - name: limit
@@ -2030,6 +2136,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ConstraintItem
+      tags:
+      - arc42
       operationId: createConstraintItem
       requestBody:
         required: true
@@ -2083,6 +2191,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ConstraintItem by id
+      tags:
+      - arc42
       operationId: getConstraintItem
       responses:
         '200':
@@ -2110,6 +2220,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ConstraintItem
+      tags:
+      - arc42
       operationId: updateConstraintItem
       requestBody:
         required: true
@@ -2155,6 +2267,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ConstraintItem
+      tags:
+      - arc42
       operationId: replaceConstraintItem
       requestBody:
         required: true
@@ -2200,6 +2314,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ConstraintItem
+      tags:
+      - arc42
       operationId: deleteConstraintItem
       responses:
         '200':
@@ -2224,6 +2340,8 @@ paths:
   /api/arc42/context_partners:
     get:
       summary: List ContextPartner records
+      tags:
+      - arc42
       operationId: listContextPartner
       parameters:
       - name: limit
@@ -2276,6 +2394,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ContextPartner
+      tags:
+      - arc42
       operationId: createContextPartner
       requestBody:
         required: true
@@ -2329,6 +2449,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ContextPartner by id
+      tags:
+      - arc42
       operationId: getContextPartner
       responses:
         '200':
@@ -2356,6 +2478,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ContextPartner
+      tags:
+      - arc42
       operationId: updateContextPartner
       requestBody:
         required: true
@@ -2401,6 +2525,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ContextPartner
+      tags:
+      - arc42
       operationId: replaceContextPartner
       requestBody:
         required: true
@@ -2446,6 +2572,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ContextPartner
+      tags:
+      - arc42
       operationId: deleteContextPartner
       responses:
         '200':
@@ -2470,6 +2598,8 @@ paths:
   /api/arc42/deployment_nodes:
     get:
       summary: List DeploymentNode records
+      tags:
+      - arc42
       operationId: listDeploymentNode
       parameters:
       - name: limit
@@ -2522,6 +2652,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DeploymentNode
+      tags:
+      - arc42
       operationId: createDeploymentNode
       requestBody:
         required: true
@@ -2575,6 +2707,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DeploymentNode by id
+      tags:
+      - arc42
       operationId: getDeploymentNode
       responses:
         '200':
@@ -2602,6 +2736,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DeploymentNode
+      tags:
+      - arc42
       operationId: updateDeploymentNode
       requestBody:
         required: true
@@ -2647,6 +2783,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DeploymentNode
+      tags:
+      - arc42
       operationId: replaceDeploymentNode
       requestBody:
         required: true
@@ -2692,6 +2830,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DeploymentNode
+      tags:
+      - arc42
       operationId: deleteDeploymentNode
       responses:
         '200':
@@ -2716,6 +2856,8 @@ paths:
   /api/arc42/glossary_terms:
     get:
       summary: List GlossaryTerm records
+      tags:
+      - arc42
       operationId: listGlossaryTerm
       parameters:
       - name: limit
@@ -2768,6 +2910,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GlossaryTerm
+      tags:
+      - arc42
       operationId: createGlossaryTerm
       requestBody:
         required: true
@@ -2821,6 +2965,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GlossaryTerm by id
+      tags:
+      - arc42
       operationId: getGlossaryTerm
       responses:
         '200':
@@ -2848,6 +2994,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GlossaryTerm
+      tags:
+      - arc42
       operationId: updateGlossaryTerm
       requestBody:
         required: true
@@ -2893,6 +3041,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GlossaryTerm
+      tags:
+      - arc42
       operationId: replaceGlossaryTerm
       requestBody:
         required: true
@@ -2938,6 +3088,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GlossaryTerm
+      tags:
+      - arc42
       operationId: deleteGlossaryTerm
       responses:
         '200':
@@ -2970,9 +3122,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - arc42
   /api/arc42/quality_goals:
     get:
       summary: List QualityGoal records
+      tags:
+      - arc42
       operationId: listQualityGoal
       parameters:
       - name: limit
@@ -3025,6 +3181,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new QualityGoal
+      tags:
+      - arc42
       operationId: createQualityGoal
       requestBody:
         required: true
@@ -3078,6 +3236,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one QualityGoal by id
+      tags:
+      - arc42
       operationId: getQualityGoal
       responses:
         '200':
@@ -3105,6 +3265,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing QualityGoal
+      tags:
+      - arc42
       operationId: updateQualityGoal
       requestBody:
         required: true
@@ -3150,6 +3312,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing QualityGoal
+      tags:
+      - arc42
       operationId: replaceQualityGoal
       requestBody:
         required: true
@@ -3195,6 +3359,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a QualityGoal
+      tags:
+      - arc42
       operationId: deleteQualityGoal
       responses:
         '200':
@@ -3219,6 +3385,8 @@ paths:
   /api/arc42/quality_scenarios:
     get:
       summary: List QualityScenario records
+      tags:
+      - arc42
       operationId: listQualityScenario
       parameters:
       - name: limit
@@ -3271,6 +3439,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new QualityScenario
+      tags:
+      - arc42
       operationId: createQualityScenario
       requestBody:
         required: true
@@ -3324,6 +3494,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one QualityScenario by id
+      tags:
+      - arc42
       operationId: getQualityScenario
       responses:
         '200':
@@ -3351,6 +3523,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing QualityScenario
+      tags:
+      - arc42
       operationId: updateQualityScenario
       requestBody:
         required: true
@@ -3396,6 +3570,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing QualityScenario
+      tags:
+      - arc42
       operationId: replaceQualityScenario
       requestBody:
         required: true
@@ -3441,6 +3617,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a QualityScenario
+      tags:
+      - arc42
       operationId: deleteQualityScenario
       responses:
         '200':
@@ -3465,6 +3643,8 @@ paths:
   /api/arc42/risk_items:
     get:
       summary: List RiskItem records
+      tags:
+      - arc42
       operationId: listRiskItem
       parameters:
       - name: limit
@@ -3517,6 +3697,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RiskItem
+      tags:
+      - arc42
       operationId: createRiskItem
       requestBody:
         required: true
@@ -3570,6 +3752,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RiskItem by id
+      tags:
+      - arc42
       operationId: getRiskItem
       responses:
         '200':
@@ -3597,6 +3781,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RiskItem
+      tags:
+      - arc42
       operationId: updateRiskItem
       requestBody:
         required: true
@@ -3642,6 +3828,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RiskItem
+      tags:
+      - arc42
       operationId: replaceRiskItem
       requestBody:
         required: true
@@ -3687,6 +3875,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RiskItem
+      tags:
+      - arc42
       operationId: deleteRiskItem
       responses:
         '200':
@@ -3711,6 +3901,8 @@ paths:
   /api/arc42/runtime_scenarios:
     get:
       summary: List RuntimeScenario records
+      tags:
+      - arc42
       operationId: listRuntimeScenario
       parameters:
       - name: limit
@@ -3763,6 +3955,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RuntimeScenario
+      tags:
+      - arc42
       operationId: createRuntimeScenario
       requestBody:
         required: true
@@ -3816,6 +4010,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RuntimeScenario by id
+      tags:
+      - arc42
       operationId: getRuntimeScenario
       responses:
         '200':
@@ -3843,6 +4039,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RuntimeScenario
+      tags:
+      - arc42
       operationId: updateRuntimeScenario
       requestBody:
         required: true
@@ -3888,6 +4086,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RuntimeScenario
+      tags:
+      - arc42
       operationId: replaceRuntimeScenario
       requestBody:
         required: true
@@ -3933,6 +4133,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RuntimeScenario
+      tags:
+      - arc42
       operationId: deleteRuntimeScenario
       responses:
         '200':
@@ -3957,6 +4159,8 @@ paths:
   /api/arc42/stakeholders:
     get:
       summary: List Stakeholder records
+      tags:
+      - arc42
       operationId: listStakeholder
       parameters:
       - name: limit
@@ -4009,6 +4213,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Stakeholder
+      tags:
+      - arc42
       operationId: createStakeholder
       requestBody:
         required: true
@@ -4062,6 +4268,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Stakeholder by id
+      tags:
+      - arc42
       operationId: getStakeholder
       responses:
         '200':
@@ -4089,6 +4297,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Stakeholder
+      tags:
+      - arc42
       operationId: updateStakeholder
       requestBody:
         required: true
@@ -4134,6 +4344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Stakeholder
+      tags:
+      - arc42
       operationId: replaceStakeholder
       requestBody:
         required: true
@@ -4179,6 +4391,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Stakeholder
+      tags:
+      - arc42
       operationId: deleteStakeholder
       responses:
         '200':
@@ -4203,6 +4417,8 @@ paths:
   /api/arc42/technology_decisions:
     get:
       summary: List TechnologyDecision records
+      tags:
+      - arc42
       operationId: listTechnologyDecision
       parameters:
       - name: limit
@@ -4255,6 +4471,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TechnologyDecision
+      tags:
+      - arc42
       operationId: createTechnologyDecision
       requestBody:
         required: true
@@ -4308,6 +4526,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TechnologyDecision by id
+      tags:
+      - arc42
       operationId: getTechnologyDecision
       responses:
         '200':
@@ -4335,6 +4555,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TechnologyDecision
+      tags:
+      - arc42
       operationId: updateTechnologyDecision
       requestBody:
         required: true
@@ -4380,6 +4602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TechnologyDecision
+      tags:
+      - arc42
       operationId: replaceTechnologyDecision
       requestBody:
         required: true
@@ -4425,6 +4649,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TechnologyDecision
+      tags:
+      - arc42
       operationId: deleteTechnologyDecision
       responses:
         '200':

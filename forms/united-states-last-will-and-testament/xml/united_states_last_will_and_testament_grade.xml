@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_states_last_will_and_testament_grade SYSTEM "united_states_last_will_and_testament_grade.dtd">
-<united_states_last_will_and_testament_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<united_states_last_will_and_testament_grade xmlns="https://formexamples.github.io/united-states-last-will-and-testament/xml">
+<id>b1ce71fa-bf02-5325-b341-5a9f2072d11e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<united_states_last_will_and_testament_id>770e8400-e29b-41d4-a716-446655440002</united_states_last_will_and_testament_id>
+<united_states_last_will_and_testament_id>e4d3d369-2f4c-55f7-8626-dfb7f613d7a4</united_states_last_will_and_testament_id>
 <validity_class>valid-ready-to-execute</validity_class>
 <residuary_percent_total>50.0</residuary_percent_total>
 <elective_share_amount>0.0</elective_share_amount>

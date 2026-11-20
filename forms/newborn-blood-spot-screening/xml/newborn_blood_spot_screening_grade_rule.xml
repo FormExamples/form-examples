@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE newborn_blood_spot_screening_grade_rule SYSTEM "newborn_blood_spot_screening_grade_rule.dtd">
-<newborn_blood_spot_screening_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<newborn_blood_spot_screening_grade_rule xmlns="https://formexamples.github.io/newborn-blood-spot-screening/xml">
+<id>50d21329-2f34-5bc6-aae0-63581b39c780</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<newborn_blood_spot_screening_grade_id>880e8400-e29b-41d4-a716-446655440003</newborn_blood_spot_screening_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<newborn_blood_spot_screening_grade_id>bd349367-aa1c-55d0-83bc-c44f0c846e1b</newborn_blood_spot_screening_grade_id>
+<rule_id>f48d932d-9d38-5e15-8b3e-e4617dc36506</rule_id>
 <stage>condition</stage>
 <category>General</category>
 <description>Example text.</description>

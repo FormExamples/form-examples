@@ -5,10 +5,19 @@ info:
   title: Nuclear Medicine Waiting List Card — NuclearMedWaitingListCardAppointment
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+x-namespace:
+  form: nuclear-medicine-waiting-list-card
+  apiPrefix: /api/nuclear-medicine-waiting-list-card/
+  sqlSchema: nuclear_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/nuclear-medicine-waiting-list-card/xml
+tags:
+  - name: nuclear-medicine-waiting-list-card
+    description: Nuclear Medicine Waiting List Card form
 paths:
   /api/nuclear-medicine-waiting-list-card/nuclear_med_waiting_list_card_appointments:
     get:
       summary: List NuclearMedWaitingListCardAppointment records
+      tags: [nuclear-medicine-waiting-list-card]
       operationId: listNuclearMedWaitingListCardAppointment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NuclearMedWaitingListCardAppointment
+      tags: [nuclear-medicine-waiting-list-card]
       operationId: createNuclearMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NuclearMedWaitingListCardAppointment by id
+      tags: [nuclear-medicine-waiting-list-card]
       operationId: getNuclearMedWaitingListCardAppointment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NuclearMedWaitingListCardAppointment
+      tags: [nuclear-medicine-waiting-list-card]
       operationId: updateNuclearMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NuclearMedWaitingListCardAppointment
+      tags: [nuclear-medicine-waiting-list-card]
       operationId: replaceNuclearMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NuclearMedWaitingListCardAppointment
+      tags: [nuclear-medicine-waiting-list-card]
       operationId: deleteNuclearMedWaitingListCardAppointment
       responses:
         "200":

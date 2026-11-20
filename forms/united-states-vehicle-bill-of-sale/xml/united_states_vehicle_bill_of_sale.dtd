@@ -1,4 +1,5 @@
 <!ELEMENT united_states_vehicle_bill_of_sale (id,created_at,updated_at,deleted_at,seller_id,buyer_id,state,sale_date,sale_price_as_usd,payment_method,tax_basis,seller_name,seller_type,seller_street_address,seller_city,seller_state,seller_postal_code,seller_phone,seller_signed,buyer_name,buyer_type,buyer_street_address,buyer_city,buyer_state,buyer_postal_code,buyer_phone,buyer_signed,vehicle_year,vehicle_make,vehicle_model,body_type,vin,vehicle_color,title_number,title_brand,gvwr_over_16000,self_propelled,odometer_reading_miles,odometer_status,odometer_seller_certified,odometer_buyer_acknowledged,seller_holds_title,title_signed,lien_status,lienholder_name,lien_release_date,as_is_clause,warranty_note,notarized,release_of_liability_filed,release_filed_date,plates_removed,buyer_title_application_date)>
+<!ATTLIST united_states_vehicle_bill_of_sale xmlns CDATA #FIXED "https://formexamples.github.io/united-states-vehicle-bill-of-sale/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

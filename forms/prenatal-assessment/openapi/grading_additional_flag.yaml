@@ -5,10 +5,19 @@ info:
   title: Prenatal Assessment — GradingAdditionalFlag
   version: 1.0.0
   description: Additional safety-critical flags detected during prenatal assessment grading (e.g. preeclampsia risk, domestic abuse, reduced fetal movement).
+x-namespace:
+  form: prenatal-assessment
+  apiPrefix: /api/prenatal-assessment/
+  sqlSchema: prenatal_assessment
+  xmlNamespace: https://formexamples.github.io/prenatal-assessment/xml
+tags:
+  - name: prenatal-assessment
+    description: Prenatal Assessment form
 paths:
   /api/prenatal-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [prenatal-assessment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [prenatal-assessment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [prenatal-assessment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [prenatal-assessment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [prenatal-assessment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [prenatal-assessment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

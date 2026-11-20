@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000064",
+    "id": "759cc349-1ce9-5623-ba21-3dd10f47d293",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000076",
+    "id": "5ad3b911-4658-5519-a757-aa209ac774b5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "sequentialOrganFailureAssessment": {
-    "id": "550e8400-e29b-41d4-a716-000000000083",
+    "id": "d01f2dca-7e79-57cf-b7af-6dda6a7ea656",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000087",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000088",
+    "patientId": "3f8a7740-a3a8-519b-b1bf-a9334b4838fa",
+    "clinicianId": "7ce02caf-7e16-577e-a81e-56a580e8096f",
     "assessorName": "",
     "assessorRole": "intensivist",
     "assessorRegistrationNumber": "",
@@ -69,11 +69,11 @@
     "clinicalNote": ""
   },
   "sequentialOrganFailureAssessmentGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a3",
+    "id": "a1af151c-b76e-59d8-9d83-3830af337dde",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "sequentialOrganFailureAssessmentId": "550e8400-e29b-41d4-a716-0000000000a7",
+    "sequentialOrganFailureAssessmentId": "f539b9ef-ed72-5206-85a6-5942ab191e0d",
     "respirationScore": null,
     "coagulationScore": null,
     "liverScore": null,
@@ -87,11 +87,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "sequentialOrganFailureAssessmentGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b3",
+    "id": "d113bb0a-73f3-5891-aaa3-58e4be2527dd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "sequentialOrganFailureAssessmentGradeId": "550e8400-e29b-41d4-a716-0000000000b7",
+    "sequentialOrganFailureAssessmentGradeId": "eb806bc3-9118-5f50-8ad0-a2d8cddc9029",
     "ruleId": "",
     "parameter": "respiration",
     "points": null,
@@ -99,11 +99,11 @@
     "description": ""
   },
   "sequentialOrganFailureAssessmentGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bd",
+    "id": "b16ec294-5daa-5b37-b919-558c9443ba56",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "sequentialOrganFailureAssessmentGradeId": "550e8400-e29b-41d4-a716-0000000000c1",
+    "sequentialOrganFailureAssessmentGradeId": "8c946f33-93a1-5908-bd35-0c064eb8efc9",
     "flagId": "",
     "category": "severe-single-organ-failure",
     "priority": "low",

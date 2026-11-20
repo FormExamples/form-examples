@@ -1,4 +1,5 @@
 <!ELEMENT abdominal_aortic_aneurysm_screening (id,created_at,updated_at,deleted_at,patient_id,clinician_id,technician_name,technician_role,clinic_site,scanned_at,device_identifier,patient_identifier,age,sex,eligibility_route,scan_type,consent_given,leaflet_provided,consent_note,aorta_visualised,max_aortic_diameter_cm,prior_max_diameter_cm,prior_scan_date,symptomatic,incidental_findings,result_note)>
+<!ATTLIST abdominal_aortic_aneurysm_screening xmlns CDATA #FIXED "https://formexamples.github.io/abdominal-aortic-aneurysm-screening/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

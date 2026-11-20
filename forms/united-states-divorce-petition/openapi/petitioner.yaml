@@ -5,10 +5,19 @@ info:
   title: United States Divorce Petition — Petitioner
   version: 1.0.0
   description: "Petitioner: the spouse who files the petition for dissolution of marriage."
+x-namespace:
+  form: united-states-divorce-petition
+  apiPrefix: /api/united-states-divorce-petition/
+  sqlSchema: united_states_divorce_petition
+  xmlNamespace: https://formexamples.github.io/united-states-divorce-petition/xml
+tags:
+  - name: united-states-divorce-petition
+    description: United States Divorce Petition form
 paths:
   /api/united-states-divorce-petition/petitioners:
     get:
       summary: List Petitioner records
+      tags: [united-states-divorce-petition]
       operationId: listPetitioner
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Petitioner
+      tags: [united-states-divorce-petition]
       operationId: createPetitioner
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Petitioner by id
+      tags: [united-states-divorce-petition]
       operationId: getPetitioner
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Petitioner
+      tags: [united-states-divorce-petition]
       operationId: updatePetitioner
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Petitioner
+      tags: [united-states-divorce-petition]
       operationId: replacePetitioner
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Petitioner
+      tags: [united-states-divorce-petition]
       operationId: deletePetitioner
       responses:
         "200":

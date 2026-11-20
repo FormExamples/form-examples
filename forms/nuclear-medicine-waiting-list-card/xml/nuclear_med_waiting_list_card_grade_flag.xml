@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nuclear_med_waiting_list_card_grade_flag SYSTEM "nuclear_med_waiting_list_card_grade_flag.dtd">
-<nuclear_med_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<nuclear_med_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/nuclear-medicine-waiting-list-card/xml">
+<id>bb652c66-f677-5ef0-85d9-77b11752a834</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<nuclear_med_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</nuclear_med_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<nuclear_med_waiting_list_card_grade_id>746de1db-0e4c-5473-84cc-39a5153a46e9</nuclear_med_waiting_list_card_grade_id>
+<flag_id>9510b00d-f9c5-56db-9281-59e4f25903ae</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

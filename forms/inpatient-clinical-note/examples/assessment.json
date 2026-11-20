@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000108",
+    "id": "77718fdb-4c27-5c55-ba5c-b4f069857fa8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000011a",
+    "id": "c16e18cc-cbb1-5254-92d9-267f1c488598",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -37,13 +37,13 @@
     "registrationNumber": ""
   },
   "inpatientClinicalNote": {
-    "id": "550e8400-e29b-41d4-a716-000000000129",
+    "id": "71dc5357-361d-5023-b442-7e7561fc052d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000012d",
-    "authorId": "550e8400-e29b-41d4-a716-00000000012e",
-    "responsibleConsultantId": "550e8400-e29b-41d4-a716-00000000012f",
+    "patientId": "c4c375c9-cc1d-5e57-8d32-a01d6b362f21",
+    "authorId": "3ce61e3a-c52a-587b-b8a8-cb5bec677467",
+    "responsibleConsultantId": "ed5bff4a-6dd8-5464-bdea-4688c2671e51",
     "status": "draft",
     "noteType": "admission-clerking",
     "hospitalName": "",
@@ -165,11 +165,11 @@
     "signedAt": null
   },
   "inpatientClinicalNoteProblem": {
-    "id": "550e8400-e29b-41d4-a716-0000000001a7",
+    "id": "12a5191c-8e2a-5bf8-b86b-176fa3dddf72",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "inpatientClinicalNoteId": "550e8400-e29b-41d4-a716-0000000001ab",
+    "inpatientClinicalNoteId": "b6cdbb7c-72a8-5c48-a724-54cdd7a9ffde",
     "sortOrder": 0,
     "problem": "",
     "category": "presenting",
@@ -180,11 +180,11 @@
     "progressCommentary": ""
   },
   "inpatientClinicalNoteMedicationChange": {
-    "id": "550e8400-e29b-41d4-a716-0000000001b4",
+    "id": "0a0e7c70-d6e7-5c98-8804-5dfbd5be6422",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "inpatientClinicalNoteId": "550e8400-e29b-41d4-a716-0000000001b8",
+    "inpatientClinicalNoteId": "e25ba0d3-cd43-5aa8-9375-8fc59c4d9c2a",
     "sortOrder": 0,
     "drugName": "",
     "action": "started",
@@ -199,11 +199,11 @@
     "notes": ""
   },
   "inpatientClinicalNoteInvestigation": {
-    "id": "550e8400-e29b-41d4-a716-0000000001c5",
+    "id": "e5002f99-fbbb-5cbb-a0f6-e2f051fa61ed",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "inpatientClinicalNoteId": "550e8400-e29b-41d4-a716-0000000001c9",
+    "inpatientClinicalNoteId": "e88dbeaf-d329-5a94-a664-2674ca348053",
     "sortOrder": 0,
     "testName": "",
     "category": "haematology",
@@ -215,11 +215,11 @@
     "actionTaken": ""
   },
   "inpatientClinicalNoteJob": {
-    "id": "550e8400-e29b-41d4-a716-0000000001d3",
+    "id": "79bab344-f38b-5954-899b-aa51a0db671c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "inpatientClinicalNoteId": "550e8400-e29b-41d4-a716-0000000001d7",
+    "inpatientClinicalNoteId": "e4a92c67-a460-5f7e-b351-9a7dd4d3bed8",
     "sortOrder": 0,
     "job": "",
     "category": "investigation",
@@ -231,11 +231,11 @@
     "notes": ""
   },
   "inpatientClinicalNoteGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000001e1",
+    "id": "522fa34a-a7ec-5c60-b5ee-eb9a6b0c281d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "inpatientClinicalNoteId": "550e8400-e29b-41d4-a716-0000000001e5",
+    "inpatientClinicalNoteId": "5b89cc17-c970-505c-af4e-fa337e264432",
     "status": "complete",
     "completenessPercent": null,
     "requiredComponentCount": null,
@@ -258,11 +258,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "inpatientClinicalNoteGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000001fa",
+    "id": "f4501591-11ea-50c7-96c3-84aeefeeb03e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "inpatientClinicalNoteGradeId": "550e8400-e29b-41d4-a716-0000000001fe",
+    "inpatientClinicalNoteGradeId": "90d0ed1f-04e7-58b1-957f-6dcdf344be0b",
     "ruleId": "",
     "engine": "completeness",
     "component": "header",
@@ -271,11 +271,11 @@
     "description": ""
   },
   "inpatientClinicalNoteGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000205",
+    "id": "ac7d3c26-aed7-56f9-8837-1c273d9fdef0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "inpatientClinicalNoteGradeId": "550e8400-e29b-41d4-a716-000000000209",
+    "inpatientClinicalNoteGradeId": "7a766615-953e-5666-8313-55c204cbd7c3",
     "flagId": "",
     "category": "deteriorating-news2-no-escalation",
     "priority": "low",

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005d",
+    "id": "3c66a81a-f4b5-5e4c-9c32-4bf790f130b9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006f",
+    "id": "e504a795-3f1a-57c3-9533-192171223638",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "nuclearMedicineTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-00000000007d",
+    "id": "3bfd1628-ec26-5f09-968e-7f4540373aaf",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000081",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000082",
+    "patientId": "fca9f883-c563-5c07-aaee-8841834184fb",
+    "clinicianId": "348b5eda-8b4d-5539-a96e-8aeba8fa7146",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -63,11 +63,11 @@
     "notes": ""
   },
   "nuclearMedicineTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000096",
+    "id": "40c85960-8fc1-5cf7-8be0-00536225c0db",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "nuclearMedicineTestRequestId": "550e8400-e29b-41d4-a716-00000000009a",
+    "nuclearMedicineTestRequestId": "540baf9e-e250-5546-8874-8814e69d58f9",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "prepSafetyBand": "ok",
@@ -81,22 +81,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "nuclearMedicineTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a6",
+    "id": "9a407976-ea15-5ce6-9857-55823843793c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "nuclearMedicineTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000aa",
+    "nuclearMedicineTestRequestGradeId": "f50dbeac-86d2-51ec-906d-ab44b82e332d",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "nuclearMedicineTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000af",
+    "id": "57480cdd-42d6-5949-8d89-37df3f85a9a1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "nuclearMedicineTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b3",
+    "nuclearMedicineTestRequestGradeId": "767ad8b8-2f66-5943-9809-918da00b0b08",
     "flagId": "",
     "category": "pregnancy",
     "priority": "low",

@@ -1,4 +1,5 @@
 <!ELEMENT chronic_kidney_disease_review_grade_flag (id,created_at,updated_at,deleted_at,chronic_kidney_disease_review_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST chronic_kidney_disease_review_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/chronic-kidney-disease-review/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

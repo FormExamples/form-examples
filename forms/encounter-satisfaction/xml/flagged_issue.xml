@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE flagged_issue SYSTEM "flagged_issue.dtd">
-<flagged_issue>
-<id>110e8400-e29b-41d4-a716-44665544000b</id>
+<flagged_issue xmlns="https://formexamples.github.io/encounter-satisfaction/xml">
+<id>5089f1a2-3c14-50a3-8645-b66b9acd3a55</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<satisfaction_result_id>ff0e8400-e29b-41d4-a716-44665544000a</satisfaction_result_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<satisfaction_result_id>5c615f46-8af3-527c-98ee-a3e43f8a3ea9</satisfaction_result_id>
+<flag_id>39f9cf10-ed82-5ba3-97f6-5fc416e8d0ab</flag_id>
 <category>General</category>
 <message></message>
 <priority>high</priority>

@@ -1,4 +1,5 @@
 <!ELEMENT assessment_anaphylaxis_episode (id,created_at,updated_at,deleted_at,anaphylaxis_history_id,trigger_description,symptoms,treatment_required,sort_order)>
+<!ATTLIST assessment_anaphylaxis_episode xmlns CDATA #FIXED "https://formexamples.github.io/allergy-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: United States Property Tax Exemption Application — PropertyTaxExemptionApplicationGradeRule
   version: 1.0.0
   description: "Audit trail of every eligibility rule that fired during classification: application dimension, category and description."
+x-namespace:
+  form: united-states-property-tax-exemption-application
+  apiPrefix: /api/united-states-property-tax-exemption-application/
+  sqlSchema: united_states_property_tax_exemption_application
+  xmlNamespace: https://formexamples.github.io/united-states-property-tax-exemption-application/xml
+tags:
+  - name: united-states-property-tax-exemption-application
+    description: United States Property Tax Exemption Application form
 paths:
   /api/united-states-property-tax-exemption-application/property_tax_exemption_application_grade_rules:
     get:
       summary: List PropertyTaxExemptionApplicationGradeRule records
+      tags: [united-states-property-tax-exemption-application]
       operationId: listPropertyTaxExemptionApplicationGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PropertyTaxExemptionApplicationGradeRule
+      tags: [united-states-property-tax-exemption-application]
       operationId: createPropertyTaxExemptionApplicationGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PropertyTaxExemptionApplicationGradeRule by id
+      tags: [united-states-property-tax-exemption-application]
       operationId: getPropertyTaxExemptionApplicationGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PropertyTaxExemptionApplicationGradeRule
+      tags: [united-states-property-tax-exemption-application]
       operationId: updatePropertyTaxExemptionApplicationGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PropertyTaxExemptionApplicationGradeRule
+      tags: [united-states-property-tax-exemption-application]
       operationId: replacePropertyTaxExemptionApplicationGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PropertyTaxExemptionApplicationGradeRule
+      tags: [united-states-property-tax-exemption-application]
       operationId: deletePropertyTaxExemptionApplicationGradeRule
       responses:
         "200":

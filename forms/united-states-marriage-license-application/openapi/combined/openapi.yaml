@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United States Marriage License Application form,
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-states-marriage-license-application
+  apiPrefix: /api/united-states-marriage-license-application/
+  sqlSchema: united_states_marriage_license_application
+  xmlNamespace: https://formexamples.github.io/united-states-marriage-license-application/xml
+tags:
+- name: united-states-marriage-license-application
+  description: United States Marriage License Application form
 paths:
   /api/united-states-marriage-license-application/applicants:
     get:
       summary: List Applicant records
+      tags:
+      - united-states-marriage-license-application
       operationId: listApplicant
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Applicant
+      tags:
+      - united-states-marriage-license-application
       operationId: createApplicant
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Applicant by id
+      tags:
+      - united-states-marriage-license-application
       operationId: getApplicant
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Applicant
+      tags:
+      - united-states-marriage-license-application
       operationId: updateApplicant
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Applicant
+      tags:
+      - united-states-marriage-license-application
       operationId: replaceApplicant
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Applicant
+      tags:
+      - united-states-marriage-license-application
       operationId: deleteApplicant
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/united-states-marriage-license-application/county_clerks:
     get:
       summary: List CountyClerk records
+      tags:
+      - united-states-marriage-license-application
       operationId: listCountyClerk
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CountyClerk
+      tags:
+      - united-states-marriage-license-application
       operationId: createCountyClerk
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CountyClerk by id
+      tags:
+      - united-states-marriage-license-application
       operationId: getCountyClerk
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CountyClerk
+      tags:
+      - united-states-marriage-license-application
       operationId: updateCountyClerk
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CountyClerk
+      tags:
+      - united-states-marriage-license-application
       operationId: replaceCountyClerk
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CountyClerk
+      tags:
+      - united-states-marriage-license-application
       operationId: deleteCountyClerk
       responses:
         '200':
@@ -511,9 +543,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-states-marriage-license-application
   /api/united-states-marriage-license-application/united_states_marriage_license_application_grade_flags:
     get:
       summary: List UnitedStatesMarriageLicenseApplicationGradeFlag records
+      tags:
+      - united-states-marriage-license-application
       operationId: listUnitedStatesMarriageLicenseApplicationGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesMarriageLicenseApplicationGradeFlag
+      tags:
+      - united-states-marriage-license-application
       operationId: createUnitedStatesMarriageLicenseApplicationGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesMarriageLicenseApplicationGradeFlag by id
+      tags:
+      - united-states-marriage-license-application
       operationId: getUnitedStatesMarriageLicenseApplicationGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesMarriageLicenseApplicationGradeFlag
+      tags:
+      - united-states-marriage-license-application
       operationId: updateUnitedStatesMarriageLicenseApplicationGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesMarriageLicenseApplicationGradeFlag
+      tags:
+      - united-states-marriage-license-application
       operationId: replaceUnitedStatesMarriageLicenseApplicationGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesMarriageLicenseApplicationGradeFlag
+      tags:
+      - united-states-marriage-license-application
       operationId: deleteUnitedStatesMarriageLicenseApplicationGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-states-marriage-license-application/united_states_marriage_license_application_grade_rules:
     get:
       summary: List UnitedStatesMarriageLicenseApplicationGradeRule records
+      tags:
+      - united-states-marriage-license-application
       operationId: listUnitedStatesMarriageLicenseApplicationGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesMarriageLicenseApplicationGradeRule
+      tags:
+      - united-states-marriage-license-application
       operationId: createUnitedStatesMarriageLicenseApplicationGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesMarriageLicenseApplicationGradeRule by id
+      tags:
+      - united-states-marriage-license-application
       operationId: getUnitedStatesMarriageLicenseApplicationGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesMarriageLicenseApplicationGradeRule
+      tags:
+      - united-states-marriage-license-application
       operationId: updateUnitedStatesMarriageLicenseApplicationGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesMarriageLicenseApplicationGradeRule
+      tags:
+      - united-states-marriage-license-application
       operationId: replaceUnitedStatesMarriageLicenseApplicationGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesMarriageLicenseApplicationGradeRule
+      tags:
+      - united-states-marriage-license-application
       operationId: deleteUnitedStatesMarriageLicenseApplicationGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-states-marriage-license-application/united_states_marriage_license_application_grades:
     get:
       summary: List UnitedStatesMarriageLicenseApplicationGrade records
+      tags:
+      - united-states-marriage-license-application
       operationId: listUnitedStatesMarriageLicenseApplicationGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesMarriageLicenseApplicationGrade
+      tags:
+      - united-states-marriage-license-application
       operationId: createUnitedStatesMarriageLicenseApplicationGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesMarriageLicenseApplicationGrade by id
+      tags:
+      - united-states-marriage-license-application
       operationId: getUnitedStatesMarriageLicenseApplicationGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesMarriageLicenseApplicationGrade
+      tags:
+      - united-states-marriage-license-application
       operationId: updateUnitedStatesMarriageLicenseApplicationGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesMarriageLicenseApplicationGrade
+      tags:
+      - united-states-marriage-license-application
       operationId: replaceUnitedStatesMarriageLicenseApplicationGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesMarriageLicenseApplicationGrade
+      tags:
+      - united-states-marriage-license-application
       operationId: deleteUnitedStatesMarriageLicenseApplicationGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-states-marriage-license-application/united_states_marriage_license_applications:
     get:
       summary: List UnitedStatesMarriageLicenseApplication records
+      tags:
+      - united-states-marriage-license-application
       operationId: listUnitedStatesMarriageLicenseApplication
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesMarriageLicenseApplication
+      tags:
+      - united-states-marriage-license-application
       operationId: createUnitedStatesMarriageLicenseApplication
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesMarriageLicenseApplication by id
+      tags:
+      - united-states-marriage-license-application
       operationId: getUnitedStatesMarriageLicenseApplication
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesMarriageLicenseApplication
+      tags:
+      - united-states-marriage-license-application
       operationId: updateUnitedStatesMarriageLicenseApplication
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesMarriageLicenseApplication
+      tags:
+      - united-states-marriage-license-application
       operationId: replaceUnitedStatesMarriageLicenseApplication
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesMarriageLicenseApplication
+      tags:
+      - united-states-marriage-license-application
       operationId: deleteUnitedStatesMarriageLicenseApplication
       responses:
         '200':

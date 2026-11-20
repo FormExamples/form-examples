@@ -5,10 +5,19 @@ info:
   title: Nephrology Waiting List Card — NephrologyWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a nephrology waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: nephrology-waiting-list-card
+  apiPrefix: /api/nephrology-waiting-list-card/
+  sqlSchema: nephrology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/nephrology-waiting-list-card/xml
+tags:
+  - name: nephrology-waiting-list-card
+    description: Nephrology Waiting List Card form
 paths:
   /api/nephrology-waiting-list-card/nephrology_waiting_list_cards:
     get:
       summary: List NephrologyWaitingListCard records
+      tags: [nephrology-waiting-list-card]
       operationId: listNephrologyWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NephrologyWaitingListCard
+      tags: [nephrology-waiting-list-card]
       operationId: createNephrologyWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NephrologyWaitingListCard by id
+      tags: [nephrology-waiting-list-card]
       operationId: getNephrologyWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NephrologyWaitingListCard
+      tags: [nephrology-waiting-list-card]
       operationId: updateNephrologyWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NephrologyWaitingListCard
+      tags: [nephrology-waiting-list-card]
       operationId: replaceNephrologyWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NephrologyWaitingListCard
+      tags: [nephrology-waiting-list-card]
       operationId: deleteNephrologyWaitingListCard
       responses:
         "200":

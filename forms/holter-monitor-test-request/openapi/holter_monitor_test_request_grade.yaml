@@ -5,10 +5,19 @@ info:
   title: Holter Monitor Test Request — HolterMonitorTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (AHA/ACC ambulatory ECG 1-9), urgency / triage, request completeness, and clinical priority."
+x-namespace:
+  form: holter-monitor-test-request
+  apiPrefix: /api/holter-monitor-test-request/
+  sqlSchema: holter_monitor_test_request
+  xmlNamespace: https://formexamples.github.io/holter-monitor-test-request/xml
+tags:
+  - name: holter-monitor-test-request
+    description: Holter Monitor Test Request form
 paths:
   /api/holter-monitor-test-request/holter_monitor_test_request_grades:
     get:
       summary: List HolterMonitorTestRequestGrade records
+      tags: [holter-monitor-test-request]
       operationId: listHolterMonitorTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HolterMonitorTestRequestGrade
+      tags: [holter-monitor-test-request]
       operationId: createHolterMonitorTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HolterMonitorTestRequestGrade by id
+      tags: [holter-monitor-test-request]
       operationId: getHolterMonitorTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HolterMonitorTestRequestGrade
+      tags: [holter-monitor-test-request]
       operationId: updateHolterMonitorTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HolterMonitorTestRequestGrade
+      tags: [holter-monitor-test-request]
       operationId: replaceHolterMonitorTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HolterMonitorTestRequestGrade
+      tags: [holter-monitor-test-request]
       operationId: deleteHolterMonitorTestRequestGrade
       responses:
         "200":

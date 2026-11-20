@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "819dbb0b-4d1a-5b0b-b231-15498f48fcd7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "d6d358d9-b0cb-5f54-9af9-84930d4646e8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "vascSurgeryWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "a941cee3-ca0a-556a-ba6c-acc4e1cb454e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000096",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000097",
+    "patientId": "85e9ed86-b770-56df-9577-8c264c391c13",
+    "practitionerId": "1ccb9391-2311-5627-a420-e0ba04fbc939",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "vascSurgeryWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "9f44b620-c4eb-504e-b342-2d44ff4f2487",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "vascSurgeryWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "vascSurgeryWaitingListCardId": "5be21064-e147-59cb-8d25-e3cd34a98e01",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "vascSurgeryWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "c5720210-36e2-52d9-8dc4-bfdb2be34c24",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "vascSurgeryWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "vascSurgeryWaitingListCardId": "923dc9b6-a6fd-5fbc-9d7c-0ebe7664d6b6",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "vascSurgeryWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d1",
+    "id": "258d1dff-b001-5c40-90dc-be2d243a0890",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "vascSurgeryWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "vascSurgeryWaitingListCardGradeId": "5b294990-eeb3-5ef7-9883-544d795fc1df",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "vascSurgeryWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000db",
+    "id": "4323e7df-44cf-5711-a73a-7f7a030cfe65",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "vascSurgeryWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000df",
+    "vascSurgeryWaitingListCardGradeId": "ade6c490-40df-5708-934c-79b86a8265c7",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

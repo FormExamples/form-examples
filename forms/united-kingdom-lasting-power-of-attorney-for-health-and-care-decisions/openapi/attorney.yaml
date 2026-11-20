@@ -5,10 +5,19 @@ info:
   title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — Attorney
   version: 1.0.0
   description: A person nominated as an attorney by the donor. Must be ≥ 18 with capacity per MCA 2005 s.10.
+x-namespace:
+  form: united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
+  apiPrefix: /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/
+  sqlSchema: united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions
+  xmlNamespace: https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml
+tags:
+  - name: united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
+    description: United Kingdom Lasting Power Of Attorney For Health And Care Decisions form
 paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/attorneys:
     get:
       summary: List Attorney records
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: listAttorney
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Attorney
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: createAttorney
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Attorney by id
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: getAttorney
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Attorney
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: updateAttorney
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Attorney
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: replaceAttorney
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Attorney
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: deleteAttorney
       responses:
         "200":

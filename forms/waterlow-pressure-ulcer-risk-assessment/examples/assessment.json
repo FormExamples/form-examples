@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005f",
+    "id": "d017a77d-1198-5f76-bfc4-8f5dc6970bb5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000071",
+    "id": "3e5b37cb-2cae-5a79-ad9b-94a6b134fc54",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "waterlowPressureUlcerRiskAssessment": {
-    "id": "550e8400-e29b-41d4-a716-00000000007e",
+    "id": "f721f410-568f-5b28-b4df-e365e996a359",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000082",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000083",
+    "patientId": "0d666e9b-364c-51cb-8d11-08564a69bbb0",
+    "clinicianId": "f9b28082-cd3d-5f12-86af-29576635a9fa",
     "nurseName": "",
     "nurseRole": "registered-nurse",
     "assessedAt": null,
@@ -61,11 +61,11 @@
     "clinicalNote": ""
   },
   "waterlowPressureUlcerRiskAssessmentGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000096",
+    "id": "a1194f6a-4b53-5cb2-962f-e17c29b67500",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "waterlowPressureUlcerRiskAssessmentId": "550e8400-e29b-41d4-a716-00000000009a",
+    "waterlowPressureUlcerRiskAssessmentId": "e1883f18-7177-5d43-a594-e856b4e13561",
     "buildPoints": null,
     "skinPoints": null,
     "sexPoints": null,
@@ -82,11 +82,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "waterlowPressureUlcerRiskAssessmentGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a9",
+    "id": "9614a693-88fc-5ddd-a1c2-07615d24decf",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "waterlowPressureUlcerRiskAssessmentGradeId": "550e8400-e29b-41d4-a716-0000000000ad",
+    "waterlowPressureUlcerRiskAssessmentGradeId": "123013a9-d68e-5bf1-8322-c443c5ecbfc6",
     "ruleId": "",
     "category": "build",
     "points": null,
@@ -94,11 +94,11 @@
     "description": ""
   },
   "waterlowPressureUlcerRiskAssessmentGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b3",
+    "id": "0ebe9220-d91d-507b-a747-9e50bab1bddd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "waterlowPressureUlcerRiskAssessmentGradeId": "550e8400-e29b-41d4-a716-0000000000b7",
+    "waterlowPressureUlcerRiskAssessmentGradeId": "2aa26d68-890b-5706-9a4b-d9452d42afb1",
     "flagId": "",
     "category": "very-high-risk",
     "priority": "low",

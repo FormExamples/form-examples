@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "99a78589-b135-40c7-acd0-ff0033e7aae9",
+  "id": "666e5414-97c0-55d2-aef5-28fc65062de9",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204",
+      "fullUrl": "urn:uuid:a660842f-f687-504c-bfe0-8e2b8e419900",
       "resource": {
         "resourceType": "Patient",
-        "id": "392d7fe6-16b8-4585-a811-032204623204",
+        "id": "a660842f-f687-504c-bfe0-8e2b8e419900",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:75e4f2ab-d94e-442c-ab21-650a8c3ba220",
+      "fullUrl": "urn:uuid:40d03fb2-c2c3-5e4e-bb55-461cf537afd9",
       "resource": {
         "resourceType": "Observation",
-        "id": "75e4f2ab-d94e-442c-ab21-650a8c3ba220",
+        "id": "40d03fb2-c2c3-5e4e-bb55-461cf537afd9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+          "reference": "urn:uuid:a660842f-f687-504c-bfe0-8e2b8e419900"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:cb44ad0e-93bb-4d54-afeb-1946d92101c0",
+      "fullUrl": "urn:uuid:c6950fe9-ec70-5043-ac3b-cad06a93cbb7",
       "resource": {
         "resourceType": "Observation",
-        "id": "cb44ad0e-93bb-4d54-afeb-1946d92101c0",
+        "id": "c6950fe9-ec70-5043-ac3b-cad06a93cbb7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+          "reference": "urn:uuid:a660842f-f687-504c-bfe0-8e2b8e419900"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -592,10 +592,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a8907715-1719-45ae-a06a-98dd0a92e25e",
+      "fullUrl": "urn:uuid:9956a788-9b0f-51fd-9ed7-6cfe1e0ed992",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "a8907715-1719-45ae-a06a-98dd0a92e25e",
+        "id": "9956a788-9b0f-51fd-9ed7-6cfe1e0ed992",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -604,7 +604,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+          "reference": "urn:uuid:a660842f-f687-504c-bfe0-8e2b8e419900"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -613,10 +613,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:fffea0ae-eb2e-4492-a774-aa3ed144d51a",
+      "fullUrl": "urn:uuid:524272f6-7242-5344-b9b0-49b7728105ce",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "fffea0ae-eb2e-4492-a774-aa3ed144d51a",
+        "id": "524272f6-7242-5344-b9b0-49b7728105ce",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -646,17 +646,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+          "reference": "urn:uuid:a660842f-f687-504c-bfe0-8e2b8e419900"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An abnormal structured finding (e.g. insufficient compatible units) is present; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:357c62ea-832f-45af-a85a-57190f2fa66d",
+      "fullUrl": "urn:uuid:9ac6e89b-df12-5311-8fea-91cc1e129a89",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "357c62ea-832f-45af-a85a-57190f2fa66d",
+        "id": "9ac6e89b-df12-5311-8fea-91cc1e129a89",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -686,17 +686,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+          "reference": "urn:uuid:a660842f-f687-504c-bfe0-8e2b8e419900"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Fewer compatible units are available than were crossmatched; severity graded moderate."
       }
     },
     {
-      "fullUrl": "urn:uuid:8be85a37-7ede-4e53-ae57-3bf73758a364",
+      "fullUrl": "urn:uuid:5b7ecd11-9208-51be-8a20-462ef7e35755",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "8be85a37-7ede-4e53-ae57-3bf73758a364",
+        "id": "5b7ecd11-9208-51be-8a20-462ef7e35755",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -726,17 +726,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+          "reference": "urn:uuid:a660842f-f687-504c-bfe0-8e2b8e419900"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Moderate abnormality present; follow-up recommended."
       }
     },
     {
-      "fullUrl": "urn:uuid:be988c84-60d3-4d68-aeb0-a680ae327d68",
+      "fullUrl": "urn:uuid:bc85df8c-3404-5fd6-ae51-5bb67baa5635",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "be988c84-60d3-4d68-aeb0-a680ae327d68",
+        "id": "bc85df8c-3404-5fd6-ae51-5bb67baa5635",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -766,7 +766,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:392d7fe6-16b8-4585-a811-032204623204"
+          "reference": "urn:uuid:a660842f-f687-504c-bfe0-8e2b8e419900"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Fewer compatible units are available than were crossmatched.",

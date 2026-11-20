@@ -5,10 +5,19 @@ info:
   title: Learning Disability Annual Health Check — LearningDisabilityAnnualHealthCheck
   version: 1.0.0
   description: "Main learning-disability annual-health-check record: context and identification, one field per required component (reasonable adjustments and communication, physical health, screening and immunisation uptake, medication review including STOMP, mental health and behaviour, syndrome-specific checks, carer and social), and the Health Action Plan. Completeness grade, fired rules, and flags live in child tables."
+x-namespace:
+  form: learning-disability-annual-health-check
+  apiPrefix: /api/learning-disability-annual-health-check/
+  sqlSchema: learning_disability_annual_health_check
+  xmlNamespace: https://formexamples.github.io/learning-disability-annual-health-check/xml
+tags:
+  - name: learning-disability-annual-health-check
+    description: Learning Disability Annual Health Check form
 paths:
   /api/learning-disability-annual-health-check/learning_disability_annual_health_checks:
     get:
       summary: List LearningDisabilityAnnualHealthCheck records
+      tags: [learning-disability-annual-health-check]
       operationId: listLearningDisabilityAnnualHealthCheck
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LearningDisabilityAnnualHealthCheck
+      tags: [learning-disability-annual-health-check]
       operationId: createLearningDisabilityAnnualHealthCheck
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LearningDisabilityAnnualHealthCheck by id
+      tags: [learning-disability-annual-health-check]
       operationId: getLearningDisabilityAnnualHealthCheck
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LearningDisabilityAnnualHealthCheck
+      tags: [learning-disability-annual-health-check]
       operationId: updateLearningDisabilityAnnualHealthCheck
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LearningDisabilityAnnualHealthCheck
+      tags: [learning-disability-annual-health-check]
       operationId: replaceLearningDisabilityAnnualHealthCheck
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LearningDisabilityAnnualHealthCheck
+      tags: [learning-disability-annual-health-check]
       operationId: deleteLearningDisabilityAnnualHealthCheck
       responses:
         "200":

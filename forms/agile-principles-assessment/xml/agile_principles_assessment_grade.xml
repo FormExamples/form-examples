@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE agile_principles_assessment_grade SYSTEM "agile_principles_assessment_grade.dtd">
-<agile_principles_assessment_grade>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<agile_principles_assessment_grade xmlns="https://formexamples.github.io/agile-principles-assessment/xml">
+<id>9c94a274-a98b-5b5e-95dc-e14f7a225951</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<agile_principles_assessment_id>660e8400-e29b-41d4-a716-446655440001</agile_principles_assessment_id>
+<agile_principles_assessment_id>ea254ec6-5c5e-56ca-b72e-589228b9827c</agile_principles_assessment_id>
 <answered_count>2</answered_count>
 <mean_score>5.0</mean_score>
 <weighted_mean_score>70.0</weighted_mean_score>

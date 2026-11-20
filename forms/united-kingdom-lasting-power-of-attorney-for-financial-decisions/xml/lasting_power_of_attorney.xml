@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE lasting_power_of_attorney SYSTEM "lasting_power_of_attorney.dtd">
-<lasting_power_of_attorney>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<lasting_power_of_attorney xmlns="https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml">
+<id>de097c0c-b2e2-5066-837a-d3ccd2c4f3e4</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<donor_person_id>660e8400-e29b-41d4-a716-446655440001</donor_person_id>
+<donor_person_id>9e69c925-5bf2-5513-96a9-6038c92da3b4</donor_person_id>
 <decision_mode>single_attorney</decision_mode>
 <decision_mode_mixed_text>Example text.</decision_mode_mixed_text>
 <when_attorneys_can_act>as_soon_as_registered</when_attorneys_can_act>

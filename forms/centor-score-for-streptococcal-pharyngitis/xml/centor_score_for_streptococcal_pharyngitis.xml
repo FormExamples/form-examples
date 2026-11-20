@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE centor_score_for_streptococcal_pharyngitis SYSTEM "centor_score_for_streptococcal_pharyngitis.dtd">
-<centor_score_for_streptococcal_pharyngitis>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<centor_score_for_streptococcal_pharyngitis xmlns="https://formexamples.github.io/centor-score-for-streptococcal-pharyngitis/xml">
+<id>49c8f7f9-4ff8-5cc4-8d8c-0bf8079f4b77</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>c45ab547-e098-5a61-b9e2-45d8f5a04ead</patient_id>
+<clinician_id>e565ba89-c85c-5331-bdee-4df4a03ae117</clinician_id>
 <clinician_name>Example</clinician_name>
 <clinician_role>gp</clinician_role>
 <assessed_at>2026-04-09T10:00:00Z</assessed_at>

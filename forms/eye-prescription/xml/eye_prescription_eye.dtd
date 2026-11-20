@@ -1,4 +1,5 @@
 <!ELEMENT eye_prescription_eye (id,created_at,updated_at,deleted_at,eye_prescription_id,eye,sphere_diopters,cylinder_diopters,axis_degrees,addition_diopters,intermediate_addition_diopters,prism_horizontal_diopters,base_horizontal,prism_vertical_diopters,base_vertical)>
+<!ATTLIST eye_prescription_eye xmlns CDATA #FIXED "https://formexamples.github.io/eye-prescription/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

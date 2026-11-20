@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Medical Operation Note form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: medical-operation-note
+  apiPrefix: /api/medical-operation-note/
+  sqlSchema: medical_operation_note
+  xmlNamespace: https://formexamples.github.io/medical-operation-note/xml
+tags:
+- name: medical-operation-note
+  description: Medical Operation Note form
 paths:
   /api/medical-operation-note/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - medical-operation-note
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - medical-operation-note
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - medical-operation-note
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - medical-operation-note
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - medical-operation-note
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - medical-operation-note
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/medical-operation-note/medical_operation_note_complications:
     get:
       summary: List MedicalOperationNoteComplication records
+      tags:
+      - medical-operation-note
       operationId: listMedicalOperationNoteComplication
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalOperationNoteComplication
+      tags:
+      - medical-operation-note
       operationId: createMedicalOperationNoteComplication
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalOperationNoteComplication by id
+      tags:
+      - medical-operation-note
       operationId: getMedicalOperationNoteComplication
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalOperationNoteComplication
+      tags:
+      - medical-operation-note
       operationId: updateMedicalOperationNoteComplication
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalOperationNoteComplication
+      tags:
+      - medical-operation-note
       operationId: replaceMedicalOperationNoteComplication
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalOperationNoteComplication
+      tags:
+      - medical-operation-note
       operationId: deleteMedicalOperationNoteComplication
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/medical-operation-note/medical_operation_note_drains:
     get:
       summary: List MedicalOperationNoteDrain records
+      tags:
+      - medical-operation-note
       operationId: listMedicalOperationNoteDrain
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalOperationNoteDrain
+      tags:
+      - medical-operation-note
       operationId: createMedicalOperationNoteDrain
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalOperationNoteDrain by id
+      tags:
+      - medical-operation-note
       operationId: getMedicalOperationNoteDrain
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalOperationNoteDrain
+      tags:
+      - medical-operation-note
       operationId: updateMedicalOperationNoteDrain
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalOperationNoteDrain
+      tags:
+      - medical-operation-note
       operationId: replaceMedicalOperationNoteDrain
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalOperationNoteDrain
+      tags:
+      - medical-operation-note
       operationId: deleteMedicalOperationNoteDrain
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/medical-operation-note/medical_operation_note_grade_flags:
     get:
       summary: List MedicalOperationNoteGradeFlag records
+      tags:
+      - medical-operation-note
       operationId: listMedicalOperationNoteGradeFlag
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalOperationNoteGradeFlag
+      tags:
+      - medical-operation-note
       operationId: createMedicalOperationNoteGradeFlag
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalOperationNoteGradeFlag by id
+      tags:
+      - medical-operation-note
       operationId: getMedicalOperationNoteGradeFlag
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalOperationNoteGradeFlag
+      tags:
+      - medical-operation-note
       operationId: updateMedicalOperationNoteGradeFlag
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalOperationNoteGradeFlag
+      tags:
+      - medical-operation-note
       operationId: replaceMedicalOperationNoteGradeFlag
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalOperationNoteGradeFlag
+      tags:
+      - medical-operation-note
       operationId: deleteMedicalOperationNoteGradeFlag
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/medical-operation-note/medical_operation_note_grade_rules:
     get:
       summary: List MedicalOperationNoteGradeRule records
+      tags:
+      - medical-operation-note
       operationId: listMedicalOperationNoteGradeRule
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalOperationNoteGradeRule
+      tags:
+      - medical-operation-note
       operationId: createMedicalOperationNoteGradeRule
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalOperationNoteGradeRule by id
+      tags:
+      - medical-operation-note
       operationId: getMedicalOperationNoteGradeRule
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalOperationNoteGradeRule
+      tags:
+      - medical-operation-note
       operationId: updateMedicalOperationNoteGradeRule
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalOperationNoteGradeRule
+      tags:
+      - medical-operation-note
       operationId: replaceMedicalOperationNoteGradeRule
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalOperationNoteGradeRule
+      tags:
+      - medical-operation-note
       operationId: deleteMedicalOperationNoteGradeRule
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/medical-operation-note/medical_operation_note_grades:
     get:
       summary: List MedicalOperationNoteGrade records
+      tags:
+      - medical-operation-note
       operationId: listMedicalOperationNoteGrade
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalOperationNoteGrade
+      tags:
+      - medical-operation-note
       operationId: createMedicalOperationNoteGrade
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalOperationNoteGrade by id
+      tags:
+      - medical-operation-note
       operationId: getMedicalOperationNoteGrade
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalOperationNoteGrade
+      tags:
+      - medical-operation-note
       operationId: updateMedicalOperationNoteGrade
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalOperationNoteGrade
+      tags:
+      - medical-operation-note
       operationId: replaceMedicalOperationNoteGrade
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalOperationNoteGrade
+      tags:
+      - medical-operation-note
       operationId: deleteMedicalOperationNoteGrade
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/medical-operation-note/medical_operation_note_implants:
     get:
       summary: List MedicalOperationNoteImplant records
+      tags:
+      - medical-operation-note
       operationId: listMedicalOperationNoteImplant
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalOperationNoteImplant
+      tags:
+      - medical-operation-note
       operationId: createMedicalOperationNoteImplant
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalOperationNoteImplant by id
+      tags:
+      - medical-operation-note
       operationId: getMedicalOperationNoteImplant
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalOperationNoteImplant
+      tags:
+      - medical-operation-note
       operationId: updateMedicalOperationNoteImplant
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalOperationNoteImplant
+      tags:
+      - medical-operation-note
       operationId: replaceMedicalOperationNoteImplant
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalOperationNoteImplant
+      tags:
+      - medical-operation-note
       operationId: deleteMedicalOperationNoteImplant
       responses:
         '200':
@@ -1733,6 +1825,8 @@ paths:
   /api/medical-operation-note/medical_operation_note_procedures:
     get:
       summary: List MedicalOperationNoteProcedure records
+      tags:
+      - medical-operation-note
       operationId: listMedicalOperationNoteProcedure
       parameters:
       - name: limit
@@ -1785,6 +1879,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalOperationNoteProcedure
+      tags:
+      - medical-operation-note
       operationId: createMedicalOperationNoteProcedure
       requestBody:
         required: true
@@ -1838,6 +1934,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalOperationNoteProcedure by id
+      tags:
+      - medical-operation-note
       operationId: getMedicalOperationNoteProcedure
       responses:
         '200':
@@ -1865,6 +1963,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalOperationNoteProcedure
+      tags:
+      - medical-operation-note
       operationId: updateMedicalOperationNoteProcedure
       requestBody:
         required: true
@@ -1910,6 +2010,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalOperationNoteProcedure
+      tags:
+      - medical-operation-note
       operationId: replaceMedicalOperationNoteProcedure
       requestBody:
         required: true
@@ -1955,6 +2057,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalOperationNoteProcedure
+      tags:
+      - medical-operation-note
       operationId: deleteMedicalOperationNoteProcedure
       responses:
         '200':
@@ -1979,6 +2083,8 @@ paths:
   /api/medical-operation-note/medical_operation_note_specimens:
     get:
       summary: List MedicalOperationNoteSpecimen records
+      tags:
+      - medical-operation-note
       operationId: listMedicalOperationNoteSpecimen
       parameters:
       - name: limit
@@ -2031,6 +2137,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalOperationNoteSpecimen
+      tags:
+      - medical-operation-note
       operationId: createMedicalOperationNoteSpecimen
       requestBody:
         required: true
@@ -2084,6 +2192,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalOperationNoteSpecimen by id
+      tags:
+      - medical-operation-note
       operationId: getMedicalOperationNoteSpecimen
       responses:
         '200':
@@ -2111,6 +2221,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalOperationNoteSpecimen
+      tags:
+      - medical-operation-note
       operationId: updateMedicalOperationNoteSpecimen
       requestBody:
         required: true
@@ -2156,6 +2268,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalOperationNoteSpecimen
+      tags:
+      - medical-operation-note
       operationId: replaceMedicalOperationNoteSpecimen
       requestBody:
         required: true
@@ -2201,6 +2315,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalOperationNoteSpecimen
+      tags:
+      - medical-operation-note
       operationId: deleteMedicalOperationNoteSpecimen
       responses:
         '200':
@@ -2225,6 +2341,8 @@ paths:
   /api/medical-operation-note/medical_operation_note_steps:
     get:
       summary: List MedicalOperationNoteStep records
+      tags:
+      - medical-operation-note
       operationId: listMedicalOperationNoteStep
       parameters:
       - name: limit
@@ -2277,6 +2395,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalOperationNoteStep
+      tags:
+      - medical-operation-note
       operationId: createMedicalOperationNoteStep
       requestBody:
         required: true
@@ -2330,6 +2450,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalOperationNoteStep by id
+      tags:
+      - medical-operation-note
       operationId: getMedicalOperationNoteStep
       responses:
         '200':
@@ -2357,6 +2479,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalOperationNoteStep
+      tags:
+      - medical-operation-note
       operationId: updateMedicalOperationNoteStep
       requestBody:
         required: true
@@ -2402,6 +2526,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalOperationNoteStep
+      tags:
+      - medical-operation-note
       operationId: replaceMedicalOperationNoteStep
       requestBody:
         required: true
@@ -2447,6 +2573,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalOperationNoteStep
+      tags:
+      - medical-operation-note
       operationId: deleteMedicalOperationNoteStep
       responses:
         '200':
@@ -2471,6 +2599,8 @@ paths:
   /api/medical-operation-note/medical_operation_note_team_members:
     get:
       summary: List MedicalOperationNoteTeamMember records
+      tags:
+      - medical-operation-note
       operationId: listMedicalOperationNoteTeamMember
       parameters:
       - name: limit
@@ -2523,6 +2653,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalOperationNoteTeamMember
+      tags:
+      - medical-operation-note
       operationId: createMedicalOperationNoteTeamMember
       requestBody:
         required: true
@@ -2576,6 +2708,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalOperationNoteTeamMember by id
+      tags:
+      - medical-operation-note
       operationId: getMedicalOperationNoteTeamMember
       responses:
         '200':
@@ -2603,6 +2737,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalOperationNoteTeamMember
+      tags:
+      - medical-operation-note
       operationId: updateMedicalOperationNoteTeamMember
       requestBody:
         required: true
@@ -2648,6 +2784,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalOperationNoteTeamMember
+      tags:
+      - medical-operation-note
       operationId: replaceMedicalOperationNoteTeamMember
       requestBody:
         required: true
@@ -2693,6 +2831,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalOperationNoteTeamMember
+      tags:
+      - medical-operation-note
       operationId: deleteMedicalOperationNoteTeamMember
       responses:
         '200':
@@ -2717,6 +2857,8 @@ paths:
   /api/medical-operation-note/medical_operation_notes:
     get:
       summary: List MedicalOperationNote records
+      tags:
+      - medical-operation-note
       operationId: listMedicalOperationNote
       parameters:
       - name: limit
@@ -2769,6 +2911,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalOperationNote
+      tags:
+      - medical-operation-note
       operationId: createMedicalOperationNote
       requestBody:
         required: true
@@ -2822,6 +2966,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalOperationNote by id
+      tags:
+      - medical-operation-note
       operationId: getMedicalOperationNote
       responses:
         '200':
@@ -2849,6 +2995,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalOperationNote
+      tags:
+      - medical-operation-note
       operationId: updateMedicalOperationNote
       requestBody:
         required: true
@@ -2894,6 +3042,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalOperationNote
+      tags:
+      - medical-operation-note
       operationId: replaceMedicalOperationNote
       requestBody:
         required: true
@@ -2939,6 +3089,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalOperationNote
+      tags:
+      - medical-operation-note
       operationId: deleteMedicalOperationNote
       responses:
         '200':
@@ -2971,9 +3123,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - medical-operation-note
   /api/medical-operation-note/patients:
     get:
       summary: List Patient records
+      tags:
+      - medical-operation-note
       operationId: listPatient
       parameters:
       - name: limit
@@ -3026,6 +3182,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - medical-operation-note
       operationId: createPatient
       requestBody:
         required: true
@@ -3079,6 +3237,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - medical-operation-note
       operationId: getPatient
       responses:
         '200':
@@ -3106,6 +3266,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - medical-operation-note
       operationId: updatePatient
       requestBody:
         required: true
@@ -3151,6 +3313,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - medical-operation-note
       operationId: replacePatient
       requestBody:
         required: true
@@ -3196,6 +3360,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - medical-operation-note
       operationId: deletePatient
       responses:
         '200':

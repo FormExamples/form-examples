@@ -5,10 +5,19 @@ info:
   title: Cardiology Request — Clinician
   version: 1.0.0
   description: Referring clinician (referrer) who completes the cardiology referral request.
+x-namespace:
+  form: cardiology-request
+  apiPrefix: /api/cardiology-request/
+  sqlSchema: cardiology_request
+  xmlNamespace: https://formexamples.github.io/cardiology-request/xml
+tags:
+  - name: cardiology-request
+    description: Cardiology Request form
 paths:
   /api/cardiology-request/clinicians:
     get:
       summary: List Clinician records
+      tags: [cardiology-request]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [cardiology-request]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [cardiology-request]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [cardiology-request]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [cardiology-request]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [cardiology-request]
       operationId: deleteClinician
       responses:
         "200":

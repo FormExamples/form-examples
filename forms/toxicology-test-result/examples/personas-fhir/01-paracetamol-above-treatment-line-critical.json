@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "b19cec04-54f5-4712-a75f-9cd5d3462cfe",
+  "id": "364b2635-cc82-5a26-9527-fc5e040bcb01",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:19ee32c1-6414-41ea-ae53-7aa10f32b9d8",
+      "fullUrl": "urn:uuid:746e5074-4fa5-5cbd-80c3-bd623b590d3a",
       "resource": {
         "resourceType": "Patient",
-        "id": "19ee32c1-6414-41ea-ae53-7aa10f32b9d8",
+        "id": "746e5074-4fa5-5cbd-80c3-bd623b590d3a",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:aa1ca581-534a-49f2-a9d7-8d7dc181330b",
+      "fullUrl": "urn:uuid:33762109-ece7-520e-ad2f-d54b47f6e6cc",
       "resource": {
         "resourceType": "Observation",
-        "id": "aa1ca581-534a-49f2-a9d7-8d7dc181330b",
+        "id": "33762109-ece7-520e-ad2f-d54b47f6e6cc",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:19ee32c1-6414-41ea-ae53-7aa10f32b9d8"
+          "reference": "urn:uuid:746e5074-4fa5-5cbd-80c3-bd623b590d3a"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:89965750-fa00-43bb-aefb-0ca59e2212a7",
+      "fullUrl": "urn:uuid:d6f8d6ac-7a6b-5906-915b-c17a3739d572",
       "resource": {
         "resourceType": "Observation",
-        "id": "89965750-fa00-43bb-aefb-0ca59e2212a7",
+        "id": "d6f8d6ac-7a6b-5906-915b-c17a3739d572",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:19ee32c1-6414-41ea-ae53-7aa10f32b9d8"
+          "reference": "urn:uuid:746e5074-4fa5-5cbd-80c3-bd623b590d3a"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -508,10 +508,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:1a5b6b93-2069-4dac-ac6a-d8d210ee0a4f",
+      "fullUrl": "urn:uuid:46f413c3-e46f-5db4-a1f8-a3c0d0fd6d04",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "1a5b6b93-2069-4dac-ac6a-d8d210ee0a4f",
+        "id": "46f413c3-e46f-5db4-a1f8-a3c0d0fd6d04",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -520,7 +520,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:19ee32c1-6414-41ea-ae53-7aa10f32b9d8"
+          "reference": "urn:uuid:746e5074-4fa5-5cbd-80c3-bd623b590d3a"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -529,10 +529,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:ba56b96c-e38d-4b2f-a2db-216597d46868",
+      "fullUrl": "urn:uuid:ec975e65-77be-5b6b-80d1-25756064c055",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ba56b96c-e38d-4b2f-a2db-216597d46868",
+        "id": "ec975e65-77be-5b6b-80d1-25756064c055",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -562,17 +562,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:19ee32c1-6414-41ea-ae53-7aa10f32b9d8"
+          "reference": "urn:uuid:746e5074-4fa5-5cbd-80c3-bd623b590d3a"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A toxic level is present (paracetamol above the treatment line, toxic level flag, a reported level over a recognised toxic threshold, or overall critical status); classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:f65ee8a9-8b53-4c26-a52e-63b82f0cbc6c",
+      "fullUrl": "urn:uuid:c1350857-1455-5e8e-9bac-4bc749bb4d2d",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "f65ee8a9-8b53-4c26-a52e-63b82f0cbc6c",
+        "id": "c1350857-1455-5e8e-9bac-4bc749bb4d2d",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -602,17 +602,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:19ee32c1-6414-41ea-ae53-7aa10f32b9d8"
+          "reference": "urn:uuid:746e5074-4fa5-5cbd-80c3-bd623b590d3a"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Toxic level present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:7412a247-7580-4f98-a75f-f9fe8ecfb27d",
+      "fullUrl": "urn:uuid:5167c2d7-17f1-5262-a245-6fdfd43e6ada",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "7412a247-7580-4f98-a75f-f9fe8ecfb27d",
+        "id": "5167c2d7-17f1-5262-a245-6fdfd43e6ada",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -642,17 +642,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:19ee32c1-6414-41ea-ae53-7aa10f32b9d8"
+          "reference": "urn:uuid:746e5074-4fa5-5cbd-80c3-bd623b590d3a"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Toxic level auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:0af64c30-a801-4c52-a4ae-26788515f21c",
+      "fullUrl": "urn:uuid:92a0cb1d-a361-5847-8faa-7cc09a944ab8",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "0af64c30-a801-4c52-a4ae-26788515f21c",
+        "id": "92a0cb1d-a361-5847-8faa-7cc09a944ab8",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -682,7 +682,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:19ee32c1-6414-41ea-ae53-7aa10f32b9d8"
+          "reference": "urn:uuid:746e5074-4fa5-5cbd-80c3-bd623b590d3a"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Paracetamol level is above the treatment line.",
@@ -696,10 +696,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:6e7abd2d-9a6b-43b6-a720-9d1d9cf78674",
+      "fullUrl": "urn:uuid:da4cedd6-259c-5795-970a-d94a559264ba",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "6e7abd2d-9a6b-43b6-a720-9d1d9cf78674",
+        "id": "da4cedd6-259c-5795-970a-d94a559264ba",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -729,7 +729,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:19ee32c1-6414-41ea-ae53-7aa10f32b9d8"
+          "reference": "urn:uuid:746e5074-4fa5-5cbd-80c3-bd623b590d3a"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Toxic result present but the result has not been recorded as communicated.",

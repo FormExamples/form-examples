@@ -5,10 +5,19 @@ info:
   title: Hearing Test Request — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: hearing-test-request
+  apiPrefix: /api/hearing-test-request/
+  sqlSchema: hearing_test_request
+  xmlNamespace: https://formexamples.github.io/hearing-test-request/xml
+tags:
+  - name: hearing-test-request
+    description: Hearing Test Request form
 paths:
   /api/hearing-test-request/patients:
     get:
       summary: List Patient records
+      tags: [hearing-test-request]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [hearing-test-request]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [hearing-test-request]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [hearing-test-request]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [hearing-test-request]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [hearing-test-request]
       operationId: deletePatient
       responses:
         "200":

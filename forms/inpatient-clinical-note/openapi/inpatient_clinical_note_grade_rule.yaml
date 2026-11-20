@@ -5,10 +5,19 @@ info:
   title: Inpatient Clinical Note — InpatientClinicalNoteGradeRule
   version: 1.0.0
   description: "Audit trail of every rule that fired during grading, from either the completeness engine or the acuity engine: engine, component, proposed band, category, and description."
+x-namespace:
+  form: inpatient-clinical-note
+  apiPrefix: /api/inpatient-clinical-note/
+  sqlSchema: inpatient_clinical_note
+  xmlNamespace: https://formexamples.github.io/inpatient-clinical-note/xml
+tags:
+  - name: inpatient-clinical-note
+    description: Inpatient Clinical Note form
 paths:
   /api/inpatient-clinical-note/inpatient_clinical_note_grade_rules:
     get:
       summary: List InpatientClinicalNoteGradeRule records
+      tags: [inpatient-clinical-note]
       operationId: listInpatientClinicalNoteGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new InpatientClinicalNoteGradeRule
+      tags: [inpatient-clinical-note]
       operationId: createInpatientClinicalNoteGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one InpatientClinicalNoteGradeRule by id
+      tags: [inpatient-clinical-note]
       operationId: getInpatientClinicalNoteGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing InpatientClinicalNoteGradeRule
+      tags: [inpatient-clinical-note]
       operationId: updateInpatientClinicalNoteGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing InpatientClinicalNoteGradeRule
+      tags: [inpatient-clinical-note]
       operationId: replaceInpatientClinicalNoteGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a InpatientClinicalNoteGradeRule
+      tags: [inpatient-clinical-note]
       operationId: deleteInpatientClinicalNoteGradeRule
       responses:
         "200":

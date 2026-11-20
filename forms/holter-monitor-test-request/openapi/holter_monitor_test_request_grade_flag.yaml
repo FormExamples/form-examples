@@ -5,10 +5,19 @@ info:
   title: Holter Monitor Test Request — HolterMonitorTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the cardiac physiology / vetting team.
+x-namespace:
+  form: holter-monitor-test-request
+  apiPrefix: /api/holter-monitor-test-request/
+  sqlSchema: holter_monitor_test_request
+  xmlNamespace: https://formexamples.github.io/holter-monitor-test-request/xml
+tags:
+  - name: holter-monitor-test-request
+    description: Holter Monitor Test Request form
 paths:
   /api/holter-monitor-test-request/holter_monitor_test_request_grade_flags:
     get:
       summary: List HolterMonitorTestRequestGradeFlag records
+      tags: [holter-monitor-test-request]
       operationId: listHolterMonitorTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HolterMonitorTestRequestGradeFlag
+      tags: [holter-monitor-test-request]
       operationId: createHolterMonitorTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HolterMonitorTestRequestGradeFlag by id
+      tags: [holter-monitor-test-request]
       operationId: getHolterMonitorTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HolterMonitorTestRequestGradeFlag
+      tags: [holter-monitor-test-request]
       operationId: updateHolterMonitorTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HolterMonitorTestRequestGradeFlag
+      tags: [holter-monitor-test-request]
       operationId: replaceHolterMonitorTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HolterMonitorTestRequestGradeFlag
+      tags: [holter-monitor-test-request]
       operationId: deleteHolterMonitorTestRequestGradeFlag
       responses:
         "200":

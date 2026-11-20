@@ -1,6 +1,6 @@
 {
   "worker": {
-    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "id": "9810ce61-c7bf-5a24-95f5-e58a201df146",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -16,7 +16,7 @@
     "costCentre": ""
   },
   "manager": {
-    "id": "550e8400-e29b-41d4-a716-00000000000f",
+    "id": "2bfeadf7-5110-5c62-b92f-d21faddcb5e7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -31,12 +31,12 @@
     "department": ""
   },
   "expenseReimbursement": {
-    "id": "550e8400-e29b-41d4-a716-00000000001c",
+    "id": "18eee6df-b4e0-5bd7-81f6-80b737440ea6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "workerId": "550e8400-e29b-41d4-a716-000000000020",
-    "managerId": "550e8400-e29b-41d4-a716-000000000021",
+    "workerId": "9d0acdd4-afa5-5652-ae10-535eb530fb9d",
+    "managerId": "1f5f582c-a9f3-5e0f-9c60-f3da413609a7",
     "status": "draft",
     "claimDate": null,
     "claimPeriodStartDate": null,
@@ -59,11 +59,11 @@
     "declarationSignedAt": null
   },
   "expenseReimbursementItem": {
-    "id": "550e8400-e29b-41d4-a716-000000000036",
+    "id": "a0bbf2fa-9bf9-5b01-b89c-169df37b6cf1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "expenseReimbursementId": "550e8400-e29b-41d4-a716-00000000003a",
+    "expenseReimbursementId": "4873c335-f651-52c5-a76e-e48fa249746f",
     "lineNumber": 0,
     "expenseDate": null,
     "category": "travel",
@@ -81,11 +81,11 @@
     "priorApprovalObtained": true
   },
   "expenseReimbursementGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000004a",
+    "id": "b393d0ae-787f-5f81-b3d8-609db8d19845",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "expenseReimbursementId": "550e8400-e29b-41d4-a716-00000000004e",
+    "expenseReimbursementId": "ad829a8e-85dd-5298-ac78-f47d4594987a",
     "complianceBand": "compliant",
     "completenessPercent": 50,
     "approvalTier": "line-manager",
@@ -95,22 +95,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "expenseReimbursementGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000056",
+    "id": "48a493fb-a8f1-5818-913d-ce293e67c818",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "expenseReimbursementGradeId": "550e8400-e29b-41d4-a716-00000000005a",
+    "expenseReimbursementGradeId": "6e068efa-2c3d-50de-820e-47ace476154e",
     "ruleId": "",
     "axis": "compliance",
     "category": "",
     "description": ""
   },
   "expenseReimbursementGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000005f",
+    "id": "03870808-330b-5d60-ba9c-e1c6e9ea2d40",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "expenseReimbursementGradeId": "550e8400-e29b-41d4-a716-000000000063",
+    "expenseReimbursementGradeId": "7f59610d-aa5b-586c-a391-4bba4d020855",
     "flagId": "",
     "category": "missing-receipt",
     "priority": "low",

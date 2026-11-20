@@ -5,10 +5,19 @@ info:
   title: Infectious Diseases Waiting List Card — InfectDisWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: infectious-diseases-waiting-list-card
+  apiPrefix: /api/infectious-diseases-waiting-list-card/
+  sqlSchema: infectious_diseases_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/infectious-diseases-waiting-list-card/xml
+tags:
+  - name: infectious-diseases-waiting-list-card
+    description: Infectious Diseases Waiting List Card form
 paths:
   /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_card_grade_flags:
     get:
       summary: List InfectDisWaitingListCardGradeFlag records
+      tags: [infectious-diseases-waiting-list-card]
       operationId: listInfectDisWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new InfectDisWaitingListCardGradeFlag
+      tags: [infectious-diseases-waiting-list-card]
       operationId: createInfectDisWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one InfectDisWaitingListCardGradeFlag by id
+      tags: [infectious-diseases-waiting-list-card]
       operationId: getInfectDisWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing InfectDisWaitingListCardGradeFlag
+      tags: [infectious-diseases-waiting-list-card]
       operationId: updateInfectDisWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing InfectDisWaitingListCardGradeFlag
+      tags: [infectious-diseases-waiting-list-card]
       operationId: replaceInfectDisWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a InfectDisWaitingListCardGradeFlag
+      tags: [infectious-diseases-waiting-list-card]
       operationId: deleteInfectDisWaitingListCardGradeFlag
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT microbiology_culture_test_result_grade (id,created_at,updated_at,deleted_at,microbiology_culture_test_result_id,result_classification,abnormality_severity,reporting_category,report_completeness_percent,follow_up_urgency,target_timeframe,recommended_action,recommendation,clinician_notes,signed_at,graded_at)>
+<!ATTLIST microbiology_culture_test_result_grade xmlns CDATA #FIXED "https://formexamples.github.io/microbiology-culture-test-result/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

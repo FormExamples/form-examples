@@ -1,4 +1,5 @@
 <!ELEMENT casualty_card_demographics (id,created_at,updated_at,deleted_at,casualty_card_id,address,postcode,phone,email,ethnicity,preferred_language,interpreter_required)>
+<!ATTLIST casualty_card_demographics xmlns CDATA #FIXED "https://formexamples.github.io/casualty-card-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

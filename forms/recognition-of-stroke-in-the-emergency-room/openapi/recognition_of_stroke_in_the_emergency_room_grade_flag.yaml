@@ -5,10 +5,19 @@ info:
   title: Recognition Of Stroke In The Emergency Room — RecognitionOfStrokeInTheEmergencyRoomGradeFlag
   version: 1.0.0
   description: Red-flag issues that fire independently of the signed total, with priority and a suggested action for the emergency-department team.
+x-namespace:
+  form: recognition-of-stroke-in-the-emergency-room
+  apiPrefix: /api/recognition-of-stroke-in-the-emergency-room/
+  sqlSchema: recognition_of_stroke_in_the_emergency_room
+  xmlNamespace: https://formexamples.github.io/recognition-of-stroke-in-the-emergency-room/xml
+tags:
+  - name: recognition-of-stroke-in-the-emergency-room
+    description: Recognition Of Stroke In The Emergency Room form
 paths:
   /api/recognition-of-stroke-in-the-emergency-room/recognition_of_stroke_in_the_emergency_room_grade_flags:
     get:
       summary: List RecognitionOfStrokeInTheEmergencyRoomGradeFlag records
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: listRecognitionOfStrokeInTheEmergencyRoomGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RecognitionOfStrokeInTheEmergencyRoomGradeFlag
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: createRecognitionOfStrokeInTheEmergencyRoomGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RecognitionOfStrokeInTheEmergencyRoomGradeFlag by id
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: getRecognitionOfStrokeInTheEmergencyRoomGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RecognitionOfStrokeInTheEmergencyRoomGradeFlag
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: updateRecognitionOfStrokeInTheEmergencyRoomGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RecognitionOfStrokeInTheEmergencyRoomGradeFlag
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: replaceRecognitionOfStrokeInTheEmergencyRoomGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RecognitionOfStrokeInTheEmergencyRoomGradeFlag
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: deleteRecognitionOfStrokeInTheEmergencyRoomGradeFlag
       responses:
         "200":

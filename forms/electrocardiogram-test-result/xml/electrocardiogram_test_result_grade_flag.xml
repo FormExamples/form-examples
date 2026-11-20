@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE electrocardiogram_test_result_grade_flag SYSTEM "electrocardiogram_test_result_grade_flag.dtd">
-<electrocardiogram_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<electrocardiogram_test_result_grade_flag xmlns="https://formexamples.github.io/electrocardiogram-test-result/xml">
+<id>4d653b08-bbef-5155-b00f-60f3c8a8638c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<electrocardiogram_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</electrocardiogram_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<electrocardiogram_test_result_grade_id>50755166-1969-5226-8389-311034c94269</electrocardiogram_test_result_grade_id>
+<flag_id>4a1bf4c6-d784-54df-9776-3aee19894432</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

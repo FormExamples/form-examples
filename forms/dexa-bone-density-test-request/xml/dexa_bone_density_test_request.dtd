@@ -1,4 +1,5 @@
 <!ELEMENT dexa_bone_density_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,scan_region,primary_indication,clinical_question,relevant_history,frax_major_fracture_percent,previous_fragility_fracture,long_term_steroids,menopause_status,parental_hip_fracture,weight_kg,previous_dexa,previous_dexa_date,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST dexa_bone_density_test_request xmlns CDATA #FIXED "https://formexamples.github.io/dexa-bone-density-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

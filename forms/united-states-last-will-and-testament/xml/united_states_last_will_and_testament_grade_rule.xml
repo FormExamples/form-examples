@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_states_last_will_and_testament_grade_rule SYSTEM "united_states_last_will_and_testament_grade_rule.dtd">
-<united_states_last_will_and_testament_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<united_states_last_will_and_testament_grade_rule xmlns="https://formexamples.github.io/united-states-last-will-and-testament/xml">
+<id>b52a4666-b6ce-560f-9fdc-67049d3bb1e9</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<united_states_last_will_and_testament_grade_id>880e8400-e29b-41d4-a716-446655440003</united_states_last_will_and_testament_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<united_states_last_will_and_testament_grade_id>b1ce71fa-bf02-5325-b341-5a9f2072d11e</united_states_last_will_and_testament_grade_id>
+<rule_id>a20d2e76-4f22-5236-98c9-45933eadf334</rule_id>
 <dimension>capacity</dimension>
 <category>General</category>
 <description>Example text.</description>

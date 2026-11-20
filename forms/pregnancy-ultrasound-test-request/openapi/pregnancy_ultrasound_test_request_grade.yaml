@@ -5,10 +5,19 @@ info:
   title: Pregnancy Ultrasound Test Request — PregnancyUltrasoundTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ACR 1-9), gestational-age window fit, request completeness, and triage priority."
+x-namespace:
+  form: pregnancy-ultrasound-test-request
+  apiPrefix: /api/pregnancy-ultrasound-test-request/
+  sqlSchema: pregnancy_ultrasound_test_request
+  xmlNamespace: https://formexamples.github.io/pregnancy-ultrasound-test-request/xml
+tags:
+  - name: pregnancy-ultrasound-test-request
+    description: Pregnancy Ultrasound Test Request form
 paths:
   /api/pregnancy-ultrasound-test-request/pregnancy_ultrasound_test_request_grades:
     get:
       summary: List PregnancyUltrasoundTestRequestGrade records
+      tags: [pregnancy-ultrasound-test-request]
       operationId: listPregnancyUltrasoundTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PregnancyUltrasoundTestRequestGrade
+      tags: [pregnancy-ultrasound-test-request]
       operationId: createPregnancyUltrasoundTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PregnancyUltrasoundTestRequestGrade by id
+      tags: [pregnancy-ultrasound-test-request]
       operationId: getPregnancyUltrasoundTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PregnancyUltrasoundTestRequestGrade
+      tags: [pregnancy-ultrasound-test-request]
       operationId: updatePregnancyUltrasoundTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PregnancyUltrasoundTestRequestGrade
+      tags: [pregnancy-ultrasound-test-request]
       operationId: replacePregnancyUltrasoundTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PregnancyUltrasoundTestRequestGrade
+      tags: [pregnancy-ultrasound-test-request]
       operationId: deletePregnancyUltrasoundTestRequestGrade
       responses:
         "200":

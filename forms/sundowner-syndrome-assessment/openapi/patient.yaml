@@ -5,10 +5,19 @@ info:
   title: Sundowner Syndrome Assessment — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: sundowner-syndrome-assessment
+  apiPrefix: /api/sundowner-syndrome-assessment/
+  sqlSchema: sundowner_syndrome_assessment
+  xmlNamespace: https://formexamples.github.io/sundowner-syndrome-assessment/xml
+tags:
+  - name: sundowner-syndrome-assessment
+    description: Sundowner Syndrome Assessment form
 paths:
   /api/sundowner-syndrome-assessment/patients:
     get:
       summary: List Patient records
+      tags: [sundowner-syndrome-assessment]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [sundowner-syndrome-assessment]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [sundowner-syndrome-assessment]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [sundowner-syndrome-assessment]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [sundowner-syndrome-assessment]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [sundowner-syndrome-assessment]
       operationId: deletePatient
       responses:
         "200":

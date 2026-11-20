@@ -1,4 +1,5 @@
 <!ELEMENT diabetes_eye_screening (id,created_at,updated_at,deleted_at,patient_id,clinician_id,grader_name,grader_role,graded_at,image_captured_at,imaging_media,patient_identifier,age_band,diabetes_type,years_since_diagnosis,previous_screen_date,previous_screen_result,right_retinopathy_grade,right_maculopathy_grade,right_photocoagulation,right_ungradable,right_visual_acuity,left_retinopathy_grade,left_maculopathy_grade,left_photocoagulation,left_ungradable,left_visual_acuity,clinical_context)>
+<!ATTLIST diabetes_eye_screening xmlns CDATA #FIXED "https://formexamples.github.io/diabetes-eye-screening/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

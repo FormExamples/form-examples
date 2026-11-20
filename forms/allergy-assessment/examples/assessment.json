@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000123",
+    "id": "34530794-f5b0-51d0-8c8b-8850e7292cfd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000013f",
+    "id": "6132d1bb-bd32-5f9a-9be6-687232524cc1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,11 +36,11 @@
     "unitedKingdomNhsNumber": ""
   },
   "assessment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c4",
+    "id": "2057f061-ba55-5a2e-9111-1ed2f46dee3b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000000c8",
+    "patientId": "eaa63265-cfb5-5184-90f3-e5448569facf",
     "status": "draft",
     "ageOfOnset": null,
     "knownAllergens": "",
@@ -77,20 +77,20 @@
     "followUpSchedule": ""
   },
   "assessmentDrugAllergies": {
-    "id": "550e8400-e29b-41d4-a716-0000000000eb",
+    "id": "00360457-ef95-56ad-b260-9ee733b793d7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000ef",
+    "assessmentId": "451c1780-c7c4-5770-9882-a5be8b3d4b5c",
     "hasDrugAllergies": "yes",
     "crossReactivityConcerns": ""
   },
   "assessmentDrugAllergyItem": {
-    "id": "550e8400-e29b-41d4-a716-0000000000f2",
+    "id": "0338c42e-3987-58ca-b35b-7e097a6725c0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "drugAllergiesId": "550e8400-e29b-41d4-a716-0000000000f6",
+    "drugAllergiesId": "7175c328-fbdf-5b7d-a9bc-482deeb58ed1",
     "allergen": "",
     "reactionType": "",
     "severity": "mild",
@@ -99,22 +99,22 @@
     "sortOrder": 0
   },
   "assessmentFoodAllergies": {
-    "id": "550e8400-e29b-41d4-a716-0000000000fd",
+    "id": "fcd085e1-afa6-5fe5-a9bb-67f6366563a4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-000000000101",
+    "assessmentId": "5ea13e17-eeb4-551b-bdda-35a84acd9a0e",
     "hasFoodAllergies": "yes",
     "igeType": "IgE-mediated",
     "oralAllergySyndrome": "yes",
     "dietaryRestrictions": ""
   },
   "assessmentFoodAllergyItem": {
-    "id": "550e8400-e29b-41d4-a716-000000000106",
+    "id": "6e12d7a9-de03-51d7-8688-97db7daa95bf",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "foodAllergiesId": "550e8400-e29b-41d4-a716-00000000010a",
+    "foodAllergiesId": "303f3f7f-f408-5e68-8243-aee2a1de01bd",
     "allergen": "",
     "reactionType": "",
     "severity": "mild",
@@ -123,33 +123,33 @@
     "sortOrder": 0
   },
   "assessmentAnaphylaxisHistory": {
-    "id": "550e8400-e29b-41d4-a716-000000000111",
+    "id": "425cc91e-66d1-5ccf-ab93-43b3ca147449",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-000000000115",
+    "assessmentId": "79fa15a9-d9e6-59c1-b081-46c643030089",
     "hasAnaphylaxisHistory": "yes",
     "numberOfEpisodes": null,
     "adrenalineAutoInjectorPrescribed": "yes",
     "actionPlanInPlace": "yes"
   },
   "assessmentAnaphylaxisEpisode": {
-    "id": "550e8400-e29b-41d4-a716-00000000011a",
+    "id": "3a0f8cb6-8810-5f43-8bbb-07ba8f446096",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "anaphylaxisHistoryId": "550e8400-e29b-41d4-a716-00000000011e",
+    "anaphylaxisHistoryId": "0a8f3e63-c366-5741-be45-6623e3ce29c8",
     "triggerDescription": "",
     "symptoms": "",
     "treatmentRequired": "",
     "sortOrder": 0
   },
   "assessmentTestingResults": {
-    "id": "550e8400-e29b-41d4-a716-000000000135",
+    "id": "5a38177b-d033-5a9d-b1dd-b99a50466ca9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-000000000139",
+    "assessmentId": "36da4008-bd1e-5b08-b18f-7520c6602897",
     "skinPrickTestsDone": "yes",
     "specificIgeDone": "yes",
     "componentResolvedDiagnosticsDone": "yes",
@@ -157,22 +157,22 @@
     "patchTestsDone": "yes"
   },
   "assessmentTestResultItem": {
-    "id": "550e8400-e29b-41d4-a716-00000000014d",
+    "id": "36db7cea-541d-5438-8112-25ab6fb4d00f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "testingResultsId": "550e8400-e29b-41d4-a716-000000000151",
+    "testingResultsId": "bb44b53a-ef2f-5aaf-aac1-28992e3a35b5",
     "testType": "",
     "allergen": "",
     "result": "",
     "sortOrder": 0
   },
   "assessmentCurrentManagement": {
-    "id": "550e8400-e29b-41d4-a716-000000000156",
+    "id": "ca243e73-a72d-5593-a91e-a4054e1d4438",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-00000000015a",
+    "assessmentId": "e08017f9-e183-55d1-be39-3afab2210c17",
     "antihistamines": "yes",
     "antihistamineDetails": "",
     "nasalSteroids": "yes",
@@ -184,43 +184,43 @@
     "allergenAvoidanceStrategies": ""
   },
   "assessmentOtherMedication": {
-    "id": "550e8400-e29b-41d4-a716-000000000164",
+    "id": "83e2c0ba-934d-5efa-b985-4d1e673eb6de",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "currentManagementId": "550e8400-e29b-41d4-a716-000000000168",
+    "currentManagementId": "60c3bc82-8785-51d1-8cd0-eb431cc3fc0b",
     "medicationName": "",
     "dose": "",
     "frequency": "",
     "sortOrder": 0
   },
   "grade": {
-    "id": "550e8400-e29b-41d4-a716-000000000187",
+    "id": "3904fd16-7446-5de1-8c1d-f7ed2b5aaadc",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-00000000018b",
+    "assessmentId": "ca41569a-61f7-554a-bc67-2fa9e2d7ab66",
     "severityLevel": "mild",
     "allergyBurdenScore": 0,
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "gradingFiredRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000018f",
+    "id": "f9e922b8-900e-5fa2-a2fb-c168b9155fa8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-000000000193",
+    "gradeId": "40c44571-d224-50c8-b7a6-fa78ea84f3d4",
     "ruleId": "",
     "category": "",
     "description": "",
     "severityLevel": "mild"
   },
   "gradingAdditionalFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000198",
+    "id": "7af4f2c2-02d9-5786-b9eb-94445fe17e16",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-00000000019c",
+    "gradeId": "0f15ee1b-d771-549f-b80c-25a5beccba4f",
     "flagId": "",
     "category": "",
     "message": "",

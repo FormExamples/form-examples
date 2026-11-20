@@ -5,10 +5,19 @@ info:
   title: Microbiology Culture Test Request — MicrobiologyCultureTestRequest
   version: 1.0.0
   description: Microbiology specimen culture / MC&S request (referral). Captures the specimen, the requested tests (booleans), the clinical indication and details, pre-analytical / specimen handling, patient-safety factors, and triage urgency.
+x-namespace:
+  form: microbiology-culture-test-request
+  apiPrefix: /api/microbiology-culture-test-request/
+  sqlSchema: microbiology_culture_test_request
+  xmlNamespace: https://formexamples.github.io/microbiology-culture-test-request/xml
+tags:
+  - name: microbiology-culture-test-request
+    description: Microbiology Culture Test Request form
 paths:
   /api/microbiology-culture-test-request/microbiology_culture_test_requests:
     get:
       summary: List MicrobiologyCultureTestRequest records
+      tags: [microbiology-culture-test-request]
       operationId: listMicrobiologyCultureTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MicrobiologyCultureTestRequest
+      tags: [microbiology-culture-test-request]
       operationId: createMicrobiologyCultureTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MicrobiologyCultureTestRequest by id
+      tags: [microbiology-culture-test-request]
       operationId: getMicrobiologyCultureTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MicrobiologyCultureTestRequest
+      tags: [microbiology-culture-test-request]
       operationId: updateMicrobiologyCultureTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MicrobiologyCultureTestRequest
+      tags: [microbiology-culture-test-request]
       operationId: replaceMicrobiologyCultureTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MicrobiologyCultureTestRequest
+      tags: [microbiology-culture-test-request]
       operationId: deleteMicrobiologyCultureTestRequest
       responses:
         "200":

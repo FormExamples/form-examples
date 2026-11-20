@@ -1,4 +1,5 @@
 <!ELEMENT organization (id,created_at,updated_at,deleted_at,name,legal_name,sector,size_band,headcount,country,region,website,notes)>
+<!ATTLIST organization xmlns CDATA #FIXED "https://formexamples.github.io/agile-consulting-scorecard-for-hiring-help/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

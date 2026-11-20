@@ -5,10 +5,19 @@ info:
   title: Cytology Test Result — CytologyTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: cytology-test-result
+  apiPrefix: /api/cytology-test-result/
+  sqlSchema: cytology_test_result
+  xmlNamespace: https://formexamples.github.io/cytology-test-result/xml
+tags:
+  - name: cytology-test-result
+    description: Cytology Test Result form
 paths:
   /api/cytology-test-result/cytology_test_result_grade_rules:
     get:
       summary: List CytologyTestResultGradeRule records
+      tags: [cytology-test-result]
       operationId: listCytologyTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CytologyTestResultGradeRule
+      tags: [cytology-test-result]
       operationId: createCytologyTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CytologyTestResultGradeRule by id
+      tags: [cytology-test-result]
       operationId: getCytologyTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CytologyTestResultGradeRule
+      tags: [cytology-test-result]
       operationId: updateCytologyTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CytologyTestResultGradeRule
+      tags: [cytology-test-result]
       operationId: replaceCytologyTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CytologyTestResultGradeRule
+      tags: [cytology-test-result]
       operationId: deleteCytologyTestResultGradeRule
       responses:
         "200":

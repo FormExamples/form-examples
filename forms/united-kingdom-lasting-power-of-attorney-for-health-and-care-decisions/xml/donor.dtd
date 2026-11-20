@@ -1,4 +1,5 @@
 <!ELEMENT donor (id,created_at,updated_at,deleted_at,title,given_names,family_name,other_names_used,birth_date,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,united_kingdom_nhs_number,jurisdiction,preferred_language,capacity_declared,capacity_declared_at)>
+<!ATTLIST donor xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

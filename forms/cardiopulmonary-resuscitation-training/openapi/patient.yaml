@@ -5,10 +5,19 @@ info:
   title: Cardiopulmonary Resuscitation Training — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: cardiopulmonary-resuscitation-training
+  apiPrefix: /api/cardiopulmonary-resuscitation-training/
+  sqlSchema: cardiopulmonary_resuscitation_training
+  xmlNamespace: https://formexamples.github.io/cardiopulmonary-resuscitation-training/xml
+tags:
+  - name: cardiopulmonary-resuscitation-training
+    description: Cardiopulmonary Resuscitation Training form
 paths:
   /api/cardiopulmonary-resuscitation-training/patients:
     get:
       summary: List Patient records
+      tags: [cardiopulmonary-resuscitation-training]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [cardiopulmonary-resuscitation-training]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [cardiopulmonary-resuscitation-training]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [cardiopulmonary-resuscitation-training]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [cardiopulmonary-resuscitation-training]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [cardiopulmonary-resuscitation-training]
       operationId: deletePatient
       responses:
         "200":

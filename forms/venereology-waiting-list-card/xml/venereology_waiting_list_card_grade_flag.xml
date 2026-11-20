@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE venereology_waiting_list_card_grade_flag SYSTEM "venereology_waiting_list_card_grade_flag.dtd">
-<venereology_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<venereology_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/venereology-waiting-list-card/xml">
+<id>5d8a4274-fa9b-5f80-a477-be57ab04306f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<venereology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</venereology_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<venereology_waiting_list_card_grade_id>03e576ab-5bb8-5df1-b0ae-42c98b8d73e5</venereology_waiting_list_card_grade_id>
+<flag_id>eab3abac-2494-564a-b340-a41c2d18806a</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

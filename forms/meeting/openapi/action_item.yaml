@@ -5,10 +5,19 @@ info:
   title: Meeting — ActionItem
   version: 1.0.0
   description: A task assigned during the meeting to a named owner with a due date, priority, and status.
+x-namespace:
+  form: meeting
+  apiPrefix: /api/meeting/
+  sqlSchema: meeting
+  xmlNamespace: https://formexamples.github.io/meeting/xml
+tags:
+  - name: meeting
+    description: Meeting form
 paths:
   /api/meeting/action_items:
     get:
       summary: List ActionItem records
+      tags: [meeting]
       operationId: listActionItem
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ActionItem
+      tags: [meeting]
       operationId: createActionItem
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ActionItem by id
+      tags: [meeting]
       operationId: getActionItem
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ActionItem
+      tags: [meeting]
       operationId: updateActionItem
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ActionItem
+      tags: [meeting]
       operationId: replaceActionItem
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ActionItem
+      tags: [meeting]
       operationId: deleteActionItem
       responses:
         "200":

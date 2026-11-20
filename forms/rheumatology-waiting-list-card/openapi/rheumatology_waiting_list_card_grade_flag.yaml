@@ -5,10 +5,19 @@ info:
   title: Rheumatology Waiting List Card — RheumatologyWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: rheumatology-waiting-list-card
+  apiPrefix: /api/rheumatology-waiting-list-card/
+  sqlSchema: rheumatology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/rheumatology-waiting-list-card/xml
+tags:
+  - name: rheumatology-waiting-list-card
+    description: Rheumatology Waiting List Card form
 paths:
   /api/rheumatology-waiting-list-card/rheumatology_waiting_list_card_grade_flags:
     get:
       summary: List RheumatologyWaitingListCardGradeFlag records
+      tags: [rheumatology-waiting-list-card]
       operationId: listRheumatologyWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RheumatologyWaitingListCardGradeFlag
+      tags: [rheumatology-waiting-list-card]
       operationId: createRheumatologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RheumatologyWaitingListCardGradeFlag by id
+      tags: [rheumatology-waiting-list-card]
       operationId: getRheumatologyWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RheumatologyWaitingListCardGradeFlag
+      tags: [rheumatology-waiting-list-card]
       operationId: updateRheumatologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RheumatologyWaitingListCardGradeFlag
+      tags: [rheumatology-waiting-list-card]
       operationId: replaceRheumatologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RheumatologyWaitingListCardGradeFlag
+      tags: [rheumatology-waiting-list-card]
       operationId: deleteRheumatologyWaitingListCardGradeFlag
       responses:
         "200":

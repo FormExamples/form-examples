@@ -1,4 +1,5 @@
 <!ELEMENT assessment (id,created_at,updated_at,deleted_at,patient_id,status,age_of_onset,known_allergens,family_history_of_atopy,family_atopy_details,family_history_of_allergy,family_allergy_details,pollen_allergy,dust_mite_allergy,mould_allergy,animal_dander_allergy,latex_allergy,insect_sting_allergy,insect_sting_severity,seasonal_pattern,other_environmental_allergens,asthma,asthma_severity,eczema,eczema_severity,rhinitis,rhinitis_severity,eosinophilic_oesophagitis,mast_cell_disorders,mast_cell_details,mental_health_impact,mental_health_details,quality_of_life_score,school_work_impact,school_work_impact_details,emergency_action_plan_status,training_provided,training_details,follow_up_schedule)>
+<!ATTLIST assessment xmlns CDATA #FIXED "https://formexamples.github.io/allergy-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

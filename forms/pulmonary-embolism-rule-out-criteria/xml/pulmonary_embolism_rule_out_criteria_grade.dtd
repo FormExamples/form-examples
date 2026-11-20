@@ -1,4 +1,5 @@
 <!ELEMENT pulmonary_embolism_rule_out_criteria_grade (id,created_at,updated_at,deleted_at,pulmonary_embolism_rule_out_criteria_id,classification,all_criteria_satisfied,applicable,recommended_pathway,graded_at)>
+<!ATTLIST pulmonary_embolism_rule_out_criteria_grade xmlns CDATA #FIXED "https://formexamples.github.io/pulmonary-embolism-rule-out-criteria/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

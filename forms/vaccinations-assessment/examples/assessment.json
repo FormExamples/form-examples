@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000109",
+    "id": "8ebfc253-7955-539a-ac61-780434bdcff6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000011b",
+    "id": "ccb35fd2-b39c-5ee9-ac8a-0c15c69ec60f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,19 +36,19 @@
     "unitedKingdomNhsNumber": ""
   },
   "assessment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b9",
+    "id": "fc2e385f-4915-5025-b929-6c3c5391ec8d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000000bd",
+    "patientId": "c75e52c5-add9-5bd6-8f57-b342dcf83aff",
     "status": "draft"
   },
   "immunizationHistory": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bf",
+    "id": "94cf9aed-1470-55fb-9d31-b038ba726468",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000c3",
+    "assessmentId": "7f8f0657-4823-5046-b588-bf9cfe690c16",
     "hasVaccinationRecord": "yes",
     "recordSource": "redBook",
     "lastReviewDate": null,
@@ -58,11 +58,11 @@
     "immunocompromisedDetails": ""
   },
   "childhoodVaccinations": {
-    "id": "550e8400-e29b-41d4-a716-0000000000cb",
+    "id": "8bdcaccd-7fbf-570c-912d-c40b7700c5b8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000cf",
+    "assessmentId": "596588ec-85dc-5617-9b4f-df5a9c87c6ba",
     "dtapIpvHibHepb": 1,
     "pneumococcal": 1,
     "rotavirus": 1,
@@ -72,11 +72,11 @@
     "preschoolBooster": 1
   },
   "adultVaccinations": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d7",
+    "id": "fee4d832-b8c0-5b17-9143-96b12c44d6dd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000db",
+    "assessmentId": "e8e5f272-920c-5ed4-ae42-e3d261ab0fda",
     "tdIpvBooster": 1,
     "hpv": 1,
     "meningitisAcwy": 1,
@@ -86,11 +86,11 @@
     "pneumococcalPpv": 1
   },
   "travelVaccinations": {
-    "id": "550e8400-e29b-41d4-a716-0000000000e3",
+    "id": "5797ed4d-48c2-541f-b775-9a80de49c954",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000e7",
+    "assessmentId": "1e1c5dfe-5f78-5aca-af2d-1f1f2283a31b",
     "travelPlanned": "yes",
     "travelDestination": "",
     "hepatitisA": 1,
@@ -101,11 +101,11 @@
     "japaneseEncephalitis": 1
   },
   "occupationalVaccinations": {
-    "id": "550e8400-e29b-41d4-a716-0000000000f0",
+    "id": "73af96da-1c53-586f-b05c-7d9897004d7f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000f4",
+    "assessmentId": "f33d4e05-899d-5628-83d9-8dc8ccd3703a",
     "occupation": "",
     "healthcareWorker": "yes",
     "hepatitisBOccupational": 1,
@@ -114,11 +114,11 @@
     "bcgTuberculosis": 1
   },
   "contraindicationsAllergies": {
-    "id": "550e8400-e29b-41d4-a716-0000000000fb",
+    "id": "7749417b-cb3b-548a-97f7-179005b15374",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000ff",
+    "assessmentId": "bb786208-507e-5c4c-b7ac-853fc3c4627b",
     "eggAllergy": "yes",
     "gelatinAllergy": "yes",
     "latexAllergy": "yes",
@@ -130,11 +130,11 @@
     "anaphylaxisDetails": ""
   },
   "consentInformation": {
-    "id": "550e8400-e29b-41d4-a716-000000000129",
+    "id": "50a5d92c-f88d-5b5c-a792-a91e55dcc003",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-00000000012d",
+    "assessmentId": "bebb168b-c5db-51d0-a4fe-2e4893274c4a",
     "informationProvided": 3,
     "risksExplained": 3,
     "benefitsExplained": 3,
@@ -144,11 +144,11 @@
     "guardianConsent": "yes"
   },
   "administrationRecord": {
-    "id": "550e8400-e29b-41d4-a716-000000000135",
+    "id": "e0c4e60c-1666-5faf-b016-6a3a4f2bd3fc",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-000000000139",
+    "assessmentId": "79235198-79a1-52d8-b5f6-bae6a18fd413",
     "vaccineName": "",
     "batchNumber": "",
     "expiryDate": null,
@@ -159,11 +159,11 @@
     "administrationDate": null
   },
   "clinicalReview": {
-    "id": "550e8400-e29b-41d4-a716-000000000142",
+    "id": "9562bfdc-ae5c-5b75-b8c0-93af61fdfaa4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-000000000146",
+    "assessmentId": "8b367142-ff83-5c9d-ab78-5e51f02ec2bb",
     "postVaccinationObservation": 3,
     "immediateReaction": "yes",
     "reactionDetails": "",
@@ -174,33 +174,33 @@
     "reviewingClinician": ""
   },
   "firedRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000014f",
+    "id": "4bceb09a-b062-5fbe-aad4-bef3b33d8e87",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-000000000153",
+    "gradeId": "28b30c00-c16b-56f6-bdb6-cc55b81c9bd7",
     "ruleId": "",
     "category": "",
     "description": "",
     "concernLevel": "high"
   },
   "additionalFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000158",
+    "id": "8ac2c633-8c55-5b59-a401-f0c0b796b74a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-00000000015c",
+    "gradeId": "8a024f59-262d-5eb9-8c0b-faa5b3a9e73b",
     "flagId": "",
     "category": "",
     "message": "",
     "priority": "high"
   },
   "grade": {
-    "id": "550e8400-e29b-41d4-a716-000000000169",
+    "id": "6214dfb9-a475-54ff-972a-1f2bda8ca32b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-00000000016d",
+    "assessmentId": "6c596831-d690-5103-a974-84770bb7820c",
     "vaccinationLevel": "upToDate",
     "vaccinationScore": 0,
     "gradedAt": null

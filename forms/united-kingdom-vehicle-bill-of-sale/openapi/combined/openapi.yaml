@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United Kingdom Vehicle Bill of Sale form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-kingdom-vehicle-bill-of-sale
+  apiPrefix: /api/united-kingdom-vehicle-bill-of-sale/
+  sqlSchema: united_kingdom_vehicle_bill_of_sale
+  xmlNamespace: https://formexamples.github.io/united-kingdom-vehicle-bill-of-sale/xml
+tags:
+- name: united-kingdom-vehicle-bill-of-sale
+  description: United Kingdom Vehicle Bill of Sale form
 paths:
   /api/united-kingdom-vehicle-bill-of-sale/buyers:
     get:
       summary: List Buyer records
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: listBuyer
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Buyer
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: createBuyer
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Buyer by id
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: getBuyer
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Buyer
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: updateBuyer
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Buyer
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: replaceBuyer
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Buyer
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: deleteBuyer
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
   /api/united-kingdom-vehicle-bill-of-sale/sellers:
     get:
       summary: List Seller records
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: listSeller
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Seller
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: createSeller
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Seller by id
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: getSeller
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Seller
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: updateSeller
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Seller
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: replaceSeller
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Seller
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: deleteSeller
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sale_grade_flags:
     get:
       summary: List UnitedKingdomVehicleBillOfSaleGradeFlag records
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: listUnitedKingdomVehicleBillOfSaleGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomVehicleBillOfSaleGradeFlag
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: createUnitedKingdomVehicleBillOfSaleGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomVehicleBillOfSaleGradeFlag by id
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: getUnitedKingdomVehicleBillOfSaleGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomVehicleBillOfSaleGradeFlag
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: updateUnitedKingdomVehicleBillOfSaleGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomVehicleBillOfSaleGradeFlag
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: replaceUnitedKingdomVehicleBillOfSaleGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomVehicleBillOfSaleGradeFlag
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: deleteUnitedKingdomVehicleBillOfSaleGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sale_grade_rules:
     get:
       summary: List UnitedKingdomVehicleBillOfSaleGradeRule records
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: listUnitedKingdomVehicleBillOfSaleGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomVehicleBillOfSaleGradeRule
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: createUnitedKingdomVehicleBillOfSaleGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomVehicleBillOfSaleGradeRule by id
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: getUnitedKingdomVehicleBillOfSaleGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomVehicleBillOfSaleGradeRule
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: updateUnitedKingdomVehicleBillOfSaleGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomVehicleBillOfSaleGradeRule
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: replaceUnitedKingdomVehicleBillOfSaleGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomVehicleBillOfSaleGradeRule
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: deleteUnitedKingdomVehicleBillOfSaleGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sale_grades:
     get:
       summary: List UnitedKingdomVehicleBillOfSaleGrade records
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: listUnitedKingdomVehicleBillOfSaleGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomVehicleBillOfSaleGrade
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: createUnitedKingdomVehicleBillOfSaleGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomVehicleBillOfSaleGrade by id
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: getUnitedKingdomVehicleBillOfSaleGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomVehicleBillOfSaleGrade
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: updateUnitedKingdomVehicleBillOfSaleGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomVehicleBillOfSaleGrade
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: replaceUnitedKingdomVehicleBillOfSaleGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomVehicleBillOfSaleGrade
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: deleteUnitedKingdomVehicleBillOfSaleGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sales:
     get:
       summary: List UnitedKingdomVehicleBillOfSale records
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: listUnitedKingdomVehicleBillOfSale
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomVehicleBillOfSale
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: createUnitedKingdomVehicleBillOfSale
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomVehicleBillOfSale by id
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: getUnitedKingdomVehicleBillOfSale
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomVehicleBillOfSale
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: updateUnitedKingdomVehicleBillOfSale
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomVehicleBillOfSale
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: replaceUnitedKingdomVehicleBillOfSale
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomVehicleBillOfSale
+      tags:
+      - united-kingdom-vehicle-bill-of-sale
       operationId: deleteUnitedKingdomVehicleBillOfSale
       responses:
         '200':

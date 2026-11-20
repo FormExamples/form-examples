@@ -5,10 +5,19 @@ info:
   title: Newborn And Infant Physical Examination — NewbornAndInfantPhysicalExaminationGradeRule
   version: 1.0.0
   description: "Audit trail of every classification rule that fired during grading: the key component, category, and description."
+x-namespace:
+  form: newborn-and-infant-physical-examination
+  apiPrefix: /api/newborn-and-infant-physical-examination/
+  sqlSchema: newborn_and_infant_physical_examination
+  xmlNamespace: https://formexamples.github.io/newborn-and-infant-physical-examination/xml
+tags:
+  - name: newborn-and-infant-physical-examination
+    description: Newborn And Infant Physical Examination form
 paths:
   /api/newborn-and-infant-physical-examination/newborn_and_infant_physical_examination_grade_rules:
     get:
       summary: List NewbornAndInfantPhysicalExaminationGradeRule records
+      tags: [newborn-and-infant-physical-examination]
       operationId: listNewbornAndInfantPhysicalExaminationGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NewbornAndInfantPhysicalExaminationGradeRule
+      tags: [newborn-and-infant-physical-examination]
       operationId: createNewbornAndInfantPhysicalExaminationGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NewbornAndInfantPhysicalExaminationGradeRule by id
+      tags: [newborn-and-infant-physical-examination]
       operationId: getNewbornAndInfantPhysicalExaminationGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NewbornAndInfantPhysicalExaminationGradeRule
+      tags: [newborn-and-infant-physical-examination]
       operationId: updateNewbornAndInfantPhysicalExaminationGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NewbornAndInfantPhysicalExaminationGradeRule
+      tags: [newborn-and-infant-physical-examination]
       operationId: replaceNewbornAndInfantPhysicalExaminationGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NewbornAndInfantPhysicalExaminationGradeRule
+      tags: [newborn-and-infant-physical-examination]
       operationId: deleteNewbornAndInfantPhysicalExaminationGradeRule
       responses:
         "200":

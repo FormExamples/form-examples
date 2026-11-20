@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pmr_waiting_list_card_grade_flag SYSTEM "pmr_waiting_list_card_grade_flag.dtd">
-<pmr_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<pmr_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/physical-medicine-and-rehabilitation-waiting-list-card/xml">
+<id>1ba5a815-6eff-5130-9979-2b0cde665454</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pmr_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</pmr_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<pmr_waiting_list_card_grade_id>23f82584-295b-58f0-92db-c68f1b8ad59b</pmr_waiting_list_card_grade_id>
+<flag_id>344cff64-50d9-5048-98d1-577af9546d13</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

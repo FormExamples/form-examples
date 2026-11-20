@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE family_history SYSTEM "family_history.dtd">
-<family_history>
-<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<family_history xmlns="https://formexamples.github.io/heart-health-check/xml">
+<id>e442a0bd-3cf9-580c-b044-1c610f60254a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>4d6dbfc2-df67-5465-bf49-f9f568150665</assessment_id>
 <family_cvd_under_60>yes</family_cvd_under_60>
 <family_cvd_relationship>parent</family_cvd_relationship>
 <family_diabetes_history>yes</family_diabetes_history>

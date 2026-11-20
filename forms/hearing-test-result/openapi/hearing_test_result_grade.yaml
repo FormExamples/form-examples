@@ -5,10 +5,19 @@ info:
   title: Hearing Test Result — HearingTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (sudden sensorineural loss or marked asymmetry suggesting retrocochlear pathology) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: hearing-test-result
+  apiPrefix: /api/hearing-test-result/
+  sqlSchema: hearing_test_result
+  xmlNamespace: https://formexamples.github.io/hearing-test-result/xml
+tags:
+  - name: hearing-test-result
+    description: Hearing Test Result form
 paths:
   /api/hearing-test-result/hearing_test_result_grades:
     get:
       summary: List HearingTestResultGrade records
+      tags: [hearing-test-result]
       operationId: listHearingTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HearingTestResultGrade
+      tags: [hearing-test-result]
       operationId: createHearingTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HearingTestResultGrade by id
+      tags: [hearing-test-result]
       operationId: getHearingTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HearingTestResultGrade
+      tags: [hearing-test-result]
       operationId: updateHearingTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HearingTestResultGrade
+      tags: [hearing-test-result]
       operationId: replaceHearingTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HearingTestResultGrade
+      tags: [hearing-test-result]
       operationId: deleteHearingTestResultGrade
       responses:
         "200":

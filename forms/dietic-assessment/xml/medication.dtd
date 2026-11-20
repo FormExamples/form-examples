@@ -1,4 +1,5 @@
 <!ELEMENT medication (id,created_at,updated_at,deleted_at,international_nonproprietary_name,brand_name,kind,nutrient_interaction,description)>
+<!ATTLIST medication xmlns CDATA #FIXED "https://formexamples.github.io/dietic-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

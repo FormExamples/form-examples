@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-0000000000be",
+    "id": "37bab187-70e0-5a3e-9a1b-f30ac44bd5cd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d0",
+    "id": "cd9621c8-bba2-5f06-8e9a-d5b03a2ec1f0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,20 +36,20 @@
     "unitedKingdomNhsNumber": ""
   },
   "prescriptionRequest": {
-    "id": "550e8400-e29b-41d4-a716-00000000008a",
+    "id": "27e04e48-5cd5-5d7a-86fe-175574609ad8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000008e",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000008f",
+    "patientId": "d1ed0be9-a7b9-5389-a137-bc051faa59d7",
+    "clinicianId": "ba289040-da7a-5edf-a0ca-c2a7dac2206f",
     "status": "draft"
   },
   "prescriptionDetails": {
-    "id": "550e8400-e29b-41d4-a716-000000000091",
+    "id": "eb434201-9803-562a-b215-ce133659a5d4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "prescriptionRequestId": "550e8400-e29b-41d4-a716-000000000095",
+    "prescriptionRequestId": "805dae69-410a-5cdb-b6ed-566a03af8bd8",
     "requestDate": "2026-04-09",
     "medicationName": "",
     "dosage": "",
@@ -58,53 +58,53 @@
     "treatmentInstructions": ""
   },
   "prescriptionSubstitutionOptions": {
-    "id": "550e8400-e29b-41d4-a716-00000000009c",
+    "id": "2280d1f7-db92-5bf5-ac15-1463f13201de",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "prescriptionRequestId": "550e8400-e29b-41d4-a716-0000000000a0",
+    "prescriptionRequestId": "fc32568f-2c78-5d95-b227-b31483ba9800",
     "allowBrandSubstitution": "yes",
     "allowGenericSubstitution": "yes",
     "allowDosageAdjustment": "yes",
     "substitutionNotes": ""
   },
   "prescriptionRequestType": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a5",
+    "id": "2d83b7f3-0ee7-5311-9a37-435ab023fb0f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "prescriptionRequestId": "550e8400-e29b-41d4-a716-0000000000a9",
+    "prescriptionRequestId": "3dfb7de7-b6f0-5874-a8f1-a9acec1e1b1d",
     "isNewPrescription": "yes",
     "isEmergency": "yes",
     "additionalNotes": ""
   },
   "grade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000e7",
+    "id": "c004cecd-e746-5ccc-a44f-6aaf8bdc0906",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "prescriptionRequestId": "550e8400-e29b-41d4-a716-0000000000eb",
+    "prescriptionRequestId": "ba139373-e468-5e07-9539-ad360282034c",
     "priorityLevel": "routine",
     "ruleCount": 0,
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "gradingFiredRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ef",
+    "id": "4b5a3836-8c6b-5e3c-bdf5-dee610ea6b5c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-0000000000f3",
+    "gradeId": "305d6bc7-3a6f-558a-9799-72d91ae7c39a",
     "ruleId": "",
     "category": "",
     "description": "",
     "severityLevel": "routine"
   },
   "gradingAdditionalFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000f8",
+    "id": "5b2d8889-8d3d-5d53-bd11-1101781658fd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-0000000000fc",
+    "gradeId": "4e90ea1a-a6ce-50e5-858e-8cd3e304c7fc",
     "flagId": "",
     "category": "",
     "message": "",

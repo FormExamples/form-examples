@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United States Durable Financial Power of Attorney
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-states-durable-financial-power-of-attorney
+  apiPrefix: /api/united-states-durable-financial-power-of-attorney/
+  sqlSchema: united_states_durable_financial_power_of_attorney
+  xmlNamespace: https://formexamples.github.io/united-states-durable-financial-power-of-attorney/xml
+tags:
+- name: united-states-durable-financial-power-of-attorney
+  description: United States Durable Financial Power of Attorney form
 paths:
   /api/united-states-durable-financial-power-of-attorney/agents:
     get:
       summary: List Agent records
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: listAgent
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Agent
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: createAgent
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Agent by id
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: getAgent
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Agent
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: updateAgent
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Agent
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: replaceAgent
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Agent
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: deleteAgent
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-states-durable-financial-power-of-attorney
   /api/united-states-durable-financial-power-of-attorney/principals:
     get:
       summary: List Principal records
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: listPrincipal
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Principal
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: createPrincipal
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Principal by id
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: getPrincipal
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Principal
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: updatePrincipal
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Principal
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: replacePrincipal
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Principal
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: deletePrincipal
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grade_flags:
     get:
       summary: List UnitedStatesDurableFinancialPowerOfAttorneyGradeFlag records
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: listUnitedStatesDurableFinancialPowerOfAttorneyGradeFlag
       parameters:
       - name: limit
@@ -567,6 +603,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesDurableFinancialPowerOfAttorneyGradeFlag
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: createUnitedStatesDurableFinancialPowerOfAttorneyGradeFlag
       requestBody:
         required: true
@@ -620,6 +658,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesDurableFinancialPowerOfAttorneyGradeFlag by id
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: getUnitedStatesDurableFinancialPowerOfAttorneyGradeFlag
       responses:
         '200':
@@ -647,6 +687,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesDurableFinancialPowerOfAttorneyGradeFlag
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: updateUnitedStatesDurableFinancialPowerOfAttorneyGradeFlag
       requestBody:
         required: true
@@ -692,6 +734,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesDurableFinancialPowerOfAttorneyGradeFlag
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: replaceUnitedStatesDurableFinancialPowerOfAttorneyGradeFlag
       requestBody:
         required: true
@@ -737,6 +781,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesDurableFinancialPowerOfAttorneyGradeFlag
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: deleteUnitedStatesDurableFinancialPowerOfAttorneyGradeFlag
       responses:
         '200':
@@ -761,6 +807,8 @@ paths:
   /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grade_rules:
     get:
       summary: List UnitedStatesDurableFinancialPowerOfAttorneyGradeRule records
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: listUnitedStatesDurableFinancialPowerOfAttorneyGradeRule
       parameters:
       - name: limit
@@ -814,6 +862,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesDurableFinancialPowerOfAttorneyGradeRule
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: createUnitedStatesDurableFinancialPowerOfAttorneyGradeRule
       requestBody:
         required: true
@@ -867,6 +917,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesDurableFinancialPowerOfAttorneyGradeRule by id
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: getUnitedStatesDurableFinancialPowerOfAttorneyGradeRule
       responses:
         '200':
@@ -894,6 +946,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesDurableFinancialPowerOfAttorneyGradeRule
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: updateUnitedStatesDurableFinancialPowerOfAttorneyGradeRule
       requestBody:
         required: true
@@ -939,6 +993,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesDurableFinancialPowerOfAttorneyGradeRule
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: replaceUnitedStatesDurableFinancialPowerOfAttorneyGradeRule
       requestBody:
         required: true
@@ -984,6 +1040,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesDurableFinancialPowerOfAttorneyGradeRule
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: deleteUnitedStatesDurableFinancialPowerOfAttorneyGradeRule
       responses:
         '200':
@@ -1008,6 +1066,8 @@ paths:
   /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grades:
     get:
       summary: List UnitedStatesDurableFinancialPowerOfAttorneyGrade records
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: listUnitedStatesDurableFinancialPowerOfAttorneyGrade
       parameters:
       - name: limit
@@ -1060,6 +1120,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesDurableFinancialPowerOfAttorneyGrade
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: createUnitedStatesDurableFinancialPowerOfAttorneyGrade
       requestBody:
         required: true
@@ -1113,6 +1175,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesDurableFinancialPowerOfAttorneyGrade by id
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: getUnitedStatesDurableFinancialPowerOfAttorneyGrade
       responses:
         '200':
@@ -1140,6 +1204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesDurableFinancialPowerOfAttorneyGrade
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: updateUnitedStatesDurableFinancialPowerOfAttorneyGrade
       requestBody:
         required: true
@@ -1185,6 +1251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesDurableFinancialPowerOfAttorneyGrade
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: replaceUnitedStatesDurableFinancialPowerOfAttorneyGrade
       requestBody:
         required: true
@@ -1230,6 +1298,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesDurableFinancialPowerOfAttorneyGrade
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: deleteUnitedStatesDurableFinancialPowerOfAttorneyGrade
       responses:
         '200':
@@ -1254,6 +1324,8 @@ paths:
   /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorneys:
     get:
       summary: List UnitedStatesDurableFinancialPowerOfAttorney records
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: listUnitedStatesDurableFinancialPowerOfAttorney
       parameters:
       - name: limit
@@ -1306,6 +1378,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesDurableFinancialPowerOfAttorney
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: createUnitedStatesDurableFinancialPowerOfAttorney
       requestBody:
         required: true
@@ -1359,6 +1433,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesDurableFinancialPowerOfAttorney by id
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: getUnitedStatesDurableFinancialPowerOfAttorney
       responses:
         '200':
@@ -1386,6 +1462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesDurableFinancialPowerOfAttorney
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: updateUnitedStatesDurableFinancialPowerOfAttorney
       requestBody:
         required: true
@@ -1431,6 +1509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesDurableFinancialPowerOfAttorney
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: replaceUnitedStatesDurableFinancialPowerOfAttorney
       requestBody:
         required: true
@@ -1476,6 +1556,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesDurableFinancialPowerOfAttorney
+      tags:
+      - united-states-durable-financial-power-of-attorney
       operationId: deleteUnitedStatesDurableFinancialPowerOfAttorney
       responses:
         '200':

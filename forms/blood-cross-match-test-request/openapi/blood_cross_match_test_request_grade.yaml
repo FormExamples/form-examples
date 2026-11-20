@@ -5,10 +5,19 @@ info:
   title: Blood Cross Match Test Request — BloodCrossMatchTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (1-9, anchored on NICE NG24 thresholds and indication), identity / sample safety, request completeness, and triage priority."
+x-namespace:
+  form: blood-cross-match-test-request
+  apiPrefix: /api/blood-cross-match-test-request/
+  sqlSchema: blood_cross_match_test_request
+  xmlNamespace: https://formexamples.github.io/blood-cross-match-test-request/xml
+tags:
+  - name: blood-cross-match-test-request
+    description: Blood Cross Match Test Request form
 paths:
   /api/blood-cross-match-test-request/blood_cross_match_test_request_grades:
     get:
       summary: List BloodCrossMatchTestRequestGrade records
+      tags: [blood-cross-match-test-request]
       operationId: listBloodCrossMatchTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BloodCrossMatchTestRequestGrade
+      tags: [blood-cross-match-test-request]
       operationId: createBloodCrossMatchTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BloodCrossMatchTestRequestGrade by id
+      tags: [blood-cross-match-test-request]
       operationId: getBloodCrossMatchTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BloodCrossMatchTestRequestGrade
+      tags: [blood-cross-match-test-request]
       operationId: updateBloodCrossMatchTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BloodCrossMatchTestRequestGrade
+      tags: [blood-cross-match-test-request]
       operationId: replaceBloodCrossMatchTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BloodCrossMatchTestRequestGrade
+      tags: [blood-cross-match-test-request]
       operationId: deleteBloodCrossMatchTestRequestGrade
       responses:
         "200":

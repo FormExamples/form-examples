@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE vehicle_title_application_grade_flag SYSTEM "vehicle_title_application_grade_flag.dtd">
-<vehicle_title_application_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<vehicle_title_application_grade_flag xmlns="https://formexamples.github.io/united-states-vehicle-title-and-registration-application/xml">
+<id>a43feaa4-f064-5328-af63-660871ca2fa4</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<vehicle_title_application_grade_id>880e8400-e29b-41d4-a716-446655440003</vehicle_title_application_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<vehicle_title_application_grade_id>0b6a458a-a1d0-5d6d-b161-57f17ba4fb1f</vehicle_title_application_grade_id>
+<flag_id>3beb77ef-6af8-5d6e-8029-ff6297d2ead0</flag_id>
 <category>state</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -5,10 +5,19 @@ info:
   title: Organ Donation Assessment — Assessment
   version: 1.0.0
   description: Organ donation assessment using donor risk index and organ-specific suitability scoring. Parent entity for all assessment sections.
+x-namespace:
+  form: organ-donation-assessment
+  apiPrefix: /api/organ-donation-assessment/
+  sqlSchema: organ_donation_assessment
+  xmlNamespace: https://formexamples.github.io/organ-donation-assessment/xml
+tags:
+  - name: organ-donation-assessment
+    description: Organ Donation Assessment form
 paths:
   /api/organ-donation-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [organ-donation-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [organ-donation-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [organ-donation-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [organ-donation-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [organ-donation-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [organ-donation-assessment]
       operationId: deleteAssessment
       responses:
         "200":

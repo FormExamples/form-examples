@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000031",
+    "id": "f755759d-83e9-567a-ad54-65927a24b8ea",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000043",
+    "id": "cc1299fc-2f54-5076-8ba5-065a04cb5bcd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,11 +36,11 @@
     "unitedKingdomNhsNumber": ""
   },
   "acknowledgment": {
-    "id": "550e8400-e29b-41d4-a716-000000000029",
+    "id": "090f412f-8370-5a36-b11e-5ab3ec1a7f88",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000002d",
+    "patientId": "b0c5ac0d-2297-5bf1-995c-d5ab123a804f",
     "confirmed": true,
     "fullName": "",
     "acknowledgedDate": null

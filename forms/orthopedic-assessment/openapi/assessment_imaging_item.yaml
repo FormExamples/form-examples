@@ -5,10 +5,19 @@ info:
   title: Orthopedic Assessment — AssessmentImagingItem
   version: 1.0.0
   description: Individual imaging study with modality, region, date, and findings.
+x-namespace:
+  form: orthopedic-assessment
+  apiPrefix: /api/orthopedic-assessment/
+  sqlSchema: orthopedic_assessment
+  xmlNamespace: https://formexamples.github.io/orthopedic-assessment/xml
+tags:
+  - name: orthopedic-assessment
+    description: Orthopedic Assessment form
 paths:
   /api/orthopedic-assessment/assessment_imaging_items:
     get:
       summary: List AssessmentImagingItem records
+      tags: [orthopedic-assessment]
       operationId: listAssessmentImagingItem
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentImagingItem
+      tags: [orthopedic-assessment]
       operationId: createAssessmentImagingItem
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentImagingItem by id
+      tags: [orthopedic-assessment]
       operationId: getAssessmentImagingItem
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentImagingItem
+      tags: [orthopedic-assessment]
       operationId: updateAssessmentImagingItem
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentImagingItem
+      tags: [orthopedic-assessment]
       operationId: replaceAssessmentImagingItem
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentImagingItem
+      tags: [orthopedic-assessment]
       operationId: deleteAssessmentImagingItem
       responses:
         "200":

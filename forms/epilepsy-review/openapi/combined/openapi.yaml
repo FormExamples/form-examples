@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Epilepsy Annual Review form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: epilepsy-review
+  apiPrefix: /api/epilepsy-review/
+  sqlSchema: epilepsy_review
+  xmlNamespace: https://formexamples.github.io/epilepsy-review/xml
+tags:
+- name: epilepsy-review
+  description: Epilepsy Annual Review form
 paths:
   /api/epilepsy-review/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - epilepsy-review
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - epilepsy-review
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - epilepsy-review
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - epilepsy-review
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - epilepsy-review
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - epilepsy-review
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/epilepsy-review/epilepsy_review_grade_flags:
     get:
       summary: List EpilepsyReviewGradeFlag records
+      tags:
+      - epilepsy-review
       operationId: listEpilepsyReviewGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EpilepsyReviewGradeFlag
+      tags:
+      - epilepsy-review
       operationId: createEpilepsyReviewGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EpilepsyReviewGradeFlag by id
+      tags:
+      - epilepsy-review
       operationId: getEpilepsyReviewGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EpilepsyReviewGradeFlag
+      tags:
+      - epilepsy-review
       operationId: updateEpilepsyReviewGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EpilepsyReviewGradeFlag
+      tags:
+      - epilepsy-review
       operationId: replaceEpilepsyReviewGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EpilepsyReviewGradeFlag
+      tags:
+      - epilepsy-review
       operationId: deleteEpilepsyReviewGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/epilepsy-review/epilepsy_review_grade_rules:
     get:
       summary: List EpilepsyReviewGradeRule records
+      tags:
+      - epilepsy-review
       operationId: listEpilepsyReviewGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EpilepsyReviewGradeRule
+      tags:
+      - epilepsy-review
       operationId: createEpilepsyReviewGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EpilepsyReviewGradeRule by id
+      tags:
+      - epilepsy-review
       operationId: getEpilepsyReviewGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EpilepsyReviewGradeRule
+      tags:
+      - epilepsy-review
       operationId: updateEpilepsyReviewGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EpilepsyReviewGradeRule
+      tags:
+      - epilepsy-review
       operationId: replaceEpilepsyReviewGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EpilepsyReviewGradeRule
+      tags:
+      - epilepsy-review
       operationId: deleteEpilepsyReviewGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/epilepsy-review/epilepsy_review_grades:
     get:
       summary: List EpilepsyReviewGrade records
+      tags:
+      - epilepsy-review
       operationId: listEpilepsyReviewGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EpilepsyReviewGrade
+      tags:
+      - epilepsy-review
       operationId: createEpilepsyReviewGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EpilepsyReviewGrade by id
+      tags:
+      - epilepsy-review
       operationId: getEpilepsyReviewGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EpilepsyReviewGrade
+      tags:
+      - epilepsy-review
       operationId: updateEpilepsyReviewGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EpilepsyReviewGrade
+      tags:
+      - epilepsy-review
       operationId: replaceEpilepsyReviewGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EpilepsyReviewGrade
+      tags:
+      - epilepsy-review
       operationId: deleteEpilepsyReviewGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/epilepsy-review/epilepsy_reviews:
     get:
       summary: List EpilepsyReview records
+      tags:
+      - epilepsy-review
       operationId: listEpilepsyReview
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EpilepsyReview
+      tags:
+      - epilepsy-review
       operationId: createEpilepsyReview
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EpilepsyReview by id
+      tags:
+      - epilepsy-review
       operationId: getEpilepsyReview
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EpilepsyReview
+      tags:
+      - epilepsy-review
       operationId: updateEpilepsyReview
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EpilepsyReview
+      tags:
+      - epilepsy-review
       operationId: replaceEpilepsyReview
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EpilepsyReview
+      tags:
+      - epilepsy-review
       operationId: deleteEpilepsyReview
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - epilepsy-review
   /api/epilepsy-review/patients:
     get:
       summary: List Patient records
+      tags:
+      - epilepsy-review
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - epilepsy-review
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - epilepsy-review
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - epilepsy-review
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - epilepsy-review
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - epilepsy-review
       operationId: deletePatient
       responses:
         '200':

@@ -5,10 +5,19 @@ info:
   title: Ottawa Ankle Rules — OttawaAnkleRules
   version: 1.0.0
   description: "Main Ottawa Ankle Rules assessment record: identification, context, the applicability flag, and the eight objective bedside criterion inputs."
+x-namespace:
+  form: ottawa-ankle-rules
+  apiPrefix: /api/ottawa-ankle-rules/
+  sqlSchema: ottawa_ankle_rules
+  xmlNamespace: https://formexamples.github.io/ottawa-ankle-rules/xml
+tags:
+  - name: ottawa-ankle-rules
+    description: Ottawa Ankle Rules form
 paths:
   /api/ottawa-ankle-rules/ottawa_ankle_rules:
     get:
       summary: List OttawaAnkleRules records
+      tags: [ottawa-ankle-rules]
       operationId: listOttawaAnkleRules
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OttawaAnkleRules
+      tags: [ottawa-ankle-rules]
       operationId: createOttawaAnkleRules
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OttawaAnkleRules by id
+      tags: [ottawa-ankle-rules]
       operationId: getOttawaAnkleRules
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OttawaAnkleRules
+      tags: [ottawa-ankle-rules]
       operationId: updateOttawaAnkleRules
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OttawaAnkleRules
+      tags: [ottawa-ankle-rules]
       operationId: replaceOttawaAnkleRules
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OttawaAnkleRules
+      tags: [ottawa-ankle-rules]
       operationId: deleteOttawaAnkleRules
       responses:
         "200":

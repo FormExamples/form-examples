@@ -5,10 +5,19 @@ info:
   title: Biopsy Test Result — BiopsyTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. unexpected malignancy or an involved resection margin) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: biopsy-test-result
+  apiPrefix: /api/biopsy-test-result/
+  sqlSchema: biopsy_test_result
+  xmlNamespace: https://formexamples.github.io/biopsy-test-result/xml
+tags:
+  - name: biopsy-test-result
+    description: Biopsy Test Result form
 paths:
   /api/biopsy-test-result/biopsy_test_result_grades:
     get:
       summary: List BiopsyTestResultGrade records
+      tags: [biopsy-test-result]
       operationId: listBiopsyTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BiopsyTestResultGrade
+      tags: [biopsy-test-result]
       operationId: createBiopsyTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BiopsyTestResultGrade by id
+      tags: [biopsy-test-result]
       operationId: getBiopsyTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BiopsyTestResultGrade
+      tags: [biopsy-test-result]
       operationId: updateBiopsyTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BiopsyTestResultGrade
+      tags: [biopsy-test-result]
       operationId: replaceBiopsyTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BiopsyTestResultGrade
+      tags: [biopsy-test-result]
       operationId: deleteBiopsyTestResultGrade
       responses:
         "200":

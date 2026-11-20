@@ -5,10 +5,19 @@ info:
   title: X Ray Test Result — XRayTestResultGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.
+x-namespace:
+  form: x-ray-test-result
+  apiPrefix: /api/x-ray-test-result/
+  sqlSchema: x_ray_test_result
+  xmlNamespace: https://formexamples.github.io/x-ray-test-result/xml
+tags:
+  - name: x-ray-test-result
+    description: X Ray Test Result form
 paths:
   /api/x-ray-test-result/x_ray_test_result_grade_flags:
     get:
       summary: List XRayTestResultGradeFlag records
+      tags: [x-ray-test-result]
       operationId: listXRayTestResultGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new XRayTestResultGradeFlag
+      tags: [x-ray-test-result]
       operationId: createXRayTestResultGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one XRayTestResultGradeFlag by id
+      tags: [x-ray-test-result]
       operationId: getXRayTestResultGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing XRayTestResultGradeFlag
+      tags: [x-ray-test-result]
       operationId: updateXRayTestResultGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing XRayTestResultGradeFlag
+      tags: [x-ray-test-result]
       operationId: replaceXRayTestResultGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a XRayTestResultGradeFlag
+      tags: [x-ray-test-result]
       operationId: deleteXRayTestResultGradeFlag
       responses:
         "200":

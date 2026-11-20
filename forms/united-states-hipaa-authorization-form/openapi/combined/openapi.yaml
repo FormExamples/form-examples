@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United States HIPAA Authorization Form form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-states-hipaa-authorization-form
+  apiPrefix: /api/united-states-hipaa-authorization-form/
+  sqlSchema: united_states_hipaa_authorization_form
+  xmlNamespace: https://formexamples.github.io/united-states-hipaa-authorization-form/xml
+tags:
+- name: united-states-hipaa-authorization-form
+  description: United States HIPAA Authorization Form form
 paths:
   /api/united-states-hipaa-authorization-form/authorized_recipients:
     get:
       summary: List AuthorizedRecipient records
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: listAuthorizedRecipient
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AuthorizedRecipient
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: createAuthorizedRecipient
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AuthorizedRecipient by id
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: getAuthorizedRecipient
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AuthorizedRecipient
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: updateAuthorizedRecipient
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AuthorizedRecipient
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: replaceAuthorizedRecipient
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AuthorizedRecipient
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: deleteAuthorizedRecipient
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/united-states-hipaa-authorization-form/disclosing_sources:
     get:
       summary: List DisclosingSource records
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: listDisclosingSource
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DisclosingSource
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: createDisclosingSource
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DisclosingSource by id
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: getDisclosingSource
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DisclosingSource
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: updateDisclosingSource
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DisclosingSource
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: replaceDisclosingSource
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DisclosingSource
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: deleteDisclosingSource
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/united-states-hipaa-authorization-form/expirations:
     get:
       summary: List Expiration records
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: listExpiration
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Expiration
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: createExpiration
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Expiration by id
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: getExpiration
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Expiration
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: updateExpiration
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Expiration
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: replaceExpiration
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Expiration
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: deleteExpiration
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/united-states-hipaa-authorization-form/hipaa_authorizations:
     get:
       summary: List HipaaAuthorization records
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: listHipaaAuthorization
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HipaaAuthorization
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: createHipaaAuthorization
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HipaaAuthorization by id
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: getHipaaAuthorization
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HipaaAuthorization
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: updateHipaaAuthorization
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HipaaAuthorization
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: replaceHipaaAuthorization
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HipaaAuthorization
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: deleteHipaaAuthorization
       responses:
         '200':
@@ -1003,9 +1059,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-states-hipaa-authorization-form
   /api/united-states-hipaa-authorization-form/patient_rights_acknowledgements:
     get:
       summary: List PatientRightsAcknowledgement records
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: listPatientRightsAcknowledgement
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PatientRightsAcknowledgement
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: createPatientRightsAcknowledgement
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PatientRightsAcknowledgement by id
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: getPatientRightsAcknowledgement
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PatientRightsAcknowledgement
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: updatePatientRightsAcknowledgement
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PatientRightsAcknowledgement
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: replacePatientRightsAcknowledgement
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PatientRightsAcknowledgement
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: deletePatientRightsAcknowledgement
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-states-hipaa-authorization-form/patients:
     get:
       summary: List Patient records
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/united-states-hipaa-authorization-form/purpose_of_disclosures:
     get:
       summary: List PurposeOfDisclosure records
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: listPurposeOfDisclosure
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PurposeOfDisclosure
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: createPurposeOfDisclosure
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PurposeOfDisclosure by id
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: getPurposeOfDisclosure
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PurposeOfDisclosure
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: updatePurposeOfDisclosure
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PurposeOfDisclosure
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: replacePurposeOfDisclosure
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PurposeOfDisclosure
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: deletePurposeOfDisclosure
       responses:
         '200':
@@ -1744,6 +1838,8 @@ paths:
   /api/united-states-hipaa-authorization-form/records_to_discloses:
     get:
       summary: List RecordsToDisclose records
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: listRecordsToDisclose
       parameters:
       - name: limit
@@ -1796,6 +1892,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RecordsToDisclose
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: createRecordsToDisclose
       requestBody:
         required: true
@@ -1849,6 +1947,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RecordsToDisclose by id
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: getRecordsToDisclose
       responses:
         '200':
@@ -1876,6 +1976,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RecordsToDisclose
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: updateRecordsToDisclose
       requestBody:
         required: true
@@ -1921,6 +2023,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RecordsToDisclose
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: replaceRecordsToDisclose
       requestBody:
         required: true
@@ -1966,6 +2070,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RecordsToDisclose
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: deleteRecordsToDisclose
       responses:
         '200':
@@ -1990,6 +2096,8 @@ paths:
   /api/united-states-hipaa-authorization-form/signature_witnesses:
     get:
       summary: List SignatureWitness records
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: listSignatureWitness
       parameters:
       - name: limit
@@ -2042,6 +2150,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new SignatureWitness
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: createSignatureWitness
       requestBody:
         required: true
@@ -2095,6 +2205,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one SignatureWitness by id
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: getSignatureWitness
       responses:
         '200':
@@ -2122,6 +2234,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing SignatureWitness
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: updateSignatureWitness
       requestBody:
         required: true
@@ -2167,6 +2281,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing SignatureWitness
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: replaceSignatureWitness
       requestBody:
         required: true
@@ -2212,6 +2328,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a SignatureWitness
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: deleteSignatureWitness
       responses:
         '200':
@@ -2236,6 +2354,8 @@ paths:
   /api/united-states-hipaa-authorization-form/signers:
     get:
       summary: List Signer records
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: listSigner
       parameters:
       - name: limit
@@ -2288,6 +2408,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Signer
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: createSigner
       requestBody:
         required: true
@@ -2341,6 +2463,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Signer by id
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: getSigner
       responses:
         '200':
@@ -2368,6 +2492,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Signer
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: updateSigner
       requestBody:
         required: true
@@ -2413,6 +2539,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Signer
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: replaceSigner
       requestBody:
         required: true
@@ -2458,6 +2586,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Signer
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: deleteSigner
       responses:
         '200':
@@ -2482,6 +2612,8 @@ paths:
   /api/united-states-hipaa-authorization-form/validation_additional_flags:
     get:
       summary: List ValidationAdditionalFlag records
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: listValidationAdditionalFlag
       parameters:
       - name: limit
@@ -2534,6 +2666,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ValidationAdditionalFlag
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: createValidationAdditionalFlag
       requestBody:
         required: true
@@ -2587,6 +2721,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ValidationAdditionalFlag by id
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: getValidationAdditionalFlag
       responses:
         '200':
@@ -2614,6 +2750,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ValidationAdditionalFlag
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: updateValidationAdditionalFlag
       requestBody:
         required: true
@@ -2659,6 +2797,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ValidationAdditionalFlag
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: replaceValidationAdditionalFlag
       requestBody:
         required: true
@@ -2704,6 +2844,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ValidationAdditionalFlag
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: deleteValidationAdditionalFlag
       responses:
         '200':
@@ -2728,6 +2870,8 @@ paths:
   /api/united-states-hipaa-authorization-form/validation_fired_rules:
     get:
       summary: List ValidationFiredRule records
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: listValidationFiredRule
       parameters:
       - name: limit
@@ -2780,6 +2924,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ValidationFiredRule
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: createValidationFiredRule
       requestBody:
         required: true
@@ -2833,6 +2979,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ValidationFiredRule by id
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: getValidationFiredRule
       responses:
         '200':
@@ -2860,6 +3008,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ValidationFiredRule
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: updateValidationFiredRule
       requestBody:
         required: true
@@ -2905,6 +3055,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ValidationFiredRule
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: replaceValidationFiredRule
       requestBody:
         required: true
@@ -2950,6 +3102,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ValidationFiredRule
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: deleteValidationFiredRule
       responses:
         '200':
@@ -2974,6 +3128,8 @@ paths:
   /api/united-states-hipaa-authorization-form/validation_results:
     get:
       summary: List ValidationResult records
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: listValidationResult
       parameters:
       - name: limit
@@ -3026,6 +3182,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ValidationResult
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: createValidationResult
       requestBody:
         required: true
@@ -3079,6 +3237,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ValidationResult by id
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: getValidationResult
       responses:
         '200':
@@ -3106,6 +3266,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ValidationResult
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: updateValidationResult
       requestBody:
         required: true
@@ -3151,6 +3313,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ValidationResult
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: replaceValidationResult
       requestBody:
         required: true
@@ -3196,6 +3360,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ValidationResult
+      tags:
+      - united-states-hipaa-authorization-form
       operationId: deleteValidationResult
       responses:
         '200':

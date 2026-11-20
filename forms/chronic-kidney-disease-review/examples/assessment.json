@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000006a",
+    "id": "60cad4be-af94-5f44-832a-0630b224ad40",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000007c",
+    "id": "13de8b2a-bd8a-5f2d-8ef7-6cf16ebc861f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "chronicKidneyDiseaseReview": {
-    "id": "550e8400-e29b-41d4-a716-000000000089",
+    "id": "8d0868aa-7f6c-5f67-9dd6-a43b4ee694bc",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000008d",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000008e",
+    "patientId": "efd2bdf6-b3bd-5343-b5c5-0a9ed38d9af4",
+    "clinicianId": "4bfab5f4-73b7-5a66-9c44-066a3fe0bc7c",
     "clinicianName": "",
     "clinicianRole": "gp",
     "reviewedAt": null,
@@ -78,11 +78,11 @@
     "clinicalNote": ""
   },
   "chronicKidneyDiseaseReviewGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b2",
+    "id": "87a4afc5-29fc-53fd-8f4c-96296b581cc3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "chronicKidneyDiseaseReviewId": "550e8400-e29b-41d4-a716-0000000000b6",
+    "chronicKidneyDiseaseReviewId": "c743eb86-5bf5-55ea-ab61-04e43998bc8a",
     "gfrCategory": "G1",
     "albuminuriaCategory": "A1",
     "kdigoRiskZone": "low",
@@ -94,22 +94,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "chronicKidneyDiseaseReviewGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c0",
+    "id": "55b3c65d-8de0-5dd9-975e-454a93a7a9f5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "chronicKidneyDiseaseReviewGradeId": "550e8400-e29b-41d4-a716-0000000000c4",
+    "chronicKidneyDiseaseReviewGradeId": "47a938f4-318c-542c-b62e-ed738a1cb172",
     "ruleId": "",
     "section": "gfr-stage",
     "category": "",
     "description": ""
   },
   "chronicKidneyDiseaseReviewGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c9",
+    "id": "5cc0a710-09a1-5614-9f3b-bbdedb22d11d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "chronicKidneyDiseaseReviewGradeId": "550e8400-e29b-41d4-a716-0000000000cd",
+    "chronicKidneyDiseaseReviewGradeId": "0757707a-5dad-5ff8-87f7-6582f50b3707",
     "flagId": "",
     "category": "very-high-risk-referral",
     "priority": "low",

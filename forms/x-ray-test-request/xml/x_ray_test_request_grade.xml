@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE x_ray_test_request_grade SYSTEM "x_ray_test_request_grade.dtd">
-<x_ray_test_request_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<x_ray_test_request_grade xmlns="https://formexamples.github.io/x-ray-test-request/xml">
+<id>f45bc7fa-7489-5898-ae51-d651dbacf238</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<x_ray_test_request_id>770e8400-e29b-41d4-a716-446655440002</x_ray_test_request_id>
+<x_ray_test_request_id>56ffb2a8-2bbc-5665-a56b-1b5fd62ff543</x_ray_test_request_id>
 <appropriateness_score>5</appropriateness_score>
 <appropriateness_band>usually-appropriate</appropriateness_band>
 <radiation_safety_band>safe</radiation_safety_band>

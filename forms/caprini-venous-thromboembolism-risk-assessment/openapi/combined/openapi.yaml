@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Caprini Venous Thromboembolism Risk Assessment form,
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: caprini-venous-thromboembolism-risk-assessment
+  apiPrefix: /api/caprini-venous-thromboembolism-risk-assessment/
+  sqlSchema: caprini_venous_thromboembolism_risk_assessment
+  xmlNamespace: https://formexamples.github.io/caprini-venous-thromboembolism-risk-assessment/xml
+tags:
+- name: caprini-venous-thromboembolism-risk-assessment
+  description: Caprini Venous Thromboembolism Risk Assessment form
 paths:
   /api/caprini-venous-thromboembolism-risk-assessment/caprini_venous_thromboembolism_risk_assessment_grade_flags:
     get:
       summary: List CapriniVenousThromboembolismRiskAssessmentGradeFlag records
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: listCapriniVenousThromboembolismRiskAssessmentGradeFlag
       parameters:
       - name: limit
@@ -64,6 +74,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CapriniVenousThromboembolismRiskAssessmentGradeFlag
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: createCapriniVenousThromboembolismRiskAssessmentGradeFlag
       requestBody:
         required: true
@@ -117,6 +129,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CapriniVenousThromboembolismRiskAssessmentGradeFlag by id
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: getCapriniVenousThromboembolismRiskAssessmentGradeFlag
       responses:
         '200':
@@ -144,6 +158,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CapriniVenousThromboembolismRiskAssessmentGradeFlag
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: updateCapriniVenousThromboembolismRiskAssessmentGradeFlag
       requestBody:
         required: true
@@ -189,6 +205,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CapriniVenousThromboembolismRiskAssessmentGradeFlag
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: replaceCapriniVenousThromboembolismRiskAssessmentGradeFlag
       requestBody:
         required: true
@@ -234,6 +252,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CapriniVenousThromboembolismRiskAssessmentGradeFlag
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: deleteCapriniVenousThromboembolismRiskAssessmentGradeFlag
       responses:
         '200':
@@ -258,6 +278,8 @@ paths:
   /api/caprini-venous-thromboembolism-risk-assessment/caprini_venous_thromboembolism_risk_assessment_grade_rules:
     get:
       summary: List CapriniVenousThromboembolismRiskAssessmentGradeRule records
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: listCapriniVenousThromboembolismRiskAssessmentGradeRule
       parameters:
       - name: limit
@@ -311,6 +333,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CapriniVenousThromboembolismRiskAssessmentGradeRule
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: createCapriniVenousThromboembolismRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -364,6 +388,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CapriniVenousThromboembolismRiskAssessmentGradeRule by id
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: getCapriniVenousThromboembolismRiskAssessmentGradeRule
       responses:
         '200':
@@ -391,6 +417,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CapriniVenousThromboembolismRiskAssessmentGradeRule
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: updateCapriniVenousThromboembolismRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -436,6 +464,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CapriniVenousThromboembolismRiskAssessmentGradeRule
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: replaceCapriniVenousThromboembolismRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -481,6 +511,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CapriniVenousThromboembolismRiskAssessmentGradeRule
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: deleteCapriniVenousThromboembolismRiskAssessmentGradeRule
       responses:
         '200':
@@ -505,6 +537,8 @@ paths:
   /api/caprini-venous-thromboembolism-risk-assessment/caprini_venous_thromboembolism_risk_assessment_grades:
     get:
       summary: List CapriniVenousThromboembolismRiskAssessmentGrade records
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: listCapriniVenousThromboembolismRiskAssessmentGrade
       parameters:
       - name: limit
@@ -557,6 +591,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CapriniVenousThromboembolismRiskAssessmentGrade
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: createCapriniVenousThromboembolismRiskAssessmentGrade
       requestBody:
         required: true
@@ -610,6 +646,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CapriniVenousThromboembolismRiskAssessmentGrade by id
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: getCapriniVenousThromboembolismRiskAssessmentGrade
       responses:
         '200':
@@ -637,6 +675,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CapriniVenousThromboembolismRiskAssessmentGrade
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: updateCapriniVenousThromboembolismRiskAssessmentGrade
       requestBody:
         required: true
@@ -682,6 +722,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CapriniVenousThromboembolismRiskAssessmentGrade
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: replaceCapriniVenousThromboembolismRiskAssessmentGrade
       requestBody:
         required: true
@@ -727,6 +769,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CapriniVenousThromboembolismRiskAssessmentGrade
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: deleteCapriniVenousThromboembolismRiskAssessmentGrade
       responses:
         '200':
@@ -751,6 +795,8 @@ paths:
   /api/caprini-venous-thromboembolism-risk-assessment/caprini_venous_thromboembolism_risk_assessments:
     get:
       summary: List CapriniVenousThromboembolismRiskAssessment records
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: listCapriniVenousThromboembolismRiskAssessment
       parameters:
       - name: limit
@@ -803,6 +849,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CapriniVenousThromboembolismRiskAssessment
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: createCapriniVenousThromboembolismRiskAssessment
       requestBody:
         required: true
@@ -856,6 +904,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CapriniVenousThromboembolismRiskAssessment by id
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: getCapriniVenousThromboembolismRiskAssessment
       responses:
         '200':
@@ -883,6 +933,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CapriniVenousThromboembolismRiskAssessment
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: updateCapriniVenousThromboembolismRiskAssessment
       requestBody:
         required: true
@@ -928,6 +980,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CapriniVenousThromboembolismRiskAssessment
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: replaceCapriniVenousThromboembolismRiskAssessment
       requestBody:
         required: true
@@ -973,6 +1027,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CapriniVenousThromboembolismRiskAssessment
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: deleteCapriniVenousThromboembolismRiskAssessment
       responses:
         '200':
@@ -997,6 +1053,8 @@ paths:
   /api/caprini-venous-thromboembolism-risk-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: listClinician
       parameters:
       - name: limit
@@ -1049,6 +1107,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: createClinician
       requestBody:
         required: true
@@ -1102,6 +1162,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: getClinician
       responses:
         '200':
@@ -1129,6 +1191,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: updateClinician
       requestBody:
         required: true
@@ -1174,6 +1238,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1219,6 +1285,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: deleteClinician
       responses:
         '200':
@@ -1251,9 +1319,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
   /api/caprini-venous-thromboembolism-risk-assessment/patients:
     get:
       summary: List Patient records
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: listPatient
       parameters:
       - name: limit
@@ -1306,6 +1378,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: createPatient
       requestBody:
         required: true
@@ -1359,6 +1433,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: getPatient
       responses:
         '200':
@@ -1386,6 +1462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: updatePatient
       requestBody:
         required: true
@@ -1431,6 +1509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: replacePatient
       requestBody:
         required: true
@@ -1476,6 +1556,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - caprini-venous-thromboembolism-risk-assessment
       operationId: deletePatient
       responses:
         '200':

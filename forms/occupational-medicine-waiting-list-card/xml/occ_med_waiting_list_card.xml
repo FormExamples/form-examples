@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE occ_med_waiting_list_card SYSTEM "occ_med_waiting_list_card.dtd">
-<occ_med_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<occ_med_waiting_list_card xmlns="https://formexamples.github.io/occupational-medicine-waiting-list-card/xml">
+<id>f98aa2d2-8828-5607-89aa-45e34edb8ce4</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>797c5c29-9926-50c1-9e85-74d7700a762c</patient_id>
+<practitioner_id>8c2504c1-52e9-5cc1-a18a-628a3b9c95ba</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

@@ -5,10 +5,19 @@ info:
   title: Arc42 — ArchitecturalDecision
   version: 1.0.0
   description: Architectural Decision Record (ADR) captured in §9 Architectural Decisions of the arc42 documentation.
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+  - name: arc42
+    description: Arc42 form
 paths:
   /api/arc42/architectural_decisions:
     get:
       summary: List ArchitecturalDecision records
+      tags: [arc42]
       operationId: listArchitecturalDecision
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ArchitecturalDecision
+      tags: [arc42]
       operationId: createArchitecturalDecision
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ArchitecturalDecision by id
+      tags: [arc42]
       operationId: getArchitecturalDecision
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ArchitecturalDecision
+      tags: [arc42]
       operationId: updateArchitecturalDecision
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ArchitecturalDecision
+      tags: [arc42]
       operationId: replaceArchitecturalDecision
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ArchitecturalDecision
+      tags: [arc42]
       operationId: deleteArchitecturalDecision
       responses:
         "200":

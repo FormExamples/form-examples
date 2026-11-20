@@ -1,4 +1,5 @@
 <!ELEMENT urinalysis_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,dipstick,microscopy_culture_sensitivity,albumin_creatinine_ratio,protein_creatinine_ratio,pregnancy_test,drug_screen,cytology,twenty_four_hour_collection,primary_indication,clinical_details,symptom_dysuria,symptom_frequency,symptom_visible_haematuria,symptom_loin_pain,symptom_fever,specimen_type,specimen_collected,collection_datetime,pregnant,catheterised,current_antibiotics,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST urinalysis_test_request xmlns CDATA #FIXED "https://formexamples.github.io/urinalysis-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

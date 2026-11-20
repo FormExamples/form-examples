@@ -5,10 +5,19 @@ info:
   title: Sleep Study Test Result — SleepStudyTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: sleep-study-test-result
+  apiPrefix: /api/sleep-study-test-result/
+  sqlSchema: sleep_study_test_result
+  xmlNamespace: https://formexamples.github.io/sleep-study-test-result/xml
+tags:
+  - name: sleep-study-test-result
+    description: Sleep Study Test Result form
 paths:
   /api/sleep-study-test-result/sleep_study_test_result_grade_rules:
     get:
       summary: List SleepStudyTestResultGradeRule records
+      tags: [sleep-study-test-result]
       operationId: listSleepStudyTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SleepStudyTestResultGradeRule
+      tags: [sleep-study-test-result]
       operationId: createSleepStudyTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one SleepStudyTestResultGradeRule by id
+      tags: [sleep-study-test-result]
       operationId: getSleepStudyTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SleepStudyTestResultGradeRule
+      tags: [sleep-study-test-result]
       operationId: updateSleepStudyTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing SleepStudyTestResultGradeRule
+      tags: [sleep-study-test-result]
       operationId: replaceSleepStudyTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SleepStudyTestResultGradeRule
+      tags: [sleep-study-test-result]
       operationId: deleteSleepStudyTestResultGradeRule
       responses:
         "200":

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE signer SYSTEM "signer.dtd">
-<signer>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<signer xmlns="https://formexamples.github.io/united-states-hipaa-authorization-form/xml">
+<id>578bc1ca-aa3f-5760-8047-1cd10e209500</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<hipaa_authorization_id>660e8400-e29b-41d4-a716-446655440001</hipaa_authorization_id>
+<hipaa_authorization_id>ea05195e-1bde-5b6a-8c9e-9cbe83fd16aa</hipaa_authorization_id>
 <relationship>self</relationship>
 <representative_name>Example</representative_name>
 <representative_authority_description>Example text.</representative_authority_description>

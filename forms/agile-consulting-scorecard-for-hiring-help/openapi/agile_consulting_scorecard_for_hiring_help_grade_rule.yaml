@@ -5,10 +5,19 @@ info:
   title: Agile Consulting Scorecard For Hiring Help — AgileConsultingScorecardForHiringHelpGradeRule
   version: 1.0.0
   description: Audit trail of every scoring rule that fired for an agile-consulting scorecard. Typically 16 rows per grade (one per item) plus optional composite rows for the band determination.
+x-namespace:
+  form: agile-consulting-scorecard-for-hiring-help
+  apiPrefix: /api/agile-consulting-scorecard-for-hiring-help/
+  sqlSchema: agile_consulting_scorecard_for_hiring_help
+  xmlNamespace: https://formexamples.github.io/agile-consulting-scorecard-for-hiring-help/xml
+tags:
+  - name: agile-consulting-scorecard-for-hiring-help
+    description: Agile Consulting Scorecard For Hiring Help form
 paths:
   /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_help_grade_rules:
     get:
       summary: List AgileConsultingScorecardForHiringHelpGradeRule records
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: listAgileConsultingScorecardForHiringHelpGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AgileConsultingScorecardForHiringHelpGradeRule
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: createAgileConsultingScorecardForHiringHelpGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AgileConsultingScorecardForHiringHelpGradeRule by id
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: getAgileConsultingScorecardForHiringHelpGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AgileConsultingScorecardForHiringHelpGradeRule
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: updateAgileConsultingScorecardForHiringHelpGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AgileConsultingScorecardForHiringHelpGradeRule
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: replaceAgileConsultingScorecardForHiringHelpGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AgileConsultingScorecardForHiringHelpGradeRule
+      tags: [agile-consulting-scorecard-for-hiring-help]
       operationId: deleteAgileConsultingScorecardForHiringHelpGradeRule
       responses:
         "200":

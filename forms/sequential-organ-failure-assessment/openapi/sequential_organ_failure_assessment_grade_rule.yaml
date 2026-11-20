@@ -5,10 +5,19 @@ info:
   title: Sequential Organ Failure Assessment — SequentialOrganFailureAssessmentGradeRule
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during SOFA computation: organ system or derivation, points contributed, category, and description."
+x-namespace:
+  form: sequential-organ-failure-assessment
+  apiPrefix: /api/sequential-organ-failure-assessment/
+  sqlSchema: sequential_organ_failure_assessment
+  xmlNamespace: https://formexamples.github.io/sequential-organ-failure-assessment/xml
+tags:
+  - name: sequential-organ-failure-assessment
+    description: Sequential Organ Failure Assessment form
 paths:
   /api/sequential-organ-failure-assessment/sequential_organ_failure_assessment_grade_rules:
     get:
       summary: List SequentialOrganFailureAssessmentGradeRule records
+      tags: [sequential-organ-failure-assessment]
       operationId: listSequentialOrganFailureAssessmentGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SequentialOrganFailureAssessmentGradeRule
+      tags: [sequential-organ-failure-assessment]
       operationId: createSequentialOrganFailureAssessmentGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one SequentialOrganFailureAssessmentGradeRule by id
+      tags: [sequential-organ-failure-assessment]
       operationId: getSequentialOrganFailureAssessmentGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SequentialOrganFailureAssessmentGradeRule
+      tags: [sequential-organ-failure-assessment]
       operationId: updateSequentialOrganFailureAssessmentGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing SequentialOrganFailureAssessmentGradeRule
+      tags: [sequential-organ-failure-assessment]
       operationId: replaceSequentialOrganFailureAssessmentGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SequentialOrganFailureAssessmentGradeRule
+      tags: [sequential-organ-failure-assessment]
       operationId: deleteSequentialOrganFailureAssessmentGradeRule
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT assessment_current_medications (id,created_at,updated_at,deleted_at,assessment_id,inhaler_use,inhaler_technique_assessed,inhaler_technique_adequate,short_acting_bronchodilator,saba_frequency,long_acting_bronchodilator,inhaled_corticosteroid,combination_inhaler,long_term_oxygen_therapy,oxygen_flow_rate_lmin,oxygen_hours_per_day,nebuliser_use,oral_medications,medication_adherence,additional_notes)>
+<!ATTLIST assessment_current_medications xmlns CDATA #FIXED "https://formexamples.github.io/pulmonology-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

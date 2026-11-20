@@ -1,4 +1,5 @@
 <!ELEMENT contraindications_allergies (id,created_at,updated_at,deleted_at,assessment_id,egg_allergy,gelatin_allergy,latex_allergy,neomycin_allergy,pregnant,pregnancy_weeks,severe_illness,previous_anaphylaxis,anaphylaxis_details)>
+<!ATTLIST contraindications_allergies xmlns CDATA #FIXED "https://formexamples.github.io/vaccinations-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Allergy Assessment — AssessmentTestResultItem
   version: 1.0.0
   description: Individual test result entry with test type, allergen tested, and result.
+x-namespace:
+  form: allergy-assessment
+  apiPrefix: /api/allergy-assessment/
+  sqlSchema: allergy_assessment
+  xmlNamespace: https://formexamples.github.io/allergy-assessment/xml
+tags:
+  - name: allergy-assessment
+    description: Allergy Assessment form
 paths:
   /api/allergy-assessment/assessment_test_result_items:
     get:
       summary: List AssessmentTestResultItem records
+      tags: [allergy-assessment]
       operationId: listAssessmentTestResultItem
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentTestResultItem
+      tags: [allergy-assessment]
       operationId: createAssessmentTestResultItem
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentTestResultItem by id
+      tags: [allergy-assessment]
       operationId: getAssessmentTestResultItem
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentTestResultItem
+      tags: [allergy-assessment]
       operationId: updateAssessmentTestResultItem
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentTestResultItem
+      tags: [allergy-assessment]
       operationId: replaceAssessmentTestResultItem
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentTestResultItem
+      tags: [allergy-assessment]
       operationId: deleteAssessmentTestResultItem
       responses:
         "200":

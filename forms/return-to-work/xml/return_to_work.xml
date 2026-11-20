@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE return_to_work SYSTEM "return_to_work.dtd">
-<return_to_work>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<return_to_work xmlns="https://formexamples.github.io/return-to-work/xml">
+<id>deaf3a69-4252-5f7b-a1e5-49fd54cf0495</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
-<employer_id>770e8400-e29b-41d4-a716-446655440002</employer_id>
+<patient_id>6ff8f908-0c6e-5eb5-a5c1-80ef7477ec69</patient_id>
+<clinician_id>5651fafd-f09f-5794-a4f1-41cdb90ca91e</clinician_id>
+<employer_id>b95942d2-7e3f-5943-a066-4e9c714bb6c9</employer_id>
 <status>draft</status>
 <statement_kind>fit-note</statement_kind>
 <assessment_date>2026-01-15</assessment_date>

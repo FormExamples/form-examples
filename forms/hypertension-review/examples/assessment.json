@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000006b",
+    "id": "595929aa-2a5a-5d99-ae14-e2c247c52ce4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000007d",
+    "id": "2a3e98cc-e1bd-5bf0-a37d-b536e9759910",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "hypertensionReview": {
-    "id": "550e8400-e29b-41d4-a716-00000000008a",
+    "id": "34f320dc-625a-5ae2-8269-ec55e8e52445",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000008e",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000008f",
+    "patientId": "4d52e39b-c46e-574d-ba5e-86dbce1ed102",
+    "clinicianId": "42790475-1ca1-5fe5-a9f0-74a84c8fd60f",
     "clinicianRole": "gp",
     "reviewedAt": null,
     "practiceSite": "",
@@ -78,11 +78,11 @@
     "reviewContext": ""
   },
   "hypertensionReviewGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b3",
+    "id": "8eb41a9b-3a22-5e7b-a85a-ef9798a7c57e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hypertensionReviewId": "550e8400-e29b-41d4-a716-0000000000b7",
+    "hypertensionReviewId": "f79ad091-31ff-5f40-8e10-01fa47dab5cc",
     "controlStatus": "controlled",
     "hypertensionStage": "none",
     "reviewStatus": "complete",
@@ -95,22 +95,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "hypertensionReviewGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "9381c09a-0489-5fc6-bf09-28998066f6ac",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hypertensionReviewGradeId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "hypertensionReviewGradeId": "38215e20-afe7-5007-bdc6-f912bef709c9",
     "ruleId": "",
     "section": "target",
     "category": "",
     "description": ""
   },
   "hypertensionReviewGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000cb",
+    "id": "a85b8722-cfa9-5c98-baf4-2adeebb69f73",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hypertensionReviewGradeId": "550e8400-e29b-41d4-a716-0000000000cf",
+    "hypertensionReviewGradeId": "0618693d-e280-5f34-8e05-ce6cc4fdd62c",
     "flagId": "",
     "category": "severe-hypertension",
     "priority": "low",

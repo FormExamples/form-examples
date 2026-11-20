@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "3decd9b5-b7a7-4858-a316-ab3155c7feb4",
+  "id": "17759cbe-878a-595f-8d00-3e33d97a58e0",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:718b05bc-8a2d-4d04-a2b7-6d2b43cf61b3",
+      "fullUrl": "urn:uuid:bf580740-fbc7-5fb7-8ff9-23d1b9c5aced",
       "resource": {
         "resourceType": "Patient",
-        "id": "718b05bc-8a2d-4d04-a2b7-6d2b43cf61b3",
+        "id": "bf580740-fbc7-5fb7-8ff9-23d1b9c5aced",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:9902c76a-8018-4c7e-afca-4fd09ffa1004",
+      "fullUrl": "urn:uuid:3ee3e53b-6614-58a3-8a06-eda94b778aba",
       "resource": {
         "resourceType": "Observation",
-        "id": "9902c76a-8018-4c7e-afca-4fd09ffa1004",
+        "id": "3ee3e53b-6614-58a3-8a06-eda94b778aba",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:718b05bc-8a2d-4d04-a2b7-6d2b43cf61b3"
+          "reference": "urn:uuid:bf580740-fbc7-5fb7-8ff9-23d1b9c5aced"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:7ec33009-7ff1-47db-ac3f-8f9848fd4c81",
+      "fullUrl": "urn:uuid:b1c6152f-42fb-5a8f-a157-c6aac5667dd7",
       "resource": {
         "resourceType": "Observation",
-        "id": "7ec33009-7ff1-47db-ac3f-8f9848fd4c81",
+        "id": "b1c6152f-42fb-5a8f-a157-c6aac5667dd7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:718b05bc-8a2d-4d04-a2b7-6d2b43cf61b3"
+          "reference": "urn:uuid:bf580740-fbc7-5fb7-8ff9-23d1b9c5aced"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -732,10 +732,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:0367c0d1-a39f-4586-a874-043de86ae0d0",
+      "fullUrl": "urn:uuid:46a40e74-53e3-51a2-a29a-e14a54660de3",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "0367c0d1-a39f-4586-a874-043de86ae0d0",
+        "id": "46a40e74-53e3-51a2-a29a-e14a54660de3",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -744,7 +744,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:718b05bc-8a2d-4d04-a2b7-6d2b43cf61b3"
+          "reference": "urn:uuid:bf580740-fbc7-5fb7-8ff9-23d1b9c5aced"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -753,10 +753,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:4364749b-a550-4d9d-a3a9-e03bdaed6f0f",
+      "fullUrl": "urn:uuid:5098cea0-0612-5e71-a830-81ac654d7146",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "4364749b-a550-4d9d-a3a9-e03bdaed6f0f",
+        "id": "5098cea0-0612-5e71-a830-81ac654d7146",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -786,17 +786,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:718b05bc-8a2d-4d04-a2b7-6d2b43cf61b3"
+          "reference": "urn:uuid:bf580740-fbc7-5fb7-8ff9-23d1b9c5aced"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (significant growth in pregnancy, critical organism, suspected urosepsis, or visible haematuria) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:862ae90b-9aa8-421b-a9d2-b61e9b3eff87",
+      "fullUrl": "urn:uuid:4ca0fe9a-54c4-5f33-b88b-0d3b2c62c7b0",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "862ae90b-9aa8-421b-a9d2-b61e9b3eff87",
+        "id": "4ca0fe9a-54c4-5f33-b88b-0d3b2c62c7b0",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -826,17 +826,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:718b05bc-8a2d-4d04-a2b7-6d2b43cf61b3"
+          "reference": "urn:uuid:bf580740-fbc7-5fb7-8ff9-23d1b9c5aced"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:52986dc7-3727-43ec-a215-9ff7c5615747",
+      "fullUrl": "urn:uuid:90a6cb0d-ede5-5ec3-9db6-5b474514ff87",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "52986dc7-3727-43ec-a215-9ff7c5615747",
+        "id": "90a6cb0d-ede5-5ec3-9db6-5b474514ff87",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -866,17 +866,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:718b05bc-8a2d-4d04-a2b7-6d2b43cf61b3"
+          "reference": "urn:uuid:bf580740-fbc7-5fb7-8ff9-23d1b9c5aced"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:f9e81faa-7c1c-4ca9-a4f5-7ab56b78a049",
+      "fullUrl": "urn:uuid:f8ff49d5-516f-57af-8efe-9cd240cd0f6f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "f9e81faa-7c1c-4ca9-a4f5-7ab56b78a049",
+        "id": "f8ff49d5-516f-57af-8efe-9cd240cd0f6f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -906,7 +906,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:718b05bc-8a2d-4d04-a2b7-6d2b43cf61b3"
+          "reference": "urn:uuid:bf580740-fbc7-5fb7-8ff9-23d1b9c5aced"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (significant growth in pregnancy, critical organism, suspected urosepsis, or visible haematuria) is present.",

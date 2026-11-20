@@ -5,10 +5,19 @@ info:
   title: Pre Operative Assessment By Clinician — PreOperativeAssessmentByClinicianGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the ASA grade, with priority and a suggested action for the perioperative team.
+x-namespace:
+  form: pre-operative-assessment-by-clinician
+  apiPrefix: /api/pre-operative-assessment-by-clinician/
+  sqlSchema: pre_operative_assessment_by_clinician
+  xmlNamespace: https://formexamples.github.io/pre-operative-assessment-by-clinician/xml
+tags:
+  - name: pre-operative-assessment-by-clinician
+    description: Pre Operative Assessment By Clinician form
 paths:
   /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinician_grade_flags:
     get:
       summary: List PreOperativeAssessmentByClinicianGradeFlag records
+      tags: [pre-operative-assessment-by-clinician]
       operationId: listPreOperativeAssessmentByClinicianGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PreOperativeAssessmentByClinicianGradeFlag
+      tags: [pre-operative-assessment-by-clinician]
       operationId: createPreOperativeAssessmentByClinicianGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PreOperativeAssessmentByClinicianGradeFlag by id
+      tags: [pre-operative-assessment-by-clinician]
       operationId: getPreOperativeAssessmentByClinicianGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PreOperativeAssessmentByClinicianGradeFlag
+      tags: [pre-operative-assessment-by-clinician]
       operationId: updatePreOperativeAssessmentByClinicianGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PreOperativeAssessmentByClinicianGradeFlag
+      tags: [pre-operative-assessment-by-clinician]
       operationId: replacePreOperativeAssessmentByClinicianGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PreOperativeAssessmentByClinicianGradeFlag
+      tags: [pre-operative-assessment-by-clinician]
       operationId: deletePreOperativeAssessmentByClinicianGradeFlag
       responses:
         "200":

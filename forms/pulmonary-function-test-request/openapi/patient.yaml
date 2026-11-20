@@ -5,10 +5,19 @@ info:
   title: Pulmonary Function Test Request — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: pulmonary-function-test-request
+  apiPrefix: /api/pulmonary-function-test-request/
+  sqlSchema: pulmonary_function_test_request
+  xmlNamespace: https://formexamples.github.io/pulmonary-function-test-request/xml
+tags:
+  - name: pulmonary-function-test-request
+    description: Pulmonary Function Test Request form
 paths:
   /api/pulmonary-function-test-request/patients:
     get:
       summary: List Patient records
+      tags: [pulmonary-function-test-request]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [pulmonary-function-test-request]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [pulmonary-function-test-request]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [pulmonary-function-test-request]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [pulmonary-function-test-request]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [pulmonary-function-test-request]
       operationId: deletePatient
       responses:
         "200":

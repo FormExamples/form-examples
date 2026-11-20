@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment_anaphylaxis_episode SYSTEM "assessment_anaphylaxis_episode.dtd">
-<assessment_anaphylaxis_episode>
-<id>dd0e8400-e29b-41d4-a716-446655440008</id>
+<assessment_anaphylaxis_episode xmlns="https://formexamples.github.io/allergy-assessment/xml">
+<id>a4443002-cff1-513e-b40a-8719f0c316b7</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<anaphylaxis_history_id>660e8400-e29b-41d4-a716-446655440001</anaphylaxis_history_id>
+<anaphylaxis_history_id>df4b84f2-4063-549d-91c5-60467b6a20a4</anaphylaxis_history_id>
 <trigger_description>Example text.</trigger_description>
 <symptoms>Fatigue</symptoms>
 <treatment_required>Example treatment</treatment_required>

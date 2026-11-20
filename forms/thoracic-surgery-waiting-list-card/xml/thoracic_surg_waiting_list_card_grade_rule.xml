@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE thoracic_surg_waiting_list_card_grade_rule SYSTEM "thoracic_surg_waiting_list_card_grade_rule.dtd">
-<thoracic_surg_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<thoracic_surg_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/thoracic-surgery-waiting-list-card/xml">
+<id>c0b48e81-1424-570c-9d08-f893dd4df565</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<thoracic_surg_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</thoracic_surg_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<thoracic_surg_waiting_list_card_grade_id>d207e273-7ade-50bc-9947-6d5301e11f14</thoracic_surg_waiting_list_card_grade_id>
+<rule_id>f4c7d0d8-1d6e-54a4-bc62-70622abd100b</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

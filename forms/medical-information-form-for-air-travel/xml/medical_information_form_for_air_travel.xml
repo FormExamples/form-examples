@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE medical_information_form_for_air_travel SYSTEM "medical_information_form_for_air_travel.dtd">
-<medical_information_form_for_air_travel>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<medical_information_form_for_air_travel xmlns="https://formexamples.github.io/medical-information-form-for-air-travel/xml">
+<id>2e991f6b-c333-5524-a6c8-06bdc66b0001</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>ed906c99-3d8b-5a6e-bdc1-6e33f07a17a1</patient_id>
+<clinician_id>355eb559-1b94-5bec-813b-5a8888be4afa</clinician_id>
 <status>draft</status>
 <submitter_name>Example</submitter_name>
 <submitter_role>passenger</submitter_role>

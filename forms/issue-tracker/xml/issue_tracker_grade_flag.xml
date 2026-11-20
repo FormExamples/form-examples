@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE issue_tracker_grade_flag SYSTEM "issue_tracker_grade_flag.dtd">
-<issue_tracker_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<issue_tracker_grade_flag xmlns="https://formexamples.github.io/issue-tracker/xml">
+<id>8c639413-7de8-52a0-b66e-3b5202e2a48b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<issue_tracker_grade_id>880e8400-e29b-41d4-a716-446655440003</issue_tracker_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<issue_tracker_grade_id>4b63b19f-01fb-5d6b-814e-56ccd4ffc27f</issue_tracker_grade_id>
+<flag_id>9ee63689-da40-51dc-a651-0f88ab5f541c</flag_id>
 <category>harm-fatal</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -5,10 +5,19 @@ info:
   title: Fluid Balance Chart — FluidBalanceChartGradeFlag
   version: 1.0.0
   description: Flagged issues raised independently of the fluid-status classification, with priority and a suggested action for the clinical team.
+x-namespace:
+  form: fluid-balance-chart
+  apiPrefix: /api/fluid-balance-chart/
+  sqlSchema: fluid_balance_chart
+  xmlNamespace: https://formexamples.github.io/fluid-balance-chart/xml
+tags:
+  - name: fluid-balance-chart
+    description: Fluid Balance Chart form
 paths:
   /api/fluid-balance-chart/fluid_balance_chart_grade_flags:
     get:
       summary: List FluidBalanceChartGradeFlag records
+      tags: [fluid-balance-chart]
       operationId: listFluidBalanceChartGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new FluidBalanceChartGradeFlag
+      tags: [fluid-balance-chart]
       operationId: createFluidBalanceChartGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one FluidBalanceChartGradeFlag by id
+      tags: [fluid-balance-chart]
       operationId: getFluidBalanceChartGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing FluidBalanceChartGradeFlag
+      tags: [fluid-balance-chart]
       operationId: updateFluidBalanceChartGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing FluidBalanceChartGradeFlag
+      tags: [fluid-balance-chart]
       operationId: replaceFluidBalanceChartGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a FluidBalanceChartGradeFlag
+      tags: [fluid-balance-chart]
       operationId: deleteFluidBalanceChartGradeFlag
       responses:
         "200":

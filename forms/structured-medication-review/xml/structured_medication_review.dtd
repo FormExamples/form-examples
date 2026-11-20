@@ -1,4 +1,5 @@
 <!ELEMENT structured_medication_review (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,reviewed_at,care_setting,consultation_mode,patient_identifier,age_band,sex,frailty_status,lives_in_care_home,long_term_conditions,presenting_problems,patient_reported_issues,what_matters_to_patient,shared_decisions,monitoring_due,overdue_monitoring_count,follow_up_plan,follow_up_date,review_completed)>
+<!ATTLIST structured_medication_review xmlns CDATA #FIXED "https://formexamples.github.io/structured-medication-review/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

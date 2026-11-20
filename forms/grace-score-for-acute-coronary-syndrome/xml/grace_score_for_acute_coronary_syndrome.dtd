@@ -1,4 +1,5 @@
 <!ELEMENT grace_score_for_acute_coronary_syndrome (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,presentation_type,patient_identifier,age_years,sex,heart_rate,systolic_blood_pressure,serum_creatinine,serum_creatinine_unit,killip_class,cardiac_arrest_at_admission,st_segment_deviation,elevated_cardiac_enzymes,clinical_note)>
+<!ATTLIST grace_score_for_acute_coronary_syndrome xmlns CDATA #FIXED "https://formexamples.github.io/grace-score-for-acute-coronary-syndrome/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

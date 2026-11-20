@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dermatology_waiting_list_card_grade_flag SYSTEM "dermatology_waiting_list_card_grade_flag.dtd">
-<dermatology_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<dermatology_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/dermatology-waiting-list-card/xml">
+<id>e34bbb05-a175-5ace-8867-305a46166f34</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<dermatology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</dermatology_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<dermatology_waiting_list_card_grade_id>c79cad0b-5701-564a-824a-3fc3c2ab3f7c</dermatology_waiting_list_card_grade_id>
+<flag_id>1f5a707d-e7f5-596d-b215-da7d7b2eb1cb</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

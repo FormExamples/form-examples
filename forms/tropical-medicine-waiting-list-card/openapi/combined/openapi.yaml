@@ -7,6 +7,14 @@ info:
   description: Combined OpenAPI specification for the Tropical Medicine Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: tropical-medicine-waiting-list-card
+  apiPrefix: /api/tropical-medicine-waiting-list-card/
+  sqlSchema: tropical_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/tropical-medicine-waiting-list-card/xml
+tags:
+- name: tropical-medicine-waiting-list-card
+  description: Tropical Medicine Waiting List Card form
 paths:
   /api/tropical-medicine-waiting-list-card/openapi.yaml:
     get:
@@ -19,9 +27,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - tropical-medicine-waiting-list-card
   /api/tropical-medicine-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -74,6 +86,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -127,6 +141,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -154,6 +170,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -199,6 +217,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -244,6 +264,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -268,6 +290,8 @@ paths:
   /api/tropical-medicine-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_card_appointments:
     get:
       summary: List TropMedWaitingListCardAppointment records
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: listTropMedWaitingListCardAppointment
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TropMedWaitingListCardAppointment
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: createTropMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TropMedWaitingListCardAppointment by id
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: getTropMedWaitingListCardAppointment
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TropMedWaitingListCardAppointment
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: updateTropMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TropMedWaitingListCardAppointment
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: replaceTropMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TropMedWaitingListCardAppointment
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: deleteTropMedWaitingListCardAppointment
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_card_grade_flags:
     get:
       summary: List TropMedWaitingListCardGradeFlag records
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: listTropMedWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TropMedWaitingListCardGradeFlag
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: createTropMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TropMedWaitingListCardGradeFlag by id
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: getTropMedWaitingListCardGradeFlag
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TropMedWaitingListCardGradeFlag
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: updateTropMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TropMedWaitingListCardGradeFlag
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: replaceTropMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TropMedWaitingListCardGradeFlag
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: deleteTropMedWaitingListCardGradeFlag
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_card_grade_rules:
     get:
       summary: List TropMedWaitingListCardGradeRule records
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: listTropMedWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TropMedWaitingListCardGradeRule
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: createTropMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TropMedWaitingListCardGradeRule by id
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: getTropMedWaitingListCardGradeRule
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TropMedWaitingListCardGradeRule
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: updateTropMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TropMedWaitingListCardGradeRule
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: replaceTropMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TropMedWaitingListCardGradeRule
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: deleteTropMedWaitingListCardGradeRule
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_card_grades:
     get:
       summary: List TropMedWaitingListCardGrade records
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: listTropMedWaitingListCardGrade
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TropMedWaitingListCardGrade
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: createTropMedWaitingListCardGrade
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TropMedWaitingListCardGrade by id
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: getTropMedWaitingListCardGrade
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TropMedWaitingListCardGrade
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: updateTropMedWaitingListCardGrade
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TropMedWaitingListCardGrade
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: replaceTropMedWaitingListCardGrade
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TropMedWaitingListCardGrade
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: deleteTropMedWaitingListCardGrade
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_cards:
     get:
       summary: List TropMedWaitingListCard records
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: listTropMedWaitingListCard
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TropMedWaitingListCard
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: createTropMedWaitingListCard
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TropMedWaitingListCard by id
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: getTropMedWaitingListCard
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TropMedWaitingListCard
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: updateTropMedWaitingListCard
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TropMedWaitingListCard
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: replaceTropMedWaitingListCard
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TropMedWaitingListCard
+      tags:
+      - tropical-medicine-waiting-list-card
       operationId: deleteTropMedWaitingListCard
       responses:
         '200':

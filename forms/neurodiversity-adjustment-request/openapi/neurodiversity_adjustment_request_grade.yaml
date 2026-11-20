@@ -5,10 +5,19 @@ info:
   title: Neurodiversity Adjustment Request — NeurodiversityAdjustmentRequestGrade
   version: 1.0.0
   description: "Computed four-axis grade for a neurodiversity reasonable-adjustments request: Equality Act 2010 eligibility, impact / wellbeing risk, request completeness, and handling priority. Being neurodivergent will often amount to a disability under the Equality Act 2010; a substantial and long-term adverse effect drives the eligibility axis, and a worker at risk of absence / burnout auto-escalates the impact and priority axes."
+x-namespace:
+  form: neurodiversity-adjustment-request
+  apiPrefix: /api/neurodiversity-adjustment-request/
+  sqlSchema: neurodiversity_adjustment_request
+  xmlNamespace: https://formexamples.github.io/neurodiversity-adjustment-request/xml
+tags:
+  - name: neurodiversity-adjustment-request
+    description: Neurodiversity Adjustment Request form
 paths:
   /api/neurodiversity-adjustment-request/neurodiversity_adjustment_request_grades:
     get:
       summary: List NeurodiversityAdjustmentRequestGrade records
+      tags: [neurodiversity-adjustment-request]
       operationId: listNeurodiversityAdjustmentRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeurodiversityAdjustmentRequestGrade
+      tags: [neurodiversity-adjustment-request]
       operationId: createNeurodiversityAdjustmentRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NeurodiversityAdjustmentRequestGrade by id
+      tags: [neurodiversity-adjustment-request]
       operationId: getNeurodiversityAdjustmentRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeurodiversityAdjustmentRequestGrade
+      tags: [neurodiversity-adjustment-request]
       operationId: updateNeurodiversityAdjustmentRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NeurodiversityAdjustmentRequestGrade
+      tags: [neurodiversity-adjustment-request]
       operationId: replaceNeurodiversityAdjustmentRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NeurodiversityAdjustmentRequestGrade
+      tags: [neurodiversity-adjustment-request]
       operationId: deleteNeurodiversityAdjustmentRequestGrade
       responses:
         "200":

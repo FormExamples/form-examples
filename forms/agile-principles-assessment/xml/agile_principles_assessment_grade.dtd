@@ -1,4 +1,5 @@
 <!ELEMENT agile_principles_assessment_grade (id,created_at,updated_at,deleted_at,agile_principles_assessment_id,answered_count,mean_score,weighted_mean_score,weights_customised,maturity,top_action_1,top_action_2,top_action_3,coach_notes,signed_at,graded_at)>
+<!ATTLIST agile_principles_assessment_grade xmlns CDATA #FIXED "https://formexamples.github.io/agile-principles-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

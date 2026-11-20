@@ -1,4 +1,5 @@
 <!ELEMENT outpatient_outcome_clinical (id,created_at,updated_at,deleted_at,outpatient_outcome_id,presenting_complaint,diagnosis,treatment_delivered,outcome_classification)>
+<!ATTLIST outpatient_outcome_clinical xmlns CDATA #FIXED "https://formexamples.github.io/outpatient-outcome/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

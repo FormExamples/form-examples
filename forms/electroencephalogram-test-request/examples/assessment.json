@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005c",
+    "id": "3bebcbb1-c038-528f-b6b0-278c8dbf7dac",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006e",
+    "id": "0c23bff9-fa0f-5a3c-a8a3-226ce48166c5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "electroencephalogramTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-00000000007c",
+    "id": "2e35c34d-1987-5af7-84cf-35bcfc4dd25d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000080",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000081",
+    "patientId": "abdd1cb6-530f-510e-9519-65b562565eb9",
+    "clinicianId": "9f08faf3-cd66-57fc-83e4-0db189864cfe",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -63,11 +63,11 @@
     "notes": ""
   },
   "electroencephalogramTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000095",
+    "id": "e78e2f7d-eec0-5945-b0cc-6f1f4087414d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "electroencephalogramTestRequestId": "550e8400-e29b-41d4-a716-000000000099",
+    "electroencephalogramTestRequestId": "1325153d-6176-537c-87a4-2b39ba468aa2",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "triageTier": "routine",
@@ -80,22 +80,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "electroencephalogramTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a4",
+    "id": "0818281d-c02e-572a-b90a-49cd8cab5ae6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "electroencephalogramTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000a8",
+    "electroencephalogramTestRequestGradeId": "a7186b28-a9b2-5924-b4cd-8c36a18077aa",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "electroencephalogramTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ad",
+    "id": "872930f1-9152-58bc-9502-7a17748fc542",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "electroencephalogramTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b1",
+    "electroencephalogramTestRequestGradeId": "9c34b79e-11e2-507c-b6e0-a749f6888d46",
     "flagId": "",
     "category": "suspected-status-epilepticus",
     "priority": "low",

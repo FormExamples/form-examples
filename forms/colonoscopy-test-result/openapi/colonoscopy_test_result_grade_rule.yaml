@@ -5,10 +5,19 @@ info:
   title: Colonoscopy Test Result — ColonoscopyTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: colonoscopy-test-result
+  apiPrefix: /api/colonoscopy-test-result/
+  sqlSchema: colonoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/colonoscopy-test-result/xml
+tags:
+  - name: colonoscopy-test-result
+    description: Colonoscopy Test Result form
 paths:
   /api/colonoscopy-test-result/colonoscopy_test_result_grade_rules:
     get:
       summary: List ColonoscopyTestResultGradeRule records
+      tags: [colonoscopy-test-result]
       operationId: listColonoscopyTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ColonoscopyTestResultGradeRule
+      tags: [colonoscopy-test-result]
       operationId: createColonoscopyTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ColonoscopyTestResultGradeRule by id
+      tags: [colonoscopy-test-result]
       operationId: getColonoscopyTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ColonoscopyTestResultGradeRule
+      tags: [colonoscopy-test-result]
       operationId: updateColonoscopyTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ColonoscopyTestResultGradeRule
+      tags: [colonoscopy-test-result]
       operationId: replaceColonoscopyTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ColonoscopyTestResultGradeRule
+      tags: [colonoscopy-test-result]
       operationId: deleteColonoscopyTestResultGradeRule
       responses:
         "200":

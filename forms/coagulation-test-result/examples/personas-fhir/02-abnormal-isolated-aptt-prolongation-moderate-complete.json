@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "3915291e-6ed6-42b3-ad18-b269813972bf",
+  "id": "0d016493-d733-5dde-a60a-c204b6cf836d",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:7c04e6a2-b349-4457-a38d-7ce1fb9f874a",
+      "fullUrl": "urn:uuid:bd0d9b12-77fc-5e7c-a958-18f460974707",
       "resource": {
         "resourceType": "Patient",
-        "id": "7c04e6a2-b349-4457-a38d-7ce1fb9f874a",
+        "id": "bd0d9b12-77fc-5e7c-a958-18f460974707",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:16e145f1-c610-4e05-ac69-ad5296481fe0",
+      "fullUrl": "urn:uuid:1d10179a-83ea-5853-a930-0c9e4260b2e1",
       "resource": {
         "resourceType": "Observation",
-        "id": "16e145f1-c610-4e05-ac69-ad5296481fe0",
+        "id": "1d10179a-83ea-5853-a930-0c9e4260b2e1",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:7c04e6a2-b349-4457-a38d-7ce1fb9f874a"
+          "reference": "urn:uuid:bd0d9b12-77fc-5e7c-a958-18f460974707"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:df372466-281c-4c2d-a8af-3c0231135d0f",
+      "fullUrl": "urn:uuid:3b322355-d34c-580c-8732-98dfed80c066",
       "resource": {
         "resourceType": "Observation",
-        "id": "df372466-281c-4c2d-a8af-3c0231135d0f",
+        "id": "3b322355-d34c-580c-8732-98dfed80c066",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:7c04e6a2-b349-4457-a38d-7ce1fb9f874a"
+          "reference": "urn:uuid:bd0d9b12-77fc-5e7c-a958-18f460974707"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -571,10 +571,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:60234beb-3fbd-45a3-a025-733c3e42c85d",
+      "fullUrl": "urn:uuid:06702a61-03b1-5cd6-99c4-9aa084e78391",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "60234beb-3fbd-45a3-a025-733c3e42c85d",
+        "id": "06702a61-03b1-5cd6-99c4-9aa084e78391",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -583,7 +583,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:7c04e6a2-b349-4457-a38d-7ce1fb9f874a"
+          "reference": "urn:uuid:bd0d9b12-77fc-5e7c-a958-18f460974707"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -592,10 +592,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:49aa529e-738c-4c30-a5e0-4809f6237805",
+      "fullUrl": "urn:uuid:633388bf-d488-5d15-af20-91fbab046d67",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "49aa529e-738c-4c30-a5e0-4809f6237805",
+        "id": "633388bf-d488-5d15-af20-91fbab046d67",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -625,17 +625,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:7c04e6a2-b349-4457-a38d-7ce1fb9f874a"
+          "reference": "urn:uuid:bd0d9b12-77fc-5e7c-a958-18f460974707"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "The reported status is abnormal or one or more result values are outside the reference range; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:bce7bbb0-f5b3-4077-ac51-e2f9d450ed8b",
+      "fullUrl": "urn:uuid:82cf37d5-f106-5d0b-9001-fb565bb076c2",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "bce7bbb0-f5b3-4077-ac51-e2f9d450ed8b",
+        "id": "82cf37d5-f106-5d0b-9001-fb565bb076c2",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -665,17 +665,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:7c04e6a2-b349-4457-a38d-7ce1fb9f874a"
+          "reference": "urn:uuid:bd0d9b12-77fc-5e7c-a958-18f460974707"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An isolated APTT prolongation (with a normal PT/INR) is present; severity graded moderate."
       }
     },
     {
-      "fullUrl": "urn:uuid:cb20d6e4-b74a-4f80-aca0-dec488a6ee58",
+      "fullUrl": "urn:uuid:ab468eb7-a165-59fc-8547-a012c53f524b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "cb20d6e4-b74a-4f80-aca0-dec488a6ee58",
+        "id": "ab468eb7-a165-59fc-8547-a012c53f524b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -705,17 +705,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:7c04e6a2-b349-4457-a38d-7ce1fb9f874a"
+          "reference": "urn:uuid:bd0d9b12-77fc-5e7c-a958-18f460974707"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Isolated APTT prolongation; mixing studies / factor or inhibitor work-up recommended."
       }
     },
     {
-      "fullUrl": "urn:uuid:a914b957-9b51-4461-aaf1-25213202ff0d",
+      "fullUrl": "urn:uuid:de5c9260-0f5f-5604-9b10-a8df44443300",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "a914b957-9b51-4461-aaf1-25213202ff0d",
+        "id": "de5c9260-0f5f-5604-9b10-a8df44443300",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -745,7 +745,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:7c04e6a2-b349-4457-a38d-7ce1fb9f874a"
+          "reference": "urn:uuid:bd0d9b12-77fc-5e7c-a958-18f460974707"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An isolated APTT prolongation is present and may warrant haematology referral for inhibitor / factor work-up.",

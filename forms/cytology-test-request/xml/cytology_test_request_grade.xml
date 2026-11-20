@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cytology_test_request_grade SYSTEM "cytology_test_request_grade.dtd">
-<cytology_test_request_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<cytology_test_request_grade xmlns="https://formexamples.github.io/cytology-test-request/xml">
+<id>93828e0f-64ce-5f06-9ba9-a66199d7efe6</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cytology_test_request_id>770e8400-e29b-41d4-a716-446655440002</cytology_test_request_id>
+<cytology_test_request_id>84faf752-b93f-5d07-a77a-34235cb5223b</cytology_test_request_id>
 <appropriateness_score>5</appropriateness_score>
 <appropriateness_band>usually-appropriate</appropriateness_band>
 <preanalytical_band>ok</preanalytical_band>

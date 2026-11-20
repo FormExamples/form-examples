@@ -5,10 +5,19 @@ info:
   title: Recognition Of Stroke In The Emergency Room — RecognitionOfStrokeInTheEmergencyRoom
   version: 1.0.0
   description: "Main ROSIER assessment record: assessment context, patient identification, the blood-glucose precondition, the two mimic-exclusion criteria, and the five acute-onset neurological signs."
+x-namespace:
+  form: recognition-of-stroke-in-the-emergency-room
+  apiPrefix: /api/recognition-of-stroke-in-the-emergency-room/
+  sqlSchema: recognition_of_stroke_in_the_emergency_room
+  xmlNamespace: https://formexamples.github.io/recognition-of-stroke-in-the-emergency-room/xml
+tags:
+  - name: recognition-of-stroke-in-the-emergency-room
+    description: Recognition Of Stroke In The Emergency Room form
 paths:
   /api/recognition-of-stroke-in-the-emergency-room/recognition_of_stroke_in_the_emergency_rooms:
     get:
       summary: List RecognitionOfStrokeInTheEmergencyRoom records
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: listRecognitionOfStrokeInTheEmergencyRoom
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RecognitionOfStrokeInTheEmergencyRoom
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: createRecognitionOfStrokeInTheEmergencyRoom
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RecognitionOfStrokeInTheEmergencyRoom by id
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: getRecognitionOfStrokeInTheEmergencyRoom
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RecognitionOfStrokeInTheEmergencyRoom
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: updateRecognitionOfStrokeInTheEmergencyRoom
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RecognitionOfStrokeInTheEmergencyRoom
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: replaceRecognitionOfStrokeInTheEmergencyRoom
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RecognitionOfStrokeInTheEmergencyRoom
+      tags: [recognition-of-stroke-in-the-emergency-room]
       operationId: deleteRecognitionOfStrokeInTheEmergencyRoom
       responses:
         "200":

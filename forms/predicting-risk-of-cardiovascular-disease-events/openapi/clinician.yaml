@@ -5,10 +5,19 @@ info:
   title: Predicting Risk Of Cardiovascular Disease Events — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: predicting-risk-of-cardiovascular-disease-events
+  apiPrefix: /api/predicting-risk-of-cardiovascular-disease-events/
+  sqlSchema: predicting_risk_of_cardiovascular_disease_events
+  xmlNamespace: https://formexamples.github.io/predicting-risk-of-cardiovascular-disease-events/xml
+tags:
+  - name: predicting-risk-of-cardiovascular-disease-events
+    description: Predicting Risk Of Cardiovascular Disease Events form
 paths:
   /api/predicting-risk-of-cardiovascular-disease-events/clinicians:
     get:
       summary: List Clinician records
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: deleteClinician
       responses:
         "200":

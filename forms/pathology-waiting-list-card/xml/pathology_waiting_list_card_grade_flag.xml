@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pathology_waiting_list_card_grade_flag SYSTEM "pathology_waiting_list_card_grade_flag.dtd">
-<pathology_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<pathology_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/pathology-waiting-list-card/xml">
+<id>6f2a21ec-0434-5ebb-9d5c-2f1184d2ab6c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pathology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</pathology_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<pathology_waiting_list_card_grade_id>1e008cac-1687-58f9-9af1-5d955272e3ea</pathology_waiting_list_card_grade_id>
+<flag_id>d85d9ae7-426a-5d2f-9c41-4cc33f164a6f</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

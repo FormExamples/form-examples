@@ -5,10 +5,19 @@ info:
   title: Vaccinations Assessment — AdditionalFlag
   version: 1.0.0
   description: Additional flags raised during vaccination assessment. Many-to-one child of grade.
+x-namespace:
+  form: vaccinations-assessment
+  apiPrefix: /api/vaccinations-assessment/
+  sqlSchema: vaccinations_assessment
+  xmlNamespace: https://formexamples.github.io/vaccinations-assessment/xml
+tags:
+  - name: vaccinations-assessment
+    description: Vaccinations Assessment form
 paths:
   /api/vaccinations-assessment/additional_flags:
     get:
       summary: List AdditionalFlag records
+      tags: [vaccinations-assessment]
       operationId: listAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AdditionalFlag
+      tags: [vaccinations-assessment]
       operationId: createAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AdditionalFlag by id
+      tags: [vaccinations-assessment]
       operationId: getAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AdditionalFlag
+      tags: [vaccinations-assessment]
       operationId: updateAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AdditionalFlag
+      tags: [vaccinations-assessment]
       operationId: replaceAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AdditionalFlag
+      tags: [vaccinations-assessment]
       operationId: deleteAdditionalFlag
       responses:
         "200":

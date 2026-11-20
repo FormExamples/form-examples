@@ -1,4 +1,5 @@
 <!ELEMENT breast_screening (id,created_at,updated_at,deleted_at,patient_id,clinician_id,reporting_clinician_role,reported_at,screening_unit,episode_type,patient_identifier,age_years,last_screened_date,higher_risk_surveillance,symptomatic,consent_given,views_taken,image_adequacy,first_read_opinion,second_read_opinion,arbitration_outcome,reading_outcome,assessment_performed,assessment_modalities,imaging_classification,clinical_context)>
+<!ATTLIST breast_screening xmlns CDATA #FIXED "https://formexamples.github.io/breast-screening/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

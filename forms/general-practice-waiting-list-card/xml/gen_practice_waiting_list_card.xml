@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE gen_practice_waiting_list_card SYSTEM "gen_practice_waiting_list_card.dtd">
-<gen_practice_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<gen_practice_waiting_list_card xmlns="https://formexamples.github.io/general-practice-waiting-list-card/xml">
+<id>26f9bd05-e63a-5dad-97f9-160210b19646</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>5422c78f-76a6-52c1-8c20-69aa4e883b5e</patient_id>
+<practitioner_id>c4c0d40a-333c-5388-8c51-64d956bb6aa3</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

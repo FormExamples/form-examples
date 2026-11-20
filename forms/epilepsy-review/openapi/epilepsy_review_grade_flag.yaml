@@ -5,10 +5,19 @@ info:
   title: Epilepsy Review — EpilepsyReviewGradeFlag
   version: 1.0.0
   description: Safety flags that fire independently of the seizure-control class and the completeness status, with priority and a suggested action for the clinician or governance team.
+x-namespace:
+  form: epilepsy-review
+  apiPrefix: /api/epilepsy-review/
+  sqlSchema: epilepsy_review
+  xmlNamespace: https://formexamples.github.io/epilepsy-review/xml
+tags:
+  - name: epilepsy-review
+    description: Epilepsy Review form
 paths:
   /api/epilepsy-review/epilepsy_review_grade_flags:
     get:
       summary: List EpilepsyReviewGradeFlag records
+      tags: [epilepsy-review]
       operationId: listEpilepsyReviewGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EpilepsyReviewGradeFlag
+      tags: [epilepsy-review]
       operationId: createEpilepsyReviewGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EpilepsyReviewGradeFlag by id
+      tags: [epilepsy-review]
       operationId: getEpilepsyReviewGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EpilepsyReviewGradeFlag
+      tags: [epilepsy-review]
       operationId: updateEpilepsyReviewGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EpilepsyReviewGradeFlag
+      tags: [epilepsy-review]
       operationId: replaceEpilepsyReviewGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EpilepsyReviewGradeFlag
+      tags: [epilepsy-review]
       operationId: deleteEpilepsyReviewGradeFlag
       responses:
         "200":

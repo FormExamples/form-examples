@@ -1,4 +1,5 @@
 <!ELEMENT assessment_food_allergies (id,created_at,updated_at,deleted_at,assessment_id,has_food_allergies,ige_type,oral_allergy_syndrome,dietary_restrictions)>
+<!ATTLIST assessment_food_allergies xmlns CDATA #FIXED "https://formexamples.github.io/allergy-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

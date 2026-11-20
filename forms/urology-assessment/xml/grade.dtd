@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,ipss_total_score,ipss_qol_score,symptom_severity,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/urology-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

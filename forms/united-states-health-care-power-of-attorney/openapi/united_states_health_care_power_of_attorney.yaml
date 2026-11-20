@@ -5,10 +5,19 @@ info:
   title: United States Health Care Power Of Attorney — UnitedStatesHealthCarePowerOfAttorney
   version: 1.0.0
   description: "Main United States health care power of attorney record: principal, agent and successors, authority, treatment wishes, and signing details. Readiness classification, fired rules, and flags live in child tables."
+x-namespace:
+  form: united-states-health-care-power-of-attorney
+  apiPrefix: /api/united-states-health-care-power-of-attorney/
+  sqlSchema: united_states_health_care_power_of_attorney
+  xmlNamespace: https://formexamples.github.io/united-states-health-care-power-of-attorney/xml
+tags:
+  - name: united-states-health-care-power-of-attorney
+    description: United States Health Care Power Of Attorney form
 paths:
   /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorneys:
     get:
       summary: List UnitedStatesHealthCarePowerOfAttorney records
+      tags: [united-states-health-care-power-of-attorney]
       operationId: listUnitedStatesHealthCarePowerOfAttorney
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesHealthCarePowerOfAttorney
+      tags: [united-states-health-care-power-of-attorney]
       operationId: createUnitedStatesHealthCarePowerOfAttorney
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesHealthCarePowerOfAttorney by id
+      tags: [united-states-health-care-power-of-attorney]
       operationId: getUnitedStatesHealthCarePowerOfAttorney
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesHealthCarePowerOfAttorney
+      tags: [united-states-health-care-power-of-attorney]
       operationId: updateUnitedStatesHealthCarePowerOfAttorney
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesHealthCarePowerOfAttorney
+      tags: [united-states-health-care-power-of-attorney]
       operationId: replaceUnitedStatesHealthCarePowerOfAttorney
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesHealthCarePowerOfAttorney
+      tags: [united-states-health-care-power-of-attorney]
       operationId: deleteUnitedStatesHealthCarePowerOfAttorney
       responses:
         "200":

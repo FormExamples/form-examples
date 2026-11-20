@@ -5,10 +5,19 @@ info:
   title: Mammography Test Result — MammographyTestResultGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team. A BI-RADS 4 or 5 final assessment raises abnormal-requiring-action and urgent-referral flags.
+x-namespace:
+  form: mammography-test-result
+  apiPrefix: /api/mammography-test-result/
+  sqlSchema: mammography_test_result
+  xmlNamespace: https://formexamples.github.io/mammography-test-result/xml
+tags:
+  - name: mammography-test-result
+    description: Mammography Test Result form
 paths:
   /api/mammography-test-result/mammography_test_result_grade_flags:
     get:
       summary: List MammographyTestResultGradeFlag records
+      tags: [mammography-test-result]
       operationId: listMammographyTestResultGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MammographyTestResultGradeFlag
+      tags: [mammography-test-result]
       operationId: createMammographyTestResultGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MammographyTestResultGradeFlag by id
+      tags: [mammography-test-result]
       operationId: getMammographyTestResultGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MammographyTestResultGradeFlag
+      tags: [mammography-test-result]
       operationId: updateMammographyTestResultGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MammographyTestResultGradeFlag
+      tags: [mammography-test-result]
       operationId: replaceMammographyTestResultGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MammographyTestResultGradeFlag
+      tags: [mammography-test-result]
       operationId: deleteMammographyTestResultGradeFlag
       responses:
         "200":

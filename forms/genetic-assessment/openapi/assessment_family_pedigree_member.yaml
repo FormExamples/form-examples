@@ -5,10 +5,19 @@ info:
   title: Genetic Assessment — AssessmentFamilyPedigreeMember
   version: 1.0.0
   description: Individual family member within the pedigree.
+x-namespace:
+  form: genetic-assessment
+  apiPrefix: /api/genetic-assessment/
+  sqlSchema: genetic_assessment
+  xmlNamespace: https://formexamples.github.io/genetic-assessment/xml
+tags:
+  - name: genetic-assessment
+    description: Genetic Assessment form
 paths:
   /api/genetic-assessment/assessment_family_pedigree_members:
     get:
       summary: List AssessmentFamilyPedigreeMember records
+      tags: [genetic-assessment]
       operationId: listAssessmentFamilyPedigreeMember
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentFamilyPedigreeMember
+      tags: [genetic-assessment]
       operationId: createAssessmentFamilyPedigreeMember
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentFamilyPedigreeMember by id
+      tags: [genetic-assessment]
       operationId: getAssessmentFamilyPedigreeMember
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentFamilyPedigreeMember
+      tags: [genetic-assessment]
       operationId: updateAssessmentFamilyPedigreeMember
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentFamilyPedigreeMember
+      tags: [genetic-assessment]
       operationId: replaceAssessmentFamilyPedigreeMember
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentFamilyPedigreeMember
+      tags: [genetic-assessment]
       operationId: deleteAssessmentFamilyPedigreeMember
       responses:
         "200":

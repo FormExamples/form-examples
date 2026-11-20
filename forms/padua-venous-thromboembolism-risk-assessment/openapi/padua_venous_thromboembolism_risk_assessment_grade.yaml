@@ -5,10 +5,19 @@ info:
   title: Padua Venous Thromboembolism Risk Assessment — PaduaVenousThromboembolismRiskAssessmentGrade
   version: 1.0.0
   description: "Computed Padua grading result: per-factor points, summed Padua Prediction Score (0-20), derived risk band (low/high), and the bleeding-risk-gated prophylaxis recommendation."
+x-namespace:
+  form: padua-venous-thromboembolism-risk-assessment
+  apiPrefix: /api/padua-venous-thromboembolism-risk-assessment/
+  sqlSchema: padua_venous_thromboembolism_risk_assessment
+  xmlNamespace: https://formexamples.github.io/padua-venous-thromboembolism-risk-assessment/xml
+tags:
+  - name: padua-venous-thromboembolism-risk-assessment
+    description: Padua Venous Thromboembolism Risk Assessment form
 paths:
   /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessment_grades:
     get:
       summary: List PaduaVenousThromboembolismRiskAssessmentGrade records
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: listPaduaVenousThromboembolismRiskAssessmentGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PaduaVenousThromboembolismRiskAssessmentGrade
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: createPaduaVenousThromboembolismRiskAssessmentGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PaduaVenousThromboembolismRiskAssessmentGrade by id
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: getPaduaVenousThromboembolismRiskAssessmentGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PaduaVenousThromboembolismRiskAssessmentGrade
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: updatePaduaVenousThromboembolismRiskAssessmentGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PaduaVenousThromboembolismRiskAssessmentGrade
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: replacePaduaVenousThromboembolismRiskAssessmentGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PaduaVenousThromboembolismRiskAssessmentGrade
+      tags: [padua-venous-thromboembolism-risk-assessment]
       operationId: deletePaduaVenousThromboembolismRiskAssessmentGrade
       responses:
         "200":

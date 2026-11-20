@@ -1,4 +1,5 @@
 <!ELEMENT communication (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,listening,explaining_condition,answering_questions,time_spent)>
+<!ATTLIST communication xmlns CDATA #FIXED "https://formexamples.github.io/encounter-satisfaction/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

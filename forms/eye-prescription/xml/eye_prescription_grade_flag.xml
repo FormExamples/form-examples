@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE eye_prescription_grade_flag SYSTEM "eye_prescription_grade_flag.dtd">
-<eye_prescription_grade_flag>
-<id>ff0e8400-e29b-41d4-a716-44665544000a</id>
+<eye_prescription_grade_flag xmlns="https://formexamples.github.io/eye-prescription/xml">
+<id>64f3e27f-eafd-526a-a728-9c6441da12f8</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<eye_prescription_grade_id>dd0e8400-e29b-41d4-a716-446655440008</eye_prescription_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<eye_prescription_grade_id>4d5b8594-f91b-51f0-8b5a-fcfea8af3292</eye_prescription_grade_id>
+<flag_id>f1951cc2-f305-5d3c-ae3c-d1b4c84b3ca1</flag_id>
 <category>high-myopia</category>
 <eye>right</eye>
 <priority>low</priority>

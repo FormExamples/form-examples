@@ -5,10 +5,19 @@ info:
   title: Rheumatology Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: rheumatology-assessment
+  apiPrefix: /api/rheumatology-assessment/
+  sqlSchema: rheumatology_assessment
+  xmlNamespace: https://formexamples.github.io/rheumatology-assessment/xml
+tags:
+  - name: rheumatology-assessment
+    description: Rheumatology Assessment form
 paths:
   /api/rheumatology-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [rheumatology-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [rheumatology-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [rheumatology-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [rheumatology-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [rheumatology-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [rheumatology-assessment]
       operationId: deleteClinician
       responses:
         "200":

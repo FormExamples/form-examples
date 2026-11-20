@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000008c",
+    "id": "8e41382f-2053-563b-b868-5a7a76856735",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -18,7 +18,7 @@
     "bodyMassIndex": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000009c",
+    "id": "5a1a5f7e-c16d-5449-9cb4-6c8332f16061",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -34,12 +34,12 @@
     "employer": ""
   },
   "hipReplacementSurgeryEvaluation": {
-    "id": "550e8400-e29b-41d4-a716-0000000000aa",
+    "id": "588d733b-5bfa-507d-85ca-c7bfb5999376",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000000ae",
-    "clinicianId": "550e8400-e29b-41d4-a716-0000000000af",
+    "patientId": "b3fb8a66-aabb-59c6-abeb-88d9dc52d0f6",
+    "clinicianId": "0d9dada0-5c00-5487-85f2-e1e8d1a4afbc",
     "status": "draft",
     "assessmentDate": null,
     "assessmentTime": null,
@@ -121,11 +121,11 @@
     "additionalNotes": ""
   },
   "hipReplacementSurgeryEvaluationGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ff",
+    "id": "3abb2a08-7a7e-54df-9edb-87ddb5029927",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hipReplacementSurgeryEvaluationId": "550e8400-e29b-41d4-a716-000000000103",
+    "hipReplacementSurgeryEvaluationId": "fee25833-a44d-52ed-aa1c-e3b47b4e75c7",
     "ohsTotal": 24,
     "ohsCategory": "severe",
     "computedCandidacy": "strong-candidate",
@@ -137,11 +137,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "hipReplacementSurgeryEvaluationGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000010d",
+    "id": "94f999b0-6a2b-53c9-b219-ceba89d31ab5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hipReplacementSurgeryEvaluationGradeId": "550e8400-e29b-41d4-a716-000000000111",
+    "hipReplacementSurgeryEvaluationGradeId": "511f79ea-2c56-51fe-9c03-f71b235b5c0d",
     "flagId": "",
     "category": "conservative-treatment-not-exhausted",
     "priority": "low",

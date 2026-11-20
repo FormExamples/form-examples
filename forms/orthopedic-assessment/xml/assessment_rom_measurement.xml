@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment_rom_measurement SYSTEM "assessment_rom_measurement.dtd">
-<assessment_rom_measurement>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<assessment_rom_measurement xmlns="https://formexamples.github.io/orthopedic-assessment/xml">
+<id>5759ecb3-96c3-5631-bd03-de8df76b1dc1</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<range_of_motion_id>660e8400-e29b-41d4-a716-446655440001</range_of_motion_id>
+<range_of_motion_id>7f303922-dddb-5218-8c68-b91cae3f3515</range_of_motion_id>
 <movement></movement>
 <active_degrees>1</active_degrees>
 <passive_degrees>1</passive_degrees>

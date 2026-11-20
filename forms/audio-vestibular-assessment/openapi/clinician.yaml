@@ -5,10 +5,19 @@ info:
   title: Audio Vestibular Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: audio-vestibular-assessment
+  apiPrefix: /api/audio-vestibular-assessment/
+  sqlSchema: audio_vestibular_assessment
+  xmlNamespace: https://formexamples.github.io/audio-vestibular-assessment/xml
+tags:
+  - name: audio-vestibular-assessment
+    description: Audio Vestibular Assessment form
 paths:
   /api/audio-vestibular-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [audio-vestibular-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [audio-vestibular-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [audio-vestibular-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [audio-vestibular-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [audio-vestibular-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [audio-vestibular-assessment]
       operationId: deleteClinician
       responses:
         "200":

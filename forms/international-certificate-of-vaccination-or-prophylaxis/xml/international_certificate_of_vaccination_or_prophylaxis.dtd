@@ -1,4 +1,5 @@
 <!ELEMENT international_certificate_of_vaccination_or_prophylaxis (id,created_at,updated_at,deleted_at,patient_id,clinician_id,center_id,status,issued_at,revoked_at,revocation_reason,certificate_serial_number,issuing_country_as_iso_3166_1_alpha_3,primary_language_as_bcp_47,secondary_language_as_bcp_47,tertiary_language_as_bcp_47,destination_countries_as_iso_3166_1_alpha_3,planned_arrival_date,purpose_of_travel,medical_waiver,medical_waiver_reason,medical_waiver_signed_by_clinician_id,medical_waiver_signed_at,declared_pregnancy,declared_breastfeeding,declared_immunosuppression,electronic_signature_data_url,electronic_signature_signed_at,overall_valid,validity_computed_at,notes)>
+<!ATTLIST international_certificate_of_vaccination_or_prophylaxis xmlns CDATA #FIXED "https://formexamples.github.io/international-certificate-of-vaccination-or-prophylaxis/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

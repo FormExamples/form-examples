@@ -1,4 +1,5 @@
 <!ELEMENT recognition_of_stroke_in_the_emergency_room_grade (id,created_at,updated_at,deleted_at,recognition_of_stroke_in_the_emergency_room_id,rosier_score,stroke_likely,glucose_excluded,graded_at)>
+<!ATTLIST recognition_of_stroke_in_the_emergency_room_grade xmlns CDATA #FIXED "https://formexamples.github.io/recognition-of-stroke-in-the-emergency-room/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

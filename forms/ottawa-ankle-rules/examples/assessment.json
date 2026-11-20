@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000056",
+    "id": "e96280eb-d8f3-5caf-898f-8e53bf3449f8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000068",
+    "id": "2e7fc6b6-4b01-5171-8ed5-605935da58ae",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "ottawaAnkleRules": {
-    "id": "550e8400-e29b-41d4-a716-000000000075",
+    "id": "0ca29aee-64e7-5659-b645-980d201a4dc6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000079",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007a",
+    "patientId": "e35304a4-8ed0-5d64-b408-145bede2f60c",
+    "clinicianId": "2422de58-eb79-5d19-a184-fadf206678b3",
     "status": "draft",
     "patientIdentifier": "",
     "assessedAt": null,
@@ -61,11 +61,11 @@
     "clinicalNotes": ""
   },
   "ottawaAnkleRulesGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008d",
+    "id": "30445447-77dc-58e4-bf23-76c52f5e1e21",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "ottawaAnkleRulesId": "550e8400-e29b-41d4-a716-000000000091",
+    "ottawaAnkleRulesId": "c3bdc796-d1af-5581-af1b-508473cad145",
     "unableToBearWeight": "yes",
     "ankleXrayIndicated": "yes",
     "footXrayIndicated": "yes",
@@ -73,11 +73,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "ottawaAnkleRulesGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000097",
+    "id": "fb267848-ec63-5b0f-8e41-e9e49dc1b734",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "ottawaAnkleRulesGradeId": "550e8400-e29b-41d4-a716-00000000009b",
+    "ottawaAnkleRulesGradeId": "988ec79a-52ef-56ad-ada5-a063d98019bb",
     "ruleId": "",
     "instrument": "precondition",
     "region": "ankle",
@@ -85,11 +85,11 @@
     "description": ""
   },
   "ottawaAnkleRulesGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a1",
+    "id": "ad928f03-b1af-5dea-8884-0a2cafa93c51",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "ottawaAnkleRulesGradeId": "550e8400-e29b-41d4-a716-0000000000a5",
+    "ottawaAnkleRulesGradeId": "7d3ce4ff-69af-5312-83f9-0f1dcfb2430a",
     "flagId": "",
     "category": "ankle-xray-indicated",
     "priority": "low",

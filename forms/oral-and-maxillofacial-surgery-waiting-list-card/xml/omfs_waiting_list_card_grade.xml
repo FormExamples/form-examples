@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE omfs_waiting_list_card_grade SYSTEM "omfs_waiting_list_card_grade.dtd">
-<omfs_waiting_list_card_grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<omfs_waiting_list_card_grade xmlns="https://formexamples.github.io/oral-and-maxillofacial-surgery-waiting-list-card/xml">
+<id>18619f97-135e-5107-acf3-f9da744c025b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<omfs_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</omfs_waiting_list_card_id>
+<omfs_waiting_list_card_id>29125c6e-20da-5515-b496-b2a57b28e712</omfs_waiting_list_card_id>
 <waiting_time_status>within-target</waiting_time_status>
 <clinical_priority>P1a</clinical_priority>
 <target_wait_weeks>0.0</target_wait_weeks>

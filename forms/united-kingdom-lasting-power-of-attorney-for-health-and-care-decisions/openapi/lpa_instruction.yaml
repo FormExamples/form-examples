@@ -5,10 +5,19 @@ info:
   title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — LpaInstruction
   version: 1.0.0
   description: Binding instruction the attorneys must follow. LP1H s.7 (instructions), MCA 2005 s.9(4).
+x-namespace:
+  form: united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
+  apiPrefix: /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/
+  sqlSchema: united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions
+  xmlNamespace: https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml
+tags:
+  - name: united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
+    description: United Kingdom Lasting Power Of Attorney For Health And Care Decisions form
 paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_instructions:
     get:
       summary: List LpaInstruction records
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: listLpaInstruction
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LpaInstruction
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: createLpaInstruction
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LpaInstruction by id
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: getLpaInstruction
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LpaInstruction
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: updateLpaInstruction
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LpaInstruction
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: replaceLpaInstruction
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LpaInstruction
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: deleteLpaInstruction
       responses:
         "200":

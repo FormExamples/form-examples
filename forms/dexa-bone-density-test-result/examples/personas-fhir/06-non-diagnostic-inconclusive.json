@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "126230a6-b45b-4a0e-afa6-b671880992bc",
+  "id": "c729529e-11b3-586f-8e9a-f103ff113d77",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:c1f526b8-522f-4ce1-a3cd-5a4d531aa982",
+      "fullUrl": "urn:uuid:bea0ee22-28a0-5093-abaa-b30c02257cb7",
       "resource": {
         "resourceType": "Patient",
-        "id": "c1f526b8-522f-4ce1-a3cd-5a4d531aa982",
+        "id": "bea0ee22-28a0-5093-abaa-b30c02257cb7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:c9d65ca7-5ec0-4354-a65d-5ca70efdeaf8",
+      "fullUrl": "urn:uuid:bc1688d9-3fe7-55b6-96b2-78b77f217ef9",
       "resource": {
         "resourceType": "Observation",
-        "id": "c9d65ca7-5ec0-4354-a65d-5ca70efdeaf8",
+        "id": "bc1688d9-3fe7-55b6-96b2-78b77f217ef9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:c1f526b8-522f-4ce1-a3cd-5a4d531aa982"
+          "reference": "urn:uuid:bea0ee22-28a0-5093-abaa-b30c02257cb7"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:7887974c-87f9-4a18-a152-d2bab995d197",
+      "fullUrl": "urn:uuid:95971a0c-b3d9-5227-8358-f73e8a2b2dba",
       "resource": {
         "resourceType": "Observation",
-        "id": "7887974c-87f9-4a18-a152-d2bab995d197",
+        "id": "95971a0c-b3d9-5227-8358-f73e8a2b2dba",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:c1f526b8-522f-4ce1-a3cd-5a4d531aa982"
+          "reference": "urn:uuid:bea0ee22-28a0-5093-abaa-b30c02257cb7"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -465,10 +465,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a88689e1-8956-4280-aa61-433368cd6f49",
+      "fullUrl": "urn:uuid:51ebca2a-2189-5986-a802-1038010a33ed",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "a88689e1-8956-4280-aa61-433368cd6f49",
+        "id": "51ebca2a-2189-5986-a802-1038010a33ed",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -477,7 +477,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:c1f526b8-522f-4ce1-a3cd-5a4d531aa982"
+          "reference": "urn:uuid:bea0ee22-28a0-5093-abaa-b30c02257cb7"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -486,10 +486,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:370aa2f8-49c0-4318-a7c4-baf8cc35fa0b",
+      "fullUrl": "urn:uuid:8f8bb9a1-9f46-5b93-9bdf-d0b563c7c3ae",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "370aa2f8-49c0-4318-a7c4-baf8cc35fa0b",
+        "id": "8f8bb9a1-9f46-5b93-9bdf-d0b563c7c3ae",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -519,17 +519,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:c1f526b8-522f-4ce1-a3cd-5a4d531aa982"
+          "reference": "urn:uuid:bea0ee22-28a0-5093-abaa-b30c02257cb7"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Examination was non-diagnostic; classified as inconclusive."
       }
     },
     {
-      "fullUrl": "urn:uuid:163e045e-d648-4b6d-a541-0ef0098f5918",
+      "fullUrl": "urn:uuid:d6865e2c-2a65-5489-8696-5ff738325d19",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "163e045e-d648-4b6d-a541-0ef0098f5918",
+        "id": "d6865e2c-2a65-5489-8696-5ff738325d19",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -559,17 +559,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:c1f526b8-522f-4ce1-a3cd-5a4d531aa982"
+          "reference": "urn:uuid:bea0ee22-28a0-5093-abaa-b30c02257cb7"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Inconclusive study; abnormality severity not established."
       }
     },
     {
-      "fullUrl": "urn:uuid:ee5028dd-05cf-4d52-a3eb-5aca23078c34",
+      "fullUrl": "urn:uuid:a5f3c60c-96c2-5b67-984f-0055c69029e9",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ee5028dd-05cf-4d52-a3eb-5aca23078c34",
+        "id": "a5f3c60c-96c2-5b67-984f-0055c69029e9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -599,17 +599,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:c1f526b8-522f-4ce1-a3cd-5a4d531aa982"
+          "reference": "urn:uuid:bea0ee22-28a0-5093-abaa-b30c02257cb7"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: quantitative findings (lowest T-score / WHO classification)."
       }
     },
     {
-      "fullUrl": "urn:uuid:cdf8d95d-db96-4e11-a86f-02e44bd1ce28",
+      "fullUrl": "urn:uuid:754ecc7d-4765-529a-9bf8-b6e3ba076fae",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "cdf8d95d-db96-4e11-a86f-02e44bd1ce28",
+        "id": "754ecc7d-4765-529a-9bf8-b6e3ba076fae",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -639,17 +639,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:c1f526b8-522f-4ce1-a3cd-5a4d531aa982"
+          "reference": "urn:uuid:bea0ee22-28a0-5093-abaa-b30c02257cb7"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: comparison with previous imaging."
       }
     },
     {
-      "fullUrl": "urn:uuid:99229a84-0e78-4b51-a46e-17589ee84edc",
+      "fullUrl": "urn:uuid:70f27454-e124-5449-a40f-92e8c54649e5",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "99229a84-0e78-4b51-a46e-17589ee84edc",
+        "id": "70f27454-e124-5449-a40f-92e8c54649e5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -679,17 +679,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:c1f526b8-522f-4ce1-a3cd-5a4d531aa982"
+          "reference": "urn:uuid:bea0ee22-28a0-5093-abaa-b30c02257cb7"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Inconclusive study; repeat or alternative assessment recommended."
       }
     },
     {
-      "fullUrl": "urn:uuid:0de4cda3-7fe4-401d-a94d-26e933d5443f",
+      "fullUrl": "urn:uuid:8962b2ff-13d3-5282-a3a5-31e7f43b99a6",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "0de4cda3-7fe4-401d-a94d-26e933d5443f",
+        "id": "8962b2ff-13d3-5282-a3a5-31e7f43b99a6",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -719,7 +719,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:c1f526b8-522f-4ce1-a3cd-5a4d531aa982"
+          "reference": "urn:uuid:bea0ee22-28a0-5093-abaa-b30c02257cb7"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Examination adequacy is non-diagnostic; diagnostic confidence may be reduced.",
@@ -733,10 +733,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:617a4280-1179-41d6-ae9b-d8f3a026fec9",
+      "fullUrl": "urn:uuid:05976fb7-8867-5f83-aab8-7eca7763f2b6",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "617a4280-1179-41d6-ae9b-d8f3a026fec9",
+        "id": "05976fb7-8867-5f83-aab8-7eca7763f2b6",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -766,7 +766,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:c1f526b8-522f-4ce1-a3cd-5a4d531aa982"
+          "reference": "urn:uuid:bea0ee22-28a0-5093-abaa-b30c02257cb7"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No lowest T-score was recorded; the WHO densitometric classification cannot be derived.",

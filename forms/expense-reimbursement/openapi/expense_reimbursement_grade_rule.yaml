@@ -5,10 +5,19 @@ info:
   title: Expense Reimbursement — ExpenseReimbursementGradeRule
   version: 1.0.0
   description: Audit trail of every compliance / completeness / approval rule that fired for this claim.
+x-namespace:
+  form: expense-reimbursement
+  apiPrefix: /api/expense-reimbursement/
+  sqlSchema: expense_reimbursement
+  xmlNamespace: https://formexamples.github.io/expense-reimbursement/xml
+tags:
+  - name: expense-reimbursement
+    description: Expense Reimbursement form
 paths:
   /api/expense-reimbursement/expense_reimbursement_grade_rules:
     get:
       summary: List ExpenseReimbursementGradeRule records
+      tags: [expense-reimbursement]
       operationId: listExpenseReimbursementGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ExpenseReimbursementGradeRule
+      tags: [expense-reimbursement]
       operationId: createExpenseReimbursementGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ExpenseReimbursementGradeRule by id
+      tags: [expense-reimbursement]
       operationId: getExpenseReimbursementGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ExpenseReimbursementGradeRule
+      tags: [expense-reimbursement]
       operationId: updateExpenseReimbursementGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ExpenseReimbursementGradeRule
+      tags: [expense-reimbursement]
       operationId: replaceExpenseReimbursementGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ExpenseReimbursementGradeRule
+      tags: [expense-reimbursement]
       operationId: deleteExpenseReimbursementGradeRule
       responses:
         "200":

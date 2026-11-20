@@ -5,10 +5,19 @@ info:
   title: Vaccinations Assessment — Assessment
   version: 1.0.0
   description: Vaccination assessment form. Parent entity for all form sections.
+x-namespace:
+  form: vaccinations-assessment
+  apiPrefix: /api/vaccinations-assessment/
+  sqlSchema: vaccinations_assessment
+  xmlNamespace: https://formexamples.github.io/vaccinations-assessment/xml
+tags:
+  - name: vaccinations-assessment
+    description: Vaccinations Assessment form
 paths:
   /api/vaccinations-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [vaccinations-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [vaccinations-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [vaccinations-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [vaccinations-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [vaccinations-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [vaccinations-assessment]
       operationId: deleteAssessment
       responses:
         "200":

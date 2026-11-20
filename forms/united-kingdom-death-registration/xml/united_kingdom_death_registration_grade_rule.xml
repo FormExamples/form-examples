@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_death_registration_grade_rule SYSTEM "united_kingdom_death_registration_grade_rule.dtd">
-<united_kingdom_death_registration_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<united_kingdom_death_registration_grade_rule xmlns="https://formexamples.github.io/united-kingdom-death-registration/xml">
+<id>f99dc30a-19e3-5338-a26e-d9e9426c941c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<united_kingdom_death_registration_grade_id>880e8400-e29b-41d4-a716-446655440003</united_kingdom_death_registration_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<united_kingdom_death_registration_grade_id>86c2b16a-9344-5a3d-98e2-96130dcdcd14</united_kingdom_death_registration_grade_id>
+<rule_id>31ac2996-570a-554a-bcb3-a72ef42ff342</rule_id>
 <dimension>deceased</dimension>
 <category>General</category>
 <description>Example text.</description>

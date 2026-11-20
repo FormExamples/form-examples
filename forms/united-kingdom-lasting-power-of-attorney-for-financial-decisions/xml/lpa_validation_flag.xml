@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE lpa_validation_flag SYSTEM "lpa_validation_flag.dtd">
-<lpa_validation_flag>
-<id>551e8400-e29b-41d4-a716-44665544000f</id>
+<lpa_validation_flag xmlns="https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml">
+<id>ba973240-a028-59a4-8234-c3beae9c00e8</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<lpa_id>660e8400-e29b-41d4-a716-446655440001</lpa_id>
+<lpa_id>4dfc3fa0-00d6-52c3-b890-03a7577d6b4a</lpa_id>
 <flag_name>Example</flag_name>
 <priority>low</priority>
 <category>General</category>

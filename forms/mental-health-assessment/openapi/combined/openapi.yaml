@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Mental Health Assessment form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: mental-health-assessment
+  apiPrefix: /api/mental-health-assessment/
+  sqlSchema: mental_health_assessment
+  xmlNamespace: https://formexamples.github.io/mental-health-assessment/xml
+tags:
+- name: mental-health-assessment
+  description: Mental Health Assessment form
 paths:
   /api/mental-health-assessment/assessment_current_medication_items:
     get:
       summary: List AssessmentCurrentMedicationItem records
+      tags:
+      - mental-health-assessment
       operationId: listAssessmentCurrentMedicationItem
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AssessmentCurrentMedicationItem
+      tags:
+      - mental-health-assessment
       operationId: createAssessmentCurrentMedicationItem
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AssessmentCurrentMedicationItem by id
+      tags:
+      - mental-health-assessment
       operationId: getAssessmentCurrentMedicationItem
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AssessmentCurrentMedicationItem
+      tags:
+      - mental-health-assessment
       operationId: updateAssessmentCurrentMedicationItem
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AssessmentCurrentMedicationItem
+      tags:
+      - mental-health-assessment
       operationId: replaceAssessmentCurrentMedicationItem
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AssessmentCurrentMedicationItem
+      tags:
+      - mental-health-assessment
       operationId: deleteAssessmentCurrentMedicationItem
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/mental-health-assessment/assessment_current_medications:
     get:
       summary: List AssessmentCurrentMedications records
+      tags:
+      - mental-health-assessment
       operationId: listAssessmentCurrentMedications
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AssessmentCurrentMedications
+      tags:
+      - mental-health-assessment
       operationId: createAssessmentCurrentMedications
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AssessmentCurrentMedications by id
+      tags:
+      - mental-health-assessment
       operationId: getAssessmentCurrentMedications
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AssessmentCurrentMedications
+      tags:
+      - mental-health-assessment
       operationId: updateAssessmentCurrentMedications
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AssessmentCurrentMedications
+      tags:
+      - mental-health-assessment
       operationId: replaceAssessmentCurrentMedications
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AssessmentCurrentMedications
+      tags:
+      - mental-health-assessment
       operationId: deleteAssessmentCurrentMedications
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/mental-health-assessment/assessments:
     get:
       summary: List Assessment records
+      tags:
+      - mental-health-assessment
       operationId: listAssessment
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessment
+      tags:
+      - mental-health-assessment
       operationId: createAssessment
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags:
+      - mental-health-assessment
       operationId: getAssessment
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessment
+      tags:
+      - mental-health-assessment
       operationId: updateAssessment
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Assessment
+      tags:
+      - mental-health-assessment
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Assessment
+      tags:
+      - mental-health-assessment
       operationId: deleteAssessment
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/mental-health-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - mental-health-assessment
       operationId: listClinician
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - mental-health-assessment
       operationId: createClinician
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - mental-health-assessment
       operationId: getClinician
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - mental-health-assessment
       operationId: updateClinician
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - mental-health-assessment
       operationId: replaceClinician
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - mental-health-assessment
       operationId: deleteClinician
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/mental-health-assessment/grades:
     get:
       summary: List Grade records
+      tags:
+      - mental-health-assessment
       operationId: listGrade
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Grade
+      tags:
+      - mental-health-assessment
       operationId: createGrade
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Grade by id
+      tags:
+      - mental-health-assessment
       operationId: getGrade
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Grade
+      tags:
+      - mental-health-assessment
       operationId: updateGrade
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Grade
+      tags:
+      - mental-health-assessment
       operationId: replaceGrade
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Grade
+      tags:
+      - mental-health-assessment
       operationId: deleteGrade
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/mental-health-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags:
+      - mental-health-assessment
       operationId: listGradingAdditionalFlag
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingAdditionalFlag
+      tags:
+      - mental-health-assessment
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags:
+      - mental-health-assessment
       operationId: getGradingAdditionalFlag
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags:
+      - mental-health-assessment
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags:
+      - mental-health-assessment
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags:
+      - mental-health-assessment
       operationId: deleteGradingAdditionalFlag
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/mental-health-assessment/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags:
+      - mental-health-assessment
       operationId: listGradingFiredRule
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingFiredRule
+      tags:
+      - mental-health-assessment
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags:
+      - mental-health-assessment
       operationId: getGradingFiredRule
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingFiredRule
+      tags:
+      - mental-health-assessment
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingFiredRule
+      tags:
+      - mental-health-assessment
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingFiredRule
+      tags:
+      - mental-health-assessment
       operationId: deleteGradingFiredRule
       responses:
         '200':
@@ -1741,9 +1833,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - mental-health-assessment
   /api/mental-health-assessment/patients:
     get:
       summary: List Patient records
+      tags:
+      - mental-health-assessment
       operationId: listPatient
       parameters:
       - name: limit
@@ -1796,6 +1892,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - mental-health-assessment
       operationId: createPatient
       requestBody:
         required: true
@@ -1849,6 +1947,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - mental-health-assessment
       operationId: getPatient
       responses:
         '200':
@@ -1876,6 +1976,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - mental-health-assessment
       operationId: updatePatient
       requestBody:
         required: true
@@ -1921,6 +2023,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - mental-health-assessment
       operationId: replacePatient
       requestBody:
         required: true
@@ -1966,6 +2070,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - mental-health-assessment
       operationId: deletePatient
       responses:
         '200':

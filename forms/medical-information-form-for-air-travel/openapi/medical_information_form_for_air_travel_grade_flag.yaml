@@ -5,10 +5,19 @@ info:
   title: Medical Information Form For Air Travel — MedicalInformationFormForAirTravelGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the fitness-to-fly band, with priority and a suggested action for the airline medical desk.
+x-namespace:
+  form: medical-information-form-for-air-travel
+  apiPrefix: /api/medical-information-form-for-air-travel/
+  sqlSchema: medical_information_form_for_air_travel
+  xmlNamespace: https://formexamples.github.io/medical-information-form-for-air-travel/xml
+tags:
+  - name: medical-information-form-for-air-travel
+    description: Medical Information Form For Air Travel form
 paths:
   /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grade_flags:
     get:
       summary: List MedicalInformationFormForAirTravelGradeFlag records
+      tags: [medical-information-form-for-air-travel]
       operationId: listMedicalInformationFormForAirTravelGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalInformationFormForAirTravelGradeFlag
+      tags: [medical-information-form-for-air-travel]
       operationId: createMedicalInformationFormForAirTravelGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalInformationFormForAirTravelGradeFlag by id
+      tags: [medical-information-form-for-air-travel]
       operationId: getMedicalInformationFormForAirTravelGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalInformationFormForAirTravelGradeFlag
+      tags: [medical-information-form-for-air-travel]
       operationId: updateMedicalInformationFormForAirTravelGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalInformationFormForAirTravelGradeFlag
+      tags: [medical-information-form-for-air-travel]
       operationId: replaceMedicalInformationFormForAirTravelGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalInformationFormForAirTravelGradeFlag
+      tags: [medical-information-form-for-air-travel]
       operationId: deleteMedicalInformationFormForAirTravelGradeFlag
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Vaccinations Assessment — AdultVaccinations
   version: 1.0.0
   description: Adult vaccination status (0=Not Given, 1=Partial, 2=Complete). One-to-one child of assessment.
+x-namespace:
+  form: vaccinations-assessment
+  apiPrefix: /api/vaccinations-assessment/
+  sqlSchema: vaccinations_assessment
+  xmlNamespace: https://formexamples.github.io/vaccinations-assessment/xml
+tags:
+  - name: vaccinations-assessment
+    description: Vaccinations Assessment form
 paths:
   /api/vaccinations-assessment/adult_vaccinations:
     get:
       summary: List AdultVaccinations records
+      tags: [vaccinations-assessment]
       operationId: listAdultVaccinations
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AdultVaccinations
+      tags: [vaccinations-assessment]
       operationId: createAdultVaccinations
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AdultVaccinations by id
+      tags: [vaccinations-assessment]
       operationId: getAdultVaccinations
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AdultVaccinations
+      tags: [vaccinations-assessment]
       operationId: updateAdultVaccinations
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AdultVaccinations
+      tags: [vaccinations-assessment]
       operationId: replaceAdultVaccinations
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AdultVaccinations
+      tags: [vaccinations-assessment]
       operationId: deleteAdultVaccinations
       responses:
         "200":

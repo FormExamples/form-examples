@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Cardiopulmonary Resuscitation Training form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: cardiopulmonary-resuscitation-training
+  apiPrefix: /api/cardiopulmonary-resuscitation-training/
+  sqlSchema: cardiopulmonary_resuscitation_training
+  xmlNamespace: https://formexamples.github.io/cardiopulmonary-resuscitation-training/xml
+tags:
+- name: cardiopulmonary-resuscitation-training
+  description: Cardiopulmonary Resuscitation Training form
 paths:
   /api/cardiopulmonary-resuscitation-training/assessments:
     get:
       summary: List Assessment records
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: listAssessment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessment
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: createAssessment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: getAssessment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessment
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: updateAssessment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Assessment
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Assessment
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: deleteAssessment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/cardiopulmonary-resuscitation-training/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: listClinician
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: createClinician
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: getClinician
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: updateClinician
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: replaceClinician
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: deleteClinician
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/cardiopulmonary-resuscitation-training/grades:
     get:
       summary: List Grade records
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: listGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Grade
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: createGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Grade by id
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: getGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Grade
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: updateGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Grade
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: replaceGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Grade
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: deleteGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/cardiopulmonary-resuscitation-training/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: listGradingAdditionalFlag
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingAdditionalFlag
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: getGradingAdditionalFlag
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: deleteGradingAdditionalFlag
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/cardiopulmonary-resuscitation-training/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: listGradingFiredRule
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingFiredRule
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: getGradingFiredRule
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingFiredRule
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingFiredRule
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingFiredRule
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: deleteGradingFiredRule
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - cardiopulmonary-resuscitation-training
   /api/cardiopulmonary-resuscitation-training/patients:
     get:
       summary: List Patient records
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - cardiopulmonary-resuscitation-training
       operationId: deletePatient
       responses:
         '200':

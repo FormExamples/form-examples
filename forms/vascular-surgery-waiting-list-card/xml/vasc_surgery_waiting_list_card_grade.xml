@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE vasc_surgery_waiting_list_card_grade SYSTEM "vasc_surgery_waiting_list_card_grade.dtd">
-<vasc_surgery_waiting_list_card_grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<vasc_surgery_waiting_list_card_grade xmlns="https://formexamples.github.io/vascular-surgery-waiting-list-card/xml">
+<id>a6416f6a-0536-5b13-9a9b-6c3d76d0ad74</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<vasc_surgery_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</vasc_surgery_waiting_list_card_id>
+<vasc_surgery_waiting_list_card_id>9288b335-8fd6-5830-ab28-cb2733e31712</vasc_surgery_waiting_list_card_id>
 <waiting_time_status>within-target</waiting_time_status>
 <clinical_priority>P1a</clinical_priority>
 <target_wait_weeks>0.0</target_wait_weeks>

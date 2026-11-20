@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE biopsy_test_result_grade SYSTEM "biopsy_test_result_grade.dtd">
-<biopsy_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<biopsy_test_result_grade xmlns="https://formexamples.github.io/biopsy-test-result/xml">
+<id>e61c21cd-1f9c-5f44-b9e9-cd493869272d</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<biopsy_test_result_id>770e8400-e29b-41d4-a716-446655440002</biopsy_test_result_id>
+<biopsy_test_result_id>771b4e4f-2afe-5beb-972f-b5631dbaa06c</biopsy_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

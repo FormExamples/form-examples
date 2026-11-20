@@ -5,10 +5,19 @@ info:
   title: United Kingdom Birth Registration — UnitedKingdomBirthRegistrationGrade
   version: 1.0.0
   description: "Computed completeness and validity classification for a United Kingdom Birth Registration application: readiness class (ready-to-submit/incomplete/needs-additional-evidence/out-of-scope), days from birth to registration, late-registration indicator, and count of missing items."
+x-namespace:
+  form: united-kingdom-birth-registration
+  apiPrefix: /api/united-kingdom-birth-registration/
+  sqlSchema: united_kingdom_birth_registration
+  xmlNamespace: https://formexamples.github.io/united-kingdom-birth-registration/xml
+tags:
+  - name: united-kingdom-birth-registration
+    description: United Kingdom Birth Registration form
 paths:
   /api/united-kingdom-birth-registration/united_kingdom_birth_registration_grades:
     get:
       summary: List UnitedKingdomBirthRegistrationGrade records
+      tags: [united-kingdom-birth-registration]
       operationId: listUnitedKingdomBirthRegistrationGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomBirthRegistrationGrade
+      tags: [united-kingdom-birth-registration]
       operationId: createUnitedKingdomBirthRegistrationGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomBirthRegistrationGrade by id
+      tags: [united-kingdom-birth-registration]
       operationId: getUnitedKingdomBirthRegistrationGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomBirthRegistrationGrade
+      tags: [united-kingdom-birth-registration]
       operationId: updateUnitedKingdomBirthRegistrationGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomBirthRegistrationGrade
+      tags: [united-kingdom-birth-registration]
       operationId: replaceUnitedKingdomBirthRegistrationGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomBirthRegistrationGrade
+      tags: [united-kingdom-birth-registration]
       operationId: deleteUnitedKingdomBirthRegistrationGrade
       responses:
         "200":

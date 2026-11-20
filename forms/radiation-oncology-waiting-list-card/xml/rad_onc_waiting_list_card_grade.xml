@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rad_onc_waiting_list_card_grade SYSTEM "rad_onc_waiting_list_card_grade.dtd">
-<rad_onc_waiting_list_card_grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<rad_onc_waiting_list_card_grade xmlns="https://formexamples.github.io/radiation-oncology-waiting-list-card/xml">
+<id>758b17eb-4f16-5541-bec0-b1060ea9bfd3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<rad_onc_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</rad_onc_waiting_list_card_id>
+<rad_onc_waiting_list_card_id>386e363e-1ee0-57d2-8bd6-843ae455df4a</rad_onc_waiting_list_card_id>
 <waiting_time_status>within-target</waiting_time_status>
 <clinical_priority>P1a</clinical_priority>
 <target_wait_weeks>0.0</target_wait_weeks>

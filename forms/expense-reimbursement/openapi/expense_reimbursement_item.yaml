@@ -5,10 +5,19 @@ info:
   title: Expense Reimbursement — ExpenseReimbursementItem
   version: 1.0.0
   description: One line item (a single receipt or purchase) within an expense reimbursement claim.
+x-namespace:
+  form: expense-reimbursement
+  apiPrefix: /api/expense-reimbursement/
+  sqlSchema: expense_reimbursement
+  xmlNamespace: https://formexamples.github.io/expense-reimbursement/xml
+tags:
+  - name: expense-reimbursement
+    description: Expense Reimbursement form
 paths:
   /api/expense-reimbursement/expense_reimbursement_items:
     get:
       summary: List ExpenseReimbursementItem records
+      tags: [expense-reimbursement]
       operationId: listExpenseReimbursementItem
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ExpenseReimbursementItem
+      tags: [expense-reimbursement]
       operationId: createExpenseReimbursementItem
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ExpenseReimbursementItem by id
+      tags: [expense-reimbursement]
       operationId: getExpenseReimbursementItem
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ExpenseReimbursementItem
+      tags: [expense-reimbursement]
       operationId: updateExpenseReimbursementItem
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ExpenseReimbursementItem
+      tags: [expense-reimbursement]
       operationId: replaceExpenseReimbursementItem
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ExpenseReimbursementItem
+      tags: [expense-reimbursement]
       operationId: deleteExpenseReimbursementItem
       responses:
         "200":

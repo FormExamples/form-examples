@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE urology_waiting_list_card_grade_flag SYSTEM "urology_waiting_list_card_grade_flag.dtd">
-<urology_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<urology_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/urology-waiting-list-card/xml">
+<id>a41c3486-b7ea-57e3-9a0c-42181a4c46df</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<urology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</urology_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<urology_waiting_list_card_grade_id>ada58888-3f2c-51a3-a952-240e3985bddb</urology_waiting_list_card_grade_id>
+<flag_id>a3d53cf6-712b-5f6f-a6bf-c40c3a25119a</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

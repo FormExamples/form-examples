@@ -1,4 +1,5 @@
 <!ELEMENT wells_score_for_pulmonary_embolism (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,patient_identifier,assessed_at,care_setting,age_band,haemodynamic_status,clinical_signs_of_dvt,pe_most_likely,heart_rate_over_100,immobilisation_or_surgery,previous_dvt_pe,haemoptysis,malignancy,clinical_notes)>
+<!ATTLIST wells_score_for_pulmonary_embolism xmlns CDATA #FIXED "https://formexamples.github.io/wells-score-for-pulmonary-embolism/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

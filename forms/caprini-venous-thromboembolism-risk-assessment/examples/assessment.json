@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000072",
+    "id": "9c46f843-11f9-5c80-8283-7d8fb5fb844d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "b8e02bf8-1402-589b-b847-07e28962c832",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "capriniVenousThromboembolismRiskAssessment": {
-    "id": "550e8400-e29b-41d4-a716-000000000091",
+    "id": "c4553840-f957-501f-9840-c278d97c1de2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000095",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000096",
+    "patientId": "2e5324f6-ee3f-539d-aa67-64cea7d5bfef",
+    "clinicianId": "f5d5d8ee-e3fa-5b00-a654-866f4f80a733",
     "clinicianName": "",
     "clinicianRole": "doctor",
     "assessedAt": null,
@@ -89,22 +89,22 @@
     "clinicalNote": ""
   },
   "capriniVenousThromboembolismRiskAssessmentGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c5",
+    "id": "dc3b74a2-efe4-5610-9558-fd6675d7e686",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "capriniVenousThromboembolismRiskAssessmentId": "550e8400-e29b-41d4-a716-0000000000c9",
+    "capriniVenousThromboembolismRiskAssessmentId": "e1aa4759-89ff-5cef-b644-78cea1831cf3",
     "totalScore": null,
     "riskBand": "very-low",
     "prophylaxisRecommendation": "",
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "capriniVenousThromboembolismRiskAssessmentGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ce",
+    "id": "6a1ca539-f80a-5410-a9e9-faa89eec59c8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "capriniVenousThromboembolismRiskAssessmentGradeId": "550e8400-e29b-41d4-a716-0000000000d2",
+    "capriniVenousThromboembolismRiskAssessmentGradeId": "40718dd1-55a4-50c8-9726-baeca8fd990e",
     "ruleId": "",
     "factor": "",
     "weightGroup": "age",
@@ -113,11 +113,11 @@
     "description": ""
   },
   "capriniVenousThromboembolismRiskAssessmentGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d9",
+    "id": "7c49f3b5-5f8a-5f70-95b1-bbedf4b6d8df",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "capriniVenousThromboembolismRiskAssessmentGradeId": "550e8400-e29b-41d4-a716-0000000000dd",
+    "capriniVenousThromboembolismRiskAssessmentGradeId": "3fa956e4-504d-5d6a-bd01-f3ac05ab2643",
     "flagId": "",
     "category": "high-vte-risk",
     "priority": "low",

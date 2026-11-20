@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000058",
+    "id": "fd79826b-d1fa-52f9-8fde-e43b34c75509",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006a",
+    "id": "78fe2b6b-b9df-5d37-949b-b673312e6761",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "fluidBalanceChart": {
-    "id": "550e8400-e29b-41d4-a716-000000000077",
+    "id": "caa2cfde-7da7-5146-9f8d-6d340fd3b5d8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007b",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007c",
+    "patientId": "7fddfc93-bcaf-502f-9a5a-f9f53ba0bf91",
+    "clinicianId": "279d3534-8a4b-500a-94da-4dbf2a3149c6",
     "clinicianName": "",
     "clinicianRole": "nurse",
     "patientIdentifier": "",
@@ -51,11 +51,11 @@
     "clinicalNote": ""
   },
   "fluidBalanceChartEntry": {
-    "id": "550e8400-e29b-41d4-a716-000000000085",
+    "id": "456c7d96-2bf4-59f3-a614-cc9e245ab108",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "fluidBalanceChartId": "550e8400-e29b-41d4-a716-000000000089",
+    "fluidBalanceChartId": "2dafcf73-916c-5f71-bf76-e93cddaaf25e",
     "entryAt": null,
     "direction": "intake",
     "category": "oral",
@@ -63,11 +63,11 @@
     "volumeMl": null
   },
   "fluidBalanceChartGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008f",
+    "id": "09e1cc64-2d11-5d52-b84d-b5f5c4ca94f9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "fluidBalanceChartId": "550e8400-e29b-41d4-a716-000000000093",
+    "fluidBalanceChartId": "b2c5f9ac-256d-59e2-bbff-c09854889f77",
     "totalIntakeMl": 0.0,
     "totalOutputMl": 0.0,
     "netBalanceMl": 0.0,
@@ -79,21 +79,21 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "fluidBalanceChartGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000009d",
+    "id": "d4a37e14-3fcf-5c34-b166-5b90f9c1f424",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "fluidBalanceChartGradeId": "550e8400-e29b-41d4-a716-0000000000a1",
+    "fluidBalanceChartGradeId": "47a80820-d35f-590c-a069-7a21cfab9d93",
     "ruleId": "",
     "category": "",
     "description": ""
   },
   "fluidBalanceChartGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a5",
+    "id": "98cd581b-a1a2-5132-9a9c-d63a9cd44e55",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "fluidBalanceChartGradeId": "550e8400-e29b-41d4-a716-0000000000a9",
+    "fluidBalanceChartGradeId": "77c18a91-6887-5acc-9015-9df0d91b3822",
     "flagId": "",
     "category": "fluid-overload",
     "priority": "low",

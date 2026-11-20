@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Nuclear Medicine Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: nuclear-medicine-waiting-list-card
+  apiPrefix: /api/nuclear-medicine-waiting-list-card/
+  sqlSchema: nuclear_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/nuclear-medicine-waiting-list-card/xml
+tags:
+- name: nuclear-medicine-waiting-list-card
+  description: Nuclear Medicine Waiting List Card form
 paths:
   /api/nuclear-medicine-waiting-list-card/nuclear_med_waiting_list_card_appointments:
     get:
       summary: List NuclearMedWaitingListCardAppointment records
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: listNuclearMedWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NuclearMedWaitingListCardAppointment
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: createNuclearMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NuclearMedWaitingListCardAppointment by id
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: getNuclearMedWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NuclearMedWaitingListCardAppointment
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: updateNuclearMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NuclearMedWaitingListCardAppointment
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: replaceNuclearMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NuclearMedWaitingListCardAppointment
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: deleteNuclearMedWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/nuclear-medicine-waiting-list-card/nuclear_med_waiting_list_card_grade_flags:
     get:
       summary: List NuclearMedWaitingListCardGradeFlag records
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: listNuclearMedWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NuclearMedWaitingListCardGradeFlag
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: createNuclearMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NuclearMedWaitingListCardGradeFlag by id
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: getNuclearMedWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NuclearMedWaitingListCardGradeFlag
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: updateNuclearMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NuclearMedWaitingListCardGradeFlag
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: replaceNuclearMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NuclearMedWaitingListCardGradeFlag
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: deleteNuclearMedWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/nuclear-medicine-waiting-list-card/nuclear_med_waiting_list_card_grade_rules:
     get:
       summary: List NuclearMedWaitingListCardGradeRule records
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: listNuclearMedWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NuclearMedWaitingListCardGradeRule
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: createNuclearMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NuclearMedWaitingListCardGradeRule by id
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: getNuclearMedWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NuclearMedWaitingListCardGradeRule
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: updateNuclearMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NuclearMedWaitingListCardGradeRule
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: replaceNuclearMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NuclearMedWaitingListCardGradeRule
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: deleteNuclearMedWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/nuclear-medicine-waiting-list-card/nuclear_med_waiting_list_card_grades:
     get:
       summary: List NuclearMedWaitingListCardGrade records
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: listNuclearMedWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NuclearMedWaitingListCardGrade
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: createNuclearMedWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NuclearMedWaitingListCardGrade by id
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: getNuclearMedWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NuclearMedWaitingListCardGrade
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: updateNuclearMedWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NuclearMedWaitingListCardGrade
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: replaceNuclearMedWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NuclearMedWaitingListCardGrade
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: deleteNuclearMedWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/nuclear-medicine-waiting-list-card/nuclear_med_waiting_list_cards:
     get:
       summary: List NuclearMedWaitingListCard records
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: listNuclearMedWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NuclearMedWaitingListCard
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: createNuclearMedWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NuclearMedWaitingListCard by id
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: getNuclearMedWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NuclearMedWaitingListCard
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: updateNuclearMedWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NuclearMedWaitingListCard
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: replaceNuclearMedWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NuclearMedWaitingListCard
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: deleteNuclearMedWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - nuclear-medicine-waiting-list-card
   /api/nuclear-medicine-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/nuclear-medicine-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - nuclear-medicine-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

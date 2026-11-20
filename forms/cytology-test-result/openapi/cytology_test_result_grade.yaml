@@ -5,10 +5,19 @@ info:
   title: Cytology Test Result — CytologyTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. high-grade dyskaryosis, malignant cells, Thy5, or breast C5) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: cytology-test-result
+  apiPrefix: /api/cytology-test-result/
+  sqlSchema: cytology_test_result
+  xmlNamespace: https://formexamples.github.io/cytology-test-result/xml
+tags:
+  - name: cytology-test-result
+    description: Cytology Test Result form
 paths:
   /api/cytology-test-result/cytology_test_result_grades:
     get:
       summary: List CytologyTestResultGrade records
+      tags: [cytology-test-result]
       operationId: listCytologyTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CytologyTestResultGrade
+      tags: [cytology-test-result]
       operationId: createCytologyTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CytologyTestResultGrade by id
+      tags: [cytology-test-result]
       operationId: getCytologyTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CytologyTestResultGrade
+      tags: [cytology-test-result]
       operationId: updateCytologyTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CytologyTestResultGrade
+      tags: [cytology-test-result]
       operationId: replaceCytologyTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CytologyTestResultGrade
+      tags: [cytology-test-result]
       operationId: deleteCytologyTestResultGrade
       responses:
         "200":

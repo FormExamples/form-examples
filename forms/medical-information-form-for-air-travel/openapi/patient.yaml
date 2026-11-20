@@ -5,10 +5,19 @@ info:
   title: Medical Information Form For Air Travel — Patient
   version: 1.0.0
   description: Passenger (MEDIF subject) demographic and identity information.
+x-namespace:
+  form: medical-information-form-for-air-travel
+  apiPrefix: /api/medical-information-form-for-air-travel/
+  sqlSchema: medical_information_form_for_air_travel
+  xmlNamespace: https://formexamples.github.io/medical-information-form-for-air-travel/xml
+tags:
+  - name: medical-information-form-for-air-travel
+    description: Medical Information Form For Air Travel form
 paths:
   /api/medical-information-form-for-air-travel/patients:
     get:
       summary: List Patient records
+      tags: [medical-information-form-for-air-travel]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [medical-information-form-for-air-travel]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [medical-information-form-for-air-travel]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [medical-information-form-for-air-travel]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [medical-information-form-for-air-travel]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [medical-information-form-for-air-travel]
       operationId: deletePatient
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE clin_biology_waiting_list_card_grade_flag SYSTEM "clin_biology_waiting_list_card_grade_flag.dtd">
-<clin_biology_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<clin_biology_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/clinical-biology-waiting-list-card/xml">
+<id>8a6d2bdb-8743-5dc1-bd4b-23443b6c41d1</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<clin_biology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</clin_biology_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<clin_biology_waiting_list_card_grade_id>c7af0193-642f-5fb4-b091-6ce6b1d4ce1b</clin_biology_waiting_list_card_grade_id>
+<flag_id>7ed07600-d4be-59c7-85b9-399cac450ea7</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

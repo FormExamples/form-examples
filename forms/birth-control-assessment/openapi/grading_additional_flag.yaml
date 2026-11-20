@@ -5,10 +5,19 @@ info:
   title: Birth Control Assessment — GradingAdditionalFlag
   version: 1.0.0
   description: Additional safety-critical flags detected during birth control assessment grading (e.g. UK MEC 4 contraindications, DVT risk).
+x-namespace:
+  form: birth-control-assessment
+  apiPrefix: /api/birth-control-assessment/
+  sqlSchema: birth_control_assessment
+  xmlNamespace: https://formexamples.github.io/birth-control-assessment/xml
+tags:
+  - name: birth-control-assessment
+    description: Birth Control Assessment form
 paths:
   /api/birth-control-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [birth-control-assessment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [birth-control-assessment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [birth-control-assessment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [birth-control-assessment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [birth-control-assessment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [birth-control-assessment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Ottawa Knee Rule — OttawaKneeRuleGradeFlag
   version: 1.0.0
   description: Clinically significant flags that fire independently of the imaging decision, with priority and a suggested action for the assessing team.
+x-namespace:
+  form: ottawa-knee-rule
+  apiPrefix: /api/ottawa-knee-rule/
+  sqlSchema: ottawa_knee_rule
+  xmlNamespace: https://formexamples.github.io/ottawa-knee-rule/xml
+tags:
+  - name: ottawa-knee-rule
+    description: Ottawa Knee Rule form
 paths:
   /api/ottawa-knee-rule/ottawa_knee_rule_grade_flags:
     get:
       summary: List OttawaKneeRuleGradeFlag records
+      tags: [ottawa-knee-rule]
       operationId: listOttawaKneeRuleGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OttawaKneeRuleGradeFlag
+      tags: [ottawa-knee-rule]
       operationId: createOttawaKneeRuleGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OttawaKneeRuleGradeFlag by id
+      tags: [ottawa-knee-rule]
       operationId: getOttawaKneeRuleGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OttawaKneeRuleGradeFlag
+      tags: [ottawa-knee-rule]
       operationId: updateOttawaKneeRuleGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OttawaKneeRuleGradeFlag
+      tags: [ottawa-knee-rule]
       operationId: replaceOttawaKneeRuleGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OttawaKneeRuleGradeFlag
+      tags: [ottawa-knee-rule]
       operationId: deleteOttawaKneeRuleGradeFlag
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Ultrasound Test Result — UltrasoundTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: ultrasound-test-result
+  apiPrefix: /api/ultrasound-test-result/
+  sqlSchema: ultrasound_test_result
+  xmlNamespace: https://formexamples.github.io/ultrasound-test-result/xml
+tags:
+  - name: ultrasound-test-result
+    description: Ultrasound Test Result form
 paths:
   /api/ultrasound-test-result/ultrasound_test_result_grades:
     get:
       summary: List UltrasoundTestResultGrade records
+      tags: [ultrasound-test-result]
       operationId: listUltrasoundTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UltrasoundTestResultGrade
+      tags: [ultrasound-test-result]
       operationId: createUltrasoundTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UltrasoundTestResultGrade by id
+      tags: [ultrasound-test-result]
       operationId: getUltrasoundTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UltrasoundTestResultGrade
+      tags: [ultrasound-test-result]
       operationId: updateUltrasoundTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UltrasoundTestResultGrade
+      tags: [ultrasound-test-result]
       operationId: replaceUltrasoundTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UltrasoundTestResultGrade
+      tags: [ultrasound-test-result]
       operationId: deleteUltrasoundTestResultGrade
       responses:
         "200":

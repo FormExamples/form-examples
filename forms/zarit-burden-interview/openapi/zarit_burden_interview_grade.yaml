@@ -5,10 +5,19 @@ info:
   title: Zarit Burden Interview — ZaritBurdenInterviewGrade
   version: 1.0.0
   description: "Computed Zarit Burden Interview grading result: total over the active item set, maximum score, derived burden band, and 12-item short-form subtotal."
+x-namespace:
+  form: zarit-burden-interview
+  apiPrefix: /api/zarit-burden-interview/
+  sqlSchema: zarit_burden_interview
+  xmlNamespace: https://formexamples.github.io/zarit-burden-interview/xml
+tags:
+  - name: zarit-burden-interview
+    description: Zarit Burden Interview form
 paths:
   /api/zarit-burden-interview/zarit_burden_interview_grades:
     get:
       summary: List ZaritBurdenInterviewGrade records
+      tags: [zarit-burden-interview]
       operationId: listZaritBurdenInterviewGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ZaritBurdenInterviewGrade
+      tags: [zarit-burden-interview]
       operationId: createZaritBurdenInterviewGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ZaritBurdenInterviewGrade by id
+      tags: [zarit-burden-interview]
       operationId: getZaritBurdenInterviewGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ZaritBurdenInterviewGrade
+      tags: [zarit-burden-interview]
       operationId: updateZaritBurdenInterviewGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ZaritBurdenInterviewGrade
+      tags: [zarit-burden-interview]
       operationId: replaceZaritBurdenInterviewGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ZaritBurdenInterviewGrade
+      tags: [zarit-burden-interview]
       operationId: deleteZaritBurdenInterviewGrade
       responses:
         "200":

@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "f78c342d-c90e-42cd-a01a-865cef53cac9",
+  "id": "fb296c6b-fc71-5bb1-a87e-0d8e633d8471",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739",
+      "fullUrl": "urn:uuid:368aaccc-3647-5b8e-b50c-653df0d33a71",
       "resource": {
         "resourceType": "Patient",
-        "id": "e75c523e-7d5e-4aa7-acfd-080dd98da739",
+        "id": "368aaccc-3647-5b8e-b50c-653df0d33a71",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:9c5d30ba-3d48-47a8-aaee-ea485a79a8cd",
+      "fullUrl": "urn:uuid:6cdeff8d-e249-57d8-9d59-c27264da86bb",
       "resource": {
         "resourceType": "Observation",
-        "id": "9c5d30ba-3d48-47a8-aaee-ea485a79a8cd",
+        "id": "6cdeff8d-e249-57d8-9d59-c27264da86bb",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+          "reference": "urn:uuid:368aaccc-3647-5b8e-b50c-653df0d33a71"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a7cade53-03b2-488b-a3c7-fc6737d03ae6",
+      "fullUrl": "urn:uuid:93f2111f-d89d-57e2-b075-485501ef9ed9",
       "resource": {
         "resourceType": "Observation",
-        "id": "a7cade53-03b2-488b-a3c7-fc6737d03ae6",
+        "id": "93f2111f-d89d-57e2-b075-485501ef9ed9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+          "reference": "urn:uuid:368aaccc-3647-5b8e-b50c-653df0d33a71"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -516,10 +516,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:6bd43aac-8258-4f81-aa4b-9a7457013bd5",
+      "fullUrl": "urn:uuid:641fe456-ee08-5ef2-b665-6af97d34f282",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "6bd43aac-8258-4f81-aa4b-9a7457013bd5",
+        "id": "641fe456-ee08-5ef2-b665-6af97d34f282",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -528,7 +528,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+          "reference": "urn:uuid:368aaccc-3647-5b8e-b50c-653df0d33a71"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -537,10 +537,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:edc41e5f-d6d8-4d65-a49b-3b7885c4c22d",
+      "fullUrl": "urn:uuid:91caaaa1-ce3f-5225-aa2e-643522863b58",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "edc41e5f-d6d8-4d65-a49b-3b7885c4c22d",
+        "id": "91caaaa1-ce3f-5225-aa2e-643522863b58",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -570,17 +570,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+          "reference": "urn:uuid:368aaccc-3647-5b8e-b50c-653df0d33a71"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Recording was inadequate (< 70% valid readings) and no impression was recorded; classified as inconclusive."
       }
     },
     {
-      "fullUrl": "urn:uuid:90730fea-0501-43c7-ae0e-4f648744c33e",
+      "fullUrl": "urn:uuid:e3d2578a-2163-5aec-8eab-724b369edef3",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "90730fea-0501-43c7-ae0e-4f648744c33e",
+        "id": "e3d2578a-2163-5aec-8eab-724b369edef3",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -610,17 +610,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+          "reference": "urn:uuid:368aaccc-3647-5b8e-b50c-653df0d33a71"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Inconclusive study; abnormality severity not established."
       }
     },
     {
-      "fullUrl": "urn:uuid:f57b433c-8914-4f10-a417-8e748d4548a3",
+      "fullUrl": "urn:uuid:635f4e01-2981-520c-a773-24b5a65a6d16",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "f57b433c-8914-4f10-a417-8e748d4548a3",
+        "id": "635f4e01-2981-520c-a773-24b5a65a6d16",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -650,17 +650,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+          "reference": "urn:uuid:368aaccc-3647-5b8e-b50c-653df0d33a71"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: averaged blood-pressure measurements."
       }
     },
     {
-      "fullUrl": "urn:uuid:166f6c13-22ca-49a8-ab79-e84e9f5a7d95",
+      "fullUrl": "urn:uuid:9e2c6d34-1864-5d55-bf84-c5976c0a2011",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "166f6c13-22ca-49a8-ab79-e84e9f5a7d95",
+        "id": "9e2c6d34-1864-5d55-bf84-c5976c0a2011",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -690,17 +690,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+          "reference": "urn:uuid:368aaccc-3647-5b8e-b50c-653df0d33a71"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: nocturnal dipping."
       }
     },
     {
-      "fullUrl": "urn:uuid:7a8b66c2-6539-420b-a6f9-2c8e5af608a6",
+      "fullUrl": "urn:uuid:08117417-7d1e-507c-bbee-54e7f8f5bdec",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "7a8b66c2-6539-420b-a6f9-2c8e5af608a6",
+        "id": "08117417-7d1e-507c-bbee-54e7f8f5bdec",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -730,17 +730,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+          "reference": "urn:uuid:368aaccc-3647-5b8e-b50c-653df0d33a71"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: impression."
       }
     },
     {
-      "fullUrl": "urn:uuid:fe02649b-64ff-4a7f-ad09-9e8543696a41",
+      "fullUrl": "urn:uuid:869f2986-23c5-5b96-adbb-31559bcc105b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "fe02649b-64ff-4a7f-ad09-9e8543696a41",
+        "id": "869f2986-23c5-5b96-adbb-31559bcc105b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -770,17 +770,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+          "reference": "urn:uuid:368aaccc-3647-5b8e-b50c-653df0d33a71"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Inconclusive or inadequate recording; repeat monitoring recommended."
       }
     },
     {
-      "fullUrl": "urn:uuid:dedfdbae-6542-445a-aa14-228e3b822a0f",
+      "fullUrl": "urn:uuid:b289f8e4-7e8d-5f7b-9fc3-ff4b2a8be117",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "dedfdbae-6542-445a-aa14-228e3b822a0f",
+        "id": "b289f8e4-7e8d-5f7b-9fc3-ff4b2a8be117",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -810,7 +810,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+          "reference": "urn:uuid:368aaccc-3647-5b8e-b50c-653df0d33a71"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Recording adequacy is below the 70% valid-readings threshold; diagnostic confidence may be reduced.",
@@ -824,10 +824,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:cecdb918-047e-45ac-a2e1-7931597a3b57",
+      "fullUrl": "urn:uuid:e0e7e0a9-95b4-54f1-96e2-a74f1ac02d7a",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "cecdb918-047e-45ac-a2e1-7931597a3b57",
+        "id": "e0e7e0a9-95b4-54f1-96e2-a74f1ac02d7a",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -857,7 +857,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+          "reference": "urn:uuid:368aaccc-3647-5b8e-b50c-653df0d33a71"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
@@ -871,10 +871,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:9f36aa29-caab-421e-a7d5-49447ebc1856",
+      "fullUrl": "urn:uuid:53b49010-d8c9-5784-a722-4d4d79b43455",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "9f36aa29-caab-421e-a7d5-49447ebc1856",
+        "id": "53b49010-d8c9-5784-a722-4d4d79b43455",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -904,7 +904,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:e75c523e-7d5e-4aa7-acfd-080dd98da739"
+          "reference": "urn:uuid:368aaccc-3647-5b8e-b50c-653df0d33a71"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No daytime or 24-hour average blood pressure was recorded.",

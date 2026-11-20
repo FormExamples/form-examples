@@ -5,10 +5,19 @@ info:
   title: Epilepsy Review — EpilepsyReview
   version: 1.0.0
   description: "Main epilepsy annual-review record (NICE NG217): patient and clinician identification, review context, epilepsy profile, seizures and anti-seizure medication with adherence and side effects, triggers, SUDEP discussion, injuries and status epilepticus, safety (DVLA driving, bathing, occupation), valproate and pregnancy-prevention arrangements, mental health, and the care plan. The computed seizure-control classification, completeness grade, fired rules, and safety flags live in child tables."
+x-namespace:
+  form: epilepsy-review
+  apiPrefix: /api/epilepsy-review/
+  sqlSchema: epilepsy_review
+  xmlNamespace: https://formexamples.github.io/epilepsy-review/xml
+tags:
+  - name: epilepsy-review
+    description: Epilepsy Review form
 paths:
   /api/epilepsy-review/epilepsy_reviews:
     get:
       summary: List EpilepsyReview records
+      tags: [epilepsy-review]
       operationId: listEpilepsyReview
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EpilepsyReview
+      tags: [epilepsy-review]
       operationId: createEpilepsyReview
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EpilepsyReview by id
+      tags: [epilepsy-review]
       operationId: getEpilepsyReview
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EpilepsyReview
+      tags: [epilepsy-review]
       operationId: updateEpilepsyReview
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EpilepsyReview
+      tags: [epilepsy-review]
       operationId: replaceEpilepsyReview
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EpilepsyReview
+      tags: [epilepsy-review]
       operationId: deleteEpilepsyReview
       responses:
         "200":

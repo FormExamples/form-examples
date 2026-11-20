@@ -1,4 +1,5 @@
 <!ELEMENT four_a_test_for_delirium_grade (id,created_at,updated_at,deleted_at,four_a_test_for_delirium_id,item1_score,item2_score,item3_score,item4_score,total_score,interpretation,graded_at)>
+<!ATTLIST four_a_test_for_delirium_grade xmlns CDATA #FIXED "https://formexamples.github.io/four-a-test-for-delirium/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

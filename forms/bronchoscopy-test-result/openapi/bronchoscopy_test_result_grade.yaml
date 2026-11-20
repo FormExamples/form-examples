@@ -5,10 +5,19 @@ info:
   title: Bronchoscopy Test Result — BronchoscopyTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. suspected tumour, massive haemoptysis, pneumothorax) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: bronchoscopy-test-result
+  apiPrefix: /api/bronchoscopy-test-result/
+  sqlSchema: bronchoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/bronchoscopy-test-result/xml
+tags:
+  - name: bronchoscopy-test-result
+    description: Bronchoscopy Test Result form
 paths:
   /api/bronchoscopy-test-result/bronchoscopy_test_result_grades:
     get:
       summary: List BronchoscopyTestResultGrade records
+      tags: [bronchoscopy-test-result]
       operationId: listBronchoscopyTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BronchoscopyTestResultGrade
+      tags: [bronchoscopy-test-result]
       operationId: createBronchoscopyTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BronchoscopyTestResultGrade by id
+      tags: [bronchoscopy-test-result]
       operationId: getBronchoscopyTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BronchoscopyTestResultGrade
+      tags: [bronchoscopy-test-result]
       operationId: updateBronchoscopyTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BronchoscopyTestResultGrade
+      tags: [bronchoscopy-test-result]
       operationId: replaceBronchoscopyTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BronchoscopyTestResultGrade
+      tags: [bronchoscopy-test-result]
       operationId: deleteBronchoscopyTestResultGrade
       responses:
         "200":

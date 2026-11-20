@@ -1,4 +1,5 @@
 <!ELEMENT glasgow_coma_scale (id,created_at,updated_at,deleted_at,patient_id,clinician_id,assessor_name,assessor_role,assessed_at,setting,reason,intubated,sedated,paralysed,eye_response,eye_not_testable_reason,verbal_response,verbal_not_testable_reason,motor_response,motor_not_testable_reason,left_pupil_reactivity,right_pupil_reactivity,left_pupil_size_mm,right_pupil_size_mm,previous_total,previous_motor_score,previous_assessed_at,clinical_note)>
+<!ATTLIST glasgow_coma_scale xmlns CDATA #FIXED "https://formexamples.github.io/glasgow-coma-scale/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

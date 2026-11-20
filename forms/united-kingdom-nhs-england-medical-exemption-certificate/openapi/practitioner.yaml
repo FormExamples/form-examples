@@ -5,10 +5,19 @@ info:
   title: United Kingdom Nhs England Medical Exemption Certificate — Practitioner
   version: 1.0.0
   description: Practitioner who signs the FP92A and attests to the qualifying condition(s).
+x-namespace:
+  form: united-kingdom-nhs-england-medical-exemption-certificate
+  apiPrefix: /api/united-kingdom-nhs-england-medical-exemption-certificate/
+  sqlSchema: united_kingdom_nhs_england_medical_exemption_certificate
+  xmlNamespace: https://formexamples.github.io/united-kingdom-nhs-england-medical-exemption-certificate/xml
+tags:
+  - name: united-kingdom-nhs-england-medical-exemption-certificate
+    description: United Kingdom Nhs England Medical Exemption Certificate form
 paths:
   /api/united-kingdom-nhs-england-medical-exemption-certificate/practitioners:
     get:
       summary: List Practitioner records
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: listPractitioner
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Practitioner
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: createPractitioner
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: getPractitioner
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Practitioner
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Practitioner
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Practitioner
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: deletePractitioner
       responses:
         "200":

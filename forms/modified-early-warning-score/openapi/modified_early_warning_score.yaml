@@ -5,10 +5,19 @@ info:
   title: Modified Early Warning Score — ModifiedEarlyWarningScore
   version: 1.0.0
   description: "Main MEWS observation record: raw physiological observations for a single vital-sign set plus recording context (care setting, ward/location, observation timestamp) and the optional previous aggregate for the deteriorating-trend flag. Sub-scores, aggregate, risk band, rules, and flags live in child tables."
+x-namespace:
+  form: modified-early-warning-score
+  apiPrefix: /api/modified-early-warning-score/
+  sqlSchema: modified_early_warning_score
+  xmlNamespace: https://formexamples.github.io/modified-early-warning-score/xml
+tags:
+  - name: modified-early-warning-score
+    description: Modified Early Warning Score form
 paths:
   /api/modified-early-warning-score/modified_early_warning_scores:
     get:
       summary: List ModifiedEarlyWarningScore records
+      tags: [modified-early-warning-score]
       operationId: listModifiedEarlyWarningScore
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ModifiedEarlyWarningScore
+      tags: [modified-early-warning-score]
       operationId: createModifiedEarlyWarningScore
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ModifiedEarlyWarningScore by id
+      tags: [modified-early-warning-score]
       operationId: getModifiedEarlyWarningScore
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ModifiedEarlyWarningScore
+      tags: [modified-early-warning-score]
       operationId: updateModifiedEarlyWarningScore
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ModifiedEarlyWarningScore
+      tags: [modified-early-warning-score]
       operationId: replaceModifiedEarlyWarningScore
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ModifiedEarlyWarningScore
+      tags: [modified-early-warning-score]
       operationId: deleteModifiedEarlyWarningScore
       responses:
         "200":

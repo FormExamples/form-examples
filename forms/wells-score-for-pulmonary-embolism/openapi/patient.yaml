@@ -5,10 +5,19 @@ info:
   title: Wells Score For Pulmonary Embolism — Patient
   version: 1.0.0
   description: Patient demographic information used by the Wells PE assessment record.
+x-namespace:
+  form: wells-score-for-pulmonary-embolism
+  apiPrefix: /api/wells-score-for-pulmonary-embolism/
+  sqlSchema: wells_score_for_pulmonary_embolism
+  xmlNamespace: https://formexamples.github.io/wells-score-for-pulmonary-embolism/xml
+tags:
+  - name: wells-score-for-pulmonary-embolism
+    description: Wells Score For Pulmonary Embolism form
 paths:
   /api/wells-score-for-pulmonary-embolism/patients:
     get:
       summary: List Patient records
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: deletePatient
       responses:
         "200":

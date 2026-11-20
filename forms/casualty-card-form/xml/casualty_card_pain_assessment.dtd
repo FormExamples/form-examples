@@ -1,4 +1,5 @@
 <!ELEMENT casualty_card_pain_assessment (id,created_at,updated_at,deleted_at,casualty_card_id,pain_present,pain_score,pain_location,pain_character,pain_onset,pain_severity_category)>
+<!ATTLIST casualty_card_pain_assessment xmlns CDATA #FIXED "https://formexamples.github.io/casualty-card-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,4 +1,5 @@
 <!ELEMENT emergency_department_triage_note (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,nurse_name,triaged_at,care_setting,arrival_mode,arrived_at,referral_source,patient_identifier,age_band,presenting_complaint,brief_history,symptom_onset,respiratory_rate,spo2,on_oxygen,systolic_bp,pulse,consciousness_acvpu,temperature,glasgow_coma_scale,pain_score,airway_threat,breathing_inadequate,circulation_shock,haemorrhage_major,consciousness_reduced,seizure_active,focal_neurology,sepsis_features,chest_pain_cardiac,stroke_features,paediatric_red_flag,clinical_notes)>
+<!ATTLIST emergency_department_triage_note xmlns CDATA #FIXED "https://formexamples.github.io/emergency-department-triage-note/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

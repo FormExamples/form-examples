@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE padua_venous_thromboembolism_risk_assessment_grade SYSTEM "padua_venous_thromboembolism_risk_assessment_grade.dtd">
-<padua_venous_thromboembolism_risk_assessment_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<padua_venous_thromboembolism_risk_assessment_grade xmlns="https://formexamples.github.io/padua-venous-thromboembolism-risk-assessment/xml">
+<id>c1972d7f-88e5-5fba-92d5-2aae8e3cc5bf</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<padua_venous_thromboembolism_risk_assessment_id>770e8400-e29b-41d4-a716-446655440002</padua_venous_thromboembolism_risk_assessment_id>
+<padua_venous_thromboembolism_risk_assessment_id>e4dc5f46-6f2d-5047-8538-e0e167ab123f</padua_venous_thromboembolism_risk_assessment_id>
 <active_cancer_points>1</active_cancer_points>
 <previous_vte_points>1</previous_vte_points>
 <reduced_mobility_points>1</reduced_mobility_points>

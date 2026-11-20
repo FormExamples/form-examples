@@ -5,10 +5,19 @@ info:
   title: Sleep Quality Assessment — GradingAdditionalFlag
   version: 1.0.0
   description: Additional safety-critical flags detected during sleep quality assessment grading.
+x-namespace:
+  form: sleep-quality-assessment
+  apiPrefix: /api/sleep-quality-assessment/
+  sqlSchema: sleep_quality_assessment
+  xmlNamespace: https://formexamples.github.io/sleep-quality-assessment/xml
+tags:
+  - name: sleep-quality-assessment
+    description: Sleep Quality Assessment form
 paths:
   /api/sleep-quality-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [sleep-quality-assessment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [sleep-quality-assessment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [sleep-quality-assessment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [sleep-quality-assessment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [sleep-quality-assessment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [sleep-quality-assessment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

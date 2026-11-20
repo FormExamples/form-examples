@@ -1,4 +1,5 @@
 <!ELEMENT united_states_divorce_petition (id,created_at,updated_at,deleted_at,petitioner_id,attorney_id,state,county,filing_date,case_type,ground_type,fault_ground,petitioner_name,respondent_name,marriage_date,marriage_place,separation_date,petitioner_residency_months,county_residency_days,married_or_lived_in_state,respondent_military,has_minor_children,children_count,children_home_state_months,pregnant,custody_plan_documented,child_support_worksheet_completed,child_support_monthly_amount,property_division_approach,settlement_agreement_signed,financial_disclosure_filed,spousal_support_requested,service_method,service_date,respondent_responded,decree_entered,decree_date,name_restoration_requested,name_to_restore,certificate_requested)>
+<!ATTLIST united_states_divorce_petition xmlns CDATA #FIXED "https://formexamples.github.io/united-states-divorce-petition/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

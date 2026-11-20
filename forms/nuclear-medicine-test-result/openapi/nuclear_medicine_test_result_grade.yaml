@@ -5,10 +5,19 @@ info:
   title: Nuclear Medicine Test Result — NuclearMedicineTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. high-probability PE on V/Q, widespread metastatic pattern) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: nuclear-medicine-test-result
+  apiPrefix: /api/nuclear-medicine-test-result/
+  sqlSchema: nuclear_medicine_test_result
+  xmlNamespace: https://formexamples.github.io/nuclear-medicine-test-result/xml
+tags:
+  - name: nuclear-medicine-test-result
+    description: Nuclear Medicine Test Result form
 paths:
   /api/nuclear-medicine-test-result/nuclear_medicine_test_result_grades:
     get:
       summary: List NuclearMedicineTestResultGrade records
+      tags: [nuclear-medicine-test-result]
       operationId: listNuclearMedicineTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NuclearMedicineTestResultGrade
+      tags: [nuclear-medicine-test-result]
       operationId: createNuclearMedicineTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NuclearMedicineTestResultGrade by id
+      tags: [nuclear-medicine-test-result]
       operationId: getNuclearMedicineTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NuclearMedicineTestResultGrade
+      tags: [nuclear-medicine-test-result]
       operationId: updateNuclearMedicineTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NuclearMedicineTestResultGrade
+      tags: [nuclear-medicine-test-result]
       operationId: replaceNuclearMedicineTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NuclearMedicineTestResultGrade
+      tags: [nuclear-medicine-test-result]
       operationId: deleteNuclearMedicineTestResultGrade
       responses:
         "200":

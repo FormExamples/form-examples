@@ -5,10 +5,19 @@ info:
   title: Medical Language Speaking Assessment For Cymraeg — Assessment
   version: 1.0.0
   description: Top-level assessment instance for medical-language-speaking-assessment-for-cymraeg. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: medical-language-speaking-assessment-for-cymraeg
+  apiPrefix: /api/medical-language-speaking-assessment-for-cymraeg/
+  sqlSchema: medical_language_speaking_assessment_for_cymraeg
+  xmlNamespace: https://formexamples.github.io/medical-language-speaking-assessment-for-cymraeg/xml
+tags:
+  - name: medical-language-speaking-assessment-for-cymraeg
+    description: Medical Language Speaking Assessment For Cymraeg form
 paths:
   /api/medical-language-speaking-assessment-for-cymraeg/assessments:
     get:
       summary: List Assessment records
+      tags: [medical-language-speaking-assessment-for-cymraeg]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [medical-language-speaking-assessment-for-cymraeg]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [medical-language-speaking-assessment-for-cymraeg]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [medical-language-speaking-assessment-for-cymraeg]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [medical-language-speaking-assessment-for-cymraeg]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [medical-language-speaking-assessment-for-cymraeg]
       operationId: deleteAssessment
       responses:
         "200":

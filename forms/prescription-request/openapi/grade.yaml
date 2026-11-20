@@ -5,10 +5,19 @@ info:
   title: Prescription Request — Grade
   version: 1.0.0
   description: Computed priority classification result for the prescription request. One-to-one child of prescription_request.
+x-namespace:
+  form: prescription-request
+  apiPrefix: /api/prescription-request/
+  sqlSchema: prescription_request
+  xmlNamespace: https://formexamples.github.io/prescription-request/xml
+tags:
+  - name: prescription-request
+    description: Prescription Request form
 paths:
   /api/prescription-request/grades:
     get:
       summary: List Grade records
+      tags: [prescription-request]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [prescription-request]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [prescription-request]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [prescription-request]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [prescription-request]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [prescription-request]
       operationId: deleteGrade
       responses:
         "200":

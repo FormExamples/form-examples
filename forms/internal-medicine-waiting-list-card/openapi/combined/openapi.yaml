@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Internal Medicine Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: internal-medicine-waiting-list-card
+  apiPrefix: /api/internal-medicine-waiting-list-card/
+  sqlSchema: internal_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/internal-medicine-waiting-list-card/xml
+tags:
+- name: internal-medicine-waiting-list-card
+  description: Internal Medicine Waiting List Card form
 paths:
   /api/internal-medicine-waiting-list-card/internal_med_waiting_list_card_appointments:
     get:
       summary: List InternalMedWaitingListCardAppointment records
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: listInternalMedWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InternalMedWaitingListCardAppointment
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: createInternalMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InternalMedWaitingListCardAppointment by id
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: getInternalMedWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InternalMedWaitingListCardAppointment
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: updateInternalMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InternalMedWaitingListCardAppointment
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: replaceInternalMedWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InternalMedWaitingListCardAppointment
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: deleteInternalMedWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/internal-medicine-waiting-list-card/internal_med_waiting_list_card_grade_flags:
     get:
       summary: List InternalMedWaitingListCardGradeFlag records
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: listInternalMedWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InternalMedWaitingListCardGradeFlag
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: createInternalMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InternalMedWaitingListCardGradeFlag by id
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: getInternalMedWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InternalMedWaitingListCardGradeFlag
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: updateInternalMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InternalMedWaitingListCardGradeFlag
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: replaceInternalMedWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InternalMedWaitingListCardGradeFlag
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: deleteInternalMedWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/internal-medicine-waiting-list-card/internal_med_waiting_list_card_grade_rules:
     get:
       summary: List InternalMedWaitingListCardGradeRule records
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: listInternalMedWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InternalMedWaitingListCardGradeRule
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: createInternalMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InternalMedWaitingListCardGradeRule by id
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: getInternalMedWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InternalMedWaitingListCardGradeRule
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: updateInternalMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InternalMedWaitingListCardGradeRule
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: replaceInternalMedWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InternalMedWaitingListCardGradeRule
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: deleteInternalMedWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/internal-medicine-waiting-list-card/internal_med_waiting_list_card_grades:
     get:
       summary: List InternalMedWaitingListCardGrade records
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: listInternalMedWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InternalMedWaitingListCardGrade
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: createInternalMedWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InternalMedWaitingListCardGrade by id
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: getInternalMedWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InternalMedWaitingListCardGrade
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: updateInternalMedWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InternalMedWaitingListCardGrade
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: replaceInternalMedWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InternalMedWaitingListCardGrade
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: deleteInternalMedWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/internal-medicine-waiting-list-card/internal_med_waiting_list_cards:
     get:
       summary: List InternalMedWaitingListCard records
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: listInternalMedWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InternalMedWaitingListCard
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: createInternalMedWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InternalMedWaitingListCard by id
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: getInternalMedWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InternalMedWaitingListCard
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: updateInternalMedWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InternalMedWaitingListCard
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: replaceInternalMedWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InternalMedWaitingListCard
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: deleteInternalMedWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - internal-medicine-waiting-list-card
   /api/internal-medicine-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/internal-medicine-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - internal-medicine-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

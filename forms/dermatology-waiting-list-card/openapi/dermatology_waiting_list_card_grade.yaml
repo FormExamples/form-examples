@@ -5,10 +5,19 @@ info:
   title: Dermatology Waiting List Card — DermatologyWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: dermatology-waiting-list-card
+  apiPrefix: /api/dermatology-waiting-list-card/
+  sqlSchema: dermatology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/dermatology-waiting-list-card/xml
+tags:
+  - name: dermatology-waiting-list-card
+    description: Dermatology Waiting List Card form
 paths:
   /api/dermatology-waiting-list-card/dermatology_waiting_list_card_grades:
     get:
       summary: List DermatologyWaitingListCardGrade records
+      tags: [dermatology-waiting-list-card]
       operationId: listDermatologyWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DermatologyWaitingListCardGrade
+      tags: [dermatology-waiting-list-card]
       operationId: createDermatologyWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DermatologyWaitingListCardGrade by id
+      tags: [dermatology-waiting-list-card]
       operationId: getDermatologyWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DermatologyWaitingListCardGrade
+      tags: [dermatology-waiting-list-card]
       operationId: updateDermatologyWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DermatologyWaitingListCardGrade
+      tags: [dermatology-waiting-list-card]
       operationId: replaceDermatologyWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DermatologyWaitingListCardGrade
+      tags: [dermatology-waiting-list-card]
       operationId: deleteDermatologyWaitingListCardGrade
       responses:
         "200":

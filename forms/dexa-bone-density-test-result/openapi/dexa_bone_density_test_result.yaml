@@ -5,10 +5,19 @@ info:
   title: Dexa Bone Density Test Result — DexaBoneDensityTestResult
   version: 1.0.0
   description: DEXA / DXA (dual-energy X-ray absorptiometry) bone-density result (report). Captures the performed examination, the clinical history, the quantitative findings (BMD in g/cm2, T-scores and Z-scores at the lumbar spine, femoral neck, and total hip, plus the lowest T-score), the WHO densitometric classification, FRAX 10-year fracture probabilities, vertebral-fracture identification, comparison with previous DEXA, the impression, and recommended follow-up. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: dexa-bone-density-test-result
+  apiPrefix: /api/dexa-bone-density-test-result/
+  sqlSchema: dexa_bone_density_test_result
+  xmlNamespace: https://formexamples.github.io/dexa-bone-density-test-result/xml
+tags:
+  - name: dexa-bone-density-test-result
+    description: Dexa Bone Density Test Result form
 paths:
   /api/dexa-bone-density-test-result/dexa_bone_density_test_results:
     get:
       summary: List DexaBoneDensityTestResult records
+      tags: [dexa-bone-density-test-result]
       operationId: listDexaBoneDensityTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DexaBoneDensityTestResult
+      tags: [dexa-bone-density-test-result]
       operationId: createDexaBoneDensityTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DexaBoneDensityTestResult by id
+      tags: [dexa-bone-density-test-result]
       operationId: getDexaBoneDensityTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DexaBoneDensityTestResult
+      tags: [dexa-bone-density-test-result]
       operationId: updateDexaBoneDensityTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DexaBoneDensityTestResult
+      tags: [dexa-bone-density-test-result]
       operationId: replaceDexaBoneDensityTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DexaBoneDensityTestResult
+      tags: [dexa-bone-density-test-result]
       operationId: deleteDexaBoneDensityTestResult
       responses:
         "200":

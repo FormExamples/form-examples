@@ -5,10 +5,19 @@ info:
   title: Arc42 — Arc42DocumentationGradeFlag
   version: 1.0.0
   description: Additional flag fired during arc42 documentation grading, independent of the maturity band.
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+  - name: arc42
+    description: Arc42 form
 paths:
   /api/arc42/arc42_documentation_grade_flags:
     get:
       summary: List Arc42DocumentationGradeFlag records
+      tags: [arc42]
       operationId: listArc42DocumentationGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Arc42DocumentationGradeFlag
+      tags: [arc42]
       operationId: createArc42DocumentationGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Arc42DocumentationGradeFlag by id
+      tags: [arc42]
       operationId: getArc42DocumentationGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Arc42DocumentationGradeFlag
+      tags: [arc42]
       operationId: updateArc42DocumentationGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Arc42DocumentationGradeFlag
+      tags: [arc42]
       operationId: replaceArc42DocumentationGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Arc42DocumentationGradeFlag
+      tags: [arc42]
       operationId: deleteArc42DocumentationGradeFlag
       responses:
         "200":

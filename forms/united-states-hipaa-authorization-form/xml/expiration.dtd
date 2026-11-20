@@ -1,4 +1,5 @@
 <!ELEMENT expiration (id,created_at,updated_at,deleted_at,hipaa_authorization_id,kind,expiration_date,expiration_event,duration_months,duration_label)>
+<!ATTLIST expiration xmlns CDATA #FIXED "https://formexamples.github.io/united-states-hipaa-authorization-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

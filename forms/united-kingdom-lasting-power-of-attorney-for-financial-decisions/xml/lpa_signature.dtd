@@ -1,4 +1,5 @@
 <!ELEMENT lpa_signature (id,created_at,updated_at,deleted_at,lpa_id,signatory_person_id,role,lp1f_section,signature_blob_path,signed_on,signed_on_behalf_full_name,is_witnessed)>
+<!ATTLIST lpa_signature xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

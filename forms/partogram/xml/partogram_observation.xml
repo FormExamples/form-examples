@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE partogram_observation SYSTEM "partogram_observation.dtd">
-<partogram_observation>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<partogram_observation xmlns="https://formexamples.github.io/partogram/xml">
+<id>dfdae170-1140-516a-8b99-540ff0b437d2</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<partogram_id>770e8400-e29b-41d4-a716-446655440002</partogram_id>
+<partogram_id>0c9016d9-f569-53ad-b7db-c53d88866156</partogram_id>
 <observed_at>2026-04-09T10:00:00Z</observed_at>
 <cervical_dilatation_cm>0.0</cervical_dilatation_cm>
 <descent_fifths>0.0</descent_fifths>

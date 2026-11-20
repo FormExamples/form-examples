@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE estimated_glomerular_filtration_rate_calculator_grade_flag SYSTEM "estimated_glomerular_filtration_rate_calculator_grade_flag.dtd">
-<estimated_glomerular_filtration_rate_calculator_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<estimated_glomerular_filtration_rate_calculator_grade_flag xmlns="https://formexamples.github.io/estimated-glomerular-filtration-rate-calculator/xml">
+<id>3c4510f2-4c25-5040-88ad-bb2b927ab9ec</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<estimated_glomerular_filtration_rate_calculator_grade_id>880e8400-e29b-41d4-a716-446655440003</estimated_glomerular_filtration_rate_calculator_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<estimated_glomerular_filtration_rate_calculator_grade_id>116dede8-8982-5e49-94ad-5f7454b5d96d</estimated_glomerular_filtration_rate_calculator_grade_id>
+<flag_id>94e113a5-df67-545a-b1aa-13565f3d0431</flag_id>
 <category>g5-nephrology-referral</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -1,4 +1,5 @@
 <!ELEMENT hospital_dashboard_metric_value (id,created_at,updated_at,deleted_at,hospital_dashboard_metrics_id,metric_code,category_number,category_title,metric_text,metric_value,notes)>
+<!ATTLIST hospital_dashboard_metric_value xmlns CDATA #FIXED "https://formexamples.github.io/hospital-dashboard-metrics/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

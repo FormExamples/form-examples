@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Fluid Balance Chart form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: fluid-balance-chart
+  apiPrefix: /api/fluid-balance-chart/
+  sqlSchema: fluid_balance_chart
+  xmlNamespace: https://formexamples.github.io/fluid-balance-chart/xml
+tags:
+- name: fluid-balance-chart
+  description: Fluid Balance Chart form
 paths:
   /api/fluid-balance-chart/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - fluid-balance-chart
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - fluid-balance-chart
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - fluid-balance-chart
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - fluid-balance-chart
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - fluid-balance-chart
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - fluid-balance-chart
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/fluid-balance-chart/fluid_balance_chart_entries:
     get:
       summary: List FluidBalanceChartEntry records
+      tags:
+      - fluid-balance-chart
       operationId: listFluidBalanceChartEntry
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FluidBalanceChartEntry
+      tags:
+      - fluid-balance-chart
       operationId: createFluidBalanceChartEntry
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one FluidBalanceChartEntry by id
+      tags:
+      - fluid-balance-chart
       operationId: getFluidBalanceChartEntry
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FluidBalanceChartEntry
+      tags:
+      - fluid-balance-chart
       operationId: updateFluidBalanceChartEntry
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing FluidBalanceChartEntry
+      tags:
+      - fluid-balance-chart
       operationId: replaceFluidBalanceChartEntry
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a FluidBalanceChartEntry
+      tags:
+      - fluid-balance-chart
       operationId: deleteFluidBalanceChartEntry
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/fluid-balance-chart/fluid_balance_chart_grade_flags:
     get:
       summary: List FluidBalanceChartGradeFlag records
+      tags:
+      - fluid-balance-chart
       operationId: listFluidBalanceChartGradeFlag
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FluidBalanceChartGradeFlag
+      tags:
+      - fluid-balance-chart
       operationId: createFluidBalanceChartGradeFlag
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one FluidBalanceChartGradeFlag by id
+      tags:
+      - fluid-balance-chart
       operationId: getFluidBalanceChartGradeFlag
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FluidBalanceChartGradeFlag
+      tags:
+      - fluid-balance-chart
       operationId: updateFluidBalanceChartGradeFlag
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing FluidBalanceChartGradeFlag
+      tags:
+      - fluid-balance-chart
       operationId: replaceFluidBalanceChartGradeFlag
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a FluidBalanceChartGradeFlag
+      tags:
+      - fluid-balance-chart
       operationId: deleteFluidBalanceChartGradeFlag
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/fluid-balance-chart/fluid_balance_chart_grade_rules:
     get:
       summary: List FluidBalanceChartGradeRule records
+      tags:
+      - fluid-balance-chart
       operationId: listFluidBalanceChartGradeRule
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FluidBalanceChartGradeRule
+      tags:
+      - fluid-balance-chart
       operationId: createFluidBalanceChartGradeRule
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one FluidBalanceChartGradeRule by id
+      tags:
+      - fluid-balance-chart
       operationId: getFluidBalanceChartGradeRule
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FluidBalanceChartGradeRule
+      tags:
+      - fluid-balance-chart
       operationId: updateFluidBalanceChartGradeRule
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing FluidBalanceChartGradeRule
+      tags:
+      - fluid-balance-chart
       operationId: replaceFluidBalanceChartGradeRule
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a FluidBalanceChartGradeRule
+      tags:
+      - fluid-balance-chart
       operationId: deleteFluidBalanceChartGradeRule
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/fluid-balance-chart/fluid_balance_chart_grades:
     get:
       summary: List FluidBalanceChartGrade records
+      tags:
+      - fluid-balance-chart
       operationId: listFluidBalanceChartGrade
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FluidBalanceChartGrade
+      tags:
+      - fluid-balance-chart
       operationId: createFluidBalanceChartGrade
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one FluidBalanceChartGrade by id
+      tags:
+      - fluid-balance-chart
       operationId: getFluidBalanceChartGrade
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FluidBalanceChartGrade
+      tags:
+      - fluid-balance-chart
       operationId: updateFluidBalanceChartGrade
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing FluidBalanceChartGrade
+      tags:
+      - fluid-balance-chart
       operationId: replaceFluidBalanceChartGrade
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a FluidBalanceChartGrade
+      tags:
+      - fluid-balance-chart
       operationId: deleteFluidBalanceChartGrade
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/fluid-balance-chart/fluid_balance_charts:
     get:
       summary: List FluidBalanceChart records
+      tags:
+      - fluid-balance-chart
       operationId: listFluidBalanceChart
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FluidBalanceChart
+      tags:
+      - fluid-balance-chart
       operationId: createFluidBalanceChart
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one FluidBalanceChart by id
+      tags:
+      - fluid-balance-chart
       operationId: getFluidBalanceChart
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FluidBalanceChart
+      tags:
+      - fluid-balance-chart
       operationId: updateFluidBalanceChart
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing FluidBalanceChart
+      tags:
+      - fluid-balance-chart
       operationId: replaceFluidBalanceChart
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a FluidBalanceChart
+      tags:
+      - fluid-balance-chart
       operationId: deleteFluidBalanceChart
       responses:
         '200':
@@ -1495,9 +1575,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - fluid-balance-chart
   /api/fluid-balance-chart/patients:
     get:
       summary: List Patient records
+      tags:
+      - fluid-balance-chart
       operationId: listPatient
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - fluid-balance-chart
       operationId: createPatient
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - fluid-balance-chart
       operationId: getPatient
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - fluid-balance-chart
       operationId: updatePatient
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - fluid-balance-chart
       operationId: replacePatient
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - fluid-balance-chart
       operationId: deletePatient
       responses:
         '200':

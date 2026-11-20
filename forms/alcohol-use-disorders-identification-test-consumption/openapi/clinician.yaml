@@ -5,10 +5,19 @@ info:
   title: Alcohol Use Disorders Identification Test Consumption — Clinician
   version: 1.0.0
   description: Clinician identifying information for the clinician who administered the AUDIT-C screen.
+x-namespace:
+  form: alcohol-use-disorders-identification-test-consumption
+  apiPrefix: /api/alcohol-use-disorders-identification-test-consumption/
+  sqlSchema: alcohol_use_disorders_identification_test_consumption
+  xmlNamespace: https://formexamples.github.io/alcohol-use-disorders-identification-test-consumption/xml
+tags:
+  - name: alcohol-use-disorders-identification-test-consumption
+    description: Alcohol Use Disorders Identification Test Consumption form
 paths:
   /api/alcohol-use-disorders-identification-test-consumption/clinicians:
     get:
       summary: List Clinician records
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: deleteClinician
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: United Kingdom Driver And Vehicle Licensing Agency V1 Form — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: united-kingdom-driver-and-vehicle-licensing-agency-v1-form
+  apiPrefix: /api/united-kingdom-driver-and-vehicle-licensing-agency-v1-form/
+  sqlSchema: united_kingdom_driver_and_vehicle_licensing_agency_v1_form
+  xmlNamespace: https://formexamples.github.io/united-kingdom-driver-and-vehicle-licensing-agency-v1-form/xml
+tags:
+  - name: united-kingdom-driver-and-vehicle-licensing-agency-v1-form
+    description: United Kingdom Driver And Vehicle Licensing Agency V1 Form form
 paths:
   /api/united-kingdom-driver-and-vehicle-licensing-agency-v1-form/clinicians:
     get:
       summary: List Clinician records
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-v1-form]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-v1-form]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-v1-form]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-v1-form]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-v1-form]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-v1-form]
       operationId: deleteClinician
       responses:
         "200":

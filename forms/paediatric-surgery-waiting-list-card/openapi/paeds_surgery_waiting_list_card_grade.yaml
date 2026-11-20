@@ -5,10 +5,19 @@ info:
   title: Paediatric Surgery Waiting List Card — PaedsSurgeryWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: paediatric-surgery-waiting-list-card
+  apiPrefix: /api/paediatric-surgery-waiting-list-card/
+  sqlSchema: paediatric_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/paediatric-surgery-waiting-list-card/xml
+tags:
+  - name: paediatric-surgery-waiting-list-card
+    description: Paediatric Surgery Waiting List Card form
 paths:
   /api/paediatric-surgery-waiting-list-card/paeds_surgery_waiting_list_card_grades:
     get:
       summary: List PaedsSurgeryWaitingListCardGrade records
+      tags: [paediatric-surgery-waiting-list-card]
       operationId: listPaedsSurgeryWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PaedsSurgeryWaitingListCardGrade
+      tags: [paediatric-surgery-waiting-list-card]
       operationId: createPaedsSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PaedsSurgeryWaitingListCardGrade by id
+      tags: [paediatric-surgery-waiting-list-card]
       operationId: getPaedsSurgeryWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PaedsSurgeryWaitingListCardGrade
+      tags: [paediatric-surgery-waiting-list-card]
       operationId: updatePaedsSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PaedsSurgeryWaitingListCardGrade
+      tags: [paediatric-surgery-waiting-list-card]
       operationId: replacePaedsSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PaedsSurgeryWaitingListCardGrade
+      tags: [paediatric-surgery-waiting-list-card]
       operationId: deletePaedsSurgeryWaitingListCardGrade
       responses:
         "200":

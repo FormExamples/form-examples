@@ -5,10 +5,19 @@ info:
   title: Mammography Test Request — MammographyTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ACR 1-9), cancer-pathway urgency, request completeness, and clinical priority."
+x-namespace:
+  form: mammography-test-request
+  apiPrefix: /api/mammography-test-request/
+  sqlSchema: mammography_test_request
+  xmlNamespace: https://formexamples.github.io/mammography-test-request/xml
+tags:
+  - name: mammography-test-request
+    description: Mammography Test Request form
 paths:
   /api/mammography-test-request/mammography_test_request_grades:
     get:
       summary: List MammographyTestRequestGrade records
+      tags: [mammography-test-request]
       operationId: listMammographyTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MammographyTestRequestGrade
+      tags: [mammography-test-request]
       operationId: createMammographyTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MammographyTestRequestGrade by id
+      tags: [mammography-test-request]
       operationId: getMammographyTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MammographyTestRequestGrade
+      tags: [mammography-test-request]
       operationId: updateMammographyTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MammographyTestRequestGrade
+      tags: [mammography-test-request]
       operationId: replaceMammographyTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MammographyTestRequestGrade
+      tags: [mammography-test-request]
       operationId: deleteMammographyTestRequestGrade
       responses:
         "200":

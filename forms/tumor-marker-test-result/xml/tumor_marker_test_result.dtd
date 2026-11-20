@@ -1,4 +1,5 @@
 <!ELEMENT tumor_marker_test_result (id,created_at,updated_at,deleted_at,patient_id,clinician_id,originating_request_reference,report_status,performed_date,reported_date,specimen_condition,clinical_history,known_cancer_site,psa,ca125,ca19_9,carcinoembryonic_antigen_cea,alpha_fetoprotein_afp,beta_hcg,ca15_3,lactate_dehydrogenase_ldh,calcitonin,chromogranin_a,previous_value,trend,comparison_with_previous,overall_result_status,markedly_elevated,findings_narrative,impression,reporting_category,recommended_follow_up,critical_result_communicated,reported_to)>
+<!ATTLIST tumor_marker_test_result xmlns CDATA #FIXED "https://formexamples.github.io/tumor-marker-test-result/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

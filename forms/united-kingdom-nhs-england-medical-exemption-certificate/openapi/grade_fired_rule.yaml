@@ -5,10 +5,19 @@ info:
   title: United Kingdom Nhs England Medical Exemption Certificate — GradeFiredRule
   version: 1.0.0
   description: Audit trail of rules that fired when computing an eligibility grade.
+x-namespace:
+  form: united-kingdom-nhs-england-medical-exemption-certificate
+  apiPrefix: /api/united-kingdom-nhs-england-medical-exemption-certificate/
+  sqlSchema: united_kingdom_nhs_england_medical_exemption_certificate
+  xmlNamespace: https://formexamples.github.io/united-kingdom-nhs-england-medical-exemption-certificate/xml
+tags:
+  - name: united-kingdom-nhs-england-medical-exemption-certificate
+    description: United Kingdom Nhs England Medical Exemption Certificate form
 paths:
   /api/united-kingdom-nhs-england-medical-exemption-certificate/grade_fired_rules:
     get:
       summary: List GradeFiredRule records
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: listGradeFiredRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradeFiredRule
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: createGradeFiredRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradeFiredRule by id
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: getGradeFiredRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradeFiredRule
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: updateGradeFiredRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradeFiredRule
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: replaceGradeFiredRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradeFiredRule
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: deleteGradeFiredRule
       responses:
         "200":

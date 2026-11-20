@@ -1,4 +1,5 @@
 <!ELEMENT eye_prescription_grade_flag (id,created_at,updated_at,deleted_at,eye_prescription_grade_id,flag_id,category,eye,priority,description,suggested_action)>
+<!ATTLIST eye_prescription_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/eye-prescription/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

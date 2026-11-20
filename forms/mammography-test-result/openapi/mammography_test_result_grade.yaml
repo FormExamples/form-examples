@@ -5,10 +5,19 @@ info:
   title: Mammography Test Result — MammographyTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. The BI-RADS final assessment category is the structured-reporting score carried in reporting_category and drives Axis A and Axis D: BI-RADS 1-2 = normal / routine; 3 = abnormal / recommended short-interval follow-up; 4-5 = abnormal or critical / urgent biopsy referral; 0 = inconclusive / further imaging; 6 = known malignancy. BI-RADS 4/5 auto-escalates the follow-up urgency and raises abnormal-requiring-action / urgent-referral flags regardless of the other axes."
+x-namespace:
+  form: mammography-test-result
+  apiPrefix: /api/mammography-test-result/
+  sqlSchema: mammography_test_result
+  xmlNamespace: https://formexamples.github.io/mammography-test-result/xml
+tags:
+  - name: mammography-test-result
+    description: Mammography Test Result form
 paths:
   /api/mammography-test-result/mammography_test_result_grades:
     get:
       summary: List MammographyTestResultGrade records
+      tags: [mammography-test-result]
       operationId: listMammographyTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MammographyTestResultGrade
+      tags: [mammography-test-result]
       operationId: createMammographyTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MammographyTestResultGrade by id
+      tags: [mammography-test-result]
       operationId: getMammographyTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MammographyTestResultGrade
+      tags: [mammography-test-result]
       operationId: updateMammographyTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MammographyTestResultGrade
+      tags: [mammography-test-result]
       operationId: replaceMammographyTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MammographyTestResultGrade
+      tags: [mammography-test-result]
       operationId: deleteMammographyTestResultGrade
       responses:
         "200":

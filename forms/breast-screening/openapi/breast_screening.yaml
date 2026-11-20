@@ -5,10 +5,19 @@ info:
   title: Breast Screening — BreastScreening
   version: 1.0.0
   description: "Main breast-screening record for one NHS Breast Screening Programme mammography encounter: context and identification, eligibility, consent, mammogram views, double-read opinions and arbitration, the reading outcome, and the five-point breast imaging classification when assessed. Screening outcome, fired rules, and flags live in child tables."
+x-namespace:
+  form: breast-screening
+  apiPrefix: /api/breast-screening/
+  sqlSchema: breast_screening
+  xmlNamespace: https://formexamples.github.io/breast-screening/xml
+tags:
+  - name: breast-screening
+    description: Breast Screening form
 paths:
   /api/breast-screening/breast_screenings:
     get:
       summary: List BreastScreening records
+      tags: [breast-screening]
       operationId: listBreastScreening
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BreastScreening
+      tags: [breast-screening]
       operationId: createBreastScreening
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BreastScreening by id
+      tags: [breast-screening]
       operationId: getBreastScreening
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BreastScreening
+      tags: [breast-screening]
       operationId: updateBreastScreening
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BreastScreening
+      tags: [breast-screening]
       operationId: replaceBreastScreening
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BreastScreening
+      tags: [breast-screening]
       operationId: deleteBreastScreening
       responses:
         "200":

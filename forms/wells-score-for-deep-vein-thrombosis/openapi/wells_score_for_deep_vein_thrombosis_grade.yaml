@@ -5,10 +5,19 @@ info:
   title: Wells Score For Deep Vein Thrombosis — WellsScoreForDeepVeinThrombosisGrade
   version: 1.0.0
   description: "Computed Wells DVT grading result: total score, two-level band, three-level band, and recommended investigation pathway. One-to-one with the parent assessment."
+x-namespace:
+  form: wells-score-for-deep-vein-thrombosis
+  apiPrefix: /api/wells-score-for-deep-vein-thrombosis/
+  sqlSchema: wells_score_for_deep_vein_thrombosis
+  xmlNamespace: https://formexamples.github.io/wells-score-for-deep-vein-thrombosis/xml
+tags:
+  - name: wells-score-for-deep-vein-thrombosis
+    description: Wells Score For Deep Vein Thrombosis form
 paths:
   /api/wells-score-for-deep-vein-thrombosis/wells_score_for_deep_vein_thrombosis_grades:
     get:
       summary: List WellsScoreForDeepVeinThrombosisGrade records
+      tags: [wells-score-for-deep-vein-thrombosis]
       operationId: listWellsScoreForDeepVeinThrombosisGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new WellsScoreForDeepVeinThrombosisGrade
+      tags: [wells-score-for-deep-vein-thrombosis]
       operationId: createWellsScoreForDeepVeinThrombosisGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one WellsScoreForDeepVeinThrombosisGrade by id
+      tags: [wells-score-for-deep-vein-thrombosis]
       operationId: getWellsScoreForDeepVeinThrombosisGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing WellsScoreForDeepVeinThrombosisGrade
+      tags: [wells-score-for-deep-vein-thrombosis]
       operationId: updateWellsScoreForDeepVeinThrombosisGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing WellsScoreForDeepVeinThrombosisGrade
+      tags: [wells-score-for-deep-vein-thrombosis]
       operationId: replaceWellsScoreForDeepVeinThrombosisGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a WellsScoreForDeepVeinThrombosisGrade
+      tags: [wells-score-for-deep-vein-thrombosis]
       operationId: deleteWellsScoreForDeepVeinThrombosisGrade
       responses:
         "200":

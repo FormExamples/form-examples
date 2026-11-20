@@ -1,4 +1,5 @@
 <!ELEMENT casualty_card_arrival_triage (id,created_at,updated_at,deleted_at,casualty_card_id,attendance_category,arrival_mode,referral_source,ambulance_incident_number,triage_time,triage_nurse,mts_flowchart,mts_category,mts_discriminator)>
+<!ATTLIST casualty_card_arrival_triage xmlns CDATA #FIXED "https://formexamples.github.io/casualty-card-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

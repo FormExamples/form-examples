@@ -5,10 +5,19 @@ info:
   title: Diabetes Eye Screening — DiabetesEyeScreening
   version: 1.0.0
   description: "Main diabetes-eye-screening record for one DESP retinal screening episode: grading context, patient identification, and the right-eye and left-eye grading blocks (R grade, M grade, P marker, U marker, visual acuity). The worst-eye classification and recall / referral outcome, fired rules, and flags live in child tables."
+x-namespace:
+  form: diabetes-eye-screening
+  apiPrefix: /api/diabetes-eye-screening/
+  sqlSchema: diabetes_eye_screening
+  xmlNamespace: https://formexamples.github.io/diabetes-eye-screening/xml
+tags:
+  - name: diabetes-eye-screening
+    description: Diabetes Eye Screening form
 paths:
   /api/diabetes-eye-screening/diabetes_eye_screenings:
     get:
       summary: List DiabetesEyeScreening records
+      tags: [diabetes-eye-screening]
       operationId: listDiabetesEyeScreening
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DiabetesEyeScreening
+      tags: [diabetes-eye-screening]
       operationId: createDiabetesEyeScreening
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DiabetesEyeScreening by id
+      tags: [diabetes-eye-screening]
       operationId: getDiabetesEyeScreening
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DiabetesEyeScreening
+      tags: [diabetes-eye-screening]
       operationId: updateDiabetesEyeScreening
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DiabetesEyeScreening
+      tags: [diabetes-eye-screening]
       operationId: replaceDiabetesEyeScreening
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DiabetesEyeScreening
+      tags: [diabetes-eye-screening]
       operationId: deleteDiabetesEyeScreening
       responses:
         "200":

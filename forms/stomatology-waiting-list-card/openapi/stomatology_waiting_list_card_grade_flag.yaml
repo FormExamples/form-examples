@@ -5,10 +5,19 @@ info:
   title: Stomatology Waiting List Card — StomatologyWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: stomatology-waiting-list-card
+  apiPrefix: /api/stomatology-waiting-list-card/
+  sqlSchema: stomatology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/stomatology-waiting-list-card/xml
+tags:
+  - name: stomatology-waiting-list-card
+    description: Stomatology Waiting List Card form
 paths:
   /api/stomatology-waiting-list-card/stomatology_waiting_list_card_grade_flags:
     get:
       summary: List StomatologyWaitingListCardGradeFlag records
+      tags: [stomatology-waiting-list-card]
       operationId: listStomatologyWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new StomatologyWaitingListCardGradeFlag
+      tags: [stomatology-waiting-list-card]
       operationId: createStomatologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one StomatologyWaitingListCardGradeFlag by id
+      tags: [stomatology-waiting-list-card]
       operationId: getStomatologyWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing StomatologyWaitingListCardGradeFlag
+      tags: [stomatology-waiting-list-card]
       operationId: updateStomatologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing StomatologyWaitingListCardGradeFlag
+      tags: [stomatology-waiting-list-card]
       operationId: replaceStomatologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a StomatologyWaitingListCardGradeFlag
+      tags: [stomatology-waiting-list-card]
       operationId: deleteStomatologyWaitingListCardGradeFlag
       responses:
         "200":

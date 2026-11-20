@@ -5,10 +5,19 @@ info:
   title: Casualty Card Form — News2Result
   version: 1.0.0
   description: 1:1 with casualty_card. Computed NEWS2 score with clinical response threshold and parameter breakdown.
+x-namespace:
+  form: casualty-card-form
+  apiPrefix: /api/casualty-card-form/
+  sqlSchema: casualty_card_form
+  xmlNamespace: https://formexamples.github.io/casualty-card-form/xml
+tags:
+  - name: casualty-card-form
+    description: Casualty Card Form form
 paths:
   /api/casualty-card-form/news2_results:
     get:
       summary: List News2Result records
+      tags: [casualty-card-form]
       operationId: listNews2Result
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new News2Result
+      tags: [casualty-card-form]
       operationId: createNews2Result
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one News2Result by id
+      tags: [casualty-card-form]
       operationId: getNews2Result
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing News2Result
+      tags: [casualty-card-form]
       operationId: updateNews2Result
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing News2Result
+      tags: [casualty-card-form]
       operationId: replaceNews2Result
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a News2Result
+      tags: [casualty-card-form]
       operationId: deleteNews2Result
       responses:
         "200":

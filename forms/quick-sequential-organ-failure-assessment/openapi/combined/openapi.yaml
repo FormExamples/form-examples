@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Quick Sequential Organ Failure Assessment (qSOFA)
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: quick-sequential-organ-failure-assessment
+  apiPrefix: /api/quick-sequential-organ-failure-assessment/
+  sqlSchema: quick_sequential_organ_failure_assessment
+  xmlNamespace: https://formexamples.github.io/quick-sequential-organ-failure-assessment/xml
+tags:
+- name: quick-sequential-organ-failure-assessment
+  description: Quick Sequential Organ Failure Assessment (qSOFA) form
 paths:
   /api/quick-sequential-organ-failure-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - quick-sequential-organ-failure-assessment
   /api/quick-sequential-organ-failure-assessment/patients:
     get:
       summary: List Patient records
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/quick-sequential-organ-failure-assessment/quick_sequential_organ_failure_assessment_grade_flags:
     get:
       summary: List QuickSequentialOrganFailureAssessmentGradeFlag records
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: listQuickSequentialOrganFailureAssessmentGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new QuickSequentialOrganFailureAssessmentGradeFlag
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: createQuickSequentialOrganFailureAssessmentGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one QuickSequentialOrganFailureAssessmentGradeFlag by id
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: getQuickSequentialOrganFailureAssessmentGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing QuickSequentialOrganFailureAssessmentGradeFlag
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: updateQuickSequentialOrganFailureAssessmentGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing QuickSequentialOrganFailureAssessmentGradeFlag
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: replaceQuickSequentialOrganFailureAssessmentGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a QuickSequentialOrganFailureAssessmentGradeFlag
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: deleteQuickSequentialOrganFailureAssessmentGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/quick-sequential-organ-failure-assessment/quick_sequential_organ_failure_assessment_grade_rules:
     get:
       summary: List QuickSequentialOrganFailureAssessmentGradeRule records
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: listQuickSequentialOrganFailureAssessmentGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new QuickSequentialOrganFailureAssessmentGradeRule
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: createQuickSequentialOrganFailureAssessmentGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one QuickSequentialOrganFailureAssessmentGradeRule by id
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: getQuickSequentialOrganFailureAssessmentGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing QuickSequentialOrganFailureAssessmentGradeRule
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: updateQuickSequentialOrganFailureAssessmentGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing QuickSequentialOrganFailureAssessmentGradeRule
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: replaceQuickSequentialOrganFailureAssessmentGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a QuickSequentialOrganFailureAssessmentGradeRule
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: deleteQuickSequentialOrganFailureAssessmentGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/quick-sequential-organ-failure-assessment/quick_sequential_organ_failure_assessment_grades:
     get:
       summary: List QuickSequentialOrganFailureAssessmentGrade records
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: listQuickSequentialOrganFailureAssessmentGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new QuickSequentialOrganFailureAssessmentGrade
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: createQuickSequentialOrganFailureAssessmentGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one QuickSequentialOrganFailureAssessmentGrade by id
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: getQuickSequentialOrganFailureAssessmentGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing QuickSequentialOrganFailureAssessmentGrade
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: updateQuickSequentialOrganFailureAssessmentGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing QuickSequentialOrganFailureAssessmentGrade
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: replaceQuickSequentialOrganFailureAssessmentGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a QuickSequentialOrganFailureAssessmentGrade
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: deleteQuickSequentialOrganFailureAssessmentGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/quick-sequential-organ-failure-assessment/quick_sequential_organ_failure_assessments:
     get:
       summary: List QuickSequentialOrganFailureAssessment records
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: listQuickSequentialOrganFailureAssessment
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new QuickSequentialOrganFailureAssessment
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: createQuickSequentialOrganFailureAssessment
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one QuickSequentialOrganFailureAssessment by id
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: getQuickSequentialOrganFailureAssessment
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing QuickSequentialOrganFailureAssessment
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: updateQuickSequentialOrganFailureAssessment
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing QuickSequentialOrganFailureAssessment
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: replaceQuickSequentialOrganFailureAssessment
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a QuickSequentialOrganFailureAssessment
+      tags:
+      - quick-sequential-organ-failure-assessment
       operationId: deleteQuickSequentialOrganFailureAssessment
       responses:
         '200':

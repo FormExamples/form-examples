@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE resp_med_waiting_list_card SYSTEM "resp_med_waiting_list_card.dtd">
-<resp_med_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<resp_med_waiting_list_card xmlns="https://formexamples.github.io/respiratory-medicine-waiting-list-card/xml">
+<id>4a6dabdf-e7f1-5e78-9d66-9d9385042a3e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>4fc15df6-7469-51dc-af9a-6d2dff960b8b</patient_id>
+<practitioner_id>df725806-526f-597f-ab04-f2a2a74470b6</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

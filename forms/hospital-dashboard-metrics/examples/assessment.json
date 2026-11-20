@@ -1,6 +1,6 @@
 {
   "hospitalDashboardMetrics": {
-    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "id": "f12df378-2e9a-5e93-9429-aef7c78ce483",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -13,11 +13,11 @@
     "signedAt": null
   },
   "hospitalDashboardMetricValue": {
-    "id": "550e8400-e29b-41d4-a716-00000000000c",
+    "id": "c644870d-71ee-54ed-a53a-7f7828d893ff",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hospitalDashboardMetricsId": "550e8400-e29b-41d4-a716-000000000010",
+    "hospitalDashboardMetricsId": "89835530-2056-585b-8d0a-5bbd94352d1c",
     "metricCode": "",
     "categoryNumber": 7,
     "categoryTitle": "",

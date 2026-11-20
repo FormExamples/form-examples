@@ -5,10 +5,19 @@ info:
   title: Toxicology Test Result — ToxicologyTestResult
   version: 1.0.0
   description: Toxicology / poisons / therapeutic-drug-level test result (report). Captures the specimen condition, clinical history and suspected agent, the assay result values (paracetamol, salicylate, ethanol, lithium, digoxin, carboxyhaemoglobin, drugs-of-abuse screen, named specific drug), the paracetamol-nomogram interpretation, the overall result status, the narrative findings and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: toxicology-test-result
+  apiPrefix: /api/toxicology-test-result/
+  sqlSchema: toxicology_test_result
+  xmlNamespace: https://formexamples.github.io/toxicology-test-result/xml
+tags:
+  - name: toxicology-test-result
+    description: Toxicology Test Result form
 paths:
   /api/toxicology-test-result/toxicology_test_results:
     get:
       summary: List ToxicologyTestResult records
+      tags: [toxicology-test-result]
       operationId: listToxicologyTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ToxicologyTestResult
+      tags: [toxicology-test-result]
       operationId: createToxicologyTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ToxicologyTestResult by id
+      tags: [toxicology-test-result]
       operationId: getToxicologyTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ToxicologyTestResult
+      tags: [toxicology-test-result]
       operationId: updateToxicologyTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ToxicologyTestResult
+      tags: [toxicology-test-result]
       operationId: replaceToxicologyTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ToxicologyTestResult
+      tags: [toxicology-test-result]
       operationId: deleteToxicologyTestResult
       responses:
         "200":

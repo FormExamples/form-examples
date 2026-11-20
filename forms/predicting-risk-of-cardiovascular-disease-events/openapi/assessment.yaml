@@ -5,10 +5,19 @@ info:
   title: Predicting Risk Of Cardiovascular Disease Events — Assessment
   version: 1.0.0
   description: A single PREVENT CVD risk assessment. Child tables hold section-specific clinical data.
+x-namespace:
+  form: predicting-risk-of-cardiovascular-disease-events
+  apiPrefix: /api/predicting-risk-of-cardiovascular-disease-events/
+  sqlSchema: predicting_risk_of_cardiovascular_disease_events
+  xmlNamespace: https://formexamples.github.io/predicting-risk-of-cardiovascular-disease-events/xml
+tags:
+  - name: predicting-risk-of-cardiovascular-disease-events
+    description: Predicting Risk Of Cardiovascular Disease Events form
 paths:
   /api/predicting-risk-of-cardiovascular-disease-events/assessments:
     get:
       summary: List Assessment records
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: deleteAssessment
       responses:
         "200":

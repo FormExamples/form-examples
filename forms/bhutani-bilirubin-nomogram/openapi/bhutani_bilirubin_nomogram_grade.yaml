@@ -5,10 +5,19 @@ info:
   title: Bhutani Bilirubin Nomogram — BhutaniBilirubinNomogramGrade
   version: 1.0.0
   description: "Computed Bhutani bilirubin nomogram classification result (1:1): percentile risk zone, mirrored percentile band, interpolated gestation-specific phototherapy and exchange thresholds, and the yes/no above-threshold signals."
+x-namespace:
+  form: bhutani-bilirubin-nomogram
+  apiPrefix: /api/bhutani-bilirubin-nomogram/
+  sqlSchema: bhutani_bilirubin_nomogram
+  xmlNamespace: https://formexamples.github.io/bhutani-bilirubin-nomogram/xml
+tags:
+  - name: bhutani-bilirubin-nomogram
+    description: Bhutani Bilirubin Nomogram form
 paths:
   /api/bhutani-bilirubin-nomogram/bhutani_bilirubin_nomogram_grades:
     get:
       summary: List BhutaniBilirubinNomogramGrade records
+      tags: [bhutani-bilirubin-nomogram]
       operationId: listBhutaniBilirubinNomogramGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BhutaniBilirubinNomogramGrade
+      tags: [bhutani-bilirubin-nomogram]
       operationId: createBhutaniBilirubinNomogramGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BhutaniBilirubinNomogramGrade by id
+      tags: [bhutani-bilirubin-nomogram]
       operationId: getBhutaniBilirubinNomogramGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BhutaniBilirubinNomogramGrade
+      tags: [bhutani-bilirubin-nomogram]
       operationId: updateBhutaniBilirubinNomogramGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BhutaniBilirubinNomogramGrade
+      tags: [bhutani-bilirubin-nomogram]
       operationId: replaceBhutaniBilirubinNomogramGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BhutaniBilirubinNomogramGrade
+      tags: [bhutani-bilirubin-nomogram]
       operationId: deleteBhutaniBilirubinNomogramGrade
       responses:
         "200":

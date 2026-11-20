@@ -5,10 +5,19 @@ info:
   title: United States Property Tax Exemption Application — Assessor
   version: 1.0.0
   description: County assessing official who receives and decides the property tax exemption application.
+x-namespace:
+  form: united-states-property-tax-exemption-application
+  apiPrefix: /api/united-states-property-tax-exemption-application/
+  sqlSchema: united_states_property_tax_exemption_application
+  xmlNamespace: https://formexamples.github.io/united-states-property-tax-exemption-application/xml
+tags:
+  - name: united-states-property-tax-exemption-application
+    description: United States Property Tax Exemption Application form
 paths:
   /api/united-states-property-tax-exemption-application/assessors:
     get:
       summary: List Assessor records
+      tags: [united-states-property-tax-exemption-application]
       operationId: listAssessor
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessor
+      tags: [united-states-property-tax-exemption-application]
       operationId: createAssessor
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessor by id
+      tags: [united-states-property-tax-exemption-application]
       operationId: getAssessor
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessor
+      tags: [united-states-property-tax-exemption-application]
       operationId: updateAssessor
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessor
+      tags: [united-states-property-tax-exemption-application]
       operationId: replaceAssessor
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessor
+      tags: [united-states-property-tax-exemption-application]
       operationId: deleteAssessor
       responses:
         "200":

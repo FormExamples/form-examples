@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United States Social Security Card Application (Form
     SS-5) form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL
     table, and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-states-social-security-card-application
+  apiPrefix: /api/united-states-social-security-card-application/
+  sqlSchema: united_states_social_security_card_application
+  xmlNamespace: https://formexamples.github.io/united-states-social-security-card-application/xml
+tags:
+- name: united-states-social-security-card-application
+  description: United States Social Security Card Application (Form SS-5) form
 paths:
   /api/united-states-social-security-card-application/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - united-states-social-security-card-application
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - united-states-social-security-card-application
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - united-states-social-security-card-application
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - united-states-social-security-card-application
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - united-states-social-security-card-application
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - united-states-social-security-card-application
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-states-social-security-card-application
   /api/united-states-social-security-card-application/patients:
     get:
       summary: List Patient records
+      tags:
+      - united-states-social-security-card-application
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - united-states-social-security-card-application
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - united-states-social-security-card-application
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - united-states-social-security-card-application
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - united-states-social-security-card-application
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - united-states-social-security-card-application
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/united-states-social-security-card-application/ss5_application_grade_flags:
     get:
       summary: List Ss5ApplicationGradeFlag records
+      tags:
+      - united-states-social-security-card-application
       operationId: listSs5ApplicationGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Ss5ApplicationGradeFlag
+      tags:
+      - united-states-social-security-card-application
       operationId: createSs5ApplicationGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Ss5ApplicationGradeFlag by id
+      tags:
+      - united-states-social-security-card-application
       operationId: getSs5ApplicationGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Ss5ApplicationGradeFlag
+      tags:
+      - united-states-social-security-card-application
       operationId: updateSs5ApplicationGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Ss5ApplicationGradeFlag
+      tags:
+      - united-states-social-security-card-application
       operationId: replaceSs5ApplicationGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Ss5ApplicationGradeFlag
+      tags:
+      - united-states-social-security-card-application
       operationId: deleteSs5ApplicationGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-states-social-security-card-application/ss5_application_grade_rules:
     get:
       summary: List Ss5ApplicationGradeRule records
+      tags:
+      - united-states-social-security-card-application
       operationId: listSs5ApplicationGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Ss5ApplicationGradeRule
+      tags:
+      - united-states-social-security-card-application
       operationId: createSs5ApplicationGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Ss5ApplicationGradeRule by id
+      tags:
+      - united-states-social-security-card-application
       operationId: getSs5ApplicationGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Ss5ApplicationGradeRule
+      tags:
+      - united-states-social-security-card-application
       operationId: updateSs5ApplicationGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Ss5ApplicationGradeRule
+      tags:
+      - united-states-social-security-card-application
       operationId: replaceSs5ApplicationGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Ss5ApplicationGradeRule
+      tags:
+      - united-states-social-security-card-application
       operationId: deleteSs5ApplicationGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-states-social-security-card-application/ss5_application_grades:
     get:
       summary: List Ss5ApplicationGrade records
+      tags:
+      - united-states-social-security-card-application
       operationId: listSs5ApplicationGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Ss5ApplicationGrade
+      tags:
+      - united-states-social-security-card-application
       operationId: createSs5ApplicationGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Ss5ApplicationGrade by id
+      tags:
+      - united-states-social-security-card-application
       operationId: getSs5ApplicationGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Ss5ApplicationGrade
+      tags:
+      - united-states-social-security-card-application
       operationId: updateSs5ApplicationGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Ss5ApplicationGrade
+      tags:
+      - united-states-social-security-card-application
       operationId: replaceSs5ApplicationGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Ss5ApplicationGrade
+      tags:
+      - united-states-social-security-card-application
       operationId: deleteSs5ApplicationGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-states-social-security-card-application/ss5_applications:
     get:
       summary: List Ss5Application records
+      tags:
+      - united-states-social-security-card-application
       operationId: listSs5Application
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Ss5Application
+      tags:
+      - united-states-social-security-card-application
       operationId: createSs5Application
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Ss5Application by id
+      tags:
+      - united-states-social-security-card-application
       operationId: getSs5Application
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Ss5Application
+      tags:
+      - united-states-social-security-card-application
       operationId: updateSs5Application
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Ss5Application
+      tags:
+      - united-states-social-security-card-application
       operationId: replaceSs5Application
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Ss5Application
+      tags:
+      - united-states-social-security-card-application
       operationId: deleteSs5Application
       responses:
         '200':

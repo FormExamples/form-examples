@@ -5,10 +5,19 @@ info:
   title: Obstetrics And Gynaecology Waiting List Card — ObgynWaitingListCardGradeRule
   version: 1.0.0
   description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that fired during grading of a waiting list card.
+x-namespace:
+  form: obstetrics-and-gynaecology-waiting-list-card
+  apiPrefix: /api/obstetrics-and-gynaecology-waiting-list-card/
+  sqlSchema: obstetrics_and_gynaecology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/obstetrics-and-gynaecology-waiting-list-card/xml
+tags:
+  - name: obstetrics-and-gynaecology-waiting-list-card
+    description: Obstetrics And Gynaecology Waiting List Card form
 paths:
   /api/obstetrics-and-gynaecology-waiting-list-card/obgyn_waiting_list_card_grade_rules:
     get:
       summary: List ObgynWaitingListCardGradeRule records
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: listObgynWaitingListCardGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ObgynWaitingListCardGradeRule
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: createObgynWaitingListCardGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ObgynWaitingListCardGradeRule by id
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: getObgynWaitingListCardGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ObgynWaitingListCardGradeRule
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: updateObgynWaitingListCardGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ObgynWaitingListCardGradeRule
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: replaceObgynWaitingListCardGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ObgynWaitingListCardGradeRule
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: deleteObgynWaitingListCardGradeRule
       responses:
         "200":

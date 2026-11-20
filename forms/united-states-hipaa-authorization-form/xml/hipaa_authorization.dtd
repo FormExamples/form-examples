@@ -1,4 +1,5 @@
 <!ELEMENT hipaa_authorization (id,created_at,updated_at,deleted_at,patient_id,status,state_template,revoked_at,revocation_method)>
+<!ATTLIST hipaa_authorization xmlns CDATA #FIXED "https://formexamples.github.io/united-states-hipaa-authorization-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

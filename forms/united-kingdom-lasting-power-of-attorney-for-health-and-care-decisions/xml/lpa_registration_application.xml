@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE lpa_registration_application SYSTEM "lpa_registration_application.dtd">
-<lpa_registration_application>
-<id>440e8400-e29b-41d4-a716-44665544000e</id>
+<lpa_registration_application xmlns="https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml">
+<id>cd4c2450-abbc-57b9-a24b-4ca383fd3bc5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<lpa_id>aa0e8400-e29b-41d4-a716-446655440005</lpa_id>
+<lpa_id>37fb4e5a-a262-55e5-adee-7ae6af4edc29</lpa_id>
 <applicant_role>donor</applicant_role>
 <applicant_signed_at>2026-04-09T10:00:00Z</applicant_signed_at>
 <fee_amount_pounds>0.0</fee_amount_pounds>

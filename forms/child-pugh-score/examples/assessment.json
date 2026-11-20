@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000059",
+    "id": "305e1be5-f02e-520b-8dbe-129459d926c0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006b",
+    "id": "19802db4-cc79-5562-a53a-10b6cc72816e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "childPughScore": {
-    "id": "550e8400-e29b-41d4-a716-000000000078",
+    "id": "6039d3cf-96d5-5506-9973-f35a7fabe1b0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007c",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007d",
+    "patientId": "d78c1101-23df-519a-9ca9-1b59b5226cbe",
+    "clinicianId": "d84a3e46-5002-5169-ad37-54ecaf393f53",
     "clinicianName": "",
     "clinicianRole": "hepatologist",
     "assessedAt": null,
@@ -58,11 +58,11 @@
     "clinicalNote": ""
   },
   "childPughScoreGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008d",
+    "id": "428e8de5-c0f5-573f-afd6-12aef3d13807",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "childPughScoreId": "550e8400-e29b-41d4-a716-000000000091",
+    "childPughScoreId": "e0da3fca-2f4d-5174-a735-8f8a44e4b0f0",
     "bilirubinPoints": null,
     "albuminPoints": null,
     "coagulationPoints": null,
@@ -76,11 +76,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "childPughScoreGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000009d",
+    "id": "cdb81670-b8c7-5b7b-8834-8c8330a03750",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "childPughScoreGradeId": "550e8400-e29b-41d4-a716-0000000000a1",
+    "childPughScoreGradeId": "15bd90be-0d67-59a8-80bd-a5658eb11ab5",
     "ruleId": "",
     "parameter": "bilirubin",
     "points": null,
@@ -88,11 +88,11 @@
     "description": ""
   },
   "childPughScoreGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a7",
+    "id": "bd2e5949-8636-56cb-bb10-f9868c2813b0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "childPughScoreGradeId": "550e8400-e29b-41d4-a716-0000000000ab",
+    "childPughScoreGradeId": "1a06d79b-d5ae-5d87-93bc-8e044288529c",
     "flagId": "",
     "category": "class-c-decompensated",
     "priority": "low",

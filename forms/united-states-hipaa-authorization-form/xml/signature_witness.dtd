@@ -1,4 +1,5 @@
 <!ELEMENT signature_witness (id,created_at,updated_at,deleted_at,hipaa_authorization_id,individual_signature_confirmed,individual_signature_image_uri,signature_date,signed_at_location,parent_guardian_co_signature_required,parent_guardian_name,parent_guardian_signature_confirmed,parent_guardian_signature_date,witness_name,witness_signature_confirmed,witness_date,witness_role)>
+<!ATTLIST signature_witness xmlns CDATA #FIXED "https://formexamples.github.io/united-states-hipaa-authorization-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE architecture_decision_record SYSTEM "architecture_decision_record.dtd">
-<architecture_decision_record>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<architecture_decision_record xmlns="https://formexamples.github.io/architecture-decision-record/xml">
+<id>3f403e28-a464-5a81-8bca-7f02e10d4a7f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<author_id>550e8400-e29b-41d4-a716-446655440000</author_id>
-<organization_id>660e8400-e29b-41d4-a716-446655440001</organization_id>
+<author_id>b93904a7-6837-5192-8a5a-b9016d1c3fbb</author_id>
+<organization_id>82d0dd71-4db0-5d6a-b1a4-33e2c2fcacf4</organization_id>
 <slug></slug>
 <number>2</number>
 <title>Example Title</title>

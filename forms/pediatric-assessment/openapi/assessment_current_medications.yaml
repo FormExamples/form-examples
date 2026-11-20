@@ -5,10 +5,19 @@ info:
   title: Pediatric Assessment — AssessmentCurrentMedications
   version: 1.0.0
   description: Current medications section header. One-to-one child of assessment.
+x-namespace:
+  form: pediatric-assessment
+  apiPrefix: /api/pediatric-assessment/
+  sqlSchema: pediatric_assessment
+  xmlNamespace: https://formexamples.github.io/pediatric-assessment/xml
+tags:
+  - name: pediatric-assessment
+    description: Pediatric Assessment form
 paths:
   /api/pediatric-assessment/assessment_current_medications:
     get:
       summary: List AssessmentCurrentMedications records
+      tags: [pediatric-assessment]
       operationId: listAssessmentCurrentMedications
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentCurrentMedications
+      tags: [pediatric-assessment]
       operationId: createAssessmentCurrentMedications
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentCurrentMedications by id
+      tags: [pediatric-assessment]
       operationId: getAssessmentCurrentMedications
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentCurrentMedications
+      tags: [pediatric-assessment]
       operationId: updateAssessmentCurrentMedications
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentCurrentMedications
+      tags: [pediatric-assessment]
       operationId: replaceAssessmentCurrentMedications
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentCurrentMedications
+      tags: [pediatric-assessment]
       operationId: deleteAssessmentCurrentMedications
       responses:
         "200":

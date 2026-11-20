@@ -5,10 +5,19 @@ info:
   title: United Kingdom Birth Registration — UnitedKingdomBirthRegistration
   version: 1.0.0
   description: "Main United Kingdom Birth Registration record: the child, mother, parentage basis for a second parent, informant and identity evidence, and the birth-certificate order for registering a birth in England and Wales. Readiness classification, fired rules, and flags live in child tables."
+x-namespace:
+  form: united-kingdom-birth-registration
+  apiPrefix: /api/united-kingdom-birth-registration/
+  sqlSchema: united_kingdom_birth_registration
+  xmlNamespace: https://formexamples.github.io/united-kingdom-birth-registration/xml
+tags:
+  - name: united-kingdom-birth-registration
+    description: United Kingdom Birth Registration form
 paths:
   /api/united-kingdom-birth-registration/united_kingdom_birth_registrations:
     get:
       summary: List UnitedKingdomBirthRegistration records
+      tags: [united-kingdom-birth-registration]
       operationId: listUnitedKingdomBirthRegistration
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomBirthRegistration
+      tags: [united-kingdom-birth-registration]
       operationId: createUnitedKingdomBirthRegistration
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomBirthRegistration by id
+      tags: [united-kingdom-birth-registration]
       operationId: getUnitedKingdomBirthRegistration
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomBirthRegistration
+      tags: [united-kingdom-birth-registration]
       operationId: updateUnitedKingdomBirthRegistration
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomBirthRegistration
+      tags: [united-kingdom-birth-registration]
       operationId: replaceUnitedKingdomBirthRegistration
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomBirthRegistration
+      tags: [united-kingdom-birth-registration]
       operationId: deleteUnitedKingdomBirthRegistration
       responses:
         "200":

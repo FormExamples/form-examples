@@ -5,10 +5,19 @@ info:
   title: Genetic Test Request — GeneticTestRequest
   version: 1.0.0
   description: Clinical genetics / genomic test request (referral). Captures the requested test type, the clinical indication and question, clinical details, family history, consent and pre-test counselling status, specimen type, and triage urgency. Aligned with the NHS National Genomic Test Directory eligibility criteria.
+x-namespace:
+  form: genetic-test-request
+  apiPrefix: /api/genetic-test-request/
+  sqlSchema: genetic_test_request
+  xmlNamespace: https://formexamples.github.io/genetic-test-request/xml
+tags:
+  - name: genetic-test-request
+    description: Genetic Test Request form
 paths:
   /api/genetic-test-request/genetic_test_requests:
     get:
       summary: List GeneticTestRequest records
+      tags: [genetic-test-request]
       operationId: listGeneticTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GeneticTestRequest
+      tags: [genetic-test-request]
       operationId: createGeneticTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GeneticTestRequest by id
+      tags: [genetic-test-request]
       operationId: getGeneticTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GeneticTestRequest
+      tags: [genetic-test-request]
       operationId: updateGeneticTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GeneticTestRequest
+      tags: [genetic-test-request]
       operationId: replaceGeneticTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GeneticTestRequest
+      tags: [genetic-test-request]
       operationId: deleteGeneticTestRequest
       responses:
         "200":

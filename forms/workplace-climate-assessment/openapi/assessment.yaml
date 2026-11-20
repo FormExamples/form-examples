@@ -5,10 +5,19 @@ info:
   title: Workplace Climate Assessment — Assessment
   version: 1.0.0
   description: Top-level assessment instance for workplace-climate-assessment. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: workplace-climate-assessment
+  apiPrefix: /api/workplace-climate-assessment/
+  sqlSchema: workplace_climate_assessment
+  xmlNamespace: https://formexamples.github.io/workplace-climate-assessment/xml
+tags:
+  - name: workplace-climate-assessment
+    description: Workplace Climate Assessment form
 paths:
   /api/workplace-climate-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [workplace-climate-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [workplace-climate-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [workplace-climate-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [workplace-climate-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [workplace-climate-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [workplace-climate-assessment]
       operationId: deleteAssessment
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Corrected Calcium Calculator — CorrectedCalciumCalculator
   version: 1.0.0
   description: "Main corrected-calcium calculation record: context and identification, plus the measured total calcium and albumin inputs and the symptomatic flag."
+x-namespace:
+  form: corrected-calcium-calculator
+  apiPrefix: /api/corrected-calcium-calculator/
+  sqlSchema: corrected_calcium_calculator
+  xmlNamespace: https://formexamples.github.io/corrected-calcium-calculator/xml
+tags:
+  - name: corrected-calcium-calculator
+    description: Corrected Calcium Calculator form
 paths:
   /api/corrected-calcium-calculator/corrected_calcium_calculators:
     get:
       summary: List CorrectedCalciumCalculator records
+      tags: [corrected-calcium-calculator]
       operationId: listCorrectedCalciumCalculator
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CorrectedCalciumCalculator
+      tags: [corrected-calcium-calculator]
       operationId: createCorrectedCalciumCalculator
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CorrectedCalciumCalculator by id
+      tags: [corrected-calcium-calculator]
       operationId: getCorrectedCalciumCalculator
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CorrectedCalciumCalculator
+      tags: [corrected-calcium-calculator]
       operationId: updateCorrectedCalciumCalculator
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CorrectedCalciumCalculator
+      tags: [corrected-calcium-calculator]
       operationId: replaceCorrectedCalciumCalculator
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CorrectedCalciumCalculator
+      tags: [corrected-calcium-calculator]
       operationId: deleteCorrectedCalciumCalculator
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Cardiac Stress Test Result — CardiacStressTestResultGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.
+x-namespace:
+  form: cardiac-stress-test-result
+  apiPrefix: /api/cardiac-stress-test-result/
+  sqlSchema: cardiac_stress_test_result
+  xmlNamespace: https://formexamples.github.io/cardiac-stress-test-result/xml
+tags:
+  - name: cardiac-stress-test-result
+    description: Cardiac Stress Test Result form
 paths:
   /api/cardiac-stress-test-result/cardiac_stress_test_result_grade_flags:
     get:
       summary: List CardiacStressTestResultGradeFlag records
+      tags: [cardiac-stress-test-result]
       operationId: listCardiacStressTestResultGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiacStressTestResultGradeFlag
+      tags: [cardiac-stress-test-result]
       operationId: createCardiacStressTestResultGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiacStressTestResultGradeFlag by id
+      tags: [cardiac-stress-test-result]
       operationId: getCardiacStressTestResultGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiacStressTestResultGradeFlag
+      tags: [cardiac-stress-test-result]
       operationId: updateCardiacStressTestResultGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiacStressTestResultGradeFlag
+      tags: [cardiac-stress-test-result]
       operationId: replaceCardiacStressTestResultGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiacStressTestResultGradeFlag
+      tags: [cardiac-stress-test-result]
       operationId: deleteCardiacStressTestResultGradeFlag
       responses:
         "200":

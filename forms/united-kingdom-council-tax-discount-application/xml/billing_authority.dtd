@@ -1,4 +1,5 @@
 <!ELEMENT billing_authority (id,created_at,updated_at,deleted_at,name,gss_code,email,phone,website_url)>
+<!ATTLIST billing_authority xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-council-tax-discount-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

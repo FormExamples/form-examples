@@ -5,10 +5,19 @@ info:
   title: Mri Scan Test Result — MriScanTestResultGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.
+x-namespace:
+  form: mri-scan-test-result
+  apiPrefix: /api/mri-scan-test-result/
+  sqlSchema: mri_scan_test_result
+  xmlNamespace: https://formexamples.github.io/mri-scan-test-result/xml
+tags:
+  - name: mri-scan-test-result
+    description: Mri Scan Test Result form
 paths:
   /api/mri-scan-test-result/mri_scan_test_result_grade_flags:
     get:
       summary: List MriScanTestResultGradeFlag records
+      tags: [mri-scan-test-result]
       operationId: listMriScanTestResultGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MriScanTestResultGradeFlag
+      tags: [mri-scan-test-result]
       operationId: createMriScanTestResultGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MriScanTestResultGradeFlag by id
+      tags: [mri-scan-test-result]
       operationId: getMriScanTestResultGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MriScanTestResultGradeFlag
+      tags: [mri-scan-test-result]
       operationId: updateMriScanTestResultGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MriScanTestResultGradeFlag
+      tags: [mri-scan-test-result]
       operationId: replaceMriScanTestResultGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MriScanTestResultGradeFlag
+      tags: [mri-scan-test-result]
       operationId: deleteMriScanTestResultGradeFlag
       responses:
         "200":

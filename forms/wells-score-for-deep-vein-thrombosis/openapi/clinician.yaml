@@ -5,10 +5,19 @@ info:
   title: Wells Score For Deep Vein Thrombosis — Clinician
   version: 1.0.0
   description: Clinician identifying information for the assessing clinician.
+x-namespace:
+  form: wells-score-for-deep-vein-thrombosis
+  apiPrefix: /api/wells-score-for-deep-vein-thrombosis/
+  sqlSchema: wells_score_for_deep_vein_thrombosis
+  xmlNamespace: https://formexamples.github.io/wells-score-for-deep-vein-thrombosis/xml
+tags:
+  - name: wells-score-for-deep-vein-thrombosis
+    description: Wells Score For Deep Vein Thrombosis form
 paths:
   /api/wells-score-for-deep-vein-thrombosis/clinicians:
     get:
       summary: List Clinician records
+      tags: [wells-score-for-deep-vein-thrombosis]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [wells-score-for-deep-vein-thrombosis]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [wells-score-for-deep-vein-thrombosis]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [wells-score-for-deep-vein-thrombosis]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [wells-score-for-deep-vein-thrombosis]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [wells-score-for-deep-vein-thrombosis]
       operationId: deleteClinician
       responses:
         "200":

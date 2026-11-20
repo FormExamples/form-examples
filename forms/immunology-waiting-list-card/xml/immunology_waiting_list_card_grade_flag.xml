@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE immunology_waiting_list_card_grade_flag SYSTEM "immunology_waiting_list_card_grade_flag.dtd">
-<immunology_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<immunology_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/immunology-waiting-list-card/xml">
+<id>91643a61-8abb-56a6-a2a1-a43369ba64c3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<immunology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</immunology_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<immunology_waiting_list_card_grade_id>ae5f865f-b8f8-59db-8044-0e424eda00d5</immunology_waiting_list_card_grade_id>
+<flag_id>edbef25f-7df6-51a7-a3e3-ef714569f78e</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

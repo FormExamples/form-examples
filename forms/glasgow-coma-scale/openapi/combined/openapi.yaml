@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Glasgow Coma Scale form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: glasgow-coma-scale
+  apiPrefix: /api/glasgow-coma-scale/
+  sqlSchema: glasgow_coma_scale
+  xmlNamespace: https://formexamples.github.io/glasgow-coma-scale/xml
+tags:
+- name: glasgow-coma-scale
+  description: Glasgow Coma Scale form
 paths:
   /api/glasgow-coma-scale/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - glasgow-coma-scale
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - glasgow-coma-scale
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - glasgow-coma-scale
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - glasgow-coma-scale
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - glasgow-coma-scale
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - glasgow-coma-scale
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/glasgow-coma-scale/glasgow_coma_scale_grade_flags:
     get:
       summary: List GlasgowComaScaleGradeFlag records
+      tags:
+      - glasgow-coma-scale
       operationId: listGlasgowComaScaleGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GlasgowComaScaleGradeFlag
+      tags:
+      - glasgow-coma-scale
       operationId: createGlasgowComaScaleGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GlasgowComaScaleGradeFlag by id
+      tags:
+      - glasgow-coma-scale
       operationId: getGlasgowComaScaleGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GlasgowComaScaleGradeFlag
+      tags:
+      - glasgow-coma-scale
       operationId: updateGlasgowComaScaleGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GlasgowComaScaleGradeFlag
+      tags:
+      - glasgow-coma-scale
       operationId: replaceGlasgowComaScaleGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GlasgowComaScaleGradeFlag
+      tags:
+      - glasgow-coma-scale
       operationId: deleteGlasgowComaScaleGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/glasgow-coma-scale/glasgow_coma_scale_grade_rules:
     get:
       summary: List GlasgowComaScaleGradeRule records
+      tags:
+      - glasgow-coma-scale
       operationId: listGlasgowComaScaleGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GlasgowComaScaleGradeRule
+      tags:
+      - glasgow-coma-scale
       operationId: createGlasgowComaScaleGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GlasgowComaScaleGradeRule by id
+      tags:
+      - glasgow-coma-scale
       operationId: getGlasgowComaScaleGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GlasgowComaScaleGradeRule
+      tags:
+      - glasgow-coma-scale
       operationId: updateGlasgowComaScaleGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GlasgowComaScaleGradeRule
+      tags:
+      - glasgow-coma-scale
       operationId: replaceGlasgowComaScaleGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GlasgowComaScaleGradeRule
+      tags:
+      - glasgow-coma-scale
       operationId: deleteGlasgowComaScaleGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/glasgow-coma-scale/glasgow_coma_scale_grades:
     get:
       summary: List GlasgowComaScaleGrade records
+      tags:
+      - glasgow-coma-scale
       operationId: listGlasgowComaScaleGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GlasgowComaScaleGrade
+      tags:
+      - glasgow-coma-scale
       operationId: createGlasgowComaScaleGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GlasgowComaScaleGrade by id
+      tags:
+      - glasgow-coma-scale
       operationId: getGlasgowComaScaleGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GlasgowComaScaleGrade
+      tags:
+      - glasgow-coma-scale
       operationId: updateGlasgowComaScaleGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GlasgowComaScaleGrade
+      tags:
+      - glasgow-coma-scale
       operationId: replaceGlasgowComaScaleGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GlasgowComaScaleGrade
+      tags:
+      - glasgow-coma-scale
       operationId: deleteGlasgowComaScaleGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/glasgow-coma-scale/glasgow_coma_scales:
     get:
       summary: List GlasgowComaScale records
+      tags:
+      - glasgow-coma-scale
       operationId: listGlasgowComaScale
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GlasgowComaScale
+      tags:
+      - glasgow-coma-scale
       operationId: createGlasgowComaScale
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GlasgowComaScale by id
+      tags:
+      - glasgow-coma-scale
       operationId: getGlasgowComaScale
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GlasgowComaScale
+      tags:
+      - glasgow-coma-scale
       operationId: updateGlasgowComaScale
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GlasgowComaScale
+      tags:
+      - glasgow-coma-scale
       operationId: replaceGlasgowComaScale
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GlasgowComaScale
+      tags:
+      - glasgow-coma-scale
       operationId: deleteGlasgowComaScale
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - glasgow-coma-scale
   /api/glasgow-coma-scale/patients:
     get:
       summary: List Patient records
+      tags:
+      - glasgow-coma-scale
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - glasgow-coma-scale
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - glasgow-coma-scale
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - glasgow-coma-scale
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - glasgow-coma-scale
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - glasgow-coma-scale
       operationId: deletePatient
       responses:
         '200':

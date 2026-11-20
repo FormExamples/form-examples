@@ -5,10 +5,19 @@ info:
   title: Medical Records Release Permission — ValidationFiredRule
   version: 1.0.0
   description: Validation rules that fired during assessment. Many-to-one child of validation_result.
+x-namespace:
+  form: medical-records-release-permission
+  apiPrefix: /api/medical-records-release-permission/
+  sqlSchema: medical_records_release_permission
+  xmlNamespace: https://formexamples.github.io/medical-records-release-permission/xml
+tags:
+  - name: medical-records-release-permission
+    description: Medical Records Release Permission form
 paths:
   /api/medical-records-release-permission/validation_fired_rules:
     get:
       summary: List ValidationFiredRule records
+      tags: [medical-records-release-permission]
       operationId: listValidationFiredRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ValidationFiredRule
+      tags: [medical-records-release-permission]
       operationId: createValidationFiredRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ValidationFiredRule by id
+      tags: [medical-records-release-permission]
       operationId: getValidationFiredRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ValidationFiredRule
+      tags: [medical-records-release-permission]
       operationId: updateValidationFiredRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ValidationFiredRule
+      tags: [medical-records-release-permission]
       operationId: replaceValidationFiredRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ValidationFiredRule
+      tags: [medical-records-release-permission]
       operationId: deleteValidationFiredRule
       responses:
         "200":

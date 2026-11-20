@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000062",
+    "id": "a87be02a-8969-585a-b3f6-3fb06567b41b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000074",
+    "id": "2d46288a-7122-579f-9c8e-b4c1b1fdc677",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "ctScanTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-000000000082",
+    "id": "7d5da494-8702-5019-a7a3-8a5374ce8256",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000086",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000087",
+    "patientId": "85de8f87-1bd4-5e57-8db9-29b2044576a3",
+    "clinicianId": "333c2025-8b92-5ef8-9935-e5cade02dcf5",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -67,11 +67,11 @@
     "notes": ""
   },
   "ctScanTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000009f",
+    "id": "d1273d91-e137-5c07-bf2b-39e415689009",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "ctScanTestRequestId": "550e8400-e29b-41d4-a716-0000000000a3",
+    "ctScanTestRequestId": "a8ed2254-b969-5555-a35e-70a21b02bff9",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "contrastSafetyBand": "safe",
@@ -86,22 +86,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "ctScanTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "93bd7eaa-8f96-5c70-b8bd-8f07947bff43",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "ctScanTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "ctScanTestRequestGradeId": "d0262dd4-faec-5d5c-8884-be4a7eefd8a4",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "ctScanTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b9",
+    "id": "3e52827b-c467-585e-9ca8-cb806c891a12",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "ctScanTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000bd",
+    "ctScanTestRequestGradeId": "26b03939-c589-5003-b4a1-f681f932b9cb",
     "flagId": "",
     "category": "pregnancy",
     "priority": "low",

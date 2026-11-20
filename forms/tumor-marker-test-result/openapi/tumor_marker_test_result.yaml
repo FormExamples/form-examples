@@ -5,10 +5,19 @@ info:
   title: Tumor Marker Test Result — TumorMarkerTestResult
   version: 1.0.0
   description: Serum tumour-marker test result (report). Captures the measured result value for each serum tumour marker (NUMERIC), the prior value and trend, an overall result status, the interpretive narrative and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: tumor-marker-test-result
+  apiPrefix: /api/tumor-marker-test-result/
+  sqlSchema: tumor_marker_test_result
+  xmlNamespace: https://formexamples.github.io/tumor-marker-test-result/xml
+tags:
+  - name: tumor-marker-test-result
+    description: Tumor Marker Test Result form
 paths:
   /api/tumor-marker-test-result/tumor_marker_test_results:
     get:
       summary: List TumorMarkerTestResult records
+      tags: [tumor-marker-test-result]
       operationId: listTumorMarkerTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new TumorMarkerTestResult
+      tags: [tumor-marker-test-result]
       operationId: createTumorMarkerTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one TumorMarkerTestResult by id
+      tags: [tumor-marker-test-result]
       operationId: getTumorMarkerTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing TumorMarkerTestResult
+      tags: [tumor-marker-test-result]
       operationId: updateTumorMarkerTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing TumorMarkerTestResult
+      tags: [tumor-marker-test-result]
       operationId: replaceTumorMarkerTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a TumorMarkerTestResult
+      tags: [tumor-marker-test-result]
       operationId: deleteTumorMarkerTestResult
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE model_for_end_stage_liver_disease_score_grade_flag SYSTEM "model_for_end_stage_liver_disease_score_grade_flag.dtd">
-<model_for_end_stage_liver_disease_score_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<model_for_end_stage_liver_disease_score_grade_flag xmlns="https://formexamples.github.io/model-for-end-stage-liver-disease-score/xml">
+<id>271ec328-a600-5a85-a5d6-bfa9e88ff0a3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<model_for_end_stage_liver_disease_score_grade_id>880e8400-e29b-41d4-a716-446655440003</model_for_end_stage_liver_disease_score_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<model_for_end_stage_liver_disease_score_grade_id>faed6370-3cfb-53ea-b3fe-d503200a1f58</model_for_end_stage_liver_disease_score_grade_id>
+<flag_id>9b5f8b54-5938-5623-bf2a-e53d868a56a4</flag_id>
 <category>transplant-referral</category>
 <priority>low</priority>
 <description>Example text.</description>

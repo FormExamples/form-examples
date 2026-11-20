@@ -5,10 +5,19 @@ info:
   title: Cardiology Request — CardiologyRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this referral.
+x-namespace:
+  form: cardiology-request
+  apiPrefix: /api/cardiology-request/
+  sqlSchema: cardiology_request
+  xmlNamespace: https://formexamples.github.io/cardiology-request/xml
+tags:
+  - name: cardiology-request
+    description: Cardiology Request form
 paths:
   /api/cardiology-request/cardiology_request_grade_rules:
     get:
       summary: List CardiologyRequestGradeRule records
+      tags: [cardiology-request]
       operationId: listCardiologyRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiologyRequestGradeRule
+      tags: [cardiology-request]
       operationId: createCardiologyRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiologyRequestGradeRule by id
+      tags: [cardiology-request]
       operationId: getCardiologyRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiologyRequestGradeRule
+      tags: [cardiology-request]
       operationId: updateCardiologyRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiologyRequestGradeRule
+      tags: [cardiology-request]
       operationId: replaceCardiologyRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiologyRequestGradeRule
+      tags: [cardiology-request]
       operationId: deleteCardiologyRequestGradeRule
       responses:
         "200":

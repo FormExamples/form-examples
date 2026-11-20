@@ -5,10 +5,19 @@ info:
   title: Lumbar Puncture Test Request — LumbarPunctureTestRequest
   version: 1.0.0
   description: Lumbar puncture request (referral) for CSF sampling and/or manometry. Captures the procedure intent, the clinical indication and question, raised-intracranial-pressure and bleeding safety screening, opening-pressure requirement, and triage urgency.
+x-namespace:
+  form: lumbar-puncture-test-request
+  apiPrefix: /api/lumbar-puncture-test-request/
+  sqlSchema: lumbar_puncture_test_request
+  xmlNamespace: https://formexamples.github.io/lumbar-puncture-test-request/xml
+tags:
+  - name: lumbar-puncture-test-request
+    description: Lumbar Puncture Test Request form
 paths:
   /api/lumbar-puncture-test-request/lumbar_puncture_test_requests:
     get:
       summary: List LumbarPunctureTestRequest records
+      tags: [lumbar-puncture-test-request]
       operationId: listLumbarPunctureTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LumbarPunctureTestRequest
+      tags: [lumbar-puncture-test-request]
       operationId: createLumbarPunctureTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LumbarPunctureTestRequest by id
+      tags: [lumbar-puncture-test-request]
       operationId: getLumbarPunctureTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LumbarPunctureTestRequest
+      tags: [lumbar-puncture-test-request]
       operationId: updateLumbarPunctureTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LumbarPunctureTestRequest
+      tags: [lumbar-puncture-test-request]
       operationId: replaceLumbarPunctureTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LumbarPunctureTestRequest
+      tags: [lumbar-puncture-test-request]
       operationId: deleteLumbarPunctureTestRequest
       responses:
         "200":

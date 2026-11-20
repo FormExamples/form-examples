@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000007b",
+    "id": "8c5d3d34-153e-5367-bc5b-dcff1e29f400",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000008d",
+    "id": "4d66e34e-987a-5531-b491-def942a0dc1c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "endoscopyTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-00000000009b",
+    "id": "d9851baa-11d5-5e4e-a7aa-714b87054e67",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000009f",
-    "clinicianId": "550e8400-e29b-41d4-a716-0000000000a0",
+    "patientId": "0f27d67a-356c-520a-98b1-d933c1af97cb",
+    "clinicianId": "b498f8d9-6b9a-5a27-856d-8f3adb22d4f1",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -89,11 +89,11 @@
     "notes": ""
   },
   "endoscopyTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ce",
+    "id": "e4a8bf0d-09ea-5cd5-9c87-7adb77f6c17e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "endoscopyTestRequestId": "550e8400-e29b-41d4-a716-0000000000d2",
+    "endoscopyTestRequestId": "a61815b2-e253-58dd-9f57-95ce31fafd8b",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "triageTier": "routine",
@@ -111,22 +111,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "endoscopyTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000e2",
+    "id": "376836b3-f891-5328-8868-239e37395165",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "endoscopyTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000e6",
+    "endoscopyTestRequestGradeId": "af00678a-1c53-55e8-aa6b-00afd014d790",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "endoscopyTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000eb",
+    "id": "935e37af-0e66-5899-9ff6-49033818ecdb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "endoscopyTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000ef",
+    "endoscopyTestRequestGradeId": "173f78de-7972-55f8-9526-b4ea8d86c4fe",
     "flagId": "",
     "category": "acute-gi-bleed",
     "priority": "low",

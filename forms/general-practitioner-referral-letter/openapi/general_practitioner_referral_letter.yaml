@@ -5,10 +5,19 @@ info:
   title: General Practitioner Referral Letter — GeneralPractitionerReferralLetter
   version: 1.0.0
   description: "Main general-practitioner referral letter record: referral destination, urgency, reason and history, examination and investigation findings, medications and allergies, and the patient's expectations, consent, and safety-netting, plus patient and referrer identification. Completeness grade, fired rules, and flags live in child tables."
+x-namespace:
+  form: general-practitioner-referral-letter
+  apiPrefix: /api/general-practitioner-referral-letter/
+  sqlSchema: general_practitioner_referral_letter
+  xmlNamespace: https://formexamples.github.io/general-practitioner-referral-letter/xml
+tags:
+  - name: general-practitioner-referral-letter
+    description: General Practitioner Referral Letter form
 paths:
   /api/general-practitioner-referral-letter/general_practitioner_referral_letters:
     get:
       summary: List GeneralPractitionerReferralLetter records
+      tags: [general-practitioner-referral-letter]
       operationId: listGeneralPractitionerReferralLetter
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GeneralPractitionerReferralLetter
+      tags: [general-practitioner-referral-letter]
       operationId: createGeneralPractitionerReferralLetter
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GeneralPractitionerReferralLetter by id
+      tags: [general-practitioner-referral-letter]
       operationId: getGeneralPractitionerReferralLetter
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GeneralPractitionerReferralLetter
+      tags: [general-practitioner-referral-letter]
       operationId: updateGeneralPractitionerReferralLetter
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GeneralPractitionerReferralLetter
+      tags: [general-practitioner-referral-letter]
       operationId: replaceGeneralPractitionerReferralLetter
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GeneralPractitionerReferralLetter
+      tags: [general-practitioner-referral-letter]
       operationId: deleteGeneralPractitionerReferralLetter
       responses:
         "200":

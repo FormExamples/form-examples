@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ottawa_knee_rule_grade SYSTEM "ottawa_knee_rule_grade.dtd">
-<ottawa_knee_rule_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<ottawa_knee_rule_grade xmlns="https://formexamples.github.io/ottawa-knee-rule/xml">
+<id>e3caa4b1-cef9-5e3b-9b7a-c16898f87fb8</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<ottawa_knee_rule_id>770e8400-e29b-41d4-a716-446655440002</ottawa_knee_rule_id>
+<ottawa_knee_rule_id>8be2c30c-c8de-5eb2-b476-6139bce5bceb</ottawa_knee_rule_id>
 <xray_indicated>yes</xray_indicated>
 <decision>xray-indicated</decision>
 <recommended_action></recommended_action>

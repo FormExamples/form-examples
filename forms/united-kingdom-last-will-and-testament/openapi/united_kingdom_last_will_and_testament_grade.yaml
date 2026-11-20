@@ -5,10 +5,19 @@ info:
   title: United Kingdom Last Will And Testament — UnitedKingdomLastWillAndTestamentGrade
   version: 1.0.0
   description: "Computed completeness and validity-classification result for a United Kingdom Last Will and Testament: validity class (valid/incomplete/formality-risk), total of beneficiary shares, count of named witnesses, and whether a formality risk is indicated."
+x-namespace:
+  form: united-kingdom-last-will-and-testament
+  apiPrefix: /api/united-kingdom-last-will-and-testament/
+  sqlSchema: united_kingdom_last_will_and_testament
+  xmlNamespace: https://formexamples.github.io/united-kingdom-last-will-and-testament/xml
+tags:
+  - name: united-kingdom-last-will-and-testament
+    description: United Kingdom Last Will And Testament form
 paths:
   /api/united-kingdom-last-will-and-testament/united_kingdom_last_will_and_testament_grades:
     get:
       summary: List UnitedKingdomLastWillAndTestamentGrade records
+      tags: [united-kingdom-last-will-and-testament]
       operationId: listUnitedKingdomLastWillAndTestamentGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomLastWillAndTestamentGrade
+      tags: [united-kingdom-last-will-and-testament]
       operationId: createUnitedKingdomLastWillAndTestamentGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomLastWillAndTestamentGrade by id
+      tags: [united-kingdom-last-will-and-testament]
       operationId: getUnitedKingdomLastWillAndTestamentGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomLastWillAndTestamentGrade
+      tags: [united-kingdom-last-will-and-testament]
       operationId: updateUnitedKingdomLastWillAndTestamentGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomLastWillAndTestamentGrade
+      tags: [united-kingdom-last-will-and-testament]
       operationId: replaceUnitedKingdomLastWillAndTestamentGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomLastWillAndTestamentGrade
+      tags: [united-kingdom-last-will-and-testament]
       operationId: deleteUnitedKingdomLastWillAndTestamentGrade
       responses:
         "200":

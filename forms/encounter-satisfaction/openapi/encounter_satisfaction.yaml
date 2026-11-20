@@ -5,10 +5,19 @@ info:
   title: Encounter Satisfaction — EncounterSatisfaction
   version: 1.0.0
   description: A single encounter satisfaction survey record. Child tables hold section-specific data.
+x-namespace:
+  form: encounter-satisfaction
+  apiPrefix: /api/encounter-satisfaction/
+  sqlSchema: encounter_satisfaction
+  xmlNamespace: https://formexamples.github.io/encounter-satisfaction/xml
+tags:
+  - name: encounter-satisfaction
+    description: Encounter Satisfaction form
 paths:
   /api/encounter-satisfaction/encounter_satisfactions:
     get:
       summary: List EncounterSatisfaction records
+      tags: [encounter-satisfaction]
       operationId: listEncounterSatisfaction
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EncounterSatisfaction
+      tags: [encounter-satisfaction]
       operationId: createEncounterSatisfaction
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EncounterSatisfaction by id
+      tags: [encounter-satisfaction]
       operationId: getEncounterSatisfaction
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EncounterSatisfaction
+      tags: [encounter-satisfaction]
       operationId: updateEncounterSatisfaction
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EncounterSatisfaction
+      tags: [encounter-satisfaction]
       operationId: replaceEncounterSatisfaction
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EncounterSatisfaction
+      tags: [encounter-satisfaction]
       operationId: deleteEncounterSatisfaction
       responses:
         "200":

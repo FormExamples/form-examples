@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000009e",
+    "id": "c10b59fc-0636-574b-80f0-444ba6b43e85",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -15,7 +15,7 @@
     "unitedKingdomNhsNumber": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ab",
+    "id": "37b1a754-d9f6-5777-bf3d-5c08f3abaa53",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -32,12 +32,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "cataractDiagnosticEvaluation": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ba",
+    "id": "c8c6fc88-fc0d-5dee-ab29-73b2dcfa7d95",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000000be",
-    "clinicianId": "550e8400-e29b-41d4-a716-0000000000bf",
+    "patientId": "64f8fba7-aaee-5154-bea2-78ff2e39f17f",
+    "clinicianId": "295aa588-0700-5659-9ec2-b3ec96a412d5",
     "status": "draft",
     "assessmentDate": null,
     "assessmentTime": null,
@@ -138,11 +138,11 @@
     "managementNotes": ""
   },
   "cataractDiagnosticEvaluationGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000122",
+    "id": "74d7000d-3c0a-50e6-a9a2-90eec51060cd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cataractDiagnosticEvaluationId": "550e8400-e29b-41d4-a716-000000000126",
+    "cataractDiagnosticEvaluationId": "30d031a6-6e7d-5cee-92fe-63797825e8b8",
     "computedLocsIiiSeverityRight": "mild",
     "computedLocsIiiSeverityLeft": "mild",
     "computedSurgicalCandidacy": "not-indicated",
@@ -155,11 +155,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "cataractDiagnosticEvaluationGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000131",
+    "id": "bd042858-aead-5f74-906b-5078e4f23f04",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cataractDiagnosticEvaluationGradeId": "550e8400-e29b-41d4-a716-000000000135",
+    "cataractDiagnosticEvaluationGradeId": "72e2e05b-44f6-57fb-a9fa-ee983dd8c35f",
     "flagId": "",
     "category": "competing-pathology-suspected",
     "priority": "low",

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "a464c086-47e6-5d2c-90c7-bd4b8484c44a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "f5f27d45-e615-5cb0-ae02-a5af458a3b0b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "nephrologyWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "72019a2b-190d-5530-b68d-c5af322886dd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000096",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000097",
+    "patientId": "ff853638-b276-5c1e-beb9-d82ea69bc618",
+    "practitionerId": "a45438a8-c77a-5027-b2b9-42ebb95fed85",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "nephrologyWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "503cf3fc-943b-5e7a-bfb1-329130a6f87f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "nephrologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "nephrologyWaitingListCardId": "9a203a70-9df2-5a33-914a-3969ed9404af",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "nephrologyWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "a8d0eab9-8857-5d20-b38b-ce173ba9ad41",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "nephrologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "nephrologyWaitingListCardId": "55587520-6fa6-5132-8d57-a5a44b09a39f",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "nephrologyWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d1",
+    "id": "56511ef4-78db-595e-9e90-1102e1c424ae",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "nephrologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "nephrologyWaitingListCardGradeId": "f005e8a7-a3c5-52f8-a6b8-a1a2b49294af",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "nephrologyWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000db",
+    "id": "75d627ba-e4a5-5d91-8c30-4bc238d6d0d2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "nephrologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000df",
+    "nephrologyWaitingListCardGradeId": "16671562-788a-57c6-bd73-5668bfa7b36d",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

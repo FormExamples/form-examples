@@ -5,10 +5,19 @@ info:
   title: Anion Gap Calculator — AnionGapCalculatorGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the classification, with priority and a suggested action for the assessing clinician.
+x-namespace:
+  form: anion-gap-calculator
+  apiPrefix: /api/anion-gap-calculator/
+  sqlSchema: anion_gap_calculator
+  xmlNamespace: https://formexamples.github.io/anion-gap-calculator/xml
+tags:
+  - name: anion-gap-calculator
+    description: Anion Gap Calculator form
 paths:
   /api/anion-gap-calculator/anion_gap_calculator_grade_flags:
     get:
       summary: List AnionGapCalculatorGradeFlag records
+      tags: [anion-gap-calculator]
       operationId: listAnionGapCalculatorGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AnionGapCalculatorGradeFlag
+      tags: [anion-gap-calculator]
       operationId: createAnionGapCalculatorGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AnionGapCalculatorGradeFlag by id
+      tags: [anion-gap-calculator]
       operationId: getAnionGapCalculatorGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AnionGapCalculatorGradeFlag
+      tags: [anion-gap-calculator]
       operationId: updateAnionGapCalculatorGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AnionGapCalculatorGradeFlag
+      tags: [anion-gap-calculator]
       operationId: replaceAnionGapCalculatorGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AnionGapCalculatorGradeFlag
+      tags: [anion-gap-calculator]
       operationId: deleteAnionGapCalculatorGradeFlag
       responses:
         "200":

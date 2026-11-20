@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "58744c1a-925f-49e9-af85-b2bcadb0c7c3",
+  "id": "553b0cb8-f2f4-56cd-b6a1-998c8874a128",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:918f81e2-146d-4032-acf4-6182fd7a41ec",
+      "fullUrl": "urn:uuid:f3d7c775-aedf-5b59-b21c-60dd8dfe58d5",
       "resource": {
         "resourceType": "Patient",
-        "id": "918f81e2-146d-4032-acf4-6182fd7a41ec",
+        "id": "f3d7c775-aedf-5b59-b21c-60dd8dfe58d5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:c9e48a5c-f53d-429e-aaef-1d8c44a991c1",
+      "fullUrl": "urn:uuid:c218b877-7700-559c-a057-960195285de2",
       "resource": {
         "resourceType": "Observation",
-        "id": "c9e48a5c-f53d-429e-aaef-1d8c44a991c1",
+        "id": "c218b877-7700-559c-a057-960195285de2",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:918f81e2-146d-4032-acf4-6182fd7a41ec"
+          "reference": "urn:uuid:f3d7c775-aedf-5b59-b21c-60dd8dfe58d5"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:b503c05b-c923-4f59-a886-92ba49838bdf",
+      "fullUrl": "urn:uuid:a2b20875-47ad-5a7a-9b2c-f677ab9b1fdb",
       "resource": {
         "resourceType": "Observation",
-        "id": "b503c05b-c923-4f59-a886-92ba49838bdf",
+        "id": "a2b20875-47ad-5a7a-9b2c-f677ab9b1fdb",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:918f81e2-146d-4032-acf4-6182fd7a41ec"
+          "reference": "urn:uuid:f3d7c775-aedf-5b59-b21c-60dd8dfe58d5"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -609,10 +609,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:9c63319c-a070-40a6-ad59-ef515673135f",
+      "fullUrl": "urn:uuid:9dca0fd5-605f-5fe4-b6c2-91166cde6c28",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "9c63319c-a070-40a6-ad59-ef515673135f",
+        "id": "9dca0fd5-605f-5fe4-b6c2-91166cde6c28",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -621,7 +621,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:918f81e2-146d-4032-acf4-6182fd7a41ec"
+          "reference": "urn:uuid:f3d7c775-aedf-5b59-b21c-60dd8dfe58d5"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -630,10 +630,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:db833a44-b18f-4fb3-ae1b-172695560e43",
+      "fullUrl": "urn:uuid:8e7a1696-c1dd-543a-83d7-afc974d7d7e7",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "db833a44-b18f-4fb3-ae1b-172695560e43",
+        "id": "8e7a1696-c1dd-543a-83d7-afc974d7d7e7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -663,17 +663,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:918f81e2-146d-4032-acf4-6182fd7a41ec"
+          "reference": "urn:uuid:f3d7c775-aedf-5b59-b21c-60dd8dfe58d5"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical structured finding (active extravasation, dissection, occlusion, or critical stenosis) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:cec2a767-32b6-49ca-a542-5406465a7814",
+      "fullUrl": "urn:uuid:49defe69-323b-51d7-8805-1285d9046000",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "cec2a767-32b6-49ca-a542-5406465a7814",
+        "id": "49defe69-323b-51d7-8805-1285d9046000",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -703,17 +703,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:918f81e2-146d-4032-acf4-6182fd7a41ec"
+          "reference": "urn:uuid:f3d7c775-aedf-5b59-b21c-60dd8dfe58d5"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:8214163e-d6cc-4cce-a488-fae9e3fb057a",
+      "fullUrl": "urn:uuid:19f6a82d-faf8-5d60-b71d-a9758ab356da",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "8214163e-d6cc-4cce-a488-fae9e3fb057a",
+        "id": "19f6a82d-faf8-5d60-b71d-a9758ab356da",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -743,17 +743,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:918f81e2-146d-4032-acf4-6182fd7a41ec"
+          "reference": "urn:uuid:f3d7c775-aedf-5b59-b21c-60dd8dfe58d5"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:ea7decb1-ea23-4218-a460-50844ce3ee4d",
+      "fullUrl": "urn:uuid:923b34c6-c1a4-5b4b-83c6-acd8ae13c510",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ea7decb1-ea23-4218-a460-50844ce3ee4d",
+        "id": "923b34c6-c1a4-5b4b-83c6-acd8ae13c510",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -783,7 +783,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:918f81e2-146d-4032-acf4-6182fd7a41ec"
+          "reference": "urn:uuid:f3d7c775-aedf-5b59-b21c-60dd8dfe58d5"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (active extravasation, dissection, occlusion, or critical stenosis) is present.",
@@ -797,10 +797,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:9497ba14-050f-4af6-a4ba-609bd58e842d",
+      "fullUrl": "urn:uuid:41f2bc52-c34d-5d36-b90f-37979cbd63ab",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "9497ba14-050f-4af6-a4ba-609bd58e842d",
+        "id": "41f2bc52-c34d-5d36-b90f-37979cbd63ab",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -830,7 +830,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:918f81e2-146d-4032-acf4-6182fd7a41ec"
+          "reference": "urn:uuid:f3d7c775-aedf-5b59-b21c-60dd8dfe58d5"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",

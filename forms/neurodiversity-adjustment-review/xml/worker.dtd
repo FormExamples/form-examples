@@ -1,4 +1,5 @@
 <!ELEMENT worker (id,created_at,updated_at,deleted_at,name,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,employee_reference,job_title,department,employment_type,work_pattern,work_location,employment_start_date)>
+<!ATTLIST worker xmlns CDATA #FIXED "https://formexamples.github.io/neurodiversity-adjustment-review/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE heart_failure_review_grade_rule SYSTEM "heart_failure_review_grade_rule.dtd">
-<heart_failure_review_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<heart_failure_review_grade_rule xmlns="https://formexamples.github.io/heart-failure-review/xml">
+<id>7672d191-6e29-5888-bfb4-39bd518e6b78</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<heart_failure_review_grade_id>880e8400-e29b-41d4-a716-446655440003</heart_failure_review_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<heart_failure_review_grade_id>bb12b829-6d5a-5aef-a314-56ad82880b46</heart_failure_review_grade_id>
+<rule_id>595b0cb3-321a-5917-8d7e-b7d3b5f2a260</rule_id>
 <section>functional</section>
 <category>General</category>
 <description>Example text.</description>

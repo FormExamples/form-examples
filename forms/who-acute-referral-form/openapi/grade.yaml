@@ -5,10 +5,19 @@ info:
   title: Who Acute Referral Form — Grade
   version: 1.0.0
   description: Computed grading / scoring result. One-to-one child of assessment. The result_category column holds a form-specific label (e.g. Low, Moderate, High, or Complete/Incomplete); result_score is optional for numeric instruments.
+x-namespace:
+  form: who-acute-referral-form
+  apiPrefix: /api/who-acute-referral-form/
+  sqlSchema: who_acute_referral_form
+  xmlNamespace: https://formexamples.github.io/who-acute-referral-form/xml
+tags:
+  - name: who-acute-referral-form
+    description: Who Acute Referral Form form
 paths:
   /api/who-acute-referral-form/grades:
     get:
       summary: List Grade records
+      tags: [who-acute-referral-form]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [who-acute-referral-form]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [who-acute-referral-form]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [who-acute-referral-form]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [who-acute-referral-form]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [who-acute-referral-form]
       operationId: deleteGrade
       responses:
         "200":

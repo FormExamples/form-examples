@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Cytology Test Result form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: cytology-test-result
+  apiPrefix: /api/cytology-test-result/
+  sqlSchema: cytology_test_result
+  xmlNamespace: https://formexamples.github.io/cytology-test-result/xml
+tags:
+- name: cytology-test-result
+  description: Cytology Test Result form
 paths:
   /api/cytology-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - cytology-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - cytology-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - cytology-test-result
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - cytology-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - cytology-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - cytology-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/cytology-test-result/cytology_test_result_grade_flags:
     get:
       summary: List CytologyTestResultGradeFlag records
+      tags:
+      - cytology-test-result
       operationId: listCytologyTestResultGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CytologyTestResultGradeFlag
+      tags:
+      - cytology-test-result
       operationId: createCytologyTestResultGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CytologyTestResultGradeFlag by id
+      tags:
+      - cytology-test-result
       operationId: getCytologyTestResultGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CytologyTestResultGradeFlag
+      tags:
+      - cytology-test-result
       operationId: updateCytologyTestResultGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CytologyTestResultGradeFlag
+      tags:
+      - cytology-test-result
       operationId: replaceCytologyTestResultGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CytologyTestResultGradeFlag
+      tags:
+      - cytology-test-result
       operationId: deleteCytologyTestResultGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/cytology-test-result/cytology_test_result_grade_rules:
     get:
       summary: List CytologyTestResultGradeRule records
+      tags:
+      - cytology-test-result
       operationId: listCytologyTestResultGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CytologyTestResultGradeRule
+      tags:
+      - cytology-test-result
       operationId: createCytologyTestResultGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CytologyTestResultGradeRule by id
+      tags:
+      - cytology-test-result
       operationId: getCytologyTestResultGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CytologyTestResultGradeRule
+      tags:
+      - cytology-test-result
       operationId: updateCytologyTestResultGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CytologyTestResultGradeRule
+      tags:
+      - cytology-test-result
       operationId: replaceCytologyTestResultGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CytologyTestResultGradeRule
+      tags:
+      - cytology-test-result
       operationId: deleteCytologyTestResultGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/cytology-test-result/cytology_test_result_grades:
     get:
       summary: List CytologyTestResultGrade records
+      tags:
+      - cytology-test-result
       operationId: listCytologyTestResultGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CytologyTestResultGrade
+      tags:
+      - cytology-test-result
       operationId: createCytologyTestResultGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CytologyTestResultGrade by id
+      tags:
+      - cytology-test-result
       operationId: getCytologyTestResultGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CytologyTestResultGrade
+      tags:
+      - cytology-test-result
       operationId: updateCytologyTestResultGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CytologyTestResultGrade
+      tags:
+      - cytology-test-result
       operationId: replaceCytologyTestResultGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CytologyTestResultGrade
+      tags:
+      - cytology-test-result
       operationId: deleteCytologyTestResultGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/cytology-test-result/cytology_test_results:
     get:
       summary: List CytologyTestResult records
+      tags:
+      - cytology-test-result
       operationId: listCytologyTestResult
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CytologyTestResult
+      tags:
+      - cytology-test-result
       operationId: createCytologyTestResult
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CytologyTestResult by id
+      tags:
+      - cytology-test-result
       operationId: getCytologyTestResult
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CytologyTestResult
+      tags:
+      - cytology-test-result
       operationId: updateCytologyTestResult
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CytologyTestResult
+      tags:
+      - cytology-test-result
       operationId: replaceCytologyTestResult
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CytologyTestResult
+      tags:
+      - cytology-test-result
       operationId: deleteCytologyTestResult
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - cytology-test-result
   /api/cytology-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - cytology-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - cytology-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - cytology-test-result
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - cytology-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - cytology-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - cytology-test-result
       operationId: deletePatient
       responses:
         '200':

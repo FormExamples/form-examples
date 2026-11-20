@@ -1,4 +1,5 @@
 <!ELEMENT mammography_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,exam_type,primary_indication,clinical_question,relevant_history,laterality,symptom_lump,symptom_pain,symptom_nipple_discharge,symptom_skin_change,symptom_nipple_inversion,previous_mammogram,previous_mammogram_date,family_history_breast_cancer,breast_implants,pregnancy_or_lactating,hormone_replacement_therapy,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST mammography_test_request xmlns CDATA #FIXED "https://formexamples.github.io/mammography-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

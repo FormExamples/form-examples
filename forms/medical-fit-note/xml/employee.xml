@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE employee SYSTEM "employee.dtd">
-<employee>
-<id>550e8400-e29b-41d4-a716-446655440000</id>
+<employee xmlns="https://formexamples.github.io/medical-fit-note/xml">
+<id>d3b2c093-e85c-5269-960d-167c3605bbef</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>

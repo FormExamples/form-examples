@@ -5,10 +5,19 @@ info:
   title: Perioperative Optimization — Patient
   version: 1.0.0
   description: Patient.
+x-namespace:
+  form: perioperative-optimization
+  apiPrefix: /api/perioperative-optimization/
+  sqlSchema: perioperative_optimization
+  xmlNamespace: https://formexamples.github.io/perioperative-optimization/xml
+tags:
+  - name: perioperative-optimization
+    description: Perioperative Optimization form
 paths:
   /api/perioperative-optimization/patients:
     get:
       summary: List Patient records
+      tags: [perioperative-optimization]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [perioperative-optimization]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [perioperative-optimization]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [perioperative-optimization]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [perioperative-optimization]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [perioperative-optimization]
       operationId: deletePatient
       responses:
         "200":

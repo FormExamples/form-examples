@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "885fab1f-59e0-4241-a15c-4d0e72f5f5ae",
+  "id": "e7af7e9f-37dd-5b92-a555-559d08e7bb2c",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93",
+      "fullUrl": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774",
       "resource": {
         "resourceType": "Patient",
-        "id": "44765aa4-d770-4cda-abb4-d35908c54e93",
+        "id": "9ddc8581-8264-56b8-99b6-f14f1d555774",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:58f98d1d-0e0f-4d7a-a9ba-ac525f94cb07",
+      "fullUrl": "urn:uuid:1c6b368c-5ce4-5a61-bad1-fb8cea9e5f45",
       "resource": {
         "resourceType": "Observation",
-        "id": "58f98d1d-0e0f-4d7a-a9ba-ac525f94cb07",
+        "id": "1c6b368c-5ce4-5a61-bad1-fb8cea9e5f45",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93"
+          "reference": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:24fe0066-43b7-4843-a207-f539f3c20231",
+      "fullUrl": "urn:uuid:c422120f-8b94-525e-a114-9b5776e528da",
       "resource": {
         "resourceType": "Observation",
-        "id": "24fe0066-43b7-4843-a207-f539f3c20231",
+        "id": "c422120f-8b94-525e-a114-9b5776e528da",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93"
+          "reference": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -579,10 +579,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:6ab0c353-2fb4-41ec-ae4b-0bfc37c9c0c8",
+      "fullUrl": "urn:uuid:bca2d5d6-e571-5d8b-aa0d-24436d788e82",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "6ab0c353-2fb4-41ec-ae4b-0bfc37c9c0c8",
+        "id": "bca2d5d6-e571-5d8b-aa0d-24436d788e82",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -591,7 +591,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93"
+          "reference": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -600,10 +600,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:ad54d790-0dac-456d-a623-2a288a951b9a",
+      "fullUrl": "urn:uuid:eac54f88-6002-513b-ae40-3f8598ad030b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ad54d790-0dac-456d-a623-2a288a951b9a",
+        "id": "eac54f88-6002-513b-ae40-3f8598ad030b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -633,17 +633,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93"
+          "reference": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical rhythm finding (ventricular tachycardia, pause > 3 s, high-grade AV block, or fast atrial fibrillation) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:1ae58e70-4226-4cce-a6af-68284532dcd1",
+      "fullUrl": "urn:uuid:7de83b2b-40fa-5ab1-8ff4-076becbf50d1",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "1ae58e70-4226-4cce-a6af-68284532dcd1",
+        "id": "7de83b2b-40fa-5ab1-8ff4-076becbf50d1",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -673,17 +673,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93"
+          "reference": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical rhythm finding present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:903de9c0-8a27-4239-a780-83e5d875c3df",
+      "fullUrl": "urn:uuid:2ec0c5dc-f96d-57a9-bd9d-5b6ad5abdcf9",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "903de9c0-8a27-4239-a780-83e5d875c3df",
+        "id": "2ec0c5dc-f96d-57a9-bd9d-5b6ad5abdcf9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -713,17 +713,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93"
+          "reference": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: clinical history."
       }
     },
     {
-      "fullUrl": "urn:uuid:9bc67b48-f4aa-4313-a8fc-89b8cba8a64a",
+      "fullUrl": "urn:uuid:b1105ccf-d662-5ddb-bb6e-4fe8dafec893",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "9bc67b48-f4aa-4313-a8fc-89b8cba8a64a",
+        "id": "b1105ccf-d662-5ddb-bb6e-4fe8dafec893",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -753,17 +753,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93"
+          "reference": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: impression."
       }
     },
     {
-      "fullUrl": "urn:uuid:c72e69b2-1b78-4490-a579-f97282957498",
+      "fullUrl": "urn:uuid:7864fda7-da75-52d9-8bad-5697838e7b84",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "c72e69b2-1b78-4490-a579-f97282957498",
+        "id": "7864fda7-da75-52d9-8bad-5697838e7b84",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -793,17 +793,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93"
+          "reference": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical rhythm finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:43a76cd3-63f2-4db1-a8e7-048f28aa4626",
+      "fullUrl": "urn:uuid:f129dcab-4b00-5273-bea6-281675e11fc4",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "43a76cd3-63f2-4db1-a8e7-048f28aa4626",
+        "id": "f129dcab-4b00-5273-bea6-281675e11fc4",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -833,7 +833,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93"
+          "reference": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical rhythm finding (ventricular tachycardia, pause > 3 s, high-grade AV block, or fast atrial fibrillation) is present.",
@@ -847,10 +847,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:3bebe08e-538e-4233-ab9b-c626091514e3",
+      "fullUrl": "urn:uuid:264a73cf-65ad-5af6-aa01-f200db16ca05",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "3bebe08e-538e-4233-ab9b-c626091514e3",
+        "id": "264a73cf-65ad-5af6-aa01-f200db16ca05",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -880,7 +880,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93"
+          "reference": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",
@@ -894,10 +894,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:6217cb9a-ee67-4a24-a7d5-2f2af23341c0",
+      "fullUrl": "urn:uuid:d7545fb5-c816-54f4-9976-cd700be4bb23",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "6217cb9a-ee67-4a24-a7d5-2f2af23341c0",
+        "id": "d7545fb5-c816-54f4-9976-cd700be4bb23",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -927,7 +927,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93"
+          "reference": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
@@ -941,10 +941,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a3a68ae4-128e-4a06-a8f7-4da7a06c7ee2",
+      "fullUrl": "urn:uuid:adb047cb-c09d-5ec7-b8d9-5fffc341a056",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "a3a68ae4-128e-4a06-a8f7-4da7a06c7ee2",
+        "id": "adb047cb-c09d-5ec7-b8d9-5fffc341a056",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -974,7 +974,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93"
+          "reference": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A symptom-rhythm correlation is documented.",
@@ -988,10 +988,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:cf718296-1206-43b4-a099-5a480dd335f5",
+      "fullUrl": "urn:uuid:aa53ab26-0617-5305-b930-c4cdfca03bee",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "cf718296-1206-43b4-a099-5a480dd335f5",
+        "id": "aa53ab26-0617-5305-b930-c4cdfca03bee",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -1021,7 +1021,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:44765aa4-d770-4cda-abb4-d35908c54e93"
+          "reference": "urn:uuid:9ddc8581-8264-56b8-99b6-f14f1d555774"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A significant finding is present but no originating request reference is recorded.",

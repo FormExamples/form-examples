@@ -5,10 +5,19 @@ info:
   title: Public Health Waiting List Card — Patient
   version: 1.0.0
   description: Patient placed on a public health waiting list.
+x-namespace:
+  form: public-health-waiting-list-card
+  apiPrefix: /api/public-health-waiting-list-card/
+  sqlSchema: public_health_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/public-health-waiting-list-card/xml
+tags:
+  - name: public-health-waiting-list-card
+    description: Public Health Waiting List Card form
 paths:
   /api/public-health-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags: [public-health-waiting-list-card]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [public-health-waiting-list-card]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [public-health-waiting-list-card]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [public-health-waiting-list-card]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [public-health-waiting-list-card]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [public-health-waiting-list-card]
       operationId: deletePatient
       responses:
         "200":

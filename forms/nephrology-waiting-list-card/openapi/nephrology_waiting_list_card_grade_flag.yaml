@@ -5,10 +5,19 @@ info:
   title: Nephrology Waiting List Card — NephrologyWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: nephrology-waiting-list-card
+  apiPrefix: /api/nephrology-waiting-list-card/
+  sqlSchema: nephrology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/nephrology-waiting-list-card/xml
+tags:
+  - name: nephrology-waiting-list-card
+    description: Nephrology Waiting List Card form
 paths:
   /api/nephrology-waiting-list-card/nephrology_waiting_list_card_grade_flags:
     get:
       summary: List NephrologyWaitingListCardGradeFlag records
+      tags: [nephrology-waiting-list-card]
       operationId: listNephrologyWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NephrologyWaitingListCardGradeFlag
+      tags: [nephrology-waiting-list-card]
       operationId: createNephrologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NephrologyWaitingListCardGradeFlag by id
+      tags: [nephrology-waiting-list-card]
       operationId: getNephrologyWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NephrologyWaitingListCardGradeFlag
+      tags: [nephrology-waiting-list-card]
       operationId: updateNephrologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NephrologyWaitingListCardGradeFlag
+      tags: [nephrology-waiting-list-card]
       operationId: replaceNephrologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NephrologyWaitingListCardGradeFlag
+      tags: [nephrology-waiting-list-card]
       operationId: deleteNephrologyWaitingListCardGradeFlag
       responses:
         "200":

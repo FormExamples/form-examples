@@ -5,10 +5,19 @@ info:
   title: Tumor Marker Test Request — TumorMarkerTestRequest
   version: 1.0.0
   description: Serum tumour-marker blood-test request (referral). Captures the requested tumour markers (booleans), the clinical indication and details, any known cancer site / prior marker value, and triage urgency.
+x-namespace:
+  form: tumor-marker-test-request
+  apiPrefix: /api/tumor-marker-test-request/
+  sqlSchema: tumor_marker_test_request
+  xmlNamespace: https://formexamples.github.io/tumor-marker-test-request/xml
+tags:
+  - name: tumor-marker-test-request
+    description: Tumor Marker Test Request form
 paths:
   /api/tumor-marker-test-request/tumor_marker_test_requests:
     get:
       summary: List TumorMarkerTestRequest records
+      tags: [tumor-marker-test-request]
       operationId: listTumorMarkerTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new TumorMarkerTestRequest
+      tags: [tumor-marker-test-request]
       operationId: createTumorMarkerTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one TumorMarkerTestRequest by id
+      tags: [tumor-marker-test-request]
       operationId: getTumorMarkerTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing TumorMarkerTestRequest
+      tags: [tumor-marker-test-request]
       operationId: updateTumorMarkerTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing TumorMarkerTestRequest
+      tags: [tumor-marker-test-request]
       operationId: replaceTumorMarkerTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a TumorMarkerTestRequest
+      tags: [tumor-marker-test-request]
       operationId: deleteTumorMarkerTestRequest
       responses:
         "200":

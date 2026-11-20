@@ -1,4 +1,5 @@
 <!ELEMENT replacement_attorney (id,created_at,updated_at,deleted_at,title,given_names,family_name,birth_date,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,relationship_to_donor,is_bankrupt,capacity_declared)>
+<!ATTLIST replacement_attorney xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

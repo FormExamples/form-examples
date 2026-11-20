@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE microbiology_culture_test_result SYSTEM "microbiology_culture_test_result.dtd">
-<microbiology_culture_test_result>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<microbiology_culture_test_result xmlns="https://formexamples.github.io/microbiology-culture-test-result/xml">
+<id>29e96cf0-aba2-5fab-880a-d8d56eb2a0dd</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>1cee1b74-9e46-50ef-8068-3bbd0ab47327</patient_id>
+<clinician_id>cdaf4930-3d8e-56de-9fc5-d1a7e2cea8e3</clinician_id>
 <originating_request_reference></originating_request_reference>
 <report_status>preliminary</report_status>
 <performed_date>2026-01-15</performed_date>

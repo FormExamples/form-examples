@@ -5,10 +5,19 @@ info:
   title: Pet Scan Test Request — PetScanTestRequest
   version: 1.0.0
   description: PET-CT scan request (referral). Captures the requested tracer / scan type, the clinical indication and question, primary tumour site, FDG-PET patient-preparation and safety data (glucose control, pregnancy, breastfeeding, renal function), IR(ME)R justification, and triage urgency.
+x-namespace:
+  form: pet-scan-test-request
+  apiPrefix: /api/pet-scan-test-request/
+  sqlSchema: pet_scan_test_request
+  xmlNamespace: https://formexamples.github.io/pet-scan-test-request/xml
+tags:
+  - name: pet-scan-test-request
+    description: Pet Scan Test Request form
 paths:
   /api/pet-scan-test-request/pet_scan_test_requests:
     get:
       summary: List PetScanTestRequest records
+      tags: [pet-scan-test-request]
       operationId: listPetScanTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PetScanTestRequest
+      tags: [pet-scan-test-request]
       operationId: createPetScanTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PetScanTestRequest by id
+      tags: [pet-scan-test-request]
       operationId: getPetScanTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PetScanTestRequest
+      tags: [pet-scan-test-request]
       operationId: updatePetScanTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PetScanTestRequest
+      tags: [pet-scan-test-request]
       operationId: replacePetScanTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PetScanTestRequest
+      tags: [pet-scan-test-request]
       operationId: deletePetScanTestRequest
       responses:
         "200":

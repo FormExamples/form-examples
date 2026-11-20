@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nephrology_waiting_list_card_grade_rule SYSTEM "nephrology_waiting_list_card_grade_rule.dtd">
-<nephrology_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<nephrology_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/nephrology-waiting-list-card/xml">
+<id>5bef5def-9a22-5405-b995-0f195fdecd09</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<nephrology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</nephrology_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<nephrology_waiting_list_card_grade_id>2ed97ebe-7136-5334-a689-47ff3e7c0043</nephrology_waiting_list_card_grade_id>
+<rule_id>afe3276e-b9cd-5421-bee9-8fc5dac05bf4</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

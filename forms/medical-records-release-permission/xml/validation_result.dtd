@@ -1,4 +1,5 @@
 <!ELEMENT validation_result (id,created_at,updated_at,deleted_at,release_form_id,completeness_score,completeness_status,validation_status,validated_at)>
+<!ATTLIST validation_result xmlns CDATA #FIXED "https://formexamples.github.io/medical-records-release-permission/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

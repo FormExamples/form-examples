@@ -1,4 +1,5 @@
 <!ELEMENT medical_operation_note_complication (id,created_at,updated_at,deleted_at,medical_operation_note_id,category,description,clavien_dindo_grade,onset_at,action_taken,resolved_in_theatre,reported_to_governance)>
+<!ATTLIST medical_operation_note_complication xmlns CDATA #FIXED "https://formexamples.github.io/medical-operation-note/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

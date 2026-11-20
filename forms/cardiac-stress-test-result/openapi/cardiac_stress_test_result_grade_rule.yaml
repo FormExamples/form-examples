@@ -5,10 +5,19 @@ info:
   title: Cardiac Stress Test Result — CardiacStressTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: cardiac-stress-test-result
+  apiPrefix: /api/cardiac-stress-test-result/
+  sqlSchema: cardiac_stress_test_result
+  xmlNamespace: https://formexamples.github.io/cardiac-stress-test-result/xml
+tags:
+  - name: cardiac-stress-test-result
+    description: Cardiac Stress Test Result form
 paths:
   /api/cardiac-stress-test-result/cardiac_stress_test_result_grade_rules:
     get:
       summary: List CardiacStressTestResultGradeRule records
+      tags: [cardiac-stress-test-result]
       operationId: listCardiacStressTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiacStressTestResultGradeRule
+      tags: [cardiac-stress-test-result]
       operationId: createCardiacStressTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiacStressTestResultGradeRule by id
+      tags: [cardiac-stress-test-result]
       operationId: getCardiacStressTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiacStressTestResultGradeRule
+      tags: [cardiac-stress-test-result]
       operationId: updateCardiacStressTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiacStressTestResultGradeRule
+      tags: [cardiac-stress-test-result]
       operationId: replaceCardiacStressTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiacStressTestResultGradeRule
+      tags: [cardiac-stress-test-result]
       operationId: deleteCardiacStressTestResultGradeRule
       responses:
         "200":

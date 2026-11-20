@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Heart Health Check form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: heart-health-check
+  apiPrefix: /api/heart-health-check/
+  sqlSchema: heart_health_check
+  xmlNamespace: https://formexamples.github.io/heart-health-check/xml
+tags:
+- name: heart-health-check
+  description: Heart Health Check form
 paths:
   /api/heart-health-check/assessments:
     get:
       summary: List Assessment records
+      tags:
+      - heart-health-check
       operationId: listAssessment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessment
+      tags:
+      - heart-health-check
       operationId: createAssessment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags:
+      - heart-health-check
       operationId: getAssessment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessment
+      tags:
+      - heart-health-check
       operationId: updateAssessment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Assessment
+      tags:
+      - heart-health-check
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Assessment
+      tags:
+      - heart-health-check
       operationId: deleteAssessment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/heart-health-check/blood_pressures:
     get:
       summary: List BloodPressure records
+      tags:
+      - heart-health-check
       operationId: listBloodPressure
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BloodPressure
+      tags:
+      - heart-health-check
       operationId: createBloodPressure
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BloodPressure by id
+      tags:
+      - heart-health-check
       operationId: getBloodPressure
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BloodPressure
+      tags:
+      - heart-health-check
       operationId: updateBloodPressure
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BloodPressure
+      tags:
+      - heart-health-check
       operationId: replaceBloodPressure
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BloodPressure
+      tags:
+      - heart-health-check
       operationId: deleteBloodPressure
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/heart-health-check/body_measurements:
     get:
       summary: List BodyMeasurements records
+      tags:
+      - heart-health-check
       operationId: listBodyMeasurements
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BodyMeasurements
+      tags:
+      - heart-health-check
       operationId: createBodyMeasurements
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BodyMeasurements by id
+      tags:
+      - heart-health-check
       operationId: getBodyMeasurements
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BodyMeasurements
+      tags:
+      - heart-health-check
       operationId: updateBodyMeasurements
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BodyMeasurements
+      tags:
+      - heart-health-check
       operationId: replaceBodyMeasurements
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BodyMeasurements
+      tags:
+      - heart-health-check
       operationId: deleteBodyMeasurements
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/heart-health-check/cholesterols:
     get:
       summary: List Cholesterol records
+      tags:
+      - heart-health-check
       operationId: listCholesterol
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Cholesterol
+      tags:
+      - heart-health-check
       operationId: createCholesterol
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Cholesterol by id
+      tags:
+      - heart-health-check
       operationId: getCholesterol
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Cholesterol
+      tags:
+      - heart-health-check
       operationId: updateCholesterol
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Cholesterol
+      tags:
+      - heart-health-check
       operationId: replaceCholesterol
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Cholesterol
+      tags:
+      - heart-health-check
       operationId: deleteCholesterol
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/heart-health-check/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - heart-health-check
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - heart-health-check
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - heart-health-check
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - heart-health-check
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - heart-health-check
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - heart-health-check
       operationId: deleteClinician
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/heart-health-check/demographics_ethnicities:
     get:
       summary: List DemographicsEthnicity records
+      tags:
+      - heart-health-check
       operationId: listDemographicsEthnicity
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DemographicsEthnicity
+      tags:
+      - heart-health-check
       operationId: createDemographicsEthnicity
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DemographicsEthnicity by id
+      tags:
+      - heart-health-check
       operationId: getDemographicsEthnicity
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DemographicsEthnicity
+      tags:
+      - heart-health-check
       operationId: updateDemographicsEthnicity
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DemographicsEthnicity
+      tags:
+      - heart-health-check
       operationId: replaceDemographicsEthnicity
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DemographicsEthnicity
+      tags:
+      - heart-health-check
       operationId: deleteDemographicsEthnicity
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/heart-health-check/family_histories:
     get:
       summary: List FamilyHistory records
+      tags:
+      - heart-health-check
       operationId: listFamilyHistory
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FamilyHistory
+      tags:
+      - heart-health-check
       operationId: createFamilyHistory
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one FamilyHistory by id
+      tags:
+      - heart-health-check
       operationId: getFamilyHistory
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FamilyHistory
+      tags:
+      - heart-health-check
       operationId: updateFamilyHistory
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing FamilyHistory
+      tags:
+      - heart-health-check
       operationId: replaceFamilyHistory
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a FamilyHistory
+      tags:
+      - heart-health-check
       operationId: deleteFamilyHistory
       responses:
         '200':
@@ -1733,6 +1825,8 @@ paths:
   /api/heart-health-check/grades:
     get:
       summary: List Grade records
+      tags:
+      - heart-health-check
       operationId: listGrade
       parameters:
       - name: limit
@@ -1785,6 +1879,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Grade
+      tags:
+      - heart-health-check
       operationId: createGrade
       requestBody:
         required: true
@@ -1838,6 +1934,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Grade by id
+      tags:
+      - heart-health-check
       operationId: getGrade
       responses:
         '200':
@@ -1865,6 +1963,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Grade
+      tags:
+      - heart-health-check
       operationId: updateGrade
       requestBody:
         required: true
@@ -1910,6 +2010,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Grade
+      tags:
+      - heart-health-check
       operationId: replaceGrade
       requestBody:
         required: true
@@ -1955,6 +2057,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Grade
+      tags:
+      - heart-health-check
       operationId: deleteGrade
       responses:
         '200':
@@ -1979,6 +2083,8 @@ paths:
   /api/heart-health-check/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags:
+      - heart-health-check
       operationId: listGradingAdditionalFlag
       parameters:
       - name: limit
@@ -2031,6 +2137,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingAdditionalFlag
+      tags:
+      - heart-health-check
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -2084,6 +2192,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags:
+      - heart-health-check
       operationId: getGradingAdditionalFlag
       responses:
         '200':
@@ -2111,6 +2221,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags:
+      - heart-health-check
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -2156,6 +2268,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags:
+      - heart-health-check
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -2201,6 +2315,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags:
+      - heart-health-check
       operationId: deleteGradingAdditionalFlag
       responses:
         '200':
@@ -2225,6 +2341,8 @@ paths:
   /api/heart-health-check/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags:
+      - heart-health-check
       operationId: listGradingFiredRule
       parameters:
       - name: limit
@@ -2277,6 +2395,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingFiredRule
+      tags:
+      - heart-health-check
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -2330,6 +2450,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags:
+      - heart-health-check
       operationId: getGradingFiredRule
       responses:
         '200':
@@ -2357,6 +2479,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingFiredRule
+      tags:
+      - heart-health-check
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -2402,6 +2526,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingFiredRule
+      tags:
+      - heart-health-check
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -2447,6 +2573,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingFiredRule
+      tags:
+      - heart-health-check
       operationId: deleteGradingFiredRule
       responses:
         '200':
@@ -2471,6 +2599,8 @@ paths:
   /api/heart-health-check/medical_conditions:
     get:
       summary: List MedicalConditions records
+      tags:
+      - heart-health-check
       operationId: listMedicalConditions
       parameters:
       - name: limit
@@ -2523,6 +2653,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalConditions
+      tags:
+      - heart-health-check
       operationId: createMedicalConditions
       requestBody:
         required: true
@@ -2576,6 +2708,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalConditions by id
+      tags:
+      - heart-health-check
       operationId: getMedicalConditions
       responses:
         '200':
@@ -2603,6 +2737,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalConditions
+      tags:
+      - heart-health-check
       operationId: updateMedicalConditions
       requestBody:
         required: true
@@ -2648,6 +2784,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalConditions
+      tags:
+      - heart-health-check
       operationId: replaceMedicalConditions
       requestBody:
         required: true
@@ -2693,6 +2831,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalConditions
+      tags:
+      - heart-health-check
       operationId: deleteMedicalConditions
       responses:
         '200':
@@ -2725,9 +2865,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - heart-health-check
   /api/heart-health-check/patients:
     get:
       summary: List Patient records
+      tags:
+      - heart-health-check
       operationId: listPatient
       parameters:
       - name: limit
@@ -2780,6 +2924,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - heart-health-check
       operationId: createPatient
       requestBody:
         required: true
@@ -2833,6 +2979,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - heart-health-check
       operationId: getPatient
       responses:
         '200':
@@ -2860,6 +3008,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - heart-health-check
       operationId: updatePatient
       requestBody:
         required: true
@@ -2905,6 +3055,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - heart-health-check
       operationId: replacePatient
       requestBody:
         required: true
@@ -2950,6 +3102,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - heart-health-check
       operationId: deletePatient
       responses:
         '200':
@@ -2974,6 +3128,8 @@ paths:
   /api/heart-health-check/physical_activity_diets:
     get:
       summary: List PhysicalActivityDiet records
+      tags:
+      - heart-health-check
       operationId: listPhysicalActivityDiet
       parameters:
       - name: limit
@@ -3026,6 +3182,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PhysicalActivityDiet
+      tags:
+      - heart-health-check
       operationId: createPhysicalActivityDiet
       requestBody:
         required: true
@@ -3079,6 +3237,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PhysicalActivityDiet by id
+      tags:
+      - heart-health-check
       operationId: getPhysicalActivityDiet
       responses:
         '200':
@@ -3106,6 +3266,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PhysicalActivityDiet
+      tags:
+      - heart-health-check
       operationId: updatePhysicalActivityDiet
       requestBody:
         required: true
@@ -3151,6 +3313,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PhysicalActivityDiet
+      tags:
+      - heart-health-check
       operationId: replacePhysicalActivityDiet
       requestBody:
         required: true
@@ -3196,6 +3360,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PhysicalActivityDiet
+      tags:
+      - heart-health-check
       operationId: deletePhysicalActivityDiet
       responses:
         '200':
@@ -3220,6 +3386,8 @@ paths:
   /api/heart-health-check/review_calculates:
     get:
       summary: List ReviewCalculate records
+      tags:
+      - heart-health-check
       operationId: listReviewCalculate
       parameters:
       - name: limit
@@ -3272,6 +3440,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ReviewCalculate
+      tags:
+      - heart-health-check
       operationId: createReviewCalculate
       requestBody:
         required: true
@@ -3325,6 +3495,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ReviewCalculate by id
+      tags:
+      - heart-health-check
       operationId: getReviewCalculate
       responses:
         '200':
@@ -3352,6 +3524,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ReviewCalculate
+      tags:
+      - heart-health-check
       operationId: updateReviewCalculate
       requestBody:
         required: true
@@ -3397,6 +3571,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ReviewCalculate
+      tags:
+      - heart-health-check
       operationId: replaceReviewCalculate
       requestBody:
         required: true
@@ -3442,6 +3618,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ReviewCalculate
+      tags:
+      - heart-health-check
       operationId: deleteReviewCalculate
       responses:
         '200':
@@ -3466,6 +3644,8 @@ paths:
   /api/heart-health-check/smoking_alcohols:
     get:
       summary: List SmokingAlcohol records
+      tags:
+      - heart-health-check
       operationId: listSmokingAlcohol
       parameters:
       - name: limit
@@ -3518,6 +3698,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new SmokingAlcohol
+      tags:
+      - heart-health-check
       operationId: createSmokingAlcohol
       requestBody:
         required: true
@@ -3571,6 +3753,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one SmokingAlcohol by id
+      tags:
+      - heart-health-check
       operationId: getSmokingAlcohol
       responses:
         '200':
@@ -3598,6 +3782,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing SmokingAlcohol
+      tags:
+      - heart-health-check
       operationId: updateSmokingAlcohol
       requestBody:
         required: true
@@ -3643,6 +3829,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing SmokingAlcohol
+      tags:
+      - heart-health-check
       operationId: replaceSmokingAlcohol
       requestBody:
         required: true
@@ -3688,6 +3876,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a SmokingAlcohol
+      tags:
+      - heart-health-check
       operationId: deleteSmokingAlcohol
       responses:
         '200':

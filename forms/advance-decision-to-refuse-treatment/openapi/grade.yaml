@@ -5,10 +5,19 @@ info:
   title: Advance Decision To Refuse Treatment — Grade
   version: 1.0.0
   description: Computed validity grading result for the advance decision to refuse treatment. One-to-one child of assessment.
+x-namespace:
+  form: advance-decision-to-refuse-treatment
+  apiPrefix: /api/advance-decision-to-refuse-treatment/
+  sqlSchema: advance_decision_to_refuse_treatment
+  xmlNamespace: https://formexamples.github.io/advance-decision-to-refuse-treatment/xml
+tags:
+  - name: advance-decision-to-refuse-treatment
+    description: Advance Decision To Refuse Treatment form
 paths:
   /api/advance-decision-to-refuse-treatment/grades:
     get:
       summary: List Grade records
+      tags: [advance-decision-to-refuse-treatment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [advance-decision-to-refuse-treatment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [advance-decision-to-refuse-treatment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [advance-decision-to-refuse-treatment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [advance-decision-to-refuse-treatment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [advance-decision-to-refuse-treatment]
       operationId: deleteGrade
       responses:
         "200":

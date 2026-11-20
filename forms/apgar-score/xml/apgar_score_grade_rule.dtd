@@ -1,4 +1,5 @@
 <!ELEMENT apgar_score_grade_rule (id,created_at,updated_at,deleted_at,apgar_score_grade_id,rule_id,timepoint_minutes,sign,points,category,description)>
+<!ATTLIST apgar_score_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/apgar-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

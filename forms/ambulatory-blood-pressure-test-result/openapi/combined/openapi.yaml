@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Ambulatory Blood Pressure Test Result form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: ambulatory-blood-pressure-test-result
+  apiPrefix: /api/ambulatory-blood-pressure-test-result/
+  sqlSchema: ambulatory_blood_pressure_test_result
+  xmlNamespace: https://formexamples.github.io/ambulatory-blood-pressure-test-result/xml
+tags:
+- name: ambulatory-blood-pressure-test-result
+  description: Ambulatory Blood Pressure Test Result form
 paths:
   /api/ambulatory-blood-pressure-test-result/ambulatory_blood_pressure_test_result_grade_flags:
     get:
       summary: List AmbulatoryBloodPressureTestResultGradeFlag records
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: listAmbulatoryBloodPressureTestResultGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AmbulatoryBloodPressureTestResultGradeFlag
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: createAmbulatoryBloodPressureTestResultGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AmbulatoryBloodPressureTestResultGradeFlag by id
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: getAmbulatoryBloodPressureTestResultGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AmbulatoryBloodPressureTestResultGradeFlag
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: updateAmbulatoryBloodPressureTestResultGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AmbulatoryBloodPressureTestResultGradeFlag
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: replaceAmbulatoryBloodPressureTestResultGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AmbulatoryBloodPressureTestResultGradeFlag
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: deleteAmbulatoryBloodPressureTestResultGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/ambulatory-blood-pressure-test-result/ambulatory_blood_pressure_test_result_grade_rules:
     get:
       summary: List AmbulatoryBloodPressureTestResultGradeRule records
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: listAmbulatoryBloodPressureTestResultGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AmbulatoryBloodPressureTestResultGradeRule
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: createAmbulatoryBloodPressureTestResultGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AmbulatoryBloodPressureTestResultGradeRule by id
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: getAmbulatoryBloodPressureTestResultGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AmbulatoryBloodPressureTestResultGradeRule
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: updateAmbulatoryBloodPressureTestResultGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AmbulatoryBloodPressureTestResultGradeRule
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: replaceAmbulatoryBloodPressureTestResultGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AmbulatoryBloodPressureTestResultGradeRule
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: deleteAmbulatoryBloodPressureTestResultGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/ambulatory-blood-pressure-test-result/ambulatory_blood_pressure_test_result_grades:
     get:
       summary: List AmbulatoryBloodPressureTestResultGrade records
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: listAmbulatoryBloodPressureTestResultGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AmbulatoryBloodPressureTestResultGrade
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: createAmbulatoryBloodPressureTestResultGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AmbulatoryBloodPressureTestResultGrade by id
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: getAmbulatoryBloodPressureTestResultGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AmbulatoryBloodPressureTestResultGrade
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: updateAmbulatoryBloodPressureTestResultGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AmbulatoryBloodPressureTestResultGrade
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: replaceAmbulatoryBloodPressureTestResultGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AmbulatoryBloodPressureTestResultGrade
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: deleteAmbulatoryBloodPressureTestResultGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/ambulatory-blood-pressure-test-result/ambulatory_blood_pressure_test_results:
     get:
       summary: List AmbulatoryBloodPressureTestResult records
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: listAmbulatoryBloodPressureTestResult
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AmbulatoryBloodPressureTestResult
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: createAmbulatoryBloodPressureTestResult
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AmbulatoryBloodPressureTestResult by id
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: getAmbulatoryBloodPressureTestResult
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AmbulatoryBloodPressureTestResult
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: updateAmbulatoryBloodPressureTestResult
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AmbulatoryBloodPressureTestResult
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: replaceAmbulatoryBloodPressureTestResult
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AmbulatoryBloodPressureTestResult
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: deleteAmbulatoryBloodPressureTestResult
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/ambulatory-blood-pressure-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - ambulatory-blood-pressure-test-result
   /api/ambulatory-blood-pressure-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - ambulatory-blood-pressure-test-result
       operationId: deletePatient
       responses:
         '200':

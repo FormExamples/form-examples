@@ -1,4 +1,5 @@
 <!ELEMENT diabetes_podiatry_assessment_grade_rule (id,created_at,updated_at,deleted_at,diabetes_podiatry_assessment_grade_id,rule_id,stage,category,description)>
+<!ATTLIST diabetes_podiatry_assessment_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/diabetes-podiatry-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

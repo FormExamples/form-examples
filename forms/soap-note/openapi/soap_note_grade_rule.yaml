@@ -5,10 +5,19 @@ info:
   title: Soap Note — SoapNoteGradeRule
   version: 1.0.0
   description: "Audit trail of every completeness rule that fired during grading: section, category, and description."
+x-namespace:
+  form: soap-note
+  apiPrefix: /api/soap-note/
+  sqlSchema: soap_note
+  xmlNamespace: https://formexamples.github.io/soap-note/xml
+tags:
+  - name: soap-note
+    description: Soap Note form
 paths:
   /api/soap-note/soap_note_grade_rules:
     get:
       summary: List SoapNoteGradeRule records
+      tags: [soap-note]
       operationId: listSoapNoteGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SoapNoteGradeRule
+      tags: [soap-note]
       operationId: createSoapNoteGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one SoapNoteGradeRule by id
+      tags: [soap-note]
       operationId: getSoapNoteGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SoapNoteGradeRule
+      tags: [soap-note]
       operationId: updateSoapNoteGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing SoapNoteGradeRule
+      tags: [soap-note]
       operationId: replaceSoapNoteGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SoapNoteGradeRule
+      tags: [soap-note]
       operationId: deleteSoapNoteGradeRule
       responses:
         "200":

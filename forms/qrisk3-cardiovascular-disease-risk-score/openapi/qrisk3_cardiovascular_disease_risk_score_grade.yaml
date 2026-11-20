@@ -5,10 +5,19 @@ info:
   title: Qrisk3 Cardiovascular Disease Risk Score — Qrisk3CardiovascularDiseaseRiskScoreGrade
   version: 1.0.0
   description: "Computed QRISK3 grading result: the linear predictor, the 10-year CVD risk percentage, the derived risk band, and the estimated heart age."
+x-namespace:
+  form: qrisk3-cardiovascular-disease-risk-score
+  apiPrefix: /api/qrisk3-cardiovascular-disease-risk-score/
+  sqlSchema: qrisk3_cardiovascular_disease_risk_score
+  xmlNamespace: https://formexamples.github.io/qrisk3-cardiovascular-disease-risk-score/xml
+tags:
+  - name: qrisk3-cardiovascular-disease-risk-score
+    description: Qrisk3 Cardiovascular Disease Risk Score form
 paths:
   /api/qrisk3-cardiovascular-disease-risk-score/qrisk3_cardiovascular_disease_risk_score_grades:
     get:
       summary: List Qrisk3CardiovascularDiseaseRiskScoreGrade records
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: listQrisk3CardiovascularDiseaseRiskScoreGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Qrisk3CardiovascularDiseaseRiskScoreGrade
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: createQrisk3CardiovascularDiseaseRiskScoreGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Qrisk3CardiovascularDiseaseRiskScoreGrade by id
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: getQrisk3CardiovascularDiseaseRiskScoreGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Qrisk3CardiovascularDiseaseRiskScoreGrade
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: updateQrisk3CardiovascularDiseaseRiskScoreGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Qrisk3CardiovascularDiseaseRiskScoreGrade
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: replaceQrisk3CardiovascularDiseaseRiskScoreGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Qrisk3CardiovascularDiseaseRiskScoreGrade
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: deleteQrisk3CardiovascularDiseaseRiskScoreGrade
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Medical Device Assessment — MedicalDeviceAssessmentGradeFlag
   version: 1.0.0
   description: Medical device assessment grade flag.
+x-namespace:
+  form: medical-device-assessment
+  apiPrefix: /api/medical-device-assessment/
+  sqlSchema: medical_device_assessment
+  xmlNamespace: https://formexamples.github.io/medical-device-assessment/xml
+tags:
+  - name: medical-device-assessment
+    description: Medical Device Assessment form
 paths:
   /api/medical-device-assessment/medical_device_assessment_grade_flags:
     get:
       summary: List MedicalDeviceAssessmentGradeFlag records
+      tags: [medical-device-assessment]
       operationId: listMedicalDeviceAssessmentGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalDeviceAssessmentGradeFlag
+      tags: [medical-device-assessment]
       operationId: createMedicalDeviceAssessmentGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalDeviceAssessmentGradeFlag by id
+      tags: [medical-device-assessment]
       operationId: getMedicalDeviceAssessmentGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalDeviceAssessmentGradeFlag
+      tags: [medical-device-assessment]
       operationId: updateMedicalDeviceAssessmentGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalDeviceAssessmentGradeFlag
+      tags: [medical-device-assessment]
       operationId: replaceMedicalDeviceAssessmentGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalDeviceAssessmentGradeFlag
+      tags: [medical-device-assessment]
       operationId: deleteMedicalDeviceAssessmentGradeFlag
       responses:
         "200":

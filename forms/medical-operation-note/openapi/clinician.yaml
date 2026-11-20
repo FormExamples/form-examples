@@ -5,10 +5,19 @@ info:
   title: Medical Operation Note — Clinician
   version: 1.0.0
   description: Clinician identifying information for members of the operating team.
+x-namespace:
+  form: medical-operation-note
+  apiPrefix: /api/medical-operation-note/
+  sqlSchema: medical_operation_note
+  xmlNamespace: https://formexamples.github.io/medical-operation-note/xml
+tags:
+  - name: medical-operation-note
+    description: Medical Operation Note form
 paths:
   /api/medical-operation-note/clinicians:
     get:
       summary: List Clinician records
+      tags: [medical-operation-note]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [medical-operation-note]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [medical-operation-note]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [medical-operation-note]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [medical-operation-note]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [medical-operation-note]
       operationId: deleteClinician
       responses:
         "200":

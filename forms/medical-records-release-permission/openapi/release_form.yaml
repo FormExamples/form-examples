@@ -5,10 +5,19 @@ info:
   title: Medical Records Release Permission — ReleaseForm
   version: 1.0.0
   description: Medical records release permission form. Parent entity for all form sections.
+x-namespace:
+  form: medical-records-release-permission
+  apiPrefix: /api/medical-records-release-permission/
+  sqlSchema: medical_records_release_permission
+  xmlNamespace: https://formexamples.github.io/medical-records-release-permission/xml
+tags:
+  - name: medical-records-release-permission
+    description: Medical Records Release Permission form
 paths:
   /api/medical-records-release-permission/release_forms:
     get:
       summary: List ReleaseForm records
+      tags: [medical-records-release-permission]
       operationId: listReleaseForm
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ReleaseForm
+      tags: [medical-records-release-permission]
       operationId: createReleaseForm
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ReleaseForm by id
+      tags: [medical-records-release-permission]
       operationId: getReleaseForm
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ReleaseForm
+      tags: [medical-records-release-permission]
       operationId: updateReleaseForm
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ReleaseForm
+      tags: [medical-records-release-permission]
       operationId: replaceReleaseForm
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ReleaseForm
+      tags: [medical-records-release-permission]
       operationId: deleteReleaseForm
       responses:
         "200":

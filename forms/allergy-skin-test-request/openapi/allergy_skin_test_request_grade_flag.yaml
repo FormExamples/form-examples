@@ -5,10 +5,19 @@ info:
   title: Allergy Skin Test Request — AllergySkinTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the allergy team.
+x-namespace:
+  form: allergy-skin-test-request
+  apiPrefix: /api/allergy-skin-test-request/
+  sqlSchema: allergy_skin_test_request
+  xmlNamespace: https://formexamples.github.io/allergy-skin-test-request/xml
+tags:
+  - name: allergy-skin-test-request
+    description: Allergy Skin Test Request form
 paths:
   /api/allergy-skin-test-request/allergy_skin_test_request_grade_flags:
     get:
       summary: List AllergySkinTestRequestGradeFlag records
+      tags: [allergy-skin-test-request]
       operationId: listAllergySkinTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AllergySkinTestRequestGradeFlag
+      tags: [allergy-skin-test-request]
       operationId: createAllergySkinTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AllergySkinTestRequestGradeFlag by id
+      tags: [allergy-skin-test-request]
       operationId: getAllergySkinTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AllergySkinTestRequestGradeFlag
+      tags: [allergy-skin-test-request]
       operationId: updateAllergySkinTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AllergySkinTestRequestGradeFlag
+      tags: [allergy-skin-test-request]
       operationId: replaceAllergySkinTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AllergySkinTestRequestGradeFlag
+      tags: [allergy-skin-test-request]
       operationId: deleteAllergySkinTestRequestGradeFlag
       responses:
         "200":

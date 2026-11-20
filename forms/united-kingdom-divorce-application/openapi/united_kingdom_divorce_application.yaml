@@ -5,10 +5,19 @@ info:
   title: United Kingdom Divorce Application — UnitedKingdomDivorceApplication
   version: 1.0.0
   description: "Main United Kingdom divorce or dissolution application record (D8, D84, D36): application type and stage, marriage and certificate, jurisdiction facts, parties and service address, children and financial arrangements, and stage dates. Readiness classification, fired rules, and flags live in child tables."
+x-namespace:
+  form: united-kingdom-divorce-application
+  apiPrefix: /api/united-kingdom-divorce-application/
+  sqlSchema: united_kingdom_divorce_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-divorce-application/xml
+tags:
+  - name: united-kingdom-divorce-application
+    description: United Kingdom Divorce Application form
 paths:
   /api/united-kingdom-divorce-application/united_kingdom_divorce_applications:
     get:
       summary: List UnitedKingdomDivorceApplication records
+      tags: [united-kingdom-divorce-application]
       operationId: listUnitedKingdomDivorceApplication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomDivorceApplication
+      tags: [united-kingdom-divorce-application]
       operationId: createUnitedKingdomDivorceApplication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomDivorceApplication by id
+      tags: [united-kingdom-divorce-application]
       operationId: getUnitedKingdomDivorceApplication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomDivorceApplication
+      tags: [united-kingdom-divorce-application]
       operationId: updateUnitedKingdomDivorceApplication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomDivorceApplication
+      tags: [united-kingdom-divorce-application]
       operationId: replaceUnitedKingdomDivorceApplication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomDivorceApplication
+      tags: [united-kingdom-divorce-application]
       operationId: deleteUnitedKingdomDivorceApplication
       responses:
         "200":

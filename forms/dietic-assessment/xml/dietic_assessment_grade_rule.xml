@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dietic_assessment_grade_rule SYSTEM "dietic_assessment_grade_rule.dtd">
-<dietic_assessment_grade_rule>
-<id>dd0e8400-e29b-41d4-a716-446655440008</id>
+<dietic_assessment_grade_rule xmlns="https://formexamples.github.io/dietic-assessment/xml">
+<id>a4e42395-156e-5d0b-8272-34c649ceadc2</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<dietic_assessment_grade_id>cc0e8400-e29b-41d4-a716-446655440007</dietic_assessment_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<dietic_assessment_grade_id>9f75b415-a874-5f9f-aee9-e1903ddca7b6</dietic_assessment_grade_id>
+<rule_id>a32ef6af-e211-56a1-a9fd-9201fc9e228a</rule_id>
 <instrument>must</instrument>
 <component></component>
 <score>5</score>

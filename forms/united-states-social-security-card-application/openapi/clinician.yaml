@@ -5,10 +5,19 @@ info:
   title: United States Social Security Card Application — Clinician
   version: 1.0.0
   description: Clinician information for the preparer or assisting staff member who helps complete the Social Security card application.
+x-namespace:
+  form: united-states-social-security-card-application
+  apiPrefix: /api/united-states-social-security-card-application/
+  sqlSchema: united_states_social_security_card_application
+  xmlNamespace: https://formexamples.github.io/united-states-social-security-card-application/xml
+tags:
+  - name: united-states-social-security-card-application
+    description: United States Social Security Card Application form
 paths:
   /api/united-states-social-security-card-application/clinicians:
     get:
       summary: List Clinician records
+      tags: [united-states-social-security-card-application]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [united-states-social-security-card-application]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [united-states-social-security-card-application]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [united-states-social-security-card-application]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [united-states-social-security-card-application]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [united-states-social-security-card-application]
       operationId: deleteClinician
       responses:
         "200":

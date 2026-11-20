@@ -1,6 +1,6 @@
 {
   "employee": {
-    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "id": "9a204820-2871-5570-8f61-ce3085ae553b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -16,7 +16,7 @@
     "jobTitle": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000000f",
+    "id": "048694cd-ef52-5f7f-b8c8-86a049601cbe",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -29,12 +29,12 @@
     "practiceName": ""
   },
   "medicalFitNote": {
-    "id": "550e8400-e29b-41d4-a716-00000000001a",
+    "id": "38287a58-a3c3-5b77-8959-52a1efba90df",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "employeeId": "550e8400-e29b-41d4-a716-00000000001e",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000001f",
+    "employeeId": "6f6cb265-0e0f-51aa-b5a1-ec9b262c26e1",
+    "clinicianId": "c27413bc-b24e-5584-a4a4-a1504318406b",
     "status": "draft",
     "assessmentDate": null,
     "assessmentMethod": "face-to-face",
@@ -56,11 +56,11 @@
     "signedAt": null
   },
   "medicalFitNoteGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000033",
+    "id": "88bd61bd-bfe9-566b-868b-bb4bf1e3c35e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalFitNoteId": "550e8400-e29b-41d4-a716-000000000037",
+    "medicalFitNoteId": "7c020516-c1e5-5977-8334-9628ae1085db",
     "outcome": "not-fit-for-work",
     "approvalStatus": "approved",
     "durationDays": null,
@@ -68,21 +68,21 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "medicalFitNoteGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000003d",
+    "id": "c842d6e5-cc34-5ee0-9239-a837c6b96fcf",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-000000000041",
+    "gradeId": "32756015-63cf-5f72-8d76-b54e4e96b104",
     "ruleId": "",
     "category": "",
     "description": ""
   },
   "medicalFitNoteGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000045",
+    "id": "71aee23c-3d03-51f7-843f-c3cac585e5d3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalFitNoteGradeId": "550e8400-e29b-41d4-a716-000000000049",
+    "medicalFitNoteGradeId": "8c5ff0cc-a156-5496-8d0b-24a9c094ac1b",
     "flagId": "",
     "category": "missing-diagnosis",
     "priority": "low",

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000057",
+    "id": "5858aabe-a1e9-570a-84af-536aeb135bd8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000069",
+    "id": "253e2363-de89-58e0-8bb3-3b1003dc9a31",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "rockallScoreForUpperGastrointestinalBleeding": {
-    "id": "550e8400-e29b-41d4-a716-000000000076",
+    "id": "36f004d5-cdc9-5ad4-be08-3b298abb8400",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007a",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007b",
+    "patientId": "35dc9cf9-00c3-5491-99a8-f48e11cf42c4",
+    "clinicianId": "1a64aadf-c184-5b86-b271-17ce57b9cc03",
     "clinicianName": "",
     "clinicianRole": "doctor",
     "assessedAt": null,
@@ -58,11 +58,11 @@
     "clinicalNote": ""
   },
   "rockallScoreForUpperGastrointestinalBleedingGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008b",
+    "id": "7dc826ba-865a-5d82-9c00-9f5aa2bd9c74",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "rockallScoreForUpperGastrointestinalBleedingId": "550e8400-e29b-41d4-a716-00000000008f",
+    "rockallScoreForUpperGastrointestinalBleedingId": "4568bd6b-4116-5b63-aa6e-356a0daf71ba",
     "agePoints": null,
     "shockPoints": null,
     "comorbidityPoints": null,
@@ -74,11 +74,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "rockallScoreForUpperGastrointestinalBleedingGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000099",
+    "id": "92ea147e-2322-5657-a961-7b2730d36c2a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "rockallScoreForUpperGastrointestinalBleedingGradeId": "550e8400-e29b-41d4-a716-00000000009d",
+    "rockallScoreForUpperGastrointestinalBleedingGradeId": "a2e42bf2-921b-5058-ae1b-451c61e0789d",
     "ruleId": "",
     "parameter": "age",
     "points": null,
@@ -86,11 +86,11 @@
     "description": ""
   },
   "rockallScoreForUpperGastrointestinalBleedingGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a3",
+    "id": "dc0b0ff3-1ff4-5b8c-b65b-6fddee4aae75",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "rockallScoreForUpperGastrointestinalBleedingGradeId": "550e8400-e29b-41d4-a716-0000000000a7",
+    "rockallScoreForUpperGastrointestinalBleedingGradeId": "e711be0b-3653-5de1-9701-c24309165b92",
     "flagId": "",
     "category": "high-mortality-risk",
     "priority": "low",

@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "6e78fc58-2ecf-4abf-abf3-bbfd5fb9f05d",
+  "id": "24836ab5-bda2-5fdf-941d-2c73e0c457a6",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:4d75b5aa-1727-4f55-a313-170b083b737e",
+      "fullUrl": "urn:uuid:57434ec5-5b99-55e3-92bf-a4f84ccf4552",
       "resource": {
         "resourceType": "Patient",
-        "id": "4d75b5aa-1727-4f55-a313-170b083b737e",
+        "id": "57434ec5-5b99-55e3-92bf-a4f84ccf4552",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:276dfe01-e18e-4a5c-a7d6-7d928ebefb9f",
+      "fullUrl": "urn:uuid:ac9311a0-57ce-5c42-a12e-213f360bf71d",
       "resource": {
         "resourceType": "Observation",
-        "id": "276dfe01-e18e-4a5c-a7d6-7d928ebefb9f",
+        "id": "ac9311a0-57ce-5c42-a12e-213f360bf71d",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:4d75b5aa-1727-4f55-a313-170b083b737e"
+          "reference": "urn:uuid:57434ec5-5b99-55e3-92bf-a4f84ccf4552"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:080eb914-1299-402f-a33b-a9990afb0a4f",
+      "fullUrl": "urn:uuid:9cd1c361-a413-5d9f-8c4f-f8dd661b8f9d",
       "resource": {
         "resourceType": "Observation",
-        "id": "080eb914-1299-402f-a33b-a9990afb0a4f",
+        "id": "9cd1c361-a413-5d9f-8c4f-f8dd661b8f9d",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:4d75b5aa-1727-4f55-a313-170b083b737e"
+          "reference": "urn:uuid:57434ec5-5b99-55e3-92bf-a4f84ccf4552"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -551,10 +551,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:9454d49a-6550-4116-a33b-d5b44f4ce3cb",
+      "fullUrl": "urn:uuid:bc859f3e-19ec-50b5-9fd0-aadd5ed7cfaf",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "9454d49a-6550-4116-a33b-d5b44f4ce3cb",
+        "id": "bc859f3e-19ec-50b5-9fd0-aadd5ed7cfaf",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -563,7 +563,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:4d75b5aa-1727-4f55-a313-170b083b737e"
+          "reference": "urn:uuid:57434ec5-5b99-55e3-92bf-a4f84ccf4552"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -572,10 +572,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:3600f0ed-be41-412b-aa1d-b63650ba9fca",
+      "fullUrl": "urn:uuid:0802f642-be1c-5d23-bd78-6b4976bfded8",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "3600f0ed-be41-412b-aa1d-b63650ba9fca",
+        "id": "0802f642-be1c-5d23-bd78-6b4976bfded8",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -605,17 +605,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4d75b5aa-1727-4f55-a313-170b083b737e"
+          "reference": "urn:uuid:57434ec5-5b99-55e3-92bf-a4f84ccf4552"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Reduced bone density (osteopenia or osteoporosis) on the WHO densitometric classification; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:f1e92028-0798-4cb9-a5f1-205a07758304",
+      "fullUrl": "urn:uuid:afe063c3-2906-50f2-89d1-87bf6d7b73b3",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "f1e92028-0798-4cb9-a5f1-205a07758304",
+        "id": "afe063c3-2906-50f2-89d1-87bf6d7b73b3",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -645,17 +645,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4d75b5aa-1727-4f55-a313-170b083b737e"
+          "reference": "urn:uuid:57434ec5-5b99-55e3-92bf-a4f84ccf4552"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Osteoporosis (T \u2264 \u22122.5); abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:c998da83-4d64-47c6-ae33-a73ab3bfdac2",
+      "fullUrl": "urn:uuid:fbd22ea1-e8fa-54cd-96b1-6ecad7aa091b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "c998da83-4d64-47c6-ae33-a73ab3bfdac2",
+        "id": "fbd22ea1-e8fa-54cd-96b1-6ecad7aa091b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -685,17 +685,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4d75b5aa-1727-4f55-a313-170b083b737e"
+          "reference": "urn:uuid:57434ec5-5b99-55e3-92bf-a4f84ccf4552"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: comparison with previous imaging."
       }
     },
     {
-      "fullUrl": "urn:uuid:9c8c4245-42a8-4846-a634-3ff6b45f1f1f",
+      "fullUrl": "urn:uuid:b3f106f1-f77a-52af-8b38-296a3c7cd2e7",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "9c8c4245-42a8-4846-a634-3ff6b45f1f1f",
+        "id": "b3f106f1-f77a-52af-8b38-296a3c7cd2e7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -725,17 +725,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4d75b5aa-1727-4f55-a313-170b083b737e"
+          "reference": "urn:uuid:57434ec5-5b99-55e3-92bf-a4f84ccf4552"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Osteoporosis (T \u2264 \u22122.5); follow-up urgency graded urgent."
       }
     },
     {
-      "fullUrl": "urn:uuid:7334e450-e4b5-4832-a518-f245b3d3b46e",
+      "fullUrl": "urn:uuid:5255e42b-44f8-56d0-b5fe-14caa5be483b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "7334e450-e4b5-4832-a518-f245b3d3b46e",
+        "id": "5255e42b-44f8-56d0-b5fe-14caa5be483b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -765,7 +765,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:4d75b5aa-1727-4f55-a313-170b083b737e"
+          "reference": "urn:uuid:57434ec5-5b99-55e3-92bf-a4f84ccf4552"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Osteoporosis (T \u2264 \u22122.5) requiring fracture-risk treatment review.",
@@ -779,10 +779,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:5eb24396-4a42-4719-a54a-aa1b1029b4e0",
+      "fullUrl": "urn:uuid:a70c691d-6dd3-5e67-8119-0b622540234b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "5eb24396-4a42-4719-a54a-aa1b1029b4e0",
+        "id": "a70c691d-6dd3-5e67-8119-0b622540234b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -812,7 +812,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4d75b5aa-1727-4f55-a313-170b083b737e"
+          "reference": "urn:uuid:57434ec5-5b99-55e3-92bf-a4f84ccf4552"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Osteoporosis warrants onward referral for treatment review.",
@@ -826,10 +826,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:741e8715-647f-4e10-af07-a96ca815e898",
+      "fullUrl": "urn:uuid:1575d181-e5ab-5918-8d0a-f400a594dbd5",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "741e8715-647f-4e10-af07-a96ca815e898",
+        "id": "1575d181-e5ab-5918-8d0a-f400a594dbd5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -859,7 +859,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:4d75b5aa-1727-4f55-a313-170b083b737e"
+          "reference": "urn:uuid:57434ec5-5b99-55e3-92bf-a4f84ccf4552"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A significant densitometric finding is present but no originating request reference is recorded.",

@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,nihss_total_score,nihss_severity,modified_rankin_score,barthel_index,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/neurology-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

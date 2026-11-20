@@ -5,10 +5,19 @@ info:
   title: Colonoscopy Test Result — Clinician
   version: 1.0.0
   description: Reporting clinician (endoscopist) who performs, authors, and signs the colonoscopy result report.
+x-namespace:
+  form: colonoscopy-test-result
+  apiPrefix: /api/colonoscopy-test-result/
+  sqlSchema: colonoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/colonoscopy-test-result/xml
+tags:
+  - name: colonoscopy-test-result
+    description: Colonoscopy Test Result form
 paths:
   /api/colonoscopy-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags: [colonoscopy-test-result]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [colonoscopy-test-result]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [colonoscopy-test-result]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [colonoscopy-test-result]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [colonoscopy-test-result]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [colonoscopy-test-result]
       operationId: deleteClinician
       responses:
         "200":

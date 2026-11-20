@@ -5,10 +5,19 @@ info:
   title: Health Screening Questionnaire — HealthScreeningQuestionnaire
   version: 1.0.0
   description: "Health screening questionnaire, i.e. the payload of the 14-step single-page wizard: assessment context, personal details, lifestyle, medical and family history, symptom review, PAR-Q+ screen, optional vital signs, occupational factors, wellbeing check, vaccination status, and consent."
+x-namespace:
+  form: health-screening-questionnaire
+  apiPrefix: /api/health-screening-questionnaire/
+  sqlSchema: health_screening_questionnaire
+  xmlNamespace: https://formexamples.github.io/health-screening-questionnaire/xml
+tags:
+  - name: health-screening-questionnaire
+    description: Health Screening Questionnaire form
 paths:
   /api/health-screening-questionnaire/health_screening_questionnaires:
     get:
       summary: List HealthScreeningQuestionnaire records
+      tags: [health-screening-questionnaire]
       operationId: listHealthScreeningQuestionnaire
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HealthScreeningQuestionnaire
+      tags: [health-screening-questionnaire]
       operationId: createHealthScreeningQuestionnaire
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HealthScreeningQuestionnaire by id
+      tags: [health-screening-questionnaire]
       operationId: getHealthScreeningQuestionnaire
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HealthScreeningQuestionnaire
+      tags: [health-screening-questionnaire]
       operationId: updateHealthScreeningQuestionnaire
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HealthScreeningQuestionnaire
+      tags: [health-screening-questionnaire]
       operationId: replaceHealthScreeningQuestionnaire
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HealthScreeningQuestionnaire
+      tags: [health-screening-questionnaire]
       operationId: deleteHealthScreeningQuestionnaire
       responses:
         "200":

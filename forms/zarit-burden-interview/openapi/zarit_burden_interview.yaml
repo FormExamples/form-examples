@@ -5,10 +5,19 @@ info:
   title: Zarit Burden Interview — ZaritBurdenInterview
   version: 1.0.0
   description: "Main Zarit Burden Interview record: assessment context, carer and care-recipient identification, and the twenty-two 0-4 item ratings."
+x-namespace:
+  form: zarit-burden-interview
+  apiPrefix: /api/zarit-burden-interview/
+  sqlSchema: zarit_burden_interview
+  xmlNamespace: https://formexamples.github.io/zarit-burden-interview/xml
+tags:
+  - name: zarit-burden-interview
+    description: Zarit Burden Interview form
 paths:
   /api/zarit-burden-interview/zarit_burden_interviews:
     get:
       summary: List ZaritBurdenInterview records
+      tags: [zarit-burden-interview]
       operationId: listZaritBurdenInterview
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ZaritBurdenInterview
+      tags: [zarit-burden-interview]
       operationId: createZaritBurdenInterview
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ZaritBurdenInterview by id
+      tags: [zarit-burden-interview]
       operationId: getZaritBurdenInterview
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ZaritBurdenInterview
+      tags: [zarit-burden-interview]
       operationId: updateZaritBurdenInterview
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ZaritBurdenInterview
+      tags: [zarit-burden-interview]
       operationId: replaceZaritBurdenInterview
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ZaritBurdenInterview
+      tags: [zarit-burden-interview]
       operationId: deleteZaritBurdenInterview
       responses:
         "200":

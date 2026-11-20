@@ -5,10 +5,19 @@ info:
   title: Waterlow Pressure Ulcer Risk Assessment — WaterlowPressureUlcerRiskAssessmentGradeRule
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during Waterlow computation: category, points contributed, label, and description."
+x-namespace:
+  form: waterlow-pressure-ulcer-risk-assessment
+  apiPrefix: /api/waterlow-pressure-ulcer-risk-assessment/
+  sqlSchema: waterlow_pressure_ulcer_risk_assessment
+  xmlNamespace: https://formexamples.github.io/waterlow-pressure-ulcer-risk-assessment/xml
+tags:
+  - name: waterlow-pressure-ulcer-risk-assessment
+    description: Waterlow Pressure Ulcer Risk Assessment form
 paths:
   /api/waterlow-pressure-ulcer-risk-assessment/waterlow_pressure_ulcer_risk_assessment_grade_rules:
     get:
       summary: List WaterlowPressureUlcerRiskAssessmentGradeRule records
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: listWaterlowPressureUlcerRiskAssessmentGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new WaterlowPressureUlcerRiskAssessmentGradeRule
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: createWaterlowPressureUlcerRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one WaterlowPressureUlcerRiskAssessmentGradeRule by id
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: getWaterlowPressureUlcerRiskAssessmentGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing WaterlowPressureUlcerRiskAssessmentGradeRule
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: updateWaterlowPressureUlcerRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing WaterlowPressureUlcerRiskAssessmentGradeRule
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: replaceWaterlowPressureUlcerRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a WaterlowPressureUlcerRiskAssessmentGradeRule
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: deleteWaterlowPressureUlcerRiskAssessmentGradeRule
       responses:
         "200":

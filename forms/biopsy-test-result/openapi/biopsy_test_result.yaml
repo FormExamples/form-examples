@@ -5,10 +5,19 @@ info:
   title: Biopsy Test Result — BiopsyTestResult
   version: 1.0.0
   description: Biopsy histopathology result (report). Captures the specimen and procedure, clinical history, the macroscopic and microscopic descriptions, the diagnosis with malignancy status, tumour type, histological grade, resection margins, lymphovascular invasion, immunohistochemistry and molecular results, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: biopsy-test-result
+  apiPrefix: /api/biopsy-test-result/
+  sqlSchema: biopsy_test_result
+  xmlNamespace: https://formexamples.github.io/biopsy-test-result/xml
+tags:
+  - name: biopsy-test-result
+    description: Biopsy Test Result form
 paths:
   /api/biopsy-test-result/biopsy_test_results:
     get:
       summary: List BiopsyTestResult records
+      tags: [biopsy-test-result]
       operationId: listBiopsyTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BiopsyTestResult
+      tags: [biopsy-test-result]
       operationId: createBiopsyTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BiopsyTestResult by id
+      tags: [biopsy-test-result]
       operationId: getBiopsyTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BiopsyTestResult
+      tags: [biopsy-test-result]
       operationId: updateBiopsyTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BiopsyTestResult
+      tags: [biopsy-test-result]
       operationId: replaceBiopsyTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BiopsyTestResult
+      tags: [biopsy-test-result]
       operationId: deleteBiopsyTestResult
       responses:
         "200":

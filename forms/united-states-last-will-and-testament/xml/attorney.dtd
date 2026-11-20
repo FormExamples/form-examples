@@ -1,4 +1,5 @@
 <!ELEMENT attorney (id,created_at,updated_at,deleted_at,name,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,role,bar_state,bar_number)>
+<!ATTLIST attorney xmlns CDATA #FIXED "https://formexamples.github.io/united-states-last-will-and-testament/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Sequential Organ Failure Assessment — SequentialOrganFailureAssessment
   version: 1.0.0
   description: "Main Sequential Organ Failure Assessment (SOFA) record: assessment context, patient identification and baseline, and the raw inputs for the six scored organ systems (respiration, coagulation, liver, cardiovascular, central nervous system, renal)."
+x-namespace:
+  form: sequential-organ-failure-assessment
+  apiPrefix: /api/sequential-organ-failure-assessment/
+  sqlSchema: sequential_organ_failure_assessment
+  xmlNamespace: https://formexamples.github.io/sequential-organ-failure-assessment/xml
+tags:
+  - name: sequential-organ-failure-assessment
+    description: Sequential Organ Failure Assessment form
 paths:
   /api/sequential-organ-failure-assessment/sequential_organ_failure_assessments:
     get:
       summary: List SequentialOrganFailureAssessment records
+      tags: [sequential-organ-failure-assessment]
       operationId: listSequentialOrganFailureAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SequentialOrganFailureAssessment
+      tags: [sequential-organ-failure-assessment]
       operationId: createSequentialOrganFailureAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one SequentialOrganFailureAssessment by id
+      tags: [sequential-organ-failure-assessment]
       operationId: getSequentialOrganFailureAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SequentialOrganFailureAssessment
+      tags: [sequential-organ-failure-assessment]
       operationId: updateSequentialOrganFailureAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing SequentialOrganFailureAssessment
+      tags: [sequential-organ-failure-assessment]
       operationId: replaceSequentialOrganFailureAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SequentialOrganFailureAssessment
+      tags: [sequential-organ-failure-assessment]
       operationId: deleteSequentialOrganFailureAssessment
       responses:
         "200":

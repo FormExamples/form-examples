@@ -1,4 +1,5 @@
 <!ELEMENT quick_sequential_organ_failure_assessment (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,suspected_source,patient_identifier,age_band,sex,respiratory_rate,glasgow_coma_scale,mentation_altered,systolic_blood_pressure,clinical_note)>
+<!ATTLIST quick_sequential_organ_failure_assessment xmlns CDATA #FIXED "https://formexamples.github.io/quick-sequential-organ-failure-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

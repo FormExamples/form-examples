@@ -5,10 +5,19 @@ info:
   title: Heart Health Check — PhysicalActivityDiet
   version: 1.0.0
   description: Physical activity and dietary habit data.
+x-namespace:
+  form: heart-health-check
+  apiPrefix: /api/heart-health-check/
+  sqlSchema: heart_health_check
+  xmlNamespace: https://formexamples.github.io/heart-health-check/xml
+tags:
+  - name: heart-health-check
+    description: Heart Health Check form
 paths:
   /api/heart-health-check/physical_activity_diets:
     get:
       summary: List PhysicalActivityDiet records
+      tags: [heart-health-check]
       operationId: listPhysicalActivityDiet
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PhysicalActivityDiet
+      tags: [heart-health-check]
       operationId: createPhysicalActivityDiet
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PhysicalActivityDiet by id
+      tags: [heart-health-check]
       operationId: getPhysicalActivityDiet
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PhysicalActivityDiet
+      tags: [heart-health-check]
       operationId: updatePhysicalActivityDiet
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PhysicalActivityDiet
+      tags: [heart-health-check]
       operationId: replacePhysicalActivityDiet
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PhysicalActivityDiet
+      tags: [heart-health-check]
       operationId: deletePhysicalActivityDiet
       responses:
         "200":

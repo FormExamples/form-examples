@@ -5,10 +5,19 @@ info:
   title: Urology Waiting List Card — UrologyWaitingListCardAppointment
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+x-namespace:
+  form: urology-waiting-list-card
+  apiPrefix: /api/urology-waiting-list-card/
+  sqlSchema: urology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/urology-waiting-list-card/xml
+tags:
+  - name: urology-waiting-list-card
+    description: Urology Waiting List Card form
 paths:
   /api/urology-waiting-list-card/urology_waiting_list_card_appointments:
     get:
       summary: List UrologyWaitingListCardAppointment records
+      tags: [urology-waiting-list-card]
       operationId: listUrologyWaitingListCardAppointment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UrologyWaitingListCardAppointment
+      tags: [urology-waiting-list-card]
       operationId: createUrologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UrologyWaitingListCardAppointment by id
+      tags: [urology-waiting-list-card]
       operationId: getUrologyWaitingListCardAppointment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UrologyWaitingListCardAppointment
+      tags: [urology-waiting-list-card]
       operationId: updateUrologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UrologyWaitingListCardAppointment
+      tags: [urology-waiting-list-card]
       operationId: replaceUrologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UrologyWaitingListCardAppointment
+      tags: [urology-waiting-list-card]
       operationId: deleteUrologyWaitingListCardAppointment
       responses:
         "200":

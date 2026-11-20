@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000053",
+    "id": "32cb3a74-e237-5301-beca-b55921fe3a46",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000065",
+    "id": "92103e38-93d4-5c72-98da-9396652f4f6f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "ottawaKneeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000072",
+    "id": "493d02c9-ee7f-5c10-84d9-b129d67e0ae0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000076",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000077",
+    "patientId": "844cc3ef-d131-5293-a26a-53ccfa494a6c",
+    "clinicianId": "0cc32d7c-4f33-5922-bceb-a135eb86453e",
     "status": "draft",
     "patientIdentifier": "",
     "assessedAt": null,
@@ -58,22 +58,22 @@
     "clinicalNotes": ""
   },
   "ottawaKneeRuleGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000087",
+    "id": "98b2b4b4-f3c4-5f02-b6ac-e26a52dd4d49",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "ottawaKneeRuleId": "550e8400-e29b-41d4-a716-00000000008b",
+    "ottawaKneeRuleId": "6bbd3544-b8de-52eb-8582-5a11f1b228a2",
     "xrayIndicated": "yes",
     "decision": "xray-indicated",
     "recommendedAction": "",
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "ottawaKneeRuleGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000090",
+    "id": "6ec34329-cc27-5f92-ab96-40d688afebfb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "ottawaKneeRuleGradeId": "550e8400-e29b-41d4-a716-000000000094",
+    "ottawaKneeRuleGradeId": "f13e8631-d8d1-5a8b-9d63-431d6844aad8",
     "ruleId": "",
     "instrument": "criterion",
     "criterion": "age",
@@ -82,11 +82,11 @@
     "description": ""
   },
   "ottawaKneeRuleGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000009b",
+    "id": "351a77b8-8aac-59e9-9bd9-ed3abbc187df",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "ottawaKneeRuleGradeId": "550e8400-e29b-41d4-a716-00000000009f",
+    "ottawaKneeRuleGradeId": "adc5bd9f-be7f-5aaf-a87f-f80e525ef1b6",
     "flagId": "",
     "category": "xray-indicated",
     "priority": "low",

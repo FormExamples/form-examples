@@ -5,10 +5,19 @@ info:
   title: Echocardiogram Test Request — EchocardiogramTestRequest
   version: 1.0.0
   description: Cardiac echocardiogram request (referral). Captures the requested echo type, clinical indication and question, relevant history, symptoms, NYHA class, ECG and natriuretic-peptide findings, prior echo, cardiotoxic-chemotherapy status, and triage urgency.
+x-namespace:
+  form: echocardiogram-test-request
+  apiPrefix: /api/echocardiogram-test-request/
+  sqlSchema: echocardiogram_test_request
+  xmlNamespace: https://formexamples.github.io/echocardiogram-test-request/xml
+tags:
+  - name: echocardiogram-test-request
+    description: Echocardiogram Test Request form
 paths:
   /api/echocardiogram-test-request/echocardiogram_test_requests:
     get:
       summary: List EchocardiogramTestRequest records
+      tags: [echocardiogram-test-request]
       operationId: listEchocardiogramTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EchocardiogramTestRequest
+      tags: [echocardiogram-test-request]
       operationId: createEchocardiogramTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EchocardiogramTestRequest by id
+      tags: [echocardiogram-test-request]
       operationId: getEchocardiogramTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EchocardiogramTestRequest
+      tags: [echocardiogram-test-request]
       operationId: updateEchocardiogramTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EchocardiogramTestRequest
+      tags: [echocardiogram-test-request]
       operationId: replaceEchocardiogramTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EchocardiogramTestRequest
+      tags: [echocardiogram-test-request]
       operationId: deleteEchocardiogramTestRequest
       responses:
         "200":

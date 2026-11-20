@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE buyer SYSTEM "buyer.dtd">
-<buyer>
-<id>660e8400-e29b-41d4-a716-446655440001</id>
+<buyer xmlns="https://formexamples.github.io/united-kingdom-vehicle-bill-of-sale/xml">
+<id>420bee23-b103-5d0e-b568-18d2b28ffd56</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>

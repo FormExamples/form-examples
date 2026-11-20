@@ -5,10 +5,19 @@ info:
   title: Clinical Biology Waiting List Card — ClinBiologyWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: clinical-biology-waiting-list-card
+  apiPrefix: /api/clinical-biology-waiting-list-card/
+  sqlSchema: clinical_biology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/clinical-biology-waiting-list-card/xml
+tags:
+  - name: clinical-biology-waiting-list-card
+    description: Clinical Biology Waiting List Card form
 paths:
   /api/clinical-biology-waiting-list-card/clin_biology_waiting_list_card_grade_flags:
     get:
       summary: List ClinBiologyWaitingListCardGradeFlag records
+      tags: [clinical-biology-waiting-list-card]
       operationId: listClinBiologyWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ClinBiologyWaitingListCardGradeFlag
+      tags: [clinical-biology-waiting-list-card]
       operationId: createClinBiologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ClinBiologyWaitingListCardGradeFlag by id
+      tags: [clinical-biology-waiting-list-card]
       operationId: getClinBiologyWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ClinBiologyWaitingListCardGradeFlag
+      tags: [clinical-biology-waiting-list-card]
       operationId: updateClinBiologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ClinBiologyWaitingListCardGradeFlag
+      tags: [clinical-biology-waiting-list-card]
       operationId: replaceClinBiologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ClinBiologyWaitingListCardGradeFlag
+      tags: [clinical-biology-waiting-list-card]
       operationId: deleteClinBiologyWaitingListCardGradeFlag
       responses:
         "200":

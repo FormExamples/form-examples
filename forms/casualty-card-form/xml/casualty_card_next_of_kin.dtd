@@ -1,4 +1,5 @@
 <!ELEMENT casualty_card_next_of_kin (id,created_at,updated_at,deleted_at,casualty_card_id,name,relationship,phone,notified)>
+<!ATTLIST casualty_card_next_of_kin xmlns CDATA #FIXED "https://formexamples.github.io/casualty-card-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

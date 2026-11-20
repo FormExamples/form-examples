@@ -5,10 +5,19 @@ info:
   title: First Aid Training Checklist — Assessment
   version: 1.0.0
   description: Top-level assessment instance for first-aid-training-checklist. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: first-aid-training-checklist
+  apiPrefix: /api/first-aid-training-checklist/
+  sqlSchema: first_aid_training_checklist
+  xmlNamespace: https://formexamples.github.io/first-aid-training-checklist/xml
+tags:
+  - name: first-aid-training-checklist
+    description: First Aid Training Checklist form
 paths:
   /api/first-aid-training-checklist/assessments:
     get:
       summary: List Assessment records
+      tags: [first-aid-training-checklist]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [first-aid-training-checklist]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [first-aid-training-checklist]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [first-aid-training-checklist]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [first-aid-training-checklist]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [first-aid-training-checklist]
       operationId: deleteAssessment
       responses:
         "200":

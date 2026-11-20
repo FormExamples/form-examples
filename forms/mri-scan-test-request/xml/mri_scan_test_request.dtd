@@ -1,4 +1,5 @@
 <!ELEMENT mri_scan_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,body_region,primary_indication,clinical_question,relevant_history,contrast_required,egfr,previous_gadolinium_reaction,pregnancy_status,pacemaker_or_icd,cochlear_implant,aneurysm_clip,metallic_foreign_body_eye,shrapnel_or_metal_fragments,programmable_shunt,neurostimulator,metal_implant_or_prosthesis,insulin_pump,claustrophobia,mri_safety_status,weight_kg,relevant_previous_imaging,urgency,supervising_consultant,notes)>
+<!ATTLIST mri_scan_test_request xmlns CDATA #FIXED "https://formexamples.github.io/mri-scan-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "97cf64ea-06df-4c06-a255-b65d9ff97b20",
+  "id": "a95964a0-c268-525f-b6f4-20656ef9e444",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:74e68713-8985-4003-a4e7-5e4f44f76781",
+      "fullUrl": "urn:uuid:32b8ec00-d02b-54ea-b742-9ef53bd38119",
       "resource": {
         "resourceType": "Patient",
-        "id": "74e68713-8985-4003-a4e7-5e4f44f76781",
+        "id": "32b8ec00-d02b-54ea-b742-9ef53bd38119",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:951689b2-9e81-4c30-a027-0a729cf89d48",
+      "fullUrl": "urn:uuid:f90747fd-00e9-58b5-978d-332bd0c54b2b",
       "resource": {
         "resourceType": "Observation",
-        "id": "951689b2-9e81-4c30-a027-0a729cf89d48",
+        "id": "f90747fd-00e9-58b5-978d-332bd0c54b2b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:74e68713-8985-4003-a4e7-5e4f44f76781"
+          "reference": "urn:uuid:32b8ec00-d02b-54ea-b742-9ef53bd38119"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:84c84cf5-b860-48b8-a87c-880c8688b5b8",
+      "fullUrl": "urn:uuid:eed39835-524a-55d7-9300-90320c3ef4e9",
       "resource": {
         "resourceType": "Observation",
-        "id": "84c84cf5-b860-48b8-a87c-880c8688b5b8",
+        "id": "eed39835-524a-55d7-9300-90320c3ef4e9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:74e68713-8985-4003-a4e7-5e4f44f76781"
+          "reference": "urn:uuid:32b8ec00-d02b-54ea-b742-9ef53bd38119"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -604,10 +604,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:9a14e3aa-dcf5-4505-a098-8d60628558ca",
+      "fullUrl": "urn:uuid:36fca9e3-25b2-51c1-9f03-1e327ef811a1",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "9a14e3aa-dcf5-4505-a098-8d60628558ca",
+        "id": "36fca9e3-25b2-51c1-9f03-1e327ef811a1",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -616,7 +616,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:74e68713-8985-4003-a4e7-5e4f44f76781"
+          "reference": "urn:uuid:32b8ec00-d02b-54ea-b742-9ef53bd38119"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -625,10 +625,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:d9f72ba3-b454-40af-a68c-da3d7ed40fa4",
+      "fullUrl": "urn:uuid:c4bbf511-3894-562b-8fe0-90a5e779cb04",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "d9f72ba3-b454-40af-a68c-da3d7ed40fa4",
+        "id": "c4bbf511-3894-562b-8fe0-90a5e779cb04",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -658,17 +658,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:74e68713-8985-4003-a4e7-5e4f44f76781"
+          "reference": "urn:uuid:32b8ec00-d02b-54ea-b742-9ef53bd38119"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "BI-RADS 4a (probably benign or suspicious); classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:9cbbe586-84dd-4c7d-a900-695df6b3fd1c",
+      "fullUrl": "urn:uuid:8b5be0a0-404e-517b-8b3f-6c87c6381978",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "9cbbe586-84dd-4c7d-a900-695df6b3fd1c",
+        "id": "8b5be0a0-404e-517b-8b3f-6c87c6381978",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -698,17 +698,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:74e68713-8985-4003-a4e7-5e4f44f76781"
+          "reference": "urn:uuid:32b8ec00-d02b-54ea-b742-9ef53bd38119"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "BI-RADS 4a (suspicious); abnormality severity graded moderate."
       }
     },
     {
-      "fullUrl": "urn:uuid:38dce94c-361a-43d0-ad12-6c8f96f7df37",
+      "fullUrl": "urn:uuid:cd650a39-6097-574f-8f4c-d56e2c86c89e",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "38dce94c-361a-43d0-ad12-6c8f96f7df37",
+        "id": "cd650a39-6097-574f-8f4c-d56e2c86c89e",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -738,17 +738,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:74e68713-8985-4003-a4e7-5e4f44f76781"
+          "reference": "urn:uuid:32b8ec00-d02b-54ea-b742-9ef53bd38119"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "BI-RADS 4a (suspicious); urgent tissue diagnosis / biopsy referral."
       }
     },
     {
-      "fullUrl": "urn:uuid:90acb14a-5fc0-40d3-ac4f-44338310c853",
+      "fullUrl": "urn:uuid:e3dce4b6-3c22-5458-b7cb-43d7422807e5",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "90acb14a-5fc0-40d3-ac4f-44338310c853",
+        "id": "e3dce4b6-3c22-5458-b7cb-43d7422807e5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -778,7 +778,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:74e68713-8985-4003-a4e7-5e4f44f76781"
+          "reference": "urn:uuid:32b8ec00-d02b-54ea-b742-9ef53bd38119"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "BI-RADS 4a final assessment requires tissue diagnosis / action.",
@@ -792,10 +792,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:afb0854a-8ee4-40ce-a703-fde0aece7170",
+      "fullUrl": "urn:uuid:97e6911d-6f93-5867-8988-a7ea014f87db",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "afb0854a-8ee4-40ce-a703-fde0aece7170",
+        "id": "97e6911d-6f93-5867-8988-a7ea014f87db",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -825,7 +825,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:74e68713-8985-4003-a4e7-5e4f44f76781"
+          "reference": "urn:uuid:32b8ec00-d02b-54ea-b742-9ef53bd38119"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Suspected cancer \u2014 refer on a two-week-wait (2WW) breast pathway.",
@@ -839,10 +839,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:1495ebff-0252-44ea-a392-408b28cd6dd5",
+      "fullUrl": "urn:uuid:03922968-147a-53c2-92fe-2119656075e2",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "1495ebff-0252-44ea-a392-408b28cd6dd5",
+        "id": "03922968-147a-53c2-92fe-2119656075e2",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -872,7 +872,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:74e68713-8985-4003-a4e7-5e4f44f76781"
+          "reference": "urn:uuid:32b8ec00-d02b-54ea-b742-9ef53bd38119"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A mass is reported on a symptomatic / diagnostic study (palpable breast lump).",

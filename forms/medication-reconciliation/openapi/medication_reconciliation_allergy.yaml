@@ -5,10 +5,19 @@ info:
   title: Medication Reconciliation — MedicationReconciliationAllergy
   version: 1.0.0
   description: Drug allergies and adverse reactions recorded for the patient, cascading from the parent reconciliation.
+x-namespace:
+  form: medication-reconciliation
+  apiPrefix: /api/medication-reconciliation/
+  sqlSchema: medication_reconciliation
+  xmlNamespace: https://formexamples.github.io/medication-reconciliation/xml
+tags:
+  - name: medication-reconciliation
+    description: Medication Reconciliation form
 paths:
   /api/medication-reconciliation/medication_reconciliation_allergies:
     get:
       summary: List MedicationReconciliationAllergy records
+      tags: [medication-reconciliation]
       operationId: listMedicationReconciliationAllergy
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicationReconciliationAllergy
+      tags: [medication-reconciliation]
       operationId: createMedicationReconciliationAllergy
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicationReconciliationAllergy by id
+      tags: [medication-reconciliation]
       operationId: getMedicationReconciliationAllergy
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicationReconciliationAllergy
+      tags: [medication-reconciliation]
       operationId: updateMedicationReconciliationAllergy
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicationReconciliationAllergy
+      tags: [medication-reconciliation]
       operationId: replaceMedicationReconciliationAllergy
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicationReconciliationAllergy
+      tags: [medication-reconciliation]
       operationId: deleteMedicationReconciliationAllergy
       responses:
         "200":

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Zarit Burden Interview (ZBI) form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: zarit-burden-interview
+  apiPrefix: /api/zarit-burden-interview/
+  sqlSchema: zarit_burden_interview
+  xmlNamespace: https://formexamples.github.io/zarit-burden-interview/xml
+tags:
+- name: zarit-burden-interview
+  description: Zarit Burden Interview (ZBI) form
 paths:
   /api/zarit-burden-interview/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - zarit-burden-interview
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - zarit-burden-interview
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - zarit-burden-interview
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - zarit-burden-interview
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - zarit-burden-interview
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - zarit-burden-interview
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - zarit-burden-interview
   /api/zarit-burden-interview/patients:
     get:
       summary: List Patient records
+      tags:
+      - zarit-burden-interview
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - zarit-burden-interview
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - zarit-burden-interview
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - zarit-burden-interview
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - zarit-burden-interview
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - zarit-burden-interview
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/zarit-burden-interview/zarit_burden_interview_grade_flags:
     get:
       summary: List ZaritBurdenInterviewGradeFlag records
+      tags:
+      - zarit-burden-interview
       operationId: listZaritBurdenInterviewGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ZaritBurdenInterviewGradeFlag
+      tags:
+      - zarit-burden-interview
       operationId: createZaritBurdenInterviewGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ZaritBurdenInterviewGradeFlag by id
+      tags:
+      - zarit-burden-interview
       operationId: getZaritBurdenInterviewGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ZaritBurdenInterviewGradeFlag
+      tags:
+      - zarit-burden-interview
       operationId: updateZaritBurdenInterviewGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ZaritBurdenInterviewGradeFlag
+      tags:
+      - zarit-burden-interview
       operationId: replaceZaritBurdenInterviewGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ZaritBurdenInterviewGradeFlag
+      tags:
+      - zarit-burden-interview
       operationId: deleteZaritBurdenInterviewGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/zarit-burden-interview/zarit_burden_interview_grade_rules:
     get:
       summary: List ZaritBurdenInterviewGradeRule records
+      tags:
+      - zarit-burden-interview
       operationId: listZaritBurdenInterviewGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ZaritBurdenInterviewGradeRule
+      tags:
+      - zarit-burden-interview
       operationId: createZaritBurdenInterviewGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ZaritBurdenInterviewGradeRule by id
+      tags:
+      - zarit-burden-interview
       operationId: getZaritBurdenInterviewGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ZaritBurdenInterviewGradeRule
+      tags:
+      - zarit-burden-interview
       operationId: updateZaritBurdenInterviewGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ZaritBurdenInterviewGradeRule
+      tags:
+      - zarit-burden-interview
       operationId: replaceZaritBurdenInterviewGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ZaritBurdenInterviewGradeRule
+      tags:
+      - zarit-burden-interview
       operationId: deleteZaritBurdenInterviewGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/zarit-burden-interview/zarit_burden_interview_grades:
     get:
       summary: List ZaritBurdenInterviewGrade records
+      tags:
+      - zarit-burden-interview
       operationId: listZaritBurdenInterviewGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ZaritBurdenInterviewGrade
+      tags:
+      - zarit-burden-interview
       operationId: createZaritBurdenInterviewGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ZaritBurdenInterviewGrade by id
+      tags:
+      - zarit-burden-interview
       operationId: getZaritBurdenInterviewGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ZaritBurdenInterviewGrade
+      tags:
+      - zarit-burden-interview
       operationId: updateZaritBurdenInterviewGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ZaritBurdenInterviewGrade
+      tags:
+      - zarit-burden-interview
       operationId: replaceZaritBurdenInterviewGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ZaritBurdenInterviewGrade
+      tags:
+      - zarit-burden-interview
       operationId: deleteZaritBurdenInterviewGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/zarit-burden-interview/zarit_burden_interviews:
     get:
       summary: List ZaritBurdenInterview records
+      tags:
+      - zarit-burden-interview
       operationId: listZaritBurdenInterview
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ZaritBurdenInterview
+      tags:
+      - zarit-burden-interview
       operationId: createZaritBurdenInterview
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ZaritBurdenInterview by id
+      tags:
+      - zarit-burden-interview
       operationId: getZaritBurdenInterview
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ZaritBurdenInterview
+      tags:
+      - zarit-burden-interview
       operationId: updateZaritBurdenInterview
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ZaritBurdenInterview
+      tags:
+      - zarit-burden-interview
       operationId: replaceZaritBurdenInterview
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ZaritBurdenInterview
+      tags:
+      - zarit-burden-interview
       operationId: deleteZaritBurdenInterview
       responses:
         '200':

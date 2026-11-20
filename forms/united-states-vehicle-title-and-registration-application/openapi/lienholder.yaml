@@ -5,10 +5,19 @@ info:
   title: United States Vehicle Title And Registration Application — Lienholder
   version: 1.0.0
   description: "The lienholder: the bank, credit union, or finance company holding a security interest in the vehicle."
+x-namespace:
+  form: united-states-vehicle-title-and-registration-application
+  apiPrefix: /api/united-states-vehicle-title-and-registration-application/
+  sqlSchema: united_states_vehicle_title_and_registration_application
+  xmlNamespace: https://formexamples.github.io/united-states-vehicle-title-and-registration-application/xml
+tags:
+  - name: united-states-vehicle-title-and-registration-application
+    description: United States Vehicle Title And Registration Application form
 paths:
   /api/united-states-vehicle-title-and-registration-application/lienholders:
     get:
       summary: List Lienholder records
+      tags: [united-states-vehicle-title-and-registration-application]
       operationId: listLienholder
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Lienholder
+      tags: [united-states-vehicle-title-and-registration-application]
       operationId: createLienholder
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Lienholder by id
+      tags: [united-states-vehicle-title-and-registration-application]
       operationId: getLienholder
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Lienholder
+      tags: [united-states-vehicle-title-and-registration-application]
       operationId: updateLienholder
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Lienholder
+      tags: [united-states-vehicle-title-and-registration-application]
       operationId: replaceLienholder
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Lienholder
+      tags: [united-states-vehicle-title-and-registration-application]
       operationId: deleteLienholder
       responses:
         "200":

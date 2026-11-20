@@ -5,10 +5,19 @@ info:
   title: Casualty Card Form — CasualtyCardPrimarySurvey
   version: 1.0.0
   description: 1:1 with casualty_card. ABCDE primary survey assessment with GCS scoring.
+x-namespace:
+  form: casualty-card-form
+  apiPrefix: /api/casualty-card-form/
+  sqlSchema: casualty_card_form
+  xmlNamespace: https://formexamples.github.io/casualty-card-form/xml
+tags:
+  - name: casualty-card-form
+    description: Casualty Card Form form
 paths:
   /api/casualty-card-form/casualty_card_primary_surveys:
     get:
       summary: List CasualtyCardPrimarySurvey records
+      tags: [casualty-card-form]
       operationId: listCasualtyCardPrimarySurvey
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CasualtyCardPrimarySurvey
+      tags: [casualty-card-form]
       operationId: createCasualtyCardPrimarySurvey
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CasualtyCardPrimarySurvey by id
+      tags: [casualty-card-form]
       operationId: getCasualtyCardPrimarySurvey
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CasualtyCardPrimarySurvey
+      tags: [casualty-card-form]
       operationId: updateCasualtyCardPrimarySurvey
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CasualtyCardPrimarySurvey
+      tags: [casualty-card-form]
       operationId: replaceCasualtyCardPrimarySurvey
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CasualtyCardPrimarySurvey
+      tags: [casualty-card-form]
       operationId: deleteCasualtyCardPrimarySurvey
       responses:
         "200":

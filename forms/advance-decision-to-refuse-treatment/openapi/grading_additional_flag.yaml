@@ -5,10 +5,19 @@ info:
   title: Advance Decision To Refuse Treatment — GradingAdditionalFlag
   version: 1.0.0
   description: Additional flags detected during advance decision validity grading (e.g. LPA conflicts, missing witnesses, outdated review).
+x-namespace:
+  form: advance-decision-to-refuse-treatment
+  apiPrefix: /api/advance-decision-to-refuse-treatment/
+  sqlSchema: advance_decision_to_refuse_treatment
+  xmlNamespace: https://formexamples.github.io/advance-decision-to-refuse-treatment/xml
+tags:
+  - name: advance-decision-to-refuse-treatment
+    description: Advance Decision To Refuse Treatment form
 paths:
   /api/advance-decision-to-refuse-treatment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [advance-decision-to-refuse-treatment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [advance-decision-to-refuse-treatment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [advance-decision-to-refuse-treatment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [advance-decision-to-refuse-treatment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [advance-decision-to-refuse-treatment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [advance-decision-to-refuse-treatment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

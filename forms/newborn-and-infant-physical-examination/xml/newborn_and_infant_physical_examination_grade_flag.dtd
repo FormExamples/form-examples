@@ -1,4 +1,5 @@
 <!ELEMENT newborn_and_infant_physical_examination_grade_flag (id,created_at,updated_at,deleted_at,newborn_and_infant_physical_examination_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST newborn_and_infant_physical_examination_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/newborn-and-infant-physical-examination/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

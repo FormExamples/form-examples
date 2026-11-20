@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Medical Device Assessment form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: medical-device-assessment
+  apiPrefix: /api/medical-device-assessment/
+  sqlSchema: medical_device_assessment
+  xmlNamespace: https://formexamples.github.io/medical-device-assessment/xml
+tags:
+- name: medical-device-assessment
+  description: Medical Device Assessment form
 paths:
   /api/medical-device-assessment/assessors:
     get:
       summary: List Assessor records
+      tags:
+      - medical-device-assessment
       operationId: listAssessor
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessor
+      tags:
+      - medical-device-assessment
       operationId: createAssessor
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Assessor by id
+      tags:
+      - medical-device-assessment
       operationId: getAssessor
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessor
+      tags:
+      - medical-device-assessment
       operationId: updateAssessor
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Assessor
+      tags:
+      - medical-device-assessment
       operationId: replaceAssessor
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Assessor
+      tags:
+      - medical-device-assessment
       operationId: deleteAssessor
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/medical-device-assessment/manufacturers:
     get:
       summary: List Manufacturer records
+      tags:
+      - medical-device-assessment
       operationId: listManufacturer
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Manufacturer
+      tags:
+      - medical-device-assessment
       operationId: createManufacturer
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Manufacturer by id
+      tags:
+      - medical-device-assessment
       operationId: getManufacturer
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Manufacturer
+      tags:
+      - medical-device-assessment
       operationId: updateManufacturer
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Manufacturer
+      tags:
+      - medical-device-assessment
       operationId: replaceManufacturer
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Manufacturer
+      tags:
+      - medical-device-assessment
       operationId: deleteManufacturer
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/medical-device-assessment/medical_device_assessment_grade_flags:
     get:
       summary: List MedicalDeviceAssessmentGradeFlag records
+      tags:
+      - medical-device-assessment
       operationId: listMedicalDeviceAssessmentGradeFlag
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalDeviceAssessmentGradeFlag
+      tags:
+      - medical-device-assessment
       operationId: createMedicalDeviceAssessmentGradeFlag
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalDeviceAssessmentGradeFlag by id
+      tags:
+      - medical-device-assessment
       operationId: getMedicalDeviceAssessmentGradeFlag
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalDeviceAssessmentGradeFlag
+      tags:
+      - medical-device-assessment
       operationId: updateMedicalDeviceAssessmentGradeFlag
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalDeviceAssessmentGradeFlag
+      tags:
+      - medical-device-assessment
       operationId: replaceMedicalDeviceAssessmentGradeFlag
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalDeviceAssessmentGradeFlag
+      tags:
+      - medical-device-assessment
       operationId: deleteMedicalDeviceAssessmentGradeFlag
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/medical-device-assessment/medical_device_assessment_grade_rules:
     get:
       summary: List MedicalDeviceAssessmentGradeRule records
+      tags:
+      - medical-device-assessment
       operationId: listMedicalDeviceAssessmentGradeRule
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalDeviceAssessmentGradeRule
+      tags:
+      - medical-device-assessment
       operationId: createMedicalDeviceAssessmentGradeRule
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalDeviceAssessmentGradeRule by id
+      tags:
+      - medical-device-assessment
       operationId: getMedicalDeviceAssessmentGradeRule
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalDeviceAssessmentGradeRule
+      tags:
+      - medical-device-assessment
       operationId: updateMedicalDeviceAssessmentGradeRule
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalDeviceAssessmentGradeRule
+      tags:
+      - medical-device-assessment
       operationId: replaceMedicalDeviceAssessmentGradeRule
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalDeviceAssessmentGradeRule
+      tags:
+      - medical-device-assessment
       operationId: deleteMedicalDeviceAssessmentGradeRule
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/medical-device-assessment/medical_device_assessment_grades:
     get:
       summary: List MedicalDeviceAssessmentGrade records
+      tags:
+      - medical-device-assessment
       operationId: listMedicalDeviceAssessmentGrade
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalDeviceAssessmentGrade
+      tags:
+      - medical-device-assessment
       operationId: createMedicalDeviceAssessmentGrade
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalDeviceAssessmentGrade by id
+      tags:
+      - medical-device-assessment
       operationId: getMedicalDeviceAssessmentGrade
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalDeviceAssessmentGrade
+      tags:
+      - medical-device-assessment
       operationId: updateMedicalDeviceAssessmentGrade
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalDeviceAssessmentGrade
+      tags:
+      - medical-device-assessment
       operationId: replaceMedicalDeviceAssessmentGrade
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalDeviceAssessmentGrade
+      tags:
+      - medical-device-assessment
       operationId: deleteMedicalDeviceAssessmentGrade
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/medical-device-assessment/medical_device_assessments:
     get:
       summary: List MedicalDeviceAssessment records
+      tags:
+      - medical-device-assessment
       operationId: listMedicalDeviceAssessment
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalDeviceAssessment
+      tags:
+      - medical-device-assessment
       operationId: createMedicalDeviceAssessment
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalDeviceAssessment by id
+      tags:
+      - medical-device-assessment
       operationId: getMedicalDeviceAssessment
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalDeviceAssessment
+      tags:
+      - medical-device-assessment
       operationId: updateMedicalDeviceAssessment
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalDeviceAssessment
+      tags:
+      - medical-device-assessment
       operationId: replaceMedicalDeviceAssessment
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalDeviceAssessment
+      tags:
+      - medical-device-assessment
       operationId: deleteMedicalDeviceAssessment
       responses:
         '200':
@@ -1495,6 +1575,8 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - medical-device-assessment
 components:
   schemas:
     Assessor:

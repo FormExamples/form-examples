@@ -5,10 +5,19 @@ info:
   title: Colonoscopy Test Result — ColonoscopyTestResult
   version: 1.0.0
   description: Colonoscopy procedure result (report). Captures the performed procedure, extent reached, bowel-preparation quality and sedation, clinical history, the narrative and structured findings, polyp count and size, biopsy / polypectomy and any complication, the impression and structured-reporting label, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: colonoscopy-test-result
+  apiPrefix: /api/colonoscopy-test-result/
+  sqlSchema: colonoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/colonoscopy-test-result/xml
+tags:
+  - name: colonoscopy-test-result
+    description: Colonoscopy Test Result form
 paths:
   /api/colonoscopy-test-result/colonoscopy_test_results:
     get:
       summary: List ColonoscopyTestResult records
+      tags: [colonoscopy-test-result]
       operationId: listColonoscopyTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ColonoscopyTestResult
+      tags: [colonoscopy-test-result]
       operationId: createColonoscopyTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ColonoscopyTestResult by id
+      tags: [colonoscopy-test-result]
       operationId: getColonoscopyTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ColonoscopyTestResult
+      tags: [colonoscopy-test-result]
       operationId: updateColonoscopyTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ColonoscopyTestResult
+      tags: [colonoscopy-test-result]
       operationId: replaceColonoscopyTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ColonoscopyTestResult
+      tags: [colonoscopy-test-result]
       operationId: deleteColonoscopyTestResult
       responses:
         "200":

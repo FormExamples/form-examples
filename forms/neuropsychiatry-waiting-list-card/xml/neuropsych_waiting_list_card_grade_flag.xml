@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE neuropsych_waiting_list_card_grade_flag SYSTEM "neuropsych_waiting_list_card_grade_flag.dtd">
-<neuropsych_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<neuropsych_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/neuropsychiatry-waiting-list-card/xml">
+<id>f4770062-c4c2-5867-90aa-7190c18b1f0f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<neuropsych_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</neuropsych_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<neuropsych_waiting_list_card_grade_id>50be5b3b-d1d3-5cdd-93d3-5c91182d3b6f</neuropsych_waiting_list_card_grade_id>
+<flag_id>3a00965f-2c0b-5835-b770-633041bb9d3b</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -5,10 +5,19 @@ info:
   title: Cataract Diagnostic Evaluation — CataractDiagnosticEvaluation
   version: 1.0.0
   description: "Cataract diagnostic evaluation: the payload of the 15-step single-page wizard."
+x-namespace:
+  form: cataract-diagnostic-evaluation
+  apiPrefix: /api/cataract-diagnostic-evaluation/
+  sqlSchema: cataract_diagnostic_evaluation
+  xmlNamespace: https://formexamples.github.io/cataract-diagnostic-evaluation/xml
+tags:
+  - name: cataract-diagnostic-evaluation
+    description: Cataract Diagnostic Evaluation form
 paths:
   /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluations:
     get:
       summary: List CataractDiagnosticEvaluation records
+      tags: [cataract-diagnostic-evaluation]
       operationId: listCataractDiagnosticEvaluation
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CataractDiagnosticEvaluation
+      tags: [cataract-diagnostic-evaluation]
       operationId: createCataractDiagnosticEvaluation
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CataractDiagnosticEvaluation by id
+      tags: [cataract-diagnostic-evaluation]
       operationId: getCataractDiagnosticEvaluation
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CataractDiagnosticEvaluation
+      tags: [cataract-diagnostic-evaluation]
       operationId: updateCataractDiagnosticEvaluation
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CataractDiagnosticEvaluation
+      tags: [cataract-diagnostic-evaluation]
       operationId: replaceCataractDiagnosticEvaluation
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CataractDiagnosticEvaluation
+      tags: [cataract-diagnostic-evaluation]
       operationId: deleteCataractDiagnosticEvaluation
       responses:
         "200":

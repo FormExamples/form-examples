@@ -5,10 +5,19 @@ info:
   title: Nuclear Medicine Test Request — NuclearMedicineTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.
+x-namespace:
+  form: nuclear-medicine-test-request
+  apiPrefix: /api/nuclear-medicine-test-request/
+  sqlSchema: nuclear_medicine_test_request
+  xmlNamespace: https://formexamples.github.io/nuclear-medicine-test-request/xml
+tags:
+  - name: nuclear-medicine-test-request
+    description: Nuclear Medicine Test Request form
 paths:
   /api/nuclear-medicine-test-request/nuclear_medicine_test_request_grade_rules:
     get:
       summary: List NuclearMedicineTestRequestGradeRule records
+      tags: [nuclear-medicine-test-request]
       operationId: listNuclearMedicineTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NuclearMedicineTestRequestGradeRule
+      tags: [nuclear-medicine-test-request]
       operationId: createNuclearMedicineTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NuclearMedicineTestRequestGradeRule by id
+      tags: [nuclear-medicine-test-request]
       operationId: getNuclearMedicineTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NuclearMedicineTestRequestGradeRule
+      tags: [nuclear-medicine-test-request]
       operationId: updateNuclearMedicineTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NuclearMedicineTestRequestGradeRule
+      tags: [nuclear-medicine-test-request]
       operationId: replaceNuclearMedicineTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NuclearMedicineTestRequestGradeRule
+      tags: [nuclear-medicine-test-request]
       operationId: deleteNuclearMedicineTestRequestGradeRule
       responses:
         "200":

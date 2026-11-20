@@ -5,10 +5,19 @@ info:
   title: General Surgery Waiting List Card — GenSurgeryWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: general-surgery-waiting-list-card
+  apiPrefix: /api/general-surgery-waiting-list-card/
+  sqlSchema: general_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/general-surgery-waiting-list-card/xml
+tags:
+  - name: general-surgery-waiting-list-card
+    description: General Surgery Waiting List Card form
 paths:
   /api/general-surgery-waiting-list-card/gen_surgery_waiting_list_card_grade_flags:
     get:
       summary: List GenSurgeryWaitingListCardGradeFlag records
+      tags: [general-surgery-waiting-list-card]
       operationId: listGenSurgeryWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GenSurgeryWaitingListCardGradeFlag
+      tags: [general-surgery-waiting-list-card]
       operationId: createGenSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GenSurgeryWaitingListCardGradeFlag by id
+      tags: [general-surgery-waiting-list-card]
       operationId: getGenSurgeryWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GenSurgeryWaitingListCardGradeFlag
+      tags: [general-surgery-waiting-list-card]
       operationId: updateGenSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GenSurgeryWaitingListCardGradeFlag
+      tags: [general-surgery-waiting-list-card]
       operationId: replaceGenSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GenSurgeryWaitingListCardGradeFlag
+      tags: [general-surgery-waiting-list-card]
       operationId: deleteGenSurgeryWaitingListCardGradeFlag
       responses:
         "200":

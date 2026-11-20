@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pre_operative_assessment_by_clinician_grade_rule SYSTEM "pre_operative_assessment_by_clinician_grade_rule.dtd">
-<pre_operative_assessment_by_clinician_grade_rule>
-<id>dd0e8400-e29b-41d4-a716-446655440008</id>
+<pre_operative_assessment_by_clinician_grade_rule xmlns="https://formexamples.github.io/pre-operative-assessment-by-clinician/xml">
+<id>4eea1067-53bf-52f6-a24a-7264cd04ced7</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>660e8400-e29b-41d4-a716-446655440001</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>54918881-d894-5c83-9f77-dbda83ce1168</grade_id>
+<rule_id>81aebcda-99f9-5251-98d9-bd768df53881</rule_id>
 <instrument>asa</instrument>
 <grade></grade>
 <category>General</category>

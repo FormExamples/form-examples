@@ -5,10 +5,19 @@ info:
   title: Encounter Satisfaction — AccessScheduling
   version: 1.0.0
   description: "1:1 with encounter_satisfaction. Access & Scheduling domain: 3 Likert-scale satisfaction questions."
+x-namespace:
+  form: encounter-satisfaction
+  apiPrefix: /api/encounter-satisfaction/
+  sqlSchema: encounter_satisfaction
+  xmlNamespace: https://formexamples.github.io/encounter-satisfaction/xml
+tags:
+  - name: encounter-satisfaction
+    description: Encounter Satisfaction form
 paths:
   /api/encounter-satisfaction/access_schedulings:
     get:
       summary: List AccessScheduling records
+      tags: [encounter-satisfaction]
       operationId: listAccessScheduling
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AccessScheduling
+      tags: [encounter-satisfaction]
       operationId: createAccessScheduling
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AccessScheduling by id
+      tags: [encounter-satisfaction]
       operationId: getAccessScheduling
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AccessScheduling
+      tags: [encounter-satisfaction]
       operationId: updateAccessScheduling
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AccessScheduling
+      tags: [encounter-satisfaction]
       operationId: replaceAccessScheduling
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AccessScheduling
+      tags: [encounter-satisfaction]
       operationId: deleteAccessScheduling
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT eye_vision_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,test_type,laterality,primary_indication,clinical_question,relevant_history,symptom_reduced_vision,symptom_sudden_loss,symptom_flashes_floaters,symptom_eye_pain,symptom_red_eye,diabetes,known_glaucoma,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST eye_vision_test_request xmlns CDATA #FIXED "https://formexamples.github.io/eye-vision-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

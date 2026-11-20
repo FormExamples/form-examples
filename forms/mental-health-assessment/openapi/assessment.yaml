@@ -5,10 +5,19 @@ info:
   title: Mental Health Assessment — Assessment
   version: 1.0.0
   description: Mental health assessment form using PHQ-9 and GAD-7 instruments. Parent entity for all assessment sections.
+x-namespace:
+  form: mental-health-assessment
+  apiPrefix: /api/mental-health-assessment/
+  sqlSchema: mental_health_assessment
+  xmlNamespace: https://formexamples.github.io/mental-health-assessment/xml
+tags:
+  - name: mental-health-assessment
+    description: Mental Health Assessment form
 paths:
   /api/mental-health-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [mental-health-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [mental-health-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [mental-health-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [mental-health-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [mental-health-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [mental-health-assessment]
       operationId: deleteAssessment
       responses:
         "200":

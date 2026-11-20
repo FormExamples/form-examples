@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE inpatient_clinical_note SYSTEM "inpatient_clinical_note.dtd">
-<inpatient_clinical_note>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<inpatient_clinical_note xmlns="https://formexamples.github.io/inpatient-clinical-note/xml">
+<id>2a2a2b38-d565-5c6e-85ed-810195533f19</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<author_id>660e8400-e29b-41d4-a716-446655440001</author_id>
-<responsible_consultant_id>660e8400-e29b-41d4-a716-446655440001</responsible_consultant_id>
+<patient_id>fbc40f8c-b819-5611-8a5b-88380d04eb7a</patient_id>
+<author_id>7ef6b482-78b6-5da1-8265-3d0c2167d31e</author_id>
+<responsible_consultant_id>4f48451c-e21c-5d65-98b5-0c40a625d49a</responsible_consultant_id>
 <status>draft</status>
 <note_type>admission-clerking</note_type>
 <hospital_name>Example</hospital_name>

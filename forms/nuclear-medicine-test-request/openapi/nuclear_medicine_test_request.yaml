@@ -5,10 +5,19 @@ info:
   title: Nuclear Medicine Test Request — NuclearMedicineTestRequest
   version: 1.0.0
   description: Nuclear medicine (radionuclide imaging) request (referral). Captures the requested scan type, the clinical indication and question, relevant history, radiation-safety governance (pregnancy, breastfeeding, renal function, recent radionuclide exposure), IR(ME)R justification, and triage urgency.
+x-namespace:
+  form: nuclear-medicine-test-request
+  apiPrefix: /api/nuclear-medicine-test-request/
+  sqlSchema: nuclear_medicine_test_request
+  xmlNamespace: https://formexamples.github.io/nuclear-medicine-test-request/xml
+tags:
+  - name: nuclear-medicine-test-request
+    description: Nuclear Medicine Test Request form
 paths:
   /api/nuclear-medicine-test-request/nuclear_medicine_test_requests:
     get:
       summary: List NuclearMedicineTestRequest records
+      tags: [nuclear-medicine-test-request]
       operationId: listNuclearMedicineTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NuclearMedicineTestRequest
+      tags: [nuclear-medicine-test-request]
       operationId: createNuclearMedicineTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NuclearMedicineTestRequest by id
+      tags: [nuclear-medicine-test-request]
       operationId: getNuclearMedicineTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NuclearMedicineTestRequest
+      tags: [nuclear-medicine-test-request]
       operationId: updateNuclearMedicineTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NuclearMedicineTestRequest
+      tags: [nuclear-medicine-test-request]
       operationId: replaceNuclearMedicineTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NuclearMedicineTestRequest
+      tags: [nuclear-medicine-test-request]
       operationId: deleteNuclearMedicineTestRequest
       responses:
         "200":

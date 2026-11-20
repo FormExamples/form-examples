@@ -1,4 +1,5 @@
 <!ELEMENT outpatient_outcome_prom_grc (id,created_at,updated_at,deleted_at,outpatient_outcome_id,global_rating_of_change,self_rated_health)>
+<!ATTLIST outpatient_outcome_prom_grc xmlns CDATA #FIXED "https://formexamples.github.io/outpatient-outcome/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

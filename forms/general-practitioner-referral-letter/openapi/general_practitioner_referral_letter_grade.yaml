@@ -5,10 +5,19 @@ info:
   title: General Practitioner Referral Letter — GeneralPractitionerReferralLetterGrade
   version: 1.0.0
   description: "Computed documentation-completeness grading result for a referral letter: status (Complete/Incomplete), echoed urgency classification, and completeness percentage."
+x-namespace:
+  form: general-practitioner-referral-letter
+  apiPrefix: /api/general-practitioner-referral-letter/
+  sqlSchema: general_practitioner_referral_letter
+  xmlNamespace: https://formexamples.github.io/general-practitioner-referral-letter/xml
+tags:
+  - name: general-practitioner-referral-letter
+    description: General Practitioner Referral Letter form
 paths:
   /api/general-practitioner-referral-letter/general_practitioner_referral_letter_grades:
     get:
       summary: List GeneralPractitionerReferralLetterGrade records
+      tags: [general-practitioner-referral-letter]
       operationId: listGeneralPractitionerReferralLetterGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GeneralPractitionerReferralLetterGrade
+      tags: [general-practitioner-referral-letter]
       operationId: createGeneralPractitionerReferralLetterGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GeneralPractitionerReferralLetterGrade by id
+      tags: [general-practitioner-referral-letter]
       operationId: getGeneralPractitionerReferralLetterGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GeneralPractitionerReferralLetterGrade
+      tags: [general-practitioner-referral-letter]
       operationId: updateGeneralPractitionerReferralLetterGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GeneralPractitionerReferralLetterGrade
+      tags: [general-practitioner-referral-letter]
       operationId: replaceGeneralPractitionerReferralLetterGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GeneralPractitionerReferralLetterGrade
+      tags: [general-practitioner-referral-letter]
       operationId: deleteGeneralPractitionerReferralLetterGrade
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Ottawa Ankle Rules — OttawaAnkleRulesGrade
   version: 1.0.0
   description: "Computed Ottawa Ankle Rules decision result: the derived unable-to-bear-weight finding and the two independent imaging decisions. One-to-one with the parent assessment."
+x-namespace:
+  form: ottawa-ankle-rules
+  apiPrefix: /api/ottawa-ankle-rules/
+  sqlSchema: ottawa_ankle_rules
+  xmlNamespace: https://formexamples.github.io/ottawa-ankle-rules/xml
+tags:
+  - name: ottawa-ankle-rules
+    description: Ottawa Ankle Rules form
 paths:
   /api/ottawa-ankle-rules/ottawa_ankle_rules_grades:
     get:
       summary: List OttawaAnkleRulesGrade records
+      tags: [ottawa-ankle-rules]
       operationId: listOttawaAnkleRulesGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OttawaAnkleRulesGrade
+      tags: [ottawa-ankle-rules]
       operationId: createOttawaAnkleRulesGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OttawaAnkleRulesGrade by id
+      tags: [ottawa-ankle-rules]
       operationId: getOttawaAnkleRulesGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OttawaAnkleRulesGrade
+      tags: [ottawa-ankle-rules]
       operationId: updateOttawaAnkleRulesGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OttawaAnkleRulesGrade
+      tags: [ottawa-ankle-rules]
       operationId: replaceOttawaAnkleRulesGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OttawaAnkleRulesGrade
+      tags: [ottawa-ankle-rules]
       operationId: deleteOttawaAnkleRulesGrade
       responses:
         "200":

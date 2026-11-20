@@ -1,4 +1,5 @@
 <!ELEMENT united_kingdom_council_tax_discount_application (id,created_at,updated_at,deleted_at,applicant_id,billing_authority_id,claim_type,account_reference,application_date,effective_date,applicant_status,property_address_as_full_text,property_postcode,council_tax_band,main_residence,liable_role,other_occupants,smi_certificate,qualifying_benefit,student_certificate,student_course_months,student_hours_per_week,disability_adaptation,disabled_person_main_home,apprentice_declaration,care_leaver_proof,care_leaver_age_years,evidence_notes,declared_true,agrees_to_report_changes,fraud_warning_acknowledged,declarant_name,declaration_date)>
+<!ATTLIST united_kingdom_council_tax_discount_application xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-council-tax-discount-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

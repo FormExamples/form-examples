@@ -5,10 +5,19 @@ info:
   title: Workplace Stress Assessment — Assessment
   version: 1.0.0
   description: Top-level assessment instance for workplace-stress-assessment. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: workplace-stress-assessment
+  apiPrefix: /api/workplace-stress-assessment/
+  sqlSchema: workplace_stress_assessment
+  xmlNamespace: https://formexamples.github.io/workplace-stress-assessment/xml
+tags:
+  - name: workplace-stress-assessment
+    description: Workplace Stress Assessment form
 paths:
   /api/workplace-stress-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [workplace-stress-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [workplace-stress-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [workplace-stress-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [workplace-stress-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [workplace-stress-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [workplace-stress-assessment]
       operationId: deleteAssessment
       responses:
         "200":

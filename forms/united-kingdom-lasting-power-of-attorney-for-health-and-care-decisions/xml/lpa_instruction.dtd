@@ -1,4 +1,5 @@
 <!ELEMENT lpa_instruction (id,created_at,updated_at,deleted_at,lpa_id,order_position,category,statement,lawfulness_assessed,contradicts_adrt)>
+<!ATTLIST lpa_instruction xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000076",
+    "id": "ec51da71-0460-5068-bc12-7741ada4ff78",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000088",
+    "id": "7277683f-58c9-540c-a72d-ae19489ba73b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "newbornAndInfantPhysicalExamination": {
-    "id": "550e8400-e29b-41d4-a716-000000000095",
+    "id": "eb1304a5-5d20-5aa1-af27-bc08a005b0a6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000099",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000009a",
+    "patientId": "1d1f04a2-d3fe-54a7-b0aa-b3861459b170",
+    "clinicianId": "c841fec1-b654-5f38-9385-0a1082cc7f03",
     "practitionerName": "",
     "practitionerRole": "midwife",
     "examinedAt": null,
@@ -91,11 +91,11 @@
     "clinicalNote": ""
   },
   "newbornAndInfantPhysicalExaminationGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000cb",
+    "id": "ac1f1a20-5442-5419-be5d-dc5bcc1a5b8e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "newbornAndInfantPhysicalExaminationId": "550e8400-e29b-41d4-a716-0000000000cf",
+    "newbornAndInfantPhysicalExaminationId": "ebcda2e7-74de-5499-a504-8d25d4e84a5f",
     "eyesResult": "satisfactory",
     "heartResult": "satisfactory",
     "hipsResult": "satisfactory",
@@ -106,22 +106,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "newbornAndInfantPhysicalExaminationGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d8",
+    "id": "e57b607c-c819-5967-988e-0f20961ccd52",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "newbornAndInfantPhysicalExaminationGradeId": "550e8400-e29b-41d4-a716-0000000000dc",
+    "newbornAndInfantPhysicalExaminationGradeId": "e39ded2c-65a4-5eff-b127-90f69ada718c",
     "ruleId": "",
     "component": "eyes",
     "category": "",
     "description": ""
   },
   "newbornAndInfantPhysicalExaminationGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000e1",
+    "id": "45d3d36a-017e-54fb-bec3-4e4fa98cd8c2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "newbornAndInfantPhysicalExaminationGradeId": "550e8400-e29b-41d4-a716-0000000000e5",
+    "newbornAndInfantPhysicalExaminationGradeId": "01077832-0634-5750-a7e1-57f90b68baa5",
     "flagId": "",
     "category": "urgent-ophthalmology",
     "priority": "low",

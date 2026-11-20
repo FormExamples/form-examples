@@ -5,10 +5,19 @@ info:
   title: Edinburgh Postnatal Depression Scale — EdinburghPostnatalDepressionScaleGrade
   version: 1.0.0
   description: "Computed EPDS grading result: summed total (0-30), interpretation band (lower/possible/likely), item 10 self-harm score, and mandatory self-harm flag."
+x-namespace:
+  form: edinburgh-postnatal-depression-scale
+  apiPrefix: /api/edinburgh-postnatal-depression-scale/
+  sqlSchema: edinburgh_postnatal_depression_scale
+  xmlNamespace: https://formexamples.github.io/edinburgh-postnatal-depression-scale/xml
+tags:
+  - name: edinburgh-postnatal-depression-scale
+    description: Edinburgh Postnatal Depression Scale form
 paths:
   /api/edinburgh-postnatal-depression-scale/edinburgh_postnatal_depression_scale_grades:
     get:
       summary: List EdinburghPostnatalDepressionScaleGrade records
+      tags: [edinburgh-postnatal-depression-scale]
       operationId: listEdinburghPostnatalDepressionScaleGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EdinburghPostnatalDepressionScaleGrade
+      tags: [edinburgh-postnatal-depression-scale]
       operationId: createEdinburghPostnatalDepressionScaleGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EdinburghPostnatalDepressionScaleGrade by id
+      tags: [edinburgh-postnatal-depression-scale]
       operationId: getEdinburghPostnatalDepressionScaleGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EdinburghPostnatalDepressionScaleGrade
+      tags: [edinburgh-postnatal-depression-scale]
       operationId: updateEdinburghPostnatalDepressionScaleGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EdinburghPostnatalDepressionScaleGrade
+      tags: [edinburgh-postnatal-depression-scale]
       operationId: replaceEdinburghPostnatalDepressionScaleGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EdinburghPostnatalDepressionScaleGrade
+      tags: [edinburgh-postnatal-depression-scale]
       operationId: deleteEdinburghPostnatalDepressionScaleGrade
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Cervical Screening — Patient
   version: 1.0.0
   description: Patient demographic information used by the cervical-screening record.
+x-namespace:
+  form: cervical-screening
+  apiPrefix: /api/cervical-screening/
+  sqlSchema: cervical_screening
+  xmlNamespace: https://formexamples.github.io/cervical-screening/xml
+tags:
+  - name: cervical-screening
+    description: Cervical Screening form
 paths:
   /api/cervical-screening/patients:
     get:
       summary: List Patient records
+      tags: [cervical-screening]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [cervical-screening]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [cervical-screening]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [cervical-screening]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [cervical-screening]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [cervical-screening]
       operationId: deletePatient
       responses:
         "200":

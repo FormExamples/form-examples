@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE diabetes_podiatry_assessment_grade_flag SYSTEM "diabetes_podiatry_assessment_grade_flag.dtd">
-<diabetes_podiatry_assessment_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<diabetes_podiatry_assessment_grade_flag xmlns="https://formexamples.github.io/diabetes-podiatry-assessment/xml">
+<id>c6dbc8fd-25ec-526f-82ff-a1bc7540d677</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<diabetes_podiatry_assessment_grade_id>880e8400-e29b-41d4-a716-446655440003</diabetes_podiatry_assessment_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<diabetes_podiatry_assessment_grade_id>0b901d72-ab41-5e48-b074-96231aef2b7a</diabetes_podiatry_assessment_grade_id>
+<flag_id>b696d5db-3c24-5271-8804-1167d2183d68</flag_id>
 <category>active-ulcer</category>
 <priority>low</priority>
 <description>Example text.</description>

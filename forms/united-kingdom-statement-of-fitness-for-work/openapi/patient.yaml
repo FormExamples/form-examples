@@ -5,10 +5,19 @@ info:
   title: United Kingdom Statement Of Fitness For Work — Patient
   version: 1.0.0
   description: Patient who is the subject of the fit note.
+x-namespace:
+  form: united-kingdom-statement-of-fitness-for-work
+  apiPrefix: /api/united-kingdom-statement-of-fitness-for-work/
+  sqlSchema: united_kingdom_statement_of_fitness_for_work
+  xmlNamespace: https://formexamples.github.io/united-kingdom-statement-of-fitness-for-work/xml
+tags:
+  - name: united-kingdom-statement-of-fitness-for-work
+    description: United Kingdom Statement Of Fitness For Work form
 paths:
   /api/united-kingdom-statement-of-fitness-for-work/patients:
     get:
       summary: List Patient records
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: deletePatient
       responses:
         "200":

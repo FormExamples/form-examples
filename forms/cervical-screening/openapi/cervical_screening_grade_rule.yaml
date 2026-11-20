@@ -5,10 +5,19 @@ info:
   title: Cervical Screening — CervicalScreeningGradeRule
   version: 1.0.0
   description: "Audit trail of every classification rule that fired during grading: pathway stage, category, and description."
+x-namespace:
+  form: cervical-screening
+  apiPrefix: /api/cervical-screening/
+  sqlSchema: cervical_screening
+  xmlNamespace: https://formexamples.github.io/cervical-screening/xml
+tags:
+  - name: cervical-screening
+    description: Cervical Screening form
 paths:
   /api/cervical-screening/cervical_screening_grade_rules:
     get:
       summary: List CervicalScreeningGradeRule records
+      tags: [cervical-screening]
       operationId: listCervicalScreeningGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CervicalScreeningGradeRule
+      tags: [cervical-screening]
       operationId: createCervicalScreeningGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CervicalScreeningGradeRule by id
+      tags: [cervical-screening]
       operationId: getCervicalScreeningGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CervicalScreeningGradeRule
+      tags: [cervical-screening]
       operationId: updateCervicalScreeningGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CervicalScreeningGradeRule
+      tags: [cervical-screening]
       operationId: replaceCervicalScreeningGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CervicalScreeningGradeRule
+      tags: [cervical-screening]
       operationId: deleteCervicalScreeningGradeRule
       responses:
         "200":

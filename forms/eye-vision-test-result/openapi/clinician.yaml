@@ -5,10 +5,19 @@ info:
   title: Eye Vision Test Result — Clinician
   version: 1.0.0
   description: Reporting clinician (ophthalmologist, optometrist, or orthoptist) who authors and signs the eye vision test result report.
+x-namespace:
+  form: eye-vision-test-result
+  apiPrefix: /api/eye-vision-test-result/
+  sqlSchema: eye_vision_test_result
+  xmlNamespace: https://formexamples.github.io/eye-vision-test-result/xml
+tags:
+  - name: eye-vision-test-result
+    description: Eye Vision Test Result form
 paths:
   /api/eye-vision-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags: [eye-vision-test-result]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [eye-vision-test-result]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [eye-vision-test-result]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [eye-vision-test-result]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [eye-vision-test-result]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [eye-vision-test-result]
       operationId: deleteClinician
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE family_general_waiting_list_card SYSTEM "family_general_waiting_list_card.dtd">
-<family_general_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<family_general_waiting_list_card xmlns="https://formexamples.github.io/family-and-general-medicine-waiting-list-card/xml">
+<id>1488b118-a848-51a8-893a-a3cb85fe035b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>cc8c38e7-212d-56f7-8e1c-f2e7ade61265</patient_id>
+<practitioner_id>b96a11dc-8f9b-5fca-ae12-89bdaefcd99e</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

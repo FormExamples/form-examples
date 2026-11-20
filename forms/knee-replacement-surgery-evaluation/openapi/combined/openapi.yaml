@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Knee Replacement Surgery Evaluation form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: knee-replacement-surgery-evaluation
+  apiPrefix: /api/knee-replacement-surgery-evaluation/
+  sqlSchema: knee_replacement_surgery_evaluation
+  xmlNamespace: https://formexamples.github.io/knee-replacement-surgery-evaluation/xml
+tags:
+- name: knee-replacement-surgery-evaluation
+  description: Knee Replacement Surgery Evaluation form
 paths:
   /api/knee-replacement-surgery-evaluation/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/knee-replacement-surgery-evaluation/knee_replacement_surgery_evaluation_grade_flags:
     get:
       summary: List KneeReplacementSurgeryEvaluationGradeFlag records
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: listKneeReplacementSurgeryEvaluationGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new KneeReplacementSurgeryEvaluationGradeFlag
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: createKneeReplacementSurgeryEvaluationGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one KneeReplacementSurgeryEvaluationGradeFlag by id
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: getKneeReplacementSurgeryEvaluationGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing KneeReplacementSurgeryEvaluationGradeFlag
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: updateKneeReplacementSurgeryEvaluationGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing KneeReplacementSurgeryEvaluationGradeFlag
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: replaceKneeReplacementSurgeryEvaluationGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a KneeReplacementSurgeryEvaluationGradeFlag
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: deleteKneeReplacementSurgeryEvaluationGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/knee-replacement-surgery-evaluation/knee_replacement_surgery_evaluation_grades:
     get:
       summary: List KneeReplacementSurgeryEvaluationGrade records
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: listKneeReplacementSurgeryEvaluationGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new KneeReplacementSurgeryEvaluationGrade
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: createKneeReplacementSurgeryEvaluationGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one KneeReplacementSurgeryEvaluationGrade by id
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: getKneeReplacementSurgeryEvaluationGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing KneeReplacementSurgeryEvaluationGrade
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: updateKneeReplacementSurgeryEvaluationGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing KneeReplacementSurgeryEvaluationGrade
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: replaceKneeReplacementSurgeryEvaluationGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a KneeReplacementSurgeryEvaluationGrade
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: deleteKneeReplacementSurgeryEvaluationGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/knee-replacement-surgery-evaluation/knee_replacement_surgery_evaluations:
     get:
       summary: List KneeReplacementSurgeryEvaluation records
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: listKneeReplacementSurgeryEvaluation
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new KneeReplacementSurgeryEvaluation
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: createKneeReplacementSurgeryEvaluation
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one KneeReplacementSurgeryEvaluation by id
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: getKneeReplacementSurgeryEvaluation
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing KneeReplacementSurgeryEvaluation
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: updateKneeReplacementSurgeryEvaluation
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing KneeReplacementSurgeryEvaluation
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: replaceKneeReplacementSurgeryEvaluation
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a KneeReplacementSurgeryEvaluation
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: deleteKneeReplacementSurgeryEvaluation
       responses:
         '200':
@@ -1003,9 +1059,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - knee-replacement-surgery-evaluation
   /api/knee-replacement-surgery-evaluation/patients:
     get:
       summary: List Patient records
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: listPatient
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: createPatient
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: getPatient
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: updatePatient
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: replacePatient
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - knee-replacement-surgery-evaluation
       operationId: deletePatient
       responses:
         '200':

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ophthalmology_waiting_list_card_appointment SYSTEM "ophthalmology_waiting_list_card_appointment.dtd">
-<ophthalmology_waiting_list_card_appointment>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<ophthalmology_waiting_list_card_appointment xmlns="https://formexamples.github.io/ophthalmology-waiting-list-card/xml">
+<id>57989b57-f9f5-5eaf-a000-66a21cb63352</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<ophthalmology_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</ophthalmology_waiting_list_card_id>
+<ophthalmology_waiting_list_card_id>4e9db39c-0763-5c62-bae4-c12b967290a6</ophthalmology_waiting_list_card_id>
 <appointment_date>2026-01-15</appointment_date>
 <appointment_time></appointment_time>
 <duration_minutes>1</duration_minutes>

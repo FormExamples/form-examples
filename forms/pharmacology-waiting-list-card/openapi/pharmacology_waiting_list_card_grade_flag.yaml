@@ -5,10 +5,19 @@ info:
   title: Pharmacology Waiting List Card — PharmacologyWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: pharmacology-waiting-list-card
+  apiPrefix: /api/pharmacology-waiting-list-card/
+  sqlSchema: pharmacology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/pharmacology-waiting-list-card/xml
+tags:
+  - name: pharmacology-waiting-list-card
+    description: Pharmacology Waiting List Card form
 paths:
   /api/pharmacology-waiting-list-card/pharmacology_waiting_list_card_grade_flags:
     get:
       summary: List PharmacologyWaitingListCardGradeFlag records
+      tags: [pharmacology-waiting-list-card]
       operationId: listPharmacologyWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PharmacologyWaitingListCardGradeFlag
+      tags: [pharmacology-waiting-list-card]
       operationId: createPharmacologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PharmacologyWaitingListCardGradeFlag by id
+      tags: [pharmacology-waiting-list-card]
       operationId: getPharmacologyWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PharmacologyWaitingListCardGradeFlag
+      tags: [pharmacology-waiting-list-card]
       operationId: updatePharmacologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PharmacologyWaitingListCardGradeFlag
+      tags: [pharmacology-waiting-list-card]
       operationId: replacePharmacologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PharmacologyWaitingListCardGradeFlag
+      tags: [pharmacology-waiting-list-card]
       operationId: deletePharmacologyWaitingListCardGradeFlag
       responses:
         "200":

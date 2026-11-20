@@ -1,4 +1,5 @@
 <!ELEMENT united_kingdom_death_registration_grade (id,created_at,updated_at,deleted_at,united_kingdom_death_registration_id,registration_class,deadline_status,days_since_confirmation,informant_qualified,graded_at)>
+<!ATTLIST united_kingdom_death_registration_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-death-registration/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

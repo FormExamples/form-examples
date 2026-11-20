@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mri_scan_test_request_grade_flag SYSTEM "mri_scan_test_request_grade_flag.dtd">
-<mri_scan_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<mri_scan_test_request_grade_flag xmlns="https://formexamples.github.io/mri-scan-test-request/xml">
+<id>d73a5b0c-596f-5935-9c35-6671c7270749</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<mri_scan_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</mri_scan_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<mri_scan_test_request_grade_id>8dc540ba-29ce-574f-aa32-4a75456e0c9b</mri_scan_test_request_grade_id>
+<flag_id>499d8e01-8775-53ef-be69-fb6e4e85a1dc</flag_id>
 <category>ferromagnetic-implant</category>
 <priority>low</priority>
 <description>Example text.</description>

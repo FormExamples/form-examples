@@ -5,10 +5,19 @@ info:
   title: Provider Transfer Request — Assessment
   version: 1.0.0
   description: Top-level assessment instance for provider-transfer-request. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: provider-transfer-request
+  apiPrefix: /api/provider-transfer-request/
+  sqlSchema: provider_transfer_request
+  xmlNamespace: https://formexamples.github.io/provider-transfer-request/xml
+tags:
+  - name: provider-transfer-request
+    description: Provider Transfer Request form
 paths:
   /api/provider-transfer-request/assessments:
     get:
       summary: List Assessment records
+      tags: [provider-transfer-request]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [provider-transfer-request]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [provider-transfer-request]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [provider-transfer-request]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [provider-transfer-request]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [provider-transfer-request]
       operationId: deleteAssessment
       responses:
         "200":

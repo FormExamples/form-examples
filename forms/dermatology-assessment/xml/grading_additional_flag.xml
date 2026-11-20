@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_additional_flag SYSTEM "grading_additional_flag.dtd">
-<grading_additional_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<grading_additional_flag xmlns="https://formexamples.github.io/dermatology-assessment/xml">
+<id>6a30f6ca-504b-50c4-b65c-6260d243ffec</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>880e8400-e29b-41d4-a716-446655440003</grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<grade_id>163fcbcf-8e59-5065-8d5f-445f2ba8aa92</grade_id>
+<flag_id>79bc705e-6b36-5853-bc56-4480e45c3b00</flag_id>
 <category>General</category>
 <message></message>
 <priority>high</priority>

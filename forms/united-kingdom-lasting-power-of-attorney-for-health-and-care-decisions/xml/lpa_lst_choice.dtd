@@ -1,4 +1,5 @@
 <!ELEMENT lpa_lst_choice (id,created_at,updated_at,deleted_at,lpa_id,lst_choice,donor_initialled,initialled_at)>
+<!ATTLIST lpa_lst_choice xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Microbiology Culture Test Result — Clinician
   version: 1.0.0
   description: Reporting clinician (consultant microbiologist, biomedical scientist, or infection specialist) who authors and signs the microbiology culture result report.
+x-namespace:
+  form: microbiology-culture-test-result
+  apiPrefix: /api/microbiology-culture-test-result/
+  sqlSchema: microbiology_culture_test_result
+  xmlNamespace: https://formexamples.github.io/microbiology-culture-test-result/xml
+tags:
+  - name: microbiology-culture-test-result
+    description: Microbiology Culture Test Result form
 paths:
   /api/microbiology-culture-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags: [microbiology-culture-test-result]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [microbiology-culture-test-result]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [microbiology-culture-test-result]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [microbiology-culture-test-result]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [microbiology-culture-test-result]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [microbiology-culture-test-result]
       operationId: deleteClinician
       responses:
         "200":

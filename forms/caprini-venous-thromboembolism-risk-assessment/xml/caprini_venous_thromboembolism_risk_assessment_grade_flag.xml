@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE caprini_venous_thromboembolism_risk_assessment_grade_flag SYSTEM "caprini_venous_thromboembolism_risk_assessment_grade_flag.dtd">
-<caprini_venous_thromboembolism_risk_assessment_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<caprini_venous_thromboembolism_risk_assessment_grade_flag xmlns="https://formexamples.github.io/caprini-venous-thromboembolism-risk-assessment/xml">
+<id>a454ba20-b7c2-520d-81a6-8c24bfe87a77</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<caprini_venous_thromboembolism_risk_assessment_grade_id>880e8400-e29b-41d4-a716-446655440003</caprini_venous_thromboembolism_risk_assessment_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<caprini_venous_thromboembolism_risk_assessment_grade_id>277e115f-70e6-56e2-b315-b50e7ba52850</caprini_venous_thromboembolism_risk_assessment_grade_id>
+<flag_id>4b63cd46-289e-52e7-8bad-1e970b300110</flag_id>
 <category>high-vte-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

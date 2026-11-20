@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005c",
+    "id": "b3b795be-fab7-554b-b44a-122c18ba357e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006e",
+    "id": "725a6670-fc45-5740-9f22-4a471ebcddb4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "xRayTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-00000000007c",
+    "id": "d8ae017a-8ace-556c-ad25-150017950b86",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000080",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000081",
+    "patientId": "e36f423b-9a17-533e-a01b-603ab6c8e1a0",
+    "clinicianId": "34a72a29-5b11-57d1-9cbc-e5b0f284c83a",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -62,11 +62,11 @@
     "notes": ""
   },
   "xRayTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000094",
+    "id": "74b7d5ac-0fb6-587c-8951-1ccc6c34c58a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "xRayTestRequestId": "550e8400-e29b-41d4-a716-000000000098",
+    "xRayTestRequestId": "c1919d4d-c6d2-59e2-b7c2-8a6a54bd194d",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "radiationSafetyBand": "safe",
@@ -80,22 +80,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "xRayTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a4",
+    "id": "dc352e18-0155-5275-b658-1cc89456cb9f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "xRayTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000a8",
+    "xRayTestRequestGradeId": "8e907470-df75-5b31-bf03-e4e276edc9ba",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "xRayTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ad",
+    "id": "71385583-8a97-5a83-aab7-551cd44d0cdc",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "xRayTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b1",
+    "xRayTestRequestGradeId": "5e3d5e0a-1970-5e43-b6d9-3a2da086f497",
     "flagId": "",
     "category": "pregnancy",
     "priority": "low",

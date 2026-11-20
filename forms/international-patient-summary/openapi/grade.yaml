@@ -5,10 +5,19 @@ info:
   title: International Patient Summary — Grade
   version: 1.0.0
   description: Computed grading / scoring result. One-to-one child of assessment. The result_category column holds a form-specific label (e.g. Low, Moderate, High, or Complete/Incomplete); result_score is optional for numeric instruments.
+x-namespace:
+  form: international-patient-summary
+  apiPrefix: /api/international-patient-summary/
+  sqlSchema: international_patient_summary
+  xmlNamespace: https://formexamples.github.io/international-patient-summary/xml
+tags:
+  - name: international-patient-summary
+    description: International Patient Summary form
 paths:
   /api/international-patient-summary/grades:
     get:
       summary: List Grade records
+      tags: [international-patient-summary]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [international-patient-summary]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [international-patient-summary]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [international-patient-summary]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [international-patient-summary]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [international-patient-summary]
       operationId: deleteGrade
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT application (id,created_at,updated_at,deleted_at,patient_id,practitioner_id,status,application_kind,previous_certificate_number,previous_certificate_expiry_date,completed_date,posted_date,received_by_nhsbsa_date,certificate_number,valid_from,valid_until,practitioner_signature_present,practitioner_declaration_text,notes)>
+<!ATTLIST application xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-nhs-england-medical-exemption-certificate/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

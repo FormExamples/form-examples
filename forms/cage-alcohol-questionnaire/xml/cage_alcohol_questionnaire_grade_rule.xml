@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cage_alcohol_questionnaire_grade_rule SYSTEM "cage_alcohol_questionnaire_grade_rule.dtd">
-<cage_alcohol_questionnaire_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<cage_alcohol_questionnaire_grade_rule xmlns="https://formexamples.github.io/cage-alcohol-questionnaire/xml">
+<id>207e14eb-f930-5356-8666-4aee60cebe09</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cage_alcohol_questionnaire_grade_id>880e8400-e29b-41d4-a716-446655440003</cage_alcohol_questionnaire_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<cage_alcohol_questionnaire_grade_id>e5b717d7-684f-5d62-b1f5-e7274a023e8b</cage_alcohol_questionnaire_grade_id>
+<rule_id>0ed8c359-f868-52c6-9445-41a9cf92ec4c</rule_id>
 <parameter>cut-down</parameter>
 <points>1</points>
 <category>General</category>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_statement_of_fitness_for_work SYSTEM "united_kingdom_statement_of_fitness_for_work.dtd">
-<united_kingdom_statement_of_fitness_for_work>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<united_kingdom_statement_of_fitness_for_work xmlns="https://formexamples.github.io/united-kingdom-statement-of-fitness-for-work/xml">
+<id>ae9ad38a-bfa8-560e-9877-955ec260afe3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
-<medical_practice_id>770e8400-e29b-41d4-a716-446655440002</medical_practice_id>
+<patient_id>6a11e3ad-abf0-559a-9705-8cedad1221f6</patient_id>
+<clinician_id>203acb3a-a76f-5f7a-8d2b-3a90c3d11813</clinician_id>
+<medical_practice_id>be700f85-2817-5c22-96d7-11c53609e9e5</medical_practice_id>
 <status>draft</status>
 <assessment_date>2026-01-15</assessment_date>
 <assessment_method>in_person</assessment_method>

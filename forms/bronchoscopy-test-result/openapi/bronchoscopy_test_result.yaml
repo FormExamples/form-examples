@@ -5,10 +5,19 @@ info:
   title: Bronchoscopy Test Result — BronchoscopyTestResult
   version: 1.0.0
   description: Bronchoscopy (airway endoscopy) result (procedure report). Captures the performed procedure, sedation and extent examined, the clinical history, the narrative and structured findings, samples taken, any complication, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: bronchoscopy-test-result
+  apiPrefix: /api/bronchoscopy-test-result/
+  sqlSchema: bronchoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/bronchoscopy-test-result/xml
+tags:
+  - name: bronchoscopy-test-result
+    description: Bronchoscopy Test Result form
 paths:
   /api/bronchoscopy-test-result/bronchoscopy_test_results:
     get:
       summary: List BronchoscopyTestResult records
+      tags: [bronchoscopy-test-result]
       operationId: listBronchoscopyTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BronchoscopyTestResult
+      tags: [bronchoscopy-test-result]
       operationId: createBronchoscopyTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BronchoscopyTestResult by id
+      tags: [bronchoscopy-test-result]
       operationId: getBronchoscopyTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BronchoscopyTestResult
+      tags: [bronchoscopy-test-result]
       operationId: updateBronchoscopyTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BronchoscopyTestResult
+      tags: [bronchoscopy-test-result]
       operationId: replaceBronchoscopyTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BronchoscopyTestResult
+      tags: [bronchoscopy-test-result]
       operationId: deleteBronchoscopyTestResult
       responses:
         "200":

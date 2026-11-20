@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE genetic_test_result_grade_flag SYSTEM "genetic_test_result_grade_flag.dtd">
-<genetic_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<genetic_test_result_grade_flag xmlns="https://formexamples.github.io/genetic-test-result/xml">
+<id>dc365df1-1af9-5f96-9a8c-edae3b8431de</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<genetic_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</genetic_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<genetic_test_result_grade_id>9702f755-30a9-5ba7-9d30-f3e4bc5d80fd</genetic_test_result_grade_id>
+<flag_id>41f33cc0-346c-5aaf-97bb-62f1ab25289b</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

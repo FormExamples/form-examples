@@ -5,10 +5,19 @@ info:
   title: Neurodiversity Adjustment Response — Worker
   version: 1.0.0
   description: Worker (the neurodivergent employee) who requests, or on whose behalf a manager requests, workplace reasonable adjustments.
+x-namespace:
+  form: neurodiversity-adjustment-response
+  apiPrefix: /api/neurodiversity-adjustment-response/
+  sqlSchema: neurodiversity_adjustment_response
+  xmlNamespace: https://formexamples.github.io/neurodiversity-adjustment-response/xml
+tags:
+  - name: neurodiversity-adjustment-response
+    description: Neurodiversity Adjustment Response form
 paths:
   /api/neurodiversity-adjustment-response/workers:
     get:
       summary: List Worker records
+      tags: [neurodiversity-adjustment-response]
       operationId: listWorker
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Worker
+      tags: [neurodiversity-adjustment-response]
       operationId: createWorker
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Worker by id
+      tags: [neurodiversity-adjustment-response]
       operationId: getWorker
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Worker
+      tags: [neurodiversity-adjustment-response]
       operationId: updateWorker
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Worker
+      tags: [neurodiversity-adjustment-response]
       operationId: replaceWorker
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Worker
+      tags: [neurodiversity-adjustment-response]
       operationId: deleteWorker
       responses:
         "200":

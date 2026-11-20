@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "id": "b3c4f7db-6175-576e-938b-7120e2ae839f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -23,7 +23,7 @@
     "heightAsCm": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000016",
+    "id": "682077d4-6fff-573d-836b-95f3bafaee12",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -40,12 +40,12 @@
     "postcode": ""
   },
   "medicalInformationFormForAirTravel": {
-    "id": "550e8400-e29b-41d4-a716-000000000025",
+    "id": "c5ecf4b3-d8fb-5204-b4c8-9fd75f7bab2d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000029",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000002a",
+    "patientId": "2334d982-4557-5ea6-8ce2-91eb1496f87c",
+    "clinicianId": "e044dd95-97ab-5c7e-b193-ef9f250d1aa5",
     "status": "draft",
     "submitterName": "",
     "submitterRole": "passenger",
@@ -143,11 +143,11 @@
     "additionalNotes": ""
   },
   "medicalInformationFormForAirTravelGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008a",
+    "id": "9a672e84-25fa-5d2f-ad67-81e2c2f66c76",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalInformationFormForAirTravelId": "550e8400-e29b-41d4-a716-00000000008e",
+    "medicalInformationFormForAirTravelId": "1e42e727-c63a-5b4e-a0a0-6569c40bf090",
     "computedFitnessBand": "fit",
     "finalFitnessBand": "fit",
     "overrideReason": "",
@@ -158,11 +158,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "medicalInformationFormForAirTravelGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000097",
+    "id": "182b704c-e4f6-53a8-93df-84f918e42afc",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalInformationFormForAirTravelGradeId": "550e8400-e29b-41d4-a716-00000000009b",
+    "medicalInformationFormForAirTravelGradeId": "04b31a66-3640-569b-9bde-e3802216c9a9",
     "ruleId": "",
     "instrument": "cardiovascular",
     "fitnessBand": "fit",
@@ -170,11 +170,11 @@
     "description": ""
   },
   "medicalInformationFormForAirTravelGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a1",
+    "id": "7e940b06-a65c-5322-b312-986242044c82",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "medicalInformationFormForAirTravelGradeId": "550e8400-e29b-41d4-a716-0000000000a5",
+    "medicalInformationFormForAirTravelGradeId": "9cd7bbf5-4799-5b4f-82df-8b349686986c",
     "flagId": "",
     "category": "cardiac-acute",
     "priority": "low",

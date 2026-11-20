@@ -5,10 +5,19 @@ info:
   title: Cataract Diagnostic Evaluation — Clinician
   version: 1.0.0
   description: Reporting clinician (optometrist or ophthalmologist) who performs and signs the cataract diagnostic evaluation.
+x-namespace:
+  form: cataract-diagnostic-evaluation
+  apiPrefix: /api/cataract-diagnostic-evaluation/
+  sqlSchema: cataract_diagnostic_evaluation
+  xmlNamespace: https://formexamples.github.io/cataract-diagnostic-evaluation/xml
+tags:
+  - name: cataract-diagnostic-evaluation
+    description: Cataract Diagnostic Evaluation form
 paths:
   /api/cataract-diagnostic-evaluation/clinicians:
     get:
       summary: List Clinician records
+      tags: [cataract-diagnostic-evaluation]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [cataract-diagnostic-evaluation]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [cataract-diagnostic-evaluation]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [cataract-diagnostic-evaluation]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [cataract-diagnostic-evaluation]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [cataract-diagnostic-evaluation]
       operationId: deleteClinician
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Pre Operative Assessment By Clinician — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: pre-operative-assessment-by-clinician
+  apiPrefix: /api/pre-operative-assessment-by-clinician/
+  sqlSchema: pre_operative_assessment_by_clinician
+  xmlNamespace: https://formexamples.github.io/pre-operative-assessment-by-clinician/xml
+tags:
+  - name: pre-operative-assessment-by-clinician
+    description: Pre Operative Assessment By Clinician form
 paths:
   /api/pre-operative-assessment-by-clinician/clinicians:
     get:
       summary: List Clinician records
+      tags: [pre-operative-assessment-by-clinician]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [pre-operative-assessment-by-clinician]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [pre-operative-assessment-by-clinician]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [pre-operative-assessment-by-clinician]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [pre-operative-assessment-by-clinician]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [pre-operative-assessment-by-clinician]
       operationId: deleteClinician
       responses:
         "200":

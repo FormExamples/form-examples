@@ -5,10 +5,19 @@ info:
   title: Sleep Study Test Result — SleepStudyTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category (AHI severity band), report completeness, and follow-up urgency. A critical result (e.g. severe OSA with significant desaturation or nocturnal hypoventilation) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: sleep-study-test-result
+  apiPrefix: /api/sleep-study-test-result/
+  sqlSchema: sleep_study_test_result
+  xmlNamespace: https://formexamples.github.io/sleep-study-test-result/xml
+tags:
+  - name: sleep-study-test-result
+    description: Sleep Study Test Result form
 paths:
   /api/sleep-study-test-result/sleep_study_test_result_grades:
     get:
       summary: List SleepStudyTestResultGrade records
+      tags: [sleep-study-test-result]
       operationId: listSleepStudyTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SleepStudyTestResultGrade
+      tags: [sleep-study-test-result]
       operationId: createSleepStudyTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one SleepStudyTestResultGrade by id
+      tags: [sleep-study-test-result]
       operationId: getSleepStudyTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SleepStudyTestResultGrade
+      tags: [sleep-study-test-result]
       operationId: updateSleepStudyTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing SleepStudyTestResultGrade
+      tags: [sleep-study-test-result]
       operationId: replaceSleepStudyTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SleepStudyTestResultGrade
+      tags: [sleep-study-test-result]
       operationId: deleteSleepStudyTestResultGrade
       responses:
         "200":

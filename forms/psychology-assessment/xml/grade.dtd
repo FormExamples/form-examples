@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,depression_score,depression_severity,anxiety_score,anxiety_severity,stress_score,stress_severity,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/psychology-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

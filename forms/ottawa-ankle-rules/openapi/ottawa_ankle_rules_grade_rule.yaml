@@ -5,10 +5,19 @@ info:
   title: Ottawa Ankle Rules — OttawaAnkleRulesGradeRule
   version: 1.0.0
   description: "Audit trail of every decision-rule criterion that fired during the Ottawa Ankle Rules computation: instrument, imaging region, category, and description."
+x-namespace:
+  form: ottawa-ankle-rules
+  apiPrefix: /api/ottawa-ankle-rules/
+  sqlSchema: ottawa_ankle_rules
+  xmlNamespace: https://formexamples.github.io/ottawa-ankle-rules/xml
+tags:
+  - name: ottawa-ankle-rules
+    description: Ottawa Ankle Rules form
 paths:
   /api/ottawa-ankle-rules/ottawa_ankle_rules_grade_rules:
     get:
       summary: List OttawaAnkleRulesGradeRule records
+      tags: [ottawa-ankle-rules]
       operationId: listOttawaAnkleRulesGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OttawaAnkleRulesGradeRule
+      tags: [ottawa-ankle-rules]
       operationId: createOttawaAnkleRulesGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OttawaAnkleRulesGradeRule by id
+      tags: [ottawa-ankle-rules]
       operationId: getOttawaAnkleRulesGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OttawaAnkleRulesGradeRule
+      tags: [ottawa-ankle-rules]
       operationId: updateOttawaAnkleRulesGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OttawaAnkleRulesGradeRule
+      tags: [ottawa-ankle-rules]
       operationId: replaceOttawaAnkleRulesGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OttawaAnkleRulesGradeRule
+      tags: [ottawa-ankle-rules]
       operationId: deleteOttawaAnkleRulesGradeRule
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT united_states_standard_certificate_of_death_grade (id,created_at,updated_at,deleted_at,united_states_standard_certificate_of_death_id,validity_class,underlying_cause,referral_indicated,graded_at)>
+<!ATTLIST united_states_standard_certificate_of_death_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-states-standard-certificate-of-death/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

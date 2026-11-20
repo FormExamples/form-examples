@@ -5,10 +5,19 @@ info:
   title: Coagulation Test Request — CoagulationTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (1-9 anchored on BSH indication / retest-interval match), pre-analytical / specimen safety (citrate tube fill / ratio / timing), request completeness, and triage priority."
+x-namespace:
+  form: coagulation-test-request
+  apiPrefix: /api/coagulation-test-request/
+  sqlSchema: coagulation_test_request
+  xmlNamespace: https://formexamples.github.io/coagulation-test-request/xml
+tags:
+  - name: coagulation-test-request
+    description: Coagulation Test Request form
 paths:
   /api/coagulation-test-request/coagulation_test_request_grades:
     get:
       summary: List CoagulationTestRequestGrade records
+      tags: [coagulation-test-request]
       operationId: listCoagulationTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CoagulationTestRequestGrade
+      tags: [coagulation-test-request]
       operationId: createCoagulationTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CoagulationTestRequestGrade by id
+      tags: [coagulation-test-request]
       operationId: getCoagulationTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CoagulationTestRequestGrade
+      tags: [coagulation-test-request]
       operationId: updateCoagulationTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CoagulationTestRequestGrade
+      tags: [coagulation-test-request]
       operationId: replaceCoagulationTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CoagulationTestRequestGrade
+      tags: [coagulation-test-request]
       operationId: deleteCoagulationTestRequestGrade
       responses:
         "200":

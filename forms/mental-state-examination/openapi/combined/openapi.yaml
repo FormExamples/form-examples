@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Mental State Examination (MSE) form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: mental-state-examination
+  apiPrefix: /api/mental-state-examination/
+  sqlSchema: mental_state_examination
+  xmlNamespace: https://formexamples.github.io/mental-state-examination/xml
+tags:
+- name: mental-state-examination
+  description: Mental State Examination (MSE) form
 paths:
   /api/mental-state-examination/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - mental-state-examination
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - mental-state-examination
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - mental-state-examination
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - mental-state-examination
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - mental-state-examination
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - mental-state-examination
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/mental-state-examination/mental_state_examination_grade_flags:
     get:
       summary: List MentalStateExaminationGradeFlag records
+      tags:
+      - mental-state-examination
       operationId: listMentalStateExaminationGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MentalStateExaminationGradeFlag
+      tags:
+      - mental-state-examination
       operationId: createMentalStateExaminationGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MentalStateExaminationGradeFlag by id
+      tags:
+      - mental-state-examination
       operationId: getMentalStateExaminationGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MentalStateExaminationGradeFlag
+      tags:
+      - mental-state-examination
       operationId: updateMentalStateExaminationGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MentalStateExaminationGradeFlag
+      tags:
+      - mental-state-examination
       operationId: replaceMentalStateExaminationGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MentalStateExaminationGradeFlag
+      tags:
+      - mental-state-examination
       operationId: deleteMentalStateExaminationGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/mental-state-examination/mental_state_examination_grade_rules:
     get:
       summary: List MentalStateExaminationGradeRule records
+      tags:
+      - mental-state-examination
       operationId: listMentalStateExaminationGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MentalStateExaminationGradeRule
+      tags:
+      - mental-state-examination
       operationId: createMentalStateExaminationGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MentalStateExaminationGradeRule by id
+      tags:
+      - mental-state-examination
       operationId: getMentalStateExaminationGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MentalStateExaminationGradeRule
+      tags:
+      - mental-state-examination
       operationId: updateMentalStateExaminationGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MentalStateExaminationGradeRule
+      tags:
+      - mental-state-examination
       operationId: replaceMentalStateExaminationGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MentalStateExaminationGradeRule
+      tags:
+      - mental-state-examination
       operationId: deleteMentalStateExaminationGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/mental-state-examination/mental_state_examination_grades:
     get:
       summary: List MentalStateExaminationGrade records
+      tags:
+      - mental-state-examination
       operationId: listMentalStateExaminationGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MentalStateExaminationGrade
+      tags:
+      - mental-state-examination
       operationId: createMentalStateExaminationGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MentalStateExaminationGrade by id
+      tags:
+      - mental-state-examination
       operationId: getMentalStateExaminationGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MentalStateExaminationGrade
+      tags:
+      - mental-state-examination
       operationId: updateMentalStateExaminationGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MentalStateExaminationGrade
+      tags:
+      - mental-state-examination
       operationId: replaceMentalStateExaminationGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MentalStateExaminationGrade
+      tags:
+      - mental-state-examination
       operationId: deleteMentalStateExaminationGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/mental-state-examination/mental_state_examinations:
     get:
       summary: List MentalStateExamination records
+      tags:
+      - mental-state-examination
       operationId: listMentalStateExamination
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MentalStateExamination
+      tags:
+      - mental-state-examination
       operationId: createMentalStateExamination
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MentalStateExamination by id
+      tags:
+      - mental-state-examination
       operationId: getMentalStateExamination
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MentalStateExamination
+      tags:
+      - mental-state-examination
       operationId: updateMentalStateExamination
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MentalStateExamination
+      tags:
+      - mental-state-examination
       operationId: replaceMentalStateExamination
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MentalStateExamination
+      tags:
+      - mental-state-examination
       operationId: deleteMentalStateExamination
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - mental-state-examination
   /api/mental-state-examination/patients:
     get:
       summary: List Patient records
+      tags:
+      - mental-state-examination
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - mental-state-examination
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - mental-state-examination
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - mental-state-examination
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - mental-state-examination
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - mental-state-examination
       operationId: deletePatient
       responses:
         '200':

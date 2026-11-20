@@ -1,4 +1,5 @@
 <!ELEMENT assessment_current_medications (id,created_at,updated_at,deleted_at,assessment_id,takes_regular_medications,current_hrt,current_hrt_type,current_hrt_route,current_hrt_duration,previous_hrt,previous_hrt_details,reason_for_stopping_hrt,takes_herbal_supplements,herbal_supplement_details,takes_anticoagulants,anticoagulant_details,medication_notes)>
+<!ATTLIST assessment_current_medications xmlns CDATA #FIXED "https://formexamples.github.io/hormone-replacement-therapy-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

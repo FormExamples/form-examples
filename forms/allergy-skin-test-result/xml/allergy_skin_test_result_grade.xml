@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE allergy_skin_test_result_grade SYSTEM "allergy_skin_test_result_grade.dtd">
-<allergy_skin_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<allergy_skin_test_result_grade xmlns="https://formexamples.github.io/allergy-skin-test-result/xml">
+<id>c8bdb7c6-ca92-5938-b6e5-0d6c37fa4413</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<allergy_skin_test_result_id>770e8400-e29b-41d4-a716-446655440002</allergy_skin_test_result_id>
+<allergy_skin_test_result_id>5f9407c2-b34a-5967-b0f0-b8d645829309</allergy_skin_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

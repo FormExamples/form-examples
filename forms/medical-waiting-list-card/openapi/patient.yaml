@@ -5,10 +5,19 @@ info:
   title: Medical Waiting List Card — Patient
   version: 1.0.0
   description: Patient placed on a medical waiting list.
+x-namespace:
+  form: medical-waiting-list-card
+  apiPrefix: /api/medical-waiting-list-card/
+  sqlSchema: medical_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/medical-waiting-list-card/xml
+tags:
+  - name: medical-waiting-list-card
+    description: Medical Waiting List Card form
 paths:
   /api/medical-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags: [medical-waiting-list-card]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [medical-waiting-list-card]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [medical-waiting-list-card]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [medical-waiting-list-card]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [medical-waiting-list-card]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [medical-waiting-list-card]
       operationId: deletePatient
       responses:
         "200":

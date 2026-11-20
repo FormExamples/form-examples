@@ -5,10 +5,19 @@ info:
   title: Provider Transfer Request — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: provider-transfer-request
+  apiPrefix: /api/provider-transfer-request/
+  sqlSchema: provider_transfer_request
+  xmlNamespace: https://formexamples.github.io/provider-transfer-request/xml
+tags:
+  - name: provider-transfer-request
+    description: Provider Transfer Request form
 paths:
   /api/provider-transfer-request/clinicians:
     get:
       summary: List Clinician records
+      tags: [provider-transfer-request]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [provider-transfer-request]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [provider-transfer-request]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [provider-transfer-request]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [provider-transfer-request]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [provider-transfer-request]
       operationId: deleteClinician
       responses:
         "200":

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Urinalysis Test Request form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: urinalysis-test-request
+  apiPrefix: /api/urinalysis-test-request/
+  sqlSchema: urinalysis_test_request
+  xmlNamespace: https://formexamples.github.io/urinalysis-test-request/xml
+tags:
+- name: urinalysis-test-request
+  description: Urinalysis Test Request form
 paths:
   /api/urinalysis-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - urinalysis-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - urinalysis-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - urinalysis-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - urinalysis-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - urinalysis-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - urinalysis-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - urinalysis-test-request
   /api/urinalysis-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - urinalysis-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - urinalysis-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - urinalysis-test-request
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - urinalysis-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - urinalysis-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - urinalysis-test-request
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/urinalysis-test-request/urinalysis_test_request_grade_flags:
     get:
       summary: List UrinalysisTestRequestGradeFlag records
+      tags:
+      - urinalysis-test-request
       operationId: listUrinalysisTestRequestGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UrinalysisTestRequestGradeFlag
+      tags:
+      - urinalysis-test-request
       operationId: createUrinalysisTestRequestGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UrinalysisTestRequestGradeFlag by id
+      tags:
+      - urinalysis-test-request
       operationId: getUrinalysisTestRequestGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UrinalysisTestRequestGradeFlag
+      tags:
+      - urinalysis-test-request
       operationId: updateUrinalysisTestRequestGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UrinalysisTestRequestGradeFlag
+      tags:
+      - urinalysis-test-request
       operationId: replaceUrinalysisTestRequestGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UrinalysisTestRequestGradeFlag
+      tags:
+      - urinalysis-test-request
       operationId: deleteUrinalysisTestRequestGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/urinalysis-test-request/urinalysis_test_request_grade_rules:
     get:
       summary: List UrinalysisTestRequestGradeRule records
+      tags:
+      - urinalysis-test-request
       operationId: listUrinalysisTestRequestGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UrinalysisTestRequestGradeRule
+      tags:
+      - urinalysis-test-request
       operationId: createUrinalysisTestRequestGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UrinalysisTestRequestGradeRule by id
+      tags:
+      - urinalysis-test-request
       operationId: getUrinalysisTestRequestGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UrinalysisTestRequestGradeRule
+      tags:
+      - urinalysis-test-request
       operationId: updateUrinalysisTestRequestGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UrinalysisTestRequestGradeRule
+      tags:
+      - urinalysis-test-request
       operationId: replaceUrinalysisTestRequestGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UrinalysisTestRequestGradeRule
+      tags:
+      - urinalysis-test-request
       operationId: deleteUrinalysisTestRequestGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/urinalysis-test-request/urinalysis_test_request_grades:
     get:
       summary: List UrinalysisTestRequestGrade records
+      tags:
+      - urinalysis-test-request
       operationId: listUrinalysisTestRequestGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UrinalysisTestRequestGrade
+      tags:
+      - urinalysis-test-request
       operationId: createUrinalysisTestRequestGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UrinalysisTestRequestGrade by id
+      tags:
+      - urinalysis-test-request
       operationId: getUrinalysisTestRequestGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UrinalysisTestRequestGrade
+      tags:
+      - urinalysis-test-request
       operationId: updateUrinalysisTestRequestGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UrinalysisTestRequestGrade
+      tags:
+      - urinalysis-test-request
       operationId: replaceUrinalysisTestRequestGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UrinalysisTestRequestGrade
+      tags:
+      - urinalysis-test-request
       operationId: deleteUrinalysisTestRequestGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/urinalysis-test-request/urinalysis_test_requests:
     get:
       summary: List UrinalysisTestRequest records
+      tags:
+      - urinalysis-test-request
       operationId: listUrinalysisTestRequest
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UrinalysisTestRequest
+      tags:
+      - urinalysis-test-request
       operationId: createUrinalysisTestRequest
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UrinalysisTestRequest by id
+      tags:
+      - urinalysis-test-request
       operationId: getUrinalysisTestRequest
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UrinalysisTestRequest
+      tags:
+      - urinalysis-test-request
       operationId: updateUrinalysisTestRequest
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UrinalysisTestRequest
+      tags:
+      - urinalysis-test-request
       operationId: replaceUrinalysisTestRequest
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UrinalysisTestRequest
+      tags:
+      - urinalysis-test-request
       operationId: deleteUrinalysisTestRequest
       responses:
         '200':

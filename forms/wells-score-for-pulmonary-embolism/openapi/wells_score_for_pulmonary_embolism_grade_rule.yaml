@@ -5,10 +5,19 @@ info:
   title: Wells Score For Pulmonary Embolism — WellsScoreForPulmonaryEmbolismGradeRule
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during Wells-score computation: instrument, points, band, category, and description."
+x-namespace:
+  form: wells-score-for-pulmonary-embolism
+  apiPrefix: /api/wells-score-for-pulmonary-embolism/
+  sqlSchema: wells_score_for_pulmonary_embolism
+  xmlNamespace: https://formexamples.github.io/wells-score-for-pulmonary-embolism/xml
+tags:
+  - name: wells-score-for-pulmonary-embolism
+    description: Wells Score For Pulmonary Embolism form
 paths:
   /api/wells-score-for-pulmonary-embolism/wells_score_for_pulmonary_embolism_grade_rules:
     get:
       summary: List WellsScoreForPulmonaryEmbolismGradeRule records
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: listWellsScoreForPulmonaryEmbolismGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new WellsScoreForPulmonaryEmbolismGradeRule
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: createWellsScoreForPulmonaryEmbolismGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one WellsScoreForPulmonaryEmbolismGradeRule by id
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: getWellsScoreForPulmonaryEmbolismGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing WellsScoreForPulmonaryEmbolismGradeRule
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: updateWellsScoreForPulmonaryEmbolismGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing WellsScoreForPulmonaryEmbolismGradeRule
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: replaceWellsScoreForPulmonaryEmbolismGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a WellsScoreForPulmonaryEmbolismGradeRule
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: deleteWellsScoreForPulmonaryEmbolismGradeRule
       responses:
         "200":

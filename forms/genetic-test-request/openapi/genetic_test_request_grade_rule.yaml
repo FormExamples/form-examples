@@ -5,10 +5,19 @@ info:
   title: Genetic Test Request — GeneticTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / consent / completeness / triage rule that fired for this request.
+x-namespace:
+  form: genetic-test-request
+  apiPrefix: /api/genetic-test-request/
+  sqlSchema: genetic_test_request
+  xmlNamespace: https://formexamples.github.io/genetic-test-request/xml
+tags:
+  - name: genetic-test-request
+    description: Genetic Test Request form
 paths:
   /api/genetic-test-request/genetic_test_request_grade_rules:
     get:
       summary: List GeneticTestRequestGradeRule records
+      tags: [genetic-test-request]
       operationId: listGeneticTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GeneticTestRequestGradeRule
+      tags: [genetic-test-request]
       operationId: createGeneticTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GeneticTestRequestGradeRule by id
+      tags: [genetic-test-request]
       operationId: getGeneticTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GeneticTestRequestGradeRule
+      tags: [genetic-test-request]
       operationId: updateGeneticTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GeneticTestRequestGradeRule
+      tags: [genetic-test-request]
       operationId: replaceGeneticTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GeneticTestRequestGradeRule
+      tags: [genetic-test-request]
       operationId: deleteGeneticTestRequestGradeRule
       responses:
         "200":

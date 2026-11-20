@@ -1,4 +1,5 @@
 <!ELEMENT cage_alcohol_questionnaire_grade (id,created_at,updated_at,deleted_at,cage_alcohol_questionnaire_id,cut_down_point,annoyed_point,guilty_point,eye_opener_point,total_score,interpretation,graded_at)>
+<!ATTLIST cage_alcohol_questionnaire_grade xmlns CDATA #FIXED "https://formexamples.github.io/cage-alcohol-questionnaire/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

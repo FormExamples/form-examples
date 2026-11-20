@@ -5,10 +5,19 @@ info:
   title: United States Hipaa Authorization Form — Patient
   version: 1.0.0
   description: Patient identification fields for the HIPAA authorization form.
+x-namespace:
+  form: united-states-hipaa-authorization-form
+  apiPrefix: /api/united-states-hipaa-authorization-form/
+  sqlSchema: united_states_hipaa_authorization_form
+  xmlNamespace: https://formexamples.github.io/united-states-hipaa-authorization-form/xml
+tags:
+  - name: united-states-hipaa-authorization-form
+    description: United States Hipaa Authorization Form form
 paths:
   /api/united-states-hipaa-authorization-form/patients:
     get:
       summary: List Patient records
+      tags: [united-states-hipaa-authorization-form]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [united-states-hipaa-authorization-form]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [united-states-hipaa-authorization-form]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [united-states-hipaa-authorization-form]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [united-states-hipaa-authorization-form]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [united-states-hipaa-authorization-form]
       operationId: deletePatient
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Dexa Bone Density Test Request — DexaBoneDensityTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (NICE CG146 / NOGG / FRAX, 1-9), radiation safety, request completeness, and triage priority."
+x-namespace:
+  form: dexa-bone-density-test-request
+  apiPrefix: /api/dexa-bone-density-test-request/
+  sqlSchema: dexa_bone_density_test_request
+  xmlNamespace: https://formexamples.github.io/dexa-bone-density-test-request/xml
+tags:
+  - name: dexa-bone-density-test-request
+    description: Dexa Bone Density Test Request form
 paths:
   /api/dexa-bone-density-test-request/dexa_bone_density_test_request_grades:
     get:
       summary: List DexaBoneDensityTestRequestGrade records
+      tags: [dexa-bone-density-test-request]
       operationId: listDexaBoneDensityTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DexaBoneDensityTestRequestGrade
+      tags: [dexa-bone-density-test-request]
       operationId: createDexaBoneDensityTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DexaBoneDensityTestRequestGrade by id
+      tags: [dexa-bone-density-test-request]
       operationId: getDexaBoneDensityTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DexaBoneDensityTestRequestGrade
+      tags: [dexa-bone-density-test-request]
       operationId: updateDexaBoneDensityTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DexaBoneDensityTestRequestGrade
+      tags: [dexa-bone-density-test-request]
       operationId: replaceDexaBoneDensityTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DexaBoneDensityTestRequestGrade
+      tags: [dexa-bone-density-test-request]
       operationId: deleteDexaBoneDensityTestRequestGrade
       responses:
         "200":

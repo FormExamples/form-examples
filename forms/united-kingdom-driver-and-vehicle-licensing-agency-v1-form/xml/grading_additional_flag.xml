@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_additional_flag SYSTEM "grading_additional_flag.dtd">
-<grading_additional_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<grading_additional_flag xmlns="https://formexamples.github.io/united-kingdom-driver-and-vehicle-licensing-agency-v1-form/xml">
+<id>cd0fb5a5-ed9a-58a1-b2ba-d4e6eb317114</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>880e8400-e29b-41d4-a716-446655440003</grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<grade_id>e2d44aea-4fc4-5f6a-b4f5-0356641b8de6</grade_id>
+<flag_id>fa97eb17-5a6f-5f13-b231-d441b0172bb0</flag_id>
 <category>General</category>
 <description>Example text.</description>
 <priority>low</priority>

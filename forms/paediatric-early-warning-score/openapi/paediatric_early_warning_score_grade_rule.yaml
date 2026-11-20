@@ -5,10 +5,19 @@ info:
   title: Paediatric Early Warning Score — PaediatricEarlyWarningScoreGradeRule
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during PEWS computation: instrument, band, points contributed, category, and description."
+x-namespace:
+  form: paediatric-early-warning-score
+  apiPrefix: /api/paediatric-early-warning-score/
+  sqlSchema: paediatric_early_warning_score
+  xmlNamespace: https://formexamples.github.io/paediatric-early-warning-score/xml
+tags:
+  - name: paediatric-early-warning-score
+    description: Paediatric Early Warning Score form
 paths:
   /api/paediatric-early-warning-score/paediatric_early_warning_score_grade_rules:
     get:
       summary: List PaediatricEarlyWarningScoreGradeRule records
+      tags: [paediatric-early-warning-score]
       operationId: listPaediatricEarlyWarningScoreGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PaediatricEarlyWarningScoreGradeRule
+      tags: [paediatric-early-warning-score]
       operationId: createPaediatricEarlyWarningScoreGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PaediatricEarlyWarningScoreGradeRule by id
+      tags: [paediatric-early-warning-score]
       operationId: getPaediatricEarlyWarningScoreGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PaediatricEarlyWarningScoreGradeRule
+      tags: [paediatric-early-warning-score]
       operationId: updatePaediatricEarlyWarningScoreGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PaediatricEarlyWarningScoreGradeRule
+      tags: [paediatric-early-warning-score]
       operationId: replacePaediatricEarlyWarningScoreGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PaediatricEarlyWarningScoreGradeRule
+      tags: [paediatric-early-warning-score]
       operationId: deletePaediatricEarlyWarningScoreGradeRule
       responses:
         "200":

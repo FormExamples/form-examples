@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000064",
+    "id": "6a3a70b4-0ac5-595e-a5e6-3d5defdd34de",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000076",
+    "id": "6e18b51a-cea2-532f-80f4-065b73a4efa2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "biopsyTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "f50e0e4d-4155-5119-8493-20005ab5f2f7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000088",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000089",
+    "patientId": "0c2faf2b-ccb7-52a1-be81-76476d4be5f3",
+    "clinicianId": "7649b002-7b47-5724-9e43-f381aeed7c23",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -69,11 +69,11 @@
     "notes": ""
   },
   "biopsyTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a3",
+    "id": "a0668cb8-3852-59d6-ac43-d79327f98829",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "biopsyTestRequestId": "550e8400-e29b-41d4-a716-0000000000a7",
+    "biopsyTestRequestId": "a28c17b3-a71a-5c6a-b442-65d11eb6a6e5",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "bleedingRiskBand": "low",
@@ -88,22 +88,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "biopsyTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b4",
+    "id": "7df503b3-d8d8-5231-bd14-5e96e597adc5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "biopsyTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b8",
+    "biopsyTestRequestGradeId": "10029e8d-8cac-535c-99fd-3fb5754eef4a",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "biopsyTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bd",
+    "id": "8f3a471f-0415-5380-bab1-b1c895b464ae",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "biopsyTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000c1",
+    "biopsyTestRequestGradeId": "79dea720-5503-58d7-b36c-8a53e8fe7157",
     "flagId": "",
     "category": "suspected-cancer-2ww",
     "priority": "low",

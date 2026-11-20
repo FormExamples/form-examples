@@ -5,10 +5,19 @@ info:
   title: United Kingdom Lasting Power Of Attorney For Financial Decisions — LpaValidationFlag
   version: 1.0.0
   description: LPA validation flag — non-blocking warning flags that fired during validation (e.g. SingleAttorneyNoReplacement, OnlyWhenNoCapacitySelected).
+x-namespace:
+  form: united-kingdom-lasting-power-of-attorney-for-financial-decisions
+  apiPrefix: /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/
+  sqlSchema: united_kingdom_lasting_power_of_attorney_for_financial_decisions
+  xmlNamespace: https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml
+tags:
+  - name: united-kingdom-lasting-power-of-attorney-for-financial-decisions
+    description: United Kingdom Lasting Power Of Attorney For Financial Decisions form
 paths:
   /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_validation_flags:
     get:
       summary: List LpaValidationFlag records
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: listLpaValidationFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LpaValidationFlag
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: createLpaValidationFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LpaValidationFlag by id
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: getLpaValidationFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LpaValidationFlag
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: updateLpaValidationFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LpaValidationFlag
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: replaceLpaValidationFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LpaValidationFlag
+      tags: [united-kingdom-lasting-power-of-attorney-for-financial-decisions]
       operationId: deleteLpaValidationFlag
       responses:
         "200":

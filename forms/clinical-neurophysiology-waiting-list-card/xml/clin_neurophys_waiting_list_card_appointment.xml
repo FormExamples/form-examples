@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE clin_neurophys_waiting_list_card_appointment SYSTEM "clin_neurophys_waiting_list_card_appointment.dtd">
-<clin_neurophys_waiting_list_card_appointment>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<clin_neurophys_waiting_list_card_appointment xmlns="https://formexamples.github.io/clinical-neurophysiology-waiting-list-card/xml">
+<id>a0438971-4a18-5986-a40b-03e982cc4daa</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<clin_neurophys_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</clin_neurophys_waiting_list_card_id>
+<clin_neurophys_waiting_list_card_id>36a7fc37-d6b8-5af0-8614-36f44253f1aa</clin_neurophys_waiting_list_card_id>
 <appointment_date>2026-01-15</appointment_date>
 <appointment_time></appointment_time>
 <duration_minutes>1</duration_minutes>

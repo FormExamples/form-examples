@@ -1,4 +1,5 @@
 <!ELEMENT chronic_obstructive_pulmonary_disease_review_grade (id,created_at,updated_at,deleted_at,chronic_obstructive_pulmonary_disease_review_id,gold_airflow_grade,symptom_burden,exacerbation_risk,abe_group,review_status,graded_at)>
+<!ATTLIST chronic_obstructive_pulmonary_disease_review_grade xmlns CDATA #FIXED "https://formexamples.github.io/chronic-obstructive-pulmonary-disease-review/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

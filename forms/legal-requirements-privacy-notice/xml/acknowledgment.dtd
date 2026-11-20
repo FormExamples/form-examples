@@ -1,4 +1,5 @@
 <!ELEMENT acknowledgment (id,created_at,updated_at,deleted_at,patient_id,confirmed,full_name,acknowledged_date)>
+<!ATTLIST acknowledgment xmlns CDATA #FIXED "https://formexamples.github.io/legal-requirements-privacy-notice/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

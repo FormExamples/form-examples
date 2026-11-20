@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000093",
+    "id": "d38647b0-b00a-5903-8cb0-702c66cff1de",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a5",
+    "id": "5ac17505-4cea-54ce-9b86-72d9e04ee996",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "heartFailureReview": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b2",
+    "id": "33d272c6-216e-503a-a0c4-da107f4c0cf2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000000b6",
-    "clinicianId": "550e8400-e29b-41d4-a716-0000000000b7",
+    "patientId": "5531e25f-d0f2-5ab6-831d-bbdcdb7e150a",
+    "clinicianId": "c8230534-3d7c-5c83-b980-739b002dbc46",
     "clinicianName": "",
     "clinicianRole": "gp",
     "reviewDate": null,
@@ -120,11 +120,11 @@
     "reviewContext": ""
   },
   "heartFailureReviewGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000105",
+    "id": "b9fb894f-e0c9-5d27-92f9-07b52eece359",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "heartFailureReviewId": "550e8400-e29b-41d4-a716-000000000109",
+    "heartFailureReviewId": "280e6d6c-2100-5d48-aa82-0ed2b82e0266",
     "nyhaStatus": "stable",
     "medicationOptimisationStatus": "optimised",
     "reviewStatus": "complete",
@@ -135,22 +135,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "heartFailureReviewGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000112",
+    "id": "adaa6db6-817c-5e73-a5ec-d37294a3e2c7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "heartFailureReviewGradeId": "550e8400-e29b-41d4-a716-000000000116",
+    "heartFailureReviewGradeId": "018850b3-67a5-571a-b933-14a2c99e23f5",
     "ruleId": "",
     "section": "functional",
     "category": "",
     "description": ""
   },
   "heartFailureReviewGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000011b",
+    "id": "51d261d2-d0e6-5b55-adf8-558367f9028f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "heartFailureReviewGradeId": "550e8400-e29b-41d4-a716-00000000011f",
+    "heartFailureReviewGradeId": "480bb4da-26b0-513e-888e-f1e8fa438a6c",
     "flagId": "",
     "category": "urgent-review",
     "priority": "low",

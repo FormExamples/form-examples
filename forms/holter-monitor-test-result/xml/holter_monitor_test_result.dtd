@@ -1,4 +1,5 @@
 <!ELEMENT holter_monitor_test_result (id,created_at,updated_at,deleted_at,patient_id,clinician_id,originating_request_reference,report_status,monitor_type,performed_date,reported_date,recording_duration_hours,analysed_percent,clinical_history,predominant_rhythm,mean_heart_rate_bpm,minimum_heart_rate_bpm,maximum_heart_rate_bpm,longest_pause_seconds,ventricular_ectopic_percent,supraventricular_ectopic_percent,atrial_fibrillation_detected,significant_pauses,ventricular_tachycardia,supraventricular_tachycardia,high_grade_av_block,symptom_rhythm_correlation,normal_study,findings_narrative,comparison_with_previous,impression,reporting_category,recommended_follow_up,critical_result_communicated,reported_to)>
+<!ATTLIST holter_monitor_test_result xmlns CDATA #FIXED "https://formexamples.github.io/holter-monitor-test-result/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

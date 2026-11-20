@@ -5,10 +5,19 @@ info:
   title: Casualty Card Form — CasualtyCardAssessmentPlan
   version: 1.0.0
   description: 1:1 with casualty_card. Working diagnosis, differentials, clinical impression, and risk stratification.
+x-namespace:
+  form: casualty-card-form
+  apiPrefix: /api/casualty-card-form/
+  sqlSchema: casualty_card_form
+  xmlNamespace: https://formexamples.github.io/casualty-card-form/xml
+tags:
+  - name: casualty-card-form
+    description: Casualty Card Form form
 paths:
   /api/casualty-card-form/casualty_card_assessment_plans:
     get:
       summary: List CasualtyCardAssessmentPlan records
+      tags: [casualty-card-form]
       operationId: listCasualtyCardAssessmentPlan
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CasualtyCardAssessmentPlan
+      tags: [casualty-card-form]
       operationId: createCasualtyCardAssessmentPlan
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CasualtyCardAssessmentPlan by id
+      tags: [casualty-card-form]
       operationId: getCasualtyCardAssessmentPlan
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CasualtyCardAssessmentPlan
+      tags: [casualty-card-form]
       operationId: updateCasualtyCardAssessmentPlan
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CasualtyCardAssessmentPlan
+      tags: [casualty-card-form]
       operationId: replaceCasualtyCardAssessmentPlan
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CasualtyCardAssessmentPlan
+      tags: [casualty-card-form]
       operationId: deleteCasualtyCardAssessmentPlan
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Predicting Risk Of Cardiovascular Disease Events — PvtRule
   version: 1.0.0
   description: Catalogue of 20 PVT risk rules evaluated during PREVENT risk grading.
+x-namespace:
+  form: predicting-risk-of-cardiovascular-disease-events
+  apiPrefix: /api/predicting-risk-of-cardiovascular-disease-events/
+  sqlSchema: predicting_risk_of_cardiovascular_disease_events
+  xmlNamespace: https://formexamples.github.io/predicting-risk-of-cardiovascular-disease-events/xml
+tags:
+  - name: predicting-risk-of-cardiovascular-disease-events
+    description: Predicting Risk Of Cardiovascular Disease Events form
 paths:
   /api/predicting-risk-of-cardiovascular-disease-events/pvt_rules:
     get:
       summary: List PvtRule records
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: listPvtRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PvtRule
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: createPvtRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PvtRule by id
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: getPvtRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PvtRule
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: updatePvtRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PvtRule
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: replacePvtRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PvtRule
+      tags: [predicting-risk-of-cardiovascular-disease-events]
       operationId: deletePvtRule
       responses:
         "200":

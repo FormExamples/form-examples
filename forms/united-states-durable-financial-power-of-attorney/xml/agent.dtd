@@ -1,4 +1,5 @@
 <!ELEMENT agent (id,created_at,updated_at,deleted_at,name,email,phone,postal_address_as_full_text,relationship)>
+<!ATTLIST agent xmlns CDATA #FIXED "https://formexamples.github.io/united-states-durable-financial-power-of-attorney/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

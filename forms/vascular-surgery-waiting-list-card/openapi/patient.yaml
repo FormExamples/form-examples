@@ -5,10 +5,19 @@ info:
   title: Vascular Surgery Waiting List Card — Patient
   version: 1.0.0
   description: Patient placed on a vascular surgery waiting list.
+x-namespace:
+  form: vascular-surgery-waiting-list-card
+  apiPrefix: /api/vascular-surgery-waiting-list-card/
+  sqlSchema: vascular_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/vascular-surgery-waiting-list-card/xml
+tags:
+  - name: vascular-surgery-waiting-list-card
+    description: Vascular Surgery Waiting List Card form
 paths:
   /api/vascular-surgery-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags: [vascular-surgery-waiting-list-card]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [vascular-surgery-waiting-list-card]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [vascular-surgery-waiting-list-card]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [vascular-surgery-waiting-list-card]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [vascular-surgery-waiting-list-card]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [vascular-surgery-waiting-list-card]
       operationId: deletePatient
       responses:
         "200":

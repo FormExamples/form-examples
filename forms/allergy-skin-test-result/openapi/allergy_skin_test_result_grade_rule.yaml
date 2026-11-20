@@ -5,10 +5,19 @@ info:
   title: Allergy Skin Test Result — AllergySkinTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: allergy-skin-test-result
+  apiPrefix: /api/allergy-skin-test-result/
+  sqlSchema: allergy_skin_test_result
+  xmlNamespace: https://formexamples.github.io/allergy-skin-test-result/xml
+tags:
+  - name: allergy-skin-test-result
+    description: Allergy Skin Test Result form
 paths:
   /api/allergy-skin-test-result/allergy_skin_test_result_grade_rules:
     get:
       summary: List AllergySkinTestResultGradeRule records
+      tags: [allergy-skin-test-result]
       operationId: listAllergySkinTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AllergySkinTestResultGradeRule
+      tags: [allergy-skin-test-result]
       operationId: createAllergySkinTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AllergySkinTestResultGradeRule by id
+      tags: [allergy-skin-test-result]
       operationId: getAllergySkinTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AllergySkinTestResultGradeRule
+      tags: [allergy-skin-test-result]
       operationId: updateAllergySkinTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AllergySkinTestResultGradeRule
+      tags: [allergy-skin-test-result]
       operationId: replaceAllergySkinTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AllergySkinTestResultGradeRule
+      tags: [allergy-skin-test-result]
       operationId: deleteAllergySkinTestResultGradeRule
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Perioperative Optimization — PatientAllergy
   version: 1.0.0
   description: Patient allergy, i.e. one allergen that one patient reacts to, with the reaction and its severity.
+x-namespace:
+  form: perioperative-optimization
+  apiPrefix: /api/perioperative-optimization/
+  sqlSchema: perioperative_optimization
+  xmlNamespace: https://formexamples.github.io/perioperative-optimization/xml
+tags:
+  - name: perioperative-optimization
+    description: Perioperative Optimization form
 paths:
   /api/perioperative-optimization/patient_allergies:
     get:
       summary: List PatientAllergy records
+      tags: [perioperative-optimization]
       operationId: listPatientAllergy
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PatientAllergy
+      tags: [perioperative-optimization]
       operationId: createPatientAllergy
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PatientAllergy by id
+      tags: [perioperative-optimization]
       operationId: getPatientAllergy
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PatientAllergy
+      tags: [perioperative-optimization]
       operationId: updatePatientAllergy
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PatientAllergy
+      tags: [perioperative-optimization]
       operationId: replacePatientAllergy
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PatientAllergy
+      tags: [perioperative-optimization]
       operationId: deletePatientAllergy
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Uk Nhs Digital Technology Assessment Criteria — UkNhsDigitalTechnologyAssessmentCriteriaGradeRule
   version: 1.0.0
   description: Audit trail of every criterion rule that fired for this assessment.
+x-namespace:
+  form: uk-nhs-digital-technology-assessment-criteria
+  apiPrefix: /api/uk-nhs-digital-technology-assessment-criteria/
+  sqlSchema: uk_nhs_digital_technology_assessment_criteria
+  xmlNamespace: https://formexamples.github.io/uk-nhs-digital-technology-assessment-criteria/xml
+tags:
+  - name: uk-nhs-digital-technology-assessment-criteria
+    description: Uk Nhs Digital Technology Assessment Criteria form
 paths:
   /api/uk-nhs-digital-technology-assessment-criteria/uk_nhs_digital_technology_assessment_criteria_grade_rules:
     get:
       summary: List UkNhsDigitalTechnologyAssessmentCriteriaGradeRule records
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: listUkNhsDigitalTechnologyAssessmentCriteriaGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: createUkNhsDigitalTechnologyAssessmentCriteriaGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UkNhsDigitalTechnologyAssessmentCriteriaGradeRule by id
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: getUkNhsDigitalTechnologyAssessmentCriteriaGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: updateUkNhsDigitalTechnologyAssessmentCriteriaGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: replaceUkNhsDigitalTechnologyAssessmentCriteriaGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+      tags: [uk-nhs-digital-technology-assessment-criteria]
       operationId: deleteUkNhsDigitalTechnologyAssessmentCriteriaGradeRule
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT person (id,created_at,updated_at,deleted_at,title,first_names,last_name,other_names,date_of_birth,email,phone,address_id,is_trust_corporation,trust_corporation_number,is_bankrupt,has_debt_relief_order)>
+<!ATTLIST person xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

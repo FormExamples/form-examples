@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,right_pta_db,left_pta_db,better_ear_pta_db,right_hearing_grade,left_hearing_grade,overall_hearing_grade,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/audiology-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

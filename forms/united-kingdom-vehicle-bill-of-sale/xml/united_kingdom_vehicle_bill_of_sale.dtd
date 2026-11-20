@@ -1,4 +1,5 @@
 <!ELEMENT united_kingdom_vehicle_bill_of_sale (id,created_at,updated_at,deleted_at,seller_id,buyer_id,sale_date,sale_place,seller_capacity,seller_is_registered_keeper,vehicle_registration,vehicle_make,vehicle_model,vehicle_colour,vehicle_vin,first_registered_year,fuel_type,mileage,mileage_accuracy,v5c_present,v5c_details_match,mot_status,mot_expiry_date,finance_status,finance_check_date,price_as_gbp,deposit_as_gbp,payment_method,payment_received,sale_terms,known_faults,description_matches_advert,new_keeper_slip_given,dvla_notification,seller_signed,buyer_signed,signature_date,note)>
+<!ATTLIST united_kingdom_vehicle_bill_of_sale xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-vehicle-bill-of-sale/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

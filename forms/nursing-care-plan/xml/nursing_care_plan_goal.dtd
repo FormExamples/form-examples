@@ -1,4 +1,5 @@
 <!ELEMENT nursing_care_plan_goal (id,created_at,updated_at,deleted_at,nursing_care_plan_problem_id,goal_text,target_date,met)>
+<!ATTLIST nursing_care_plan_goal xmlns CDATA #FIXED "https://formexamples.github.io/nursing-care-plan/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

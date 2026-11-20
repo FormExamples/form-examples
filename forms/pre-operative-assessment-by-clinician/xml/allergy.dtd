@@ -1,4 +1,5 @@
 <!ELEMENT allergy (id,created_at,updated_at,deleted_at,scientific_name,european_union_name,united_states_name,cosmetic_name)>
+<!ATTLIST allergy xmlns CDATA #FIXED "https://formexamples.github.io/pre-operative-assessment-by-clinician/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

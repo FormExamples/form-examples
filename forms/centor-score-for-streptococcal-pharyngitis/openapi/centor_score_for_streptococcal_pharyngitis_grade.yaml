@@ -5,10 +5,19 @@ info:
   title: Centor Score For Streptococcal Pharyngitis — CentorScoreForStreptococcalPharyngitisGrade
   version: 1.0.0
   description: "Computed Centor / McIsaac grading result: raw Centor total (0-4), age modifier (-1..+1), modified McIsaac score (-1..5), derived risk band, and management guidance."
+x-namespace:
+  form: centor-score-for-streptococcal-pharyngitis
+  apiPrefix: /api/centor-score-for-streptococcal-pharyngitis/
+  sqlSchema: centor_score_for_streptococcal_pharyngitis
+  xmlNamespace: https://formexamples.github.io/centor-score-for-streptococcal-pharyngitis/xml
+tags:
+  - name: centor-score-for-streptococcal-pharyngitis
+    description: Centor Score For Streptococcal Pharyngitis form
 paths:
   /api/centor-score-for-streptococcal-pharyngitis/centor_score_for_streptococcal_pharyngitis_grades:
     get:
       summary: List CentorScoreForStreptococcalPharyngitisGrade records
+      tags: [centor-score-for-streptococcal-pharyngitis]
       operationId: listCentorScoreForStreptococcalPharyngitisGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CentorScoreForStreptococcalPharyngitisGrade
+      tags: [centor-score-for-streptococcal-pharyngitis]
       operationId: createCentorScoreForStreptococcalPharyngitisGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CentorScoreForStreptococcalPharyngitisGrade by id
+      tags: [centor-score-for-streptococcal-pharyngitis]
       operationId: getCentorScoreForStreptococcalPharyngitisGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CentorScoreForStreptococcalPharyngitisGrade
+      tags: [centor-score-for-streptococcal-pharyngitis]
       operationId: updateCentorScoreForStreptococcalPharyngitisGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CentorScoreForStreptococcalPharyngitisGrade
+      tags: [centor-score-for-streptococcal-pharyngitis]
       operationId: replaceCentorScoreForStreptococcalPharyngitisGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CentorScoreForStreptococcalPharyngitisGrade
+      tags: [centor-score-for-streptococcal-pharyngitis]
       operationId: deleteCentorScoreForStreptococcalPharyngitisGrade
       responses:
         "200":

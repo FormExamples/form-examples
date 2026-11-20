@@ -5,10 +5,19 @@ info:
   title: Health Screening Questionnaire — HealthScreeningQuestionnaireGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the risk band, with a priority and a suggested action. Flags are never suppressed by an assessor override.
+x-namespace:
+  form: health-screening-questionnaire
+  apiPrefix: /api/health-screening-questionnaire/
+  sqlSchema: health_screening_questionnaire
+  xmlNamespace: https://formexamples.github.io/health-screening-questionnaire/xml
+tags:
+  - name: health-screening-questionnaire
+    description: Health Screening Questionnaire form
 paths:
   /api/health-screening-questionnaire/health_screening_questionnaire_grade_flags:
     get:
       summary: List HealthScreeningQuestionnaireGradeFlag records
+      tags: [health-screening-questionnaire]
       operationId: listHealthScreeningQuestionnaireGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HealthScreeningQuestionnaireGradeFlag
+      tags: [health-screening-questionnaire]
       operationId: createHealthScreeningQuestionnaireGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HealthScreeningQuestionnaireGradeFlag by id
+      tags: [health-screening-questionnaire]
       operationId: getHealthScreeningQuestionnaireGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HealthScreeningQuestionnaireGradeFlag
+      tags: [health-screening-questionnaire]
       operationId: updateHealthScreeningQuestionnaireGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HealthScreeningQuestionnaireGradeFlag
+      tags: [health-screening-questionnaire]
       operationId: replaceHealthScreeningQuestionnaireGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HealthScreeningQuestionnaireGradeFlag
+      tags: [health-screening-questionnaire]
       operationId: deleteHealthScreeningQuestionnaireGradeFlag
       responses:
         "200":

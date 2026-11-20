@@ -5,10 +5,19 @@ info:
   title: Perioperative Optimization — PerioperativeOptimization
   version: 1.0.0
   description: "Perioperative optimization: the payload of the 16-step single-page wizard, covering the eight optimization domains plus the history, medication, allergy, frailty, and social context that shapes the prehabilitation plan."
+x-namespace:
+  form: perioperative-optimization
+  apiPrefix: /api/perioperative-optimization/
+  sqlSchema: perioperative_optimization
+  xmlNamespace: https://formexamples.github.io/perioperative-optimization/xml
+tags:
+  - name: perioperative-optimization
+    description: Perioperative Optimization form
 paths:
   /api/perioperative-optimization/perioperative_optimizations:
     get:
       summary: List PerioperativeOptimization records
+      tags: [perioperative-optimization]
       operationId: listPerioperativeOptimization
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PerioperativeOptimization
+      tags: [perioperative-optimization]
       operationId: createPerioperativeOptimization
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PerioperativeOptimization by id
+      tags: [perioperative-optimization]
       operationId: getPerioperativeOptimization
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PerioperativeOptimization
+      tags: [perioperative-optimization]
       operationId: updatePerioperativeOptimization
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PerioperativeOptimization
+      tags: [perioperative-optimization]
       operationId: replacePerioperativeOptimization
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PerioperativeOptimization
+      tags: [perioperative-optimization]
       operationId: deletePerioperativeOptimization
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT lpa_preferences_and_instructions (id,created_at,updated_at,deleted_at,lpa_id,preferences_overflow_text,instructions_overflow_text,decisions_jointly_overflow_text,replacement_step_in_overflow_text)>
+<!ATTLIST lpa_preferences_and_instructions xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

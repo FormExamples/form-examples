@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<grade xmlns="https://formexamples.github.io/consent-to-treatment/xml">
+<id>bb8a0fbb-393e-5af7-ac87-cf042fd66a5f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>cd66ce94-4ef1-5594-9988-8c9676c2f5ab</assessment_id>
 <completeness_status>complete</completeness_status>
 <sections_complete>1</sections_complete>
 <sections_total>1</sections_total>

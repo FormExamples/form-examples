@@ -1,4 +1,5 @@
 <!ELEMENT patient_allergy (id,created_at,updated_at,deleted_at,patient_id,allergy_id)>
+<!ATTLIST patient_allergy xmlns CDATA #FIXED "https://formexamples.github.io/pre-operative-assessment-by-clinician/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

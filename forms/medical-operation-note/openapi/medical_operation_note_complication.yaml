@@ -5,10 +5,19 @@ info:
   title: Medical Operation Note — MedicalOperationNoteComplication
   version: 1.0.0
   description: Intra-operative complications classified by Clavien-Dindo with description, action taken, and governance reporting status.
+x-namespace:
+  form: medical-operation-note
+  apiPrefix: /api/medical-operation-note/
+  sqlSchema: medical_operation_note
+  xmlNamespace: https://formexamples.github.io/medical-operation-note/xml
+tags:
+  - name: medical-operation-note
+    description: Medical Operation Note form
 paths:
   /api/medical-operation-note/medical_operation_note_complications:
     get:
       summary: List MedicalOperationNoteComplication records
+      tags: [medical-operation-note]
       operationId: listMedicalOperationNoteComplication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalOperationNoteComplication
+      tags: [medical-operation-note]
       operationId: createMedicalOperationNoteComplication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalOperationNoteComplication by id
+      tags: [medical-operation-note]
       operationId: getMedicalOperationNoteComplication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalOperationNoteComplication
+      tags: [medical-operation-note]
       operationId: updateMedicalOperationNoteComplication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalOperationNoteComplication
+      tags: [medical-operation-note]
       operationId: replaceMedicalOperationNoteComplication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalOperationNoteComplication
+      tags: [medical-operation-note]
       operationId: deleteMedicalOperationNoteComplication
       responses:
         "200":

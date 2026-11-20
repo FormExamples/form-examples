@@ -5,10 +5,19 @@ info:
   title: Genetic Test Result — GeneticTestResult
   version: 1.0.0
   description: Genetic / genomic test result (report). Captures the performed test, the genes tested and sample type, clinical history and inheritance pattern, the detected variants and their ACMG/AMP-ACGS classification and zygosity, structured finding booleans, the interpretation and impression, the ACMG reporting category, recommended cascade testing and follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: genetic-test-result
+  apiPrefix: /api/genetic-test-result/
+  sqlSchema: genetic_test_result
+  xmlNamespace: https://formexamples.github.io/genetic-test-result/xml
+tags:
+  - name: genetic-test-result
+    description: Genetic Test Result form
 paths:
   /api/genetic-test-result/genetic_test_results:
     get:
       summary: List GeneticTestResult records
+      tags: [genetic-test-result]
       operationId: listGeneticTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GeneticTestResult
+      tags: [genetic-test-result]
       operationId: createGeneticTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GeneticTestResult by id
+      tags: [genetic-test-result]
       operationId: getGeneticTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GeneticTestResult
+      tags: [genetic-test-result]
       operationId: updateGeneticTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GeneticTestResult
+      tags: [genetic-test-result]
       operationId: replaceGeneticTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GeneticTestResult
+      tags: [genetic-test-result]
       operationId: deleteGeneticTestResult
       responses:
         "200":

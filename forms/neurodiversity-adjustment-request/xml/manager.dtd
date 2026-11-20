@@ -1,4 +1,5 @@
 <!ELEMENT manager (id,created_at,updated_at,deleted_at,name,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,role,job_title,department)>
+<!ATTLIST manager xmlns CDATA #FIXED "https://formexamples.github.io/neurodiversity-adjustment-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

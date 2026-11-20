@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE child_safeguarding_referral_grade SYSTEM "child_safeguarding_referral_grade.dtd">
-<child_safeguarding_referral_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<child_safeguarding_referral_grade xmlns="https://formexamples.github.io/child-safeguarding-referral/xml">
+<id>7a272f6e-c6ff-5844-b494-9a87ca100575</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<child_safeguarding_referral_id>770e8400-e29b-41d4-a716-446655440002</child_safeguarding_referral_id>
+<child_safeguarding_referral_id>0ff2d44b-3ad4-5d53-b096-aa65ea920ffe</child_safeguarding_referral_id>
 <status>complete</status>
 <urgency>emergency</urgency>
 <completeness_percent>1</completeness_percent>

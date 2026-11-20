@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "id": "c64d31c8-11c4-52bc-88ee-49e45f7e725c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -16,7 +16,7 @@
     "occupation": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000000f",
+    "id": "6d77cc87-d4bc-5f54-9814-775cf56528f6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -32,7 +32,7 @@
     "isPrivatePractice": "yes"
   },
   "medicalPractice": {
-    "id": "550e8400-e29b-41d4-a716-00000000001d",
+    "id": "6a5479c2-b35a-53fa-9b74-6867e6c42773",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -46,13 +46,13 @@
     "setting": "primary_care"
   },
   "unitedKingdomStatementOfFitnessForWork": {
-    "id": "550e8400-e29b-41d4-a716-000000000029",
+    "id": "df39d258-7f18-59c0-a4cc-01debdd948ae",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000002d",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000002e",
-    "medicalPracticeId": "550e8400-e29b-41d4-a716-00000000002f",
+    "patientId": "1e2e8734-b3f2-5c1c-bd74-c6798cd18c5b",
+    "clinicianId": "3bb4020e-ea16-57fc-9f94-6ab87691cdd7",
+    "medicalPracticeId": "0e94f28b-f0c2-51a3-adc2-1d13782b562b",
     "status": "draft",
     "assessmentDate": null,
     "assessmentMethod": "in_person",
@@ -80,18 +80,18 @@
     "issuedAt": null,
     "issuedVia": "digital",
     "issueSetting": "primary_care",
-    "isDuplicateOf": "550e8400-e29b-41d4-a716-00000000004b",
+    "isDuplicateOf": "da11bd4e-f1c5-5ab1-a00f-2fa5933970de",
     "safeguardingConcern": "yes",
     "safeguardingNotes": "",
     "clinicianSignatureSvg": "",
     "clinicianSignedAt": null
   },
   "unitedKingdomStatementOfFitnessForWorkGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000050",
+    "id": "abc65fea-4830-5aa3-bf20-9e83b8ebc8a7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedKingdomStatementOfFitnessForWorkId": "550e8400-e29b-41d4-a716-000000000054",
+    "unitedKingdomStatementOfFitnessForWorkId": "78e56e71-c8eb-51dc-a051-b4f71402286d",
     "fitnessCategory": "not_fit",
     "adaptationIntensity": "none",
     "adaptationCount": 2,
@@ -107,22 +107,22 @@
     "clinicianFinalRecommendation": "standard"
   },
   "unitedKingdomStatementOfFitnessForWorkGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000062",
+    "id": "f7f6b1d6-635e-5efb-8fe3-a640fe4c0b12",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedKingdomStatementOfFitnessForWorkGradeId": "550e8400-e29b-41d4-a716-000000000066",
+    "unitedKingdomStatementOfFitnessForWorkGradeId": "da7d5abe-ce3d-5b2d-b3c2-0816ddf71707",
     "ruleId": "",
     "ruleSet": "validity",
     "severity": "low",
     "description": ""
   },
   "unitedKingdomStatementOfFitnessForWorkGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000006b",
+    "id": "14a82266-e9bd-56e2-9822-242070ba04b8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "unitedKingdomStatementOfFitnessForWorkGradeId": "550e8400-e29b-41d4-a716-00000000006f",
+    "unitedKingdomStatementOfFitnessForWorkGradeId": "82ea335c-a13a-5be8-bd9b-62e0a3328387",
     "flagId": "",
     "category": "invalid_no_name",
     "priority": "low",

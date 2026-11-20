@@ -5,10 +5,19 @@ info:
   title: Dexa Bone Density Test Request — DexaBoneDensityTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.
+x-namespace:
+  form: dexa-bone-density-test-request
+  apiPrefix: /api/dexa-bone-density-test-request/
+  sqlSchema: dexa_bone_density_test_request
+  xmlNamespace: https://formexamples.github.io/dexa-bone-density-test-request/xml
+tags:
+  - name: dexa-bone-density-test-request
+    description: Dexa Bone Density Test Request form
 paths:
   /api/dexa-bone-density-test-request/dexa_bone_density_test_request_grade_rules:
     get:
       summary: List DexaBoneDensityTestRequestGradeRule records
+      tags: [dexa-bone-density-test-request]
       operationId: listDexaBoneDensityTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DexaBoneDensityTestRequestGradeRule
+      tags: [dexa-bone-density-test-request]
       operationId: createDexaBoneDensityTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DexaBoneDensityTestRequestGradeRule by id
+      tags: [dexa-bone-density-test-request]
       operationId: getDexaBoneDensityTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DexaBoneDensityTestRequestGradeRule
+      tags: [dexa-bone-density-test-request]
       operationId: updateDexaBoneDensityTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DexaBoneDensityTestRequestGradeRule
+      tags: [dexa-bone-density-test-request]
       operationId: replaceDexaBoneDensityTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DexaBoneDensityTestRequestGradeRule
+      tags: [dexa-bone-density-test-request]
       operationId: deleteDexaBoneDensityTestRequestGradeRule
       responses:
         "200":

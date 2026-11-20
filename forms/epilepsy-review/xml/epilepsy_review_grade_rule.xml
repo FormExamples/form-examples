@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE epilepsy_review_grade_rule SYSTEM "epilepsy_review_grade_rule.dtd">
-<epilepsy_review_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<epilepsy_review_grade_rule xmlns="https://formexamples.github.io/epilepsy-review/xml">
+<id>84e49532-22c1-55c1-8773-fd05b8330ae5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<epilepsy_review_grade_id>880e8400-e29b-41d4-a716-446655440003</epilepsy_review_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<epilepsy_review_grade_id>28e1fdd0-a7ec-5aaf-8967-bdd31c1aa744</epilepsy_review_grade_id>
+<rule_id>c22f9b60-3849-5019-a9d3-94e9d3127e97</rule_id>
 <section>seizure-control</section>
 <category>General</category>
 <description>Example text.</description>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE deployment_node SYSTEM "deployment_node.dtd">
-<deployment_node>
-<id>ff0e8400-e29b-41d4-a716-44665544000a</id>
+<deployment_node xmlns="https://formexamples.github.io/arc42/xml">
+<id>ac8396ee-a98e-58fe-94af-4e3683df0032</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<arc42_documentation_id>660e8400-e29b-41d4-a716-446655440001</arc42_documentation_id>
+<arc42_documentation_id>1afd9d9a-51df-5a94-9fcf-f0d8b362ee5f</arc42_documentation_id>
 <ordinal>1</ordinal>
 <environment>development</environment>
 <node_name>Example</node_name>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE consent_information SYSTEM "consent_information.dtd">
-<consent_information>
-<id>ee0e8400-e29b-41d4-a716-446655440009</id>
+<consent_information xmlns="https://formexamples.github.io/vaccinations-assessment/xml">
+<id>4f8a7f06-196c-5406-8c67-2a420f322390</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>d10c2df6-1454-5bfc-b390-6a42172dc4c3</assessment_id>
 <information_provided>1</information_provided>
 <risks_explained>1</risks_explained>
 <benefits_explained>1</benefits_explained>

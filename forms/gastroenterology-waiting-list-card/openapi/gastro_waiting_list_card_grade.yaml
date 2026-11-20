@@ -5,10 +5,19 @@ info:
   title: Gastroenterology Waiting List Card — GastroWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: gastroenterology-waiting-list-card
+  apiPrefix: /api/gastroenterology-waiting-list-card/
+  sqlSchema: gastroenterology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/gastroenterology-waiting-list-card/xml
+tags:
+  - name: gastroenterology-waiting-list-card
+    description: Gastroenterology Waiting List Card form
 paths:
   /api/gastroenterology-waiting-list-card/gastro_waiting_list_card_grades:
     get:
       summary: List GastroWaitingListCardGrade records
+      tags: [gastroenterology-waiting-list-card]
       operationId: listGastroWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GastroWaitingListCardGrade
+      tags: [gastroenterology-waiting-list-card]
       operationId: createGastroWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GastroWaitingListCardGrade by id
+      tags: [gastroenterology-waiting-list-card]
       operationId: getGastroWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GastroWaitingListCardGrade
+      tags: [gastroenterology-waiting-list-card]
       operationId: updateGastroWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GastroWaitingListCardGrade
+      tags: [gastroenterology-waiting-list-card]
       operationId: replaceGastroWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GastroWaitingListCardGrade
+      tags: [gastroenterology-waiting-list-card]
       operationId: deleteGastroWaitingListCardGrade
       responses:
         "200":

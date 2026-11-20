@@ -5,10 +5,19 @@ info:
   title: Medical Language Speaking Assessment For English — GradingAdditionalFlag
   version: 1.0.0
   description: Safety-critical clinical flags raised alongside the grading result.
+x-namespace:
+  form: medical-language-speaking-assessment-for-english
+  apiPrefix: /api/medical-language-speaking-assessment-for-english/
+  sqlSchema: medical_language_speaking_assessment_for_english
+  xmlNamespace: https://formexamples.github.io/medical-language-speaking-assessment-for-english/xml
+tags:
+  - name: medical-language-speaking-assessment-for-english
+    description: Medical Language Speaking Assessment For English form
 paths:
   /api/medical-language-speaking-assessment-for-english/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [medical-language-speaking-assessment-for-english]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [medical-language-speaking-assessment-for-english]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [medical-language-speaking-assessment-for-english]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [medical-language-speaking-assessment-for-english]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [medical-language-speaking-assessment-for-english]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [medical-language-speaking-assessment-for-english]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

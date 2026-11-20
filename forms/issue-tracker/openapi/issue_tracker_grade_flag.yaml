@@ -5,10 +5,19 @@ info:
   title: Issue Tracker — IssueTrackerGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the composite priority, with priority and a suggested action for the on-call team.
+x-namespace:
+  form: issue-tracker
+  apiPrefix: /api/issue-tracker/
+  sqlSchema: issue_tracker
+  xmlNamespace: https://formexamples.github.io/issue-tracker/xml
+tags:
+  - name: issue-tracker
+    description: Issue Tracker form
 paths:
   /api/issue-tracker/issue_tracker_grade_flags:
     get:
       summary: List IssueTrackerGradeFlag records
+      tags: [issue-tracker]
       operationId: listIssueTrackerGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new IssueTrackerGradeFlag
+      tags: [issue-tracker]
       operationId: createIssueTrackerGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one IssueTrackerGradeFlag by id
+      tags: [issue-tracker]
       operationId: getIssueTrackerGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing IssueTrackerGradeFlag
+      tags: [issue-tracker]
       operationId: updateIssueTrackerGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing IssueTrackerGradeFlag
+      tags: [issue-tracker]
       operationId: replaceIssueTrackerGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a IssueTrackerGradeFlag
+      tags: [issue-tracker]
       operationId: deleteIssueTrackerGradeFlag
       responses:
         "200":

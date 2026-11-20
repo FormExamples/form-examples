@@ -5,10 +5,19 @@ info:
   title: United Kingdom Lasting Power Of Attorney For Health And Care Decisions — LpaPreference
   version: 1.0.0
   description: Non-binding preference statement guiding the attorneys. LP1H s.7 (preferences).
+x-namespace:
+  form: united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
+  apiPrefix: /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/
+  sqlSchema: united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions
+  xmlNamespace: https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml
+tags:
+  - name: united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions
+    description: United Kingdom Lasting Power Of Attorney For Health And Care Decisions form
 paths:
   /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_preferences:
     get:
       summary: List LpaPreference records
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: listLpaPreference
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LpaPreference
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: createLpaPreference
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LpaPreference by id
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: getLpaPreference
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LpaPreference
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: updateLpaPreference
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LpaPreference
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: replaceLpaPreference
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LpaPreference
+      tags: [united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions]
       operationId: deleteLpaPreference
       responses:
         "200":

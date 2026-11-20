@@ -5,10 +5,19 @@ info:
   title: United States Hipaa Authorization Form — ValidationResult
   version: 1.0.0
   description: Result of the HIPAA-authorization validity engine. One-to-one child of hipaa_authorization.
+x-namespace:
+  form: united-states-hipaa-authorization-form
+  apiPrefix: /api/united-states-hipaa-authorization-form/
+  sqlSchema: united_states_hipaa_authorization_form
+  xmlNamespace: https://formexamples.github.io/united-states-hipaa-authorization-form/xml
+tags:
+  - name: united-states-hipaa-authorization-form
+    description: United States Hipaa Authorization Form form
 paths:
   /api/united-states-hipaa-authorization-form/validation_results:
     get:
       summary: List ValidationResult records
+      tags: [united-states-hipaa-authorization-form]
       operationId: listValidationResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ValidationResult
+      tags: [united-states-hipaa-authorization-form]
       operationId: createValidationResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ValidationResult by id
+      tags: [united-states-hipaa-authorization-form]
       operationId: getValidationResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ValidationResult
+      tags: [united-states-hipaa-authorization-form]
       operationId: updateValidationResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ValidationResult
+      tags: [united-states-hipaa-authorization-form]
       operationId: replaceValidationResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ValidationResult
+      tags: [united-states-hipaa-authorization-form]
       operationId: deleteValidationResult
       responses:
         "200":

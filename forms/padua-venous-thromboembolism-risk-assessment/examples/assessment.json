@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005b",
+    "id": "b2284f2b-a1b5-59c1-b7a0-8a5dde143cf8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006d",
+    "id": "eebd3129-09e3-5b59-972d-c8197cb126f6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "paduaVenousThromboembolismRiskAssessment": {
-    "id": "550e8400-e29b-41d4-a716-00000000007a",
+    "id": "bdaa5a74-585b-591b-91f8-ee94600f88a1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007e",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007f",
+    "patientId": "e71ddb6c-ae50-5080-9edb-73947f06ace2",
+    "clinicianId": "1cf84346-3af1-5b56-888f-c31bf51c7680",
     "clinicianName": "",
     "clinicianRole": "doctor",
     "assessedAt": null,
@@ -56,11 +56,11 @@
     "recentTraumaOrSurgery": "yes"
   },
   "paduaVenousThromboembolismRiskAssessmentGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008d",
+    "id": "38ee338f-0715-5a3c-a7a8-ebbe020f3c9e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "paduaVenousThromboembolismRiskAssessmentId": "550e8400-e29b-41d4-a716-000000000091",
+    "paduaVenousThromboembolismRiskAssessmentId": "5551cb95-2052-52e2-8dba-0b66bc11158b",
     "activeCancerPoints": null,
     "previousVtePoints": null,
     "reducedMobilityPoints": null,
@@ -78,11 +78,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "paduaVenousThromboembolismRiskAssessmentGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a1",
+    "id": "7694504f-f06a-5dab-b7d3-e3783f176ad4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "paduaVenousThromboembolismRiskAssessmentGradeId": "550e8400-e29b-41d4-a716-0000000000a5",
+    "paduaVenousThromboembolismRiskAssessmentGradeId": "d49ff0a5-a628-567e-b569-4e67a6ad9361",
     "ruleId": "",
     "factor": "active-cancer",
     "points": null,
@@ -90,11 +90,11 @@
     "description": ""
   },
   "paduaVenousThromboembolismRiskAssessmentGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ab",
+    "id": "886d0d13-7150-5e6a-a2b3-e3728512c98b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "paduaVenousThromboembolismRiskAssessmentGradeId": "550e8400-e29b-41d4-a716-0000000000af",
+    "paduaVenousThromboembolismRiskAssessmentGradeId": "6f09557f-642d-5698-9fed-99e202eec0f6",
     "flagId": "",
     "category": "high-risk-prophylaxis",
     "priority": "low",

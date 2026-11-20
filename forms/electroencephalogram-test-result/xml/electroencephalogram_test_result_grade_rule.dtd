@@ -1,4 +1,5 @@
 <!ELEMENT electroencephalogram_test_result_grade_rule (id,created_at,updated_at,deleted_at,electroencephalogram_test_result_grade_id,rule_id,axis,category,description)>
+<!ATTLIST electroencephalogram_test_result_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/electroencephalogram-test-result/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

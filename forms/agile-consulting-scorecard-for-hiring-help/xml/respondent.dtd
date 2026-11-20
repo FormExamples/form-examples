@@ -1,4 +1,5 @@
 <!ELEMENT respondent (id,created_at,updated_at,deleted_at,organization_id,name,email,phone,role,department,seniority,timezone,preferred_contact)>
+<!ATTLIST respondent xmlns CDATA #FIXED "https://formexamples.github.io/agile-consulting-scorecard-for-hiring-help/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

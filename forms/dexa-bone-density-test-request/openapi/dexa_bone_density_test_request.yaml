@@ -5,10 +5,19 @@ info:
   title: Dexa Bone Density Test Request — DexaBoneDensityTestRequest
   version: 1.0.0
   description: DEXA / DXA bone-densitometry (osteoporosis) scan request (referral). Captures the requested scan region, the clinical indication and question, fracture-risk factors (FRAX inputs), previous DEXA history, and triage urgency.
+x-namespace:
+  form: dexa-bone-density-test-request
+  apiPrefix: /api/dexa-bone-density-test-request/
+  sqlSchema: dexa_bone_density_test_request
+  xmlNamespace: https://formexamples.github.io/dexa-bone-density-test-request/xml
+tags:
+  - name: dexa-bone-density-test-request
+    description: Dexa Bone Density Test Request form
 paths:
   /api/dexa-bone-density-test-request/dexa_bone_density_test_requests:
     get:
       summary: List DexaBoneDensityTestRequest records
+      tags: [dexa-bone-density-test-request]
       operationId: listDexaBoneDensityTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DexaBoneDensityTestRequest
+      tags: [dexa-bone-density-test-request]
       operationId: createDexaBoneDensityTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DexaBoneDensityTestRequest by id
+      tags: [dexa-bone-density-test-request]
       operationId: getDexaBoneDensityTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DexaBoneDensityTestRequest
+      tags: [dexa-bone-density-test-request]
       operationId: updateDexaBoneDensityTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DexaBoneDensityTestRequest
+      tags: [dexa-bone-density-test-request]
       operationId: replaceDexaBoneDensityTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DexaBoneDensityTestRequest
+      tags: [dexa-bone-density-test-request]
       operationId: deleteDexaBoneDensityTestRequest
       responses:
         "200":

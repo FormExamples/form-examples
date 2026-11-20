@@ -5,10 +5,19 @@ info:
   title: Colonoscopy Test Request — ColonoscopyTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ASGE / EPAGE / NICE 1-9), cancer-pathway urgency / triage tier, request completeness, and pre-procedure risk."
+x-namespace:
+  form: colonoscopy-test-request
+  apiPrefix: /api/colonoscopy-test-request/
+  sqlSchema: colonoscopy_test_request
+  xmlNamespace: https://formexamples.github.io/colonoscopy-test-request/xml
+tags:
+  - name: colonoscopy-test-request
+    description: Colonoscopy Test Request form
 paths:
   /api/colonoscopy-test-request/colonoscopy_test_request_grades:
     get:
       summary: List ColonoscopyTestRequestGrade records
+      tags: [colonoscopy-test-request]
       operationId: listColonoscopyTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ColonoscopyTestRequestGrade
+      tags: [colonoscopy-test-request]
       operationId: createColonoscopyTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ColonoscopyTestRequestGrade by id
+      tags: [colonoscopy-test-request]
       operationId: getColonoscopyTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ColonoscopyTestRequestGrade
+      tags: [colonoscopy-test-request]
       operationId: updateColonoscopyTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ColonoscopyTestRequestGrade
+      tags: [colonoscopy-test-request]
       operationId: replaceColonoscopyTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ColonoscopyTestRequestGrade
+      tags: [colonoscopy-test-request]
       operationId: deleteColonoscopyTestRequestGrade
       responses:
         "200":

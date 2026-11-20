@@ -5,10 +5,19 @@ info:
   title: Occupational Therapy Assessment — Grade
   version: 1.0.0
   description: Computed COPM grading result for the occupational therapy assessment. One-to-one child of assessment.
+x-namespace:
+  form: occupational-therapy-assessment
+  apiPrefix: /api/occupational-therapy-assessment/
+  sqlSchema: occupational_therapy_assessment
+  xmlNamespace: https://formexamples.github.io/occupational-therapy-assessment/xml
+tags:
+  - name: occupational-therapy-assessment
+    description: Occupational Therapy Assessment form
 paths:
   /api/occupational-therapy-assessment/grades:
     get:
       summary: List Grade records
+      tags: [occupational-therapy-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [occupational-therapy-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [occupational-therapy-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [occupational-therapy-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [occupational-therapy-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [occupational-therapy-assessment]
       operationId: deleteGrade
       responses:
         "200":

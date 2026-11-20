@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_vehicle_bill_of_sale_grade_flag SYSTEM "united_kingdom_vehicle_bill_of_sale_grade_flag.dtd">
-<united_kingdom_vehicle_bill_of_sale_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<united_kingdom_vehicle_bill_of_sale_grade_flag xmlns="https://formexamples.github.io/united-kingdom-vehicle-bill-of-sale/xml">
+<id>b973aa9e-3efb-5c16-b81d-bb35ebfe9c80</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<united_kingdom_vehicle_bill_of_sale_grade_id>880e8400-e29b-41d4-a716-446655440003</united_kingdom_vehicle_bill_of_sale_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<united_kingdom_vehicle_bill_of_sale_grade_id>b414aff1-31a8-52d1-850a-e1400f53bc43</united_kingdom_vehicle_bill_of_sale_grade_id>
+<flag_id>736af458-335e-5d0a-aabf-709712b4cd5d</flag_id>
 <category>no-vin</category>
 <priority>low</priority>
 <description>Example text.</description>

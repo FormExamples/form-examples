@@ -5,10 +5,19 @@ info:
   title: United Kingdom Death Registration — UnitedKingdomDeathRegistrationGrade
   version: 1.0.0
   description: "Computed completeness classification for a death registration: registration class, 5-day deadline status, days since medical examiner confirmation, and whether the informant is qualified."
+x-namespace:
+  form: united-kingdom-death-registration
+  apiPrefix: /api/united-kingdom-death-registration/
+  sqlSchema: united_kingdom_death_registration
+  xmlNamespace: https://formexamples.github.io/united-kingdom-death-registration/xml
+tags:
+  - name: united-kingdom-death-registration
+    description: United Kingdom Death Registration form
 paths:
   /api/united-kingdom-death-registration/united_kingdom_death_registration_grades:
     get:
       summary: List UnitedKingdomDeathRegistrationGrade records
+      tags: [united-kingdom-death-registration]
       operationId: listUnitedKingdomDeathRegistrationGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomDeathRegistrationGrade
+      tags: [united-kingdom-death-registration]
       operationId: createUnitedKingdomDeathRegistrationGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomDeathRegistrationGrade by id
+      tags: [united-kingdom-death-registration]
       operationId: getUnitedKingdomDeathRegistrationGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomDeathRegistrationGrade
+      tags: [united-kingdom-death-registration]
       operationId: updateUnitedKingdomDeathRegistrationGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomDeathRegistrationGrade
+      tags: [united-kingdom-death-registration]
       operationId: replaceUnitedKingdomDeathRegistrationGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomDeathRegistrationGrade
+      tags: [united-kingdom-death-registration]
       operationId: deleteUnitedKingdomDeathRegistrationGrade
       responses:
         "200":

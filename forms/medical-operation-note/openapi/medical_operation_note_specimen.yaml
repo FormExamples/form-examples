@@ -5,10 +5,19 @@ info:
   title: Medical Operation Note — MedicalOperationNoteSpecimen
   version: 1.0.0
   description: Specimens sent from theatre with container, fixative, destination, urgency, and labelling/chain-of-custody status.
+x-namespace:
+  form: medical-operation-note
+  apiPrefix: /api/medical-operation-note/
+  sqlSchema: medical_operation_note
+  xmlNamespace: https://formexamples.github.io/medical-operation-note/xml
+tags:
+  - name: medical-operation-note
+    description: Medical Operation Note form
 paths:
   /api/medical-operation-note/medical_operation_note_specimens:
     get:
       summary: List MedicalOperationNoteSpecimen records
+      tags: [medical-operation-note]
       operationId: listMedicalOperationNoteSpecimen
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalOperationNoteSpecimen
+      tags: [medical-operation-note]
       operationId: createMedicalOperationNoteSpecimen
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalOperationNoteSpecimen by id
+      tags: [medical-operation-note]
       operationId: getMedicalOperationNoteSpecimen
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalOperationNoteSpecimen
+      tags: [medical-operation-note]
       operationId: updateMedicalOperationNoteSpecimen
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalOperationNoteSpecimen
+      tags: [medical-operation-note]
       operationId: replaceMedicalOperationNoteSpecimen
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalOperationNoteSpecimen
+      tags: [medical-operation-note]
       operationId: deleteMedicalOperationNoteSpecimen
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: United States Vehicle Bill Of Sale — UnitedStatesVehicleBillOfSaleGradeRule
   version: 1.0.0
   description: "Audit trail of every rule that fired during classification: bill-of-sale dimension, category, and description."
+x-namespace:
+  form: united-states-vehicle-bill-of-sale
+  apiPrefix: /api/united-states-vehicle-bill-of-sale/
+  sqlSchema: united_states_vehicle_bill_of_sale
+  xmlNamespace: https://formexamples.github.io/united-states-vehicle-bill-of-sale/xml
+tags:
+  - name: united-states-vehicle-bill-of-sale
+    description: United States Vehicle Bill Of Sale form
 paths:
   /api/united-states-vehicle-bill-of-sale/united_states_vehicle_bill_of_sale_grade_rules:
     get:
       summary: List UnitedStatesVehicleBillOfSaleGradeRule records
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: listUnitedStatesVehicleBillOfSaleGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesVehicleBillOfSaleGradeRule
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: createUnitedStatesVehicleBillOfSaleGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesVehicleBillOfSaleGradeRule by id
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: getUnitedStatesVehicleBillOfSaleGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesVehicleBillOfSaleGradeRule
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: updateUnitedStatesVehicleBillOfSaleGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesVehicleBillOfSaleGradeRule
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: replaceUnitedStatesVehicleBillOfSaleGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesVehicleBillOfSaleGradeRule
+      tags: [united-states-vehicle-bill-of-sale]
       operationId: deleteUnitedStatesVehicleBillOfSaleGradeRule
       responses:
         "200":

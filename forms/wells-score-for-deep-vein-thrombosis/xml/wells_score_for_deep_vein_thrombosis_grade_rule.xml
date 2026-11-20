@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE wells_score_for_deep_vein_thrombosis_grade_rule SYSTEM "wells_score_for_deep_vein_thrombosis_grade_rule.dtd">
-<wells_score_for_deep_vein_thrombosis_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<wells_score_for_deep_vein_thrombosis_grade_rule xmlns="https://formexamples.github.io/wells-score-for-deep-vein-thrombosis/xml">
+<id>8c26a5fd-5968-57b4-a62a-17e240c079b5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<wells_score_for_deep_vein_thrombosis_grade_id>880e8400-e29b-41d4-a716-446655440003</wells_score_for_deep_vein_thrombosis_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<wells_score_for_deep_vein_thrombosis_grade_id>d19cd1b0-0fd7-5e9d-8fd7-0ee74cc534ae</wells_score_for_deep_vein_thrombosis_grade_id>
+<rule_id>7fc467b7-6435-5cc9-b68d-a309a723850a</rule_id>
 <instrument>criterion</instrument>
 <points>1</points>
 <band>likely</band>

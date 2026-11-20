@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United States Vehicle Bill of Sale form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-states-vehicle-bill-of-sale
+  apiPrefix: /api/united-states-vehicle-bill-of-sale/
+  sqlSchema: united_states_vehicle_bill_of_sale
+  xmlNamespace: https://formexamples.github.io/united-states-vehicle-bill-of-sale/xml
+tags:
+- name: united-states-vehicle-bill-of-sale
+  description: United States Vehicle Bill of Sale form
 paths:
   /api/united-states-vehicle-bill-of-sale/buyers:
     get:
       summary: List Buyer records
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: listBuyer
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Buyer
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: createBuyer
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Buyer by id
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: getBuyer
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Buyer
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: updateBuyer
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Buyer
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: replaceBuyer
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Buyer
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: deleteBuyer
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-states-vehicle-bill-of-sale
   /api/united-states-vehicle-bill-of-sale/sellers:
     get:
       summary: List Seller records
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: listSeller
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Seller
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: createSeller
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Seller by id
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: getSeller
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Seller
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: updateSeller
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Seller
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: replaceSeller
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Seller
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: deleteSeller
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/united-states-vehicle-bill-of-sale/united_states_vehicle_bill_of_sale_grade_flags:
     get:
       summary: List UnitedStatesVehicleBillOfSaleGradeFlag records
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: listUnitedStatesVehicleBillOfSaleGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesVehicleBillOfSaleGradeFlag
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: createUnitedStatesVehicleBillOfSaleGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesVehicleBillOfSaleGradeFlag by id
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: getUnitedStatesVehicleBillOfSaleGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesVehicleBillOfSaleGradeFlag
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: updateUnitedStatesVehicleBillOfSaleGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesVehicleBillOfSaleGradeFlag
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: replaceUnitedStatesVehicleBillOfSaleGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesVehicleBillOfSaleGradeFlag
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: deleteUnitedStatesVehicleBillOfSaleGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-states-vehicle-bill-of-sale/united_states_vehicle_bill_of_sale_grade_rules:
     get:
       summary: List UnitedStatesVehicleBillOfSaleGradeRule records
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: listUnitedStatesVehicleBillOfSaleGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesVehicleBillOfSaleGradeRule
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: createUnitedStatesVehicleBillOfSaleGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesVehicleBillOfSaleGradeRule by id
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: getUnitedStatesVehicleBillOfSaleGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesVehicleBillOfSaleGradeRule
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: updateUnitedStatesVehicleBillOfSaleGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesVehicleBillOfSaleGradeRule
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: replaceUnitedStatesVehicleBillOfSaleGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesVehicleBillOfSaleGradeRule
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: deleteUnitedStatesVehicleBillOfSaleGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-states-vehicle-bill-of-sale/united_states_vehicle_bill_of_sale_grades:
     get:
       summary: List UnitedStatesVehicleBillOfSaleGrade records
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: listUnitedStatesVehicleBillOfSaleGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesVehicleBillOfSaleGrade
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: createUnitedStatesVehicleBillOfSaleGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesVehicleBillOfSaleGrade by id
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: getUnitedStatesVehicleBillOfSaleGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesVehicleBillOfSaleGrade
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: updateUnitedStatesVehicleBillOfSaleGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesVehicleBillOfSaleGrade
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: replaceUnitedStatesVehicleBillOfSaleGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesVehicleBillOfSaleGrade
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: deleteUnitedStatesVehicleBillOfSaleGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-states-vehicle-bill-of-sale/united_states_vehicle_bill_of_sales:
     get:
       summary: List UnitedStatesVehicleBillOfSale records
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: listUnitedStatesVehicleBillOfSale
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesVehicleBillOfSale
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: createUnitedStatesVehicleBillOfSale
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesVehicleBillOfSale by id
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: getUnitedStatesVehicleBillOfSale
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesVehicleBillOfSale
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: updateUnitedStatesVehicleBillOfSale
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesVehicleBillOfSale
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: replaceUnitedStatesVehicleBillOfSale
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesVehicleBillOfSale
+      tags:
+      - united-states-vehicle-bill-of-sale
       operationId: deleteUnitedStatesVehicleBillOfSale
       responses:
         '200':

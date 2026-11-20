@@ -1,4 +1,5 @@
 <!ELEMENT administration_record (id,created_at,updated_at,deleted_at,assessment_id,vaccine_name,batch_number,expiry_date,administration_site,administration_route,dose_number,administered_by,administration_date)>
+<!ATTLIST administration_record xmlns CDATA #FIXED "https://formexamples.github.io/vaccinations-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

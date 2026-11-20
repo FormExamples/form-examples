@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ultrasound_test_result_grade_flag SYSTEM "ultrasound_test_result_grade_flag.dtd">
-<ultrasound_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<ultrasound_test_result_grade_flag xmlns="https://formexamples.github.io/ultrasound-test-result/xml">
+<id>352845c6-79a3-5557-8de5-f08bdaa8d758</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<ultrasound_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</ultrasound_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<ultrasound_test_result_grade_id>21847b89-f17a-5902-a889-2bf33a87a06d</ultrasound_test_result_grade_id>
+<flag_id>35b625c5-293f-5620-87eb-4dc158120e61</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

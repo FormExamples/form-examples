@@ -5,10 +5,19 @@ info:
   title: United States Divorce Petition — UnitedStatesDivorcePetitionGrade
   version: 1.0.0
   description: "Computed readiness classification for a divorce petition: ready-to-file, incomplete, or not-yet-eligible, the property regime, and the earliest permitted decree date."
+x-namespace:
+  form: united-states-divorce-petition
+  apiPrefix: /api/united-states-divorce-petition/
+  sqlSchema: united_states_divorce_petition
+  xmlNamespace: https://formexamples.github.io/united-states-divorce-petition/xml
+tags:
+  - name: united-states-divorce-petition
+    description: United States Divorce Petition form
 paths:
   /api/united-states-divorce-petition/united_states_divorce_petition_grades:
     get:
       summary: List UnitedStatesDivorcePetitionGrade records
+      tags: [united-states-divorce-petition]
       operationId: listUnitedStatesDivorcePetitionGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesDivorcePetitionGrade
+      tags: [united-states-divorce-petition]
       operationId: createUnitedStatesDivorcePetitionGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesDivorcePetitionGrade by id
+      tags: [united-states-divorce-petition]
       operationId: getUnitedStatesDivorcePetitionGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesDivorcePetitionGrade
+      tags: [united-states-divorce-petition]
       operationId: updateUnitedStatesDivorcePetitionGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesDivorcePetitionGrade
+      tags: [united-states-divorce-petition]
       operationId: replaceUnitedStatesDivorcePetitionGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesDivorcePetitionGrade
+      tags: [united-states-divorce-petition]
       operationId: deleteUnitedStatesDivorcePetitionGrade
       responses:
         "200":

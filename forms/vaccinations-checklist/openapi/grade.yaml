@@ -5,10 +5,19 @@ info:
   title: Vaccinations Checklist — Grade
   version: 1.0.0
   description: Computed vaccination compliance grading result. Compliance status and risk level. One-to-one child of assessment.
+x-namespace:
+  form: vaccinations-checklist
+  apiPrefix: /api/vaccinations-checklist/
+  sqlSchema: vaccinations_checklist
+  xmlNamespace: https://formexamples.github.io/vaccinations-checklist/xml
+tags:
+  - name: vaccinations-checklist
+    description: Vaccinations Checklist form
 paths:
   /api/vaccinations-checklist/grades:
     get:
       summary: List Grade records
+      tags: [vaccinations-checklist]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [vaccinations-checklist]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [vaccinations-checklist]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [vaccinations-checklist]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [vaccinations-checklist]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [vaccinations-checklist]
       operationId: deleteGrade
       responses:
         "200":

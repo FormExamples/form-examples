@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Cardiology Request form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: cardiology-request
+  apiPrefix: /api/cardiology-request/
+  sqlSchema: cardiology_request
+  xmlNamespace: https://formexamples.github.io/cardiology-request/xml
+tags:
+- name: cardiology-request
+  description: Cardiology Request form
 paths:
   /api/cardiology-request/cardiology_requests:
     get:
       summary: List CardiologyRequest records
+      tags:
+      - cardiology-request
       operationId: listCardiologyRequest
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CardiologyRequest
+      tags:
+      - cardiology-request
       operationId: createCardiologyRequest
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CardiologyRequest by id
+      tags:
+      - cardiology-request
       operationId: getCardiologyRequest
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CardiologyRequest
+      tags:
+      - cardiology-request
       operationId: updateCardiologyRequest
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CardiologyRequest
+      tags:
+      - cardiology-request
       operationId: deleteCardiologyRequest
       responses:
         '200':
@@ -244,6 +262,8 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+      tags:
+      - cardiology-request
   /api/cardiology-request/cardiology_requests/{id}/submit:
     parameters:
     - name: id
@@ -281,6 +301,8 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+      tags:
+      - cardiology-request
   /api/cardiology-request/dashboard:
     get:
       summary: Each request with its grade, newest first
@@ -341,6 +363,8 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+      tags:
+      - cardiology-request
 components:
   schemas:
     CardiologyRequest:

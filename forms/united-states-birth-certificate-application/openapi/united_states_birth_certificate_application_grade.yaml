@@ -5,10 +5,19 @@ info:
   title: United States Birth Certificate Application — UnitedStatesBirthCertificateApplicationGrade
   version: 1.0.0
   description: "Computed classification for a birth certificate application: ready-to-submit, incomplete, or ineligible-requester, with the applicable state and expected fee."
+x-namespace:
+  form: united-states-birth-certificate-application
+  apiPrefix: /api/united-states-birth-certificate-application/
+  sqlSchema: united_states_birth_certificate_application
+  xmlNamespace: https://formexamples.github.io/united-states-birth-certificate-application/xml
+tags:
+  - name: united-states-birth-certificate-application
+    description: United States Birth Certificate Application form
 paths:
   /api/united-states-birth-certificate-application/united_states_birth_certificate_application_grades:
     get:
       summary: List UnitedStatesBirthCertificateApplicationGrade records
+      tags: [united-states-birth-certificate-application]
       operationId: listUnitedStatesBirthCertificateApplicationGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedStatesBirthCertificateApplicationGrade
+      tags: [united-states-birth-certificate-application]
       operationId: createUnitedStatesBirthCertificateApplicationGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedStatesBirthCertificateApplicationGrade by id
+      tags: [united-states-birth-certificate-application]
       operationId: getUnitedStatesBirthCertificateApplicationGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedStatesBirthCertificateApplicationGrade
+      tags: [united-states-birth-certificate-application]
       operationId: updateUnitedStatesBirthCertificateApplicationGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedStatesBirthCertificateApplicationGrade
+      tags: [united-states-birth-certificate-application]
       operationId: replaceUnitedStatesBirthCertificateApplicationGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedStatesBirthCertificateApplicationGrade
+      tags: [united-states-birth-certificate-application]
       operationId: deleteUnitedStatesBirthCertificateApplicationGrade
       responses:
         "200":

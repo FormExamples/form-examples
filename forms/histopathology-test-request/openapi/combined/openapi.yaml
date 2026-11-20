@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Histopathology Test Request form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: histopathology-test-request
+  apiPrefix: /api/histopathology-test-request/
+  sqlSchema: histopathology_test_request
+  xmlNamespace: https://formexamples.github.io/histopathology-test-request/xml
+tags:
+- name: histopathology-test-request
+  description: Histopathology Test Request form
 paths:
   /api/histopathology-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - histopathology-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - histopathology-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - histopathology-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - histopathology-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - histopathology-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - histopathology-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/histopathology-test-request/histopathology_test_request_grade_flags:
     get:
       summary: List HistopathologyTestRequestGradeFlag records
+      tags:
+      - histopathology-test-request
       operationId: listHistopathologyTestRequestGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HistopathologyTestRequestGradeFlag
+      tags:
+      - histopathology-test-request
       operationId: createHistopathologyTestRequestGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HistopathologyTestRequestGradeFlag by id
+      tags:
+      - histopathology-test-request
       operationId: getHistopathologyTestRequestGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HistopathologyTestRequestGradeFlag
+      tags:
+      - histopathology-test-request
       operationId: updateHistopathologyTestRequestGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HistopathologyTestRequestGradeFlag
+      tags:
+      - histopathology-test-request
       operationId: replaceHistopathologyTestRequestGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HistopathologyTestRequestGradeFlag
+      tags:
+      - histopathology-test-request
       operationId: deleteHistopathologyTestRequestGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/histopathology-test-request/histopathology_test_request_grade_rules:
     get:
       summary: List HistopathologyTestRequestGradeRule records
+      tags:
+      - histopathology-test-request
       operationId: listHistopathologyTestRequestGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HistopathologyTestRequestGradeRule
+      tags:
+      - histopathology-test-request
       operationId: createHistopathologyTestRequestGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HistopathologyTestRequestGradeRule by id
+      tags:
+      - histopathology-test-request
       operationId: getHistopathologyTestRequestGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HistopathologyTestRequestGradeRule
+      tags:
+      - histopathology-test-request
       operationId: updateHistopathologyTestRequestGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HistopathologyTestRequestGradeRule
+      tags:
+      - histopathology-test-request
       operationId: replaceHistopathologyTestRequestGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HistopathologyTestRequestGradeRule
+      tags:
+      - histopathology-test-request
       operationId: deleteHistopathologyTestRequestGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/histopathology-test-request/histopathology_test_request_grades:
     get:
       summary: List HistopathologyTestRequestGrade records
+      tags:
+      - histopathology-test-request
       operationId: listHistopathologyTestRequestGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HistopathologyTestRequestGrade
+      tags:
+      - histopathology-test-request
       operationId: createHistopathologyTestRequestGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HistopathologyTestRequestGrade by id
+      tags:
+      - histopathology-test-request
       operationId: getHistopathologyTestRequestGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HistopathologyTestRequestGrade
+      tags:
+      - histopathology-test-request
       operationId: updateHistopathologyTestRequestGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HistopathologyTestRequestGrade
+      tags:
+      - histopathology-test-request
       operationId: replaceHistopathologyTestRequestGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HistopathologyTestRequestGrade
+      tags:
+      - histopathology-test-request
       operationId: deleteHistopathologyTestRequestGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/histopathology-test-request/histopathology_test_requests:
     get:
       summary: List HistopathologyTestRequest records
+      tags:
+      - histopathology-test-request
       operationId: listHistopathologyTestRequest
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HistopathologyTestRequest
+      tags:
+      - histopathology-test-request
       operationId: createHistopathologyTestRequest
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HistopathologyTestRequest by id
+      tags:
+      - histopathology-test-request
       operationId: getHistopathologyTestRequest
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HistopathologyTestRequest
+      tags:
+      - histopathology-test-request
       operationId: updateHistopathologyTestRequest
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HistopathologyTestRequest
+      tags:
+      - histopathology-test-request
       operationId: replaceHistopathologyTestRequest
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HistopathologyTestRequest
+      tags:
+      - histopathology-test-request
       operationId: deleteHistopathologyTestRequest
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - histopathology-test-request
   /api/histopathology-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - histopathology-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - histopathology-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - histopathology-test-request
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - histopathology-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - histopathology-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - histopathology-test-request
       operationId: deletePatient
       responses:
         '200':

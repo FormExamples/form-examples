@@ -5,10 +5,19 @@ info:
   title: United Kingdom Nhs England Medical Exemption Certificate — Application
   version: 1.0.0
   description: FP92A medical exemption application instance.
+x-namespace:
+  form: united-kingdom-nhs-england-medical-exemption-certificate
+  apiPrefix: /api/united-kingdom-nhs-england-medical-exemption-certificate/
+  sqlSchema: united_kingdom_nhs_england_medical_exemption_certificate
+  xmlNamespace: https://formexamples.github.io/united-kingdom-nhs-england-medical-exemption-certificate/xml
+tags:
+  - name: united-kingdom-nhs-england-medical-exemption-certificate
+    description: United Kingdom Nhs England Medical Exemption Certificate form
 paths:
   /api/united-kingdom-nhs-england-medical-exemption-certificate/applications:
     get:
       summary: List Application records
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: listApplication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Application
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: createApplication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Application by id
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: getApplication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Application
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: updateApplication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Application
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: replaceApplication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Application
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: deleteApplication
       responses:
         "200":

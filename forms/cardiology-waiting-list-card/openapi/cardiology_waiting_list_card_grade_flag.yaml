@@ -5,10 +5,19 @@ info:
   title: Cardiology Waiting List Card — CardiologyWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: cardiology-waiting-list-card
+  apiPrefix: /api/cardiology-waiting-list-card/
+  sqlSchema: cardiology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/cardiology-waiting-list-card/xml
+tags:
+  - name: cardiology-waiting-list-card
+    description: Cardiology Waiting List Card form
 paths:
   /api/cardiology-waiting-list-card/cardiology_waiting_list_card_grade_flags:
     get:
       summary: List CardiologyWaitingListCardGradeFlag records
+      tags: [cardiology-waiting-list-card]
       operationId: listCardiologyWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiologyWaitingListCardGradeFlag
+      tags: [cardiology-waiting-list-card]
       operationId: createCardiologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiologyWaitingListCardGradeFlag by id
+      tags: [cardiology-waiting-list-card]
       operationId: getCardiologyWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiologyWaitingListCardGradeFlag
+      tags: [cardiology-waiting-list-card]
       operationId: updateCardiologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiologyWaitingListCardGradeFlag
+      tags: [cardiology-waiting-list-card]
       operationId: replaceCardiologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiologyWaitingListCardGradeFlag
+      tags: [cardiology-waiting-list-card]
       operationId: deleteCardiologyWaitingListCardGradeFlag
       responses:
         "200":

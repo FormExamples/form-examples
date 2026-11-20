@@ -1,4 +1,5 @@
 <!ELEMENT paediatric_early_warning_score (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,observation_at,care_setting,age_band,respiratory_rate,respiratory_effort,oxygen_saturation,supplemental_oxygen,heart_rate,capillary_refill,consciousness_acvpu,nurse_concern,parent_concern,clinical_notes)>
+<!ATTLIST paediatric_early_warning_score xmlns CDATA #FIXED "https://formexamples.github.io/paediatric-early-warning-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

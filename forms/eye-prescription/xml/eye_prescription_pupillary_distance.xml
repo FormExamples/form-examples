@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE eye_prescription_pupillary_distance SYSTEM "eye_prescription_pupillary_distance.dtd">
-<eye_prescription_pupillary_distance>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<eye_prescription_pupillary_distance xmlns="https://formexamples.github.io/eye-prescription/xml">
+<id>918e2819-8a46-5d86-be82-8d4fdbdad469</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<eye_prescription_id>770e8400-e29b-41d4-a716-446655440002</eye_prescription_id>
+<eye_prescription_id>7dcf0e2d-b1bd-537d-8f80-02dc8446bdec</eye_prescription_id>
 <distance_total_mm>0.0</distance_total_mm>
 <distance_right_mm>0.0</distance_right_mm>
 <distance_left_mm>0.0</distance_left_mm>

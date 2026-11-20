@@ -5,10 +5,19 @@ info:
   title: Arc42 — GlossaryTerm
   version: 1.0.0
   description: Glossary term captured in §12 Glossary of the arc42 documentation.
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+  - name: arc42
+    description: Arc42 form
 paths:
   /api/arc42/glossary_terms:
     get:
       summary: List GlossaryTerm records
+      tags: [arc42]
       operationId: listGlossaryTerm
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GlossaryTerm
+      tags: [arc42]
       operationId: createGlossaryTerm
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GlossaryTerm by id
+      tags: [arc42]
       operationId: getGlossaryTerm
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GlossaryTerm
+      tags: [arc42]
       operationId: updateGlossaryTerm
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GlossaryTerm
+      tags: [arc42]
       operationId: replaceGlossaryTerm
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GlossaryTerm
+      tags: [arc42]
       operationId: deleteGlossaryTerm
       responses:
         "200":

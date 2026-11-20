@@ -5,10 +5,19 @@ info:
   title: Pulmonary Embolism Rule Out Criteria — PulmonaryEmbolismRuleOutCriteriaGrade
   version: 1.0.0
   description: "Computed PERC classification result: binary classification, all-criteria-satisfied flag, applicability, and recommended pathway. One-to-one with the parent assessment."
+x-namespace:
+  form: pulmonary-embolism-rule-out-criteria
+  apiPrefix: /api/pulmonary-embolism-rule-out-criteria/
+  sqlSchema: pulmonary_embolism_rule_out_criteria
+  xmlNamespace: https://formexamples.github.io/pulmonary-embolism-rule-out-criteria/xml
+tags:
+  - name: pulmonary-embolism-rule-out-criteria
+    description: Pulmonary Embolism Rule Out Criteria form
 paths:
   /api/pulmonary-embolism-rule-out-criteria/pulmonary_embolism_rule_out_criteria_grades:
     get:
       summary: List PulmonaryEmbolismRuleOutCriteriaGrade records
+      tags: [pulmonary-embolism-rule-out-criteria]
       operationId: listPulmonaryEmbolismRuleOutCriteriaGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PulmonaryEmbolismRuleOutCriteriaGrade
+      tags: [pulmonary-embolism-rule-out-criteria]
       operationId: createPulmonaryEmbolismRuleOutCriteriaGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PulmonaryEmbolismRuleOutCriteriaGrade by id
+      tags: [pulmonary-embolism-rule-out-criteria]
       operationId: getPulmonaryEmbolismRuleOutCriteriaGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PulmonaryEmbolismRuleOutCriteriaGrade
+      tags: [pulmonary-embolism-rule-out-criteria]
       operationId: updatePulmonaryEmbolismRuleOutCriteriaGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PulmonaryEmbolismRuleOutCriteriaGrade
+      tags: [pulmonary-embolism-rule-out-criteria]
       operationId: replacePulmonaryEmbolismRuleOutCriteriaGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PulmonaryEmbolismRuleOutCriteriaGrade
+      tags: [pulmonary-embolism-rule-out-criteria]
       operationId: deletePulmonaryEmbolismRuleOutCriteriaGrade
       responses:
         "200":

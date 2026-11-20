@@ -1,0 +1,124 @@
+#!/usr/bin/env python3
+"""bin/test-form-namespacing — every layer of every form is namespaced by its slug.
+
+The conformance test for [`spec/form-namespacing/`](../spec/form-namespacing/).
+Per form it checks:
+
+    sql/                      every CREATE TABLE is qualified with the form's schema
+    openapi/combined/         every path starts with /api/<slug>/, every operation is
+                              tagged <slug>, and x-namespace names the form
+    openapi/*.yaml            the same tag and x-namespace on each per-entity file
+    front-end-with-svelte/    src/routes/ holds only <slug>/ and SvelteKit root files
+    xml/*.xml                 the root element carries xmlns="https://formexamples.github.io/<slug>/xml"
+    fhir/r5/, examples/,      no UUID is shared with another form (each form's example
+    xml/                      ids are UUIDv5 names within it; see bin/lib/example_ids.py)
+    schema names              no two forms' SQL schemas are equal within 63 bytes
+
+Browser storage keys are checked by `bin/browser-storage-namespace --check --all`,
+and the mechanical rewrites by `bin/sql-schema-namespace` and `bin/axum-api-namespace`.
+
+Usage:
+  bin/test-form-namespacing [--verbose] [<slug>...]   # default: every form
+"""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+import re
+import sys
+from collections import defaultdict
+
+import yaml
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+UUID = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+METHODS = ("get", "post", "put", "patch", "delete")
+SVELTE_ROOT_FILES = re.compile(r"^\+(layout|page|server|error)(\.server)?\.(svelte|ts|js)$")
+
+
+def check_form(form: pathlib.Path, problems: list[str]) -> None:
+    slug = form.name
+    schema = slug.replace("-", "_")
+
+    for path in sorted((form / "sql").glob("[0-9]*.sql")):
+        for name in re.findall(r"CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?([\w.\"]+)", path.read_text(), re.I):
+            if not name.replace('"', "").startswith(schema + "."):
+                problems.append(f"{path.relative_to(ROOT)}: table {name} not in schema {schema}")
+
+    docs = sorted((form / "openapi").glob("*.yaml")) + sorted((form / "openapi" / "combined").glob("openapi.yaml"))
+    for path in docs:
+        doc = yaml.safe_load(path.read_text()) or {}
+        rel = path.relative_to(ROOT)
+        if (doc.get("x-namespace") or {}).get("form") != slug:
+            problems.append(f"{rel}: x-namespace.form is not {slug}")
+        if not any(tag.get("name") == slug for tag in doc.get("tags") or []):
+            problems.append(f"{rel}: no top-level tag {slug}")
+        for route, item in (doc.get("paths") or {}).items():
+            if path.parent.name == "combined" and not route.startswith(f"/api/{slug}/"):
+                problems.append(f"{rel}: path {route} not under /api/{slug}/")
+            for method, operation in (item or {}).items():
+                if method in METHODS and (operation or {}).get("tags") != [slug]:
+                    problems.append(f"{rel}: {method.upper()} {route} not tagged [{slug}]")
+
+    routes = form / "front-end-with-svelte" / "src" / "routes"
+    if routes.is_dir():
+        for entry in sorted(routes.iterdir()):
+            if entry.name != slug and not SVELTE_ROOT_FILES.match(entry.name):
+                problems.append(f"{entry.relative_to(ROOT)}: Svelte route outside /{slug}/")
+
+    namespace = f'xmlns="https://formexamples.github.io/{slug}/xml"'
+    for path in sorted((form / "xml").glob("*.xml")):
+        lines = path.read_text().splitlines()
+        root = next((line for line in lines if line.startswith("<") and not line.startswith(("<?", "<!"))), "")
+        if namespace not in root:
+            problems.append(f"{path.relative_to(ROOT)}: root element lacks {namespace}")
+
+
+def example_files(form: pathlib.Path):
+    yield from (form / "fhir" / "r5").glob("*.json")
+    yield from (form / "examples").glob("*.json")
+    yield from (form / "examples" / "personas-fhir").glob("*.json")
+    yield from (form / "xml").glob("*.xml")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--verbose", action="store_true")
+    args = parser.parse_args()
+    every = sorted(p for p in FORMS.iterdir() if (p / "index.md").is_file())
+    forms = [FORMS / s for s in args.slugs] if args.slugs else every
+
+    problems: list[str] = []
+    for form in forms:
+        check_form(form, problems)
+
+    # Example ids and schema names are checked across the whole fleet.
+    owners: dict[str, set[str]] = defaultdict(set)
+    for form in every:
+        for path in example_files(form):
+            for found in UUID.findall(path.read_text(errors="ignore")):
+                owners[found].add(form.name)
+    named = {f.name for f in forms}
+    for found, slugs in sorted(owners.items()):
+        if len(slugs) > 1 and slugs & named:
+            problems.append(f"example id {found} shared by {', '.join(sorted(slugs))}")
+    schemas: dict[bytes, list[str]] = defaultdict(list)
+    for form in every:
+        schemas[form.name.replace("-", "_").encode()[:63]].append(form.name)
+    for names in schemas.values():
+        if len(names) > 1:
+            problems.append(f"SQL schema names equal within 63 bytes: {', '.join(names)}")
+
+    for problem in problems if args.verbose else problems[:50]:
+        print(problem)
+    if len(problems) > 50 and not args.verbose:
+        print(f"... and {len(problems) - 50} more (--verbose)")
+    print(f"test-form-namespacing: {len(forms)} form(s), {len(problems)} problem(s)")
+    return 1 if problems else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

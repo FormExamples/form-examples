@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE waterlow_pressure_ulcer_risk_assessment_grade SYSTEM "waterlow_pressure_ulcer_risk_assessment_grade.dtd">
-<waterlow_pressure_ulcer_risk_assessment_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<waterlow_pressure_ulcer_risk_assessment_grade xmlns="https://formexamples.github.io/waterlow-pressure-ulcer-risk-assessment/xml">
+<id>a5fe8cd5-4473-55f3-b424-539256873bc8</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<waterlow_pressure_ulcer_risk_assessment_id>770e8400-e29b-41d4-a716-446655440002</waterlow_pressure_ulcer_risk_assessment_id>
+<waterlow_pressure_ulcer_risk_assessment_id>405f1b68-9595-530b-a22a-d1d86da20787</waterlow_pressure_ulcer_risk_assessment_id>
 <build_points>1</build_points>
 <skin_points>1</skin_points>
 <sex_points>1</sex_points>

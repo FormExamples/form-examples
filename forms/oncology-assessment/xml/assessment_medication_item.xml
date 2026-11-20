@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment_medication_item SYSTEM "assessment_medication_item.dtd">
-<assessment_medication_item>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<assessment_medication_item xmlns="https://formexamples.github.io/oncology-assessment/xml">
+<id>f4a4ed83-a628-5256-aa56-48510596fb49</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<current_medications_id>660e8400-e29b-41d4-a716-446655440001</current_medications_id>
+<current_medications_id>bfe5f981-402a-5abb-a810-669fd1d2669b</current_medications_id>
 <medication_name>Example</medication_name>
 <dose>500mg</dose>
 <frequency>twice daily</frequency>

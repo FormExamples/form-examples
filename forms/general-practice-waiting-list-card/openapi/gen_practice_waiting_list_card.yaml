@@ -5,10 +5,19 @@ info:
   title: General Practice Waiting List Card — GenPracticeWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a general practice waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: general-practice-waiting-list-card
+  apiPrefix: /api/general-practice-waiting-list-card/
+  sqlSchema: general_practice_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/general-practice-waiting-list-card/xml
+tags:
+  - name: general-practice-waiting-list-card
+    description: General Practice Waiting List Card form
 paths:
   /api/general-practice-waiting-list-card/gen_practice_waiting_list_cards:
     get:
       summary: List GenPracticeWaitingListCard records
+      tags: [general-practice-waiting-list-card]
       operationId: listGenPracticeWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GenPracticeWaitingListCard
+      tags: [general-practice-waiting-list-card]
       operationId: createGenPracticeWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GenPracticeWaitingListCard by id
+      tags: [general-practice-waiting-list-card]
       operationId: getGenPracticeWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GenPracticeWaitingListCard
+      tags: [general-practice-waiting-list-card]
       operationId: updateGenPracticeWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GenPracticeWaitingListCard
+      tags: [general-practice-waiting-list-card]
       operationId: replaceGenPracticeWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GenPracticeWaitingListCard
+      tags: [general-practice-waiting-list-card]
       operationId: deleteGenPracticeWaitingListCard
       responses:
         "200":

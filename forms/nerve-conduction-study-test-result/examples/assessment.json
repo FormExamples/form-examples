@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000064",
+    "id": "2e0775dd-b421-5673-a238-c30c4ce0c707",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000076",
+    "id": "1795ae63-6d1f-59a9-96e8-97515e68d64c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "nerveConductionStudyTestResult": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "0b33e092-3507-5043-aaed-d9126a133d6f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000088",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000089",
+    "patientId": "33183f52-9c6b-55e4-ba72-aed9ede722e0",
+    "clinicianId": "eeecdb7a-751c-52a9-a07e-ba67c67ff092",
     "originatingRequestReference": "",
     "reportStatus": "preliminary",
     "performedDate": null,
@@ -70,11 +70,11 @@
     "reportedTo": ""
   },
   "nerveConductionStudyTestResultGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a4",
+    "id": "f4bec4e6-a8a2-52f7-bbc8-c7d699ac166f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "nerveConductionStudyTestResultId": "550e8400-e29b-41d4-a716-0000000000a8",
+    "nerveConductionStudyTestResultId": "fbe3c82e-3060-5a35-b3b4-3f86485e80c6",
     "resultClassification": "normal",
     "abnormalitySeverity": "none",
     "reportingCategory": "",
@@ -88,22 +88,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "nerveConductionStudyTestResultGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b4",
+    "id": "d4ed14ad-a52c-54af-9f87-85d25e72be8b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "nerveConductionStudyTestResultGradeId": "550e8400-e29b-41d4-a716-0000000000b8",
+    "nerveConductionStudyTestResultGradeId": "974400aa-8a6e-5595-8dc6-2388ec9c69e5",
     "ruleId": "",
     "axis": "classification",
     "category": "",
     "description": ""
   },
   "nerveConductionStudyTestResultGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bd",
+    "id": "6b776f03-085d-5b0d-bdfc-8e5ad3758031",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "nerveConductionStudyTestResultGradeId": "550e8400-e29b-41d4-a716-0000000000c1",
+    "nerveConductionStudyTestResultGradeId": "9fa35520-2568-5f26-b594-b1535f9ef43b",
     "flagId": "",
     "category": "critical-result-alert",
     "priority": "low",

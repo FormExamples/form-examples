@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cardiology_request_grade_rule SYSTEM "cardiology_request_grade_rule.dtd">
-<cardiology_request_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<cardiology_request_grade_rule xmlns="https://formexamples.github.io/cardiology-request/xml">
+<id>0d5f8ed6-f573-5075-ba1d-bf184f9f3658</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cardiology_request_grade_id>880e8400-e29b-41d4-a716-446655440003</cardiology_request_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<cardiology_request_grade_id>5d9d001b-ccdc-5cc1-814a-b888b79a65fb</cardiology_request_grade_id>
+<rule_id>3169769a-5bf4-51fe-91ee-568a6a41df63</rule_id>
 <axis>appropriateness</axis>
 <category>General</category>
 <description>Example text.</description>

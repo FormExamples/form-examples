@@ -5,10 +5,19 @@ info:
   title: Child Psychiatry Waiting List Card — ChildPsychWaitingListCardGradeFlag
   version: 1.0.0
   description: Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.
+x-namespace:
+  form: child-psychiatry-waiting-list-card
+  apiPrefix: /api/child-psychiatry-waiting-list-card/
+  sqlSchema: child_psychiatry_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/child-psychiatry-waiting-list-card/xml
+tags:
+  - name: child-psychiatry-waiting-list-card
+    description: Child Psychiatry Waiting List Card form
 paths:
   /api/child-psychiatry-waiting-list-card/child_psych_waiting_list_card_grade_flags:
     get:
       summary: List ChildPsychWaitingListCardGradeFlag records
+      tags: [child-psychiatry-waiting-list-card]
       operationId: listChildPsychWaitingListCardGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ChildPsychWaitingListCardGradeFlag
+      tags: [child-psychiatry-waiting-list-card]
       operationId: createChildPsychWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ChildPsychWaitingListCardGradeFlag by id
+      tags: [child-psychiatry-waiting-list-card]
       operationId: getChildPsychWaitingListCardGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ChildPsychWaitingListCardGradeFlag
+      tags: [child-psychiatry-waiting-list-card]
       operationId: updateChildPsychWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ChildPsychWaitingListCardGradeFlag
+      tags: [child-psychiatry-waiting-list-card]
       operationId: replaceChildPsychWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ChildPsychWaitingListCardGradeFlag
+      tags: [child-psychiatry-waiting-list-card]
       operationId: deleteChildPsychWaitingListCardGradeFlag
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Blood Cross Match Test Result — BloodCrossMatchTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. An incompatible crossmatch, clinically-significant antibodies, an ABO discrepancy, or an unmet two-sample rule auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: blood-cross-match-test-result
+  apiPrefix: /api/blood-cross-match-test-result/
+  sqlSchema: blood_cross_match_test_result
+  xmlNamespace: https://formexamples.github.io/blood-cross-match-test-result/xml
+tags:
+  - name: blood-cross-match-test-result
+    description: Blood Cross Match Test Result form
 paths:
   /api/blood-cross-match-test-result/blood_cross_match_test_result_grades:
     get:
       summary: List BloodCrossMatchTestResultGrade records
+      tags: [blood-cross-match-test-result]
       operationId: listBloodCrossMatchTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BloodCrossMatchTestResultGrade
+      tags: [blood-cross-match-test-result]
       operationId: createBloodCrossMatchTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BloodCrossMatchTestResultGrade by id
+      tags: [blood-cross-match-test-result]
       operationId: getBloodCrossMatchTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BloodCrossMatchTestResultGrade
+      tags: [blood-cross-match-test-result]
       operationId: updateBloodCrossMatchTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BloodCrossMatchTestResultGrade
+      tags: [blood-cross-match-test-result]
       operationId: replaceBloodCrossMatchTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BloodCrossMatchTestResultGrade
+      tags: [blood-cross-match-test-result]
       operationId: deleteBloodCrossMatchTestResultGrade
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE wells_score_for_deep_vein_thrombosis_grade_flag SYSTEM "wells_score_for_deep_vein_thrombosis_grade_flag.dtd">
-<wells_score_for_deep_vein_thrombosis_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<wells_score_for_deep_vein_thrombosis_grade_flag xmlns="https://formexamples.github.io/wells-score-for-deep-vein-thrombosis/xml">
+<id>e2501fb6-1ee6-5bc5-880d-211fdce066db</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<wells_score_for_deep_vein_thrombosis_grade_id>880e8400-e29b-41d4-a716-446655440003</wells_score_for_deep_vein_thrombosis_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<wells_score_for_deep_vein_thrombosis_grade_id>d19cd1b0-0fd7-5e9d-8fd7-0ee74cc534ae</wells_score_for_deep_vein_thrombosis_grade_id>
+<flag_id>d4f570ed-3232-5ad5-9e14-895f797a5dde</flag_id>
 <category>dvt-likely-ultrasound</category>
 <priority>low</priority>
 <description>Example text.</description>

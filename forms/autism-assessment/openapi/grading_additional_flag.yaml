@@ -5,10 +5,19 @@ info:
   title: Autism Assessment — GradingAdditionalFlag
   version: 1.0.0
   description: Additional clinical flags detected during autism assessment grading (e.g. co-occurring conditions, safeguarding concerns).
+x-namespace:
+  form: autism-assessment
+  apiPrefix: /api/autism-assessment/
+  sqlSchema: autism_assessment
+  xmlNamespace: https://formexamples.github.io/autism-assessment/xml
+tags:
+  - name: autism-assessment
+    description: Autism Assessment form
 paths:
   /api/autism-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [autism-assessment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [autism-assessment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [autism-assessment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [autism-assessment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [autism-assessment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [autism-assessment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

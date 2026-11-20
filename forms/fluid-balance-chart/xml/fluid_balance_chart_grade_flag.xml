@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fluid_balance_chart_grade_flag SYSTEM "fluid_balance_chart_grade_flag.dtd">
-<fluid_balance_chart_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<fluid_balance_chart_grade_flag xmlns="https://formexamples.github.io/fluid-balance-chart/xml">
+<id>9a271f2f-307e-5514-b7ad-0da68d71f11d</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<fluid_balance_chart_grade_id>990e8400-e29b-41d4-a716-446655440004</fluid_balance_chart_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<fluid_balance_chart_grade_id>eb0f726c-5241-5e8e-8fe0-fd56de56eeba</fluid_balance_chart_grade_id>
+<flag_id>e84962af-b652-55af-a47a-77b554719da2</flag_id>
 <category>fluid-overload</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE agile_checklist_grade_flag SYSTEM "agile_checklist_grade_flag.dtd">
-<agile_checklist_grade_flag>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<agile_checklist_grade_flag xmlns="https://formexamples.github.io/agile-checklist/xml">
+<id>5d21e52d-35ab-54fb-b293-5d71424617e0</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<agile_checklist_grade_id>770e8400-e29b-41d4-a716-446655440002</agile_checklist_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<agile_checklist_grade_id>65ba1f91-624d-58fb-9b9f-2b34df7ced40</agile_checklist_grade_id>
+<flag_id>1b4dfa64-097c-51de-96b7-ac5ac55a84e5</flag_id>
 <category>teams-autonomy-risk</category>
 <priority>low</priority>
 <section>teams</section>

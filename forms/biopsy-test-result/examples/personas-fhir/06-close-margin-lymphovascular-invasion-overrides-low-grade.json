@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "a88c2c55-06d1-4af7-aec5-4d266faac79b",
+  "id": "a741a9f3-f2fc-599a-8b2b-54a235749614",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:bcdf6a96-537e-497b-afbd-9ca025f85fc1",
+      "fullUrl": "urn:uuid:50e85cd4-fb8c-5396-b5e9-c052489859ea",
       "resource": {
         "resourceType": "Patient",
-        "id": "bcdf6a96-537e-497b-afbd-9ca025f85fc1",
+        "id": "50e85cd4-fb8c-5396-b5e9-c052489859ea",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:0d1bc292-3ef7-4e71-a6b3-781c2505135c",
+      "fullUrl": "urn:uuid:8b524d4a-936b-538d-aa5c-a2d67ebd47f2",
       "resource": {
         "resourceType": "Observation",
-        "id": "0d1bc292-3ef7-4e71-a6b3-781c2505135c",
+        "id": "8b524d4a-936b-538d-aa5c-a2d67ebd47f2",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:bcdf6a96-537e-497b-afbd-9ca025f85fc1"
+          "reference": "urn:uuid:50e85cd4-fb8c-5396-b5e9-c052489859ea"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:e94008dd-b904-4593-a311-9f8c52b7d0b2",
+      "fullUrl": "urn:uuid:4ada1ffa-f953-5048-83c6-e08a99b2b7e7",
       "resource": {
         "resourceType": "Observation",
-        "id": "e94008dd-b904-4593-a311-9f8c52b7d0b2",
+        "id": "4ada1ffa-f953-5048-83c6-e08a99b2b7e7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:bcdf6a96-537e-497b-afbd-9ca025f85fc1"
+          "reference": "urn:uuid:50e85cd4-fb8c-5396-b5e9-c052489859ea"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -554,10 +554,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:782fb1f6-8d59-48e5-aa45-0f8b668d622b",
+      "fullUrl": "urn:uuid:a012d451-3345-5216-be08-246bde0bb461",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "782fb1f6-8d59-48e5-aa45-0f8b668d622b",
+        "id": "a012d451-3345-5216-be08-246bde0bb461",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -566,7 +566,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:bcdf6a96-537e-497b-afbd-9ca025f85fc1"
+          "reference": "urn:uuid:50e85cd4-fb8c-5396-b5e9-c052489859ea"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -575,10 +575,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:b4170a74-d3ae-45af-a8a4-4b5a62bc2eb4",
+      "fullUrl": "urn:uuid:8c510e19-affe-5019-b0e4-2e8babc2c2a7",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "b4170a74-d3ae-45af-a8a4-4b5a62bc2eb4",
+        "id": "8c510e19-affe-5019-b0e4-2e8babc2c2a7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -608,17 +608,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:bcdf6a96-537e-497b-afbd-9ca025f85fc1"
+          "reference": "urn:uuid:50e85cd4-fb8c-5396-b5e9-c052489859ea"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Malignancy or an abnormal diagnostic feature is present; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:80c3fead-144a-40c5-a51d-c7ee3ee5a7e6",
+      "fullUrl": "urn:uuid:e246b7a5-4929-5533-9d25-186892758e7d",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "80c3fead-144a-40c5-a51d-c7ee3ee5a7e6",
+        "id": "e246b7a5-4929-5533-9d25-186892758e7d",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -648,17 +648,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:bcdf6a96-537e-497b-afbd-9ca025f85fc1"
+          "reference": "urn:uuid:50e85cd4-fb8c-5396-b5e9-c052489859ea"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An actionable abnormal feature (lymphovascular invasion or a close margin) is present; severity graded moderate."
       }
     },
     {
-      "fullUrl": "urn:uuid:53a113a6-395a-4141-a13e-6eac02bc02a5",
+      "fullUrl": "urn:uuid:9aeddd91-47e7-57b4-9f09-bfd80a4013d0",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "53a113a6-395a-4141-a13e-6eac02bc02a5",
+        "id": "9aeddd91-47e7-57b4-9f09-bfd80a4013d0",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -688,17 +688,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:bcdf6a96-537e-497b-afbd-9ca025f85fc1"
+          "reference": "urn:uuid:50e85cd4-fb8c-5396-b5e9-c052489859ea"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Moderate abnormality present; follow-up recommended."
       }
     },
     {
-      "fullUrl": "urn:uuid:eab7c27a-348b-48fb-a7b4-22a86faccfb8",
+      "fullUrl": "urn:uuid:3c617677-1f76-58a2-a0a3-4b2d6c8d5588",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "eab7c27a-348b-48fb-a7b4-22a86faccfb8",
+        "id": "3c617677-1f76-58a2-a0a3-4b2d6c8d5588",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -728,7 +728,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:bcdf6a96-537e-497b-afbd-9ca025f85fc1"
+          "reference": "urn:uuid:50e85cd4-fb8c-5396-b5e9-c052489859ea"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Malignancy with lymphovascular invasion is present and may warrant urgent referral.",

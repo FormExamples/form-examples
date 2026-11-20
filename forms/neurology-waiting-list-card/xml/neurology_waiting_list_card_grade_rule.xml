@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE neurology_waiting_list_card_grade_rule SYSTEM "neurology_waiting_list_card_grade_rule.dtd">
-<neurology_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<neurology_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/neurology-waiting-list-card/xml">
+<id>3af93e38-3894-5be8-bd8c-7be66b6fc818</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<neurology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</neurology_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<neurology_waiting_list_card_grade_id>c105e778-908d-5124-ac2b-76ff772b9b95</neurology_waiting_list_card_grade_id>
+<rule_id>c2c45c0e-2134-564c-a556-7908403088fe</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

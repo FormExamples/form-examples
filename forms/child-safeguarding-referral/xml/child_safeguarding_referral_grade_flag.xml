@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE child_safeguarding_referral_grade_flag SYSTEM "child_safeguarding_referral_grade_flag.dtd">
-<child_safeguarding_referral_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<child_safeguarding_referral_grade_flag xmlns="https://formexamples.github.io/child-safeguarding-referral/xml">
+<id>d6f9af64-154f-5f77-a3d5-937140267272</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<child_safeguarding_referral_grade_id>880e8400-e29b-41d4-a716-446655440003</child_safeguarding_referral_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<child_safeguarding_referral_grade_id>7a272f6e-c6ff-5844-b494-9a87ca100575</child_safeguarding_referral_grade_id>
+<flag_id>6b82e3b3-4ce6-5355-aeb6-dfd7c1434138</flag_id>
 <category>immediate-danger</category>
 <priority>low</priority>
 <description>Example text.</description>

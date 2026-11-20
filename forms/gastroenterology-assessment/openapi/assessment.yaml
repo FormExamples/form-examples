@@ -5,10 +5,19 @@ info:
   title: Gastroenterology Assessment — Assessment
   version: 1.0.0
   description: Gastroenterology assessment form using GI Symptom Severity Score with red flag detection. Parent entity for all assessment sections.
+x-namespace:
+  form: gastroenterology-assessment
+  apiPrefix: /api/gastroenterology-assessment/
+  sqlSchema: gastroenterology_assessment
+  xmlNamespace: https://formexamples.github.io/gastroenterology-assessment/xml
+tags:
+  - name: gastroenterology-assessment
+    description: Gastroenterology Assessment form
 paths:
   /api/gastroenterology-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [gastroenterology-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [gastroenterology-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [gastroenterology-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [gastroenterology-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [gastroenterology-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [gastroenterology-assessment]
       operationId: deleteAssessment
       responses:
         "200":

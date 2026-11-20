@@ -1,4 +1,5 @@
 <!ELEMENT diabetes_eye_screening_grade (id,created_at,updated_at,deleted_at,diabetes_eye_screening_id,worst_retinopathy,worst_maculopathy,any_ungradable,outcome,referral,recall_interval_months,status,graded_at)>
+<!ATTLIST diabetes_eye_screening_grade xmlns CDATA #FIXED "https://formexamples.github.io/diabetes-eye-screening/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

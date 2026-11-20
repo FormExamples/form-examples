@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Medical Certificate of Cause of Death (MCCD) form,
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: medical-certificate-of-cause-of-death
+  apiPrefix: /api/medical-certificate-of-cause-of-death/
+  sqlSchema: medical_certificate_of_cause_of_death
+  xmlNamespace: https://formexamples.github.io/medical-certificate-of-cause-of-death/xml
+tags:
+- name: medical-certificate-of-cause-of-death
+  description: Medical Certificate of Cause of Death (MCCD) form
 paths:
   /api/medical-certificate-of-cause-of-death/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/medical-certificate-of-cause-of-death/medical_certificate_of_cause_of_death_grade_flags:
     get:
       summary: List MedicalCertificateOfCauseOfDeathGradeFlag records
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: listMedicalCertificateOfCauseOfDeathGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalCertificateOfCauseOfDeathGradeFlag
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: createMedicalCertificateOfCauseOfDeathGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalCertificateOfCauseOfDeathGradeFlag by id
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: getMedicalCertificateOfCauseOfDeathGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalCertificateOfCauseOfDeathGradeFlag
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: updateMedicalCertificateOfCauseOfDeathGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalCertificateOfCauseOfDeathGradeFlag
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: replaceMedicalCertificateOfCauseOfDeathGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalCertificateOfCauseOfDeathGradeFlag
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: deleteMedicalCertificateOfCauseOfDeathGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/medical-certificate-of-cause-of-death/medical_certificate_of_cause_of_death_grade_rules:
     get:
       summary: List MedicalCertificateOfCauseOfDeathGradeRule records
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: listMedicalCertificateOfCauseOfDeathGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalCertificateOfCauseOfDeathGradeRule
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: createMedicalCertificateOfCauseOfDeathGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalCertificateOfCauseOfDeathGradeRule by id
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: getMedicalCertificateOfCauseOfDeathGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalCertificateOfCauseOfDeathGradeRule
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: updateMedicalCertificateOfCauseOfDeathGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalCertificateOfCauseOfDeathGradeRule
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: replaceMedicalCertificateOfCauseOfDeathGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalCertificateOfCauseOfDeathGradeRule
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: deleteMedicalCertificateOfCauseOfDeathGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/medical-certificate-of-cause-of-death/medical_certificate_of_cause_of_death_grades:
     get:
       summary: List MedicalCertificateOfCauseOfDeathGrade records
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: listMedicalCertificateOfCauseOfDeathGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalCertificateOfCauseOfDeathGrade
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: createMedicalCertificateOfCauseOfDeathGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalCertificateOfCauseOfDeathGrade by id
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: getMedicalCertificateOfCauseOfDeathGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalCertificateOfCauseOfDeathGrade
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: updateMedicalCertificateOfCauseOfDeathGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalCertificateOfCauseOfDeathGrade
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: replaceMedicalCertificateOfCauseOfDeathGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalCertificateOfCauseOfDeathGrade
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: deleteMedicalCertificateOfCauseOfDeathGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/medical-certificate-of-cause-of-death/medical_certificate_of_cause_of_deaths:
     get:
       summary: List MedicalCertificateOfCauseOfDeath records
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: listMedicalCertificateOfCauseOfDeath
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalCertificateOfCauseOfDeath
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: createMedicalCertificateOfCauseOfDeath
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicalCertificateOfCauseOfDeath by id
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: getMedicalCertificateOfCauseOfDeath
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalCertificateOfCauseOfDeath
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: updateMedicalCertificateOfCauseOfDeath
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicalCertificateOfCauseOfDeath
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: replaceMedicalCertificateOfCauseOfDeath
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicalCertificateOfCauseOfDeath
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: deleteMedicalCertificateOfCauseOfDeath
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - medical-certificate-of-cause-of-death
   /api/medical-certificate-of-cause-of-death/patients:
     get:
       summary: List Patient records
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - medical-certificate-of-cause-of-death
       operationId: deletePatient
       responses:
         '200':

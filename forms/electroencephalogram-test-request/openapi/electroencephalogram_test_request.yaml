@@ -5,10 +5,19 @@ info:
   title: Electroencephalogram Test Request — ElectroencephalogramTestRequest
   version: 1.0.0
   description: Electroencephalogram (EEG) test request (referral). Captures the requested EEG type, the clinical indication and question, seizure / epilepsy context, antiepileptic medication, red flags, and triage urgency.
+x-namespace:
+  form: electroencephalogram-test-request
+  apiPrefix: /api/electroencephalogram-test-request/
+  sqlSchema: electroencephalogram_test_request
+  xmlNamespace: https://formexamples.github.io/electroencephalogram-test-request/xml
+tags:
+  - name: electroencephalogram-test-request
+    description: Electroencephalogram Test Request form
 paths:
   /api/electroencephalogram-test-request/electroencephalogram_test_requests:
     get:
       summary: List ElectroencephalogramTestRequest records
+      tags: [electroencephalogram-test-request]
       operationId: listElectroencephalogramTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ElectroencephalogramTestRequest
+      tags: [electroencephalogram-test-request]
       operationId: createElectroencephalogramTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ElectroencephalogramTestRequest by id
+      tags: [electroencephalogram-test-request]
       operationId: getElectroencephalogramTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ElectroencephalogramTestRequest
+      tags: [electroencephalogram-test-request]
       operationId: updateElectroencephalogramTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ElectroencephalogramTestRequest
+      tags: [electroencephalogram-test-request]
       operationId: replaceElectroencephalogramTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ElectroencephalogramTestRequest
+      tags: [electroencephalogram-test-request]
       operationId: deleteElectroencephalogramTestRequest
       responses:
         "200":

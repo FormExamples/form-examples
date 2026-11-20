@@ -5,10 +5,19 @@ info:
   title: Code Of Conduct Notice — Assessment
   version: 1.0.0
   description: Top-level assessment instance for code-of-conduct-notice. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: code-of-conduct-notice
+  apiPrefix: /api/code-of-conduct-notice/
+  sqlSchema: code_of_conduct_notice
+  xmlNamespace: https://formexamples.github.io/code-of-conduct-notice/xml
+tags:
+  - name: code-of-conduct-notice
+    description: Code Of Conduct Notice form
 paths:
   /api/code-of-conduct-notice/assessments:
     get:
       summary: List Assessment records
+      tags: [code-of-conduct-notice]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [code-of-conduct-notice]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [code-of-conduct-notice]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [code-of-conduct-notice]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [code-of-conduct-notice]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [code-of-conduct-notice]
       operationId: deleteAssessment
       responses:
         "200":

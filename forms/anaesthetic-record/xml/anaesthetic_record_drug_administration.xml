@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE anaesthetic_record_drug_administration SYSTEM "anaesthetic_record_drug_administration.dtd">
-<anaesthetic_record_drug_administration>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<anaesthetic_record_drug_administration xmlns="https://formexamples.github.io/anaesthetic-record/xml">
+<id>a57ad0b3-9f25-59ea-a964-f19a5e44eae8</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<anaesthetic_record_id>770e8400-e29b-41d4-a716-446655440002</anaesthetic_record_id>
+<anaesthetic_record_id>c9ac9734-0722-513c-af50-ea06913293c8</anaesthetic_record_id>
 <drug_name>Example</drug_name>
 <dose>10.0</dose>
 <dose_unit>mg</dose_unit>

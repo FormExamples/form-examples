@@ -5,10 +5,19 @@ info:
   title: Recommended Summary Plan For Emergency Care And Treatment — Clinician
   version: 1.0.0
   description: Clinician identifying information for the clinician who completed and signed the ReSPECT plan and any senior clinician who endorsed it.
+x-namespace:
+  form: recommended-summary-plan-for-emergency-care-and-treatment
+  apiPrefix: /api/recommended-summary-plan-for-emergency-care-and-treatment/
+  sqlSchema: recommended_summary_plan_for_emergency_care_and_treatment
+  xmlNamespace: https://formexamples.github.io/recommended-summary-plan-for-emergency-care-and-treatment/xml
+tags:
+  - name: recommended-summary-plan-for-emergency-care-and-treatment
+    description: Recommended Summary Plan For Emergency Care And Treatment form
 paths:
   /api/recommended-summary-plan-for-emergency-care-and-treatment/clinicians:
     get:
       summary: List Clinician records
+      tags: [recommended-summary-plan-for-emergency-care-and-treatment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [recommended-summary-plan-for-emergency-care-and-treatment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [recommended-summary-plan-for-emergency-care-and-treatment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [recommended-summary-plan-for-emergency-care-and-treatment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [recommended-summary-plan-for-emergency-care-and-treatment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [recommended-summary-plan-for-emergency-care-and-treatment]
       operationId: deleteClinician
       responses:
         "200":

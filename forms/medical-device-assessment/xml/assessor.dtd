@@ -1,4 +1,5 @@
 <!ELEMENT assessor (id,created_at,updated_at,deleted_at,name,email,phone,role,organization)>
+<!ATTLIST assessor xmlns CDATA #FIXED "https://formexamples.github.io/medical-device-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

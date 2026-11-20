@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Sleep Study Test Request form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: sleep-study-test-request
+  apiPrefix: /api/sleep-study-test-request/
+  sqlSchema: sleep_study_test_request
+  xmlNamespace: https://formexamples.github.io/sleep-study-test-request/xml
+tags:
+- name: sleep-study-test-request
+  description: Sleep Study Test Request form
 paths:
   /api/sleep-study-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - sleep-study-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - sleep-study-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - sleep-study-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - sleep-study-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - sleep-study-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - sleep-study-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - sleep-study-test-request
   /api/sleep-study-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - sleep-study-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - sleep-study-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - sleep-study-test-request
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - sleep-study-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - sleep-study-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - sleep-study-test-request
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/sleep-study-test-request/sleep_study_test_request_grade_flags:
     get:
       summary: List SleepStudyTestRequestGradeFlag records
+      tags:
+      - sleep-study-test-request
       operationId: listSleepStudyTestRequestGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new SleepStudyTestRequestGradeFlag
+      tags:
+      - sleep-study-test-request
       operationId: createSleepStudyTestRequestGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one SleepStudyTestRequestGradeFlag by id
+      tags:
+      - sleep-study-test-request
       operationId: getSleepStudyTestRequestGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing SleepStudyTestRequestGradeFlag
+      tags:
+      - sleep-study-test-request
       operationId: updateSleepStudyTestRequestGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing SleepStudyTestRequestGradeFlag
+      tags:
+      - sleep-study-test-request
       operationId: replaceSleepStudyTestRequestGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a SleepStudyTestRequestGradeFlag
+      tags:
+      - sleep-study-test-request
       operationId: deleteSleepStudyTestRequestGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/sleep-study-test-request/sleep_study_test_request_grade_rules:
     get:
       summary: List SleepStudyTestRequestGradeRule records
+      tags:
+      - sleep-study-test-request
       operationId: listSleepStudyTestRequestGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new SleepStudyTestRequestGradeRule
+      tags:
+      - sleep-study-test-request
       operationId: createSleepStudyTestRequestGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one SleepStudyTestRequestGradeRule by id
+      tags:
+      - sleep-study-test-request
       operationId: getSleepStudyTestRequestGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing SleepStudyTestRequestGradeRule
+      tags:
+      - sleep-study-test-request
       operationId: updateSleepStudyTestRequestGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing SleepStudyTestRequestGradeRule
+      tags:
+      - sleep-study-test-request
       operationId: replaceSleepStudyTestRequestGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a SleepStudyTestRequestGradeRule
+      tags:
+      - sleep-study-test-request
       operationId: deleteSleepStudyTestRequestGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/sleep-study-test-request/sleep_study_test_request_grades:
     get:
       summary: List SleepStudyTestRequestGrade records
+      tags:
+      - sleep-study-test-request
       operationId: listSleepStudyTestRequestGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new SleepStudyTestRequestGrade
+      tags:
+      - sleep-study-test-request
       operationId: createSleepStudyTestRequestGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one SleepStudyTestRequestGrade by id
+      tags:
+      - sleep-study-test-request
       operationId: getSleepStudyTestRequestGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing SleepStudyTestRequestGrade
+      tags:
+      - sleep-study-test-request
       operationId: updateSleepStudyTestRequestGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing SleepStudyTestRequestGrade
+      tags:
+      - sleep-study-test-request
       operationId: replaceSleepStudyTestRequestGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a SleepStudyTestRequestGrade
+      tags:
+      - sleep-study-test-request
       operationId: deleteSleepStudyTestRequestGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/sleep-study-test-request/sleep_study_test_requests:
     get:
       summary: List SleepStudyTestRequest records
+      tags:
+      - sleep-study-test-request
       operationId: listSleepStudyTestRequest
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new SleepStudyTestRequest
+      tags:
+      - sleep-study-test-request
       operationId: createSleepStudyTestRequest
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one SleepStudyTestRequest by id
+      tags:
+      - sleep-study-test-request
       operationId: getSleepStudyTestRequest
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing SleepStudyTestRequest
+      tags:
+      - sleep-study-test-request
       operationId: updateSleepStudyTestRequest
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing SleepStudyTestRequest
+      tags:
+      - sleep-study-test-request
       operationId: replaceSleepStudyTestRequest
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a SleepStudyTestRequest
+      tags:
+      - sleep-study-test-request
       operationId: deleteSleepStudyTestRequest
       responses:
         '200':

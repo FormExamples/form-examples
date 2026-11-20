@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE apgar_score SYSTEM "apgar_score.dtd">
-<apgar_score>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<apgar_score xmlns="https://formexamples.github.io/apgar-score/xml">
+<id>6ddec115-0bbc-506a-a073-17dce73325e0</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>07c75596-b4f7-5325-a528-e88d394ee9ca</patient_id>
+<clinician_id>52fd4db6-0ecf-53ce-a730-5ef640a4413b</clinician_id>
 <clinician_name>Example</clinician_name>
 <clinician_role>midwife</clinician_role>
 <born_at>2026-04-09T10:00:00Z</born_at>

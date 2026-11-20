@@ -5,10 +5,19 @@ info:
   title: Child Psychiatry Waiting List Card — ChildPsychWaitingListCardAppointment
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+x-namespace:
+  form: child-psychiatry-waiting-list-card
+  apiPrefix: /api/child-psychiatry-waiting-list-card/
+  sqlSchema: child_psychiatry_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/child-psychiatry-waiting-list-card/xml
+tags:
+  - name: child-psychiatry-waiting-list-card
+    description: Child Psychiatry Waiting List Card form
 paths:
   /api/child-psychiatry-waiting-list-card/child_psych_waiting_list_card_appointments:
     get:
       summary: List ChildPsychWaitingListCardAppointment records
+      tags: [child-psychiatry-waiting-list-card]
       operationId: listChildPsychWaitingListCardAppointment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ChildPsychWaitingListCardAppointment
+      tags: [child-psychiatry-waiting-list-card]
       operationId: createChildPsychWaitingListCardAppointment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ChildPsychWaitingListCardAppointment by id
+      tags: [child-psychiatry-waiting-list-card]
       operationId: getChildPsychWaitingListCardAppointment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ChildPsychWaitingListCardAppointment
+      tags: [child-psychiatry-waiting-list-card]
       operationId: updateChildPsychWaitingListCardAppointment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ChildPsychWaitingListCardAppointment
+      tags: [child-psychiatry-waiting-list-card]
       operationId: replaceChildPsychWaitingListCardAppointment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ChildPsychWaitingListCardAppointment
+      tags: [child-psychiatry-waiting-list-card]
       operationId: deleteChildPsychWaitingListCardAppointment
       responses:
         "200":

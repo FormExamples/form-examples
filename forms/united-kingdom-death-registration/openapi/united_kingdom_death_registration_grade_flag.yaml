@@ -5,10 +5,19 @@ info:
   title: United Kingdom Death Registration — UnitedKingdomDeathRegistrationGradeFlag
   version: 1.0.0
   description: Flagged registration issues with priority and suggested action.
+x-namespace:
+  form: united-kingdom-death-registration
+  apiPrefix: /api/united-kingdom-death-registration/
+  sqlSchema: united_kingdom_death_registration
+  xmlNamespace: https://formexamples.github.io/united-kingdom-death-registration/xml
+tags:
+  - name: united-kingdom-death-registration
+    description: United Kingdom Death Registration form
 paths:
   /api/united-kingdom-death-registration/united_kingdom_death_registration_grade_flags:
     get:
       summary: List UnitedKingdomDeathRegistrationGradeFlag records
+      tags: [united-kingdom-death-registration]
       operationId: listUnitedKingdomDeathRegistrationGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomDeathRegistrationGradeFlag
+      tags: [united-kingdom-death-registration]
       operationId: createUnitedKingdomDeathRegistrationGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomDeathRegistrationGradeFlag by id
+      tags: [united-kingdom-death-registration]
       operationId: getUnitedKingdomDeathRegistrationGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomDeathRegistrationGradeFlag
+      tags: [united-kingdom-death-registration]
       operationId: updateUnitedKingdomDeathRegistrationGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomDeathRegistrationGradeFlag
+      tags: [united-kingdom-death-registration]
       operationId: replaceUnitedKingdomDeathRegistrationGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomDeathRegistrationGradeFlag
+      tags: [united-kingdom-death-registration]
       operationId: deleteUnitedKingdomDeathRegistrationGradeFlag
       responses:
         "200":

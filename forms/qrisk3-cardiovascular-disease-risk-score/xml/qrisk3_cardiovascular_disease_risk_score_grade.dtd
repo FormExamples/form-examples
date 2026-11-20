@@ -1,4 +1,5 @@
 <!ELEMENT qrisk3_cardiovascular_disease_risk_score_grade (id,created_at,updated_at,deleted_at,qrisk3_cardiovascular_disease_risk_score_id,ten_year_risk_percent,risk_band,heart_age,linear_predictor,graded_at)>
+<!ATTLIST qrisk3_cardiovascular_disease_risk_score_grade xmlns CDATA #FIXED "https://formexamples.github.io/qrisk3-cardiovascular-disease-risk-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

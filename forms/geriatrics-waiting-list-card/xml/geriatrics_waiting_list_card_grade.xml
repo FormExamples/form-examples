@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE geriatrics_waiting_list_card_grade SYSTEM "geriatrics_waiting_list_card_grade.dtd">
-<geriatrics_waiting_list_card_grade>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<geriatrics_waiting_list_card_grade xmlns="https://formexamples.github.io/geriatrics-waiting-list-card/xml">
+<id>a26b5ef5-d8ce-5d77-ad93-509e1be2b987</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<geriatrics_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</geriatrics_waiting_list_card_id>
+<geriatrics_waiting_list_card_id>4904b953-7c8d-53e4-8813-9bc34b6f37b1</geriatrics_waiting_list_card_id>
 <waiting_time_status>within-target</waiting_time_status>
 <clinical_priority>P1a</clinical_priority>
 <target_wait_weeks>0.0</target_wait_weeks>

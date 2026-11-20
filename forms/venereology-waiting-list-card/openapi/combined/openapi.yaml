@@ -7,6 +7,14 @@ info:
   description: Combined OpenAPI specification for the Venereology Waiting List Card form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: venereology-waiting-list-card
+  apiPrefix: /api/venereology-waiting-list-card/
+  sqlSchema: venereology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/venereology-waiting-list-card/xml
+tags:
+- name: venereology-waiting-list-card
+  description: Venereology Waiting List Card form
 paths:
   /api/venereology-waiting-list-card/openapi.yaml:
     get:
@@ -19,9 +27,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - venereology-waiting-list-card
   /api/venereology-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - venereology-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -74,6 +86,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - venereology-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -127,6 +141,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - venereology-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -154,6 +170,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - venereology-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -199,6 +217,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - venereology-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -244,6 +264,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - venereology-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -268,6 +290,8 @@ paths:
   /api/venereology-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - venereology-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - venereology-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - venereology-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - venereology-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - venereology-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - venereology-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/venereology-waiting-list-card/venereology_waiting_list_card_appointments:
     get:
       summary: List VenereologyWaitingListCardAppointment records
+      tags:
+      - venereology-waiting-list-card
       operationId: listVenereologyWaitingListCardAppointment
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VenereologyWaitingListCardAppointment
+      tags:
+      - venereology-waiting-list-card
       operationId: createVenereologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VenereologyWaitingListCardAppointment by id
+      tags:
+      - venereology-waiting-list-card
       operationId: getVenereologyWaitingListCardAppointment
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VenereologyWaitingListCardAppointment
+      tags:
+      - venereology-waiting-list-card
       operationId: updateVenereologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VenereologyWaitingListCardAppointment
+      tags:
+      - venereology-waiting-list-card
       operationId: replaceVenereologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VenereologyWaitingListCardAppointment
+      tags:
+      - venereology-waiting-list-card
       operationId: deleteVenereologyWaitingListCardAppointment
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/venereology-waiting-list-card/venereology_waiting_list_card_grade_flags:
     get:
       summary: List VenereologyWaitingListCardGradeFlag records
+      tags:
+      - venereology-waiting-list-card
       operationId: listVenereologyWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VenereologyWaitingListCardGradeFlag
+      tags:
+      - venereology-waiting-list-card
       operationId: createVenereologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VenereologyWaitingListCardGradeFlag by id
+      tags:
+      - venereology-waiting-list-card
       operationId: getVenereologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VenereologyWaitingListCardGradeFlag
+      tags:
+      - venereology-waiting-list-card
       operationId: updateVenereologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VenereologyWaitingListCardGradeFlag
+      tags:
+      - venereology-waiting-list-card
       operationId: replaceVenereologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VenereologyWaitingListCardGradeFlag
+      tags:
+      - venereology-waiting-list-card
       operationId: deleteVenereologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/venereology-waiting-list-card/venereology_waiting_list_card_grade_rules:
     get:
       summary: List VenereologyWaitingListCardGradeRule records
+      tags:
+      - venereology-waiting-list-card
       operationId: listVenereologyWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VenereologyWaitingListCardGradeRule
+      tags:
+      - venereology-waiting-list-card
       operationId: createVenereologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VenereologyWaitingListCardGradeRule by id
+      tags:
+      - venereology-waiting-list-card
       operationId: getVenereologyWaitingListCardGradeRule
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VenereologyWaitingListCardGradeRule
+      tags:
+      - venereology-waiting-list-card
       operationId: updateVenereologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VenereologyWaitingListCardGradeRule
+      tags:
+      - venereology-waiting-list-card
       operationId: replaceVenereologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VenereologyWaitingListCardGradeRule
+      tags:
+      - venereology-waiting-list-card
       operationId: deleteVenereologyWaitingListCardGradeRule
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/venereology-waiting-list-card/venereology_waiting_list_card_grades:
     get:
       summary: List VenereologyWaitingListCardGrade records
+      tags:
+      - venereology-waiting-list-card
       operationId: listVenereologyWaitingListCardGrade
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VenereologyWaitingListCardGrade
+      tags:
+      - venereology-waiting-list-card
       operationId: createVenereologyWaitingListCardGrade
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VenereologyWaitingListCardGrade by id
+      tags:
+      - venereology-waiting-list-card
       operationId: getVenereologyWaitingListCardGrade
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VenereologyWaitingListCardGrade
+      tags:
+      - venereology-waiting-list-card
       operationId: updateVenereologyWaitingListCardGrade
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VenereologyWaitingListCardGrade
+      tags:
+      - venereology-waiting-list-card
       operationId: replaceVenereologyWaitingListCardGrade
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VenereologyWaitingListCardGrade
+      tags:
+      - venereology-waiting-list-card
       operationId: deleteVenereologyWaitingListCardGrade
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/venereology-waiting-list-card/venereology_waiting_list_cards:
     get:
       summary: List VenereologyWaitingListCard records
+      tags:
+      - venereology-waiting-list-card
       operationId: listVenereologyWaitingListCard
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new VenereologyWaitingListCard
+      tags:
+      - venereology-waiting-list-card
       operationId: createVenereologyWaitingListCard
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one VenereologyWaitingListCard by id
+      tags:
+      - venereology-waiting-list-card
       operationId: getVenereologyWaitingListCard
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing VenereologyWaitingListCard
+      tags:
+      - venereology-waiting-list-card
       operationId: updateVenereologyWaitingListCard
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing VenereologyWaitingListCard
+      tags:
+      - venereology-waiting-list-card
       operationId: replaceVenereologyWaitingListCard
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a VenereologyWaitingListCard
+      tags:
+      - venereology-waiting-list-card
       operationId: deleteVenereologyWaitingListCard
       responses:
         '200':

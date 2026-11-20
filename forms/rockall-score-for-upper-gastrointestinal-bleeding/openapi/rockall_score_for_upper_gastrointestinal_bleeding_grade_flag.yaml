@@ -5,10 +5,19 @@ info:
   title: Rockall Score For Upper Gastrointestinal Bleeding — RockallScoreForUpperGastrointestinalBleedingGradeFlag
   version: 1.0.0
   description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.
+x-namespace:
+  form: rockall-score-for-upper-gastrointestinal-bleeding
+  apiPrefix: /api/rockall-score-for-upper-gastrointestinal-bleeding/
+  sqlSchema: rockall_score_for_upper_gastrointestinal_bleeding
+  xmlNamespace: https://formexamples.github.io/rockall-score-for-upper-gastrointestinal-bleeding/xml
+tags:
+  - name: rockall-score-for-upper-gastrointestinal-bleeding
+    description: Rockall Score For Upper Gastrointestinal Bleeding form
 paths:
   /api/rockall-score-for-upper-gastrointestinal-bleeding/rockall_score_for_upper_gastrointestinal_bleeding_grade_flags:
     get:
       summary: List RockallScoreForUpperGastrointestinalBleedingGradeFlag records
+      tags: [rockall-score-for-upper-gastrointestinal-bleeding]
       operationId: listRockallScoreForUpperGastrointestinalBleedingGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RockallScoreForUpperGastrointestinalBleedingGradeFlag
+      tags: [rockall-score-for-upper-gastrointestinal-bleeding]
       operationId: createRockallScoreForUpperGastrointestinalBleedingGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RockallScoreForUpperGastrointestinalBleedingGradeFlag by id
+      tags: [rockall-score-for-upper-gastrointestinal-bleeding]
       operationId: getRockallScoreForUpperGastrointestinalBleedingGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RockallScoreForUpperGastrointestinalBleedingGradeFlag
+      tags: [rockall-score-for-upper-gastrointestinal-bleeding]
       operationId: updateRockallScoreForUpperGastrointestinalBleedingGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RockallScoreForUpperGastrointestinalBleedingGradeFlag
+      tags: [rockall-score-for-upper-gastrointestinal-bleeding]
       operationId: replaceRockallScoreForUpperGastrointestinalBleedingGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RockallScoreForUpperGastrointestinalBleedingGradeFlag
+      tags: [rockall-score-for-upper-gastrointestinal-bleeding]
       operationId: deleteRockallScoreForUpperGastrointestinalBleedingGradeFlag
       responses:
         "200":

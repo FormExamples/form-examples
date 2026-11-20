@@ -5,10 +5,19 @@ info:
   title: Ambulatory Blood Pressure Test Result — AmbulatoryBloodPressureTestResultGrade
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A severe-hypertension result (ABPM average >= 150/95, equivalent to clinic >= 180/120) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
+x-namespace:
+  form: ambulatory-blood-pressure-test-result
+  apiPrefix: /api/ambulatory-blood-pressure-test-result/
+  sqlSchema: ambulatory_blood_pressure_test_result
+  xmlNamespace: https://formexamples.github.io/ambulatory-blood-pressure-test-result/xml
+tags:
+  - name: ambulatory-blood-pressure-test-result
+    description: Ambulatory Blood Pressure Test Result form
 paths:
   /api/ambulatory-blood-pressure-test-result/ambulatory_blood_pressure_test_result_grades:
     get:
       summary: List AmbulatoryBloodPressureTestResultGrade records
+      tags: [ambulatory-blood-pressure-test-result]
       operationId: listAmbulatoryBloodPressureTestResultGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AmbulatoryBloodPressureTestResultGrade
+      tags: [ambulatory-blood-pressure-test-result]
       operationId: createAmbulatoryBloodPressureTestResultGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AmbulatoryBloodPressureTestResultGrade by id
+      tags: [ambulatory-blood-pressure-test-result]
       operationId: getAmbulatoryBloodPressureTestResultGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AmbulatoryBloodPressureTestResultGrade
+      tags: [ambulatory-blood-pressure-test-result]
       operationId: updateAmbulatoryBloodPressureTestResultGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AmbulatoryBloodPressureTestResultGrade
+      tags: [ambulatory-blood-pressure-test-result]
       operationId: replaceAmbulatoryBloodPressureTestResultGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AmbulatoryBloodPressureTestResultGrade
+      tags: [ambulatory-blood-pressure-test-result]
       operationId: deleteAmbulatoryBloodPressureTestResultGrade
       responses:
         "200":

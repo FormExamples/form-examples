@@ -5,10 +5,19 @@ info:
   title: Sequential Organ Failure Assessment — SequentialOrganFailureAssessmentGradeFlag
   version: 1.0.0
   description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.
+x-namespace:
+  form: sequential-organ-failure-assessment
+  apiPrefix: /api/sequential-organ-failure-assessment/
+  sqlSchema: sequential_organ_failure_assessment
+  xmlNamespace: https://formexamples.github.io/sequential-organ-failure-assessment/xml
+tags:
+  - name: sequential-organ-failure-assessment
+    description: Sequential Organ Failure Assessment form
 paths:
   /api/sequential-organ-failure-assessment/sequential_organ_failure_assessment_grade_flags:
     get:
       summary: List SequentialOrganFailureAssessmentGradeFlag records
+      tags: [sequential-organ-failure-assessment]
       operationId: listSequentialOrganFailureAssessmentGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SequentialOrganFailureAssessmentGradeFlag
+      tags: [sequential-organ-failure-assessment]
       operationId: createSequentialOrganFailureAssessmentGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one SequentialOrganFailureAssessmentGradeFlag by id
+      tags: [sequential-organ-failure-assessment]
       operationId: getSequentialOrganFailureAssessmentGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SequentialOrganFailureAssessmentGradeFlag
+      tags: [sequential-organ-failure-assessment]
       operationId: updateSequentialOrganFailureAssessmentGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing SequentialOrganFailureAssessmentGradeFlag
+      tags: [sequential-organ-failure-assessment]
       operationId: replaceSequentialOrganFailureAssessmentGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SequentialOrganFailureAssessmentGradeFlag
+      tags: [sequential-organ-failure-assessment]
       operationId: deleteSequentialOrganFailureAssessmentGradeFlag
       responses:
         "200":

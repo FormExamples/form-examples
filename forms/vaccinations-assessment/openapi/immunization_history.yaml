@@ -5,10 +5,19 @@ info:
   title: Vaccinations Assessment — ImmunizationHistory
   version: 1.0.0
   description: Immunization history including record source and adverse reaction screening. One-to-one child of assessment.
+x-namespace:
+  form: vaccinations-assessment
+  apiPrefix: /api/vaccinations-assessment/
+  sqlSchema: vaccinations_assessment
+  xmlNamespace: https://formexamples.github.io/vaccinations-assessment/xml
+tags:
+  - name: vaccinations-assessment
+    description: Vaccinations Assessment form
 paths:
   /api/vaccinations-assessment/immunization_histories:
     get:
       summary: List ImmunizationHistory records
+      tags: [vaccinations-assessment]
       operationId: listImmunizationHistory
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ImmunizationHistory
+      tags: [vaccinations-assessment]
       operationId: createImmunizationHistory
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ImmunizationHistory by id
+      tags: [vaccinations-assessment]
       operationId: getImmunizationHistory
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ImmunizationHistory
+      tags: [vaccinations-assessment]
       operationId: updateImmunizationHistory
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ImmunizationHistory
+      tags: [vaccinations-assessment]
       operationId: replaceImmunizationHistory
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ImmunizationHistory
+      tags: [vaccinations-assessment]
       operationId: deleteImmunizationHistory
       responses:
         "200":

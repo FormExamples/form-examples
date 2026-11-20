@@ -5,10 +5,19 @@ info:
   title: Inpatient Clinical Note — InpatientClinicalNoteGradeFlag
   version: 1.0.0
   description: Safety flags that fire independently of the completeness status and the acuity band, with priority and a suggested action for the clinician or governance team.
+x-namespace:
+  form: inpatient-clinical-note
+  apiPrefix: /api/inpatient-clinical-note/
+  sqlSchema: inpatient_clinical_note
+  xmlNamespace: https://formexamples.github.io/inpatient-clinical-note/xml
+tags:
+  - name: inpatient-clinical-note
+    description: Inpatient Clinical Note form
 paths:
   /api/inpatient-clinical-note/inpatient_clinical_note_grade_flags:
     get:
       summary: List InpatientClinicalNoteGradeFlag records
+      tags: [inpatient-clinical-note]
       operationId: listInpatientClinicalNoteGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new InpatientClinicalNoteGradeFlag
+      tags: [inpatient-clinical-note]
       operationId: createInpatientClinicalNoteGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one InpatientClinicalNoteGradeFlag by id
+      tags: [inpatient-clinical-note]
       operationId: getInpatientClinicalNoteGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing InpatientClinicalNoteGradeFlag
+      tags: [inpatient-clinical-note]
       operationId: updateInpatientClinicalNoteGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing InpatientClinicalNoteGradeFlag
+      tags: [inpatient-clinical-note]
       operationId: replaceInpatientClinicalNoteGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a InpatientClinicalNoteGradeFlag
+      tags: [inpatient-clinical-note]
       operationId: deleteInpatientClinicalNoteGradeFlag
       responses:
         "200":

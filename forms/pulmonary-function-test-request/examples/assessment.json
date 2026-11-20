@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005e",
+    "id": "a40af25e-da29-5111-89da-dda3b5b67569",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000070",
+    "id": "bce83e38-2401-509e-a7e3-baf092e338cc",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "pulmonaryFunctionTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-00000000007e",
+    "id": "d7559d60-f093-5bae-a531-96ff47924279",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000082",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000083",
+    "patientId": "701ab155-4da9-5a30-98eb-a35748ad014b",
+    "clinicianId": "43ef7296-280f-5f60-be31-ab6f31989b8f",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -65,11 +65,11 @@
     "notes": ""
   },
   "pulmonaryFunctionTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000099",
+    "id": "ee484b0f-b093-5c7e-94bc-9486f42092ee",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "pulmonaryFunctionTestRequestId": "550e8400-e29b-41d4-a716-00000000009d",
+    "pulmonaryFunctionTestRequestId": "a6be00f5-cf65-5263-98ac-42d845d4f093",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "contraindicationBand": "ok",
@@ -82,22 +82,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "pulmonaryFunctionTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a8",
+    "id": "1c51ee4a-95fd-57a4-b7ca-8dad633483b3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "pulmonaryFunctionTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000ac",
+    "pulmonaryFunctionTestRequestGradeId": "87cc4b70-0714-5f15-acd1-7295c972c963",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "pulmonaryFunctionTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b1",
+    "id": "e0eff970-e388-52ab-8e19-95ea5fddd73f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "pulmonaryFunctionTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b5",
+    "pulmonaryFunctionTestRequestGradeId": "3b70c999-c5be-5e4e-b55f-52f66795c3b2",
     "flagId": "",
     "category": "recent-mi-contraindication",
     "priority": "low",

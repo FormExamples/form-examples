@@ -1,4 +1,5 @@
 <!ELEMENT general_practitioner_referral_letter (id,created_at,updated_at,deleted_at,patient_id,clinician_id,patient_identifier,referrer_role,referring_practice,referral_date,access_needs,referral_specialty,named_clinician,receiving_organisation,urgency,urgency_reason,suspected_cancer_criterion,suspected_cancer_pathway,reason_for_referral,relevant_history,presenting_problem,symptom_duration,red_flag_symptoms,examination_findings,investigation_results,current_medications,allergies,patient_expectations,consent_to_share,safety_netting,clinical_note)>
+<!ATTLIST general_practitioner_referral_letter xmlns CDATA #FIXED "https://formexamples.github.io/general-practitioner-referral-letter/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

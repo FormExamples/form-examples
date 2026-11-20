@@ -5,10 +5,19 @@ info:
   title: Partogram — Partogram
   version: 1.0.0
   description: "Parent partogram labour record header: recording context, patient identification, admission findings, and the active-phase start time that anchors the alert and action lines."
+x-namespace:
+  form: partogram
+  apiPrefix: /api/partogram/
+  sqlSchema: partogram
+  xmlNamespace: https://formexamples.github.io/partogram/xml
+tags:
+  - name: partogram
+    description: Partogram form
 paths:
   /api/partogram/partograms:
     get:
       summary: List Partogram records
+      tags: [partogram]
       operationId: listPartogram
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Partogram
+      tags: [partogram]
       operationId: createPartogram
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Partogram by id
+      tags: [partogram]
       operationId: getPartogram
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Partogram
+      tags: [partogram]
       operationId: updatePartogram
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Partogram
+      tags: [partogram]
       operationId: replacePartogram
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Partogram
+      tags: [partogram]
       operationId: deletePartogram
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Newborn And Infant Physical Examination — NewbornAndInfantPhysicalExaminationGradeFlag
   version: 1.0.0
   description: Referral flags that fire independently of the outcome roll-up, with priority and a suggested action pointing to the appropriate onward referral pathway for the practitioner or screening team.
+x-namespace:
+  form: newborn-and-infant-physical-examination
+  apiPrefix: /api/newborn-and-infant-physical-examination/
+  sqlSchema: newborn_and_infant_physical_examination
+  xmlNamespace: https://formexamples.github.io/newborn-and-infant-physical-examination/xml
+tags:
+  - name: newborn-and-infant-physical-examination
+    description: Newborn And Infant Physical Examination form
 paths:
   /api/newborn-and-infant-physical-examination/newborn_and_infant_physical_examination_grade_flags:
     get:
       summary: List NewbornAndInfantPhysicalExaminationGradeFlag records
+      tags: [newborn-and-infant-physical-examination]
       operationId: listNewbornAndInfantPhysicalExaminationGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NewbornAndInfantPhysicalExaminationGradeFlag
+      tags: [newborn-and-infant-physical-examination]
       operationId: createNewbornAndInfantPhysicalExaminationGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NewbornAndInfantPhysicalExaminationGradeFlag by id
+      tags: [newborn-and-infant-physical-examination]
       operationId: getNewbornAndInfantPhysicalExaminationGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NewbornAndInfantPhysicalExaminationGradeFlag
+      tags: [newborn-and-infant-physical-examination]
       operationId: updateNewbornAndInfantPhysicalExaminationGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NewbornAndInfantPhysicalExaminationGradeFlag
+      tags: [newborn-and-infant-physical-examination]
       operationId: replaceNewbornAndInfantPhysicalExaminationGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NewbornAndInfantPhysicalExaminationGradeFlag
+      tags: [newborn-and-infant-physical-examination]
       operationId: deleteNewbornAndInfantPhysicalExaminationGradeFlag
       responses:
         "200":

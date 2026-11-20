@@ -5,10 +5,19 @@ info:
   title: Neurodiversity Adjustment Response — NeurodiversityAdjustmentResponseGrade
   version: 1.0.0
   description: "Computed four-axis grade for a neurodiversity reasonable-adjustments response: outcome classification, legal / discrimination risk (reasonableness), response completeness, and follow-up / review urgency. Declining adjustments for a worker likely covered by the Equality Act 2010 without an adequate reasonableness justification or alternatives drives the legal-risk axis to high-risk and raises the discrimination-risk flag regardless of the other axes."
+x-namespace:
+  form: neurodiversity-adjustment-response
+  apiPrefix: /api/neurodiversity-adjustment-response/
+  sqlSchema: neurodiversity_adjustment_response
+  xmlNamespace: https://formexamples.github.io/neurodiversity-adjustment-response/xml
+tags:
+  - name: neurodiversity-adjustment-response
+    description: Neurodiversity Adjustment Response form
 paths:
   /api/neurodiversity-adjustment-response/neurodiversity_adjustment_response_grades:
     get:
       summary: List NeurodiversityAdjustmentResponseGrade records
+      tags: [neurodiversity-adjustment-response]
       operationId: listNeurodiversityAdjustmentResponseGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeurodiversityAdjustmentResponseGrade
+      tags: [neurodiversity-adjustment-response]
       operationId: createNeurodiversityAdjustmentResponseGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NeurodiversityAdjustmentResponseGrade by id
+      tags: [neurodiversity-adjustment-response]
       operationId: getNeurodiversityAdjustmentResponseGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeurodiversityAdjustmentResponseGrade
+      tags: [neurodiversity-adjustment-response]
       operationId: updateNeurodiversityAdjustmentResponseGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NeurodiversityAdjustmentResponseGrade
+      tags: [neurodiversity-adjustment-response]
       operationId: replaceNeurodiversityAdjustmentResponseGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NeurodiversityAdjustmentResponseGrade
+      tags: [neurodiversity-adjustment-response]
       operationId: deleteNeurodiversityAdjustmentResponseGrade
       responses:
         "200":

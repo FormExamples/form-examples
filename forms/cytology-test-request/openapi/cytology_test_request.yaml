@@ -5,10 +5,19 @@ info:
   title: Cytology Test Request — CytologyTestRequest
   version: 1.0.0
   description: Cytology specimen test request (referral). Captures the requested specimen type and site, the clinical indication and question, cervical-screening / cytology context, specimen collection (pre-analytical) details, and triage urgency.
+x-namespace:
+  form: cytology-test-request
+  apiPrefix: /api/cytology-test-request/
+  sqlSchema: cytology_test_request
+  xmlNamespace: https://formexamples.github.io/cytology-test-request/xml
+tags:
+  - name: cytology-test-request
+    description: Cytology Test Request form
 paths:
   /api/cytology-test-request/cytology_test_requests:
     get:
       summary: List CytologyTestRequest records
+      tags: [cytology-test-request]
       operationId: listCytologyTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CytologyTestRequest
+      tags: [cytology-test-request]
       operationId: createCytologyTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CytologyTestRequest by id
+      tags: [cytology-test-request]
       operationId: getCytologyTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CytologyTestRequest
+      tags: [cytology-test-request]
       operationId: updateCytologyTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CytologyTestRequest
+      tags: [cytology-test-request]
       operationId: replaceCytologyTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CytologyTestRequest
+      tags: [cytology-test-request]
       operationId: deleteCytologyTestRequest
       responses:
         "200":

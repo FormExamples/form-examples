@@ -5,10 +5,19 @@ info:
   title: Orthopedic Assessment — AssessmentRomMeasurement
   version: 1.0.0
   description: Individual range of motion measurement for a specific movement (e.g. flexion, extension, abduction).
+x-namespace:
+  form: orthopedic-assessment
+  apiPrefix: /api/orthopedic-assessment/
+  sqlSchema: orthopedic_assessment
+  xmlNamespace: https://formexamples.github.io/orthopedic-assessment/xml
+tags:
+  - name: orthopedic-assessment
+    description: Orthopedic Assessment form
 paths:
   /api/orthopedic-assessment/assessment_rom_measurements:
     get:
       summary: List AssessmentRomMeasurement records
+      tags: [orthopedic-assessment]
       operationId: listAssessmentRomMeasurement
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentRomMeasurement
+      tags: [orthopedic-assessment]
       operationId: createAssessmentRomMeasurement
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentRomMeasurement by id
+      tags: [orthopedic-assessment]
       operationId: getAssessmentRomMeasurement
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentRomMeasurement
+      tags: [orthopedic-assessment]
       operationId: updateAssessmentRomMeasurement
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentRomMeasurement
+      tags: [orthopedic-assessment]
       operationId: replaceAssessmentRomMeasurement
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentRomMeasurement
+      tags: [orthopedic-assessment]
       operationId: deleteAssessmentRomMeasurement
       responses:
         "200":

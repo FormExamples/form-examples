@@ -5,10 +5,19 @@ info:
   title: Mental Health Act Assessment — MentalHealthActAssessmentGrade
   version: 1.0.0
   description: "Computed legal-completeness and classification result for a Mental Health Act assessment: completeness status (valid/incomplete), recommended-section class, and urgency class. No automated detention decision is made."
+x-namespace:
+  form: mental-health-act-assessment
+  apiPrefix: /api/mental-health-act-assessment/
+  sqlSchema: mental_health_act_assessment
+  xmlNamespace: https://formexamples.github.io/mental-health-act-assessment/xml
+tags:
+  - name: mental-health-act-assessment
+    description: Mental Health Act Assessment form
 paths:
   /api/mental-health-act-assessment/mental_health_act_assessment_grades:
     get:
       summary: List MentalHealthActAssessmentGrade records
+      tags: [mental-health-act-assessment]
       operationId: listMentalHealthActAssessmentGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MentalHealthActAssessmentGrade
+      tags: [mental-health-act-assessment]
       operationId: createMentalHealthActAssessmentGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MentalHealthActAssessmentGrade by id
+      tags: [mental-health-act-assessment]
       operationId: getMentalHealthActAssessmentGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MentalHealthActAssessmentGrade
+      tags: [mental-health-act-assessment]
       operationId: updateMentalHealthActAssessmentGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MentalHealthActAssessmentGrade
+      tags: [mental-health-act-assessment]
       operationId: replaceMentalHealthActAssessmentGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MentalHealthActAssessmentGrade
+      tags: [mental-health-act-assessment]
       operationId: deleteMentalHealthActAssessmentGrade
       responses:
         "200":

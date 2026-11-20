@@ -5,10 +5,19 @@ info:
   title: Clinical Neurophysiology Waiting List Card — ClinNeurophysWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a clinical neurophysiology waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: clinical-neurophysiology-waiting-list-card
+  apiPrefix: /api/clinical-neurophysiology-waiting-list-card/
+  sqlSchema: clinical_neurophysiology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/clinical-neurophysiology-waiting-list-card/xml
+tags:
+  - name: clinical-neurophysiology-waiting-list-card
+    description: Clinical Neurophysiology Waiting List Card form
 paths:
   /api/clinical-neurophysiology-waiting-list-card/clin_neurophys_waiting_list_cards:
     get:
       summary: List ClinNeurophysWaitingListCard records
+      tags: [clinical-neurophysiology-waiting-list-card]
       operationId: listClinNeurophysWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ClinNeurophysWaitingListCard
+      tags: [clinical-neurophysiology-waiting-list-card]
       operationId: createClinNeurophysWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ClinNeurophysWaitingListCard by id
+      tags: [clinical-neurophysiology-waiting-list-card]
       operationId: getClinNeurophysWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ClinNeurophysWaitingListCard
+      tags: [clinical-neurophysiology-waiting-list-card]
       operationId: updateClinNeurophysWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ClinNeurophysWaitingListCard
+      tags: [clinical-neurophysiology-waiting-list-card]
       operationId: replaceClinNeurophysWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ClinNeurophysWaitingListCard
+      tags: [clinical-neurophysiology-waiting-list-card]
       operationId: deleteClinNeurophysWaitingListCard
       responses:
         "200":

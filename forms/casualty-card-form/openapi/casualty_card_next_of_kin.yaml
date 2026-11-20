@@ -5,10 +5,19 @@ info:
   title: Casualty Card Form — CasualtyCardNextOfKin
   version: 1.0.0
   description: 1:1 with casualty_card. Next of kin contact details and notification status.
+x-namespace:
+  form: casualty-card-form
+  apiPrefix: /api/casualty-card-form/
+  sqlSchema: casualty_card_form
+  xmlNamespace: https://formexamples.github.io/casualty-card-form/xml
+tags:
+  - name: casualty-card-form
+    description: Casualty Card Form form
 paths:
   /api/casualty-card-form/casualty_card_next_of_kins:
     get:
       summary: List CasualtyCardNextOfKin records
+      tags: [casualty-card-form]
       operationId: listCasualtyCardNextOfKin
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CasualtyCardNextOfKin
+      tags: [casualty-card-form]
       operationId: createCasualtyCardNextOfKin
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CasualtyCardNextOfKin by id
+      tags: [casualty-card-form]
       operationId: getCasualtyCardNextOfKin
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CasualtyCardNextOfKin
+      tags: [casualty-card-form]
       operationId: updateCasualtyCardNextOfKin
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CasualtyCardNextOfKin
+      tags: [casualty-card-form]
       operationId: replaceCasualtyCardNextOfKin
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CasualtyCardNextOfKin
+      tags: [casualty-card-form]
       operationId: deleteCasualtyCardNextOfKin
       responses:
         "200":

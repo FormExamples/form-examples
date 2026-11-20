@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,severity_level,total_symptom_score,menstrual_domain_score,pelvic_symptom_score,urogenital_symptom_score,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/gynecology-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

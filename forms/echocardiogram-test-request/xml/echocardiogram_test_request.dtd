@@ -1,4 +1,5 @@
 <!ELEMENT echocardiogram_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,echo_type,primary_indication,clinical_question,relevant_history,breathlessness,chest_pain,palpitations,syncope,oedema,nyha_class,ecg_findings,bnp_or_nt_probnp,known_murmur,previous_echo,previous_echo_date,ejection_fraction_known,on_cardiotoxic_chemotherapy,relevant_medications,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST echocardiogram_test_request xmlns CDATA #FIXED "https://formexamples.github.io/echocardiogram-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

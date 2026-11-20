@@ -5,10 +5,19 @@ info:
   title: Agile Checklist — AgileChecklist
   version: 1.0.0
   description: One row per submission. Stores answers to the 57 agile-checklist behaviour items grouped by section (Teams t01-t25, Stakeholders s01-s14, Practices p01-p18). Each column accepts yes / no / not-applicable / empty-string. Composite maturity is computed in agile_checklist_grade.
+x-namespace:
+  form: agile-checklist
+  apiPrefix: /api/agile-checklist/
+  sqlSchema: agile_checklist
+  xmlNamespace: https://formexamples.github.io/agile-checklist/xml
+tags:
+  - name: agile-checklist
+    description: Agile Checklist form
 paths:
   /api/agile-checklist/agile_checklists:
     get:
       summary: List AgileChecklist records
+      tags: [agile-checklist]
       operationId: listAgileChecklist
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AgileChecklist
+      tags: [agile-checklist]
       operationId: createAgileChecklist
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AgileChecklist by id
+      tags: [agile-checklist]
       operationId: getAgileChecklist
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AgileChecklist
+      tags: [agile-checklist]
       operationId: updateAgileChecklist
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AgileChecklist
+      tags: [agile-checklist]
       operationId: replaceAgileChecklist
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AgileChecklist
+      tags: [agile-checklist]
       operationId: deleteAgileChecklist
       responses:
         "200":

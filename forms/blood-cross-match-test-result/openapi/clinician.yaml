@@ -5,10 +5,19 @@ info:
   title: Blood Cross Match Test Result — Clinician
   version: 1.0.0
   description: Reporting clinician (biomedical scientist, transfusion practitioner, or consultant haematologist) who authors and signs the blood cross-match test result report.
+x-namespace:
+  form: blood-cross-match-test-result
+  apiPrefix: /api/blood-cross-match-test-result/
+  sqlSchema: blood_cross_match_test_result
+  xmlNamespace: https://formexamples.github.io/blood-cross-match-test-result/xml
+tags:
+  - name: blood-cross-match-test-result
+    description: Blood Cross Match Test Result form
 paths:
   /api/blood-cross-match-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags: [blood-cross-match-test-result]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [blood-cross-match-test-result]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [blood-cross-match-test-result]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [blood-cross-match-test-result]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [blood-cross-match-test-result]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [blood-cross-match-test-result]
       operationId: deleteClinician
       responses:
         "200":

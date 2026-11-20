@@ -5,10 +5,19 @@ info:
   title: Child Safeguarding Referral — Clinician
   version: 1.0.0
   description: Referrer identifying information for the professional making the child safeguarding referral.
+x-namespace:
+  form: child-safeguarding-referral
+  apiPrefix: /api/child-safeguarding-referral/
+  sqlSchema: child_safeguarding_referral
+  xmlNamespace: https://formexamples.github.io/child-safeguarding-referral/xml
+tags:
+  - name: child-safeguarding-referral
+    description: Child Safeguarding Referral form
 paths:
   /api/child-safeguarding-referral/clinicians:
     get:
       summary: List Clinician records
+      tags: [child-safeguarding-referral]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [child-safeguarding-referral]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [child-safeguarding-referral]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [child-safeguarding-referral]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [child-safeguarding-referral]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [child-safeguarding-referral]
       operationId: deleteClinician
       responses:
         "200":

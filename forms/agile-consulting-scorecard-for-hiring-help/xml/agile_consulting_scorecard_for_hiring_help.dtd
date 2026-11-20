@@ -1,4 +1,5 @@
 <!ELEMENT agile_consulting_scorecard_for_hiring_help (id,created_at,updated_at,deleted_at,organization_id,respondent_id,status,assessment_date,submitted_at,finalized_at,m1_done,m1_evidence,m2_done,m2_evidence,m3_done,m3_evidence,m4_done,m4_evidence,p1_done,p1_evidence,p2_done,p2_evidence,p3_done,p3_evidence,p4_done,p4_evidence,p5_done,p5_evidence,p6_done,p6_evidence,p7_done,p7_evidence,p8_done,p8_evidence,p9_done,p9_evidence,p10_done,p10_evidence,p11_done,p11_evidence,p12_done,p12_evidence)>
+<!ATTLIST agile_consulting_scorecard_for_hiring_help xmlns CDATA #FIXED "https://formexamples.github.io/agile-consulting-scorecard-for-hiring-help/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

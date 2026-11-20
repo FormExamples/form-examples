@@ -5,10 +5,19 @@ info:
   title: Dietic Assessment — DieticAssessmentGradeRule
   version: 1.0.0
   description: Audit trail of every MUST, GLIM, NRS-2002, SARC-F, SCOFF, refeeding, or composite rule that fired for this assessment.
+x-namespace:
+  form: dietic-assessment
+  apiPrefix: /api/dietic-assessment/
+  sqlSchema: dietic_assessment
+  xmlNamespace: https://formexamples.github.io/dietic-assessment/xml
+tags:
+  - name: dietic-assessment
+    description: Dietic Assessment form
 paths:
   /api/dietic-assessment/dietic_assessment_grade_rules:
     get:
       summary: List DieticAssessmentGradeRule records
+      tags: [dietic-assessment]
       operationId: listDieticAssessmentGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DieticAssessmentGradeRule
+      tags: [dietic-assessment]
       operationId: createDieticAssessmentGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DieticAssessmentGradeRule by id
+      tags: [dietic-assessment]
       operationId: getDieticAssessmentGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DieticAssessmentGradeRule
+      tags: [dietic-assessment]
       operationId: updateDieticAssessmentGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DieticAssessmentGradeRule
+      tags: [dietic-assessment]
       operationId: replaceDieticAssessmentGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DieticAssessmentGradeRule
+      tags: [dietic-assessment]
       operationId: deleteDieticAssessmentGradeRule
       responses:
         "200":

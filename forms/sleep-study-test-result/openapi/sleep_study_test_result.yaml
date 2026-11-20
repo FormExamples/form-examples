@@ -5,10 +5,19 @@ info:
   title: Sleep Study Test Result — SleepStudyTestResult
   version: 1.0.0
   description: Sleep study / polysomnography result (report). Captures the performed study type and adequacy, clinical history, the key quantitative metrics (recording and sleep time, apnoea-hypopnoea index, oxygen desaturation index, minimum and time-below-90% SpO2, mean heart rate), the OSA severity band, the narrative and structured findings, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: sleep-study-test-result
+  apiPrefix: /api/sleep-study-test-result/
+  sqlSchema: sleep_study_test_result
+  xmlNamespace: https://formexamples.github.io/sleep-study-test-result/xml
+tags:
+  - name: sleep-study-test-result
+    description: Sleep Study Test Result form
 paths:
   /api/sleep-study-test-result/sleep_study_test_results:
     get:
       summary: List SleepStudyTestResult records
+      tags: [sleep-study-test-result]
       operationId: listSleepStudyTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SleepStudyTestResult
+      tags: [sleep-study-test-result]
       operationId: createSleepStudyTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one SleepStudyTestResult by id
+      tags: [sleep-study-test-result]
       operationId: getSleepStudyTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SleepStudyTestResult
+      tags: [sleep-study-test-result]
       operationId: updateSleepStudyTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing SleepStudyTestResult
+      tags: [sleep-study-test-result]
       operationId: replaceSleepStudyTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SleepStudyTestResult
+      tags: [sleep-study-test-result]
       operationId: deleteSleepStudyTestResult
       responses:
         "200":

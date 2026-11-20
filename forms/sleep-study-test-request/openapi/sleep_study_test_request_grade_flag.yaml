@@ -5,10 +5,19 @@ info:
   title: Sleep Study Test Request — SleepStudyTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the sleep team.
+x-namespace:
+  form: sleep-study-test-request
+  apiPrefix: /api/sleep-study-test-request/
+  sqlSchema: sleep_study_test_request
+  xmlNamespace: https://formexamples.github.io/sleep-study-test-request/xml
+tags:
+  - name: sleep-study-test-request
+    description: Sleep Study Test Request form
 paths:
   /api/sleep-study-test-request/sleep_study_test_request_grade_flags:
     get:
       summary: List SleepStudyTestRequestGradeFlag records
+      tags: [sleep-study-test-request]
       operationId: listSleepStudyTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SleepStudyTestRequestGradeFlag
+      tags: [sleep-study-test-request]
       operationId: createSleepStudyTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one SleepStudyTestRequestGradeFlag by id
+      tags: [sleep-study-test-request]
       operationId: getSleepStudyTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SleepStudyTestRequestGradeFlag
+      tags: [sleep-study-test-request]
       operationId: updateSleepStudyTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing SleepStudyTestRequestGradeFlag
+      tags: [sleep-study-test-request]
       operationId: replaceSleepStudyTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SleepStudyTestRequestGradeFlag
+      tags: [sleep-study-test-request]
       operationId: deleteSleepStudyTestRequestGradeFlag
       responses:
         "200":

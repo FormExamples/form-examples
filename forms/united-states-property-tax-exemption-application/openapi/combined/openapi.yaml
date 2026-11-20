@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United States Property Tax Exemption Application
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-states-property-tax-exemption-application
+  apiPrefix: /api/united-states-property-tax-exemption-application/
+  sqlSchema: united_states_property_tax_exemption_application
+  xmlNamespace: https://formexamples.github.io/united-states-property-tax-exemption-application/xml
+tags:
+- name: united-states-property-tax-exemption-application
+  description: United States Property Tax Exemption Application form
 paths:
   /api/united-states-property-tax-exemption-application/applicants:
     get:
       summary: List Applicant records
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: listApplicant
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Applicant
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: createApplicant
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Applicant by id
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: getApplicant
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Applicant
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: updateApplicant
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Applicant
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: replaceApplicant
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Applicant
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: deleteApplicant
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/united-states-property-tax-exemption-application/assessors:
     get:
       summary: List Assessor records
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: listAssessor
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessor
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: createAssessor
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Assessor by id
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: getAssessor
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessor
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: updateAssessor
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Assessor
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: replaceAssessor
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Assessor
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: deleteAssessor
       responses:
         '200':
@@ -511,9 +543,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-states-property-tax-exemption-application
   /api/united-states-property-tax-exemption-application/property_tax_exemption_application_grade_flags:
     get:
       summary: List PropertyTaxExemptionApplicationGradeFlag records
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: listPropertyTaxExemptionApplicationGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PropertyTaxExemptionApplicationGradeFlag
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: createPropertyTaxExemptionApplicationGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PropertyTaxExemptionApplicationGradeFlag by id
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: getPropertyTaxExemptionApplicationGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PropertyTaxExemptionApplicationGradeFlag
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: updatePropertyTaxExemptionApplicationGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PropertyTaxExemptionApplicationGradeFlag
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: replacePropertyTaxExemptionApplicationGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PropertyTaxExemptionApplicationGradeFlag
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: deletePropertyTaxExemptionApplicationGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-states-property-tax-exemption-application/property_tax_exemption_application_grade_rules:
     get:
       summary: List PropertyTaxExemptionApplicationGradeRule records
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: listPropertyTaxExemptionApplicationGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PropertyTaxExemptionApplicationGradeRule
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: createPropertyTaxExemptionApplicationGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PropertyTaxExemptionApplicationGradeRule by id
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: getPropertyTaxExemptionApplicationGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PropertyTaxExemptionApplicationGradeRule
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: updatePropertyTaxExemptionApplicationGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PropertyTaxExemptionApplicationGradeRule
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: replacePropertyTaxExemptionApplicationGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PropertyTaxExemptionApplicationGradeRule
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: deletePropertyTaxExemptionApplicationGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-states-property-tax-exemption-application/property_tax_exemption_application_grades:
     get:
       summary: List PropertyTaxExemptionApplicationGrade records
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: listPropertyTaxExemptionApplicationGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PropertyTaxExemptionApplicationGrade
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: createPropertyTaxExemptionApplicationGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PropertyTaxExemptionApplicationGrade by id
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: getPropertyTaxExemptionApplicationGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PropertyTaxExemptionApplicationGrade
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: updatePropertyTaxExemptionApplicationGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PropertyTaxExemptionApplicationGrade
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: replacePropertyTaxExemptionApplicationGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PropertyTaxExemptionApplicationGrade
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: deletePropertyTaxExemptionApplicationGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-states-property-tax-exemption-application/property_tax_exemption_applications:
     get:
       summary: List PropertyTaxExemptionApplication records
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: listPropertyTaxExemptionApplication
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PropertyTaxExemptionApplication
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: createPropertyTaxExemptionApplication
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PropertyTaxExemptionApplication by id
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: getPropertyTaxExemptionApplication
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PropertyTaxExemptionApplication
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: updatePropertyTaxExemptionApplication
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PropertyTaxExemptionApplication
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: replacePropertyTaxExemptionApplication
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PropertyTaxExemptionApplication
+      tags:
+      - united-states-property-tax-exemption-application
       operationId: deletePropertyTaxExemptionApplication
       responses:
         '200':

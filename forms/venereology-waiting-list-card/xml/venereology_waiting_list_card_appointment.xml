@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE venereology_waiting_list_card_appointment SYSTEM "venereology_waiting_list_card_appointment.dtd">
-<venereology_waiting_list_card_appointment>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<venereology_waiting_list_card_appointment xmlns="https://formexamples.github.io/venereology-waiting-list-card/xml">
+<id>8c65e95d-5999-5e11-a119-1023dda0b591</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<venereology_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</venereology_waiting_list_card_id>
+<venereology_waiting_list_card_id>e9697eaa-3ff7-524d-ad9c-08148c72d7f1</venereology_waiting_list_card_id>
 <appointment_date>2026-01-15</appointment_date>
 <appointment_time></appointment_time>
 <duration_minutes>1</duration_minutes>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nursing_care_plan_grade_rule SYSTEM "nursing_care_plan_grade_rule.dtd">
-<nursing_care_plan_grade_rule>
-<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<nursing_care_plan_grade_rule xmlns="https://formexamples.github.io/nursing-care-plan/xml">
+<id>b050718b-81bc-5e1c-b0ca-927dcefae4e1</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<nursing_care_plan_grade_id>bb0e8400-e29b-41d4-a716-446655440006</nursing_care_plan_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<nursing_care_plan_grade_id>e10ef3fa-779c-5338-8a69-f4e9857c2516</nursing_care_plan_grade_id>
+<rule_id>214f0489-1a87-57d0-ba53-b2283680997c</rule_id>
 <category>General</category>
 <description>Example text.</description>
 </nursing_care_plan_grade_rule>

@@ -5,10 +5,19 @@ info:
   title: Medical Certificate Of Cause Of Death — MedicalCertificateOfCauseOfDeath
   version: 1.0.0
   description: "Main Medical Certificate of Cause of Death (MCCD) record: certification context, deceased death details, the Part I direct causal sequence (I(a) -> I(b) -> I(c)) with onset-to-death intervals, the Part II contributory conditions, and the coroner / medical-examiner referral status. Validity classification, fired rules, and flags live in child tables."
+x-namespace:
+  form: medical-certificate-of-cause-of-death
+  apiPrefix: /api/medical-certificate-of-cause-of-death/
+  sqlSchema: medical_certificate_of_cause_of_death
+  xmlNamespace: https://formexamples.github.io/medical-certificate-of-cause-of-death/xml
+tags:
+  - name: medical-certificate-of-cause-of-death
+    description: Medical Certificate Of Cause Of Death form
 paths:
   /api/medical-certificate-of-cause-of-death/medical_certificate_of_cause_of_deaths:
     get:
       summary: List MedicalCertificateOfCauseOfDeath records
+      tags: [medical-certificate-of-cause-of-death]
       operationId: listMedicalCertificateOfCauseOfDeath
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalCertificateOfCauseOfDeath
+      tags: [medical-certificate-of-cause-of-death]
       operationId: createMedicalCertificateOfCauseOfDeath
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalCertificateOfCauseOfDeath by id
+      tags: [medical-certificate-of-cause-of-death]
       operationId: getMedicalCertificateOfCauseOfDeath
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalCertificateOfCauseOfDeath
+      tags: [medical-certificate-of-cause-of-death]
       operationId: updateMedicalCertificateOfCauseOfDeath
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalCertificateOfCauseOfDeath
+      tags: [medical-certificate-of-cause-of-death]
       operationId: replaceMedicalCertificateOfCauseOfDeath
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalCertificateOfCauseOfDeath
+      tags: [medical-certificate-of-cause-of-death]
       operationId: deleteMedicalCertificateOfCauseOfDeath
       responses:
         "200":

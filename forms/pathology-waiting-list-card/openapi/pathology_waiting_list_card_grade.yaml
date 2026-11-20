@@ -5,10 +5,19 @@ info:
   title: Pathology Waiting List Card — PathologyWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: pathology-waiting-list-card
+  apiPrefix: /api/pathology-waiting-list-card/
+  sqlSchema: pathology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/pathology-waiting-list-card/xml
+tags:
+  - name: pathology-waiting-list-card
+    description: Pathology Waiting List Card form
 paths:
   /api/pathology-waiting-list-card/pathology_waiting_list_card_grades:
     get:
       summary: List PathologyWaitingListCardGrade records
+      tags: [pathology-waiting-list-card]
       operationId: listPathologyWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PathologyWaitingListCardGrade
+      tags: [pathology-waiting-list-card]
       operationId: createPathologyWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PathologyWaitingListCardGrade by id
+      tags: [pathology-waiting-list-card]
       operationId: getPathologyWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PathologyWaitingListCardGrade
+      tags: [pathology-waiting-list-card]
       operationId: updatePathologyWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PathologyWaitingListCardGrade
+      tags: [pathology-waiting-list-card]
       operationId: replacePathologyWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PathologyWaitingListCardGrade
+      tags: [pathology-waiting-list-card]
       operationId: deletePathologyWaitingListCardGrade
       responses:
         "200":

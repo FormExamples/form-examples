@@ -5,10 +5,19 @@ info:
   title: Genetic Test Request — GeneticTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (NHS National Genomic Test Directory eligibility match, 1-9), consent and pre-test counselling, request completeness, and triage priority."
+x-namespace:
+  form: genetic-test-request
+  apiPrefix: /api/genetic-test-request/
+  sqlSchema: genetic_test_request
+  xmlNamespace: https://formexamples.github.io/genetic-test-request/xml
+tags:
+  - name: genetic-test-request
+    description: Genetic Test Request form
 paths:
   /api/genetic-test-request/genetic_test_request_grades:
     get:
       summary: List GeneticTestRequestGrade records
+      tags: [genetic-test-request]
       operationId: listGeneticTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GeneticTestRequestGrade
+      tags: [genetic-test-request]
       operationId: createGeneticTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GeneticTestRequestGrade by id
+      tags: [genetic-test-request]
       operationId: getGeneticTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GeneticTestRequestGrade
+      tags: [genetic-test-request]
       operationId: updateGeneticTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GeneticTestRequestGrade
+      tags: [genetic-test-request]
       operationId: replaceGeneticTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GeneticTestRequestGrade
+      tags: [genetic-test-request]
       operationId: deleteGeneticTestRequestGrade
       responses:
         "200":

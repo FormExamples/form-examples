@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "7844283d-343f-4579-a914-5318201ab663",
+  "id": "e059b5c1-2b5e-5110-9903-525f8b616073",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:fcecc4d6-e355-4bac-a045-9fb413c9b91c",
+      "fullUrl": "urn:uuid:5224494b-da33-5aad-aec7-9804b9fa5c69",
       "resource": {
         "resourceType": "Patient",
-        "id": "fcecc4d6-e355-4bac-a045-9fb413c9b91c",
+        "id": "5224494b-da33-5aad-aec7-9804b9fa5c69",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:9c9f99cb-90b0-4609-ac9e-7d911f3067bc",
+      "fullUrl": "urn:uuid:e8c8e4c6-05e9-53e9-84d0-311aa7d0109f",
       "resource": {
         "resourceType": "Observation",
-        "id": "9c9f99cb-90b0-4609-ac9e-7d911f3067bc",
+        "id": "e8c8e4c6-05e9-53e9-84d0-311aa7d0109f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:fcecc4d6-e355-4bac-a045-9fb413c9b91c"
+          "reference": "urn:uuid:5224494b-da33-5aad-aec7-9804b9fa5c69"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:9e2eac67-b49f-4188-a4c5-09bffb1cb1ce",
+      "fullUrl": "urn:uuid:3b1e512a-c81f-595d-8f04-80c156f94658",
       "resource": {
         "resourceType": "Observation",
-        "id": "9e2eac67-b49f-4188-a4c5-09bffb1cb1ce",
+        "id": "3b1e512a-c81f-595d-8f04-80c156f94658",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:fcecc4d6-e355-4bac-a045-9fb413c9b91c"
+          "reference": "urn:uuid:5224494b-da33-5aad-aec7-9804b9fa5c69"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -643,10 +643,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:20015f73-ce3b-45b9-afa7-5b41459d3848",
+      "fullUrl": "urn:uuid:763d9d19-7cf1-595f-9a29-06a4294a98a7",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "20015f73-ce3b-45b9-afa7-5b41459d3848",
+        "id": "763d9d19-7cf1-595f-9a29-06a4294a98a7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -655,7 +655,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:fcecc4d6-e355-4bac-a045-9fb413c9b91c"
+          "reference": "urn:uuid:5224494b-da33-5aad-aec7-9804b9fa5c69"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -664,10 +664,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a526b383-e3f3-475e-aaaf-bb691c790ca4",
+      "fullUrl": "urn:uuid:97f24763-49bd-5b1b-8ec2-5dfd4fa61512",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "a526b383-e3f3-475e-aaaf-bb691c790ca4",
+        "id": "97f24763-49bd-5b1b-8ec2-5dfd4fa61512",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -697,17 +697,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:fcecc4d6-e355-4bac-a045-9fb413c9b91c"
+          "reference": "urn:uuid:5224494b-da33-5aad-aec7-9804b9fa5c69"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (ST elevation / STEMI, ventricular tachycardia, complete heart block, or markedly prolonged QTc) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:8f54ef19-b0ff-4b9c-a3b7-044f43bd8e4e",
+      "fullUrl": "urn:uuid:c41d7627-029c-5a3b-824a-8168792e8cfc",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "8f54ef19-b0ff-4b9c-a3b7-044f43bd8e4e",
+        "id": "c41d7627-029c-5a3b-824a-8168792e8cfc",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -737,17 +737,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:fcecc4d6-e355-4bac-a045-9fb413c9b91c"
+          "reference": "urn:uuid:5224494b-da33-5aad-aec7-9804b9fa5c69"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:2f5e9ae5-789c-4954-af84-d24fa9df9fa5",
+      "fullUrl": "urn:uuid:bfaee921-94c8-5345-b01b-82d2c25277d2",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "2f5e9ae5-789c-4954-af84-d24fa9df9fa5",
+        "id": "bfaee921-94c8-5345-b01b-82d2c25277d2",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -777,17 +777,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:fcecc4d6-e355-4bac-a045-9fb413c9b91c"
+          "reference": "urn:uuid:5224494b-da33-5aad-aec7-9804b9fa5c69"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:2bace3a5-d56e-473d-a317-bfc0ff4982da",
+      "fullUrl": "urn:uuid:594c9204-cc3d-5014-bc4a-6df08a2614e5",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "2bace3a5-d56e-473d-a317-bfc0ff4982da",
+        "id": "594c9204-cc3d-5014-bc4a-6df08a2614e5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -817,7 +817,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:fcecc4d6-e355-4bac-a045-9fb413c9b91c"
+          "reference": "urn:uuid:5224494b-da33-5aad-aec7-9804b9fa5c69"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (ST elevation / STEMI, ventricular tachycardia, complete heart block, or markedly prolonged QTc) is present.",
@@ -831,10 +831,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:d4e445f6-83ba-4171-a722-aff91bf577bf",
+      "fullUrl": "urn:uuid:18dca154-b23f-580a-9491-a9570dd5cb2b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "d4e445f6-83ba-4171-a722-aff91bf577bf",
+        "id": "18dca154-b23f-580a-9491-a9570dd5cb2b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -864,7 +864,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:fcecc4d6-e355-4bac-a045-9fb413c9b91c"
+          "reference": "urn:uuid:5224494b-da33-5aad-aec7-9804b9fa5c69"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",

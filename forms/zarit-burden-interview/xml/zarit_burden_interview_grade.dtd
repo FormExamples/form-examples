@@ -1,4 +1,5 @@
 <!ELEMENT zarit_burden_interview_grade (id,created_at,updated_at,deleted_at,zarit_burden_interview_id,total_score,max_score,burden_band,short_form_score,graded_at)>
+<!ATTLIST zarit_burden_interview_grade xmlns CDATA #FIXED "https://formexamples.github.io/zarit-burden-interview/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

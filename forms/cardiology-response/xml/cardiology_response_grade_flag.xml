@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cardiology_response_grade_flag SYSTEM "cardiology_response_grade_flag.dtd">
-<cardiology_response_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<cardiology_response_grade_flag xmlns="https://formexamples.github.io/cardiology-response/xml">
+<id>b77397d9-f07e-5715-bfb8-afdbacc48788</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cardiology_response_grade_id>880e8400-e29b-41d4-a716-446655440003</cardiology_response_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<cardiology_response_grade_id>cb1571e5-b942-5a59-a15a-0fb83cfa0107</cardiology_response_grade_id>
+<flag_id>276b16df-6902-5a2e-8c99-b3ae76057110</flag_id>
 <category>critical-finding</category>
 <priority>low</priority>
 <description>Example text.</description>

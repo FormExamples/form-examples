@@ -5,10 +5,19 @@ info:
   title: Outpatient Outcome — OutpatientOutcomeGradeRule
   version: 1.0.0
   description: Individual OOCG rules that evaluated to true during grading.
+x-namespace:
+  form: outpatient-outcome
+  apiPrefix: /api/outpatient-outcome/
+  sqlSchema: outpatient_outcome
+  xmlNamespace: https://formexamples.github.io/outpatient-outcome/xml
+tags:
+  - name: outpatient-outcome
+    description: Outpatient Outcome form
 paths:
   /api/outpatient-outcome/outpatient_outcome_grade_rules:
     get:
       summary: List OutpatientOutcomeGradeRule records
+      tags: [outpatient-outcome]
       operationId: listOutpatientOutcomeGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OutpatientOutcomeGradeRule
+      tags: [outpatient-outcome]
       operationId: createOutpatientOutcomeGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OutpatientOutcomeGradeRule by id
+      tags: [outpatient-outcome]
       operationId: getOutpatientOutcomeGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OutpatientOutcomeGradeRule
+      tags: [outpatient-outcome]
       operationId: updateOutpatientOutcomeGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OutpatientOutcomeGradeRule
+      tags: [outpatient-outcome]
       operationId: replaceOutpatientOutcomeGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OutpatientOutcomeGradeRule
+      tags: [outpatient-outcome]
       operationId: deleteOutpatientOutcomeGradeRule
       responses:
         "200":

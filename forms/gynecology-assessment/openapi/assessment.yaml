@@ -5,10 +5,19 @@ info:
   title: Gynecology Assessment — Assessment
   version: 1.0.0
   description: Gynaecological symptom assessment. Parent entity for all assessment sections.
+x-namespace:
+  form: gynecology-assessment
+  apiPrefix: /api/gynecology-assessment/
+  sqlSchema: gynecology_assessment
+  xmlNamespace: https://formexamples.github.io/gynecology-assessment/xml
+tags:
+  - name: gynecology-assessment
+    description: Gynecology Assessment form
 paths:
   /api/gynecology-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [gynecology-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [gynecology-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [gynecology-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [gynecology-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [gynecology-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [gynecology-assessment]
       operationId: deleteAssessment
       responses:
         "200":

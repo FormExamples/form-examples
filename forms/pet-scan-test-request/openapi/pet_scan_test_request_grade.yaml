@@ -5,10 +5,19 @@ info:
   title: Pet Scan Test Request — PetScanTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ACR / RCR iRefer 1-9), preparation safety and radiation dose, request completeness, and triage priority."
+x-namespace:
+  form: pet-scan-test-request
+  apiPrefix: /api/pet-scan-test-request/
+  sqlSchema: pet_scan_test_request
+  xmlNamespace: https://formexamples.github.io/pet-scan-test-request/xml
+tags:
+  - name: pet-scan-test-request
+    description: Pet Scan Test Request form
 paths:
   /api/pet-scan-test-request/pet_scan_test_request_grades:
     get:
       summary: List PetScanTestRequestGrade records
+      tags: [pet-scan-test-request]
       operationId: listPetScanTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PetScanTestRequestGrade
+      tags: [pet-scan-test-request]
       operationId: createPetScanTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PetScanTestRequestGrade by id
+      tags: [pet-scan-test-request]
       operationId: getPetScanTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PetScanTestRequestGrade
+      tags: [pet-scan-test-request]
       operationId: updatePetScanTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PetScanTestRequestGrade
+      tags: [pet-scan-test-request]
       operationId: replacePetScanTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PetScanTestRequestGrade
+      tags: [pet-scan-test-request]
       operationId: deletePetScanTestRequestGrade
       responses:
         "200":

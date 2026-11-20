@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the TIMI Risk Score for Acute Coronary Syndrome (UA/NSTEMI)
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: timi-risk-score-for-acute-coronary-syndrome
+  apiPrefix: /api/timi-risk-score-for-acute-coronary-syndrome/
+  sqlSchema: timi_risk_score_for_acute_coronary_syndrome
+  xmlNamespace: https://formexamples.github.io/timi-risk-score-for-acute-coronary-syndrome/xml
+tags:
+- name: timi-risk-score-for-acute-coronary-syndrome
+  description: TIMI Risk Score for Acute Coronary Syndrome (UA/NSTEMI) form
 paths:
   /api/timi-risk-score-for-acute-coronary-syndrome/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
   /api/timi-risk-score-for-acute-coronary-syndrome/patients:
     get:
       summary: List Patient records
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/timi-risk-score-for-acute-coronary-syndrome/timi_risk_score_for_acute_coronary_syndrome_grade_flags:
     get:
       summary: List TimiRiskScoreForAcuteCoronarySyndromeGradeFlag records
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: listTimiRiskScoreForAcuteCoronarySyndromeGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TimiRiskScoreForAcuteCoronarySyndromeGradeFlag
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: createTimiRiskScoreForAcuteCoronarySyndromeGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TimiRiskScoreForAcuteCoronarySyndromeGradeFlag by id
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: getTimiRiskScoreForAcuteCoronarySyndromeGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TimiRiskScoreForAcuteCoronarySyndromeGradeFlag
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: updateTimiRiskScoreForAcuteCoronarySyndromeGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TimiRiskScoreForAcuteCoronarySyndromeGradeFlag
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: replaceTimiRiskScoreForAcuteCoronarySyndromeGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TimiRiskScoreForAcuteCoronarySyndromeGradeFlag
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: deleteTimiRiskScoreForAcuteCoronarySyndromeGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/timi-risk-score-for-acute-coronary-syndrome/timi_risk_score_for_acute_coronary_syndrome_grade_rules:
     get:
       summary: List TimiRiskScoreForAcuteCoronarySyndromeGradeRule records
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: listTimiRiskScoreForAcuteCoronarySyndromeGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TimiRiskScoreForAcuteCoronarySyndromeGradeRule
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: createTimiRiskScoreForAcuteCoronarySyndromeGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TimiRiskScoreForAcuteCoronarySyndromeGradeRule by id
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: getTimiRiskScoreForAcuteCoronarySyndromeGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TimiRiskScoreForAcuteCoronarySyndromeGradeRule
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: updateTimiRiskScoreForAcuteCoronarySyndromeGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TimiRiskScoreForAcuteCoronarySyndromeGradeRule
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: replaceTimiRiskScoreForAcuteCoronarySyndromeGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TimiRiskScoreForAcuteCoronarySyndromeGradeRule
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: deleteTimiRiskScoreForAcuteCoronarySyndromeGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/timi-risk-score-for-acute-coronary-syndrome/timi_risk_score_for_acute_coronary_syndrome_grades:
     get:
       summary: List TimiRiskScoreForAcuteCoronarySyndromeGrade records
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: listTimiRiskScoreForAcuteCoronarySyndromeGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TimiRiskScoreForAcuteCoronarySyndromeGrade
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: createTimiRiskScoreForAcuteCoronarySyndromeGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TimiRiskScoreForAcuteCoronarySyndromeGrade by id
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: getTimiRiskScoreForAcuteCoronarySyndromeGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TimiRiskScoreForAcuteCoronarySyndromeGrade
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: updateTimiRiskScoreForAcuteCoronarySyndromeGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TimiRiskScoreForAcuteCoronarySyndromeGrade
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: replaceTimiRiskScoreForAcuteCoronarySyndromeGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TimiRiskScoreForAcuteCoronarySyndromeGrade
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: deleteTimiRiskScoreForAcuteCoronarySyndromeGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/timi-risk-score-for-acute-coronary-syndrome/timi_risk_score_for_acute_coronary_syndromes:
     get:
       summary: List TimiRiskScoreForAcuteCoronarySyndrome records
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: listTimiRiskScoreForAcuteCoronarySyndrome
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TimiRiskScoreForAcuteCoronarySyndrome
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: createTimiRiskScoreForAcuteCoronarySyndrome
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TimiRiskScoreForAcuteCoronarySyndrome by id
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: getTimiRiskScoreForAcuteCoronarySyndrome
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TimiRiskScoreForAcuteCoronarySyndrome
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: updateTimiRiskScoreForAcuteCoronarySyndrome
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TimiRiskScoreForAcuteCoronarySyndrome
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: replaceTimiRiskScoreForAcuteCoronarySyndrome
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TimiRiskScoreForAcuteCoronarySyndrome
+      tags:
+      - timi-risk-score-for-acute-coronary-syndrome
       operationId: deleteTimiRiskScoreForAcuteCoronarySyndrome
       responses:
         '200':

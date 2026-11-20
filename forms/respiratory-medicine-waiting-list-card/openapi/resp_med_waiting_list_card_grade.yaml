@@ -5,10 +5,19 @@ info:
   title: Respiratory Medicine Waiting List Card — RespMedWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: respiratory-medicine-waiting-list-card
+  apiPrefix: /api/respiratory-medicine-waiting-list-card/
+  sqlSchema: respiratory_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/respiratory-medicine-waiting-list-card/xml
+tags:
+  - name: respiratory-medicine-waiting-list-card
+    description: Respiratory Medicine Waiting List Card form
 paths:
   /api/respiratory-medicine-waiting-list-card/resp_med_waiting_list_card_grades:
     get:
       summary: List RespMedWaitingListCardGrade records
+      tags: [respiratory-medicine-waiting-list-card]
       operationId: listRespMedWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RespMedWaitingListCardGrade
+      tags: [respiratory-medicine-waiting-list-card]
       operationId: createRespMedWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RespMedWaitingListCardGrade by id
+      tags: [respiratory-medicine-waiting-list-card]
       operationId: getRespMedWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RespMedWaitingListCardGrade
+      tags: [respiratory-medicine-waiting-list-card]
       operationId: updateRespMedWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RespMedWaitingListCardGrade
+      tags: [respiratory-medicine-waiting-list-card]
       operationId: replaceRespMedWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RespMedWaitingListCardGrade
+      tags: [respiratory-medicine-waiting-list-card]
       operationId: deleteRespMedWaitingListCardGrade
       responses:
         "200":

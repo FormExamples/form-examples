@@ -5,10 +5,19 @@ info:
   title: Clinical Neurophysiology Waiting List Card — ClinNeurophysWaitingListCardGradeRule
   version: 1.0.0
   description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that fired during grading of a waiting list card.
+x-namespace:
+  form: clinical-neurophysiology-waiting-list-card
+  apiPrefix: /api/clinical-neurophysiology-waiting-list-card/
+  sqlSchema: clinical_neurophysiology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/clinical-neurophysiology-waiting-list-card/xml
+tags:
+  - name: clinical-neurophysiology-waiting-list-card
+    description: Clinical Neurophysiology Waiting List Card form
 paths:
   /api/clinical-neurophysiology-waiting-list-card/clin_neurophys_waiting_list_card_grade_rules:
     get:
       summary: List ClinNeurophysWaitingListCardGradeRule records
+      tags: [clinical-neurophysiology-waiting-list-card]
       operationId: listClinNeurophysWaitingListCardGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ClinNeurophysWaitingListCardGradeRule
+      tags: [clinical-neurophysiology-waiting-list-card]
       operationId: createClinNeurophysWaitingListCardGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ClinNeurophysWaitingListCardGradeRule by id
+      tags: [clinical-neurophysiology-waiting-list-card]
       operationId: getClinNeurophysWaitingListCardGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ClinNeurophysWaitingListCardGradeRule
+      tags: [clinical-neurophysiology-waiting-list-card]
       operationId: updateClinNeurophysWaitingListCardGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ClinNeurophysWaitingListCardGradeRule
+      tags: [clinical-neurophysiology-waiting-list-card]
       operationId: replaceClinNeurophysWaitingListCardGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ClinNeurophysWaitingListCardGradeRule
+      tags: [clinical-neurophysiology-waiting-list-card]
       operationId: deleteClinNeurophysWaitingListCardGradeRule
       responses:
         "200":

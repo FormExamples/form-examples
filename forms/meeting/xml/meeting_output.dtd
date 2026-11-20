@@ -1,4 +1,5 @@
 <!ELEMENT meeting_output (id,created_at,updated_at,deleted_at,meeting_id,position,title,kind,url,description,owner_name)>
+<!ATTLIST meeting_output xmlns CDATA #FIXED "https://formexamples.github.io/meeting/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

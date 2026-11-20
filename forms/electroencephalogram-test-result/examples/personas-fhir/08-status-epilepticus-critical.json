@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "27e205db-ed50-4299-ac1d-a31a6efe9518",
+  "id": "b01c79bf-ec0b-5bea-b8a9-a2cc4e64e57e",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:53776ba9-f24c-43dd-ae9d-66ddca6a8a75",
+      "fullUrl": "urn:uuid:f8026474-7269-5047-ac0a-21886bea871e",
       "resource": {
         "resourceType": "Patient",
-        "id": "53776ba9-f24c-43dd-ae9d-66ddca6a8a75",
+        "id": "f8026474-7269-5047-ac0a-21886bea871e",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:8f2eb762-6698-4493-af2b-dd07e7712dd0",
+      "fullUrl": "urn:uuid:5e25a6ba-ad19-569d-b85d-8716a4c86616",
       "resource": {
         "resourceType": "Observation",
-        "id": "8f2eb762-6698-4493-af2b-dd07e7712dd0",
+        "id": "5e25a6ba-ad19-569d-b85d-8716a4c86616",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:53776ba9-f24c-43dd-ae9d-66ddca6a8a75"
+          "reference": "urn:uuid:f8026474-7269-5047-ac0a-21886bea871e"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:968cba93-aef7-4587-a9c5-3501e8d312bd",
+      "fullUrl": "urn:uuid:e918245f-c2da-5603-b860-d1b03872d24e",
       "resource": {
         "resourceType": "Observation",
-        "id": "968cba93-aef7-4587-a9c5-3501e8d312bd",
+        "id": "e918245f-c2da-5603-b860-d1b03872d24e",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:53776ba9-f24c-43dd-ae9d-66ddca6a8a75"
+          "reference": "urn:uuid:f8026474-7269-5047-ac0a-21886bea871e"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -566,10 +566,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:b8616bcf-fc0d-4ba8-a241-2f8e10d23b61",
+      "fullUrl": "urn:uuid:44cec176-9a3d-5c94-8bd5-d630111c2781",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "b8616bcf-fc0d-4ba8-a241-2f8e10d23b61",
+        "id": "44cec176-9a3d-5c94-8bd5-d630111c2781",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -578,7 +578,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:53776ba9-f24c-43dd-ae9d-66ddca6a8a75"
+          "reference": "urn:uuid:f8026474-7269-5047-ac0a-21886bea871e"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -587,10 +587,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:6d621401-22b0-4b81-a1bd-58d27fe47809",
+      "fullUrl": "urn:uuid:01fa50b6-fc76-5204-8caf-0b0712e91178",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "6d621401-22b0-4b81-a1bd-58d27fe47809",
+        "id": "01fa50b6-fc76-5204-8caf-0b0712e91178",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -620,17 +620,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:53776ba9-f24c-43dd-ae9d-66ddca6a8a75"
+          "reference": "urn:uuid:f8026474-7269-5047-ac0a-21886bea871e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical structured finding (status epilepticus, a recorded seizure, or epileptiform discharges) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:c495df8a-0e71-489c-a27d-70ef2b20de6b",
+      "fullUrl": "urn:uuid:a477a559-74dd-59e4-a07f-9fd48b7d875c",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "c495df8a-0e71-489c-a27d-70ef2b20de6b",
+        "id": "a477a559-74dd-59e4-a07f-9fd48b7d875c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -660,17 +660,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:53776ba9-f24c-43dd-ae9d-66ddca6a8a75"
+          "reference": "urn:uuid:f8026474-7269-5047-ac0a-21886bea871e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:57e5f2d1-6d47-489c-a103-a3115ac3f0d8",
+      "fullUrl": "urn:uuid:fc20589d-6fa6-5ca0-8b33-74f0e731fc26",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "57e5f2d1-6d47-489c-a103-a3115ac3f0d8",
+        "id": "fc20589d-6fa6-5ca0-8b33-74f0e731fc26",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -700,17 +700,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:53776ba9-f24c-43dd-ae9d-66ddca6a8a75"
+          "reference": "urn:uuid:f8026474-7269-5047-ac0a-21886bea871e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: comparison with previous EEG."
       }
     },
     {
-      "fullUrl": "urn:uuid:8279c76f-4ce4-4fd5-a743-b99377f8f70a",
+      "fullUrl": "urn:uuid:d3731deb-a86a-5a6b-8573-9526b6962050",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "8279c76f-4ce4-4fd5-a743-b99377f8f70a",
+        "id": "d3731deb-a86a-5a6b-8573-9526b6962050",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -740,17 +740,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:53776ba9-f24c-43dd-ae9d-66ddca6a8a75"
+          "reference": "urn:uuid:f8026474-7269-5047-ac0a-21886bea871e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:a36b0556-7609-401a-a9b4-2f772404221b",
+      "fullUrl": "urn:uuid:786b114d-6d1f-52f1-9e3a-cf76e5799b33",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "a36b0556-7609-401a-a9b4-2f772404221b",
+        "id": "786b114d-6d1f-52f1-9e3a-cf76e5799b33",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -780,7 +780,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:53776ba9-f24c-43dd-ae9d-66ddca6a8a75"
+          "reference": "urn:uuid:f8026474-7269-5047-ac0a-21886bea871e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (status epilepticus, a recorded seizure, or epileptiform discharges) is present.",
@@ -794,10 +794,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:1f621cdd-5a60-4a79-a90b-d6f28fc7c8d7",
+      "fullUrl": "urn:uuid:061451a0-2064-5fcb-87dc-2fd3bd6b7865",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "1f621cdd-5a60-4a79-a90b-d6f28fc7c8d7",
+        "id": "061451a0-2064-5fcb-87dc-2fd3bd6b7865",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -827,7 +827,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:53776ba9-f24c-43dd-ae9d-66ddca6a8a75"
+          "reference": "urn:uuid:f8026474-7269-5047-ac0a-21886bea871e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",
@@ -841,10 +841,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:ff93e87e-1981-4f34-a621-c148549ba111",
+      "fullUrl": "urn:uuid:67c2991a-b12e-5dd2-ba75-003c2481b627",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ff93e87e-1981-4f34-a621-c148549ba111",
+        "id": "67c2991a-b12e-5dd2-ba75-003c2481b627",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -874,7 +874,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:53776ba9-f24c-43dd-ae9d-66ddca6a8a75"
+          "reference": "urn:uuid:f8026474-7269-5047-ac0a-21886bea871e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Status epilepticus (including non-convulsive status) requires immediate action.",

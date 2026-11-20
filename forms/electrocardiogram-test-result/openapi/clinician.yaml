@@ -5,10 +5,19 @@ info:
   title: Electrocardiogram Test Result — Clinician
   version: 1.0.0
   description: Reporting clinician (cardiologist, cardiac physiologist, or reporting clinician) who authors and signs the ECG result report.
+x-namespace:
+  form: electrocardiogram-test-result
+  apiPrefix: /api/electrocardiogram-test-result/
+  sqlSchema: electrocardiogram_test_result
+  xmlNamespace: https://formexamples.github.io/electrocardiogram-test-result/xml
+tags:
+  - name: electrocardiogram-test-result
+    description: Electrocardiogram Test Result form
 paths:
   /api/electrocardiogram-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags: [electrocardiogram-test-result]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [electrocardiogram-test-result]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [electrocardiogram-test-result]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [electrocardiogram-test-result]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [electrocardiogram-test-result]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [electrocardiogram-test-result]
       operationId: deleteClinician
       responses:
         "200":

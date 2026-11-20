@@ -5,10 +5,19 @@ info:
   title: Paediatrics Waiting List Card — Practitioner
   version: 1.0.0
   description: Practitioner who completes a paediatrics waiting list card on behalf of the patient.
+x-namespace:
+  form: paediatrics-waiting-list-card
+  apiPrefix: /api/paediatrics-waiting-list-card/
+  sqlSchema: paediatrics_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/paediatrics-waiting-list-card/xml
+tags:
+  - name: paediatrics-waiting-list-card
+    description: Paediatrics Waiting List Card form
 paths:
   /api/paediatrics-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags: [paediatrics-waiting-list-card]
       operationId: listPractitioner
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Practitioner
+      tags: [paediatrics-waiting-list-card]
       operationId: createPractitioner
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags: [paediatrics-waiting-list-card]
       operationId: getPractitioner
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Practitioner
+      tags: [paediatrics-waiting-list-card]
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Practitioner
+      tags: [paediatrics-waiting-list-card]
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Practitioner
+      tags: [paediatrics-waiting-list-card]
       operationId: deletePractitioner
       responses:
         "200":

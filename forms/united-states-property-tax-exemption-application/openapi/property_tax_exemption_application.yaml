@@ -5,10 +5,19 @@ info:
   title: United States Property Tax Exemption Application — PropertyTaxExemptionApplication
   version: 1.0.0
   description: "Main United States property tax exemption application: parcel, ownership and occupancy on the assessment date, exemptions claimed, income, proof documents, filing date, appeal basics and the signed declaration."
+x-namespace:
+  form: united-states-property-tax-exemption-application
+  apiPrefix: /api/united-states-property-tax-exemption-application/
+  sqlSchema: united_states_property_tax_exemption_application
+  xmlNamespace: https://formexamples.github.io/united-states-property-tax-exemption-application/xml
+tags:
+  - name: united-states-property-tax-exemption-application
+    description: United States Property Tax Exemption Application form
 paths:
   /api/united-states-property-tax-exemption-application/property_tax_exemption_applications:
     get:
       summary: List PropertyTaxExemptionApplication records
+      tags: [united-states-property-tax-exemption-application]
       operationId: listPropertyTaxExemptionApplication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PropertyTaxExemptionApplication
+      tags: [united-states-property-tax-exemption-application]
       operationId: createPropertyTaxExemptionApplication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PropertyTaxExemptionApplication by id
+      tags: [united-states-property-tax-exemption-application]
       operationId: getPropertyTaxExemptionApplication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PropertyTaxExemptionApplication
+      tags: [united-states-property-tax-exemption-application]
       operationId: updatePropertyTaxExemptionApplication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PropertyTaxExemptionApplication
+      tags: [united-states-property-tax-exemption-application]
       operationId: replacePropertyTaxExemptionApplication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PropertyTaxExemptionApplication
+      tags: [united-states-property-tax-exemption-application]
       operationId: deletePropertyTaxExemptionApplication
       responses:
         "200":

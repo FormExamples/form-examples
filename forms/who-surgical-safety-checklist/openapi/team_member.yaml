@@ -5,10 +5,19 @@ info:
   title: Who Surgical Safety Checklist — TeamMember
   version: 1.0.0
   description: Operating-team roster row captured during the Time Out introductions step. Each row represents one team member present in the operating room for a given case.
+x-namespace:
+  form: who-surgical-safety-checklist
+  apiPrefix: /api/who-surgical-safety-checklist/
+  sqlSchema: who_surgical_safety_checklist
+  xmlNamespace: https://formexamples.github.io/who-surgical-safety-checklist/xml
+tags:
+  - name: who-surgical-safety-checklist
+    description: Who Surgical Safety Checklist form
 paths:
   /api/who-surgical-safety-checklist/team_members:
     get:
       summary: List TeamMember records
+      tags: [who-surgical-safety-checklist]
       operationId: listTeamMember
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new TeamMember
+      tags: [who-surgical-safety-checklist]
       operationId: createTeamMember
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one TeamMember by id
+      tags: [who-surgical-safety-checklist]
       operationId: getTeamMember
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing TeamMember
+      tags: [who-surgical-safety-checklist]
       operationId: updateTeamMember
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing TeamMember
+      tags: [who-surgical-safety-checklist]
       operationId: replaceTeamMember
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a TeamMember
+      tags: [who-surgical-safety-checklist]
       operationId: deleteTeamMember
       responses:
         "200":

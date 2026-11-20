@@ -5,10 +5,19 @@ info:
   title: Medical Operation Note — MedicalOperationNoteTeamMember
   version: 1.0.0
   description: "Members of the operating team for an operation note: clinician plus team role and time present."
+x-namespace:
+  form: medical-operation-note
+  apiPrefix: /api/medical-operation-note/
+  sqlSchema: medical_operation_note
+  xmlNamespace: https://formexamples.github.io/medical-operation-note/xml
+tags:
+  - name: medical-operation-note
+    description: Medical Operation Note form
 paths:
   /api/medical-operation-note/medical_operation_note_team_members:
     get:
       summary: List MedicalOperationNoteTeamMember records
+      tags: [medical-operation-note]
       operationId: listMedicalOperationNoteTeamMember
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalOperationNoteTeamMember
+      tags: [medical-operation-note]
       operationId: createMedicalOperationNoteTeamMember
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalOperationNoteTeamMember by id
+      tags: [medical-operation-note]
       operationId: getMedicalOperationNoteTeamMember
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalOperationNoteTeamMember
+      tags: [medical-operation-note]
       operationId: updateMedicalOperationNoteTeamMember
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalOperationNoteTeamMember
+      tags: [medical-operation-note]
       operationId: replaceMedicalOperationNoteTeamMember
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalOperationNoteTeamMember
+      tags: [medical-operation-note]
       operationId: deleteMedicalOperationNoteTeamMember
       responses:
         "200":

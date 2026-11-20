@@ -5,10 +5,19 @@ info:
   title: Anaesthetics Waiting List Card — AnaestheticsWaitingListCardAppointment
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+x-namespace:
+  form: anaesthetics-waiting-list-card
+  apiPrefix: /api/anaesthetics-waiting-list-card/
+  sqlSchema: anaesthetics_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/anaesthetics-waiting-list-card/xml
+tags:
+  - name: anaesthetics-waiting-list-card
+    description: Anaesthetics Waiting List Card form
 paths:
   /api/anaesthetics-waiting-list-card/anaesthetics_waiting_list_card_appointments:
     get:
       summary: List AnaestheticsWaitingListCardAppointment records
+      tags: [anaesthetics-waiting-list-card]
       operationId: listAnaestheticsWaitingListCardAppointment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AnaestheticsWaitingListCardAppointment
+      tags: [anaesthetics-waiting-list-card]
       operationId: createAnaestheticsWaitingListCardAppointment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AnaestheticsWaitingListCardAppointment by id
+      tags: [anaesthetics-waiting-list-card]
       operationId: getAnaestheticsWaitingListCardAppointment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AnaestheticsWaitingListCardAppointment
+      tags: [anaesthetics-waiting-list-card]
       operationId: updateAnaestheticsWaitingListCardAppointment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AnaestheticsWaitingListCardAppointment
+      tags: [anaesthetics-waiting-list-card]
       operationId: replaceAnaestheticsWaitingListCardAppointment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AnaestheticsWaitingListCardAppointment
+      tags: [anaesthetics-waiting-list-card]
       operationId: deleteAnaestheticsWaitingListCardAppointment
       responses:
         "200":

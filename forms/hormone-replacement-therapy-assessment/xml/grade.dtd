@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,mrs_total_score,somatic_subscale_score,psychological_subscale_score,urogenital_subscale_score,overall_severity,hrt_eligibility,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/hormone-replacement-therapy-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Inpatient Clinical Note — InpatientClinicalNoteGrade
   version: 1.0.0
   description: "Computed grading result for an inpatient clinical note: documentation-completeness status and percentage over the note-type-specific required-component set, max-band clinical acuity band, NEWS2 aggregate, and per-component presence flags."
+x-namespace:
+  form: inpatient-clinical-note
+  apiPrefix: /api/inpatient-clinical-note/
+  sqlSchema: inpatient_clinical_note
+  xmlNamespace: https://formexamples.github.io/inpatient-clinical-note/xml
+tags:
+  - name: inpatient-clinical-note
+    description: Inpatient Clinical Note form
 paths:
   /api/inpatient-clinical-note/inpatient_clinical_note_grades:
     get:
       summary: List InpatientClinicalNoteGrade records
+      tags: [inpatient-clinical-note]
       operationId: listInpatientClinicalNoteGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new InpatientClinicalNoteGrade
+      tags: [inpatient-clinical-note]
       operationId: createInpatientClinicalNoteGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one InpatientClinicalNoteGrade by id
+      tags: [inpatient-clinical-note]
       operationId: getInpatientClinicalNoteGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing InpatientClinicalNoteGrade
+      tags: [inpatient-clinical-note]
       operationId: updateInpatientClinicalNoteGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing InpatientClinicalNoteGrade
+      tags: [inpatient-clinical-note]
       operationId: replaceInpatientClinicalNoteGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a InpatientClinicalNoteGrade
+      tags: [inpatient-clinical-note]
       operationId: deleteInpatientClinicalNoteGrade
       responses:
         "200":

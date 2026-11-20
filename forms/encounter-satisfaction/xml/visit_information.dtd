@@ -1,4 +1,5 @@
 <!ELEMENT visit_information (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,visit_date,department,provider_name,visit_type,reason_for_visit,first_visit)>
+<!ATTLIST visit_information xmlns CDATA #FIXED "https://formexamples.github.io/encounter-satisfaction/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

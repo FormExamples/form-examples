@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005f",
+    "id": "2b33fa50-7105-58c7-9cc1-89ab0a546fcf",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000071",
+    "id": "41803c7b-c44f-5846-877d-97cfba388b6d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "newbornBloodSpotScreening": {
-    "id": "550e8400-e29b-41d4-a716-00000000007e",
+    "id": "7721c354-1b35-593b-9020-02d82398be23",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000082",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000083",
+    "patientId": "019e0609-bdc7-5004-bbc0-61bfd847aaed",
+    "clinicianId": "b2829a00-514f-524f-aada-3fbf76d07d13",
     "sampleTakerRole": "midwife",
     "careSetting": "community",
     "recordDate": null,
@@ -70,11 +70,11 @@
     "clinicalContext": ""
   },
   "newbornBloodSpotScreeningGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000009f",
+    "id": "df308af6-d31f-5ea3-82a3-481a1fcb6fea",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "newbornBloodSpotScreeningId": "550e8400-e29b-41d4-a716-0000000000a3",
+    "newbornBloodSpotScreeningId": "db40ee4e-a58c-567b-8822-ff316cfa3081",
     "overallOutcome": "referral-required",
     "referralStatus": "routine",
     "sampleAdequate": true,
@@ -83,22 +83,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "newbornBloodSpotScreeningGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000aa",
+    "id": "b5bbb362-4459-5d27-9a67-2c445c36237a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "newbornBloodSpotScreeningGradeId": "550e8400-e29b-41d4-a716-0000000000ae",
+    "newbornBloodSpotScreeningGradeId": "0f55180b-f46e-5ca6-a80e-194e5290b455",
     "ruleId": "",
     "stage": "condition",
     "category": "",
     "description": ""
   },
   "newbornBloodSpotScreeningGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b3",
+    "id": "18799dfd-3698-53f4-b091-b6b84b3979ae",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "newbornBloodSpotScreeningGradeId": "550e8400-e29b-41d4-a716-0000000000b7",
+    "newbornBloodSpotScreeningGradeId": "dcd837be-21c7-5c3f-87c3-8735e844ba8c",
     "flagId": "",
     "category": "urgent-referral",
     "priority": "low",

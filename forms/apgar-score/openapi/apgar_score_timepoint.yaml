@@ -5,10 +5,19 @@ info:
   title: Apgar Score — ApgarScoreTimepoint
   version: 1.0.0
   description: Repeated per-timepoint five-sign Apgar scores (1, 5, 10 minutes, and beyond); cascades from the parent apgar_score.
+x-namespace:
+  form: apgar-score
+  apiPrefix: /api/apgar-score/
+  sqlSchema: apgar_score
+  xmlNamespace: https://formexamples.github.io/apgar-score/xml
+tags:
+  - name: apgar-score
+    description: Apgar Score form
 paths:
   /api/apgar-score/apgar_score_timepoints:
     get:
       summary: List ApgarScoreTimepoint records
+      tags: [apgar-score]
       operationId: listApgarScoreTimepoint
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ApgarScoreTimepoint
+      tags: [apgar-score]
       operationId: createApgarScoreTimepoint
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ApgarScoreTimepoint by id
+      tags: [apgar-score]
       operationId: getApgarScoreTimepoint
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ApgarScoreTimepoint
+      tags: [apgar-score]
       operationId: updateApgarScoreTimepoint
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ApgarScoreTimepoint
+      tags: [apgar-score]
       operationId: replaceApgarScoreTimepoint
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ApgarScoreTimepoint
+      tags: [apgar-score]
       operationId: deleteApgarScoreTimepoint
       responses:
         "200":

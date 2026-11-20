@@ -1,4 +1,5 @@
 <!ELEMENT fluid_balance_chart_entry (id,created_at,updated_at,deleted_at,fluid_balance_chart_id,entry_at,direction,category,description,volume_ml)>
+<!ATTLIST fluid_balance_chart_entry xmlns CDATA #FIXED "https://formexamples.github.io/fluid-balance-chart/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

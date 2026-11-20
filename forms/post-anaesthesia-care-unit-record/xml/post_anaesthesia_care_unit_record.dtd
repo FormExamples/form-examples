@@ -1,4 +1,5 @@
 <!ELEMENT post_anaesthesia_care_unit_record (id,created_at,updated_at,deleted_at,patient_id,clinician_id,nurse_name,nurse_role,anaesthetist_name,admitted_at,anaesthetic_technique,procedure,patient_identifier,age_band,sex,asa_status,baseline_systolic_bp,ambulatory_case,activity,respiration,circulation,consciousness,oxygen_saturation,airway_status,pain_score,ponv_severity,analgesia_given,antiemetics_given,padss_vital_signs,padss_ambulation,padss_nausea_vomiting,padss_pain,padss_surgical_bleeding,recovery_note)>
+<!ATTLIST post_anaesthesia_care_unit_record xmlns CDATA #FIXED "https://formexamples.github.io/post-anaesthesia-care-unit-record/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Pet Scan Test Result — Clinician
   version: 1.0.0
   description: Reporting clinician (nuclear-medicine physician or radiologist) who authors and signs the PET-CT scan result report.
+x-namespace:
+  form: pet-scan-test-result
+  apiPrefix: /api/pet-scan-test-result/
+  sqlSchema: pet_scan_test_result
+  xmlNamespace: https://formexamples.github.io/pet-scan-test-result/xml
+tags:
+  - name: pet-scan-test-result
+    description: Pet Scan Test Result form
 paths:
   /api/pet-scan-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags: [pet-scan-test-result]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [pet-scan-test-result]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [pet-scan-test-result]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [pet-scan-test-result]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [pet-scan-test-result]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [pet-scan-test-result]
       operationId: deleteClinician
       responses:
         "200":

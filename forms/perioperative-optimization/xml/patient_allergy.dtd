@@ -1,4 +1,5 @@
 <!ELEMENT patient_allergy (id,created_at,updated_at,deleted_at,patient_id,allergy_id,reaction,severity,kind,diagnosis_method,onset_on,adrenaline_auto_injector,notes)>
+<!ATTLIST patient_allergy xmlns CDATA #FIXED "https://formexamples.github.io/perioperative-optimization/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000094",
+    "id": "b8d921bd-ddcb-54e7-8e4e-751bad94250c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a6",
+    "id": "2cfecf0f-d7bf-5f88-ab99-dacea856be08",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,15 +36,15 @@
     "unitedKingdomNhsNumber": ""
   },
   "assessment": {
-    "id": "550e8400-e29b-41d4-a716-000000000069",
+    "id": "c5e660d3-fe97-519a-b449-e805b8a9fdf8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000006d",
+    "patientId": "a6894975-e7e1-5b38-a308-710077527306",
     "status": "in_progress"
   },
   "pvtRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000006f",
+    "id": "ef1d334a-7ad7-5652-b3f5-1983f7d82fe8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -54,11 +54,11 @@
     "riskLevel": "high"
   },
   "grade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b4",
+    "id": "9609c786-b03f-556b-bbb4-ef6b18743d6d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "assessmentId": "550e8400-e29b-41d4-a716-0000000000b8",
+    "assessmentId": "c9ce8ed7-b3a5-5e2b-88c5-ed4e84ddc264",
     "riskCategory": "draft",
     "tenYearRiskPercent": 0.0,
     "thirtyYearRiskPercent": 0.0,
@@ -67,22 +67,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "gradingFiredRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bf",
+    "id": "1ee3ebd8-a062-534a-8fef-c1e6818b7e92",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-0000000000c3",
+    "gradeId": "16dc7fdc-c8af-589b-9955-d8a02d1664b1",
     "ruleCode": "",
     "ruleCategory": "",
     "ruleDescription": "",
     "ruleRiskLevel": "high"
   },
   "gradingAdditionalFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c8",
+    "id": "3c4e6705-45ca-57cb-bc9b-aa594d2f0f4b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "gradeId": "550e8400-e29b-41d4-a716-0000000000cc",
+    "gradeId": "6988e69d-7418-5833-840e-10e0de4b94be",
     "flagId": "",
     "category": "",
     "message": "",

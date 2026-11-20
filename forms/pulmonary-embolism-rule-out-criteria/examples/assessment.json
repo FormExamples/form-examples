@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000057",
+    "id": "d82da253-6105-5db6-b42b-8a7ece2bd714",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000069",
+    "id": "9b6be9c9-517b-561e-8e1e-91468f123134",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "pulmonaryEmbolismRuleOutCriteria": {
-    "id": "550e8400-e29b-41d4-a716-000000000076",
+    "id": "078b7dd8-a3d2-5937-8857-08270435b0e3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007a",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007b",
+    "patientId": "a4f55331-d58b-5152-bf8f-6b61280c7537",
+    "clinicianId": "f0ad630c-fe80-52bc-893a-dfd815a23cfb",
     "status": "draft",
     "patientIdentifier": "",
     "assessedAt": null,
@@ -61,11 +61,11 @@
     "clinicalNotes": ""
   },
   "pulmonaryEmbolismRuleOutCriteriaGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008e",
+    "id": "5529a5c6-c727-50c3-96a0-bf191171d79f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "pulmonaryEmbolismRuleOutCriteriaId": "550e8400-e29b-41d4-a716-000000000092",
+    "pulmonaryEmbolismRuleOutCriteriaId": "626c72ca-1b35-5268-89e9-444bd8ee8b87",
     "classification": "perc-negative",
     "allCriteriaSatisfied": "yes",
     "applicable": "yes",
@@ -73,11 +73,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "pulmonaryEmbolismRuleOutCriteriaGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000098",
+    "id": "8ef014cf-8342-5016-a6e8-ec18457c3fff",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "pulmonaryEmbolismRuleOutCriteriaGradeId": "550e8400-e29b-41d4-a716-00000000009c",
+    "pulmonaryEmbolismRuleOutCriteriaGradeId": "eb3de7cf-ff83-5324-a54d-14f5c5328cf7",
     "ruleId": "",
     "instrument": "criterion",
     "satisfied": "yes",
@@ -86,11 +86,11 @@
     "description": ""
   },
   "pulmonaryEmbolismRuleOutCriteriaGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a3",
+    "id": "898afcc5-076c-565f-a759-d611608c86c2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "pulmonaryEmbolismRuleOutCriteriaGradeId": "550e8400-e29b-41d4-a716-0000000000a7",
+    "pulmonaryEmbolismRuleOutCriteriaGradeId": "f2dbb3fb-3f85-5317-8f10-c112adc657d9",
     "flagId": "",
     "category": "requires-workup",
     "priority": "low",

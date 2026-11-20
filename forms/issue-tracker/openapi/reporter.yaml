@@ -5,10 +5,19 @@ info:
   title: Issue Tracker — Reporter
   version: 1.0.0
   description: Person who reported an issue. Records identity, role, and preferred contact channel.
+x-namespace:
+  form: issue-tracker
+  apiPrefix: /api/issue-tracker/
+  sqlSchema: issue_tracker
+  xmlNamespace: https://formexamples.github.io/issue-tracker/xml
+tags:
+  - name: issue-tracker
+    description: Issue Tracker form
 paths:
   /api/issue-tracker/reporters:
     get:
       summary: List Reporter records
+      tags: [issue-tracker]
       operationId: listReporter
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Reporter
+      tags: [issue-tracker]
       operationId: createReporter
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Reporter by id
+      tags: [issue-tracker]
       operationId: getReporter
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Reporter
+      tags: [issue-tracker]
       operationId: updateReporter
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Reporter
+      tags: [issue-tracker]
       operationId: replaceReporter
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Reporter
+      tags: [issue-tracker]
       operationId: deleteReporter
       responses:
         "200":

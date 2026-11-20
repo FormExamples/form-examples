@@ -1,4 +1,5 @@
 <!ELEMENT prescription_substitution_options (id,created_at,updated_at,deleted_at,prescription_request_id,allow_brand_substitution,allow_generic_substitution,allow_dosage_adjustment,substitution_notes)>
+<!ATTLIST prescription_substitution_options xmlns CDATA #FIXED "https://formexamples.github.io/prescription-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ent_waiting_list_card_grade_flag SYSTEM "ent_waiting_list_card_grade_flag.dtd">
-<ent_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<ent_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/otorhinolaryngology-waiting-list-card/xml">
+<id>dc8e3b08-6d8e-55c3-b393-724f092239f1</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<ent_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</ent_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<ent_waiting_list_card_grade_id>2b8aa0a0-97f1-59f8-a3ca-e5ed177d686a</ent_waiting_list_card_grade_id>
+<flag_id>0c723a8b-d9d8-5788-8344-f265dc360dca</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

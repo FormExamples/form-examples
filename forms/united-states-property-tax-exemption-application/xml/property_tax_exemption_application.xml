@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE property_tax_exemption_application SYSTEM "property_tax_exemption_application.dtd">
-<property_tax_exemption_application>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<property_tax_exemption_application xmlns="https://formexamples.github.io/united-states-property-tax-exemption-application/xml">
+<id>a84ff80e-aa40-5e12-b062-505d8c6f208e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<applicant_id>550e8400-e29b-41d4-a716-446655440000</applicant_id>
-<assessor_id>660e8400-e29b-41d4-a716-446655440001</assessor_id>
+<applicant_id>32ee76f6-02c5-5a82-b028-af1e6c1849d9</applicant_id>
+<assessor_id>313a2d8a-8d7f-535b-826c-7468500dab8e</assessor_id>
 <applicant_name>Example</applicant_name>
 <date_of_birth>1965-06-15</date_of_birth>
 <age_on_assessment_date>2026-01-15</age_on_assessment_date>

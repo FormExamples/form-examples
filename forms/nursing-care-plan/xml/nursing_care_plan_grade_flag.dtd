@@ -1,4 +1,5 @@
 <!ELEMENT nursing_care_plan_grade_flag (id,created_at,updated_at,deleted_at,nursing_care_plan_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST nursing_care_plan_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/nursing-care-plan/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

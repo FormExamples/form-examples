@@ -1,4 +1,5 @@
 <!ELEMENT columbia_suicide_severity_rating_scale (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,scale_version,reason_for_assessment,patient_identifier,age_band,sex,wish_to_be_dead,non_specific_active_thoughts,active_ideation_methods,active_ideation_intent,active_ideation_plan,ideation_timeframe,ideation_frequency,ideation_duration,ideation_controllability,ideation_deterrents,ideation_reasons,actual_attempt,interrupted_attempt,aborted_attempt,preparatory_acts,non_suicidal_self_injury,behaviour_recency,lifetime_attempt_count,most_recent_attempt_date,actual_lethality,potential_lethality,access_to_lethal_means,protective_factors,clinical_note)>
+<!ATTLIST columbia_suicide_severity_rating_scale xmlns CDATA #FIXED "https://formexamples.github.io/columbia-suicide-severity-rating-scale/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

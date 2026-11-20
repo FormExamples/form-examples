@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE environment SYSTEM "environment.dtd">
-<environment>
-<id>dd0e8400-e29b-41d4-a716-446655440008</id>
+<environment xmlns="https://formexamples.github.io/encounter-satisfaction/xml">
+<id>ef2d8fe9-dd9d-517b-a0d7-a58f71068c56</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<encounter_satisfaction_id>770e8400-e29b-41d4-a716-446655440002</encounter_satisfaction_id>
+<encounter_satisfaction_id>9d55e49a-33ad-5345-8437-aabb2c65c34a</encounter_satisfaction_id>
 <cleanliness>1</cleanliness>
 <waiting_area_comfort>1</waiting_area_comfort>
 <privacy>1</privacy>

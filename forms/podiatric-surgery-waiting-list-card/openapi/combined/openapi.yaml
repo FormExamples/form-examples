@@ -7,6 +7,14 @@ info:
   description: Combined OpenAPI specification for the Podiatric Surgery Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: podiatric-surgery-waiting-list-card
+  apiPrefix: /api/podiatric-surgery-waiting-list-card/
+  sqlSchema: podiatric_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/podiatric-surgery-waiting-list-card/xml
+tags:
+- name: podiatric-surgery-waiting-list-card
+  description: Podiatric Surgery Waiting List Card form
 paths:
   /api/podiatric-surgery-waiting-list-card/openapi.yaml:
     get:
@@ -19,9 +27,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - podiatric-surgery-waiting-list-card
   /api/podiatric-surgery-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -74,6 +86,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -127,6 +141,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -154,6 +170,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -199,6 +217,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -244,6 +264,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -268,6 +290,8 @@ paths:
   /api/podiatric-surgery-waiting-list-card/podiatric_surg_waiting_list_card_appointments:
     get:
       summary: List PodiatricSurgWaitingListCardAppointment records
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: listPodiatricSurgWaitingListCardAppointment
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PodiatricSurgWaitingListCardAppointment
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: createPodiatricSurgWaitingListCardAppointment
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PodiatricSurgWaitingListCardAppointment by id
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: getPodiatricSurgWaitingListCardAppointment
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PodiatricSurgWaitingListCardAppointment
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: updatePodiatricSurgWaitingListCardAppointment
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PodiatricSurgWaitingListCardAppointment
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: replacePodiatricSurgWaitingListCardAppointment
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PodiatricSurgWaitingListCardAppointment
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: deletePodiatricSurgWaitingListCardAppointment
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/podiatric-surgery-waiting-list-card/podiatric_surg_waiting_list_card_grade_flags:
     get:
       summary: List PodiatricSurgWaitingListCardGradeFlag records
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: listPodiatricSurgWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PodiatricSurgWaitingListCardGradeFlag
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: createPodiatricSurgWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PodiatricSurgWaitingListCardGradeFlag by id
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: getPodiatricSurgWaitingListCardGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PodiatricSurgWaitingListCardGradeFlag
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: updatePodiatricSurgWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PodiatricSurgWaitingListCardGradeFlag
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: replacePodiatricSurgWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PodiatricSurgWaitingListCardGradeFlag
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: deletePodiatricSurgWaitingListCardGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/podiatric-surgery-waiting-list-card/podiatric_surg_waiting_list_card_grade_rules:
     get:
       summary: List PodiatricSurgWaitingListCardGradeRule records
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: listPodiatricSurgWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PodiatricSurgWaitingListCardGradeRule
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: createPodiatricSurgWaitingListCardGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PodiatricSurgWaitingListCardGradeRule by id
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: getPodiatricSurgWaitingListCardGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PodiatricSurgWaitingListCardGradeRule
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: updatePodiatricSurgWaitingListCardGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PodiatricSurgWaitingListCardGradeRule
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: replacePodiatricSurgWaitingListCardGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PodiatricSurgWaitingListCardGradeRule
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: deletePodiatricSurgWaitingListCardGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/podiatric-surgery-waiting-list-card/podiatric_surg_waiting_list_card_grades:
     get:
       summary: List PodiatricSurgWaitingListCardGrade records
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: listPodiatricSurgWaitingListCardGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PodiatricSurgWaitingListCardGrade
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: createPodiatricSurgWaitingListCardGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PodiatricSurgWaitingListCardGrade by id
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: getPodiatricSurgWaitingListCardGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PodiatricSurgWaitingListCardGrade
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: updatePodiatricSurgWaitingListCardGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PodiatricSurgWaitingListCardGrade
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: replacePodiatricSurgWaitingListCardGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PodiatricSurgWaitingListCardGrade
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: deletePodiatricSurgWaitingListCardGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/podiatric-surgery-waiting-list-card/podiatric_surg_waiting_list_cards:
     get:
       summary: List PodiatricSurgWaitingListCard records
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: listPodiatricSurgWaitingListCard
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PodiatricSurgWaitingListCard
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: createPodiatricSurgWaitingListCard
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PodiatricSurgWaitingListCard by id
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: getPodiatricSurgWaitingListCard
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PodiatricSurgWaitingListCard
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: updatePodiatricSurgWaitingListCard
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PodiatricSurgWaitingListCard
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: replacePodiatricSurgWaitingListCard
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PodiatricSurgWaitingListCard
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: deletePodiatricSurgWaitingListCard
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/podiatric-surgery-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - podiatric-surgery-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

@@ -5,10 +5,19 @@ info:
   title: Diabetes Assessment — Assessment
   version: 1.0.0
   description: A single diabetes assessment visit. Child tables hold section-specific clinical data.
+x-namespace:
+  form: diabetes-assessment
+  apiPrefix: /api/diabetes-assessment/
+  sqlSchema: diabetes_assessment
+  xmlNamespace: https://formexamples.github.io/diabetes-assessment/xml
+tags:
+  - name: diabetes-assessment
+    description: Diabetes Assessment form
 paths:
   /api/diabetes-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [diabetes-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [diabetes-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [diabetes-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [diabetes-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [diabetes-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [diabetes-assessment]
       operationId: deleteAssessment
       responses:
         "200":

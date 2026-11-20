@@ -5,10 +5,19 @@ info:
   title: Organ Donation Assessment — Grade
   version: 1.0.0
   description: "Computed organ donation eligibility grading result. Eligibility: suitable, conditionally-suitable, unsuitable. Risk: low, moderate, high, critical. One-to-one child of assessment."
+x-namespace:
+  form: organ-donation-assessment
+  apiPrefix: /api/organ-donation-assessment/
+  sqlSchema: organ_donation_assessment
+  xmlNamespace: https://formexamples.github.io/organ-donation-assessment/xml
+tags:
+  - name: organ-donation-assessment
+    description: Organ Donation Assessment form
 paths:
   /api/organ-donation-assessment/grades:
     get:
       summary: List Grade records
+      tags: [organ-donation-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [organ-donation-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [organ-donation-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [organ-donation-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [organ-donation-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [organ-donation-assessment]
       operationId: deleteGrade
       responses:
         "200":

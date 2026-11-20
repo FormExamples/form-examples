@@ -5,10 +5,19 @@ info:
   title: Confusion Assessment Method — Clinician
   version: 1.0.0
   description: Clinician identifying information for the assessor performing the CAM delirium screen.
+x-namespace:
+  form: confusion-assessment-method
+  apiPrefix: /api/confusion-assessment-method/
+  sqlSchema: confusion_assessment_method
+  xmlNamespace: https://formexamples.github.io/confusion-assessment-method/xml
+tags:
+  - name: confusion-assessment-method
+    description: Confusion Assessment Method form
 paths:
   /api/confusion-assessment-method/clinicians:
     get:
       summary: List Clinician records
+      tags: [confusion-assessment-method]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [confusion-assessment-method]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [confusion-assessment-method]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [confusion-assessment-method]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [confusion-assessment-method]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [confusion-assessment-method]
       operationId: deleteClinician
       responses:
         "200":

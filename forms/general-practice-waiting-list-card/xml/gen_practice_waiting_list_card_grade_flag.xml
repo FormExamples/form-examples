@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE gen_practice_waiting_list_card_grade_flag SYSTEM "gen_practice_waiting_list_card_grade_flag.dtd">
-<gen_practice_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<gen_practice_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/general-practice-waiting-list-card/xml">
+<id>287d3422-0988-5d0d-8f21-f0463188e2d6</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<gen_practice_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</gen_practice_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<gen_practice_waiting_list_card_grade_id>877a0058-0bd1-5abb-a72d-4cae0b400459</gen_practice_waiting_list_card_grade_id>
+<flag_id>7297cedd-40d5-5f14-885a-88128945e102</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

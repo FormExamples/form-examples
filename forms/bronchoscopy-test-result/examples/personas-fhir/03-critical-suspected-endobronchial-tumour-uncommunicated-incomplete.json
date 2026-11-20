@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "6747813e-8ffb-4ded-a1f9-d2e0d352a1b9",
+  "id": "e7aef0ea-9abb-5356-ad9a-644ec69b00cd",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd",
+      "fullUrl": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523",
       "resource": {
         "resourceType": "Patient",
-        "id": "44745893-5d97-407c-ae4f-beec437535bd",
+        "id": "3921573b-967b-5e1f-a025-e13435602523",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:15129b69-dbae-4799-ace7-4568410556a5",
+      "fullUrl": "urn:uuid:b16c282a-6b73-5e2f-8333-cb85fc38a6cb",
       "resource": {
         "resourceType": "Observation",
-        "id": "15129b69-dbae-4799-ace7-4568410556a5",
+        "id": "b16c282a-6b73-5e2f-8333-cb85fc38a6cb",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:92b25e44-a60d-4309-a666-c4569aa1c677",
+      "fullUrl": "urn:uuid:7006c3f3-ae59-5e6e-bec5-4e93b7664aca",
       "resource": {
         "resourceType": "Observation",
-        "id": "92b25e44-a60d-4309-a666-c4569aa1c677",
+        "id": "7006c3f3-ae59-5e6e-bec5-4e93b7664aca",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -504,10 +504,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a3af7041-e9ee-4af0-a608-bb7f759861ef",
+      "fullUrl": "urn:uuid:3b7e13e2-2304-5b89-880d-0e0d296340b0",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "a3af7041-e9ee-4af0-a608-bb7f759861ef",
+        "id": "3b7e13e2-2304-5b89-880d-0e0d296340b0",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -516,7 +516,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -525,10 +525,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:3d5adcd3-5658-48d7-acb3-0fab1626a2bd",
+      "fullUrl": "urn:uuid:0272e528-91f4-5daa-9fcf-37caf4d515cc",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "3d5adcd3-5658-48d7-acb3-0fab1626a2bd",
+        "id": "0272e528-91f4-5daa-9fcf-37caf4d515cc",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -558,17 +558,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical structured finding (endobronchial lesion, bleeding, or pneumothorax) is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:4cf7dad8-f7b8-4d54-a616-2b774e2f5e64",
+      "fullUrl": "urn:uuid:3cc2978d-6a38-5a91-9ac7-7f64e57e7e91",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "4cf7dad8-f7b8-4d54-a616-2b774e2f5e64",
+        "id": "3cc2978d-6a38-5a91-9ac7-7f64e57e7e91",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -598,17 +598,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:c7345502-e12b-428b-a9a8-59db48e2bd7b",
+      "fullUrl": "urn:uuid:0bb810ad-6f82-5caf-8c8c-0870107a6b29",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "c7345502-e12b-428b-a9a8-59db48e2bd7b",
+        "id": "0bb810ad-6f82-5caf-8c8c-0870107a6b29",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -638,17 +638,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: clinical history."
       }
     },
     {
-      "fullUrl": "urn:uuid:50ac540a-55da-42ce-aa6b-4297f0e47501",
+      "fullUrl": "urn:uuid:f25c1658-f00f-55a2-9b99-98d82787e093",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "50ac540a-55da-42ce-aa6b-4297f0e47501",
+        "id": "f25c1658-f00f-55a2-9b99-98d82787e093",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -678,17 +678,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: procedure / extent examined."
       }
     },
     {
-      "fullUrl": "urn:uuid:1a302842-012c-445d-a204-106625436005",
+      "fullUrl": "urn:uuid:e38d7df1-2309-50d4-b8b5-bd044979a8d0",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "1a302842-012c-445d-a204-106625436005",
+        "id": "e38d7df1-2309-50d4-b8b5-bd044979a8d0",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -718,17 +718,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: impression."
       }
     },
     {
-      "fullUrl": "urn:uuid:4c082394-5e97-4dd1-a4d1-c893b20f6811",
+      "fullUrl": "urn:uuid:ecbeae07-21ab-5021-afee-f14334f10466",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "4c082394-5e97-4dd1-a4d1-c893b20f6811",
+        "id": "ecbeae07-21ab-5021-afee-f14334f10466",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -758,17 +758,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:1807fc40-90c8-47a1-a0cf-b3a1fb7181fb",
+      "fullUrl": "urn:uuid:34345302-5aeb-5633-973c-3545131db5c9",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "1807fc40-90c8-47a1-a0cf-b3a1fb7181fb",
+        "id": "34345302-5aeb-5633-973c-3545131db5c9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -798,7 +798,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (suspected endobronchial tumour, massive haemoptysis, or pneumothorax) is present.",
@@ -812,10 +812,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:d1f7c40d-f146-4156-a332-a236a27ce9a5",
+      "fullUrl": "urn:uuid:b16bc073-5198-579c-9b3c-726c8d65881c",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "d1f7c40d-f146-4156-a332-a236a27ce9a5",
+        "id": "b16bc073-5198-579c-9b3c-726c8d65881c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -845,7 +845,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",
@@ -859,10 +859,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a1abb9bd-6f2e-471c-a777-6a48537739c3",
+      "fullUrl": "urn:uuid:33a6344d-0448-56f9-ba89-0bbd9589501f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "a1abb9bd-6f2e-471c-a777-6a48537739c3",
+        "id": "33a6344d-0448-56f9-ba89-0bbd9589501f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -892,7 +892,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A suspected endobronchial tumour requires urgent lung-cancer MDT referral.",
@@ -906,10 +906,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:3ded80c5-bc49-4e4a-a8ec-ba9ac69d7392",
+      "fullUrl": "urn:uuid:f978a56e-d58d-5460-b171-253c2d364a58",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "3ded80c5-bc49-4e4a-a8ec-ba9ac69d7392",
+        "id": "f978a56e-d58d-5460-b171-253c2d364a58",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -939,7 +939,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
@@ -953,10 +953,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:2f5365f5-d1e3-4d4f-ad88-25b4f15a52ee",
+      "fullUrl": "urn:uuid:8e7409b3-0b77-597e-a37a-7bbd03d972bb",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "2f5365f5-d1e3-4d4f-ad88-25b4f15a52ee",
+        "id": "8e7409b3-0b77-597e-a37a-7bbd03d972bb",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -986,7 +986,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An endobronchial lesion is reported but no anatomical location was recorded.",
@@ -1000,10 +1000,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a4480062-1794-4608-a758-ea16aa3a798b",
+      "fullUrl": "urn:uuid:2a9fa61c-c24a-5bf6-8745-85586177fe5a",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "a4480062-1794-4608-a758-ea16aa3a798b",
+        "id": "2a9fa61c-c24a-5bf6-8745-85586177fe5a",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -1033,7 +1033,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:44745893-5d97-407c-ae4f-beec437535bd"
+          "reference": "urn:uuid:3921573b-967b-5e1f-a025-e13435602523"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A significant finding is present but no originating request reference is recorded.",

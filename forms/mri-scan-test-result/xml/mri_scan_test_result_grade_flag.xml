@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mri_scan_test_result_grade_flag SYSTEM "mri_scan_test_result_grade_flag.dtd">
-<mri_scan_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<mri_scan_test_result_grade_flag xmlns="https://formexamples.github.io/mri-scan-test-result/xml">
+<id>edd1ab20-6ea9-5dca-9fb5-242f78184bc8</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<mri_scan_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</mri_scan_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<mri_scan_test_result_grade_id>5f06a4d6-8924-5f9e-a833-8a5219d467ea</mri_scan_test_result_grade_id>
+<flag_id>43f95920-d613-5ca1-903c-5d2c2104398b</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

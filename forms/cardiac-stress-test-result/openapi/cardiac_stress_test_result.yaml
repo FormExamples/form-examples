@@ -5,10 +5,19 @@ info:
   title: Cardiac Stress Test Result — CardiacStressTestResult
   version: 1.0.0
   description: Cardiac stress / exercise test result (report). Captures the performed test type and protocol, the clinical history, the haemodynamic and exercise response (peak heart rate, percent-predicted heart rate, exercise duration, METs, blood-pressure response), the structured ECG / symptom / arrhythmia findings, the overall positive / negative / inconclusive conclusion, the Duke treadmill prognostic score, the impression and recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: cardiac-stress-test-result
+  apiPrefix: /api/cardiac-stress-test-result/
+  sqlSchema: cardiac_stress_test_result
+  xmlNamespace: https://formexamples.github.io/cardiac-stress-test-result/xml
+tags:
+  - name: cardiac-stress-test-result
+    description: Cardiac Stress Test Result form
 paths:
   /api/cardiac-stress-test-result/cardiac_stress_test_results:
     get:
       summary: List CardiacStressTestResult records
+      tags: [cardiac-stress-test-result]
       operationId: listCardiacStressTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiacStressTestResult
+      tags: [cardiac-stress-test-result]
       operationId: createCardiacStressTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiacStressTestResult by id
+      tags: [cardiac-stress-test-result]
       operationId: getCardiacStressTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiacStressTestResult
+      tags: [cardiac-stress-test-result]
       operationId: updateCardiacStressTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiacStressTestResult
+      tags: [cardiac-stress-test-result]
       operationId: replaceCardiacStressTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiacStressTestResult
+      tags: [cardiac-stress-test-result]
       operationId: deleteCardiacStressTestResult
       responses:
         "200":

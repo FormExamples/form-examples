@@ -1,4 +1,5 @@
 <!ELEMENT runtime_scenario (id,created_at,updated_at,deleted_at,arc42_documentation_id,ordinal,name,trigger_description,steps_summary)>
+<!ATTLIST runtime_scenario xmlns CDATA #FIXED "https://formexamples.github.io/arc42/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

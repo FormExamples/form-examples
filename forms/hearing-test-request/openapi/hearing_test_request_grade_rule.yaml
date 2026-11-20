@@ -5,10 +5,19 @@ info:
   title: Hearing Test Request — HearingTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / urgency / completeness / priority rule that fired for this request.
+x-namespace:
+  form: hearing-test-request
+  apiPrefix: /api/hearing-test-request/
+  sqlSchema: hearing_test_request
+  xmlNamespace: https://formexamples.github.io/hearing-test-request/xml
+tags:
+  - name: hearing-test-request
+    description: Hearing Test Request form
 paths:
   /api/hearing-test-request/hearing_test_request_grade_rules:
     get:
       summary: List HearingTestRequestGradeRule records
+      tags: [hearing-test-request]
       operationId: listHearingTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HearingTestRequestGradeRule
+      tags: [hearing-test-request]
       operationId: createHearingTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HearingTestRequestGradeRule by id
+      tags: [hearing-test-request]
       operationId: getHearingTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HearingTestRequestGradeRule
+      tags: [hearing-test-request]
       operationId: updateHearingTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HearingTestRequestGradeRule
+      tags: [hearing-test-request]
       operationId: replaceHearingTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HearingTestRequestGradeRule
+      tags: [hearing-test-request]
       operationId: deleteHearingTestRequestGradeRule
       responses:
         "200":

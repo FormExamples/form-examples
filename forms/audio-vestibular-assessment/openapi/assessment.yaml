@@ -5,10 +5,19 @@ info:
   title: Audio Vestibular Assessment — Assessment
   version: 1.0.0
   description: Top-level assessment instance for audio-vestibular-assessment. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: audio-vestibular-assessment
+  apiPrefix: /api/audio-vestibular-assessment/
+  sqlSchema: audio_vestibular_assessment
+  xmlNamespace: https://formexamples.github.io/audio-vestibular-assessment/xml
+tags:
+  - name: audio-vestibular-assessment
+    description: Audio Vestibular Assessment form
 paths:
   /api/audio-vestibular-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [audio-vestibular-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [audio-vestibular-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [audio-vestibular-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [audio-vestibular-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [audio-vestibular-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [audio-vestibular-assessment]
       operationId: deleteAssessment
       responses:
         "200":

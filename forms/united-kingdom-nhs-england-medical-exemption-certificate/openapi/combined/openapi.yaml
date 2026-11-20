@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the UK NHS England Medical Exemption Certificate (FP92A)
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-kingdom-nhs-england-medical-exemption-certificate
+  apiPrefix: /api/united-kingdom-nhs-england-medical-exemption-certificate/
+  sqlSchema: united_kingdom_nhs_england_medical_exemption_certificate
+  xmlNamespace: https://formexamples.github.io/united-kingdom-nhs-england-medical-exemption-certificate/xml
+tags:
+- name: united-kingdom-nhs-england-medical-exemption-certificate
+  description: UK NHS England Medical Exemption Certificate (FP92A) form
 paths:
   /api/united-kingdom-nhs-england-medical-exemption-certificate/application_eligible_conditions:
     get:
       summary: List ApplicationEligibleCondition records
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: listApplicationEligibleCondition
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ApplicationEligibleCondition
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: createApplicationEligibleCondition
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ApplicationEligibleCondition by id
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: getApplicationEligibleCondition
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ApplicationEligibleCondition
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: updateApplicationEligibleCondition
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ApplicationEligibleCondition
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: replaceApplicationEligibleCondition
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ApplicationEligibleCondition
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: deleteApplicationEligibleCondition
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/united-kingdom-nhs-england-medical-exemption-certificate/applications:
     get:
       summary: List Application records
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: listApplication
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Application
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: createApplication
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Application by id
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: getApplication
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Application
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: updateApplication
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Application
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: replaceApplication
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Application
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: deleteApplication
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/united-kingdom-nhs-england-medical-exemption-certificate/eligible_conditions:
     get:
       summary: List EligibleCondition records
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: listEligibleCondition
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EligibleCondition
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: createEligibleCondition
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EligibleCondition by id
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: getEligibleCondition
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EligibleCondition
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: updateEligibleCondition
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EligibleCondition
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: replaceEligibleCondition
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EligibleCondition
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: deleteEligibleCondition
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/united-kingdom-nhs-england-medical-exemption-certificate/grade_additional_flags:
     get:
       summary: List GradeAdditionalFlag records
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: listGradeAdditionalFlag
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradeAdditionalFlag
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: createGradeAdditionalFlag
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradeAdditionalFlag by id
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: getGradeAdditionalFlag
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradeAdditionalFlag
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: updateGradeAdditionalFlag
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradeAdditionalFlag
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: replaceGradeAdditionalFlag
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradeAdditionalFlag
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: deleteGradeAdditionalFlag
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/united-kingdom-nhs-england-medical-exemption-certificate/grade_fired_rules:
     get:
       summary: List GradeFiredRule records
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: listGradeFiredRule
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradeFiredRule
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: createGradeFiredRule
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradeFiredRule by id
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: getGradeFiredRule
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradeFiredRule
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: updateGradeFiredRule
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradeFiredRule
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: replaceGradeFiredRule
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradeFiredRule
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: deleteGradeFiredRule
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/united-kingdom-nhs-england-medical-exemption-certificate/grades:
     get:
       summary: List Grade records
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: listGrade
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Grade
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: createGrade
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Grade by id
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: getGrade
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Grade
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: updateGrade
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Grade
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: replaceGrade
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Grade
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: deleteGrade
       responses:
         '200':
@@ -1495,9 +1575,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
   /api/united-kingdom-nhs-england-medical-exemption-certificate/patients:
     get:
       summary: List Patient records
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: listPatient
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: createPatient
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: getPatient
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: updatePatient
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: replacePatient
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: deletePatient
       responses:
         '200':
@@ -1744,6 +1838,8 @@ paths:
   /api/united-kingdom-nhs-england-medical-exemption-certificate/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1796,6 +1892,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1849,6 +1947,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: getPractitioner
       responses:
         '200':
@@ -1876,6 +1976,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1921,6 +2023,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1966,6 +2070,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - united-kingdom-nhs-england-medical-exemption-certificate
       operationId: deletePractitioner
       responses:
         '200':

@@ -5,10 +5,19 @@ info:
   title: Vaccinations Assessment — ClinicalReview
   version: 1.0.0
   description: Clinical review including post-vaccination observation and referral needs. One-to-one child of assessment.
+x-namespace:
+  form: vaccinations-assessment
+  apiPrefix: /api/vaccinations-assessment/
+  sqlSchema: vaccinations_assessment
+  xmlNamespace: https://formexamples.github.io/vaccinations-assessment/xml
+tags:
+  - name: vaccinations-assessment
+    description: Vaccinations Assessment form
 paths:
   /api/vaccinations-assessment/clinical_reviews:
     get:
       summary: List ClinicalReview records
+      tags: [vaccinations-assessment]
       operationId: listClinicalReview
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ClinicalReview
+      tags: [vaccinations-assessment]
       operationId: createClinicalReview
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ClinicalReview by id
+      tags: [vaccinations-assessment]
       operationId: getClinicalReview
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ClinicalReview
+      tags: [vaccinations-assessment]
       operationId: updateClinicalReview
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ClinicalReview
+      tags: [vaccinations-assessment]
       operationId: replaceClinicalReview
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ClinicalReview
+      tags: [vaccinations-assessment]
       operationId: deleteClinicalReview
       responses:
         "200":

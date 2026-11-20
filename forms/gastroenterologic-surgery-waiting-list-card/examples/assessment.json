@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "78bbeeae-d769-51a1-a933-3eed7f6c88f8",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "546ffc62-4a6a-5947-82dc-df3cb7f8e3cd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "giSurgeryWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "5e122412-4f71-5f2f-b311-a8fb9705d507",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000096",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000097",
+    "patientId": "b4330bf2-a806-5054-abb1-69d36edb648a",
+    "practitionerId": "97ca612b-404e-550e-b2c5-dd3718120467",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "giSurgeryWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "b5a4102d-6b8e-5e80-8251-d8a890365f69",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "giSurgeryWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "giSurgeryWaitingListCardId": "092babf3-2947-5d18-9577-5063a512433c",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "giSurgeryWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "681f0565-1bc7-56f4-80f4-875bf398614b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "giSurgeryWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "giSurgeryWaitingListCardId": "4b758cbd-ad5b-5af9-ac2a-7324543d28f3",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "giSurgeryWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d1",
+    "id": "7aa2ad39-5a21-5e39-95fe-19a64a5bd3cd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "giSurgeryWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "giSurgeryWaitingListCardGradeId": "5683bd50-32e6-5b83-a823-deb9493d1676",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "giSurgeryWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000db",
+    "id": "0473ed85-6788-507f-a7a0-98680459d56c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "giSurgeryWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000df",
+    "giSurgeryWaitingListCardGradeId": "f1d73a7f-6a11-554a-9dca-c7284ed92a64",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

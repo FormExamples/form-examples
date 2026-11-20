@@ -5,10 +5,19 @@ info:
   title: Wells Score For Pulmonary Embolism — Clinician
   version: 1.0.0
   description: Clinician identifying information for the assessing clinician.
+x-namespace:
+  form: wells-score-for-pulmonary-embolism
+  apiPrefix: /api/wells-score-for-pulmonary-embolism/
+  sqlSchema: wells_score_for_pulmonary_embolism
+  xmlNamespace: https://formexamples.github.io/wells-score-for-pulmonary-embolism/xml
+tags:
+  - name: wells-score-for-pulmonary-embolism
+    description: Wells Score For Pulmonary Embolism form
 paths:
   /api/wells-score-for-pulmonary-embolism/clinicians:
     get:
       summary: List Clinician records
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: deleteClinician
       responses:
         "200":

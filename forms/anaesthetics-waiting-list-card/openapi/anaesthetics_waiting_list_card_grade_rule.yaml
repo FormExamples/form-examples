@@ -5,10 +5,19 @@ info:
   title: Anaesthetics Waiting List Card — AnaestheticsWaitingListCardGradeRule
   version: 1.0.0
   description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that fired during grading of a waiting list card.
+x-namespace:
+  form: anaesthetics-waiting-list-card
+  apiPrefix: /api/anaesthetics-waiting-list-card/
+  sqlSchema: anaesthetics_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/anaesthetics-waiting-list-card/xml
+tags:
+  - name: anaesthetics-waiting-list-card
+    description: Anaesthetics Waiting List Card form
 paths:
   /api/anaesthetics-waiting-list-card/anaesthetics_waiting_list_card_grade_rules:
     get:
       summary: List AnaestheticsWaitingListCardGradeRule records
+      tags: [anaesthetics-waiting-list-card]
       operationId: listAnaestheticsWaitingListCardGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AnaestheticsWaitingListCardGradeRule
+      tags: [anaesthetics-waiting-list-card]
       operationId: createAnaestheticsWaitingListCardGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AnaestheticsWaitingListCardGradeRule by id
+      tags: [anaesthetics-waiting-list-card]
       operationId: getAnaestheticsWaitingListCardGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AnaestheticsWaitingListCardGradeRule
+      tags: [anaesthetics-waiting-list-card]
       operationId: updateAnaestheticsWaitingListCardGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AnaestheticsWaitingListCardGradeRule
+      tags: [anaesthetics-waiting-list-card]
       operationId: replaceAnaestheticsWaitingListCardGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AnaestheticsWaitingListCardGradeRule
+      tags: [anaesthetics-waiting-list-card]
       operationId: deleteAnaestheticsWaitingListCardGradeRule
       responses:
         "200":

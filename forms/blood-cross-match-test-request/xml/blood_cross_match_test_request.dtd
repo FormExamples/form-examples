@@ -1,4 +1,5 @@
 <!ELEMENT blood_cross_match_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,request_type,component,units_required,primary_indication,clinical_details,patient_blood_group,known_antibodies,antibody_detail,previous_transfusion,previous_transfusion_reaction,pregnant,sample_collected,collection_datetime,two_sample_rule_met,required_by_datetime,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST blood_cross_match_test_request xmlns CDATA #FIXED "https://formexamples.github.io/blood-cross-match-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

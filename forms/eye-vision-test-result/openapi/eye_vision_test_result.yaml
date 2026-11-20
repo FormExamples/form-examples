@@ -5,10 +5,19 @@ info:
   title: Eye Vision Test Result — EyeVisionTestResult
   version: 1.0.0
   description: Eye vision test result (report) for an ophthalmic / optometric examination. Captures the performed test type, clinical history, the visual-acuity / intraocular-pressure / visual-field measurements, the narrative and structured findings (including diabetic retinopathy grading), the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: eye-vision-test-result
+  apiPrefix: /api/eye-vision-test-result/
+  sqlSchema: eye_vision_test_result
+  xmlNamespace: https://formexamples.github.io/eye-vision-test-result/xml
+tags:
+  - name: eye-vision-test-result
+    description: Eye Vision Test Result form
 paths:
   /api/eye-vision-test-result/eye_vision_test_results:
     get:
       summary: List EyeVisionTestResult records
+      tags: [eye-vision-test-result]
       operationId: listEyeVisionTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EyeVisionTestResult
+      tags: [eye-vision-test-result]
       operationId: createEyeVisionTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EyeVisionTestResult by id
+      tags: [eye-vision-test-result]
       operationId: getEyeVisionTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EyeVisionTestResult
+      tags: [eye-vision-test-result]
       operationId: updateEyeVisionTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EyeVisionTestResult
+      tags: [eye-vision-test-result]
       operationId: replaceEyeVisionTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EyeVisionTestResult
+      tags: [eye-vision-test-result]
       operationId: deleteEyeVisionTestResult
       responses:
         "200":

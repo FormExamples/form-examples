@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hearing_test_result_grade_flag SYSTEM "hearing_test_result_grade_flag.dtd">
-<hearing_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<hearing_test_result_grade_flag xmlns="https://formexamples.github.io/hearing-test-result/xml">
+<id>792ae90c-597a-5ea5-ba4a-928232f9998c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<hearing_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</hearing_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<hearing_test_result_grade_id>4b32b707-f937-56dc-a7b1-fad18a62b080</hearing_test_result_grade_id>
+<flag_id>45c8498f-d87d-51f6-8a52-a54254865c3d</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

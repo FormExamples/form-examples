@@ -7,6 +7,14 @@ info:
   description: Combined OpenAPI specification for the United States Health Care Power of Attorney form,
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-states-health-care-power-of-attorney
+  apiPrefix: /api/united-states-health-care-power-of-attorney/
+  sqlSchema: united_states_health_care_power_of_attorney
+  xmlNamespace: https://formexamples.github.io/united-states-health-care-power-of-attorney/xml
+tags:
+- name: united-states-health-care-power-of-attorney
+  description: United States Health Care Power of Attorney form
 paths:
   /api/united-states-health-care-power-of-attorney/openapi.yaml:
     get:
@@ -19,9 +27,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-states-health-care-power-of-attorney
   /api/united-states-health-care-power-of-attorney/principals:
     get:
       summary: List Principal records
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: listPrincipal
       parameters:
       - name: limit
@@ -74,6 +86,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Principal
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: createPrincipal
       requestBody:
         required: true
@@ -127,6 +141,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Principal by id
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: getPrincipal
       responses:
         '200':
@@ -154,6 +170,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Principal
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: updatePrincipal
       requestBody:
         required: true
@@ -199,6 +217,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Principal
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: replacePrincipal
       requestBody:
         required: true
@@ -244,6 +264,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Principal
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: deletePrincipal
       responses:
         '200':
@@ -268,6 +290,8 @@ paths:
   /api/united-states-health-care-power-of-attorney/reviewers:
     get:
       summary: List Reviewer records
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: listReviewer
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Reviewer
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: createReviewer
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Reviewer by id
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: getReviewer
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Reviewer
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: updateReviewer
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Reviewer
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: replaceReviewer
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Reviewer
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: deleteReviewer
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorney_grade_flags:
     get:
       summary: List UnitedStatesHealthCarePowerOfAttorneyGradeFlag records
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: listUnitedStatesHealthCarePowerOfAttorneyGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesHealthCarePowerOfAttorneyGradeFlag
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: createUnitedStatesHealthCarePowerOfAttorneyGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesHealthCarePowerOfAttorneyGradeFlag by id
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: getUnitedStatesHealthCarePowerOfAttorneyGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesHealthCarePowerOfAttorneyGradeFlag
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: updateUnitedStatesHealthCarePowerOfAttorneyGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesHealthCarePowerOfAttorneyGradeFlag
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: replaceUnitedStatesHealthCarePowerOfAttorneyGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesHealthCarePowerOfAttorneyGradeFlag
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: deleteUnitedStatesHealthCarePowerOfAttorneyGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorney_grade_rules:
     get:
       summary: List UnitedStatesHealthCarePowerOfAttorneyGradeRule records
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: listUnitedStatesHealthCarePowerOfAttorneyGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesHealthCarePowerOfAttorneyGradeRule
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: createUnitedStatesHealthCarePowerOfAttorneyGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesHealthCarePowerOfAttorneyGradeRule by id
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: getUnitedStatesHealthCarePowerOfAttorneyGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesHealthCarePowerOfAttorneyGradeRule
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: updateUnitedStatesHealthCarePowerOfAttorneyGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesHealthCarePowerOfAttorneyGradeRule
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: replaceUnitedStatesHealthCarePowerOfAttorneyGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesHealthCarePowerOfAttorneyGradeRule
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: deleteUnitedStatesHealthCarePowerOfAttorneyGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorney_grades:
     get:
       summary: List UnitedStatesHealthCarePowerOfAttorneyGrade records
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: listUnitedStatesHealthCarePowerOfAttorneyGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesHealthCarePowerOfAttorneyGrade
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: createUnitedStatesHealthCarePowerOfAttorneyGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesHealthCarePowerOfAttorneyGrade by id
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: getUnitedStatesHealthCarePowerOfAttorneyGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesHealthCarePowerOfAttorneyGrade
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: updateUnitedStatesHealthCarePowerOfAttorneyGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesHealthCarePowerOfAttorneyGrade
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: replaceUnitedStatesHealthCarePowerOfAttorneyGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesHealthCarePowerOfAttorneyGrade
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: deleteUnitedStatesHealthCarePowerOfAttorneyGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorneys:
     get:
       summary: List UnitedStatesHealthCarePowerOfAttorney records
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: listUnitedStatesHealthCarePowerOfAttorney
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesHealthCarePowerOfAttorney
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: createUnitedStatesHealthCarePowerOfAttorney
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesHealthCarePowerOfAttorney by id
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: getUnitedStatesHealthCarePowerOfAttorney
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesHealthCarePowerOfAttorney
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: updateUnitedStatesHealthCarePowerOfAttorney
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesHealthCarePowerOfAttorney
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: replaceUnitedStatesHealthCarePowerOfAttorney
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesHealthCarePowerOfAttorney
+      tags:
+      - united-states-health-care-power-of-attorney
       operationId: deleteUnitedStatesHealthCarePowerOfAttorney
       responses:
         '200':

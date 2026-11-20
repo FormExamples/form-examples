@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Screening Program Privacy Notice form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: screening-program-privacy-notice
+  apiPrefix: /api/screening-program-privacy-notice/
+  sqlSchema: screening_program_privacy_notice
+  xmlNamespace: https://formexamples.github.io/screening-program-privacy-notice/xml
+tags:
+- name: screening-program-privacy-notice
+  description: Screening Program Privacy Notice form
 paths:
   /api/screening-program-privacy-notice/acknowledgments:
     get:
       summary: List Acknowledgment records
+      tags:
+      - screening-program-privacy-notice
       operationId: listAcknowledgment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Acknowledgment
+      tags:
+      - screening-program-privacy-notice
       operationId: createAcknowledgment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Acknowledgment by id
+      tags:
+      - screening-program-privacy-notice
       operationId: getAcknowledgment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Acknowledgment
+      tags:
+      - screening-program-privacy-notice
       operationId: updateAcknowledgment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Acknowledgment
+      tags:
+      - screening-program-privacy-notice
       operationId: replaceAcknowledgment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Acknowledgment
+      tags:
+      - screening-program-privacy-notice
       operationId: deleteAcknowledgment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/screening-program-privacy-notice/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - screening-program-privacy-notice
       operationId: listClinician
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - screening-program-privacy-notice
       operationId: createClinician
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - screening-program-privacy-notice
       operationId: getClinician
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - screening-program-privacy-notice
       operationId: updateClinician
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - screening-program-privacy-notice
       operationId: replaceClinician
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - screening-program-privacy-notice
       operationId: deleteClinician
       responses:
         '200':
@@ -511,9 +543,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - screening-program-privacy-notice
   /api/screening-program-privacy-notice/patients:
     get:
       summary: List Patient records
+      tags:
+      - screening-program-privacy-notice
       operationId: listPatient
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - screening-program-privacy-notice
       operationId: createPatient
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - screening-program-privacy-notice
       operationId: getPatient
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - screening-program-privacy-notice
       operationId: updatePatient
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - screening-program-privacy-notice
       operationId: replacePatient
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - screening-program-privacy-notice
       operationId: deletePatient
       responses:
         '200':

@@ -5,10 +5,19 @@ info:
   title: Diabetes Assessment — Grade
   version: 1.0.0
   description: 1:1 with assessment. Stores computed diabetes control level and composite score.
+x-namespace:
+  form: diabetes-assessment
+  apiPrefix: /api/diabetes-assessment/
+  sqlSchema: diabetes_assessment
+  xmlNamespace: https://formexamples.github.io/diabetes-assessment/xml
+tags:
+  - name: diabetes-assessment
+    description: Diabetes Assessment form
 paths:
   /api/diabetes-assessment/grades:
     get:
       summary: List Grade records
+      tags: [diabetes-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [diabetes-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [diabetes-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [diabetes-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [diabetes-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [diabetes-assessment]
       operationId: deleteGrade
       responses:
         "200":

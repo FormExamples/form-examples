@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tumor_marker_test_request_grade_rule SYSTEM "tumor_marker_test_request_grade_rule.dtd">
-<tumor_marker_test_request_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<tumor_marker_test_request_grade_rule xmlns="https://formexamples.github.io/tumor-marker-test-request/xml">
+<id>27f9b925-44b9-5419-986c-109a7e7262ec</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<tumor_marker_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</tumor_marker_test_request_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<tumor_marker_test_request_grade_id>75abf1f6-0bc2-5a52-84f9-597ff78dffdc</tumor_marker_test_request_grade_id>
+<rule_id>dc87e461-403a-5d61-a545-def5963f1c89</rule_id>
 <axis>appropriateness</axis>
 <category>General</category>
 <description>Example text.</description>

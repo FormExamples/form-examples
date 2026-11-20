@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE abdominal_aortic_aneurysm_screening_grade_flag SYSTEM "abdominal_aortic_aneurysm_screening_grade_flag.dtd">
-<abdominal_aortic_aneurysm_screening_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<abdominal_aortic_aneurysm_screening_grade_flag xmlns="https://formexamples.github.io/abdominal-aortic-aneurysm-screening/xml">
+<id>7d6d65e1-a15a-5941-a45d-6dc34a5141a3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<abdominal_aortic_aneurysm_screening_grade_id>880e8400-e29b-41d4-a716-446655440003</abdominal_aortic_aneurysm_screening_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<abdominal_aortic_aneurysm_screening_grade_id>6185888b-dc37-51a8-b79a-cf0f118593ac</abdominal_aortic_aneurysm_screening_grade_id>
+<flag_id>235802c9-b7c1-5783-889f-b1d81e1a4d6a</flag_id>
 <category>vascular-referral</category>
 <priority>low</priority>
 <description>Example text.</description>

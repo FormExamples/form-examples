@@ -5,10 +5,19 @@ info:
   title: Allergist Waiting List Card — AllergistWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a allergist waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: allergist-waiting-list-card
+  apiPrefix: /api/allergist-waiting-list-card/
+  sqlSchema: allergist_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/allergist-waiting-list-card/xml
+tags:
+  - name: allergist-waiting-list-card
+    description: Allergist Waiting List Card form
 paths:
   /api/allergist-waiting-list-card/allergist_waiting_list_cards:
     get:
       summary: List AllergistWaitingListCard records
+      tags: [allergist-waiting-list-card]
       operationId: listAllergistWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AllergistWaitingListCard
+      tags: [allergist-waiting-list-card]
       operationId: createAllergistWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AllergistWaitingListCard by id
+      tags: [allergist-waiting-list-card]
       operationId: getAllergistWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AllergistWaitingListCard
+      tags: [allergist-waiting-list-card]
       operationId: updateAllergistWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AllergistWaitingListCard
+      tags: [allergist-waiting-list-card]
       operationId: replaceAllergistWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AllergistWaitingListCard
+      tags: [allergist-waiting-list-card]
       operationId: deleteAllergistWaitingListCard
       responses:
         "200":

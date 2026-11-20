@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE attorney SYSTEM "attorney.dtd">
-<attorney>
-<id>660e8400-e29b-41d4-a716-446655440001</id>
+<attorney xmlns="https://formexamples.github.io/united-states-divorce-petition/xml">
+<id>627492ec-c07d-5875-9528-a0f7ad1b8b19</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>

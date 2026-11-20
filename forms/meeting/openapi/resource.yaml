@@ -5,10 +5,19 @@ info:
   title: Meeting — Resource
   version: 1.0.0
   description: "A resource required for the meeting: room, equipment, document, link, budget line, catering, interpreter, transport. Tracks quantity, cost, reservation status."
+x-namespace:
+  form: meeting
+  apiPrefix: /api/meeting/
+  sqlSchema: meeting
+  xmlNamespace: https://formexamples.github.io/meeting/xml
+tags:
+  - name: meeting
+    description: Meeting form
 paths:
   /api/meeting/resources:
     get:
       summary: List Resource records
+      tags: [meeting]
       operationId: listResource
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Resource
+      tags: [meeting]
       operationId: createResource
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Resource by id
+      tags: [meeting]
       operationId: getResource
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Resource
+      tags: [meeting]
       operationId: updateResource
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Resource
+      tags: [meeting]
       operationId: replaceResource
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Resource
+      tags: [meeting]
       operationId: deleteResource
       responses:
         "200":

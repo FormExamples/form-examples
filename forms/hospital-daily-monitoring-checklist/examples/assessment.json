@@ -1,6 +1,6 @@
 {
   "hospitalDailyMonitoringChecklist": {
-    "id": "550e8400-e29b-41d4-a716-000000000001",
+    "id": "e0783a9b-4b70-545a-9ec5-f5c11a28a72d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -15,11 +15,11 @@
     "signedAt": null
   },
   "hospitalDailyMonitoringChecklistItem": {
-    "id": "550e8400-e29b-41d4-a716-00000000000e",
+    "id": "28ddc160-e3b1-565f-8120-e79d9d1eaa52",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hospitalDailyMonitoringChecklistId": "550e8400-e29b-41d4-a716-000000000012",
+    "hospitalDailyMonitoringChecklistId": "85b42fae-6d35-5bf0-8434-4b070260e1f9",
     "itemCode": "",
     "sectionNumber": 11,
     "sectionTitle": "",

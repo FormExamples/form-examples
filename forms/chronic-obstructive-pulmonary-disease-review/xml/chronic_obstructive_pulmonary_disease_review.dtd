@@ -1,4 +1,5 @@
 <!ELEMENT chronic_obstructive_pulmonary_disease_review (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,reviewed_at,review_type,patient_identifier,age_band,sex,diagnosis_year,spirometry_confirmed,exposure_notes,fev1_litres,fev1_percent_predicted,fvc_litres,fev1_fvc_ratio,spirometry_date,mrc_grade,mmrc_grade,cat_score,exacerbations_last_12m,hospitalisations_last_12m,last_exacerbation_date,rescue_pack_courses,smoking_status,pack_years,cessation_support_offered,inhaled_therapy,device_type,inhaler_technique_checked,inhaler_technique_adequate,adherence,influenza_vaccine,pneumococcal_vaccine,covid_vaccine,pulmonary_rehab_status,oxygen_use,resting_spo2,comorbidities,self_management_plan,rescue_pack_supplied,next_review_interval,clinician_note)>
+<!ATTLIST chronic_obstructive_pulmonary_disease_review xmlns CDATA #FIXED "https://formexamples.github.io/chronic-obstructive-pulmonary-disease-review/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment_polypharmacy_review_medication SYSTEM "assessment_polypharmacy_review_medication.dtd">
-<assessment_polypharmacy_review_medication>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<assessment_polypharmacy_review_medication xmlns="https://formexamples.github.io/gerontology-assessment/xml">
+<id>0a718871-b13f-56db-9020-234ccd54ae30</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<polypharmacy_review_id>660e8400-e29b-41d4-a716-446655440001</polypharmacy_review_id>
+<polypharmacy_review_id>d74caf96-491f-5a9c-a667-0000abf4cf51</polypharmacy_review_id>
 <medication_name>Example</medication_name>
 <dose>500mg</dose>
 <frequency>twice daily</frequency>

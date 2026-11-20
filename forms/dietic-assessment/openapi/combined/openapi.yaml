@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Dietetic Assessment form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: dietic-assessment
+  apiPrefix: /api/dietic-assessment/
+  sqlSchema: dietic_assessment
+  xmlNamespace: https://formexamples.github.io/dietic-assessment/xml
+tags:
+- name: dietic-assessment
+  description: Dietetic Assessment form
 paths:
   /api/dietic-assessment/allergies:
     get:
       summary: List Allergy records
+      tags:
+      - dietic-assessment
       operationId: listAllergy
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Allergy
+      tags:
+      - dietic-assessment
       operationId: createAllergy
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Allergy by id
+      tags:
+      - dietic-assessment
       operationId: getAllergy
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Allergy
+      tags:
+      - dietic-assessment
       operationId: updateAllergy
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Allergy
+      tags:
+      - dietic-assessment
       operationId: replaceAllergy
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Allergy
+      tags:
+      - dietic-assessment
       operationId: deleteAllergy
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/dietic-assessment/dietic_assessment_grade_flags:
     get:
       summary: List DieticAssessmentGradeFlag records
+      tags:
+      - dietic-assessment
       operationId: listDieticAssessmentGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DieticAssessmentGradeFlag
+      tags:
+      - dietic-assessment
       operationId: createDieticAssessmentGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DieticAssessmentGradeFlag by id
+      tags:
+      - dietic-assessment
       operationId: getDieticAssessmentGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DieticAssessmentGradeFlag
+      tags:
+      - dietic-assessment
       operationId: updateDieticAssessmentGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DieticAssessmentGradeFlag
+      tags:
+      - dietic-assessment
       operationId: replaceDieticAssessmentGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DieticAssessmentGradeFlag
+      tags:
+      - dietic-assessment
       operationId: deleteDieticAssessmentGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/dietic-assessment/dietic_assessment_grade_rules:
     get:
       summary: List DieticAssessmentGradeRule records
+      tags:
+      - dietic-assessment
       operationId: listDieticAssessmentGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DieticAssessmentGradeRule
+      tags:
+      - dietic-assessment
       operationId: createDieticAssessmentGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DieticAssessmentGradeRule by id
+      tags:
+      - dietic-assessment
       operationId: getDieticAssessmentGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DieticAssessmentGradeRule
+      tags:
+      - dietic-assessment
       operationId: updateDieticAssessmentGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DieticAssessmentGradeRule
+      tags:
+      - dietic-assessment
       operationId: replaceDieticAssessmentGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DieticAssessmentGradeRule
+      tags:
+      - dietic-assessment
       operationId: deleteDieticAssessmentGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/dietic-assessment/dietic_assessment_grades:
     get:
       summary: List DieticAssessmentGrade records
+      tags:
+      - dietic-assessment
       operationId: listDieticAssessmentGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DieticAssessmentGrade
+      tags:
+      - dietic-assessment
       operationId: createDieticAssessmentGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DieticAssessmentGrade by id
+      tags:
+      - dietic-assessment
       operationId: getDieticAssessmentGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DieticAssessmentGrade
+      tags:
+      - dietic-assessment
       operationId: updateDieticAssessmentGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DieticAssessmentGrade
+      tags:
+      - dietic-assessment
       operationId: replaceDieticAssessmentGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DieticAssessmentGrade
+      tags:
+      - dietic-assessment
       operationId: deleteDieticAssessmentGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/dietic-assessment/dietic_assessments:
     get:
       summary: List DieticAssessment records
+      tags:
+      - dietic-assessment
       operationId: listDieticAssessment
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DieticAssessment
+      tags:
+      - dietic-assessment
       operationId: createDieticAssessment
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DieticAssessment by id
+      tags:
+      - dietic-assessment
       operationId: getDieticAssessment
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DieticAssessment
+      tags:
+      - dietic-assessment
       operationId: updateDieticAssessment
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DieticAssessment
+      tags:
+      - dietic-assessment
       operationId: replaceDieticAssessment
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DieticAssessment
+      tags:
+      - dietic-assessment
       operationId: deleteDieticAssessment
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/dietic-assessment/dietitians:
     get:
       summary: List Dietitian records
+      tags:
+      - dietic-assessment
       operationId: listDietitian
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Dietitian
+      tags:
+      - dietic-assessment
       operationId: createDietitian
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Dietitian by id
+      tags:
+      - dietic-assessment
       operationId: getDietitian
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Dietitian
+      tags:
+      - dietic-assessment
       operationId: updateDietitian
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Dietitian
+      tags:
+      - dietic-assessment
       operationId: replaceDietitian
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Dietitian
+      tags:
+      - dietic-assessment
       operationId: deleteDietitian
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/dietic-assessment/medications:
     get:
       summary: List Medication records
+      tags:
+      - dietic-assessment
       operationId: listMedication
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Medication
+      tags:
+      - dietic-assessment
       operationId: createMedication
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Medication by id
+      tags:
+      - dietic-assessment
       operationId: getMedication
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Medication
+      tags:
+      - dietic-assessment
       operationId: updateMedication
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Medication
+      tags:
+      - dietic-assessment
       operationId: replaceMedication
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Medication
+      tags:
+      - dietic-assessment
       operationId: deleteMedication
       responses:
         '200':
@@ -1741,9 +1833,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - dietic-assessment
   /api/dietic-assessment/patient_allergies:
     get:
       summary: List PatientAllergy records
+      tags:
+      - dietic-assessment
       operationId: listPatientAllergy
       parameters:
       - name: limit
@@ -1796,6 +1892,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PatientAllergy
+      tags:
+      - dietic-assessment
       operationId: createPatientAllergy
       requestBody:
         required: true
@@ -1849,6 +1947,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PatientAllergy by id
+      tags:
+      - dietic-assessment
       operationId: getPatientAllergy
       responses:
         '200':
@@ -1876,6 +1976,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PatientAllergy
+      tags:
+      - dietic-assessment
       operationId: updatePatientAllergy
       requestBody:
         required: true
@@ -1921,6 +2023,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PatientAllergy
+      tags:
+      - dietic-assessment
       operationId: replacePatientAllergy
       requestBody:
         required: true
@@ -1966,6 +2070,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PatientAllergy
+      tags:
+      - dietic-assessment
       operationId: deletePatientAllergy
       responses:
         '200':
@@ -1990,6 +2096,8 @@ paths:
   /api/dietic-assessment/patient_medications:
     get:
       summary: List PatientMedication records
+      tags:
+      - dietic-assessment
       operationId: listPatientMedication
       parameters:
       - name: limit
@@ -2042,6 +2150,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PatientMedication
+      tags:
+      - dietic-assessment
       operationId: createPatientMedication
       requestBody:
         required: true
@@ -2095,6 +2205,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PatientMedication by id
+      tags:
+      - dietic-assessment
       operationId: getPatientMedication
       responses:
         '200':
@@ -2122,6 +2234,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PatientMedication
+      tags:
+      - dietic-assessment
       operationId: updatePatientMedication
       requestBody:
         required: true
@@ -2167,6 +2281,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PatientMedication
+      tags:
+      - dietic-assessment
       operationId: replacePatientMedication
       requestBody:
         required: true
@@ -2212,6 +2328,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PatientMedication
+      tags:
+      - dietic-assessment
       operationId: deletePatientMedication
       responses:
         '200':
@@ -2236,6 +2354,8 @@ paths:
   /api/dietic-assessment/patients:
     get:
       summary: List Patient records
+      tags:
+      - dietic-assessment
       operationId: listPatient
       parameters:
       - name: limit
@@ -2288,6 +2408,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - dietic-assessment
       operationId: createPatient
       requestBody:
         required: true
@@ -2341,6 +2463,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - dietic-assessment
       operationId: getPatient
       responses:
         '200':
@@ -2368,6 +2492,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - dietic-assessment
       operationId: updatePatient
       requestBody:
         required: true
@@ -2413,6 +2539,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - dietic-assessment
       operationId: replacePatient
       requestBody:
         required: true
@@ -2458,6 +2586,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - dietic-assessment
       operationId: deletePatient
       responses:
         '200':

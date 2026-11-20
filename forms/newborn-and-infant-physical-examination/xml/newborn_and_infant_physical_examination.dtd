@@ -1,4 +1,5 @@
 <!ELEMENT newborn_and_infant_physical_examination (id,created_at,updated_at,deleted_at,patient_id,clinician_id,practitioner_name,practitioner_role,examined_at,examination_context,care_setting,baby_identifier,baby_name,date_of_birth,sex,gestational_age_weeks,birth_weight_grams,breech_presentation,family_history_hip_problems,antenatal_concerns,eyes_red_reflex_right,eyes_red_reflex_left,eyes_appearance,heart_murmur,femoral_pulses_right,femoral_pulses_left,central_cyanosis,oxygen_saturation_preductal,oxygen_saturation_postductal,barlow_test,ortolani_test,hip_abduction,testis_right,testis_left,general_appearance,skin,head_and_fontanelles,face_and_palate,neck_and_clavicles,chest_and_lungs,abdomen,genitalia,anus_and_spine,limbs_and_digits,feet,tone_and_movement,weight_grams,head_circumference_cm,length_cm,eyes_result_recorded,heart_result_recorded,hips_result_recorded,testes_result_recorded,clinical_note)>
+<!ATTLIST newborn_and_infant_physical_examination xmlns CDATA #FIXED "https://formexamples.github.io/newborn-and-infant-physical-examination/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

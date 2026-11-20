@@ -1,4 +1,5 @@
 <!ELEMENT structured_medication_review_grade (id,created_at,updated_at,deleted_at,structured_medication_review_id,review_status,anticholinergic_burden_score,anticholinergic_band,polypharmacy_band,burden_band,medicine_count,regular_medicine_count,graded_at)>
+<!ATTLIST structured_medication_review_grade xmlns CDATA #FIXED "https://formexamples.github.io/structured-medication-review/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

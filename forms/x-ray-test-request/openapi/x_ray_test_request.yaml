@@ -5,10 +5,19 @@ info:
   title: X Ray Test Request — XRayTestRequest
   version: 1.0.0
   description: Plain-radiograph (X-ray) imaging request (referral). Captures the requested body region and laterality, the clinical indication and question, relevant history, radiation-safety details (pregnancy status, recent similar exposure), mobility, and triage urgency.
+x-namespace:
+  form: x-ray-test-request
+  apiPrefix: /api/x-ray-test-request/
+  sqlSchema: x_ray_test_request
+  xmlNamespace: https://formexamples.github.io/x-ray-test-request/xml
+tags:
+  - name: x-ray-test-request
+    description: X Ray Test Request form
 paths:
   /api/x-ray-test-request/x_ray_test_requests:
     get:
       summary: List XRayTestRequest records
+      tags: [x-ray-test-request]
       operationId: listXRayTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new XRayTestRequest
+      tags: [x-ray-test-request]
       operationId: createXRayTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one XRayTestRequest by id
+      tags: [x-ray-test-request]
       operationId: getXRayTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing XRayTestRequest
+      tags: [x-ray-test-request]
       operationId: updateXRayTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing XRayTestRequest
+      tags: [x-ray-test-request]
       operationId: replaceXRayTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a XRayTestRequest
+      tags: [x-ray-test-request]
       operationId: deleteXRayTestRequest
       responses:
         "200":

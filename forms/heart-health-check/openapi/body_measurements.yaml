@@ -5,10 +5,19 @@ info:
   title: Heart Health Check — BodyMeasurements
   version: 1.0.0
   description: Body measurements for cardiovascular risk assessment.
+x-namespace:
+  form: heart-health-check
+  apiPrefix: /api/heart-health-check/
+  sqlSchema: heart_health_check
+  xmlNamespace: https://formexamples.github.io/heart-health-check/xml
+tags:
+  - name: heart-health-check
+    description: Heart Health Check form
 paths:
   /api/heart-health-check/body_measurements:
     get:
       summary: List BodyMeasurements records
+      tags: [heart-health-check]
       operationId: listBodyMeasurements
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BodyMeasurements
+      tags: [heart-health-check]
       operationId: createBodyMeasurements
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BodyMeasurements by id
+      tags: [heart-health-check]
       operationId: getBodyMeasurements
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BodyMeasurements
+      tags: [heart-health-check]
       operationId: updateBodyMeasurements
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BodyMeasurements
+      tags: [heart-health-check]
       operationId: replaceBodyMeasurements
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BodyMeasurements
+      tags: [heart-health-check]
       operationId: deleteBodyMeasurements
       responses:
         "200":

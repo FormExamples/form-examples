@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE endocrinology_waiting_list_card_appointment SYSTEM "endocrinology_waiting_list_card_appointment.dtd">
-<endocrinology_waiting_list_card_appointment>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<endocrinology_waiting_list_card_appointment xmlns="https://formexamples.github.io/endocrinology-waiting-list-card/xml">
+<id>3e914a46-d509-5110-987d-e1d896076fe3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<endocrinology_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</endocrinology_waiting_list_card_id>
+<endocrinology_waiting_list_card_id>b39712fe-6c86-5602-91f1-b67fa51e28b3</endocrinology_waiting_list_card_id>
 <appointment_date>2026-01-15</appointment_date>
 <appointment_time></appointment_time>
 <duration_minutes>1</duration_minutes>

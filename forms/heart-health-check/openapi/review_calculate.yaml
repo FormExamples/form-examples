@@ -5,10 +5,19 @@ info:
   title: Heart Health Check — ReviewCalculate
   version: 1.0.0
   description: Clinician review information and AUDIT alcohol screening score.
+x-namespace:
+  form: heart-health-check
+  apiPrefix: /api/heart-health-check/
+  sqlSchema: heart_health_check
+  xmlNamespace: https://formexamples.github.io/heart-health-check/xml
+tags:
+  - name: heart-health-check
+    description: Heart Health Check form
 paths:
   /api/heart-health-check/review_calculates:
     get:
       summary: List ReviewCalculate records
+      tags: [heart-health-check]
       operationId: listReviewCalculate
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ReviewCalculate
+      tags: [heart-health-check]
       operationId: createReviewCalculate
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ReviewCalculate by id
+      tags: [heart-health-check]
       operationId: getReviewCalculate
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ReviewCalculate
+      tags: [heart-health-check]
       operationId: updateReviewCalculate
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ReviewCalculate
+      tags: [heart-health-check]
       operationId: replaceReviewCalculate
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ReviewCalculate
+      tags: [heart-health-check]
       operationId: deleteReviewCalculate
       responses:
         "200":

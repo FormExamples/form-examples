@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United Kingdom Marriage Certificate Application
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-kingdom-marriage-certificate-application
+  apiPrefix: /api/united-kingdom-marriage-certificate-application/
+  sqlSchema: united_kingdom_marriage_certificate_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-marriage-certificate-application/xml
+tags:
+- name: united-kingdom-marriage-certificate-application
+  description: United Kingdom Marriage Certificate Application form
 paths:
   /api/united-kingdom-marriage-certificate-application/applicants:
     get:
       summary: List Applicant records
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: listApplicant
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Applicant
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: createApplicant
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Applicant by id
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: getApplicant
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Applicant
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: updateApplicant
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Applicant
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: replaceApplicant
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Applicant
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: deleteApplicant
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-kingdom-marriage-certificate-application
   /api/united-kingdom-marriage-certificate-application/registrars:
     get:
       summary: List Registrar records
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: listRegistrar
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Registrar
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: createRegistrar
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Registrar by id
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: getRegistrar
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Registrar
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: updateRegistrar
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Registrar
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: replaceRegistrar
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Registrar
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: deleteRegistrar
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_application_grade_flags:
     get:
       summary: List UnitedKingdomMarriageCertificateApplicationGradeFlag records
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: listUnitedKingdomMarriageCertificateApplicationGradeFlag
       parameters:
       - name: limit
@@ -567,6 +603,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomMarriageCertificateApplicationGradeFlag
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: createUnitedKingdomMarriageCertificateApplicationGradeFlag
       requestBody:
         required: true
@@ -620,6 +658,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomMarriageCertificateApplicationGradeFlag by id
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: getUnitedKingdomMarriageCertificateApplicationGradeFlag
       responses:
         '200':
@@ -647,6 +687,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomMarriageCertificateApplicationGradeFlag
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: updateUnitedKingdomMarriageCertificateApplicationGradeFlag
       requestBody:
         required: true
@@ -692,6 +734,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomMarriageCertificateApplicationGradeFlag
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: replaceUnitedKingdomMarriageCertificateApplicationGradeFlag
       requestBody:
         required: true
@@ -737,6 +781,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomMarriageCertificateApplicationGradeFlag
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: deleteUnitedKingdomMarriageCertificateApplicationGradeFlag
       responses:
         '200':
@@ -761,6 +807,8 @@ paths:
   /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_application_grade_rules:
     get:
       summary: List UnitedKingdomMarriageCertificateApplicationGradeRule records
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: listUnitedKingdomMarriageCertificateApplicationGradeRule
       parameters:
       - name: limit
@@ -814,6 +862,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomMarriageCertificateApplicationGradeRule
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: createUnitedKingdomMarriageCertificateApplicationGradeRule
       requestBody:
         required: true
@@ -867,6 +917,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomMarriageCertificateApplicationGradeRule by id
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: getUnitedKingdomMarriageCertificateApplicationGradeRule
       responses:
         '200':
@@ -894,6 +946,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomMarriageCertificateApplicationGradeRule
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: updateUnitedKingdomMarriageCertificateApplicationGradeRule
       requestBody:
         required: true
@@ -939,6 +993,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomMarriageCertificateApplicationGradeRule
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: replaceUnitedKingdomMarriageCertificateApplicationGradeRule
       requestBody:
         required: true
@@ -984,6 +1040,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomMarriageCertificateApplicationGradeRule
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: deleteUnitedKingdomMarriageCertificateApplicationGradeRule
       responses:
         '200':
@@ -1008,6 +1066,8 @@ paths:
   /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_application_grades:
     get:
       summary: List UnitedKingdomMarriageCertificateApplicationGrade records
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: listUnitedKingdomMarriageCertificateApplicationGrade
       parameters:
       - name: limit
@@ -1060,6 +1120,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomMarriageCertificateApplicationGrade
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: createUnitedKingdomMarriageCertificateApplicationGrade
       requestBody:
         required: true
@@ -1113,6 +1175,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomMarriageCertificateApplicationGrade by id
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: getUnitedKingdomMarriageCertificateApplicationGrade
       responses:
         '200':
@@ -1140,6 +1204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomMarriageCertificateApplicationGrade
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: updateUnitedKingdomMarriageCertificateApplicationGrade
       requestBody:
         required: true
@@ -1185,6 +1251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomMarriageCertificateApplicationGrade
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: replaceUnitedKingdomMarriageCertificateApplicationGrade
       requestBody:
         required: true
@@ -1230,6 +1298,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomMarriageCertificateApplicationGrade
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: deleteUnitedKingdomMarriageCertificateApplicationGrade
       responses:
         '200':
@@ -1254,6 +1324,8 @@ paths:
   /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_applications:
     get:
       summary: List UnitedKingdomMarriageCertificateApplication records
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: listUnitedKingdomMarriageCertificateApplication
       parameters:
       - name: limit
@@ -1306,6 +1378,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomMarriageCertificateApplication
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: createUnitedKingdomMarriageCertificateApplication
       requestBody:
         required: true
@@ -1359,6 +1433,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomMarriageCertificateApplication by id
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: getUnitedKingdomMarriageCertificateApplication
       responses:
         '200':
@@ -1386,6 +1462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomMarriageCertificateApplication
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: updateUnitedKingdomMarriageCertificateApplication
       requestBody:
         required: true
@@ -1431,6 +1509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomMarriageCertificateApplication
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: replaceUnitedKingdomMarriageCertificateApplication
       requestBody:
         required: true
@@ -1476,6 +1556,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomMarriageCertificateApplication
+      tags:
+      - united-kingdom-marriage-certificate-application
       operationId: deleteUnitedKingdomMarriageCertificateApplication
       responses:
         '200':

@@ -5,10 +5,19 @@ info:
   title: United Kingdom Birth Registration — Patient
   version: 1.0.0
   description: Patient demographic information for the child whose birth is being registered.
+x-namespace:
+  form: united-kingdom-birth-registration
+  apiPrefix: /api/united-kingdom-birth-registration/
+  sqlSchema: united_kingdom_birth_registration
+  xmlNamespace: https://formexamples.github.io/united-kingdom-birth-registration/xml
+tags:
+  - name: united-kingdom-birth-registration
+    description: United Kingdom Birth Registration form
 paths:
   /api/united-kingdom-birth-registration/patients:
     get:
       summary: List Patient records
+      tags: [united-kingdom-birth-registration]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [united-kingdom-birth-registration]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [united-kingdom-birth-registration]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [united-kingdom-birth-registration]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [united-kingdom-birth-registration]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [united-kingdom-birth-registration]
       operationId: deletePatient
       responses:
         "200":

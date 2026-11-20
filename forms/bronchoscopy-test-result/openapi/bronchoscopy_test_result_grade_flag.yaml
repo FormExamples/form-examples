@@ -5,10 +5,19 @@ info:
   title: Bronchoscopy Test Result — BronchoscopyTestResultGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.
+x-namespace:
+  form: bronchoscopy-test-result
+  apiPrefix: /api/bronchoscopy-test-result/
+  sqlSchema: bronchoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/bronchoscopy-test-result/xml
+tags:
+  - name: bronchoscopy-test-result
+    description: Bronchoscopy Test Result form
 paths:
   /api/bronchoscopy-test-result/bronchoscopy_test_result_grade_flags:
     get:
       summary: List BronchoscopyTestResultGradeFlag records
+      tags: [bronchoscopy-test-result]
       operationId: listBronchoscopyTestResultGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BronchoscopyTestResultGradeFlag
+      tags: [bronchoscopy-test-result]
       operationId: createBronchoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BronchoscopyTestResultGradeFlag by id
+      tags: [bronchoscopy-test-result]
       operationId: getBronchoscopyTestResultGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BronchoscopyTestResultGradeFlag
+      tags: [bronchoscopy-test-result]
       operationId: updateBronchoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BronchoscopyTestResultGradeFlag
+      tags: [bronchoscopy-test-result]
       operationId: replaceBronchoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BronchoscopyTestResultGradeFlag
+      tags: [bronchoscopy-test-result]
       operationId: deleteBronchoscopyTestResultGradeFlag
       responses:
         "200":

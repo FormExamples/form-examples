@@ -5,10 +5,19 @@ info:
   title: Neurodiversity Adjustment Response — NeurodiversityAdjustmentResponseGradeFlag
   version: 1.0.0
   description: Compliance and risk flags that fire independently of the four axes, with priority and a suggested action. The discrimination-risk flag (adjustments declined for a worker likely covered by the Equality Act 2010 without adequate justification or alternatives) is the highest-priority signal of a failure-to-make-reasonable-adjustments claim.
+x-namespace:
+  form: neurodiversity-adjustment-response
+  apiPrefix: /api/neurodiversity-adjustment-response/
+  sqlSchema: neurodiversity_adjustment_response
+  xmlNamespace: https://formexamples.github.io/neurodiversity-adjustment-response/xml
+tags:
+  - name: neurodiversity-adjustment-response
+    description: Neurodiversity Adjustment Response form
 paths:
   /api/neurodiversity-adjustment-response/neurodiversity_adjustment_response_grade_flags:
     get:
       summary: List NeurodiversityAdjustmentResponseGradeFlag records
+      tags: [neurodiversity-adjustment-response]
       operationId: listNeurodiversityAdjustmentResponseGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeurodiversityAdjustmentResponseGradeFlag
+      tags: [neurodiversity-adjustment-response]
       operationId: createNeurodiversityAdjustmentResponseGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NeurodiversityAdjustmentResponseGradeFlag by id
+      tags: [neurodiversity-adjustment-response]
       operationId: getNeurodiversityAdjustmentResponseGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeurodiversityAdjustmentResponseGradeFlag
+      tags: [neurodiversity-adjustment-response]
       operationId: updateNeurodiversityAdjustmentResponseGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NeurodiversityAdjustmentResponseGradeFlag
+      tags: [neurodiversity-adjustment-response]
       operationId: replaceNeurodiversityAdjustmentResponseGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NeurodiversityAdjustmentResponseGradeFlag
+      tags: [neurodiversity-adjustment-response]
       operationId: deleteNeurodiversityAdjustmentResponseGradeFlag
       responses:
         "200":

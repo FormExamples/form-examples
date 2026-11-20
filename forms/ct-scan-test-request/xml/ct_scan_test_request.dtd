@@ -1,4 +1,5 @@
 <!ELEMENT ct_scan_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,body_region,primary_indication,clinical_question,relevant_history,contrast_required,pregnancy_status,egfr,previous_contrast_reaction,iodine_contrast_allergy,metformin,diabetes,renal_impairment,weight_kg,relevant_previous_imaging,urgency,supervising_consultant,ir_me_r_justification,notes)>
+<!ATTLIST ct_scan_test_request xmlns CDATA #FIXED "https://formexamples.github.io/ct-scan-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

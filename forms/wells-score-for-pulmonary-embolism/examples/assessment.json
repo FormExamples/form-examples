@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000053",
+    "id": "6ff91208-e586-55f0-a307-5e1867a0b4b5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000065",
+    "id": "6609c7a6-859f-5916-ad8a-493996eddc0f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "wellsScoreForPulmonaryEmbolism": {
-    "id": "550e8400-e29b-41d4-a716-000000000072",
+    "id": "97a61552-d1da-5df2-84b7-629f1ebc2209",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000076",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000077",
+    "patientId": "6b6ec5aa-f95e-506c-8c25-c021ec306343",
+    "clinicianId": "703a055f-30af-57c4-89d0-ba3712205d85",
     "status": "draft",
     "patientIdentifier": "",
     "assessedAt": null,
@@ -57,11 +57,11 @@
     "clinicalNotes": ""
   },
   "wellsScoreForPulmonaryEmbolismGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000086",
+    "id": "eb2d783c-1156-50eb-a07e-8919aece91f7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "wellsScoreForPulmonaryEmbolismId": "550e8400-e29b-41d4-a716-00000000008a",
+    "wellsScoreForPulmonaryEmbolismId": "f59bdcad-8af7-557c-97d0-7c11754fd0d2",
     "wellsScore": null,
     "twoLevelBand": "likely",
     "threeLevelBand": "low",
@@ -69,11 +69,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "wellsScoreForPulmonaryEmbolismGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000090",
+    "id": "cb0803e9-f784-59a5-91bf-a5e77f101c3c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "wellsScoreForPulmonaryEmbolismGradeId": "550e8400-e29b-41d4-a716-000000000094",
+    "wellsScoreForPulmonaryEmbolismGradeId": "2e896cdb-6ae6-5857-827f-6673b1852ef0",
     "ruleId": "",
     "instrument": "criterion",
     "points": 0.0,
@@ -82,11 +82,11 @@
     "description": ""
   },
   "wellsScoreForPulmonaryEmbolismGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000009b",
+    "id": "bbdd6a9e-8e10-5808-93f0-e6aad48ae314",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "wellsScoreForPulmonaryEmbolismGradeId": "550e8400-e29b-41d4-a716-00000000009f",
+    "wellsScoreForPulmonaryEmbolismGradeId": "129fb4e1-a593-5c22-9b53-a73ed28cbdeb",
     "flagId": "",
     "category": "pe-likely-ctpa",
     "priority": "low",

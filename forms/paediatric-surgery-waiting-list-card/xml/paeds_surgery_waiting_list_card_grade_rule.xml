@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE paeds_surgery_waiting_list_card_grade_rule SYSTEM "paeds_surgery_waiting_list_card_grade_rule.dtd">
-<paeds_surgery_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<paeds_surgery_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/paediatric-surgery-waiting-list-card/xml">
+<id>408cf45a-3265-5767-a1be-dd893e197e4f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<paeds_surgery_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</paeds_surgery_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<paeds_surgery_waiting_list_card_grade_id>5e462d94-c829-53cb-939c-7079fb69c2b4</paeds_surgery_waiting_list_card_grade_id>
+<rule_id>1fb0e7fb-e752-5b9e-aae5-cd7dcfd2b1e4</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

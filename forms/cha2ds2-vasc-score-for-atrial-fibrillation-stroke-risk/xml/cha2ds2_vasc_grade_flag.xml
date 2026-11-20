@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cha2ds2_vasc_grade_flag SYSTEM "cha2ds2_vasc_grade_flag.dtd">
-<cha2ds2_vasc_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<cha2ds2_vasc_grade_flag xmlns="https://formexamples.github.io/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/xml">
+<id>48bd0dd2-db54-5e8c-b9fe-f793b9e7f482</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cha2ds2_vasc_grade_id>880e8400-e29b-41d4-a716-446655440003</cha2ds2_vasc_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<cha2ds2_vasc_grade_id>821d0180-9870-5ee5-9b1f-3c64fbaa18fe</cha2ds2_vasc_grade_id>
+<flag_id>e49903a0-f359-50a2-aae3-284d07537b80</flag_id>
 <category>anticoagulation-recommended</category>
 <priority>low</priority>
 <description>Example text.</description>

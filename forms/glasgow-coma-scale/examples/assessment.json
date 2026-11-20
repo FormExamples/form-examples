@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005f",
+    "id": "140d3eec-7a43-5997-9b9e-e26c318eff29",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000071",
+    "id": "3e032957-db9a-514d-acab-ecae1ab7b8c7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "glasgowComaScale": {
-    "id": "550e8400-e29b-41d4-a716-00000000007e",
+    "id": "eed78407-675b-59e5-ace6-ec1e47b750bf",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000082",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000083",
+    "patientId": "58bc131b-c3ac-525e-a2d5-b11f882b028e",
+    "clinicianId": "0128483f-ce2f-5950-80a7-66a21604c450",
     "assessorName": "",
     "assessorRole": "doctor",
     "assessedAt": null,
@@ -65,11 +65,11 @@
     "clinicalNote": ""
   },
   "glasgowComaScaleGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000009a",
+    "id": "aed232a0-ce44-5da6-8fa6-b0ebcb7826d2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "glasgowComaScaleId": "550e8400-e29b-41d4-a716-00000000009e",
+    "glasgowComaScaleId": "e01462ea-0667-56c0-8d3e-e39168565feb",
     "eyeScore": null,
     "verbalScore": null,
     "motorScore": null,
@@ -82,11 +82,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "glasgowComaScaleGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a9",
+    "id": "929af26b-bd9a-56fb-b0a7-01d07a20f2c7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "glasgowComaScaleGradeId": "550e8400-e29b-41d4-a716-0000000000ad",
+    "glasgowComaScaleGradeId": "af85e559-7019-552d-870e-fd0b27a737a2",
     "ruleId": "",
     "component": "eye",
     "points": null,
@@ -94,11 +94,11 @@
     "description": ""
   },
   "glasgowComaScaleGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b3",
+    "id": "7052fb1f-5f73-53b6-8913-853d3296270d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "glasgowComaScaleGradeId": "550e8400-e29b-41d4-a716-0000000000b7",
+    "glasgowComaScaleGradeId": "feab61ef-1154-5dbd-ab44-4d800cf8e44c",
     "flagId": "",
     "category": "airway-risk",
     "priority": "low",

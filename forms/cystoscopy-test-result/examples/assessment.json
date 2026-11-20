@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000062",
+    "id": "85627eb4-5f54-5904-b8c1-c6e1c74ca907",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000074",
+    "id": "7e05213c-34ca-5852-86b9-a8a789375c31",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "cystoscopyTestResult": {
-    "id": "550e8400-e29b-41d4-a716-000000000082",
+    "id": "e7b2b807-a48b-5af8-a804-f6411c7198d5",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000086",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000087",
+    "patientId": "74933632-13b3-5a96-9403-f6aa2be26b0d",
+    "clinicianId": "2bdebdf4-427c-505e-8e5a-509274e50c1b",
     "originatingRequestReference": "",
     "reportStatus": "preliminary",
     "performedDate": null,
@@ -68,11 +68,11 @@
     "reportedTo": ""
   },
   "cystoscopyTestResultGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a0",
+    "id": "a5f22e56-3280-54b7-bbe5-e01c35097749",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cystoscopyTestResultId": "550e8400-e29b-41d4-a716-0000000000a4",
+    "cystoscopyTestResultId": "e1e5d355-d09e-598d-8fbe-57c4b25fe5d5",
     "resultClassification": "normal",
     "abnormalitySeverity": "none",
     "reportingCategory": "",
@@ -86,22 +86,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "cystoscopyTestResultGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "0ab0bdde-de88-5a4e-a869-3da8fc324a6c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cystoscopyTestResultGradeId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "cystoscopyTestResultGradeId": "93d9ee68-3db1-54ad-96ad-10d2fa20fc85",
     "ruleId": "",
     "axis": "classification",
     "category": "",
     "description": ""
   },
   "cystoscopyTestResultGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b9",
+    "id": "90c6022d-9485-5804-8b5c-9be42f0f972f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cystoscopyTestResultGradeId": "550e8400-e29b-41d4-a716-0000000000bd",
+    "cystoscopyTestResultGradeId": "62d62d37-a072-5fe9-999d-6785c52809a4",
     "flagId": "",
     "category": "critical-result-alert",
     "priority": "low",

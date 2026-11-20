@@ -1,4 +1,5 @@
 <!ELEMENT medication (id,created_at,updated_at,deleted_at,international_nonproprietary_name,description)>
+<!ATTLIST medication xmlns CDATA #FIXED "https://formexamples.github.io/pre-anaesthesia-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

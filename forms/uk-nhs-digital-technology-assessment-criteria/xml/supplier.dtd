@@ -1,4 +1,5 @@
 <!ELEMENT supplier (id,created_at,updated_at,deleted_at,name,trading_name,company_registration_number,country_of_registration_as_iso_3166_1_alpha_2,ico_registration_number,website,postal_address_as_full_text,postcode,contact_name,contact_email,contact_phone)>
+<!ATTLIST supplier xmlns CDATA #FIXED "https://formexamples.github.io/uk-nhs-digital-technology-assessment-criteria/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

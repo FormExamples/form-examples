@@ -5,10 +5,19 @@ info:
   title: Partogram — PartogramGradeFlag
   version: 1.0.0
   description: Flagged issues raised independently of the progress classification, scanned across the whole observation series, with priority and a suggested action for the labour-ward team.
+x-namespace:
+  form: partogram
+  apiPrefix: /api/partogram/
+  sqlSchema: partogram
+  xmlNamespace: https://formexamples.github.io/partogram/xml
+tags:
+  - name: partogram
+    description: Partogram form
 paths:
   /api/partogram/partogram_grade_flags:
     get:
       summary: List PartogramGradeFlag records
+      tags: [partogram]
       operationId: listPartogramGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PartogramGradeFlag
+      tags: [partogram]
       operationId: createPartogramGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PartogramGradeFlag by id
+      tags: [partogram]
       operationId: getPartogramGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PartogramGradeFlag
+      tags: [partogram]
       operationId: updatePartogramGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PartogramGradeFlag
+      tags: [partogram]
       operationId: replacePartogramGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PartogramGradeFlag
+      tags: [partogram]
       operationId: deletePartogramGradeFlag
       responses:
         "200":

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE coagulation_test_result_grade SYSTEM "coagulation_test_result_grade.dtd">
-<coagulation_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<coagulation_test_result_grade xmlns="https://formexamples.github.io/coagulation-test-result/xml">
+<id>e970478c-ac07-5be3-acc7-07cb6bf4ba67</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<coagulation_test_result_id>770e8400-e29b-41d4-a716-446655440002</coagulation_test_result_id>
+<coagulation_test_result_id>0a056a96-975d-553f-bceb-34b970f064a6</coagulation_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

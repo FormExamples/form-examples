@@ -5,10 +5,19 @@ info:
   title: Advance Statement About Care — GradingAdditionalFlag
   version: 1.0.0
   description: Additional flags detected during advance statement completeness grading (e.g. missing contacts, unsigned statement, outdated review date).
+x-namespace:
+  form: advance-statement-about-care
+  apiPrefix: /api/advance-statement-about-care/
+  sqlSchema: advance_statement_about_care
+  xmlNamespace: https://formexamples.github.io/advance-statement-about-care/xml
+tags:
+  - name: advance-statement-about-care
+    description: Advance Statement About Care form
 paths:
   /api/advance-statement-about-care/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [advance-statement-about-care]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [advance-statement-about-care]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [advance-statement-about-care]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [advance-statement-about-care]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [advance-statement-about-care]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [advance-statement-about-care]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

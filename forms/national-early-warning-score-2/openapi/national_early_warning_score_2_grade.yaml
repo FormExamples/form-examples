@@ -5,10 +5,19 @@ info:
   title: National Early Warning Score 2 — NationalEarlyWarningScore2Grade
   version: 1.0.0
   description: "Computed NEWS2 grading result: per-parameter subscores, aggregate total (0-20+), red-score indicator, derived clinical-risk band, and RCP-recommended monitoring frequency and escalation response. One row per observation record (1:1)."
+x-namespace:
+  form: national-early-warning-score-2
+  apiPrefix: /api/national-early-warning-score-2/
+  sqlSchema: national_early_warning_score_2
+  xmlNamespace: https://formexamples.github.io/national-early-warning-score-2/xml
+tags:
+  - name: national-early-warning-score-2
+    description: National Early Warning Score 2 form
 paths:
   /api/national-early-warning-score-2/national_early_warning_score_2_grades:
     get:
       summary: List NationalEarlyWarningScore2Grade records
+      tags: [national-early-warning-score-2]
       operationId: listNationalEarlyWarningScore2Grade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NationalEarlyWarningScore2Grade
+      tags: [national-early-warning-score-2]
       operationId: createNationalEarlyWarningScore2Grade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NationalEarlyWarningScore2Grade by id
+      tags: [national-early-warning-score-2]
       operationId: getNationalEarlyWarningScore2Grade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NationalEarlyWarningScore2Grade
+      tags: [national-early-warning-score-2]
       operationId: updateNationalEarlyWarningScore2Grade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NationalEarlyWarningScore2Grade
+      tags: [national-early-warning-score-2]
       operationId: replaceNationalEarlyWarningScore2Grade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NationalEarlyWarningScore2Grade
+      tags: [national-early-warning-score-2]
       operationId: deleteNationalEarlyWarningScore2Grade
       responses:
         "200":

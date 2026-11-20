@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE echocardiogram_test_request_grade_flag SYSTEM "echocardiogram_test_request_grade_flag.dtd">
-<echocardiogram_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<echocardiogram_test_request_grade_flag xmlns="https://formexamples.github.io/echocardiogram-test-request/xml">
+<id>73d843c6-7653-5dec-9366-ec570b747171</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<echocardiogram_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</echocardiogram_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<echocardiogram_test_request_grade_id>f2714994-442e-50e2-a84f-03f47e1ec623</echocardiogram_test_request_grade_id>
+<flag_id>32d2575d-cf57-59e3-a3f1-d75f41663543</flag_id>
 <category>suspected-endocarditis</category>
 <priority>low</priority>
 <description>Example text.</description>

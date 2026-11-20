@@ -5,10 +5,19 @@ info:
   title: Modified Early Warning Score — ModifiedEarlyWarningScoreGradeRule
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during MEWS computation: instrument, band, points contributed, category, and description."
+x-namespace:
+  form: modified-early-warning-score
+  apiPrefix: /api/modified-early-warning-score/
+  sqlSchema: modified_early_warning_score
+  xmlNamespace: https://formexamples.github.io/modified-early-warning-score/xml
+tags:
+  - name: modified-early-warning-score
+    description: Modified Early Warning Score form
 paths:
   /api/modified-early-warning-score/modified_early_warning_score_grade_rules:
     get:
       summary: List ModifiedEarlyWarningScoreGradeRule records
+      tags: [modified-early-warning-score]
       operationId: listModifiedEarlyWarningScoreGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ModifiedEarlyWarningScoreGradeRule
+      tags: [modified-early-warning-score]
       operationId: createModifiedEarlyWarningScoreGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ModifiedEarlyWarningScoreGradeRule by id
+      tags: [modified-early-warning-score]
       operationId: getModifiedEarlyWarningScoreGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ModifiedEarlyWarningScoreGradeRule
+      tags: [modified-early-warning-score]
       operationId: updateModifiedEarlyWarningScoreGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ModifiedEarlyWarningScoreGradeRule
+      tags: [modified-early-warning-score]
       operationId: replaceModifiedEarlyWarningScoreGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ModifiedEarlyWarningScoreGradeRule
+      tags: [modified-early-warning-score]
       operationId: deleteModifiedEarlyWarningScoreGradeRule
       responses:
         "200":

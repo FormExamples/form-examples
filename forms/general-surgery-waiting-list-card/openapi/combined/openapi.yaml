@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the General Surgery Waiting List Card form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: general-surgery-waiting-list-card
+  apiPrefix: /api/general-surgery-waiting-list-card/
+  sqlSchema: general_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/general-surgery-waiting-list-card/xml
+tags:
+- name: general-surgery-waiting-list-card
+  description: General Surgery Waiting List Card form
 paths:
   /api/general-surgery-waiting-list-card/gen_surgery_waiting_list_card_appointments:
     get:
       summary: List GenSurgeryWaitingListCardAppointment records
+      tags:
+      - general-surgery-waiting-list-card
       operationId: listGenSurgeryWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GenSurgeryWaitingListCardAppointment
+      tags:
+      - general-surgery-waiting-list-card
       operationId: createGenSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GenSurgeryWaitingListCardAppointment by id
+      tags:
+      - general-surgery-waiting-list-card
       operationId: getGenSurgeryWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GenSurgeryWaitingListCardAppointment
+      tags:
+      - general-surgery-waiting-list-card
       operationId: updateGenSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GenSurgeryWaitingListCardAppointment
+      tags:
+      - general-surgery-waiting-list-card
       operationId: replaceGenSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GenSurgeryWaitingListCardAppointment
+      tags:
+      - general-surgery-waiting-list-card
       operationId: deleteGenSurgeryWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/general-surgery-waiting-list-card/gen_surgery_waiting_list_card_grade_flags:
     get:
       summary: List GenSurgeryWaitingListCardGradeFlag records
+      tags:
+      - general-surgery-waiting-list-card
       operationId: listGenSurgeryWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GenSurgeryWaitingListCardGradeFlag
+      tags:
+      - general-surgery-waiting-list-card
       operationId: createGenSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GenSurgeryWaitingListCardGradeFlag by id
+      tags:
+      - general-surgery-waiting-list-card
       operationId: getGenSurgeryWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GenSurgeryWaitingListCardGradeFlag
+      tags:
+      - general-surgery-waiting-list-card
       operationId: updateGenSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GenSurgeryWaitingListCardGradeFlag
+      tags:
+      - general-surgery-waiting-list-card
       operationId: replaceGenSurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GenSurgeryWaitingListCardGradeFlag
+      tags:
+      - general-surgery-waiting-list-card
       operationId: deleteGenSurgeryWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/general-surgery-waiting-list-card/gen_surgery_waiting_list_card_grade_rules:
     get:
       summary: List GenSurgeryWaitingListCardGradeRule records
+      tags:
+      - general-surgery-waiting-list-card
       operationId: listGenSurgeryWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GenSurgeryWaitingListCardGradeRule
+      tags:
+      - general-surgery-waiting-list-card
       operationId: createGenSurgeryWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GenSurgeryWaitingListCardGradeRule by id
+      tags:
+      - general-surgery-waiting-list-card
       operationId: getGenSurgeryWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GenSurgeryWaitingListCardGradeRule
+      tags:
+      - general-surgery-waiting-list-card
       operationId: updateGenSurgeryWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GenSurgeryWaitingListCardGradeRule
+      tags:
+      - general-surgery-waiting-list-card
       operationId: replaceGenSurgeryWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GenSurgeryWaitingListCardGradeRule
+      tags:
+      - general-surgery-waiting-list-card
       operationId: deleteGenSurgeryWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/general-surgery-waiting-list-card/gen_surgery_waiting_list_card_grades:
     get:
       summary: List GenSurgeryWaitingListCardGrade records
+      tags:
+      - general-surgery-waiting-list-card
       operationId: listGenSurgeryWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GenSurgeryWaitingListCardGrade
+      tags:
+      - general-surgery-waiting-list-card
       operationId: createGenSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GenSurgeryWaitingListCardGrade by id
+      tags:
+      - general-surgery-waiting-list-card
       operationId: getGenSurgeryWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GenSurgeryWaitingListCardGrade
+      tags:
+      - general-surgery-waiting-list-card
       operationId: updateGenSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GenSurgeryWaitingListCardGrade
+      tags:
+      - general-surgery-waiting-list-card
       operationId: replaceGenSurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GenSurgeryWaitingListCardGrade
+      tags:
+      - general-surgery-waiting-list-card
       operationId: deleteGenSurgeryWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/general-surgery-waiting-list-card/gen_surgery_waiting_list_cards:
     get:
       summary: List GenSurgeryWaitingListCard records
+      tags:
+      - general-surgery-waiting-list-card
       operationId: listGenSurgeryWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GenSurgeryWaitingListCard
+      tags:
+      - general-surgery-waiting-list-card
       operationId: createGenSurgeryWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GenSurgeryWaitingListCard by id
+      tags:
+      - general-surgery-waiting-list-card
       operationId: getGenSurgeryWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GenSurgeryWaitingListCard
+      tags:
+      - general-surgery-waiting-list-card
       operationId: updateGenSurgeryWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GenSurgeryWaitingListCard
+      tags:
+      - general-surgery-waiting-list-card
       operationId: replaceGenSurgeryWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GenSurgeryWaitingListCard
+      tags:
+      - general-surgery-waiting-list-card
       operationId: deleteGenSurgeryWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - general-surgery-waiting-list-card
   /api/general-surgery-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - general-surgery-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - general-surgery-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - general-surgery-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - general-surgery-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - general-surgery-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - general-surgery-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/general-surgery-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - general-surgery-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - general-surgery-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - general-surgery-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - general-surgery-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - general-surgery-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - general-surgery-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

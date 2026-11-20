@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000055",
+    "id": "6a28d88a-c4fd-5f20-9347-536c3f042b92",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000067",
+    "id": "67d3e9b4-4473-5a74-9841-ba63ac603d65",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "modifiedEarlyWarningScore": {
-    "id": "550e8400-e29b-41d4-a716-000000000074",
+    "id": "5af1eca7-b104-5f2d-9d59-9e9df1a0a251",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000078",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000079",
+    "patientId": "daf5317c-240b-5eee-93c3-1bb87e01d69a",
+    "clinicianId": "c2e9d3e5-1785-5bfa-9c51-51e562b90244",
     "status": "draft",
     "observationAt": null,
     "careSetting": "acute-ward",
@@ -54,11 +54,11 @@
     "clinicalNotes": ""
   },
   "modifiedEarlyWarningScoreGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000085",
+    "id": "2945aafa-724e-55bd-ae9a-0a829d3d7b56",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "modifiedEarlyWarningScoreId": "550e8400-e29b-41d4-a716-000000000089",
+    "modifiedEarlyWarningScoreId": "d655a52c-7d6f-51aa-a836-3713b12c09ad",
     "aggregateScore": null,
     "systolicBloodPressureScore": null,
     "heartRateScore": null,
@@ -71,11 +71,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "modifiedEarlyWarningScoreGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000094",
+    "id": "22329fc0-2891-53b1-969a-0553bf764db6",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "modifiedEarlyWarningScoreGradeId": "550e8400-e29b-41d4-a716-000000000098",
+    "modifiedEarlyWarningScoreGradeId": "e0d6e3b3-4ebd-55e9-87d7-e843e448b97b",
     "ruleId": "",
     "instrument": "systolic-blood-pressure",
     "band": "low",
@@ -84,11 +84,11 @@
     "description": ""
   },
   "modifiedEarlyWarningScoreGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000009f",
+    "id": "e0dbdca9-46d5-5214-9e9b-163e10cc9078",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "modifiedEarlyWarningScoreGradeId": "550e8400-e29b-41d4-a716-0000000000a3",
+    "modifiedEarlyWarningScoreGradeId": "b0a1876c-2246-587f-9989-0c1877098b43",
     "flagId": "",
     "category": "aggregate-escalation",
     "priority": "low",

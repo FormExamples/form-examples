@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ottawa_knee_rule_grade_rule SYSTEM "ottawa_knee_rule_grade_rule.dtd">
-<ottawa_knee_rule_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<ottawa_knee_rule_grade_rule xmlns="https://formexamples.github.io/ottawa-knee-rule/xml">
+<id>0825f0d0-75ad-5da4-8040-2e59179ed12f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<ottawa_knee_rule_grade_id>880e8400-e29b-41d4-a716-446655440003</ottawa_knee_rule_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<ottawa_knee_rule_grade_id>e3caa4b1-cef9-5e3b-9b7a-c16898f87fb8</ottawa_knee_rule_grade_id>
+<rule_id>78e219d5-832c-5e97-ac49-b95a76b6243f</rule_id>
 <instrument>criterion</instrument>
 <criterion>age</criterion>
 <fired>true</fired>

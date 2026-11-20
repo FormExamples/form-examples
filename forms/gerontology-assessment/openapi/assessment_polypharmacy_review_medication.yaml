@@ -5,10 +5,19 @@ info:
   title: Gerontology Assessment — AssessmentPolypharmacyReviewMedication
   version: 1.0.0
   description: Individual medication entry within the polypharmacy review.
+x-namespace:
+  form: gerontology-assessment
+  apiPrefix: /api/gerontology-assessment/
+  sqlSchema: gerontology_assessment
+  xmlNamespace: https://formexamples.github.io/gerontology-assessment/xml
+tags:
+  - name: gerontology-assessment
+    description: Gerontology Assessment form
 paths:
   /api/gerontology-assessment/assessment_polypharmacy_review_medications:
     get:
       summary: List AssessmentPolypharmacyReviewMedication records
+      tags: [gerontology-assessment]
       operationId: listAssessmentPolypharmacyReviewMedication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AssessmentPolypharmacyReviewMedication
+      tags: [gerontology-assessment]
       operationId: createAssessmentPolypharmacyReviewMedication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AssessmentPolypharmacyReviewMedication by id
+      tags: [gerontology-assessment]
       operationId: getAssessmentPolypharmacyReviewMedication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AssessmentPolypharmacyReviewMedication
+      tags: [gerontology-assessment]
       operationId: updateAssessmentPolypharmacyReviewMedication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AssessmentPolypharmacyReviewMedication
+      tags: [gerontology-assessment]
       operationId: replaceAssessmentPolypharmacyReviewMedication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AssessmentPolypharmacyReviewMedication
+      tags: [gerontology-assessment]
       operationId: deleteAssessmentPolypharmacyReviewMedication
       responses:
         "200":

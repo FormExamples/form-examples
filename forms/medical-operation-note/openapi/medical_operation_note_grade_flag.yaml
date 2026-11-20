@@ -5,10 +5,19 @@ info:
   title: Medical Operation Note — MedicalOperationNoteGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the composite-risk grade, with priority and a suggested action for the recovery and governance team.
+x-namespace:
+  form: medical-operation-note
+  apiPrefix: /api/medical-operation-note/
+  sqlSchema: medical_operation_note
+  xmlNamespace: https://formexamples.github.io/medical-operation-note/xml
+tags:
+  - name: medical-operation-note
+    description: Medical Operation Note form
 paths:
   /api/medical-operation-note/medical_operation_note_grade_flags:
     get:
       summary: List MedicalOperationNoteGradeFlag records
+      tags: [medical-operation-note]
       operationId: listMedicalOperationNoteGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalOperationNoteGradeFlag
+      tags: [medical-operation-note]
       operationId: createMedicalOperationNoteGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalOperationNoteGradeFlag by id
+      tags: [medical-operation-note]
       operationId: getMedicalOperationNoteGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalOperationNoteGradeFlag
+      tags: [medical-operation-note]
       operationId: updateMedicalOperationNoteGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalOperationNoteGradeFlag
+      tags: [medical-operation-note]
       operationId: replaceMedicalOperationNoteGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalOperationNoteGradeFlag
+      tags: [medical-operation-note]
       operationId: deleteMedicalOperationNoteGradeFlag
       responses:
         "200":

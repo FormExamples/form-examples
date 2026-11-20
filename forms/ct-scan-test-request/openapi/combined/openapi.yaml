@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the CT Scan Test Request form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: ct-scan-test-request
+  apiPrefix: /api/ct-scan-test-request/
+  sqlSchema: ct_scan_test_request
+  xmlNamespace: https://formexamples.github.io/ct-scan-test-request/xml
+tags:
+- name: ct-scan-test-request
+  description: CT Scan Test Request form
 paths:
   /api/ct-scan-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - ct-scan-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - ct-scan-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - ct-scan-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - ct-scan-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - ct-scan-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - ct-scan-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/ct-scan-test-request/ct_scan_test_request_grade_flags:
     get:
       summary: List CtScanTestRequestGradeFlag records
+      tags:
+      - ct-scan-test-request
       operationId: listCtScanTestRequestGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CtScanTestRequestGradeFlag
+      tags:
+      - ct-scan-test-request
       operationId: createCtScanTestRequestGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CtScanTestRequestGradeFlag by id
+      tags:
+      - ct-scan-test-request
       operationId: getCtScanTestRequestGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CtScanTestRequestGradeFlag
+      tags:
+      - ct-scan-test-request
       operationId: updateCtScanTestRequestGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CtScanTestRequestGradeFlag
+      tags:
+      - ct-scan-test-request
       operationId: replaceCtScanTestRequestGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CtScanTestRequestGradeFlag
+      tags:
+      - ct-scan-test-request
       operationId: deleteCtScanTestRequestGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/ct-scan-test-request/ct_scan_test_request_grade_rules:
     get:
       summary: List CtScanTestRequestGradeRule records
+      tags:
+      - ct-scan-test-request
       operationId: listCtScanTestRequestGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CtScanTestRequestGradeRule
+      tags:
+      - ct-scan-test-request
       operationId: createCtScanTestRequestGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CtScanTestRequestGradeRule by id
+      tags:
+      - ct-scan-test-request
       operationId: getCtScanTestRequestGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CtScanTestRequestGradeRule
+      tags:
+      - ct-scan-test-request
       operationId: updateCtScanTestRequestGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CtScanTestRequestGradeRule
+      tags:
+      - ct-scan-test-request
       operationId: replaceCtScanTestRequestGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CtScanTestRequestGradeRule
+      tags:
+      - ct-scan-test-request
       operationId: deleteCtScanTestRequestGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/ct-scan-test-request/ct_scan_test_request_grades:
     get:
       summary: List CtScanTestRequestGrade records
+      tags:
+      - ct-scan-test-request
       operationId: listCtScanTestRequestGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CtScanTestRequestGrade
+      tags:
+      - ct-scan-test-request
       operationId: createCtScanTestRequestGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CtScanTestRequestGrade by id
+      tags:
+      - ct-scan-test-request
       operationId: getCtScanTestRequestGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CtScanTestRequestGrade
+      tags:
+      - ct-scan-test-request
       operationId: updateCtScanTestRequestGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CtScanTestRequestGrade
+      tags:
+      - ct-scan-test-request
       operationId: replaceCtScanTestRequestGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CtScanTestRequestGrade
+      tags:
+      - ct-scan-test-request
       operationId: deleteCtScanTestRequestGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/ct-scan-test-request/ct_scan_test_requests:
     get:
       summary: List CtScanTestRequest records
+      tags:
+      - ct-scan-test-request
       operationId: listCtScanTestRequest
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CtScanTestRequest
+      tags:
+      - ct-scan-test-request
       operationId: createCtScanTestRequest
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CtScanTestRequest by id
+      tags:
+      - ct-scan-test-request
       operationId: getCtScanTestRequest
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CtScanTestRequest
+      tags:
+      - ct-scan-test-request
       operationId: updateCtScanTestRequest
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CtScanTestRequest
+      tags:
+      - ct-scan-test-request
       operationId: replaceCtScanTestRequest
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CtScanTestRequest
+      tags:
+      - ct-scan-test-request
       operationId: deleteCtScanTestRequest
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - ct-scan-test-request
   /api/ct-scan-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - ct-scan-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - ct-scan-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - ct-scan-test-request
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - ct-scan-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - ct-scan-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - ct-scan-test-request
       operationId: deletePatient
       responses:
         '200':

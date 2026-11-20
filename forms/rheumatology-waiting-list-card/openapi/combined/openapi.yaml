@@ -7,6 +7,14 @@ info:
   description: Combined OpenAPI specification for the Rheumatology Waiting List Card form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: rheumatology-waiting-list-card
+  apiPrefix: /api/rheumatology-waiting-list-card/
+  sqlSchema: rheumatology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/rheumatology-waiting-list-card/xml
+tags:
+- name: rheumatology-waiting-list-card
+  description: Rheumatology Waiting List Card form
 paths:
   /api/rheumatology-waiting-list-card/openapi.yaml:
     get:
@@ -19,9 +27,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - rheumatology-waiting-list-card
   /api/rheumatology-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - rheumatology-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -74,6 +86,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - rheumatology-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -127,6 +141,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - rheumatology-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -154,6 +170,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - rheumatology-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -199,6 +217,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - rheumatology-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -244,6 +264,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - rheumatology-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -268,6 +290,8 @@ paths:
   /api/rheumatology-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - rheumatology-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - rheumatology-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - rheumatology-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - rheumatology-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - rheumatology-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - rheumatology-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/rheumatology-waiting-list-card/rheumatology_waiting_list_card_appointments:
     get:
       summary: List RheumatologyWaitingListCardAppointment records
+      tags:
+      - rheumatology-waiting-list-card
       operationId: listRheumatologyWaitingListCardAppointment
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RheumatologyWaitingListCardAppointment
+      tags:
+      - rheumatology-waiting-list-card
       operationId: createRheumatologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RheumatologyWaitingListCardAppointment by id
+      tags:
+      - rheumatology-waiting-list-card
       operationId: getRheumatologyWaitingListCardAppointment
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RheumatologyWaitingListCardAppointment
+      tags:
+      - rheumatology-waiting-list-card
       operationId: updateRheumatologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RheumatologyWaitingListCardAppointment
+      tags:
+      - rheumatology-waiting-list-card
       operationId: replaceRheumatologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RheumatologyWaitingListCardAppointment
+      tags:
+      - rheumatology-waiting-list-card
       operationId: deleteRheumatologyWaitingListCardAppointment
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/rheumatology-waiting-list-card/rheumatology_waiting_list_card_grade_flags:
     get:
       summary: List RheumatologyWaitingListCardGradeFlag records
+      tags:
+      - rheumatology-waiting-list-card
       operationId: listRheumatologyWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RheumatologyWaitingListCardGradeFlag
+      tags:
+      - rheumatology-waiting-list-card
       operationId: createRheumatologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RheumatologyWaitingListCardGradeFlag by id
+      tags:
+      - rheumatology-waiting-list-card
       operationId: getRheumatologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RheumatologyWaitingListCardGradeFlag
+      tags:
+      - rheumatology-waiting-list-card
       operationId: updateRheumatologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RheumatologyWaitingListCardGradeFlag
+      tags:
+      - rheumatology-waiting-list-card
       operationId: replaceRheumatologyWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RheumatologyWaitingListCardGradeFlag
+      tags:
+      - rheumatology-waiting-list-card
       operationId: deleteRheumatologyWaitingListCardGradeFlag
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/rheumatology-waiting-list-card/rheumatology_waiting_list_card_grade_rules:
     get:
       summary: List RheumatologyWaitingListCardGradeRule records
+      tags:
+      - rheumatology-waiting-list-card
       operationId: listRheumatologyWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RheumatologyWaitingListCardGradeRule
+      tags:
+      - rheumatology-waiting-list-card
       operationId: createRheumatologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RheumatologyWaitingListCardGradeRule by id
+      tags:
+      - rheumatology-waiting-list-card
       operationId: getRheumatologyWaitingListCardGradeRule
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RheumatologyWaitingListCardGradeRule
+      tags:
+      - rheumatology-waiting-list-card
       operationId: updateRheumatologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RheumatologyWaitingListCardGradeRule
+      tags:
+      - rheumatology-waiting-list-card
       operationId: replaceRheumatologyWaitingListCardGradeRule
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RheumatologyWaitingListCardGradeRule
+      tags:
+      - rheumatology-waiting-list-card
       operationId: deleteRheumatologyWaitingListCardGradeRule
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/rheumatology-waiting-list-card/rheumatology_waiting_list_card_grades:
     get:
       summary: List RheumatologyWaitingListCardGrade records
+      tags:
+      - rheumatology-waiting-list-card
       operationId: listRheumatologyWaitingListCardGrade
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RheumatologyWaitingListCardGrade
+      tags:
+      - rheumatology-waiting-list-card
       operationId: createRheumatologyWaitingListCardGrade
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RheumatologyWaitingListCardGrade by id
+      tags:
+      - rheumatology-waiting-list-card
       operationId: getRheumatologyWaitingListCardGrade
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RheumatologyWaitingListCardGrade
+      tags:
+      - rheumatology-waiting-list-card
       operationId: updateRheumatologyWaitingListCardGrade
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RheumatologyWaitingListCardGrade
+      tags:
+      - rheumatology-waiting-list-card
       operationId: replaceRheumatologyWaitingListCardGrade
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RheumatologyWaitingListCardGrade
+      tags:
+      - rheumatology-waiting-list-card
       operationId: deleteRheumatologyWaitingListCardGrade
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/rheumatology-waiting-list-card/rheumatology_waiting_list_cards:
     get:
       summary: List RheumatologyWaitingListCard records
+      tags:
+      - rheumatology-waiting-list-card
       operationId: listRheumatologyWaitingListCard
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RheumatologyWaitingListCard
+      tags:
+      - rheumatology-waiting-list-card
       operationId: createRheumatologyWaitingListCard
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RheumatologyWaitingListCard by id
+      tags:
+      - rheumatology-waiting-list-card
       operationId: getRheumatologyWaitingListCard
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RheumatologyWaitingListCard
+      tags:
+      - rheumatology-waiting-list-card
       operationId: updateRheumatologyWaitingListCard
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RheumatologyWaitingListCard
+      tags:
+      - rheumatology-waiting-list-card
       operationId: replaceRheumatologyWaitingListCard
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RheumatologyWaitingListCard
+      tags:
+      - rheumatology-waiting-list-card
       operationId: deleteRheumatologyWaitingListCard
       responses:
         '200':

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<grade xmlns="https://formexamples.github.io/workplace-stress-assessment/xml">
+<id>7f10864b-69b7-5be5-8536-5c5a7cd8ed69</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>eab0bb58-a37e-5039-a5c0-9045188dcb4a</assessment_id>
 <result_category>Normal</result_category>
 <result_score>5.0</result_score>
 <result_notes>Example text.</result_notes>

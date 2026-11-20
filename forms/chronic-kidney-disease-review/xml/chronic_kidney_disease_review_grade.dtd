@@ -1,4 +1,5 @@
 <!ELEMENT chronic_kidney_disease_review_grade (id,created_at,updated_at,deleted_at,chronic_kidney_disease_review_id,gfr_category,albuminuria_category,kdigo_risk_zone,review_status,blood_pressure_target_systolic,blood_pressure_target_diastolic,blood_pressure_at_target,completeness_score,graded_at)>
+<!ATTLIST chronic_kidney_disease_review_grade xmlns CDATA #FIXED "https://formexamples.github.io/chronic-kidney-disease-review/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

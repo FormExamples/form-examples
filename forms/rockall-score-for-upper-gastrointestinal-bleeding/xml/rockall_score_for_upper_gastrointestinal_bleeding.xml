@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rockall_score_for_upper_gastrointestinal_bleeding SYSTEM "rockall_score_for_upper_gastrointestinal_bleeding.dtd">
-<rockall_score_for_upper_gastrointestinal_bleeding>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<rockall_score_for_upper_gastrointestinal_bleeding xmlns="https://formexamples.github.io/rockall-score-for-upper-gastrointestinal-bleeding/xml">
+<id>76d21b5b-176a-5330-8ae2-d7821ea55778</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>b486497d-57ee-5829-960f-44d2b0a51d29</patient_id>
+<clinician_id>99dbfd9b-3710-5c1a-93af-35f733069939</clinician_id>
 <clinician_name>Example</clinician_name>
 <clinician_role>doctor</clinician_role>
 <assessed_at>2026-04-09T10:00:00Z</assessed_at>

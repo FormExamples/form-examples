@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "92eb6093-8ba5-4ca3-af28-4dc05c7808ff",
+  "id": "6039bd16-cc90-552a-bd24-bd3948da9c82",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:31f0e59b-6bf4-48e8-a834-ef4730708961",
+      "fullUrl": "urn:uuid:bec273fc-05dc-5292-ad5f-1c1e2c7659e9",
       "resource": {
         "resourceType": "Patient",
-        "id": "31f0e59b-6bf4-48e8-a834-ef4730708961",
+        "id": "bec273fc-05dc-5292-ad5f-1c1e2c7659e9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:d5ec88a3-83fd-410f-a54e-453f3f5d064d",
+      "fullUrl": "urn:uuid:676b97e1-0ee0-53cc-8aab-45076ec6e339",
       "resource": {
         "resourceType": "Observation",
-        "id": "d5ec88a3-83fd-410f-a54e-453f3f5d064d",
+        "id": "676b97e1-0ee0-53cc-8aab-45076ec6e339",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:31f0e59b-6bf4-48e8-a834-ef4730708961"
+          "reference": "urn:uuid:bec273fc-05dc-5292-ad5f-1c1e2c7659e9"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:2fc49eee-5516-4bb3-a01e-610719a9849a",
+      "fullUrl": "urn:uuid:0bca3336-10d4-5cdc-bde3-1ec3d1c87d25",
       "resource": {
         "resourceType": "Observation",
-        "id": "2fc49eee-5516-4bb3-a01e-610719a9849a",
+        "id": "0bca3336-10d4-5cdc-bde3-1ec3d1c87d25",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:31f0e59b-6bf4-48e8-a834-ef4730708961"
+          "reference": "urn:uuid:bec273fc-05dc-5292-ad5f-1c1e2c7659e9"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -559,10 +559,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:439a1594-0f27-481f-ad8d-0cf315aa76c3",
+      "fullUrl": "urn:uuid:7e891315-98ea-51ce-b0c1-dc15e688ec1c",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "439a1594-0f27-481f-ad8d-0cf315aa76c3",
+        "id": "7e891315-98ea-51ce-b0c1-dc15e688ec1c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -571,7 +571,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:31f0e59b-6bf4-48e8-a834-ef4730708961"
+          "reference": "urn:uuid:bec273fc-05dc-5292-ad5f-1c1e2c7659e9"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -580,10 +580,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:3ee879a7-40dc-4992-a649-d7873cd642bf",
+      "fullUrl": "urn:uuid:7c8cd2b4-67f5-5e6f-9186-a008436d4fb7",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "3ee879a7-40dc-4992-a649-d7873cd642bf",
+        "id": "7c8cd2b4-67f5-5e6f-9186-a008436d4fb7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -613,17 +613,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:31f0e59b-6bf4-48e8-a834-ef4730708961"
+          "reference": "urn:uuid:bec273fc-05dc-5292-ad5f-1c1e2c7659e9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Malignancy or an abnormal diagnostic feature is present; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:19b7d5ec-0136-4e2f-ab13-75d6a64fcc8c",
+      "fullUrl": "urn:uuid:5e7dbe2d-89d4-5a5f-ac96-9fd698be1e1a",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "19b7d5ec-0136-4e2f-ab13-75d6a64fcc8c",
+        "id": "5e7dbe2d-89d4-5a5f-ac96-9fd698be1e1a",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -653,17 +653,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:31f0e59b-6bf4-48e8-a834-ef4730708961"
+          "reference": "urn:uuid:bec273fc-05dc-5292-ad5f-1c1e2c7659e9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Malignancy present without a recorded grade; abnormality severity graded minor."
       }
     },
     {
-      "fullUrl": "urn:uuid:97e78b00-890d-411e-ae84-12480dbe9311",
+      "fullUrl": "urn:uuid:1baf8647-005e-56f8-a9f1-fcee063aa5e4",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "97e78b00-890d-411e-ae84-12480dbe9311",
+        "id": "1baf8647-005e-56f8-a9f1-fcee063aa5e4",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -693,17 +693,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:31f0e59b-6bf4-48e8-a834-ef4730708961"
+          "reference": "urn:uuid:bec273fc-05dc-5292-ad5f-1c1e2c7659e9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Minor abnormality present; structured follow-up recommended."
       }
     },
     {
-      "fullUrl": "urn:uuid:5b69994b-faf5-4458-a6bd-3566a22352a8",
+      "fullUrl": "urn:uuid:cab51d7e-6856-54b6-9bd4-7079e59b8bf8",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "5b69994b-faf5-4458-a6bd-3566a22352a8",
+        "id": "cab51d7e-6856-54b6-9bd4-7079e59b8bf8",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -733,7 +733,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:31f0e59b-6bf4-48e8-a834-ef4730708961"
+          "reference": "urn:uuid:bec273fc-05dc-5292-ad5f-1c1e2c7659e9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Malignancy is reported but no histological grade was recorded.",

@@ -5,10 +5,19 @@ info:
   title: Advance Decision To Refuse Treatment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: advance-decision-to-refuse-treatment
+  apiPrefix: /api/advance-decision-to-refuse-treatment/
+  sqlSchema: advance_decision_to_refuse_treatment
+  xmlNamespace: https://formexamples.github.io/advance-decision-to-refuse-treatment/xml
+tags:
+  - name: advance-decision-to-refuse-treatment
+    description: Advance Decision To Refuse Treatment form
 paths:
   /api/advance-decision-to-refuse-treatment/clinicians:
     get:
       summary: List Clinician records
+      tags: [advance-decision-to-refuse-treatment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [advance-decision-to-refuse-treatment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [advance-decision-to-refuse-treatment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [advance-decision-to-refuse-treatment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [advance-decision-to-refuse-treatment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [advance-decision-to-refuse-treatment]
       operationId: deleteClinician
       responses:
         "200":

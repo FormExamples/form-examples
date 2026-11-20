@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Wells Score for Pulmonary Embolism form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: wells-score-for-pulmonary-embolism
+  apiPrefix: /api/wells-score-for-pulmonary-embolism/
+  sqlSchema: wells_score_for_pulmonary_embolism
+  xmlNamespace: https://formexamples.github.io/wells-score-for-pulmonary-embolism/xml
+tags:
+- name: wells-score-for-pulmonary-embolism
+  description: Wells Score for Pulmonary Embolism form
 paths:
   /api/wells-score-for-pulmonary-embolism/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - wells-score-for-pulmonary-embolism
   /api/wells-score-for-pulmonary-embolism/patients:
     get:
       summary: List Patient records
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/wells-score-for-pulmonary-embolism/wells_score_for_pulmonary_embolism_grade_flags:
     get:
       summary: List WellsScoreForPulmonaryEmbolismGradeFlag records
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: listWellsScoreForPulmonaryEmbolismGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WellsScoreForPulmonaryEmbolismGradeFlag
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: createWellsScoreForPulmonaryEmbolismGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WellsScoreForPulmonaryEmbolismGradeFlag by id
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: getWellsScoreForPulmonaryEmbolismGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WellsScoreForPulmonaryEmbolismGradeFlag
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: updateWellsScoreForPulmonaryEmbolismGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WellsScoreForPulmonaryEmbolismGradeFlag
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: replaceWellsScoreForPulmonaryEmbolismGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WellsScoreForPulmonaryEmbolismGradeFlag
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: deleteWellsScoreForPulmonaryEmbolismGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/wells-score-for-pulmonary-embolism/wells_score_for_pulmonary_embolism_grade_rules:
     get:
       summary: List WellsScoreForPulmonaryEmbolismGradeRule records
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: listWellsScoreForPulmonaryEmbolismGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WellsScoreForPulmonaryEmbolismGradeRule
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: createWellsScoreForPulmonaryEmbolismGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WellsScoreForPulmonaryEmbolismGradeRule by id
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: getWellsScoreForPulmonaryEmbolismGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WellsScoreForPulmonaryEmbolismGradeRule
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: updateWellsScoreForPulmonaryEmbolismGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WellsScoreForPulmonaryEmbolismGradeRule
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: replaceWellsScoreForPulmonaryEmbolismGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WellsScoreForPulmonaryEmbolismGradeRule
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: deleteWellsScoreForPulmonaryEmbolismGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/wells-score-for-pulmonary-embolism/wells_score_for_pulmonary_embolism_grades:
     get:
       summary: List WellsScoreForPulmonaryEmbolismGrade records
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: listWellsScoreForPulmonaryEmbolismGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WellsScoreForPulmonaryEmbolismGrade
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: createWellsScoreForPulmonaryEmbolismGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WellsScoreForPulmonaryEmbolismGrade by id
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: getWellsScoreForPulmonaryEmbolismGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WellsScoreForPulmonaryEmbolismGrade
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: updateWellsScoreForPulmonaryEmbolismGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WellsScoreForPulmonaryEmbolismGrade
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: replaceWellsScoreForPulmonaryEmbolismGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WellsScoreForPulmonaryEmbolismGrade
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: deleteWellsScoreForPulmonaryEmbolismGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/wells-score-for-pulmonary-embolism/wells_score_for_pulmonary_embolisms:
     get:
       summary: List WellsScoreForPulmonaryEmbolism records
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: listWellsScoreForPulmonaryEmbolism
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WellsScoreForPulmonaryEmbolism
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: createWellsScoreForPulmonaryEmbolism
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one WellsScoreForPulmonaryEmbolism by id
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: getWellsScoreForPulmonaryEmbolism
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WellsScoreForPulmonaryEmbolism
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: updateWellsScoreForPulmonaryEmbolism
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing WellsScoreForPulmonaryEmbolism
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: replaceWellsScoreForPulmonaryEmbolism
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a WellsScoreForPulmonaryEmbolism
+      tags:
+      - wells-score-for-pulmonary-embolism
       operationId: deleteWellsScoreForPulmonaryEmbolism
       responses:
         '200':

@@ -5,10 +5,19 @@ info:
   title: Heart Failure Review — HeartFailureReviewGrade
   version: 1.0.0
   description: "Computed classification and completeness grading result for a heart-failure annual review: NYHA functional status, medication-optimisation status against the indicated pillar set, review-completeness status and score, and the indicated / prescribed / missing pillar breakdown. 1:1 with the parent review."
+x-namespace:
+  form: heart-failure-review
+  apiPrefix: /api/heart-failure-review/
+  sqlSchema: heart_failure_review
+  xmlNamespace: https://formexamples.github.io/heart-failure-review/xml
+tags:
+  - name: heart-failure-review
+    description: Heart Failure Review form
 paths:
   /api/heart-failure-review/heart_failure_review_grades:
     get:
       summary: List HeartFailureReviewGrade records
+      tags: [heart-failure-review]
       operationId: listHeartFailureReviewGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HeartFailureReviewGrade
+      tags: [heart-failure-review]
       operationId: createHeartFailureReviewGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HeartFailureReviewGrade by id
+      tags: [heart-failure-review]
       operationId: getHeartFailureReviewGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HeartFailureReviewGrade
+      tags: [heart-failure-review]
       operationId: updateHeartFailureReviewGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HeartFailureReviewGrade
+      tags: [heart-failure-review]
       operationId: replaceHeartFailureReviewGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HeartFailureReviewGrade
+      tags: [heart-failure-review]
       operationId: deleteHeartFailureReviewGrade
       responses:
         "200":

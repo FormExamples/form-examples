@@ -5,10 +5,19 @@ info:
   title: Eye Vision Test Request — EyeVisionTestRequest
   version: 1.0.0
   description: Eye vision test request (ophthalmic / optometric examination referral). Captures the requested test, laterality, the clinical indication and question, relevant history, symptoms / red flags, risk factors, and triage urgency.
+x-namespace:
+  form: eye-vision-test-request
+  apiPrefix: /api/eye-vision-test-request/
+  sqlSchema: eye_vision_test_request
+  xmlNamespace: https://formexamples.github.io/eye-vision-test-request/xml
+tags:
+  - name: eye-vision-test-request
+    description: Eye Vision Test Request form
 paths:
   /api/eye-vision-test-request/eye_vision_test_requests:
     get:
       summary: List EyeVisionTestRequest records
+      tags: [eye-vision-test-request]
       operationId: listEyeVisionTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EyeVisionTestRequest
+      tags: [eye-vision-test-request]
       operationId: createEyeVisionTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EyeVisionTestRequest by id
+      tags: [eye-vision-test-request]
       operationId: getEyeVisionTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EyeVisionTestRequest
+      tags: [eye-vision-test-request]
       operationId: updateEyeVisionTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EyeVisionTestRequest
+      tags: [eye-vision-test-request]
       operationId: replaceEyeVisionTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EyeVisionTestRequest
+      tags: [eye-vision-test-request]
       operationId: deleteEyeVisionTestRequest
       responses:
         "200":

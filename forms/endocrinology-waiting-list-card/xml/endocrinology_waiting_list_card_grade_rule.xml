@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE endocrinology_waiting_list_card_grade_rule SYSTEM "endocrinology_waiting_list_card_grade_rule.dtd">
-<endocrinology_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<endocrinology_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/endocrinology-waiting-list-card/xml">
+<id>597c85a4-afcd-53eb-873f-919df0b630fe</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<endocrinology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</endocrinology_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<endocrinology_waiting_list_card_grade_id>699b3ca3-ada6-51bf-ae40-769581f4a48f</endocrinology_waiting_list_card_grade_id>
+<rule_id>6b6d41b4-3292-5b9d-a80e-35a7f67607dc</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

@@ -5,10 +5,19 @@ info:
   title: Alcohol Use Disorders Identification Test Consumption — AuditC
   version: 1.0.0
   description: "Main AUDIT-C assessment record: assessment context, patient identification, and the three scored consumption item inputs (Q1 frequency of drinking, Q2 typical quantity, Q3 frequency of heavy episodic drinking). Uses the short table base audit_c to stay within PostgreSQL identifier limits."
+x-namespace:
+  form: alcohol-use-disorders-identification-test-consumption
+  apiPrefix: /api/alcohol-use-disorders-identification-test-consumption/
+  sqlSchema: alcohol_use_disorders_identification_test_consumption
+  xmlNamespace: https://formexamples.github.io/alcohol-use-disorders-identification-test-consumption/xml
+tags:
+  - name: alcohol-use-disorders-identification-test-consumption
+    description: Alcohol Use Disorders Identification Test Consumption form
 paths:
   /api/alcohol-use-disorders-identification-test-consumption/audit_cs:
     get:
       summary: List AuditC records
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: listAuditC
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AuditC
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: createAuditC
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AuditC by id
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: getAuditC
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AuditC
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: updateAuditC
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AuditC
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: replaceAuditC
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AuditC
+      tags: [alcohol-use-disorders-identification-test-consumption]
       operationId: deleteAuditC
       responses:
         "200":

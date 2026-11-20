@@ -5,10 +5,19 @@ info:
   title: Rheumatology Assessment — Grade
   version: 1.0.0
   description: Computed DAS28 disease activity grading result. One-to-one child of assessment.
+x-namespace:
+  form: rheumatology-assessment
+  apiPrefix: /api/rheumatology-assessment/
+  sqlSchema: rheumatology_assessment
+  xmlNamespace: https://formexamples.github.io/rheumatology-assessment/xml
+tags:
+  - name: rheumatology-assessment
+    description: Rheumatology Assessment form
 paths:
   /api/rheumatology-assessment/grades:
     get:
       summary: List Grade records
+      tags: [rheumatology-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [rheumatology-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [rheumatology-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [rheumatology-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [rheumatology-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [rheumatology-assessment]
       operationId: deleteGrade
       responses:
         "200":

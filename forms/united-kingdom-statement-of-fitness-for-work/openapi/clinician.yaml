@@ -5,10 +5,19 @@ info:
   title: United Kingdom Statement Of Fitness For Work — Clinician
   version: 1.0.0
   description: Healthcare professional issuing the fit note (doctor, nurse, OT, pharmacist, or physiotherapist).
+x-namespace:
+  form: united-kingdom-statement-of-fitness-for-work
+  apiPrefix: /api/united-kingdom-statement-of-fitness-for-work/
+  sqlSchema: united_kingdom_statement_of_fitness_for_work
+  xmlNamespace: https://formexamples.github.io/united-kingdom-statement-of-fitness-for-work/xml
+tags:
+  - name: united-kingdom-statement-of-fitness-for-work
+    description: United Kingdom Statement Of Fitness For Work form
 paths:
   /api/united-kingdom-statement-of-fitness-for-work/clinicians:
     get:
       summary: List Clinician records
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [united-kingdom-statement-of-fitness-for-work]
       operationId: deleteClinician
       responses:
         "200":

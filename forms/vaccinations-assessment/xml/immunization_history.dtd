@@ -1,4 +1,5 @@
 <!ELEMENT immunization_history (id,created_at,updated_at,deleted_at,assessment_id,has_vaccination_record,record_source,last_review_date,previous_adverse_reactions,adverse_reaction_details,immunocompromised,immunocompromised_details)>
+<!ATTLIST immunization_history xmlns CDATA #FIXED "https://formexamples.github.io/vaccinations-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Dexa Bone Density Test Result — DexaBoneDensityTestResultGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.
+x-namespace:
+  form: dexa-bone-density-test-result
+  apiPrefix: /api/dexa-bone-density-test-result/
+  sqlSchema: dexa_bone_density_test_result
+  xmlNamespace: https://formexamples.github.io/dexa-bone-density-test-result/xml
+tags:
+  - name: dexa-bone-density-test-result
+    description: Dexa Bone Density Test Result form
 paths:
   /api/dexa-bone-density-test-result/dexa_bone_density_test_result_grade_flags:
     get:
       summary: List DexaBoneDensityTestResultGradeFlag records
+      tags: [dexa-bone-density-test-result]
       operationId: listDexaBoneDensityTestResultGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DexaBoneDensityTestResultGradeFlag
+      tags: [dexa-bone-density-test-result]
       operationId: createDexaBoneDensityTestResultGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one DexaBoneDensityTestResultGradeFlag by id
+      tags: [dexa-bone-density-test-result]
       operationId: getDexaBoneDensityTestResultGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DexaBoneDensityTestResultGradeFlag
+      tags: [dexa-bone-density-test-result]
       operationId: updateDexaBoneDensityTestResultGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing DexaBoneDensityTestResultGradeFlag
+      tags: [dexa-bone-density-test-result]
       operationId: replaceDexaBoneDensityTestResultGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a DexaBoneDensityTestResultGradeFlag
+      tags: [dexa-bone-density-test-result]
       operationId: deleteDexaBoneDensityTestResultGradeFlag
       responses:
         "200":

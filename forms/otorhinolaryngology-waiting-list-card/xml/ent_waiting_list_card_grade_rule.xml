@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ent_waiting_list_card_grade_rule SYSTEM "ent_waiting_list_card_grade_rule.dtd">
-<ent_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<ent_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/otorhinolaryngology-waiting-list-card/xml">
+<id>d27c61a1-77d3-589c-ad90-af26434cecc6</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<ent_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</ent_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<ent_waiting_list_card_grade_id>2b8aa0a0-97f1-59f8-a3ca-e5ed177d686a</ent_waiting_list_card_grade_id>
+<rule_id>3fc0ef94-36d3-57c6-8491-9f76610a9a74</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

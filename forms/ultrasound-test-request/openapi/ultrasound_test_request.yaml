@@ -5,10 +5,19 @@ info:
   title: Ultrasound Test Request — UltrasoundTestRequest
   version: 1.0.0
   description: General (non-obstetric) diagnostic ultrasound request (referral). Captures the requested examination (body region, laterality), the clinical indication and question, relevant history, preparation requirements, and triage urgency.
+x-namespace:
+  form: ultrasound-test-request
+  apiPrefix: /api/ultrasound-test-request/
+  sqlSchema: ultrasound_test_request
+  xmlNamespace: https://formexamples.github.io/ultrasound-test-request/xml
+tags:
+  - name: ultrasound-test-request
+    description: Ultrasound Test Request form
 paths:
   /api/ultrasound-test-request/ultrasound_test_requests:
     get:
       summary: List UltrasoundTestRequest records
+      tags: [ultrasound-test-request]
       operationId: listUltrasoundTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UltrasoundTestRequest
+      tags: [ultrasound-test-request]
       operationId: createUltrasoundTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UltrasoundTestRequest by id
+      tags: [ultrasound-test-request]
       operationId: getUltrasoundTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UltrasoundTestRequest
+      tags: [ultrasound-test-request]
       operationId: updateUltrasoundTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UltrasoundTestRequest
+      tags: [ultrasound-test-request]
       operationId: replaceUltrasoundTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UltrasoundTestRequest
+      tags: [ultrasound-test-request]
       operationId: deleteUltrasoundTestRequest
       responses:
         "200":

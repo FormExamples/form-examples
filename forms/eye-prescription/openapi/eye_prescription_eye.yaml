@@ -5,10 +5,19 @@ info:
   title: Eye Prescription — EyePrescriptionEye
   version: 1.0.0
   description: Per-eye refractive prescription (sphere, cylinder, axis, addition, prism). One row per eye per prescription.
+x-namespace:
+  form: eye-prescription
+  apiPrefix: /api/eye-prescription/
+  sqlSchema: eye_prescription
+  xmlNamespace: https://formexamples.github.io/eye-prescription/xml
+tags:
+  - name: eye-prescription
+    description: Eye Prescription form
 paths:
   /api/eye-prescription/eye_prescription_eyes:
     get:
       summary: List EyePrescriptionEye records
+      tags: [eye-prescription]
       operationId: listEyePrescriptionEye
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EyePrescriptionEye
+      tags: [eye-prescription]
       operationId: createEyePrescriptionEye
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EyePrescriptionEye by id
+      tags: [eye-prescription]
       operationId: getEyePrescriptionEye
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EyePrescriptionEye
+      tags: [eye-prescription]
       operationId: updateEyePrescriptionEye
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EyePrescriptionEye
+      tags: [eye-prescription]
       operationId: replaceEyePrescriptionEye
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EyePrescriptionEye
+      tags: [eye-prescription]
       operationId: deleteEyePrescriptionEye
       responses:
         "200":

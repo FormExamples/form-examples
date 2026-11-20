@@ -5,10 +5,19 @@ info:
   title: Psychiatry Assessment — Assessment
   version: 1.0.0
   description: Psychiatry assessment form. Parent entity for all sections covering the GAF (Global Assessment of Functioning) evaluation.
+x-namespace:
+  form: psychiatry-assessment
+  apiPrefix: /api/psychiatry-assessment/
+  sqlSchema: psychiatry_assessment
+  xmlNamespace: https://formexamples.github.io/psychiatry-assessment/xml
+tags:
+  - name: psychiatry-assessment
+    description: Psychiatry Assessment form
 paths:
   /api/psychiatry-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [psychiatry-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [psychiatry-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [psychiatry-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [psychiatry-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [psychiatry-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [psychiatry-assessment]
       operationId: deleteAssessment
       responses:
         "200":

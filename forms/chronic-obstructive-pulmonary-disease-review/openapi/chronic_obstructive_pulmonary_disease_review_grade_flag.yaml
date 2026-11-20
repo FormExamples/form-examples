@@ -5,10 +5,19 @@ info:
   title: Chronic Obstructive Pulmonary Disease Review — ChronicObstructivePulmonaryDiseaseReviewGradeFlag
   version: 1.0.0
   description: Flags that fire independently of the grades, with priority and a suggested action for the clinician or governance team.
+x-namespace:
+  form: chronic-obstructive-pulmonary-disease-review
+  apiPrefix: /api/chronic-obstructive-pulmonary-disease-review/
+  sqlSchema: chronic_obstructive_pulmonary_disease_review
+  xmlNamespace: https://formexamples.github.io/chronic-obstructive-pulmonary-disease-review/xml
+tags:
+  - name: chronic-obstructive-pulmonary-disease-review
+    description: Chronic Obstructive Pulmonary Disease Review form
 paths:
   /api/chronic-obstructive-pulmonary-disease-review/chronic_obstructive_pulmonary_disease_review_grade_flags:
     get:
       summary: List ChronicObstructivePulmonaryDiseaseReviewGradeFlag records
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: listChronicObstructivePulmonaryDiseaseReviewGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ChronicObstructivePulmonaryDiseaseReviewGradeFlag
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: createChronicObstructivePulmonaryDiseaseReviewGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ChronicObstructivePulmonaryDiseaseReviewGradeFlag by id
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: getChronicObstructivePulmonaryDiseaseReviewGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ChronicObstructivePulmonaryDiseaseReviewGradeFlag
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: updateChronicObstructivePulmonaryDiseaseReviewGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ChronicObstructivePulmonaryDiseaseReviewGradeFlag
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: replaceChronicObstructivePulmonaryDiseaseReviewGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ChronicObstructivePulmonaryDiseaseReviewGradeFlag
+      tags: [chronic-obstructive-pulmonary-disease-review]
       operationId: deleteChronicObstructivePulmonaryDiseaseReviewGradeFlag
       responses:
         "200":

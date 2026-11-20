@@ -1,4 +1,5 @@
 <!ELEMENT united_states_last_will_and_testament_grade_rule (id,created_at,updated_at,deleted_at,united_states_last_will_and_testament_grade_id,rule_id,dimension,category,description)>
+<!ATTLIST united_states_last_will_and_testament_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/united-states-last-will-and-testament/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

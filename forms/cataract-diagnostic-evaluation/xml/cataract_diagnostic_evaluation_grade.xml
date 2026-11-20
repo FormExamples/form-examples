@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cataract_diagnostic_evaluation_grade SYSTEM "cataract_diagnostic_evaluation_grade.dtd">
-<cataract_diagnostic_evaluation_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<cataract_diagnostic_evaluation_grade xmlns="https://formexamples.github.io/cataract-diagnostic-evaluation/xml">
+<id>65372d04-4774-5f78-a9ca-e60a5bdddb4a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cataract_diagnostic_evaluation_id>770e8400-e29b-41d4-a716-446655440002</cataract_diagnostic_evaluation_id>
+<cataract_diagnostic_evaluation_id>410850a9-4cce-58a4-8f10-2e32d1e1cf7c</cataract_diagnostic_evaluation_id>
 <computed_locs_iii_severity_right>mild</computed_locs_iii_severity_right>
 <computed_locs_iii_severity_left>mild</computed_locs_iii_severity_left>
 <computed_surgical_candidacy>not-indicated</computed_surgical_candidacy>

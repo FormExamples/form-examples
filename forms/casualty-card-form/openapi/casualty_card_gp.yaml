@@ -5,10 +5,19 @@ info:
   title: Casualty Card Form — CasualtyCardGp
   version: 1.0.0
   description: 1:1 with casualty_card. Registered GP and practice details for communication and follow-up.
+x-namespace:
+  form: casualty-card-form
+  apiPrefix: /api/casualty-card-form/
+  sqlSchema: casualty_card_form
+  xmlNamespace: https://formexamples.github.io/casualty-card-form/xml
+tags:
+  - name: casualty-card-form
+    description: Casualty Card Form form
 paths:
   /api/casualty-card-form/casualty_card_gps:
     get:
       summary: List CasualtyCardGp records
+      tags: [casualty-card-form]
       operationId: listCasualtyCardGp
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CasualtyCardGp
+      tags: [casualty-card-form]
       operationId: createCasualtyCardGp
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CasualtyCardGp by id
+      tags: [casualty-card-form]
       operationId: getCasualtyCardGp
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CasualtyCardGp
+      tags: [casualty-card-form]
       operationId: updateCasualtyCardGp
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CasualtyCardGp
+      tags: [casualty-card-form]
       operationId: replaceCasualtyCardGp
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CasualtyCardGp
+      tags: [casualty-card-form]
       operationId: deleteCasualtyCardGp
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Casualty Card Form — CasualtyCardPainAssessment
   version: 1.0.0
   description: 1:1 with casualty_card. Structured pain assessment using NRS and descriptive characterisation.
+x-namespace:
+  form: casualty-card-form
+  apiPrefix: /api/casualty-card-form/
+  sqlSchema: casualty_card_form
+  xmlNamespace: https://formexamples.github.io/casualty-card-form/xml
+tags:
+  - name: casualty-card-form
+    description: Casualty Card Form form
 paths:
   /api/casualty-card-form/casualty_card_pain_assessments:
     get:
       summary: List CasualtyCardPainAssessment records
+      tags: [casualty-card-form]
       operationId: listCasualtyCardPainAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CasualtyCardPainAssessment
+      tags: [casualty-card-form]
       operationId: createCasualtyCardPainAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CasualtyCardPainAssessment by id
+      tags: [casualty-card-form]
       operationId: getCasualtyCardPainAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CasualtyCardPainAssessment
+      tags: [casualty-card-form]
       operationId: updateCasualtyCardPainAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CasualtyCardPainAssessment
+      tags: [casualty-card-form]
       operationId: replaceCasualtyCardPainAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CasualtyCardPainAssessment
+      tags: [casualty-card-form]
       operationId: deleteCasualtyCardPainAssessment
       responses:
         "200":

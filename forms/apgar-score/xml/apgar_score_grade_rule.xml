@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE apgar_score_grade_rule SYSTEM "apgar_score_grade_rule.dtd">
-<apgar_score_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<apgar_score_grade_rule xmlns="https://formexamples.github.io/apgar-score/xml">
+<id>fd3886b6-f0e0-5bc2-8a03-b2976a3c575f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<apgar_score_grade_id>990e8400-e29b-41d4-a716-446655440004</apgar_score_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<apgar_score_grade_id>3d013fa7-f77f-5b9f-9424-a4ebdf407a91</apgar_score_grade_id>
+<rule_id>921ec76e-cd50-5da1-a4c0-1fb489f03dea</rule_id>
 <timepoint_minutes>1</timepoint_minutes>
 <sign>appearance</sign>
 <points>1</points>

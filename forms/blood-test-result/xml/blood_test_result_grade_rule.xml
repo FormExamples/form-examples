@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE blood_test_result_grade_rule SYSTEM "blood_test_result_grade_rule.dtd">
-<blood_test_result_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<blood_test_result_grade_rule xmlns="https://formexamples.github.io/blood-test-result/xml">
+<id>f5d6b703-b030-5e5b-b297-598e9f554b04</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<blood_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</blood_test_result_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<blood_test_result_grade_id>21e16739-05d3-5308-81ca-af570f645a30</blood_test_result_grade_id>
+<rule_id>1bd27810-c83b-547d-ac99-8aaad479a4c1</rule_id>
 <axis>classification</axis>
 <category>General</category>
 <description>Example text.</description>

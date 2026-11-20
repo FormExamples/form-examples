@@ -5,10 +5,19 @@ info:
   title: Pet Scan Test Result — PetScanTestResult
   version: 1.0.0
   description: PET-CT (positron emission tomography) scan result (report). Captures the tracer / scan type, the clinical history and acquisition data (blood glucose, injected activity), the narrative and structured metabolic findings, key measurements (SUVmax, largest lesion size), comparison and treatment response, the impression, the structured reporting category (e.g. Deauville score or PERCIST category), recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: pet-scan-test-result
+  apiPrefix: /api/pet-scan-test-result/
+  sqlSchema: pet_scan_test_result
+  xmlNamespace: https://formexamples.github.io/pet-scan-test-result/xml
+tags:
+  - name: pet-scan-test-result
+    description: Pet Scan Test Result form
 paths:
   /api/pet-scan-test-result/pet_scan_test_results:
     get:
       summary: List PetScanTestResult records
+      tags: [pet-scan-test-result]
       operationId: listPetScanTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PetScanTestResult
+      tags: [pet-scan-test-result]
       operationId: createPetScanTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PetScanTestResult by id
+      tags: [pet-scan-test-result]
       operationId: getPetScanTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PetScanTestResult
+      tags: [pet-scan-test-result]
       operationId: updatePetScanTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PetScanTestResult
+      tags: [pet-scan-test-result]
       operationId: replacePetScanTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PetScanTestResult
+      tags: [pet-scan-test-result]
       operationId: deletePetScanTestResult
       responses:
         "200":

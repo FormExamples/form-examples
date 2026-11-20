@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE blood_cross_match_test_result SYSTEM "blood_cross_match_test_result.dtd">
-<blood_cross_match_test_result>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<blood_cross_match_test_result xmlns="https://formexamples.github.io/blood-cross-match-test-result/xml">
+<id>92e1edd4-bced-5460-8e32-05454dc839a3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>9249acf7-34e4-5892-ac2c-ffb09fdafcb6</patient_id>
+<clinician_id>14855b31-57a2-5b3c-a2ce-10ef89bb40bd</clinician_id>
 <originating_request_reference></originating_request_reference>
 <report_status>preliminary</report_status>
 <performed_date>2026-01-15</performed_date>

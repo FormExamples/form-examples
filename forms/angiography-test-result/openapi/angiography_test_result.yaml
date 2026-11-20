@@ -5,10 +5,19 @@ info:
   title: Angiography Test Result — AngiographyTestResult
   version: 1.0.0
   description: Angiography result (report). Captures the performed examination, modality and contrast, clinical history, the narrative and structured vascular findings, the maximum stenosis percentage and whether an intervention was performed, the impression and reporting category, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: angiography-test-result
+  apiPrefix: /api/angiography-test-result/
+  sqlSchema: angiography_test_result
+  xmlNamespace: https://formexamples.github.io/angiography-test-result/xml
+tags:
+  - name: angiography-test-result
+    description: Angiography Test Result form
 paths:
   /api/angiography-test-result/angiography_test_results:
     get:
       summary: List AngiographyTestResult records
+      tags: [angiography-test-result]
       operationId: listAngiographyTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AngiographyTestResult
+      tags: [angiography-test-result]
       operationId: createAngiographyTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AngiographyTestResult by id
+      tags: [angiography-test-result]
       operationId: getAngiographyTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AngiographyTestResult
+      tags: [angiography-test-result]
       operationId: updateAngiographyTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AngiographyTestResult
+      tags: [angiography-test-result]
       operationId: replaceAngiographyTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AngiographyTestResult
+      tags: [angiography-test-result]
       operationId: deleteAngiographyTestResult
       responses:
         "200":

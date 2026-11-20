@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE eye_prescription_eye SYSTEM "eye_prescription_eye.dtd">
-<eye_prescription_eye>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<eye_prescription_eye xmlns="https://formexamples.github.io/eye-prescription/xml">
+<id>a784aaa2-8be6-5911-a1e8-7e868364f190</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<eye_prescription_id>770e8400-e29b-41d4-a716-446655440002</eye_prescription_id>
+<eye_prescription_id>7dcf0e2d-b1bd-537d-8f80-02dc8446bdec</eye_prescription_id>
 <eye>right</eye>
 <sphere_diopters>0.0</sphere_diopters>
 <cylinder_diopters>0.0</cylinder_diopters>

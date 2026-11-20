@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Diabetes Podiatry Assessment form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: diabetes-podiatry-assessment
+  apiPrefix: /api/diabetes-podiatry-assessment/
+  sqlSchema: diabetes_podiatry_assessment
+  xmlNamespace: https://formexamples.github.io/diabetes-podiatry-assessment/xml
+tags:
+- name: diabetes-podiatry-assessment
+  description: Diabetes Podiatry Assessment form
 paths:
   /api/diabetes-podiatry-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - diabetes-podiatry-assessment
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - diabetes-podiatry-assessment
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - diabetes-podiatry-assessment
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - diabetes-podiatry-assessment
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - diabetes-podiatry-assessment
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - diabetes-podiatry-assessment
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/diabetes-podiatry-assessment/diabetes_podiatry_assessment_grade_flags:
     get:
       summary: List DiabetesPodiatryAssessmentGradeFlag records
+      tags:
+      - diabetes-podiatry-assessment
       operationId: listDiabetesPodiatryAssessmentGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DiabetesPodiatryAssessmentGradeFlag
+      tags:
+      - diabetes-podiatry-assessment
       operationId: createDiabetesPodiatryAssessmentGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DiabetesPodiatryAssessmentGradeFlag by id
+      tags:
+      - diabetes-podiatry-assessment
       operationId: getDiabetesPodiatryAssessmentGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DiabetesPodiatryAssessmentGradeFlag
+      tags:
+      - diabetes-podiatry-assessment
       operationId: updateDiabetesPodiatryAssessmentGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DiabetesPodiatryAssessmentGradeFlag
+      tags:
+      - diabetes-podiatry-assessment
       operationId: replaceDiabetesPodiatryAssessmentGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DiabetesPodiatryAssessmentGradeFlag
+      tags:
+      - diabetes-podiatry-assessment
       operationId: deleteDiabetesPodiatryAssessmentGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/diabetes-podiatry-assessment/diabetes_podiatry_assessment_grade_rules:
     get:
       summary: List DiabetesPodiatryAssessmentGradeRule records
+      tags:
+      - diabetes-podiatry-assessment
       operationId: listDiabetesPodiatryAssessmentGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DiabetesPodiatryAssessmentGradeRule
+      tags:
+      - diabetes-podiatry-assessment
       operationId: createDiabetesPodiatryAssessmentGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DiabetesPodiatryAssessmentGradeRule by id
+      tags:
+      - diabetes-podiatry-assessment
       operationId: getDiabetesPodiatryAssessmentGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DiabetesPodiatryAssessmentGradeRule
+      tags:
+      - diabetes-podiatry-assessment
       operationId: updateDiabetesPodiatryAssessmentGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DiabetesPodiatryAssessmentGradeRule
+      tags:
+      - diabetes-podiatry-assessment
       operationId: replaceDiabetesPodiatryAssessmentGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DiabetesPodiatryAssessmentGradeRule
+      tags:
+      - diabetes-podiatry-assessment
       operationId: deleteDiabetesPodiatryAssessmentGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/diabetes-podiatry-assessment/diabetes_podiatry_assessment_grades:
     get:
       summary: List DiabetesPodiatryAssessmentGrade records
+      tags:
+      - diabetes-podiatry-assessment
       operationId: listDiabetesPodiatryAssessmentGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DiabetesPodiatryAssessmentGrade
+      tags:
+      - diabetes-podiatry-assessment
       operationId: createDiabetesPodiatryAssessmentGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DiabetesPodiatryAssessmentGrade by id
+      tags:
+      - diabetes-podiatry-assessment
       operationId: getDiabetesPodiatryAssessmentGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DiabetesPodiatryAssessmentGrade
+      tags:
+      - diabetes-podiatry-assessment
       operationId: updateDiabetesPodiatryAssessmentGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DiabetesPodiatryAssessmentGrade
+      tags:
+      - diabetes-podiatry-assessment
       operationId: replaceDiabetesPodiatryAssessmentGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DiabetesPodiatryAssessmentGrade
+      tags:
+      - diabetes-podiatry-assessment
       operationId: deleteDiabetesPodiatryAssessmentGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/diabetes-podiatry-assessment/diabetes_podiatry_assessments:
     get:
       summary: List DiabetesPodiatryAssessment records
+      tags:
+      - diabetes-podiatry-assessment
       operationId: listDiabetesPodiatryAssessment
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DiabetesPodiatryAssessment
+      tags:
+      - diabetes-podiatry-assessment
       operationId: createDiabetesPodiatryAssessment
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one DiabetesPodiatryAssessment by id
+      tags:
+      - diabetes-podiatry-assessment
       operationId: getDiabetesPodiatryAssessment
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DiabetesPodiatryAssessment
+      tags:
+      - diabetes-podiatry-assessment
       operationId: updateDiabetesPodiatryAssessment
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing DiabetesPodiatryAssessment
+      tags:
+      - diabetes-podiatry-assessment
       operationId: replaceDiabetesPodiatryAssessment
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a DiabetesPodiatryAssessment
+      tags:
+      - diabetes-podiatry-assessment
       operationId: deleteDiabetesPodiatryAssessment
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - diabetes-podiatry-assessment
   /api/diabetes-podiatry-assessment/patients:
     get:
       summary: List Patient records
+      tags:
+      - diabetes-podiatry-assessment
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - diabetes-podiatry-assessment
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - diabetes-podiatry-assessment
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - diabetes-podiatry-assessment
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - diabetes-podiatry-assessment
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - diabetes-podiatry-assessment
       operationId: deletePatient
       responses:
         '200':

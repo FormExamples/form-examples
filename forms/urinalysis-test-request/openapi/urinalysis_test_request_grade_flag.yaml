@@ -5,10 +5,19 @@ info:
   title: Urinalysis Test Request — UrinalysisTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the pathology / vetting team.
+x-namespace:
+  form: urinalysis-test-request
+  apiPrefix: /api/urinalysis-test-request/
+  sqlSchema: urinalysis_test_request
+  xmlNamespace: https://formexamples.github.io/urinalysis-test-request/xml
+tags:
+  - name: urinalysis-test-request
+    description: Urinalysis Test Request form
 paths:
   /api/urinalysis-test-request/urinalysis_test_request_grade_flags:
     get:
       summary: List UrinalysisTestRequestGradeFlag records
+      tags: [urinalysis-test-request]
       operationId: listUrinalysisTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UrinalysisTestRequestGradeFlag
+      tags: [urinalysis-test-request]
       operationId: createUrinalysisTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UrinalysisTestRequestGradeFlag by id
+      tags: [urinalysis-test-request]
       operationId: getUrinalysisTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UrinalysisTestRequestGradeFlag
+      tags: [urinalysis-test-request]
       operationId: updateUrinalysisTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UrinalysisTestRequestGradeFlag
+      tags: [urinalysis-test-request]
       operationId: replaceUrinalysisTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UrinalysisTestRequestGradeFlag
+      tags: [urinalysis-test-request]
       operationId: deleteUrinalysisTestRequestGradeFlag
       responses:
         "200":

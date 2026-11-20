@@ -5,10 +5,19 @@ info:
   title: Electrocardiogram Test Request — ElectrocardiogramTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (AHA/ACC 1-9), urgency triage tier, request completeness, and clinical priority."
+x-namespace:
+  form: electrocardiogram-test-request
+  apiPrefix: /api/electrocardiogram-test-request/
+  sqlSchema: electrocardiogram_test_request
+  xmlNamespace: https://formexamples.github.io/electrocardiogram-test-request/xml
+tags:
+  - name: electrocardiogram-test-request
+    description: Electrocardiogram Test Request form
 paths:
   /api/electrocardiogram-test-request/electrocardiogram_test_request_grades:
     get:
       summary: List ElectrocardiogramTestRequestGrade records
+      tags: [electrocardiogram-test-request]
       operationId: listElectrocardiogramTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ElectrocardiogramTestRequestGrade
+      tags: [electrocardiogram-test-request]
       operationId: createElectrocardiogramTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ElectrocardiogramTestRequestGrade by id
+      tags: [electrocardiogram-test-request]
       operationId: getElectrocardiogramTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ElectrocardiogramTestRequestGrade
+      tags: [electrocardiogram-test-request]
       operationId: updateElectrocardiogramTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ElectrocardiogramTestRequestGrade
+      tags: [electrocardiogram-test-request]
       operationId: replaceElectrocardiogramTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ElectrocardiogramTestRequestGrade
+      tags: [electrocardiogram-test-request]
       operationId: deleteElectrocardiogramTestRequestGrade
       responses:
         "200":

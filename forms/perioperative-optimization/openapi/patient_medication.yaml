@@ -5,10 +5,19 @@ info:
   title: Perioperative Optimization — PatientMedication
   version: 1.0.0
   description: Patient medication, i.e. one medicine that one patient takes, with the agreed perioperative hold-and-restart plan.
+x-namespace:
+  form: perioperative-optimization
+  apiPrefix: /api/perioperative-optimization/
+  sqlSchema: perioperative_optimization
+  xmlNamespace: https://formexamples.github.io/perioperative-optimization/xml
+tags:
+  - name: perioperative-optimization
+    description: Perioperative Optimization form
 paths:
   /api/perioperative-optimization/patient_medications:
     get:
       summary: List PatientMedication records
+      tags: [perioperative-optimization]
       operationId: listPatientMedication
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PatientMedication
+      tags: [perioperative-optimization]
       operationId: createPatientMedication
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PatientMedication by id
+      tags: [perioperative-optimization]
       operationId: getPatientMedication
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PatientMedication
+      tags: [perioperative-optimization]
       operationId: updatePatientMedication
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PatientMedication
+      tags: [perioperative-optimization]
       operationId: replacePatientMedication
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PatientMedication
+      tags: [perioperative-optimization]
       operationId: deletePatientMedication
       responses:
         "200":

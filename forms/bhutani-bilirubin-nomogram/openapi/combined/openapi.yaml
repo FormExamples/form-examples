@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Bhutani Bilirubin Nomogram form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: bhutani-bilirubin-nomogram
+  apiPrefix: /api/bhutani-bilirubin-nomogram/
+  sqlSchema: bhutani_bilirubin_nomogram
+  xmlNamespace: https://formexamples.github.io/bhutani-bilirubin-nomogram/xml
+tags:
+- name: bhutani-bilirubin-nomogram
+  description: Bhutani Bilirubin Nomogram form
 paths:
   /api/bhutani-bilirubin-nomogram/bhutani_bilirubin_nomogram_grade_flags:
     get:
       summary: List BhutaniBilirubinNomogramGradeFlag records
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: listBhutaniBilirubinNomogramGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BhutaniBilirubinNomogramGradeFlag
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: createBhutaniBilirubinNomogramGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BhutaniBilirubinNomogramGradeFlag by id
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: getBhutaniBilirubinNomogramGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BhutaniBilirubinNomogramGradeFlag
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: updateBhutaniBilirubinNomogramGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BhutaniBilirubinNomogramGradeFlag
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: replaceBhutaniBilirubinNomogramGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BhutaniBilirubinNomogramGradeFlag
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: deleteBhutaniBilirubinNomogramGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/bhutani-bilirubin-nomogram/bhutani_bilirubin_nomogram_grade_rules:
     get:
       summary: List BhutaniBilirubinNomogramGradeRule records
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: listBhutaniBilirubinNomogramGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BhutaniBilirubinNomogramGradeRule
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: createBhutaniBilirubinNomogramGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BhutaniBilirubinNomogramGradeRule by id
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: getBhutaniBilirubinNomogramGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BhutaniBilirubinNomogramGradeRule
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: updateBhutaniBilirubinNomogramGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BhutaniBilirubinNomogramGradeRule
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: replaceBhutaniBilirubinNomogramGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BhutaniBilirubinNomogramGradeRule
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: deleteBhutaniBilirubinNomogramGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/bhutani-bilirubin-nomogram/bhutani_bilirubin_nomogram_grades:
     get:
       summary: List BhutaniBilirubinNomogramGrade records
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: listBhutaniBilirubinNomogramGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BhutaniBilirubinNomogramGrade
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: createBhutaniBilirubinNomogramGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BhutaniBilirubinNomogramGrade by id
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: getBhutaniBilirubinNomogramGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BhutaniBilirubinNomogramGrade
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: updateBhutaniBilirubinNomogramGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BhutaniBilirubinNomogramGrade
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: replaceBhutaniBilirubinNomogramGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BhutaniBilirubinNomogramGrade
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: deleteBhutaniBilirubinNomogramGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/bhutani-bilirubin-nomogram/bhutani_bilirubin_nomograms:
     get:
       summary: List BhutaniBilirubinNomogram records
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: listBhutaniBilirubinNomogram
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BhutaniBilirubinNomogram
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: createBhutaniBilirubinNomogram
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BhutaniBilirubinNomogram by id
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: getBhutaniBilirubinNomogram
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BhutaniBilirubinNomogram
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: updateBhutaniBilirubinNomogram
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BhutaniBilirubinNomogram
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: replaceBhutaniBilirubinNomogram
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BhutaniBilirubinNomogram
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: deleteBhutaniBilirubinNomogram
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/bhutani-bilirubin-nomogram/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - bhutani-bilirubin-nomogram
   /api/bhutani-bilirubin-nomogram/patients:
     get:
       summary: List Patient records
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - bhutani-bilirubin-nomogram
       operationId: deletePatient
       responses:
         '200':

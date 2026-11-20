@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Clinical Microbiology Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: clinical-microbiology-waiting-list-card
+  apiPrefix: /api/clinical-microbiology-waiting-list-card/
+  sqlSchema: clinical_microbiology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/clinical-microbiology-waiting-list-card/xml
+tags:
+- name: clinical-microbiology-waiting-list-card
+  description: Clinical Microbiology Waiting List Card form
 paths:
   /api/clinical-microbiology-waiting-list-card/clin_micro_waiting_list_card_appointments:
     get:
       summary: List ClinMicroWaitingListCardAppointment records
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: listClinMicroWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinMicroWaitingListCardAppointment
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: createClinMicroWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinMicroWaitingListCardAppointment by id
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: getClinMicroWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinMicroWaitingListCardAppointment
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: updateClinMicroWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinMicroWaitingListCardAppointment
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: replaceClinMicroWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinMicroWaitingListCardAppointment
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: deleteClinMicroWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/clinical-microbiology-waiting-list-card/clin_micro_waiting_list_card_grade_flags:
     get:
       summary: List ClinMicroWaitingListCardGradeFlag records
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: listClinMicroWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinMicroWaitingListCardGradeFlag
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: createClinMicroWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinMicroWaitingListCardGradeFlag by id
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: getClinMicroWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinMicroWaitingListCardGradeFlag
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: updateClinMicroWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinMicroWaitingListCardGradeFlag
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: replaceClinMicroWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinMicroWaitingListCardGradeFlag
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: deleteClinMicroWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/clinical-microbiology-waiting-list-card/clin_micro_waiting_list_card_grade_rules:
     get:
       summary: List ClinMicroWaitingListCardGradeRule records
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: listClinMicroWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinMicroWaitingListCardGradeRule
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: createClinMicroWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinMicroWaitingListCardGradeRule by id
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: getClinMicroWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinMicroWaitingListCardGradeRule
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: updateClinMicroWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinMicroWaitingListCardGradeRule
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: replaceClinMicroWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinMicroWaitingListCardGradeRule
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: deleteClinMicroWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/clinical-microbiology-waiting-list-card/clin_micro_waiting_list_card_grades:
     get:
       summary: List ClinMicroWaitingListCardGrade records
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: listClinMicroWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinMicroWaitingListCardGrade
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: createClinMicroWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinMicroWaitingListCardGrade by id
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: getClinMicroWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinMicroWaitingListCardGrade
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: updateClinMicroWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinMicroWaitingListCardGrade
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: replaceClinMicroWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinMicroWaitingListCardGrade
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: deleteClinMicroWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/clinical-microbiology-waiting-list-card/clin_micro_waiting_list_cards:
     get:
       summary: List ClinMicroWaitingListCard records
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: listClinMicroWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinMicroWaitingListCard
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: createClinMicroWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinMicroWaitingListCard by id
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: getClinMicroWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinMicroWaitingListCard
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: updateClinMicroWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinMicroWaitingListCard
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: replaceClinMicroWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinMicroWaitingListCard
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: deleteClinMicroWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - clinical-microbiology-waiting-list-card
   /api/clinical-microbiology-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/clinical-microbiology-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - clinical-microbiology-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

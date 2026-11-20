@@ -5,10 +5,19 @@ info:
   title: Stomatology Waiting List Card — StomatologyWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a stomatology waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: stomatology-waiting-list-card
+  apiPrefix: /api/stomatology-waiting-list-card/
+  sqlSchema: stomatology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/stomatology-waiting-list-card/xml
+tags:
+  - name: stomatology-waiting-list-card
+    description: Stomatology Waiting List Card form
 paths:
   /api/stomatology-waiting-list-card/stomatology_waiting_list_cards:
     get:
       summary: List StomatologyWaitingListCard records
+      tags: [stomatology-waiting-list-card]
       operationId: listStomatologyWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new StomatologyWaitingListCard
+      tags: [stomatology-waiting-list-card]
       operationId: createStomatologyWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one StomatologyWaitingListCard by id
+      tags: [stomatology-waiting-list-card]
       operationId: getStomatologyWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing StomatologyWaitingListCard
+      tags: [stomatology-waiting-list-card]
       operationId: updateStomatologyWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing StomatologyWaitingListCard
+      tags: [stomatology-waiting-list-card]
       operationId: replaceStomatologyWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a StomatologyWaitingListCard
+      tags: [stomatology-waiting-list-card]
       operationId: deleteStomatologyWaitingListCard
       responses:
         "200":

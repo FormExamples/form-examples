@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE travel_vaccinations SYSTEM "travel_vaccinations.dtd">
-<travel_vaccinations>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<travel_vaccinations xmlns="https://formexamples.github.io/vaccinations-assessment/xml">
+<id>436fb6ff-9998-512a-bbe8-f2340863a864</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>d10c2df6-1454-5bfc-b390-6a42172dc4c3</assessment_id>
 <travel_planned>yes</travel_planned>
 <travel_destination></travel_destination>
 <hepatitis_a>1</hepatitis_a>

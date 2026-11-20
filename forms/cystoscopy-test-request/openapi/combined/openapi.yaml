@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Cystoscopy Test Request form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: cystoscopy-test-request
+  apiPrefix: /api/cystoscopy-test-request/
+  sqlSchema: cystoscopy_test_request
+  xmlNamespace: https://formexamples.github.io/cystoscopy-test-request/xml
+tags:
+- name: cystoscopy-test-request
+  description: Cystoscopy Test Request form
 paths:
   /api/cystoscopy-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - cystoscopy-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - cystoscopy-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - cystoscopy-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - cystoscopy-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - cystoscopy-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - cystoscopy-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/cystoscopy-test-request/cystoscopy_test_request_grade_flags:
     get:
       summary: List CystoscopyTestRequestGradeFlag records
+      tags:
+      - cystoscopy-test-request
       operationId: listCystoscopyTestRequestGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CystoscopyTestRequestGradeFlag
+      tags:
+      - cystoscopy-test-request
       operationId: createCystoscopyTestRequestGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CystoscopyTestRequestGradeFlag by id
+      tags:
+      - cystoscopy-test-request
       operationId: getCystoscopyTestRequestGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CystoscopyTestRequestGradeFlag
+      tags:
+      - cystoscopy-test-request
       operationId: updateCystoscopyTestRequestGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CystoscopyTestRequestGradeFlag
+      tags:
+      - cystoscopy-test-request
       operationId: replaceCystoscopyTestRequestGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CystoscopyTestRequestGradeFlag
+      tags:
+      - cystoscopy-test-request
       operationId: deleteCystoscopyTestRequestGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/cystoscopy-test-request/cystoscopy_test_request_grade_rules:
     get:
       summary: List CystoscopyTestRequestGradeRule records
+      tags:
+      - cystoscopy-test-request
       operationId: listCystoscopyTestRequestGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CystoscopyTestRequestGradeRule
+      tags:
+      - cystoscopy-test-request
       operationId: createCystoscopyTestRequestGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CystoscopyTestRequestGradeRule by id
+      tags:
+      - cystoscopy-test-request
       operationId: getCystoscopyTestRequestGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CystoscopyTestRequestGradeRule
+      tags:
+      - cystoscopy-test-request
       operationId: updateCystoscopyTestRequestGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CystoscopyTestRequestGradeRule
+      tags:
+      - cystoscopy-test-request
       operationId: replaceCystoscopyTestRequestGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CystoscopyTestRequestGradeRule
+      tags:
+      - cystoscopy-test-request
       operationId: deleteCystoscopyTestRequestGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/cystoscopy-test-request/cystoscopy_test_request_grades:
     get:
       summary: List CystoscopyTestRequestGrade records
+      tags:
+      - cystoscopy-test-request
       operationId: listCystoscopyTestRequestGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CystoscopyTestRequestGrade
+      tags:
+      - cystoscopy-test-request
       operationId: createCystoscopyTestRequestGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CystoscopyTestRequestGrade by id
+      tags:
+      - cystoscopy-test-request
       operationId: getCystoscopyTestRequestGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CystoscopyTestRequestGrade
+      tags:
+      - cystoscopy-test-request
       operationId: updateCystoscopyTestRequestGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CystoscopyTestRequestGrade
+      tags:
+      - cystoscopy-test-request
       operationId: replaceCystoscopyTestRequestGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CystoscopyTestRequestGrade
+      tags:
+      - cystoscopy-test-request
       operationId: deleteCystoscopyTestRequestGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/cystoscopy-test-request/cystoscopy_test_requests:
     get:
       summary: List CystoscopyTestRequest records
+      tags:
+      - cystoscopy-test-request
       operationId: listCystoscopyTestRequest
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new CystoscopyTestRequest
+      tags:
+      - cystoscopy-test-request
       operationId: createCystoscopyTestRequest
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one CystoscopyTestRequest by id
+      tags:
+      - cystoscopy-test-request
       operationId: getCystoscopyTestRequest
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing CystoscopyTestRequest
+      tags:
+      - cystoscopy-test-request
       operationId: updateCystoscopyTestRequest
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing CystoscopyTestRequest
+      tags:
+      - cystoscopy-test-request
       operationId: replaceCystoscopyTestRequest
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a CystoscopyTestRequest
+      tags:
+      - cystoscopy-test-request
       operationId: deleteCystoscopyTestRequest
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - cystoscopy-test-request
   /api/cystoscopy-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - cystoscopy-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - cystoscopy-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - cystoscopy-test-request
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - cystoscopy-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - cystoscopy-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - cystoscopy-test-request
       operationId: deletePatient
       responses:
         '200':

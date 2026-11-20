@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Medication Reconciliation form, merged from the
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
+x-namespace:
+  form: medication-reconciliation
+  apiPrefix: /api/medication-reconciliation/
+  sqlSchema: medication_reconciliation
+  xmlNamespace: https://formexamples.github.io/medication-reconciliation/xml
+tags:
+- name: medication-reconciliation
+  description: Medication Reconciliation form
 paths:
   /api/medication-reconciliation/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - medication-reconciliation
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - medication-reconciliation
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - medication-reconciliation
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - medication-reconciliation
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - medication-reconciliation
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - medication-reconciliation
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/medication-reconciliation/medication_reconciliation_allergies:
     get:
       summary: List MedicationReconciliationAllergy records
+      tags:
+      - medication-reconciliation
       operationId: listMedicationReconciliationAllergy
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicationReconciliationAllergy
+      tags:
+      - medication-reconciliation
       operationId: createMedicationReconciliationAllergy
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicationReconciliationAllergy by id
+      tags:
+      - medication-reconciliation
       operationId: getMedicationReconciliationAllergy
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicationReconciliationAllergy
+      tags:
+      - medication-reconciliation
       operationId: updateMedicationReconciliationAllergy
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicationReconciliationAllergy
+      tags:
+      - medication-reconciliation
       operationId: replaceMedicationReconciliationAllergy
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicationReconciliationAllergy
+      tags:
+      - medication-reconciliation
       operationId: deleteMedicationReconciliationAllergy
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/medication-reconciliation/medication_reconciliation_discrepancies:
     get:
       summary: List MedicationReconciliationDiscrepancy records
+      tags:
+      - medication-reconciliation
       operationId: listMedicationReconciliationDiscrepancy
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicationReconciliationDiscrepancy
+      tags:
+      - medication-reconciliation
       operationId: createMedicationReconciliationDiscrepancy
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicationReconciliationDiscrepancy by id
+      tags:
+      - medication-reconciliation
       operationId: getMedicationReconciliationDiscrepancy
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicationReconciliationDiscrepancy
+      tags:
+      - medication-reconciliation
       operationId: updateMedicationReconciliationDiscrepancy
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicationReconciliationDiscrepancy
+      tags:
+      - medication-reconciliation
       operationId: replaceMedicationReconciliationDiscrepancy
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicationReconciliationDiscrepancy
+      tags:
+      - medication-reconciliation
       operationId: deleteMedicationReconciliationDiscrepancy
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/medication-reconciliation/medication_reconciliation_grade_flags:
     get:
       summary: List MedicationReconciliationGradeFlag records
+      tags:
+      - medication-reconciliation
       operationId: listMedicationReconciliationGradeFlag
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicationReconciliationGradeFlag
+      tags:
+      - medication-reconciliation
       operationId: createMedicationReconciliationGradeFlag
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicationReconciliationGradeFlag by id
+      tags:
+      - medication-reconciliation
       operationId: getMedicationReconciliationGradeFlag
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicationReconciliationGradeFlag
+      tags:
+      - medication-reconciliation
       operationId: updateMedicationReconciliationGradeFlag
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicationReconciliationGradeFlag
+      tags:
+      - medication-reconciliation
       operationId: replaceMedicationReconciliationGradeFlag
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicationReconciliationGradeFlag
+      tags:
+      - medication-reconciliation
       operationId: deleteMedicationReconciliationGradeFlag
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/medication-reconciliation/medication_reconciliation_grade_rules:
     get:
       summary: List MedicationReconciliationGradeRule records
+      tags:
+      - medication-reconciliation
       operationId: listMedicationReconciliationGradeRule
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicationReconciliationGradeRule
+      tags:
+      - medication-reconciliation
       operationId: createMedicationReconciliationGradeRule
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicationReconciliationGradeRule by id
+      tags:
+      - medication-reconciliation
       operationId: getMedicationReconciliationGradeRule
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicationReconciliationGradeRule
+      tags:
+      - medication-reconciliation
       operationId: updateMedicationReconciliationGradeRule
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicationReconciliationGradeRule
+      tags:
+      - medication-reconciliation
       operationId: replaceMedicationReconciliationGradeRule
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicationReconciliationGradeRule
+      tags:
+      - medication-reconciliation
       operationId: deleteMedicationReconciliationGradeRule
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/medication-reconciliation/medication_reconciliation_grades:
     get:
       summary: List MedicationReconciliationGrade records
+      tags:
+      - medication-reconciliation
       operationId: listMedicationReconciliationGrade
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicationReconciliationGrade
+      tags:
+      - medication-reconciliation
       operationId: createMedicationReconciliationGrade
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicationReconciliationGrade by id
+      tags:
+      - medication-reconciliation
       operationId: getMedicationReconciliationGrade
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicationReconciliationGrade
+      tags:
+      - medication-reconciliation
       operationId: updateMedicationReconciliationGrade
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicationReconciliationGrade
+      tags:
+      - medication-reconciliation
       operationId: replaceMedicationReconciliationGrade
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicationReconciliationGrade
+      tags:
+      - medication-reconciliation
       operationId: deleteMedicationReconciliationGrade
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/medication-reconciliation/medication_reconciliation_information_sources:
     get:
       summary: List MedicationReconciliationInformationSource records
+      tags:
+      - medication-reconciliation
       operationId: listMedicationReconciliationInformationSource
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicationReconciliationInformationSource
+      tags:
+      - medication-reconciliation
       operationId: createMedicationReconciliationInformationSource
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicationReconciliationInformationSource by id
+      tags:
+      - medication-reconciliation
       operationId: getMedicationReconciliationInformationSource
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicationReconciliationInformationSource
+      tags:
+      - medication-reconciliation
       operationId: updateMedicationReconciliationInformationSource
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicationReconciliationInformationSource
+      tags:
+      - medication-reconciliation
       operationId: replaceMedicationReconciliationInformationSource
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicationReconciliationInformationSource
+      tags:
+      - medication-reconciliation
       operationId: deleteMedicationReconciliationInformationSource
       responses:
         '200':
@@ -1733,6 +1825,8 @@ paths:
   /api/medication-reconciliation/medication_reconciliation_line_items:
     get:
       summary: List MedicationReconciliationLineItem records
+      tags:
+      - medication-reconciliation
       operationId: listMedicationReconciliationLineItem
       parameters:
       - name: limit
@@ -1785,6 +1879,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicationReconciliationLineItem
+      tags:
+      - medication-reconciliation
       operationId: createMedicationReconciliationLineItem
       requestBody:
         required: true
@@ -1838,6 +1934,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicationReconciliationLineItem by id
+      tags:
+      - medication-reconciliation
       operationId: getMedicationReconciliationLineItem
       responses:
         '200':
@@ -1865,6 +1963,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicationReconciliationLineItem
+      tags:
+      - medication-reconciliation
       operationId: updateMedicationReconciliationLineItem
       requestBody:
         required: true
@@ -1910,6 +2010,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicationReconciliationLineItem
+      tags:
+      - medication-reconciliation
       operationId: replaceMedicationReconciliationLineItem
       requestBody:
         required: true
@@ -1955,6 +2057,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicationReconciliationLineItem
+      tags:
+      - medication-reconciliation
       operationId: deleteMedicationReconciliationLineItem
       responses:
         '200':
@@ -1979,6 +2083,8 @@ paths:
   /api/medication-reconciliation/medication_reconciliations:
     get:
       summary: List MedicationReconciliation records
+      tags:
+      - medication-reconciliation
       operationId: listMedicationReconciliation
       parameters:
       - name: limit
@@ -2031,6 +2137,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicationReconciliation
+      tags:
+      - medication-reconciliation
       operationId: createMedicationReconciliation
       requestBody:
         required: true
@@ -2084,6 +2192,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one MedicationReconciliation by id
+      tags:
+      - medication-reconciliation
       operationId: getMedicationReconciliation
       responses:
         '200':
@@ -2111,6 +2221,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicationReconciliation
+      tags:
+      - medication-reconciliation
       operationId: updateMedicationReconciliation
       requestBody:
         required: true
@@ -2156,6 +2268,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing MedicationReconciliation
+      tags:
+      - medication-reconciliation
       operationId: replaceMedicationReconciliation
       requestBody:
         required: true
@@ -2201,6 +2315,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a MedicationReconciliation
+      tags:
+      - medication-reconciliation
       operationId: deleteMedicationReconciliation
       responses:
         '200':
@@ -2233,9 +2349,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - medication-reconciliation
   /api/medication-reconciliation/patients:
     get:
       summary: List Patient records
+      tags:
+      - medication-reconciliation
       operationId: listPatient
       parameters:
       - name: limit
@@ -2288,6 +2408,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - medication-reconciliation
       operationId: createPatient
       requestBody:
         required: true
@@ -2341,6 +2463,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - medication-reconciliation
       operationId: getPatient
       responses:
         '200':
@@ -2368,6 +2492,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - medication-reconciliation
       operationId: updatePatient
       requestBody:
         required: true
@@ -2413,6 +2539,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - medication-reconciliation
       operationId: replacePatient
       requestBody:
         required: true
@@ -2458,6 +2586,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - medication-reconciliation
       operationId: deletePatient
       responses:
         '200':

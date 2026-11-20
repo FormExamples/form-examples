@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "74339bbd-ef85-47be-ac56-22aa9549ee0f",
+  "id": "dd501c5c-1ef3-5dca-a1fa-322858baa1f6",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71",
+      "fullUrl": "urn:uuid:2d0f67cf-1165-54ca-a3c5-3d3cc4c6fbb1",
       "resource": {
         "resourceType": "Patient",
-        "id": "41a61f34-d2cc-47da-a180-913d963bea71",
+        "id": "2d0f67cf-1165-54ca-a3c5-3d3cc4c6fbb1",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:8fe4f93e-fe8d-4d47-abc2-5baa31ff78bd",
+      "fullUrl": "urn:uuid:6c5f053e-4f08-53c2-9798-f6acbbb16e51",
       "resource": {
         "resourceType": "Observation",
-        "id": "8fe4f93e-fe8d-4d47-abc2-5baa31ff78bd",
+        "id": "6c5f053e-4f08-53c2-9798-f6acbbb16e51",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+          "reference": "urn:uuid:2d0f67cf-1165-54ca-a3c5-3d3cc4c6fbb1"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:df21cba1-11fa-4f77-ad1a-17a9fc9f976d",
+      "fullUrl": "urn:uuid:39f6472a-0651-5950-804f-81ab5521922a",
       "resource": {
         "resourceType": "Observation",
-        "id": "df21cba1-11fa-4f77-ad1a-17a9fc9f976d",
+        "id": "39f6472a-0651-5950-804f-81ab5521922a",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+          "reference": "urn:uuid:2d0f67cf-1165-54ca-a3c5-3d3cc4c6fbb1"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -538,10 +538,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:55f7d93f-d56e-4ec4-aacf-9747882ec011",
+      "fullUrl": "urn:uuid:ba8335f0-7fc7-5846-8295-38847fb750fa",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "55f7d93f-d56e-4ec4-aacf-9747882ec011",
+        "id": "ba8335f0-7fc7-5846-8295-38847fb750fa",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -550,7 +550,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+          "reference": "urn:uuid:2d0f67cf-1165-54ca-a3c5-3d3cc4c6fbb1"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -559,10 +559,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:58de6eee-06e7-4243-ac81-908204563b4a",
+      "fullUrl": "urn:uuid:691a9a7e-a28f-5b58-9702-5aeb17de2b47",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "58de6eee-06e7-4243-ac81-908204563b4a",
+        "id": "691a9a7e-a28f-5b58-9702-5aeb17de2b47",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -592,17 +592,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+          "reference": "urn:uuid:2d0f67cf-1165-54ca-a3c5-3d3cc4c6fbb1"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Test was invalid / non-interpretable (antihistamines not withheld, absent positive control, or dermographism); classified as inconclusive."
       }
     },
     {
-      "fullUrl": "urn:uuid:caf252d6-563e-4f99-a6f0-478d6679cd40",
+      "fullUrl": "urn:uuid:5655d81f-a7f1-57a0-886c-652206a7b436",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "caf252d6-563e-4f99-a6f0-478d6679cd40",
+        "id": "5655d81f-a7f1-57a0-886c-652206a7b436",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -632,17 +632,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+          "reference": "urn:uuid:2d0f67cf-1165-54ca-a3c5-3d3cc4c6fbb1"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Inconclusive study; abnormality severity not established."
       }
     },
     {
-      "fullUrl": "urn:uuid:5b3caf38-7454-404c-a14f-f398d2fb2e67",
+      "fullUrl": "urn:uuid:db116be0-5422-5d87-bbeb-9e553538af8c",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "5b3caf38-7454-404c-a14f-f398d2fb2e67",
+        "id": "db116be0-5422-5d87-bbeb-9e553538af8c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -672,17 +672,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+          "reference": "urn:uuid:2d0f67cf-1165-54ca-a3c5-3d3cc4c6fbb1"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: validity controls (antihistamine washout / positive control)."
       }
     },
     {
-      "fullUrl": "urn:uuid:73345937-f55a-4a81-a946-9c029eaa8f4f",
+      "fullUrl": "urn:uuid:30006f76-fa63-5459-86b0-bd2b9a422a6a",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "73345937-f55a-4a81-a946-9c029eaa8f4f",
+        "id": "30006f76-fa63-5459-86b0-bd2b9a422a6a",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -712,17 +712,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+          "reference": "urn:uuid:2d0f67cf-1165-54ca-a3c5-3d3cc4c6fbb1"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Invalid / inconclusive test; repeat or alternative testing recommended."
       }
     },
     {
-      "fullUrl": "urn:uuid:979f1e8d-3433-4129-a874-8e71528988f7",
+      "fullUrl": "urn:uuid:215afa73-3e06-56c2-a753-f84c718b7ca0",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "979f1e8d-3433-4129-a874-8e71528988f7",
+        "id": "215afa73-3e06-56c2-a753-f84c718b7ca0",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -752,7 +752,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:41a61f34-d2cc-47da-a180-913d963bea71"
+          "reference": "urn:uuid:2d0f67cf-1165-54ca-a3c5-3d3cc4c6fbb1"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Test is invalid / non-interpretable (antihistamines not withheld, absent positive control, or dermographism).",

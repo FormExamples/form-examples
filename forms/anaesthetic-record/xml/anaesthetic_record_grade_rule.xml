@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE anaesthetic_record_grade_rule SYSTEM "anaesthetic_record_grade_rule.dtd">
-<anaesthetic_record_grade_rule>
-<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<anaesthetic_record_grade_rule xmlns="https://formexamples.github.io/anaesthetic-record/xml">
+<id>3157cfb3-1205-54d8-b021-cf2d9af48120</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<anaesthetic_record_grade_id>bb0e8400-e29b-41d4-a716-446655440006</anaesthetic_record_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<anaesthetic_record_grade_id>0588340b-3d90-57da-8451-7a4e516b1ad4</anaesthetic_record_grade_id>
+<rule_id>1d2f5921-9792-5b40-bc79-3e5ab5751c2a</rule_id>
 <category>General</category>
 <criticality>critical</criticality>
 <satisfied>true</satisfied>

@@ -5,10 +5,19 @@ info:
   title: Angiography Test Result — Clinician
   version: 1.0.0
   description: Reporting clinician (interventional radiologist, radiologist, cardiologist, or vascular surgeon) who authors and signs the angiography result report.
+x-namespace:
+  form: angiography-test-result
+  apiPrefix: /api/angiography-test-result/
+  sqlSchema: angiography_test_result
+  xmlNamespace: https://formexamples.github.io/angiography-test-result/xml
+tags:
+  - name: angiography-test-result
+    description: Angiography Test Result form
 paths:
   /api/angiography-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags: [angiography-test-result]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [angiography-test-result]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [angiography-test-result]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [angiography-test-result]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [angiography-test-result]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [angiography-test-result]
       operationId: deleteClinician
       responses:
         "200":

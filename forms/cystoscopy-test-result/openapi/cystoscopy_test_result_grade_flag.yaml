@@ -5,10 +5,19 @@ info:
   title: Cystoscopy Test Result — CystoscopyTestResultGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.
+x-namespace:
+  form: cystoscopy-test-result
+  apiPrefix: /api/cystoscopy-test-result/
+  sqlSchema: cystoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/cystoscopy-test-result/xml
+tags:
+  - name: cystoscopy-test-result
+    description: Cystoscopy Test Result form
 paths:
   /api/cystoscopy-test-result/cystoscopy_test_result_grade_flags:
     get:
       summary: List CystoscopyTestResultGradeFlag records
+      tags: [cystoscopy-test-result]
       operationId: listCystoscopyTestResultGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CystoscopyTestResultGradeFlag
+      tags: [cystoscopy-test-result]
       operationId: createCystoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CystoscopyTestResultGradeFlag by id
+      tags: [cystoscopy-test-result]
       operationId: getCystoscopyTestResultGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CystoscopyTestResultGradeFlag
+      tags: [cystoscopy-test-result]
       operationId: updateCystoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CystoscopyTestResultGradeFlag
+      tags: [cystoscopy-test-result]
       operationId: replaceCystoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CystoscopyTestResultGradeFlag
+      tags: [cystoscopy-test-result]
       operationId: deleteCystoscopyTestResultGradeFlag
       responses:
         "200":

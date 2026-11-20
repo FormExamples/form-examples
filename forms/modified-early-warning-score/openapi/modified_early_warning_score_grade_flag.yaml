@@ -5,10 +5,19 @@ info:
   title: Modified Early Warning Score — ModifiedEarlyWarningScoreGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the aggregate risk band, with priority and a suggested action for the ward and escalation team.
+x-namespace:
+  form: modified-early-warning-score
+  apiPrefix: /api/modified-early-warning-score/
+  sqlSchema: modified_early_warning_score
+  xmlNamespace: https://formexamples.github.io/modified-early-warning-score/xml
+tags:
+  - name: modified-early-warning-score
+    description: Modified Early Warning Score form
 paths:
   /api/modified-early-warning-score/modified_early_warning_score_grade_flags:
     get:
       summary: List ModifiedEarlyWarningScoreGradeFlag records
+      tags: [modified-early-warning-score]
       operationId: listModifiedEarlyWarningScoreGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ModifiedEarlyWarningScoreGradeFlag
+      tags: [modified-early-warning-score]
       operationId: createModifiedEarlyWarningScoreGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ModifiedEarlyWarningScoreGradeFlag by id
+      tags: [modified-early-warning-score]
       operationId: getModifiedEarlyWarningScoreGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ModifiedEarlyWarningScoreGradeFlag
+      tags: [modified-early-warning-score]
       operationId: updateModifiedEarlyWarningScoreGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ModifiedEarlyWarningScoreGradeFlag
+      tags: [modified-early-warning-score]
       operationId: replaceModifiedEarlyWarningScoreGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ModifiedEarlyWarningScoreGradeFlag
+      tags: [modified-early-warning-score]
       operationId: deleteModifiedEarlyWarningScoreGradeFlag
       responses:
         "200":

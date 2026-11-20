@@ -5,10 +5,19 @@ info:
   title: Anaesthetic Record — AnaestheticRecordGrade
   version: 1.0.0
   description: "Computed completeness grading result for an anaesthetic record: overall status and completeness percent."
+x-namespace:
+  form: anaesthetic-record
+  apiPrefix: /api/anaesthetic-record/
+  sqlSchema: anaesthetic_record
+  xmlNamespace: https://formexamples.github.io/anaesthetic-record/xml
+tags:
+  - name: anaesthetic-record
+    description: Anaesthetic Record form
 paths:
   /api/anaesthetic-record/anaesthetic_record_grades:
     get:
       summary: List AnaestheticRecordGrade records
+      tags: [anaesthetic-record]
       operationId: listAnaestheticRecordGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AnaestheticRecordGrade
+      tags: [anaesthetic-record]
       operationId: createAnaestheticRecordGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AnaestheticRecordGrade by id
+      tags: [anaesthetic-record]
       operationId: getAnaestheticRecordGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AnaestheticRecordGrade
+      tags: [anaesthetic-record]
       operationId: updateAnaestheticRecordGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AnaestheticRecordGrade
+      tags: [anaesthetic-record]
       operationId: replaceAnaestheticRecordGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AnaestheticRecordGrade
+      tags: [anaesthetic-record]
       operationId: deleteAnaestheticRecordGrade
       responses:
         "200":

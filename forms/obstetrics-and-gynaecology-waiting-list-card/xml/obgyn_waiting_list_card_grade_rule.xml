@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE obgyn_waiting_list_card_grade_rule SYSTEM "obgyn_waiting_list_card_grade_rule.dtd">
-<obgyn_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<obgyn_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/obstetrics-and-gynaecology-waiting-list-card/xml">
+<id>df56ff0a-ec4e-5899-b566-c4cf8b4a7834</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<obgyn_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</obgyn_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<obgyn_waiting_list_card_grade_id>90ffd0fe-f6a4-58cf-89a9-0c79e9315f4e</obgyn_waiting_list_card_grade_id>
+<rule_id>e397283f-4fbd-5d3b-8aac-95fbbbb6d519</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

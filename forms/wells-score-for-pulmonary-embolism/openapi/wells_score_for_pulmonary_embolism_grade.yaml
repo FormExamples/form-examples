@@ -5,10 +5,19 @@ info:
   title: Wells Score For Pulmonary Embolism — WellsScoreForPulmonaryEmbolismGrade
   version: 1.0.0
   description: "Computed Wells PE grading result: total score, two-level band, three-level band, and recommended diagnostic pathway. One-to-one with the parent assessment."
+x-namespace:
+  form: wells-score-for-pulmonary-embolism
+  apiPrefix: /api/wells-score-for-pulmonary-embolism/
+  sqlSchema: wells_score_for_pulmonary_embolism
+  xmlNamespace: https://formexamples.github.io/wells-score-for-pulmonary-embolism/xml
+tags:
+  - name: wells-score-for-pulmonary-embolism
+    description: Wells Score For Pulmonary Embolism form
 paths:
   /api/wells-score-for-pulmonary-embolism/wells_score_for_pulmonary_embolism_grades:
     get:
       summary: List WellsScoreForPulmonaryEmbolismGrade records
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: listWellsScoreForPulmonaryEmbolismGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new WellsScoreForPulmonaryEmbolismGrade
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: createWellsScoreForPulmonaryEmbolismGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one WellsScoreForPulmonaryEmbolismGrade by id
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: getWellsScoreForPulmonaryEmbolismGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing WellsScoreForPulmonaryEmbolismGrade
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: updateWellsScoreForPulmonaryEmbolismGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing WellsScoreForPulmonaryEmbolismGrade
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: replaceWellsScoreForPulmonaryEmbolismGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a WellsScoreForPulmonaryEmbolismGrade
+      tags: [wells-score-for-pulmonary-embolism]
       operationId: deleteWellsScoreForPulmonaryEmbolismGrade
       responses:
         "200":

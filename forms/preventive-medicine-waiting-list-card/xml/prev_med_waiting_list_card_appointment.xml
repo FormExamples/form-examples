@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE prev_med_waiting_list_card_appointment SYSTEM "prev_med_waiting_list_card_appointment.dtd">
-<prev_med_waiting_list_card_appointment>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<prev_med_waiting_list_card_appointment xmlns="https://formexamples.github.io/preventive-medicine-waiting-list-card/xml">
+<id>6cd76ccc-0c75-5eaa-b23d-2fd96ed76a3c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<prev_med_waiting_list_card_id>770e8400-e29b-41d4-a716-446655440002</prev_med_waiting_list_card_id>
+<prev_med_waiting_list_card_id>52e750a7-e3f4-507b-8515-a444743213ad</prev_med_waiting_list_card_id>
 <appointment_date>2026-01-15</appointment_date>
 <appointment_time></appointment_time>
 <duration_minutes>1</duration_minutes>

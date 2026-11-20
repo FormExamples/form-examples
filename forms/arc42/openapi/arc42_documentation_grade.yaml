@@ -5,10 +5,19 @@ info:
   title: Arc42 — Arc42DocumentationGrade
   version: 1.0.0
   description: "Grading result for an arc42 documentation snapshot: computed and final maturity band plus per-section completeness."
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+  - name: arc42
+    description: Arc42 form
 paths:
   /api/arc42/arc42_documentation_grades:
     get:
       summary: List Arc42DocumentationGrade records
+      tags: [arc42]
       operationId: listArc42DocumentationGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Arc42DocumentationGrade
+      tags: [arc42]
       operationId: createArc42DocumentationGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Arc42DocumentationGrade by id
+      tags: [arc42]
       operationId: getArc42DocumentationGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Arc42DocumentationGrade
+      tags: [arc42]
       operationId: updateArc42DocumentationGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Arc42DocumentationGrade
+      tags: [arc42]
       operationId: replaceArc42DocumentationGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Arc42DocumentationGrade
+      tags: [arc42]
       operationId: deleteArc42DocumentationGrade
       responses:
         "200":

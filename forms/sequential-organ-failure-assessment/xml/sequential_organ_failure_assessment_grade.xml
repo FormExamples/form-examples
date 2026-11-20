@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sequential_organ_failure_assessment_grade SYSTEM "sequential_organ_failure_assessment_grade.dtd">
-<sequential_organ_failure_assessment_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<sequential_organ_failure_assessment_grade xmlns="https://formexamples.github.io/sequential-organ-failure-assessment/xml">
+<id>1ec46a55-9452-502f-b610-f3e7f3f3fe88</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<sequential_organ_failure_assessment_id>770e8400-e29b-41d4-a716-446655440002</sequential_organ_failure_assessment_id>
+<sequential_organ_failure_assessment_id>15fd4c29-62b3-5802-a4ff-38047d7493cc</sequential_organ_failure_assessment_id>
 <respiration_score>5</respiration_score>
 <coagulation_score>5</coagulation_score>
 <liver_score>5</liver_score>

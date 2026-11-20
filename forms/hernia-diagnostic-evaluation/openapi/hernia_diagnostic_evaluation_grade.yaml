@@ -5,10 +5,19 @@ info:
   title: Hernia Diagnostic Evaluation — HerniaDiagnosticEvaluationGrade
   version: 1.0.0
   description: Computed and signed-off classification and urgency result for one hernia diagnostic evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.
+x-namespace:
+  form: hernia-diagnostic-evaluation
+  apiPrefix: /api/hernia-diagnostic-evaluation/
+  sqlSchema: hernia_diagnostic_evaluation
+  xmlNamespace: https://formexamples.github.io/hernia-diagnostic-evaluation/xml
+tags:
+  - name: hernia-diagnostic-evaluation
+    description: Hernia Diagnostic Evaluation form
 paths:
   /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluation_grades:
     get:
       summary: List HerniaDiagnosticEvaluationGrade records
+      tags: [hernia-diagnostic-evaluation]
       operationId: listHerniaDiagnosticEvaluationGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HerniaDiagnosticEvaluationGrade
+      tags: [hernia-diagnostic-evaluation]
       operationId: createHerniaDiagnosticEvaluationGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HerniaDiagnosticEvaluationGrade by id
+      tags: [hernia-diagnostic-evaluation]
       operationId: getHerniaDiagnosticEvaluationGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HerniaDiagnosticEvaluationGrade
+      tags: [hernia-diagnostic-evaluation]
       operationId: updateHerniaDiagnosticEvaluationGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HerniaDiagnosticEvaluationGrade
+      tags: [hernia-diagnostic-evaluation]
       operationId: replaceHerniaDiagnosticEvaluationGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HerniaDiagnosticEvaluationGrade
+      tags: [hernia-diagnostic-evaluation]
       operationId: deleteHerniaDiagnosticEvaluationGrade
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE structured_medication_review SYSTEM "structured_medication_review.dtd">
-<structured_medication_review>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<structured_medication_review xmlns="https://formexamples.github.io/structured-medication-review/xml">
+<id>826a2e23-4dcf-5610-ad43-08caa97a8cbe</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>6709db1e-f1f7-5039-b7ef-e84451f7a2e1</patient_id>
+<clinician_id>eaea51b4-94a3-5033-a2bc-13c1952f8de4</clinician_id>
 <clinician_name>Example</clinician_name>
 <clinician_role>clinical-pharmacist</clinician_role>
 <reviewed_at>2026-04-09T10:00:00Z</reviewed_at>

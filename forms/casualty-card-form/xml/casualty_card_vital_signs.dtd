@@ -1,4 +1,5 @@
 <!ELEMENT casualty_card_vital_signs (id,created_at,updated_at,deleted_at,casualty_card_id,heart_rate,systolic_bp,diastolic_bp,respiratory_rate,oxygen_saturation,supplemental_oxygen,oxygen_flow_rate,temperature,blood_glucose,consciousness_level,pupil_left_size,pupil_left_reactive,pupil_right_size,pupil_right_reactive,capillary_refill_time,weight)>
+<!ATTLIST casualty_card_vital_signs xmlns CDATA #FIXED "https://formexamples.github.io/casualty-card-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

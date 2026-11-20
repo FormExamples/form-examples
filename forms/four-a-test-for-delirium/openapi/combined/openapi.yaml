@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the 4AT — Rapid Delirium and Cognitive-Impairment Screen
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: four-a-test-for-delirium
+  apiPrefix: /api/four-a-test-for-delirium/
+  sqlSchema: four_a_test_for_delirium
+  xmlNamespace: https://formexamples.github.io/four-a-test-for-delirium/xml
+tags:
+- name: four-a-test-for-delirium
+  description: 4AT — Rapid Delirium and Cognitive-Impairment Screen form
 paths:
   /api/four-a-test-for-delirium/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - four-a-test-for-delirium
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - four-a-test-for-delirium
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - four-a-test-for-delirium
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - four-a-test-for-delirium
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - four-a-test-for-delirium
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - four-a-test-for-delirium
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/four-a-test-for-delirium/four_a_test_for_delirium_grade_flags:
     get:
       summary: List FourATestForDeliriumGradeFlag records
+      tags:
+      - four-a-test-for-delirium
       operationId: listFourATestForDeliriumGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FourATestForDeliriumGradeFlag
+      tags:
+      - four-a-test-for-delirium
       operationId: createFourATestForDeliriumGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one FourATestForDeliriumGradeFlag by id
+      tags:
+      - four-a-test-for-delirium
       operationId: getFourATestForDeliriumGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FourATestForDeliriumGradeFlag
+      tags:
+      - four-a-test-for-delirium
       operationId: updateFourATestForDeliriumGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing FourATestForDeliriumGradeFlag
+      tags:
+      - four-a-test-for-delirium
       operationId: replaceFourATestForDeliriumGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a FourATestForDeliriumGradeFlag
+      tags:
+      - four-a-test-for-delirium
       operationId: deleteFourATestForDeliriumGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/four-a-test-for-delirium/four_a_test_for_delirium_grade_rules:
     get:
       summary: List FourATestForDeliriumGradeRule records
+      tags:
+      - four-a-test-for-delirium
       operationId: listFourATestForDeliriumGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FourATestForDeliriumGradeRule
+      tags:
+      - four-a-test-for-delirium
       operationId: createFourATestForDeliriumGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one FourATestForDeliriumGradeRule by id
+      tags:
+      - four-a-test-for-delirium
       operationId: getFourATestForDeliriumGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FourATestForDeliriumGradeRule
+      tags:
+      - four-a-test-for-delirium
       operationId: updateFourATestForDeliriumGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing FourATestForDeliriumGradeRule
+      tags:
+      - four-a-test-for-delirium
       operationId: replaceFourATestForDeliriumGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a FourATestForDeliriumGradeRule
+      tags:
+      - four-a-test-for-delirium
       operationId: deleteFourATestForDeliriumGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/four-a-test-for-delirium/four_a_test_for_delirium_grades:
     get:
       summary: List FourATestForDeliriumGrade records
+      tags:
+      - four-a-test-for-delirium
       operationId: listFourATestForDeliriumGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FourATestForDeliriumGrade
+      tags:
+      - four-a-test-for-delirium
       operationId: createFourATestForDeliriumGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one FourATestForDeliriumGrade by id
+      tags:
+      - four-a-test-for-delirium
       operationId: getFourATestForDeliriumGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FourATestForDeliriumGrade
+      tags:
+      - four-a-test-for-delirium
       operationId: updateFourATestForDeliriumGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing FourATestForDeliriumGrade
+      tags:
+      - four-a-test-for-delirium
       operationId: replaceFourATestForDeliriumGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a FourATestForDeliriumGrade
+      tags:
+      - four-a-test-for-delirium
       operationId: deleteFourATestForDeliriumGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/four-a-test-for-delirium/four_a_test_for_deliriums:
     get:
       summary: List FourATestForDelirium records
+      tags:
+      - four-a-test-for-delirium
       operationId: listFourATestForDelirium
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FourATestForDelirium
+      tags:
+      - four-a-test-for-delirium
       operationId: createFourATestForDelirium
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one FourATestForDelirium by id
+      tags:
+      - four-a-test-for-delirium
       operationId: getFourATestForDelirium
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FourATestForDelirium
+      tags:
+      - four-a-test-for-delirium
       operationId: updateFourATestForDelirium
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing FourATestForDelirium
+      tags:
+      - four-a-test-for-delirium
       operationId: replaceFourATestForDelirium
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a FourATestForDelirium
+      tags:
+      - four-a-test-for-delirium
       operationId: deleteFourATestForDelirium
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - four-a-test-for-delirium
   /api/four-a-test-for-delirium/patients:
     get:
       summary: List Patient records
+      tags:
+      - four-a-test-for-delirium
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - four-a-test-for-delirium
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - four-a-test-for-delirium
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - four-a-test-for-delirium
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - four-a-test-for-delirium
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - four-a-test-for-delirium
       operationId: deletePatient
       responses:
         '200':

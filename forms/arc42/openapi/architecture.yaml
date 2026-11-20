@@ -5,10 +5,19 @@ info:
   title: Arc42 — Architecture
   version: 1.0.0
   description: Software architecture being documented with arc42.
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+  - name: arc42
+    description: Arc42 form
 paths:
   /api/arc42/architectures:
     get:
       summary: List Architecture records
+      tags: [arc42]
       operationId: listArchitecture
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Architecture
+      tags: [arc42]
       operationId: createArchitecture
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Architecture by id
+      tags: [arc42]
       operationId: getArchitecture
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Architecture
+      tags: [arc42]
       operationId: updateArchitecture
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Architecture
+      tags: [arc42]
       operationId: replaceArchitecture
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Architecture
+      tags: [arc42]
       operationId: deleteArchitecture
       responses:
         "200":

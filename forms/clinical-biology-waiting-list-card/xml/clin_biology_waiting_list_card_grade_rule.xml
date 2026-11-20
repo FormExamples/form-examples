@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE clin_biology_waiting_list_card_grade_rule SYSTEM "clin_biology_waiting_list_card_grade_rule.dtd">
-<clin_biology_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<clin_biology_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/clinical-biology-waiting-list-card/xml">
+<id>6483bcfc-d9f4-52cd-89c5-20bde3dd8b3d</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<clin_biology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</clin_biology_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<clin_biology_waiting_list_card_grade_id>c7af0193-642f-5fb4-b091-6ce6b1d4ce1b</clin_biology_waiting_list_card_grade_id>
+<rule_id>08bfc920-744d-5ce0-b0a3-7eee6a2819db</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

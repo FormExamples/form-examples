@@ -1,4 +1,5 @@
 <!ELEMENT assessment_testing_results (id,created_at,updated_at,deleted_at,assessment_id,skin_prick_tests_done,specific_ige_done,component_resolved_diagnostics_done,challenge_tests_done,patch_tests_done)>
+<!ATTLIST assessment_testing_results xmlns CDATA #FIXED "https://formexamples.github.io/allergy-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

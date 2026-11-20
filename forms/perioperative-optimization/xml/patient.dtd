@@ -1,4 +1,5 @@
 <!ELEMENT patient (id,created_at,updated_at,deleted_at,name,birth_date,sex,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,united_kingdom_nhs_number,height_as_cm,weight_as_kg,body_mass_index,waist_as_cm,mid_upper_arm_circumference_as_cm,calf_circumference_as_cm,preferred_language,ethnicity)>
+<!ATTLIST patient xmlns CDATA #FIXED "https://formexamples.github.io/perioperative-optimization/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

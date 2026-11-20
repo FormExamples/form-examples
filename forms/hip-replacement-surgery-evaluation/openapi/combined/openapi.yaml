@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Hip Replacement Surgery Evaluation form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: hip-replacement-surgery-evaluation
+  apiPrefix: /api/hip-replacement-surgery-evaluation/
+  sqlSchema: hip_replacement_surgery_evaluation
+  xmlNamespace: https://formexamples.github.io/hip-replacement-surgery-evaluation/xml
+tags:
+- name: hip-replacement-surgery-evaluation
+  description: Hip Replacement Surgery Evaluation form
 paths:
   /api/hip-replacement-surgery-evaluation/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluation_grade_flags:
     get:
       summary: List HipReplacementSurgeryEvaluationGradeFlag records
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: listHipReplacementSurgeryEvaluationGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HipReplacementSurgeryEvaluationGradeFlag
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: createHipReplacementSurgeryEvaluationGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HipReplacementSurgeryEvaluationGradeFlag by id
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: getHipReplacementSurgeryEvaluationGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HipReplacementSurgeryEvaluationGradeFlag
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: updateHipReplacementSurgeryEvaluationGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HipReplacementSurgeryEvaluationGradeFlag
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: replaceHipReplacementSurgeryEvaluationGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HipReplacementSurgeryEvaluationGradeFlag
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: deleteHipReplacementSurgeryEvaluationGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluation_grades:
     get:
       summary: List HipReplacementSurgeryEvaluationGrade records
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: listHipReplacementSurgeryEvaluationGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HipReplacementSurgeryEvaluationGrade
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: createHipReplacementSurgeryEvaluationGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HipReplacementSurgeryEvaluationGrade by id
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: getHipReplacementSurgeryEvaluationGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HipReplacementSurgeryEvaluationGrade
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: updateHipReplacementSurgeryEvaluationGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HipReplacementSurgeryEvaluationGrade
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: replaceHipReplacementSurgeryEvaluationGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HipReplacementSurgeryEvaluationGrade
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: deleteHipReplacementSurgeryEvaluationGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluations:
     get:
       summary: List HipReplacementSurgeryEvaluation records
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: listHipReplacementSurgeryEvaluation
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HipReplacementSurgeryEvaluation
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: createHipReplacementSurgeryEvaluation
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HipReplacementSurgeryEvaluation by id
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: getHipReplacementSurgeryEvaluation
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HipReplacementSurgeryEvaluation
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: updateHipReplacementSurgeryEvaluation
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HipReplacementSurgeryEvaluation
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: replaceHipReplacementSurgeryEvaluation
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HipReplacementSurgeryEvaluation
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: deleteHipReplacementSurgeryEvaluation
       responses:
         '200':
@@ -1003,9 +1059,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - hip-replacement-surgery-evaluation
   /api/hip-replacement-surgery-evaluation/patients:
     get:
       summary: List Patient records
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: listPatient
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: createPatient
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: getPatient
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: updatePatient
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: replacePatient
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - hip-replacement-surgery-evaluation
       operationId: deletePatient
       responses:
         '200':

@@ -5,10 +5,19 @@ info:
   title: Caprini Venous Thromboembolism Risk Assessment — Patient
   version: 1.0.0
   description: Patient demographic information used by the Caprini VTE risk-assessment record.
+x-namespace:
+  form: caprini-venous-thromboembolism-risk-assessment
+  apiPrefix: /api/caprini-venous-thromboembolism-risk-assessment/
+  sqlSchema: caprini_venous_thromboembolism_risk_assessment
+  xmlNamespace: https://formexamples.github.io/caprini-venous-thromboembolism-risk-assessment/xml
+tags:
+  - name: caprini-venous-thromboembolism-risk-assessment
+    description: Caprini Venous Thromboembolism Risk Assessment form
 paths:
   /api/caprini-venous-thromboembolism-risk-assessment/patients:
     get:
       summary: List Patient records
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: deletePatient
       responses:
         "200":

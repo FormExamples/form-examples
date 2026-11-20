@@ -5,10 +5,19 @@ info:
   title: Biopsy Test Request — BiopsyTestRequestGrade
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ACR 1-9), periprocedural bleeding risk, request completeness, and urgency / cancer-pathway triage."
+x-namespace:
+  form: biopsy-test-request
+  apiPrefix: /api/biopsy-test-request/
+  sqlSchema: biopsy_test_request
+  xmlNamespace: https://formexamples.github.io/biopsy-test-request/xml
+tags:
+  - name: biopsy-test-request
+    description: Biopsy Test Request form
 paths:
   /api/biopsy-test-request/biopsy_test_request_grades:
     get:
       summary: List BiopsyTestRequestGrade records
+      tags: [biopsy-test-request]
       operationId: listBiopsyTestRequestGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BiopsyTestRequestGrade
+      tags: [biopsy-test-request]
       operationId: createBiopsyTestRequestGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BiopsyTestRequestGrade by id
+      tags: [biopsy-test-request]
       operationId: getBiopsyTestRequestGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BiopsyTestRequestGrade
+      tags: [biopsy-test-request]
       operationId: updateBiopsyTestRequestGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BiopsyTestRequestGrade
+      tags: [biopsy-test-request]
       operationId: replaceBiopsyTestRequestGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BiopsyTestRequestGrade
+      tags: [biopsy-test-request]
       operationId: deleteBiopsyTestRequestGrade
       responses:
         "200":

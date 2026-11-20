@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE medical_fit_note_grade_flag SYSTEM "medical_fit_note_grade_flag.dtd">
-<medical_fit_note_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<medical_fit_note_grade_flag xmlns="https://formexamples.github.io/medical-fit-note/xml">
+<id>a1f52771-d99a-58e3-8c98-914846776c7a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<medical_fit_note_grade_id>880e8400-e29b-41d4-a716-446655440003</medical_fit_note_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<medical_fit_note_grade_id>a77509c3-0b43-5b03-a6c0-d0c5564b842a</medical_fit_note_grade_id>
+<flag_id>346abaee-3ed2-5999-b405-be8f701841f1</flag_id>
 <category>missing-diagnosis</category>
 <priority>low</priority>
 <description>Example text.</description>

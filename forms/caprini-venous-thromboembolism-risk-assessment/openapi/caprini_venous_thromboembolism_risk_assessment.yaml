@@ -5,10 +5,19 @@ info:
   title: Caprini Venous Thromboembolism Risk Assessment — CapriniVenousThromboembolismRiskAssessment
   version: 1.0.0
   description: "Main Caprini VTE risk-assessment record: assessment context, patient identification, age band, weighted yes/no risk-factor inputs (1-, 2-, 3-, and 5-point groups), and the bleeding-risk input."
+x-namespace:
+  form: caprini-venous-thromboembolism-risk-assessment
+  apiPrefix: /api/caprini-venous-thromboembolism-risk-assessment/
+  sqlSchema: caprini_venous_thromboembolism_risk_assessment
+  xmlNamespace: https://formexamples.github.io/caprini-venous-thromboembolism-risk-assessment/xml
+tags:
+  - name: caprini-venous-thromboembolism-risk-assessment
+    description: Caprini Venous Thromboembolism Risk Assessment form
 paths:
   /api/caprini-venous-thromboembolism-risk-assessment/caprini_venous_thromboembolism_risk_assessments:
     get:
       summary: List CapriniVenousThromboembolismRiskAssessment records
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: listCapriniVenousThromboembolismRiskAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CapriniVenousThromboembolismRiskAssessment
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: createCapriniVenousThromboembolismRiskAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CapriniVenousThromboembolismRiskAssessment by id
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: getCapriniVenousThromboembolismRiskAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CapriniVenousThromboembolismRiskAssessment
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: updateCapriniVenousThromboembolismRiskAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CapriniVenousThromboembolismRiskAssessment
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: replaceCapriniVenousThromboembolismRiskAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CapriniVenousThromboembolismRiskAssessment
+      tags: [caprini-venous-thromboembolism-risk-assessment]
       operationId: deleteCapriniVenousThromboembolismRiskAssessment
       responses:
         "200":

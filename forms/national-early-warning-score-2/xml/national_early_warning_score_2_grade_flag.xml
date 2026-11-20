@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE national_early_warning_score_2_grade_flag SYSTEM "national_early_warning_score_2_grade_flag.dtd">
-<national_early_warning_score_2_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<national_early_warning_score_2_grade_flag xmlns="https://formexamples.github.io/national-early-warning-score-2/xml">
+<id>7b3752ba-69e9-5461-a109-bbd70deb728b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<national_early_warning_score_2_grade_id>880e8400-e29b-41d4-a716-446655440003</national_early_warning_score_2_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<national_early_warning_score_2_grade_id>52af0b34-ace3-54f9-8caf-934d6bf690c5</national_early_warning_score_2_grade_id>
+<flag_id>dfea755f-b38e-5495-92b7-e6caeb1cf7a5</flag_id>
 <category>high-score-escalate</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE partogram_grade_rule SYSTEM "partogram_grade_rule.dtd">
-<partogram_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<partogram_grade_rule xmlns="https://formexamples.github.io/partogram/xml">
+<id>e9880346-06e7-50d6-9fcf-ef4262706f61</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<partogram_grade_id>990e8400-e29b-41d4-a716-446655440004</partogram_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<partogram_grade_id>f74f18ce-ca73-57c7-ae2f-00cc3e221ced</partogram_grade_id>
+<rule_id>87a6cbc5-1ac8-5a19-8066-640510bb1fbc</rule_id>
 <category>General</category>
 <description>Example text.</description>
 </partogram_grade_rule>

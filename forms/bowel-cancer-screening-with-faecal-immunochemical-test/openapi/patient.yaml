@@ -5,10 +5,19 @@ info:
   title: Bowel Cancer Screening With Faecal Immunochemical Test — Patient
   version: 1.0.0
   description: Patient demographic information used by the bowel-cancer-screening FIT record; the screening participant.
+x-namespace:
+  form: bowel-cancer-screening-with-faecal-immunochemical-test
+  apiPrefix: /api/bowel-cancer-screening-with-faecal-immunochemical-test/
+  sqlSchema: bowel_cancer_screening_with_faecal_immunochemical_test
+  xmlNamespace: https://formexamples.github.io/bowel-cancer-screening-with-faecal-immunochemical-test/xml
+tags:
+  - name: bowel-cancer-screening-with-faecal-immunochemical-test
+    description: Bowel Cancer Screening With Faecal Immunochemical Test form
 paths:
   /api/bowel-cancer-screening-with-faecal-immunochemical-test/patients:
     get:
       summary: List Patient records
+      tags: [bowel-cancer-screening-with-faecal-immunochemical-test]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [bowel-cancer-screening-with-faecal-immunochemical-test]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [bowel-cancer-screening-with-faecal-immunochemical-test]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [bowel-cancer-screening-with-faecal-immunochemical-test]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [bowel-cancer-screening-with-faecal-immunochemical-test]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [bowel-cancer-screening-with-faecal-immunochemical-test]
       operationId: deletePatient
       responses:
         "200":

@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "d38ef736-424d-482b-a76b-b549a85bb812",
+  "id": "888ac2bc-6899-5480-8b68-7fa9756112aa",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:38162964-2e0b-4f78-a511-c59a577d6058",
+      "fullUrl": "urn:uuid:7726ed67-905c-52a5-bc33-a636da207bb9",
       "resource": {
         "resourceType": "Patient",
-        "id": "38162964-2e0b-4f78-a511-c59a577d6058",
+        "id": "7726ed67-905c-52a5-bc33-a636da207bb9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:aea6ef95-63c2-4301-a7bf-fb45985d1014",
+      "fullUrl": "urn:uuid:076c1b87-2a8f-567c-b992-8154f45d88aa",
       "resource": {
         "resourceType": "Observation",
-        "id": "aea6ef95-63c2-4301-a7bf-fb45985d1014",
+        "id": "076c1b87-2a8f-567c-b992-8154f45d88aa",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:38162964-2e0b-4f78-a511-c59a577d6058"
+          "reference": "urn:uuid:7726ed67-905c-52a5-bc33-a636da207bb9"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:0bda26f5-8a0d-4095-ac7e-f68cc2c7926b",
+      "fullUrl": "urn:uuid:67d2567d-2778-5082-99a5-a6bd8f9bcf65",
       "resource": {
         "resourceType": "Observation",
-        "id": "0bda26f5-8a0d-4095-ac7e-f68cc2c7926b",
+        "id": "67d2567d-2778-5082-99a5-a6bd8f9bcf65",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:38162964-2e0b-4f78-a511-c59a577d6058"
+          "reference": "urn:uuid:7726ed67-905c-52a5-bc33-a636da207bb9"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -489,10 +489,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:b49c2f78-240d-4daf-a159-31968e339930",
+      "fullUrl": "urn:uuid:aad5dab0-5c63-54ed-bb8d-0f4ad093d109",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "b49c2f78-240d-4daf-a159-31968e339930",
+        "id": "aad5dab0-5c63-54ed-bb8d-0f4ad093d109",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -501,7 +501,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:38162964-2e0b-4f78-a511-c59a577d6058"
+          "reference": "urn:uuid:7726ed67-905c-52a5-bc33-a636da207bb9"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -510,10 +510,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:29f96e59-8540-4441-ab49-c1f0592846cf",
+      "fullUrl": "urn:uuid:8f35dfdf-b0d1-50cc-b80d-842cf38043a5",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "29f96e59-8540-4441-ab49-c1f0592846cf",
+        "id": "8f35dfdf-b0d1-50cc-b80d-842cf38043a5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -543,17 +543,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:38162964-2e0b-4f78-a511-c59a577d6058"
+          "reference": "urn:uuid:7726ed67-905c-52a5-bc33-a636da207bb9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A toxic level is present (paracetamol above the treatment line, toxic level flag, a reported level over a recognised toxic threshold, or overall critical status); classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:8dcd0350-c46c-442c-a3bc-ab5be4c02a9d",
+      "fullUrl": "urn:uuid:3753e931-c818-5a00-b284-1bf5eb5ad157",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "8dcd0350-c46c-442c-a3bc-ab5be4c02a9d",
+        "id": "3753e931-c818-5a00-b284-1bf5eb5ad157",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -583,17 +583,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:38162964-2e0b-4f78-a511-c59a577d6058"
+          "reference": "urn:uuid:7726ed67-905c-52a5-bc33-a636da207bb9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A reported level is over a recognised toxic threshold (lithium, carboxyhaemoglobin, or salicylate); severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:95dacab3-51e8-4800-ae11-eb15b66d3e6b",
+      "fullUrl": "urn:uuid:62b12fa5-c709-562a-9701-bd762d0b753c",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "95dacab3-51e8-4800-ae11-eb15b66d3e6b",
+        "id": "62b12fa5-c709-562a-9701-bd762d0b753c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -623,17 +623,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:38162964-2e0b-4f78-a511-c59a577d6058"
+          "reference": "urn:uuid:7726ed67-905c-52a5-bc33-a636da207bb9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Toxic level auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:f278d8d5-9786-4990-ad78-277b378090da",
+      "fullUrl": "urn:uuid:36929144-ce1f-5435-a1f0-ec63fe9f0eeb",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "f278d8d5-9786-4990-ad78-277b378090da",
+        "id": "36929144-ce1f-5435-a1f0-ec63fe9f0eeb",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -663,7 +663,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:38162964-2e0b-4f78-a511-c59a577d6058"
+          "reference": "urn:uuid:7726ed67-905c-52a5-bc33-a636da207bb9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A toxic level requiring action is present.",
@@ -677,10 +677,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:0732fb2e-739e-43ff-acc9-bc72076649af",
+      "fullUrl": "urn:uuid:1d654144-8282-56dd-a8ae-ca404bc4d839",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "0732fb2e-739e-43ff-acc9-bc72076649af",
+        "id": "1d654144-8282-56dd-a8ae-ca404bc4d839",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -710,7 +710,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:38162964-2e0b-4f78-a511-c59a577d6058"
+          "reference": "urn:uuid:7726ed67-905c-52a5-bc33-a636da207bb9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Toxic result present but the result has not been recorded as communicated.",
@@ -724,10 +724,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:319f8182-3f69-44bc-aef3-2642dab26d74",
+      "fullUrl": "urn:uuid:56a7feaf-8824-552c-9f08-2f1270507d8b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "319f8182-3f69-44bc-aef3-2642dab26d74",
+        "id": "56a7feaf-8824-552c-9f08-2f1270507d8b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -757,7 +757,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:38162964-2e0b-4f78-a511-c59a577d6058"
+          "reference": "urn:uuid:7726ed67-905c-52a5-bc33-a636da207bb9"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A lithium, carboxyhaemoglobin, or salicylate level is in a range that may warrant urgent referral.",

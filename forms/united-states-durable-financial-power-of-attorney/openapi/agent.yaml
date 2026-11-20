@@ -5,10 +5,19 @@ info:
   title: United States Durable Financial Power Of Attorney — Agent
   version: 1.0.0
   description: The agent (attorney-in-fact) named in a durable financial power of attorney.
+x-namespace:
+  form: united-states-durable-financial-power-of-attorney
+  apiPrefix: /api/united-states-durable-financial-power-of-attorney/
+  sqlSchema: united_states_durable_financial_power_of_attorney
+  xmlNamespace: https://formexamples.github.io/united-states-durable-financial-power-of-attorney/xml
+tags:
+  - name: united-states-durable-financial-power-of-attorney
+    description: United States Durable Financial Power Of Attorney form
 paths:
   /api/united-states-durable-financial-power-of-attorney/agents:
     get:
       summary: List Agent records
+      tags: [united-states-durable-financial-power-of-attorney]
       operationId: listAgent
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Agent
+      tags: [united-states-durable-financial-power-of-attorney]
       operationId: createAgent
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Agent by id
+      tags: [united-states-durable-financial-power-of-attorney]
       operationId: getAgent
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Agent
+      tags: [united-states-durable-financial-power-of-attorney]
       operationId: updateAgent
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Agent
+      tags: [united-states-durable-financial-power-of-attorney]
       operationId: replaceAgent
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Agent
+      tags: [united-states-durable-financial-power-of-attorney]
       operationId: deleteAgent
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Arc42 — BuildingBlock
   version: 1.0.0
   description: Building block captured in §5 Building Block View of the arc42 documentation.
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+  - name: arc42
+    description: Arc42 form
 paths:
   /api/arc42/building_blocks:
     get:
       summary: List BuildingBlock records
+      tags: [arc42]
       operationId: listBuildingBlock
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BuildingBlock
+      tags: [arc42]
       operationId: createBuildingBlock
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BuildingBlock by id
+      tags: [arc42]
       operationId: getBuildingBlock
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BuildingBlock
+      tags: [arc42]
       operationId: updateBuildingBlock
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BuildingBlock
+      tags: [arc42]
       operationId: replaceBuildingBlock
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BuildingBlock
+      tags: [arc42]
       operationId: deleteBuildingBlock
       responses:
         "200":

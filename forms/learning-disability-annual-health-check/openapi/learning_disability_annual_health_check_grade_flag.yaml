@@ -5,10 +5,19 @@ info:
   title: Learning Disability Annual Health Check — LearningDisabilityAnnualHealthCheckGradeFlag
   version: 1.0.0
   description: Clinical flags that fire independently of the completeness status, with priority and a suggested action for the clinician or governance team.
+x-namespace:
+  form: learning-disability-annual-health-check
+  apiPrefix: /api/learning-disability-annual-health-check/
+  sqlSchema: learning_disability_annual_health_check
+  xmlNamespace: https://formexamples.github.io/learning-disability-annual-health-check/xml
+tags:
+  - name: learning-disability-annual-health-check
+    description: Learning Disability Annual Health Check form
 paths:
   /api/learning-disability-annual-health-check/learning_disability_annual_health_check_grade_flags:
     get:
       summary: List LearningDisabilityAnnualHealthCheckGradeFlag records
+      tags: [learning-disability-annual-health-check]
       operationId: listLearningDisabilityAnnualHealthCheckGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LearningDisabilityAnnualHealthCheckGradeFlag
+      tags: [learning-disability-annual-health-check]
       operationId: createLearningDisabilityAnnualHealthCheckGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LearningDisabilityAnnualHealthCheckGradeFlag by id
+      tags: [learning-disability-annual-health-check]
       operationId: getLearningDisabilityAnnualHealthCheckGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LearningDisabilityAnnualHealthCheckGradeFlag
+      tags: [learning-disability-annual-health-check]
       operationId: updateLearningDisabilityAnnualHealthCheckGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LearningDisabilityAnnualHealthCheckGradeFlag
+      tags: [learning-disability-annual-health-check]
       operationId: replaceLearningDisabilityAnnualHealthCheckGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LearningDisabilityAnnualHealthCheckGradeFlag
+      tags: [learning-disability-annual-health-check]
       operationId: deleteLearningDisabilityAnnualHealthCheckGradeFlag
       responses:
         "200":

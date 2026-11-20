@@ -5,10 +5,19 @@ info:
   title: Arc42 — Arc42DocumentationGradeRule
   version: 1.0.0
   description: Audit trail of grading rules that fired when computing the maturity of an arc42 documentation snapshot.
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+  - name: arc42
+    description: Arc42 form
 paths:
   /api/arc42/arc42_documentation_grade_rules:
     get:
       summary: List Arc42DocumentationGradeRule records
+      tags: [arc42]
       operationId: listArc42DocumentationGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Arc42DocumentationGradeRule
+      tags: [arc42]
       operationId: createArc42DocumentationGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Arc42DocumentationGradeRule by id
+      tags: [arc42]
       operationId: getArc42DocumentationGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Arc42DocumentationGradeRule
+      tags: [arc42]
       operationId: updateArc42DocumentationGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Arc42DocumentationGradeRule
+      tags: [arc42]
       operationId: replaceArc42DocumentationGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Arc42DocumentationGradeRule
+      tags: [arc42]
       operationId: deleteArc42DocumentationGradeRule
       responses:
         "200":

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Hospital Daily Monitoring Checklist form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: hospital-daily-monitoring-checklist
+  apiPrefix: /api/hospital-daily-monitoring-checklist/
+  sqlSchema: hospital_daily_monitoring_checklist
+  xmlNamespace: https://formexamples.github.io/hospital-daily-monitoring-checklist/xml
+tags:
+- name: hospital-daily-monitoring-checklist
+  description: Hospital Daily Monitoring Checklist form
 paths:
   /api/hospital-daily-monitoring-checklist/hospital_daily_monitoring_checklist_items:
     get:
       summary: List HospitalDailyMonitoringChecklistItem records
+      tags:
+      - hospital-daily-monitoring-checklist
       operationId: listHospitalDailyMonitoringChecklistItem
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HospitalDailyMonitoringChecklistItem
+      tags:
+      - hospital-daily-monitoring-checklist
       operationId: createHospitalDailyMonitoringChecklistItem
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HospitalDailyMonitoringChecklistItem by id
+      tags:
+      - hospital-daily-monitoring-checklist
       operationId: getHospitalDailyMonitoringChecklistItem
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HospitalDailyMonitoringChecklistItem
+      tags:
+      - hospital-daily-monitoring-checklist
       operationId: updateHospitalDailyMonitoringChecklistItem
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HospitalDailyMonitoringChecklistItem
+      tags:
+      - hospital-daily-monitoring-checklist
       operationId: replaceHospitalDailyMonitoringChecklistItem
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HospitalDailyMonitoringChecklistItem
+      tags:
+      - hospital-daily-monitoring-checklist
       operationId: deleteHospitalDailyMonitoringChecklistItem
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/hospital-daily-monitoring-checklist/hospital_daily_monitoring_checklists:
     get:
       summary: List HospitalDailyMonitoringChecklist records
+      tags:
+      - hospital-daily-monitoring-checklist
       operationId: listHospitalDailyMonitoringChecklist
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HospitalDailyMonitoringChecklist
+      tags:
+      - hospital-daily-monitoring-checklist
       operationId: createHospitalDailyMonitoringChecklist
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one HospitalDailyMonitoringChecklist by id
+      tags:
+      - hospital-daily-monitoring-checklist
       operationId: getHospitalDailyMonitoringChecklist
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HospitalDailyMonitoringChecklist
+      tags:
+      - hospital-daily-monitoring-checklist
       operationId: updateHospitalDailyMonitoringChecklist
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing HospitalDailyMonitoringChecklist
+      tags:
+      - hospital-daily-monitoring-checklist
       operationId: replaceHospitalDailyMonitoringChecklist
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a HospitalDailyMonitoringChecklist
+      tags:
+      - hospital-daily-monitoring-checklist
       operationId: deleteHospitalDailyMonitoringChecklist
       responses:
         '200':
@@ -511,6 +543,8 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - hospital-daily-monitoring-checklist
 components:
   schemas:
     HospitalDailyMonitoringChecklist:

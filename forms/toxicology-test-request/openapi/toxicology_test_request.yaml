@@ -5,10 +5,19 @@ info:
   title: Toxicology Test Request — ToxicologyTestRequest
   version: 1.0.0
   description: Toxicology / poisons / therapeutic-drug-level blood-test request. Captures the requested assays (booleans), the clinical indication and details, suspected agent and ingestion timing, specimen handling, and triage urgency.
+x-namespace:
+  form: toxicology-test-request
+  apiPrefix: /api/toxicology-test-request/
+  sqlSchema: toxicology_test_request
+  xmlNamespace: https://formexamples.github.io/toxicology-test-request/xml
+tags:
+  - name: toxicology-test-request
+    description: Toxicology Test Request form
 paths:
   /api/toxicology-test-request/toxicology_test_requests:
     get:
       summary: List ToxicologyTestRequest records
+      tags: [toxicology-test-request]
       operationId: listToxicologyTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ToxicologyTestRequest
+      tags: [toxicology-test-request]
       operationId: createToxicologyTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ToxicologyTestRequest by id
+      tags: [toxicology-test-request]
       operationId: getToxicologyTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ToxicologyTestRequest
+      tags: [toxicology-test-request]
       operationId: updateToxicologyTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ToxicologyTestRequest
+      tags: [toxicology-test-request]
       operationId: replaceToxicologyTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ToxicologyTestRequest
+      tags: [toxicology-test-request]
       operationId: deleteToxicologyTestRequest
       responses:
         "200":

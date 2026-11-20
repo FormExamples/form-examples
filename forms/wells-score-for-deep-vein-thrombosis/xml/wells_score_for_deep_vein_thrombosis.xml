@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE wells_score_for_deep_vein_thrombosis SYSTEM "wells_score_for_deep_vein_thrombosis.dtd">
-<wells_score_for_deep_vein_thrombosis>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<wells_score_for_deep_vein_thrombosis xmlns="https://formexamples.github.io/wells-score-for-deep-vein-thrombosis/xml">
+<id>a0abce10-e713-5bae-9b22-10a6ac21b619</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>5fa0216a-b42e-5fa5-bd81-c85c6aead822</patient_id>
+<clinician_id>9d496fb2-3f93-5b1c-90f4-45fc7615aab7</clinician_id>
 <status>draft</status>
 <patient_identifier></patient_identifier>
 <assessed_at>2026-04-09T10:00:00Z</assessed_at>

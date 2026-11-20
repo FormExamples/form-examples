@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_additional_flag SYSTEM "grading_additional_flag.dtd">
-<grading_additional_flag>
-<id>ee0e8400-e29b-41d4-a716-446655440009</id>
+<grading_additional_flag xmlns="https://formexamples.github.io/patient-intake/xml">
+<id>d5b8a99e-bbd1-5373-bcbe-91e671d08ad2</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>cc0e8400-e29b-41d4-a716-446655440007</grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<grade_id>6b80b05f-287e-533e-9eee-9355a4cf17e0</grade_id>
+<flag_id>8356ac8b-9271-5c90-b91a-34e3a4a779b6</flag_id>
 <category>General</category>
 <message></message>
 <priority>high</priority>

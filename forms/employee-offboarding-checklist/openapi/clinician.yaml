@@ -5,10 +5,19 @@ info:
   title: Employee Offboarding Checklist — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: employee-offboarding-checklist
+  apiPrefix: /api/employee-offboarding-checklist/
+  sqlSchema: employee_offboarding_checklist
+  xmlNamespace: https://formexamples.github.io/employee-offboarding-checklist/xml
+tags:
+  - name: employee-offboarding-checklist
+    description: Employee Offboarding Checklist form
 paths:
   /api/employee-offboarding-checklist/clinicians:
     get:
       summary: List Clinician records
+      tags: [employee-offboarding-checklist]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [employee-offboarding-checklist]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [employee-offboarding-checklist]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [employee-offboarding-checklist]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [employee-offboarding-checklist]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [employee-offboarding-checklist]
       operationId: deleteClinician
       responses:
         "200":

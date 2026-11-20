@@ -1,4 +1,5 @@
 <!ELEMENT mental_state_examination (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,assessment_reason,patient_identifier,age_band,sex,appearance_grooming,appearance_eye_contact,appearance_rapport,appearance_psychomotor,appearance_abnormal_movements,appearance_notes,speech_rate,speech_volume,speech_quantity,speech_fluency,speech_notes,mood_subjective,mood_descriptor,affect_range,affect_congruence,affect_reactivity,emotion_notes,hallucinations_present,command_hallucinations,illusions,depersonalisation,derealisation,perception_notes,thought_form,delusions,obsessions,suicidal_ideation,homicidal_ideation,self_harm_thoughts,thought_notes,insight_level,treatment_understanding,judgement,insight_notes,orientation,attention,memory,cognitive_impression,cognition_notes,clinical_formulation)>
+<!ATTLIST mental_state_examination xmlns CDATA #FIXED "https://formexamples.github.io/mental-state-examination/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

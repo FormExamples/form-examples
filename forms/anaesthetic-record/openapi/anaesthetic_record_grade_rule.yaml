@@ -5,10 +5,19 @@ info:
   title: Anaesthetic Record — AnaestheticRecordGradeRule
   version: 1.0.0
   description: "Audit trail of every mandatory-item rule evaluated during grading: criticality, satisfied state, and description."
+x-namespace:
+  form: anaesthetic-record
+  apiPrefix: /api/anaesthetic-record/
+  sqlSchema: anaesthetic_record
+  xmlNamespace: https://formexamples.github.io/anaesthetic-record/xml
+tags:
+  - name: anaesthetic-record
+    description: Anaesthetic Record form
 paths:
   /api/anaesthetic-record/anaesthetic_record_grade_rules:
     get:
       summary: List AnaestheticRecordGradeRule records
+      tags: [anaesthetic-record]
       operationId: listAnaestheticRecordGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new AnaestheticRecordGradeRule
+      tags: [anaesthetic-record]
       operationId: createAnaestheticRecordGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one AnaestheticRecordGradeRule by id
+      tags: [anaesthetic-record]
       operationId: getAnaestheticRecordGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing AnaestheticRecordGradeRule
+      tags: [anaesthetic-record]
       operationId: updateAnaestheticRecordGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing AnaestheticRecordGradeRule
+      tags: [anaesthetic-record]
       operationId: replaceAnaestheticRecordGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AnaestheticRecordGradeRule
+      tags: [anaesthetic-record]
       operationId: deleteAnaestheticRecordGradeRule
       responses:
         "200":

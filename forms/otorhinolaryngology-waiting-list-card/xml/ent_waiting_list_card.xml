@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ent_waiting_list_card SYSTEM "ent_waiting_list_card.dtd">
-<ent_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<ent_waiting_list_card xmlns="https://formexamples.github.io/otorhinolaryngology-waiting-list-card/xml">
+<id>93bc230b-8ece-578d-8d6c-ab87766a6153</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>9e4a1ed5-a17c-527f-8eca-7d9357a3be44</patient_id>
+<practitioner_id>514fc0b4-6545-5047-92d8-b40d6624cdb1</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

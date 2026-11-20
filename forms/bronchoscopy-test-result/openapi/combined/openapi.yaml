@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Bronchoscopy Test Result form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: bronchoscopy-test-result
+  apiPrefix: /api/bronchoscopy-test-result/
+  sqlSchema: bronchoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/bronchoscopy-test-result/xml
+tags:
+- name: bronchoscopy-test-result
+  description: Bronchoscopy Test Result form
 paths:
   /api/bronchoscopy-test-result/bronchoscopy_test_result_grade_flags:
     get:
       summary: List BronchoscopyTestResultGradeFlag records
+      tags:
+      - bronchoscopy-test-result
       operationId: listBronchoscopyTestResultGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BronchoscopyTestResultGradeFlag
+      tags:
+      - bronchoscopy-test-result
       operationId: createBronchoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BronchoscopyTestResultGradeFlag by id
+      tags:
+      - bronchoscopy-test-result
       operationId: getBronchoscopyTestResultGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BronchoscopyTestResultGradeFlag
+      tags:
+      - bronchoscopy-test-result
       operationId: updateBronchoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BronchoscopyTestResultGradeFlag
+      tags:
+      - bronchoscopy-test-result
       operationId: replaceBronchoscopyTestResultGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BronchoscopyTestResultGradeFlag
+      tags:
+      - bronchoscopy-test-result
       operationId: deleteBronchoscopyTestResultGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/bronchoscopy-test-result/bronchoscopy_test_result_grade_rules:
     get:
       summary: List BronchoscopyTestResultGradeRule records
+      tags:
+      - bronchoscopy-test-result
       operationId: listBronchoscopyTestResultGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BronchoscopyTestResultGradeRule
+      tags:
+      - bronchoscopy-test-result
       operationId: createBronchoscopyTestResultGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BronchoscopyTestResultGradeRule by id
+      tags:
+      - bronchoscopy-test-result
       operationId: getBronchoscopyTestResultGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BronchoscopyTestResultGradeRule
+      tags:
+      - bronchoscopy-test-result
       operationId: updateBronchoscopyTestResultGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BronchoscopyTestResultGradeRule
+      tags:
+      - bronchoscopy-test-result
       operationId: replaceBronchoscopyTestResultGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BronchoscopyTestResultGradeRule
+      tags:
+      - bronchoscopy-test-result
       operationId: deleteBronchoscopyTestResultGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/bronchoscopy-test-result/bronchoscopy_test_result_grades:
     get:
       summary: List BronchoscopyTestResultGrade records
+      tags:
+      - bronchoscopy-test-result
       operationId: listBronchoscopyTestResultGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BronchoscopyTestResultGrade
+      tags:
+      - bronchoscopy-test-result
       operationId: createBronchoscopyTestResultGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BronchoscopyTestResultGrade by id
+      tags:
+      - bronchoscopy-test-result
       operationId: getBronchoscopyTestResultGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BronchoscopyTestResultGrade
+      tags:
+      - bronchoscopy-test-result
       operationId: updateBronchoscopyTestResultGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BronchoscopyTestResultGrade
+      tags:
+      - bronchoscopy-test-result
       operationId: replaceBronchoscopyTestResultGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BronchoscopyTestResultGrade
+      tags:
+      - bronchoscopy-test-result
       operationId: deleteBronchoscopyTestResultGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/bronchoscopy-test-result/bronchoscopy_test_results:
     get:
       summary: List BronchoscopyTestResult records
+      tags:
+      - bronchoscopy-test-result
       operationId: listBronchoscopyTestResult
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BronchoscopyTestResult
+      tags:
+      - bronchoscopy-test-result
       operationId: createBronchoscopyTestResult
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one BronchoscopyTestResult by id
+      tags:
+      - bronchoscopy-test-result
       operationId: getBronchoscopyTestResult
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BronchoscopyTestResult
+      tags:
+      - bronchoscopy-test-result
       operationId: updateBronchoscopyTestResult
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing BronchoscopyTestResult
+      tags:
+      - bronchoscopy-test-result
       operationId: replaceBronchoscopyTestResult
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a BronchoscopyTestResult
+      tags:
+      - bronchoscopy-test-result
       operationId: deleteBronchoscopyTestResult
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/bronchoscopy-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - bronchoscopy-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - bronchoscopy-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - bronchoscopy-test-result
       operationId: getClinician
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - bronchoscopy-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - bronchoscopy-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - bronchoscopy-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - bronchoscopy-test-result
   /api/bronchoscopy-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - bronchoscopy-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - bronchoscopy-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - bronchoscopy-test-result
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - bronchoscopy-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - bronchoscopy-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - bronchoscopy-test-result
       operationId: deletePatient
       responses:
         '200':

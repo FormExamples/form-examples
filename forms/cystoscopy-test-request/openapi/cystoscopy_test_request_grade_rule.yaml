@@ -5,10 +5,19 @@ info:
   title: Cystoscopy Test Request — CystoscopyTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / urgency / completeness / risk rule that fired for this request.
+x-namespace:
+  form: cystoscopy-test-request
+  apiPrefix: /api/cystoscopy-test-request/
+  sqlSchema: cystoscopy_test_request
+  xmlNamespace: https://formexamples.github.io/cystoscopy-test-request/xml
+tags:
+  - name: cystoscopy-test-request
+    description: Cystoscopy Test Request form
 paths:
   /api/cystoscopy-test-request/cystoscopy_test_request_grade_rules:
     get:
       summary: List CystoscopyTestRequestGradeRule records
+      tags: [cystoscopy-test-request]
       operationId: listCystoscopyTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CystoscopyTestRequestGradeRule
+      tags: [cystoscopy-test-request]
       operationId: createCystoscopyTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CystoscopyTestRequestGradeRule by id
+      tags: [cystoscopy-test-request]
       operationId: getCystoscopyTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CystoscopyTestRequestGradeRule
+      tags: [cystoscopy-test-request]
       operationId: updateCystoscopyTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CystoscopyTestRequestGradeRule
+      tags: [cystoscopy-test-request]
       operationId: replaceCystoscopyTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CystoscopyTestRequestGradeRule
+      tags: [cystoscopy-test-request]
       operationId: deleteCystoscopyTestRequestGradeRule
       responses:
         "200":

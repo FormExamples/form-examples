@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE gastro_waiting_list_card_grade_rule SYSTEM "gastro_waiting_list_card_grade_rule.dtd">
-<gastro_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<gastro_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/gastroenterology-waiting-list-card/xml">
+<id>402395e5-ad1d-571b-872f-0880cda7c689</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<gastro_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</gastro_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<gastro_waiting_list_card_grade_id>0f8fd20c-c688-5d96-86a3-771de8d6cb10</gastro_waiting_list_card_grade_id>
+<rule_id>bf422559-e7b5-52db-9dc0-e781d6d8e212</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

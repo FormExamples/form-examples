@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_birth_registration_grade_flag SYSTEM "united_kingdom_birth_registration_grade_flag.dtd">
-<united_kingdom_birth_registration_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<united_kingdom_birth_registration_grade_flag xmlns="https://formexamples.github.io/united-kingdom-birth-registration/xml">
+<id>770b715c-f1df-5b37-a15d-4f663be7b516</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<united_kingdom_birth_registration_grade_id>880e8400-e29b-41d4-a716-446655440003</united_kingdom_birth_registration_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<united_kingdom_birth_registration_grade_id>e4ff928a-f1bb-5bb7-9ff5-08209825a2c2</united_kingdom_birth_registration_grade_id>
+<flag_id>d27f54b0-1a27-5f15-9cb1-a3fd99ccb297</flag_id>
 <category>out-of-scope</category>
 <priority>low</priority>
 <description>Example text.</description>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE patient_allergy SYSTEM "patient_allergy.dtd">
-<patient_allergy>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<patient_allergy xmlns="https://formexamples.github.io/dietic-assessment/xml">
+<id>41224454-8d03-57f3-a075-5e0d193c4e0f</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<allergy_id>990e8400-e29b-41d4-a716-446655440004</allergy_id>
+<patient_id>f299e76b-a019-538e-8454-af01a34eb133</patient_id>
+<allergy_id>e1b7e726-c141-5f50-9c7a-cc062a1ebd44</allergy_id>
 <reaction>Urticaria</reaction>
 <severity>mild</severity>
 <kind>allergy</kind>

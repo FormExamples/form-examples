@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pulmonary_embolism_rule_out_criteria_grade SYSTEM "pulmonary_embolism_rule_out_criteria_grade.dtd">
-<pulmonary_embolism_rule_out_criteria_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<pulmonary_embolism_rule_out_criteria_grade xmlns="https://formexamples.github.io/pulmonary-embolism-rule-out-criteria/xml">
+<id>04de5b98-a892-5c10-b1a1-7237656ce6b7</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pulmonary_embolism_rule_out_criteria_id>770e8400-e29b-41d4-a716-446655440002</pulmonary_embolism_rule_out_criteria_id>
+<pulmonary_embolism_rule_out_criteria_id>547b9b21-3d26-5acb-8410-48c2484e5090</pulmonary_embolism_rule_out_criteria_id>
 <classification>perc-negative</classification>
 <all_criteria_satisfied>yes</all_criteria_satisfied>
 <applicable>yes</applicable>

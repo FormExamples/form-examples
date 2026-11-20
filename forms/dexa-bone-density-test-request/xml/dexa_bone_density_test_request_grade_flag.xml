@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dexa_bone_density_test_request_grade_flag SYSTEM "dexa_bone_density_test_request_grade_flag.dtd">
-<dexa_bone_density_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<dexa_bone_density_test_request_grade_flag xmlns="https://formexamples.github.io/dexa-bone-density-test-request/xml">
+<id>d1ab1ad2-73ca-52a1-85eb-9402680ddc58</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<dexa_bone_density_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</dexa_bone_density_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<dexa_bone_density_test_request_grade_id>79edff67-1b1a-58ba-8516-8b9be93d90b7</dexa_bone_density_test_request_grade_id>
+<flag_id>8e6642a3-451e-5e4a-badf-ff79a11ae565</flag_id>
 <category>recent-fragility-fracture</category>
 <priority>low</priority>
 <description>Example text.</description>

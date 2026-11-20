@@ -1,4 +1,5 @@
 <!ELEMENT testator (id,created_at,updated_at,deleted_at,name,birth_date,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode)>
+<!ATTLIST testator xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-last-will-and-testament/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Partogram (Partograph) form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: partogram
+  apiPrefix: /api/partogram/
+  sqlSchema: partogram
+  xmlNamespace: https://formexamples.github.io/partogram/xml
+tags:
+- name: partogram
+  description: Partogram (Partograph) form
 paths:
   /api/partogram/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - partogram
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - partogram
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - partogram
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - partogram
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - partogram
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - partogram
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - partogram
   /api/partogram/partogram_grade_flags:
     get:
       summary: List PartogramGradeFlag records
+      tags:
+      - partogram
       operationId: listPartogramGradeFlag
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PartogramGradeFlag
+      tags:
+      - partogram
       operationId: createPartogramGradeFlag
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PartogramGradeFlag by id
+      tags:
+      - partogram
       operationId: getPartogramGradeFlag
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PartogramGradeFlag
+      tags:
+      - partogram
       operationId: updatePartogramGradeFlag
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PartogramGradeFlag
+      tags:
+      - partogram
       operationId: replacePartogramGradeFlag
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PartogramGradeFlag
+      tags:
+      - partogram
       operationId: deletePartogramGradeFlag
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/partogram/partogram_grade_rules:
     get:
       summary: List PartogramGradeRule records
+      tags:
+      - partogram
       operationId: listPartogramGradeRule
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PartogramGradeRule
+      tags:
+      - partogram
       operationId: createPartogramGradeRule
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PartogramGradeRule by id
+      tags:
+      - partogram
       operationId: getPartogramGradeRule
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PartogramGradeRule
+      tags:
+      - partogram
       operationId: updatePartogramGradeRule
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PartogramGradeRule
+      tags:
+      - partogram
       operationId: replacePartogramGradeRule
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PartogramGradeRule
+      tags:
+      - partogram
       operationId: deletePartogramGradeRule
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/partogram/partogram_grades:
     get:
       summary: List PartogramGrade records
+      tags:
+      - partogram
       operationId: listPartogramGrade
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PartogramGrade
+      tags:
+      - partogram
       operationId: createPartogramGrade
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PartogramGrade by id
+      tags:
+      - partogram
       operationId: getPartogramGrade
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PartogramGrade
+      tags:
+      - partogram
       operationId: updatePartogramGrade
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PartogramGrade
+      tags:
+      - partogram
       operationId: replacePartogramGrade
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PartogramGrade
+      tags:
+      - partogram
       operationId: deletePartogramGrade
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/partogram/partogram_observations:
     get:
       summary: List PartogramObservation records
+      tags:
+      - partogram
       operationId: listPartogramObservation
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PartogramObservation
+      tags:
+      - partogram
       operationId: createPartogramObservation
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PartogramObservation by id
+      tags:
+      - partogram
       operationId: getPartogramObservation
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PartogramObservation
+      tags:
+      - partogram
       operationId: updatePartogramObservation
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PartogramObservation
+      tags:
+      - partogram
       operationId: replacePartogramObservation
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PartogramObservation
+      tags:
+      - partogram
       operationId: deletePartogramObservation
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/partogram/partograms:
     get:
       summary: List Partogram records
+      tags:
+      - partogram
       operationId: listPartogram
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Partogram
+      tags:
+      - partogram
       operationId: createPartogram
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Partogram by id
+      tags:
+      - partogram
       operationId: getPartogram
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Partogram
+      tags:
+      - partogram
       operationId: updatePartogram
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Partogram
+      tags:
+      - partogram
       operationId: replacePartogram
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Partogram
+      tags:
+      - partogram
       operationId: deletePartogram
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/partogram/patients:
     get:
       summary: List Patient records
+      tags:
+      - partogram
       operationId: listPatient
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - partogram
       operationId: createPatient
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - partogram
       operationId: getPatient
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - partogram
       operationId: updatePatient
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - partogram
       operationId: replacePatient
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - partogram
       operationId: deletePatient
       responses:
         '200':

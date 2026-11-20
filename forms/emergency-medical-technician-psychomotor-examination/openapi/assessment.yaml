@@ -5,10 +5,19 @@ info:
   title: Emergency Medical Technician Psychomotor Examination — Assessment
   version: 1.0.0
   description: Top-level assessment instance for emergency-medical-technician-psychomotor-examination. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: emergency-medical-technician-psychomotor-examination
+  apiPrefix: /api/emergency-medical-technician-psychomotor-examination/
+  sqlSchema: emergency_medical_technician_psychomotor_examination
+  xmlNamespace: https://formexamples.github.io/emergency-medical-technician-psychomotor-examination/xml
+tags:
+  - name: emergency-medical-technician-psychomotor-examination
+    description: Emergency Medical Technician Psychomotor Examination form
 paths:
   /api/emergency-medical-technician-psychomotor-examination/assessments:
     get:
       summary: List Assessment records
+      tags: [emergency-medical-technician-psychomotor-examination]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [emergency-medical-technician-psychomotor-examination]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [emergency-medical-technician-psychomotor-examination]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [emergency-medical-technician-psychomotor-examination]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [emergency-medical-technician-psychomotor-examination]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [emergency-medical-technician-psychomotor-examination]
       operationId: deleteAssessment
       responses:
         "200":

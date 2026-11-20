@@ -5,10 +5,19 @@ info:
   title: Corrected Calcium Calculator — Clinician
   version: 1.0.0
   description: Clinician identifying information for the staff recording a corrected-calcium calculation.
+x-namespace:
+  form: corrected-calcium-calculator
+  apiPrefix: /api/corrected-calcium-calculator/
+  sqlSchema: corrected_calcium_calculator
+  xmlNamespace: https://formexamples.github.io/corrected-calcium-calculator/xml
+tags:
+  - name: corrected-calcium-calculator
+    description: Corrected Calcium Calculator form
 paths:
   /api/corrected-calcium-calculator/clinicians:
     get:
       summary: List Clinician records
+      tags: [corrected-calcium-calculator]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [corrected-calcium-calculator]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [corrected-calcium-calculator]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [corrected-calcium-calculator]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [corrected-calcium-calculator]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [corrected-calcium-calculator]
       operationId: deleteClinician
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Cervical Screening — CervicalScreeningGradeFlag
   version: 1.0.0
   description: Safety flags that fire independently of the result class, with priority and a suggested action for the sample-taker or screening service.
+x-namespace:
+  form: cervical-screening
+  apiPrefix: /api/cervical-screening/
+  sqlSchema: cervical_screening
+  xmlNamespace: https://formexamples.github.io/cervical-screening/xml
+tags:
+  - name: cervical-screening
+    description: Cervical Screening form
 paths:
   /api/cervical-screening/cervical_screening_grade_flags:
     get:
       summary: List CervicalScreeningGradeFlag records
+      tags: [cervical-screening]
       operationId: listCervicalScreeningGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CervicalScreeningGradeFlag
+      tags: [cervical-screening]
       operationId: createCervicalScreeningGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CervicalScreeningGradeFlag by id
+      tags: [cervical-screening]
       operationId: getCervicalScreeningGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CervicalScreeningGradeFlag
+      tags: [cervical-screening]
       operationId: updateCervicalScreeningGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CervicalScreeningGradeFlag
+      tags: [cervical-screening]
       operationId: replaceCervicalScreeningGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CervicalScreeningGradeFlag
+      tags: [cervical-screening]
       operationId: deleteCervicalScreeningGradeFlag
       responses:
         "200":

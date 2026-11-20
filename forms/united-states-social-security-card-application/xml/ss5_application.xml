@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ss5_application SYSTEM "ss5_application.dtd">
-<ss5_application>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<ss5_application xmlns="https://formexamples.github.io/united-states-social-security-card-application/xml">
+<id>9a106de3-99a3-5d61-bf0d-9be00005e7c5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>7ae79a08-81fe-5cbf-b28b-5171b897f048</patient_id>
+<clinician_id>cde501a6-efcc-5e1b-886b-ffb2d0277c28</clinician_id>
 <application_date>2026-01-15</application_date>
 <request_type>original</request_type>
 <channel>in-person</channel>

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Neurosurgery Waiting List Card form, merged from
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: neurosurgery-waiting-list-card
+  apiPrefix: /api/neurosurgery-waiting-list-card/
+  sqlSchema: neurosurgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/neurosurgery-waiting-list-card/xml
+tags:
+- name: neurosurgery-waiting-list-card
+  description: Neurosurgery Waiting List Card form
 paths:
   /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_card_appointments:
     get:
       summary: List NeurosurgeryWaitingListCardAppointment records
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: listNeurosurgeryWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurosurgeryWaitingListCardAppointment
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: createNeurosurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NeurosurgeryWaitingListCardAppointment by id
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: getNeurosurgeryWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurosurgeryWaitingListCardAppointment
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: updateNeurosurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NeurosurgeryWaitingListCardAppointment
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: replaceNeurosurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NeurosurgeryWaitingListCardAppointment
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: deleteNeurosurgeryWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_card_grade_flags:
     get:
       summary: List NeurosurgeryWaitingListCardGradeFlag records
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: listNeurosurgeryWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurosurgeryWaitingListCardGradeFlag
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: createNeurosurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NeurosurgeryWaitingListCardGradeFlag by id
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: getNeurosurgeryWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurosurgeryWaitingListCardGradeFlag
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: updateNeurosurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NeurosurgeryWaitingListCardGradeFlag
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: replaceNeurosurgeryWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NeurosurgeryWaitingListCardGradeFlag
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: deleteNeurosurgeryWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_card_grade_rules:
     get:
       summary: List NeurosurgeryWaitingListCardGradeRule records
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: listNeurosurgeryWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurosurgeryWaitingListCardGradeRule
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: createNeurosurgeryWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NeurosurgeryWaitingListCardGradeRule by id
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: getNeurosurgeryWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurosurgeryWaitingListCardGradeRule
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: updateNeurosurgeryWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NeurosurgeryWaitingListCardGradeRule
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: replaceNeurosurgeryWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NeurosurgeryWaitingListCardGradeRule
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: deleteNeurosurgeryWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_card_grades:
     get:
       summary: List NeurosurgeryWaitingListCardGrade records
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: listNeurosurgeryWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurosurgeryWaitingListCardGrade
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: createNeurosurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NeurosurgeryWaitingListCardGrade by id
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: getNeurosurgeryWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurosurgeryWaitingListCardGrade
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: updateNeurosurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NeurosurgeryWaitingListCardGrade
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: replaceNeurosurgeryWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NeurosurgeryWaitingListCardGrade
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: deleteNeurosurgeryWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_cards:
     get:
       summary: List NeurosurgeryWaitingListCard records
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: listNeurosurgeryWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurosurgeryWaitingListCard
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: createNeurosurgeryWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one NeurosurgeryWaitingListCard by id
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: getNeurosurgeryWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurosurgeryWaitingListCard
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: updateNeurosurgeryWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing NeurosurgeryWaitingListCard
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: replaceNeurosurgeryWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a NeurosurgeryWaitingListCard
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: deleteNeurosurgeryWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - neurosurgery-waiting-list-card
   /api/neurosurgery-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/neurosurgery-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - neurosurgery-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

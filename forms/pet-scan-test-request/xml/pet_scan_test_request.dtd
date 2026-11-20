@@ -1,4 +1,5 @@
 <!ELEMENT pet_scan_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,scan_type,primary_indication,clinical_question,relevant_history,primary_tumour_site,diabetes,blood_glucose_mmol_l,pregnancy_status,breastfeeding,egfr,recent_chemo_radiotherapy,claustrophobia,weight_kg,urgency,ir_me_r_justification,supervising_consultant,requester_contact,notes)>
+<!ATTLIST pet_scan_test_request xmlns CDATA #FIXED "https://formexamples.github.io/pet-scan-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

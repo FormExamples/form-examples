@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fluoroscopy_test_result_grade_rule SYSTEM "fluoroscopy_test_result_grade_rule.dtd">
-<fluoroscopy_test_result_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<fluoroscopy_test_result_grade_rule xmlns="https://formexamples.github.io/fluoroscopy-test-result/xml">
+<id>f0d2f19d-8544-56a3-9031-4f2fa3365363</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<fluoroscopy_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</fluoroscopy_test_result_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<fluoroscopy_test_result_grade_id>40e335b7-8f6e-558e-87dd-8a9ce0b35444</fluoroscopy_test_result_grade_id>
+<rule_id>199e5439-9c5a-5cd0-9184-ccc5e806295f</rule_id>
 <axis>classification</axis>
 <category>General</category>
 <description>Example text.</description>

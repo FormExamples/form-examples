@@ -5,10 +5,19 @@ info:
   title: Meeting — Meeting
   version: 1.0.0
   description: A meeting record captured via a 10-step single-page wizard. Holds the invitation metadata, the 250-character summary, and the sign-off. Variable-length collections live in child tables.
+x-namespace:
+  form: meeting
+  apiPrefix: /api/meeting/
+  sqlSchema: meeting
+  xmlNamespace: https://formexamples.github.io/meeting/xml
+tags:
+  - name: meeting
+    description: Meeting form
 paths:
   /api/meeting/meetings:
     get:
       summary: List Meeting records
+      tags: [meeting]
       operationId: listMeeting
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Meeting
+      tags: [meeting]
       operationId: createMeeting
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Meeting by id
+      tags: [meeting]
       operationId: getMeeting
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Meeting
+      tags: [meeting]
       operationId: updateMeeting
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Meeting
+      tags: [meeting]
       operationId: replaceMeeting
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Meeting
+      tags: [meeting]
       operationId: deleteMeeting
       responses:
         "200":

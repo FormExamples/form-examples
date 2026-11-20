@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE columbia_suicide_severity_rating_scale_grade SYSTEM "columbia_suicide_severity_rating_scale_grade.dtd">
-<columbia_suicide_severity_rating_scale_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<columbia_suicide_severity_rating_scale_grade xmlns="https://formexamples.github.io/columbia-suicide-severity-rating-scale/xml">
+<id>c1fedc31-72c0-56b3-a1b9-635b57722f64</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<columbia_suicide_severity_rating_scale_id>770e8400-e29b-41d4-a716-446655440002</columbia_suicide_severity_rating_scale_id>
+<columbia_suicide_severity_rating_scale_id>b6b753b9-9d25-5604-9d3c-ddd8cdb1387e</columbia_suicide_severity_rating_scale_id>
 <ideation_level>1</ideation_level>
 <any_behaviour>yes</any_behaviour>
 <recent_behaviour>yes</recent_behaviour>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE blood_test_request_grade SYSTEM "blood_test_request_grade.dtd">
-<blood_test_request_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<blood_test_request_grade xmlns="https://formexamples.github.io/blood-test-request/xml">
+<id>5ca5cad9-e64e-5fd9-934c-c5f727cef023</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<blood_test_request_id>770e8400-e29b-41d4-a716-446655440002</blood_test_request_id>
+<blood_test_request_id>5a88bf11-3f78-5098-a58f-01aa6d0c5457</blood_test_request_id>
 <appropriateness_score>5</appropriateness_score>
 <appropriateness_band>usually-appropriate</appropriateness_band>
 <preanalytical_band>ok</preanalytical_band>

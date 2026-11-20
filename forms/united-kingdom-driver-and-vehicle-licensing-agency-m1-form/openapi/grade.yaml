@@ -5,10 +5,19 @@ info:
   title: United Kingdom Driver And Vehicle Licensing Agency M1 Form — Grade
   version: 1.0.0
   description: Computed grading / scoring result. One-to-one child of assessment. The result_category column holds a form-specific label (e.g. Low, Moderate, High, or Complete/Incomplete); result_score is optional for numeric instruments.
+x-namespace:
+  form: united-kingdom-driver-and-vehicle-licensing-agency-m1-form
+  apiPrefix: /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/
+  sqlSchema: united_kingdom_driver_and_vehicle_licensing_agency_m1_form
+  xmlNamespace: https://formexamples.github.io/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/xml
+tags:
+  - name: united-kingdom-driver-and-vehicle-licensing-agency-m1-form
+    description: United Kingdom Driver And Vehicle Licensing Agency M1 Form form
 paths:
   /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/grades:
     get:
       summary: List Grade records
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-m1-form]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-m1-form]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-m1-form]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-m1-form]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-m1-form]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-m1-form]
       operationId: deleteGrade
       responses:
         "200":

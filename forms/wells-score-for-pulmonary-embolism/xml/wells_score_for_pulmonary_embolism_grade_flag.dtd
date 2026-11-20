@@ -1,4 +1,5 @@
 <!ELEMENT wells_score_for_pulmonary_embolism_grade_flag (id,created_at,updated_at,deleted_at,wells_score_for_pulmonary_embolism_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST wells_score_for_pulmonary_embolism_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/wells-score-for-pulmonary-embolism/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: Immunology Waiting List Card — ImmunologyWaitingListCardAppointment
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+x-namespace:
+  form: immunology-waiting-list-card
+  apiPrefix: /api/immunology-waiting-list-card/
+  sqlSchema: immunology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/immunology-waiting-list-card/xml
+tags:
+  - name: immunology-waiting-list-card
+    description: Immunology Waiting List Card form
 paths:
   /api/immunology-waiting-list-card/immunology_waiting_list_card_appointments:
     get:
       summary: List ImmunologyWaitingListCardAppointment records
+      tags: [immunology-waiting-list-card]
       operationId: listImmunologyWaitingListCardAppointment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ImmunologyWaitingListCardAppointment
+      tags: [immunology-waiting-list-card]
       operationId: createImmunologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ImmunologyWaitingListCardAppointment by id
+      tags: [immunology-waiting-list-card]
       operationId: getImmunologyWaitingListCardAppointment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ImmunologyWaitingListCardAppointment
+      tags: [immunology-waiting-list-card]
       operationId: updateImmunologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ImmunologyWaitingListCardAppointment
+      tags: [immunology-waiting-list-card]
       operationId: replaceImmunologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ImmunologyWaitingListCardAppointment
+      tags: [immunology-waiting-list-card]
       operationId: deleteImmunologyWaitingListCardAppointment
       responses:
         "200":

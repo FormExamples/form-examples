@@ -5,10 +5,19 @@ info:
   title: Obstetrics And Gynaecology Waiting List Card — ObgynWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a obstetrics and gynaecology waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: obstetrics-and-gynaecology-waiting-list-card
+  apiPrefix: /api/obstetrics-and-gynaecology-waiting-list-card/
+  sqlSchema: obstetrics_and_gynaecology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/obstetrics-and-gynaecology-waiting-list-card/xml
+tags:
+  - name: obstetrics-and-gynaecology-waiting-list-card
+    description: Obstetrics And Gynaecology Waiting List Card form
 paths:
   /api/obstetrics-and-gynaecology-waiting-list-card/obgyn_waiting_list_cards:
     get:
       summary: List ObgynWaitingListCard records
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: listObgynWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ObgynWaitingListCard
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: createObgynWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ObgynWaitingListCard by id
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: getObgynWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ObgynWaitingListCard
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: updateObgynWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ObgynWaitingListCard
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: replaceObgynWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ObgynWaitingListCard
+      tags: [obstetrics-and-gynaecology-waiting-list-card]
       operationId: deleteObgynWaitingListCard
       responses:
         "200":

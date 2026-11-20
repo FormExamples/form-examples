@@ -5,10 +5,19 @@ info:
   title: Holter Monitor Test Request — HolterMonitorTestRequest
   version: 1.0.0
   description: Ambulatory ECG (Holter) monitoring request (referral). Captures the requested monitor type, primary indication and clinical question, symptoms and symptom frequency, cardiac context and red flags, relevant history and medications, and triage urgency.
+x-namespace:
+  form: holter-monitor-test-request
+  apiPrefix: /api/holter-monitor-test-request/
+  sqlSchema: holter_monitor_test_request
+  xmlNamespace: https://formexamples.github.io/holter-monitor-test-request/xml
+tags:
+  - name: holter-monitor-test-request
+    description: Holter Monitor Test Request form
 paths:
   /api/holter-monitor-test-request/holter_monitor_test_requests:
     get:
       summary: List HolterMonitorTestRequest records
+      tags: [holter-monitor-test-request]
       operationId: listHolterMonitorTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HolterMonitorTestRequest
+      tags: [holter-monitor-test-request]
       operationId: createHolterMonitorTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HolterMonitorTestRequest by id
+      tags: [holter-monitor-test-request]
       operationId: getHolterMonitorTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HolterMonitorTestRequest
+      tags: [holter-monitor-test-request]
       operationId: updateHolterMonitorTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HolterMonitorTestRequest
+      tags: [holter-monitor-test-request]
       operationId: replaceHolterMonitorTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HolterMonitorTestRequest
+      tags: [holter-monitor-test-request]
       operationId: deleteHolterMonitorTestRequest
       responses:
         "200":

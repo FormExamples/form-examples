@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Medical Records Release Permission form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: medical-records-release-permission
+  apiPrefix: /api/medical-records-release-permission/
+  sqlSchema: medical_records_release_permission
+  xmlNamespace: https://formexamples.github.io/medical-records-release-permission/xml
+tags:
+- name: medical-records-release-permission
+  description: Medical Records Release Permission form
 paths:
   /api/medical-records-release-permission/authorization_periods:
     get:
       summary: List AuthorizationPeriod records
+      tags:
+      - medical-records-release-permission
       operationId: listAuthorizationPeriod
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AuthorizationPeriod
+      tags:
+      - medical-records-release-permission
       operationId: createAuthorizationPeriod
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AuthorizationPeriod by id
+      tags:
+      - medical-records-release-permission
       operationId: getAuthorizationPeriod
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AuthorizationPeriod
+      tags:
+      - medical-records-release-permission
       operationId: updateAuthorizationPeriod
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AuthorizationPeriod
+      tags:
+      - medical-records-release-permission
       operationId: replaceAuthorizationPeriod
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AuthorizationPeriod
+      tags:
+      - medical-records-release-permission
       operationId: deleteAuthorizationPeriod
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/medical-records-release-permission/authorized_recipients:
     get:
       summary: List AuthorizedRecipient records
+      tags:
+      - medical-records-release-permission
       operationId: listAuthorizedRecipient
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AuthorizedRecipient
+      tags:
+      - medical-records-release-permission
       operationId: createAuthorizedRecipient
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AuthorizedRecipient by id
+      tags:
+      - medical-records-release-permission
       operationId: getAuthorizedRecipient
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AuthorizedRecipient
+      tags:
+      - medical-records-release-permission
       operationId: updateAuthorizedRecipient
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AuthorizedRecipient
+      tags:
+      - medical-records-release-permission
       operationId: replaceAuthorizedRecipient
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AuthorizedRecipient
+      tags:
+      - medical-records-release-permission
       operationId: deleteAuthorizedRecipient
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/medical-records-release-permission/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - medical-records-release-permission
       operationId: listClinician
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - medical-records-release-permission
       operationId: createClinician
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - medical-records-release-permission
       operationId: getClinician
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - medical-records-release-permission
       operationId: updateClinician
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - medical-records-release-permission
       operationId: replaceClinician
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - medical-records-release-permission
       operationId: deleteClinician
       responses:
         '200':
@@ -757,9 +801,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - medical-records-release-permission
   /api/medical-records-release-permission/patient_rights:
     get:
       summary: List PatientRights records
+      tags:
+      - medical-records-release-permission
       operationId: listPatientRights
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PatientRights
+      tags:
+      - medical-records-release-permission
       operationId: createPatientRights
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PatientRights by id
+      tags:
+      - medical-records-release-permission
       operationId: getPatientRights
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PatientRights
+      tags:
+      - medical-records-release-permission
       operationId: updatePatientRights
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PatientRights
+      tags:
+      - medical-records-release-permission
       operationId: replacePatientRights
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PatientRights
+      tags:
+      - medical-records-release-permission
       operationId: deletePatientRights
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/medical-records-release-permission/patients:
     get:
       summary: List Patient records
+      tags:
+      - medical-records-release-permission
       operationId: listPatient
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - medical-records-release-permission
       operationId: createPatient
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - medical-records-release-permission
       operationId: getPatient
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - medical-records-release-permission
       operationId: updatePatient
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - medical-records-release-permission
       operationId: replacePatient
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - medical-records-release-permission
       operationId: deletePatient
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/medical-records-release-permission/purpose_of_releases:
     get:
       summary: List PurposeOfRelease records
+      tags:
+      - medical-records-release-permission
       operationId: listPurposeOfRelease
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PurposeOfRelease
+      tags:
+      - medical-records-release-permission
       operationId: createPurposeOfRelease
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PurposeOfRelease by id
+      tags:
+      - medical-records-release-permission
       operationId: getPurposeOfRelease
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PurposeOfRelease
+      tags:
+      - medical-records-release-permission
       operationId: updatePurposeOfRelease
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PurposeOfRelease
+      tags:
+      - medical-records-release-permission
       operationId: replacePurposeOfRelease
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PurposeOfRelease
+      tags:
+      - medical-records-release-permission
       operationId: deletePurposeOfRelease
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/medical-records-release-permission/records_to_releases:
     get:
       summary: List RecordsToRelease records
+      tags:
+      - medical-records-release-permission
       operationId: listRecordsToRelease
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RecordsToRelease
+      tags:
+      - medical-records-release-permission
       operationId: createRecordsToRelease
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RecordsToRelease by id
+      tags:
+      - medical-records-release-permission
       operationId: getRecordsToRelease
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RecordsToRelease
+      tags:
+      - medical-records-release-permission
       operationId: updateRecordsToRelease
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RecordsToRelease
+      tags:
+      - medical-records-release-permission
       operationId: replaceRecordsToRelease
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RecordsToRelease
+      tags:
+      - medical-records-release-permission
       operationId: deleteRecordsToRelease
       responses:
         '200':
@@ -1744,6 +1838,8 @@ paths:
   /api/medical-records-release-permission/release_forms:
     get:
       summary: List ReleaseForm records
+      tags:
+      - medical-records-release-permission
       operationId: listReleaseForm
       parameters:
       - name: limit
@@ -1796,6 +1892,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ReleaseForm
+      tags:
+      - medical-records-release-permission
       operationId: createReleaseForm
       requestBody:
         required: true
@@ -1849,6 +1947,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ReleaseForm by id
+      tags:
+      - medical-records-release-permission
       operationId: getReleaseForm
       responses:
         '200':
@@ -1876,6 +1976,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ReleaseForm
+      tags:
+      - medical-records-release-permission
       operationId: updateReleaseForm
       requestBody:
         required: true
@@ -1921,6 +2023,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ReleaseForm
+      tags:
+      - medical-records-release-permission
       operationId: replaceReleaseForm
       requestBody:
         required: true
@@ -1966,6 +2070,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ReleaseForm
+      tags:
+      - medical-records-release-permission
       operationId: deleteReleaseForm
       responses:
         '200':
@@ -1990,6 +2096,8 @@ paths:
   /api/medical-records-release-permission/restrictions_limitations:
     get:
       summary: List RestrictionsLimitations records
+      tags:
+      - medical-records-release-permission
       operationId: listRestrictionsLimitations
       parameters:
       - name: limit
@@ -2042,6 +2150,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RestrictionsLimitations
+      tags:
+      - medical-records-release-permission
       operationId: createRestrictionsLimitations
       requestBody:
         required: true
@@ -2095,6 +2205,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one RestrictionsLimitations by id
+      tags:
+      - medical-records-release-permission
       operationId: getRestrictionsLimitations
       responses:
         '200':
@@ -2122,6 +2234,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RestrictionsLimitations
+      tags:
+      - medical-records-release-permission
       operationId: updateRestrictionsLimitations
       requestBody:
         required: true
@@ -2167,6 +2281,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing RestrictionsLimitations
+      tags:
+      - medical-records-release-permission
       operationId: replaceRestrictionsLimitations
       requestBody:
         required: true
@@ -2212,6 +2328,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a RestrictionsLimitations
+      tags:
+      - medical-records-release-permission
       operationId: deleteRestrictionsLimitations
       responses:
         '200':
@@ -2236,6 +2354,8 @@ paths:
   /api/medical-records-release-permission/signature_consents:
     get:
       summary: List SignatureConsent records
+      tags:
+      - medical-records-release-permission
       operationId: listSignatureConsent
       parameters:
       - name: limit
@@ -2288,6 +2408,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new SignatureConsent
+      tags:
+      - medical-records-release-permission
       operationId: createSignatureConsent
       requestBody:
         required: true
@@ -2341,6 +2463,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one SignatureConsent by id
+      tags:
+      - medical-records-release-permission
       operationId: getSignatureConsent
       responses:
         '200':
@@ -2368,6 +2492,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing SignatureConsent
+      tags:
+      - medical-records-release-permission
       operationId: updateSignatureConsent
       requestBody:
         required: true
@@ -2413,6 +2539,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing SignatureConsent
+      tags:
+      - medical-records-release-permission
       operationId: replaceSignatureConsent
       requestBody:
         required: true
@@ -2458,6 +2586,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a SignatureConsent
+      tags:
+      - medical-records-release-permission
       operationId: deleteSignatureConsent
       responses:
         '200':
@@ -2482,6 +2612,8 @@ paths:
   /api/medical-records-release-permission/validation_additional_flags:
     get:
       summary: List ValidationAdditionalFlag records
+      tags:
+      - medical-records-release-permission
       operationId: listValidationAdditionalFlag
       parameters:
       - name: limit
@@ -2534,6 +2666,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ValidationAdditionalFlag
+      tags:
+      - medical-records-release-permission
       operationId: createValidationAdditionalFlag
       requestBody:
         required: true
@@ -2587,6 +2721,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ValidationAdditionalFlag by id
+      tags:
+      - medical-records-release-permission
       operationId: getValidationAdditionalFlag
       responses:
         '200':
@@ -2614,6 +2750,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ValidationAdditionalFlag
+      tags:
+      - medical-records-release-permission
       operationId: updateValidationAdditionalFlag
       requestBody:
         required: true
@@ -2659,6 +2797,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ValidationAdditionalFlag
+      tags:
+      - medical-records-release-permission
       operationId: replaceValidationAdditionalFlag
       requestBody:
         required: true
@@ -2704,6 +2844,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ValidationAdditionalFlag
+      tags:
+      - medical-records-release-permission
       operationId: deleteValidationAdditionalFlag
       responses:
         '200':
@@ -2728,6 +2870,8 @@ paths:
   /api/medical-records-release-permission/validation_fired_rules:
     get:
       summary: List ValidationFiredRule records
+      tags:
+      - medical-records-release-permission
       operationId: listValidationFiredRule
       parameters:
       - name: limit
@@ -2780,6 +2924,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ValidationFiredRule
+      tags:
+      - medical-records-release-permission
       operationId: createValidationFiredRule
       requestBody:
         required: true
@@ -2833,6 +2979,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ValidationFiredRule by id
+      tags:
+      - medical-records-release-permission
       operationId: getValidationFiredRule
       responses:
         '200':
@@ -2860,6 +3008,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ValidationFiredRule
+      tags:
+      - medical-records-release-permission
       operationId: updateValidationFiredRule
       requestBody:
         required: true
@@ -2905,6 +3055,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ValidationFiredRule
+      tags:
+      - medical-records-release-permission
       operationId: replaceValidationFiredRule
       requestBody:
         required: true
@@ -2950,6 +3102,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ValidationFiredRule
+      tags:
+      - medical-records-release-permission
       operationId: deleteValidationFiredRule
       responses:
         '200':
@@ -2974,6 +3128,8 @@ paths:
   /api/medical-records-release-permission/validation_results:
     get:
       summary: List ValidationResult records
+      tags:
+      - medical-records-release-permission
       operationId: listValidationResult
       parameters:
       - name: limit
@@ -3026,6 +3182,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ValidationResult
+      tags:
+      - medical-records-release-permission
       operationId: createValidationResult
       requestBody:
         required: true
@@ -3079,6 +3237,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ValidationResult by id
+      tags:
+      - medical-records-release-permission
       operationId: getValidationResult
       responses:
         '200':
@@ -3106,6 +3266,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ValidationResult
+      tags:
+      - medical-records-release-permission
       operationId: updateValidationResult
       requestBody:
         required: true
@@ -3151,6 +3313,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ValidationResult
+      tags:
+      - medical-records-release-permission
       operationId: replaceValidationResult
       requestBody:
         required: true
@@ -3196,6 +3360,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ValidationResult
+      tags:
+      - medical-records-release-permission
       operationId: deleteValidationResult
       responses:
         '200':

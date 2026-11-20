@@ -5,10 +5,19 @@ info:
   title: Anesthesiology Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: anesthesiology-assessment
+  apiPrefix: /api/anesthesiology-assessment/
+  sqlSchema: anesthesiology_assessment
+  xmlNamespace: https://formexamples.github.io/anesthesiology-assessment/xml
+tags:
+  - name: anesthesiology-assessment
+    description: Anesthesiology Assessment form
 paths:
   /api/anesthesiology-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [anesthesiology-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [anesthesiology-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [anesthesiology-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [anesthesiology-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [anesthesiology-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [anesthesiology-assessment]
       operationId: deleteClinician
       responses:
         "200":

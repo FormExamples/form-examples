@@ -1,4 +1,5 @@
 <!ELEMENT lpa_validation_result (id,created_at,updated_at,deleted_at,lpa_id,validity_band,composite_risk,computed_at)>
+<!ATTLIST lpa_validation_result xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

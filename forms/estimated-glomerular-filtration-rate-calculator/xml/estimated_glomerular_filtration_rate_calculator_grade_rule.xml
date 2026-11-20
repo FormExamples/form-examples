@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE estimated_glomerular_filtration_rate_calculator_grade_rule SYSTEM "estimated_glomerular_filtration_rate_calculator_grade_rule.dtd">
-<estimated_glomerular_filtration_rate_calculator_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<estimated_glomerular_filtration_rate_calculator_grade_rule xmlns="https://formexamples.github.io/estimated-glomerular-filtration-rate-calculator/xml">
+<id>7ce38535-c0c6-5fdc-a4d0-072f55d29538</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<estimated_glomerular_filtration_rate_calculator_grade_id>880e8400-e29b-41d4-a716-446655440003</estimated_glomerular_filtration_rate_calculator_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<estimated_glomerular_filtration_rate_calculator_grade_id>116dede8-8982-5e49-94ad-5f7454b5d96d</estimated_glomerular_filtration_rate_calculator_grade_id>
+<rule_id>83847e0e-7db7-5f18-8e7f-2edda4003f42</rule_id>
 <instrument>conversion</instrument>
 <band>G1</band>
 <category>General</category>

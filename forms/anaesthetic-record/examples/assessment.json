@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000099",
+    "id": "0158a6a5-0310-599b-9688-19a86d2f29a1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ab",
+    "id": "6c48e15f-9a21-5acf-9afc-eb20373d9799",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "anaestheticRecord": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b8",
+    "id": "5da47922-079c-5b0b-9836-13899ec0e64f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000000bc",
-    "clinicianId": "550e8400-e29b-41d4-a716-0000000000bd",
+    "patientId": "92bf84ba-7817-5d9f-86f5-76a96029c76d",
+    "clinicianId": "69d43c91-558d-5724-88e8-1db35338698a",
     "theatre": "",
     "operationDate": null,
     "anaesthetistName": "",
@@ -97,11 +97,11 @@
     "signedAt": null
   },
   "anaestheticRecordDrugAdministration": {
-    "id": "550e8400-e29b-41d4-a716-0000000000f4",
+    "id": "2adcdccf-0da2-5044-b56c-83e83299ff1e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "anaestheticRecordId": "550e8400-e29b-41d4-a716-0000000000f8",
+    "anaestheticRecordId": "5c894493-f249-55d0-a37f-a619f92138e0",
     "drugName": "",
     "dose": null,
     "doseUnit": "mg",
@@ -110,11 +110,11 @@
     "administeredAt": null
   },
   "anaestheticRecordTimedObservation": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ff",
+    "id": "382056b9-6331-5a4a-9784-18aace8df074",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "anaestheticRecordId": "550e8400-e29b-41d4-a716-000000000103",
+    "anaestheticRecordId": "39dbace3-6d65-56f5-9bd9-3d0d3163df9c",
     "observedAt": null,
     "systolicBloodPressure": null,
     "diastolicBloodPressure": null,
@@ -126,31 +126,31 @@
     "freshGasFlowL": null
   },
   "anaestheticRecordIntraOperativeEvent": {
-    "id": "550e8400-e29b-41d4-a716-00000000010d",
+    "id": "039fd38a-2425-5a7a-b100-12792137ff44",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "anaestheticRecordId": "550e8400-e29b-41d4-a716-000000000111",
+    "anaestheticRecordId": "1d6d654f-1548-59f9-a33a-72bf4f7322fd",
     "eventType": "desaturation",
     "occurredAt": null,
     "management": ""
   },
   "anaestheticRecordGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000115",
+    "id": "6884086a-3a86-5058-951c-25e8292cae48",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "anaestheticRecordId": "550e8400-e29b-41d4-a716-000000000119",
+    "anaestheticRecordId": "fff13afb-152f-5307-95ea-8ca5ca008591",
     "status": "complete",
     "completenessPercent": 50,
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "anaestheticRecordGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-00000000011d",
+    "id": "1e814976-b701-5ae0-b6a0-1ea48fba414f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "anaestheticRecordGradeId": "550e8400-e29b-41d4-a716-000000000121",
+    "anaestheticRecordGradeId": "2494c875-f60b-5776-bae0-70cc482001c0",
     "ruleId": "",
     "category": "",
     "criticality": "critical",
@@ -158,11 +158,11 @@
     "description": ""
   },
   "anaestheticRecordGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000127",
+    "id": "7142bf5a-ff66-5225-a7af-86eb02ffcc55",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "anaestheticRecordGradeId": "550e8400-e29b-41d4-a716-00000000012b",
+    "anaestheticRecordGradeId": "874bc8f2-f654-5677-afd9-db9355e8ae98",
     "flagId": "",
     "category": "who-checklist-not-done",
     "priority": "low",

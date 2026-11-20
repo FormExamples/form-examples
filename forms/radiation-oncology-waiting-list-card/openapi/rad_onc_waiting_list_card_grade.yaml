@@ -5,10 +5,19 @@ info:
   title: Radiation Oncology Waiting List Card — RadOncWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: radiation-oncology-waiting-list-card
+  apiPrefix: /api/radiation-oncology-waiting-list-card/
+  sqlSchema: radiation_oncology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/radiation-oncology-waiting-list-card/xml
+tags:
+  - name: radiation-oncology-waiting-list-card
+    description: Radiation Oncology Waiting List Card form
 paths:
   /api/radiation-oncology-waiting-list-card/rad_onc_waiting_list_card_grades:
     get:
       summary: List RadOncWaitingListCardGrade records
+      tags: [radiation-oncology-waiting-list-card]
       operationId: listRadOncWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RadOncWaitingListCardGrade
+      tags: [radiation-oncology-waiting-list-card]
       operationId: createRadOncWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RadOncWaitingListCardGrade by id
+      tags: [radiation-oncology-waiting-list-card]
       operationId: getRadOncWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RadOncWaitingListCardGrade
+      tags: [radiation-oncology-waiting-list-card]
       operationId: updateRadOncWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RadOncWaitingListCardGrade
+      tags: [radiation-oncology-waiting-list-card]
       operationId: replaceRadOncWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RadOncWaitingListCardGrade
+      tags: [radiation-oncology-waiting-list-card]
       operationId: deleteRadOncWaitingListCardGrade
       responses:
         "200":

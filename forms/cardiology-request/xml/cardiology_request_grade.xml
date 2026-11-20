@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cardiology_request_grade SYSTEM "cardiology_request_grade.dtd">
-<cardiology_request_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<cardiology_request_grade xmlns="https://formexamples.github.io/cardiology-request/xml">
+<id>5d9d001b-ccdc-5cc1-814a-b888b79a65fb</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cardiology_request_id>770e8400-e29b-41d4-a716-446655440002</cardiology_request_id>
+<cardiology_request_id>1575b3d7-139e-52e0-98e1-95643d72832d</cardiology_request_id>
 <appropriateness_band>usually-appropriate</appropriateness_band>
 <safety_band>ok</safety_band>
 <completeness_percent>1</completeness_percent>

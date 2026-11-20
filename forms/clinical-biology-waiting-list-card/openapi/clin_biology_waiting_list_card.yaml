@@ -5,10 +5,19 @@ info:
   title: Clinical Biology Waiting List Card — ClinBiologyWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a clinical biology waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: clinical-biology-waiting-list-card
+  apiPrefix: /api/clinical-biology-waiting-list-card/
+  sqlSchema: clinical_biology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/clinical-biology-waiting-list-card/xml
+tags:
+  - name: clinical-biology-waiting-list-card
+    description: Clinical Biology Waiting List Card form
 paths:
   /api/clinical-biology-waiting-list-card/clin_biology_waiting_list_cards:
     get:
       summary: List ClinBiologyWaitingListCard records
+      tags: [clinical-biology-waiting-list-card]
       operationId: listClinBiologyWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ClinBiologyWaitingListCard
+      tags: [clinical-biology-waiting-list-card]
       operationId: createClinBiologyWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ClinBiologyWaitingListCard by id
+      tags: [clinical-biology-waiting-list-card]
       operationId: getClinBiologyWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ClinBiologyWaitingListCard
+      tags: [clinical-biology-waiting-list-card]
       operationId: updateClinBiologyWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ClinBiologyWaitingListCard
+      tags: [clinical-biology-waiting-list-card]
       operationId: replaceClinBiologyWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ClinBiologyWaitingListCard
+      tags: [clinical-biology-waiting-list-card]
       operationId: deleteClinBiologyWaitingListCard
       responses:
         "200":

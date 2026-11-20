@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE x_ray_test_result_grade_flag SYSTEM "x_ray_test_result_grade_flag.dtd">
-<x_ray_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<x_ray_test_result_grade_flag xmlns="https://formexamples.github.io/x-ray-test-result/xml">
+<id>9304c713-5d50-5d23-98bc-153191f8f2ce</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<x_ray_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</x_ray_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<x_ray_test_result_grade_id>0e74e959-b0e3-581f-b261-f63509a81436</x_ray_test_result_grade_id>
+<flag_id>e0f24b56-b5d9-5789-88b8-1d329e09e01c</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

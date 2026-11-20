@@ -5,10 +5,19 @@ info:
   title: Issue Tracker — IssueTrackerGrade
   version: 1.0.0
   description: Computed and signed-off grading result for an issue. One-to-one with issue_tracker. Stores both engine-computed and triager-final composite priority, the seven dimension scores, and a triage recommendation.
+x-namespace:
+  form: issue-tracker
+  apiPrefix: /api/issue-tracker/
+  sqlSchema: issue_tracker
+  xmlNamespace: https://formexamples.github.io/issue-tracker/xml
+tags:
+  - name: issue-tracker
+    description: Issue Tracker form
 paths:
   /api/issue-tracker/issue_tracker_grades:
     get:
       summary: List IssueTrackerGrade records
+      tags: [issue-tracker]
       operationId: listIssueTrackerGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new IssueTrackerGrade
+      tags: [issue-tracker]
       operationId: createIssueTrackerGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one IssueTrackerGrade by id
+      tags: [issue-tracker]
       operationId: getIssueTrackerGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing IssueTrackerGrade
+      tags: [issue-tracker]
       operationId: updateIssueTrackerGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing IssueTrackerGrade
+      tags: [issue-tracker]
       operationId: replaceIssueTrackerGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a IssueTrackerGrade
+      tags: [issue-tracker]
       operationId: deleteIssueTrackerGrade
       responses:
         "200":

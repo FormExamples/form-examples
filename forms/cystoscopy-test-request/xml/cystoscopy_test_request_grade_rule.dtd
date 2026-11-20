@@ -1,4 +1,5 @@
 <!ELEMENT cystoscopy_test_request_grade_rule (id,created_at,updated_at,deleted_at,cystoscopy_test_request_grade_id,rule_id,axis,category,description)>
+<!ATTLIST cystoscopy_test_request_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/cystoscopy-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -5,10 +5,19 @@ info:
   title: United Kingdom Council Tax Discount Application — Occupant
   version: 1.0.0
   description: One person on the occupant roster of a Council Tax discount application, other than the applicant, with their status and whether evidence is held.
+x-namespace:
+  form: united-kingdom-council-tax-discount-application
+  apiPrefix: /api/united-kingdom-council-tax-discount-application/
+  sqlSchema: united_kingdom_council_tax_discount_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-council-tax-discount-application/xml
+tags:
+  - name: united-kingdom-council-tax-discount-application
+    description: United Kingdom Council Tax Discount Application form
 paths:
   /api/united-kingdom-council-tax-discount-application/occupants:
     get:
       summary: List Occupant records
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: listOccupant
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Occupant
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: createOccupant
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Occupant by id
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: getOccupant
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Occupant
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: updateOccupant
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Occupant
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: replaceOccupant
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Occupant
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: deleteOccupant
       responses:
         "200":

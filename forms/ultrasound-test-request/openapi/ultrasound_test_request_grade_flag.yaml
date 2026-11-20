@@ -5,10 +5,19 @@ info:
   title: Ultrasound Test Request — UltrasoundTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the imaging team.
+x-namespace:
+  form: ultrasound-test-request
+  apiPrefix: /api/ultrasound-test-request/
+  sqlSchema: ultrasound_test_request
+  xmlNamespace: https://formexamples.github.io/ultrasound-test-request/xml
+tags:
+  - name: ultrasound-test-request
+    description: Ultrasound Test Request form
 paths:
   /api/ultrasound-test-request/ultrasound_test_request_grade_flags:
     get:
       summary: List UltrasoundTestRequestGradeFlag records
+      tags: [ultrasound-test-request]
       operationId: listUltrasoundTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UltrasoundTestRequestGradeFlag
+      tags: [ultrasound-test-request]
       operationId: createUltrasoundTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UltrasoundTestRequestGradeFlag by id
+      tags: [ultrasound-test-request]
       operationId: getUltrasoundTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UltrasoundTestRequestGradeFlag
+      tags: [ultrasound-test-request]
       operationId: updateUltrasoundTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UltrasoundTestRequestGradeFlag
+      tags: [ultrasound-test-request]
       operationId: replaceUltrasoundTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UltrasoundTestRequestGradeFlag
+      tags: [ultrasound-test-request]
       operationId: deleteUltrasoundTestRequestGradeFlag
       responses:
         "200":

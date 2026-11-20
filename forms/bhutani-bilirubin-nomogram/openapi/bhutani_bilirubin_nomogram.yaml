@@ -5,10 +5,19 @@ info:
   title: Bhutani Bilirubin Nomogram — BhutaniBilirubinNomogram
   version: 1.0.0
   description: "Main Bhutani bilirubin nomogram assessment record: assessment context, infant identification, measurement inputs (age in hours, total serum bilirubin, measurement method, gestational age), and neonatal hyperbilirubinaemia risk factors."
+x-namespace:
+  form: bhutani-bilirubin-nomogram
+  apiPrefix: /api/bhutani-bilirubin-nomogram/
+  sqlSchema: bhutani_bilirubin_nomogram
+  xmlNamespace: https://formexamples.github.io/bhutani-bilirubin-nomogram/xml
+tags:
+  - name: bhutani-bilirubin-nomogram
+    description: Bhutani Bilirubin Nomogram form
 paths:
   /api/bhutani-bilirubin-nomogram/bhutani_bilirubin_nomograms:
     get:
       summary: List BhutaniBilirubinNomogram records
+      tags: [bhutani-bilirubin-nomogram]
       operationId: listBhutaniBilirubinNomogram
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BhutaniBilirubinNomogram
+      tags: [bhutani-bilirubin-nomogram]
       operationId: createBhutaniBilirubinNomogram
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one BhutaniBilirubinNomogram by id
+      tags: [bhutani-bilirubin-nomogram]
       operationId: getBhutaniBilirubinNomogram
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing BhutaniBilirubinNomogram
+      tags: [bhutani-bilirubin-nomogram]
       operationId: updateBhutaniBilirubinNomogram
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing BhutaniBilirubinNomogram
+      tags: [bhutani-bilirubin-nomogram]
       operationId: replaceBhutaniBilirubinNomogram
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BhutaniBilirubinNomogram
+      tags: [bhutani-bilirubin-nomogram]
       operationId: deleteBhutaniBilirubinNomogram
       responses:
         "200":

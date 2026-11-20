@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE soap_note_grade SYSTEM "soap_note_grade.dtd">
-<soap_note_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<soap_note_grade xmlns="https://formexamples.github.io/soap-note/xml">
+<id>0e76b5a0-06ae-5fa6-973c-14f03c7bea21</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<soap_note_id>770e8400-e29b-41d4-a716-446655440002</soap_note_id>
+<soap_note_id>4b0828a1-49af-5615-80f3-d922e94fc1b2</soap_note_id>
 <status>complete</status>
 <completeness_percent>1</completeness_percent>
 <subjective_present>yes</subjective_present>

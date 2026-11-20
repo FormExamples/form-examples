@@ -1,4 +1,5 @@
 <!ELEMENT vehicle_title_application (id,created_at,updated_at,deleted_at,applicant_id,lienholder_id,state,transaction_type,vehicle_condition,acquisition_method,out_of_state_transfer,previous_state,acquisition_date,application_date,owner_name,co_owner_name,co_owner_conjunction,owner_type,identification_type,identification_number,mailing_address,owner_signed,co_owner_signed,vin,model_year,make,model,body_type,vehicle_class,fuel_type,gvwr_lbs,color,odometer_reading,odometer_status,seller_odometer_statement,buyer_odometer_acknowledged,title_document,prior_title_surrendered,title_brand,brand_disclosed,nmvtis_check,brand_inspection,lien_status,lienholder_name,lien_electronic,insurance_proof,insurance_expiry_date,emissions_inspection,safety_inspection,vin_verification,purchase_price_usd,sales_tax_status,sales_tax_rate_percent,sales_tax_amount_usd,tax_exemption_reason,title_fee_usd,registration_fee_usd,fees_tendered,applicant_note)>
+<!ATTLIST vehicle_title_application xmlns CDATA #FIXED "https://formexamples.github.io/united-states-vehicle-title-and-registration-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

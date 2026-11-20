@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE angiography_test_result_grade SYSTEM "angiography_test_result_grade.dtd">
-<angiography_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<angiography_test_result_grade xmlns="https://formexamples.github.io/angiography-test-result/xml">
+<id>7ada6e7d-60e8-566c-ba14-ce8e0785d5d6</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<angiography_test_result_id>770e8400-e29b-41d4-a716-446655440002</angiography_test_result_id>
+<angiography_test_result_id>4a309c20-38ea-508b-8c37-d96d642d010f</angiography_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

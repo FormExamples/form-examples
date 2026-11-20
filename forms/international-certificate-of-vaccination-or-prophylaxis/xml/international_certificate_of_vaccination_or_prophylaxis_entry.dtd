@@ -1,4 +1,5 @@
 <!ELEMENT international_certificate_of_vaccination_or_prophylaxis_entry (id,created_at,updated_at,deleted_at,international_certificate_of_vaccination_or_prophylaxis_id,entry_index,disease,disease_other_label,disease_as_snomed_ct,disease_as_icd_11,vaccine_or_prophylaxis_name,vaccine_as_snomed_ct,vaccine_as_atc,manufacturer,manufacturer_country_as_iso_3166_1_alpha_3,batch_number,lot_expiry_date,route,anatomical_site,dose_amount_value,dose_amount_unit,dose_sequence,dose_sequence_total,vaccination_date,vaccination_time,administered_by_clinician_id,administering_clinician_signature_data_url,administering_clinician_professional_status,validity_starts_on,validity_ends_on,validity_is_lifetime,centre_id,centre_stamp_image_data_url,centre_stamp_applied,adverse_event,adverse_event_notes,entry_valid,entry_notes)>
+<!ATTLIST international_certificate_of_vaccination_or_prophylaxis_entry xmlns CDATA #FIXED "https://formexamples.github.io/international-certificate-of-vaccination-or-prophylaxis/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

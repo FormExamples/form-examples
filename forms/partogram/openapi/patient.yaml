@@ -5,10 +5,19 @@ info:
   title: Partogram — Patient
   version: 1.0.0
   description: Patient demographic information used by the partogram labour record.
+x-namespace:
+  form: partogram
+  apiPrefix: /api/partogram/
+  sqlSchema: partogram
+  xmlNamespace: https://formexamples.github.io/partogram/xml
+tags:
+  - name: partogram
+    description: Partogram form
 paths:
   /api/partogram/patients:
     get:
       summary: List Patient records
+      tags: [partogram]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [partogram]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [partogram]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [partogram]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [partogram]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [partogram]
       operationId: deletePatient
       responses:
         "200":

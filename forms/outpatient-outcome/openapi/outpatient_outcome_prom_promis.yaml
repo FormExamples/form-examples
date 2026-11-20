@@ -5,10 +5,19 @@ info:
   title: Outpatient Outcome — OutpatientOutcomePromPromis
   version: 1.0.0
   description: PROMIS Global Health Short Form v1.2 responses (10 items) and derived GPH/GMH T-scores. Public domain (NIH-funded). Scaffold uses linear approximation; production use requires official IRT calibration tables.
+x-namespace:
+  form: outpatient-outcome
+  apiPrefix: /api/outpatient-outcome/
+  sqlSchema: outpatient_outcome
+  xmlNamespace: https://formexamples.github.io/outpatient-outcome/xml
+tags:
+  - name: outpatient-outcome
+    description: Outpatient Outcome form
 paths:
   /api/outpatient-outcome/outpatient_outcome_prom_promis:
     get:
       summary: List OutpatientOutcomePromPromis records
+      tags: [outpatient-outcome]
       operationId: listOutpatientOutcomePromPromis
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OutpatientOutcomePromPromis
+      tags: [outpatient-outcome]
       operationId: createOutpatientOutcomePromPromis
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OutpatientOutcomePromPromis by id
+      tags: [outpatient-outcome]
       operationId: getOutpatientOutcomePromPromis
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OutpatientOutcomePromPromis
+      tags: [outpatient-outcome]
       operationId: updateOutpatientOutcomePromPromis
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OutpatientOutcomePromPromis
+      tags: [outpatient-outcome]
       operationId: replaceOutpatientOutcomePromPromis
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OutpatientOutcomePromPromis
+      tags: [outpatient-outcome]
       operationId: deleteOutpatientOutcomePromPromis
       responses:
         "200":

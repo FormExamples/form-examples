@@ -5,10 +5,19 @@ info:
   title: Ultrasound Test Result — Clinician
   version: 1.0.0
   description: Reporting clinician (sonographer or radiologist) who performs / interprets and signs the ultrasound result report.
+x-namespace:
+  form: ultrasound-test-result
+  apiPrefix: /api/ultrasound-test-result/
+  sqlSchema: ultrasound_test_result
+  xmlNamespace: https://formexamples.github.io/ultrasound-test-result/xml
+tags:
+  - name: ultrasound-test-result
+    description: Ultrasound Test Result form
 paths:
   /api/ultrasound-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags: [ultrasound-test-result]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [ultrasound-test-result]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [ultrasound-test-result]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [ultrasound-test-result]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [ultrasound-test-result]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [ultrasound-test-result]
       operationId: deleteClinician
       responses:
         "200":

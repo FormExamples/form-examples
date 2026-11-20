@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE biopsy_test_result SYSTEM "biopsy_test_result.dtd">
-<biopsy_test_result>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<biopsy_test_result xmlns="https://formexamples.github.io/biopsy-test-result/xml">
+<id>771b4e4f-2afe-5beb-972f-b5631dbaa06c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>4e2bb5aa-03a0-520d-8001-05cbd8ca059e</patient_id>
+<clinician_id>e1f94d22-b8cb-5308-a471-d4473070ab7b</clinician_id>
 <originating_request_reference></originating_request_reference>
 <report_status>preliminary</report_status>
 <performed_date>2026-01-15</performed_date>

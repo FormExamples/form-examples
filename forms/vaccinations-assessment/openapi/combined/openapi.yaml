@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Vaccinations Assessment form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: vaccinations-assessment
+  apiPrefix: /api/vaccinations-assessment/
+  sqlSchema: vaccinations_assessment
+  xmlNamespace: https://formexamples.github.io/vaccinations-assessment/xml
+tags:
+- name: vaccinations-assessment
+  description: Vaccinations Assessment form
 paths:
   /api/vaccinations-assessment/additional_flags:
     get:
       summary: List AdditionalFlag records
+      tags:
+      - vaccinations-assessment
       operationId: listAdditionalFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AdditionalFlag
+      tags:
+      - vaccinations-assessment
       operationId: createAdditionalFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AdditionalFlag by id
+      tags:
+      - vaccinations-assessment
       operationId: getAdditionalFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AdditionalFlag
+      tags:
+      - vaccinations-assessment
       operationId: updateAdditionalFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AdditionalFlag
+      tags:
+      - vaccinations-assessment
       operationId: replaceAdditionalFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AdditionalFlag
+      tags:
+      - vaccinations-assessment
       operationId: deleteAdditionalFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/vaccinations-assessment/administration_records:
     get:
       summary: List AdministrationRecord records
+      tags:
+      - vaccinations-assessment
       operationId: listAdministrationRecord
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AdministrationRecord
+      tags:
+      - vaccinations-assessment
       operationId: createAdministrationRecord
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AdministrationRecord by id
+      tags:
+      - vaccinations-assessment
       operationId: getAdministrationRecord
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AdministrationRecord
+      tags:
+      - vaccinations-assessment
       operationId: updateAdministrationRecord
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AdministrationRecord
+      tags:
+      - vaccinations-assessment
       operationId: replaceAdministrationRecord
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AdministrationRecord
+      tags:
+      - vaccinations-assessment
       operationId: deleteAdministrationRecord
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/vaccinations-assessment/adult_vaccinations:
     get:
       summary: List AdultVaccinations records
+      tags:
+      - vaccinations-assessment
       operationId: listAdultVaccinations
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AdultVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: createAdultVaccinations
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AdultVaccinations by id
+      tags:
+      - vaccinations-assessment
       operationId: getAdultVaccinations
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AdultVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: updateAdultVaccinations
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AdultVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: replaceAdultVaccinations
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AdultVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: deleteAdultVaccinations
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/vaccinations-assessment/assessments:
     get:
       summary: List Assessment records
+      tags:
+      - vaccinations-assessment
       operationId: listAssessment
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessment
+      tags:
+      - vaccinations-assessment
       operationId: createAssessment
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags:
+      - vaccinations-assessment
       operationId: getAssessment
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessment
+      tags:
+      - vaccinations-assessment
       operationId: updateAssessment
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Assessment
+      tags:
+      - vaccinations-assessment
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Assessment
+      tags:
+      - vaccinations-assessment
       operationId: deleteAssessment
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/vaccinations-assessment/childhood_vaccinations:
     get:
       summary: List ChildhoodVaccinations records
+      tags:
+      - vaccinations-assessment
       operationId: listChildhoodVaccinations
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ChildhoodVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: createChildhoodVaccinations
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ChildhoodVaccinations by id
+      tags:
+      - vaccinations-assessment
       operationId: getChildhoodVaccinations
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ChildhoodVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: updateChildhoodVaccinations
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ChildhoodVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: replaceChildhoodVaccinations
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ChildhoodVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: deleteChildhoodVaccinations
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/vaccinations-assessment/clinical_reviews:
     get:
       summary: List ClinicalReview records
+      tags:
+      - vaccinations-assessment
       operationId: listClinicalReview
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinicalReview
+      tags:
+      - vaccinations-assessment
       operationId: createClinicalReview
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ClinicalReview by id
+      tags:
+      - vaccinations-assessment
       operationId: getClinicalReview
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinicalReview
+      tags:
+      - vaccinations-assessment
       operationId: updateClinicalReview
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ClinicalReview
+      tags:
+      - vaccinations-assessment
       operationId: replaceClinicalReview
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ClinicalReview
+      tags:
+      - vaccinations-assessment
       operationId: deleteClinicalReview
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/vaccinations-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - vaccinations-assessment
       operationId: listClinician
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - vaccinations-assessment
       operationId: createClinician
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - vaccinations-assessment
       operationId: getClinician
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - vaccinations-assessment
       operationId: updateClinician
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - vaccinations-assessment
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - vaccinations-assessment
       operationId: deleteClinician
       responses:
         '200':
@@ -1733,6 +1825,8 @@ paths:
   /api/vaccinations-assessment/consent_informations:
     get:
       summary: List ConsentInformation records
+      tags:
+      - vaccinations-assessment
       operationId: listConsentInformation
       parameters:
       - name: limit
@@ -1785,6 +1879,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ConsentInformation
+      tags:
+      - vaccinations-assessment
       operationId: createConsentInformation
       requestBody:
         required: true
@@ -1838,6 +1934,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ConsentInformation by id
+      tags:
+      - vaccinations-assessment
       operationId: getConsentInformation
       responses:
         '200':
@@ -1865,6 +1963,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ConsentInformation
+      tags:
+      - vaccinations-assessment
       operationId: updateConsentInformation
       requestBody:
         required: true
@@ -1910,6 +2010,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ConsentInformation
+      tags:
+      - vaccinations-assessment
       operationId: replaceConsentInformation
       requestBody:
         required: true
@@ -1955,6 +2057,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ConsentInformation
+      tags:
+      - vaccinations-assessment
       operationId: deleteConsentInformation
       responses:
         '200':
@@ -1979,6 +2083,8 @@ paths:
   /api/vaccinations-assessment/contraindications_allergies:
     get:
       summary: List ContraindicationsAllergies records
+      tags:
+      - vaccinations-assessment
       operationId: listContraindicationsAllergies
       parameters:
       - name: limit
@@ -2031,6 +2137,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ContraindicationsAllergies
+      tags:
+      - vaccinations-assessment
       operationId: createContraindicationsAllergies
       requestBody:
         required: true
@@ -2084,6 +2192,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ContraindicationsAllergies by id
+      tags:
+      - vaccinations-assessment
       operationId: getContraindicationsAllergies
       responses:
         '200':
@@ -2111,6 +2221,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ContraindicationsAllergies
+      tags:
+      - vaccinations-assessment
       operationId: updateContraindicationsAllergies
       requestBody:
         required: true
@@ -2156,6 +2268,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ContraindicationsAllergies
+      tags:
+      - vaccinations-assessment
       operationId: replaceContraindicationsAllergies
       requestBody:
         required: true
@@ -2201,6 +2315,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ContraindicationsAllergies
+      tags:
+      - vaccinations-assessment
       operationId: deleteContraindicationsAllergies
       responses:
         '200':
@@ -2225,6 +2341,8 @@ paths:
   /api/vaccinations-assessment/fired_rules:
     get:
       summary: List FiredRule records
+      tags:
+      - vaccinations-assessment
       operationId: listFiredRule
       parameters:
       - name: limit
@@ -2277,6 +2395,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FiredRule
+      tags:
+      - vaccinations-assessment
       operationId: createFiredRule
       requestBody:
         required: true
@@ -2330,6 +2450,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one FiredRule by id
+      tags:
+      - vaccinations-assessment
       operationId: getFiredRule
       responses:
         '200':
@@ -2357,6 +2479,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FiredRule
+      tags:
+      - vaccinations-assessment
       operationId: updateFiredRule
       requestBody:
         required: true
@@ -2402,6 +2526,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing FiredRule
+      tags:
+      - vaccinations-assessment
       operationId: replaceFiredRule
       requestBody:
         required: true
@@ -2447,6 +2573,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a FiredRule
+      tags:
+      - vaccinations-assessment
       operationId: deleteFiredRule
       responses:
         '200':
@@ -2471,6 +2599,8 @@ paths:
   /api/vaccinations-assessment/grades:
     get:
       summary: List Grade records
+      tags:
+      - vaccinations-assessment
       operationId: listGrade
       parameters:
       - name: limit
@@ -2523,6 +2653,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Grade
+      tags:
+      - vaccinations-assessment
       operationId: createGrade
       requestBody:
         required: true
@@ -2576,6 +2708,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Grade by id
+      tags:
+      - vaccinations-assessment
       operationId: getGrade
       responses:
         '200':
@@ -2603,6 +2737,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Grade
+      tags:
+      - vaccinations-assessment
       operationId: updateGrade
       requestBody:
         required: true
@@ -2648,6 +2784,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Grade
+      tags:
+      - vaccinations-assessment
       operationId: replaceGrade
       requestBody:
         required: true
@@ -2693,6 +2831,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Grade
+      tags:
+      - vaccinations-assessment
       operationId: deleteGrade
       responses:
         '200':
@@ -2717,6 +2857,8 @@ paths:
   /api/vaccinations-assessment/immunization_histories:
     get:
       summary: List ImmunizationHistory records
+      tags:
+      - vaccinations-assessment
       operationId: listImmunizationHistory
       parameters:
       - name: limit
@@ -2769,6 +2911,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ImmunizationHistory
+      tags:
+      - vaccinations-assessment
       operationId: createImmunizationHistory
       requestBody:
         required: true
@@ -2822,6 +2966,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ImmunizationHistory by id
+      tags:
+      - vaccinations-assessment
       operationId: getImmunizationHistory
       responses:
         '200':
@@ -2849,6 +2995,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ImmunizationHistory
+      tags:
+      - vaccinations-assessment
       operationId: updateImmunizationHistory
       requestBody:
         required: true
@@ -2894,6 +3042,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ImmunizationHistory
+      tags:
+      - vaccinations-assessment
       operationId: replaceImmunizationHistory
       requestBody:
         required: true
@@ -2939,6 +3089,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ImmunizationHistory
+      tags:
+      - vaccinations-assessment
       operationId: deleteImmunizationHistory
       responses:
         '200':
@@ -2963,6 +3115,8 @@ paths:
   /api/vaccinations-assessment/occupational_vaccinations:
     get:
       summary: List OccupationalVaccinations records
+      tags:
+      - vaccinations-assessment
       operationId: listOccupationalVaccinations
       parameters:
       - name: limit
@@ -3015,6 +3169,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OccupationalVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: createOccupationalVaccinations
       requestBody:
         required: true
@@ -3068,6 +3224,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one OccupationalVaccinations by id
+      tags:
+      - vaccinations-assessment
       operationId: getOccupationalVaccinations
       responses:
         '200':
@@ -3095,6 +3253,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OccupationalVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: updateOccupationalVaccinations
       requestBody:
         required: true
@@ -3140,6 +3300,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing OccupationalVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: replaceOccupationalVaccinations
       requestBody:
         required: true
@@ -3185,6 +3347,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a OccupationalVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: deleteOccupationalVaccinations
       responses:
         '200':
@@ -3217,9 +3381,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - vaccinations-assessment
   /api/vaccinations-assessment/patients:
     get:
       summary: List Patient records
+      tags:
+      - vaccinations-assessment
       operationId: listPatient
       parameters:
       - name: limit
@@ -3272,6 +3440,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - vaccinations-assessment
       operationId: createPatient
       requestBody:
         required: true
@@ -3325,6 +3495,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - vaccinations-assessment
       operationId: getPatient
       responses:
         '200':
@@ -3352,6 +3524,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - vaccinations-assessment
       operationId: updatePatient
       requestBody:
         required: true
@@ -3397,6 +3571,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - vaccinations-assessment
       operationId: replacePatient
       requestBody:
         required: true
@@ -3442,6 +3618,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - vaccinations-assessment
       operationId: deletePatient
       responses:
         '200':
@@ -3466,6 +3644,8 @@ paths:
   /api/vaccinations-assessment/travel_vaccinations:
     get:
       summary: List TravelVaccinations records
+      tags:
+      - vaccinations-assessment
       operationId: listTravelVaccinations
       parameters:
       - name: limit
@@ -3518,6 +3698,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TravelVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: createTravelVaccinations
       requestBody:
         required: true
@@ -3571,6 +3753,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one TravelVaccinations by id
+      tags:
+      - vaccinations-assessment
       operationId: getTravelVaccinations
       responses:
         '200':
@@ -3598,6 +3782,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TravelVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: updateTravelVaccinations
       requestBody:
         required: true
@@ -3643,6 +3829,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing TravelVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: replaceTravelVaccinations
       requestBody:
         required: true
@@ -3688,6 +3876,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a TravelVaccinations
+      tags:
+      - vaccinations-assessment
       operationId: deleteTravelVaccinations
       responses:
         '200':

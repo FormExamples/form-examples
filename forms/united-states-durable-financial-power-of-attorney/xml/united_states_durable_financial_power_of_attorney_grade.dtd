@@ -1,4 +1,5 @@
 <!ELEMENT united_states_durable_financial_power_of_attorney_grade (id,created_at,updated_at,deleted_at,united_states_durable_financial_power_of_attorney_id,validity_class,governing_state,execution_risk_indicated,graded_at)>
+<!ATTLIST united_states_durable_financial_power_of_attorney_grade xmlns CDATA #FIXED "https://formexamples.github.io/united-states-durable-financial-power-of-attorney/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

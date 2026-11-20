@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pregnancy_ultrasound_test_request_grade_rule SYSTEM "pregnancy_ultrasound_test_request_grade_rule.dtd">
-<pregnancy_ultrasound_test_request_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<pregnancy_ultrasound_test_request_grade_rule xmlns="https://formexamples.github.io/pregnancy-ultrasound-test-request/xml">
+<id>8dc70b35-07b7-594e-b223-2df7d71f3d54</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pregnancy_ultrasound_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</pregnancy_ultrasound_test_request_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<pregnancy_ultrasound_test_request_grade_id>7369f3d0-6bfb-5f15-a991-0c218e802a77</pregnancy_ultrasound_test_request_grade_id>
+<rule_id>d159ce45-28d9-558e-b856-a1eed32ea5ed</rule_id>
 <axis>appropriateness</axis>
 <category>General</category>
 <description>Example text.</description>

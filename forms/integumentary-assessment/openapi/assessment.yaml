@@ -5,10 +5,19 @@ info:
   title: Integumentary Assessment — Assessment
   version: 1.0.0
   description: Top-level assessment instance for integumentary-assessment. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: integumentary-assessment
+  apiPrefix: /api/integumentary-assessment/
+  sqlSchema: integumentary_assessment
+  xmlNamespace: https://formexamples.github.io/integumentary-assessment/xml
+tags:
+  - name: integumentary-assessment
+    description: Integumentary Assessment form
 paths:
   /api/integumentary-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [integumentary-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [integumentary-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [integumentary-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [integumentary-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [integumentary-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [integumentary-assessment]
       operationId: deleteAssessment
       responses:
         "200":

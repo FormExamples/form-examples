@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE flagged_issue SYSTEM "flagged_issue.dtd">
-<flagged_issue>
-<id>bb1e8400-e29b-41d4-a716-446655440015</id>
+<flagged_issue xmlns="https://formexamples.github.io/casualty-card-form/xml">
+<id>2e6d57b5-e71d-552e-bd20-9d46d67262bd</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<news2_result_id>aa1e8400-e29b-41d4-a716-446655440014</news2_result_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<news2_result_id>daca3c37-2b0e-5edd-a0fe-a43d8e0d7e6f</news2_result_id>
+<flag_id>fb6e187d-827c-5de6-b412-13cd9db9b5c1</flag_id>
 <category>General</category>
 <message></message>
 <priority>high</priority>

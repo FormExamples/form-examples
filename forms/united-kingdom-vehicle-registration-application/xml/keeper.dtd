@@ -1,4 +1,5 @@
 <!ELEMENT keeper (id,created_at,updated_at,deleted_at,name,keeper_type,company_registration_number,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode)>
+<!ATTLIST keeper xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-vehicle-registration-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,4 +1,5 @@
 <!ELEMENT casualty_card_treatment (id,created_at,updated_at,deleted_at,casualty_card_id,oxygen_therapy_device,oxygen_therapy_flow_rate,tetanus_prophylaxis)>
+<!ATTLIST casualty_card_treatment xmlns CDATA #FIXED "https://formexamples.github.io/casualty-card-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

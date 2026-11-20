@@ -5,10 +5,19 @@ info:
   title: Emergency Department Triage Note — EmergencyDepartmentTriageNoteGradeRule
   version: 1.0.0
   description: "Audit trail of every classification rule that fired while selecting the MTS priority level: instrument, minimum level justified, category, and description."
+x-namespace:
+  form: emergency-department-triage-note
+  apiPrefix: /api/emergency-department-triage-note/
+  sqlSchema: emergency_department_triage_note
+  xmlNamespace: https://formexamples.github.io/emergency-department-triage-note/xml
+tags:
+  - name: emergency-department-triage-note
+    description: Emergency Department Triage Note form
 paths:
   /api/emergency-department-triage-note/emergency_department_triage_note_grade_rules:
     get:
       summary: List EmergencyDepartmentTriageNoteGradeRule records
+      tags: [emergency-department-triage-note]
       operationId: listEmergencyDepartmentTriageNoteGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EmergencyDepartmentTriageNoteGradeRule
+      tags: [emergency-department-triage-note]
       operationId: createEmergencyDepartmentTriageNoteGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EmergencyDepartmentTriageNoteGradeRule by id
+      tags: [emergency-department-triage-note]
       operationId: getEmergencyDepartmentTriageNoteGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EmergencyDepartmentTriageNoteGradeRule
+      tags: [emergency-department-triage-note]
       operationId: updateEmergencyDepartmentTriageNoteGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EmergencyDepartmentTriageNoteGradeRule
+      tags: [emergency-department-triage-note]
       operationId: replaceEmergencyDepartmentTriageNoteGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EmergencyDepartmentTriageNoteGradeRule
+      tags: [emergency-department-triage-note]
       operationId: deleteEmergencyDepartmentTriageNoteGradeRule
       responses:
         "200":

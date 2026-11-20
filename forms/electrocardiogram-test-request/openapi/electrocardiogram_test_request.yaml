@@ -5,10 +5,19 @@ info:
   title: Electrocardiogram Test Request — ElectrocardiogramTestRequest
   version: 1.0.0
   description: Electrocardiogram (ECG) test request (referral). Captures the requested ECG type, the clinical indication and question, relevant history and medications, symptoms / red flags, and triage urgency.
+x-namespace:
+  form: electrocardiogram-test-request
+  apiPrefix: /api/electrocardiogram-test-request/
+  sqlSchema: electrocardiogram_test_request
+  xmlNamespace: https://formexamples.github.io/electrocardiogram-test-request/xml
+tags:
+  - name: electrocardiogram-test-request
+    description: Electrocardiogram Test Request form
 paths:
   /api/electrocardiogram-test-request/electrocardiogram_test_requests:
     get:
       summary: List ElectrocardiogramTestRequest records
+      tags: [electrocardiogram-test-request]
       operationId: listElectrocardiogramTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ElectrocardiogramTestRequest
+      tags: [electrocardiogram-test-request]
       operationId: createElectrocardiogramTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ElectrocardiogramTestRequest by id
+      tags: [electrocardiogram-test-request]
       operationId: getElectrocardiogramTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ElectrocardiogramTestRequest
+      tags: [electrocardiogram-test-request]
       operationId: updateElectrocardiogramTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ElectrocardiogramTestRequest
+      tags: [electrocardiogram-test-request]
       operationId: replaceElectrocardiogramTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ElectrocardiogramTestRequest
+      tags: [electrocardiogram-test-request]
       operationId: deleteElectrocardiogramTestRequest
       responses:
         "200":

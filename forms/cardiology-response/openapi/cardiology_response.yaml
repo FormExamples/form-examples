@@ -5,10 +5,19 @@ info:
   title: Cardiology Response — CardiologyResponse
   version: 1.0.0
   description: Cardiology response (consult reply) authored by a cardiology clinician in answer to a cardiology referral. Captures the consultation type, clinical summary and examination, investigations performed, structured findings, the diagnosis, the key left-ventricular ejection fraction measurement, the management plan and follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: cardiology-response
+  apiPrefix: /api/cardiology-response/
+  sqlSchema: cardiology_response
+  xmlNamespace: https://formexamples.github.io/cardiology-response/xml
+tags:
+  - name: cardiology-response
+    description: Cardiology Response form
 paths:
   /api/cardiology-response/cardiology_responses:
     get:
       summary: List CardiologyResponse records
+      tags: [cardiology-response]
       operationId: listCardiologyResponse
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CardiologyResponse
+      tags: [cardiology-response]
       operationId: createCardiologyResponse
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CardiologyResponse by id
+      tags: [cardiology-response]
       operationId: getCardiologyResponse
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CardiologyResponse
+      tags: [cardiology-response]
       operationId: updateCardiologyResponse
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CardiologyResponse
+      tags: [cardiology-response]
       operationId: replaceCardiologyResponse
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CardiologyResponse
+      tags: [cardiology-response]
       operationId: deleteCardiologyResponse
       responses:
         "200":

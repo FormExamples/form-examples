@@ -1,4 +1,5 @@
 <!ELEMENT has_bled_score_for_major_bleeding_risk_grade (id,created_at,updated_at,deleted_at,has_bled_score_for_major_bleeding_risk_id,hypertension_points,renal_points,liver_points,stroke_points,bleeding_points,labile_inr_points,elderly_points,drugs_points,alcohol_points,total_score,risk_band,modifiable_factors,graded_at)>
+<!ATTLIST has_bled_score_for_major_bleeding_risk_grade xmlns CDATA #FIXED "https://formexamples.github.io/has-bled-score-for-major-bleeding-risk/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

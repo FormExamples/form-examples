@@ -5,10 +5,19 @@ info:
   title: Code Of Conduct Notice — GradingFiredRule
   version: 1.0.0
   description: Individual rules that evaluated to true during grading.
+x-namespace:
+  form: code-of-conduct-notice
+  apiPrefix: /api/code-of-conduct-notice/
+  sqlSchema: code_of_conduct_notice
+  xmlNamespace: https://formexamples.github.io/code-of-conduct-notice/xml
+tags:
+  - name: code-of-conduct-notice
+    description: Code Of Conduct Notice form
 paths:
   /api/code-of-conduct-notice/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags: [code-of-conduct-notice]
       operationId: listGradingFiredRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingFiredRule
+      tags: [code-of-conduct-notice]
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags: [code-of-conduct-notice]
       operationId: getGradingFiredRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingFiredRule
+      tags: [code-of-conduct-notice]
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingFiredRule
+      tags: [code-of-conduct-notice]
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingFiredRule
+      tags: [code-of-conduct-notice]
       operationId: deleteGradingFiredRule
       responses:
         "200":

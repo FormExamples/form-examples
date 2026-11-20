@@ -5,10 +5,19 @@ info:
   title: Child Pugh Score — ChildPughScoreGrade
   version: 1.0.0
   description: "Computed Child-Pugh grading result: per-parameter points, summed total (5-15), derived class (A/B/C), and banded survival and surgical-risk estimates."
+x-namespace:
+  form: child-pugh-score
+  apiPrefix: /api/child-pugh-score/
+  sqlSchema: child_pugh_score
+  xmlNamespace: https://formexamples.github.io/child-pugh-score/xml
+tags:
+  - name: child-pugh-score
+    description: Child Pugh Score form
 paths:
   /api/child-pugh-score/child_pugh_score_grades:
     get:
       summary: List ChildPughScoreGrade records
+      tags: [child-pugh-score]
       operationId: listChildPughScoreGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ChildPughScoreGrade
+      tags: [child-pugh-score]
       operationId: createChildPughScoreGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ChildPughScoreGrade by id
+      tags: [child-pugh-score]
       operationId: getChildPughScoreGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ChildPughScoreGrade
+      tags: [child-pugh-score]
       operationId: updateChildPughScoreGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ChildPughScoreGrade
+      tags: [child-pugh-score]
       operationId: replaceChildPughScoreGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ChildPughScoreGrade
+      tags: [child-pugh-score]
       operationId: deleteChildPughScoreGrade
       responses:
         "200":

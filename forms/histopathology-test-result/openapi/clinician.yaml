@@ -5,10 +5,19 @@ info:
   title: Histopathology Test Result — Clinician
   version: 1.0.0
   description: Reporting clinician (consultant histopathologist or biomedical scientist) who authors and signs the histopathology test result report.
+x-namespace:
+  form: histopathology-test-result
+  apiPrefix: /api/histopathology-test-result/
+  sqlSchema: histopathology_test_result
+  xmlNamespace: https://formexamples.github.io/histopathology-test-result/xml
+tags:
+  - name: histopathology-test-result
+    description: Histopathology Test Result form
 paths:
   /api/histopathology-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags: [histopathology-test-result]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [histopathology-test-result]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [histopathology-test-result]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [histopathology-test-result]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [histopathology-test-result]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [histopathology-test-result]
       operationId: deleteClinician
       responses:
         "200":

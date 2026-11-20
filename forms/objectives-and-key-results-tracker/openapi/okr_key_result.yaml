@@ -5,10 +5,19 @@ info:
   title: Objectives And Key Results Tracker — OkrKeyResult
   version: 1.0.0
   description: A Key Result for an objective. 1-5 rows per okr_objective; UNIQUE on (okr_objective_id, position).
+x-namespace:
+  form: objectives-and-key-results-tracker
+  apiPrefix: /api/objectives-and-key-results-tracker/
+  sqlSchema: objectives_and_key_results_tracker
+  xmlNamespace: https://formexamples.github.io/objectives-and-key-results-tracker/xml
+tags:
+  - name: objectives-and-key-results-tracker
+    description: Objectives And Key Results Tracker form
 paths:
   /api/objectives-and-key-results-tracker/okr_key_results:
     get:
       summary: List OkrKeyResult records
+      tags: [objectives-and-key-results-tracker]
       operationId: listOkrKeyResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new OkrKeyResult
+      tags: [objectives-and-key-results-tracker]
       operationId: createOkrKeyResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one OkrKeyResult by id
+      tags: [objectives-and-key-results-tracker]
       operationId: getOkrKeyResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing OkrKeyResult
+      tags: [objectives-and-key-results-tracker]
       operationId: updateOkrKeyResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing OkrKeyResult
+      tags: [objectives-and-key-results-tracker]
       operationId: replaceOkrKeyResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OkrKeyResult
+      tags: [objectives-and-key-results-tracker]
       operationId: deleteOkrKeyResult
       responses:
         "200":

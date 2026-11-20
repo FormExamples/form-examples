@@ -5,10 +5,19 @@ info:
   title: Mammography Test Request — MammographyTestRequest
   version: 1.0.0
   description: Breast mammography imaging request (referral). Captures the requested examination, the clinical indication and question, symptoms, breast history / risk factors, and triage urgency.
+x-namespace:
+  form: mammography-test-request
+  apiPrefix: /api/mammography-test-request/
+  sqlSchema: mammography_test_request
+  xmlNamespace: https://formexamples.github.io/mammography-test-request/xml
+tags:
+  - name: mammography-test-request
+    description: Mammography Test Request form
 paths:
   /api/mammography-test-request/mammography_test_requests:
     get:
       summary: List MammographyTestRequest records
+      tags: [mammography-test-request]
       operationId: listMammographyTestRequest
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MammographyTestRequest
+      tags: [mammography-test-request]
       operationId: createMammographyTestRequest
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MammographyTestRequest by id
+      tags: [mammography-test-request]
       operationId: getMammographyTestRequest
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MammographyTestRequest
+      tags: [mammography-test-request]
       operationId: updateMammographyTestRequest
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MammographyTestRequest
+      tags: [mammography-test-request]
       operationId: replaceMammographyTestRequest
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MammographyTestRequest
+      tags: [mammography-test-request]
       operationId: deleteMammographyTestRequest
       responses:
         "200":

@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000066",
+    "id": "0ee3c439-068f-578c-889a-5e1c88f2c1e9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000078",
+    "id": "5787d1f1-27d8-5a30-b803-34faa5185d06",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "zaritBurdenInterview": {
-    "id": "550e8400-e29b-41d4-a716-000000000085",
+    "id": "62854ef9-c76c-5c9f-a064-d3ecba644c04",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000089",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000008a",
+    "patientId": "3f59e23c-65dc-5f9b-8a42-fc99ed7eea7c",
+    "clinicianId": "7f37dc8b-899c-5943-a110-a468522eb714",
     "practitionerName": "",
     "practitionerRole": "clinician",
     "assessedAt": null,
@@ -77,11 +77,11 @@
     "clinicalNote": ""
   },
   "zaritBurdenInterviewGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ad",
+    "id": "adb74cf5-63b5-5d32-8c8b-64d2bc64aa07",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "zaritBurdenInterviewId": "550e8400-e29b-41d4-a716-0000000000b1",
+    "zaritBurdenInterviewId": "26993a84-6c63-52c3-86d3-754afb98d447",
     "totalScore": null,
     "maxScore": null,
     "burdenBand": "little-or-none",
@@ -89,11 +89,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "zaritBurdenInterviewGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b7",
+    "id": "5174519a-df12-5c0c-a895-a7bbae94278d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "zaritBurdenInterviewGradeId": "550e8400-e29b-41d4-a716-0000000000bb",
+    "zaritBurdenInterviewGradeId": "ed4b5d25-f9a2-5733-871a-6d3636d10f02",
     "ruleId": "",
     "itemNumber": null,
     "points": null,
@@ -101,11 +101,11 @@
     "description": ""
   },
   "zaritBurdenInterviewGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c1",
+    "id": "5e35e4b8-9bd6-5ef5-a726-a130e0831055",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "zaritBurdenInterviewGradeId": "550e8400-e29b-41d4-a716-0000000000c5",
+    "zaritBurdenInterviewGradeId": "e43dd23d-f4c1-5812-a2a9-ff0a4b2bf5c5",
     "flagId": "",
     "category": "severe-burden",
     "priority": "low",

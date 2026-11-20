@@ -5,10 +5,19 @@ info:
   title: Hearing Aid Assessment — Grade
   version: 1.0.0
   description: Computed HHIE-S grading result. 0-8 = No handicap, 10-24 = Mild-moderate, 26-40 = Significant. One-to-one child of assessment.
+x-namespace:
+  form: hearing-aid-assessment
+  apiPrefix: /api/hearing-aid-assessment/
+  sqlSchema: hearing_aid_assessment
+  xmlNamespace: https://formexamples.github.io/hearing-aid-assessment/xml
+tags:
+  - name: hearing-aid-assessment
+    description: Hearing Aid Assessment form
 paths:
   /api/hearing-aid-assessment/grades:
     get:
       summary: List Grade records
+      tags: [hearing-aid-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [hearing-aid-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [hearing-aid-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [hearing-aid-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [hearing-aid-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [hearing-aid-assessment]
       operationId: deleteGrade
       responses:
         "200":

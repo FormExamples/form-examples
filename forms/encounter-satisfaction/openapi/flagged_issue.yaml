@@ -5,10 +5,19 @@ info:
   title: Encounter Satisfaction — FlaggedIssue
   version: 1.0.0
   description: Many-to-one with satisfaction_result. Alerts detected by the flagged issues engine.
+x-namespace:
+  form: encounter-satisfaction
+  apiPrefix: /api/encounter-satisfaction/
+  sqlSchema: encounter_satisfaction
+  xmlNamespace: https://formexamples.github.io/encounter-satisfaction/xml
+tags:
+  - name: encounter-satisfaction
+    description: Encounter Satisfaction form
 paths:
   /api/encounter-satisfaction/flagged_issues:
     get:
       summary: List FlaggedIssue records
+      tags: [encounter-satisfaction]
       operationId: listFlaggedIssue
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new FlaggedIssue
+      tags: [encounter-satisfaction]
       operationId: createFlaggedIssue
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one FlaggedIssue by id
+      tags: [encounter-satisfaction]
       operationId: getFlaggedIssue
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing FlaggedIssue
+      tags: [encounter-satisfaction]
       operationId: updateFlaggedIssue
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing FlaggedIssue
+      tags: [encounter-satisfaction]
       operationId: replaceFlaggedIssue
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a FlaggedIssue
+      tags: [encounter-satisfaction]
       operationId: deleteFlaggedIssue
       responses:
         "200":

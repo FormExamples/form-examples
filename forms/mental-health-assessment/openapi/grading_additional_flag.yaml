@@ -5,10 +5,19 @@ info:
   title: Mental Health Assessment — GradingAdditionalFlag
   version: 1.0.0
   description: Additional safety-critical flags detected during mental health assessment grading (e.g. suicidal ideation, self-harm, high PHQ-9 Q9 score).
+x-namespace:
+  form: mental-health-assessment
+  apiPrefix: /api/mental-health-assessment/
+  sqlSchema: mental_health_assessment
+  xmlNamespace: https://formexamples.github.io/mental-health-assessment/xml
+tags:
+  - name: mental-health-assessment
+    description: Mental Health Assessment form
 paths:
   /api/mental-health-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags: [mental-health-assessment]
       operationId: listGradingAdditionalFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GradingAdditionalFlag
+      tags: [mental-health-assessment]
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags: [mental-health-assessment]
       operationId: getGradingAdditionalFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags: [mental-health-assessment]
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags: [mental-health-assessment]
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags: [mental-health-assessment]
       operationId: deleteGradingAdditionalFlag
       responses:
         "200":

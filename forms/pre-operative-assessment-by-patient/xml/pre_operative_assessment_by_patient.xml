@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pre_operative_assessment_by_patient SYSTEM "pre_operative_assessment_by_patient.dtd">
-<pre_operative_assessment_by_patient>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<pre_operative_assessment_by_patient xmlns="https://formexamples.github.io/pre-operative-assessment-by-patient/xml">
+<id>4811b3f9-5d37-5063-8e3a-36e128fed25c</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<patient_id>bdf003ff-6c1c-557a-b559-9186c2201ce7</patient_id>
 <weight>70.0</weight>
 <height>170.0</height>
 <bmi>24.2</bmi>

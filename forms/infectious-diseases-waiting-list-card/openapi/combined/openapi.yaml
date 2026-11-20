@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Infectious Diseases Waiting List Card form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: infectious-diseases-waiting-list-card
+  apiPrefix: /api/infectious-diseases-waiting-list-card/
+  sqlSchema: infectious_diseases_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/infectious-diseases-waiting-list-card/xml
+tags:
+- name: infectious-diseases-waiting-list-card
+  description: Infectious Diseases Waiting List Card form
 paths:
   /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_card_appointments:
     get:
       summary: List InfectDisWaitingListCardAppointment records
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: listInfectDisWaitingListCardAppointment
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InfectDisWaitingListCardAppointment
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: createInfectDisWaitingListCardAppointment
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InfectDisWaitingListCardAppointment by id
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: getInfectDisWaitingListCardAppointment
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InfectDisWaitingListCardAppointment
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: updateInfectDisWaitingListCardAppointment
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InfectDisWaitingListCardAppointment
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: replaceInfectDisWaitingListCardAppointment
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InfectDisWaitingListCardAppointment
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: deleteInfectDisWaitingListCardAppointment
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_card_grade_flags:
     get:
       summary: List InfectDisWaitingListCardGradeFlag records
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: listInfectDisWaitingListCardGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InfectDisWaitingListCardGradeFlag
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: createInfectDisWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InfectDisWaitingListCardGradeFlag by id
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: getInfectDisWaitingListCardGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InfectDisWaitingListCardGradeFlag
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: updateInfectDisWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InfectDisWaitingListCardGradeFlag
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: replaceInfectDisWaitingListCardGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InfectDisWaitingListCardGradeFlag
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: deleteInfectDisWaitingListCardGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_card_grade_rules:
     get:
       summary: List InfectDisWaitingListCardGradeRule records
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: listInfectDisWaitingListCardGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InfectDisWaitingListCardGradeRule
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: createInfectDisWaitingListCardGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InfectDisWaitingListCardGradeRule by id
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: getInfectDisWaitingListCardGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InfectDisWaitingListCardGradeRule
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: updateInfectDisWaitingListCardGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InfectDisWaitingListCardGradeRule
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: replaceInfectDisWaitingListCardGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InfectDisWaitingListCardGradeRule
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: deleteInfectDisWaitingListCardGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_card_grades:
     get:
       summary: List InfectDisWaitingListCardGrade records
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: listInfectDisWaitingListCardGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InfectDisWaitingListCardGrade
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: createInfectDisWaitingListCardGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InfectDisWaitingListCardGrade by id
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: getInfectDisWaitingListCardGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InfectDisWaitingListCardGrade
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: updateInfectDisWaitingListCardGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InfectDisWaitingListCardGrade
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: replaceInfectDisWaitingListCardGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InfectDisWaitingListCardGrade
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: deleteInfectDisWaitingListCardGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_cards:
     get:
       summary: List InfectDisWaitingListCard records
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: listInfectDisWaitingListCard
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InfectDisWaitingListCard
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: createInfectDisWaitingListCard
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one InfectDisWaitingListCard by id
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: getInfectDisWaitingListCard
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InfectDisWaitingListCard
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: updateInfectDisWaitingListCard
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing InfectDisWaitingListCard
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: replaceInfectDisWaitingListCard
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a InfectDisWaitingListCard
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: deleteInfectDisWaitingListCard
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - infectious-diseases-waiting-list-card
   /api/infectious-diseases-waiting-list-card/patients:
     get:
       summary: List Patient records
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: deletePatient
       responses:
         '200':
@@ -1498,6 +1580,8 @@ paths:
   /api/infectious-diseases-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: listPractitioner
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: createPractitioner
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Practitioner by id
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: getPractitioner
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: updatePractitioner
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Practitioner
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: replacePractitioner
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Practitioner
+      tags:
+      - infectious-diseases-waiting-list-card
       operationId: deletePractitioner
       responses:
         '200':

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE united_kingdom_death_registration SYSTEM "united_kingdom_death_registration.dtd">
-<united_kingdom_death_registration>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<united_kingdom_death_registration xmlns="https://formexamples.github.io/united-kingdom-death-registration/xml">
+<id>c0d5b8cc-d409-546b-ae11-8ff9d98510e5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<informant_id>660e8400-e29b-41d4-a716-446655440001</informant_id>
+<patient_id>cedf3dc6-bace-523f-960d-8a3a1596a8ec</patient_id>
+<informant_id>71eca8a1-5d58-5850-8b00-0746621fe7d3</informant_id>
 <deceased_name>Example</deceased_name>
 <sex>female</sex>
 <date_of_birth>1965-06-15</date_of_birth>

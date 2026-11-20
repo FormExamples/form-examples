@@ -5,10 +5,19 @@ info:
   title: Stomatology Waiting List Card — StomatologyWaitingListCardAppointment
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+x-namespace:
+  form: stomatology-waiting-list-card
+  apiPrefix: /api/stomatology-waiting-list-card/
+  sqlSchema: stomatology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/stomatology-waiting-list-card/xml
+tags:
+  - name: stomatology-waiting-list-card
+    description: Stomatology Waiting List Card form
 paths:
   /api/stomatology-waiting-list-card/stomatology_waiting_list_card_appointments:
     get:
       summary: List StomatologyWaitingListCardAppointment records
+      tags: [stomatology-waiting-list-card]
       operationId: listStomatologyWaitingListCardAppointment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new StomatologyWaitingListCardAppointment
+      tags: [stomatology-waiting-list-card]
       operationId: createStomatologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one StomatologyWaitingListCardAppointment by id
+      tags: [stomatology-waiting-list-card]
       operationId: getStomatologyWaitingListCardAppointment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing StomatologyWaitingListCardAppointment
+      tags: [stomatology-waiting-list-card]
       operationId: updateStomatologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing StomatologyWaitingListCardAppointment
+      tags: [stomatology-waiting-list-card]
       operationId: replaceStomatologyWaitingListCardAppointment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a StomatologyWaitingListCardAppointment
+      tags: [stomatology-waiting-list-card]
       operationId: deleteStomatologyWaitingListCardAppointment
       responses:
         "200":

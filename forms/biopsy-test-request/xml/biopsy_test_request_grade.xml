@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE biopsy_test_request_grade SYSTEM "biopsy_test_request_grade.dtd">
-<biopsy_test_request_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<biopsy_test_request_grade xmlns="https://formexamples.github.io/biopsy-test-request/xml">
+<id>90d6a8ab-434c-5eef-b148-2aee343f47cc</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<biopsy_test_request_id>770e8400-e29b-41d4-a716-446655440002</biopsy_test_request_id>
+<biopsy_test_request_id>036cedd4-53b5-542f-a1bc-edff0b56cbf5</biopsy_test_request_id>
 <appropriateness_score>5</appropriateness_score>
 <appropriateness_band>usually-appropriate</appropriateness_band>
 <bleeding_risk_band>low</bleeding_risk_band>

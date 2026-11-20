@@ -5,10 +5,19 @@ info:
   title: Vaccinations Checklist — Assessment
   version: 1.0.0
   description: Vaccinations checklist assessment form tracking immunisation status. Parent entity for all assessment sections.
+x-namespace:
+  form: vaccinations-checklist
+  apiPrefix: /api/vaccinations-checklist/
+  sqlSchema: vaccinations_checklist
+  xmlNamespace: https://formexamples.github.io/vaccinations-checklist/xml
+tags:
+  - name: vaccinations-checklist
+    description: Vaccinations Checklist form
 paths:
   /api/vaccinations-checklist/assessments:
     get:
       summary: List Assessment records
+      tags: [vaccinations-checklist]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [vaccinations-checklist]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [vaccinations-checklist]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [vaccinations-checklist]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [vaccinations-checklist]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [vaccinations-checklist]
       operationId: deleteAssessment
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT sequential_organ_failure_assessment_grade (id,created_at,updated_at,deleted_at,sequential_organ_failure_assessment_id,respiration_score,coagulation_score,liver_score,cardiovascular_score,cns_score,renal_score,total_score,delta_sofa,mortality_band,sepsis3,graded_at)>
+<!ATTLIST sequential_organ_failure_assessment_grade xmlns CDATA #FIXED "https://formexamples.github.io/sequential-organ-failure-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

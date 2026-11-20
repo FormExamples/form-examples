@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ward_round_note SYSTEM "ward_round_note.dtd">
-<ward_round_note>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<ward_round_note xmlns="https://formexamples.github.io/ward-round-note/xml">
+<id>c95cf1ca-d70a-5ce1-abfd-f601aad146ff</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>60e52c33-7bbb-5b58-8f7c-7c63f0732611</patient_id>
+<clinician_id>b7c3a640-0a98-5bf4-952d-0b9a350618ec</clinician_id>
 <clinician_name>Example</clinician_name>
 <clinician_grade>fy1</clinician_grade>
 <reviewed_at>2026-04-09T10:00:00Z</reviewed_at>

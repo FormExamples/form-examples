@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "5e977652-4c04-4465-a345-34a9bbc7f62f",
+  "id": "3b92ad0e-5648-5769-9ca7-3f13617d8d82",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:9cdb3bab-c956-4040-ad76-a86b3783bd25",
+      "fullUrl": "urn:uuid:8fa3d816-5c6a-5d2d-b7db-f366b8f98564",
       "resource": {
         "resourceType": "Patient",
-        "id": "9cdb3bab-c956-4040-ad76-a86b3783bd25",
+        "id": "8fa3d816-5c6a-5d2d-b7db-f366b8f98564",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:09ee2843-3a6d-483a-a516-914e1008f37e",
+      "fullUrl": "urn:uuid:13a01aee-d1ef-58f9-9bd3-70d2b85eb381",
       "resource": {
         "resourceType": "Observation",
-        "id": "09ee2843-3a6d-483a-a516-914e1008f37e",
+        "id": "13a01aee-d1ef-58f9-9bd3-70d2b85eb381",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:9cdb3bab-c956-4040-ad76-a86b3783bd25"
+          "reference": "urn:uuid:8fa3d816-5c6a-5d2d-b7db-f366b8f98564"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:60163062-cec0-47f7-a694-b0e00d9addad",
+      "fullUrl": "urn:uuid:52232789-0c31-5a9a-955c-55d1f13afd07",
       "resource": {
         "resourceType": "Observation",
-        "id": "60163062-cec0-47f7-a694-b0e00d9addad",
+        "id": "52232789-0c31-5a9a-955c-55d1f13afd07",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:9cdb3bab-c956-4040-ad76-a86b3783bd25"
+          "reference": "urn:uuid:8fa3d816-5c6a-5d2d-b7db-f366b8f98564"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -563,10 +563,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:fb7525b2-8b9f-4d4d-a177-0cf2976247bf",
+      "fullUrl": "urn:uuid:d814453e-7e37-5b10-8b3e-a061e695858c",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "fb7525b2-8b9f-4d4d-a177-0cf2976247bf",
+        "id": "d814453e-7e37-5b10-8b3e-a061e695858c",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -575,7 +575,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:9cdb3bab-c956-4040-ad76-a86b3783bd25"
+          "reference": "urn:uuid:8fa3d816-5c6a-5d2d-b7db-f366b8f98564"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -584,10 +584,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:50d3acf1-1f52-4ab7-a5cd-2fd40b04d389",
+      "fullUrl": "urn:uuid:c482ec2c-94f7-5a24-8cc5-6809f2e9984b",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "50d3acf1-1f52-4ab7-a5cd-2fd40b04d389",
+        "id": "c482ec2c-94f7-5a24-8cc5-6809f2e9984b",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -617,17 +617,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:9cdb3bab-c956-4040-ad76-a86b3783bd25"
+          "reference": "urn:uuid:8fa3d816-5c6a-5d2d-b7db-f366b8f98564"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Reduced bone density (osteopenia or osteoporosis) on the WHO densitometric classification; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:ee194c58-f7f1-4b9f-a663-50f718cd5f8b",
+      "fullUrl": "urn:uuid:2f17387a-b4b1-5847-b47e-a12da30f8509",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "ee194c58-f7f1-4b9f-a663-50f718cd5f8b",
+        "id": "2f17387a-b4b1-5847-b47e-a12da30f8509",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -657,17 +657,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:9cdb3bab-c956-4040-ad76-a86b3783bd25"
+          "reference": "urn:uuid:8fa3d816-5c6a-5d2d-b7db-f366b8f98564"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Osteopenia (low bone mass); abnormality severity graded moderate."
       }
     },
     {
-      "fullUrl": "urn:uuid:8a4025fb-0e71-4ce8-af57-d784406002fa",
+      "fullUrl": "urn:uuid:8cc0198c-baf7-508f-adb3-58838d756bb7",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "8a4025fb-0e71-4ce8-af57-d784406002fa",
+        "id": "8cc0198c-baf7-508f-adb3-58838d756bb7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -697,17 +697,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:9cdb3bab-c956-4040-ad76-a86b3783bd25"
+          "reference": "urn:uuid:8fa3d816-5c6a-5d2d-b7db-f366b8f98564"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: comparison with previous imaging."
       }
     },
     {
-      "fullUrl": "urn:uuid:12915e2d-b184-403e-a935-c86d79d5338a",
+      "fullUrl": "urn:uuid:af9082d6-507e-5939-bfe0-a42658ec4d83",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "12915e2d-b184-403e-a935-c86d79d5338a",
+        "id": "af9082d6-507e-5939-bfe0-a42658ec4d83",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -737,7 +737,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:9cdb3bab-c956-4040-ad76-a86b3783bd25"
+          "reference": "urn:uuid:8fa3d816-5c6a-5d2d-b7db-f366b8f98564"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Osteopenia (low bone mass); follow-up recommended."

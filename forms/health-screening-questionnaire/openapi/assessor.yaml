@@ -5,10 +5,19 @@ info:
   title: Health Screening Questionnaire — Assessor
   version: 1.0.0
   description: Assessor, i.e. the person who conducts the health screening questionnaire. Often not a clinician.
+x-namespace:
+  form: health-screening-questionnaire
+  apiPrefix: /api/health-screening-questionnaire/
+  sqlSchema: health_screening_questionnaire
+  xmlNamespace: https://formexamples.github.io/health-screening-questionnaire/xml
+tags:
+  - name: health-screening-questionnaire
+    description: Health Screening Questionnaire form
 paths:
   /api/health-screening-questionnaire/assessors:
     get:
       summary: List Assessor records
+      tags: [health-screening-questionnaire]
       operationId: listAssessor
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessor
+      tags: [health-screening-questionnaire]
       operationId: createAssessor
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessor by id
+      tags: [health-screening-questionnaire]
       operationId: getAssessor
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessor
+      tags: [health-screening-questionnaire]
       operationId: updateAssessor
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessor
+      tags: [health-screening-questionnaire]
       operationId: replaceAssessor
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessor
+      tags: [health-screening-questionnaire]
       operationId: deleteAssessor
       responses:
         "200":

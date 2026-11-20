@@ -1,4 +1,5 @@
 <!ELEMENT lpa_replacement_attorney (id,created_at,updated_at,deleted_at,lpa_id,replacement_attorney_id,order_position,replacement_trigger)>
+<!ATTLIST lpa_replacement_attorney xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

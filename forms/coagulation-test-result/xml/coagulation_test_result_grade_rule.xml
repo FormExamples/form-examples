@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE coagulation_test_result_grade_rule SYSTEM "coagulation_test_result_grade_rule.dtd">
-<coagulation_test_result_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<coagulation_test_result_grade_rule xmlns="https://formexamples.github.io/coagulation-test-result/xml">
+<id>64261006-d0d0-5999-9bfa-b6276d3ce5bd</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<coagulation_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</coagulation_test_result_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<coagulation_test_result_grade_id>e970478c-ac07-5be3-acc7-07cb6bf4ba67</coagulation_test_result_grade_id>
+<rule_id>e1cf5818-172a-5824-b924-213fc0d9d2a6</rule_id>
 <axis>classification</axis>
 <category>General</category>
 <description>Example text.</description>

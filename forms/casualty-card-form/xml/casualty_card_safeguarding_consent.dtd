@@ -1,4 +1,5 @@
 <!ELEMENT casualty_card_safeguarding_consent (id,created_at,updated_at,deleted_at,casualty_card_id,safeguarding_concern,safeguarding_type,referral_made,mental_capacity_assessment,mental_health_act_status,consent_for_treatment,completed_by_name,completed_by_role,completed_by_gmc_number,senior_reviewing_clinician)>
+<!ATTLIST casualty_card_safeguarding_consent xmlns CDATA #FIXED "https://formexamples.github.io/casualty-card-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Eye Vision Test Result form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: eye-vision-test-result
+  apiPrefix: /api/eye-vision-test-result/
+  sqlSchema: eye_vision_test_result
+  xmlNamespace: https://formexamples.github.io/eye-vision-test-result/xml
+tags:
+- name: eye-vision-test-result
+  description: Eye Vision Test Result form
 paths:
   /api/eye-vision-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - eye-vision-test-result
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - eye-vision-test-result
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - eye-vision-test-result
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - eye-vision-test-result
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - eye-vision-test-result
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - eye-vision-test-result
       operationId: deleteClinician
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/eye-vision-test-result/eye_vision_test_result_grade_flags:
     get:
       summary: List EyeVisionTestResultGradeFlag records
+      tags:
+      - eye-vision-test-result
       operationId: listEyeVisionTestResultGradeFlag
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EyeVisionTestResultGradeFlag
+      tags:
+      - eye-vision-test-result
       operationId: createEyeVisionTestResultGradeFlag
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EyeVisionTestResultGradeFlag by id
+      tags:
+      - eye-vision-test-result
       operationId: getEyeVisionTestResultGradeFlag
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EyeVisionTestResultGradeFlag
+      tags:
+      - eye-vision-test-result
       operationId: updateEyeVisionTestResultGradeFlag
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EyeVisionTestResultGradeFlag
+      tags:
+      - eye-vision-test-result
       operationId: replaceEyeVisionTestResultGradeFlag
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EyeVisionTestResultGradeFlag
+      tags:
+      - eye-vision-test-result
       operationId: deleteEyeVisionTestResultGradeFlag
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/eye-vision-test-result/eye_vision_test_result_grade_rules:
     get:
       summary: List EyeVisionTestResultGradeRule records
+      tags:
+      - eye-vision-test-result
       operationId: listEyeVisionTestResultGradeRule
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EyeVisionTestResultGradeRule
+      tags:
+      - eye-vision-test-result
       operationId: createEyeVisionTestResultGradeRule
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EyeVisionTestResultGradeRule by id
+      tags:
+      - eye-vision-test-result
       operationId: getEyeVisionTestResultGradeRule
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EyeVisionTestResultGradeRule
+      tags:
+      - eye-vision-test-result
       operationId: updateEyeVisionTestResultGradeRule
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EyeVisionTestResultGradeRule
+      tags:
+      - eye-vision-test-result
       operationId: replaceEyeVisionTestResultGradeRule
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EyeVisionTestResultGradeRule
+      tags:
+      - eye-vision-test-result
       operationId: deleteEyeVisionTestResultGradeRule
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/eye-vision-test-result/eye_vision_test_result_grades:
     get:
       summary: List EyeVisionTestResultGrade records
+      tags:
+      - eye-vision-test-result
       operationId: listEyeVisionTestResultGrade
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EyeVisionTestResultGrade
+      tags:
+      - eye-vision-test-result
       operationId: createEyeVisionTestResultGrade
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EyeVisionTestResultGrade by id
+      tags:
+      - eye-vision-test-result
       operationId: getEyeVisionTestResultGrade
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EyeVisionTestResultGrade
+      tags:
+      - eye-vision-test-result
       operationId: updateEyeVisionTestResultGrade
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EyeVisionTestResultGrade
+      tags:
+      - eye-vision-test-result
       operationId: replaceEyeVisionTestResultGrade
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EyeVisionTestResultGrade
+      tags:
+      - eye-vision-test-result
       operationId: deleteEyeVisionTestResultGrade
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/eye-vision-test-result/eye_vision_test_results:
     get:
       summary: List EyeVisionTestResult records
+      tags:
+      - eye-vision-test-result
       operationId: listEyeVisionTestResult
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new EyeVisionTestResult
+      tags:
+      - eye-vision-test-result
       operationId: createEyeVisionTestResult
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one EyeVisionTestResult by id
+      tags:
+      - eye-vision-test-result
       operationId: getEyeVisionTestResult
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing EyeVisionTestResult
+      tags:
+      - eye-vision-test-result
       operationId: updateEyeVisionTestResult
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing EyeVisionTestResult
+      tags:
+      - eye-vision-test-result
       operationId: replaceEyeVisionTestResult
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a EyeVisionTestResult
+      tags:
+      - eye-vision-test-result
       operationId: deleteEyeVisionTestResult
       responses:
         '200':
@@ -1249,9 +1317,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - eye-vision-test-result
   /api/eye-vision-test-result/patients:
     get:
       summary: List Patient records
+      tags:
+      - eye-vision-test-result
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - eye-vision-test-result
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - eye-vision-test-result
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - eye-vision-test-result
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - eye-vision-test-result
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - eye-vision-test-result
       operationId: deletePatient
       responses:
         '200':

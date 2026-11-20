@@ -1,4 +1,5 @@
 <!ELEMENT cytology_test_request (id,created_at,updated_at,deleted_at,patient_id,clinician_id,status,site_name,setting,referral_date,requested_by_date,specimen_type,specimen_site,primary_indication,clinical_question,clinical_details,hpv_test_requested,previous_abnormal_cytology,last_menstrual_period_date,specimen_collected,collection_datetime,urgency,supervising_consultant,requester_contact,notes)>
+<!ATTLIST cytology_test_request xmlns CDATA #FIXED "https://formexamples.github.io/cytology-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

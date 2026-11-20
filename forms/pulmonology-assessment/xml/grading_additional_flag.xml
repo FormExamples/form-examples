@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_additional_flag SYSTEM "grading_additional_flag.dtd">
-<grading_additional_flag>
-<id>cc0e8400-e29b-41d4-a716-446655440007</id>
+<grading_additional_flag xmlns="https://formexamples.github.io/pulmonology-assessment/xml">
+<id>3e3f17bb-4257-55e2-b16d-fa7bbdf0a90e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>aa0e8400-e29b-41d4-a716-446655440005</grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<grade_id>0f427cf4-fc3b-5414-b1dc-aa8eace7f2ce</grade_id>
+<flag_id>cc1e9399-9257-5937-a7bd-3e4bc8ec7284</flag_id>
 <category>General</category>
 <message></message>
 <priority>high</priority>

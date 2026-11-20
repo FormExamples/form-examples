@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000054",
+    "id": "165ee4a6-d503-5ff2-ba55-ddc48e68ab86",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000066",
+    "id": "22a84103-8019-5c21-b76b-256ec6da9eef",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "cervicalScreening": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "af965465-1ffe-5e0b-b585-99de0fb50b52",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000077",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000078",
+    "patientId": "c7abd9d1-396e-56d8-bebc-97470cbf7059",
+    "clinicianId": "9c39b808-a63b-5868-a2a2-e51eee7be47c",
     "careSetting": "general-practice",
     "sampleTakerRole": "practice-nurse",
     "sampleTakenAt": null,
@@ -61,33 +61,33 @@
     "clinicalContext": ""
   },
   "cervicalScreeningGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008b",
+    "id": "d1f930d0-88cf-58d7-821a-f37fe116078d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cervicalScreeningId": "550e8400-e29b-41d4-a716-00000000008f",
+    "cervicalScreeningId": "d41b200d-39ef-519d-a33f-e7ac1927cf8e",
     "resultClass": "inadequate",
     "managementAction": "routine-recall",
     "status": "complete",
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "cervicalScreeningGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000094",
+    "id": "dd516748-97d6-56fa-804c-62270de3d25b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cervicalScreeningGradeId": "550e8400-e29b-41d4-a716-000000000098",
+    "cervicalScreeningGradeId": "14edbb84-054e-5afb-985c-e05410c86fc0",
     "ruleId": "",
     "stage": "eligibility",
     "category": "",
     "description": ""
   },
   "cervicalScreeningGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000009d",
+    "id": "2defa6bb-21e6-55c5-9ed5-cd3e97787c2c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "cervicalScreeningGradeId": "550e8400-e29b-41d4-a716-0000000000a1",
+    "cervicalScreeningGradeId": "c9fe1f0b-32f1-5547-9221-c6462f3cca29",
     "flagId": "",
     "category": "urgent-colposcopy",
     "priority": "low",

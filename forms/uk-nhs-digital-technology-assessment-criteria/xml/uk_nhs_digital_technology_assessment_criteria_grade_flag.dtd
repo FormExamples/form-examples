@@ -1,4 +1,5 @@
 <!ELEMENT uk_nhs_digital_technology_assessment_criteria_grade_flag (id,created_at,updated_at,deleted_at,uk_nhs_digital_technology_assessment_criteria_grade_id,flag_id,category,severity,message)>
+<!ATTLIST uk_nhs_digital_technology_assessment_criteria_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/uk-nhs-digital-technology-assessment-criteria/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

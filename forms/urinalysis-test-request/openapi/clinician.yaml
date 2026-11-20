@@ -5,10 +5,19 @@ info:
   title: Urinalysis Test Request — Clinician
   version: 1.0.0
   description: Requesting clinician (referrer) who completes the urinalysis test request.
+x-namespace:
+  form: urinalysis-test-request
+  apiPrefix: /api/urinalysis-test-request/
+  sqlSchema: urinalysis_test_request
+  xmlNamespace: https://formexamples.github.io/urinalysis-test-request/xml
+tags:
+  - name: urinalysis-test-request
+    description: Urinalysis Test Request form
 paths:
   /api/urinalysis-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags: [urinalysis-test-request]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [urinalysis-test-request]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [urinalysis-test-request]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [urinalysis-test-request]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [urinalysis-test-request]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [urinalysis-test-request]
       operationId: deleteClinician
       responses:
         "200":

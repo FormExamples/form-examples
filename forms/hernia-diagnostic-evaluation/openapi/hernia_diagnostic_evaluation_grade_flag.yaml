@@ -5,10 +5,19 @@ info:
   title: Hernia Diagnostic Evaluation — HerniaDiagnosticEvaluationGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the computed urgency band, with a priority and a suggested action for the surgical or referring team.
+x-namespace:
+  form: hernia-diagnostic-evaluation
+  apiPrefix: /api/hernia-diagnostic-evaluation/
+  sqlSchema: hernia_diagnostic_evaluation
+  xmlNamespace: https://formexamples.github.io/hernia-diagnostic-evaluation/xml
+tags:
+  - name: hernia-diagnostic-evaluation
+    description: Hernia Diagnostic Evaluation form
 paths:
   /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluation_grade_flags:
     get:
       summary: List HerniaDiagnosticEvaluationGradeFlag records
+      tags: [hernia-diagnostic-evaluation]
       operationId: listHerniaDiagnosticEvaluationGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HerniaDiagnosticEvaluationGradeFlag
+      tags: [hernia-diagnostic-evaluation]
       operationId: createHerniaDiagnosticEvaluationGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HerniaDiagnosticEvaluationGradeFlag by id
+      tags: [hernia-diagnostic-evaluation]
       operationId: getHerniaDiagnosticEvaluationGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HerniaDiagnosticEvaluationGradeFlag
+      tags: [hernia-diagnostic-evaluation]
       operationId: updateHerniaDiagnosticEvaluationGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HerniaDiagnosticEvaluationGradeFlag
+      tags: [hernia-diagnostic-evaluation]
       operationId: replaceHerniaDiagnosticEvaluationGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HerniaDiagnosticEvaluationGradeFlag
+      tags: [hernia-diagnostic-evaluation]
       operationId: deleteHerniaDiagnosticEvaluationGradeFlag
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Laboratory Medicine Waiting List Card — LabMedWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: laboratory-medicine-waiting-list-card
+  apiPrefix: /api/laboratory-medicine-waiting-list-card/
+  sqlSchema: laboratory_medicine_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/laboratory-medicine-waiting-list-card/xml
+tags:
+  - name: laboratory-medicine-waiting-list-card
+    description: Laboratory Medicine Waiting List Card form
 paths:
   /api/laboratory-medicine-waiting-list-card/lab_med_waiting_list_card_grades:
     get:
       summary: List LabMedWaitingListCardGrade records
+      tags: [laboratory-medicine-waiting-list-card]
       operationId: listLabMedWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LabMedWaitingListCardGrade
+      tags: [laboratory-medicine-waiting-list-card]
       operationId: createLabMedWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LabMedWaitingListCardGrade by id
+      tags: [laboratory-medicine-waiting-list-card]
       operationId: getLabMedWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LabMedWaitingListCardGrade
+      tags: [laboratory-medicine-waiting-list-card]
       operationId: updateLabMedWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LabMedWaitingListCardGrade
+      tags: [laboratory-medicine-waiting-list-card]
       operationId: replaceLabMedWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LabMedWaitingListCardGrade
+      tags: [laboratory-medicine-waiting-list-card]
       operationId: deleteLabMedWaitingListCardGrade
       responses:
         "200":

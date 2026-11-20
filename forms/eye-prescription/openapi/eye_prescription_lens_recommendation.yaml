@@ -5,10 +5,19 @@ info:
   title: Eye Prescription — EyePrescriptionLensRecommendation
   version: 1.0.0
   description: "Lens recommendation: design, material, coatings, tint. One row per prescription."
+x-namespace:
+  form: eye-prescription
+  apiPrefix: /api/eye-prescription/
+  sqlSchema: eye_prescription
+  xmlNamespace: https://formexamples.github.io/eye-prescription/xml
+tags:
+  - name: eye-prescription
+    description: Eye Prescription form
 paths:
   /api/eye-prescription/eye_prescription_lens_recommendations:
     get:
       summary: List EyePrescriptionLensRecommendation records
+      tags: [eye-prescription]
       operationId: listEyePrescriptionLensRecommendation
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EyePrescriptionLensRecommendation
+      tags: [eye-prescription]
       operationId: createEyePrescriptionLensRecommendation
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EyePrescriptionLensRecommendation by id
+      tags: [eye-prescription]
       operationId: getEyePrescriptionLensRecommendation
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EyePrescriptionLensRecommendation
+      tags: [eye-prescription]
       operationId: updateEyePrescriptionLensRecommendation
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EyePrescriptionLensRecommendation
+      tags: [eye-prescription]
       operationId: replaceEyePrescriptionLensRecommendation
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EyePrescriptionLensRecommendation
+      tags: [eye-prescription]
       operationId: deleteEyePrescriptionLensRecommendation
       responses:
         "200":

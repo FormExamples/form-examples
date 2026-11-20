@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "e7666155-120c-5a19-bf6e-d1d973ff6678",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredLanguage": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a3",
+    "id": "1a08da72-c68c-5ae9-b3ae-eb30044c21d2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "kneeReplacementSurgeryEvaluation": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b2",
+    "id": "6ffd59eb-7084-5fc8-9f19-48ff304c3278",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000000b6",
-    "clinicianId": "550e8400-e29b-41d4-a716-0000000000b7",
+    "patientId": "7e564e79-97d6-5b41-ac9c-828d50e4d4b1",
+    "clinicianId": "c4cd8433-124c-5663-8d74-f3b2ede661a8",
     "status": "draft",
     "siteName": "",
     "assessmentDate": null,
@@ -125,11 +125,11 @@
     "responsibleSurgeon": ""
   },
   "kneeReplacementSurgeryEvaluationGrade": {
-    "id": "550e8400-e29b-41d4-a716-000000000109",
+    "id": "3560a807-34df-5166-90ba-80c5ac7d5ae3",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "kneeReplacementSurgeryEvaluationId": "550e8400-e29b-41d4-a716-00000000010d",
+    "kneeReplacementSurgeryEvaluationId": "9043bd77-84a9-5187-abe7-e80529d98198",
     "oksTotal": 24,
     "computedOksCategory": "severe",
     "finalOksCategory": "severe",
@@ -143,11 +143,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "kneeReplacementSurgeryEvaluationGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000119",
+    "id": "e1778c08-9453-541d-a471-6440b5bb9345",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "kneeReplacementSurgeryEvaluationGradeId": "550e8400-e29b-41d4-a716-00000000011d",
+    "kneeReplacementSurgeryEvaluationGradeId": "08850a0d-97e5-5c8d-b7aa-04adcaa0e46a",
     "flagId": "",
     "category": "conservative-treatment-not-exhausted",
     "priority": "low",

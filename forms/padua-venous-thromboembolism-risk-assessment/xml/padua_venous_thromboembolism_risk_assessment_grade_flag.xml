@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE padua_venous_thromboembolism_risk_assessment_grade_flag SYSTEM "padua_venous_thromboembolism_risk_assessment_grade_flag.dtd">
-<padua_venous_thromboembolism_risk_assessment_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<padua_venous_thromboembolism_risk_assessment_grade_flag xmlns="https://formexamples.github.io/padua-venous-thromboembolism-risk-assessment/xml">
+<id>5e3adffd-c328-54b5-8abd-3e3a889de8b8</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<padua_venous_thromboembolism_risk_assessment_grade_id>880e8400-e29b-41d4-a716-446655440003</padua_venous_thromboembolism_risk_assessment_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<padua_venous_thromboembolism_risk_assessment_grade_id>c1972d7f-88e5-5fba-92d5-2aae8e3cc5bf</padua_venous_thromboembolism_risk_assessment_grade_id>
+<flag_id>d5f2497e-b50d-5f48-a6b0-0efea6798d35</flag_id>
 <category>high-risk-prophylaxis</category>
 <priority>low</priority>
 <description>Example text.</description>

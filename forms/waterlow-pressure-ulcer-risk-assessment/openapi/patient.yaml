@@ -5,10 +5,19 @@ info:
   title: Waterlow Pressure Ulcer Risk Assessment — Patient
   version: 1.0.0
   description: Patient demographic information used by the Waterlow pressure ulcer risk assessment record.
+x-namespace:
+  form: waterlow-pressure-ulcer-risk-assessment
+  apiPrefix: /api/waterlow-pressure-ulcer-risk-assessment/
+  sqlSchema: waterlow_pressure_ulcer_risk_assessment
+  xmlNamespace: https://formexamples.github.io/waterlow-pressure-ulcer-risk-assessment/xml
+tags:
+  - name: waterlow-pressure-ulcer-risk-assessment
+    description: Waterlow Pressure Ulcer Risk Assessment form
 paths:
   /api/waterlow-pressure-ulcer-risk-assessment/patients:
     get:
       summary: List Patient records
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: deletePatient
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Dyslexia Assessment — Assessment
   version: 1.0.0
   description: Dyslexia assessment form using standardised scores for reading, writing, spelling, phonological processing, working memory, and processing speed. Parent entity for all assessment sections.
+x-namespace:
+  form: dyslexia-assessment
+  apiPrefix: /api/dyslexia-assessment/
+  sqlSchema: dyslexia_assessment
+  xmlNamespace: https://formexamples.github.io/dyslexia-assessment/xml
+tags:
+  - name: dyslexia-assessment
+    description: Dyslexia Assessment form
 paths:
   /api/dyslexia-assessment/assessments:
     get:
       summary: List Assessment records
+      tags: [dyslexia-assessment]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [dyslexia-assessment]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [dyslexia-assessment]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [dyslexia-assessment]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [dyslexia-assessment]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [dyslexia-assessment]
       operationId: deleteAssessment
       responses:
         "200":

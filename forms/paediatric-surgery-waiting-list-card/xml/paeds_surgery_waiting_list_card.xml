@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE paeds_surgery_waiting_list_card SYSTEM "paeds_surgery_waiting_list_card.dtd">
-<paeds_surgery_waiting_list_card>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<paeds_surgery_waiting_list_card xmlns="https://formexamples.github.io/paediatric-surgery-waiting-list-card/xml">
+<id>9a411827-bf9f-53d8-a30a-8ed3f9479981</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<practitioner_id>660e8400-e29b-41d4-a716-446655440001</practitioner_id>
+<patient_id>80f7e9ca-b360-57a5-bd66-6d2960b8afd4</patient_id>
+<practitioner_id>e9d765b5-fe51-555b-9be7-bc598f72adc7</practitioner_id>
 <status>draft</status>
 <entry_date>2026-01-15</entry_date>
 <entry_time></entry_time>

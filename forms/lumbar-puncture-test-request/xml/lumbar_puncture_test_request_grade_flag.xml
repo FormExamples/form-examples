@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE lumbar_puncture_test_request_grade_flag SYSTEM "lumbar_puncture_test_request_grade_flag.dtd">
-<lumbar_puncture_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<lumbar_puncture_test_request_grade_flag xmlns="https://formexamples.github.io/lumbar-puncture-test-request/xml">
+<id>9198b26f-1110-5b6e-bebb-ae898b5d1ac3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<lumbar_puncture_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</lumbar_puncture_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<lumbar_puncture_test_request_grade_id>ca52c19c-3e72-5c6f-ac7b-239aaac3fdc0</lumbar_puncture_test_request_grade_id>
+<flag_id>149f7e02-50b2-5c6a-8ec3-3deedf787b91</flag_id>
 <category>suspected-raised-icp-needs-imaging</category>
 <priority>low</priority>
 <description>Example text.</description>

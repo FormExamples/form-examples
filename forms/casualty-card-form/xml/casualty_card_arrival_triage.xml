@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE casualty_card_arrival_triage SYSTEM "casualty_card_arrival_triage.dtd">
-<casualty_card_arrival_triage>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<casualty_card_arrival_triage xmlns="https://formexamples.github.io/casualty-card-form/xml">
+<id>573648d1-39c1-5ae1-a716-56efd0fe8004</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<casualty_card_id>770e8400-e29b-41d4-a716-446655440002</casualty_card_id>
+<casualty_card_id>8adbfe12-8ed7-5b00-800a-0bdbdfa13f84</casualty_card_id>
 <attendance_category>first</attendance_category>
 <arrival_mode>ambulance</arrival_mode>
 <referral_source>self</referral_source>

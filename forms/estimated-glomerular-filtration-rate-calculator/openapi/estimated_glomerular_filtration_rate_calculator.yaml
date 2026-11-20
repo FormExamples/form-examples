@@ -5,10 +5,19 @@ info:
   title: Estimated Glomerular Filtration Rate Calculator — EstimatedGlomerularFiltrationRateCalculator
   version: 1.0.0
   description: "Main eGFR calculation record: context and identification, plus the serum creatinine, age, sex, specimen date, and steady-state inputs and the chosen estimating equation."
+x-namespace:
+  form: estimated-glomerular-filtration-rate-calculator
+  apiPrefix: /api/estimated-glomerular-filtration-rate-calculator/
+  sqlSchema: estimated_glomerular_filtration_rate_calculator
+  xmlNamespace: https://formexamples.github.io/estimated-glomerular-filtration-rate-calculator/xml
+tags:
+  - name: estimated-glomerular-filtration-rate-calculator
+    description: Estimated Glomerular Filtration Rate Calculator form
 paths:
   /api/estimated-glomerular-filtration-rate-calculator/estimated_glomerular_filtration_rate_calculators:
     get:
       summary: List EstimatedGlomerularFiltrationRateCalculator records
+      tags: [estimated-glomerular-filtration-rate-calculator]
       operationId: listEstimatedGlomerularFiltrationRateCalculator
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EstimatedGlomerularFiltrationRateCalculator
+      tags: [estimated-glomerular-filtration-rate-calculator]
       operationId: createEstimatedGlomerularFiltrationRateCalculator
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EstimatedGlomerularFiltrationRateCalculator by id
+      tags: [estimated-glomerular-filtration-rate-calculator]
       operationId: getEstimatedGlomerularFiltrationRateCalculator
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EstimatedGlomerularFiltrationRateCalculator
+      tags: [estimated-glomerular-filtration-rate-calculator]
       operationId: updateEstimatedGlomerularFiltrationRateCalculator
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EstimatedGlomerularFiltrationRateCalculator
+      tags: [estimated-glomerular-filtration-rate-calculator]
       operationId: replaceEstimatedGlomerularFiltrationRateCalculator
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EstimatedGlomerularFiltrationRateCalculator
+      tags: [estimated-glomerular-filtration-rate-calculator]
       operationId: deleteEstimatedGlomerularFiltrationRateCalculator
       responses:
         "200":

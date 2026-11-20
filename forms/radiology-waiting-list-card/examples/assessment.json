@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000073",
+    "id": "259edc15-c302-5ba4-8021-2b80ba23d385",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "preferredContactChannel": "sms"
   },
   "practitioner": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "c652ac1d-c609-5976-9bb5-35459cbed51d",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "countryAsIso31661Alpha2": ""
   },
   "radiologyWaitingListCard": {
-    "id": "550e8400-e29b-41d4-a716-000000000092",
+    "id": "1724c5c7-2e9e-56b4-af2e-0a9919b40fc1",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000096",
-    "practitionerId": "550e8400-e29b-41d4-a716-000000000097",
+    "patientId": "cc34de13-1c6e-5435-9c20-56703f34719f",
+    "practitionerId": "96f4d587-3631-5bf3-9617-4c98daee587b",
     "status": "draft",
     "entryDate": null,
     "entryTime": null,
@@ -67,11 +67,11 @@
     "signedAt": null
   },
   "radiologyWaitingListCardAppointment": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b0",
+    "id": "ced588a0-37b1-57fb-96a0-42b7f850ebac",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "radiologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000b4",
+    "radiologyWaitingListCardId": "3a70f45c-0bc1-5451-bfee-109ef2a7c7f3",
     "appointmentDate": null,
     "appointmentTime": null,
     "durationMinutes": 720,
@@ -87,11 +87,11 @@
     "accessNotes": ""
   },
   "radiologyWaitingListCardGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c2",
+    "id": "73389b64-b8c9-5bcc-a55e-86b08a346c6e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "radiologyWaitingListCardId": "550e8400-e29b-41d4-a716-0000000000c6",
+    "radiologyWaitingListCardId": "0f8afa42-bbdb-56c3-8c7d-a43cbefbd694",
     "waitingTimeStatus": "within-target",
     "clinicalPriority": "P1a",
     "targetWaitWeeks": null,
@@ -104,11 +104,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "radiologyWaitingListCardGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d1",
+    "id": "bc9e7f54-ad7b-55c6-8f34-2eba6022f819",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "radiologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000d5",
+    "radiologyWaitingListCardGradeId": "08baa118-7760-5de1-9050-a18d723d3e1a",
     "ruleId": "",
     "instrument": "waiting-time-status",
     "band": "within-target",
@@ -116,11 +116,11 @@
     "description": ""
   },
   "radiologyWaitingListCardGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000db",
+    "id": "4a8f1edf-cbfb-53c6-a587-8ae37f0d2e0b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "radiologyWaitingListCardGradeId": "550e8400-e29b-41d4-a716-0000000000df",
+    "radiologyWaitingListCardGradeId": "9554fb92-4ee0-574d-a146-81d4868e6b2c",
     "flagId": "",
     "category": "breach-risk",
     "priority": "low",

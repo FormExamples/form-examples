@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE expense_reimbursement_item SYSTEM "expense_reimbursement_item.dtd">
-<expense_reimbursement_item>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<expense_reimbursement_item xmlns="https://formexamples.github.io/expense-reimbursement/xml">
+<id>96897daa-b9e2-5012-98c0-f19ec5449363</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<expense_reimbursement_id>770e8400-e29b-41d4-a716-446655440002</expense_reimbursement_id>
+<expense_reimbursement_id>f7f312b0-ed13-5575-8b0d-a7fcc006fef2</expense_reimbursement_id>
 <line_number>2</line_number>
 <expense_date>2026-01-15</expense_date>
 <category>travel</category>

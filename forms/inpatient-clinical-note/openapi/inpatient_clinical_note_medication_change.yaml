@@ -5,10 +5,19 @@ info:
   title: Inpatient Clinical Note — InpatientClinicalNoteMedicationChange
   version: 1.0.0
   description: "Prescribing-change rows for an inpatient clinical note: one row per drug started, stopped, dose-changed, held, switched, or explicitly continued, with indication, route, and review date."
+x-namespace:
+  form: inpatient-clinical-note
+  apiPrefix: /api/inpatient-clinical-note/
+  sqlSchema: inpatient_clinical_note
+  xmlNamespace: https://formexamples.github.io/inpatient-clinical-note/xml
+tags:
+  - name: inpatient-clinical-note
+    description: Inpatient Clinical Note form
 paths:
   /api/inpatient-clinical-note/inpatient_clinical_note_medication_changes:
     get:
       summary: List InpatientClinicalNoteMedicationChange records
+      tags: [inpatient-clinical-note]
       operationId: listInpatientClinicalNoteMedicationChange
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new InpatientClinicalNoteMedicationChange
+      tags: [inpatient-clinical-note]
       operationId: createInpatientClinicalNoteMedicationChange
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one InpatientClinicalNoteMedicationChange by id
+      tags: [inpatient-clinical-note]
       operationId: getInpatientClinicalNoteMedicationChange
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing InpatientClinicalNoteMedicationChange
+      tags: [inpatient-clinical-note]
       operationId: updateInpatientClinicalNoteMedicationChange
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing InpatientClinicalNoteMedicationChange
+      tags: [inpatient-clinical-note]
       operationId: replaceInpatientClinicalNoteMedicationChange
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a InpatientClinicalNoteMedicationChange
+      tags: [inpatient-clinical-note]
       operationId: deleteInpatientClinicalNoteMedicationChange
       responses:
         "200":

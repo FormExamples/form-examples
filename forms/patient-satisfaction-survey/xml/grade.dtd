@@ -1,4 +1,5 @@
 <!ELEMENT grade (id,created_at,updated_at,deleted_at,assessment_id,normalized_score,satisfaction_category,domain_access_score,domain_communication_score,domain_clinical_care_score,domain_staff_score,domain_environment_score,domain_discharge_score,domain_overall_score,graded_at)>
+<!ATTLIST grade xmlns CDATA #FIXED "https://formexamples.github.io/patient-satisfaction-survey/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

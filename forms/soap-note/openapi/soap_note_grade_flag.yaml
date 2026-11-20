@@ -5,10 +5,19 @@ info:
   title: Soap Note — SoapNoteGradeFlag
   version: 1.0.0
   description: Safety flags that fire independently of the completeness status, with priority and a suggested action for the clinician or governance team.
+x-namespace:
+  form: soap-note
+  apiPrefix: /api/soap-note/
+  sqlSchema: soap_note
+  xmlNamespace: https://formexamples.github.io/soap-note/xml
+tags:
+  - name: soap-note
+    description: Soap Note form
 paths:
   /api/soap-note/soap_note_grade_flags:
     get:
       summary: List SoapNoteGradeFlag records
+      tags: [soap-note]
       operationId: listSoapNoteGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SoapNoteGradeFlag
+      tags: [soap-note]
       operationId: createSoapNoteGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one SoapNoteGradeFlag by id
+      tags: [soap-note]
       operationId: getSoapNoteGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SoapNoteGradeFlag
+      tags: [soap-note]
       operationId: updateSoapNoteGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing SoapNoteGradeFlag
+      tags: [soap-note]
       operationId: replaceSoapNoteGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SoapNoteGradeFlag
+      tags: [soap-note]
       operationId: deleteSoapNoteGradeFlag
       responses:
         "200":

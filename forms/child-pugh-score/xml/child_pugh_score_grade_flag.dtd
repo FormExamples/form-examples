@@ -1,4 +1,5 @@
 <!ELEMENT child_pugh_score_grade_flag (id,created_at,updated_at,deleted_at,child_pugh_score_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST child_pugh_score_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/child-pugh-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

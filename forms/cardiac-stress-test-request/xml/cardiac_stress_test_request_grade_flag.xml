@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cardiac_stress_test_request_grade_flag SYSTEM "cardiac_stress_test_request_grade_flag.dtd">
-<cardiac_stress_test_request_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<cardiac_stress_test_request_grade_flag xmlns="https://formexamples.github.io/cardiac-stress-test-request/xml">
+<id>8a49ffa5-77d5-5ec9-8044-fa331a2c89a9</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<cardiac_stress_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</cardiac_stress_test_request_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<cardiac_stress_test_request_grade_id>4cd19b31-d33c-526b-9c2f-c0d7f8fb0985</cardiac_stress_test_request_grade_id>
+<flag_id>9a85207e-90a4-5588-989a-59fa075aaa65</flag_id>
 <category>recent-acs-contraindication</category>
 <priority>low</priority>
 <description>Example text.</description>

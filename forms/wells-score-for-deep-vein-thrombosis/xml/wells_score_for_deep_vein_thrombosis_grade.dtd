@@ -1,4 +1,5 @@
 <!ELEMENT wells_score_for_deep_vein_thrombosis_grade (id,created_at,updated_at,deleted_at,wells_score_for_deep_vein_thrombosis_id,wells_score,two_level_band,three_level_band,recommended_pathway,graded_at)>
+<!ATTLIST wells_score_for_deep_vein_thrombosis_grade xmlns CDATA #FIXED "https://formexamples.github.io/wells-score-for-deep-vein-thrombosis/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE paediatric_early_warning_score_grade SYSTEM "paediatric_early_warning_score_grade.dtd">
-<paediatric_early_warning_score_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<paediatric_early_warning_score_grade xmlns="https://formexamples.github.io/paediatric-early-warning-score/xml">
+<id>c55b0ed1-d907-5e09-992a-852c5367fa29</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<paediatric_early_warning_score_id>770e8400-e29b-41d4-a716-446655440002</paediatric_early_warning_score_id>
+<paediatric_early_warning_score_id>0c832d44-e8a8-5148-90da-ac4a09a277a3</paediatric_early_warning_score_id>
 <aggregate_score>5</aggregate_score>
 <max_parameter_score>5</max_parameter_score>
 <respiratory_rate_score>5</respiratory_rate_score>

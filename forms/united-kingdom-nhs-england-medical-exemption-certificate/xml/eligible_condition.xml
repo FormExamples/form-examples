@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE eligible_condition SYSTEM "eligible_condition.dtd">
-<eligible_condition>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<eligible_condition xmlns="https://formexamples.github.io/united-kingdom-nhs-england-medical-exemption-certificate/xml">
+<id>ae5c6353-893a-5d0c-b3ee-2c1fe8aab03a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>

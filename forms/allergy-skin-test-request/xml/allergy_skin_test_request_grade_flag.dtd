@@ -1,4 +1,5 @@
 <!ELEMENT allergy_skin_test_request_grade_flag (id,created_at,updated_at,deleted_at,allergy_skin_test_request_grade_id,flag_id,category,priority,description,suggested_action)>
+<!ATTLIST allergy_skin_test_request_grade_flag xmlns CDATA #FIXED "https://formexamples.github.io/allergy-skin-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

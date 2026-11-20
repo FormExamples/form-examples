@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/kinesiology-assessment/xml">
+<id>7929e1e5-73c0-57ac-b445-eda335b65744</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>880e8400-e29b-41d4-a716-446655440003</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>9987c0b7-0e47-5564-a730-eb9c13b71667</grade_id>
+<rule_id>e4a32edc-ba7e-5bac-a47d-97a14a24f845</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>mild</severity_level>

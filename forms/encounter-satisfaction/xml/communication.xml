@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE communication SYSTEM "communication.dtd">
-<communication>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<communication xmlns="https://formexamples.github.io/encounter-satisfaction/xml">
+<id>3f9dcf0e-cf33-54de-aebe-6eec691c9f75</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<encounter_satisfaction_id>770e8400-e29b-41d4-a716-446655440002</encounter_satisfaction_id>
+<encounter_satisfaction_id>9d55e49a-33ad-5345-8437-aabb2c65c34a</encounter_satisfaction_id>
 <listening>1</listening>
 <explaining_condition>1</explaining_condition>
 <answering_questions>1</answering_questions>

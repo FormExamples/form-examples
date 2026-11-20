@@ -1,4 +1,5 @@
 <!ELEMENT outpatient_outcome_signoff (id,created_at,updated_at,deleted_at,outpatient_outcome_id,reporting_clinician_id,reporting_clinician_name,reporting_clinician_role,signed_off_at)>
+<!ATTLIST outpatient_outcome_signoff xmlns CDATA #FIXED "https://formexamples.github.io/outpatient-outcome/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

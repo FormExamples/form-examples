@@ -1,4 +1,5 @@
 <!ELEMENT lasting_power_of_attorney (id,created_at,updated_at,deleted_at,donor_person_id,decision_mode,decision_mode_mixed_text,when_attorneys_can_act,preferences_text,instructions_text,legal_rights_acknowledged,opg_reference_number,opg_registration_date,status)>
+<!ATTLIST lasting_power_of_attorney xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

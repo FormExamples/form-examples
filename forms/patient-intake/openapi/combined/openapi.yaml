@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Patient Intake form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: patient-intake
+  apiPrefix: /api/patient-intake/
+  sqlSchema: patient_intake
+  xmlNamespace: https://formexamples.github.io/patient-intake/xml
+tags:
+- name: patient-intake
+  description: Patient Intake form
 paths:
   /api/patient-intake/assessment_allergies:
     get:
       summary: List AssessmentAllergies records
+      tags:
+      - patient-intake
       operationId: listAssessmentAllergies
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AssessmentAllergies
+      tags:
+      - patient-intake
       operationId: createAssessmentAllergies
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AssessmentAllergies by id
+      tags:
+      - patient-intake
       operationId: getAssessmentAllergies
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AssessmentAllergies
+      tags:
+      - patient-intake
       operationId: updateAssessmentAllergies
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AssessmentAllergies
+      tags:
+      - patient-intake
       operationId: replaceAssessmentAllergies
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AssessmentAllergies
+      tags:
+      - patient-intake
       operationId: deleteAssessmentAllergies
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/patient-intake/assessment_allergy_items:
     get:
       summary: List AssessmentAllergyItem records
+      tags:
+      - patient-intake
       operationId: listAssessmentAllergyItem
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AssessmentAllergyItem
+      tags:
+      - patient-intake
       operationId: createAssessmentAllergyItem
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AssessmentAllergyItem by id
+      tags:
+      - patient-intake
       operationId: getAssessmentAllergyItem
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AssessmentAllergyItem
+      tags:
+      - patient-intake
       operationId: updateAssessmentAllergyItem
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AssessmentAllergyItem
+      tags:
+      - patient-intake
       operationId: replaceAssessmentAllergyItem
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AssessmentAllergyItem
+      tags:
+      - patient-intake
       operationId: deleteAssessmentAllergyItem
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/patient-intake/assessment_medication_items:
     get:
       summary: List AssessmentMedicationItem records
+      tags:
+      - patient-intake
       operationId: listAssessmentMedicationItem
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AssessmentMedicationItem
+      tags:
+      - patient-intake
       operationId: createAssessmentMedicationItem
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AssessmentMedicationItem by id
+      tags:
+      - patient-intake
       operationId: getAssessmentMedicationItem
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AssessmentMedicationItem
+      tags:
+      - patient-intake
       operationId: updateAssessmentMedicationItem
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AssessmentMedicationItem
+      tags:
+      - patient-intake
       operationId: replaceAssessmentMedicationItem
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AssessmentMedicationItem
+      tags:
+      - patient-intake
       operationId: deleteAssessmentMedicationItem
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/patient-intake/assessment_medications:
     get:
       summary: List AssessmentMedications records
+      tags:
+      - patient-intake
       operationId: listAssessmentMedications
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AssessmentMedications
+      tags:
+      - patient-intake
       operationId: createAssessmentMedications
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AssessmentMedications by id
+      tags:
+      - patient-intake
       operationId: getAssessmentMedications
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AssessmentMedications
+      tags:
+      - patient-intake
       operationId: updateAssessmentMedications
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AssessmentMedications
+      tags:
+      - patient-intake
       operationId: replaceAssessmentMedications
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AssessmentMedications
+      tags:
+      - patient-intake
       operationId: deleteAssessmentMedications
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/patient-intake/assessments:
     get:
       summary: List Assessment records
+      tags:
+      - patient-intake
       operationId: listAssessment
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessment
+      tags:
+      - patient-intake
       operationId: createAssessment
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags:
+      - patient-intake
       operationId: getAssessment
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessment
+      tags:
+      - patient-intake
       operationId: updateAssessment
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Assessment
+      tags:
+      - patient-intake
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Assessment
+      tags:
+      - patient-intake
       operationId: deleteAssessment
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/patient-intake/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - patient-intake
       operationId: listClinician
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - patient-intake
       operationId: createClinician
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - patient-intake
       operationId: getClinician
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - patient-intake
       operationId: updateClinician
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - patient-intake
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - patient-intake
       operationId: deleteClinician
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/patient-intake/grades:
     get:
       summary: List Grade records
+      tags:
+      - patient-intake
       operationId: listGrade
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Grade
+      tags:
+      - patient-intake
       operationId: createGrade
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Grade by id
+      tags:
+      - patient-intake
       operationId: getGrade
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Grade
+      tags:
+      - patient-intake
       operationId: updateGrade
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Grade
+      tags:
+      - patient-intake
       operationId: replaceGrade
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Grade
+      tags:
+      - patient-intake
       operationId: deleteGrade
       responses:
         '200':
@@ -1733,6 +1825,8 @@ paths:
   /api/patient-intake/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags:
+      - patient-intake
       operationId: listGradingAdditionalFlag
       parameters:
       - name: limit
@@ -1785,6 +1879,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingAdditionalFlag
+      tags:
+      - patient-intake
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -1838,6 +1934,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags:
+      - patient-intake
       operationId: getGradingAdditionalFlag
       responses:
         '200':
@@ -1865,6 +1963,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags:
+      - patient-intake
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -1910,6 +2010,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags:
+      - patient-intake
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -1955,6 +2057,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags:
+      - patient-intake
       operationId: deleteGradingAdditionalFlag
       responses:
         '200':
@@ -1979,6 +2083,8 @@ paths:
   /api/patient-intake/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags:
+      - patient-intake
       operationId: listGradingFiredRule
       parameters:
       - name: limit
@@ -2031,6 +2137,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingFiredRule
+      tags:
+      - patient-intake
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -2084,6 +2192,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags:
+      - patient-intake
       operationId: getGradingFiredRule
       responses:
         '200':
@@ -2111,6 +2221,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingFiredRule
+      tags:
+      - patient-intake
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -2156,6 +2268,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingFiredRule
+      tags:
+      - patient-intake
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -2201,6 +2315,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingFiredRule
+      tags:
+      - patient-intake
       operationId: deleteGradingFiredRule
       responses:
         '200':
@@ -2233,9 +2349,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - patient-intake
   /api/patient-intake/patients:
     get:
       summary: List Patient records
+      tags:
+      - patient-intake
       operationId: listPatient
       parameters:
       - name: limit
@@ -2288,6 +2408,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - patient-intake
       operationId: createPatient
       requestBody:
         required: true
@@ -2341,6 +2463,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - patient-intake
       operationId: getPatient
       responses:
         '200':
@@ -2368,6 +2492,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - patient-intake
       operationId: updatePatient
       requestBody:
         required: true
@@ -2413,6 +2539,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - patient-intake
       operationId: replacePatient
       requestBody:
         required: true
@@ -2458,6 +2586,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - patient-intake
       operationId: deletePatient
       responses:
         '200':

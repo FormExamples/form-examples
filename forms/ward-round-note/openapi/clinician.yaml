@@ -5,10 +5,19 @@ info:
   title: Ward Round Note — Clinician
   version: 1.0.0
   description: Clinician identifying information for the reviewing clinician who documented a ward-round note.
+x-namespace:
+  form: ward-round-note
+  apiPrefix: /api/ward-round-note/
+  sqlSchema: ward_round_note
+  xmlNamespace: https://formexamples.github.io/ward-round-note/xml
+tags:
+  - name: ward-round-note
+    description: Ward Round Note form
 paths:
   /api/ward-round-note/clinicians:
     get:
       summary: List Clinician records
+      tags: [ward-round-note]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [ward-round-note]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [ward-round-note]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [ward-round-note]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [ward-round-note]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [ward-round-note]
       operationId: deleteClinician
       responses:
         "200":

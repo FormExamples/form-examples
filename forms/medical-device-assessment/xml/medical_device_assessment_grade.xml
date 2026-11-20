@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE medical_device_assessment_grade SYSTEM "medical_device_assessment_grade.dtd">
-<medical_device_assessment_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<medical_device_assessment_grade xmlns="https://formexamples.github.io/medical-device-assessment/xml">
+<id>4b3715f7-7c53-5a9c-a39f-62429581e9d8</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<medical_device_assessment_id>770e8400-e29b-41d4-a716-446655440002</medical_device_assessment_id>
+<medical_device_assessment_id>f1afa838-a53c-5999-86b2-1bf4ab14b7d5</medical_device_assessment_id>
 <computed_device_class>I</computed_device_class>
 <final_device_class>I</final_device_class>
 <class_suffix>s</class_suffix>

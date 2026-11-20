@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000055",
+    "id": "66523961-80b8-55ca-a0f7-501b1204d60b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000067",
+    "id": "2b46fca3-bc01-572f-8a74-32e2ff771f3c",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "recognitionOfStrokeInTheEmergencyRoom": {
-    "id": "550e8400-e29b-41d4-a716-000000000074",
+    "id": "45ada420-3377-5c54-95f9-3d3cf717d57f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000078",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000079",
+    "patientId": "40af87ad-2444-59db-9f59-d0f7a712b6aa",
+    "clinicianId": "d6898e4e-d67b-5129-82af-649d5804dcd5",
     "clinicianName": "",
     "clinicianRole": "doctor",
     "assessedAt": null,
@@ -61,22 +61,22 @@
     "clinicalNote": ""
   },
   "recognitionOfStrokeInTheEmergencyRoomGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008c",
+    "id": "cffbd78d-c48c-520e-ab93-ac0f774c6fcd",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "recognitionOfStrokeInTheEmergencyRoomId": "550e8400-e29b-41d4-a716-000000000090",
+    "recognitionOfStrokeInTheEmergencyRoomId": "e712bb68-aacd-57d3-870b-12cd5a4d0137",
     "rosierScore": null,
     "strokeLikely": "stroke-unlikely",
     "glucoseExcluded": "yes",
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "recognitionOfStrokeInTheEmergencyRoomGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000095",
+    "id": "b3c56bac-a39c-5026-89f8-e968b221d94f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "recognitionOfStrokeInTheEmergencyRoomGradeId": "550e8400-e29b-41d4-a716-000000000099",
+    "recognitionOfStrokeInTheEmergencyRoomGradeId": "c1043d6d-6948-5c92-bc26-cbf5ebdeafb4",
     "ruleId": "",
     "criterion": "loss-of-consciousness",
     "points": null,
@@ -84,11 +84,11 @@
     "description": ""
   },
   "recognitionOfStrokeInTheEmergencyRoomGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-00000000009f",
+    "id": "223840e2-a9d7-5380-a2d0-4bb3b8ed65bb",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "recognitionOfStrokeInTheEmergencyRoomGradeId": "550e8400-e29b-41d4-a716-0000000000a3",
+    "recognitionOfStrokeInTheEmergencyRoomGradeId": "0914e545-ff7b-5232-9156-4add73c644b2",
     "flagId": "",
     "category": "activate-stroke-pathway",
     "priority": "low",

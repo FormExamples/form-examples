@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment_testing_results SYSTEM "assessment_testing_results.dtd">
-<assessment_testing_results>
-<id>ee0e8400-e29b-41d4-a716-446655440009</id>
+<assessment_testing_results xmlns="https://formexamples.github.io/allergy-assessment/xml">
+<id>eda54c7c-da23-5950-88c0-bfa732040471</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>5fd99768-6a1f-5300-bf95-106f0fb5a2eb</assessment_id>
 <skin_prick_tests_done>yes</skin_prick_tests_done>
 <specific_ige_done>yes</specific_ige_done>
 <component_resolved_diagnostics_done>yes</component_resolved_diagnostics_done>

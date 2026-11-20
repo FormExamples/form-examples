@@ -5,10 +5,19 @@ info:
   title: Arc42 — RiskItem
   version: 1.0.0
   description: Risk or technical debt item captured in §11 Risks & Technical Debt of the arc42 documentation.
+x-namespace:
+  form: arc42
+  apiPrefix: /api/arc42/
+  sqlSchema: arc42
+  xmlNamespace: https://formexamples.github.io/arc42/xml
+tags:
+  - name: arc42
+    description: Arc42 form
 paths:
   /api/arc42/risk_items:
     get:
       summary: List RiskItem records
+      tags: [arc42]
       operationId: listRiskItem
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new RiskItem
+      tags: [arc42]
       operationId: createRiskItem
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one RiskItem by id
+      tags: [arc42]
       operationId: getRiskItem
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing RiskItem
+      tags: [arc42]
       operationId: updateRiskItem
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing RiskItem
+      tags: [arc42]
       operationId: replaceRiskItem
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a RiskItem
+      tags: [arc42]
       operationId: deleteRiskItem
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: United Kingdom Driver And Vehicle Licensing Agency M1 Form — Assessment
   version: 1.0.0
   description: Top-level assessment instance for united-kingdom-driver-and-vehicle-licensing-agency-m1-form. Parent entity for domain-specific sections and the grading result.
+x-namespace:
+  form: united-kingdom-driver-and-vehicle-licensing-agency-m1-form
+  apiPrefix: /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/
+  sqlSchema: united_kingdom_driver_and_vehicle_licensing_agency_m1_form
+  xmlNamespace: https://formexamples.github.io/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/xml
+tags:
+  - name: united-kingdom-driver-and-vehicle-licensing-agency-m1-form
+    description: United Kingdom Driver And Vehicle Licensing Agency M1 Form form
 paths:
   /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/assessments:
     get:
       summary: List Assessment records
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-m1-form]
       operationId: listAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-m1-form]
       operationId: createAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-m1-form]
       operationId: getAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-m1-form]
       operationId: updateAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Assessment
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-m1-form]
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Assessment
+      tags: [united-kingdom-driver-and-vehicle-licensing-agency-m1-form]
       operationId: deleteAssessment
       responses:
         "200":

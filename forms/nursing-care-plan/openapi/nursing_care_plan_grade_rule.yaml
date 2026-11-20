@@ -5,10 +5,19 @@ info:
   title: Nursing Care Plan — NursingCarePlanGradeRule
   version: 1.0.0
   description: "Audit trail of every completeness rule that fired during grading: category and description."
+x-namespace:
+  form: nursing-care-plan
+  apiPrefix: /api/nursing-care-plan/
+  sqlSchema: nursing_care_plan
+  xmlNamespace: https://formexamples.github.io/nursing-care-plan/xml
+tags:
+  - name: nursing-care-plan
+    description: Nursing Care Plan form
 paths:
   /api/nursing-care-plan/nursing_care_plan_grade_rules:
     get:
       summary: List NursingCarePlanGradeRule records
+      tags: [nursing-care-plan]
       operationId: listNursingCarePlanGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NursingCarePlanGradeRule
+      tags: [nursing-care-plan]
       operationId: createNursingCarePlanGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NursingCarePlanGradeRule by id
+      tags: [nursing-care-plan]
       operationId: getNursingCarePlanGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NursingCarePlanGradeRule
+      tags: [nursing-care-plan]
       operationId: updateNursingCarePlanGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NursingCarePlanGradeRule
+      tags: [nursing-care-plan]
       operationId: replaceNursingCarePlanGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NursingCarePlanGradeRule
+      tags: [nursing-care-plan]
       operationId: deleteNursingCarePlanGradeRule
       responses:
         "200":

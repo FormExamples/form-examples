@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE wells_score_for_pulmonary_embolism_grade SYSTEM "wells_score_for_pulmonary_embolism_grade.dtd">
-<wells_score_for_pulmonary_embolism_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<wells_score_for_pulmonary_embolism_grade xmlns="https://formexamples.github.io/wells-score-for-pulmonary-embolism/xml">
+<id>2ff63702-5569-501c-baf2-fa724b829278</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<wells_score_for_pulmonary_embolism_id>770e8400-e29b-41d4-a716-446655440002</wells_score_for_pulmonary_embolism_id>
+<wells_score_for_pulmonary_embolism_id>66ca0c4f-f624-5d55-910c-627ff0c153fe</wells_score_for_pulmonary_embolism_id>
 <wells_score>5.0</wells_score>
 <two_level_band>likely</two_level_band>
 <three_level_band>low</three_level_band>

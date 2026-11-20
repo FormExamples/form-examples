@@ -1,4 +1,5 @@
 <!ELEMENT review_calculate (id,created_at,updated_at,deleted_at,assessment_id,clinician_name,review_date,clinical_notes,audit_score)>
+<!ATTLIST review_calculate xmlns CDATA #FIXED "https://formexamples.github.io/heart-health-check/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

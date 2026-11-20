@@ -5,10 +5,19 @@ info:
   title: Electrocardiogram Test Request — ElectrocardiogramTestRequestGradeRule
   version: 1.0.0
   description: Audit trail of every appropriateness / urgency / completeness / priority rule that fired for this request.
+x-namespace:
+  form: electrocardiogram-test-request
+  apiPrefix: /api/electrocardiogram-test-request/
+  sqlSchema: electrocardiogram_test_request
+  xmlNamespace: https://formexamples.github.io/electrocardiogram-test-request/xml
+tags:
+  - name: electrocardiogram-test-request
+    description: Electrocardiogram Test Request form
 paths:
   /api/electrocardiogram-test-request/electrocardiogram_test_request_grade_rules:
     get:
       summary: List ElectrocardiogramTestRequestGradeRule records
+      tags: [electrocardiogram-test-request]
       operationId: listElectrocardiogramTestRequestGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ElectrocardiogramTestRequestGradeRule
+      tags: [electrocardiogram-test-request]
       operationId: createElectrocardiogramTestRequestGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ElectrocardiogramTestRequestGradeRule by id
+      tags: [electrocardiogram-test-request]
       operationId: getElectrocardiogramTestRequestGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ElectrocardiogramTestRequestGradeRule
+      tags: [electrocardiogram-test-request]
       operationId: updateElectrocardiogramTestRequestGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ElectrocardiogramTestRequestGradeRule
+      tags: [electrocardiogram-test-request]
       operationId: replaceElectrocardiogramTestRequestGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ElectrocardiogramTestRequestGradeRule
+      tags: [electrocardiogram-test-request]
       operationId: deleteElectrocardiogramTestRequestGradeRule
       responses:
         "200":

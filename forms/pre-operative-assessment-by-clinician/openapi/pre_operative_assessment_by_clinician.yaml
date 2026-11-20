@@ -5,10 +5,19 @@ info:
   title: Pre Operative Assessment By Clinician — PreOperativeAssessmentByClinician
   version: 1.0.0
   description: "Clinician-led pre-operative assessment: objective findings, scoring inputs (ASA, Mallampati, RCRI, STOP-BANG, Clinical Frailty Scale), planned anaesthesia strategy, and safety flags for adult elective and urgent surgery."
+x-namespace:
+  form: pre-operative-assessment-by-clinician
+  apiPrefix: /api/pre-operative-assessment-by-clinician/
+  sqlSchema: pre_operative_assessment_by_clinician
+  xmlNamespace: https://formexamples.github.io/pre-operative-assessment-by-clinician/xml
+tags:
+  - name: pre-operative-assessment-by-clinician
+    description: Pre Operative Assessment By Clinician form
 paths:
   /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinicians:
     get:
       summary: List PreOperativeAssessmentByClinician records
+      tags: [pre-operative-assessment-by-clinician]
       operationId: listPreOperativeAssessmentByClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PreOperativeAssessmentByClinician
+      tags: [pre-operative-assessment-by-clinician]
       operationId: createPreOperativeAssessmentByClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one PreOperativeAssessmentByClinician by id
+      tags: [pre-operative-assessment-by-clinician]
       operationId: getPreOperativeAssessmentByClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PreOperativeAssessmentByClinician
+      tags: [pre-operative-assessment-by-clinician]
       operationId: updatePreOperativeAssessmentByClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing PreOperativeAssessmentByClinician
+      tags: [pre-operative-assessment-by-clinician]
       operationId: replacePreOperativeAssessmentByClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PreOperativeAssessmentByClinician
+      tags: [pre-operative-assessment-by-clinician]
       operationId: deletePreOperativeAssessmentByClinician
       responses:
         "200":

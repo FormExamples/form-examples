@@ -5,10 +5,19 @@ info:
   title: Mental State Examination — MentalStateExaminationGradeRule
   version: 1.0.0
   description: "Audit trail of every completeness-and-risk rule that fired during grading: domain, category, and description."
+x-namespace:
+  form: mental-state-examination
+  apiPrefix: /api/mental-state-examination/
+  sqlSchema: mental_state_examination
+  xmlNamespace: https://formexamples.github.io/mental-state-examination/xml
+tags:
+  - name: mental-state-examination
+    description: Mental State Examination form
 paths:
   /api/mental-state-examination/mental_state_examination_grade_rules:
     get:
       summary: List MentalStateExaminationGradeRule records
+      tags: [mental-state-examination]
       operationId: listMentalStateExaminationGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MentalStateExaminationGradeRule
+      tags: [mental-state-examination]
       operationId: createMentalStateExaminationGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MentalStateExaminationGradeRule by id
+      tags: [mental-state-examination]
       operationId: getMentalStateExaminationGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MentalStateExaminationGradeRule
+      tags: [mental-state-examination]
       operationId: updateMentalStateExaminationGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MentalStateExaminationGradeRule
+      tags: [mental-state-examination]
       operationId: replaceMentalStateExaminationGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MentalStateExaminationGradeRule
+      tags: [mental-state-examination]
       operationId: deleteMentalStateExaminationGradeRule
       responses:
         "200":

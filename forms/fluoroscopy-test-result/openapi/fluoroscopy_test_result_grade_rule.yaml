@@ -5,10 +5,19 @@ info:
   title: Fluoroscopy Test Result — FluoroscopyTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: fluoroscopy-test-result
+  apiPrefix: /api/fluoroscopy-test-result/
+  sqlSchema: fluoroscopy_test_result
+  xmlNamespace: https://formexamples.github.io/fluoroscopy-test-result/xml
+tags:
+  - name: fluoroscopy-test-result
+    description: Fluoroscopy Test Result form
 paths:
   /api/fluoroscopy-test-result/fluoroscopy_test_result_grade_rules:
     get:
       summary: List FluoroscopyTestResultGradeRule records
+      tags: [fluoroscopy-test-result]
       operationId: listFluoroscopyTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new FluoroscopyTestResultGradeRule
+      tags: [fluoroscopy-test-result]
       operationId: createFluoroscopyTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one FluoroscopyTestResultGradeRule by id
+      tags: [fluoroscopy-test-result]
       operationId: getFluoroscopyTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing FluoroscopyTestResultGradeRule
+      tags: [fluoroscopy-test-result]
       operationId: updateFluoroscopyTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing FluoroscopyTestResultGradeRule
+      tags: [fluoroscopy-test-result]
       operationId: replaceFluoroscopyTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a FluoroscopyTestResultGradeRule
+      tags: [fluoroscopy-test-result]
       operationId: deleteFluoroscopyTestResultGradeRule
       responses:
         "200":

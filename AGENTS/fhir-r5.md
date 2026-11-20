@@ -41,7 +41,7 @@ fhir/r5/
 - FHIR version: R5 (5.0.0)
 - Every resource includes a `resourceType` field matching the resource type
 - Every resource includes a `meta.profile` referencing the base StructureDefinition
-- `id` values are the UUIDv4 primary key of the source SQL row
+- `id` values are the UUIDv4 primary key of the source SQL row. In the generated examples they are UUIDv5 names within the form (`bin/lib/example_ids.py`), so no two forms' examples share an id ([`spec/form-namespacing/`](../spec/form-namespacing/))
 - References use the `"reference": "ResourceType/uuid"` format
 - Patient NHS numbers use system `https://fhir.nhs.uk/Id/nhs-number`
 - Encounter `class` coded as `AMB` (ambulatory) from v3-ActCode

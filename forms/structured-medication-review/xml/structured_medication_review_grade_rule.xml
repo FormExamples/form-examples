@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE structured_medication_review_grade_rule SYSTEM "structured_medication_review_grade_rule.dtd">
-<structured_medication_review_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<structured_medication_review_grade_rule xmlns="https://formexamples.github.io/structured-medication-review/xml">
+<id>d801af62-14e2-5c0e-a531-ab817a54b854</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<structured_medication_review_grade_id>990e8400-e29b-41d4-a716-446655440004</structured_medication_review_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<structured_medication_review_grade_id>5b0c2bac-7f9a-5a23-ad92-18939e881d28</structured_medication_review_grade_id>
+<rule_id>92585b0a-f5c3-5339-a207-28cd7cc0a159</rule_id>
 <category>General</category>
 <description>Example text.</description>
 </structured_medication_review_grade_rule>

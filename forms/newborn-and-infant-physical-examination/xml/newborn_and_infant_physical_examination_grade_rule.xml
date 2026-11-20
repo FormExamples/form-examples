@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE newborn_and_infant_physical_examination_grade_rule SYSTEM "newborn_and_infant_physical_examination_grade_rule.dtd">
-<newborn_and_infant_physical_examination_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<newborn_and_infant_physical_examination_grade_rule xmlns="https://formexamples.github.io/newborn-and-infant-physical-examination/xml">
+<id>c519829d-840b-5bb2-a327-9479cb2fb289</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<newborn_and_infant_physical_examination_grade_id>880e8400-e29b-41d4-a716-446655440003</newborn_and_infant_physical_examination_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<newborn_and_infant_physical_examination_grade_id>027b3587-87d6-53b6-90f7-692d3999483e</newborn_and_infant_physical_examination_grade_id>
+<rule_id>bd2e89a6-514b-5dd5-9e4d-218236a19885</rule_id>
 <component>eyes</component>
 <category>General</category>
 <description>Example text.</description>

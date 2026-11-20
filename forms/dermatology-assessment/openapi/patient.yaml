@@ -5,10 +5,19 @@ info:
   title: Dermatology Assessment — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: dermatology-assessment
+  apiPrefix: /api/dermatology-assessment/
+  sqlSchema: dermatology_assessment
+  xmlNamespace: https://formexamples.github.io/dermatology-assessment/xml
+tags:
+  - name: dermatology-assessment
+    description: Dermatology Assessment form
 paths:
   /api/dermatology-assessment/patients:
     get:
       summary: List Patient records
+      tags: [dermatology-assessment]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [dermatology-assessment]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [dermatology-assessment]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [dermatology-assessment]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [dermatology-assessment]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [dermatology-assessment]
       operationId: deletePatient
       responses:
         "200":

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE bronchoscopy_test_result_grade SYSTEM "bronchoscopy_test_result_grade.dtd">
-<bronchoscopy_test_result_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<bronchoscopy_test_result_grade xmlns="https://formexamples.github.io/bronchoscopy-test-result/xml">
+<id>a49ed54b-9c70-5591-873b-eb8e6b5ba41a</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<bronchoscopy_test_result_id>770e8400-e29b-41d4-a716-446655440002</bronchoscopy_test_result_id>
+<bronchoscopy_test_result_id>a9d24557-502b-5422-94b8-b57ef5ce1700</bronchoscopy_test_result_id>
 <result_classification>normal</result_classification>
 <abnormality_severity>none</abnormality_severity>
 <reporting_category>General</reporting_category>

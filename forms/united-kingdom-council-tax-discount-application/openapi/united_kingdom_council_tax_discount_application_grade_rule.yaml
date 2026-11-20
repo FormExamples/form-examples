@@ -5,10 +5,19 @@ info:
   title: United Kingdom Council Tax Discount Application — UnitedKingdomCouncilTaxDiscountApplicationGradeRule
   version: 1.0.0
   description: Audit trail of every eligibility rule that fired during classification, with the application dimension it concerns, the category and a description.
+x-namespace:
+  form: united-kingdom-council-tax-discount-application
+  apiPrefix: /api/united-kingdom-council-tax-discount-application/
+  sqlSchema: united_kingdom_council_tax_discount_application
+  xmlNamespace: https://formexamples.github.io/united-kingdom-council-tax-discount-application/xml
+tags:
+  - name: united-kingdom-council-tax-discount-application
+    description: United Kingdom Council Tax Discount Application form
 paths:
   /api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_application_grade_rules:
     get:
       summary: List UnitedKingdomCouncilTaxDiscountApplicationGradeRule records
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: listUnitedKingdomCouncilTaxDiscountApplicationGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomCouncilTaxDiscountApplicationGradeRule
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: createUnitedKingdomCouncilTaxDiscountApplicationGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomCouncilTaxDiscountApplicationGradeRule by id
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: getUnitedKingdomCouncilTaxDiscountApplicationGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomCouncilTaxDiscountApplicationGradeRule
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: updateUnitedKingdomCouncilTaxDiscountApplicationGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomCouncilTaxDiscountApplicationGradeRule
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: replaceUnitedKingdomCouncilTaxDiscountApplicationGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomCouncilTaxDiscountApplicationGradeRule
+      tags: [united-kingdom-council-tax-discount-application]
       operationId: deleteUnitedKingdomCouncilTaxDiscountApplicationGradeRule
       responses:
         "200":

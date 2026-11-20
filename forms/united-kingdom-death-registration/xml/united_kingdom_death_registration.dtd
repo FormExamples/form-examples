@@ -1,4 +1,5 @@
 <!ELEMENT united_kingdom_death_registration (id,created_at,updated_at,deleted_at,patient_id,informant_id,deceased_name,sex,date_of_birth,date_of_death,place_of_death,death_jurisdiction,deceased_particulars_known,mccd_received,medical_examiner_status,medical_examiner_confirmation_date,referred_to_coroner,coroner_stage,coroner_certificate_received,informant_name,informant_relationship,informant_address,register_office,appointment_booked,supporting_documents_available,registration_date,as_of_date,disposal_method,disposal_certificate_issued,tell_us_once_status,tell_us_once_reference,copies_requested,copy_order_channel,gro_index_reference,priority_service)>
+<!ATTLIST united_kingdom_death_registration xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-death-registration/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

@@ -7,6 +7,14 @@ info:
   description: Combined OpenAPI specification for the United Kingdom Last Will and Testament form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-kingdom-last-will-and-testament
+  apiPrefix: /api/united-kingdom-last-will-and-testament/
+  sqlSchema: united_kingdom_last_will_and_testament
+  xmlNamespace: https://formexamples.github.io/united-kingdom-last-will-and-testament/xml
+tags:
+- name: united-kingdom-last-will-and-testament
+  description: United Kingdom Last Will and Testament form
 paths:
   /api/united-kingdom-last-will-and-testament/openapi.yaml:
     get:
@@ -19,9 +27,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-kingdom-last-will-and-testament
   /api/united-kingdom-last-will-and-testament/testators:
     get:
       summary: List Testator records
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: listTestator
       parameters:
       - name: limit
@@ -74,6 +86,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Testator
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: createTestator
       requestBody:
         required: true
@@ -127,6 +141,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Testator by id
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: getTestator
       responses:
         '200':
@@ -154,6 +170,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Testator
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: updateTestator
       requestBody:
         required: true
@@ -199,6 +217,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Testator
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: replaceTestator
       requestBody:
         required: true
@@ -244,6 +264,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Testator
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: deleteTestator
       responses:
         '200':
@@ -268,6 +290,8 @@ paths:
   /api/united-kingdom-last-will-and-testament/united_kingdom_last_will_and_testament_grade_flags:
     get:
       summary: List UnitedKingdomLastWillAndTestamentGradeFlag records
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: listUnitedKingdomLastWillAndTestamentGradeFlag
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomLastWillAndTestamentGradeFlag
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: createUnitedKingdomLastWillAndTestamentGradeFlag
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomLastWillAndTestamentGradeFlag by id
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: getUnitedKingdomLastWillAndTestamentGradeFlag
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomLastWillAndTestamentGradeFlag
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: updateUnitedKingdomLastWillAndTestamentGradeFlag
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomLastWillAndTestamentGradeFlag
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: replaceUnitedKingdomLastWillAndTestamentGradeFlag
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomLastWillAndTestamentGradeFlag
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: deleteUnitedKingdomLastWillAndTestamentGradeFlag
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/united-kingdom-last-will-and-testament/united_kingdom_last_will_and_testament_grade_rules:
     get:
       summary: List UnitedKingdomLastWillAndTestamentGradeRule records
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: listUnitedKingdomLastWillAndTestamentGradeRule
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomLastWillAndTestamentGradeRule
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: createUnitedKingdomLastWillAndTestamentGradeRule
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomLastWillAndTestamentGradeRule by id
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: getUnitedKingdomLastWillAndTestamentGradeRule
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomLastWillAndTestamentGradeRule
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: updateUnitedKingdomLastWillAndTestamentGradeRule
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomLastWillAndTestamentGradeRule
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: replaceUnitedKingdomLastWillAndTestamentGradeRule
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomLastWillAndTestamentGradeRule
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: deleteUnitedKingdomLastWillAndTestamentGradeRule
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-kingdom-last-will-and-testament/united_kingdom_last_will_and_testament_grades:
     get:
       summary: List UnitedKingdomLastWillAndTestamentGrade records
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: listUnitedKingdomLastWillAndTestamentGrade
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomLastWillAndTestamentGrade
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: createUnitedKingdomLastWillAndTestamentGrade
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomLastWillAndTestamentGrade by id
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: getUnitedKingdomLastWillAndTestamentGrade
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomLastWillAndTestamentGrade
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: updateUnitedKingdomLastWillAndTestamentGrade
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomLastWillAndTestamentGrade
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: replaceUnitedKingdomLastWillAndTestamentGrade
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomLastWillAndTestamentGrade
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: deleteUnitedKingdomLastWillAndTestamentGrade
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-kingdom-last-will-and-testament/united_kingdom_last_will_and_testaments:
     get:
       summary: List UnitedKingdomLastWillAndTestament records
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: listUnitedKingdomLastWillAndTestament
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomLastWillAndTestament
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: createUnitedKingdomLastWillAndTestament
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedKingdomLastWillAndTestament by id
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: getUnitedKingdomLastWillAndTestament
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomLastWillAndTestament
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: updateUnitedKingdomLastWillAndTestament
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedKingdomLastWillAndTestament
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: replaceUnitedKingdomLastWillAndTestament
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedKingdomLastWillAndTestament
+      tags:
+      - united-kingdom-last-will-and-testament
       operationId: deleteUnitedKingdomLastWillAndTestament
       responses:
         '200':

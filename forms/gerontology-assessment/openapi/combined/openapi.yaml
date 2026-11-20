@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Gerontology Assessment form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: gerontology-assessment
+  apiPrefix: /api/gerontology-assessment/
+  sqlSchema: gerontology_assessment
+  xmlNamespace: https://formexamples.github.io/gerontology-assessment/xml
+tags:
+- name: gerontology-assessment
+  description: Gerontology Assessment form
 paths:
   /api/gerontology-assessment/assessment_polypharmacy_review_medications:
     get:
       summary: List AssessmentPolypharmacyReviewMedication records
+      tags:
+      - gerontology-assessment
       operationId: listAssessmentPolypharmacyReviewMedication
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AssessmentPolypharmacyReviewMedication
+      tags:
+      - gerontology-assessment
       operationId: createAssessmentPolypharmacyReviewMedication
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AssessmentPolypharmacyReviewMedication by id
+      tags:
+      - gerontology-assessment
       operationId: getAssessmentPolypharmacyReviewMedication
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AssessmentPolypharmacyReviewMedication
+      tags:
+      - gerontology-assessment
       operationId: updateAssessmentPolypharmacyReviewMedication
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AssessmentPolypharmacyReviewMedication
+      tags:
+      - gerontology-assessment
       operationId: replaceAssessmentPolypharmacyReviewMedication
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AssessmentPolypharmacyReviewMedication
+      tags:
+      - gerontology-assessment
       operationId: deleteAssessmentPolypharmacyReviewMedication
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/gerontology-assessment/assessment_polypharmacy_reviews:
     get:
       summary: List AssessmentPolypharmacyReview records
+      tags:
+      - gerontology-assessment
       operationId: listAssessmentPolypharmacyReview
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AssessmentPolypharmacyReview
+      tags:
+      - gerontology-assessment
       operationId: createAssessmentPolypharmacyReview
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one AssessmentPolypharmacyReview by id
+      tags:
+      - gerontology-assessment
       operationId: getAssessmentPolypharmacyReview
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AssessmentPolypharmacyReview
+      tags:
+      - gerontology-assessment
       operationId: updateAssessmentPolypharmacyReview
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing AssessmentPolypharmacyReview
+      tags:
+      - gerontology-assessment
       operationId: replaceAssessmentPolypharmacyReview
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a AssessmentPolypharmacyReview
+      tags:
+      - gerontology-assessment
       operationId: deleteAssessmentPolypharmacyReview
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/gerontology-assessment/assessments:
     get:
       summary: List Assessment records
+      tags:
+      - gerontology-assessment
       operationId: listAssessment
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessment
+      tags:
+      - gerontology-assessment
       operationId: createAssessment
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Assessment by id
+      tags:
+      - gerontology-assessment
       operationId: getAssessment
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessment
+      tags:
+      - gerontology-assessment
       operationId: updateAssessment
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Assessment
+      tags:
+      - gerontology-assessment
       operationId: replaceAssessment
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Assessment
+      tags:
+      - gerontology-assessment
       operationId: deleteAssessment
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/gerontology-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - gerontology-assessment
       operationId: listClinician
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - gerontology-assessment
       operationId: createClinician
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - gerontology-assessment
       operationId: getClinician
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - gerontology-assessment
       operationId: updateClinician
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - gerontology-assessment
       operationId: replaceClinician
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - gerontology-assessment
       operationId: deleteClinician
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/gerontology-assessment/grades:
     get:
       summary: List Grade records
+      tags:
+      - gerontology-assessment
       operationId: listGrade
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Grade
+      tags:
+      - gerontology-assessment
       operationId: createGrade
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Grade by id
+      tags:
+      - gerontology-assessment
       operationId: getGrade
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Grade
+      tags:
+      - gerontology-assessment
       operationId: updateGrade
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Grade
+      tags:
+      - gerontology-assessment
       operationId: replaceGrade
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Grade
+      tags:
+      - gerontology-assessment
       operationId: deleteGrade
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/gerontology-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
+      tags:
+      - gerontology-assessment
       operationId: listGradingAdditionalFlag
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingAdditionalFlag
+      tags:
+      - gerontology-assessment
       operationId: createGradingAdditionalFlag
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingAdditionalFlag by id
+      tags:
+      - gerontology-assessment
       operationId: getGradingAdditionalFlag
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingAdditionalFlag
+      tags:
+      - gerontology-assessment
       operationId: updateGradingAdditionalFlag
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingAdditionalFlag
+      tags:
+      - gerontology-assessment
       operationId: replaceGradingAdditionalFlag
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingAdditionalFlag
+      tags:
+      - gerontology-assessment
       operationId: deleteGradingAdditionalFlag
       responses:
         '200':
@@ -1487,6 +1567,8 @@ paths:
   /api/gerontology-assessment/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
+      tags:
+      - gerontology-assessment
       operationId: listGradingFiredRule
       parameters:
       - name: limit
@@ -1539,6 +1621,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingFiredRule
+      tags:
+      - gerontology-assessment
       operationId: createGradingFiredRule
       requestBody:
         required: true
@@ -1592,6 +1676,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one GradingFiredRule by id
+      tags:
+      - gerontology-assessment
       operationId: getGradingFiredRule
       responses:
         '200':
@@ -1619,6 +1705,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing GradingFiredRule
+      tags:
+      - gerontology-assessment
       operationId: updateGradingFiredRule
       requestBody:
         required: true
@@ -1664,6 +1752,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing GradingFiredRule
+      tags:
+      - gerontology-assessment
       operationId: replaceGradingFiredRule
       requestBody:
         required: true
@@ -1709,6 +1799,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingFiredRule
+      tags:
+      - gerontology-assessment
       operationId: deleteGradingFiredRule
       responses:
         '200':
@@ -1741,9 +1833,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - gerontology-assessment
   /api/gerontology-assessment/patients:
     get:
       summary: List Patient records
+      tags:
+      - gerontology-assessment
       operationId: listPatient
       parameters:
       - name: limit
@@ -1796,6 +1892,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - gerontology-assessment
       operationId: createPatient
       requestBody:
         required: true
@@ -1849,6 +1947,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - gerontology-assessment
       operationId: getPatient
       responses:
         '200':
@@ -1876,6 +1976,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - gerontology-assessment
       operationId: updatePatient
       requestBody:
         required: true
@@ -1921,6 +2023,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - gerontology-assessment
       operationId: replacePatient
       requestBody:
         required: true
@@ -1966,6 +2070,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - gerontology-assessment
       operationId: deletePatient
       responses:
         '200':

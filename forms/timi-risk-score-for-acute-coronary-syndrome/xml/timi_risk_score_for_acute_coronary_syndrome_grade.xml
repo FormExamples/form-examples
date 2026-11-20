@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE timi_risk_score_for_acute_coronary_syndrome_grade SYSTEM "timi_risk_score_for_acute_coronary_syndrome_grade.dtd">
-<timi_risk_score_for_acute_coronary_syndrome_grade>
-<id>880e8400-e29b-41d4-a716-446655440003</id>
+<timi_risk_score_for_acute_coronary_syndrome_grade xmlns="https://formexamples.github.io/timi-risk-score-for-acute-coronary-syndrome/xml">
+<id>74b05ecf-d144-5fa7-8663-9c0a117cf62b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<timi_risk_score_for_acute_coronary_syndrome_id>770e8400-e29b-41d4-a716-446655440002</timi_risk_score_for_acute_coronary_syndrome_id>
+<timi_risk_score_for_acute_coronary_syndrome_id>ca682357-080a-52a8-aa40-d1694413b974</timi_risk_score_for_acute_coronary_syndrome_id>
 <total_score>5</total_score>
 <risk_band>low</risk_band>
 <fourteen_day_event_risk_percent>50.0</fourteen_day_event_risk_percent>

@@ -5,10 +5,19 @@ info:
   title: Hospital Dashboard Metrics — HospitalDashboardMetrics
   version: 1.0.0
   description: "One hospital KPI reporting period: hospital/site, period month/year, prepared-by, and sign-off notes."
+x-namespace:
+  form: hospital-dashboard-metrics
+  apiPrefix: /api/hospital-dashboard-metrics/
+  sqlSchema: hospital_dashboard_metrics
+  xmlNamespace: https://formexamples.github.io/hospital-dashboard-metrics/xml
+tags:
+  - name: hospital-dashboard-metrics
+    description: Hospital Dashboard Metrics form
 paths:
   /api/hospital-dashboard-metrics/hospital_dashboard_metrics:
     get:
       summary: List HospitalDashboardMetrics records
+      tags: [hospital-dashboard-metrics]
       operationId: listHospitalDashboardMetrics
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HospitalDashboardMetrics
+      tags: [hospital-dashboard-metrics]
       operationId: createHospitalDashboardMetrics
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HospitalDashboardMetrics by id
+      tags: [hospital-dashboard-metrics]
       operationId: getHospitalDashboardMetrics
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HospitalDashboardMetrics
+      tags: [hospital-dashboard-metrics]
       operationId: updateHospitalDashboardMetrics
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HospitalDashboardMetrics
+      tags: [hospital-dashboard-metrics]
       operationId: replaceHospitalDashboardMetrics
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HospitalDashboardMetrics
+      tags: [hospital-dashboard-metrics]
       operationId: deleteHospitalDashboardMetrics
       responses:
         "200":

@@ -5,10 +5,19 @@ info:
   title: Parkland Formula For Burns — ParklandFormulaForBurnsGradeFlag
   version: 1.0.0
   description: Safety-critical red flags that fire independently of the arithmetic, with priority and a suggested action for the assessing clinician.
+x-namespace:
+  form: parkland-formula-for-burns
+  apiPrefix: /api/parkland-formula-for-burns/
+  sqlSchema: parkland_formula_for_burns
+  xmlNamespace: https://formexamples.github.io/parkland-formula-for-burns/xml
+tags:
+  - name: parkland-formula-for-burns
+    description: Parkland Formula For Burns form
 paths:
   /api/parkland-formula-for-burns/parkland_formula_for_burns_grade_flags:
     get:
       summary: List ParklandFormulaForBurnsGradeFlag records
+      tags: [parkland-formula-for-burns]
       operationId: listParklandFormulaForBurnsGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ParklandFormulaForBurnsGradeFlag
+      tags: [parkland-formula-for-burns]
       operationId: createParklandFormulaForBurnsGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ParklandFormulaForBurnsGradeFlag by id
+      tags: [parkland-formula-for-burns]
       operationId: getParklandFormulaForBurnsGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ParklandFormulaForBurnsGradeFlag
+      tags: [parkland-formula-for-burns]
       operationId: updateParklandFormulaForBurnsGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ParklandFormulaForBurnsGradeFlag
+      tags: [parkland-formula-for-burns]
       operationId: replaceParklandFormulaForBurnsGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ParklandFormulaForBurnsGradeFlag
+      tags: [parkland-formula-for-burns]
       operationId: deleteParklandFormulaForBurnsGradeFlag
       responses:
         "200":

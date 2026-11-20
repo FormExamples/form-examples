@@ -5,10 +5,19 @@ info:
   title: Screening Program Privacy Notice — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: screening-program-privacy-notice
+  apiPrefix: /api/screening-program-privacy-notice/
+  sqlSchema: screening_program_privacy_notice
+  xmlNamespace: https://formexamples.github.io/screening-program-privacy-notice/xml
+tags:
+  - name: screening-program-privacy-notice
+    description: Screening Program Privacy Notice form
 paths:
   /api/screening-program-privacy-notice/patients:
     get:
       summary: List Patient records
+      tags: [screening-program-privacy-notice]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [screening-program-privacy-notice]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [screening-program-privacy-notice]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [screening-program-privacy-notice]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [screening-program-privacy-notice]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [screening-program-privacy-notice]
       operationId: deletePatient
       responses:
         "200":

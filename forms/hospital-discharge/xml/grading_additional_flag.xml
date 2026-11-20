@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_additional_flag SYSTEM "grading_additional_flag.dtd">
-<grading_additional_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<grading_additional_flag xmlns="https://formexamples.github.io/hospital-discharge/xml">
+<id>818d1e3d-9ea8-59a9-a56c-0c36f1b69cc5</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>880e8400-e29b-41d4-a716-446655440003</grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<grade_id>d4da96b5-f5cf-5fe1-be1a-91d72ad7c628</grade_id>
+<flag_id>2469eb2f-c3a5-5b55-918c-6353e3c118c0</flag_id>
 <category>General</category>
 <description>Example text.</description>
 <priority>low</priority>

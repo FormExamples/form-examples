@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ss5_application_grade_flag SYSTEM "ss5_application_grade_flag.dtd">
-<ss5_application_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<ss5_application_grade_flag xmlns="https://formexamples.github.io/united-states-social-security-card-application/xml">
+<id>ca436772-94b1-51cc-ba88-8d1d8ecdd5d0</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<ss5_application_grade_id>880e8400-e29b-41d4-a716-446655440003</ss5_application_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<ss5_application_grade_id>127df800-39e0-5606-b8da-1a1bcc88e0d5</ss5_application_grade_id>
+<flag_id>c541582e-b64d-5784-ae59-73d415fbad3f</flag_id>
 <category>applicant-deceased</category>
 <priority>low</priority>
 <description>Example text.</description>

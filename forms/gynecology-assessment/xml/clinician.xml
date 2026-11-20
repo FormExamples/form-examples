@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE clinician SYSTEM "clinician.dtd">
-<clinician>
-<id>660e8400-e29b-41d4-a716-446655440001</id>
+<clinician xmlns="https://formexamples.github.io/gynecology-assessment/xml">
+<id>8b0d82e9-0a9f-5bb2-a8c5-5975c5df04a3</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>

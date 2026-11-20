@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "4726f2f3-767b-40e2-a3da-56ed179c4e5a",
+  "id": "bdd83c04-7f45-5b8e-b703-b9dc44a0974f",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:5fdf0520-717b-4c78-a988-a32ba6dcab42",
+      "fullUrl": "urn:uuid:8d221c42-8f07-5f5e-9dd2-87e037cbf646",
       "resource": {
         "resourceType": "Patient",
-        "id": "5fdf0520-717b-4c78-a988-a32ba6dcab42",
+        "id": "8d221c42-8f07-5f5e-9dd2-87e037cbf646",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:6c76eb4a-9715-4145-a015-717a9b5f7761",
+      "fullUrl": "urn:uuid:49b31e44-511f-5c9f-a818-f162087f53a9",
       "resource": {
         "resourceType": "Observation",
-        "id": "6c76eb4a-9715-4145-a015-717a9b5f7761",
+        "id": "49b31e44-511f-5c9f-a818-f162087f53a9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:5fdf0520-717b-4c78-a988-a32ba6dcab42"
+          "reference": "urn:uuid:8d221c42-8f07-5f5e-9dd2-87e037cbf646"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:1f8dfb44-12d5-4d9a-a609-42078c54c781",
+      "fullUrl": "urn:uuid:81a81d4f-33ee-5745-a615-dc2fd374fdc2",
       "resource": {
         "resourceType": "Observation",
-        "id": "1f8dfb44-12d5-4d9a-a609-42078c54c781",
+        "id": "81a81d4f-33ee-5745-a615-dc2fd374fdc2",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:5fdf0520-717b-4c78-a988-a32ba6dcab42"
+          "reference": "urn:uuid:8d221c42-8f07-5f5e-9dd2-87e037cbf646"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -645,10 +645,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:db9cf9f4-2745-4b55-ae02-e7b5e3e50f01",
+      "fullUrl": "urn:uuid:d39bc27f-ba13-545b-969a-e5c66d79f38a",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "db9cf9f4-2745-4b55-ae02-e7b5e3e50f01",
+        "id": "d39bc27f-ba13-545b-969a-e5c66d79f38a",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -657,7 +657,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:5fdf0520-717b-4c78-a988-a32ba6dcab42"
+          "reference": "urn:uuid:8d221c42-8f07-5f5e-9dd2-87e037cbf646"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -666,10 +666,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:d8637386-40df-4996-a434-0c93baa31177",
+      "fullUrl": "urn:uuid:5b4a61a4-a52d-5aea-b1e6-bb4c0f3091c3",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "d8637386-40df-4996-a434-0c93baa31177",
+        "id": "5b4a61a4-a52d-5aea-b1e6-bb4c0f3091c3",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -699,17 +699,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:5fdf0520-717b-4c78-a988-a32ba6dcab42"
+          "reference": "urn:uuid:8d221c42-8f07-5f5e-9dd2-87e037cbf646"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "One or more abnormal interpretations (raised average or confirmed/masked/nocturnal hypertension) are present; classified as abnormal."
       }
     },
     {
-      "fullUrl": "urn:uuid:a0b16a6d-d026-40f8-a271-49917c0f99d5",
+      "fullUrl": "urn:uuid:5b197a07-093f-5fc5-b40a-8d42858b2d7f",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "a0b16a6d-d026-40f8-a271-49917c0f99d5",
+        "id": "5b197a07-093f-5fc5-b40a-8d42858b2d7f",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -739,17 +739,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:5fdf0520-717b-4c78-a988-a32ba6dcab42"
+          "reference": "urn:uuid:8d221c42-8f07-5f5e-9dd2-87e037cbf646"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Raised ambulatory average below the stage-2 threshold; severity graded minor."
       }
     },
     {
-      "fullUrl": "urn:uuid:a0c44779-7417-4ce1-a119-9290c2a45e49",
+      "fullUrl": "urn:uuid:2ac5bdad-19ec-5c0b-9510-982a10f136e9",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "a0c44779-7417-4ce1-a119-9290c2a45e49",
+        "id": "2ac5bdad-19ec-5c0b-9510-982a10f136e9",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -779,7 +779,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:5fdf0520-717b-4c78-a988-a32ba6dcab42"
+          "reference": "urn:uuid:8d221c42-8f07-5f5e-9dd2-87e037cbf646"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Minor abnormality (stage 1, nocturnal, or white-coat); structured follow-up recommended."

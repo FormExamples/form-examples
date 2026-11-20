@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE modified_early_warning_score SYSTEM "modified_early_warning_score.dtd">
-<modified_early_warning_score>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<modified_early_warning_score xmlns="https://formexamples.github.io/modified-early-warning-score/xml">
+<id>01d25f01-0f47-5e22-b7ca-a5dfa36aedff</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>cde0a9ae-743d-5199-adfb-a6402e3483e2</patient_id>
+<clinician_id>098d1477-dd74-5bde-8799-dac167e16975</clinician_id>
 <status>draft</status>
 <observation_at>2026-04-09T10:00:00Z</observation_at>
 <care_setting>acute-ward</care_setting>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE anaesthetic_record_grade_flag SYSTEM "anaesthetic_record_grade_flag.dtd">
-<anaesthetic_record_grade_flag>
-<id>dd0e8400-e29b-41d4-a716-446655440008</id>
+<anaesthetic_record_grade_flag xmlns="https://formexamples.github.io/anaesthetic-record/xml">
+<id>801ed67c-6f7d-541c-bb81-0bce6045d491</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<anaesthetic_record_grade_id>bb0e8400-e29b-41d4-a716-446655440006</anaesthetic_record_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<anaesthetic_record_grade_id>0588340b-3d90-57da-8451-7a4e516b1ad4</anaesthetic_record_grade_id>
+<flag_id>8012f3e9-b692-5f03-9758-a2a6f7cffb8b</flag_id>
 <category>who-checklist-not-done</category>
 <priority>low</priority>
 <description>Example text.</description>

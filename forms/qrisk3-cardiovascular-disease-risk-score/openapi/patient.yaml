@@ -5,10 +5,19 @@ info:
   title: Qrisk3 Cardiovascular Disease Risk Score — Patient
   version: 1.0.0
   description: Patient demographic information used by the QRISK3 assessment record.
+x-namespace:
+  form: qrisk3-cardiovascular-disease-risk-score
+  apiPrefix: /api/qrisk3-cardiovascular-disease-risk-score/
+  sqlSchema: qrisk3_cardiovascular_disease_risk_score
+  xmlNamespace: https://formexamples.github.io/qrisk3-cardiovascular-disease-risk-score/xml
+tags:
+  - name: qrisk3-cardiovascular-disease-risk-score
+    description: Qrisk3 Cardiovascular Disease Risk Score form
 paths:
   /api/qrisk3-cardiovascular-disease-risk-score/patients:
     get:
       summary: List Patient records
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [qrisk3-cardiovascular-disease-risk-score]
       operationId: deletePatient
       responses:
         "200":

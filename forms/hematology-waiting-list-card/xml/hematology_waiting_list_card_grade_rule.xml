@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hematology_waiting_list_card_grade_rule SYSTEM "hematology_waiting_list_card_grade_rule.dtd">
-<hematology_waiting_list_card_grade_rule>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<hematology_waiting_list_card_grade_rule xmlns="https://formexamples.github.io/hematology-waiting-list-card/xml">
+<id>af0770f6-91c3-5578-a158-c391af060108</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<hematology_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</hematology_waiting_list_card_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<hematology_waiting_list_card_grade_id>25d24dca-a5b8-5251-88dc-8968217c5dfe</hematology_waiting_list_card_grade_id>
+<rule_id>331ab02d-16b2-5153-8b4e-0d1099a0a79b</rule_id>
 <instrument>waiting-time-status</instrument>
 <band>within-target</band>
 <category>General</category>

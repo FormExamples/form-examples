@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE prev_med_waiting_list_card_grade_flag SYSTEM "prev_med_waiting_list_card_grade_flag.dtd">
-<prev_med_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<prev_med_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/preventive-medicine-waiting-list-card/xml">
+<id>7b0668e5-7088-51db-8dd5-72d6c2b1d80b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<prev_med_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</prev_med_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<prev_med_waiting_list_card_grade_id>dbef6f14-59d4-5774-a375-aece5b48b0c0</prev_med_waiting_list_card_grade_id>
+<flag_id>157ba086-34be-5471-bf0e-ffda81c9797d</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

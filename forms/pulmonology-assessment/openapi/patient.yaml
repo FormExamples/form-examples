@@ -5,10 +5,19 @@ info:
   title: Pulmonology Assessment — Patient
   version: 1.0.0
   description: Patient
+x-namespace:
+  form: pulmonology-assessment
+  apiPrefix: /api/pulmonology-assessment/
+  sqlSchema: pulmonology_assessment
+  xmlNamespace: https://formexamples.github.io/pulmonology-assessment/xml
+tags:
+  - name: pulmonology-assessment
+    description: Pulmonology Assessment form
 paths:
   /api/pulmonology-assessment/patients:
     get:
       summary: List Patient records
+      tags: [pulmonology-assessment]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [pulmonology-assessment]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [pulmonology-assessment]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [pulmonology-assessment]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [pulmonology-assessment]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [pulmonology-assessment]
       operationId: deletePatient
       responses:
         "200":

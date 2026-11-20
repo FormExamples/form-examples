@@ -5,10 +5,19 @@ info:
   title: Endometriosis Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: endometriosis-assessment
+  apiPrefix: /api/endometriosis-assessment/
+  sqlSchema: endometriosis_assessment
+  xmlNamespace: https://formexamples.github.io/endometriosis-assessment/xml
+tags:
+  - name: endometriosis-assessment
+    description: Endometriosis Assessment form
 paths:
   /api/endometriosis-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [endometriosis-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [endometriosis-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [endometriosis-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [endometriosis-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [endometriosis-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [endometriosis-assessment]
       operationId: deleteClinician
       responses:
         "200":

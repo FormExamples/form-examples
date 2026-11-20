@@ -1,4 +1,5 @@
 <!ELEMENT assessment_imaging_item (id,created_at,updated_at,deleted_at,imaging_history_id,modality,body_region,date_performed,findings,sort_order)>
+<!ATTLIST assessment_imaging_item xmlns CDATA #FIXED "https://formexamples.github.io/orthopedic-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

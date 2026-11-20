@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE biopsy_test_request_grade_rule SYSTEM "biopsy_test_request_grade_rule.dtd">
-<biopsy_test_request_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<biopsy_test_request_grade_rule xmlns="https://formexamples.github.io/biopsy-test-request/xml">
+<id>9b4e5c83-ecb3-5286-a178-b8a08325a85d</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<biopsy_test_request_grade_id>880e8400-e29b-41d4-a716-446655440003</biopsy_test_request_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<biopsy_test_request_grade_id>90d6a8ab-434c-5eef-b148-2aee343f47cc</biopsy_test_request_grade_id>
+<rule_id>c44c71e5-b996-5411-9bf7-ab8351fe5c51</rule_id>
 <axis>appropriateness</axis>
 <category>General</category>
 <description>Example text.</description>

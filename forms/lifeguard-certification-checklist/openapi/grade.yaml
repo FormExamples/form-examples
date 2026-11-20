@@ -5,10 +5,19 @@ info:
   title: Lifeguard Certification Checklist — Grade
   version: 1.0.0
   description: Computed grading / scoring result. One-to-one child of assessment. The result_category column holds a form-specific label (e.g. Low, Moderate, High, or Complete/Incomplete); result_score is optional for numeric instruments.
+x-namespace:
+  form: lifeguard-certification-checklist
+  apiPrefix: /api/lifeguard-certification-checklist/
+  sqlSchema: lifeguard_certification_checklist
+  xmlNamespace: https://formexamples.github.io/lifeguard-certification-checklist/xml
+tags:
+  - name: lifeguard-certification-checklist
+    description: Lifeguard Certification Checklist form
 paths:
   /api/lifeguard-certification-checklist/grades:
     get:
       summary: List Grade records
+      tags: [lifeguard-certification-checklist]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [lifeguard-certification-checklist]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [lifeguard-certification-checklist]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [lifeguard-certification-checklist]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [lifeguard-certification-checklist]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [lifeguard-certification-checklist]
       operationId: deleteGrade
       responses:
         "200":

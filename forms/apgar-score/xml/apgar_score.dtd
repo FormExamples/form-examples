@@ -1,4 +1,5 @@
 <!ELEMENT apgar_score (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,born_at,care_setting,gestational_age_weeks,mode_of_delivery,newborn_identifier,sex,birth_order,resuscitation_measures,clinician_note)>
+<!ATTLIST apgar_score xmlns CDATA #FIXED "https://formexamples.github.io/apgar-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

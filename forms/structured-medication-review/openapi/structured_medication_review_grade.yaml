@@ -5,10 +5,19 @@ info:
   title: Structured Medication Review — StructuredMedicationReviewGrade
   version: 1.0.0
   description: "Computed scoring result for a structured medication review: review status, anticholinergic burden score and band, polypharmacy band, composite burden band, and medicine counts."
+x-namespace:
+  form: structured-medication-review
+  apiPrefix: /api/structured-medication-review/
+  sqlSchema: structured_medication_review
+  xmlNamespace: https://formexamples.github.io/structured-medication-review/xml
+tags:
+  - name: structured-medication-review
+    description: Structured Medication Review form
 paths:
   /api/structured-medication-review/structured_medication_review_grades:
     get:
       summary: List StructuredMedicationReviewGrade records
+      tags: [structured-medication-review]
       operationId: listStructuredMedicationReviewGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new StructuredMedicationReviewGrade
+      tags: [structured-medication-review]
       operationId: createStructuredMedicationReviewGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one StructuredMedicationReviewGrade by id
+      tags: [structured-medication-review]
       operationId: getStructuredMedicationReviewGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing StructuredMedicationReviewGrade
+      tags: [structured-medication-review]
       operationId: updateStructuredMedicationReviewGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing StructuredMedicationReviewGrade
+      tags: [structured-medication-review]
       operationId: replaceStructuredMedicationReviewGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a StructuredMedicationReviewGrade
+      tags: [structured-medication-review]
       operationId: deleteStructuredMedicationReviewGrade
       responses:
         "200":

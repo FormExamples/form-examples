@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Toxicology Test Request form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
+x-namespace:
+  form: toxicology-test-request
+  apiPrefix: /api/toxicology-test-request/
+  sqlSchema: toxicology_test_request
+  xmlNamespace: https://formexamples.github.io/toxicology-test-request/xml
+tags:
+- name: toxicology-test-request
+  description: Toxicology Test Request form
 paths:
   /api/toxicology-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - toxicology-test-request
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - toxicology-test-request
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - toxicology-test-request
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - toxicology-test-request
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - toxicology-test-request
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - toxicology-test-request
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - toxicology-test-request
   /api/toxicology-test-request/patients:
     get:
       summary: List Patient records
+      tags:
+      - toxicology-test-request
       operationId: listPatient
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - toxicology-test-request
       operationId: createPatient
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - toxicology-test-request
       operationId: getPatient
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - toxicology-test-request
       operationId: updatePatient
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - toxicology-test-request
       operationId: replacePatient
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - toxicology-test-request
       operationId: deletePatient
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/toxicology-test-request/toxicology_test_request_grade_flags:
     get:
       summary: List ToxicologyTestRequestGradeFlag records
+      tags:
+      - toxicology-test-request
       operationId: listToxicologyTestRequestGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ToxicologyTestRequestGradeFlag
+      tags:
+      - toxicology-test-request
       operationId: createToxicologyTestRequestGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ToxicologyTestRequestGradeFlag by id
+      tags:
+      - toxicology-test-request
       operationId: getToxicologyTestRequestGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ToxicologyTestRequestGradeFlag
+      tags:
+      - toxicology-test-request
       operationId: updateToxicologyTestRequestGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ToxicologyTestRequestGradeFlag
+      tags:
+      - toxicology-test-request
       operationId: replaceToxicologyTestRequestGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ToxicologyTestRequestGradeFlag
+      tags:
+      - toxicology-test-request
       operationId: deleteToxicologyTestRequestGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/toxicology-test-request/toxicology_test_request_grade_rules:
     get:
       summary: List ToxicologyTestRequestGradeRule records
+      tags:
+      - toxicology-test-request
       operationId: listToxicologyTestRequestGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ToxicologyTestRequestGradeRule
+      tags:
+      - toxicology-test-request
       operationId: createToxicologyTestRequestGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ToxicologyTestRequestGradeRule by id
+      tags:
+      - toxicology-test-request
       operationId: getToxicologyTestRequestGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ToxicologyTestRequestGradeRule
+      tags:
+      - toxicology-test-request
       operationId: updateToxicologyTestRequestGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ToxicologyTestRequestGradeRule
+      tags:
+      - toxicology-test-request
       operationId: replaceToxicologyTestRequestGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ToxicologyTestRequestGradeRule
+      tags:
+      - toxicology-test-request
       operationId: deleteToxicologyTestRequestGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/toxicology-test-request/toxicology_test_request_grades:
     get:
       summary: List ToxicologyTestRequestGrade records
+      tags:
+      - toxicology-test-request
       operationId: listToxicologyTestRequestGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ToxicologyTestRequestGrade
+      tags:
+      - toxicology-test-request
       operationId: createToxicologyTestRequestGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ToxicologyTestRequestGrade by id
+      tags:
+      - toxicology-test-request
       operationId: getToxicologyTestRequestGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ToxicologyTestRequestGrade
+      tags:
+      - toxicology-test-request
       operationId: updateToxicologyTestRequestGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ToxicologyTestRequestGrade
+      tags:
+      - toxicology-test-request
       operationId: replaceToxicologyTestRequestGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ToxicologyTestRequestGrade
+      tags:
+      - toxicology-test-request
       operationId: deleteToxicologyTestRequestGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/toxicology-test-request/toxicology_test_requests:
     get:
       summary: List ToxicologyTestRequest records
+      tags:
+      - toxicology-test-request
       operationId: listToxicologyTestRequest
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ToxicologyTestRequest
+      tags:
+      - toxicology-test-request
       operationId: createToxicologyTestRequest
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ToxicologyTestRequest by id
+      tags:
+      - toxicology-test-request
       operationId: getToxicologyTestRequest
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ToxicologyTestRequest
+      tags:
+      - toxicology-test-request
       operationId: updateToxicologyTestRequest
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ToxicologyTestRequest
+      tags:
+      - toxicology-test-request
       operationId: replaceToxicologyTestRequest
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ToxicologyTestRequest
+      tags:
+      - toxicology-test-request
       operationId: deleteToxicologyTestRequest
       responses:
         '200':

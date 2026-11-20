@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/gynecology-assessment/xml">
+<id>01a29e3d-f05d-5411-8b77-63dba9c1ac1b</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>aa0e8400-e29b-41d4-a716-446655440005</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>d6a2874e-3d9c-56da-ad11-8ebf06c45e9e</grade_id>
+<rule_id>50d666c5-9ece-59e4-8403-e18c7f7e3a57</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>mild</severity_level>

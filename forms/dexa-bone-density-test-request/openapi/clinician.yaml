@@ -5,10 +5,19 @@ info:
   title: Dexa Bone Density Test Request — Clinician
   version: 1.0.0
   description: Requesting clinician (referrer) who completes the DEXA bone density scan request.
+x-namespace:
+  form: dexa-bone-density-test-request
+  apiPrefix: /api/dexa-bone-density-test-request/
+  sqlSchema: dexa_bone_density_test_request
+  xmlNamespace: https://formexamples.github.io/dexa-bone-density-test-request/xml
+tags:
+  - name: dexa-bone-density-test-request
+    description: Dexa Bone Density Test Request form
 paths:
   /api/dexa-bone-density-test-request/clinicians:
     get:
       summary: List Clinician records
+      tags: [dexa-bone-density-test-request]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [dexa-bone-density-test-request]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [dexa-bone-density-test-request]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [dexa-bone-density-test-request]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [dexa-bone-density-test-request]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [dexa-bone-density-test-request]
       operationId: deleteClinician
       responses:
         "200":

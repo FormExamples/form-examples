@@ -1,4 +1,5 @@
 <!ELEMENT return_to_work_restriction (id,created_at,updated_at,deleted_at,return_to_work_id,kind,severity,quantitative_limit,notes,start_date,end_date,priority_rank)>
+<!ATTLIST return_to_work_restriction xmlns CDATA #FIXED "https://formexamples.github.io/return-to-work/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

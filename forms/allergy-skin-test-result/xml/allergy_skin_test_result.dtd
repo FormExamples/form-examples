@@ -1,4 +1,5 @@
 <!ELEMENT allergy_skin_test_result (id,created_at,updated_at,deleted_at,patient_id,clinician_id,originating_request_reference,test_type,report_status,performed_date,reported_date,clinical_history,antihistamines_withheld,positive_control_valid,allergens_tested,wheal_sizes,specific_ige_results,sensitised_allergens,positive_reactions,sensitisation_confirmed,anaphylaxis_during_test,all_negative,test_invalid,interpretation,impression,reporting_category,recommended_follow_up,critical_result_communicated,reported_to)>
+<!ATTLIST allergy_skin_test_result xmlns CDATA #FIXED "https://formexamples.github.io/allergy-skin-test-result/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

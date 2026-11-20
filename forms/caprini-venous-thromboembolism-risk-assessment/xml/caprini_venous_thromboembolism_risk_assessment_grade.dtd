@@ -1,4 +1,5 @@
 <!ELEMENT caprini_venous_thromboembolism_risk_assessment_grade (id,created_at,updated_at,deleted_at,caprini_venous_thromboembolism_risk_assessment_id,total_score,risk_band,prophylaxis_recommendation,graded_at)>
+<!ATTLIST caprini_venous_thromboembolism_risk_assessment_grade xmlns CDATA #FIXED "https://formexamples.github.io/caprini-venous-thromboembolism-risk-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

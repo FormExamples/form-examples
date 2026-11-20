@@ -5,10 +5,19 @@ info:
   title: Holter Monitor Test Result — HolterMonitorTestResultGradeRule
   version: 1.0.0
   description: Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.
+x-namespace:
+  form: holter-monitor-test-result
+  apiPrefix: /api/holter-monitor-test-result/
+  sqlSchema: holter_monitor_test_result
+  xmlNamespace: https://formexamples.github.io/holter-monitor-test-result/xml
+tags:
+  - name: holter-monitor-test-result
+    description: Holter Monitor Test Result form
 paths:
   /api/holter-monitor-test-result/holter_monitor_test_result_grade_rules:
     get:
       summary: List HolterMonitorTestResultGradeRule records
+      tags: [holter-monitor-test-result]
       operationId: listHolterMonitorTestResultGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HolterMonitorTestResultGradeRule
+      tags: [holter-monitor-test-result]
       operationId: createHolterMonitorTestResultGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HolterMonitorTestResultGradeRule by id
+      tags: [holter-monitor-test-result]
       operationId: getHolterMonitorTestResultGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HolterMonitorTestResultGradeRule
+      tags: [holter-monitor-test-result]
       operationId: updateHolterMonitorTestResultGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HolterMonitorTestResultGradeRule
+      tags: [holter-monitor-test-result]
       operationId: replaceHolterMonitorTestResultGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HolterMonitorTestResultGradeRule
+      tags: [holter-monitor-test-result]
       operationId: deleteHolterMonitorTestResultGradeRule
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT national_early_warning_score_2_grade_rule (id,created_at,updated_at,deleted_at,national_early_warning_score_2_grade_id,rule_id,instrument,band,points,category,description)>
+<!ATTLIST national_early_warning_score_2_grade_rule xmlns CDATA #FIXED "https://formexamples.github.io/national-early-warning-score-2/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

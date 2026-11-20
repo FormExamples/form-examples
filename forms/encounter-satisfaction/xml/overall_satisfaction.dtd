@@ -1,4 +1,5 @@
 <!ELEMENT overall_satisfaction (id,created_at,updated_at,deleted_at,encounter_satisfaction_id,overall_rating,likely_to_recommend,likely_to_return,comments)>
+<!ATTLIST overall_satisfaction xmlns CDATA #FIXED "https://formexamples.github.io/encounter-satisfaction/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

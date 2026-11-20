@@ -1,6 +1,6 @@
 {
   "resourceType": "Bundle",
-  "id": "5577f764-6950-46c9-aeb5-bf900f4f61ef",
+  "id": "1944467f-87da-5a22-a7c9-518f7bf1e2f2",
   "type": "collection",
   "timestamp": "2026-04-09T10:00:00+00:00",
   "meta": {
@@ -17,10 +17,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106",
+      "fullUrl": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e",
       "resource": {
         "resourceType": "Patient",
-        "id": "4d66849e-dbec-45be-a6c4-9982ddaf5106",
+        "id": "18ace9d0-4a93-5d08-a798-c3ce0d75489e",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Patient"
@@ -56,10 +56,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:474358eb-048e-4cb9-a1a0-221d7b9b7efe",
+      "fullUrl": "urn:uuid:c9f9f1e5-a495-5564-b7aa-e80d8ec18be6",
       "resource": {
         "resourceType": "Observation",
-        "id": "474358eb-048e-4cb9-a1a0-221d7b9b7efe",
+        "id": "c9f9f1e5-a495-5564-b7aa-e80d8ec18be6",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -88,7 +88,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+          "reference": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -244,10 +244,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:a5acda7b-2f0f-4aeb-a6dd-506944972d32",
+      "fullUrl": "urn:uuid:13a9ea59-9e28-5cec-b4a5-e7939f06e2ad",
       "resource": {
         "resourceType": "Observation",
-        "id": "a5acda7b-2f0f-4aeb-a6dd-506944972d32",
+        "id": "13a9ea59-9e28-5cec-b4a5-e7939f06e2ad",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/Observation"
@@ -276,7 +276,7 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+          "reference": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "component": [
@@ -537,10 +537,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:c6e380e9-9bde-4540-a8c6-1530a1b200e0",
+      "fullUrl": "urn:uuid:bb8c238b-3cfe-5468-bf41-0c3577adcdbb",
       "resource": {
         "resourceType": "ClinicalImpression",
-        "id": "c6e380e9-9bde-4540-a8c6-1530a1b200e0",
+        "id": "bb8c238b-3cfe-5468-bf41-0c3577adcdbb",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
@@ -549,7 +549,7 @@
         },
         "status": "completed",
         "subject": {
-          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+          "reference": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e"
         },
         "effectiveDateTime": "2026-04-09T10:00:00+00:00",
         "date": "2026-04-09T10:00:00+00:00",
@@ -558,10 +558,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:0cfe3ae1-84bc-4ca3-a50c-1ee49c19d63f",
+      "fullUrl": "urn:uuid:e1f4387b-0566-51a4-b4f2-0477fc381281",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "0cfe3ae1-84bc-4ca3-a50c-1ee49c19d63f",
+        "id": "e1f4387b-0566-51a4-b4f2-0477fc381281",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -591,17 +591,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+          "reference": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A bladder tumour or suspicious lesion is present; classified as critical."
       }
     },
     {
-      "fullUrl": "urn:uuid:7a743915-4048-4be4-a02d-2e356531c128",
+      "fullUrl": "urn:uuid:e7d12325-21a1-5d73-90ec-28d75e92d076",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "7a743915-4048-4be4-a02d-2e356531c128",
+        "id": "e7d12325-21a1-5d73-90ec-28d75e92d076",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -631,17 +631,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+          "reference": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Bladder tumour or suspicious lesion present; abnormality severity graded major."
       }
     },
     {
-      "fullUrl": "urn:uuid:5a9e0a83-1418-459c-a79a-6f6bff6e7388",
+      "fullUrl": "urn:uuid:59e3dde7-bc0a-53b5-ae66-f2c7d286f848",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "5a9e0a83-1418-459c-a79a-6f6bff6e7388",
+        "id": "59e3dde7-bc0a-53b5-ae66-f2c7d286f848",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -671,17 +671,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+          "reference": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: clinical history."
       }
     },
     {
-      "fullUrl": "urn:uuid:01ba31c1-d691-4cc5-a240-f7dab36b7d73",
+      "fullUrl": "urn:uuid:dab23c57-26b8-5861-a922-dcc3d93f4ca0",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "01ba31c1-d691-4cc5-a240-f7dab36b7d73",
+        "id": "dab23c57-26b8-5861-a922-dcc3d93f4ca0",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -711,17 +711,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+          "reference": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: impression."
       }
     },
     {
-      "fullUrl": "urn:uuid:0aa4610f-f8f3-42fe-a51a-2584895c7e05",
+      "fullUrl": "urn:uuid:698d8f41-26a5-5a1c-a1d5-03c6a4eede22",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "0aa4610f-f8f3-42fe-a51a-2584895c7e05",
+        "id": "698d8f41-26a5-5a1c-a1d5-03c6a4eede22",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -751,17 +751,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+          "reference": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Mandatory report section missing: recommended follow-up."
       }
     },
     {
-      "fullUrl": "urn:uuid:d3cc4a3c-7c6c-4f49-a4af-50baa17611dc",
+      "fullUrl": "urn:uuid:38a67b07-f9c3-540a-bb6c-ebd71a2e2ea5",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "d3cc4a3c-7c6c-4f49-a4af-50baa17611dc",
+        "id": "38a67b07-f9c3-540a-bb6c-ebd71a2e2ea5",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -791,17 +791,17 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+          "reference": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Bladder tumour / suspicious lesion auto-escalates follow-up urgency to critical-alert regardless of the other axes."
       }
     },
     {
-      "fullUrl": "urn:uuid:1dff216a-f780-4587-a5ed-63e7bb02f04e",
+      "fullUrl": "urn:uuid:c80450a0-6c47-5a92-ba6c-944fe0c0f7b7",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "1dff216a-f780-4587-a5ed-63e7bb02f04e",
+        "id": "c80450a0-6c47-5a92-ba6c-944fe0c0f7b7",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -831,7 +831,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+          "reference": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A bladder tumour or suspicious lesion is present.",
@@ -845,10 +845,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:18f011da-4d37-4ab2-aaa0-6f828d983732",
+      "fullUrl": "urn:uuid:2e112361-91d6-52ef-b125-01b7ec0dabb0",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "18f011da-4d37-4ab2-aaa0-6f828d983732",
+        "id": "2e112361-91d6-52ef-b125-01b7ec0dabb0",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -878,7 +878,7 @@
         },
         "severity": "high",
         "subject": {
-          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+          "reference": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",
@@ -892,10 +892,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:65411ae8-015d-474b-a801-9ce9d9810ed1",
+      "fullUrl": "urn:uuid:31619691-dbda-5148-b83d-98cc1bd55a72",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "65411ae8-015d-474b-a801-9ce9d9810ed1",
+        "id": "31619691-dbda-5148-b83d-98cc1bd55a72",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -925,7 +925,7 @@
         },
         "severity": "moderate",
         "subject": {
-          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+          "reference": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
@@ -939,10 +939,10 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:9d63cdfe-b801-4696-a49c-815fab88c725",
+      "fullUrl": "urn:uuid:d209dd26-2501-57ef-bbfc-54fd15193373",
       "resource": {
         "resourceType": "DetectedIssue",
-        "id": "9d63cdfe-b801-4696-a49c-815fab88c725",
+        "id": "d209dd26-2501-57ef-bbfc-54fd15193373",
         "meta": {
           "profile": [
             "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
@@ -972,7 +972,7 @@
         },
         "severity": "low",
         "subject": {
-          "reference": "urn:uuid:4d66849e-dbec-45be-a6c4-9982ddaf5106"
+          "reference": "urn:uuid:18ace9d0-4a93-5d08-a798-c3ce0d75489e"
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A significant finding is present but no originating request reference is recorded.",

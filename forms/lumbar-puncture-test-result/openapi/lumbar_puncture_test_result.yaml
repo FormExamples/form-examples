@@ -5,10 +5,19 @@ info:
   title: Lumbar Puncture Test Result — LumbarPunctureTestResult
   version: 1.0.0
   description: Lumbar puncture (LP) / cerebrospinal-fluid (CSF) analysis result (report). Captures the manometry opening pressure, CSF macroscopic appearance, cell counts, biochemistry (protein, glucose, CSF:serum glucose ratio, lactate), microbiology (Gram stain, culture, PCR), specialist tests (oligoclonal bands, xanthochromia spectrophotometry), the narrative and structured interpretive findings, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: lumbar-puncture-test-result
+  apiPrefix: /api/lumbar-puncture-test-result/
+  sqlSchema: lumbar_puncture_test_result
+  xmlNamespace: https://formexamples.github.io/lumbar-puncture-test-result/xml
+tags:
+  - name: lumbar-puncture-test-result
+    description: Lumbar Puncture Test Result form
 paths:
   /api/lumbar-puncture-test-result/lumbar_puncture_test_results:
     get:
       summary: List LumbarPunctureTestResult records
+      tags: [lumbar-puncture-test-result]
       operationId: listLumbarPunctureTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new LumbarPunctureTestResult
+      tags: [lumbar-puncture-test-result]
       operationId: createLumbarPunctureTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one LumbarPunctureTestResult by id
+      tags: [lumbar-puncture-test-result]
       operationId: getLumbarPunctureTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing LumbarPunctureTestResult
+      tags: [lumbar-puncture-test-result]
       operationId: updateLumbarPunctureTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing LumbarPunctureTestResult
+      tags: [lumbar-puncture-test-result]
       operationId: replaceLumbarPunctureTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LumbarPunctureTestResult
+      tags: [lumbar-puncture-test-result]
       operationId: deleteLumbarPunctureTestResult
       responses:
         "200":

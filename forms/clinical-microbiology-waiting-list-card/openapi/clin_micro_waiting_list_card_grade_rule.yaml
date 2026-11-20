@@ -5,10 +5,19 @@ info:
   title: Clinical Microbiology Waiting List Card — ClinMicroWaitingListCardGradeRule
   version: 1.0.0
   description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that fired during grading of a waiting list card.
+x-namespace:
+  form: clinical-microbiology-waiting-list-card
+  apiPrefix: /api/clinical-microbiology-waiting-list-card/
+  sqlSchema: clinical_microbiology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/clinical-microbiology-waiting-list-card/xml
+tags:
+  - name: clinical-microbiology-waiting-list-card
+    description: Clinical Microbiology Waiting List Card form
 paths:
   /api/clinical-microbiology-waiting-list-card/clin_micro_waiting_list_card_grade_rules:
     get:
       summary: List ClinMicroWaitingListCardGradeRule records
+      tags: [clinical-microbiology-waiting-list-card]
       operationId: listClinMicroWaitingListCardGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ClinMicroWaitingListCardGradeRule
+      tags: [clinical-microbiology-waiting-list-card]
       operationId: createClinMicroWaitingListCardGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one ClinMicroWaitingListCardGradeRule by id
+      tags: [clinical-microbiology-waiting-list-card]
       operationId: getClinMicroWaitingListCardGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ClinMicroWaitingListCardGradeRule
+      tags: [clinical-microbiology-waiting-list-card]
       operationId: updateClinMicroWaitingListCardGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing ClinMicroWaitingListCardGradeRule
+      tags: [clinical-microbiology-waiting-list-card]
       operationId: replaceClinMicroWaitingListCardGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ClinMicroWaitingListCardGradeRule
+      tags: [clinical-microbiology-waiting-list-card]
       operationId: deleteClinMicroWaitingListCardGradeRule
       responses:
         "200":

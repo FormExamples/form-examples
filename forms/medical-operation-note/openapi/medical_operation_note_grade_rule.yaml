@@ -5,10 +5,19 @@ info:
   title: Medical Operation Note — MedicalOperationNoteGradeRule
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during composite-risk computation: instrument, band, category, and description."
+x-namespace:
+  form: medical-operation-note
+  apiPrefix: /api/medical-operation-note/
+  sqlSchema: medical_operation_note
+  xmlNamespace: https://formexamples.github.io/medical-operation-note/xml
+tags:
+  - name: medical-operation-note
+    description: Medical Operation Note form
 paths:
   /api/medical-operation-note/medical_operation_note_grade_rules:
     get:
       summary: List MedicalOperationNoteGradeRule records
+      tags: [medical-operation-note]
       operationId: listMedicalOperationNoteGradeRule
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalOperationNoteGradeRule
+      tags: [medical-operation-note]
       operationId: createMedicalOperationNoteGradeRule
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MedicalOperationNoteGradeRule by id
+      tags: [medical-operation-note]
       operationId: getMedicalOperationNoteGradeRule
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalOperationNoteGradeRule
+      tags: [medical-operation-note]
       operationId: updateMedicalOperationNoteGradeRule
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MedicalOperationNoteGradeRule
+      tags: [medical-operation-note]
       operationId: replaceMedicalOperationNoteGradeRule
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalOperationNoteGradeRule
+      tags: [medical-operation-note]
       operationId: deleteMedicalOperationNoteGradeRule
       responses:
         "200":

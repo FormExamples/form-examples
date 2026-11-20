@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE medical_operation_note_grade_flag SYSTEM "medical_operation_note_grade_flag.dtd">
-<medical_operation_note_grade_flag>
-<id>220e8400-e29b-41d4-a716-44665544000c</id>
+<medical_operation_note_grade_flag xmlns="https://formexamples.github.io/medical-operation-note/xml">
+<id>940c25d8-5599-5bbe-8fae-01b7ceab1083</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<medical_operation_note_grade_id>ff0e8400-e29b-41d4-a716-44665544000a</medical_operation_note_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<medical_operation_note_grade_id>aaab51de-c5e5-5eb6-a70f-f8976284f4d1</medical_operation_note_grade_id>
+<flag_id>43d27bed-f343-5d10-9079-c45f73cd5562</flag_id>
 <category>incorrect-count</category>
 <priority>low</priority>
 <description>Example text.</description>

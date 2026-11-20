@@ -1,4 +1,5 @@
 <!ELEMENT manufacturer (id,created_at,updated_at,deleted_at,name,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode,single_registration_number,authorized_representative_name,united_kingdom_responsible_person_name)>
+<!ATTLIST manufacturer xmlns CDATA #FIXED "https://formexamples.github.io/medical-device-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

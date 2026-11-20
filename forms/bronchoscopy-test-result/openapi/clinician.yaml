@@ -5,10 +5,19 @@ info:
   title: Bronchoscopy Test Result — Clinician
   version: 1.0.0
   description: Operating / reporting clinician (bronchoscopist) who performs the procedure and authors and signs the bronchoscopy result report.
+x-namespace:
+  form: bronchoscopy-test-result
+  apiPrefix: /api/bronchoscopy-test-result/
+  sqlSchema: bronchoscopy_test_result
+  xmlNamespace: https://formexamples.github.io/bronchoscopy-test-result/xml
+tags:
+  - name: bronchoscopy-test-result
+    description: Bronchoscopy Test Result form
 paths:
   /api/bronchoscopy-test-result/clinicians:
     get:
       summary: List Clinician records
+      tags: [bronchoscopy-test-result]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [bronchoscopy-test-result]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [bronchoscopy-test-result]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [bronchoscopy-test-result]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [bronchoscopy-test-result]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [bronchoscopy-test-result]
       operationId: deleteClinician
       responses:
         "200":

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE corrected_calcium_calculator_grade_rule SYSTEM "corrected_calcium_calculator_grade_rule.dtd">
-<corrected_calcium_calculator_grade_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<corrected_calcium_calculator_grade_rule xmlns="https://formexamples.github.io/corrected-calcium-calculator/xml">
+<id>9fcf9e9b-b047-5ae6-ab62-456f763c8184</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<corrected_calcium_calculator_grade_id>880e8400-e29b-41d4-a716-446655440003</corrected_calcium_calculator_grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<corrected_calcium_calculator_grade_id>f69b13f7-11a8-526d-822c-07641b1b3377</corrected_calcium_calculator_grade_id>
+<rule_id>3feb9a5b-6a59-572f-acd4-f34c04d9db24</rule_id>
 <instrument>correction</instrument>
 <band>hypocalcaemia</band>
 <category>General</category>

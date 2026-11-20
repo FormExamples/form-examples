@@ -1,4 +1,5 @@
 <!ELEMENT centor_score_for_streptococcal_pharyngitis_grade (id,created_at,updated_at,deleted_at,centor_score_for_streptococcal_pharyngitis_id,centor_score,age_modifier,mcisaac_score,risk_band,management,graded_at)>
+<!ATTLIST centor_score_for_streptococcal_pharyngitis_grade xmlns CDATA #FIXED "https://formexamples.github.io/centor-score-for-streptococcal-pharyngitis/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

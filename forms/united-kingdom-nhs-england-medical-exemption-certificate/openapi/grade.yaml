@@ -5,10 +5,19 @@ info:
   title: United Kingdom Nhs England Medical Exemption Certificate — Grade
   version: 1.0.0
   description: Computed eligibility determination for an FP92A application.
+x-namespace:
+  form: united-kingdom-nhs-england-medical-exemption-certificate
+  apiPrefix: /api/united-kingdom-nhs-england-medical-exemption-certificate/
+  sqlSchema: united_kingdom_nhs_england_medical_exemption_certificate
+  xmlNamespace: https://formexamples.github.io/united-kingdom-nhs-england-medical-exemption-certificate/xml
+tags:
+  - name: united-kingdom-nhs-england-medical-exemption-certificate
+    description: United Kingdom Nhs England Medical Exemption Certificate form
 paths:
   /api/united-kingdom-nhs-england-medical-exemption-certificate/grades:
     get:
       summary: List Grade records
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [united-kingdom-nhs-england-medical-exemption-certificate]
       operationId: deleteGrade
       responses:
         "200":

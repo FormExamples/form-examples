@@ -1,4 +1,5 @@
 <!ELEMENT lpa_witness (id,created_at,updated_at,deleted_at,signature_id,witness_person_id,witness_signature_blob_path,witnessed_on)>
+<!ATTLIST lpa_witness xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-lasting-power-of-attorney-for-financial-decisions/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

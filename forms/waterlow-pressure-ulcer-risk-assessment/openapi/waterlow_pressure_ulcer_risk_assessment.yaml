@@ -5,10 +5,19 @@ info:
   title: Waterlow Pressure Ulcer Risk Assessment — WaterlowPressureUlcerRiskAssessment
   version: 1.0.0
   description: "Main Waterlow pressure ulcer risk assessment record: assessment context, patient identification, the five weighted core category inputs, the four special-risk group inputs, and the existing-pressure-damage flag."
+x-namespace:
+  form: waterlow-pressure-ulcer-risk-assessment
+  apiPrefix: /api/waterlow-pressure-ulcer-risk-assessment/
+  sqlSchema: waterlow_pressure_ulcer_risk_assessment
+  xmlNamespace: https://formexamples.github.io/waterlow-pressure-ulcer-risk-assessment/xml
+tags:
+  - name: waterlow-pressure-ulcer-risk-assessment
+    description: Waterlow Pressure Ulcer Risk Assessment form
 paths:
   /api/waterlow-pressure-ulcer-risk-assessment/waterlow_pressure_ulcer_risk_assessments:
     get:
       summary: List WaterlowPressureUlcerRiskAssessment records
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: listWaterlowPressureUlcerRiskAssessment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new WaterlowPressureUlcerRiskAssessment
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: createWaterlowPressureUlcerRiskAssessment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one WaterlowPressureUlcerRiskAssessment by id
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: getWaterlowPressureUlcerRiskAssessment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing WaterlowPressureUlcerRiskAssessment
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: updateWaterlowPressureUlcerRiskAssessment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing WaterlowPressureUlcerRiskAssessment
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: replaceWaterlowPressureUlcerRiskAssessment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a WaterlowPressureUlcerRiskAssessment
+      tags: [waterlow-pressure-ulcer-risk-assessment]
       operationId: deleteWaterlowPressureUlcerRiskAssessment
       responses:
         "200":

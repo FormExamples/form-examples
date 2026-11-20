@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-00000000005b",
+    "id": "59a8796d-8563-5f0e-98c5-47255d8a3fc4",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "allergiesSummary": ""
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-00000000006d",
+    "id": "6ecd704d-17f3-5597-911b-8f379f9c578e",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -35,12 +35,12 @@
     "registrationNumber": ""
   },
   "hasBledScoreForMajorBleedingRisk": {
-    "id": "550e8400-e29b-41d4-a716-00000000007a",
+    "id": "ea9b14cb-96c3-5fd0-8c94-ed73e1d41a1b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-00000000007e",
-    "clinicianId": "550e8400-e29b-41d4-a716-00000000007f",
+    "patientId": "88503655-ee81-57e2-8c26-901ef3be360e",
+    "clinicianId": "e769506e-c6ac-5fc7-b26b-1943d994a757",
     "clinicianName": "",
     "clinicianRole": "doctor",
     "assessedAt": null,
@@ -58,11 +58,11 @@
     "labileInr": "yes"
   },
   "hasBledScoreForMajorBleedingRiskGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000008f",
+    "id": "8746b051-182f-559d-9e79-63d085be523a",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hasBledScoreForMajorBleedingRiskId": "550e8400-e29b-41d4-a716-000000000093",
+    "hasBledScoreForMajorBleedingRiskId": "3ae8365e-cdaa-59f7-9c78-0f0cfc3c9c91",
     "hypertensionPoints": null,
     "renalPoints": null,
     "liverPoints": null,
@@ -78,11 +78,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "hasBledScoreForMajorBleedingRiskGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a1",
+    "id": "f65037ff-5923-56d0-ba04-824ebe27d2d2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hasBledScoreForMajorBleedingRiskGradeId": "550e8400-e29b-41d4-a716-0000000000a5",
+    "hasBledScoreForMajorBleedingRiskGradeId": "37071f31-ff6c-51a6-8602-f9adc50748f9",
     "ruleId": "",
     "criterion": "hypertension",
     "points": null,
@@ -90,11 +90,11 @@
     "description": ""
   },
   "hasBledScoreForMajorBleedingRiskGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000ab",
+    "id": "2f6aca2d-2fa9-5e0c-9dfc-312d4153b69b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "hasBledScoreForMajorBleedingRiskGradeId": "550e8400-e29b-41d4-a716-0000000000af",
+    "hasBledScoreForMajorBleedingRiskGradeId": "1aefcd1a-2426-5895-9882-455402890ec7",
     "flagId": "",
     "category": "high-bleeding-risk",
     "priority": "low",

@@ -5,10 +5,19 @@ info:
   title: Cystoscopy Test Request — CystoscopyTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the imaging / urology team.
+x-namespace:
+  form: cystoscopy-test-request
+  apiPrefix: /api/cystoscopy-test-request/
+  sqlSchema: cystoscopy_test_request
+  xmlNamespace: https://formexamples.github.io/cystoscopy-test-request/xml
+tags:
+  - name: cystoscopy-test-request
+    description: Cystoscopy Test Request form
 paths:
   /api/cystoscopy-test-request/cystoscopy_test_request_grade_flags:
     get:
       summary: List CystoscopyTestRequestGradeFlag records
+      tags: [cystoscopy-test-request]
       operationId: listCystoscopyTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CystoscopyTestRequestGradeFlag
+      tags: [cystoscopy-test-request]
       operationId: createCystoscopyTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CystoscopyTestRequestGradeFlag by id
+      tags: [cystoscopy-test-request]
       operationId: getCystoscopyTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CystoscopyTestRequestGradeFlag
+      tags: [cystoscopy-test-request]
       operationId: updateCystoscopyTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CystoscopyTestRequestGradeFlag
+      tags: [cystoscopy-test-request]
       operationId: replaceCystoscopyTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CystoscopyTestRequestGradeFlag
+      tags: [cystoscopy-test-request]
       operationId: deleteCystoscopyTestRequestGradeFlag
       responses:
         "200":

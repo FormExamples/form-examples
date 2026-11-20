@@ -5,10 +5,19 @@ info:
   title: United States Standard Certificate Of Death — Patient
   version: 1.0.0
   description: Patient demographic information for the deceased whose cause of death this death certificate records.
+x-namespace:
+  form: united-states-standard-certificate-of-death
+  apiPrefix: /api/united-states-standard-certificate-of-death/
+  sqlSchema: united_states_standard_certificate_of_death
+  xmlNamespace: https://formexamples.github.io/united-states-standard-certificate-of-death/xml
+tags:
+  - name: united-states-standard-certificate-of-death
+    description: United States Standard Certificate Of Death form
 paths:
   /api/united-states-standard-certificate-of-death/patients:
     get:
       summary: List Patient records
+      tags: [united-states-standard-certificate-of-death]
       operationId: listPatient
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Patient
+      tags: [united-states-standard-certificate-of-death]
       operationId: createPatient
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Patient by id
+      tags: [united-states-standard-certificate-of-death]
       operationId: getPatient
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Patient
+      tags: [united-states-standard-certificate-of-death]
       operationId: updatePatient
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Patient
+      tags: [united-states-standard-certificate-of-death]
       operationId: replacePatient
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Patient
+      tags: [united-states-standard-certificate-of-death]
       operationId: deletePatient
       responses:
         "200":

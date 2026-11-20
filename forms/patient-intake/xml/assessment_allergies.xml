@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE assessment_allergies SYSTEM "assessment_allergies.dtd">
-<assessment_allergies>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<assessment_allergies xmlns="https://formexamples.github.io/patient-intake/xml">
+<id>16ddafc9-cdba-535b-8f68-46d114f16321</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>3608dbf5-c955-59c7-965f-49174e060f72</assessment_id>
 <has_drug_allergies>yes</has_drug_allergies>
 <has_food_allergies>yes</has_food_allergies>
 <has_environmental_allergies>yes</has_environmental_allergies>

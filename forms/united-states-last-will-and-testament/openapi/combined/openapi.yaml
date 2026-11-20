@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the United States Last Will and Testament form, merged
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
+x-namespace:
+  form: united-states-last-will-and-testament
+  apiPrefix: /api/united-states-last-will-and-testament/
+  sqlSchema: united_states_last_will_and_testament
+  xmlNamespace: https://formexamples.github.io/united-states-last-will-and-testament/xml
+tags:
+- name: united-states-last-will-and-testament
+  description: United States Last Will and Testament form
 paths:
   /api/united-states-last-will-and-testament/attorneys:
     get:
       summary: List Attorney records
+      tags:
+      - united-states-last-will-and-testament
       operationId: listAttorney
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Attorney
+      tags:
+      - united-states-last-will-and-testament
       operationId: createAttorney
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Attorney by id
+      tags:
+      - united-states-last-will-and-testament
       operationId: getAttorney
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Attorney
+      tags:
+      - united-states-last-will-and-testament
       operationId: updateAttorney
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Attorney
+      tags:
+      - united-states-last-will-and-testament
       operationId: replaceAttorney
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Attorney
+      tags:
+      - united-states-last-will-and-testament
       operationId: deleteAttorney
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - united-states-last-will-and-testament
   /api/united-states-last-will-and-testament/testators:
     get:
       summary: List Testator records
+      tags:
+      - united-states-last-will-and-testament
       operationId: listTestator
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Testator
+      tags:
+      - united-states-last-will-and-testament
       operationId: createTestator
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Testator by id
+      tags:
+      - united-states-last-will-and-testament
       operationId: getTestator
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Testator
+      tags:
+      - united-states-last-will-and-testament
       operationId: updateTestator
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Testator
+      tags:
+      - united-states-last-will-and-testament
       operationId: replaceTestator
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Testator
+      tags:
+      - united-states-last-will-and-testament
       operationId: deleteTestator
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/united-states-last-will-and-testament/united_states_last_will_and_testament_grade_flags:
     get:
       summary: List UnitedStatesLastWillAndTestamentGradeFlag records
+      tags:
+      - united-states-last-will-and-testament
       operationId: listUnitedStatesLastWillAndTestamentGradeFlag
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesLastWillAndTestamentGradeFlag
+      tags:
+      - united-states-last-will-and-testament
       operationId: createUnitedStatesLastWillAndTestamentGradeFlag
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesLastWillAndTestamentGradeFlag by id
+      tags:
+      - united-states-last-will-and-testament
       operationId: getUnitedStatesLastWillAndTestamentGradeFlag
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesLastWillAndTestamentGradeFlag
+      tags:
+      - united-states-last-will-and-testament
       operationId: updateUnitedStatesLastWillAndTestamentGradeFlag
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesLastWillAndTestamentGradeFlag
+      tags:
+      - united-states-last-will-and-testament
       operationId: replaceUnitedStatesLastWillAndTestamentGradeFlag
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesLastWillAndTestamentGradeFlag
+      tags:
+      - united-states-last-will-and-testament
       operationId: deleteUnitedStatesLastWillAndTestamentGradeFlag
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/united-states-last-will-and-testament/united_states_last_will_and_testament_grade_rules:
     get:
       summary: List UnitedStatesLastWillAndTestamentGradeRule records
+      tags:
+      - united-states-last-will-and-testament
       operationId: listUnitedStatesLastWillAndTestamentGradeRule
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesLastWillAndTestamentGradeRule
+      tags:
+      - united-states-last-will-and-testament
       operationId: createUnitedStatesLastWillAndTestamentGradeRule
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesLastWillAndTestamentGradeRule by id
+      tags:
+      - united-states-last-will-and-testament
       operationId: getUnitedStatesLastWillAndTestamentGradeRule
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesLastWillAndTestamentGradeRule
+      tags:
+      - united-states-last-will-and-testament
       operationId: updateUnitedStatesLastWillAndTestamentGradeRule
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesLastWillAndTestamentGradeRule
+      tags:
+      - united-states-last-will-and-testament
       operationId: replaceUnitedStatesLastWillAndTestamentGradeRule
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesLastWillAndTestamentGradeRule
+      tags:
+      - united-states-last-will-and-testament
       operationId: deleteUnitedStatesLastWillAndTestamentGradeRule
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/united-states-last-will-and-testament/united_states_last_will_and_testament_grades:
     get:
       summary: List UnitedStatesLastWillAndTestamentGrade records
+      tags:
+      - united-states-last-will-and-testament
       operationId: listUnitedStatesLastWillAndTestamentGrade
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesLastWillAndTestamentGrade
+      tags:
+      - united-states-last-will-and-testament
       operationId: createUnitedStatesLastWillAndTestamentGrade
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesLastWillAndTestamentGrade by id
+      tags:
+      - united-states-last-will-and-testament
       operationId: getUnitedStatesLastWillAndTestamentGrade
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesLastWillAndTestamentGrade
+      tags:
+      - united-states-last-will-and-testament
       operationId: updateUnitedStatesLastWillAndTestamentGrade
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesLastWillAndTestamentGrade
+      tags:
+      - united-states-last-will-and-testament
       operationId: replaceUnitedStatesLastWillAndTestamentGrade
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesLastWillAndTestamentGrade
+      tags:
+      - united-states-last-will-and-testament
       operationId: deleteUnitedStatesLastWillAndTestamentGrade
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/united-states-last-will-and-testament/united_states_last_will_and_testaments:
     get:
       summary: List UnitedStatesLastWillAndTestament records
+      tags:
+      - united-states-last-will-and-testament
       operationId: listUnitedStatesLastWillAndTestament
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedStatesLastWillAndTestament
+      tags:
+      - united-states-last-will-and-testament
       operationId: createUnitedStatesLastWillAndTestament
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one UnitedStatesLastWillAndTestament by id
+      tags:
+      - united-states-last-will-and-testament
       operationId: getUnitedStatesLastWillAndTestament
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedStatesLastWillAndTestament
+      tags:
+      - united-states-last-will-and-testament
       operationId: updateUnitedStatesLastWillAndTestament
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing UnitedStatesLastWillAndTestament
+      tags:
+      - united-states-last-will-and-testament
       operationId: replaceUnitedStatesLastWillAndTestament
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a UnitedStatesLastWillAndTestament
+      tags:
+      - united-states-last-will-and-testament
       operationId: deleteUnitedStatesLastWillAndTestament
       responses:
         '200':

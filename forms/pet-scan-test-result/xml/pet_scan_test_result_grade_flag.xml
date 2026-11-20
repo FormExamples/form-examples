@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pet_scan_test_result_grade_flag SYSTEM "pet_scan_test_result_grade_flag.dtd">
-<pet_scan_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<pet_scan_test_result_grade_flag xmlns="https://formexamples.github.io/pet-scan-test-result/xml">
+<id>4d087931-d762-5961-a940-1f44569673d4</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<pet_scan_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</pet_scan_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<pet_scan_test_result_grade_id>1b462246-61fe-57bd-85ba-e26b656ba6c7</pet_scan_test_result_grade_id>
+<flag_id>8fd8bcce-d947-5bc7-92d1-43346d8c50ac</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

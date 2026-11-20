@@ -5,10 +5,19 @@ info:
   title: Meeting — Organizer
   version: 1.0.0
   description: "Person who schedules a meeting and signs the record. The analogue of patient in a clinical form: the subject of the assessment is the meeting itself, but the organizer is the human who scheduled it."
+x-namespace:
+  form: meeting
+  apiPrefix: /api/meeting/
+  sqlSchema: meeting
+  xmlNamespace: https://formexamples.github.io/meeting/xml
+tags:
+  - name: meeting
+    description: Meeting form
 paths:
   /api/meeting/organizers:
     get:
       summary: List Organizer records
+      tags: [meeting]
       operationId: listOrganizer
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Organizer
+      tags: [meeting]
       operationId: createOrganizer
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Organizer by id
+      tags: [meeting]
       operationId: getOrganizer
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Organizer
+      tags: [meeting]
       operationId: updateOrganizer
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Organizer
+      tags: [meeting]
       operationId: replaceOrganizer
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Organizer
+      tags: [meeting]
       operationId: deleteOrganizer
       responses:
         "200":

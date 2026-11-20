@@ -1,4 +1,5 @@
 <!ELEMENT casualty_card_disposition (id,created_at,updated_at,deleted_at,casualty_card_id,disposition,admitting_specialty,admitting_consultant,ward,level_of_care,discharge_diagnosis,discharge_medications,discharge_instructions,follow_up,return_precautions,receiving_hospital,reason_for_transfer,mode_of_transfer,discharge_time,total_time_in_department)>
+<!ATTLIST casualty_card_disposition xmlns CDATA #FIXED "https://formexamples.github.io/casualty-card-form/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

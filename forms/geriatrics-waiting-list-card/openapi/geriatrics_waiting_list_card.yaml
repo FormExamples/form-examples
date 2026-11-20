@@ -5,10 +5,19 @@ info:
   title: Geriatrics Waiting List Card — GeriatricsWaitingListCard
   version: 1.0.0
   description: Top-level record placing a patient on a geriatrics waiting list. Parent of appointment(s) and grading result.
+x-namespace:
+  form: geriatrics-waiting-list-card
+  apiPrefix: /api/geriatrics-waiting-list-card/
+  sqlSchema: geriatrics_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/geriatrics-waiting-list-card/xml
+tags:
+  - name: geriatrics-waiting-list-card
+    description: Geriatrics Waiting List Card form
 paths:
   /api/geriatrics-waiting-list-card/geriatrics_waiting_list_cards:
     get:
       summary: List GeriatricsWaitingListCard records
+      tags: [geriatrics-waiting-list-card]
       operationId: listGeriatricsWaitingListCard
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GeriatricsWaitingListCard
+      tags: [geriatrics-waiting-list-card]
       operationId: createGeriatricsWaitingListCard
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one GeriatricsWaitingListCard by id
+      tags: [geriatrics-waiting-list-card]
       operationId: getGeriatricsWaitingListCard
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GeriatricsWaitingListCard
+      tags: [geriatrics-waiting-list-card]
       operationId: updateGeriatricsWaitingListCard
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing GeriatricsWaitingListCard
+      tags: [geriatrics-waiting-list-card]
       operationId: replaceGeriatricsWaitingListCard
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a GeriatricsWaitingListCard
+      tags: [geriatrics-waiting-list-card]
       operationId: deleteGeriatricsWaitingListCard
       responses:
         "200":

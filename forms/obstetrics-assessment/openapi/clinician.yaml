@@ -5,10 +5,19 @@ info:
   title: Obstetrics Assessment — Clinician
   version: 1.0.0
   description: Clinician
+x-namespace:
+  form: obstetrics-assessment
+  apiPrefix: /api/obstetrics-assessment/
+  sqlSchema: obstetrics_assessment
+  xmlNamespace: https://formexamples.github.io/obstetrics-assessment/xml
+tags:
+  - name: obstetrics-assessment
+    description: Obstetrics Assessment form
 paths:
   /api/obstetrics-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags: [obstetrics-assessment]
       operationId: listClinician
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Clinician
+      tags: [obstetrics-assessment]
       operationId: createClinician
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags: [obstetrics-assessment]
       operationId: getClinician
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Clinician
+      tags: [obstetrics-assessment]
       operationId: updateClinician
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Clinician
+      tags: [obstetrics-assessment]
       operationId: replaceClinician
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Clinician
+      tags: [obstetrics-assessment]
       operationId: deleteClinician
       responses:
         "200":

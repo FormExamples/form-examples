@@ -1,4 +1,5 @@
 <!ELEMENT employee (id,created_at,updated_at,deleted_at,first_name,last_name,date_of_birth,nhs_number,email,phone,job_title,department,start_date)>
+<!ATTLIST employee xmlns CDATA #FIXED "https://formexamples.github.io/employee-onboarding-checklist/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

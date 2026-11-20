@@ -5,10 +5,19 @@ info:
   title: United Kingdom Death Registration — UnitedKingdomDeathRegistration
   version: 1.0.0
   description: "Main death-registration record: the registrar-side and family-side process in England and Wales after an MCCD. Classification, fired rules, and flags live in child tables."
+x-namespace:
+  form: united-kingdom-death-registration
+  apiPrefix: /api/united-kingdom-death-registration/
+  sqlSchema: united_kingdom_death_registration
+  xmlNamespace: https://formexamples.github.io/united-kingdom-death-registration/xml
+tags:
+  - name: united-kingdom-death-registration
+    description: United Kingdom Death Registration form
 paths:
   /api/united-kingdom-death-registration/united_kingdom_death_registrations:
     get:
       summary: List UnitedKingdomDeathRegistration records
+      tags: [united-kingdom-death-registration]
       operationId: listUnitedKingdomDeathRegistration
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new UnitedKingdomDeathRegistration
+      tags: [united-kingdom-death-registration]
       operationId: createUnitedKingdomDeathRegistration
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one UnitedKingdomDeathRegistration by id
+      tags: [united-kingdom-death-registration]
       operationId: getUnitedKingdomDeathRegistration
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing UnitedKingdomDeathRegistration
+      tags: [united-kingdom-death-registration]
       operationId: updateUnitedKingdomDeathRegistration
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing UnitedKingdomDeathRegistration
+      tags: [united-kingdom-death-registration]
       operationId: replaceUnitedKingdomDeathRegistration
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a UnitedKingdomDeathRegistration
+      tags: [united-kingdom-death-registration]
       operationId: deleteUnitedKingdomDeathRegistration
       responses:
         "200":

@@ -1,4 +1,5 @@
 <!ELEMENT patient_reported_outcome_measures_score (id,created_at,updated_at,deleted_at,patient_reported_outcome_measures_id,sf36_pf,sf36_rp,sf36_bp,sf36_gh,sf36_vt,sf36_sf,sf36_re,sf36_mh,sf36_pcs_approx,sf36_mcs_approx,ndi_raw_score,ndi_answered_sections,ndi_percentage_score,ndi_band,mjoa_total_score,mjoa_band,eq5d_health_state_descriptor,eq5d_uk_index_value,eq5d_vas_score)>
+<!ATTLIST patient_reported_outcome_measures_score xmlns CDATA #FIXED "https://formexamples.github.io/patient-reported-outcome-measures/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

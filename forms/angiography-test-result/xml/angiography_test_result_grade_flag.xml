@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE angiography_test_result_grade_flag SYSTEM "angiography_test_result_grade_flag.dtd">
-<angiography_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<angiography_test_result_grade_flag xmlns="https://formexamples.github.io/angiography-test-result/xml">
+<id>a45432bc-dfe0-590a-bf21-e32e423ca497</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<angiography_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</angiography_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<angiography_test_result_grade_id>7ada6e7d-60e8-566c-ba14-ce8e0785d5d6</angiography_test_result_grade_id>
+<flag_id>93873fe1-51bf-528b-96d3-1ceb5f44b823</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

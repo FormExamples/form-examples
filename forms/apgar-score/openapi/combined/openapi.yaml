@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Apgar Score form, merged from the per-entity specs
     in this directory. One RESTful resource per routed SQL table, and any routes documented by hand in
     hand/routes.yaml.
+x-namespace:
+  form: apgar-score
+  apiPrefix: /api/apgar-score/
+  sqlSchema: apgar_score
+  xmlNamespace: https://formexamples.github.io/apgar-score/xml
+tags:
+- name: apgar-score
+  description: Apgar Score form
 paths:
   /api/apgar-score/apgar_score_grade_flags:
     get:
       summary: List ApgarScoreGradeFlag records
+      tags:
+      - apgar-score
       operationId: listApgarScoreGradeFlag
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ApgarScoreGradeFlag
+      tags:
+      - apgar-score
       operationId: createApgarScoreGradeFlag
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ApgarScoreGradeFlag by id
+      tags:
+      - apgar-score
       operationId: getApgarScoreGradeFlag
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ApgarScoreGradeFlag
+      tags:
+      - apgar-score
       operationId: updateApgarScoreGradeFlag
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ApgarScoreGradeFlag
+      tags:
+      - apgar-score
       operationId: replaceApgarScoreGradeFlag
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ApgarScoreGradeFlag
+      tags:
+      - apgar-score
       operationId: deleteApgarScoreGradeFlag
       responses:
         '200':
@@ -257,6 +277,8 @@ paths:
   /api/apgar-score/apgar_score_grade_rules:
     get:
       summary: List ApgarScoreGradeRule records
+      tags:
+      - apgar-score
       operationId: listApgarScoreGradeRule
       parameters:
       - name: limit
@@ -309,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ApgarScoreGradeRule
+      tags:
+      - apgar-score
       operationId: createApgarScoreGradeRule
       requestBody:
         required: true
@@ -362,6 +386,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ApgarScoreGradeRule by id
+      tags:
+      - apgar-score
       operationId: getApgarScoreGradeRule
       responses:
         '200':
@@ -389,6 +415,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ApgarScoreGradeRule
+      tags:
+      - apgar-score
       operationId: updateApgarScoreGradeRule
       requestBody:
         required: true
@@ -434,6 +462,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ApgarScoreGradeRule
+      tags:
+      - apgar-score
       operationId: replaceApgarScoreGradeRule
       requestBody:
         required: true
@@ -479,6 +509,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ApgarScoreGradeRule
+      tags:
+      - apgar-score
       operationId: deleteApgarScoreGradeRule
       responses:
         '200':
@@ -503,6 +535,8 @@ paths:
   /api/apgar-score/apgar_score_grades:
     get:
       summary: List ApgarScoreGrade records
+      tags:
+      - apgar-score
       operationId: listApgarScoreGrade
       parameters:
       - name: limit
@@ -555,6 +589,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ApgarScoreGrade
+      tags:
+      - apgar-score
       operationId: createApgarScoreGrade
       requestBody:
         required: true
@@ -608,6 +644,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ApgarScoreGrade by id
+      tags:
+      - apgar-score
       operationId: getApgarScoreGrade
       responses:
         '200':
@@ -635,6 +673,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ApgarScoreGrade
+      tags:
+      - apgar-score
       operationId: updateApgarScoreGrade
       requestBody:
         required: true
@@ -680,6 +720,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ApgarScoreGrade
+      tags:
+      - apgar-score
       operationId: replaceApgarScoreGrade
       requestBody:
         required: true
@@ -725,6 +767,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ApgarScoreGrade
+      tags:
+      - apgar-score
       operationId: deleteApgarScoreGrade
       responses:
         '200':
@@ -749,6 +793,8 @@ paths:
   /api/apgar-score/apgar_score_timepoints:
     get:
       summary: List ApgarScoreTimepoint records
+      tags:
+      - apgar-score
       operationId: listApgarScoreTimepoint
       parameters:
       - name: limit
@@ -801,6 +847,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ApgarScoreTimepoint
+      tags:
+      - apgar-score
       operationId: createApgarScoreTimepoint
       requestBody:
         required: true
@@ -854,6 +902,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ApgarScoreTimepoint by id
+      tags:
+      - apgar-score
       operationId: getApgarScoreTimepoint
       responses:
         '200':
@@ -881,6 +931,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ApgarScoreTimepoint
+      tags:
+      - apgar-score
       operationId: updateApgarScoreTimepoint
       requestBody:
         required: true
@@ -926,6 +978,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ApgarScoreTimepoint
+      tags:
+      - apgar-score
       operationId: replaceApgarScoreTimepoint
       requestBody:
         required: true
@@ -971,6 +1025,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ApgarScoreTimepoint
+      tags:
+      - apgar-score
       operationId: deleteApgarScoreTimepoint
       responses:
         '200':
@@ -995,6 +1051,8 @@ paths:
   /api/apgar-score/apgar_scores:
     get:
       summary: List ApgarScore records
+      tags:
+      - apgar-score
       operationId: listApgarScore
       parameters:
       - name: limit
@@ -1047,6 +1105,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ApgarScore
+      tags:
+      - apgar-score
       operationId: createApgarScore
       requestBody:
         required: true
@@ -1100,6 +1160,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one ApgarScore by id
+      tags:
+      - apgar-score
       operationId: getApgarScore
       responses:
         '200':
@@ -1127,6 +1189,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ApgarScore
+      tags:
+      - apgar-score
       operationId: updateApgarScore
       requestBody:
         required: true
@@ -1172,6 +1236,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing ApgarScore
+      tags:
+      - apgar-score
       operationId: replaceApgarScore
       requestBody:
         required: true
@@ -1217,6 +1283,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a ApgarScore
+      tags:
+      - apgar-score
       operationId: deleteApgarScore
       responses:
         '200':
@@ -1241,6 +1309,8 @@ paths:
   /api/apgar-score/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - apgar-score
       operationId: listClinician
       parameters:
       - name: limit
@@ -1293,6 +1363,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - apgar-score
       operationId: createClinician
       requestBody:
         required: true
@@ -1346,6 +1418,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - apgar-score
       operationId: getClinician
       responses:
         '200':
@@ -1373,6 +1447,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - apgar-score
       operationId: updateClinician
       requestBody:
         required: true
@@ -1418,6 +1494,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - apgar-score
       operationId: replaceClinician
       requestBody:
         required: true
@@ -1463,6 +1541,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - apgar-score
       operationId: deleteClinician
       responses:
         '200':
@@ -1495,9 +1575,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - apgar-score
   /api/apgar-score/patients:
     get:
       summary: List Patient records
+      tags:
+      - apgar-score
       operationId: listPatient
       parameters:
       - name: limit
@@ -1550,6 +1634,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - apgar-score
       operationId: createPatient
       requestBody:
         required: true
@@ -1603,6 +1689,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - apgar-score
       operationId: getPatient
       responses:
         '200':
@@ -1630,6 +1718,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - apgar-score
       operationId: updatePatient
       requestBody:
         required: true
@@ -1675,6 +1765,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - apgar-score
       operationId: replacePatient
       requestBody:
         required: true
@@ -1720,6 +1812,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - apgar-score
       operationId: deletePatient
       responses:
         '200':

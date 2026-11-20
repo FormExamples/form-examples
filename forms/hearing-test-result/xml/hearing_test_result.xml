@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hearing_test_result SYSTEM "hearing_test_result.dtd">
-<hearing_test_result>
-<id>770e8400-e29b-41d4-a716-446655440002</id>
+<hearing_test_result xmlns="https://formexamples.github.io/hearing-test-result/xml">
+<id>8356f2a9-e6ad-5b18-8959-ffa4476eaf43</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
-<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<patient_id>f1d81f1b-260e-580d-863b-3e5d954a5770</patient_id>
+<clinician_id>47125619-f5af-54a0-958a-1a843f4105a3</clinician_id>
 <originating_request_reference></originating_request_reference>
 <report_status>preliminary</report_status>
 <performed_date>2026-01-15</performed_date>

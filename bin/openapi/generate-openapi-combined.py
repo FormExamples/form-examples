@@ -238,6 +238,11 @@ def build(slug: str) -> str:
         if ("get", own) in served_operations(slug):
             paths[own] = SELF
     schemas = referenced(paths, schemas)
+    # Per spec/form-namespacing/: every operation is tagged with the form's slug.
+    for item in paths.values():
+        for method, operation in item.items():
+            if method in METHODS and isinstance(operation, dict):
+                operation["tags"] = [slug]
 
     doc = {
         "openapi": "3.1.0",
@@ -251,6 +256,13 @@ def build(slug: str) -> str:
                 "in hand/routes.yaml."
             ),
         },
+        "x-namespace": {
+            "form": slug,
+            "apiPrefix": f"/api/{slug}/",
+            "sqlSchema": slug.replace("-", "_"),
+            "xmlNamespace": f"https://formexamples.github.io/{slug}/xml",
+        },
+        "tags": [{"name": slug, "description": f"{title_of(slug)} form"}],
         "paths": dict(sorted(paths.items())),
         "components": {"schemas": dict(sorted(schemas.items()))},
     }

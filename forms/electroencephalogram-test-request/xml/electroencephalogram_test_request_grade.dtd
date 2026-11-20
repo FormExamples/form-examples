@@ -1,4 +1,5 @@
 <!ELEMENT electroencephalogram_test_request_grade (id,created_at,updated_at,deleted_at,electroencephalogram_test_request_id,appropriateness_score,appropriateness_band,triage_tier,target_timeframe,completeness_percent,priority_band,recommendation,clinician_notes,signed_at,graded_at)>
+<!ATTLIST electroencephalogram_test_request_grade xmlns CDATA #FIXED "https://formexamples.github.io/electroencephalogram-test-request/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

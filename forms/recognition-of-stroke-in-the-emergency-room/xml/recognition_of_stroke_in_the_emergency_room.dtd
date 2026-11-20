@@ -1,4 +1,5 @@
 <!ELEMENT recognition_of_stroke_in_the_emergency_room (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,symptom_onset_at,patient_identifier,age_band,sex,blood_glucose,hypoglycaemia_corrected,loss_of_consciousness,seizure_activity,facial_weakness,arm_weakness,leg_weakness,speech_disturbance,visual_field_defect,clinical_note)>
+<!ATTLIST recognition_of_stroke_in_the_emergency_room xmlns CDATA #FIXED "https://formexamples.github.io/recognition-of-stroke-in-the-emergency-room/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

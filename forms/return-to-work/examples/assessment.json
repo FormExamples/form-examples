@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a0",
+    "id": "1983a8d2-0eb4-5457-965c-c876aab75a23",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -22,7 +22,7 @@
     "dvlaGroup2LicenceHeld": "yes"
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b4",
+    "id": "e02da726-6b30-54ba-986a-254d93772687",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -40,7 +40,7 @@
     "unitedKingdomNhsNumber": ""
   },
   "employer": {
-    "id": "550e8400-e29b-41d4-a716-0000000000c4",
+    "id": "d2913db7-1120-55e0-9443-c9671405ef72",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -56,13 +56,13 @@
     "hrContactEmail": ""
   },
   "returnToWork": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d2",
+    "id": "cfe81364-05ee-558a-827b-dc6f98fb1ca7",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-0000000000d6",
-    "clinicianId": "550e8400-e29b-41d4-a716-0000000000d7",
-    "employerId": "550e8400-e29b-41d4-a716-0000000000d8",
+    "patientId": "6874d69e-07bf-5c52-9d3b-a2ba45859519",
+    "clinicianId": "505c826e-952d-559b-9ccf-b687acedbf5c",
+    "employerId": "4076985b-739c-5b36-aea4-ae5a510c9f83",
     "status": "draft",
     "statementKind": "fit-note",
     "assessmentDate": null,
@@ -122,11 +122,11 @@
     "signedAt": null
   },
   "returnToWorkRestriction": {
-    "id": "550e8400-e29b-41d4-a716-000000000112",
+    "id": "4987cd9f-f877-5f30-a08e-c7739493079f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "returnToWorkId": "550e8400-e29b-41d4-a716-000000000116",
+    "returnToWorkId": "3f1b61b1-385e-5e26-88d9-3af1d1904e78",
     "kind": "altered-hours",
     "severity": "low",
     "quantitativeLimit": "",
@@ -136,11 +136,11 @@
     "priorityRank": 0
   },
   "returnToWorkGrade": {
-    "id": "550e8400-e29b-41d4-a716-00000000011e",
+    "id": "daad71bb-ff93-5603-a7d5-bbcb24afb065",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "returnToWorkId": "550e8400-e29b-41d4-a716-000000000122",
+    "returnToWorkId": "8429b393-5c1e-5ec6-9797-02a61faf1ef4",
     "fitnessStatement": "fit",
     "restrictionPriority": "routine",
     "ruleCount": 0,
@@ -148,11 +148,11 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "returnToWorkGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-000000000128",
+    "id": "62444187-818b-5a72-a483-47a80319386b",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "returnToWorkGradeId": "550e8400-e29b-41d4-a716-00000000012c",
+    "returnToWorkGradeId": "f840af66-ccca-5a76-83bc-65653c4d4e19",
     "ruleCode": "",
     "ruleTitle": "",
     "ruleBand": "routine",
@@ -162,11 +162,11 @@
     "ruleNotes": ""
   },
   "returnToWorkGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-000000000134",
+    "id": "18e859d5-4bf4-5448-8fbd-4ee623cf6b61",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "returnToWorkGradeId": "550e8400-e29b-41d4-a716-000000000138",
+    "returnToWorkGradeId": "0e953275-37ba-5ebf-b58e-dfcc4c0d1ea6",
     "flagCode": "",
     "flagTitle": "",
     "flagCategory": "safety-critical-role",

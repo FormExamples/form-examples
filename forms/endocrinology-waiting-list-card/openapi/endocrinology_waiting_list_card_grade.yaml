@@ -5,10 +5,19 @@ info:
   title: Endocrinology Waiting List Card — EndocrinologyWaitingListCardGrade
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
+x-namespace:
+  form: endocrinology-waiting-list-card
+  apiPrefix: /api/endocrinology-waiting-list-card/
+  sqlSchema: endocrinology_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/endocrinology-waiting-list-card/xml
+tags:
+  - name: endocrinology-waiting-list-card
+    description: Endocrinology Waiting List Card form
 paths:
   /api/endocrinology-waiting-list-card/endocrinology_waiting_list_card_grades:
     get:
       summary: List EndocrinologyWaitingListCardGrade records
+      tags: [endocrinology-waiting-list-card]
       operationId: listEndocrinologyWaitingListCardGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EndocrinologyWaitingListCardGrade
+      tags: [endocrinology-waiting-list-card]
       operationId: createEndocrinologyWaitingListCardGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one EndocrinologyWaitingListCardGrade by id
+      tags: [endocrinology-waiting-list-card]
       operationId: getEndocrinologyWaitingListCardGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EndocrinologyWaitingListCardGrade
+      tags: [endocrinology-waiting-list-card]
       operationId: updateEndocrinologyWaitingListCardGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing EndocrinologyWaitingListCardGrade
+      tags: [endocrinology-waiting-list-card]
       operationId: replaceEndocrinologyWaitingListCardGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EndocrinologyWaitingListCardGrade
+      tags: [endocrinology-waiting-list-card]
       operationId: deleteEndocrinologyWaitingListCardGrade
       responses:
         "200":

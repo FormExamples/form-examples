@@ -5,10 +5,19 @@ info:
   title: Craniofacial Surgery Waiting List Card — CranioSurgeryWaitingListCardAppointment
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
+x-namespace:
+  form: craniofacial-surgery-waiting-list-card
+  apiPrefix: /api/craniofacial-surgery-waiting-list-card/
+  sqlSchema: craniofacial_surgery_waiting_list_card
+  xmlNamespace: https://formexamples.github.io/craniofacial-surgery-waiting-list-card/xml
+tags:
+  - name: craniofacial-surgery-waiting-list-card
+    description: Craniofacial Surgery Waiting List Card form
 paths:
   /api/craniofacial-surgery-waiting-list-card/cranio_surgery_waiting_list_card_appointments:
     get:
       summary: List CranioSurgeryWaitingListCardAppointment records
+      tags: [craniofacial-surgery-waiting-list-card]
       operationId: listCranioSurgeryWaitingListCardAppointment
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CranioSurgeryWaitingListCardAppointment
+      tags: [craniofacial-surgery-waiting-list-card]
       operationId: createCranioSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one CranioSurgeryWaitingListCardAppointment by id
+      tags: [craniofacial-surgery-waiting-list-card]
       operationId: getCranioSurgeryWaitingListCardAppointment
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CranioSurgeryWaitingListCardAppointment
+      tags: [craniofacial-surgery-waiting-list-card]
       operationId: updateCranioSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing CranioSurgeryWaitingListCardAppointment
+      tags: [craniofacial-surgery-waiting-list-card]
       operationId: replaceCranioSurgeryWaitingListCardAppointment
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CranioSurgeryWaitingListCardAppointment
+      tags: [craniofacial-surgery-waiting-list-card]
       operationId: deleteCranioSurgeryWaitingListCardAppointment
       responses:
         "200":

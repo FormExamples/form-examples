@@ -1,4 +1,5 @@
 <!ELEMENT body_measurements (id,created_at,updated_at,deleted_at,assessment_id,height_cm,weight_kg,bmi,waist_circumference_cm)>
+<!ATTLIST body_measurements xmlns CDATA #FIXED "https://formexamples.github.io/heart-health-check/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

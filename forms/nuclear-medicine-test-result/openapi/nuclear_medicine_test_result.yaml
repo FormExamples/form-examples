@@ -5,10 +5,19 @@ info:
   title: Nuclear Medicine Test Result — NuclearMedicineTestResult
   version: 1.0.0
   description: Nuclear medicine (radionuclide scan) result (report). Captures the performed examination, the radiopharmaceutical and injected activity, clinical history, the narrative and structured findings, key quantitative measurements (e.g. ejection fraction, split renal function), the impression and structured reporting category (e.g. V/Q PE probability), recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: nuclear-medicine-test-result
+  apiPrefix: /api/nuclear-medicine-test-result/
+  sqlSchema: nuclear_medicine_test_result
+  xmlNamespace: https://formexamples.github.io/nuclear-medicine-test-result/xml
+tags:
+  - name: nuclear-medicine-test-result
+    description: Nuclear Medicine Test Result form
 paths:
   /api/nuclear-medicine-test-result/nuclear_medicine_test_results:
     get:
       summary: List NuclearMedicineTestResult records
+      tags: [nuclear-medicine-test-result]
       operationId: listNuclearMedicineTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NuclearMedicineTestResult
+      tags: [nuclear-medicine-test-result]
       operationId: createNuclearMedicineTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one NuclearMedicineTestResult by id
+      tags: [nuclear-medicine-test-result]
       operationId: getNuclearMedicineTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NuclearMedicineTestResult
+      tags: [nuclear-medicine-test-result]
       operationId: updateNuclearMedicineTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing NuclearMedicineTestResult
+      tags: [nuclear-medicine-test-result]
       operationId: replaceNuclearMedicineTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a NuclearMedicineTestResult
+      tags: [nuclear-medicine-test-result]
       operationId: deleteNuclearMedicineTestResult
       responses:
         "200":

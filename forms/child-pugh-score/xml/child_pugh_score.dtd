@@ -1,4 +1,5 @@
 <!ELEMENT child_pugh_score (id,created_at,updated_at,deleted_at,patient_id,clinician_id,clinician_name,clinician_role,assessed_at,care_setting,aetiology,patient_identifier,age_band,sex,total_bilirubin_umol_l,serum_albumin_g_l,inr,prothrombin_time_seconds,ascites,hepatic_encephalopathy,clinical_note)>
+<!ATTLIST child_pugh_score xmlns CDATA #FIXED "https://formexamples.github.io/child-pugh-score/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

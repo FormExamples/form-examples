@@ -1,6 +1,6 @@
 {
   "patient": {
-    "id": "550e8400-e29b-41d4-a716-000000000064",
+    "id": "4868f99d-2ff6-5efd-891b-6362f304e474",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -20,7 +20,7 @@
     "vo2Max": null
   },
   "clinician": {
-    "id": "550e8400-e29b-41d4-a716-000000000076",
+    "id": "719a7559-1417-5b3a-952c-937e141e7079",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -36,12 +36,12 @@
     "unitedKingdomNhsNumber": ""
   },
   "mammographyTestRequest": {
-    "id": "550e8400-e29b-41d4-a716-000000000084",
+    "id": "97a75958-b821-55d0-a72c-76f696e60754",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "patientId": "550e8400-e29b-41d4-a716-000000000088",
-    "clinicianId": "550e8400-e29b-41d4-a716-000000000089",
+    "patientId": "ee38413e-91b1-5a78-9173-1b9ad11dce54",
+    "clinicianId": "8700567f-b8e1-5633-9195-ee40e2ac8dff",
     "status": "draft",
     "siteName": "",
     "setting": "outpatient",
@@ -69,11 +69,11 @@
     "notes": ""
   },
   "mammographyTestRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000a3",
+    "id": "17598025-dd63-54b2-a7d1-47a85178f197",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "mammographyTestRequestId": "550e8400-e29b-41d4-a716-0000000000a7",
+    "mammographyTestRequestId": "cde4556e-49df-566f-aea8-4eba49de7f82",
     "appropriatenessScore": 5,
     "appropriatenessBand": "usually-appropriate",
     "triageTier": "routine",
@@ -88,22 +88,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "mammographyTestRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000b4",
+    "id": "c8bea919-3db4-5601-80ec-fd8d958e8eb0",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "mammographyTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000b8",
+    "mammographyTestRequestGradeId": "c3ce618d-0398-550c-b721-e7a0fcaf77ac",
     "ruleId": "",
     "axis": "appropriateness",
     "category": "",
     "description": ""
   },
   "mammographyTestRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000bd",
+    "id": "119b7540-527b-5797-8158-50763d867d31",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "mammographyTestRequestGradeId": "550e8400-e29b-41d4-a716-0000000000c1",
+    "mammographyTestRequestGradeId": "60779b5a-43e0-5191-b0c3-85a438c72e8d",
     "flagId": "",
     "category": "suspected-cancer-2ww",
     "priority": "low",

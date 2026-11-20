@@ -5,10 +5,19 @@ info:
   title: Histopathology Test Result — HistopathologyTestResult
   version: 1.0.0
   description: Histopathology test result (report). Captures the examined specimen and adequacy, clinical history, the macroscopic and microscopic descriptions, the diagnosis, malignancy and tumour characterisation (type, histological grade, pathological TNM stage), resection margins and lymphovascular invasion, ancillary immunohistochemistry and SNOMED coding, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
+x-namespace:
+  form: histopathology-test-result
+  apiPrefix: /api/histopathology-test-result/
+  sqlSchema: histopathology_test_result
+  xmlNamespace: https://formexamples.github.io/histopathology-test-result/xml
+tags:
+  - name: histopathology-test-result
+    description: Histopathology Test Result form
 paths:
   /api/histopathology-test-result/histopathology_test_results:
     get:
       summary: List HistopathologyTestResult records
+      tags: [histopathology-test-result]
       operationId: listHistopathologyTestResult
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new HistopathologyTestResult
+      tags: [histopathology-test-result]
       operationId: createHistopathologyTestResult
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one HistopathologyTestResult by id
+      tags: [histopathology-test-result]
       operationId: getHistopathologyTestResult
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing HistopathologyTestResult
+      tags: [histopathology-test-result]
       operationId: updateHistopathologyTestResult
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing HistopathologyTestResult
+      tags: [histopathology-test-result]
       operationId: replaceHistopathologyTestResult
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HistopathologyTestResult
+      tags: [histopathology-test-result]
       operationId: deleteHistopathologyTestResult
       responses:
         "200":

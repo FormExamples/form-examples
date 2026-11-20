@@ -5,10 +5,19 @@ info:
   title: Ward Round Note — WardRoundNote
   version: 1.0.0
   description: "Main ward-round-note record for one daily inpatient review: review header, patient and clinician identification, and the ten review components (overnight events, problem list, examination and NEWS2, investigations, VTE, medication, plan, escalation, estimated discharge) as free text and enum flags. Completeness grade, fired rules, and flags live in child tables."
+x-namespace:
+  form: ward-round-note
+  apiPrefix: /api/ward-round-note/
+  sqlSchema: ward_round_note
+  xmlNamespace: https://formexamples.github.io/ward-round-note/xml
+tags:
+  - name: ward-round-note
+    description: Ward Round Note form
 paths:
   /api/ward-round-note/ward_round_notes:
     get:
       summary: List WardRoundNote records
+      tags: [ward-round-note]
       operationId: listWardRoundNote
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new WardRoundNote
+      tags: [ward-round-note]
       operationId: createWardRoundNote
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one WardRoundNote by id
+      tags: [ward-round-note]
       operationId: getWardRoundNote
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing WardRoundNote
+      tags: [ward-round-note]
       operationId: updateWardRoundNote
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing WardRoundNote
+      tags: [ward-round-note]
       operationId: replaceWardRoundNote
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a WardRoundNote
+      tags: [ward-round-note]
       operationId: deleteWardRoundNote
       responses:
         "200":

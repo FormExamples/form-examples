@@ -5,10 +5,19 @@ info:
   title: Soap Note — SoapNote
   version: 1.0.0
   description: "Main SOAP-note record for one patient encounter: encounter context, patient and clinician identification, and the four SOAP sections (Subjective, Objective, Assessment, Plan) as free text. Completeness grade, fired rules, and flags live in child tables."
+x-namespace:
+  form: soap-note
+  apiPrefix: /api/soap-note/
+  sqlSchema: soap_note
+  xmlNamespace: https://formexamples.github.io/soap-note/xml
+tags:
+  - name: soap-note
+    description: Soap Note form
 paths:
   /api/soap-note/soap_notes:
     get:
       summary: List SoapNote records
+      tags: [soap-note]
       operationId: listSoapNote
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SoapNote
+      tags: [soap-note]
       operationId: createSoapNote
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one SoapNote by id
+      tags: [soap-note]
       operationId: getSoapNote
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SoapNote
+      tags: [soap-note]
       operationId: updateSoapNote
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing SoapNote
+      tags: [soap-note]
       operationId: replaceSoapNote
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SoapNote
+      tags: [soap-note]
       operationId: deleteSoapNote
       responses:
         "200":

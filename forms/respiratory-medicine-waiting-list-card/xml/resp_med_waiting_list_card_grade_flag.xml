@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE resp_med_waiting_list_card_grade_flag SYSTEM "resp_med_waiting_list_card_grade_flag.dtd">
-<resp_med_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<resp_med_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/respiratory-medicine-waiting-list-card/xml">
+<id>fbd5737d-4819-5a85-b575-1b4f4ae4d80e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<resp_med_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</resp_med_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<resp_med_waiting_list_card_grade_id>5e6f5185-0d32-5cc1-9da6-80b39c5eea8a</resp_med_waiting_list_card_grade_id>
+<flag_id>db7f7a32-f111-5c57-a5d5-6482a16e0326</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

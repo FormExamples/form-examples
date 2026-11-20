@@ -1,6 +1,6 @@
 {
   "worker": {
-    "id": "550e8400-e29b-41d4-a716-000000000070",
+    "id": "854033e7-2243-5fff-97ab-9c5b58f21fe9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -19,7 +19,7 @@
     "employmentStartDate": null
   },
   "manager": {
-    "id": "550e8400-e29b-41d4-a716-000000000081",
+    "id": "103edc4d-e4e4-5bcd-9347-f7e05790a6f9",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
@@ -34,12 +34,12 @@
     "department": ""
   },
   "neurodiversityAdjustmentRequest": {
-    "id": "550e8400-e29b-41d4-a716-00000000008e",
+    "id": "fba67e06-4c28-5b3c-8ed5-0cfdcefeff58",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "workerId": "550e8400-e29b-41d4-a716-000000000092",
-    "managerId": "550e8400-e29b-41d4-a716-000000000093",
+    "workerId": "f66f54d2-a7b6-5a11-a015-9f6fe0a6233a",
+    "managerId": "1f07c23e-3301-5f6c-8a2b-aa45c537ff7d",
     "status": "draft",
     "requestedBy": "worker",
     "requestDate": null,
@@ -84,11 +84,11 @@
     "notes": ""
   },
   "neurodiversityAdjustmentRequestGrade": {
-    "id": "550e8400-e29b-41d4-a716-0000000000be",
+    "id": "61a4ee08-58be-5c53-a889-d281d3ec9b6f",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "neurodiversityAdjustmentRequestId": "550e8400-e29b-41d4-a716-0000000000c2",
+    "neurodiversityAdjustmentRequestId": "83326212-412d-527c-803c-7103a34e9d74",
     "eligibilityBand": "likely-covered",
     "impactBand": "ok",
     "completenessPercent": 50,
@@ -100,22 +100,22 @@
     "gradedAt": "2026-04-09T10:00:00+00:00"
   },
   "neurodiversityAdjustmentRequestGradeRule": {
-    "id": "550e8400-e29b-41d4-a716-0000000000cc",
+    "id": "bcb8eef2-6a1b-5f0b-adba-71bddce924d2",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "neurodiversityAdjustmentRequestGradeId": "550e8400-e29b-41d4-a716-0000000000d0",
+    "neurodiversityAdjustmentRequestGradeId": "c90ae9b8-1aa3-50fe-b8a9-63f192d52930",
     "ruleId": "",
     "axis": "eligibility",
     "category": "",
     "description": ""
   },
   "neurodiversityAdjustmentRequestGradeFlag": {
-    "id": "550e8400-e29b-41d4-a716-0000000000d5",
+    "id": "67648031-727e-5f2a-b1a8-7a3364e1d901",
     "createdAt": "2026-04-09T10:00:00+00:00",
     "updatedAt": "2026-04-09T10:00:00+00:00",
     "deletedAt": null,
-    "neurodiversityAdjustmentRequestGradeId": "550e8400-e29b-41d4-a716-0000000000d9",
+    "neurodiversityAdjustmentRequestGradeId": "a7ab73be-bb45-50bb-b10e-ecb6ef9213c2",
     "flagId": "",
     "category": "disability-duty-engaged",
     "priority": "low",

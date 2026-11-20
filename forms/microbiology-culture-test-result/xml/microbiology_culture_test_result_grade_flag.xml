@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE microbiology_culture_test_result_grade_flag SYSTEM "microbiology_culture_test_result_grade_flag.dtd">
-<microbiology_culture_test_result_grade_flag>
-<id>aa0e8400-e29b-41d4-a716-446655440005</id>
+<microbiology_culture_test_result_grade_flag xmlns="https://formexamples.github.io/microbiology-culture-test-result/xml">
+<id>ef7f5242-000b-5bbc-8141-d8f279555246</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<microbiology_culture_test_result_grade_id>880e8400-e29b-41d4-a716-446655440003</microbiology_culture_test_result_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<microbiology_culture_test_result_grade_id>f14d244a-683a-5410-8aa8-c11612a7c1c6</microbiology_culture_test_result_grade_id>
+<flag_id>b976d482-0187-5aa5-9639-06d9eccfb88b</flag_id>
 <category>critical-result-alert</category>
 <priority>low</priority>
 <description>Example text.</description>

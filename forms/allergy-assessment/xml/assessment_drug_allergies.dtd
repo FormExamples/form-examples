@@ -1,4 +1,5 @@
 <!ELEMENT assessment_drug_allergies (id,created_at,updated_at,deleted_at,assessment_id,has_drug_allergies,cross_reactivity_concerns)>
+<!ATTLIST assessment_drug_allergies xmlns CDATA #FIXED "https://formexamples.github.io/allergy-assessment/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

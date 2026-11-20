@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grading_fired_rule SYSTEM "grading_fired_rule.dtd">
-<grading_fired_rule>
-<id>990e8400-e29b-41d4-a716-446655440004</id>
+<grading_fired_rule xmlns="https://formexamples.github.io/stroke-assessment/xml">
+<id>25bc9a9e-ea34-51aa-b640-473ed03a48e4</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<grade_id>880e8400-e29b-41d4-a716-446655440003</grade_id>
-<rule_id>660e8400-e29b-41d4-a716-446655440001</rule_id>
+<grade_id>5db03f9d-432a-5448-8b54-6979c3cec975</grade_id>
+<rule_id>a68fdb2f-1b05-5f62-ba7b-76f445090449</rule_id>
 <category>General</category>
 <description>Example text.</description>
 <severity_level>no_stroke_symptoms</severity_level>

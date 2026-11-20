@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE internal_med_waiting_list_card_grade_flag SYSTEM "internal_med_waiting_list_card_grade_flag.dtd">
-<internal_med_waiting_list_card_grade_flag>
-<id>bb0e8400-e29b-41d4-a716-446655440006</id>
+<internal_med_waiting_list_card_grade_flag xmlns="https://formexamples.github.io/internal-medicine-waiting-list-card/xml">
+<id>a4ef2fa9-1d45-565b-8724-0f2e44f6859e</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<internal_med_waiting_list_card_grade_id>990e8400-e29b-41d4-a716-446655440004</internal_med_waiting_list_card_grade_id>
-<flag_id>660e8400-e29b-41d4-a716-446655440001</flag_id>
+<internal_med_waiting_list_card_grade_id>9458790c-50f2-58a1-a3d6-064d93207f35</internal_med_waiting_list_card_grade_id>
+<flag_id>db5edfd4-3120-5caf-91de-820f418c8f35</flag_id>
 <category>breach-risk</category>
 <priority>low</priority>
 <description>Example text.</description>

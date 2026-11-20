@@ -5,10 +5,19 @@ info:
   title: Prenatal Assessment — Grade
   version: 1.0.0
   description: Computed prenatal risk stratification result. Risk level based on obstetric, medical, and mental health factors. One-to-one child of assessment.
+x-namespace:
+  form: prenatal-assessment
+  apiPrefix: /api/prenatal-assessment/
+  sqlSchema: prenatal_assessment
+  xmlNamespace: https://formexamples.github.io/prenatal-assessment/xml
+tags:
+  - name: prenatal-assessment
+    description: Prenatal Assessment form
 paths:
   /api/prenatal-assessment/grades:
     get:
       summary: List Grade records
+      tags: [prenatal-assessment]
       operationId: listGrade
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Grade
+      tags: [prenatal-assessment]
       operationId: createGrade
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one Grade by id
+      tags: [prenatal-assessment]
       operationId: getGrade
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Grade
+      tags: [prenatal-assessment]
       operationId: updateGrade
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing Grade
+      tags: [prenatal-assessment]
       operationId: replaceGrade
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Grade
+      tags: [prenatal-assessment]
       operationId: deleteGrade
       responses:
         "200":

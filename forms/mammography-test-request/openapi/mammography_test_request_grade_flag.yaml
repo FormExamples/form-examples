@@ -5,10 +5,19 @@ info:
   title: Mammography Test Request — MammographyTestRequestGradeFlag
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the imaging team.
+x-namespace:
+  form: mammography-test-request
+  apiPrefix: /api/mammography-test-request/
+  sqlSchema: mammography_test_request
+  xmlNamespace: https://formexamples.github.io/mammography-test-request/xml
+tags:
+  - name: mammography-test-request
+    description: Mammography Test Request form
 paths:
   /api/mammography-test-request/mammography_test_request_grade_flags:
     get:
       summary: List MammographyTestRequestGradeFlag records
+      tags: [mammography-test-request]
       operationId: listMammographyTestRequestGradeFlag
       parameters:
         - name: limit
@@ -59,6 +68,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MammographyTestRequestGradeFlag
+      tags: [mammography-test-request]
       operationId: createMammographyTestRequestGradeFlag
       requestBody:
         required: true
@@ -112,6 +122,7 @@ paths:
           format: uuid
     get:
       summary: Fetch one MammographyTestRequestGradeFlag by id
+      tags: [mammography-test-request]
       operationId: getMammographyTestRequestGradeFlag
       responses:
         "200":
@@ -139,6 +150,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MammographyTestRequestGradeFlag
+      tags: [mammography-test-request]
       operationId: updateMammographyTestRequestGradeFlag
       requestBody:
         required: true
@@ -184,6 +196,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     put:
       summary: Replace an existing MammographyTestRequestGradeFlag
+      tags: [mammography-test-request]
       operationId: replaceMammographyTestRequestGradeFlag
       requestBody:
         required: true
@@ -229,6 +242,7 @@ paths:
                 $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MammographyTestRequestGradeFlag
+      tags: [mammography-test-request]
       operationId: deleteMammographyTestRequestGradeFlag
       responses:
         "200":

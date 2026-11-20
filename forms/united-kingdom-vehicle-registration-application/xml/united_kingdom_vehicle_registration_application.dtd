@@ -1,4 +1,5 @@
 <!ELEMENT united_kingdom_vehicle_registration_application (id,created_at,updated_at,deleted_at,applicant_id,keeper_id,application_type,application_date,v5c_status,weeks_since_change_of_keeper,new_keeper_slip_provided,owner_differs_from_keeper,owner_name,keeper_address_in_northern_ireland,registration_number,vehicle_identification_number,engine_number,make,model,colour,vehicle_category,fuel_type,engine_capacity_as_cc,date_of_manufacture,date_first_used,seriously_damaged,certificate_of_newness_provided,type_approval,mot_status,insurance_status,country_of_export,import_date,nova_status,nova_reference,build_evidence_provided,donor_vehicle_count,fee_payment_method,fee_paid_as_pence,declaration_signed,declaration_date,applicant_note)>
+<!ATTLIST united_kingdom_vehicle_registration_application xmlns CDATA #FIXED "https://formexamples.github.io/united-kingdom-vehicle-registration-application/xml">
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT created_at (#PCDATA)>
 <!ELEMENT updated_at (#PCDATA)>

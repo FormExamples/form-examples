@@ -7,10 +7,20 @@ info:
   description: Combined OpenAPI specification for the Padua Venous Thromboembolism Risk Assessment (Padua
     Prediction Score) form, merged from the per-entity specs in this directory. One RESTful resource per
     routed SQL table, and any routes documented by hand in hand/routes.yaml.
+x-namespace:
+  form: padua-venous-thromboembolism-risk-assessment
+  apiPrefix: /api/padua-venous-thromboembolism-risk-assessment/
+  sqlSchema: padua_venous_thromboembolism_risk_assessment
+  xmlNamespace: https://formexamples.github.io/padua-venous-thromboembolism-risk-assessment/xml
+tags:
+- name: padua-venous-thromboembolism-risk-assessment
+  description: Padua Venous Thromboembolism Risk Assessment (Padua Prediction Score) form
 paths:
   /api/padua-venous-thromboembolism-risk-assessment/clinicians:
     get:
       summary: List Clinician records
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: listClinician
       parameters:
       - name: limit
@@ -63,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: createClinician
       requestBody:
         required: true
@@ -116,6 +128,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Clinician by id
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: getClinician
       responses:
         '200':
@@ -143,6 +157,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: updateClinician
       requestBody:
         required: true
@@ -188,6 +204,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Clinician
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: replaceClinician
       requestBody:
         required: true
@@ -233,6 +251,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: deleteClinician
       responses:
         '200':
@@ -265,9 +285,13 @@ paths:
             application/yaml:
               schema:
                 type: string
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
   /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessment_grade_flags:
     get:
       summary: List PaduaVenousThromboembolismRiskAssessmentGradeFlag records
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: listPaduaVenousThromboembolismRiskAssessmentGradeFlag
       parameters:
       - name: limit
@@ -320,6 +344,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PaduaVenousThromboembolismRiskAssessmentGradeFlag
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: createPaduaVenousThromboembolismRiskAssessmentGradeFlag
       requestBody:
         required: true
@@ -373,6 +399,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PaduaVenousThromboembolismRiskAssessmentGradeFlag by id
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: getPaduaVenousThromboembolismRiskAssessmentGradeFlag
       responses:
         '200':
@@ -400,6 +428,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PaduaVenousThromboembolismRiskAssessmentGradeFlag
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: updatePaduaVenousThromboembolismRiskAssessmentGradeFlag
       requestBody:
         required: true
@@ -445,6 +475,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PaduaVenousThromboembolismRiskAssessmentGradeFlag
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: replacePaduaVenousThromboembolismRiskAssessmentGradeFlag
       requestBody:
         required: true
@@ -490,6 +522,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PaduaVenousThromboembolismRiskAssessmentGradeFlag
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: deletePaduaVenousThromboembolismRiskAssessmentGradeFlag
       responses:
         '200':
@@ -514,6 +548,8 @@ paths:
   /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessment_grade_rules:
     get:
       summary: List PaduaVenousThromboembolismRiskAssessmentGradeRule records
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: listPaduaVenousThromboembolismRiskAssessmentGradeRule
       parameters:
       - name: limit
@@ -566,6 +602,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PaduaVenousThromboembolismRiskAssessmentGradeRule
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: createPaduaVenousThromboembolismRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -619,6 +657,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PaduaVenousThromboembolismRiskAssessmentGradeRule by id
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: getPaduaVenousThromboembolismRiskAssessmentGradeRule
       responses:
         '200':
@@ -646,6 +686,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PaduaVenousThromboembolismRiskAssessmentGradeRule
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: updatePaduaVenousThromboembolismRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -691,6 +733,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PaduaVenousThromboembolismRiskAssessmentGradeRule
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: replacePaduaVenousThromboembolismRiskAssessmentGradeRule
       requestBody:
         required: true
@@ -736,6 +780,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PaduaVenousThromboembolismRiskAssessmentGradeRule
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: deletePaduaVenousThromboembolismRiskAssessmentGradeRule
       responses:
         '200':
@@ -760,6 +806,8 @@ paths:
   /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessment_grades:
     get:
       summary: List PaduaVenousThromboembolismRiskAssessmentGrade records
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: listPaduaVenousThromboembolismRiskAssessmentGrade
       parameters:
       - name: limit
@@ -812,6 +860,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PaduaVenousThromboembolismRiskAssessmentGrade
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: createPaduaVenousThromboembolismRiskAssessmentGrade
       requestBody:
         required: true
@@ -865,6 +915,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PaduaVenousThromboembolismRiskAssessmentGrade by id
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: getPaduaVenousThromboembolismRiskAssessmentGrade
       responses:
         '200':
@@ -892,6 +944,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PaduaVenousThromboembolismRiskAssessmentGrade
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: updatePaduaVenousThromboembolismRiskAssessmentGrade
       requestBody:
         required: true
@@ -937,6 +991,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PaduaVenousThromboembolismRiskAssessmentGrade
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: replacePaduaVenousThromboembolismRiskAssessmentGrade
       requestBody:
         required: true
@@ -982,6 +1038,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PaduaVenousThromboembolismRiskAssessmentGrade
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: deletePaduaVenousThromboembolismRiskAssessmentGrade
       responses:
         '200':
@@ -1006,6 +1064,8 @@ paths:
   /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessments:
     get:
       summary: List PaduaVenousThromboembolismRiskAssessment records
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: listPaduaVenousThromboembolismRiskAssessment
       parameters:
       - name: limit
@@ -1058,6 +1118,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PaduaVenousThromboembolismRiskAssessment
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: createPaduaVenousThromboembolismRiskAssessment
       requestBody:
         required: true
@@ -1111,6 +1173,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one PaduaVenousThromboembolismRiskAssessment by id
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: getPaduaVenousThromboembolismRiskAssessment
       responses:
         '200':
@@ -1138,6 +1202,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PaduaVenousThromboembolismRiskAssessment
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: updatePaduaVenousThromboembolismRiskAssessment
       requestBody:
         required: true
@@ -1183,6 +1249,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing PaduaVenousThromboembolismRiskAssessment
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: replacePaduaVenousThromboembolismRiskAssessment
       requestBody:
         required: true
@@ -1228,6 +1296,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PaduaVenousThromboembolismRiskAssessment
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: deletePaduaVenousThromboembolismRiskAssessment
       responses:
         '200':
@@ -1252,6 +1322,8 @@ paths:
   /api/padua-venous-thromboembolism-risk-assessment/patients:
     get:
       summary: List Patient records
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: listPatient
       parameters:
       - name: limit
@@ -1304,6 +1376,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: createPatient
       requestBody:
         required: true
@@ -1357,6 +1431,8 @@ paths:
         format: uuid
     get:
       summary: Fetch one Patient by id
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: getPatient
       responses:
         '200':
@@ -1384,6 +1460,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: updatePatient
       requestBody:
         required: true
@@ -1429,6 +1507,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     put:
       summary: Replace an existing Patient
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: replacePatient
       requestBody:
         required: true
@@ -1474,6 +1554,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
+      tags:
+      - padua-venous-thromboembolism-risk-assessment
       operationId: deletePatient
       responses:
         '200':

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE grade SYSTEM "grade.dtd">
-<grade>
-<id>330e8400-e29b-41d4-a716-44665544000d</id>
+<grade xmlns="https://formexamples.github.io/allergy-assessment/xml">
+<id>f3a341d3-4330-59c1-87bb-47ec772a8d34</id>
 <created_at>2026-04-09T10:00:00Z</created_at>
 <updated_at>2026-04-09T10:00:00Z</updated_at>
 <deleted_at>2026-04-09T10:00:00Z</deleted_at>
-<assessment_id>770e8400-e29b-41d4-a716-446655440002</assessment_id>
+<assessment_id>5fd99768-6a1f-5300-bf95-106f0fb5a2eb</assessment_id>
 <severity_level>mild</severity_level>
 <allergy_burden_score>5</allergy_burden_score>
 <graded_at>2026-04-09T10:00:00Z</graded_at>
