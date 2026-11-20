@@ -33,24 +33,21 @@
   async function downloadPDF() {
     pdfError = '';
     try {
-      const res = await fetch(`/pre-operative-assessments-by-clinician/${id}/report/pdf`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: store.data, result: store.result })
-      });
-      if (res.ok) {
-        const blob = await res.blob();
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `pre-operative-assessment-${d.patient.lastName || id}.pdf`;
-        a.click();
-        URL.revokeObjectURL(url);
-      } else {
-        pdfError = 'Failed to generate PDF. Please try again.';
-      }
+      // Built in the browser, so the report works on a static host with no server.
+      const [{ default: pdfMake }, { default: vfs }, { buildPdfDoc }] = await Promise.all([
+        import('pdfmake/build/pdfmake'),
+        import('pdfmake/build/vfs_fonts'),
+        import('#lib/report/pdf-builder.js')
+      ]);
+      pdfMake.addVirtualFileSystem(vfs);
+      const doc = buildPdfDoc(store.data, store.result) as unknown as Parameters<
+        typeof pdfMake.createPdf
+      >[0];
+      await pdfMake
+        .createPdf(doc)
+        .download(`pre-operative-assessment-${d.patient.lastName || id}.pdf`);
     } catch {
-      pdfError = 'Failed to generate PDF. Please check your connection and try again.';
+      pdfError = 'Failed to generate PDF. Please try again.';
     }
   }
 </script>

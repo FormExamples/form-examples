@@ -13,7 +13,8 @@
     "dev": "vite dev",
     "preview": "vite preview",
     "precheck": "tsx scripts/generate-forms-data.ts && tsx scripts/generate-examples-data.ts",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "build:forms": "node scripts/build-forms.mjs"
   },
   "devDependencies": {
     "@fontsource/inter": "^5.3.0",

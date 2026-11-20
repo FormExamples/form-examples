@@ -72,6 +72,27 @@ Welcome / form / dashboard.
 Reference implementations: `forms/cardiology-request/` and
 `forms/cardiology-response/`.
 
+## On formexamples.github.io (static build)
+
+Every front-end is also served on the public site at `/<slug>/`, built with
+`VITE_FORM_EXAMPLES_SITE=1`, per
+[`spec/monorepo-github-pages/`](../spec/monorepo-github-pages/). So a front-end:
+
+- builds statically in that mode: `vite.config.ts` switches to
+  `@sveltejs/adapter-static` with `appDir: '_app/<slug>'` and a
+  `<slug>/200.html` fallback, and `src/routes/<slug>/+layout.ts` sets
+  `prerender = 'auto'` and `trailingSlash = 'always'` in that mode only;
+- keeps the `__spa` script in `src/app.html`, which restores the path for a
+  page reached through the site's `404.html`;
+- needs no server: no `+server.ts` other than the root redirect, and the PDF
+  report is built in the browser (`pdfmake/build/pdfmake` plus
+  `pdfmake/build/vfs_fonts`, with `addVirtualFileSystem`);
+- loads its themes from `/themes/`, which the site serves.
+
+`node formexamples.github.io/scripts/build-forms.mjs <slug>` builds one form into
+an already-built site, and serving `formexamples.github.io/build/` the way
+GitHub Pages does shows it at `/<slug>/`.
+
 ## Theming (Lily themes, gold standard)
 
 Every `front-end-with-svelte/` uses the **prebuilt Lily Design System theme

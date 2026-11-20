@@ -43,6 +43,22 @@ jobs:
 
       - run: pnpm run build
 
+      # Every form's own Svelte front-end, served at /<slug>/ (scripts/build-forms.mjs).
+      # The sources come from the public monorepo, without their vendored theme
+      # CSS: every form loads this site's /themes/.
+      - uses: actions/checkout@v7
+        with:
+          repository: FormExamples/form-examples
+          path: form-examples
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /forms/*/front-end-with-svelte/
+            !/forms/*/front-end-with-svelte/static/themes/
+
+      - run: node scripts/build-forms.mjs --jobs 4
+        env:
+          FORMS_DIR: form-examples/forms
+
       - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5

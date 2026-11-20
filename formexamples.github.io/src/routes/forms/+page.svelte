@@ -33,9 +33,17 @@
 <ul class="mt-6 grid gap-4 sm:grid-cols-2" aria-live="polite">
   {#each shown as form (form.slug)}
     <li class="rounded border border-current/20 p-4">
-      <a class="font-medium" href={formUrl(form.slug)} target="_blank" rel="noopener noreferrer">{form.title}</a>
+      {#if form.app}
+        <a class="font-medium" href="/{form.slug}/" data-sveltekit-reload>{form.title}</a>
+      {:else}
+        <a class="font-medium" href={formUrl(form.slug)} target="_blank" rel="noopener noreferrer">{form.title}</a>
+      {/if}
       <span class="ml-1 text-xs text-muted">{form.slug}</span>
       {#if form.description}<p class="mt-1 text-sm text-muted">{form.description}</p>{/if}
+      <p class="mt-2 text-sm">
+        {#if form.app}<a href="/{form.slug}/" data-sveltekit-reload>Try the form</a> ·{/if}
+        <a href={formUrl(form.slug)} target="_blank" rel="noopener noreferrer">Source</a>
+      </p>
     </li>
   {:else}
     <li class="text-muted">No forms match “{query}”.</li>

@@ -17,6 +17,10 @@
 # exported — so the sibling repo builds and deploys itself on every push
 # this tool makes to it, no separate setup needed there.
 #
+# The deploy workflow also builds every form's Svelte front-end into the site,
+# served at /<slug>/ (formexamples.github.io/scripts/build-forms.mjs), from
+# this monorepo's public main: push main before running this tool.
+#
 # Usage:
 #   bin/make-github-pages              # export + push (same as `make github-pages`)
 #   bin/make-github-pages --dry-run    # split only, don't push
@@ -41,5 +45,20 @@ if [ "${1:-}" = "--dry-run" ]; then
     exit 0
 fi
 
+before="$(git ls-remote "$remote_name" main | cut -f1)"
 git subtree push --prefix="$prefix" "$remote_name" main
+after="$(git ls-remote "$remote_name" main | cut -f1)"
 echo "pushed $prefix/ -> $remote_url main"
+
+# The site also builds every form's own Svelte front-end, fetched from this
+# monorepo's main at deploy time (formexamples.github.io/scripts/build-forms.mjs).
+# A change to a form alone leaves the subtree unchanged, so no push triggers
+# the deploy: run the workflow directly instead.
+if [ "$before" = "$after" ]; then
+    if command -v gh >/dev/null 2>&1; then
+        gh workflow run deploy.yml --repo FormExamples/formexamples.github.io --ref main
+        echo "subtree unchanged: started the deploy workflow, to rebuild the forms"
+    else
+        echo "subtree unchanged; to rebuild the forms, run the deploy workflow of FormExamples/formexamples.github.io" >&2
+    fi
+fi

@@ -2062,6 +2062,10 @@ bin/make-github-pages — publish formexamples.github.io/, per
  exported — so the sibling repo builds and deploys itself on every push
  this tool makes to it, no separate setup needed there.
 
+ The deploy workflow also builds every form's Svelte front-end into the site,
+ served at /<slug>/ (formexamples.github.io/scripts/build-forms.mjs), from
+ this monorepo's public main: push main before running this tool.
+
  Usage:
    bin/make-github-pages              # export + push (same as `make github-pages`)
    bin/make-github-pages --dry-run    # split only, don't push
@@ -3090,7 +3094,8 @@ Idempotent: re-running after a full --apply makes no further changes.
 
 ```text
 bin/svelte-theme-css-sync -- re-sync the 45 Lily reference theme
-stylesheets vendored into every form's front-end-with-svelte/static/themes/
+stylesheets vendored into every form's front-end-with-svelte/static/themes/,
+and the public site's formexamples.github.io/static/themes/ (which the forms load there),
 from the pinned Lily checkout (~/git/lilydesignsystem/lily-design-system/themes/).
 
 front-end-with-svelte/static/themes/ was originally populated once by

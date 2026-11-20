@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """bin/svelte-theme-css-sync -- re-sync the 45 Lily reference theme
-stylesheets vendored into every form's front-end-with-svelte/static/themes/
+stylesheets vendored into every form's front-end-with-svelte/static/themes/,
+and the public site's formexamples.github.io/static/themes/ (which the forms load there),
 from the pinned Lily checkout (~/git/lilydesignsystem/lily-design-system/themes/).
 
 front-end-with-svelte/static/themes/ was originally populated once by
@@ -75,6 +76,13 @@ def main() -> int:
         if not (form_dir / "front-end-with-svelte").is_dir():
             continue
         r = sync_themes(themes_dir, args.lily_dir, check)
+        counts[r] = counts.get(r, 0) + 1
+
+    # The public site's one copy, which every form loads from /themes/ there
+    # (spec/monorepo-github-pages/ "Forms on the site").
+    site_themes = REPO_ROOT / "formexamples.github.io" / "static" / "themes"
+    if site_themes.is_dir():
+        r = "site-" + sync_themes(site_themes, args.lily_dir, check)
         counts[r] = counts.get(r, 0) + 1
 
     mode_label = "CHECK" if check else "APPLY"
