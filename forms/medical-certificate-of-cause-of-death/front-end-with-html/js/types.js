@@ -21,7 +21,10 @@
  * @typedef {'yes' | 'no' | ''} YesNo
  * @typedef {'consultant' | 'sas' | 'registrar' | 'foundation' | 'gp' | 'other' | ''} DoctorGrade
  * @typedef {'certifier' | 'another-practitioner' | 'not-seen' | ''} SeenAfterDeathBy
- * @typedef {'unnatural' | 'violent' | 'suspicious' | 'unknown-cause' | 'industrial-disease' | 'medical-procedure' | 'custody' | 'no-attending-practitioner' | 'other' | 'none' | ''} CoronerReason
+ * @typedef {'unnatural' | 'violent' | 'suspicious' | 'unknown-cause' | 'industrial-disease' | 'medical-procedure' | 'custody' | 'no-attending-practitioner' | 'neglect' | 'self-harm' | 'poisoning' | 'other' | 'none' | ''} CoronerReason
+ * @typedef {'in-person' | 'video' | 'telephone' | 'none' | ''} AttendanceMode
+ * @typedef {'not-applicable' | 'not-pregnant' | 'pregnant-at-death' | 'pregnant-within-12-months' | 'unknown' | ''} PregnancyStatus
+ * @typedef {'none' | 'present' | 'unknown' | ''} ImplantedDeviceStatus
  * @typedef {'scrutinised' | 'discussed' | 'pending' | 'not-required' | ''} MedicalExaminerStatus
  * @typedef {'valid' | 'incomplete' | 'refer-to-coroner'} ValidityClass
  * @typedef {'high' | 'medium' | 'low'} Priority
@@ -37,6 +40,8 @@
  * @property {string | null} certificationDate   - ISO date; null when unset
  * @property {YesNo} attendedDeceased
  * @property {string | null} lastSeenAliveDate    - ISO date; null when unset
+ * @property {string} qualifications              - primary medical qualifications
+ * @property {AttendanceMode} attendanceMode      - in person / video qualify; telephone does not
  */
 
 /**
@@ -47,6 +52,8 @@
  * @property {string | null} dateOfBirth          - ISO date; null when unset
  * @property {number | null} ageYears
  * @property {string} patientIdentifier
+ * @property {string} ethnicity                  - from the record; 'unknown' if undocumented
+ * @property {PregnancyStatus} pregnancyStatus
  */
 
 /**
@@ -56,6 +63,8 @@
  * @property {string | null} timeOfDeath          - HH:MM; null when unset
  * @property {string} placeOfDeath
  * @property {SeenAfterDeathBy} seenAfterDeathBy
+ * @property {ImplantedDeviceStatus} implantedDeviceStatus
+ * @property {string} implantedDevices
  */
 
 /**
@@ -67,6 +76,8 @@
  * @property {string} causeIbInterval
  * @property {string} causeIcCondition
  * @property {string} causeIcInterval
+ * @property {string} causeIdCondition
+ * @property {string} causeIdInterval
  */
 
 /**
@@ -82,6 +93,7 @@
  * @property {YesNo} referredToCoroner
  * @property {CoronerReason} coronerReason
  * @property {MedicalExaminerStatus} medicalExaminerStatus
+ * @property {YesNo} bereavedFamilyDiscussed
  * @property {string} certifierNote
  */
 
@@ -127,20 +139,26 @@ function emptyCertificate() {
       placeOfCertification: '',
       certificationDate: null,
       attendedDeceased: '',
-      lastSeenAliveDate: null
+      lastSeenAliveDate: null,
+      qualifications: '',
+      attendanceMode: ''
     },
     deceased: {
       deceasedName: '',
       sex: '',
       dateOfBirth: null,
       ageYears: null,
-      patientIdentifier: ''
+      patientIdentifier: '',
+      ethnicity: '',
+      pregnancyStatus: ''
     },
     death: {
       dateOfDeath: null,
       timeOfDeath: null,
       placeOfDeath: '',
-      seenAfterDeathBy: ''
+      seenAfterDeathBy: '',
+      implantedDeviceStatus: '',
+      implantedDevices: ''
     },
     partI: {
       causeIaCondition: '',
@@ -148,7 +166,9 @@ function emptyCertificate() {
       causeIbCondition: '',
       causeIbInterval: '',
       causeIcCondition: '',
-      causeIcInterval: ''
+      causeIcInterval: '',
+      causeIdCondition: '',
+      causeIdInterval: ''
     },
     partII: {
       partIiConditions: '',
@@ -158,6 +178,7 @@ function emptyCertificate() {
       referredToCoroner: '',
       coronerReason: '',
       medicalExaminerStatus: '',
+      bereavedFamilyDiscussed: '',
       certifierNote: ''
     }
   };
@@ -228,6 +249,9 @@ function coronerReasonLabel(value) {
     case 'medical-procedure': return 'Possibly due to a medical procedure, treatment, or neglect';
     case 'custody': return 'Death in custody or state detention';
     case 'no-attending-practitioner': return 'No attending practitioner able to certify';
+    case 'neglect': return 'Neglect or self-neglect';
+    case 'self-harm': return 'Self-harm';
+    case 'poisoning': return 'Poisoning or overdose';
     case 'other': return 'Other reportable circumstance';
     case 'none': return 'None — no referral criterion met';
     default: return '';
@@ -241,6 +265,39 @@ function medicalExaminerStatusLabel(value) {
     case 'discussed': return 'Discussed with a medical examiner';
     case 'pending': return 'Scrutiny pending';
     case 'not-required': return 'Not required (coroner case)';
+    default: return '';
+  }
+}
+
+/** Attendance-mode label. */
+function attendanceModeLabel(value) {
+  switch (value) {
+    case 'in-person': return 'In person';
+    case 'video': return 'Video consultation';
+    case 'telephone': return 'Telephone only (does not qualify)';
+    case 'none': return 'Did not attend the deceased';
+    default: return '';
+  }
+}
+
+/** Pregnancy-status label. */
+function pregnancyStatusLabel(value) {
+  switch (value) {
+    case 'not-applicable': return 'Not applicable';
+    case 'not-pregnant': return 'Not pregnant in the 12 months before death';
+    case 'pregnant-at-death': return 'Pregnant at the time of death';
+    case 'pregnant-within-12-months': return 'Pregnant within the 12 months before death';
+    case 'unknown': return 'Unknown';
+    default: return '';
+  }
+}
+
+/** Implanted-device-status label. */
+function implantedDeviceStatusLabel(value) {
+  switch (value) {
+    case 'none': return 'No hazardous implanted device';
+    case 'present': return 'Hazardous implanted device present';
+    case 'unknown': return 'Unknown';
     default: return '';
   }
 }
@@ -264,4 +321,4 @@ function priorityLabel(priority) {
   }
 }
 
-export { emptyCertificate, validityClassLabel, validityClassClass, gradeLabel, sexLabel, seenAfterDeathByLabel, coronerReasonLabel, medicalExaminerStatusLabel, yesNoLabel, priorityLabel };
+export { emptyCertificate, validityClassLabel, validityClassClass, gradeLabel, sexLabel, seenAfterDeathByLabel, coronerReasonLabel, attendanceModeLabel, pregnancyStatusLabel, implantedDeviceStatusLabel, medicalExaminerStatusLabel, yesNoLabel, priorityLabel };

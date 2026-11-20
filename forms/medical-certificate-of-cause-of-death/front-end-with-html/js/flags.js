@@ -1,4 +1,4 @@
-import { coronerReferralIndicated, illogicalSequence, missingPartIa, nonEmpty, soleCause, unacceptableSoleCause } from './rules.js';
+import { abbreviationsUsed, attendanceQualifies, coronerReferralIndicated, explicitReferral, illogicalSequence, missingPartIa, nonEmpty, soleCause, traumaInCause, unacceptableSoleCause, unspecifiedDiabetes, unspecifiedMalignancy } from './rules.js';
 import { coronerReasonLabel } from './types.js';
 
 // Flagged-issue detection (statutory, safety, and governance). Independent of the
@@ -113,12 +113,118 @@ function detectFlaggedIssues(d) {
     });
   }
 
+  // ─── Certifier did not attend (HIGH) ────────────────────────
+  if (!attendanceQualifies(d)) {
+    flags.push({
+      id: 'F-CERTIFIER-NOT-ATTENDING-001',
+      category: 'certifier-not-attending',
+      priority: 'high',
+      description:
+        'The certifier did not attend the deceased in person or by video consultation. Telephone contact alone does not qualify, and an MCCD cannot be issued without an attending practitioner.',
+      suggestedAction:
+        'Ask a doctor who attended the deceased during life (in person or by video) to certify, or refer the death to the coroner.'
+    });
+  }
+
+  // ─── Trauma or complication in the cause (HIGH) ─────────────
+  if (traumaInCause(d) && !explicitReferral(d)) {
+    flags.push({
+      id: 'F-TRAUMA-IN-CAUSE-001',
+      category: 'trauma-in-cause',
+      priority: 'high',
+      description:
+        'A cause line mentions trauma, injury, poisoning, or a procedure or surgical complication, but no coroner referral is recorded. Such deaths must be referred, even if the event was months or years earlier.',
+      suggestedAction:
+        'Refer the death to the senior coroner. Never omit a traumatic event or clinical complication from the certificate to avoid a referral.'
+    });
+  }
+
+  // ─── Prohibited abbreviation (MEDIUM) ───────────────────────
+  const abbreviations = abbreviationsUsed(d);
+  if (abbreviations.length > 0) {
+    flags.push({
+      id: 'F-ABBREVIATION-001',
+      category: 'prohibited-abbreviation',
+      priority: 'medium',
+      description:
+        `Abbreviations are not allowed on the certificate: ${abbreviations.join(', ')}. Write every term in full (only HIV and AIDS are accepted).`,
+      suggestedAction:
+        'Replace each abbreviation with the full term, for example myocardial infarction, chronic obstructive pulmonary disease, urinary tract infection.'
+    });
+  }
+
+  // ─── Unspecified diabetes or malignancy (MEDIUM) ────────────
+  const unspecified = [];
+  if (unspecifiedDiabetes(d)) unspecified.push('diabetes without Type 1 or Type 2');
+  if (unspecifiedMalignancy(d)) unspecified.push('cancer without primary site and histological type');
+  if (unspecified.length > 0) {
+    flags.push({
+      id: 'F-SPECIFICITY-001',
+      category: 'insufficient-specificity',
+      priority: 'medium',
+      description:
+        `A condition is stated too vaguely: ${unspecified.join('; ')}.`,
+      suggestedAction:
+        'State whether diabetes is Type 1 or Type 2, and give the primary site and histological type of any malignancy (and the causative organism of an infection, if known).'
+    });
+  }
+
+  // ─── Implantable devices (MEDIUM / LOW) ─────────────────────
+  const deviceStatus = d.death.implantedDeviceStatus;
+  if (!nonEmpty(deviceStatus)) {
+    flags.push({
+      id: 'F-IMPLANTED-DEVICE-001',
+      category: 'implanted-device-not-recorded',
+      priority: 'medium',
+      description:
+        'Hazardous implantable devices (pacemaker, ICD, neurostimulator, radioactive implant) have not been recorded. This is needed for cremation safety.',
+      suggestedAction:
+        'Check the medical records and the body, then record whether a hazardous implanted device is present.'
+    });
+  } else if (deviceStatus === 'present') {
+    flags.push({
+      id: 'F-IMPLANTED-DEVICE-PRESENT-001',
+      category: 'implanted-device-present',
+      priority: 'low',
+      description:
+        'A hazardous implanted device is present. It must be removed or made safe before cremation.',
+      suggestedAction:
+        'Name the device on the certificate and notify the funeral director and crematorium.'
+    });
+  }
+
+  // ─── Ethnicity (LOW) ────────────────────────────────────────
+  if (!nonEmpty(d.deceased.ethnicity)) {
+    flags.push({
+      id: 'F-ETHNICITY-001',
+      category: 'ethnicity-not-recorded',
+      priority: 'low',
+      description: 'Ethnicity is not recorded.',
+      suggestedAction:
+        'Copy the self-declared ethnicity from the medical record. If it is not documented enter "unknown"; never guess or ask the bereaved.'
+    });
+  }
+
+  // ─── Pregnancy status (LOW) ─────────────────────────────────
+  if (d.deceased.sex === 'female' && !nonEmpty(d.deceased.pregnancyStatus)) {
+    flags.push({
+      id: 'F-PREGNANCY-001',
+      category: 'pregnancy-status-not-recorded',
+      priority: 'low',
+      description:
+        'The deceased is female and pregnancy status is not recorded.',
+      suggestedAction:
+        'Record whether the deceased was pregnant within the 12 months before death, or mark it not applicable.'
+    });
+  }
+
   // ─── Missing interval (LOW) ─────────────────────────────────
   // A completed Part I condition line with an empty onset-to-death interval.
   const intervalPairs = [
     { label: 'I(a)', condition: d.partI.causeIaCondition, interval: d.partI.causeIaInterval },
     { label: 'I(b)', condition: d.partI.causeIbCondition, interval: d.partI.causeIbInterval },
-    { label: 'I(c)', condition: d.partI.causeIcCondition, interval: d.partI.causeIcInterval }
+    { label: 'I(c)', condition: d.partI.causeIcCondition, interval: d.partI.causeIcInterval },
+    { label: 'I(d)', condition: d.partI.causeIdCondition, interval: d.partI.causeIdInterval }
   ];
   const missingIntervalLines = intervalPairs
     .filter((p) => nonEmpty(p.condition) && !nonEmpty(p.interval))
@@ -140,6 +246,7 @@ function detectFlaggedIssues(d) {
   if (!nonEmpty(d.certification.certifyingDoctorName)) missingCertifier.push('name');
   if (!nonEmpty(d.certification.certifyingDoctorGrade)) missingCertifier.push('grade');
   if (!nonEmpty(d.certification.gmcReference)) missingCertifier.push('GMC reference');
+  if (!nonEmpty(d.certification.qualifications)) missingCertifier.push('primary medical qualifications');
   if (!nonEmpty(d.certification.attendedDeceased)) missingCertifier.push('attendance on the deceased');
   if (missingCertifier.length > 0) {
     flags.push({

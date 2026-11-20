@@ -54,4 +54,27 @@
       bind:value={p.patientIdentifier}
     />
   </Field>
+  <Field label="Ethnicity (self-declared)" inputId="deceased-ethnicity">
+    <TextInput
+      id="deceased-ethnicity"
+      label="Ethnicity (self-declared)"
+      placeholder="e.g. White British, or unknown"
+      bind:value={p.ethnicity}
+    />
+  </Field>
+  <p class="hint">
+    Copy from the medical record. If not documented enter "unknown"; never guess or ask the
+    bereaved.
+  </p>
+
+  <Field label="Pregnancy status" inputId="deceased-pregnancyStatus">
+    <Select id="deceased-pregnancyStatus" label="Pregnancy status" bind:value={p.pregnancyStatus}>
+      <option value="">— Select —</option>
+      <option value="not-applicable">Not applicable</option>
+      <option value="not-pregnant">Not pregnant in the 12 months before death</option>
+      <option value="pregnant-at-death">Pregnant at the time of death</option>
+      <option value="pregnant-within-12-months">Pregnant within the 12 months before death</option>
+      <option value="unknown">Unknown</option>
+    </Select>
+  </Field>
 </Fieldset>

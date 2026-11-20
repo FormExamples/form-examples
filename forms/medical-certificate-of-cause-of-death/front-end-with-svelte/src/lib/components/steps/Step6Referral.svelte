@@ -49,6 +49,9 @@
       >
       <option value="custody">Death in custody or state detention</option>
       <option value="no-attending-practitioner">No attending practitioner able to certify</option>
+      <option value="neglect">Neglect or self-neglect</option>
+      <option value="self-harm">Self-harm</option>
+      <option value="poisoning">Poisoning or overdose</option>
       <option value="other">Other reportable circumstance</option>
     </Select>
   </Field>
@@ -95,5 +98,19 @@
           : 'issues'})
       </span>
     </span>
+  </Field>
+  <Field
+    label="Cause of death discussed with the bereaved by the medical examiner?"
+    inputId="referral-bereavedFamilyDiscussed"
+  >
+    <Select
+      id="referral-bereavedFamilyDiscussed"
+      label="Cause of death discussed with the bereaved by the medical examiner?"
+      bind:value={r.bereavedFamilyDiscussed}
+    >
+      <option value="">— Select —</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </Select>
   </Field>
 </Fieldset>

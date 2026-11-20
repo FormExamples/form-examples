@@ -1,6 +1,6 @@
 import { detectFlaggedIssues } from './flags.js';
 import { validateCertificate } from './grader.js';
-import { coronerReasonLabel, emptyCertificate, gradeLabel, medicalExaminerStatusLabel, priorityLabel, seenAfterDeathByLabel, sexLabel, validityClassClass, validityClassLabel } from './types.js';
+import { attendanceModeLabel, implantedDeviceStatusLabel, pregnancyStatusLabel, coronerReasonLabel, emptyCertificate, gradeLabel, medicalExaminerStatusLabel, priorityLabel, seenAfterDeathByLabel, sexLabel, validityClassClass, validityClassLabel } from './types.js';
 
 // Medical Certificate of Cause of Death (MCCD) — wizard (vanilla JavaScript,
 // no build).
@@ -366,6 +366,27 @@ const sexOptions = [
   { value: 'unknown', label: 'Unknown' }
 ];
 
+const attendanceModeOptions = [
+  { value: 'in-person', label: 'In person' },
+  { value: 'video', label: 'Video consultation' },
+  { value: 'telephone', label: 'Telephone only (does not qualify)' },
+  { value: 'none', label: 'Did not attend the deceased' }
+];
+
+const pregnancyOptions = [
+  { value: 'not-applicable', label: 'Not applicable' },
+  { value: 'not-pregnant', label: 'Not pregnant in the 12 months before death' },
+  { value: 'pregnant-at-death', label: 'Pregnant at the time of death' },
+  { value: 'pregnant-within-12-months', label: 'Pregnant within the 12 months before death' },
+  { value: 'unknown', label: 'Unknown' }
+];
+
+const implantedDeviceOptions = [
+  { value: 'none', label: 'No hazardous implanted device' },
+  { value: 'present', label: 'Hazardous implanted device present' },
+  { value: 'unknown', label: 'Unknown' }
+];
+
 const seenAfterDeathOptions = [
   { value: 'certifier', label: 'By the certifying doctor' },
   { value: 'another-practitioner', label: 'By another practitioner' },
@@ -382,6 +403,9 @@ const coronerReasonOptions = [
   { value: 'medical-procedure', label: 'Possibly due to a medical procedure, treatment, or neglect' },
   { value: 'custody', label: 'Death in custody or state detention' },
   { value: 'no-attending-practitioner', label: 'No attending practitioner able to certify' },
+  { value: 'neglect', label: 'Neglect or self-neglect' },
+  { value: 'self-harm', label: 'Self-harm' },
+  { value: 'poisoning', label: 'Poisoning or overdose' },
   { value: 'other', label: 'Other reportable circumstance' }
 ];
 
@@ -415,6 +439,10 @@ function renderStep1() {
     placeholder: 'e.g. 7654321'
   }));
   card.appendChild(textInput({
+    label: 'Primary medical qualifications', section: 'certification', field: 'qualifications',
+    hint: 'Stated with your signature in the declaration.', placeholder: 'e.g. MBBS, MRCGP'
+  }));
+  card.appendChild(textInput({
     label: 'Place of certification', section: 'certification', field: 'placeOfCertification',
     placeholder: 'Hospital, practice, or other'
   }));
@@ -425,6 +453,11 @@ function renderStep1() {
   card.appendChild(radioGroup({
     label: 'Attended the deceased during the last illness?', section: 'certification',
     field: 'attendedDeceased', options: yesNo
+  }));
+  card.appendChild(selectInput({
+    label: 'How did you attend the deceased in life?', section: 'certification',
+    field: 'attendanceMode', options: attendanceModeOptions,
+    hint: 'In person or by video qualifies; telephone calls do not. There is no 28-day rule, and you need not have viewed the body.'
   }));
   card.appendChild(textInput({
     label: 'Date last seen alive by the certifier', section: 'certification', field: 'lastSeenAliveDate',
@@ -457,6 +490,15 @@ function renderStep2() {
     label: 'Patient identifier (NHS number or local ID)', section: 'deceased',
     field: 'patientIdentifier', placeholder: 'e.g. 943 476 5919'
   }));
+  card.appendChild(textInput({
+    label: 'Ethnicity (self-declared)', section: 'deceased', field: 'ethnicity',
+    hint: 'Copy from the medical record. If not documented enter "unknown"; never guess or ask the bereaved.',
+    placeholder: 'e.g. White British, or unknown'
+  }));
+  card.appendChild(selectInput({
+    label: 'Pregnancy status', section: 'deceased', field: 'pregnancyStatus',
+    options: pregnancyOptions, hint: 'Whether the deceased was pregnant within the 12 months before death.'
+  }));
   return card;
 }
 
@@ -479,6 +521,15 @@ function renderStep3() {
   card.appendChild(selectInput({
     label: 'Seen after death by', section: 'death', field: 'seenAfterDeathBy',
     options: seenAfterDeathOptions
+  }));
+  card.appendChild(selectInput({
+    label: 'Hazardous implantable devices', section: 'death', field: 'implantedDeviceStatus',
+    options: implantedDeviceOptions,
+    hint: 'Check the records and the body (pacemaker, ICD, neurostimulator, radioactive implant) for cremation safety.'
+  }));
+  card.appendChild(textInput({
+    label: 'Device details', section: 'death', field: 'implantedDevices',
+    placeholder: 'e.g. Pacemaker, implanted 2019'
   }));
   return card;
 }
@@ -514,6 +565,16 @@ function renderStep4() {
   card.appendChild(textInput({
     label: 'I(c) — onset-to-death interval', section: 'partI', field: 'causeIcInterval',
     placeholder: 'e.g. 30 years'
+  }));
+  card.appendChild(textInput({
+    label: 'I(d) — underlying condition giving rise to I(c)', section: 'partI',
+    field: 'causeIdCondition',
+    hint: 'Write every term in full: no abbreviations except HIV and AIDS. Name the organism, the cancer site and histology, and Type 1 or Type 2 diabetes. If the chain is longer than four lines, link conditions on one line with "due to" or "secondary to".',
+    placeholder: 'e.g. Adenocarcinoma of the colon'
+  }));
+  card.appendChild(textInput({
+    label: 'I(d) — onset-to-death interval', section: 'partI', field: 'causeIdInterval',
+    placeholder: 'e.g. 4 years'
   }));
   return card;
 }
@@ -553,6 +614,10 @@ function renderStep6() {
   card.appendChild(selectInput({
     label: 'Medical-examiner scrutiny status', section: 'referral', field: 'medicalExaminerStatus',
     options: medicalExaminerOptions
+  }));
+  card.appendChild(radioGroup({
+    label: 'Cause of death discussed with the bereaved by the medical examiner?', section: 'referral',
+    field: 'bereavedFamilyDiscussed', options: yesNo
   }));
   card.appendChild(textArea({
     label: 'Certifier note', section: 'referral', field: 'certifierNote',
@@ -619,8 +684,8 @@ function updateConditionalSections() {
 // Each section maps to one or more progress "slots". A slot counts as answered
 // when ANY of its fields is answered.
 const STEP_SLOTS = {
-  certification: [['certifyingDoctorName'], ['certifyingDoctorGrade'], ['certificationDate']],
-  deceased: [['deceasedName'], ['sex'], ['dateOfDeath', 'ageYears']],
+  certification: [['certifyingDoctorName'], ['attendanceMode'], ['certifyingDoctorGrade'], ['certificationDate']],
+  deceased: [['deceasedName'], ['sex'], ['ethnicity'], ['dateOfDeath', 'ageYears']],
   death: [['dateOfDeath'], ['placeOfDeath']],
   partI: [['causeIaCondition'], ['causeIaInterval']],
   partII: [['partIiConditions']],
@@ -686,7 +751,8 @@ function renderReport() {
   const partIRows = [
     { line: 'I(a)', condition: state.partI.causeIaCondition, interval: state.partI.causeIaInterval },
     { line: 'I(b)', condition: state.partI.causeIbCondition, interval: state.partI.causeIbInterval },
-    { line: 'I(c)', condition: state.partI.causeIcCondition, interval: state.partI.causeIcInterval }
+    { line: 'I(c)', condition: state.partI.causeIcCondition, interval: state.partI.causeIcInterval },
+    { line: 'I(d)', condition: state.partI.causeIdCondition, interval: state.partI.causeIdInterval }
   ].map((r) => `
     <tr>
       <th scope="row">${esc(r.line)}</th>
@@ -757,6 +823,20 @@ function renderReport() {
         </thead>
         <tbody>${partIRows}${partIiRow}</tbody>
       </table>
+
+      <h3>Statutory additions</h3>
+      <table class="subscales">
+        <tbody>
+          <tr><th scope="row">Qualifications</th><td>${state.certification.qualifications ? esc(state.certification.qualifications) : '<span class="muted">—</span>'}</td></tr>
+          <tr><th scope="row">Attendance</th><td>${state.certification.attendanceMode ? esc(attendanceModeLabel(state.certification.attendanceMode)) : '<span class="muted">—</span>'}</td></tr>
+          <tr><th scope="row">Ethnicity</th><td>${state.deceased.ethnicity ? esc(state.deceased.ethnicity) : '<span class="muted">—</span>'}</td></tr>
+          <tr><th scope="row">Pregnancy</th><td>${state.deceased.pregnancyStatus ? esc(pregnancyStatusLabel(state.deceased.pregnancyStatus)) : '<span class="muted">—</span>'}</td></tr>
+          <tr><th scope="row">Implanted devices</th><td>${state.death.implantedDeviceStatus ? esc(implantedDeviceStatusLabel(state.death.implantedDeviceStatus)) + (state.death.implantedDevices ? ': ' + esc(state.death.implantedDevices) : '') : '<span class="muted">—</span>'}</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Next steps</h3>
+      <p>The medical examiner reviews the records and discusses the cause of death with you and the bereaved. Once confirmed and signed, the certificate goes straight to the registrar; the person registering the death then has 5 days to register it and obtain the death certificate.</p>
 
       <h3>Flagged issues (${flaggedIssues.length})</h3>
       ${flagsList}

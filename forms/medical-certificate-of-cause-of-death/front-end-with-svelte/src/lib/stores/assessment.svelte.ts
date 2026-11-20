@@ -16,20 +16,26 @@ export function createDefaultCertificate(): DeathCertificate {
       placeOfCertification: '',
       certificationDate: null,
       attendedDeceased: '',
-      lastSeenAliveDate: null
+      lastSeenAliveDate: null,
+      qualifications: '',
+      attendanceMode: ''
     },
     deceased: {
       deceasedName: '',
       sex: '',
       dateOfBirth: null,
       ageYears: null,
-      patientIdentifier: ''
+      patientIdentifier: '',
+      ethnicity: '',
+      pregnancyStatus: ''
     },
     death: {
       dateOfDeath: null,
       timeOfDeath: null,
       placeOfDeath: '',
-      seenAfterDeathBy: ''
+      seenAfterDeathBy: '',
+      implantedDeviceStatus: '',
+      implantedDevices: ''
     },
     partI: {
       causeIaCondition: '',
@@ -37,7 +43,9 @@ export function createDefaultCertificate(): DeathCertificate {
       causeIbCondition: '',
       causeIbInterval: '',
       causeIcCondition: '',
-      causeIcInterval: ''
+      causeIcInterval: '',
+      causeIdCondition: '',
+      causeIdInterval: ''
     },
     partII: {
       partIiConditions: '',
@@ -47,6 +55,7 @@ export function createDefaultCertificate(): DeathCertificate {
       referredToCoroner: '',
       coronerReason: '',
       medicalExaminerStatus: '',
+      bereavedFamilyDiscussed: '',
       certifierNote: ''
     }
   };

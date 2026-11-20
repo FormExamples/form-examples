@@ -18,20 +18,26 @@ function createDefaultCertificate(): DeathCertificate {
       placeOfCertification: '',
       certificationDate: null,
       attendedDeceased: '',
-      lastSeenAliveDate: null
+      lastSeenAliveDate: null,
+      qualifications: 'MBChB',
+      attendanceMode: 'in-person'
     },
     deceased: {
       deceasedName: '',
       sex: '',
       dateOfBirth: null,
       ageYears: null,
-      patientIdentifier: ''
+      patientIdentifier: '',
+      ethnicity: 'unknown',
+      pregnancyStatus: 'not-applicable'
     },
     death: {
       dateOfDeath: null,
       timeOfDeath: null,
       placeOfDeath: '',
-      seenAfterDeathBy: ''
+      seenAfterDeathBy: '',
+      implantedDeviceStatus: 'none',
+      implantedDevices: ''
     },
     partI: {
       causeIaCondition: '',
@@ -39,7 +45,9 @@ function createDefaultCertificate(): DeathCertificate {
       causeIbCondition: '',
       causeIbInterval: '',
       causeIcCondition: '',
-      causeIcInterval: ''
+      causeIcInterval: '',
+      causeIdCondition: '',
+      causeIdInterval: ''
     },
     partII: {
       partIiConditions: '',
@@ -49,6 +57,7 @@ function createDefaultCertificate(): DeathCertificate {
       referredToCoroner: '',
       coronerReason: '',
       medicalExaminerStatus: '',
+      bereavedFamilyDiscussed: 'yes',
       certifierNote: ''
     }
   };
@@ -192,5 +201,60 @@ describe('MCCD flagged-issue detection', () => {
     const priorities = flags.map((f) => f.priority);
     const sorted = [...priorities].sort((a, b) => order[a] - order[b]);
     expect(priorities).toEqual(sorted);
+  });
+
+  describe('statutory additions (GOV.UK MCCD guidance)', () => {
+    it('refers a telephone-only certifier to the coroner', () => {
+      const d = createValidCertificate();
+      d.certification.attendanceMode = 'telephone';
+      expect(deriveValidityClass(d)).toBe('refer-to-coroner');
+      expect(detectFlaggedIssues(d).map((f) => f.id)).toContain('F-CERTIFIER-NOT-ATTENDING-001');
+    });
+
+    it('treats video attendance as qualifying', () => {
+      const d = createValidCertificate();
+      d.certification.attendanceMode = 'video';
+      expect(deriveValidityClass(d)).toBe('valid');
+    });
+
+    it('flags prohibited abbreviations but allows HIV', () => {
+      const d = createValidCertificate();
+      d.partII.partIiConditions = 'HIV; COPD';
+      const f = detectFlaggedIssues(d).find((x) => x.id === 'F-ABBREVIATION-001');
+      expect(f?.description).toContain('COPD');
+      expect(f?.description).not.toContain('HIV,');
+    });
+
+    it('flags diabetes without a type and cancer without histology', () => {
+      const d = createValidCertificate();
+      d.partII.partIiConditions = 'Diabetes mellitus; cancer of the colon';
+      expect(detectFlaggedIssues(d).map((f) => f.id)).toContain('F-SPECIFICITY-001');
+    });
+
+    it('refers a death whose cause mentions a fracture, and flags the omission', () => {
+      const d = createValidCertificate();
+      d.partI.causeIbCondition = 'Fractured neck of femur';
+      expect(deriveValidityClass(d)).toBe('refer-to-coroner');
+      expect(detectFlaggedIssues(d).map((f) => f.id)).toContain('F-TRAUMA-IN-CAUSE-001');
+    });
+
+    it('derives the underlying cause from the I(d) line', () => {
+      const d = createValidCertificate();
+      d.partI.causeIcCondition = 'Hypertension';
+      d.partI.causeIdCondition = 'Chronic kidney disease';
+      expect(underlyingCause(d)).toBe('Chronic kidney disease');
+    });
+
+    it('flags missing ethnicity, device status, and a female deceased with no pregnancy status', () => {
+      const d = createValidCertificate();
+      d.deceased.ethnicity = '';
+      d.death.implantedDeviceStatus = '';
+      d.deceased.sex = 'female';
+      d.deceased.pregnancyStatus = '';
+      const ids = detectFlaggedIssues(d).map((f) => f.id);
+      expect(ids).toEqual(
+        expect.arrayContaining(['F-ETHNICITY-001', 'F-IMPLANTED-DEVICE-001', 'F-PREGNANCY-001'])
+      );
+    });
   });
 });

@@ -13,10 +13,23 @@ file only records changes scoped to the **Medical Certificate of Cause of Death 
 ## [Unreleased]
 
 ### Added
-- _Pending — record new fields, new fired-rule categories, new schema columns,
-  new front-end steps, new clinical references, new examples, etc._
+- Statutory fields from the GOV.UK MCCD guidance for England and Wales:
+  certifier qualifications and attendance mode (in person / video / telephone /
+  none; no 28-day rule), ethnicity, pregnancy status, hazardous implantable
+  devices, a fourth Part I line (I(d)), the coroner reasons neglect, self-harm
+  and poisoning, and whether the medical examiner discussed the cause with the
+  bereaved. SQL columns, the Axum crate and both front-ends carry them.
+- Flags: certifier did not attend, trauma or complication in the cause,
+  prohibited abbreviation, unspecified diabetes or malignancy, implantable
+  device not recorded or present, ethnicity and pregnancy status not recorded.
+- Five new personas covering the above (8 in total).
+- Report shows the statutory additions and the medical-examiner-to-registrar
+  next steps (5 days to register).
 
 ### Changed
+- A telephone-only or non-attending certifier, or trauma / poisoning / surgical
+  wording in any cause line, now classifies the certificate as
+  refer-to-coroner (previously only the referral answers did).
 - _Pending — record schema migrations, scoring-engine behaviour changes,
   re-banding of composite risk, front-end UX changes, breaking renames._
 

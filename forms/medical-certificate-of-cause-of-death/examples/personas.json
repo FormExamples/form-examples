@@ -9,7 +9,7 @@
   "personas": [
     {
       "name": "Valid certificate, scrutinised by medical examiner",
-      "description": "Expected hospital death of an 84-year-old woman from bronchopneumonia due to a left MCA infarct due to atrial fibrillation, Part II type 2 diabetes; all three Part I intervals recorded; consultant certifier fully identified who attended the deceased; not referred to the coroner (reason 'none'); medical examiner status 'scrutinised'. Expect validityClass 'valid', underlyingCause 'Atrial fibrillation' (the I(c) line), coronerReferralIndicated false, and an empty flaggedIssues array (the ME-scrutiny flag is suppressed by 'scrutinised').",
+      "description": "Expected hospital death of an 84-year-old woman from bronchopneumonia due to a left MCA infarct due to atrial fibrillation, Part II type 2 diabetes; all three Part I intervals recorded; consultant certifier fully identified who attended the deceased; not referred to the coroner (reason 'none'); medical examiner status 'scrutinised'. Expect validityClass 'valid', underlyingCause 'Atrial fibrillation' (the I(c) line), coronerReferralIndicated false, and an empty flaggedIssues array (the ME-scrutiny flag is suppressed by 'scrutinised'). The new statutory additions (qualifications, in-person attendance, ethnicity, pregnancy, implanted-device status) are all recorded, so none of the new flags fire.",
       "state": {
         "certification": {
           "certifyingDoctorName": "Dr Fiona Macleod",
@@ -18,20 +18,26 @@
           "placeOfCertification": "Ward 22, Ninewells Hospital, Dundee",
           "certificationDate": "2026-08-31",
           "attendedDeceased": "yes",
-          "lastSeenAliveDate": "2026-08-29"
+          "lastSeenAliveDate": "2026-08-29",
+          "qualifications": "MBChB, FRCP",
+          "attendanceMode": "in-person"
         },
         "deceased": {
           "deceasedName": "Agnes Muriel Ferguson",
           "sex": "female",
           "dateOfBirth": "1942-02-11",
           "ageYears": 84,
-          "patientIdentifier": "CHI 1102423361"
+          "patientIdentifier": "CHI 1102423361",
+          "ethnicity": "White Scottish",
+          "pregnancyStatus": "not-applicable"
         },
         "death": {
           "dateOfDeath": "2026-08-30",
           "timeOfDeath": "04:20",
           "placeOfDeath": "Ward 22, Ninewells Hospital, Dundee",
-          "seenAfterDeathBy": "certifier"
+          "seenAfterDeathBy": "certifier",
+          "implantedDeviceStatus": "none",
+          "implantedDevices": ""
         },
         "partI": {
           "causeIaCondition": "Bronchopneumonia",
@@ -39,7 +45,9 @@
           "causeIbCondition": "Left middle cerebral artery territory ischaemic stroke",
           "causeIbInterval": "3 weeks",
           "causeIcCondition": "Atrial fibrillation",
-          "causeIcInterval": "6 years"
+          "causeIcInterval": "6 years",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
         },
         "partII": {
           "partIiConditions": "Type 2 diabetes mellitus; hypertension",
@@ -49,7 +57,8 @@
           "referredToCoroner": "no",
           "coronerReason": "none",
           "medicalExaminerStatus": "scrutinised",
-          "certifierNote": "Discussed with family; medical examiner scrutiny completed 31 Aug 2026."
+          "certifierNote": "Discussed with family; medical examiner scrutiny completed 31 Aug 2026.",
+          "bereavedFamilyDiscussed": "yes"
         }
       },
       "expected": {
@@ -70,20 +79,26 @@
           "placeOfCertification": "St Oswald's Hospice, Newcastle upon Tyne",
           "certificationDate": "2026-09-02",
           "attendedDeceased": "yes",
-          "lastSeenAliveDate": "2026-09-01"
+          "lastSeenAliveDate": "2026-09-01",
+          "qualifications": "MBChB, FRCP",
+          "attendanceMode": "in-person"
         },
         "deceased": {
           "deceasedName": "Raymond Arthur Hedley",
           "sex": "male",
           "dateOfBirth": "1955-04-19",
           "ageYears": 71,
-          "patientIdentifier": "NHS 401 234 5677"
+          "patientIdentifier": "NHS 401 234 5677",
+          "ethnicity": "White Scottish",
+          "pregnancyStatus": "not-applicable"
         },
         "death": {
           "dateOfDeath": "2026-09-01",
           "timeOfDeath": "22:45",
           "placeOfDeath": "St Oswald's Hospice, Newcastle upon Tyne",
-          "seenAfterDeathBy": "another-practitioner"
+          "seenAfterDeathBy": "another-practitioner",
+          "implantedDeviceStatus": "none",
+          "implantedDevices": ""
         },
         "partI": {
           "causeIaCondition": "Malignant pleural mesothelioma",
@@ -91,7 +106,9 @@
           "causeIbCondition": "Occupational asbestos exposure",
           "causeIbInterval": "",
           "causeIcCondition": "",
-          "causeIcInterval": ""
+          "causeIcInterval": "",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
         },
         "partII": {
           "partIiConditions": "Chronic obstructive pulmonary disease",
@@ -101,7 +118,8 @@
           "referredToCoroner": "no",
           "coronerReason": "industrial-disease",
           "medicalExaminerStatus": "pending",
-          "certifierNote": "Worked at Swan Hunter 1971-1998; family aware coroner will be notified."
+          "certifierNote": "Worked at Swan Hunter 1971-1998; family aware coroner will be notified.",
+          "bereavedFamilyDiscussed": "yes"
         }
       },
       "expected": {
@@ -144,20 +162,26 @@
           "placeOfCertification": "Acute Medical Unit, Queen's Medical Centre, Nottingham",
           "certificationDate": "2026-09-03",
           "attendedDeceased": "",
-          "lastSeenAliveDate": null
+          "lastSeenAliveDate": null,
+          "qualifications": "",
+          "attendanceMode": ""
         },
         "deceased": {
           "deceasedName": "Colin James Brotherton",
           "sex": "male",
           "dateOfBirth": "1959-07-08",
           "ageYears": 67,
-          "patientIdentifier": "NHS 943 476 5919"
+          "patientIdentifier": "NHS 943 476 5919",
+          "ethnicity": "",
+          "pregnancyStatus": ""
         },
         "death": {
           "dateOfDeath": "2026-09-03",
           "timeOfDeath": "03:10",
           "placeOfDeath": "Acute Medical Unit, Queen's Medical Centre, Nottingham",
-          "seenAfterDeathBy": "certifier"
+          "seenAfterDeathBy": "certifier",
+          "implantedDeviceStatus": "",
+          "implantedDevices": ""
         },
         "partI": {
           "causeIaCondition": "",
@@ -165,7 +189,9 @@
           "causeIbCondition": "Cardiac arrest",
           "causeIbInterval": "",
           "causeIcCondition": "",
-          "causeIcInterval": ""
+          "causeIcInterval": "",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
         },
         "partII": {
           "partIiConditions": "",
@@ -175,7 +201,8 @@
           "referredToCoroner": "",
           "coronerReason": "",
           "medicalExaminerStatus": "",
-          "certifierNote": "Draft only — to be completed by the day team with the consultant."
+          "certifierNote": "Draft only — to be completed by the day team with the consultant.",
+          "bereavedFamilyDiscussed": ""
         }
       },
       "expected": {
@@ -212,6 +239,20 @@
             "suggestedAction": "Refer the certificate to the medical examiner for scrutiny before the death is registered."
           },
           {
+            "id": "F-IMPLANTED-DEVICE-001",
+            "category": "implanted-device-not-recorded",
+            "priority": "medium",
+            "description": "Hazardous implantable devices (pacemaker, ICD, neurostimulator, radioactive implant) have not been recorded. This is needed for cremation safety.",
+            "suggestedAction": "Check the medical records and the body, then record whether a hazardous implanted device is present."
+          },
+          {
+            "id": "F-ETHNICITY-001",
+            "category": "ethnicity-not-recorded",
+            "priority": "low",
+            "description": "Ethnicity is not recorded.",
+            "suggestedAction": "Copy the self-declared ethnicity from the medical record. If it is not documented enter \"unknown\"; never guess or ask the bereaved."
+          },
+          {
             "id": "F-MISSING-INTERVAL-001",
             "category": "missing-interval",
             "priority": "low",
@@ -222,7 +263,401 @@
             "id": "F-INCOMPLETE-CERTIFIER-001",
             "category": "incomplete-certifier",
             "priority": "low",
-            "description": "Certifying-doctor details are incomplete: grade, GMC reference, attendance on the deceased not recorded.",
+            "description": "Certifying-doctor details are incomplete: grade, GMC reference, primary medical qualifications, attendance on the deceased not recorded.",
+            "suggestedAction": "Complete the certifying doctor’s identity, grade, GMC reference, and attendance on the deceased."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Prohibited abbreviations and unspecified diabetes",
+      "description": "Part I(a) 'MI', I(b) 'IHD' and Part II 'COPD; diabetes': abbreviations MI, IHD, COPD are prohibited and diabetes has no type. Expect a valid class (no referral, I(a) present) but the abbreviation and specificity flags.",
+      "state": {
+        "certification": {
+          "certifyingDoctorName": "Dr Fiona Macleod",
+          "certifyingDoctorGrade": "consultant",
+          "gmcReference": "6043217",
+          "placeOfCertification": "Ward 22, Ninewells Hospital, Dundee",
+          "certificationDate": "2026-08-31",
+          "attendedDeceased": "yes",
+          "lastSeenAliveDate": "2026-08-29",
+          "qualifications": "MBChB, FRCP",
+          "attendanceMode": "in-person"
+        },
+        "deceased": {
+          "deceasedName": "Agnes Muriel Ferguson",
+          "sex": "female",
+          "dateOfBirth": "1942-02-11",
+          "ageYears": 84,
+          "patientIdentifier": "CHI 1102423361",
+          "ethnicity": "White Scottish",
+          "pregnancyStatus": "not-applicable"
+        },
+        "death": {
+          "dateOfDeath": "2026-08-30",
+          "timeOfDeath": "04:20",
+          "placeOfDeath": "Ward 22, Ninewells Hospital, Dundee",
+          "seenAfterDeathBy": "certifier",
+          "implantedDeviceStatus": "none",
+          "implantedDevices": ""
+        },
+        "partI": {
+          "causeIaCondition": "MI",
+          "causeIaInterval": "2 hours",
+          "causeIbCondition": "IHD",
+          "causeIbInterval": "10 years",
+          "causeIcCondition": "",
+          "causeIcInterval": "",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "COPD; diabetes",
+          "partIiInterval": "15 years"
+        },
+        "referral": {
+          "referredToCoroner": "no",
+          "coronerReason": "none",
+          "medicalExaminerStatus": "scrutinised",
+          "certifierNote": "Discussed with family; medical examiner scrutiny completed 31 Aug 2026.",
+          "bereavedFamilyDiscussed": "yes"
+        }
+      },
+      "expected": {
+        "validityClass": "valid",
+        "underlyingCause": "IHD",
+        "coronerReferralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-ABBREVIATION-001",
+            "category": "prohibited-abbreviation",
+            "priority": "medium",
+            "description": "Abbreviations are not allowed on the certificate: MI, COPD, IHD. Write every term in full (only HIV and AIDS are accepted).",
+            "suggestedAction": "Replace each abbreviation with the full term, for example myocardial infarction, chronic obstructive pulmonary disease, urinary tract infection."
+          },
+          {
+            "id": "F-SPECIFICITY-001",
+            "category": "insufficient-specificity",
+            "priority": "medium",
+            "description": "A condition is stated too vaguely: diabetes without Type 1 or Type 2.",
+            "suggestedAction": "State whether diabetes is Type 1 or Type 2, and give the primary site and histological type of any malignancy (and the causative organism of an infection, if known)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Telephone-only attendance cannot certify",
+      "description": "Certifier only spoke to the patient by telephone: attendanceMode 'telephone' means no attending practitioner, so the certificate is classified refer-to-coroner with the not-attending flag.",
+      "state": {
+        "certification": {
+          "certifyingDoctorName": "Dr Fiona Macleod",
+          "certifyingDoctorGrade": "consultant",
+          "gmcReference": "6043217",
+          "placeOfCertification": "Ward 22, Ninewells Hospital, Dundee",
+          "certificationDate": "2026-08-31",
+          "attendedDeceased": "yes",
+          "lastSeenAliveDate": "2026-08-29",
+          "qualifications": "MBChB, FRCP",
+          "attendanceMode": "telephone"
+        },
+        "deceased": {
+          "deceasedName": "Agnes Muriel Ferguson",
+          "sex": "female",
+          "dateOfBirth": "1942-02-11",
+          "ageYears": 84,
+          "patientIdentifier": "CHI 1102423361",
+          "ethnicity": "White Scottish",
+          "pregnancyStatus": "not-applicable"
+        },
+        "death": {
+          "dateOfDeath": "2026-08-30",
+          "timeOfDeath": "04:20",
+          "placeOfDeath": "Ward 22, Ninewells Hospital, Dundee",
+          "seenAfterDeathBy": "certifier",
+          "implantedDeviceStatus": "none",
+          "implantedDevices": ""
+        },
+        "partI": {
+          "causeIaCondition": "Bronchopneumonia",
+          "causeIaInterval": "5 days",
+          "causeIbCondition": "Left middle cerebral artery territory ischaemic stroke",
+          "causeIbInterval": "3 weeks",
+          "causeIcCondition": "Atrial fibrillation",
+          "causeIcInterval": "6 years",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "Type 2 diabetes mellitus; hypertension",
+          "partIiInterval": "15 years"
+        },
+        "referral": {
+          "referredToCoroner": "no",
+          "coronerReason": "none",
+          "medicalExaminerStatus": "scrutinised",
+          "certifierNote": "Discussed with family; medical examiner scrutiny completed 31 Aug 2026.",
+          "bereavedFamilyDiscussed": "yes"
+        }
+      },
+      "expected": {
+        "validityClass": "refer-to-coroner",
+        "underlyingCause": "Atrial fibrillation",
+        "coronerReferralIndicated": true,
+        "flaggedIssues": [
+          {
+            "id": "F-CORONER-REFERRAL-REQUIRED-001",
+            "category": "coroner-referral-required",
+            "priority": "high",
+            "description": "A coroner-referral criterion is asserted. The MCCD should not be issued until the coroner has considered the case.",
+            "suggestedAction": "Refer the death to the coroner and do not issue the certificate until the coroner has determined whether an investigation is required."
+          },
+          {
+            "id": "F-CERTIFIER-NOT-ATTENDING-001",
+            "category": "certifier-not-attending",
+            "priority": "high",
+            "description": "The certifier did not attend the deceased in person or by video consultation. Telephone contact alone does not qualify, and an MCCD cannot be issued without an attending practitioner.",
+            "suggestedAction": "Ask a doctor who attended the deceased during life (in person or by video) to certify, or refer the death to the coroner."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Fracture of the neck of femur not referred",
+      "description": "Pulmonary embolism due to deep vein thrombosis following a fractured neck of femur after a fall, certified without a coroner referral. Expect class refer-to-coroner, the coroner-referral flag and the trauma-in-cause flag (high); the injury must stay on the certificate and the death be referred.",
+      "state": {
+        "certification": {
+          "certifyingDoctorName": "Dr Fiona Macleod",
+          "certifyingDoctorGrade": "consultant",
+          "gmcReference": "6043217",
+          "placeOfCertification": "Ward 22, Ninewells Hospital, Dundee",
+          "certificationDate": "2026-08-31",
+          "attendedDeceased": "yes",
+          "lastSeenAliveDate": "2026-08-29",
+          "qualifications": "MBChB, FRCP",
+          "attendanceMode": "in-person"
+        },
+        "deceased": {
+          "deceasedName": "Agnes Muriel Ferguson",
+          "sex": "female",
+          "dateOfBirth": "1942-02-11",
+          "ageYears": 84,
+          "patientIdentifier": "CHI 1102423361",
+          "ethnicity": "White Scottish",
+          "pregnancyStatus": "not-applicable"
+        },
+        "death": {
+          "dateOfDeath": "2026-08-30",
+          "timeOfDeath": "04:20",
+          "placeOfDeath": "Ward 22, Ninewells Hospital, Dundee",
+          "seenAfterDeathBy": "certifier",
+          "implantedDeviceStatus": "none",
+          "implantedDevices": ""
+        },
+        "partI": {
+          "causeIaCondition": "Pulmonary embolism",
+          "causeIaInterval": "2 days",
+          "causeIbCondition": "Deep vein thrombosis following fracture of the neck of femur",
+          "causeIbInterval": "3 weeks",
+          "causeIcCondition": "Fall at home",
+          "causeIcInterval": "4 weeks",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "Type 2 diabetes mellitus; hypertension",
+          "partIiInterval": "15 years"
+        },
+        "referral": {
+          "referredToCoroner": "no",
+          "coronerReason": "none",
+          "medicalExaminerStatus": "scrutinised",
+          "certifierNote": "Discussed with family; medical examiner scrutiny completed 31 Aug 2026.",
+          "bereavedFamilyDiscussed": "yes"
+        }
+      },
+      "expected": {
+        "validityClass": "refer-to-coroner",
+        "underlyingCause": "Fall at home",
+        "coronerReferralIndicated": true,
+        "flaggedIssues": [
+          {
+            "id": "F-CORONER-REFERRAL-REQUIRED-001",
+            "category": "coroner-referral-required",
+            "priority": "high",
+            "description": "A coroner-referral criterion is asserted. The MCCD should not be issued until the coroner has considered the case.",
+            "suggestedAction": "Refer the death to the coroner and do not issue the certificate until the coroner has determined whether an investigation is required."
+          },
+          {
+            "id": "F-TRAUMA-IN-CAUSE-001",
+            "category": "trauma-in-cause",
+            "priority": "high",
+            "description": "A cause line mentions trauma, injury, poisoning, or a procedure or surgical complication, but no coroner referral is recorded. Such deaths must be referred, even if the event was months or years earlier.",
+            "suggestedAction": "Refer the death to the senior coroner. Never omit a traumatic event or clinical complication from the certificate to avoid a referral."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Four-line chain with device and pregnancy",
+      "description": "Four-step chain I(a)-I(d) down to adenocarcinoma of the sigmoid colon, a pacemaker recorded, and pregnancy within 12 months. Underlying cause is I(d). Expect the implanted-device-present flag only: the malignancy is specific (adenocarcinoma of the sigmoid colon) and diabetes is Type 2.",
+      "state": {
+        "certification": {
+          "certifyingDoctorName": "Dr Fiona Macleod",
+          "certifyingDoctorGrade": "consultant",
+          "gmcReference": "6043217",
+          "placeOfCertification": "Ward 22, Ninewells Hospital, Dundee",
+          "certificationDate": "2026-08-31",
+          "attendedDeceased": "yes",
+          "lastSeenAliveDate": "2026-08-29",
+          "qualifications": "MBChB, FRCP",
+          "attendanceMode": "in-person"
+        },
+        "deceased": {
+          "deceasedName": "Agnes Muriel Ferguson",
+          "sex": "female",
+          "dateOfBirth": "1942-02-11",
+          "ageYears": 84,
+          "patientIdentifier": "CHI 1102423361",
+          "ethnicity": "White Scottish",
+          "pregnancyStatus": "pregnant-within-12-months"
+        },
+        "death": {
+          "dateOfDeath": "2026-08-30",
+          "timeOfDeath": "04:20",
+          "placeOfDeath": "Ward 22, Ninewells Hospital, Dundee",
+          "seenAfterDeathBy": "certifier",
+          "implantedDeviceStatus": "present",
+          "implantedDevices": "Pacemaker"
+        },
+        "partI": {
+          "causeIaCondition": "Bronchopneumonia",
+          "causeIaInterval": "4 days",
+          "causeIbCondition": "Sepsis",
+          "causeIbInterval": "1 week",
+          "causeIcCondition": "Metastatic cancer",
+          "causeIcInterval": "2 years",
+          "causeIdCondition": "Adenocarcinoma of the sigmoid colon",
+          "causeIdInterval": "3 years"
+        },
+        "partII": {
+          "partIiConditions": "Type 2 diabetes mellitus",
+          "partIiInterval": "15 years"
+        },
+        "referral": {
+          "referredToCoroner": "no",
+          "coronerReason": "none",
+          "medicalExaminerStatus": "scrutinised",
+          "certifierNote": "Discussed with family; medical examiner scrutiny completed 31 Aug 2026.",
+          "bereavedFamilyDiscussed": "yes"
+        }
+      },
+      "expected": {
+        "validityClass": "valid",
+        "underlyingCause": "Adenocarcinoma of the sigmoid colon",
+        "coronerReferralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-IMPLANTED-DEVICE-PRESENT-001",
+            "category": "implanted-device-present",
+            "priority": "low",
+            "description": "A hazardous implanted device is present. It must be removed or made safe before cremation.",
+            "suggestedAction": "Name the device on the certificate and notify the funeral director and crematorium."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Statutory additions all missing",
+      "description": "Well-formed Part I but no qualifications, ethnicity, pregnancy status or implanted-device status, and diabetes without a type in Part II. Expect the statutory-addition flags.",
+      "state": {
+        "certification": {
+          "certifyingDoctorName": "Dr Fiona Macleod",
+          "certifyingDoctorGrade": "consultant",
+          "gmcReference": "6043217",
+          "placeOfCertification": "Ward 22, Ninewells Hospital, Dundee",
+          "certificationDate": "2026-08-31",
+          "attendedDeceased": "yes",
+          "lastSeenAliveDate": "2026-08-29",
+          "qualifications": "",
+          "attendanceMode": "in-person"
+        },
+        "deceased": {
+          "deceasedName": "Agnes Muriel Ferguson",
+          "sex": "female",
+          "dateOfBirth": "1942-02-11",
+          "ageYears": 84,
+          "patientIdentifier": "CHI 1102423361",
+          "ethnicity": "",
+          "pregnancyStatus": ""
+        },
+        "death": {
+          "dateOfDeath": "2026-08-30",
+          "timeOfDeath": "04:20",
+          "placeOfDeath": "Ward 22, Ninewells Hospital, Dundee",
+          "seenAfterDeathBy": "certifier",
+          "implantedDeviceStatus": "",
+          "implantedDevices": ""
+        },
+        "partI": {
+          "causeIaCondition": "Pulmonary embolism",
+          "causeIaInterval": "5 days",
+          "causeIbCondition": "Deep vein thrombosis",
+          "causeIbInterval": "3 weeks",
+          "causeIcCondition": "Adenocarcinoma of the colon",
+          "causeIcInterval": "6 years",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "Diabetes",
+          "partIiInterval": "15 years"
+        },
+        "referral": {
+          "referredToCoroner": "no",
+          "coronerReason": "none",
+          "medicalExaminerStatus": "scrutinised",
+          "certifierNote": "Discussed with family; medical examiner scrutiny completed 31 Aug 2026.",
+          "bereavedFamilyDiscussed": "yes"
+        }
+      },
+      "expected": {
+        "validityClass": "valid",
+        "underlyingCause": "Adenocarcinoma of the colon",
+        "coronerReferralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-SPECIFICITY-001",
+            "category": "insufficient-specificity",
+            "priority": "medium",
+            "description": "A condition is stated too vaguely: diabetes without Type 1 or Type 2.",
+            "suggestedAction": "State whether diabetes is Type 1 or Type 2, and give the primary site and histological type of any malignancy (and the causative organism of an infection, if known)."
+          },
+          {
+            "id": "F-IMPLANTED-DEVICE-001",
+            "category": "implanted-device-not-recorded",
+            "priority": "medium",
+            "description": "Hazardous implantable devices (pacemaker, ICD, neurostimulator, radioactive implant) have not been recorded. This is needed for cremation safety.",
+            "suggestedAction": "Check the medical records and the body, then record whether a hazardous implanted device is present."
+          },
+          {
+            "id": "F-ETHNICITY-001",
+            "category": "ethnicity-not-recorded",
+            "priority": "low",
+            "description": "Ethnicity is not recorded.",
+            "suggestedAction": "Copy the self-declared ethnicity from the medical record. If it is not documented enter \"unknown\"; never guess or ask the bereaved."
+          },
+          {
+            "id": "F-PREGNANCY-001",
+            "category": "pregnancy-status-not-recorded",
+            "priority": "low",
+            "description": "The deceased is female and pregnancy status is not recorded.",
+            "suggestedAction": "Record whether the deceased was pregnant within the 12 months before death, or mark it not applicable."
+          },
+          {
+            "id": "F-INCOMPLETE-CERTIFIER-001",
+            "category": "incomplete-certifier",
+            "priority": "low",
+            "description": "Certifying-doctor details are incomplete: primary medical qualifications not recorded.",
             "suggestedAction": "Complete the certifying doctor’s identity, grade, GMC reference, and attendance on the deceased."
           }
         ]

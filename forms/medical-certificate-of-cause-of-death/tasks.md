@@ -24,4 +24,5 @@ Task tracking. See [`plan.md`](./plan.md) for the roadmap.
 
 ## To do
 
-- [ ] `bin/test-form medical-certificate-of-cause-of-death` passes.
+- [x] `bin/test-form medical-certificate-of-cause-of-death` passes.
+- [x] Extended to the GOV.UK MCCD guidance (qualifications, attendance, ethnicity, pregnancy, implanted devices, I(d), new flags, personas).

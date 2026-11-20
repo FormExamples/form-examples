@@ -21,6 +21,14 @@ enum MedicalCertificateOfCauseOfDeathAttendedDeceasedEnum {
   ATTENDEDDECEASED_NO = 2;  // no
 }
 
+enum MedicalCertificateOfCauseOfDeathAttendanceModeEnum {
+  ATTENDANCEMODE_UNSPECIFIED = 0;
+  ATTENDANCEMODE_IN_PERSON = 1;  // in-person
+  ATTENDANCEMODE_VIDEO = 2;  // video
+  ATTENDANCEMODE_TELEPHONE = 3;  // telephone
+  ATTENDANCEMODE_NONE = 4;  // none
+}
+
 enum MedicalCertificateOfCauseOfDeathSexEnum {
   SEX_UNSPECIFIED = 0;
   SEX_FEMALE = 1;  // female
@@ -29,11 +37,27 @@ enum MedicalCertificateOfCauseOfDeathSexEnum {
   SEX_UNKNOWN = 4;  // unknown
 }
 
+enum MedicalCertificateOfCauseOfDeathPregnancyStatusEnum {
+  PREGNANCYSTATUS_UNSPECIFIED = 0;
+  PREGNANCYSTATUS_NOT_APPLICABLE = 1;  // not-applicable
+  PREGNANCYSTATUS_NOT_PREGNANT = 2;  // not-pregnant
+  PREGNANCYSTATUS_PREGNANT_AT_DEATH = 3;  // pregnant-at-death
+  PREGNANCYSTATUS_PREGNANT_WITHIN_12_MONTHS = 4;  // pregnant-within-12-months
+  PREGNANCYSTATUS_UNKNOWN = 5;  // unknown
+}
+
 enum MedicalCertificateOfCauseOfDeathSeenAfterDeathByEnum {
   SEENAFTERDEATHBY_UNSPECIFIED = 0;
   SEENAFTERDEATHBY_CERTIFIER = 1;  // certifier
   SEENAFTERDEATHBY_ANOTHER_PRACTITIONER = 2;  // another-practitioner
   SEENAFTERDEATHBY_NOT_SEEN = 3;  // not-seen
+}
+
+enum MedicalCertificateOfCauseOfDeathImplantedDeviceStatusEnum {
+  IMPLANTEDDEVICESTATUS_UNSPECIFIED = 0;
+  IMPLANTEDDEVICESTATUS_NONE = 1;  // none
+  IMPLANTEDDEVICESTATUS_PRESENT = 2;  // present
+  IMPLANTEDDEVICESTATUS_UNKNOWN = 3;  // unknown
 }
 
 enum MedicalCertificateOfCauseOfDeathReferredToCoronerEnum {
@@ -52,8 +76,11 @@ enum MedicalCertificateOfCauseOfDeathCoronerReasonEnum {
   CORONERREASON_MEDICAL_PROCEDURE = 6;  // medical-procedure
   CORONERREASON_CUSTODY = 7;  // custody
   CORONERREASON_NO_ATTENDING_PRACTITIONER = 8;  // no-attending-practitioner
-  CORONERREASON_OTHER = 9;  // other
-  CORONERREASON_NONE = 10;  // none
+  CORONERREASON_NEGLECT = 9;  // neglect
+  CORONERREASON_SELF_HARM = 10;  // self-harm
+  CORONERREASON_POISONING = 11;  // poisoning
+  CORONERREASON_OTHER = 12;  // other
+  CORONERREASON_NONE = 13;  // none
 }
 
 enum MedicalCertificateOfCauseOfDeathMedicalExaminerStatusEnum {
@@ -62,6 +89,12 @@ enum MedicalCertificateOfCauseOfDeathMedicalExaminerStatusEnum {
   MEDICALEXAMINERSTATUS_DISCUSSED = 2;  // discussed
   MEDICALEXAMINERSTATUS_PENDING = 3;  // pending
   MEDICALEXAMINERSTATUS_NOT_REQUIRED = 4;  // not-required
+}
+
+enum MedicalCertificateOfCauseOfDeathBereavedFamilyDiscussedEnum {
+  BEREAVEDFAMILYDISCUSSED_UNSPECIFIED = 0;
+  BEREAVEDFAMILYDISCUSSED_YES = 1;  // yes
+  BEREAVEDFAMILYDISCUSSED_NO = 2;  // no
 }
 
 message MedicalCertificateOfCauseOfDeath {
@@ -78,25 +111,34 @@ message MedicalCertificateOfCauseOfDeath {
   string certification_date = 11;  // DATE — iso 8601 date
   MedicalCertificateOfCauseOfDeathAttendedDeceasedEnum attended_deceased = 12;  // VARCHAR(5)
   string last_seen_alive_date = 13;  // DATE — iso 8601 date
-  string deceased_name = 14;  // TEXT
-  MedicalCertificateOfCauseOfDeathSexEnum sex = 15;  // VARCHAR(20)
-  string date_of_birth = 16;  // DATE — iso 8601 date
-  int32 age_years = 17;  // INTEGER
-  string patient_identifier = 18;  // VARCHAR(100) — max 100 chars
-  string date_of_death = 19;  // DATE — iso 8601 date
-  string time_of_death = 20;  // TIME — iso 8601 time
-  string place_of_death = 21;  // TEXT
-  MedicalCertificateOfCauseOfDeathSeenAfterDeathByEnum seen_after_death_by = 22;  // VARCHAR(25)
-  string cause_ia_condition = 23;  // TEXT
-  string cause_ia_interval = 24;  // TEXT
-  string cause_ib_condition = 25;  // TEXT
-  string cause_ib_interval = 26;  // TEXT
-  string cause_ic_condition = 27;  // TEXT
-  string cause_ic_interval = 28;  // TEXT
-  string part_ii_conditions = 29;  // TEXT
-  string part_ii_interval = 30;  // TEXT
-  MedicalCertificateOfCauseOfDeathReferredToCoronerEnum referred_to_coroner = 31;  // VARCHAR(5)
-  MedicalCertificateOfCauseOfDeathCoronerReasonEnum coroner_reason = 32;  // VARCHAR(30)
-  MedicalCertificateOfCauseOfDeathMedicalExaminerStatusEnum medical_examiner_status = 33;  // VARCHAR(20)
-  string certifier_note = 34;  // TEXT
+  string qualifications = 14;  // TEXT
+  MedicalCertificateOfCauseOfDeathAttendanceModeEnum attendance_mode = 15;  // VARCHAR(10)
+  string deceased_name = 16;  // TEXT
+  MedicalCertificateOfCauseOfDeathSexEnum sex = 17;  // VARCHAR(20)
+  string date_of_birth = 18;  // DATE — iso 8601 date
+  int32 age_years = 19;  // INTEGER
+  string patient_identifier = 20;  // VARCHAR(100) — max 100 chars
+  string ethnicity = 21;  // TEXT
+  MedicalCertificateOfCauseOfDeathPregnancyStatusEnum pregnancy_status = 22;  // VARCHAR(30)
+  string date_of_death = 23;  // DATE — iso 8601 date
+  string time_of_death = 24;  // TIME — iso 8601 time
+  string place_of_death = 25;  // TEXT
+  MedicalCertificateOfCauseOfDeathSeenAfterDeathByEnum seen_after_death_by = 26;  // VARCHAR(25)
+  MedicalCertificateOfCauseOfDeathImplantedDeviceStatusEnum implanted_device_status = 27;  // VARCHAR(10)
+  string implanted_devices = 28;  // TEXT
+  string cause_ia_condition = 29;  // TEXT
+  string cause_ia_interval = 30;  // TEXT
+  string cause_ib_condition = 31;  // TEXT
+  string cause_ib_interval = 32;  // TEXT
+  string cause_ic_condition = 33;  // TEXT
+  string cause_ic_interval = 34;  // TEXT
+  string cause_id_condition = 35;  // TEXT
+  string cause_id_interval = 36;  // TEXT
+  string part_ii_conditions = 37;  // TEXT
+  string part_ii_interval = 38;  // TEXT
+  MedicalCertificateOfCauseOfDeathReferredToCoronerEnum referred_to_coroner = 39;  // VARCHAR(5)
+  MedicalCertificateOfCauseOfDeathCoronerReasonEnum coroner_reason = 40;  // VARCHAR(30)
+  MedicalCertificateOfCauseOfDeathMedicalExaminerStatusEnum medical_examiner_status = 41;  // VARCHAR(20)
+  MedicalCertificateOfCauseOfDeathBereavedFamilyDiscussedEnum bereaved_family_discussed = 42;  // VARCHAR(5)
+  string certifier_note = 43;  // TEXT
 }

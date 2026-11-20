@@ -105,6 +105,21 @@ non-referred certificate.
 - **Incomplete certifier details** (low) — certifying-doctor identity, grade,
   or attendance information is missing.
 
+## Statutory additions (GOV.UK guidance, England and Wales)
+
+The certificate also records the certifier's primary medical qualifications and
+how they attended the deceased (in person or by video; telephone alone does not
+qualify, and there is no 28-day rule); self-declared ethnicity copied from the
+record (`unknown` if undocumented); pregnancy within 12 months of death; and
+any hazardous implantable device (pacemaker, ICD, neurostimulator, radioactive
+implant) for cremation safety. Part I has four lines, I(a) to I(d). Every term
+is written in full (only HIV and AIDS may be abbreviated); diabetes must be
+Type 1 or Type 2, malignancies need a site and histological type. A traumatic
+event or clinical complication is never omitted to avoid a coroner referral.
+After certification a medical examiner reviews the record and discusses the
+cause with the bereaved; the certificate then goes straight to the registrar,
+who has 5 days to register the death. See [`spec/index.md`](spec/index.md) §3–5.
+
 ## Assessment steps
 
 Completed in order on a single continuous single-page wizard.

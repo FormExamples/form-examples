@@ -44,6 +44,15 @@ pub struct Model {
     pub certifier_note: String,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
+    pub qualifications: String,
+    pub attendance_mode: String,
+    pub ethnicity: String,
+    pub pregnancy_status: String,
+    pub implanted_device_status: String,
+    pub implanted_devices: String,
+    pub cause_id_condition: String,
+    pub cause_id_interval: String,
+    pub bereaved_family_discussed: String,
 }
 
 impl Model {

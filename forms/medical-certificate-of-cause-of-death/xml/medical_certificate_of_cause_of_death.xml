@@ -14,25 +14,34 @@
 <certification_date>2026-01-15</certification_date>
 <attended_deceased>yes</attended_deceased>
 <last_seen_alive_date>2026-01-15</last_seen_alive_date>
+<qualifications></qualifications>
+<attendance_mode>in-person</attendance_mode>
 <deceased_name>Example</deceased_name>
 <sex>female</sex>
 <date_of_birth>1965-06-15</date_of_birth>
 <age_years>45</age_years>
 <patient_identifier></patient_identifier>
+<ethnicity>White British</ethnicity>
+<pregnancy_status>not-applicable</pregnancy_status>
 <date_of_death>2026-01-15</date_of_death>
 <time_of_death></time_of_death>
 <place_of_death></place_of_death>
 <seen_after_death_by>certifier</seen_after_death_by>
+<implanted_device_status>none</implanted_device_status>
+<implanted_devices>Example text.</implanted_devices>
 <cause_ia_condition></cause_ia_condition>
 <cause_ia_interval></cause_ia_interval>
 <cause_ib_condition></cause_ib_condition>
 <cause_ib_interval></cause_ib_interval>
 <cause_ic_condition></cause_ic_condition>
 <cause_ic_interval></cause_ic_interval>
+<cause_id_condition></cause_id_condition>
+<cause_id_interval></cause_id_interval>
 <part_ii_conditions></part_ii_conditions>
 <part_ii_interval></part_ii_interval>
 <referred_to_coroner>yes</referred_to_coroner>
 <coroner_reason>unnatural</coroner_reason>
 <medical_examiner_status>scrutinised</medical_examiner_status>
+<bereaved_family_discussed>yes</bereaved_family_discussed>
 <certifier_note></certifier_note>
 </medical_certificate_of_cause_of_death>

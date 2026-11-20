@@ -1,4 +1,7 @@
 import type {
+  AttendanceMode,
+  ImplantedDeviceStatus,
+  PregnancyStatus,
   CoronerReason,
   DoctorGrade,
   MedicalExaminerStatus,
@@ -147,6 +150,12 @@ export function coronerReasonLabel(value: CoronerReason): string {
       return 'Death in custody or state detention';
     case 'no-attending-practitioner':
       return 'No attending practitioner able to certify';
+    case 'neglect':
+      return 'Neglect or self-neglect';
+    case 'self-harm':
+      return 'Self-harm';
+    case 'poisoning':
+      return 'Poisoning or overdose';
     case 'other':
       return 'Other reportable circumstance';
     case 'none':
@@ -179,6 +188,54 @@ export function yesNoLabel(value: string): string {
       return 'Yes';
     case 'no':
       return 'No';
+    default:
+      return '';
+  }
+}
+
+/** Attendance-mode label. */
+export function attendanceModeLabel(value: AttendanceMode): string {
+  switch (value) {
+    case 'in-person':
+      return 'In person';
+    case 'video':
+      return 'Video consultation';
+    case 'telephone':
+      return 'Telephone only (does not qualify)';
+    case 'none':
+      return 'Did not attend the deceased';
+    default:
+      return '';
+  }
+}
+
+/** Pregnancy-status label. */
+export function pregnancyStatusLabel(value: PregnancyStatus): string {
+  switch (value) {
+    case 'not-applicable':
+      return 'Not applicable';
+    case 'not-pregnant':
+      return 'Not pregnant in the 12 months before death';
+    case 'pregnant-at-death':
+      return 'Pregnant at the time of death';
+    case 'pregnant-within-12-months':
+      return 'Pregnant within the 12 months before death';
+    case 'unknown':
+      return 'Unknown';
+    default:
+      return '';
+  }
+}
+
+/** Implanted-device-status label. */
+export function implantedDeviceStatusLabel(value: ImplantedDeviceStatus): string {
+  switch (value) {
+    case 'none':
+      return 'No hazardous implanted device';
+    case 'present':
+      return 'Hazardous implanted device present';
+    case 'unknown':
+      return 'Unknown';
     default:
       return '';
   }

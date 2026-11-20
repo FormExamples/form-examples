@@ -1641,6 +1641,20 @@ components:
           - 'null'
           format: date
           description: Date the certifier last saw the deceased alive.
+        qualifications:
+          type: string
+          description: Certifier primary medical qualifications, stated alongside the signature in the
+            declaration.
+        attendanceMode:
+          type: string
+          enum:
+          - in-person
+          - video
+          - telephone
+          - none
+          - ''
+          description: 'How the certifier attended the deceased during life: in-person, video, telephone,
+            or none. Telephone alone does not qualify.'
         deceasedName:
           type: string
           description: Full name of the deceased as recorded on the certificate.
@@ -1669,6 +1683,21 @@ components:
           type: string
           maxLength: 100
           description: NHS number or local identifier of the deceased as recorded on the certificate.
+        ethnicity:
+          type: string
+          description: Self-declared ethnicity copied from the medical record; unknown if not documented.
+            Never guessed or asked of the family.
+        pregnancyStatus:
+          type: string
+          enum:
+          - not-applicable
+          - not-pregnant
+          - pregnant-at-death
+          - pregnant-within-12-months
+          - unknown
+          - ''
+          description: 'Pregnancy status: not-applicable, not-pregnant, pregnant-at-death, pregnant-within-12-months,
+            or unknown.'
         dateOfDeath:
           type:
           - string
@@ -1692,6 +1721,19 @@ components:
           - not-seen
           - ''
           description: 'Who saw the body after death: certifier, another-practitioner, or not-seen.'
+        implantedDeviceStatus:
+          type: string
+          enum:
+          - none
+          - present
+          - unknown
+          - ''
+          description: 'Whether hazardous implantable devices are present, checked in the records and
+            on the body for cremation safety: none, present, or unknown.'
+        implantedDevices:
+          type: string
+          description: Description of hazardous implantable devices, for example pacemaker, ICD, neurostimulator,
+            or radioactive implant.
         causeIaCondition:
           type: string
           description: 'Part I(a): the disease or condition directly leading to death (required).'
@@ -1710,6 +1752,13 @@ components:
         causeIcInterval:
           type: string
           description: 'Part I(c): approximate interval between onset and death.'
+        causeIdCondition:
+          type: string
+          description: 'Part I(d): the underlying condition giving rise to I(c), when the sequence has
+            four steps.'
+        causeIdInterval:
+          type: string
+          description: 'Part I(d): approximate interval between onset and death.'
         partIiConditions:
           type: string
           description: 'Part II: other significant conditions contributing to death but not part of the
@@ -1735,11 +1784,15 @@ components:
           - medical-procedure
           - custody
           - no-attending-practitioner
+          - neglect
+          - self-harm
+          - poisoning
           - other
           - none
           - ''
           description: 'Coroner-referral criterion, if any: unnatural, violent, suspicious, unknown-cause,
-            industrial-disease, medical-procedure, custody, no-attending-practitioner, other, or none.'
+            industrial-disease, medical-procedure, custody, no-attending-practitioner, neglect, self-harm,
+            poisoning, other, or none.'
         medicalExaminerStatus:
           type: string
           enum:
@@ -1749,6 +1802,14 @@ components:
           - not-required
           - ''
           description: 'Medical-examiner scrutiny status: scrutinised, discussed, pending, or not-required.'
+        bereavedFamilyDiscussed:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether the medical examiner has discussed the cause of death with the bereaved
+            family (yes/no).
         certifierNote:
           type: string
           description: Free-text note from the certifying doctor.
@@ -1761,22 +1822,31 @@ components:
       - gmcReference
       - placeOfCertification
       - attendedDeceased
+      - qualifications
+      - attendanceMode
       - deceasedName
       - sex
       - patientIdentifier
+      - ethnicity
+      - pregnancyStatus
       - placeOfDeath
       - seenAfterDeathBy
+      - implantedDeviceStatus
+      - implantedDevices
       - causeIaCondition
       - causeIaInterval
       - causeIbCondition
       - causeIbInterval
       - causeIcCondition
       - causeIcInterval
+      - causeIdCondition
+      - causeIdInterval
       - partIiConditions
       - partIiInterval
       - referredToCoroner
       - coronerReason
       - medicalExaminerStatus
+      - bereavedFamilyDiscussed
       - certifierNote
       description: 'Main Medical Certificate of Cause of Death (MCCD) record: certification context, deceased
         death details, the Part I direct causal sequence (I(a) -> I(b) -> I(c)) with onset-to-death intervals,

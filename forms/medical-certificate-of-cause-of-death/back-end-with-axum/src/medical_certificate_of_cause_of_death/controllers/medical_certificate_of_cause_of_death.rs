@@ -57,23 +57,47 @@ pub struct Params {
     pub medical_examiner_status: String,
     #[validate(length(max = TEXT_MAX))]
     pub certifier_note: String,
+    #[serde(default)]
+    pub qualifications: Option<String>,
+    #[serde(default)]
+    pub attendance_mode: Option<String>,
+    #[serde(default)]
+    pub ethnicity: Option<String>,
+    #[serde(default)]
+    pub pregnancy_status: Option<String>,
+    #[serde(default)]
+    pub implanted_device_status: Option<String>,
+    #[serde(default)]
+    pub implanted_devices: Option<String>,
+    #[serde(default)]
+    pub cause_id_condition: Option<String>,
+    #[serde(default)]
+    pub cause_id_interval: Option<String>,
+    #[serde(default)]
+    pub bereaved_family_discussed: Option<String>,
 }
 
 impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO medical_certificate_of_cause_of_deaths (patient_id, clinician_id, \
-            certifying_doctor_name, certifying_doctor_grade, gmc_reference, \
-            place_of_certification, certification_date, attended_deceased, \
-            last_seen_alive_date, deceased_name, sex, date_of_birth, age_years, \
-            patient_identifier, date_of_death, time_of_death, place_of_death, \
-            seen_after_death_by, cause_ia_condition, cause_ia_interval, cause_ib_condition, \
-            cause_ib_interval, cause_ic_condition, cause_ic_interval, part_ii_conditions, \
-            part_ii_interval, referred_to_coroner, coroner_reason, medical_examiner_status, \
-            certifier_note) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
-            $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, \
-            $30) RETURNING *",
+            "INSERT INTO medical_certificate_of_cause_of_deaths (patient_id, \
+            clinician_id, certifying_doctor_name, certifying_doctor_grade, \
+            gmc_reference, place_of_certification, certification_date, \
+            attended_deceased, last_seen_alive_date, deceased_name, sex, date_of_birth, \
+            age_years, patient_identifier, date_of_death, time_of_death, place_of_death, \
+            seen_after_death_by, cause_ia_condition, cause_ia_interval, \
+            cause_ib_condition, cause_ib_interval, cause_ic_condition, \
+            cause_ic_interval, part_ii_conditions, part_ii_interval, \
+            referred_to_coroner, coroner_reason, medical_examiner_status, \
+            certifier_note, qualifications, attendance_mode, ethnicity, \
+            pregnancy_status, implanted_device_status, implanted_devices, \
+            cause_id_condition, cause_id_interval, bereaved_family_discussed) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, \
+            $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, \
+            COALESCE($31, ''), COALESCE($32, ''), COALESCE($33, ''), COALESCE($34, ''), \
+            COALESCE($35, ''), COALESCE($36, ''), COALESCE($37, ''), COALESCE($38, ''), \
+            COALESCE($39, '')) RETURNING *",
         )
         .bind(self.patient_id)
         .bind(self.clinician_id)
@@ -105,6 +129,15 @@ impl Params {
         .bind(&self.coroner_reason)
         .bind(&self.medical_examiner_status)
         .bind(&self.certifier_note)
+        .bind(&self.qualifications)
+        .bind(&self.attendance_mode)
+        .bind(&self.ethnicity)
+        .bind(&self.pregnancy_status)
+        .bind(&self.implanted_device_status)
+        .bind(&self.implanted_devices)
+        .bind(&self.cause_id_condition)
+        .bind(&self.cause_id_interval)
+        .bind(&self.bereaved_family_discussed)
         .fetch_one(db)
         .await
     }
@@ -122,8 +155,15 @@ impl Params {
             $21, cause_ib_condition = $22, cause_ib_interval = $23, cause_ic_condition = \
             $24, cause_ic_interval = $25, part_ii_conditions = $26, part_ii_interval = \
             $27, referred_to_coroner = $28, coroner_reason = $29, \
-            medical_examiner_status = $30, certifier_note = $31, updated_at = now() \
-            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
+            medical_examiner_status = $30, certifier_note = $31, qualifications = \
+            COALESCE($32, qualifications), attendance_mode = COALESCE($33, \
+            attendance_mode), ethnicity = COALESCE($34, ethnicity), pregnancy_status = \
+            COALESCE($35, pregnancy_status), implanted_device_status = COALESCE($36, \
+            implanted_device_status), implanted_devices = COALESCE($37, \
+            implanted_devices), cause_id_condition = COALESCE($38, cause_id_condition), \
+            cause_id_interval = COALESCE($39, cause_id_interval), \
+            bereaved_family_discussed = COALESCE($40, bereaved_family_discussed), \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)
@@ -156,6 +196,15 @@ impl Params {
         .bind(&self.coroner_reason)
         .bind(&self.medical_examiner_status)
         .bind(&self.certifier_note)
+        .bind(&self.qualifications)
+        .bind(&self.attendance_mode)
+        .bind(&self.ethnicity)
+        .bind(&self.pregnancy_status)
+        .bind(&self.implanted_device_status)
+        .bind(&self.implanted_devices)
+        .bind(&self.cause_id_condition)
+        .bind(&self.cause_id_interval)
+        .bind(&self.bereaved_family_discussed)
         .fetch_optional(db)
         .await
     }

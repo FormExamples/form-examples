@@ -71,4 +71,26 @@
       bind:value={p.causeIcInterval}
     />
   </Field>
+  <Field label="I(d) — underlying condition giving rise to I(c)" inputId="partI-causeIdCondition">
+    <TextInput
+      id="partI-causeIdCondition"
+      label="I(d) — underlying condition giving rise to I(c)"
+      placeholder="e.g. Adenocarcinoma of the colon"
+      bind:value={p.causeIdCondition}
+    />
+  </Field>
+
+  <Field label="I(d) — onset-to-death interval" inputId="partI-causeIdInterval">
+    <TextInput
+      id="partI-causeIdInterval"
+      label="I(d) — onset-to-death interval"
+      placeholder="e.g. 4 years"
+      bind:value={p.causeIdInterval}
+    />
+  </Field>
+  <p class="hint">
+    Write every term in full: no abbreviations except HIV and AIDS. Name the organism, the cancer
+    site and histology, and Type 1 or Type 2 diabetes. If the chain is longer than four lines, link
+    conditions on one line with "due to" or "secondary to".
+  </p>
 </Fieldset>

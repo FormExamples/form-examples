@@ -36,7 +36,10 @@ export const CORONER_REASONS: string[] = [
   'industrial-disease',
   'medical-procedure',
   'custody',
-  'no-attending-practitioner'
+  'no-attending-practitioner',
+  'neglect',
+  'self-harm',
+  'poisoning'
 ];
 
 /**
@@ -99,9 +102,19 @@ export function normalise(text: string): string {
 
 /** True when a coroner-referral criterion is asserted (spec §4). */
 export function coronerReferralIndicated(d: DeathCertificate): boolean {
+  return explicitReferral(d) || traumaInCause(d);
+}
+
+/**
+ * True when a referral is asserted by the certifier's own entries (the
+ * referral answers, a listed reason, or a non-attending certifier), as opposed
+ * to being inferred from trauma wording in the cause lines.
+ */
+export function explicitReferral(d: DeathCertificate): boolean {
   return (
     d.referral.referredToCoroner === 'yes' ||
-    CORONER_REASONS.indexOf(d.referral.coronerReason) !== -1
+    CORONER_REASONS.indexOf(d.referral.coronerReason) !== -1 ||
+    !attendanceQualifies(d)
   );
 }
 
@@ -111,11 +124,7 @@ export function coronerReferralIndicated(d: DeathCertificate): boolean {
  * the unacceptable-mode list.
  */
 export function soleCause(d: DeathCertificate): string {
-  const lines = [
-    d.partI.causeIaCondition,
-    d.partI.causeIbCondition,
-    d.partI.causeIcCondition
-  ].filter(nonEmpty);
+  const lines = partILines(d).filter(nonEmpty);
   const partIiPresent = nonEmpty(d.partII.partIiConditions);
   if (lines.length === 1 && !partIiPresent) return lines[0];
   return '';
@@ -145,7 +154,8 @@ export function illogicalSequence(d: DeathCertificate): boolean {
   const ia = nonEmpty(d.partI.causeIaCondition);
   const ib = nonEmpty(d.partI.causeIbCondition);
   const ic = nonEmpty(d.partI.causeIcCondition);
-  return (ib && !ia) || (ic && !ib);
+  const id = nonEmpty(d.partI.causeIdCondition);
+  return (ib && !ia) || (ic && !ib) || (id && !ic);
 }
 
 /**
@@ -153,8 +163,107 @@ export function illogicalSequence(d: DeathCertificate): boolean {
  * I(a)); '' when Part I is empty (spec §4).
  */
 export function underlyingCause(d: DeathCertificate): string {
+  if (nonEmpty(d.partI.causeIdCondition)) return d.partI.causeIdCondition.trim();
   if (nonEmpty(d.partI.causeIcCondition)) return d.partI.causeIcCondition.trim();
   if (nonEmpty(d.partI.causeIbCondition)) return d.partI.causeIbCondition.trim();
   if (nonEmpty(d.partI.causeIaCondition)) return d.partI.causeIaCondition.trim();
   return '';
+}
+
+/** The four Part I condition texts, I(a) to I(d). */
+export function partILines(d: DeathCertificate): string[] {
+  return [
+    d.partI.causeIaCondition,
+    d.partI.causeIbCondition,
+    d.partI.causeIcCondition,
+    d.partI.causeIdCondition
+  ];
+}
+
+/** Every cause text on the certificate (Part I lines and Part II). */
+export function allCauseText(d: DeathCertificate): string {
+  return partILines(d).concat([d.partII.partIiConditions]).filter(nonEmpty).join(' ; ');
+}
+
+/**
+ * Only a doctor who attended in person or by video may certify; telephone
+ * contact alone, or no attendance, does not qualify (there is no 28-day rule).
+ * Unanswered counts as qualifying so a blank certificate is merely incomplete.
+ */
+export function attendanceQualifies(d: DeathCertificate): boolean {
+  const m = d.certification.attendanceMode;
+  return m !== 'telephone' && m !== 'none';
+}
+
+/** Abbreviations the guidance prohibits; HIV and AIDS are the only accepted ones. */
+export const ABBREVIATIONS: string[] = [
+  'MI',
+  'COPD',
+  'CKD',
+  'UTI',
+  'COVID',
+  'COVID-19',
+  'CVA',
+  'DVT',
+  'PE',
+  'TIA',
+  'AF',
+  'CCF',
+  'CHF',
+  'IHD',
+  'CABG',
+  'ARDS',
+  'AKI',
+  'DM',
+  'HTN',
+  'CA',
+  'RTA',
+  'GI',
+  'CNS',
+  'ESRF',
+  'CAP',
+  'HAP',
+  'SAH',
+  'ACS',
+  'PD',
+  'MS',
+  'MND'
+];
+
+/** Prohibited abbreviations used, matched case-sensitively as whole words. */
+export function abbreviationsUsed(d: DeathCertificate): string[] {
+  const text = allCauseText(d);
+  const found: string[] = [];
+  ABBREVIATIONS.forEach((a) => {
+    const re = new RegExp('(^|[^A-Za-z0-9-])' + a.replace('-', '\\-') + '(?![A-Za-z0-9-])');
+    if (re.test(text) && found.indexOf(a) === -1) found.push(a);
+  });
+  return found;
+}
+
+/** Diabetes named without Type 1 / Type 2 (or secondary / gestational). */
+export function unspecifiedDiabetes(d: DeathCertificate): boolean {
+  const text = allCauseText(d).toLowerCase();
+  return (
+    /diabet/.test(text) &&
+    !/(type\s*(1|2|i|ii|one|two)\b|type-\s*(1|2)|secondary|gestational|pancreatic|steroid)/.test(
+      text
+    )
+  );
+}
+
+/** Cancer named without a histological type. */
+export function unspecifiedMalignancy(d: DeathCertificate): boolean {
+  const text = allCauseText(d).toLowerCase();
+  if (!/(cancer|malignan|neoplasm|tumou?r|metasta)/.test(text)) return false;
+  return !/(carcinoma|sarcoma|lymphoma|leuk(a)?emia|melanoma|glioma|glioblastoma|myeloma|mesothelioma|blastoma|seminoma|adenoma)/.test(
+    text
+  );
+}
+
+/** Trauma, poisoning, or procedure wording in any cause line. */
+export function traumaInCause(d: DeathCertificate): boolean {
+  return /(\btrauma|\binjur|\bfall\b|\bfell\b|\bfractur|\bhead injury|\bpoison|\boverdose|\bhang|\bstab|\bgunshot|\bburns?\b|\bdrown|\bsuffocat|\basphyxia|\bpost-?operative|\bsurgery|\bsurgical|\banaesthe|\bcollision|\bassault)/.test(
+    allCauseText(d).toLowerCase()
+  );
 }

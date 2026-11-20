@@ -46,6 +46,8 @@ A single logical certificate record. Fields default to `''` (text/enum) or
 | `certificationDate` | date | date certificate completed |
 | `attendedDeceased` | enum | yes / no — attended during last illness |
 | `lastSeenAliveDate` | date | date certifier last saw the deceased alive |
+| `qualifications` | text | certifier's primary medical qualifications, stated with the signature |
+| `attendanceMode` | enum | in-person / video / telephone / none — how the certifier attended the deceased in life; telephone alone does not qualify. There is no 28-day rule and no need to have viewed the body |
 
 **Deceased identification.**
 
@@ -56,6 +58,8 @@ A single logical certificate record. Fields default to `''` (text/enum) or
 | `dateOfBirth` | date | |
 | `ageYears` | numeric | age at death in years |
 | `patientIdentifier` | text | NHS number or local identifier |
+| `ethnicity` | text | self-declared, copied from the medical record; `unknown` if undocumented — never guessed and never asked of the family |
+| `pregnancyStatus` | enum | not-applicable / not-pregnant / pregnant-at-death / pregnant-within-12-months / unknown |
 
 **Death details.**
 
@@ -65,8 +69,10 @@ A single logical certificate record. Fields default to `''` (text/enum) or
 | `timeOfDeath` | time | |
 | `placeOfDeath` | text | ward / home / hospice / other |
 | `seenAfterDeathBy` | enum | certifier / another-practitioner / not-seen |
+| `implantedDeviceStatus` | enum | none / present / unknown — hazardous implantable devices checked in the records and on the body, for cremation safety |
+| `implantedDevices` | text | pacemaker, ICD, neurostimulator, radioactive implant, … |
 
-**Part I — direct causal sequence.** Three lines, each a condition plus interval:
+**Part I — direct causal sequence.** Four lines (1a–1d), each a condition plus interval:
 
 | Field | Type | Line |
 | --- | --- | --- |
@@ -76,6 +82,8 @@ A single logical certificate record. Fields default to `''` (text/enum) or
 | `causeIbInterval` | text | I(b) interval |
 | `causeIcCondition` | text | I(c) underlying cause |
 | `causeIcInterval` | text | I(c) interval |
+| `causeIdCondition` | text | I(d) underlying cause when the chain has four steps; with more than four, put several conditions on one line linked by "due to" / "secondary to" |
+| `causeIdInterval` | text | I(d) interval |
 
 **Part II — contributory conditions.**
 
@@ -89,8 +97,9 @@ A single logical certificate record. Fields default to `''` (text/enum) or
 | Field | Type | Notes |
 | --- | --- | --- |
 | `referredToCoroner` | enum | yes / no |
-| `coronerReason` | enum | unnatural / violent / suspicious / unknown-cause / industrial-disease / medical-procedure / custody / no-attending-practitioner / other / none |
+| `coronerReason` | enum | unnatural / violent / suspicious / unknown-cause / industrial-disease / medical-procedure / custody / no-attending-practitioner / neglect / self-harm / poisoning / other / none |
 | `medicalExaminerStatus` | enum | scrutinized / discussed / pending / not-required |
+| `bereavedFamilyDiscussed` | enum | yes / no — medical examiner has discussed the cause with the bereaved |
 | `certifierNote` | text | free-text |
 
 **Derived (never stored as input).** `validityClass`, `underlyingCause`,
@@ -106,7 +115,9 @@ coronerReferralIndicated =
      referredToCoroner == 'yes'
   || coronerReason in { 'unnatural','violent','suspicious','unknown-cause',
                         'industrial-disease','medical-procedure','custody',
-                        'no-attending-practitioner' }
+                        'no-attending-practitioner','neglect','self-harm',
+                        'poisoning' }
+  || attendanceMode in { 'telephone','none' }   # not an attending practitioner
 
 # Unacceptable sole "mode of death": the only cause given is a recognised mode
 soleCause = the single non-empty Part I condition when exactly one is present
@@ -122,13 +133,23 @@ missingPartIa = causeIaCondition == ''
 illogicalSequence =
      (causeIbCondition != '' && causeIaCondition == '')
   || (causeIcCondition != '' && causeIbCondition == '')
+  || (causeIdCondition != '' && causeIcCondition == '')
+
+# Strictly prohibited terms (GOV.UK MCCD guidance), case-sensitive whole words
+abbreviationsUsed = tokens in Part I/II matching {MI, COPD, CKD, UTI, COVID,
+                    CVA, DVT, PE, TIA, AF, CCF, CHF, IHD, ...}; HIV and AIDS allowed
+unspecifiedDiabetes = "diabetes" without Type 1 / Type 2 (or secondary/gestational)
+unspecifiedMalignancy = cancer/malignancy/tumour/neoplasm without a site AND a
+                    histological type (carcinoma, sarcoma, lymphoma, …)
+traumaInCause = trauma/injury/fall/fracture/poisoning/overdose/surgery wording
+                in any cause line while no coroner referral is indicated
 
 validityClass =
     coronerReferralIndicated                      -> 'refer-to-coroner'
     missingPartIa || unacceptableSoleCause        -> 'incomplete'
     otherwise                                     -> 'valid'
 
-underlyingCause = lowest completed Part I condition (I(c) else I(b) else I(a))
+underlyingCause = lowest completed Part I condition (I(d), I(c), I(b), else I(a))
 ```
 
 - `refer-to-coroner` takes precedence: if a referral criterion is met the
@@ -156,7 +177,28 @@ Emitted independently of the class, each with a priority:
 - **Missing interval** (low) — a completed Part I condition line has an empty
   interval.
 - **Incomplete certifier details** (low) — `certifyingDoctorName`,
-  `certifyingDoctorGrade`, `gmcReference`, or `attendedDeceased` missing.
+  `certifyingDoctorGrade`, `gmcReference`, `qualifications`, or
+  `attendedDeceased` missing.
+- **Certifier did not attend** (high) — `attendanceMode` is `telephone` or
+  `none`: only a doctor who attended in person or by video may certify.
+- **Trauma or complication in the cause** (high) — `traumaInCause`: never omit
+  a traumatic event or clinical complication to avoid referral; refer to the
+  coroner.
+- **Prohibited abbreviation** (medium) — `abbreviationsUsed`: write every term
+  in full (only HIV and AIDS are accepted).
+- **Unspecified diabetes or malignancy** (medium) — Type 1 or Type 2 diabetes,
+  and primary site plus histological type for a cancer, must be stated.
+- **Implantable devices not recorded** (medium) — `implantedDeviceStatus`
+  empty; when `present`, a low flag reminds the certifier to notify the
+  crematorium.
+- **Ethnicity not recorded** (low) — record `unknown` if undocumented.
+- **Pregnancy status not recorded** (low) — deceased is female and
+  `pregnancyStatus` is empty.
+
+**Process note (not scored).** Attending practitioner completes the MCCD; a
+medical examiner reviews the records and discusses the cause with the
+practitioner and the bereaved; once confirmed it goes straight to the
+registrar, and the person registering then has 5 days to register the death.
 
 ## 6. Inputs and outputs
 
@@ -219,6 +261,10 @@ Form-specific classification is recorded in [`index.md`](../index.md) and
 [`AGENTS.md`](../AGENTS.md) where it differs from the baseline.
 
 ## 10. References
+
+- [GOV.UK — Guidance for medical practitioners completing MCCDs in England and Wales](https://www.gov.uk/government/publications/medical-certificate-of-cause-of-death-mccd-guidance-for-medical-practitioners/guidance-for-medical-practitioners-completing-medical-certificates-of-cause-of-death-in-england-and-wales)
+- [GOV.UK — MCCD guidance for medical practitioners](https://www.gov.uk/government/publications/medical-certificate-of-cause-of-death-mccd-guidance-for-medical-practitioners)
+- [Guidance for registered medical practitioners on the Notification of Deaths Regulations](https://assets.publishing.service.gov.uk/media/66d044a059b0ec2e151f847e/Guidance_for_registered_medical_practitioners_on_the_Notification_of_Deaths_Regulations__web_.pdf)
 
 - [`index.md`](../index.md) — form description and validity model
 - [`AGENTS.md`](../AGENTS.md) — agent instructions

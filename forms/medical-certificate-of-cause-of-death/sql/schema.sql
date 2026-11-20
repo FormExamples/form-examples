@@ -229,6 +229,8 @@ CREATE TABLE medical_certificate_of_cause_of_death (
     certification_date DATE,
     attended_deceased VARCHAR(5) NOT NULL DEFAULT '' CHECK (attended_deceased IN ('yes', 'no', '')),
     last_seen_alive_date DATE,
+    qualifications TEXT NOT NULL DEFAULT '',
+    attendance_mode VARCHAR(10) NOT NULL DEFAULT '' CHECK (attendance_mode IN ('in-person', 'video', 'telephone', 'none', '')),
 
     -- Deceased identification (context beyond the patient FK)
     deceased_name TEXT NOT NULL DEFAULT '',
@@ -236,12 +238,16 @@ CREATE TABLE medical_certificate_of_cause_of_death (
     date_of_birth DATE,
     age_years INTEGER,
     patient_identifier VARCHAR(100) NOT NULL DEFAULT '',
+    ethnicity TEXT NOT NULL DEFAULT '',
+    pregnancy_status VARCHAR(30) NOT NULL DEFAULT '' CHECK (pregnancy_status IN ('not-applicable', 'not-pregnant', 'pregnant-at-death', 'pregnant-within-12-months', 'unknown', '')),
 
     -- Death details
     date_of_death DATE,
     time_of_death TIME,
     place_of_death TEXT NOT NULL DEFAULT '',
     seen_after_death_by VARCHAR(25) NOT NULL DEFAULT '' CHECK (seen_after_death_by IN ('certifier', 'another-practitioner', 'not-seen', '')),
+    implanted_device_status VARCHAR(10) NOT NULL DEFAULT '' CHECK (implanted_device_status IN ('none', 'present', 'unknown', '')),
+    implanted_devices TEXT NOT NULL DEFAULT '',
 
     -- Part I: direct causal sequence
     cause_ia_condition TEXT NOT NULL DEFAULT '',
@@ -250,6 +256,8 @@ CREATE TABLE medical_certificate_of_cause_of_death (
     cause_ib_interval TEXT NOT NULL DEFAULT '',
     cause_ic_condition TEXT NOT NULL DEFAULT '',
     cause_ic_interval TEXT NOT NULL DEFAULT '',
+    cause_id_condition TEXT NOT NULL DEFAULT '',
+    cause_id_interval TEXT NOT NULL DEFAULT '',
 
     -- Part II: contributory conditions
     part_ii_conditions TEXT NOT NULL DEFAULT '',
@@ -257,8 +265,9 @@ CREATE TABLE medical_certificate_of_cause_of_death (
 
     -- Referral and scrutiny
     referred_to_coroner VARCHAR(5) NOT NULL DEFAULT '' CHECK (referred_to_coroner IN ('yes', 'no', '')),
-    coroner_reason VARCHAR(30) NOT NULL DEFAULT '' CHECK (coroner_reason IN ('unnatural', 'violent', 'suspicious', 'unknown-cause', 'industrial-disease', 'medical-procedure', 'custody', 'no-attending-practitioner', 'other', 'none', '')),
+    coroner_reason VARCHAR(30) NOT NULL DEFAULT '' CHECK (coroner_reason IN ('unnatural', 'violent', 'suspicious', 'unknown-cause', 'industrial-disease', 'medical-procedure', 'custody', 'no-attending-practitioner', 'neglect', 'self-harm', 'poisoning', 'other', 'none', '')),
     medical_examiner_status VARCHAR(20) NOT NULL DEFAULT '' CHECK (medical_examiner_status IN ('scrutinised', 'discussed', 'pending', 'not-required', '')),
+    bereaved_family_discussed VARCHAR(5) NOT NULL DEFAULT '' CHECK (bereaved_family_discussed IN ('yes', 'no', '')),
     certifier_note TEXT NOT NULL DEFAULT ''
 );
 
@@ -337,11 +346,29 @@ COMMENT ON COLUMN medical_certificate_of_cause_of_death.part_ii_interval IS
 COMMENT ON COLUMN medical_certificate_of_cause_of_death.referred_to_coroner IS
     'Whether the death has been referred to the coroner (yes/no).';
 COMMENT ON COLUMN medical_certificate_of_cause_of_death.coroner_reason IS
-    'Coroner-referral criterion, if any: unnatural, violent, suspicious, unknown-cause, industrial-disease, medical-procedure, custody, no-attending-practitioner, other, or none.';
+    'Coroner-referral criterion, if any: unnatural, violent, suspicious, unknown-cause, industrial-disease, medical-procedure, custody, no-attending-practitioner, neglect, self-harm, poisoning, other, or none.';
 COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_examiner_status IS
     'Medical-examiner scrutiny status: scrutinised, discussed, pending, or not-required.';
 COMMENT ON COLUMN medical_certificate_of_cause_of_death.certifier_note IS
     'Free-text note from the certifying doctor.';
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.qualifications IS
+    'Certifier primary medical qualifications, stated alongside the signature in the declaration.';
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.attendance_mode IS
+    'How the certifier attended the deceased during life: in-person, video, telephone, or none. Telephone alone does not qualify.';
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.ethnicity IS
+    'Self-declared ethnicity copied from the medical record; unknown if not documented. Never guessed or asked of the family.';
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.pregnancy_status IS
+    'Pregnancy status: not-applicable, not-pregnant, pregnant-at-death, pregnant-within-12-months, or unknown.';
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.implanted_device_status IS
+    'Whether hazardous implantable devices are present, checked in the records and on the body for cremation safety: none, present, or unknown.';
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.implanted_devices IS
+    'Description of hazardous implantable devices, for example pacemaker, ICD, neurostimulator, or radioactive implant.';
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_id_condition IS
+    'Part I(d): the underlying condition giving rise to I(c), when the sequence has four steps.';
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_id_interval IS
+    'Part I(d): approximate interval between onset and death.';
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.bereaved_family_discussed IS
+    'Whether the medical examiner has discussed the cause of death with the bereaved family (yes/no).';
 
 -- ========================================================================
 -- END 04_create_table_medical_certificate_of_cause_of_death.sql

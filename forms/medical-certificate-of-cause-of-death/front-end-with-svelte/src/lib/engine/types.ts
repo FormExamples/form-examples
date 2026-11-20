@@ -27,9 +27,21 @@ export type CoronerReason =
   | 'medical-procedure'
   | 'custody'
   | 'no-attending-practitioner'
+  | 'neglect'
+  | 'self-harm'
+  | 'poisoning'
   | 'other'
   | 'none'
   | '';
+export type AttendanceMode = 'in-person' | 'video' | 'telephone' | 'none' | '';
+export type PregnancyStatus =
+  | 'not-applicable'
+  | 'not-pregnant'
+  | 'pregnant-at-death'
+  | 'pregnant-within-12-months'
+  | 'unknown'
+  | '';
+export type ImplantedDeviceStatus = 'none' | 'present' | 'unknown' | '';
 export type MedicalExaminerStatus = 'scrutinised' | 'discussed' | 'pending' | 'not-required' | '';
 
 export type ValidityClass = 'valid' | 'incomplete' | 'refer-to-coroner';
@@ -46,6 +58,10 @@ export interface Certification {
   attendedDeceased: YesNo;
   /** ISO date string; null when unset. */
   lastSeenAliveDate: string | null;
+  /** Primary medical qualifications, stated with the signature. */
+  qualifications: string;
+  /** In person or video qualifies; telephone does not. */
+  attendanceMode: AttendanceMode;
 }
 
 /** Step 2 — deceased identification. */
@@ -56,6 +72,9 @@ export interface Deceased {
   dateOfBirth: string | null;
   ageYears: number | null;
   patientIdentifier: string;
+  /** Self-declared, from the record; 'unknown' if undocumented. */
+  ethnicity: string;
+  pregnancyStatus: PregnancyStatus;
 }
 
 /** Step 3 — death details. */
@@ -66,6 +85,8 @@ export interface Death {
   timeOfDeath: string | null;
   placeOfDeath: string;
   seenAfterDeathBy: SeenAfterDeathBy;
+  implantedDeviceStatus: ImplantedDeviceStatus;
+  implantedDevices: string;
 }
 
 /** Step 4 — Part I direct causal sequence (I(a) -> I(b) -> I(c)). */
@@ -76,6 +97,8 @@ export interface PartI {
   causeIbInterval: string;
   causeIcCondition: string;
   causeIcInterval: string;
+  causeIdCondition: string;
+  causeIdInterval: string;
 }
 
 /** Step 5 — Part II contributory conditions. */
@@ -89,6 +112,7 @@ export interface Referral {
   referredToCoroner: YesNo;
   coronerReason: CoronerReason;
   medicalExaminerStatus: MedicalExaminerStatus;
+  bereavedFamilyDiscussed: YesNo;
   certifierNote: string;
 }
 

@@ -85,4 +85,30 @@
       bind:value={c.lastSeenAliveDate}
     />
   </Field>
+  <Field label="Primary medical qualifications" inputId="certification-qualifications">
+    <TextInput
+      id="certification-qualifications"
+      label="Primary medical qualifications"
+      placeholder="e.g. MBBS, MRCGP"
+      bind:value={c.qualifications}
+    />
+  </Field>
+
+  <Field label="How did you attend the deceased in life?" inputId="certification-attendanceMode">
+    <Select
+      id="certification-attendanceMode"
+      label="How did you attend the deceased in life?"
+      bind:value={c.attendanceMode}
+    >
+      <option value="">— Select —</option>
+      <option value="in-person">In person</option>
+      <option value="video">Video consultation</option>
+      <option value="telephone">Telephone only (does not qualify)</option>
+      <option value="none">Did not attend the deceased</option>
+    </Select>
+  </Field>
+  <p class="hint">
+    In person or by video qualifies; telephone calls do not. There is no 28-day rule, and you need
+    not have viewed the body.
+  </p>
 </Fieldset>

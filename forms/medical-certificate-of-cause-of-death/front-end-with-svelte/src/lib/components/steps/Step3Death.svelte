@@ -46,4 +46,25 @@
       <option value="not-seen">Not seen after death</option>
     </Select>
   </Field>
+  <Field label="Hazardous implantable devices" inputId="death-implantedDeviceStatus">
+    <Select
+      id="death-implantedDeviceStatus"
+      label="Hazardous implantable devices"
+      bind:value={dth.implantedDeviceStatus}
+    >
+      <option value="">— Select —</option>
+      <option value="none">No hazardous implanted device</option>
+      <option value="present">Hazardous implanted device present</option>
+      <option value="unknown">Unknown</option>
+    </Select>
+  </Field>
+
+  <Field label="Device details" inputId="death-implantedDevices">
+    <TextInput
+      id="death-implantedDevices"
+      label="Device details"
+      placeholder="e.g. Pacemaker, implanted 2019"
+      bind:value={dth.implantedDevices}
+    />
+  </Field>
 </Fieldset>

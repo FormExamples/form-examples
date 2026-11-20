@@ -129,6 +129,11 @@ export function buildPdfDocument(
               { text: 'I(c)', fontSize: 9 },
               { text: data.partI.causeIcCondition || '—', fontSize: 9 },
               { text: data.partI.causeIcInterval || '—', fontSize: 9 }
+            ],
+            [
+              { text: 'I(d)', fontSize: 9 },
+              { text: data.partI.causeIdCondition || '—', fontSize: 9 },
+              { text: data.partI.causeIdInterval || '—', fontSize: 9 }
             ]
           ]
         },
