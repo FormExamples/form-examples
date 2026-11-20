@@ -17,6 +17,11 @@
       - <div class="statistic-title">  — the label/heading text
       - <div class="statistic-value">  — the value, optionally wrapped between
         a <span class="statistic-prefix"> and a <span class="statistic-suffix">.
+      - optional <div class="statistic-change" data-trend="up|down|flat"> — the
+        change, in words that name its comparison ("0.5 more than October
+        2024"); data-trend is for the theme, which may draw an arrow from it.
+      - optional <time class="statistic-as-of" datetime="…"> — when the value
+        was measured, in words.
     Purely passive: no script.
 
   Usage:
@@ -27,6 +32,8 @@
         1,234
         <span class="statistic-suffix">USD</span>
       </div>
+      <div class="statistic-change" data-trend="up">56 more than last month</div>
+      <time class="statistic-as-of" datetime="2024-12-01">Data as of 1 December 2024</time>
     </div>
 -->
 
@@ -54,4 +61,20 @@
       <!-- Consumer provides the suffix content (or remove this span if unused) -->
     </span>
   </div>
+
+  <!-- Optional change: words that name the comparison; data-trend="up", "down" or "flat" for the theme. -->
+  <div
+    class="statistic-change"
+    data-trend="up"
+  >
+    <!-- Consumer provides the change text (or remove this div if unused) -->
+  </div>
+
+  <!-- Optional as-of time: when the value was measured, in words. -->
+  <time
+    class="statistic-as-of"
+    datetime=""
+  >
+    <!-- Consumer provides the date in words (or remove this element if unused) -->
+  </time>
 </div>

@@ -6,6 +6,11 @@
   CSS class: sparkline
   Keyboard: None (passive element)
   Accessibility: aria-label for accessible name
+  Too few readings: when there are fewer readings than the consumer's minimum, it is not a trend. Drop role="img" and
+    aria-label, add data-insufficient, and show only the consumer's words as text in place of the graphic:
+    <span class="sparkline" data-insufficient><span class="sparkline-insufficient">Not enough readings for a trend</span></span>
+  Breaks: where readings are not comparable (a new method, a new unit), draw one <path> per comparable run, so the line
+    never joins across the break.
   Usage:
     <div class="sparkline" aria-label="Example">
       ...

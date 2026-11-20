@@ -6,6 +6,9 @@
   CSS class: context-menu
   Keyboard: ArrowDown/ArrowUp move between items (wrapping), Home/End jump to first/last, Escape closes (sets data-open="false"); opening focuses the first item
   Accessibility: role="menu", aria-label for accessible name; items are role="menuitem" tabindex="-1"
+  Subject: when the menu acts on a record, name it first with a non-interactive part,
+    <div class="context-menu-subject" id="…-subject" role="none">Ada Lovelace, blood pressure 3 Nov</div>,
+    and give the menu aria-labelledby="…-subject" instead of aria-label (spec/lessons/zoblocks).
   Popover API (tasks.md P18-T11): the menu is popover="auto". There is no
     declarative trigger (a right-click or long-press opens it), so the
     consumer sets data-open="true" and the embedded script shows it with
@@ -38,36 +41,37 @@
 
 <script>
   // ContextMenu behavior
-  (function() {
-    'use strict';
-    var native = typeof HTMLElement.prototype.showPopover === 'function';
-    document.querySelectorAll('.context-menu').forEach(function(root) {
-      root.addEventListener('keydown', function(e) {
+  (function () {
+    "use strict";
+    var native = typeof HTMLElement.prototype.showPopover === "function";
+    document.querySelectorAll(".context-menu").forEach(function (root) {
+      root.addEventListener("keydown", function (e) {
         var items = Array.from(root.querySelectorAll("[role='menuitem']"));
         var index = items.indexOf(document.activeElement);
-        if (e.key === 'ArrowDown') {
+        if (e.key === "ArrowDown") {
           e.preventDefault();
           if (items.length) items[index < items.length - 1 ? index + 1 : 0].focus();
-        } else if (e.key === 'ArrowUp') {
+        } else if (e.key === "ArrowUp") {
           e.preventDefault();
           if (items.length) items[index > 0 ? index - 1 : items.length - 1].focus();
-        } else if (e.key === 'Home') {
+        } else if (e.key === "Home") {
           e.preventDefault();
           if (items.length) items[0].focus();
-        } else if (e.key === 'End') {
+        } else if (e.key === "End") {
           e.preventDefault();
           if (items.length) items[items.length - 1].focus();
         }
       });
     });
-    document.querySelectorAll('.context-menu').forEach(function(el) {
+    document.querySelectorAll(".context-menu").forEach(function (el) {
       var opener = null;
       var shown = false;
-      if (!native) el.removeAttribute('popover');
+      if (!native) el.removeAttribute("popover");
       function show(open) {
         if (native) {
           try {
-            if (open) el.showPopover(); else el.hidePopover();
+            if (open) el.showPopover();
+            else el.hidePopover();
           } catch (error) {
             // Already in that state.
           }
@@ -76,12 +80,13 @@
         }
       }
       function sync() {
-        if (el.getAttribute('data-open') === 'true') {
+        if (el.getAttribute("data-open") === "true") {
           if (!shown) opener = document.activeElement;
           shown = true;
           show(true);
           var first = el.querySelector("[role='menuitem']");
-          if (first) first.focus(); else el.focus();
+          if (first) first.focus();
+          else el.focus();
         } else {
           var wasShown = shown;
           shown = false;
@@ -90,20 +95,20 @@
           opener = null;
         }
       }
-      new MutationObserver(sync).observe(el, { attributes: true, attributeFilter: ['data-open'] });
+      new MutationObserver(sync).observe(el, { attributes: true, attributeFilter: ["data-open"] });
       sync();
       function close() {
-        el.setAttribute('data-open', 'false');
-        el.dispatchEvent(new CustomEvent('close'));
+        el.setAttribute("data-open", "false");
+        el.dispatchEvent(new CustomEvent("close"));
       }
       if (native) {
         // Escape and light dismiss are the browser's; follow them.
-        el.addEventListener('toggle', function(e) {
-          if (e.newState === 'closed' && el.getAttribute('data-open') === 'true') close();
+        el.addEventListener("toggle", function (e) {
+          if (e.newState === "closed" && el.getAttribute("data-open") === "true") close();
         });
       } else {
-        el.addEventListener('keydown', function(e) {
-          if (e.key === 'Escape' && el.getAttribute('data-open') === 'true') {
+        el.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && el.getAttribute("data-open") === "true") {
             e.preventDefault();
             close();
           }

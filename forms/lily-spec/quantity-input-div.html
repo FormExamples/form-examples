@@ -1,0 +1,55 @@
+<!-- quantity-input-div.html -->
+<!-- QuantityInputDiv component -->
+<!--
+  Description: a quantity entered as a number and a unit, each unit with its own limits
+  HTML tag: <div role="group">
+  CSS class: quantity-input-div (parts: -magnitude, -unit)
+  Spec: spec/lessons/openehr (tasks.md P29-T8)
+  Keyboard: Tab moves between the number and the unit; each is a native control
+  The group's aria-label names the pair; each control has a visible label. Each unit's limits sit on its option as
+    data-min, data-max and data-step; the consumer's script copies the chosen unit's limits to the number's min, max
+    and step when the unit changes. With one unit, the unit is text linked by aria-describedby, with a hidden field.
+    Nothing is converted. The words are the consumer's.
+-->
+
+<div
+  class="quantity-input-div"
+  role="group"
+  aria-label="Weight"
+>
+  <label for="weight-magnitude">Amount</label>
+  <input
+    class="quantity-input-div-magnitude"
+    id="weight-magnitude"
+    name="weight-magnitude"
+    type="number"
+    inputmode="decimal"
+    min="0"
+    max="300"
+    step="0.1"
+  />
+  <label for="weight-unit">Unit</label>
+  <select
+    class="quantity-input-div-unit"
+    id="weight-unit"
+    name="weight-unit"
+  >
+    <option
+      value="kg"
+      data-min="0"
+      data-max="300"
+      data-step="0.1"
+      selected
+    >
+      kilograms
+    </option>
+    <option
+      value="[lb_av]"
+      data-min="0"
+      data-max="660"
+      data-step="0.1"
+    >
+      pounds
+    </option>
+  </select>
+</div>

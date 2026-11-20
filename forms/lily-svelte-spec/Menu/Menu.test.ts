@@ -3,16 +3,16 @@ import { describe, expect, test } from "vitest";
 
 import Subject from "./Menu.svelte";
 
-function menuItemsSnippet() {
+function menuItemsSnippet(first = "Cut", second = "Copy") {
     return (($anchor: Comment) => {
         const item1 = document.createElement("div");
         item1.setAttribute("role", "menuitem");
         item1.setAttribute("tabindex", "-1");
-        item1.textContent = "Cut";
+        item1.textContent = first;
         const item2 = document.createElement("div");
         item2.setAttribute("role", "menuitem");
         item2.setAttribute("tabindex", "-1");
-        item2.textContent = "Copy";
+        item2.textContent = second;
         $anchor.before(item1, item2);
     }) as any;
 }
@@ -47,5 +47,15 @@ describe("Menu", () => {
             props: { label: "A", "data-testid": "m", children: menuItemsSnippet() },
         });
         expect(screen.getByTestId("m")).toBeTruthy();
+    });
+
+    test("repeating a supplementary initial moves focus and wraps", () => {
+        render(Subject, { props: { label: "People", children: menuItemsSnippet("𠮷田", "𠮷川") } });
+        const [first, second] = screen.getAllByRole("menuitem");
+        first.focus();
+        first.dispatchEvent(new KeyboardEvent("keydown", { key: "𠮷", bubbles: true }));
+        expect(document.activeElement).toBe(second);
+        second.dispatchEvent(new KeyboardEvent("keydown", { key: "𠮷", bubbles: true }));
+        expect(document.activeElement).toBe(first);
     });
 });

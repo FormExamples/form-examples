@@ -37,10 +37,13 @@
     let {
         class: className = "",
         label = undefined,
+        overflowLabel = undefined,
         children,
         ...restProps
     }: {
         label?: string;
+        /** the consumer's words for the avatars not shown ("and 12 more"), rendered last as -overflow */
+        overflowLabel?: string;
         children: Snippet;
         [key: string]: unknown;
     } = $props();
@@ -54,4 +57,5 @@
     {...restProps}
 >
     {@render children?.()}
+    {#if overflowLabel}<span class="avatar-group-overflow">{overflowLabel}</span>{/if}
 </div>

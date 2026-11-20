@@ -68,3 +68,77 @@ describe("TileMap", () => {
         expect(document.activeElement).not.toBe(tile);
     });
 });
+
+describe("TileMap rows", () => {
+    // A 2-by-2 grid: A B on top, C D below, each tile 10 wide and 10 tall.
+    function grid() {
+        const { container } = render(Subject, {
+            label: "Map",
+            children: snippet(
+                '<button data-tile tabindex="0">A</button><button data-tile tabindex="-1">B</button>' +
+                    '<button data-tile tabindex="-1">C</button><button data-tile tabindex="-1">D</button>',
+            ),
+        });
+        const tiles = Array.from(container.querySelectorAll<HTMLElement>("[data-tile]"));
+        const at = [
+            [0, 0],
+            [10, 0],
+            [0, 10],
+            [10, 10],
+        ];
+        tiles.forEach((tile, i) => {
+            const [left, top] = at[i];
+            tile.getBoundingClientRect = () => ({ left, top, width: 10, height: 10 }) as DOMRect;
+        });
+        const press = (key: string) => {
+            const event = new KeyboardEvent("keydown", { key, bubbles: true, cancelable: true });
+            (document.activeElement as HTMLElement).dispatchEvent(event);
+            return event;
+        };
+        return { tiles, press, map: container.querySelector(".tile-map") as HTMLElement };
+    }
+
+    test("ArrowDown and ArrowUp go to the nearest tile in the next or previous row", () => {
+        const { tiles, press } = grid();
+        tiles[1].focus();
+        expect(press("ArrowDown").defaultPrevented).toBe(true);
+        expect(document.activeElement).toBe(tiles[3]);
+        press("ArrowUp");
+        expect(document.activeElement).toBe(tiles[1]);
+        // Nothing above the top row: focus stays.
+        press("ArrowUp");
+        expect(document.activeElement).toBe(tiles[1]);
+    });
+
+    test("ArrowLeft and ArrowRight stop at the ends instead of wrapping", () => {
+        const { tiles, press } = grid();
+        tiles[0].focus();
+        press("ArrowLeft");
+        expect(document.activeElement).toBe(tiles[0]);
+        tiles[3].focus();
+        press("ArrowRight");
+        expect(document.activeElement).toBe(tiles[3]);
+        press("ArrowLeft");
+        expect(document.activeElement).toBe(tiles[2]);
+    });
+
+    test("Escape leaves the tile; Space activates it; a key with focus outside the tiles moves nothing", () => {
+        const { tiles, press, map } = grid();
+        tiles[2].focus();
+        let activated = 0;
+        tiles[2].addEventListener("tile-activate", () => activated++);
+        press(" ");
+        expect(activated).toBe(1);
+        press("Escape");
+        expect(document.activeElement).not.toBe(tiles[2]);
+        map.tabIndex = -1;
+        map.focus();
+        const down = new KeyboardEvent("keydown", {
+            key: "ArrowDown",
+            bubbles: true,
+            cancelable: true,
+        });
+        map.dispatchEvent(down);
+        expect(document.activeElement).toBe(map);
+    });
+});

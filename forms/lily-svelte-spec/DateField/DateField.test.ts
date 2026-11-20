@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/svelte";
 import { describe, expect, test } from "vitest";
 
 import Subject from "./DateField.svelte";
+import Host from "./DateFieldTestHost.svelte";
 
 const labels = { dayLabel: "Day", monthLabel: "Month", yearLabel: "Year" };
 
@@ -88,5 +89,46 @@ describe("DateField", () => {
     test("passes through attributes", () => {
         render(Subject, { props: { label: "D", ...labels, "data-testid": "df" } });
         expect(screen.getByTestId("df").tagName).toBe("FIELDSET");
+    });
+
+    test("precision month asks for month and year only, and its value has no invented day", async () => {
+        const { container } = render(Host, {
+            props: { monthLabel: "Month", yearLabel: "Year", precision: "month" },
+        });
+        expect(screen.queryByLabelText("Day")).toBeNull();
+        expect(container.querySelector("fieldset")!.getAttribute("data-precision")).toBe("month");
+        await fireEvent.input(screen.getByLabelText("Month"), { target: { value: "3" } });
+        await fireEvent.input(screen.getByLabelText("Year"), { target: { value: "2019" } });
+        expect(screen.getByTestId("value").textContent).toBe("2019-03");
+    });
+
+    test("precision year asks for the year alone", async () => {
+        render(Host, { props: { yearLabel: "Year", precision: "year" } });
+        expect(screen.queryByLabelText("Day")).toBeNull();
+        expect(screen.queryByLabelText("Month")).toBeNull();
+        await fireEvent.input(screen.getByLabelText("Year"), { target: { value: "2019" } });
+        expect(screen.getByTestId("value").textContent).toBe("2019");
+    });
+
+    test("a partial value fills the parts of its precision, and a value of another precision fills none", () => {
+        const { unmount } = render(Subject, {
+            props: { label: "D", ...labels, precision: "month", value: "2019-03" },
+        });
+        expect((screen.getByLabelText("Month") as HTMLInputElement).value).toBe("03");
+        expect((screen.getByLabelText("Year") as HTMLInputElement).value).toBe("2019");
+        unmount();
+        render(Subject, {
+            props: { label: "D", ...labels, precision: "month", value: "2019-03-14" },
+        });
+        expect((screen.getByLabelText("Year") as HTMLInputElement).value).toBe("");
+    });
+
+    test("precision day is the default, with no data-precision", async () => {
+        const { container } = render(Host, { props: labels });
+        expect(container.querySelector("fieldset")!.hasAttribute("data-precision")).toBe(false);
+        await fireEvent.input(screen.getByLabelText("Day"), { target: { value: "4" } });
+        await fireEvent.input(screen.getByLabelText("Month"), { target: { value: "3" } });
+        await fireEvent.input(screen.getByLabelText("Year"), { target: { value: "2019" } });
+        expect(screen.getByTestId("value").textContent).toBe("2019-03-04");
     });
 });

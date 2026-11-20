@@ -9,8 +9,8 @@
     "syncpack:lint": "syncpack lint"
   },
   "devDependencies": {
-    "@lilydesignsystem/html-headless": "^0.11.0",
-    "@lilydesignsystem/svelte-headless": "^0.9.0",
+    "@lilydesignsystem/html-headless": "^0.13.0",
+    "@lilydesignsystem/svelte-headless": "^0.11.0",
     "@lilydesignsystem/themes": "^0.6.2",
     "syncpack": "^15.3.3"
   }

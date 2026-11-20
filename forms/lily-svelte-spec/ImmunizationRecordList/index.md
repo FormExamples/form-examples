@@ -8,7 +8,7 @@ See `components/immunization-record-list/index.md` for the canonical documentati
 
 ## Props
 
-- `status`: "known" | "none-known" | "not-recorded" | "unavailable" | "omitted" (required) — rendered as `data-status`
+- `status`: "known" | "none-known" | "not-recorded" | "unavailable" | "omitted" | "not-applicable" (required) — rendered as `data-status`
 - `statusLabel`: string (required) — the status in words; names the list, and is its one item unless status is `known`
 - `label`: string (optional) — the accessible name, when it should differ from `statusLabel`
 - `children`: slot (optional) — `immunization-record-list-item` items

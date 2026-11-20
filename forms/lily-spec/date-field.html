@@ -9,6 +9,9 @@
   Order: the consumer's. Year, month, day (ISO 8601) here; reorder the label and input pairs for
     day first or month first. The labels are the consumer's words.
   Name: each part is {name}-day, {name}-month, {name}-year, so the form submits without script.
+  Precision: for a month and year ("onset: March 2019"), leave out the day's label and input and set
+    data-precision="month" on the fieldset; for a year alone, leave out the month's too and set data-precision="year".
+    Never pad a partial date with an invented day or month (openEHR DV_DATE, FHIR partial dates).
   Usage:
     <fieldset class="date-field" aria-describedby="dob-desc">
       <legend>Date of birth</legend>
@@ -19,9 +22,7 @@
     </fieldset>
 -->
 
-<fieldset
-  class="date-field"
->
+<fieldset class="date-field">
   <legend><!-- Consumer provides the date's name --></legend>
   <label for="date-field-year"><!-- Consumer provides the year label --></label>
   <input

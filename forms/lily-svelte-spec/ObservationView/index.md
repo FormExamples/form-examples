@@ -13,7 +13,7 @@ See `components/observation-view/index.md` for the canonical documentation, and 
 - `interpretation`: string (optional) — a FHIR v3 ObservationInterpretation code, rendered as `data-interpretation`
 - `flagLabel`: string (optional) — the flag in words ("High"); required when the flag is not normal
 - `range`: string (optional) — the reference range as text
-- `status`: "final" | "preliminary" | "amended" | "corrected" | "entered-in-error" | "cancelled" | "masked" | "not-recorded" | "unavailable" (optional) — default `final`, rendered as `data-status`
+- `status`: "final" | "preliminary" | "amended" | "corrected" | "entered-in-error" | "cancelled" | "masked" | "not-recorded" | "unavailable" | "not-applicable" (optional) — default `final`, rendered as `data-status`
 - `statusLabel`: string (optional) — the words for a status that is not final; replaces the value when it is missing
 - `label`: string (optional) — hidden text naming the observation, when no visible caption does
 

@@ -44,4 +44,11 @@ describe("Headline", () => {
         });
         expect(container.querySelector(".headline-byline")?.textContent).toBe("By Jane");
     });
+
+    test.each([1, 2, 3, 4, 5, 6] as const)("level %i renders that heading element", (level) => {
+        const { container } = render(Subject, { level, children: snippet("Title") });
+        const h = container.querySelector(".headline-heading");
+        expect(h?.tagName).toBe(`H${level}`);
+        expect(h?.textContent).toBe("Title");
+    });
 });

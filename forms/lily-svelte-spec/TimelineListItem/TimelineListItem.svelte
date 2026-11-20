@@ -57,11 +57,14 @@
     //   - WAI-ARIA listitem role: https://www.w3.org/TR/wai-aria-1.2/#listitem
 
     import type { Snippet } from "svelte";
+    import { warnMissingProp } from "../dev-warning";
 
     let {
         class: className = "",
         datetime = "",
         heading = "",
+        entryState = undefined,
+        entryStateLabel = undefined,
         children,
         ...restProps
     }: {
@@ -69,20 +72,46 @@
         datetime?: string;
         /** Visible date/time text for the <time> element. */
         heading?: string;
+        /**
+         * "withheld": the entry exists but its content is not shown (its date stays, with the consumer's words);
+         * "entered-in-error": the entry is kept, its content struck through in a <del>, with the consumer's words.
+         * Neither is ever silently removed (spec/lessons/zoblocks item 4). Rendered as data-entry-state.
+         */
+        entryState?: "withheld" | "entered-in-error";
+        /** That state in the consumer's words; required with entryState. */
+        entryStateLabel?: string;
         /** Event description content. */
         children: Snippet;
         /** Additional HTML attributes spread onto the <li>. */
         [key: string]: unknown;
     } = $props();
+
+    $effect(() => {
+        if (entryState)
+            warnMissingProp(
+                "TimelineListItem",
+                "entryStateLabel",
+                entryStateLabel,
+                "a withheld or in-error entry must say so in words.",
+            );
+    });
 </script>
 
 <!-- TimelineListItem.svelte -->
 <li
     class={`timeline-list-item ${className}`}
+    data-entry-state={entryState}
     {...restProps}
 >
     {#if datetime || heading}
         <time datetime={datetime || undefined}>{heading}</time>
     {/if}
-    {@render children?.()}
+    {#if entryState === "withheld"}
+        <span class="timeline-list-item-entry-state">{entryStateLabel}</span>
+    {:else if entryState === "entered-in-error"}
+        <del class="timeline-list-item-entry">{@render children?.()}</del>
+        <span class="timeline-list-item-entry-state">{entryStateLabel}</span>
+    {:else}
+        {@render children?.()}
+    {/if}
 </li>

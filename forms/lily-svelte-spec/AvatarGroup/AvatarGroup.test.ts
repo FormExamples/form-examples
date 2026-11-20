@@ -16,4 +16,11 @@ describe("AvatarGroup", () => {
         expect(root.getAttribute("role")).toBe("group");
         expect(root.getAttribute("aria-label")).toBe("Story");
     });
+
+    test("says how many avatars it does not show, in the consumer's words, last", () => {
+        render(AvatarGroup, { props: { label: "Care team", overflowLabel: "and 12 more" } as any });
+        const el = screen.getByRole("group", { name: "Care team" });
+        expect(el.lastElementChild?.className).toBe("avatar-group-overflow");
+        expect(el.lastElementChild?.textContent).toBe("and 12 more");
+    });
 });

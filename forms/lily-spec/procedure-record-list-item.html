@@ -3,7 +3,9 @@
 <!--
   Description: one procedure in a procedure record list, with its status and when it was performed
   HTML tag: <li>
-  CSS class: procedure-record-list-item (parts: -procedure, -status, -performed)
+  Subject: when the record is not the patient's own (a relative's history, a fetus), put the consumer's words first,
+    <span class="procedure-record-list-item-subject">Mother</span>, so it is never read as the patient's.
+  CSS class: procedure-record-list-item (parts: -subject, -procedure, -status, -performed)
   Spec: spec/healthcare-ui (tasks.md P28-T3)
   Attributes: data-status (preparation, in-progress, not-done, on-hold, stopped, completed, entered-in-error, unknown). Each status is also text, in the consumer's words; a part with no text is left out.
     Dates are <time datetime>.

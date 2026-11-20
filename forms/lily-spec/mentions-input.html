@@ -312,11 +312,12 @@ function typeahead(
     event               ,
     name                             ,
 ) {
-    if (event.key.length !== 1 || event.key === " " || event.isComposing) return undefined;
+    const key = event.key.normalize("NFC");
+    if (!/^[^\p{Cc}\p{Cf}\p{Cs} ]$/u.test(key) || event.isComposing) return undefined;
     if (event.ctrlKey || event.metaKey || event.altKey) return undefined;
-    const letter = event.key.toLocaleLowerCase();
+    const letter = key.toLocaleLowerCase();
     return [...items.slice(from + 1), ...items.slice(0, from + 1)].find((el) =>
-        name(el).toLocaleLowerCase().startsWith(letter),
+        name(el).normalize("NFC").toLocaleLowerCase().startsWith(letter),
     );
 }
 

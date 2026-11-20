@@ -6,6 +6,7 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
+    //   subjectLabel: string (optional) — whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first
     //   procedure: string (required) — the procedure; never truncated
     //   status: "preparation" | "in-progress" | "not-done" | "on-hold" | "stopped" | "completed" | "entered-in-error" | "unknown" (optional) — FHIR Procedure status; rendered as data-status
     //   statusLabel: string (optional; required when status is set) — the status in words
@@ -21,6 +22,7 @@
 
     let {
         class: className = "",
+        subjectLabel,
         procedure,
         status,
         statusLabel,
@@ -29,6 +31,8 @@
         children,
         ...restProps
     }: {
+        /** whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first */
+        subjectLabel?: string;
         procedure: string;
         status?:
             | "preparation"
@@ -63,6 +67,8 @@
     data-status={status}
     {...restProps}
 >
+    {#if subjectLabel}<span class="procedure-record-list-item-subject">{subjectLabel}</span
+        >{" "}{/if}
     <span class="procedure-record-list-item-procedure">{procedure}</span>
     {#if statusLabel}{" "}<span class="procedure-record-list-item-status">{statusLabel}</span>{/if}
     {#if performedLabel}{" "}<time

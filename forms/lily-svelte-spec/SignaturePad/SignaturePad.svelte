@@ -1,67 +1,101 @@
 <script lang="ts">
-    // SignaturePad component
-    //
-    // A headless container for capturing handwritten signatures using mouse, touch,
-    // or stylus input. Renders a <div> with role="application" and an accessible
-    // label. Commonly used in contract signing workflows, consent forms, delivery
-    // confirmations, and legal document processing. The consumer provides the actual
-    // drawing implementation (HTML canvas, SVG paths, or a third-party library).
-    //
-    // Props:
-    //   className — string, optional. CSS class name.
-    //   label — string, required. Accessible description of the signature field via aria-label.
-    //   children — Snippet, required. Drawing surface (canvas, SVG, or other input mechanism).
-    //   ...restProps — additional HTML attributes spread onto the <div>.
-    //
-    // Syntax:
-    //   <SignaturePad label="Sign here">
-    //     <canvas width="400" height="200"></canvas>
-    //   </SignaturePad>
-    //
-    // Examples:
-    //   <!-- With terms acceptance context -->
-    //   <SignaturePad label="Sign to accept terms">
-    //     <canvas width="400" height="200"></canvas>
-    //   </SignaturePad>
-    //
-    //   <!-- With SVG drawing surface -->
-    //   <SignaturePad label="Your signature">
-    //     <svg viewBox="0 0 400 200"><path d="" /></svg>
-    //   </SignaturePad>
-    //
-    // Keyboard:
-    //   - None — pointer-based interactions are handled by the consumer-provided drawing surface.
+    // SignaturePad: a signature, captured by drawing or by typing a name, with the consumer's attestation and its outcome
+    // (spec/lessons/zoblocks item 6, tasks.md P31-T5).
     //
     // Accessibility:
-    //   - role="application" indicates a complex widget with custom pointer interactions
-    //   - aria-label provides an accessible description of the signature pad purpose
-    //   - Assistive technologies pass keyboard events through to the application
+    //   - A named group (role="group"), not role="application": a screen reader keeps its own keys, and the consumer's
+    //     drawing surface inside handles its own pointer and key input.
+    //   - The attestation ("I confirm that…") is the group's accessible description (aria-describedby).
+    //   - typedNameLabel adds a labelled text field, so a signature can be given by keyboard alone (WCAG 2.1.1); drawing is
+    //     never the only way.
+    //   - outcome other than "signed" is a notice in the consumer's words (declined, unable, verbal, on paper, pending,
+    //     revoked), never an empty line. Rendered as data-outcome.
     //
-    // Internationalization:
-    //   - The label prop externalizes the accessible description for localization
-    //
-    // Claude rules:
-    //   - Headless: no CSS, no styles — consumer provides all styling
-    //   - No internal drawing logic — consumer provides canvas/SVG implementation
-    //   - role="application" is intentional for complex pointer interaction widgets
-    //
-    // References:
-    //   - WAI-ARIA application role: https://www.w3.org/TR/wai-aria-1.2/#application
+    // Internationalization: every string is the consumer's; no default text.
+    // Headless: no CSS; no drawing logic, no hashing (the consumer's).
     import type { Snippet } from "svelte";
+    import { warnMissingName, warnMissingProp } from "../dev-warning";
+
     let {
         class: className = "",
         label,
+        attestation = undefined,
+        outcome = undefined,
+        outcomeLabel = undefined,
+        typedNameLabel = undefined,
+        typedName = $bindable(""),
+        name = undefined,
         children,
         ...restProps
-    }: { label: string; children: Snippet; [key: string]: unknown } = $props();
+    }: {
+        /** The group's accessible name ("Signature of the person giving consent"). */
+        label: string;
+        /** What the signer confirms, in the consumer's words; shown first and the group's accessible description. */
+        attestation?: string;
+        /** The signature's outcome; rendered as data-outcome, with outcomeLabel as its words. */
+        outcome?: "signed" | "declined" | "unable" | "verbal" | "on-paper" | "pending" | "revoked";
+        /** The outcome in the consumer's words ("Declined to sign", "Signed on paper, scanned"); required with outcome. */
+        outcomeLabel?: string;
+        /** Adds a typed-name field with this label, so a signature can be given by keyboard alone. */
+        typedNameLabel?: string;
+        /** The typed name. Bindable. */
+        typedName?: string;
+        /** The typed-name field's form name. */
+        name?: string;
+        /** The drawing surface (canvas, SVG) or nothing; the consumer's. */
+        children?: Snippet;
+        [key: string]: unknown;
+    } = $props();
+
+    const uid = $props.id();
+    const attestationId = `signature-pad-attestation-${uid}`;
+    const typedId = `signature-pad-typed-${uid}`;
+
+    $effect(() =>
+        warnMissingName(
+            "SignaturePad",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
+
+    $effect(() => {
+        if (outcome)
+            warnMissingProp(
+                "SignaturePad",
+                "outcomeLabel",
+                outcomeLabel,
+                "a signature's outcome needs words, never an empty line.",
+            );
+    });
 </script>
 
 <!-- SignaturePad.svelte -->
 <div
     class={`signature-pad ${className}`}
-    role="application"
+    role="group"
     aria-label={label}
+    aria-describedby={attestation ? attestationId : undefined}
+    data-outcome={outcome}
     {...restProps}
 >
+    {#if attestation}<p
+            class="signature-pad-attestation"
+            id={attestationId}
+        >
+            {attestation}
+        </p>{/if}
     {@render children?.()}
+    {#if typedNameLabel}<p class="signature-pad-typed">
+            <label for={typedId}>{typedNameLabel}</label>
+            <input
+                id={typedId}
+                type="text"
+                autocomplete="name"
+                {name}
+                bind:value={typedName}
+            />
+        </p>{/if}
+    {#if outcome && outcomeLabel}<p class="signature-pad-outcome">{outcomeLabel}</p>{/if}
 </div>

@@ -6,6 +6,7 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
+    //   subjectLabel: string (optional) — whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first
     //   children: slot — the record itself, written by the consumer
     //   status: string (optional) — the record's status, as the consumer's code; rendered as data-status
     //   statusLabel: string (optional; required when status is set) — the status in words
@@ -20,6 +21,9 @@
 
     let {
         class: className = "",
+        subjectLabel,
+        entryState,
+        entryStateLabel,
         status,
         statusLabel,
         updated,
@@ -27,6 +31,15 @@
         children,
         ...restProps
     }: {
+        /** whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first */
+        subjectLabel?: string;
+        /**
+         * "withheld": the record exists but its content is not shown, only the consumer's words; "entered-in-error": the
+         * record is kept, its content struck through in a <del>, with the consumer's words. Rendered as data-entry-state.
+         */
+        entryState?: "withheld" | "entered-in-error";
+        /** That state in the consumer's words; required with entryState. */
+        entryStateLabel?: string;
         status?: string;
         statusLabel?: string;
         updated?: string;
@@ -43,6 +56,13 @@
                 statusLabel,
                 "a status needs words a person can read, never a code alone.",
             );
+        if (entryState)
+            warnMissingProp(
+                "RecordListItem",
+                "entryStateLabel",
+                entryStateLabel,
+                "a withheld or in-error record must say so in words.",
+            );
     });
 </script>
 
@@ -50,9 +70,16 @@
 <li
     class={`record-list-item ${className}`}
     data-status={status}
+    data-entry-state={entryState}
     {...restProps}
 >
-    {@render children?.()}
+    {#if subjectLabel}<span class="record-list-item-subject">{subjectLabel}</span>{" "}{/if}
+    {#if entryState === "withheld"}<span class="record-list-item-entry-state"
+            >{entryStateLabel}</span
+        >{:else if entryState === "entered-in-error"}<del class="record-list-item-entry"
+            >{@render children?.()}</del
+        >{" "}<span class="record-list-item-entry-state">{entryStateLabel}</span
+        >{:else}{@render children?.()}{/if}
     {#if statusLabel}{" "}<span class="record-list-item-status">{statusLabel}</span>{/if}
     {#if updatedLabel}{" "}<time
             class="record-list-item-updated"

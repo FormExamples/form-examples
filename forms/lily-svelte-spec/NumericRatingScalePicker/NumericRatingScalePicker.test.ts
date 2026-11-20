@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/svelte";
 import userEvent from "@testing-library/user-event";
+import { tick } from "svelte";
 import { describe, expect, test } from "vitest";
 
 import Subject from "./NumericRatingScalePicker.svelte";
@@ -73,5 +74,42 @@ describe("NumericRatingScalePicker", () => {
         render(Subject, { props: { label: "Rate it" } });
         expect(document.querySelector(".numeric-rating-scale-picker-min-label")).toBeNull();
         expect(document.querySelector(".numeric-rating-scale-picker-max-label")).toBeNull();
+    });
+
+    test("a form reset restores the first value", async () => {
+        const form = document.createElement("form");
+        document.body.append(form);
+        const { container } = render(Subject, {
+            target: form,
+            props: { label: "Pain", min: 0, max: 10, value: "5" },
+        });
+        const radio = (n: number) =>
+            container.querySelector<HTMLInputElement>(`input[value="${n}"]`)!;
+        radio(7).click();
+        await tick();
+        expect(radio(7).checked).toBe(true);
+        form.reset();
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        await tick();
+        expect(radio(5).checked).toBe(true);
+        expect(radio(7).checked).toBe(false);
+        form.remove();
+    });
+
+    test("a reset another handler cancels changes nothing", async () => {
+        const form = document.createElement("form");
+        document.body.append(form);
+        const { container } = render(Subject, {
+            target: form,
+            props: { label: "Pain", min: 0, max: 3, value: "1" },
+        });
+        container.querySelector<HTMLInputElement>('input[value="2"]')!.click();
+        await tick();
+        form.addEventListener("reset", (event) => event.preventDefault());
+        form.reset();
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        await tick();
+        expect(container.querySelector<HTMLInputElement>('input[value="2"]')!.checked).toBe(true);
+        form.remove();
     });
 });

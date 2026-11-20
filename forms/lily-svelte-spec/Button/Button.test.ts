@@ -183,11 +183,19 @@ describe("Button", () => {
         expect(button.getAttribute("id")).toBe("btn-1");
     });
 
-    test("a pending button stays enabled and focusable, carrying aria-busy and aria-disabled", async () => {
+    test("a pending button keeps focus and a consumer guard ignores a second click", async () => {
+        const user = userEvent.setup();
+        let pending = false;
+        const start = vi.fn();
         render(Subject, {
             props: {
                 "aria-busy": "true",
                 "aria-disabled": "true",
+                onclick: () => {
+                    if (pending) return;
+                    pending = true;
+                    start();
+                },
                 children: textSnippet("Saving"),
             },
         });
@@ -196,6 +204,9 @@ describe("Button", () => {
         expect(button.getAttribute("aria-busy")).toBe("true");
         expect(button.getAttribute("aria-disabled")).toBe("true");
         button.focus();
+        await user.click(button);
+        await user.click(button);
         expect(document.activeElement).toBe(button);
+        expect(start).toHaveBeenCalledOnce();
     });
 });

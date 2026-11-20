@@ -58,12 +58,18 @@
     let {
         class: className = "",
         label,
+        subjectLabel = undefined,
         open = $bindable(false),
         children,
         ...restProps
     }: {
         /** Accessible name for the context menu. */
         label: string;
+        /**
+         * Whose record or what the menu acts on ("Ada Lovelace, blood pressure 3 Nov"), in the consumer's words: a
+         * non-interactive first part, .context-menu-subject, that names the menu through aria-labelledby (spec/lessons/zoblocks).
+         */
+        subjectLabel?: string;
         /** Whether the menu is visible. Bindable for two-way control. */
         open?: boolean;
         /** Menu item content rendered inside the menu list. */
@@ -74,11 +80,14 @@
     $effect(() =>
         warnMissingName(
             "ContextMenu",
-            label,
+            label || subjectLabel,
             restProps["aria-label"],
             restProps["aria-labelledby"],
         ),
     );
+
+    const uid = $props.id();
+    const subjectId = `context-menu-subject-${uid}`;
 
     // Reference to the menu element for focus management.
     let menuRef: HTMLElement | undefined = $state(undefined);
@@ -136,7 +145,8 @@
 <div
     class={`context-menu ${className}`}
     role="menu"
-    aria-label={label}
+    aria-label={subjectLabel ? undefined : label}
+    aria-labelledby={subjectLabel ? subjectId : undefined}
     popover="auto"
     bind:this={menuRef}
     use:popoverState={open}
@@ -144,5 +154,12 @@
     {onkeydown}
     {...restProps}
 >
+    {#if subjectLabel}<div
+            class="context-menu-subject"
+            id={subjectId}
+            role="none"
+        >
+            {subjectLabel}
+        </div>{/if}
     {@render children?.()}
 </div>

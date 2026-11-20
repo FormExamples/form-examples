@@ -73,4 +73,20 @@ describe("TimelineList", () => {
         const list = screen.getByRole("list");
         expect(list.getAttribute("id")).toBe("project-timeline");
     });
+
+    test("coverageLabel says what the list is a view of, as its first item", () => {
+        const { container } = render(Subject, {
+            props: {
+                label: "History",
+                children: textSnippet(""),
+                coverageLabel: "Last 12 months, newest first. The GP record did not answer.",
+            },
+        });
+        const first = container.querySelector(".timeline-list")!.firstElementChild!;
+        expect(first.tagName).toBe("LI");
+        expect(first.className).toBe("timeline-list-coverage");
+        expect(first.textContent).toBe(
+            "Last 12 months, newest first. The GP record did not answer.",
+        );
+    });
 });

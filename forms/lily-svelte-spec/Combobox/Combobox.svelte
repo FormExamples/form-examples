@@ -71,6 +71,10 @@
         value = $bindable(""),
         open = $bindable(false),
         onSelect = undefined,
+        resultCount = undefined,
+        resultsLabel = undefined,
+        noResultsLabel = undefined,
+        statusDelay = 500,
         children,
         ...restProps
     }: {
@@ -82,6 +86,14 @@
         open?: boolean;
         /** Called with the chosen option's value. */
         onSelect?: (value: string) => void;
+        /** How many options match the text, as the consumer counts them (the consumer filters the options). */
+        resultCount?: number;
+        /** The count in the consumer's words ("4 matches"), announced politely when typing pauses. */
+        resultsLabel?: (count: number) => string;
+        /** The consumer's words when nothing matches ("No matches"), shown and announced. */
+        noResultsLabel?: string;
+        /** How long typing must pause, in milliseconds, before the count is announced. Default 500. */
+        statusDelay?: number;
         /** Dropdown option elements. */
         children: Snippet;
         [key: string]: unknown;
@@ -104,6 +116,23 @@
                 onSelect?.(chosen);
             },
         });
+    });
+
+    // The count, or "no matches", in the consumer's words, after typing pauses, so a screen reader is not interrupted at
+    // every keystroke (P34-T2). Shown only while the list is open and the consumer has given the words.
+    let status = $state("");
+    $effect(() => {
+        const count = resultCount;
+        const words =
+            count === undefined
+                ? ""
+                : count === 0
+                  ? (noResultsLabel ?? "")
+                  : (resultsLabel?.(count) ?? "");
+        const isOpen = open;
+        void value;
+        const timer = setTimeout(() => (status = isOpen ? words : ""), statusDelay);
+        return () => clearTimeout(timer);
     });
 
     // Closed from outside: no highlight survives into the next opening.
@@ -137,4 +166,13 @@
     >
         {@render children?.()}
     </div>
+    {#if resultsLabel || noResultsLabel}
+        <p
+            class="combobox-status"
+            role="status"
+            data-results={resultCount}
+        >
+            {status}
+        </p>
+    {/if}
 </div>

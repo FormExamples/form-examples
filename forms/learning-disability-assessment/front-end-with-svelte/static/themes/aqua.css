@@ -571,6 +571,13 @@
 
     /* Baseline button — primary-coloured pill. Variants override colour or
        shape below. */
+    /* Public component-scoped variables; set them on one .button to restyle it. */
+    :where(.button) {
+        --lily-button-background: var(--lily-brand);
+        --lily-button-color: var(--lily-on-brand);
+        --lily-button-border-radius: var(--lily-radius-md);
+    }
+
     :where(.button, [class$="-button"]:not(.hamburger-menu-button)) {
         appearance: none;
         display: inline-flex;
@@ -583,10 +590,10 @@
         font-family: var(--lily-font-body);
         font-weight: 600;
         line-height: 1.2;
-        color: var(--color-primary-content);
-        background-color: var(--color-primary);
+        color: var(--lily-button-color, var(--color-primary-content));
+        background-color: var(--lily-button-background, var(--color-primary));
         border: var(--border) solid transparent;
-        border-radius: var(--lily-radius-md);
+        border-radius: var(--lily-button-border-radius, var(--lily-radius-md));
         cursor: pointer;
         user-select: none; /* prevent text drag-select on double-click */
         text-decoration: none;
@@ -1080,11 +1087,18 @@
      * (kanban columns, gantt bars, calendar selection).
      * ====================================================================== */
 
+    /* Public component-scoped variables; descendants inherit the table values. */
+    :where(.table) {
+        --lily-table-background: var(--lily-surface);
+        --lily-table-color: var(--lily-text);
+        --lily-table-header-background: var(--lily-surface-alt);
+    }
+
     :where(.table, .data-table, .calendar-table, .kanban-table, .gantt-table) {
         width: 100%;
         border-collapse: collapse; /* shared edges between cells */
-        background-color: var(--lily-surface);
-        color: var(--lily-text);
+        background-color: var(--lily-table-background, var(--lily-surface));
+        color: var(--lily-table-color, var(--lily-text));
         font-family: var(--lily-font-body);
     }
 
@@ -1096,7 +1110,7 @@
         .kanban-table-head,
         .gantt-table-thead
     ) {
-        background-color: var(--lily-surface-alt);
+        background-color: var(--lily-table-header-background, var(--lily-surface-alt));
     }
 
     /* Header cells — bold, slightly tighter padding, with a 2px under-rule. */
@@ -1311,6 +1325,14 @@
      * (shadow depth) and accent colour.
      * ====================================================================== */
 
+    /* Public component-scoped variables for the base card only. */
+    :where(.card) {
+        --lily-card-background: var(--lily-surface);
+        --lily-card-color: var(--lily-text);
+        --lily-card-border-color: var(--lily-border);
+        --lily-card-border-radius: var(--lily-radius-lg);
+    }
+
     :where(
         .card,
         .feature-card,
@@ -1323,10 +1345,10 @@
     ) {
         display: block;
         padding: 1rem;
-        background-color: var(--lily-surface);
-        color: var(--lily-text);
-        border: var(--border) solid var(--lily-border);
-        border-radius: var(--lily-radius-lg);
+        background-color: var(--lily-card-background, var(--lily-surface));
+        color: var(--lily-card-color, var(--lily-text));
+        border: var(--border) solid var(--lily-card-border-color, var(--lily-border));
+        border-radius: var(--lily-card-border-radius, var(--lily-radius-lg));
         box-shadow: var(--lily-shadow-sm);
     }
     /* Feature card — generous padding because it leads the page. */
@@ -1373,6 +1395,13 @@
      * ====================================================================== */
 
     /* Baseline — alert/banner/callout/notification all share the same frame. */
+    /* Public component-scoped variables; severity still owns the accent rail. */
+    :where(.alert) {
+        --lily-alert-color: var(--lily-text);
+        --lily-alert-border-color: var(--lily-border);
+        --lily-alert-border-radius: var(--lily-radius-md);
+    }
+
     :where(
         .alert,
         .banner,
@@ -1393,10 +1422,10 @@
         gap: 0.75rem;
         padding: 1rem;
         background-color: var(--lily-surface-alt);
-        color: var(--lily-text);
-        border: var(--border) solid var(--lily-border);
+        color: var(--lily-alert-color, var(--lily-text));
+        border: var(--border) solid var(--lily-alert-border-color, var(--lily-border));
         border-inline-start-width: 0.375rem; /* the coloured rail */
-        border-radius: var(--lily-radius-md);
+        border-radius: var(--lily-alert-border-radius, var(--lily-radius-md));
     }
 
     /* Severity variants — rail + faint background tint. */
@@ -1741,6 +1770,14 @@
      * ====================================================================== */
 
     /* Native <dialog> + variant types. */
+    /* Public component-scoped variables for the native dialog frame. */
+    :where(.dialog) {
+        --lily-dialog-background: var(--lily-surface);
+        --lily-dialog-color: var(--lily-text);
+        --lily-dialog-border-color: var(--lily-border);
+        --lily-dialog-border-radius: var(--lily-radius-lg);
+    }
+
     :where(
         .dialog,
         .alert-dialog,
@@ -1748,10 +1785,10 @@
         .popconfirm-dialog,
         .file-dialog
     ) {
-        background-color: var(--lily-surface);
-        color: var(--lily-text);
-        border: var(--border) solid var(--lily-border);
-        border-radius: var(--lily-radius-lg);
+        background-color: var(--lily-dialog-background, var(--lily-surface));
+        color: var(--lily-dialog-color, var(--lily-text));
+        border: var(--border) solid var(--lily-dialog-border-color, var(--lily-border));
+        border-radius: var(--lily-dialog-border-radius, var(--lily-radius-lg));
         padding: 1.5rem;
         box-shadow: var(--lily-shadow-lg);
         max-width: min(40rem, 90vw); /* cap on big screens, fit on small */
@@ -3890,6 +3927,23 @@
 }
 
 /* ============================================================================
+ * Group fieldsets — shared verbatim by all themes (tasks.md P10-T14).
+ *
+ * RadioGroup and CheckboxGroup keep their native fieldset semantics, but the
+ * dedicated Fieldset component owns the visible border and padded grouping cue.
+ * Reset the user-agent box so a nested group does not draw a second,
+ * browser-dependent border or force intrinsic-width overflow. :where() keeps
+ * specificity at zero, so a consumer can deliberately add a treatment.
+ * ========================================================================= */
+
+:where(.radio-group, .checkbox-group) {
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* ============================================================================
  * WCAG 2.2 target-size (minimum) floor — 2.5.8
  *
  * Every interactive Lily hook offers a >=24x24 CSS-pixel target. Links
@@ -4118,6 +4172,18 @@
     .colombia-cedula-de-ciudadania-view,
     .australia-tax-file-number-view,
     .nigeria-national-identification-number-view,
+    .peru-documento-nacional-de-identidad-view,
+    .republica-dominicana-cedula-de-identidad-y-electoral-view,
+    .costa-rica-cedula-de-identidad-view,
+    .guatemala-codigo-unico-de-identificacion-view,
+    .mauritius-national-identity-card-number-view,
+    .ghana-card-personal-identification-number-view,
+    .ityopya-fayda-identification-number-view,
+    .sri-lanka-national-identity-card-view,
+    .bangladesh-national-identity-card-view,
+    .qazaqstan-zheke-saikestendiru-nomiri-view,
+    .ozbekiston-jismoniy-shaxsning-shaxsiy-identifikatsion-raqami-view,
+    .al-imarat-raqm-al-huwiyah-view,
     .misr-al-raqm-al-qawmi-view
 ) {
     overflow-wrap: anywhere;

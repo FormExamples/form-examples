@@ -1,0 +1,25 @@
+<!-- record-provenance-view.html -->
+<!-- RecordProvenanceView component -->
+<!--
+  Description: who recorded a record, where it came from and whether it is signed, in the consumer's words
+  HTML tag: <span>
+  CSS class: record-provenance-view (parts: -attestation, -sync, -source, -author, -observed, -recorded, -version)
+  Spec: spec/lessons/openehr (tasks.md P29-T9)
+  Attributes: data-attestation (signed, pending, unsigned, amended, deleted), data-sync (pending, failed) and data-source
+    (the consumer's code), each with its words as a part, so an unsigned or unsent record never reads as a signed one. The
+    signature and sync states come first; a part with no words is left out. Times are <time datetime>.
+-->
+
+<span
+  class="record-provenance-view"
+  data-attestation="pending"
+  data-source="device"
+  ><span class="record-provenance-view-attestation">Awaiting signature</span>
+  <span class="record-provenance-view-source">From a blood pressure monitor</span>
+  <span class="record-provenance-view-author">Dr A Patel</span>
+  <time
+    class="record-provenance-view-recorded"
+    datetime="2026-11-03T09:00"
+    >Recorded 09:00</time
+  ></span
+>

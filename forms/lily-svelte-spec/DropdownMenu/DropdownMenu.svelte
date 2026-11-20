@@ -69,12 +69,18 @@
     let {
         class: className = "",
         label,
+        subjectLabel = undefined,
         open = $bindable(false),
         children,
         ...restProps
     }: {
         /** Accessible name for the menu button. */
         label: string;
+        /**
+         * Whose record or what the menu acts on ("Ada Lovelace, blood pressure 3 Nov"), in the consumer's words: a
+         * non-interactive first part, .dropdown-menu-subject, that names the menu through aria-labelledby (spec/lessons/zoblocks).
+         */
+        subjectLabel?: string;
         /** Whether the menu is open. Bindable. */
         open?: boolean;
         /** Menu items. */
@@ -93,6 +99,7 @@
 
     const uid = $props.id();
     const menuId = `dropdown-menu-${uid}`;
+    const subjectId = `dropdown-menu-subject-${uid}`;
     let menuRef: HTMLElement | undefined = $state(undefined);
 
     // Focus the first menuitem when the menu opens.
@@ -171,13 +178,21 @@
     <div
         id={menuId}
         role="menu"
-        aria-label={label}
+        aria-label={subjectLabel ? undefined : label}
+        aria-labelledby={subjectLabel ? subjectId : undefined}
         popover="auto"
         bind:this={menuRef}
         use:popoverState={open}
         ontoggle={(event) => (open = toggleOpened(event))}
         onkeydown={onMenuKeydown}
     >
+        {#if subjectLabel}<div
+                class="dropdown-menu-subject"
+                id={subjectId}
+                role="none"
+            >
+                {subjectLabel}
+            </div>{/if}
         {@render children?.()}
     </div>
 </div>

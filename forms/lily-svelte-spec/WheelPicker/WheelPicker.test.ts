@@ -86,6 +86,26 @@ describe("WheelPicker", () => {
         expect(selected()).toBe("March");
     });
 
+    it.each(["𠮷", "가", "e\u0301"])(
+        "cycles the Unicode initial %s through enabled options and wraps",
+        async (key) => {
+            const initial = key.normalize("NFC");
+            const options = [
+                { value: "first", label: `${initial} A` },
+                { value: "disabled", label: `${initial} B`, disabled: true },
+                { value: "second", label: `${initial} C` },
+            ];
+            make({ options, value: "first" });
+            const [first, , second] = screen.getAllByRole("option");
+            await fireEvent.keyDown(list(), { key, isComposing: true });
+            expect(list().getAttribute("aria-activedescendant")).toBe(first.id);
+            await fireEvent.keyDown(list(), { key });
+            expect(list().getAttribute("aria-activedescendant")).toBe(second.id);
+            await fireEvent.keyDown(list(), { key });
+            expect(list().getAttribute("aria-activedescendant")).toBe(first.id);
+        },
+    );
+
     it("prevents the page scroll for the keys it handles", async () => {
         make();
         const notPrevented = await fireEvent.keyDown(list(), { key: "ArrowDown" });

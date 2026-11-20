@@ -65,4 +65,16 @@ describe("ProblemRecordListItem", () => {
             ),
         ).toBe(true);
     });
+
+    test("says whose record it is first, when it is not the patient's", () => {
+        render(Subject, { props: { condition: "Breast cancer", subjectLabel: "Mother" } });
+        expect(part("subject")!.textContent).toBe("Mother");
+        expect(root().firstElementChild).toBe(part("subject"));
+        expect(root().textContent).toMatch(/^Mother\s+Breast cancer/);
+    });
+
+    test("renders no subject part without subjectLabel", () => {
+        render(Subject, { props: { condition: "Asthma" } });
+        expect(part("subject")).toBeNull();
+    });
 });

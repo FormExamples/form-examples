@@ -92,4 +92,24 @@ describe("DropdownMenu", () => {
         });
         expect(screen.getByTestId("dd")).toBeTruthy();
     });
+
+    test("subjectLabel is a non-interactive first part that names the menu", () => {
+        const { container } = render(Subject, {
+            props: {
+                label: "Actions",
+                open: true,
+                subjectLabel: "Ada Lovelace, blood pressure 3 Nov",
+                children: menuItemsSnippet(),
+            },
+        });
+        const menu = container.querySelector("[role='menu']") as HTMLElement;
+        const subject = menu.firstElementChild as HTMLElement;
+        expect(subject.className).toBe("dropdown-menu-subject");
+        expect(subject.getAttribute("role")).toBe("none");
+        expect(subject.textContent?.trim()).toBe("Ada Lovelace, blood pressure 3 Nov");
+        expect(
+            screen.getByRole("menu", { hidden: true, name: "Ada Lovelace, blood pressure 3 Nov" }),
+        ).toBe(menu);
+        expect(menu.hasAttribute("aria-label")).toBe(false);
+    });
 });

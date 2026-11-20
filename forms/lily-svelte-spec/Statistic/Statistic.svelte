@@ -14,6 +14,10 @@
     //   label — string, optional. aria-label override (defaults to "{title}: {value}").
     //   prefix — Snippet, optional. Element before the value (e.g., currency symbol).
     //   suffix — Snippet, optional. Element after the value (e.g., unit or %).
+    //   change — string, optional. The change in words that name its comparison ("0.5 more than October 2024").
+    //   trend — "up" | "down" | "flat", optional. data-trend on the change, for the theme; no arrow is rendered.
+    //   asOf — string, optional. ISO 8601 date or date-time for the as-of <time>.
+    //   asOfLabel — string, optional. When the value was measured, in words; the as-of line renders only with it.
     //   ...restProps — additional HTML attributes spread onto the root <div>.
     //
     // Syntax:
@@ -27,6 +31,7 @@
     //
     // Accessibility:
     //   - role="group" with aria-label so screen readers announce the pair.
+    //   - A change is said in words; its direction is never an arrow or a colour alone (an arrow is the theme's).
     //
     // Internationalization:
     //   - title, value, label all come through props; consumer formats numbers.
@@ -47,6 +52,10 @@
         label = undefined,
         prefix = undefined,
         suffix = undefined,
+        change = undefined,
+        trend = undefined,
+        asOf = undefined,
+        asOfLabel = undefined,
         ...restProps
     }: {
         /** CSS class appended to the base class */
@@ -61,6 +70,14 @@
         prefix?: Snippet;
         /** Element after the value */
         suffix?: Snippet;
+        /** The change, in words that name what it is compared with ("0.5 more than October 2024") */
+        change?: string;
+        /** The direction of the change, as data-trend for the theme; the words in `change` carry it for everyone */
+        trend?: "up" | "down" | "flat";
+        /** When the value was measured, as an ISO 8601 date or date-time for the <time> element */
+        asOf?: string;
+        /** When the value was measured, in words ("Data as of 1 December 2024"); the as-of line renders only with it */
+        asOfLabel?: string;
         [key: string]: unknown;
     } = $props();
 
@@ -80,4 +97,18 @@
         {value}
         {#if suffix}<span class="statistic-suffix">{@render suffix()}</span>{/if}
     </div>
+    {#if change}
+        <div
+            class="statistic-change"
+            data-trend={trend}
+        >
+            {change}
+        </div>
+    {/if}
+    {#if asOfLabel}
+        <time
+            class="statistic-as-of"
+            datetime={asOf}>{asOfLabel}</time
+        >
+    {/if}
 </div>

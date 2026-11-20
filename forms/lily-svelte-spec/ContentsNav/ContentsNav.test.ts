@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/svelte";
-import { describe, expect, test } from "vitest";
+import { afterEach, describe, expect, test, vi } from "vitest";
 
 import Subject from "./ContentsNav.svelte";
 
@@ -38,7 +38,6 @@ describe("ContentsNav", () => {
 // Scrollspy (spy)
 // =====================================================================
 
-import { afterEach, vi } from "vitest";
 import { activeSectionIndex } from "./ContentsNav.svelte";
 
 function linksSnippet(ids: string[]) {
@@ -284,5 +283,91 @@ describe("ContentsNav — scrollspy", () => {
         });
         await settle();
         expect(activeLink()!.textContent).toBe("intro");
+    });
+});
+
+describe("ContentsNav — scrollspy edges", () => {
+    afterEach(() => {
+        document.body.innerHTML = "";
+        window.location.hash = "";
+    });
+
+    test("a URL hash that names no section falls back to the scroll position", async () => {
+        const tops = sections(IDS);
+        tops.intro = -400;
+        tops.usage = -20;
+        tops.api = 500;
+        window.location.hash = "#nowhere";
+        render(Subject, { props: { label: "Contents", spy: true, children: linksSnippet(IDS) } });
+        await settle();
+        expect(activeLink()!.textContent).toBe("usage");
+    });
+
+    test("when no link has a section, nothing is marked", async () => {
+        render(Subject, {
+            props: { label: "Contents", spy: true, children: linksSnippet(["gone", "missing"]) },
+        });
+        await settle();
+        expect(activeLink()).toBeNull();
+    });
+
+    test("when the marked section disappears, the mark goes too", async () => {
+        const tops = sections(["intro"]);
+        tops.intro = 0;
+        render(Subject, {
+            props: { label: "Contents", spy: true, children: linksSnippet(["intro"]) },
+        });
+        await settle();
+        expect(activeLink()!.textContent).toBe("intro");
+        document.getElementById("intro")!.remove();
+        window.dispatchEvent(new Event("scroll"));
+        await settle();
+        expect(activeLink()).toBeNull();
+    });
+
+    test("a click off the links, or on a link with no section, changes nothing", async () => {
+        const tops = sections(["intro"]);
+        tops.intro = 0;
+        render(Subject, {
+            props: { label: "Contents", spy: true, children: linksSnippet(["intro", "missing"]) },
+        });
+        await settle();
+        (document.querySelector("nav") as HTMLElement).click();
+        (document.querySelector('a[href="#missing"]') as HTMLElement).click();
+        expect(activeLink()!.textContent).toBe("intro");
+    });
+
+    test("a second click while the first holds the mark restarts the hold", async () => {
+        const tops = sections(IDS);
+        tops.intro = 0;
+        tops.usage = 300;
+        tops.api = 600;
+        render(Subject, { props: { label: "Contents", spy: true, children: linksSnippet(IDS) } });
+        await settle();
+        (document.querySelector('a[href="#api"]') as HTMLElement).click();
+        (document.querySelector('a[href="#usage"]') as HTMLElement).click();
+        expect(activeLink()!.textContent).toBe("usage");
+        window.dispatchEvent(new Event("scroll"));
+        await settle();
+        expect(activeLink()!.textContent).toBe("usage");
+    });
+
+    test("unmounting stops listening", async () => {
+        const tops = sections(IDS);
+        tops.intro = 0;
+        tops.usage = 300;
+        tops.api = 600;
+        const onActiveChange = vi.fn();
+        const { unmount } = render(Subject, {
+            props: { label: "Contents", spy: true, onActiveChange, children: linksSnippet(IDS) },
+        });
+        await settle();
+        unmount();
+        onActiveChange.mockClear();
+        tops.intro = -400;
+        tops.usage = -20;
+        window.dispatchEvent(new Event("scroll"));
+        await settle();
+        expect(onActiveChange).not.toHaveBeenCalled();
     });
 });

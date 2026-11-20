@@ -6,6 +6,7 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
+    //   subjectLabel: string (optional) — whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first
     //   condition: string (required) — the problem or condition; never truncated
     //   clinicalStatus: "active" | "recurrence" | "relapse" | "inactive" | "remission" | "resolved" (optional) — FHIR Condition clinicalStatus; rendered as data-clinical-status
     //   clinicalStatusLabel: string (optional; required when clinicalStatus is set) — the clinicalStatus in words
@@ -26,6 +27,7 @@
 
     let {
         class: className = "",
+        subjectLabel,
         condition,
         clinicalStatus,
         clinicalStatusLabel,
@@ -39,6 +41,8 @@
         children,
         ...restProps
     }: {
+        /** whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first */
+        subjectLabel?: string;
         condition: string;
         clinicalStatus?:
             "active" | "recurrence" | "relapse" | "inactive" | "remission" | "resolved";
@@ -85,6 +89,7 @@
     data-verification-status={verificationStatus}
     {...restProps}
 >
+    {#if subjectLabel}<span class="problem-record-list-item-subject">{subjectLabel}</span>{" "}{/if}
     <span class="problem-record-list-item-condition">{condition}</span>
     {#if clinicalStatusLabel}{" "}<span class="problem-record-list-item-clinical-status"
             >{clinicalStatusLabel}</span

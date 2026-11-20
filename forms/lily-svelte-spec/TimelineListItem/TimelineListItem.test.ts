@@ -97,4 +97,40 @@ describe("TimelineListItem", () => {
         const li = screen.getByRole("listitem");
         expect(li.getAttribute("id")).toBe("event-1");
     });
+
+    test("a withheld entry keeps its date and shows only the consumer's words", () => {
+        const { container } = render(Subject, {
+            props: {
+                datetime: "2026-11-03",
+                heading: "3 Nov 2026",
+                entryState: "withheld",
+                entryStateLabel: "Restricted entry",
+                children: textSnippet("Sensitive note"),
+            },
+        });
+        const li = container.querySelector("li.timeline-list-item")!;
+        expect(li.getAttribute("data-entry-state")).toBe("withheld");
+        expect(li.querySelector("time")?.textContent).toBe("3 Nov 2026");
+        expect(li.textContent).not.toContain("Sensitive note");
+        expect(li.querySelector(".timeline-list-item-entry-state")?.textContent).toBe(
+            "Restricted entry",
+        );
+    });
+
+    test("an entry in error is kept, struck through, with the consumer's words", () => {
+        const { container } = render(Subject, {
+            props: {
+                entryState: "entered-in-error",
+                entryStateLabel: "Entered in error",
+                children: textSnippet("Wrong patient"),
+            },
+        });
+        const li = container.querySelector("li.timeline-list-item")!;
+        expect(li.querySelector("del.timeline-list-item-entry")?.textContent).toContain(
+            "Wrong patient",
+        );
+        expect(li.querySelector(".timeline-list-item-entry-state")?.textContent).toBe(
+            "Entered in error",
+        );
+    });
 });

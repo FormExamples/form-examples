@@ -218,8 +218,9 @@ function isWheelTypeaheadKey(event
 
  )          {
     return (
-        event.key.length === 1 &&
-        event.key !== " " &&
+        /^[^\p{Cc}\p{Cf}\p{Cs} ]$/u.test(event.key.normalize("NFC")) &&
+        !event.isComposing &&
+        !event.nativeEvent?.isComposing &&
         !event.ctrlKey &&
         !event.altKey &&
         !event.metaKey
@@ -235,11 +236,12 @@ function wheelTypeaheadIndex(
     current        ,
     prefix        ,
 )         {
-    const folded = fold(prefix);
-    if (folded === "" || options.length === 0) return -1;
-    const repeated = folded.length > 1 && [...folded].every((c) => c === folded[0]);
-    const needle = repeated ? folded[0] : folded;
-    const startOffset = needle.length > 1 ? 0 : 1;
+    // Fold each initial separately so a Hangul syllable can cycle even when it folds to several Jamo.
+    const initials = Array.from(prefix.normalize("NFC"), fold).filter(Boolean);
+    if (initials.length === 0 || options.length === 0) return -1;
+    const cycle = initials.every((initial) => initial === initials[0]);
+    const needle = cycle ? initials[0] : fold(prefix);
+    const startOffset = cycle ? 1 : 0;
     const from = current < 0 ? -startOffset : current;
     for (let step = 0; step < options.length; step++) {
         const index = (from + startOffset + step + options.length) % options.length;

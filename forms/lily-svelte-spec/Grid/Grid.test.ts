@@ -32,7 +32,7 @@ describe("Grid", () => {
 
         const root = container.querySelector(".grid") as HTMLElement;
         expect(root.getAttribute("data-columns")).toBe("12");
-        expect(root.getAttribute("style")).toContain("repeat(12, minmax(0, 1fr))");
+        expect(root.getAttribute("style")).toMatch(/repeat\(12, minmax\(0(px)?, 1fr\)\)/);
     });
 
     test("uses repeat() for numeric columns", () => {
@@ -44,7 +44,7 @@ describe("Grid", () => {
         });
 
         const root = container.querySelector(".grid") as HTMLElement;
-        expect(root.getAttribute("style")).toContain("repeat(3, minmax(0, 1fr))");
+        expect(root.getAttribute("style")).toMatch(/repeat\(3, minmax\(0(px)?, 1fr\)\)/);
     });
 
     test("uses string columns as-is", () => {

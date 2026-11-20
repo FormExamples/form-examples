@@ -6,6 +6,7 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
+    //   subjectLabel: string (optional) — whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first
     //   children: slot — the medicine, usually a MedicationView
     //   status: "active" | "completed" | "entered-in-error" | "intended" | "stopped" | "on-hold" | "unknown" | "not-taken" (optional) — FHIR MedicationStatement status; rendered as data-status
     //   statusLabel: string (optional; required when status is set) — the status in words
@@ -20,6 +21,7 @@
 
     let {
         class: className = "",
+        subjectLabel,
         status,
         statusLabel,
         effective,
@@ -27,6 +29,8 @@
         children,
         ...restProps
     }: {
+        /** whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first */
+        subjectLabel?: string;
         status?:
             | "active"
             | "completed"
@@ -60,6 +64,8 @@
     data-status={status}
     {...restProps}
 >
+    {#if subjectLabel}<span class="medication-record-list-item-subject">{subjectLabel}</span
+        >{" "}{/if}
     {@render children?.()}
     {#if statusLabel}{" "}<span class="medication-record-list-item-status">{statusLabel}</span>{/if}
     {#if effectiveLabel}{" "}<time

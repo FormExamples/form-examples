@@ -48,20 +48,53 @@
     //   - WAI-ARIA img role: https://www.w3.org/TR/wai-aria-1.2/#img
 
     import type { Snippet } from "svelte";
+    import { warnMissingProp } from "../dev-warning";
     let {
         class: className = "",
         label,
+        pointCount = undefined,
+        minimumPoints = undefined,
+        insufficientLabel = undefined,
         children,
         ...restProps
-    }: { label: string; children: Snippet; [key: string]: unknown } = $props();
+    }: {
+        label: string;
+        /** How many readings the consumer's graphic shows. */
+        pointCount?: number;
+        /**
+         * Fewer readings than this are not a trend: the graphic is not shown, only insufficientLabel, as text
+         * (spec/lessons/zoblocks). Rendered as data-insufficient.
+         */
+        minimumPoints?: number;
+        /** Why there is no line, in the consumer's words ("Not enough readings for a trend"); required with minimumPoints. */
+        insufficientLabel?: string;
+        children: Snippet;
+        [key: string]: unknown;
+    } = $props();
+
+    const insufficient = $derived(
+        pointCount !== undefined && minimumPoints !== undefined && pointCount < minimumPoints,
+    );
+
+    $effect(() => {
+        if (minimumPoints !== undefined)
+            warnMissingProp(
+                "Sparkline",
+                "insufficientLabel",
+                insufficientLabel,
+                "a sparkline that draws no line must say why in words.",
+            );
+    });
 </script>
 
-<!-- Sparkline.svelte -->
+<!-- Sparkline.svelte: below minimumPoints the root is plain text (no role="img", which would hide it behind the label). -->
 <span
     class={`sparkline ${className}`}
-    role="img"
-    aria-label={label}
+    role={insufficient ? undefined : "img"}
+    aria-label={insufficient ? undefined : label}
+    data-insufficient={insufficient ? "" : undefined}
     {...restProps}
 >
-    {@render children?.()}
+    {#if insufficient}<span class="sparkline-insufficient">{insufficientLabel}</span
+        >{:else}{@render children?.()}{/if}
 </span>

@@ -95,4 +95,13 @@ describe("DateTimeView", () => {
         expect(root.className).toContain("date-time-view");
         expect(root.className).toContain("extra");
     });
+
+    test("takes a partial date as its datetime, with nothing invented", () => {
+        const { container } = render(Subject, {
+            props: { value: "2019-03", format: "March 2019" },
+        });
+        const root = container.querySelector("time") as HTMLElement;
+        expect(root.getAttribute("datetime")).toBe("2019-03");
+        expect(root.textContent?.trim()).toBe("March 2019");
+    });
 });

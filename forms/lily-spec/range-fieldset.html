@@ -1,0 +1,40 @@
+<!-- range-fieldset.html -->
+<!-- RangeFieldset component -->
+<!--
+  Description: a fieldset of two range inputs for a minimum and a maximum that cannot cross
+  HTML tag: <fieldset> with a <legend> and two <input type="range">
+  CSS class: range-fieldset (parts: -legend, -minimum, -maximum)
+  Spec: spec/lessons/retool (tasks.md P34-T1)
+  Keyboard: native range keys on each thumb (arrows, Home, End, Page Up, Page Down); Tab moves from the lower to the upper
+  Accessibility: the legend names the group; aria-label names each thumb, in the consumer's words
+  Both inputs have the same min, max and step, so the consumer's CSS can lay them over one track. Each value is its own
+    form field, and a native form reset puts both back. The thumbs must not cross: the consumer's script clamps on input,
+    for example
+      lower.addEventListener("input", () => { if (+lower.value > +upper.value) lower.value = upper.value; });
+      upper.addEventListener("input", () => { if (+upper.value < +lower.value) upper.value = lower.value; });
+    and without script the server takes the lower of the two values as the minimum.
+-->
+
+<fieldset class="range-fieldset">
+  <legend class="range-fieldset-legend">Price</legend>
+  <input
+    class="range-fieldset-minimum"
+    type="range"
+    aria-label="Lowest price"
+    name="price-min"
+    min="0"
+    max="100"
+    step="1"
+    value="20"
+  />
+  <input
+    class="range-fieldset-maximum"
+    type="range"
+    aria-label="Highest price"
+    name="price-max"
+    min="0"
+    max="100"
+    step="1"
+    value="80"
+  />
+</fieldset>

@@ -2,6 +2,9 @@
 <!-- Combobox component -->
 <!--
   Description: a text input combined with a dropdown list for filtering options
+  Result count: when the consumer filters the options, a <p class="combobox-status" role="status"> after the listbox says how
+    many match in the consumer's words, or that nothing matches, after typing pauses. It never goes inside the listbox, which
+    holds only options.
   HTML tag: <div>
   CSS class: combobox
   Keyboard: ArrowDown and ArrowUp open on the first or last option, then move and wrap; Home and End jump while open;
@@ -62,7 +65,7 @@
       }
     }
 
-    document.querySelectorAll(".combobox [role=\"listbox\"]").forEach(function (el) {
+    document.querySelectorAll('.combobox [role="listbox"]').forEach(function (el) {
       if (typeof el.showPopover !== "function") showList(el, false);
     });
 
@@ -104,9 +107,12 @@
         root.dispatchEvent(new CustomEvent("combobox-close", { bubbles: true }));
       }
       function choose(option) {
-        var value = option.dataset.value !== undefined ? option.dataset.value : option.textContent.trim();
+        var value =
+          option.dataset.value !== undefined ? option.dataset.value : option.textContent.trim();
         input.value = value;
-        root.dispatchEvent(new CustomEvent("combobox-select", { bubbles: true, detail: { value: value } }));
+        root.dispatchEvent(
+          new CustomEvent("combobox-select", { bubbles: true, detail: { value: value } }),
+        );
         close();
       }
 

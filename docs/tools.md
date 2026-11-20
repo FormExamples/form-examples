@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-124 tools.
+125 tools.
 
 - [`bin/axum-api-namespace`](#axum-api-namespace)
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
@@ -85,6 +85,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-helpers-chooser-rename`](#svelte-helpers-chooser-rename)
 - [`bin/svelte-helpers-picker-rename`](#svelte-helpers-picker-rename)
 - [`bin/svelte-kit-3-theme-url-fix.py`](#svelte-kit-3-theme-url-fixpy)
+- [`bin/svelte-lily-headless-0-11`](#svelte-lily-headless-0-11)
 - [`bin/svelte-lily-picker-bar-0-6`](#svelte-lily-picker-bar-0-6)
 - [`bin/svelte-lily-picker-bar-0-7`](#svelte-lily-picker-bar-0-7)
 - [`bin/svelte-lily-picker-defaults`](#svelte-lily-picker-defaults)
@@ -2597,6 +2598,34 @@ the `sv migrate` codemod's own per-form task list — once confirmed resolved
 Usage:
   bin/svelte-kit-3-theme-url-fix.py --check          # CI drift detector
   bin/svelte-kit-3-theme-url-fix.py --apply          # rewrite in place
+```
+
+<h2 id="svelte-lily-headless-0-11"><code>bin/svelte-lily-headless-0-11</code></h2>
+
+```text
+bin/svelte-lily-headless-0-11 — move each Svelte front-end to Lily svelte-headless 0.11.
+
+What it changes in a `front-end-with-svelte/`:
+
+  package.json         @lilydesignsystem/svelte-headless ^0.10.0 -> ^0.11.0
+  pnpm-workspace.yaml  minimumReleaseAgeExclude gains svelte-headless@0.11.0 (under the
+                       release-age cooldown when adopted, like 0.10.0 before it)
+  pnpm-lock.yaml       `pnpm install --lockfile-only`, so only the lock moves and no
+                       node_modules is created; unless --no-lock
+
+svelte-headless 0.11.0 is breaking in one way only: its 164 national personal
+identifier components (an -input and a -view for each of 82 identifier types)
+move to @lilydesignsystem/svelte-headless-identifiers. No front-end imports any
+of them (checked against every component name in that package, in PascalCase
+and kebab-case), so the version is the whole change. Supersedes the headless
+half of bin/svelte-lily-picker-bar-0-7, whose picker-bar 0.7 stays current.
+
+A front-end already moved is skipped, so the tool can be rerun. A front-end whose
+package.json lacks the expected line stops the run before anything is written.
+
+Usage:
+  bin/svelte-lily-headless-0-11 [--no-lock] --all|<slug>...
+  bin/svelte-lily-headless-0-11 --check --all|<slug>...   # CI drift check
 ```
 
 <h2 id="svelte-lily-picker-bar-0-6"><code>bin/svelte-lily-picker-bar-0-6</code></h2>

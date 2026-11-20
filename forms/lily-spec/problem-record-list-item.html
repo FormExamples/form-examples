@@ -3,7 +3,9 @@
 <!--
   Description: one problem or condition in a problem record list, with its clinical and verification status, severity, onset and resolution
   HTML tag: <li>
-  CSS class: problem-record-list-item (parts: -condition, -clinical-status, -verification-status, -severity, -onset, -abatement)
+  Subject: when the record is not the patient's own (a relative's history, a fetus), put the consumer's words first,
+    <span class="problem-record-list-item-subject">Mother</span>, so it is never read as the patient's.
+  CSS class: problem-record-list-item (parts: -subject, -condition, -clinical-status, -verification-status, -severity, -onset, -abatement)
   Spec: spec/healthcare-ui (tasks.md P28-T3)
   Attributes: data-clinical-status (active, recurrence, relapse, inactive, remission, resolved), data-verification-status (unconfirmed, provisional, differential, confirmed, refuted, entered-in-error). Each status is also text, in the consumer's words; a part with no text is left out.
     Dates are <time datetime>.

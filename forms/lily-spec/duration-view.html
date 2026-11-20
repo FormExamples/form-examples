@@ -1,0 +1,17 @@
+<!-- duration-view.html -->
+<!-- DurationView component -->
+<!--
+  Description: a length of time, as an ISO 8601 duration in a <time> element, shown in the consumer's words
+  HTML tag: <time>
+  CSS class: duration-view
+  Spec: spec/lessons/openehr (tasks.md P29-T6)
+  datetime is an ISO 8601 duration of days, hours, minutes and seconds ("P3DT4H"); a year or a month has no fixed length and
+    is no datetime. A negative duration ("3 days early") puts its length in datetime and adds data-negative; the direction is
+    in the words. The words are the consumer's (for example from Intl.DurationFormat with durationParts in a TypeScript library).
+-->
+
+<time
+  class="duration-view"
+  datetime="P3DT4H"
+  ><span class="screen-reader-span">Length of stay </span>3 days 4 hours</time
+>

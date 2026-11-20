@@ -45,9 +45,9 @@ picker family's own (larger) pnpm migration.
 | Field            | Value                                                                  |
 |------------------|------------------------------------------------------------------------|
 | Repository       | `lilydesignsystem/lily-design-system` (subdir `lily-design-system-svelte-headless` — the git subdirectory name is unchanged by the npm scope move) |
-| Pinned commit    | `a6cb8fe87`                                                             |
+| Pinned commit    | `c48e31d83`                                                             |
 | npm package depended on | `@lilydesignsystem/svelte-headless` `^0.1.0` |
-| Date pinned      | 2026-11-16                                                              |
+| Date pinned      | 2026-11-20                                                              |
 | Snapshot         | [`lily-svelte-spec/`](lily-svelte-spec/) — one subdirectory per component |
 
 This pin is the contract our forms build against, and remains the

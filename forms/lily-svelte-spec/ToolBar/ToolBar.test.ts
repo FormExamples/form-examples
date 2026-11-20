@@ -13,6 +13,21 @@ function buttonsSnippet() {
     }) as any;
 }
 
+function threeSnippet(disableMiddle = false) {
+    return (($anchor: Comment) => {
+        const buttons = ["Bold", "Italic", "Underline"].map((text) => {
+            const button = document.createElement("button");
+            button.textContent = text;
+            return button;
+        });
+        if (disableMiddle) buttons[1].disabled = true;
+        $anchor.before(...buttons);
+    }) as any;
+}
+
+const press = (el: Element, key: string) =>
+    el.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true, cancelable: true }));
+
 describe("ToolBar", () => {
     test("renders a toolbar", () => {
         render(Subject, { props: { label: "Tools", children: buttonsSnippet() } });
@@ -37,6 +52,43 @@ describe("ToolBar", () => {
             new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }),
         );
         expect(document.activeElement).toBe(buttons[1]);
+    });
+
+    test("the arrows skip a disabled button, and Home and End jump", () => {
+        render(Subject, { props: { label: "Tools", children: threeSnippet(true) } });
+        const [bold, , underline] = screen.getAllByRole("button");
+        bold.focus();
+        press(bold, "ArrowRight");
+        expect(document.activeElement).toBe(underline);
+        press(underline, "ArrowLeft");
+        expect(document.activeElement).toBe(bold);
+        press(bold, "End");
+        expect(document.activeElement).toBe(underline);
+        press(underline, "Home");
+        expect(document.activeElement).toBe(bold);
+    });
+
+    test("right-to-left swaps the arrows", () => {
+        render(Subject, {
+            props: {
+                label: "Tools",
+                dir: "rtl",
+                style: "direction: rtl",
+                children: threeSnippet(),
+            },
+        });
+        const [bold, italic] = screen.getAllByRole("button");
+        bold.focus();
+        press(bold, "ArrowLeft");
+        expect(document.activeElement).toBe(italic);
+    });
+
+    test("one tab stop, which follows focus", () => {
+        render(Subject, { props: { label: "Tools", children: threeSnippet() } });
+        const [bold, italic, underline] = screen.getAllByRole("button");
+        expect([bold.tabIndex, italic.tabIndex, underline.tabIndex]).toEqual([0, -1, -1]);
+        italic.focus();
+        expect([bold.tabIndex, italic.tabIndex, underline.tabIndex]).toEqual([-1, 0, -1]);
     });
 
     test("passes through attributes", () => {

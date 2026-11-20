@@ -105,4 +105,60 @@ describe("ObservationView", () => {
         render(Subject, { props: { value: "4.1", interpretation: "N" } });
         expect(spy).not.toHaveBeenCalled();
     });
+
+    test("not-applicable replaces the value with the consumer's words", () => {
+        render(Subject, {
+            props: { value: "", status: "not-applicable", statusLabel: "Not applicable" },
+        });
+        expect(root().getAttribute("data-status")).toBe("not-applicable");
+        expect(part("status")!.textContent).toBe("Not applicable");
+        expect(part("value")).toBeNull();
+    });
+
+    test("never infers an interpretation: with a range but no interpretation, no flag and no data", () => {
+        render(Subject, { props: { value: "5.9", unit: "mmol/L", range: "3.5–5.3" } });
+        expect(root().hasAttribute("data-interpretation")).toBe(false);
+        expect(part("flag")).toBeNull();
+    });
+
+    test("renders each named range as its own part", () => {
+        render(Subject, {
+            props: {
+                value: "2.1",
+                range: "3.5–5.3",
+                ranges: [{ label: "Critical", text: "below 2.5" }],
+            },
+        });
+        const ranges = root().querySelectorAll(".observation-view-range");
+        expect(ranges).toHaveLength(2);
+        expect(ranges[1].querySelector(".observation-view-range-label")?.textContent).toBe(
+            "Critical",
+        );
+        expect(ranges[1].textContent).toBe("Critical below 2.5");
+    });
+
+    test("a corrected result keeps the superseded value in a del, with words", () => {
+        render(Subject, {
+            props: {
+                value: "4.8",
+                status: "corrected",
+                statusLabel: "Corrected",
+                previousValue: "5.1",
+                previousLabel: "was 5.1 until 3 Nov",
+            },
+        });
+        expect(root().querySelector("del.observation-view-previous-value")?.textContent).toBe(
+            "5.1",
+        );
+        expect(part("previous-label")?.textContent).toBe("was 5.1 until 3 Nov");
+        expect(part("value")?.textContent).toBe("4.8");
+    });
+
+    test("warns when a superseded value has no words", () => {
+        const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+        render(Subject, { props: { value: "4.8", previousValue: "5.1" } });
+        expect(warn).toHaveBeenCalledWith(
+            expect.stringContaining("ObservationView has no previousLabel"),
+        );
+    });
 });

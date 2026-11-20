@@ -3,7 +3,9 @@
 <!--
   Description: one allergy or intolerance in an allergy record list, with substance, reaction, severity, criticality and status
   HTML tag: <li>
-  CSS class: allergy-record-list-item (parts: -substance, -reaction, -severity, -criticality, -clinical-status, -verification-status, -type, -category, -updated)
+  Subject: when the record is not the patient's own (a relative's history, a fetus), put the consumer's words first,
+    <span class="allergy-record-list-item-subject">Mother</span>, so it is never read as the patient's.
+  CSS class: allergy-record-list-item (parts: -subject, -substance, -reaction, -severity, -criticality, -clinical-status, -verification-status, -type, -category, -updated)
   Spec: spec/healthcare-ui (tasks.md P28-T3)
   Attributes: data-severity (mild, moderate, severe), data-criticality (low, high, unable-to-assess), data-clinical-status (active, inactive, resolved), data-verification-status (unconfirmed, presumed, confirmed, refuted, entered-in-error). Each status is also text, in the consumer's words; a part with no text is left out.
     Dates are <time datetime>.

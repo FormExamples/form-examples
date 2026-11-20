@@ -6,6 +6,7 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
+    //   subjectLabel: string (optional) — whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first
     //   device: string (required) — the device; never truncated
     //   status: "active" | "completed" | "entered-in-error" | "intended" | "stopped" | "on-hold" (optional) — FHIR DeviceUseStatement status; rendered as data-status
     //   statusLabel: string (optional; required when status is set) — the status in words
@@ -21,6 +22,7 @@
 
     let {
         class: className = "",
+        subjectLabel,
         device,
         status,
         statusLabel,
@@ -29,6 +31,8 @@
         children,
         ...restProps
     }: {
+        /** whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first */
+        subjectLabel?: string;
         device: string;
         status?: "active" | "completed" | "entered-in-error" | "intended" | "stopped" | "on-hold";
         statusLabel?: string;
@@ -55,6 +59,7 @@
     data-status={status}
     {...restProps}
 >
+    {#if subjectLabel}<span class="device-record-list-item-subject">{subjectLabel}</span>{" "}{/if}
     <span class="device-record-list-item-device">{device}</span>
     {#if statusLabel}{" "}<span class="device-record-list-item-status">{statusLabel}</span>{/if}
     {#if timingLabel}{" "}<time

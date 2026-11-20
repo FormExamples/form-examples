@@ -19,7 +19,8 @@
         try {
           var stored = localStorage.getItem('form-examples.theme.v1');
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          var theme = stored || (prefersDark ? 'dark' : 'light');
+          // "system" is theme-picker 0.4's "Follow this device" choice.
+          var theme = stored && stored !== 'system' ? stored : prefersDark ? 'dark' : 'light';
           document.documentElement.setAttribute('data-theme', theme);
         } catch (_) {}
       })();

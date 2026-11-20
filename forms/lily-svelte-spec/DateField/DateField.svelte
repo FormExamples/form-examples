@@ -1,7 +1,7 @@
 <script lang="ts">
     // DateField component
     //
-    // A date asked for as three parts, day, month and year, in a <fieldset> named by its
+    // A date asked for as three parts, day, month and year (or fewer, by `precision`), in a <fieldset> named by its
     // <legend>, with optional helper text and an error message, all linked by generated
     // ids. It suits dates people know by heart, such as a date of birth. The order of the
     // parts and every label are the consumer's: there is no regional or English default.
@@ -9,9 +9,12 @@
     // Props:
     //   className — string, optional. CSS class name.
     //   label — string, required. The legend, naming the whole date.
-    //   dayLabel, monthLabel, yearLabel — string, required. The three parts' labels.
+    //   dayLabel, monthLabel, yearLabel — string. The parts' labels; each is required when its part is shown.
+    //   precision — "day" | "month" | "year", default "day". How much of the date is asked for: a day asks for all three
+    //     parts; a month asks for month and year ("onset: March 2019"); a year asks for the year alone. A partial date is a
+    //     real value (openEHR DV_DATE, FHIR), never padded with an invented day or month.
     //   order — "ymd" | "dmy" | "mdy", default "ymd" (ISO 8601). The order of the parts.
-    //   value — string, default "". YYYY-MM-DD once all three parts are filled, else "";
+    //   value — string, default "". YYYY-MM-DD, YYYY-MM or YYYY (by precision) once its parts are filled, else "";
     //     bindable via bind:value. A new value fills the parts.
     //   name — string, optional. Base name: the parts are {name}-day, -month, -year.
     //   autocomplete — "bday", optional. A date of birth: the parts autocomplete as bday-day, -month, -year.
@@ -43,7 +46,7 @@
     //   - ISO 8601 calendar dates (YYYY-MM-DD)
 
     import { untrack } from "svelte";
-    import { warnMissingName } from "../dev-warning";
+    import { warnMissingName, warnMissingProp } from "../dev-warning";
 
     type Part = "day" | "month" | "year";
 
@@ -54,6 +57,7 @@
         monthLabel,
         yearLabel,
         order = "ymd",
+        precision = "day",
         value = $bindable(""),
         name = undefined,
         autocomplete = undefined,
@@ -66,15 +70,17 @@
     }: {
         /** The legend, naming the whole date. */
         label: string;
-        /** The day part's label. */
-        dayLabel: string;
-        /** The month part's label. */
-        monthLabel: string;
+        /** The day part's label; required when precision is "day". */
+        dayLabel?: string;
+        /** The month part's label; required unless precision is "year". */
+        monthLabel?: string;
         /** The year part's label. */
         yearLabel: string;
         /** The order of the parts. Default "ymd" (ISO 8601). */
         order?: "ymd" | "dmy" | "mdy";
-        /** YYYY-MM-DD once all three parts are filled, else "". Bindable. */
+        /** How much of the date is asked for. Default "day" (all three parts). */
+        precision?: "day" | "month" | "year";
+        /** YYYY-MM-DD, YYYY-MM or YYYY (by precision) once its parts are filled, else "". Bindable. */
         value?: string;
         /** Base name: the parts are {name}-day, {name}-month, {name}-year. */
         name?: string;
@@ -96,6 +102,12 @@
     $effect(() =>
         warnMissingName("DateField", label, restProps["aria-label"], restProps["aria-labelledby"]),
     );
+    $effect(() => {
+        if (shown.includes("day"))
+            warnMissingProp("DateField", "dayLabel", dayLabel, "the day part needs a label.");
+        if (shown.includes("month"))
+            warnMissingProp("DateField", "monthLabel", monthLabel, "the month part needs a label.");
+    });
 
     const uid = $props.id();
     let baseId = $derived(id ?? `date-field-${uid}`);
@@ -106,16 +118,27 @@
             undefined,
     );
 
-    /** The parts of a YYYY-MM-DD value, or empty parts for anything else. */
+    /** The parts shown at each precision, in ISO order. */
+    const PARTS: Record<string, Part[]> = {
+        day: ["year", "month", "day"],
+        month: ["year", "month"],
+        year: ["year"],
+    };
+    const shown = $derived(PARTS[precision] ?? PARTS.day);
+
+    /** The parts of a value of this precision (YYYY-MM-DD, YYYY-MM or YYYY), or empty parts for anything else. */
     function split(v: string): Record<Part, string> {
-        const m = /^(\d{1,4})-(\d{1,2})-(\d{1,2})$/.exec(v ?? "");
-        return m ? { year: m[1], month: m[2], day: m[3] } : { year: "", month: "", day: "" };
+        const m = /^(\d{1,4})(?:-(\d{1,2})(?:-(\d{1,2}))?)?$/.exec(v ?? "");
+        const filled = m ? [m[1], m[2], m[3]].filter((x) => x !== undefined).length : 0;
+        if (!m || filled !== shown.length) return { year: "", month: "", day: "" };
+        return { year: m[1], month: m[2] ?? "", day: m[3] ?? "" };
     }
 
-    /** YYYY-MM-DD when every part is a number, else "". The calendar check is the consumer's. */
+    /** The value when every shown part is a number, else "". The calendar check is the consumer's. */
     function join(p: Record<Part, string>): string {
-        if (![p.year, p.month, p.day].every((x) => /^\d+$/.test(x))) return "";
-        return `${p.year.padStart(4, "0")}-${p.month.padStart(2, "0")}-${p.day.padStart(2, "0")}`;
+        if (!shown.every((part) => /^\d+$/.test(p[part]))) return "";
+        const iso = [p.year.padStart(4, "0"), p.month.padStart(2, "0"), p.day.padStart(2, "0")];
+        return iso.slice(0, shown.length).join("-");
     }
 
     let parts = $state(split(value));
@@ -139,12 +162,15 @@
         dmy: ["day", "month", "year"],
         mdy: ["month", "day", "year"],
     };
-    const sequence = $derived(SEQUENCES[order] ?? SEQUENCES.ymd);
+    const sequence = $derived(
+        (SEQUENCES[order] ?? SEQUENCES.ymd).filter((part) => shown.includes(part)),
+    );
 </script>
 
 <!-- DateField.svelte -->
 <fieldset
     class={`date-field ${className}`}
+    data-precision={precision === "day" ? undefined : precision}
     aria-describedby={describedBy}
     {disabled}
     {...restProps}

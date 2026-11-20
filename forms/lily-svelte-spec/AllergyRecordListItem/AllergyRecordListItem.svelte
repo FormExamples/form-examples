@@ -6,6 +6,7 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
+    //   subjectLabel: string (optional) — whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first
     //   substance: string (required) — what the patient reacts to; never truncated
     //   reaction: string (optional) — the manifestation
     //   severity: "mild" | "moderate" | "severe" (optional) — the reaction's severity (FHIR reaction.severity); rendered as data-severity
@@ -30,6 +31,7 @@
 
     let {
         class: className = "",
+        subjectLabel,
         substance,
         reaction,
         severity,
@@ -47,6 +49,8 @@
         children,
         ...restProps
     }: {
+        /** whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first */
+        subjectLabel?: string;
         substance: string;
         reaction?: string;
         severity?: "mild" | "moderate" | "severe";
@@ -107,6 +111,7 @@
     data-verification-status={verificationStatus}
     {...restProps}
 >
+    {#if subjectLabel}<span class="allergy-record-list-item-subject">{subjectLabel}</span>{" "}{/if}
     <span class="allergy-record-list-item-substance">{substance}</span>
     {#if reaction}{" "}<span class="allergy-record-list-item-reaction">{reaction}</span>{/if}
     {#if severityLabel}{" "}<span class="allergy-record-list-item-severity">{severityLabel}</span

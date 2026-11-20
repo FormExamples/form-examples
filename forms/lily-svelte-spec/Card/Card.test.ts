@@ -82,4 +82,28 @@ describe("Card", () => {
 
         expect(screen.getByTestId("card")).toBeTruthy();
     });
+
+    test.each([2, 3, 4, 5, 6] as const)(
+        "heading level %i renders that element, plain or linked",
+        (level) => {
+            const { unmount } = render(Subject, {
+                props: { heading: "Plain", headingLevel: level, children: textSnippet("Body") },
+            });
+            const plain = document.querySelector(`.card h${level}`) as HTMLElement;
+            expect(plain.textContent).toBe("Plain");
+            expect(plain.querySelector("a")).toBeNull();
+            unmount();
+            render(Subject, {
+                props: {
+                    heading: "Linked",
+                    headingLevel: level,
+                    href: "/x",
+                    children: textSnippet("Body"),
+                },
+            });
+            const link = document.querySelector(`.card h${level} a`) as HTMLAnchorElement;
+            expect(link.textContent).toBe("Linked");
+            expect(link.getAttribute("href")).toBe("/x");
+        },
+    );
 });

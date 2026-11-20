@@ -6,8 +6,29 @@
   CSS class: timeline-list-item
   Keyboard: none; not interactive, and any interactive children handle their own keys
   Accessibility: aria-label for accessible name
+  Entry state: data-entry-state="withheld" keeps the date and shows only the consumer's words in -entry-state;
+    data-entry-state="entered-in-error" keeps the content in <del class="timeline-list-item-entry">, with the words.
 -->
 
-<ol><li class="timeline-list-item" aria-label="Example">
+<ol>
+  <li
+    class="timeline-list-item"
+    aria-label="Example"
+  >
     <!-- Consumer provides child content -->
-</li></ol>
+  </li>
+  <li
+    class="timeline-list-item"
+    data-entry-state="withheld"
+  >
+    <time datetime="2026-11-03">3 Nov 2026</time>
+    <span class="timeline-list-item-entry-state">Restricted entry</span>
+  </li>
+  <li
+    class="timeline-list-item"
+    data-entry-state="entered-in-error"
+  >
+    <del class="timeline-list-item-entry">Wrong patient</del>
+    <span class="timeline-list-item-entry-state">Entered in error</span>
+  </li>
+</ol>

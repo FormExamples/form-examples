@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { SITE_NAME, REPO_URL, pageTitle } from '#lib/site.js';
-  import { THEME_OPTIONS, DEFAULT_THEME, THEME_STORAGE_KEY } from '#lib/config/themes.js';
+  import { THEME_OPTIONS, THEME_STORAGE_KEY } from '#lib/config/themes.js';
   import { TEXT_SIZE_OPTIONS, DEFAULT_TEXT_SIZE, TEXT_SIZE_STORAGE_KEY } from '#lib/config/text-sizes.js';
   import { LOCALE_OPTIONS, DEFAULT_LOCALE, LOCALE_STORAGE_KEY } from '#lib/config/locales.js';
   import { SHARE_TARGETS } from '#lib/config/share-targets.js';
@@ -54,7 +54,7 @@
         }}
         themesUrl="/themes/"
         themes={themeValues}
-        themeProps={{ themeLabels, defaultValue: DEFAULT_THEME, detectFromSystem: true, storageKey: THEME_STORAGE_KEY }}
+        themeProps={{ themeLabels, systemLabel: 'Follow this device', cookieName: '', storageKey: THEME_STORAGE_KEY }}
         locales={localeValues}
         localeProps={{ localeLabels, defaultValue: DEFAULT_LOCALE, storageKey: LOCALE_STORAGE_KEY }}
         sizes={textSizeValues}

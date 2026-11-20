@@ -57,6 +57,7 @@
         disabled = false,
         onchange = undefined,
         selectedLabel = undefined,
+        dropZone = false,
         ...restProps
     }: {
         /** Accessible label for the button. */
@@ -71,6 +72,11 @@
         onchange?: (files: FileList | null) => void;
         /** The status for a count of files; plural forms are the consumer's. */
         selectedLabel?: (count: number) => string;
+        /**
+         * The root also accepts dropped files, into the same onchange and count, with data-drag-over while a file is held
+         * over it. Dragging is never the only way: the button still chooses files, and the drop zone adds no tab stop.
+         */
+        dropZone?: boolean;
         [key: string]: unknown;
     } = $props();
 
@@ -79,6 +85,33 @@
 
     function handleClick() {
         inputRef?.click();
+    }
+
+    let dragOver = $state(false);
+
+    /** The files a drop carries: all of them with `multiple`, else the first. */
+    function dropped(files: FileList): FileList {
+        if (multiple || files.length <= 1 || typeof DataTransfer === "undefined") return files;
+        const one = new DataTransfer();
+        one.items.add(files[0]);
+        return one.files;
+    }
+
+    function handleDragOver(event: DragEvent) {
+        if (!dropZone || disabled || !event.dataTransfer?.types.includes("Files")) return;
+        event.preventDefault();
+        dragOver = true;
+    }
+
+    function handleDrop(event: DragEvent) {
+        if (!dropZone || disabled) return;
+        event.preventDefault();
+        dragOver = false;
+        const files = event.dataTransfer?.files;
+        if (!files || files.length === 0) return;
+        const chosen = dropped(files);
+        fileCount = chosen.length;
+        onchange?.(chosen);
     }
 
     function handleChange(event: Event) {
@@ -91,6 +124,11 @@
 <!-- FileUpload.svelte -->
 <div
     class={`file-upload ${className}`}
+    data-drop-zone={dropZone ? "" : undefined}
+    data-drag-over={dragOver ? "" : undefined}
+    ondragover={handleDragOver}
+    ondragleave={() => (dragOver = false)}
+    ondrop={handleDrop}
     {...restProps}
 >
     <button

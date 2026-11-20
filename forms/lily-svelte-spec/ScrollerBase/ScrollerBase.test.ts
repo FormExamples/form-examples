@@ -1,5 +1,6 @@
 import { render } from "@testing-library/svelte";
-import { describe, expect, test } from "vitest";
+import { tick } from "svelte";
+import { afterEach, describe, expect, test, vi } from "vitest";
 
 import Subject from "./ScrollerBase.svelte";
 
@@ -9,6 +10,35 @@ function snippet(html: string) {
         tpl.innerHTML = html;
         for (const node of Array.from(tpl.content.childNodes)) $anchor.before(node);
     }) as any;
+}
+
+/** A stand-in IntersectionObserver (jsdom has none) that a test triggers by hand. */
+class StubObserver {
+    static last: StubObserver | undefined;
+    targets: Element[] = [];
+    disconnected = false;
+    constructor(
+        public callback: IntersectionObserverCallback,
+        public options?: IntersectionObserverInit,
+    ) {
+        StubObserver.last = this;
+    }
+    observe(target: Element) {
+        this.targets.push(target);
+    }
+    unobserve() {}
+    disconnect() {
+        this.disconnected = true;
+    }
+    takeRecords() {
+        return [];
+    }
+    fire(target: Element, isIntersecting: boolean) {
+        this.callback(
+            [{ target, isIntersecting } as IntersectionObserverEntry],
+            this as unknown as IntersectionObserver,
+        );
+    }
 }
 
 describe("ScrollerBase", () => {
@@ -53,5 +83,57 @@ describe("ScrollerBase", () => {
     test("has no role without a label", () => {
         const { container } = render(Subject, { children: snippet("content") });
         expect(container.querySelector(".scroller-base")?.hasAttribute("role")).toBe(false);
+    });
+});
+
+describe("ScrollerBase with an IntersectionObserver", () => {
+    afterEach(() => vi.unstubAllGlobals());
+
+    test("each step entering the trigger line reports its index, and scrolling reports progress", async () => {
+        vi.stubGlobal("IntersectionObserver", StubObserver);
+        const onIndexChange = vi.fn();
+        const onProgressChange = vi.fn();
+        const { container } = render(Subject, {
+            offset: 0.25,
+            onIndexChange,
+            onProgressChange,
+            children: snippet("<div>1</div><div>2</div><div>3</div>"),
+        });
+        await tick();
+        const root = container.querySelector(".scroller-base") as HTMLElement;
+        const steps = [...root.children];
+        const observer = StubObserver.last!;
+        expect(observer.targets).toEqual(steps);
+        expect(observer.options).toEqual({ rootMargin: "-25.00% 0px -75.00% 0px", threshold: 0 });
+        observer.fire(steps[2], true);
+        observer.fire(steps[1], false);
+        observer.fire(document.body, true);
+        expect(onIndexChange.mock.calls).toEqual([[2]]);
+
+        // Progress is how far the block has passed through the window, from 0 to 1.
+        expect(onProgressChange).toHaveBeenCalled();
+        root.getBoundingClientRect = () => ({ top: -500, height: 1000 }) as DOMRect;
+        window.dispatchEvent(new Event("scroll"));
+        const expected = (window.innerHeight + 500) / (1000 + window.innerHeight);
+        expect(onProgressChange).toHaveBeenLastCalledWith(Math.min(1, expected));
+        root.getBoundingClientRect = () => ({ top: -99999, height: 10 }) as DOMRect;
+        window.dispatchEvent(new Event("scroll"));
+        expect(onProgressChange).toHaveBeenLastCalledWith(1);
+    });
+
+    test("unmounting stops observing and listening", async () => {
+        vi.stubGlobal("IntersectionObserver", StubObserver);
+        const onProgressChange = vi.fn();
+        const { unmount } = render(Subject, {
+            onProgressChange,
+            children: snippet("<div>1</div><div>2</div>"),
+        });
+        await tick();
+        const observer = StubObserver.last!;
+        unmount();
+        expect(observer.disconnected).toBe(true);
+        onProgressChange.mockClear();
+        window.dispatchEvent(new Event("scroll"));
+        expect(onProgressChange).not.toHaveBeenCalled();
     });
 });

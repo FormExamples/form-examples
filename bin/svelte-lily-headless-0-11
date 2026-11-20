@@ -1,0 +1,106 @@
+#!/usr/bin/env python3
+"""bin/svelte-lily-headless-0-11 — move each Svelte front-end to Lily svelte-headless 0.11.
+
+What it changes in a `front-end-with-svelte/`:
+
+  package.json         @lilydesignsystem/svelte-headless ^0.10.0 -> ^0.11.0
+  pnpm-workspace.yaml  minimumReleaseAgeExclude gains svelte-headless@0.11.0 (under the
+                       release-age cooldown when adopted, like 0.10.0 before it)
+  pnpm-lock.yaml       `pnpm install --lockfile-only`, so only the lock moves and no
+                       node_modules is created; unless --no-lock
+
+svelte-headless 0.11.0 is breaking in one way only: its 164 national personal
+identifier components (an -input and a -view for each of 82 identifier types)
+move to @lilydesignsystem/svelte-headless-identifiers. No front-end imports any
+of them (checked against every component name in that package, in PascalCase
+and kebab-case), so the version is the whole change. Supersedes the headless
+half of bin/svelte-lily-picker-bar-0-7, whose picker-bar 0.7 stays current.
+
+A front-end already moved is skipped, so the tool can be rerun. A front-end whose
+package.json lacks the expected line stops the run before anything is written.
+
+Usage:
+  bin/svelte-lily-headless-0-11 [--no-lock] --all|<slug>...
+  bin/svelte-lily-headless-0-11 --check --all|<slug>...   # CI drift check
+"""
+
+from __future__ import annotations
+
+import argparse
+import glob
+import os
+import re
+import subprocess
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OLD = '"@lilydesignsystem/svelte-headless": "^0.10.0"'
+NEW = '"@lilydesignsystem/svelte-headless": "^0.11.0"'
+EXCLUDE = "'@lilydesignsystem/svelte-headless@0.11.0'"
+LOCKED = re.compile(r"^ +'?@lilydesignsystem/svelte-headless'?:\n +specifier: \^0\.11\.0\n +version: 0\.11\.", re.M)
+
+
+def drift(app: str) -> str | None:
+    if NEW not in open(f"{app}/package.json").read():
+        return "package.json is not on svelte-headless ^0.11.0"
+    if f"  - {EXCLUDE}" not in open(f"{app}/pnpm-workspace.yaml").read():
+        return "pnpm-workspace.yaml lacks the svelte-headless 0.11.0 release-age exclusion"
+    if not LOCKED.search(open(f"{app}/pnpm-lock.yaml").read()):
+        return "pnpm-lock.yaml is not on svelte-headless 0.11"
+    return None
+
+
+def add_exclude(ws: str) -> str:
+    if f"  - {EXCLUDE}" in ws:
+        return ws
+    marker = "minimumReleaseAgeExclude:\n"
+    if marker in ws:
+        return ws.replace(marker, f"{marker}  - {EXCLUDE}\n", 1)
+    return ws.rstrip("\n") + f"\n\n{marker}  - {EXCLUDE}\n"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--no-lock", action="store_true")
+    args = parser.parse_args()
+    if args.all:
+        apps = sorted(os.path.dirname(p) for p in glob.glob(f"{REPO}/forms/*/front-end-with-svelte/package.json"))
+    elif args.slugs:
+        apps = [f"{REPO}/forms/{s}/front-end-with-svelte" for s in args.slugs]
+    else:
+        parser.error("name forms, or pass --all")
+    if args.check:
+        bad = [(a, why) for a in apps if (why := drift(a))]
+        for app, why in bad:
+            print(f"{app.split('/')[-2]}: {why}")
+        print(f"{len(apps) - len(bad)}/{len(apps)} front-ends on svelte-headless 0.11")
+        return 1 if bad else 0
+    texts = {a: open(f"{a}/package.json").read() for a in apps}
+    odd = [a for a, t in texts.items() if NEW not in t and OLD not in t]
+    if odd:
+        for app in odd:
+            print(f"stopped, nothing written: {app}: expected the svelte-headless ^0.10.0 line", file=sys.stderr)
+        return 1
+    moved, failed = 0, []
+    for app, text in texts.items():
+        new = text.replace(OLD, NEW)
+        ws = open(f"{app}/pnpm-workspace.yaml").read()
+        new_ws = add_exclude(ws)
+        if new != text or new_ws != ws:
+            open(f"{app}/package.json", "w").write(new)
+            open(f"{app}/pnpm-workspace.yaml", "w").write(new_ws)
+            moved += 1
+        if not args.no_lock and drift(app):
+            result = subprocess.run(["pnpm", "install", "--lockfile-only", "--silent"], cwd=app, capture_output=True, text=True)
+            if result.returncode or drift(app):
+                failed.append(app)
+                print(f"{app.split('/')[-2]}: pnpm lock failed: {(result.stderr or result.stdout).strip()[-300:]}", file=sys.stderr)
+    print(f"{moved} moved, {len(apps) - moved} already on svelte-headless 0.11, {len(failed)} lock failures")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

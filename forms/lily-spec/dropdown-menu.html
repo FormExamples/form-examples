@@ -6,6 +6,9 @@
   CSS class: dropdown-menu
   Keyboard: Enter/Space/click on the button toggles the menu and focuses the first item; in the menu ArrowDown/ArrowUp move (wrapping), Home/End jump, Escape closes and returns focus to the button
   Accessibility: button: aria-haspopup="true", aria-expanded, aria-controls, aria-label; panel: role="menu", aria-label; items are role="menuitem" tabindex="-1"
+  Subject: when the menu acts on a record, name it first with a non-interactive part,
+    <div class="dropdown-menu-subject" id="…-subject" role="none">Ada Lovelace, blood pressure 3 Nov</div>,
+    and give the menu aria-labelledby="…-subject" instead of aria-label (spec/lessons/zoblocks).
   Popover API: the menu is popover="auto" and the button names it with
     command="toggle-popover" commandfor (and popovertarget), so the browser
     opens and closes it, closes it on Escape and on a click outside, and puts
@@ -25,9 +28,7 @@
     </div>
 -->
 
-<div
-  class="dropdown-menu"
->
+<div class="dropdown-menu">
   <button
     type="button"
     aria-haspopup="true"
@@ -40,23 +41,30 @@
   >
     <!-- Consumer provides button content -->
   </button>
-  <div id="dropdown-menu-1" role="menu" aria-label="" popover="auto">
+  <div
+    id="dropdown-menu-1"
+    role="menu"
+    aria-label=""
+    popover="auto"
+  >
     <!-- Consumer provides role="menuitem" items -->
   </div>
 </div>
 
 <script>
   // DropdownMenu behavior
-  (function() {
-    'use strict';
-    var native = typeof HTMLElement.prototype.showPopover === 'function';
-    document.querySelectorAll('.dropdown-menu').forEach(function(root) {
-      var button = root.querySelector('button');
+  (function () {
+    "use strict";
+    var native = typeof HTMLElement.prototype.showPopover === "function";
+    document.querySelectorAll(".dropdown-menu").forEach(function (root) {
+      var button = root.querySelector("button");
       var menu = root.querySelector('[role="menu"]');
       if (!button || !menu) return;
-      function items() { return Array.from(menu.querySelectorAll("[role='menuitem']")); }
+      function items() {
+        return Array.from(menu.querySelectorAll("[role='menuitem']"));
+      }
       function opened(open) {
-        button.setAttribute('aria-expanded', String(open));
+        button.setAttribute("aria-expanded", String(open));
         if (open) {
           var first = items()[0];
           if (first) first.focus();
@@ -64,39 +72,41 @@
       }
       if (native) {
         // The browser opens, closes and light-dismisses the menu; follow it.
-        menu.addEventListener('toggle', function(e) { opened(e.newState === 'open'); });
+        menu.addEventListener("toggle", function (e) {
+          opened(e.newState === "open");
+        });
       } else {
         // Fallback: no Popover API.
-        menu.removeAttribute('popover');
+        menu.removeAttribute("popover");
         menu.hidden = true;
-        var setOpen = function(open) {
+        var setOpen = function (open) {
           menu.hidden = !open;
           opened(open);
         };
-        button.addEventListener('click', function() {
+        button.addEventListener("click", function () {
           setOpen(menu.hidden);
         });
-        menu.addEventListener('keydown', function(e) {
-          if (e.key === 'Escape') {
+        menu.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") {
             e.preventDefault();
             setOpen(false);
             button.focus();
           }
         });
       }
-      menu.addEventListener('keydown', function(e) {
+      menu.addEventListener("keydown", function (e) {
         var list = items();
         var index = list.indexOf(document.activeElement);
-        if (e.key === 'ArrowDown') {
+        if (e.key === "ArrowDown") {
           e.preventDefault();
           if (list.length) list[index < list.length - 1 ? index + 1 : 0].focus();
-        } else if (e.key === 'ArrowUp') {
+        } else if (e.key === "ArrowUp") {
           e.preventDefault();
           if (list.length) list[index > 0 ? index - 1 : list.length - 1].focus();
-        } else if (e.key === 'Home') {
+        } else if (e.key === "Home") {
           e.preventDefault();
           if (list.length) list[0].focus();
-        } else if (e.key === 'End') {
+        } else if (e.key === "End") {
           e.preventDefault();
           if (list.length) list[list.length - 1].focus();
         }

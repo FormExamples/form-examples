@@ -60,4 +60,31 @@ describe("RecordList", () => {
             spy.mock.calls.some((call) => String(call[0]).includes("RecordList has no status")),
         ).toBe(true);
     });
+
+    test("not-applicable is its own status, shown in words", () => {
+        render(Subject, {
+            props: { status: "not-applicable", statusLabel: "Pregnancy: not applicable" },
+        });
+        const list = screen.getByRole("list", { name: "Pregnancy: not applicable" });
+        expect(list.getAttribute("data-status")).toBe("not-applicable");
+        expect(list.querySelector(".record-list-status")!.textContent).toBe(
+            "Pregnancy: not applicable",
+        );
+    });
+
+    test("coverageLabel says what the list is a view of, as its first item", () => {
+        const { container } = render(Subject, {
+            props: {
+                status: "known",
+                statusLabel: "Vital signs",
+                coverageLabel: "Last 12 months, newest first. The GP record did not answer.",
+            },
+        });
+        const first = container.querySelector(".record-list")!.firstElementChild!;
+        expect(first.tagName).toBe("LI");
+        expect(first.className).toBe("record-list-coverage");
+        expect(first.textContent).toBe(
+            "Last 12 months, newest first. The GP record did not answer.",
+        );
+    });
 });

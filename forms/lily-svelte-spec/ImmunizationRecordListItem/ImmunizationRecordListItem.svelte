@@ -6,6 +6,7 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
+    //   subjectLabel: string (optional) — whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first
     //   vaccine: string (required) — the vaccine given; never truncated
     //   occurrence: string (optional) — when it was given, for <time datetime>
     //   occurrenceLabel: string (optional) — that date as the consumer writes it; the <time> shows only when set
@@ -23,6 +24,7 @@
 
     let {
         class: className = "",
+        subjectLabel,
         vaccine,
         occurrence,
         occurrenceLabel,
@@ -33,6 +35,8 @@
         children,
         ...restProps
     }: {
+        /** whose record it is, when it is not the patient's ("Mother", "Fetus 1"); shown first */
+        subjectLabel?: string;
         vaccine: string;
         occurrence?: string;
         occurrenceLabel?: string;
@@ -61,6 +65,8 @@
     data-status={status}
     {...restProps}
 >
+    {#if subjectLabel}<span class="immunization-record-list-item-subject">{subjectLabel}</span
+        >{" "}{/if}
     <span class="immunization-record-list-item-vaccine">{vaccine}</span>
     {#if occurrenceLabel}{" "}<time
             class="immunization-record-list-item-occurrence"

@@ -53,4 +53,35 @@ describe("RecordListItem", () => {
             ),
         ).toBe(true);
     });
+
+    test("says whose record it is before the consumer's content", () => {
+        render(Subject, { props: { subjectLabel: "Mother", children: content } });
+        expect(part("subject")!.textContent).toBe("Mother");
+        expect(root().firstElementChild).toBe(part("subject"));
+    });
+
+    test("a withheld record shows only the consumer's words; one in error keeps its content struck through", () => {
+        const { unmount } = render(Subject, {
+            props: {
+                entryState: "withheld",
+                entryStateLabel: "Restricted: not available to you",
+                children: content,
+            },
+        });
+        expect(root().getAttribute("data-entry-state")).toBe("withheld");
+        expect(root().textContent).not.toContain("Blood pressure");
+        expect(part("entry-state")?.textContent).toBe("Restricted: not available to you");
+        unmount();
+        render(Subject, {
+            props: {
+                entryState: "entered-in-error",
+                entryStateLabel: "Entered in error",
+                children: content,
+            },
+        });
+        expect(root().querySelector("del.record-list-item-entry")?.textContent).toContain(
+            "Blood pressure",
+        );
+        expect(part("entry-state")?.textContent).toBe("Entered in error");
+    });
 });

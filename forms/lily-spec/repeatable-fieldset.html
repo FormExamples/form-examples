@@ -1,0 +1,71 @@
+<!-- repeatable-fieldset.html -->
+<!-- RepeatableFieldset component -->
+<!--
+  Description: a group of identical fieldsets that a person adds to and removes from ("add another")
+  HTML tag: <fieldset>
+  CSS class: repeatable-fieldset (parts: -item, -item-legend, -remove, -add, -status)
+  Spec: spec/lessons/openehr (tasks.md P29-T10)
+  Keyboard: Tab moves through each item's fields, its remove button, then the add button
+  Without script, the add and remove buttons submit the form (name="{name}-add"; name="{name}-remove" with the item's index
+    as value) and the server returns the page one item longer or shorter. With script, the consumer's code adds and removes
+    items, renumbers the legends in its own words, moves focus to the new item's first field on add and to the add button
+    on remove, and may announce the change in the -status region. Remove buttons are left out at the minimum count; the
+    add button is disabled at the maximum. The words are the consumer's.
+-->
+
+<fieldset
+  class="repeatable-fieldset"
+  data-count="2"
+>
+  <legend>Medicines</legend>
+  <fieldset
+    class="repeatable-fieldset-item"
+    data-index="0"
+  >
+    <legend class="repeatable-fieldset-item-legend">Medicine 1</legend>
+    <label for="medicine-0">Name</label>
+    <input
+      id="medicine-0"
+      name="medicine-0"
+      value="Aspirin"
+    />
+    <button
+      type="submit"
+      class="repeatable-fieldset-remove"
+      name="medicines-remove"
+      value="0"
+      formnovalidate
+    >
+      Remove medicine 1
+    </button>
+  </fieldset>
+  <fieldset
+    class="repeatable-fieldset-item"
+    data-index="1"
+  >
+    <legend class="repeatable-fieldset-item-legend">Medicine 2</legend>
+    <label for="medicine-1">Name</label>
+    <input
+      id="medicine-1"
+      name="medicine-1"
+    />
+    <button
+      type="submit"
+      class="repeatable-fieldset-remove"
+      name="medicines-remove"
+      value="1"
+      formnovalidate
+    >
+      Remove medicine 2
+    </button>
+  </fieldset>
+  <button
+    type="submit"
+    class="repeatable-fieldset-add"
+    name="medicines-add"
+    value="1"
+    formnovalidate
+  >
+    Add another medicine
+  </button>
+</fieldset>

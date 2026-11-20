@@ -3,10 +3,15 @@
 <!--
   Description: one record in a record list, with its status and last update around the consumer's content
   HTML tag: <li>
-  CSS class: record-list-item (parts: -status, -updated)
+  Subject: when the record is not the patient's own (a relative's history, a fetus), put the consumer's words first,
+    <span class="record-list-item-subject">Mother</span>, so it is never read as the patient's.
+  CSS class: record-list-item (parts: -subject, -status, -updated)
   Spec: spec/healthcare-ui (tasks.md P28-T3)
   Attributes: data-status (the consumer's code). Each status is also text, in the consumer's words; a part with no text is left out.
     Dates are <time datetime>.
+  Entry state: data-entry-state="withheld" shows only the consumer's words in -entry-state, never the content;
+    data-entry-state="entered-in-error" keeps the content in <del class="record-list-item-entry">, with the words. Neither is
+    ever silently removed (spec/lessons/zoblocks).
 -->
 
 <ul
@@ -24,5 +29,18 @@
       datetime="2026-11-03"
       >Updated 3 Nov 2026</time
     >
+  </li>
+  <li
+    class="record-list-item"
+    data-entry-state="withheld"
+  >
+    <span class="record-list-item-entry-state">Restricted: not available to you</span>
+  </li>
+  <li
+    class="record-list-item"
+    data-entry-state="entered-in-error"
+  >
+    <del class="record-list-item-entry">Pulse 72 bpm</del>
+    <span class="record-list-item-entry-state">Entered in error</span>
   </li>
 </ul>

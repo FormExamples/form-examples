@@ -1,31 +1,44 @@
 <!-- signature-pad.html -->
-<!-- SignaturePad component -->
-<!--
-  Description: a drawing area for capturing a handwritten signature
-  HTML tag: <div>
-  CSS class: signature-pad
-  Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
-  Usage:
-    <div class="signature-pad" aria-label="Example">
-      ...
-    </div>
--->
 
 <div
   class="signature-pad"
-  role="application"
-  aria-label=""
+  role="group"
+  aria-label="Consent signature"
+  aria-describedby="signature-pad-1-attestation"
 >
-  <!-- Consumer provides content -->
+  <p
+    class="signature-pad-attestation"
+    id="signature-pad-1-attestation"
+  >
+    I confirm I have read and understood the information.
+  </p>
+  <!-- Consumer provides the drawing surface, for example <canvas class="signature-pad-canvas"> -->
+  <p class="signature-pad-typed">
+    <label for="signature-pad-1-typed">Or type your full name</label>
+    <input
+      id="signature-pad-1-typed"
+      type="text"
+      autocomplete="name"
+      name="signature"
+    />
+  </p>
+</div>
+
+<div
+  class="signature-pad"
+  role="group"
+  aria-label="Consent signature"
+  data-outcome="declined"
+>
+  <p class="signature-pad-outcome">Declined to sign</p>
 </div>
 
 <script>
   // SignaturePad behavior
-  (function() {
-    'use strict';
+  (function () {
+    "use strict";
     // SignaturePad: consumer implements interactive behavior
-    document.querySelectorAll('.signature-pad').forEach(function(el) {
+    document.querySelectorAll(".signature-pad").forEach(function (el) {
       // Interactive behavior initialization
     });
   })();
