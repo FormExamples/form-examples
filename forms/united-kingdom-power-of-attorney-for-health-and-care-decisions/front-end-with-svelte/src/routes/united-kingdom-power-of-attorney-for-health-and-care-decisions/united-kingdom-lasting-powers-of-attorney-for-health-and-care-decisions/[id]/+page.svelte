@@ -23,7 +23,7 @@
   import Step12AttorneySignatures from '#lib/components/steps/Step12AttorneySignatures.svelte';
   import Step13Registration from '#lib/components/steps/Step13Registration.svelte';
 
-  const plural = 'united-kingdom-powers-of-attorney-for-health-and-care-decisions';
+  const plural = 'united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions';
 
   const stepComponents = [
     Step01Donor,

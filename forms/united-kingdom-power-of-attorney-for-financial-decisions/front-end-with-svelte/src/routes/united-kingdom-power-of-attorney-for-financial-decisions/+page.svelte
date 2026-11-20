@@ -2,7 +2,7 @@
   // The app root is a welcome page: it explains the work and offers prominent
   // links to the two working surfaces — the LPA wizard and the dashboard. The
   // collection routes hold the actual functionality.
-  const plural = 'united-kingdom-powers-of-attorney-for-financial-decisions';
+  const plural = 'united-kingdom-lasting-powers-of-attorney-for-financial-decisions';
 </script>
 
 <main class="mx-16 px-4 py-12">

@@ -5,7 +5,7 @@
   import { validityStatusLabel, validityStatusColor, severityColor } from '#lib/engine/utils.js';
   import { Button } from '@lilydesignsystem/svelte-headless';
 
-  const plural = 'united-kingdom-powers-of-attorney-for-health-and-care-decisions';
+  const plural = 'united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions';
 
   const id = $derived(page.params.id ?? 'new');
   const app = $derived(lpaStore.application);

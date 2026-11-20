@@ -11,7 +11,7 @@
     DEFAULT_TEXT_SIZE
   } from '#lib/config/text-sizes.js';
   let { children } = $props();
-  const plural = 'united-kingdom-powers-of-attorney-for-health-and-care-decisions';
+  const plural = 'united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions';
 
   const navClass = (href: string) =>
     page.url.pathname === href

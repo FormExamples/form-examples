@@ -5,7 +5,7 @@
   import { sampleLpaRows } from '#lib/data/sample-reports.js';
   import { validityStatusLabel } from '#lib/engine/utils.js';
 
-  const plural = 'united-kingdom-powers-of-attorney-for-health-and-care-decisions';
+  const plural = 'united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions';
 
   let statusFilter = $state('');
   let jurisdictionFilter = $state('');

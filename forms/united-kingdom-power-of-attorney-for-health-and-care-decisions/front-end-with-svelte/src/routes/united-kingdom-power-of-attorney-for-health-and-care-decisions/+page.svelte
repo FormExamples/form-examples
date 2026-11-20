@@ -2,7 +2,7 @@
   // The app root is a welcome page: it explains the work and offers prominent
   // links to the two working surfaces — the LP1H application wizard and the
   // clinician / case-worker dashboard.
-  const plural = 'united-kingdom-powers-of-attorney-for-health-and-care-decisions';
+  const plural = 'united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions';
 </script>
 
 <main class="mx-16 px-4 py-12">

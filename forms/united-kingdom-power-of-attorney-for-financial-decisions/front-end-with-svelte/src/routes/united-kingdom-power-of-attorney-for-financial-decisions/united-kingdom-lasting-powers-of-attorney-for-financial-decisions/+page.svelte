@@ -10,7 +10,7 @@
     compositeRiskLabel
   } from '#lib/validator/labels.js';
 
-  const plural = 'united-kingdom-powers-of-attorney-for-financial-decisions';
+  const plural = 'united-kingdom-lasting-powers-of-attorney-for-financial-decisions';
 
   let riskFilter = $state('');
   let modeFilter = $state('');

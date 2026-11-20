@@ -12,7 +12,7 @@
   } from '#lib/validator/labels.js';
   import { Button } from '@lilydesignsystem/svelte-headless';
 
-  const plural = 'united-kingdom-powers-of-attorney-for-financial-decisions';
+  const plural = 'united-kingdom-lasting-powers-of-attorney-for-financial-decisions';
 
   const id = $derived(page.params.id ?? 'new');
   const data = $derived(store.data);

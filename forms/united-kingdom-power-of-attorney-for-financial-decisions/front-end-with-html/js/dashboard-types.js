@@ -40,6 +40,6 @@
  */
 
 /**
- * Response from `GET /api/united-kingdom-power-of-attorney-for-financial-decisions/united_kingdom_powers_of_attorney_for_financial_decisions`.
+ * Response from `GET /api/united-kingdom-power-of-attorney-for-financial-decisions/united_kingdom_lasting_powers_of_attorney_for_financial_decisions`.
  * @typedef {DashboardRow[] | { items: DashboardRow[], total?: number }} DashboardResponse
  */

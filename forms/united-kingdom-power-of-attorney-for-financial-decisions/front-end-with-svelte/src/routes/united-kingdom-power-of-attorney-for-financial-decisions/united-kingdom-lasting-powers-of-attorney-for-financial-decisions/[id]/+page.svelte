@@ -26,7 +26,7 @@
   import Step14ApplicationFee from '#lib/components/steps/Step14ApplicationFee.svelte';
   import Step15RegistrationSignature from '#lib/components/steps/Step15RegistrationSignature.svelte';
 
-  const plural = 'united-kingdom-powers-of-attorney-for-financial-decisions';
+  const plural = 'united-kingdom-lasting-powers-of-attorney-for-financial-decisions';
 
   let errors = $state<{ id: string; message: string }[]>([]);
 

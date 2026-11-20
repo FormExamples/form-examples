@@ -48,9 +48,9 @@ Confirm each destination is an internal route. Use `window.location.href` for ex
 
 #### Files to review
 
-- [ ] `src/routes/united-kingdom-power-of-attorney-for-health-and-care-decisions/united-kingdom-powers-of-attorney-for-health-and-care-decisions/+page.svelte`
-- [ ] `src/routes/united-kingdom-power-of-attorney-for-health-and-care-decisions/united-kingdom-powers-of-attorney-for-health-and-care-decisions/[id]/+page.svelte`
-- [ ] `src/routes/united-kingdom-power-of-attorney-for-health-and-care-decisions/united-kingdom-powers-of-attorney-for-health-and-care-decisions/[id]/report/+page.svelte`
+- [ ] `src/routes/united-kingdom-power-of-attorney-for-health-and-care-decisions/united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions/+page.svelte`
+- [ ] `src/routes/united-kingdom-power-of-attorney-for-health-and-care-decisions/united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions/[id]/+page.svelte`
+- [ ] `src/routes/united-kingdom-power-of-attorney-for-health-and-care-decisions/united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions/[id]/report/+page.svelte`
 
 ### Replace `invalidateAll` with `refreshAll`
 
@@ -66,9 +66,9 @@ Replace `invalidateAll()` with `refreshAll()`. Note that `refreshAll()` will kee
 
 #### Files to review
 
-- [ ] `src/routes/united-kingdom-power-of-attorney-for-health-and-care-decisions/united-kingdom-powers-of-attorney-for-health-and-care-decisions/+page.svelte`
-- [ ] `src/routes/united-kingdom-power-of-attorney-for-health-and-care-decisions/united-kingdom-powers-of-attorney-for-health-and-care-decisions/[id]/+page.svelte`
-- [ ] `src/routes/united-kingdom-power-of-attorney-for-health-and-care-decisions/united-kingdom-powers-of-attorney-for-health-and-care-decisions/[id]/report/+page.svelte`
+- [ ] `src/routes/united-kingdom-power-of-attorney-for-health-and-care-decisions/united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions/+page.svelte`
+- [ ] `src/routes/united-kingdom-power-of-attorney-for-health-and-care-decisions/united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions/[id]/+page.svelte`
+- [ ] `src/routes/united-kingdom-power-of-attorney-for-health-and-care-decisions/united-kingdom-lasting-powers-of-attorney-for-health-and-care-decisions/[id]/report/+page.svelte`
 
 ### CORS for static assets in development is handled by Vite
 
