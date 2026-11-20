@@ -45,8 +45,10 @@ schema. Extensions (`pgcrypto`, `pg_trgm`) stay in `public`.
 The namespace is a schema, not a `<slug>_` name prefix, because Postgres caps
 every identifier at 63 bytes and silently truncates longer ones. A
 `<slug>_<table>` prefix would have pushed 265 tables in 59 forms over that
-limit. A schema name is the slug alone, so it must itself fit in 63 bytes;
-`bin/sql-schema-namespace` refuses a slug whose snake case does not. See
+limit. A schema name is the slug alone. It may itself be longer than 63
+bytes, as two are, in which case Postgres truncates it. Every form's schema
+name must be unique within its first 63 bytes, and `bin/sql-schema-namespace`
+refuses to run otherwise. See
 [`spec/postgresql-name-length/`](../postgresql-name-length/).
 
 The generators that read `sql/` accept the qualifier and name each entity by

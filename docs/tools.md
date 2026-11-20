@@ -2292,9 +2292,12 @@ namespace:
 
 A schema, rather than a `<slug>_` name prefix, because Postgres caps every
 identifier at 63 bytes and silently truncates longer ones: prefixing would push
-265 tables in 59 forms over the cap. A schema name is the snake slug alone,
-which must itself fit; a slug that does not would need an entry in
-`SCHEMA_OVERRIDES` below (none does).
+265 tables in 59 forms over the cap. The schema name is the snake slug in
+full, even where it is longer than 63 bytes (two are: 64 and 70). Postgres
+truncates it, as it does every long identifier, and every reference truncates
+the same way. What must hold, per spec/postgresql-name-length/, is that no
+two forms' schema names are the same within their first 63 bytes; the tool
+refuses to run if they are.
 
 For each form the tool writes `sql/00_create_schema.sql` and, in every other
 numbered `sql/NN_*.sql` file, qualifies each reference to the form's own

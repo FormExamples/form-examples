@@ -23,7 +23,7 @@ raises prioritized flagged issues.
 Principals, family caregivers, elder-law paralegals, and financial-institution
 onboarding staff preparing a durable financial POA before signing. Companion to
 the UK analogue
-[`united-kingdom-power-of-attorney-for-financial-decisions`](../united-kingdom-power-of-attorney-for-financial-decisions/index.md)
+[`united-kingdom-lasting-power-of-attorney-for-financial-decisions`](../united-kingdom-lasting-power-of-attorney-for-financial-decisions/index.md)
 (Mental Capacity Act 2005, OPG registration); the US instrument is not
 registered with any agency and takes effect by signing.
 

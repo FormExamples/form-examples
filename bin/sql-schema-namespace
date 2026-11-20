@@ -12,9 +12,12 @@ namespace:
 
 A schema, rather than a `<slug>_` name prefix, because Postgres caps every
 identifier at 63 bytes and silently truncates longer ones: prefixing would push
-265 tables in 59 forms over the cap. A schema name is the snake slug alone,
-which must itself fit; a slug that does not would need an entry in
-`SCHEMA_OVERRIDES` below (none does).
+265 tables in 59 forms over the cap. The schema name is the snake slug in
+full, even where it is longer than 63 bytes (two are: 64 and 70). Postgres
+truncates it, as it does every long identifier, and every reference truncates
+the same way. What must hold, per spec/postgresql-name-length/, is that no
+two forms' schema names are the same within their first 63 bytes; the tool
+refuses to run if they are.
 
 For each form the tool writes `sql/00_create_schema.sql` and, in every other
 numbered `sql/NN_*.sql` file, qualifies each reference to the form's own
@@ -58,18 +61,24 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FORMS = ROOT / "forms"
 
-# Snake slugs longer than Postgres's 63-byte identifier cap, mapped to a
-# registered short schema name. None today: every slug fits.
-SCHEMA_OVERRIDES: dict[str, str] = {}
-
 NAME = r'"?([a-z_][a-z0-9_]*)"?'
 QUALIFIED = r'"?[a-z_][a-z0-9_]*"?\s*\.\s*'
 
 
+NAMEDATALEN = 63  # Postgres keeps this many bytes of an identifier
+
+
 def schema_of(slug: str) -> str:
-    name = SCHEMA_OVERRIDES.get(slug, slug.replace("-", "_"))
-    assert len(name.encode()) <= 63, name
-    return name
+    return slug.replace("-", "_")
+
+
+def truncation_clashes() -> list[list[str]]:
+    """Forms whose schema names are the same within their first 63 bytes."""
+    seen: dict[bytes, list[str]] = {}
+    for form in FORMS.iterdir():
+        if (form / "sql").is_dir():
+            seen.setdefault(schema_of(form.name).encode()[:NAMEDATALEN], []).append(form.name)
+    return [sorted(names) for names in seen.values() if len(names) > 1]
 
 
 def title_of(form: pathlib.Path) -> str:
@@ -205,6 +214,12 @@ def main() -> int:
         return 0
     if not args.all and not args.slugs:
         parser.error("name one or more slugs, or --all")
+    clashes = truncation_clashes()
+    if clashes:
+        for names in clashes:
+            print(f"sql-schema-namespace: schema names clash within {NAMEDATALEN} bytes: {', '.join(names)}",
+                  file=sys.stderr)
+        return 1
 
     changed_forms = changed_files = 0
     for form in forms(args):

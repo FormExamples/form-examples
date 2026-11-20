@@ -61,7 +61,7 @@ yes/no, location-of-document free text):
 - Advance Statement — see separate form
   `advance-statement-about-care`.
 - Lasting Power of Attorney for Health and Welfare — see separate form
-  `united-kingdom-power-of-attorney-for-health-and-care-decisions`.
+  `united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions`.
 - Do Not Attempt Cardiopulmonary Resuscitation (DNACPR) decision — UK
   national DNACPR form.
 

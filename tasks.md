@@ -2858,7 +2858,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       `bone-marrow-donation-assessment`, `code-of-conduct-notice`,
       `dietic-assessment`, `eye-prescription`, `organ-donation-assessment`,
       `research-and-planning-privacy-notice`, `structured-medication-review`,
-      `united-kingdom-power-of-attorney-for-financial-decisions`,
+      `united-kingdom-lasting-power-of-attorney-for-financial-decisions`,
       `…-for-health-and-care-decisions`: the empty factory does not satisfy
       the grader (throws on `undefined.presentingProblems`,
       `undefined.dateOfBirth`, `undefined.find` …). Make the graders
@@ -3147,7 +3147,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       including 2 urgent). All nine matched hand derivation exactly.
       Fleet: `bin/test-personas` forms 344/344 PASS, personas
       1148/1148 PASS, 0 FAIL; `bin/test-e2e --html` 6/6 passed.
-      2 more done: `united-kingdom-power-of-attorney-for-
+      2 more done: `united-kingdom-lasting-power-of-attorney-for-
       financial-decisions` (`validateLpa`, also exported as
       `calculateGrade`, folding statutory blockers, non-blocking
       flags, and the validity-band derivation into one call —
@@ -3199,7 +3199,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       PASS, personas 1169/1169 PASS, 0 FAIL; `bin/test-e2e --html`
       2/2, 4/4, and 4/4 passed across the three batches.
       Final form done, closing the backlog:
-      `united-kingdom-power-of-attorney-for-health-and-care-
+      `united-kingdom-lasting-power-of-attorney-for-health-and-care-
       decisions` (`calculateLpaValidity`, folding `detectAdditionalFlags`
       into its own return; a statutory-fatal cascade across seven rule
       modules -- donor, attorney, certificate-provider, signature-order,
