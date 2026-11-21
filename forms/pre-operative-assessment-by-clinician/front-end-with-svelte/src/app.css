@@ -82,7 +82,17 @@ body {
   }
 }
 
-.visually-hidden {
+/* The Lily themes set `overflow-wrap: anywhere` on every th/td, which in an
+   auto-sized table lets columns shrink until headers break mid-word. In the
+   DataGrid, wrap only between words: its .data-grid-scroll wrapper scrolls. */
+.data-grid :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+/* The Lily DataGrid's live region (sort, filter, selection announcements) is
+   for screen readers; the grid ships no CSS, so hide it here. */
+.visually-hidden,
+.data-grid-status {
   position: absolute;
   width: 1px;
   height: 1px;

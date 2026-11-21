@@ -1,7 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { browser } from '$app/env';
-  import { Grid, Willow, WillowDark, type IApi } from '@svar-ui/svelte-grid';
+  import DataGrid, { type DataGridColumn } from '@lilydesignsystem/svelte-data-grid';
   import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
 
   let riskFilter = $state('');
@@ -14,30 +13,8 @@
         (asaFilter === '' || r.asaGrade === asaFilter)
     )
   );
-
-  // Follow the active Lily theme: pick the dark SVAR skin when the theme's
-  // base surface is dark. Recomputed whenever <html data-theme> changes (after
-  // the new theme stylesheet has applied its tokens).
-  let isDark = $state(false);
-  function computeDark(): boolean {
-    if (!browser) return false;
-    const v = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-base-100')
-      .trim();
-    const m = v.match(/oklch\(\s*([0-9.]+%?)/);
-    if (!m) return false;
-    const l = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-    return l < 0.5;
-  }
-  $effect(() => {
-    if (!browser) return;
-    const update = () => (isDark = computeDark());
-    update();
-    const obs = new MutationObserver(() => setTimeout(update, 120));
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  });
-  const GridTheme = $derived(isDark ? WillowDark : Willow);
+  // Plain objects, as the grid's DataGridRow (a string-keyed record) needs.
+  const gridRows = $derived(rows.map((r) => ({ ...r })));
 
   const riskLabel: Record<string, string> = {
     low: 'Low',
@@ -46,55 +23,35 @@
     critical: 'Critical'
   };
 
-  // SVAR DataGrid columns. The ASA grade, RCRI, STOP-BANG, CFS, composite risk,
+  // Lily DataGrid columns. The ASA grade, RCRI, STOP-BANG, CFS, composite risk,
   // and flag count all render through the shared engine output so the dashboard
-  // and report stay aligned.
-  const columns = [
-    { id: 'id', header: 'Assessment', width: 130 },
-    { id: 'patientName', header: 'Patient', flexgrow: 2, sort: true },
-    { id: 'assessedDate', header: 'Assessed', width: 120, sort: true },
-    { id: 'procedure', header: 'Procedure', flexgrow: 2 },
-    {
-      id: 'asaGrade',
-      header: 'ASA',
-      width: 80,
-      sort: true,
-      template: (v: string) => (v ? `ASA ${v}` : '—')
-    },
-    { id: 'rcriScore', header: 'RCRI', width: 80, sort: true },
-    {
-      id: 'stopbangScore',
-      header: 'STOP-BANG',
-      width: 110,
-      sort: true
-    },
-
-    {
-      id: 'frailtyScale',
-      header: 'CFS',
-      width: 80,
-      sort: true,
-      template: (v: number | null) => (v == null ? '—' : String(v))
-    },
+  // and report stay aligned. A missing value shows the grid's emptyValue.
+  const columns: DataGridColumn[] = [
+    { id: 'id', header: 'Assessment' },
+    { id: 'patientName', header: 'Patient', sortable: true },
+    { id: 'assessedDate', header: 'Assessed', sortable: true },
+    { id: 'procedure', header: 'Procedure' },
+    { id: 'asaGrade', header: 'ASA', sortable: true, format: (v) => `ASA ${v}` },
+    { id: 'rcriScore', header: 'RCRI', sortable: true },
+    { id: 'stopbangScore', header: 'STOP-BANG', sortable: true },
+    { id: 'frailtyScale', header: 'CFS', sortable: true },
     {
       id: 'compositeRisk',
       header: 'Composite risk',
-      width: 140,
-      sort: true,
-      template: (v: string) => riskLabel[v] ?? v
+      sortable: true,
+      format: (v) => riskLabel[String(v)] ?? String(v)
     },
-    { id: 'flagCount', header: 'Flags', width: 80, sort: true }
+    { id: 'flagCount', header: 'Flags', sortable: true }
   ];
 
-  function init(api: IApi) {
-    api.exec('sort-rows', { key: 'patientName', order: 'asc' });
-    // Open an assessment when its row is selected.
-    api.on('select-row', (ev: { id?: string | number }) => {
-      if (ev?.id != null)
-        goto(
-          `/pre-operative-assessment-by-clinician/pre-operative-assessments-by-clinician/${ev.id}`
-        );
-    });
+  let sort = $state<{ columnId: string; direction: 'ascending' | 'descending' | 'none' }>({
+    columnId: 'patientName',
+    direction: 'ascending'
+  });
+
+  // Open an assessment when its row is activated (click, or Enter on a cell).
+  function open(_row: unknown, id: string) {
+    goto(`/pre-operative-assessment-by-clinician/pre-operative-assessments-by-clinician/${id}`);
   }
 </script>
 
@@ -140,9 +97,18 @@
     </label>
   </div>
 
-  <div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-    <GridTheme><Grid data={rows} {columns} {init} /></GridTheme>
-  </div>
+  <DataGrid
+    label="Assessed patients"
+    {columns}
+    rows={gridRows}
+    rowId={(row) => String(row.id)}
+    bind:sort
+    emptyValue="—"
+    onRowActivate={open}
+    labels={{
+      sortAnnouncement: (header, direction) => `${header} sorted ${direction}`
+    }}
+  />
 
   <p class="mt-4 text-sm text-base-content/60">{rows.length} patients</p>
 </main>
