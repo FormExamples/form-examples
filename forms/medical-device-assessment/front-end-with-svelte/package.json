@@ -44,13 +44,13 @@
     "vitest": "^5.1.0"
   },
   "dependencies": {
+    "@lilydesignsystem/svelte-data-grid": "^0.11.2",
     "@lilydesignsystem/svelte-headless": "^0.11.0",
     "@lilydesignsystem/svelte-locale-picker": "^0.3.3",
     "@lilydesignsystem/svelte-picker-bar": "^0.7.0",
     "@lilydesignsystem/svelte-share-picker": "^0.3.2",
     "@lilydesignsystem/svelte-text-size-picker": "^0.3.2",
     "@lilydesignsystem/svelte-theme-picker": "^0.4.0",
-    "@svar-ui/svelte-grid": "^2.7.6",
     "pdfmake": "^0.3.14"
   },
   "imports": {

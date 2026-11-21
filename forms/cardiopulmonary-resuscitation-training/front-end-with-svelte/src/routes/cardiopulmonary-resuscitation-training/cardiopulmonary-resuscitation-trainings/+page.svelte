@@ -1,7 +1,16 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { browser } from '$app/env';
-  import { Grid, Willow, WillowDark, type IApi } from '@svar-ui/svelte-grid';
+  import DataGrid, {
+    type DataGridColumn,
+    type DataGridRow
+  } from '@lilydesignsystem/svelte-data-grid';
+
+  // A column's template, typed as it was written, as a DataGrid format. A missing
+  // value (null, undefined or '') is left to the grid's emptyValue.
+  const fmt =
+    <T,>(template: (value: T, row: DataGridRow) => string) =>
+    (value: unknown, row: DataGridRow): string =>
+      value === null || value === undefined || value === '' ? '' : template(value as T, row);
   import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
   import { outcomeLabel, roleLabel } from '#lib/engine/utils.js';
   import type { Outcome, TraineeRole } from '#lib/engine/types.js';
@@ -17,71 +26,43 @@
     )
   );
 
-  // Follow the active Lily theme: pick the dark SVAR skin when the theme's
-  // base surface is dark. Recomputed whenever <html data-theme> changes (after
-  // the new theme stylesheet has applied its tokens).
-  let isDark = $state(false);
-  function computeDark(): boolean {
-    if (!browser) return false;
-    const v = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-base-100')
-      .trim();
-    const m = v.match(/oklch\(\s*([0-9.]+%?)/);
-    if (!m) return false;
-    const l = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-    return l < 0.5;
-  }
-  $effect(() => {
-    if (!browser) return;
-    const update = () => (isDark = computeDark());
-    update();
-    const obs = new MutationObserver(() => setTimeout(update, 120));
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  });
-  const GridTheme = $derived(isDark ? WillowDark : Willow);
-
   // SVAR DataGrid columns. The Pass/Fail outcome, critical-action failures,
   // and deficiency counts render through the shared engine output so the
   // dashboard and report stay aligned.
-  const columns = [
-    { id: 'id', header: 'Assessment', width: 130 },
+  const columns: DataGridColumn[] = [
+    { id: 'id', header: 'Assessment' },
     {
       id: 'traineeName',
       header: 'Trainee',
-      flexgrow: 2,
-      sort: true
+      sortable: true
     },
 
     {
       id: 'role',
       header: 'Role',
-      width: 130,
-      sort: true,
-      template: (v: TraineeRole) => roleLabel(v) || '—'
+      sortable: true,
+      format: fmt((v: TraineeRole) => roleLabel(v) || '—')
     },
-    { id: 'sessionDate', header: 'Session', width: 120, sort: true },
+    { id: 'sessionDate', header: 'Session', sortable: true },
     {
       id: 'outcome',
       header: 'Outcome',
-      width: 110,
-      sort: true,
-      template: (v: Outcome) => outcomeLabel(v)
+      sortable: true,
+      format: fmt((v: Outcome) => outcomeLabel(v))
     },
-    { id: 'criticalFailures', header: 'Critical fails', width: 120, sort: true },
-    { id: 'deficiencies', header: 'Deficiencies', width: 120, sort: true },
-    { id: 'flagCount', header: 'Flags', width: 90, sort: true }
+    { id: 'criticalFailures', header: 'Critical fails', sortable: true },
+    { id: 'deficiencies', header: 'Deficiencies', sortable: true },
+    { id: 'flagCount', header: 'Flags', sortable: true }
   ];
 
-  function init(api: IApi) {
-    api.exec('sort-rows', { key: 'traineeName', order: 'asc' });
-    // Open an assessment when its row is selected.
-    api.on('select-row', (ev: { id?: string | number }) => {
-      if (ev?.id != null)
-        goto(
-          `/cardiopulmonary-resuscitation-training/cardiopulmonary-resuscitation-trainings/${ev.id}`
-        );
-    });
+  let sort = $state<{ columnId: string; direction: 'ascending' | 'descending' | 'none' }>({
+    columnId: 'traineeName',
+    direction: 'ascending'
+  });
+
+  // Open a record when its row is activated (click, or Enter on a cell).
+  function open(_row: DataGridRow, id: string) {
+    goto(`/cardiopulmonary-resuscitation-training/cardiopulmonary-resuscitation-trainings/${id}`);
   }
 </script>
 
@@ -124,9 +105,16 @@
     </label>
   </div>
 
-  <div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-    <GridTheme><Grid data={rows} {columns} {init} /></GridTheme>
-  </div>
+  <DataGrid
+    label="Training coordinator dashboard"
+    {columns}
+    rows={rows.map((row) => ({ ...row }))}
+    rowId={(row) => String(row.id)}
+    bind:sort
+    emptyValue="—"
+    onRowActivate={open}
+    labels={{ sortAnnouncement: (header, direction) => `${header} sorted ${direction}` }}
+  />
 
   <p class="mt-4 text-sm text-base-content/60">{rows.length} trainees</p>
 </main>

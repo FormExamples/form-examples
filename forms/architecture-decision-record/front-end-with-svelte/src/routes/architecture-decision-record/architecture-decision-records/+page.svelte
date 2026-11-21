@@ -1,7 +1,16 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { browser } from '$app/env';
-  import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
+  import DataGrid, {
+    type DataGridColumn,
+    type DataGridRow
+  } from '@lilydesignsystem/svelte-data-grid';
+
+  // A column's template, typed as it was written, as a DataGrid format. A missing
+  // value (null, undefined or '') is left to the grid's emptyValue.
+  const fmt =
+    <T,>(template: (value: T, row: DataGridRow) => string) =>
+    (value: unknown, row: DataGridRow): string =>
+      value === null || value === undefined || value === '' ? '' : template(value as T, row);
   import { sampleAdrRows } from '#lib/data/sample-reports.js';
   import { statusLabel, groupLabel, pad4 } from '#lib/engine/utils.js';
   import type { Status, DecisionGroup } from '#lib/types.js';
@@ -17,78 +26,48 @@
     )
   );
 
-  // Follow the active Lily theme: pick the dark SVAR skin when the theme's
-  // base surface is dark. Recomputed whenever <html data-theme> changes (after
-  // the new theme stylesheet has applied its tokens).
-  let isDark = $state(false);
-  function computeDark(): boolean {
-    if (!browser) return false;
-    const v = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-base-100')
-      .trim();
-    const m = v.match(/oklch\(\s*([0-9.]+%?)/);
-    if (!m) return false;
-    const l = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-    return l < 0.5;
-  }
-  $effect(() => {
-    if (!browser) return;
-    const update = () => (isDark = computeDark());
-    update();
-    const obs = new MutationObserver(() => setTimeout(update, 120));
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  });
-  const GridTheme = $derived(isDark ? WillowDark : Willow);
-
   // SVAR DataGrid columns. Status, group, completeness and flags render through
   // the shared engine output so the register and report stay aligned.
-  const columns = [
-    { id: 'number', header: 'No.', width: 80, sort: true, template: (v: number | null) => pad4(v) },
-    { id: 'title', header: 'Title', flexgrow: 2, sort: true },
+  const columns: DataGridColumn[] = [
+    { id: 'number', header: 'No.', sortable: true, format: fmt((v: number | null) => pad4(v)) },
+    { id: 'title', header: 'Title', sortable: true },
     {
       id: 'status',
       header: 'Status',
-      width: 120,
-      sort: true,
-      template: (v: Status) => statusLabel(v)
+      sortable: true,
+      format: fmt((v: Status) => statusLabel(v))
     },
     {
       id: 'decisionGroup',
       header: 'Group',
-      width: 130,
-      sort: true,
-      template: (v: DecisionGroup) => groupLabel(v)
+      sortable: true,
+      format: fmt((v: DecisionGroup) => groupLabel(v))
     },
     {
       id: 'completeness',
       header: 'Complete',
-      width: 110,
-      sort: true,
-      template: (v: number) => `${v}%`
+      sortable: true,
+      format: fmt((v: number) => `${v}%`)
     },
-    { id: 'chosenPosition', header: 'Chosen', flexgrow: 1, template: (v: string) => v || '—' },
-    { id: 'authorName', header: 'Author', width: 150, sort: true },
+    { id: 'chosenPosition', header: 'Chosen', format: fmt((v: string) => v || '—') },
+    { id: 'authorName', header: 'Author', sortable: true },
     {
       id: 'decisionDate',
       header: 'Date',
-      width: 120,
-      sort: true,
-      template: (v: string) => v || '—'
+      sortable: true,
+      format: fmt((v: string) => v || '—')
     },
-    { id: 'flagCount', header: 'Flags', width: 80, sort: true }
+    { id: 'flagCount', header: 'Flags', sortable: true }
   ];
 
-  function init(api: {
-    exec: (k: string, p: unknown) => void;
-    on: (e: string, cb: (ev: { id?: string | number }) => void) => void;
-  }) {
-    api.exec('sort-rows', { key: 'number', order: 'asc' });
-    // Open a record when its row is selected.
-    api.on('select-row', (ev: { id?: string | number }) => {
-      if (ev?.id != null)
-        goto(`/architecture-decision-record/architecture-decision-records/${ev.id}`);
-    });
+  let sort = $state<{ columnId: string; direction: 'ascending' | 'descending' | 'none' }>({
+    columnId: 'number',
+    direction: 'ascending'
+  });
+
+  // Open a record when its row is activated (click, or Enter on a cell).
+  function open(_row: DataGridRow, id: string) {
+    goto(`/architecture-decision-record/architecture-decision-records/${id}`);
   }
 </script>
 
@@ -137,9 +116,16 @@
     </label>
   </div>
 
-  <div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-    <GridTheme><Grid data={rows} {columns} {init} /></GridTheme>
-  </div>
+  <DataGrid
+    label="Architecture decision register"
+    {columns}
+    rows={rows.map((row) => ({ ...row }))}
+    rowId={(row) => String(row.id)}
+    bind:sort
+    emptyValue="—"
+    onRowActivate={open}
+    labels={{ sortAnnouncement: (header, direction) => `${header} sorted ${direction}` }}
+  />
 
   <p class="mt-4 text-sm text-base-content/60">{rows.length} records</p>
 </main>

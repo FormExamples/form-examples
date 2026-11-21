@@ -1,7 +1,16 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { browser } from '$app/env';
-  import { Grid, Willow, WillowDark, type IApi } from '@svar-ui/svelte-grid';
+  import DataGrid, {
+    type DataGridColumn,
+    type DataGridRow
+  } from '@lilydesignsystem/svelte-data-grid';
+
+  // A column's template, typed as it was written, as a DataGrid format. A missing
+  // value (null, undefined or '') is left to the grid's emptyValue.
+  const fmt =
+    <T,>(template: (value: T, row: DataGridRow) => string) =>
+    (value: unknown, row: DataGridRow): string =>
+      value === null || value === undefined || value === '' ? '' : template(value as T, row);
   import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
   import { resultClassLabel, managementActionLabel, formatHb } from '#lib/engine/utils.js';
 
@@ -18,76 +27,49 @@
 
   const hubs = $derived([...new Set(sampleAssessmentRows.map((r) => r.screeningHub))].sort());
 
-  // Follow the active Lily theme: pick the dark SVAR skin when the theme's
-  // base surface is dark. Recomputed whenever <html data-theme> changes (after
-  // the new theme stylesheet has applied its tokens).
-  let isDark = $state(false);
-  function computeDark(): boolean {
-    if (!browser) return false;
-    const v = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-base-100')
-      .trim();
-    const m = v.match(/oklch\(\s*([0-9.]+%?)/);
-    if (!m) return false;
-    const l = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-    return l < 0.5;
-  }
-  $effect(() => {
-    if (!browser) return;
-    const update = () => (isDark = computeDark());
-    update();
-    const obs = new MutationObserver(() => setTimeout(update, 120));
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  });
-  const GridTheme = $derived(isDark ? WillowDark : Willow);
-
   // SVAR DataGrid columns. Result class, management action, and the symptomatic
   // flag render through the shared engine output so the dashboard and report
   // stay aligned.
-  const columns = [
-    { id: 'id', header: 'Record', width: 130 },
-    { id: 'participantIdentifier', header: 'Participant ID', width: 140, sort: true },
-    { id: 'participantName', header: 'Participant', flexgrow: 2, sort: true },
-    { id: 'reviewedDate', header: 'Reviewed', width: 120, sort: true },
-    { id: 'screeningHub', header: 'Hub', width: 140, sort: true },
+  const columns: DataGridColumn[] = [
+    { id: 'id', header: 'Record' },
+    { id: 'participantIdentifier', header: 'Participant ID', sortable: true },
+    { id: 'participantName', header: 'Participant', sortable: true },
+    { id: 'reviewedDate', header: 'Reviewed', sortable: true },
+    { id: 'screeningHub', header: 'Hub', sortable: true },
     {
       id: 'faecalHb',
       header: 'Faecal Hb',
-      width: 120,
-      sort: true,
-      template: (v: number | null) => formatHb(v)
+      sortable: true,
+      format: fmt((v: number | null) => formatHb(v))
     },
     {
       id: 'resultClass',
       header: 'Result',
-      width: 190,
-      sort: true,
-      template: (v: string) => resultClassLabel(v as never)
+      sortable: true,
+      format: fmt((v: string) => resultClassLabel(v as never))
     },
     {
       id: 'managementAction',
       header: 'Management',
-      width: 190,
-      sort: true,
-      template: (v: string) => managementActionLabel(v as never)
+      sortable: true,
+      format: fmt((v: string) => managementActionLabel(v as never))
     },
     {
       id: 'symptomaticPathway',
       header: 'Symptomatic',
-      width: 120,
-      template: (v: boolean) => (v ? 'Yes' : 'No')
+      format: fmt((v: boolean) => (v ? 'Yes' : 'No'))
     },
-    { id: 'flagCount', header: 'Flags', width: 80, sort: true }
+    { id: 'flagCount', header: 'Flags', sortable: true }
   ];
 
-  function init(api: IApi) {
-    api.exec('sort-rows', { key: 'participantName', order: 'asc' });
-    // Open a record when its row is selected.
-    api.on('select-row', (ev: { id?: string | number }) => {
-      if (ev?.id != null)
-        goto(`/bowel-cancer-screening-with-faecal-immunochemical-test/fit-screenings/${ev.id}`);
-    });
+  let sort = $state<{ columnId: string; direction: 'ascending' | 'descending' | 'none' }>({
+    columnId: 'participantName',
+    direction: 'ascending'
+  });
+
+  // Open a record when its row is activated (click, or Enter on a cell).
+  function open(_row: DataGridRow, id: string) {
+    goto(`/bowel-cancer-screening-with-faecal-immunochemical-test/fit-screenings/${id}`);
   }
 </script>
 
@@ -128,9 +110,16 @@
     </label>
   </div>
 
-  <div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-    <GridTheme><Grid data={rows} {columns} {init} /></GridTheme>
-  </div>
+  <DataGrid
+    label="FIT screening dashboard"
+    {columns}
+    rows={rows.map((row) => ({ ...row }))}
+    rowId={(row) => String(row.id)}
+    bind:sort
+    emptyValue="—"
+    onRowActivate={open}
+    labels={{ sortAnnouncement: (header, direction) => `${header} sorted ${direction}` }}
+  />
 
   <p class="mt-4 text-sm text-base-content/60">{rows.length} screening episodes</p>
 </main>

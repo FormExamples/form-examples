@@ -1,7 +1,16 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { browser } from '$app/env';
-  import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
+  import DataGrid, {
+    type DataGridColumn,
+    type DataGridRow
+  } from '@lilydesignsystem/svelte-data-grid';
+
+  // A column's template, typed as it was written, as a DataGrid format. A missing
+  // value (null, undefined or '') is left to the grid's emptyValue.
+  const fmt =
+    <T,>(template: (value: T, row: DataGridRow) => string) =>
+    (value: unknown, row: DataGridRow): string =>
+      value === null || value === undefined || value === '' ? '' : template(value as T, row);
   import { sampleRequestRows } from '#lib/data/sample-reports.js';
   import {
     studyTypeLabel,
@@ -24,102 +33,68 @@
     )
   );
 
-  // Follow the active Lily theme: pick the dark SVAR skin when the theme's
-  // base surface is dark. Recomputed whenever <html data-theme> changes (after
-  // the new theme stylesheet has applied its tokens).
-  let isDark = $state(false);
-  function computeDark(): boolean {
-    if (!browser) return false;
-    const v = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-base-100')
-      .trim();
-    const m = v.match(/oklch\(\s*([0-9.]+%?)/);
-    if (!m) return false;
-    const l = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-    return l < 0.5;
-  }
-  $effect(() => {
-    if (!browser) return;
-    const update = () => (isDark = computeDark());
-    update();
-    const obs = new MutationObserver(() => setTimeout(update, 120));
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  });
-  const GridTheme = $derived(isDark ? WillowDark : Willow);
-
   // SVAR DataGrid columns. Graded axes render through the shared engine label
   // helpers so the dashboard and the report stay in lock-step.
-  const columns = [
-    { id: 'id', header: 'Request', width: 110 },
+  const columns: DataGridColumn[] = [
+    { id: 'id', header: 'Request' },
     {
       id: 'patientName',
       header: 'Patient',
-      flexgrow: 2,
-      sort: true
+      sortable: true
     },
 
     {
       id: 'studyType',
       header: 'Study',
-      flexgrow: 2,
-      template: (v: string) => studyTypeLabel(v as never)
+      format: fmt((v: string) => studyTypeLabel(v as never))
     },
     {
       id: 'primaryIndication',
       header: 'Indication',
-      flexgrow: 2,
-      template: (v: string) => indicationLabel(v as never)
+      format: fmt((v: string) => indicationLabel(v as never))
     },
     {
       id: 'appropriatenessBand',
       header: 'Appropriateness',
-      width: 150,
-      template: (v: string) => appropriatenessLabel(v as never)
+      format: fmt((v: string) => appropriatenessLabel(v as never))
     },
     {
       id: 'safetyBand',
       header: 'Safety',
-      width: 120,
-      template: (v: string) => safetyLabel(v as never)
+      format: fmt((v: string) => safetyLabel(v as never))
     },
     {
       id: 'radiationDoseBand',
       header: 'Dose',
-      width: 100,
-      template: (v: string) => radiationDoseLabel(v as never)
+      format: fmt((v: string) => radiationDoseLabel(v as never))
     },
     {
       id: 'completenessPercent',
       header: 'Complete',
-      width: 100,
-      template: (v: number) => `${v}%`
+      format: fmt((v: number) => `${v}%`)
     },
     {
       id: 'triageTier',
       header: 'Triage',
-      width: 120,
-      sort: true,
-      template: (v: string) => triageTierLabel(v as never)
+      sortable: true,
+      format: fmt((v: string) => triageTierLabel(v as never))
     },
     {
       id: 'recommendation',
       header: 'Recommendation',
-      width: 170,
-      template: (v: string) => recommendationLabel(v as never)
+      format: fmt((v: string) => recommendationLabel(v as never))
     },
-    { id: 'flagCount', header: 'Flags', width: 80, sort: true }
+    { id: 'flagCount', header: 'Flags', sortable: true }
   ];
 
-  function init(api: {
-    exec: (cmd: string, payload: unknown) => void;
-    on: (ev: string, cb: (e: { id?: string | number }) => void) => void;
-  }) {
-    api.exec('sort-rows', { key: 'triageTier', order: 'asc' });
-    // Open a request when its row is selected.
-    api.on('select-row', (ev: { id?: string | number }) => {
-      if (ev?.id != null) goto(`/fluoroscopy-test-request/fluoroscopy-test-requests/${ev.id}`);
-    });
+  let sort = $state<{ columnId: string; direction: 'ascending' | 'descending' | 'none' }>({
+    columnId: 'triageTier',
+    direction: 'ascending'
+  });
+
+  // Open a record when its row is activated (click, or Enter on a cell).
+  function open(_row: DataGridRow, id: string) {
+    goto(`/fluoroscopy-test-request/fluoroscopy-test-requests/${id}`);
   }
 </script>
 
@@ -161,9 +136,16 @@
     </label>
   </div>
 
-  <div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-    <GridTheme><Grid data={rows} {columns} {init} /></GridTheme>
-  </div>
+  <DataGrid
+    label="Fluoroscopy vetting dashboard"
+    {columns}
+    rows={rows.map((row) => ({ ...row }))}
+    rowId={(row) => String(row.id)}
+    bind:sort
+    emptyValue="—"
+    onRowActivate={open}
+    labels={{ sortAnnouncement: (header, direction) => `${header} sorted ${direction}` }}
+  />
 
   <p class="mt-4 text-sm text-base-content/60">{rows.length} requests</p>
 </main>

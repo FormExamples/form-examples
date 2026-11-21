@@ -1,7 +1,16 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { browser } from '$app/env';
-  import { Grid, Willow, WillowDark, type IApi } from '@svar-ui/svelte-grid';
+  import DataGrid, {
+    type DataGridColumn,
+    type DataGridRow
+  } from '@lilydesignsystem/svelte-data-grid';
+
+  // A column's template, typed as it was written, as a DataGrid format. A missing
+  // value (null, undefined or '') is left to the grid's emptyValue.
+  const fmt =
+    <T,>(template: (value: T, row: DataGridRow) => string) =>
+    (value: unknown, row: DataGridRow): string =>
+      value === null || value === undefined || value === '' ? '' : template(value as T, row);
   import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
   import { careSettingLabel, riskZoneLabel, formatTsb } from '#lib/engine/utils.js';
   import type { RiskZone } from '#lib/engine/types.js';
@@ -17,86 +26,58 @@
     )
   );
 
-  // Follow the active Lily theme: pick the dark SVAR skin when the theme's
-  // base surface is dark. Recomputed whenever <html data-theme> changes (after
-  // the new theme stylesheet has applied its tokens).
-  let isDark = $state(false);
-  function computeDark(): boolean {
-    if (!browser) return false;
-    const v = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-base-100')
-      .trim();
-    const m = v.match(/oklch\(\s*([0-9.]+%?)/);
-    if (!m) return false;
-    const l = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-    return l < 0.5;
-  }
-  $effect(() => {
-    if (!browser) return;
-    const update = () => (isDark = computeDark());
-    update();
-    const obs = new MutationObserver(() => setTimeout(update, 120));
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  });
-  const GridTheme = $derived(isDark ? WillowDark : Willow);
-
   // SVAR DataGrid columns. Risk zone and treatment-threshold signals render
   // through the shared engine output so the dashboard and report stay aligned.
-  const columns = [
-    { id: 'id', header: 'Assessment', width: 130 },
-    { id: 'infantIdentifier', header: 'Infant ID', width: 130, sort: true },
-    { id: 'patientName', header: 'Infant', flexgrow: 2, sort: true },
+  const columns: DataGridColumn[] = [
+    { id: 'id', header: 'Assessment' },
+    { id: 'infantIdentifier', header: 'Infant ID', sortable: true },
+    { id: 'patientName', header: 'Infant', sortable: true },
     {
       id: 'assessedDate',
       header: 'Assessed',
-      width: 120,
-      sort: true
+      sortable: true
     },
 
     {
       id: 'careSetting',
       header: 'Setting',
-      width: 150,
-      sort: true,
-      template: (v: string) => careSettingLabel(v as never) || '—'
+      sortable: true,
+      format: fmt((v: string) => careSettingLabel(v as never) || '—')
     },
     {
       id: 'ageHours',
       header: 'Age (h)',
-      width: 90,
-      sort: true,
-      template: (v: number | null) => (v === null ? '—' : String(v))
+      sortable: true,
+      format: fmt((v: number | null) => (v === null ? '—' : String(v)))
     },
     {
       id: 'tsb',
       header: 'TSB',
-      width: 110,
-      sort: true,
-      template: (v: number | null) => formatTsb(v)
+      sortable: true,
+      format: fmt((v: number | null) => formatTsb(v))
     },
     {
       id: 'riskZone',
       header: 'Risk zone',
-      width: 190,
-      sort: true,
-      template: (v: RiskZone) => riskZoneLabel(v)
+      sortable: true,
+      format: fmt((v: RiskZone) => riskZoneLabel(v))
     },
     {
       id: 'aboveExchange',
       header: 'Exchange',
-      width: 100,
-      template: (v: boolean) => (v ? 'At/above' : 'Below')
+      format: fmt((v: boolean) => (v ? 'At/above' : 'Below'))
     },
-    { id: 'flagCount', header: 'Flags', width: 80, sort: true }
+    { id: 'flagCount', header: 'Flags', sortable: true }
   ];
 
-  function init(api: IApi) {
-    api.exec('sort-rows', { key: 'patientName', order: 'asc' });
-    // Open an assessment when its row is selected.
-    api.on('select-row', (ev: { id?: string | number }) => {
-      if (ev?.id != null) goto(`/bhutani-bilirubin-nomogram/bhutani-bilirubin-nomograms/${ev.id}`);
-    });
+  let sort = $state<{ columnId: string; direction: 'ascending' | 'descending' | 'none' }>({
+    columnId: 'patientName',
+    direction: 'ascending'
+  });
+
+  // Open a record when its row is activated (click, or Enter on a cell).
+  function open(_row: DataGridRow, id: string) {
+    goto(`/bhutani-bilirubin-nomogram/bhutani-bilirubin-nomograms/${id}`);
   }
 </script>
 
@@ -140,9 +121,16 @@
     </label>
   </div>
 
-  <div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-    <GridTheme><Grid data={rows} {columns} {init} /></GridTheme>
-  </div>
+  <DataGrid
+    label="Bhutani nomogram dashboard"
+    {columns}
+    rows={rows.map((row) => ({ ...row }))}
+    rowId={(row) => String(row.id)}
+    bind:sort
+    emptyValue="—"
+    onRowActivate={open}
+    labels={{ sortAnnouncement: (header, direction) => `${header} sorted ${direction}` }}
+  />
 
   <p class="mt-4 text-sm text-base-content/60">{rows.length} infants</p>
 </main>

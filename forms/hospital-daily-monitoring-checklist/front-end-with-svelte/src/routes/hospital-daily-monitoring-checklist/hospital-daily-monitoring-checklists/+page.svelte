@@ -1,7 +1,10 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { browser } from '$app/env';
-  import { Grid, Willow, WillowDark, type IApi } from '@svar-ui/svelte-grid';
+  import DataGrid, {
+    type DataGridColumn,
+    type DataGridRow
+  } from '@lilydesignsystem/svelte-data-grid';
+
   import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
 
   let hospitalFilter = $state('');
@@ -17,50 +20,27 @@
   );
   const hospitalOptions = Array.from(new Set(sampleAssessmentRows.map((r) => r.hospitalName)));
 
-  // Follow the active Lily theme: pick the dark SVAR skin when the theme's
-  // base surface is dark. Recomputed whenever <html data-theme> changes (after
-  // the new theme stylesheet has applied its tokens).
-  let isDark = $state(false);
-  function computeDark(): boolean {
-    if (!browser) return false;
-    const v = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-base-100')
-      .trim();
-    const m = v.match(/oklch\(\s*([0-9.]+%?)/);
-    if (!m) return false;
-    const l = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-    return l < 0.5;
-  }
-  $effect(() => {
-    if (!browser) return;
-    const update = () => (isDark = computeDark());
-    update();
-    const obs = new MutationObserver(() => setTimeout(update, 120));
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  });
-  const GridTheme = $derived(isDark ? WillowDark : Willow);
-
   // SVAR DataGrid columns. Answered/needs-attention counts and affected areas
   // all render through the shared engine output so the dashboard and report
   // stay aligned.
-  const columns = [
-    { id: 'id', header: 'Round', width: 140 },
-    { id: 'hospitalName', header: 'Hospital', flexgrow: 2, sort: true },
-    { id: 'inspectingOfficerName', header: 'Inspecting officer', flexgrow: 1, sort: true },
-    { id: 'inspectionDate', header: 'Date', width: 110, sort: true },
-    { id: 'answeredCount', header: 'Answered', width: 100, sort: true },
-    { id: 'needsAttentionCount', header: 'Needs attention', width: 130, sort: true },
-    { id: 'affectedAreas', header: 'Affected areas', flexgrow: 2 }
+  const columns: DataGridColumn[] = [
+    { id: 'id', header: 'Round' },
+    { id: 'hospitalName', header: 'Hospital', sortable: true },
+    { id: 'inspectingOfficerName', header: 'Inspecting officer', sortable: true },
+    { id: 'inspectionDate', header: 'Date', sortable: true },
+    { id: 'answeredCount', header: 'Answered', sortable: true },
+    { id: 'needsAttentionCount', header: 'Needs attention', sortable: true },
+    { id: 'affectedAreas', header: 'Affected areas' }
   ];
 
-  function init(api: IApi) {
-    api.exec('sort-rows', { key: 'hospitalName', order: 'asc' });
-    // Open a round when its row is selected.
-    api.on('select-row', (ev: { id?: string | number }) => {
-      if (ev?.id != null)
-        goto(`/hospital-daily-monitoring-checklist/hospital-daily-monitoring-checklists/${ev.id}`);
-    });
+  let sort = $state<{ columnId: string; direction: 'ascending' | 'descending' | 'none' }>({
+    columnId: 'hospitalName',
+    direction: 'ascending'
+  });
+
+  // Open a record when its row is activated (click, or Enter on a cell).
+  function open(_row: DataGridRow, id: string) {
+    goto(`/hospital-daily-monitoring-checklist/hospital-daily-monitoring-checklists/${id}`);
   }
 </script>
 
@@ -100,9 +80,16 @@
     </label>
   </div>
 
-  <div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-    <GridTheme><Grid data={rows} {columns} {init} /></GridTheme>
-  </div>
+  <DataGrid
+    label="Administrator review dashboard"
+    {columns}
+    rows={rows.map((row) => ({ ...row }))}
+    rowId={(row) => String(row.id)}
+    bind:sort
+    emptyValue="—"
+    onRowActivate={open}
+    labels={{ sortAnnouncement: (header, direction) => `${header} sorted ${direction}` }}
+  />
 
   <p class="mt-4 text-sm text-base-content/60">{rows.length} inspection rounds</p>
 </main>

@@ -1,7 +1,16 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { browser } from '$app/env';
-  import { Grid, Willow, WillowDark, type IApi } from '@svar-ui/svelte-grid';
+  import DataGrid, {
+    type DataGridColumn,
+    type DataGridRow
+  } from '@lilydesignsystem/svelte-data-grid';
+
+  // A column's template, typed as it was written, as a DataGrid format. A missing
+  // value (null, undefined or '') is left to the grid's emptyValue.
+  const fmt =
+    <T,>(template: (value: T, row: DataGridRow) => string) =>
+    (value: unknown, row: DataGridRow): string =>
+      value === null || value === undefined || value === '' ? '' : template(value as T, row);
   import { sampleReports } from '#lib/data/sample-reports.js';
   import {
     outcomeClassificationLabel,
@@ -60,80 +69,52 @@
     ];
   });
 
-  // Follow the active Lily theme: pick the dark SVAR skin when the theme's
-  // base surface is dark. Recomputed whenever <html data-theme> changes (after
-  // the new theme stylesheet has applied its tokens).
-  let isDark = $state(false);
-  function computeDark(): boolean {
-    if (!browser) return false;
-    const v = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-base-100')
-      .trim();
-    const m = v.match(/oklch\(\s*([0-9.]+%?)/);
-    if (!m) return false;
-    const l = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-    return l < 0.5;
-  }
-  $effect(() => {
-    if (!browser) return;
-    const update = () => (isDark = computeDark());
-    update();
-    const obs = new MutationObserver(() => setTimeout(update, 120));
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  });
-  const GridTheme = $derived(isDark ? WillowDark : Willow);
-
   // SVAR DataGrid columns. Graded axes render through the shared engine label
   // helpers so the dashboard and the report stay in lock-step.
-  const columns = [
-    { id: 'id', header: 'Response', width: 130 },
-    { id: 'workerName', header: 'Worker', flexgrow: 2, sort: true },
+  const columns: DataGridColumn[] = [
+    { id: 'id', header: 'Response' },
+    { id: 'workerName', header: 'Worker', sortable: true },
     {
       id: 'responseStatus',
       header: 'Status',
-      width: 130,
-      template: (v: string) => responseStatusLabel(v as never)
+      format: fmt((v: string) => responseStatusLabel(v as never))
     },
 
     {
       id: 'respondedDate',
       header: 'Responded',
-      width: 120,
-      sort: true
+      sortable: true
     },
 
     {
       id: 'outcomeClassification',
       header: 'Outcome',
-      width: 150,
-      template: (v: string) => outcomeClassificationLabel(v as never)
+      format: fmt((v: string) => outcomeClassificationLabel(v as never))
     },
     {
       id: 'legalRiskBand',
       header: 'Legal risk',
-      width: 120,
-      sort: true,
-      template: (v: string) => legalRiskBandLabel(v as never)
+      sortable: true,
+      format: fmt((v: string) => legalRiskBandLabel(v as never))
     },
     {
       id: 'followUpUrgency',
       header: 'Urgency',
-      width: 150,
-      sort: true,
-      template: (v: string) => followUpUrgencyLabel(v as never)
+      sortable: true,
+      format: fmt((v: string) => followUpUrgencyLabel(v as never))
     },
-    { id: 'completenessPercent', header: 'Complete', width: 100, template: (v: number) => `${v}%` },
-    { id: 'flagCount', header: 'Flags', width: 80, sort: true }
+    { id: 'completenessPercent', header: 'Complete', format: fmt((v: number) => `${v}%`) },
+    { id: 'flagCount', header: 'Flags', sortable: true }
   ];
 
-  function init(api: IApi) {
-    api.exec('sort-rows', { key: 'followUpUrgency', order: 'desc' });
-    // Open a response when its row is selected.
-    api.on('select-row', (ev: { id?: string | number }) => {
-      if (ev?.id != null)
-        goto(`/neurodiversity-adjustment-response/neurodiversity-adjustment-responses/${ev.id}`);
-    });
+  let sort = $state<{ columnId: string; direction: 'ascending' | 'descending' | 'none' }>({
+    columnId: 'followUpUrgency',
+    direction: 'descending'
+  });
+
+  // Open a record when its row is activated (click, or Enter on a cell).
+  function open(_row: DataGridRow, id: string) {
+    goto(`/neurodiversity-adjustment-response/neurodiversity-adjustment-responses/${id}`);
   }
 </script>
 
@@ -188,9 +169,16 @@
     </div>
   </section>
 
-  <div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-    <GridTheme><Grid data={rows} {columns} {init} /></GridTheme>
-  </div>
+  <DataGrid
+    label="Graded adjustment responses"
+    {columns}
+    rows={rows.map((row) => ({ ...row }))}
+    rowId={(row) => String(row.id)}
+    bind:sort
+    emptyValue="—"
+    onRowActivate={open}
+    labels={{ sortAnnouncement: (header, direction) => `${header} sorted ${direction}` }}
+  />
 
   <p class="mt-4 text-sm text-base-content/60">{rows.length} responses</p>
 </main>

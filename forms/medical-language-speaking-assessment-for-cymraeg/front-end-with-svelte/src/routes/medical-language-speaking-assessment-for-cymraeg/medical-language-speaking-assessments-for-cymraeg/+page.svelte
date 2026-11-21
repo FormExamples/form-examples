@@ -1,7 +1,16 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { browser } from '$app/env';
-  import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
+  import DataGrid, {
+    type DataGridColumn,
+    type DataGridRow
+  } from '@lilydesignsystem/svelte-data-grid';
+
+  // A column's template, typed as it was written, as a DataGrid format. A missing
+  // value (null, undefined or '') is left to the grid's emptyValue.
+  const fmt =
+    <T,>(template: (value: T, row: DataGridRow) => string) =>
+    (value: unknown, row: DataGridRow): string =>
+      value === null || value === undefined || value === '' ? '' : template(value as T, row);
   import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
   import { gradeShortLabel } from '#lib/engine/utils.js';
   import type { OETGrade } from '#lib/engine/types.js';
@@ -19,94 +28,63 @@
     )
   );
 
-  // Follow the active Lily theme: pick the dark SVAR skin when the theme's base
-  // surface is dark. Recomputed whenever <html data-theme> changes.
-  let isDark = $state(false);
-  function computeDark(): boolean {
-    if (!browser) return false;
-    const v = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-base-100')
-      .trim();
-    const m = v.match(/oklch\(\s*([0-9.]+%?)/);
-    if (!m) return false;
-    const l = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-    return l < 0.5;
-  }
-  $effect(() => {
-    if (!browser) return;
-    const update = () => (isDark = computeDark());
-    update();
-    const obs = new MutationObserver(() => setTimeout(update, 120));
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  });
-  const GridTheme = $derived(isDark ? WillowDark : Willow);
-
   // SVAR DataGrid columns. Grade, scaled score, and totals render through the
   // shared engine output so the dashboard and report stay aligned.
-  const columns = [
-    { id: 'id', header: 'Assessment', width: 130 },
+  const columns: DataGridColumn[] = [
+    { id: 'id', header: 'Assessment' },
     {
       id: 'candidateName',
       header: 'Candidate',
-      flexgrow: 2,
-      sort: true
+      sortable: true
     },
 
     {
       id: 'assessedDate',
       header: 'Assessed',
-      width: 120,
-      sort: true
+      sortable: true
     },
 
     {
       id: 'grade',
       header: 'Grade',
-      width: 130,
-      sort: true,
-      template: (v: OETGrade) => gradeShortLabel(v)
+      sortable: true,
+      format: fmt((v: OETGrade) => gradeShortLabel(v))
     },
 
     {
       id: 'scaledScore',
       header: 'Score /500',
-      width: 110,
-      sort: true
+      sortable: true
     },
 
     {
       id: 'linguisticTotal',
       header: 'Ling /24',
-      width: 100,
-      sort: true
+      sortable: true
     },
 
     {
       id: 'clinicalTotal',
       header: 'Clin /15',
-      width: 100,
-      sort: true
+      sortable: true
     },
 
     {
       id: 'thresholdMet',
       header: 'Clinical threshold',
-      width: 150,
-      template: (v: boolean) => (v ? 'Met' : 'Below')
+      format: fmt((v: boolean) => (v ? 'Met' : 'Below'))
     },
-    { id: 'flagCount', header: 'Flags', width: 80, sort: true }
+    { id: 'flagCount', header: 'Flags', sortable: true }
   ];
 
-  function init(api: {
-    exec: (name: string, args: unknown) => void;
-    on: (name: string, cb: (ev: { id?: string | number }) => void) => void;
-  }) {
-    api.exec('sort-rows', { key: 'candidateName', order: 'asc' });
-    api.on('select-row', (ev) => {
-      if (ev?.id != null)
-        goto(`/medical-language-speaking-assessment-for-cymraeg/${plural}/${ev.id}`);
-    });
+  let sort = $state<{ columnId: string; direction: 'ascending' | 'descending' | 'none' }>({
+    columnId: 'candidateName',
+    direction: 'ascending'
+  });
+
+  // Open a record when its row is activated (click, or Enter on a cell).
+  function open(_row: DataGridRow, id: string) {
+    goto(`/medical-language-speaking-assessment-for-cymraeg/${plural}/${id}`);
   }
 </script>
 
@@ -145,9 +123,16 @@
     </label>
   </div>
 
-  <div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-    <GridTheme><Grid data={rows} {columns} {init} /></GridTheme>
-  </div>
+  <DataGrid
+    label="Cymraeg clinical-speaking dashboard"
+    {columns}
+    rows={rows.map((row) => ({ ...row }))}
+    rowId={(row) => String(row.id)}
+    bind:sort
+    emptyValue="—"
+    onRowActivate={open}
+    labels={{ sortAnnouncement: (header, direction) => `${header} sorted ${direction}` }}
+  />
 
   <p class="mt-4 text-sm text-base-content/60">{rows.length} candidates</p>
 </main>

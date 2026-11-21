@@ -159,8 +159,9 @@ fleet's current conformance.
   `front-end-*-with-svelte/` directory. Each form's `src/lib/components/ui/`
   mirrors the Lily Svelte API and emits the same class vocabulary. See
   [`forms/AGENTS-front-end-svelte.md`](forms/AGENTS-front-end-svelte.md).
-- **Tailwind CSS 4 + SVAR DataGrid (Willow)** is the styling layer that
-  attaches to the Lily class names in SvelteKit projects.
+- **Tailwind CSS 4** is the styling layer that attaches to the Lily class
+  names in SvelteKit projects; dashboards use the **Lily DataGrid**
+  (`@lilydesignsystem/svelte-data-grid`), styled by the Lily themes.
 - **LocalStorage autosave.** Drafts persist under the key
   `<slug>.front-end-with-html.v1` (HTML) or
   `<slug>.front-end-with-svelte.v1` (SvelteKit). The shape is the

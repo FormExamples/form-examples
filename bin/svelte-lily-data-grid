@@ -1,0 +1,319 @@
+#!/usr/bin/env python3
+"""bin/svelte-lily-data-grid — replace each Svelte dashboard's SVAR grid with Lily's DataGrid.
+
+Every form's Svelte dashboard (`src/routes/<slug>/<plural>/+page.svelte`) drew its
+table with `@svar-ui/svelte-grid`. This tool moves it to
+`@lilydesignsystem/svelte-data-grid`, as piloted on
+pre-operative-assessment-by-clinician:
+
+  import          Grid/Willow/WillowDark/IApi -> DataGrid, DataGridColumn, DataGridRow
+  dark mode       the Willow/WillowDark observer goes: the Lily themes style the grid
+  columns         typed DataGridColumn[]; `sort: true` -> `sortable: true`; `width` and
+                  `flexgrow` go (the table sizes itself); `template: f` -> `format: fmt(f)`,
+                  where fmt() keeps the template's own parameter types and gives a
+                  missing value (null, undefined or '') to the grid's emptyValue
+  init()          `api.exec('sort-rows', ...)` -> a bound `sort` state;
+                  `api.on('select-row', ...)` -> `onRowActivate`, so a click or Enter
+                  on a cell opens the record
+  markup          the Willow-wrapped <Grid> -> <DataGrid label=... emptyValue="—" ...>
+  +page.ts        `export const ssr = false` goes: the grid renders on the server, so
+                  the dashboard prerenders with its rows
+  src/app.css     hide the grid's live region (.data-grid-status), and let its cells
+                  wrap only between words (the Lily themes' overflow-wrap: anywhere on
+                  th/td breaks headers mid-word in an auto-sized table)
+  package.json    + @lilydesignsystem/svelte-data-grid, - @svar-ui/svelte-grid
+  pnpm-lock.yaml  `pnpm install --lockfile-only`; unless --no-lock
+
+A page that does not match the fleet's usual shape is reported and left alone.
+Run Prettier on the files it writes. Idempotent.
+
+Usage:
+  bin/svelte-lily-data-grid [--no-lock] --all|<slug>...
+  bin/svelte-lily-data-grid --check --all|<slug>...   # CI drift check
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import pathlib
+import re
+import subprocess
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+DATA_GRID = "^0.11.2"
+
+IMPORT_OLD = re.compile(r"import \{ Grid, Willow, WillowDark(?:, type IApi)?(?:, type IRow)? \} from '@svar-ui/svelte-grid';")
+IMPORT_NEW = (
+    "import DataGrid, {\n    type DataGridColumn,\n    type DataGridRow\n  } from '@lilydesignsystem/svelte-data-grid';"
+)
+DARK = re.compile(
+    r"\n(?:  // Follow the active Lily theme[^\n]*\n(?:  //[^\n]*\n)*)?  let isDark = \$state\(false\);.*?"
+    r"const GridTheme = \$derived\(isDark \? WillowDark : Willow\);\n",
+    re.S,
+)
+INIT = re.compile(
+    r"\n  function init\(api: (?:IApi|\{(?:[^{}]|\{[^{}]*\})*\})\) \{\n(?P<body>.*?)\n  \}\n", re.S
+)
+SORT = re.compile(r"api\.exec\('sort-rows', \{ key: '(?P<key>\w+)', order: '(?P<order>asc|desc)' \}\);")
+SELECT = re.compile(
+    r"api\.on\('select-row'.*?goto\(\s*(?P<url>resolve\(`[^`]*\$\{ev\.id\}[^`]*`\)|`[^`]*\$\{ev\.id\}[^`]*`)\s*\);?\s*\}\);",
+    re.S,
+)
+MARKUP = re.compile(
+    r"(?P<indent>[ \t]*)<div class=\"[^\"]*\"(?: style=\"[^\"]*\")?>\s*"
+    r"<GridTheme>\s*<Grid data=\{(?P<rows>\w+)\} \{columns\} \{init\} />\s*</GridTheme>\s*</div>"
+)
+FMT = """
+  // A column's template, typed as it was written, as a DataGrid format. A missing
+  // value (null, undefined or '') is left to the grid's emptyValue.
+  const fmt =
+    <T,>(template: (value: T, row: DataGridRow) => string) =>
+    (value: unknown, row: DataGridRow): string =>
+      value === null || value === undefined || value === '' ? '' : template(value as T, row);
+"""
+CSS = """
+/* The Lily DataGrid: its live region (sort announcements) is for screen
+   readers, and the grid ships no CSS, so hide it here. The Lily themes set
+   `overflow-wrap: anywhere` on every th/td, which in an auto-sized table lets
+   columns shrink until headers break mid-word; in the grid, wrap only between
+   words (its .data-grid-scroll wrapper scrolls). */
+.data-grid-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+.data-grid :is(th, td) {
+  overflow-wrap: break-word;
+}
+"""
+
+
+def dashboards(app: pathlib.Path) -> list[pathlib.Path]:
+    return sorted(p for p in app.glob("src/routes/**/+page.svelte") if "@svar-ui/svelte-grid" in p.read_text())
+
+
+def expression_end(text: str, start: int) -> int:
+    """Index just past the expression starting at `start`, at the next top-level , or }."""
+    depth, i, stack = 0, start, []
+    while i < len(text):
+        c = text[i]
+        if c in "'\"":
+            j = i + 1
+            while text[j] != c:
+                j += 2 if text[j] == "\\" else 1
+            i = j + 1
+            continue
+        if c == "`":
+            j, inner = i + 1, 0
+            while True:
+                if text[j] == "\\":
+                    j += 2
+                    continue
+                if text.startswith("${", j):
+                    inner += 1
+                    j += 2
+                    continue
+                if text[j] == "}" and inner:
+                    inner -= 1
+                elif text[j] == "`" and not inner:
+                    break
+                j += 1
+            i = j + 1
+            continue
+        if c in "([{":
+            stack.append(c)
+        elif c in ")]}":
+            if not stack:
+                return i
+            stack.pop()
+        elif c == "," and not stack:
+            return i
+        i += 1
+    raise ValueError("unterminated template expression")
+
+
+def convert_columns(script: str) -> str:
+    start = script.index("const columns = [")
+    end = script.index("\n  ];", start) + len("\n  ];")
+    block = script[start:end]
+    block = block.replace("const columns = [", "const columns: DataGridColumn[] = [", 1)
+    block = re.sub(r"\bsort: true\b", "sortable: true", block)
+    block = re.sub(r"\s*\b(?:width|flexgrow): \d+,", "", block)
+    block = re.sub(r",\s*\b(?:width|flexgrow): \d+(?=\s*\})", "", block)
+    out, i = [], 0
+    for m in re.finditer(r"\btemplate:\s*", block):
+        if m.start() < i:
+            continue
+        stop = expression_end(block, m.end())
+        expr = block[m.end():stop].rstrip()
+        out.append(block[i:m.start()] + f"format: fmt({expr})")
+        i = m.end() + len(block[m.end():stop].rstrip())
+    out.append(block[i:])
+    return script[:start] + "".join(out) + script[end:]
+
+
+def label_of(text: str) -> str:
+    m = re.search(r"<h1[^>]*>\s*(.*?)\s*</h1>", text, re.S)
+    label = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", m.group(1))).strip() if m else "Records"
+    if "{" in label:
+        label = "Records"
+    return label.replace("'", "\\'")
+
+
+def convert(page: pathlib.Path) -> str:
+    text = page.read_text()
+    script_end = text.index("</script>")
+    script, rest = text[:script_end], text[script_end:]
+    if not IMPORT_OLD.search(script):
+        raise ValueError("SVAR import not in the usual shape")
+    script = IMPORT_OLD.sub(IMPORT_NEW, script, count=1)
+    script = re.sub(r"\bIRow\b", "DataGridRow", script)
+    script, n = DARK.subn("\n", script)
+    if n != 1:
+        raise ValueError("SVAR dark-mode block not in the usual shape")
+    init = INIT.search(script)
+    if not init:
+        raise ValueError("no init(api) function")
+    body = init.group("body")
+    sort, select = SORT.search(body), SELECT.search(body)
+    leftover = SELECT.sub("", SORT.sub("", body))
+    if not select or re.sub(r"\s*//[^\n]*", "", leftover).strip():
+        raise ValueError("init(api) does more than sort and select")
+    url = select.group("url").replace("${ev.id}", "${id}")
+    direction = {"asc": "ascending", "desc": "descending"}[sort.group("order")] if sort else "none"
+    replacement = (
+        "\n  let sort = $state<{ columnId: string; direction: 'ascending' | 'descending' | 'none' }>({\n"
+        f"    columnId: '{sort.group('key') if sort else ''}',\n"
+        f"    direction: '{direction}'\n"
+        "  });\n\n"
+        "  // Open a record when its row is activated (click, or Enter on a cell).\n"
+        "  function open(_row: DataGridRow, id: string) {\n"
+        f"    goto({url});\n"
+        "  }\n"
+    )
+    script = script[: init.start()] + replacement + script[init.end():]
+    script = convert_columns(script)
+    first_import_end = script.index("\n", script.index("from '@lilydesignsystem/svelte-data-grid';")) + 1
+    if "format: fmt(" in script:
+        script = script[:first_import_end] + FMT + script[first_import_end:]
+    if not re.search(r"\bbrowser\b", script.split("\n", 1)[1].replace("import { browser } from '$app/env';", "")):
+        script = script.replace("  import { browser } from '$app/env';\n", "")
+    m = MARKUP.search(rest)
+    if not m:
+        raise ValueError("SVAR markup not in the usual shape")
+    indent, rows = m.group("indent"), m.group("rows")
+    grid = (
+        f"{indent}<DataGrid\n"
+        f"{indent}  label=\"{label_of(text)}\"\n"
+        f"{indent}  {{columns}}\n"
+        f"{indent}  rows={{{rows}.map((row) => ({{ ...row }}))}}\n"
+        f"{indent}  rowId={{(row) => String(row.id)}}\n"
+        f"{indent}  bind:sort\n"
+        f"{indent}  emptyValue=\"—\"\n"
+        f"{indent}  onRowActivate={{open}}\n"
+        f"{indent}  labels={{{{ sortAnnouncement: (header, direction) => `${{header}} sorted ${{direction}}` }}}}\n"
+        f"{indent}/>"
+    )
+    rest = rest[: m.start()] + grid + rest[m.end():]
+    if re.search(r"\b(Grid|Willow|WillowDark|GridTheme|IApi|isDark)\b", script + rest.replace("DataGrid", "")):
+        raise ValueError("SVAR names remain after the conversion")
+    return script + rest
+
+
+def problems(slug: str) -> list[str]:
+    app = FORMS / slug / "front-end-with-svelte"
+    found = [f"{p.relative_to(app)} still uses SVAR" for p in dashboards(app)]
+    pkg = (app / "package.json").read_text()
+    if "@svar-ui/svelte-grid" in pkg:
+        found.append("package.json still depends on @svar-ui/svelte-grid")
+    if "@lilydesignsystem/svelte-data-grid" in pkg and "@lilydesignsystem/svelte-data-grid" not in (app / "pnpm-lock.yaml").read_text():
+        found.append("pnpm-lock.yaml lacks @lilydesignsystem/svelte-data-grid")
+    return found
+
+
+def apply(slug: str, lock: bool) -> list[str]:
+    app = FORMS / slug / "front-end-with-svelte"
+    notes = []
+    for page in dashboards(app):
+        try:
+            new = convert(page)
+        except ValueError as error:
+            notes.append(f"{page.relative_to(app)}: {error}")
+            continue
+        page.write_text(new)
+        page_ts = page.with_name("+page.ts")
+        if page_ts.exists():
+            text = page_ts.read_text()
+            code = [l for l in text.splitlines() if l.strip() and not l.strip().startswith("//")]
+            if code == ["export const ssr = false;"]:
+                page_ts.unlink()
+            elif "export const ssr = false;" in text:
+                page_ts.write_text(text.replace("export const ssr = false;\n", ""))
+    if notes:
+        return notes
+    css = app / "src" / "app.css"
+    if ".data-grid-status" not in css.read_text():
+        css.write_text(css.read_text().rstrip("\n") + "\n" + CSS)
+    pkg_path = app / "package.json"
+    pkg = json.loads(pkg_path.read_text())
+    deps = pkg.setdefault("dependencies", {})
+    changed = False
+    if "@lilydesignsystem/svelte-data-grid" not in deps:
+        deps["@lilydesignsystem/svelte-data-grid"] = DATA_GRID
+        changed = True
+    sources = [p for p in app.glob("src/**/*") if p.suffix in {".svelte", ".ts", ".js"}]
+    if not any("@svar-ui/svelte-grid" in p.read_text() for p in sources):
+        for section in ("dependencies", "devDependencies"):
+            if "@svar-ui/svelte-grid" in pkg.get(section, {}):
+                del pkg[section]["@svar-ui/svelte-grid"]
+                changed = True
+    if changed:
+        pkg["dependencies"] = dict(sorted(deps.items()))
+        pkg_path.write_text(json.dumps(pkg, indent=2, ensure_ascii=False) + "\n")
+    if lock and problems(slug):
+        result = subprocess.run(["pnpm", "install", "--lockfile-only", "--silent"], cwd=app, capture_output=True, text=True)
+        if result.returncode:
+            notes.append(f"pnpm lock failed: {(result.stderr or result.stdout).strip()[-300:]}")
+    return notes
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--no-lock", action="store_true")
+    args = parser.parse_args()
+    if args.all:
+        slugs = sorted(p.parent.parent.name for p in FORMS.glob("*/front-end-with-svelte/package.json"))
+    elif args.slugs:
+        slugs = args.slugs
+    else:
+        parser.error("name forms, or pass --all")
+    if args.check:
+        bad = {slug: found for slug in slugs if (found := problems(slug))}
+        for slug, found in bad.items():
+            for problem in found:
+                print(f"{slug}: {problem}")
+        print(f"{len(slugs) - len(bad)}/{len(slugs)} front-ends use the Lily DataGrid, not SVAR")
+        return 1 if bad else 0
+    failed = 0
+    for slug in slugs:
+        for note in apply(slug, not args.no_lock):
+            print(f"{slug}: {note}", file=sys.stderr)
+            failed += 1
+    print(f"{len(slugs)} front-ends processed, {failed} need a hand")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

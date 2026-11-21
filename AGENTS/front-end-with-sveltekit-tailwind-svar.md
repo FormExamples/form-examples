@@ -34,10 +34,9 @@ Slug: front-end-with-sveltekit-tailwind-svar
 | [TypeScript](https://www.typescriptlang.org/)             | 5.x     | Type-safe development                                           |
 | [Tailwind CSS](https://tailwindcss.com/)                  | 4.x     | Utility-first styling with `@import 'tailwindcss'` and `@theme` |
 | [Lily Svelte headless](https://github.com/LilyDesignSystem/lily-design-system-svelte-headless) | pinned (see `forms/lily-svelte-version.md`) | Headless UI component contract (no CSS); shared class vocabulary with Lily HTML |
-| [SVAR Svelte Core](https://svar.dev/svelte/core/)         | 2.x     | Base UI components and Willow theme (dashboards only)           |
-| [SVAR Svelte DataGrid](https://svar.dev/svelte/datagrid/) | 2.x     | Data table with sort and filter (dashboards only)               |
+| [Lily DataGrid](https://www.npmjs.com/package/@lilydesignsystem/svelte-data-grid) | 0.11.x | Dashboard table with sorting and grid keyboard navigation (replaced the SVAR DataGrid) |
 | [Vite](https://vite.dev/)                                 | 7.x     | Build tool and dev server                                       |
-| [pdfmake](https://pdfmake.github.io/docs/)                | 0.2.x   | Server-side PDF report generation                               |
+| [pdfmake](https://pdfmake.github.io/docs/)                | 0.3.x   | PDF report generation, in the browser                            |
 | [Vitest](https://vitest.dev/)                             | 3.x     | Unit testing for grading logic                                  |
 
 ## Svelte 5 runes
@@ -96,8 +95,9 @@ pinned upstream commit is in `forms/lily-svelte-version.md`. Refresh via
 
 ## Dashboard pattern
 
-- `DataTable` (Lily Svelte) for the row list; OR `Willow`-themed `Grid`
-  (SVAR DataGrid) for forms that need built-in sort/filter ergonomics.
+- The Lily DataGrid (`@lilydesignsystem/svelte-data-grid`) for the row list,
+  with sortable columns; see
+  [`forms/AGENTS-front-end-svelte.md`](../forms/AGENTS-front-end-svelte.md).
 - Sortable columns, dropdown filters.
 - Backend API client with in-memory sample data fallback.
 - Row list shows computed scores, severities, and safety flags.

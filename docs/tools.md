@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-126 tools.
+127 tools.
 
 - [`bin/axum-api-namespace`](#axum-api-namespace)
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
@@ -85,6 +85,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-helpers-chooser-rename`](#svelte-helpers-chooser-rename)
 - [`bin/svelte-helpers-picker-rename`](#svelte-helpers-picker-rename)
 - [`bin/svelte-kit-3-theme-url-fix.py`](#svelte-kit-3-theme-url-fixpy)
+- [`bin/svelte-lily-data-grid`](#svelte-lily-data-grid)
 - [`bin/svelte-lily-headless-0-11`](#svelte-lily-headless-0-11)
 - [`bin/svelte-lily-picker-bar-0-6`](#svelte-lily-picker-bar-0-6)
 - [`bin/svelte-lily-picker-bar-0-7`](#svelte-lily-picker-bar-0-7)
@@ -2603,6 +2604,42 @@ the `sv migrate` codemod's own per-form task list — once confirmed resolved
 Usage:
   bin/svelte-kit-3-theme-url-fix.py --check          # CI drift detector
   bin/svelte-kit-3-theme-url-fix.py --apply          # rewrite in place
+```
+
+<h2 id="svelte-lily-data-grid"><code>bin/svelte-lily-data-grid</code></h2>
+
+```text
+bin/svelte-lily-data-grid — replace each Svelte dashboard's SVAR grid with Lily's DataGrid.
+
+Every form's Svelte dashboard (`src/routes/<slug>/<plural>/+page.svelte`) drew its
+table with `@svar-ui/svelte-grid`. This tool moves it to
+`@lilydesignsystem/svelte-data-grid`, as piloted on
+pre-operative-assessment-by-clinician:
+
+  import          Grid/Willow/WillowDark/IApi -> DataGrid, DataGridColumn, DataGridRow
+  dark mode       the Willow/WillowDark observer goes: the Lily themes style the grid
+  columns         typed DataGridColumn[]; `sort: true` -> `sortable: true`; `width` and
+                  `flexgrow` go (the table sizes itself); `template: f` -> `format: fmt(f)`,
+                  where fmt() keeps the template's own parameter types and gives a
+                  missing value (null, undefined or '') to the grid's emptyValue
+  init()          `api.exec('sort-rows', ...)` -> a bound `sort` state;
+                  `api.on('select-row', ...)` -> `onRowActivate`, so a click or Enter
+                  on a cell opens the record
+  markup          the Willow-wrapped <Grid> -> <DataGrid label=... emptyValue="—" ...>
+  +page.ts        `export const ssr = false` goes: the grid renders on the server, so
+                  the dashboard prerenders with its rows
+  src/app.css     hide the grid's live region (.data-grid-status), and let its cells
+                  wrap only between words (the Lily themes' overflow-wrap: anywhere on
+                  th/td breaks headers mid-word in an auto-sized table)
+  package.json    + @lilydesignsystem/svelte-data-grid, - @svar-ui/svelte-grid
+  pnpm-lock.yaml  `pnpm install --lockfile-only`; unless --no-lock
+
+A page that does not match the fleet's usual shape is reported and left alone.
+Run Prettier on the files it writes. Idempotent.
+
+Usage:
+  bin/svelte-lily-data-grid [--no-lock] --all|<slug>...
+  bin/svelte-lily-data-grid --check --all|<slug>...   # CI drift check
 ```
 
 <h2 id="svelte-lily-headless-0-11"><code>bin/svelte-lily-headless-0-11</code></h2>

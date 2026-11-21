@@ -1,7 +1,16 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { browser } from '$app/env';
-  import { Grid, Willow, WillowDark, type IApi } from '@svar-ui/svelte-grid';
+  import DataGrid, {
+    type DataGridColumn,
+    type DataGridRow
+  } from '@lilydesignsystem/svelte-data-grid';
+
+  // A column's template, typed as it was written, as a DataGrid format. A missing
+  // value (null, undefined or '') is left to the grid's emptyValue.
+  const fmt =
+    <T,>(template: (value: T, row: DataGridRow) => string) =>
+    (value: unknown, row: DataGridRow): string =>
+      value === null || value === undefined || value === '' ? '' : template(value as T, row);
   import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
   import { outcomeLabel } from '#lib/engine/utils.js';
 
@@ -18,80 +27,52 @@
     )
   );
 
-  // Follow the active Lily theme: pick the dark SVAR skin when the theme's base
-  // surface is dark. Recomputed whenever <html data-theme> changes (after the
-  // new theme stylesheet has applied its tokens).
-  let isDark = $state(false);
-  function computeDark(): boolean {
-    if (!browser) return false;
-    const v = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-base-100')
-      .trim();
-    const m = v.match(/oklch\(\s*([0-9.]+%?)/);
-    if (!m) return false;
-    const l = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-    return l < 0.5;
-  }
-  $effect(() => {
-    if (!browser) return;
-    const update = () => (isDark = computeDark());
-    update();
-    const obs = new MutationObserver(() => setTimeout(update, 120));
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  });
-  const GridTheme = $derived(isDark ? WillowDark : Willow);
-
   // SVAR DataGrid columns. The outcome and completion percentage render through
   // the shared engine output so the dashboard and report stay aligned.
-  const columns = [
-    { id: 'id', header: 'Checklist', width: 130 },
+  const columns: DataGridColumn[] = [
+    { id: 'id', header: 'Checklist' },
     {
       id: 'employeeName',
       header: 'Employee',
-      flexgrow: 2,
-      sort: true
+      sortable: true
     },
 
     {
       id: 'department',
       header: 'Department',
-      width: 170,
-      sort: true
+      sortable: true
     },
 
     {
       id: 'lastWorkingDay',
       header: 'Last working day',
-      width: 150,
-      sort: true
+      sortable: true
     },
 
     {
       id: 'outcome',
       header: 'Outcome',
-      width: 120,
-      sort: true,
-      template: (v: string) => outcomeLabel(v as never)
+      sortable: true,
+      format: fmt((v: string) => outcomeLabel(v as never))
     },
     {
       id: 'completionPercent',
       header: 'Completion',
-      width: 110,
-      sort: true,
-      template: (v: number) => `${v}%`
+      sortable: true,
+      format: fmt((v: number) => `${v}%`)
     },
-    { id: 'blockerCount', header: 'Blockers', width: 90, sort: true },
-    { id: 'flagCount', header: 'Flags', width: 80, sort: true }
+    { id: 'blockerCount', header: 'Blockers', sortable: true },
+    { id: 'flagCount', header: 'Flags', sortable: true }
   ];
 
-  function init(api: IApi) {
-    api.exec('sort-rows', { key: 'employeeName', order: 'asc' });
-    // Open a checklist when its row is selected.
-    api.on('select-row', (ev: { id?: string | number }) => {
-      if (ev?.id != null)
-        goto(`/employee-offboarding-checklist/employee-offboarding-checklists/${ev.id}`);
-    });
+  let sort = $state<{ columnId: string; direction: 'ascending' | 'descending' | 'none' }>({
+    columnId: 'employeeName',
+    direction: 'ascending'
+  });
+
+  // Open a record when its row is activated (click, or Enter on a cell).
+  function open(_row: DataGridRow, id: string) {
+    goto(`/employee-offboarding-checklist/employee-offboarding-checklists/${id}`);
   }
 </script>
 
@@ -132,9 +113,16 @@
     </label>
   </div>
 
-  <div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-    <GridTheme><Grid data={rows} {columns} {init} /></GridTheme>
-  </div>
+  <DataGrid
+    label="Offboarding HR dashboard"
+    {columns}
+    rows={rows.map((row) => ({ ...row }))}
+    rowId={(row) => String(row.id)}
+    bind:sort
+    emptyValue="—"
+    onRowActivate={open}
+    labels={{ sortAnnouncement: (header, direction) => `${header} sorted ${direction}` }}
+  />
 
   <p class="mt-4 text-sm text-base-content/60">{rows.length} employees</p>
 </main>

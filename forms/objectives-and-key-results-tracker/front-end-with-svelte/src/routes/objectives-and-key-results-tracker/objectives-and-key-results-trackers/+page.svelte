@@ -1,7 +1,16 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { browser } from '$app/env';
-  import { Grid, Willow, WillowDark, type IApi } from '@svar-ui/svelte-grid';
+  import DataGrid, {
+    type DataGridColumn,
+    type DataGridRow
+  } from '@lilydesignsystem/svelte-data-grid';
+
+  // A column's template, typed as it was written, as a DataGrid format. A missing
+  // value (null, undefined or '') is left to the grid's emptyValue.
+  const fmt =
+    <T,>(template: (value: T, row: DataGridRow) => string) =>
+    (value: unknown, row: DataGridRow): string =>
+      value === null || value === undefined || value === '' ? '' : template(value as T, row);
   import { sampleObjectiveRows } from '#lib/data/sample-reports.js';
   import { ragLabel } from '$engine/utils';
   import type { RagBand } from '$engine/types';
@@ -16,69 +25,43 @@
     )
   );
 
-  // Follow the active Lily theme: pick the dark SVAR skin when the theme's base
-  // surface is dark. Recomputed whenever <html data-theme> changes (after the new
-  // theme stylesheet has applied its tokens).
-  let isDark = $state(false);
-  function computeDark(): boolean {
-    if (!browser) return false;
-    const v = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-base-100')
-      .trim();
-    const m = v.match(/oklch\(\s*([0-9.]+%?)/);
-    if (!m) return false;
-    const l = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-    return l < 0.5;
-  }
-  $effect(() => {
-    if (!browser) return;
-    const update = () => (isDark = computeDark());
-    update();
-    const obs = new MutationObserver(() => setTimeout(update, 120));
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  });
-  const GridTheme = $derived(isDark ? WillowDark : Willow);
-
   // SVAR DataGrid columns. The composite RAG band renders through the shared
   // engine output so the dashboard and report stay aligned.
-  const columns = [
-    { id: 'id', header: 'Objective', width: 130 },
-    { id: 'objectiveTitle', header: 'Title', flexgrow: 2, sort: true },
-    { id: 'owner', header: 'Owner', width: 140, sort: true },
-    { id: 'level', header: 'Level', width: 120, sort: true },
-    { id: 'updatedDate', header: 'Updated', width: 120, sort: true },
+  const columns: DataGridColumn[] = [
+    { id: 'id', header: 'Objective' },
+    { id: 'objectiveTitle', header: 'Title', sortable: true },
+    { id: 'owner', header: 'Owner', sortable: true },
+    { id: 'level', header: 'Level', sortable: true },
+    { id: 'updatedDate', header: 'Updated', sortable: true },
     {
       id: 'rag',
       header: 'RAG',
-      width: 120,
-      sort: true,
-      template: (v: RagBand) => ragLabel(v)
+      sortable: true,
+      format: fmt((v: RagBand) => ragLabel(v))
     },
     {
       id: 'progressPercent',
       header: 'Progress',
-      width: 100,
-      sort: true,
-      template: (v: number | null) => (v == null ? '—' : `${v}%`)
+      sortable: true,
+      format: fmt((v: number | null) => (v == null ? '—' : `${v}%`))
     },
     {
       id: 'confidenceDecile',
       header: 'Confidence',
-      width: 110,
-      sort: true,
-      template: (v: number | null) => (v == null ? '—' : `${v}/10`)
+      sortable: true,
+      format: fmt((v: number | null) => (v == null ? '—' : `${v}/10`))
     },
-    { id: 'flagCount', header: 'Flags', width: 80, sort: true }
+    { id: 'flagCount', header: 'Flags', sortable: true }
   ];
 
-  function init(api: IApi) {
-    api.exec('sort-rows', { key: 'objectiveTitle', order: 'asc' });
-    // Open an objective when its row is selected.
-    api.on('select-row', (ev: { id?: string | number }) => {
-      if (ev?.id != null)
-        goto(`/objectives-and-key-results-tracker/objectives-and-key-results-trackers/${ev.id}`);
-    });
+  let sort = $state<{ columnId: string; direction: 'ascending' | 'descending' | 'none' }>({
+    columnId: 'objectiveTitle',
+    direction: 'ascending'
+  });
+
+  // Open a record when its row is activated (click, or Enter on a cell).
+  function open(_row: DataGridRow, id: string) {
+    goto(`/objectives-and-key-results-tracker/objectives-and-key-results-trackers/${id}`);
   }
 </script>
 
@@ -120,9 +103,16 @@
     </label>
   </div>
 
-  <div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-    <GridTheme><Grid data={rows} {columns} {init} /></GridTheme>
-  </div>
+  <DataGrid
+    label="OKR review dashboard"
+    {columns}
+    rows={rows.map((row) => ({ ...row }))}
+    rowId={(row) => String(row.id)}
+    bind:sort
+    emptyValue="—"
+    onRowActivate={open}
+    labels={{ sortAnnouncement: (header, direction) => `${header} sorted ${direction}` }}
+  />
 
   <p class="mt-4 text-sm text-base-content/60">{rows.length} objectives</p>
 </main>

@@ -176,15 +176,25 @@ system** — do not hand-roll theme CSS.
   so they override Tailwind's layered `@theme` defaults at runtime — every theme
   re-skins the whole app, including headings.
 
-## Dashboard grid (SVAR)
+## Dashboard grid (Lily DataGrid)
 
-The collection dashboard (`/<slug>/<plural>/`) renders the data table with the **SVAR
-Svelte DataGrid** (`@svar-ui/svelte-grid`, `Grid` + `Willow`/`WillowDark`).
-Graded columns render through the shared engine label helpers. The grid is
-**client-only** (its packages are not SSR-safe), so the dashboard route sets
-`export const ssr = false;` in `+page.ts`. Pick `WillowDark` vs `Willow` from the
-active theme's `--color-base-100` lightness so the grid follows the Lily theme,
-and wire `api.on('select-row', …)` to open `/<slug>/<plural>/[id]`.
+The collection dashboard (`/<slug>/<plural>/`) renders its table with the **Lily
+DataGrid** (`@lilydesignsystem/svelte-data-grid`), which composes Lily's
+`DataTable` and adds sorting, keyboard grid navigation and announcements. It
+replaced the SVAR grid fleet-wide (`bin/svelte-lily-data-grid`, which also has
+the `--check` CI gate). Per dashboard:
+
+- `columns: DataGridColumn[]` with `sortable: true`, and `format` for graded
+  columns, through the shared engine label helpers. A template written for a
+  typed value goes through the page's `fmt()` wrapper, which also leaves a
+  missing value (`null`, `undefined`, `''`) to the grid's `emptyValue="—"`.
+- An initial sort as a bound `sort = { columnId, direction }`, and
+  `onRowActivate` opening `/<slug>/<plural>/[id]` (a click, or Enter on a cell).
+- No theme code: the Lily themes style the grid's class hooks, so it follows
+  every theme, light and dark. `src/app.css` hides `.data-grid-status` (the live
+  region) and sets `overflow-wrap: break-word` on the grid's cells.
+- The grid renders on the server, so there is no `ssr = false`: the dashboard
+  prerenders with its rows.
 
 Companion docs: [`AGENTS-front-end-html.md`](AGENTS-front-end-html.md),
 [`plan.md`](plan.md), [`tasks.md`](tasks.md).

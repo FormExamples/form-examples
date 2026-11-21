@@ -1,7 +1,17 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { browser } from '$app/env';
-  import { Grid, Willow, WillowDark, type IApi } from '@svar-ui/svelte-grid';
+  import DataGrid, {
+    type DataGridColumn,
+    type DataGridRow
+  } from '@lilydesignsystem/svelte-data-grid';
+
+  // A column's template, typed as it was written, as a DataGrid format. A missing
+  // value (null, undefined or '') is left to the grid's emptyValue.
+  const fmt =
+    <T,>(template: (value: T, row: DataGridRow) => string) =>
+    (value: unknown, row: DataGridRow): string =>
+      value === null || value === undefined || value === '' ? '' : template(value as T, row);
   import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
   import { fetchDashboardRows } from '#lib/api/medical-device-assessments.js';
   import Alert from '#lib/components/ui/Alert.svelte';
@@ -53,80 +63,54 @@
     })
   );
 
-  // Follow the active Lily theme: pick the dark SVAR skin when the theme's
-  // base surface is dark. Recomputed whenever <html data-theme> changes (after
-  // the new theme stylesheet has applied its tokens).
-  let isDark = $state(false);
-  function computeDark(): boolean {
-    if (!browser) return false;
-    const v = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-base-100')
-      .trim();
-    const m = v.match(/oklch\(\s*([0-9.]+%?)/);
-    if (!m) return false;
-    const l = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-    return l < 0.5;
-  }
-  $effect(() => {
-    if (!browser) return;
-    const update = () => (isDark = computeDark());
-    update();
-    const obs = new MutationObserver(() => setTimeout(update, 120));
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  });
-  const GridTheme = $derived(isDark ? WillowDark : Willow);
-
   // Columns mirror the HTML dashboard; class, route and readiness render
   // through the shared engine label helpers.
-  const columns = [
-    { id: 'id', header: 'Assessment', width: 140 },
-    { id: 'date', header: 'Date', width: 120, sort: true },
-    { id: 'device', header: 'Device', flexgrow: 2, sort: true },
-    { id: 'deviceKind', header: 'Kind', width: 170, sort: true },
+  const columns: DataGridColumn[] = [
+    { id: 'id', header: 'Assessment' },
+    { id: 'date', header: 'Date', sortable: true },
+    { id: 'device', header: 'Device', sortable: true },
+    { id: 'deviceKind', header: 'Kind', sortable: true },
     {
       id: 'computedClass',
       header: 'Computed',
-      width: 100,
-      sort: true,
-      template: (v: DeviceClass) => shortClass(v)
+      sortable: true,
+      format: fmt((v: DeviceClass) => shortClass(v))
     },
     {
       id: 'finalClass',
       header: 'Final class',
-      width: 100,
-      sort: true,
-      template: (v: DeviceClass, row: unknown) =>
+      sortable: true,
+      format: fmt((v: DeviceClass, row: unknown) =>
         shortClass(v, (row as DashboardRow | undefined)?.classSuffix)
+      )
     },
     {
       id: 'conformityRoute',
       header: 'Conformity route',
-      flexgrow: 2,
-      template: (v: ConformityRoute) => routeLabel(v)
+      format: fmt((v: ConformityRoute) => routeLabel(v))
     },
-    { id: 'determiningRule', header: 'Determining rule', width: 150, sort: true },
+    { id: 'determiningRule', header: 'Determining rule', sortable: true },
     {
       id: 'readiness',
       header: 'Readiness',
-      width: 130,
-      sort: true,
-      template: (v: Readiness) => readinessLabel(v)
+      sortable: true,
+      format: fmt((v: Readiness) => readinessLabel(v))
     },
     {
       id: 'flags',
       header: 'Flags',
-      flexgrow: 2,
-      template: (v: string[]) => (v && v.length > 0 ? v.join(', ') : '—')
+      format: fmt((v: string[]) => (v && v.length > 0 ? v.join(', ') : '—'))
     }
   ];
 
-  function init(api: IApi) {
-    api.exec('sort-rows', { key: 'date', order: 'desc' });
-    // Open an assessment when its row is selected.
-    api.on('select-row', (ev: { id?: string | number }) => {
-      if (ev?.id != null) goto(`/medical-device-assessment/medical-device-assessments/${ev.id}`);
-    });
+  let sort = $state<{ columnId: string; direction: 'ascending' | 'descending' | 'none' }>({
+    columnId: 'date',
+    direction: 'descending'
+  });
+
+  // Open a record when its row is activated (click, or Enter on a cell).
+  function open(_row: DataGridRow, id: string) {
+    goto(`/medical-device-assessment/medical-device-assessments/${id}`);
   }
 </script>
 
@@ -196,9 +180,16 @@
     </label>
   </div>
 
-  <div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
-    <GridTheme><Grid data={rows} {columns} {init} /></GridTheme>
-  </div>
+  <DataGrid
+    label="Medical device assessment dashboard"
+    {columns}
+    rows={rows.map((row) => ({ ...row }))}
+    rowId={(row) => String(row.id)}
+    bind:sort
+    emptyValue="—"
+    onRowActivate={open}
+    labels={{ sortAnnouncement: (header, direction) => `${header} sorted ${direction}` }}
+  />
 
   <p class="mt-4 text-sm text-base-content/60">{rows.length} devices</p>
 </main>
