@@ -131,9 +131,10 @@ Protocol Buffers, and OpenAPI representations are all derived from it by the
 generators in `bin/`. Copy the directory, keep `sql/` as your starting schema,
 and regenerate the representations if you change it.
 
-Note the licence before you do: **CC BY-NC-SA 4.0**, which is
-non-commercial and share-alike. See [`LICENSE.md`](LICENSE.md), and ask if your
-use does not fit it.
+Note the licence before you do: you may choose **CC BY-NC-SA 4.0**, which is
+non-commercial and share-alike, or **OGL-UK-3.0**, the UK Open Government
+Licence v3.0, which permits commercial reuse with attribution. See
+[`LICENSE.md`](LICENSE.md), and ask if your use fits neither.
 
 ## Before you deploy any of this
 

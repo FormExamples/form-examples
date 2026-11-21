@@ -48,7 +48,7 @@
     { "title": "News", "url": "https://github.com/FormExamples/form-examples/blob/main/NEWS.md", "description": "Project fact sheet and press contact" },
     { "title": "Comparisons", "url": "https://github.com/FormExamples/form-examples/blob/main/COMPARISONS.md", "description": "Related projects, and when one is the better choice" },
     { "title": "Benchmarks", "url": "https://github.com/FormExamples/form-examples/blob/main/BENCHMARKS.md", "description": "Measured gate timings and page weight" },
-    { "title": "License", "url": "https://github.com/FormExamples/form-examples/blob/main/LICENSE.md", "description": "CC BY-NC-SA 4.0, and third-party works included here" },
+    { "title": "License", "url": "https://github.com/FormExamples/form-examples/blob/main/LICENSE.md", "description": "CC BY-NC-SA 4.0 or OGL-UK-3.0, and third-party works included here" },
     { "title": "Citation", "url": "https://github.com/FormExamples/form-examples/blob/main/CITATION.cff", "description": "How to cite this work" }
   ]
 }

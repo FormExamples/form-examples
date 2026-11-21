@@ -68,5 +68,5 @@ for the full alphabetical index in the repository.
 - [News](https://github.com/FormExamples/form-examples/blob/main/NEWS.md): project fact sheet and press contact
 - [Comparisons](https://github.com/FormExamples/form-examples/blob/main/COMPARISONS.md): related projects, and when one is the better choice
 - [Benchmarks](https://github.com/FormExamples/form-examples/blob/main/BENCHMARKS.md): measured gate timings and page weight
-- [License](https://github.com/FormExamples/form-examples/blob/main/LICENSE.md): CC BY-NC-SA 4.0, and third-party works included here
+- [License](https://github.com/FormExamples/form-examples/blob/main/LICENSE.md): CC BY-NC-SA 4.0 or OGL-UK-3.0, and third-party works included here
 - [Citation](https://github.com/FormExamples/form-examples/blob/main/CITATION.cff): how to cite this work

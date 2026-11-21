@@ -54,7 +54,7 @@ Update the spec before changing code. See `spec.md` §10 for the workflow.
 | [`NEWS.md`](NEWS.md) | news, the project fact sheet, and press contact |
 | [`COMPARISONS.md`](COMPARISONS.md) | related projects, and when one of them is the better choice |
 | [`BENCHMARKS.md`](BENCHMARKS.md) | measured gate timings, page weight, and what is deliberately not measured |
-| [`LICENSE.md`](LICENSE.md) | CC BY-NC-SA 4.0, and third-party works included here |
+| [`LICENSE.md`](LICENSE.md) | CC BY-NC-SA 4.0 or OGL-UK-3.0, and third-party works included here |
 | [`CITATION.cff`](CITATION.cff) | how to cite this work |
 | [`CODEOWNERS`](CODEOWNERS) | review ownership per path |
 

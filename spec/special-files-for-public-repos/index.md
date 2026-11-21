@@ -13,7 +13,7 @@ describes.
 | File | Purpose | Status |
 | --- | --- | --- |
 | [`README.md`](../../README.md) | entry point; a symlink to `index.md` so GitHub renders it | present |
-| [`LICENSE.md`](../../LICENSE.md) | licence, with SPDX identification (`CC-BY-NC-SA-4.0`) and the third-party works included here | present |
+| [`LICENSE.md`](../../LICENSE.md) | licence, with SPDX identification (`CC-BY-NC-SA-4.0 OR OGL-UK-3.0`) and the third-party works included here | present |
 | [`CITATION.cff`](../../CITATION.cff) | citation metadata, with ORCID, for Joel Parker Henderson (<joel@joelparkerhenderson.com>) | present |
 | [`NEWS.md`](../../NEWS.md) | news, update information, project fact sheet, press contact | present |
 | [`COMPARISONS.md`](../../COMPARISONS.md) | comparisons to relevant projects, and when one of them is the better choice | present |

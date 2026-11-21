@@ -45,4 +45,6 @@ keywords:
   - Rust
   - spec-driven development
   - health informatics
-license: CC-BY-NC-SA-4.0
+license:
+  - CC-BY-NC-SA-4.0
+  - OGL-UK-3.0

@@ -36,7 +36,7 @@ project with one maintainer.
 
 Everyone taking part is covered by the
 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). Contributions are accepted under the
-repository's licence, [`LICENSE.md`](LICENSE.md) (CC BY-NC-SA 4.0). If you use
+repository's licence, [`LICENSE.md`](LICENSE.md) (CC BY-NC-SA 4.0 or OGL-UK-3.0). If you use
 AI tooling on a contribution, disclose it in the pull-request description —
 which tool, and what it did — and carry a `Co-Authored-By:` trailer naming
 the tool on any commit it touched (see Commit conventions below); the rule

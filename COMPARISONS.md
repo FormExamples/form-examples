@@ -163,8 +163,11 @@ an advertisement:
 - **No deployment story.** No hosting, no multi-tenancy, no user management, no
   audit log, no packaged release. [`INSTALL.md`](INSTALL.md) runs one form
   locally; everything past that is yours.
-- **A restrictive licence for a code corpus.** CC BY-NC-SA 4.0 is
+- **An unusual licence for a code corpus.** CC BY-NC-SA 4.0 is
   non-commercial and share-alike, which rules out uses that a permissively
-  licensed alternative would allow. See [`LICENSE.md`](LICENSE.md).
+  licensed alternative would allow. The UK Open Government Licence v3.0
+  (`OGL-UK-3.0`) is offered as an alternative that permits commercial reuse
+  with attribution, but it is written for information rather than software, and
+  it is not one of the common software licences. See [`LICENSE.md`](LICENSE.md).
 - **A bus factor of one.** [`MAINTAINERS.md`](MAINTAINERS.md) is explicit about
   what that means for anyone considering a dependency.

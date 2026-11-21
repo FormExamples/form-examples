@@ -100,7 +100,7 @@ authoritative count of forms at any commit.
 | Toolchain | 69 tools under `bin/`, most with a `--check` drift gate |
 | Tracked files | ~146,000 |
 | Started | 2026-03-13 |
-| Licence | CC BY-NC-SA 4.0 — see [`LICENSE.md`](LICENSE.md) |
+| Licence | CC BY-NC-SA 4.0 or OGL-UK-3.0, at your choice — see [`LICENSE.md`](LICENSE.md) |
 
 ## Boilerplate
 
@@ -110,7 +110,7 @@ Short, for a paragraph at the end of an article:
 > administrative forms, each published as a complete worked stack: a PostgreSQL
 > schema, generated XML, FHIR R5, Protocol Buffers, and OpenAPI representations,
 > two front-end implementations, and a Rust JSON API. It is maintained by Joel
-> Parker Henderson and published under CC BY-NC-SA 4.0 at
+> Parker Henderson and published under CC BY-NC-SA 4.0 or OGL-UK-3.0 at
 > [formexamples.com](https://formexamples.com).
 
 ## Accuracy notes for anyone writing about this
