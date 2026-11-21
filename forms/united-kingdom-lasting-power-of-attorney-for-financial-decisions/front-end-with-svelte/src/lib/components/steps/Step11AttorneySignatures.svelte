@@ -12,7 +12,11 @@
   // signature record with a witness. We make sure one exists for every listed
   // person on render; surplus records are not removed (the underlying person
   // may have been replaced).
-  function ensureAttorneySignature(personId: string, role: SignatureRole): Signature {
+  function ensureAttorneySignature(
+    personId: string,
+    role: SignatureRole,
+    create = true
+  ): Signature {
     let sig = store.data.signatures.find(
       (s) => s.lp1fSection === 11 && s.signatoryPersonId === personId
     );
@@ -32,10 +36,21 @@
           witnessedOn: ''
         }
       };
-      store.data.signatures.push(sig);
+      if (create) store.data.signatures.push(sig);
     }
     return sig;
   }
+
+  // Create the signatures now and whenever the attorneys change, not while
+  // rendering: Svelte forbids changing state inside a template, so the
+  // template's ensureAttorneySignature(...) only finds them.
+  function ensureAll() {
+    for (const a of store.data.attorneys) ensureAttorneySignature(a.person.id, 'attorney');
+    for (const r of store.data.replacementAttorneys)
+      ensureAttorneySignature(r.person.id, 'replacement_attorney');
+  }
+  ensureAll();
+  $effect.pre(ensureAll);
 </script>
 
 <section>
@@ -54,7 +69,7 @@
 
   <div class="space-y-6">
     {#each store.data.attorneys as a (a.person.id)}
-      {@const sig = ensureAttorneySignature(a.person.id, 'attorney')}
+      {@const sig = ensureAttorneySignature(a.person.id, 'attorney', false)}
       <div class="border border-base-300 rounded p-3 bg-base-200 space-y-3">
         <h3 class="text-sm font-semibold text-base-content/80">
           Attorney #{a.ordinal} &mdash; {a.person.firstNames}
@@ -87,7 +102,7 @@
     {/each}
 
     {#each store.data.replacementAttorneys as r (r.person.id)}
-      {@const sig = ensureAttorneySignature(r.person.id, 'replacement_attorney')}
+      {@const sig = ensureAttorneySignature(r.person.id, 'replacement_attorney', false)}
       <div class="border border-base-300 rounded p-3 bg-base-200 space-y-3">
         <h3 class="text-sm font-semibold text-base-content/80">
           Replacement #{r.ordinal} &mdash; {r.person.firstNames}

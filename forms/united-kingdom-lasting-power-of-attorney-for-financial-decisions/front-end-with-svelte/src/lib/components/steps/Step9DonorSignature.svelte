@@ -8,7 +8,7 @@
   import AddressInput from '#lib/components/ui/AddressInput.svelte';
 
   // Ensure exactly one signature exists for the donor at LP1F section 9.
-  function ensureDonorSignature() {
+  function ensureDonorSignature(create = true) {
     let sig = store.data.signatures.find((s) => s.role === 'donor' && s.lp1fSection === 9);
     if (!sig) {
       sig = {
@@ -26,12 +26,19 @@
           witnessedOn: ''
         }
       };
-      store.data.signatures.push(sig);
+      if (create) store.data.signatures.push(sig);
     }
     return sig;
   }
 
-  const donorSig = $derived(ensureDonorSignature());
+  // Create the record now, not while rendering: Svelte forbids changing state
+  // inside $derived or a template, so the derived value below only finds it.
+  ensureDonorSignature();
+  // Again before each update: loading another record replaces the data.
+  $effect.pre(() => {
+    ensureDonorSignature();
+  });
+  const donorSig = $derived(ensureDonorSignature(false));
 </script>
 
 <section>

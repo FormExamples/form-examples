@@ -83,7 +83,8 @@
       header: 'Mean',
       width: 90,
       sort: true,
-      template: (v: number | null) => (v === null ? '—' : v.toFixed(2))
+      // typeof, not === null: the grid passes a missing value as ''.
+      template: (v: number | null) => (typeof v === 'number' ? v.toFixed(2) : '—')
     },
     {
       id: 'maturity',

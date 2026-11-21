@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { renderPdf } from '#lib/report/pdf-client.js';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
   import { store } from '#lib/stores/assessment.svelte.js';
@@ -33,21 +34,20 @@
   async function downloadPDF() {
     pdfError = '';
     try {
-      // Built in the browser, so the report works on a static host with no server.
-      const [{ default: pdfMake }, { default: vfs }, { buildPdfDoc }] = await Promise.all([
-        import('pdfmake/build/pdfmake'),
-        import('pdfmake/build/vfs_fonts'),
-        import('#lib/report/pdf-builder.js')
-      ]);
-      pdfMake.addVirtualFileSystem(vfs);
-      const doc = buildPdfDoc(store.data, store.result) as unknown as Parameters<
-        typeof pdfMake.createPdf
-      >[0];
-      await pdfMake
-        .createPdf(doc)
-        .download(`pre-operative-assessment-${d.patient.lastName || id}.pdf`);
+      const res = await renderPdf({ data: store.data, result: store.result });
+      if (res.ok) {
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `pre-operative-assessment-${d.patient.lastName || id}.pdf`;
+        a.click();
+        URL.revokeObjectURL(url);
+      } else {
+        pdfError = 'Failed to generate PDF. Please try again.';
+      }
     } catch {
-      pdfError = 'Failed to generate PDF. Please try again.';
+      pdfError = 'Failed to generate PDF. Please check your connection and try again.';
     }
   }
 </script>

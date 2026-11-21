@@ -5,3 +5,7 @@ __pycache__/
 .svelte-kit/
 .vibe/
 target/
+
+# Each form's Svelte front-end writes its formexamples.github.io build here
+# (VITE_FORM_EXAMPLES_SITE=1; see spec/monorepo-github-pages/).
+forms/*/front-end-with-svelte/build/

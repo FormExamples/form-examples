@@ -152,5 +152,6 @@ export function sexLabel(sex: Sex): string {
 
 /** Format an aortic diameter for display, or a dash when null. */
 export function formatDiameter(n: number | null): string {
-  return n === null || n === undefined ? '—' : `${n.toFixed(1)} cm`;
+  // typeof, not === null: the SVAR grid passes a missing value as ''.
+  return typeof n !== 'number' ? '—' : `${n.toFixed(1)} cm`;
 }

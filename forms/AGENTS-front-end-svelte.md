@@ -85,10 +85,14 @@ Every front-end is also served on the public site at `/<slug>/`, built with
 - keeps the `__spa` script in `src/app.html`, which restores the path for a
   page reached through the site's `404.html`;
 - needs no server: no `+server.ts` other than the root redirect, and the PDF
-  report is built in the browser (`pdfmake/build/pdfmake` plus
-  `pdfmake/build/vfs_fonts`, with `addVirtualFileSystem`);
+  report is built in the browser by `src/lib/report/pdf-client.ts`'s
+  `renderPdf(body)` (`pdfmake/build/pdfmake` plus `pdfmake/build/vfs_fonts`,
+  with `addVirtualFileSystem`), which the report page calls where it used to
+  POST to `report/pdf`;
 - loads its themes from `/themes/`, which the site serves.
 
+`bin/svelte-site-static <slug>` makes a front-end ready for this (it writes all
+of the above), and `bin/svelte-site-static --check --all` is the CI drift detector.
 `node formexamples.github.io/scripts/build-forms.mjs <slug>` builds one form into
 an already-built site, and serving `formexamples.github.io/build/` the way
 GitHub Pages does shows it at `/<slug>/`.

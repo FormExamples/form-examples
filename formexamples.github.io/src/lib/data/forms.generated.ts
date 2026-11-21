@@ -7,1627 +7,1627 @@ export const forms: Form[] = [
     "slug": "abdominal-aortic-aneurysm-screening",
     "title": "Abdominal Aortic Aneurysm (AAA) Screening",
     "description": "A documentation and result-classification form for the UK NHS Abdominal Aortic Aneurysm (AAA) Screening Programme.",
-    "app": false
+    "app": true
   },
   {
     "slug": "accident-and-emergency-medicine-waiting-list-card",
     "title": "Accident and Emergency Medicine Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a accident and emergency medicine waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "advance-decision-to-refuse-treatment",
     "title": "Advance Decision to Refuse Treatment",
     "description": "Legal document allowing patients to record treatment refusal decisions in advance, assessed for legal validity per Mental Capacity Act 2005.",
-    "app": false
+    "app": true
   },
   {
     "slug": "advance-statement-about-care",
     "title": "Advance Statement About Care",
     "description": "Document for recording a patient's wishes and preferences about future care, including values, beliefs, care preferences, medical treatment wishes, communication preferences, people important to them, and practical…",
-    "app": false
+    "app": true
   },
   {
     "slug": "agile-checklist",
     "title": "Agile Checklist",
     "description": "A team / organization self-assessment that audits 57 concrete behaviours of an agile way-of-working across three sections — Teams, Stakeholders, and Practices — and produces a composite agility maturity level (Ad-hoc /…",
-    "app": false
+    "app": true
   },
   {
     "slug": "agile-consulting-scorecard-for-hiring-help",
     "title": "Agile consulting scorecard for hiring help",
     "description": "A self-assessment scorecard that helps an organization decide whether it is ready to hire agile consulting help.",
-    "app": false
+    "app": true
   },
   {
     "slug": "agile-principles-assessment",
     "title": "Agile Principles Assessment",
     "description": "A team / organization self-assessment that scores adoption of the 12 principles of the Agile Manifesto (Beck et al., 2001) and produces a composite agility maturity level (Ad-hoc / Initial / Developing / Mature /…",
-    "app": false
+    "app": true
   },
   {
     "slug": "alcohol-use-disorders-identification-test-consumption",
     "title": "Alcohol Use Disorders Identification Test — Consumption (AUDIT-C)",
     "description": "A brief, three-item alcohol screening questionnaire for adults. It records the three consumption items of the World Health Organization's Alcohol Use Disorders Identification Test — frequency of drinking, typical…",
-    "app": false
+    "app": true
   },
   {
     "slug": "allergist-waiting-list-card",
     "title": "Allergist Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a allergist waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "allergy-assessment",
     "title": "Allergy Assessment",
     "description": "Comprehensive allergy evaluation covering drug, food, and environmental allergies with anaphylaxis risk assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "allergy-skin-test-request",
     "title": "Allergy Skin Test Request",
     "description": "A UK NHS–aligned allergy testing request (referral) that a clinician completes to request allergy diagnostic testing — skin-prick testing, intradermal testing, patch testing, specific-IgE blood testing, or a…",
-    "app": false
+    "app": true
   },
   {
     "slug": "allergy-skin-test-result",
     "title": "Allergy Skin Test Result",
     "description": "A UK NHS–aligned allergy skin test result (report) that a reporting clinician completes after an allergy test has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "ambulatory-blood-pressure-test-request",
     "title": "Ambulatory Blood Pressure Test Request",
     "description": "A UK NHS–aligned ambulatory blood pressure monitoring (ABPM) request (referral) that a clinician completes to request 24-hour ambulatory blood pressure monitoring (or home blood pressure monitoring) for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "ambulatory-blood-pressure-test-result",
     "title": "Ambulatory Blood Pressure Test Result",
     "description": "A UK NHS–aligned ambulatory blood pressure monitoring (ABPM) result (report) that a reporting clinician completes after a 24-hour ABPM (or home blood pressure monitoring) period has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "anaesthetic-record",
     "title": "Anaesthetic Record",
     "description": "The intra-operative anaesthesia chart: the contemporaneous clinical record of an anaesthetic from pre-induction checks through emergence and recovery handover.",
-    "app": false
+    "app": true
   },
   {
     "slug": "anaesthetics-waiting-list-card",
     "title": "Anaesthetics Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a anaesthetics waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "anesthesiology-assessment",
     "title": "Anesthesiology Assessment",
     "description": "UK NHS-aligned pre-operative anesthesiology assessment combining four validated scoring systems — ASA Physical Status Classification, Mallampati / Airway Score, Revised Cardiac Risk Index (RCRI / Lee Index), and…",
-    "app": false
+    "app": true
   },
   {
     "slug": "angiography-test-request",
     "title": "Angiography Test Request",
     "description": "A UK NHS–aligned vascular angiography request (referral) that a clinician completes to request a CT, MR, or catheter angiographic examination of an arterial territory.",
-    "app": false
+    "app": true
   },
   {
     "slug": "angiography-test-result",
     "title": "Angiography Test Result",
     "description": "A UK NHS–aligned angiography result (report) that a reporting clinician completes after a vascular angiographic examination has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "anion-gap-calculator",
     "title": "Anion Gap Calculator",
     "description": "A point-of-care calculator that derives the serum anion gap from a routine electrolyte panel, corrects it for the patient's serum albumin, and classifies the result as low, normal, or high.",
-    "app": false
+    "app": true
   },
   {
     "slug": "apgar-score",
     "title": "Apgar Score",
     "description": "A rapid, structured assessment of a newborn's condition in the first minutes after birth.",
-    "app": false
+    "app": true
   },
   {
     "slug": "arc42",
     "title": "arc42",
     "description": "A structured documentation wizard for arc42, the pragmatic template for software architecture communication.",
-    "app": false
+    "app": true
   },
   {
     "slug": "architecture-decision-record",
     "title": "Architecture Decision Record (Tyree & Akerman)",
     "description": "A structured form for capturing an Architecture Decision Record (ADR) using the Jeff Tyree & Art Akerman template (\"Architecture Decisions: Demystifying Architecture\", IEEE Software, 2005).",
-    "app": false
+    "app": true
   },
   {
     "slug": "asthma-assessment",
     "title": "Asthma Assessment",
     "description": "Asthma control evaluation using the ACT (Asthma Control Test) scoring instrument.",
-    "app": false
+    "app": true
   },
   {
     "slug": "attention-deficit-assessment",
     "title": "Attention Deficit Assessment",
     "description": "ADHD screening using the ASRS (Adult ADHD Self-Report Scale) v1.1 screener.",
-    "app": false
+    "app": true
   },
   {
     "slug": "audio-vestibular-assessment",
     "title": "Audio-Vestibular Assessment",
     "description": "Combined audiology and vestibular (balance) assessment capturing presenting symptoms, otoscopic and audiometric findings, tympanometry, vestibular screening tests, and the Dizziness Handicap Inventory (DHI) to classify…",
-    "app": false
+    "app": true
   },
   {
     "slug": "audiology-assessment",
     "title": "Audiology Assessment",
     "description": "Comprehensive hearing evaluation covering audiometric testing, tinnitus, vestibular function, and communication impact.",
-    "app": false
+    "app": true
   },
   {
     "slug": "autism-assessment",
     "title": "Autism Assessment",
     "description": "Autism spectrum screening using the AQ-10 questionnaire with sensory and developmental profiling.",
-    "app": false
+    "app": true
   },
   {
     "slug": "bhutani-bilirubin-nomogram",
     "title": "Bhutani Bilirubin Nomogram",
     "description": "A predictive risk-stratification tool for neonatal hyperbilirubinaemia. It plots a newborn infant's total serum bilirubin (TSB) against the infant's age in hours on the hour-specific Bhutani nomogram to assign a…",
-    "app": false
+    "app": true
   },
   {
     "slug": "biopsy-test-request",
     "title": "Biopsy Test Request",
     "description": "A UK NHS–aligned tissue-biopsy procedure / pathology request (referral) that a clinician completes to request a diagnostic biopsy for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "biopsy-test-result",
     "title": "Biopsy Test Result",
     "description": "A UK NHS–aligned biopsy histopathology result (report) that a reporting pathologist completes after a tissue or cytology specimen has been examined.",
-    "app": false
+    "app": true
   },
   {
     "slug": "birth-control-assessment",
     "title": "Birth Control Assessment",
     "description": "Contraceptive suitability evaluation using UK Medical Eligibility Criteria (UK MEC) categories with comprehensive risk profiling for DVT, cardiovascular disease, BMI, smoking, and migraine with aura.",
-    "app": false
+    "app": true
   },
   {
     "slug": "blood-cross-match-test-request",
     "title": "Blood Cross-Match Test Request",
     "description": "A UK NHS–aligned blood cross-match / transfusion compatibility request (referral) that a clinician completes to request group-and-save, antibody screen, crossmatch, or emergency blood for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "blood-cross-match-test-result",
     "title": "Blood Cross-Match Test Result",
     "description": "A UK NHS–aligned blood cross-match / transfusion compatibility result (report) that a reporting clinician completes after pre-transfusion testing has been performed in the transfusion laboratory.",
-    "app": false
+    "app": true
   },
   {
     "slug": "blood-donation-assessment",
     "title": "Blood Donation Assessment",
     "description": "Blood donation eligibility screening aligned with the JPAC Donor Selection Guidelines used by UK NHSBT, covering donor demographics, health status, medications, recent illness, travel history, lifestyle risk, and vital…",
-    "app": false
+    "app": true
   },
   {
     "slug": "blood-test-request",
     "title": "Blood Test Request",
     "description": "A UK NHS–aligned pathology / phlebotomy blood-test order (request) that a clinician completes to order one or more blood-test panels for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "blood-test-result",
     "title": "Blood Test Result",
     "description": "A UK NHS–aligned blood / pathology test result (report) that a reporting clinician completes after a blood specimen has been analysed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "body-mass-index-and-body-surface-area-calculator",
     "title": "Body Mass Index and Body Surface Area Calculator",
     "description": "An anthropometric calculator that converts a patient's height and weight into two derived measurements used throughout clinical practice:",
-    "app": false
+    "app": true
   },
   {
     "slug": "bone-marrow-donation-assessment",
     "title": "Bone Marrow Donation Assessment",
     "description": "Haematopoietic stem cell donor evaluation assessing HLA typing, health screening, anaesthetic fitness, and collection method suitability (peripheral blood stem cells vs bone marrow harvest).",
-    "app": false
+    "app": true
   },
   {
     "slug": "bowel-cancer-screening-with-faecal-immunochemical-test",
     "title": "Bowel Cancer Screening with Faecal Immunochemical Test (FIT)",
     "description": "A documentation and result-classification form for the NHS Bowel Cancer Screening Programme (BCSP).",
-    "app": false
+    "app": true
   },
   {
     "slug": "breast-screening",
     "title": "Breast Screening Record (NHS Breast Screening Programme)",
     "description": "A documentation and result-classification record for a mammography breast screening encounter within the NHS Breast Screening Programme (NHSBSP).",
-    "app": false
+    "app": true
   },
   {
     "slug": "bronchoscopy-test-request",
     "title": "Bronchoscopy Test Request",
     "description": "A UK NHS–aligned airway endoscopy request (referral) that a clinician completes to request a bronchoscopy for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "bronchoscopy-test-result",
     "title": "Bronchoscopy Test Result",
     "description": "A UK NHS–aligned bronchoscopy (airway endoscopy) result (procedure report) that an operating clinician completes after a bronchoscopy has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "cage-alcohol-questionnaire",
     "title": "CAGE Alcohol Questionnaire",
     "description": "A brief four-item screening questionnaire for alcohol misuse and dependence in adults.",
-    "app": false
+    "app": true
   },
   {
     "slug": "caprini-venous-thromboembolism-risk-assessment",
     "title": "Caprini Venous Thromboembolism Risk Assessment",
     "description": "A structured venous thromboembolism (VTE) risk-stratification tool for surgical and medical inpatients.",
-    "app": false
+    "app": true
   },
   {
     "slug": "cardiac-stress-test-request",
     "title": "Cardiac Stress Test Request",
     "description": "A UK NHS–aligned cardiac stress / exercise test request (referral) that a clinician completes to request a stress test for a patient with suspected or known cardiac disease.",
-    "app": false
+    "app": true
   },
   {
     "slug": "cardiac-stress-test-result",
     "title": "Cardiac Stress Test Result",
     "description": "A UK NHS–aligned cardiac stress / exercise test result (report) that a reporting clinician completes after a stress test has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "cardiology-assessment",
     "title": "Cardiology Assessment",
     "description": "Cardiovascular evaluation using CCS Angina Classification and NYHA Heart Failure Classification with comprehensive cardiac risk profiling.",
-    "app": false
+    "app": true
   },
   {
     "slug": "cardiology-request",
     "title": "Cardiology Request",
     "description": "A UK NHS–aligned cardiology referral / consult request that a clinician completes to refer a patient into a cardiology service.",
-    "app": false
+    "app": true
   },
   {
     "slug": "cardiology-response",
     "title": "Cardiology Response",
     "description": "A UK NHS–aligned cardiology response (consult reply) that a cardiology clinician completes in answer to a cardiology referral.",
-    "app": false
+    "app": true
   },
   {
     "slug": "cardiology-waiting-list-card",
     "title": "Cardiology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a cardiology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "cardiopulmonary-resuscitation-training",
     "title": "Cardiopulmonary Resuscitation Training",
     "description": "Basic Life Support (BLS) cardiopulmonary resuscitation competency assessment aligned with AHA/Resuscitation Council (UK) guidelines, used to certify rescuers on adult BLS and AED skills with pass/fail criteria and…",
-    "app": false
+    "app": true
   },
   {
     "slug": "care-privacy-notice",
     "title": "Care Privacy Notice",
     "description": "Read-and-acknowledge privacy notice form based on the BMA GDPR template for GP practices.",
-    "app": false
+    "app": true
   },
   {
     "slug": "casualty-card-form",
     "title": "Casualty Card Form",
     "description": "A clinical document used in Emergency Departments (ED) and Minor Injury Units (MIU). Captures patient information from arrival through triage, assessment, treatment, and disposition.",
-    "app": false
+    "app": true
   },
   {
     "slug": "cataract-diagnostic-evaluation",
     "title": "Cataract Diagnostic Evaluation",
     "description": "A comprehensive cataract diagnostic evaluation: the ophthalmic assessment used to confirm the presence of a cataract, grade its severity against the validated LOCS III (Lens Opacities Classification System III)…",
-    "app": false
+    "app": true
   },
   {
     "slug": "centor-score-for-streptococcal-pharyngitis",
     "title": "Centor Score for Streptococcal Pharyngitis",
     "description": "A clinical prediction tool that estimates the likelihood that an acute sore throat is caused by group A beta-haemolytic streptococcus (GABHS, \"strep\") and therefore the likelihood that antibiotics would help.",
-    "app": false
+    "app": true
   },
   {
     "slug": "cervical-screening",
     "title": "Cervical Screening record",
     "description": "A structured record of a cervical screening (smear) encounter under the UK NHS Cervical Screening Programme (NHS CSP).",
-    "app": false
+    "app": true
   },
   {
     "slug": "cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk",
     "title": "CHA2DS2-VASc Score for Atrial Fibrillation Stroke Risk",
     "description": "A clinical prediction tool that estimates the annual risk of ischaemic stroke and systemic thromboembolism in adults with non-valvular atrial fibrillation (AF), and guides the decision to start oral anticoagulation.",
-    "app": false
+    "app": true
   },
   {
     "slug": "child-psychiatry-waiting-list-card",
     "title": "Child Psychiatry Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a child psychiatry waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "child-pugh-score",
     "title": "Child-Pugh Score (Child-Turcotte-Pugh)",
     "description": "A prognostic score for the severity of chronic liver disease, principally cirrhosis.",
-    "app": false
+    "app": true
   },
   {
     "slug": "child-safeguarding-referral",
     "title": "Child Safeguarding Referral",
     "description": "A structured referral to children's social care when a professional believes a child may be at risk of harm.",
-    "app": false
+    "app": true
   },
   {
     "slug": "chronic-kidney-disease-review",
     "title": "Chronic Kidney Disease Annual Review",
     "description": "A UK primary-care structured review that documents the annual (or interval) monitoring of an adult with chronic kidney disease (CKD) and classifies the patient on the KDIGO GFR × albuminuria risk heat-map.",
-    "app": false
+    "app": true
   },
   {
     "slug": "chronic-obstructive-pulmonary-disease-review",
     "title": "Chronic Obstructive Pulmonary Disease Review (COPD Annual Review)",
     "description": "A UK primary-care annual review for adults with a confirmed diagnosis of chronic obstructive pulmonary disease (COPD).",
-    "app": false
+    "app": true
   },
   {
     "slug": "clinical-biology-waiting-list-card",
     "title": "Clinical Biology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a clinical biology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "clinical-chemistry-waiting-list-card",
     "title": "Clinical Chemistry Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a clinical chemistry waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "clinical-microbiology-waiting-list-card",
     "title": "Clinical Microbiology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a clinical microbiology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "clinical-neurophysiology-waiting-list-card",
     "title": "Clinical Neurophysiology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a clinical neurophysiology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "coagulation-test-request",
     "title": "Coagulation Test Request",
     "description": "A UK NHS–aligned coagulation / haemostasis blood-test request (referral) that a clinician completes to order one or more coagulation tests for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "coagulation-test-result",
     "title": "Coagulation Test Result",
     "description": "A UK NHS–aligned coagulation / haemostasis test result (report) that a reporting clinician completes after a coagulation test has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "code-of-conduct-notice",
     "title": "Code of Conduct Notice",
     "description": "Read-and-acknowledge code of conduct notice presenting the twelve core principles that medical-service providers and supporting staff must uphold, with signature capture to record acknowledgement.",
-    "app": false
+    "app": true
   },
   {
     "slug": "cognitive-assessment",
     "title": "Cognitive Assessment",
     "description": "Cognitive function screening using the MMSE (Mini-Mental State Examination) with functional impact assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "colonoscopy-test-request",
     "title": "Colonoscopy Test Request",
     "description": "A UK NHS–aligned lower-GI endoscopy procedure request (referral) that a clinician completes to request a colonoscopy (or flexible sigmoidoscopy / CT colonography) for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "colonoscopy-test-result",
     "title": "Colonoscopy Test Result",
     "description": "A UK NHS–aligned colonoscopy procedure result (report) that a reporting clinician (endoscopist) completes after a lower-GI endoscopy has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "columbia-suicide-severity-rating-scale",
     "title": "Columbia Suicide Severity Rating Scale (C-SSRS)",
     "description": "A structured, evidence-based instrument for assessing suicide risk. It records the severity of suicidal ideation on a five-point ordinal scale, the presence of distinct categories of suicidal behaviour, and the…",
-    "app": false
+    "app": true
   },
   {
     "slug": "confusion-assessment-method",
     "title": "Confusion Assessment Method (CAM)",
     "description": "A structured, bedside delirium screening instrument that records four observational features of an acute confusional state and applies the validated CAM diagnostic algorithm to classify delirium as present or absent.",
-    "app": false
+    "app": true
   },
   {
     "slug": "consent-to-treatment",
     "title": "Consent to Treatment",
     "description": "Informed consent form for medical procedures, validated for completeness of required sections.",
-    "app": false
+    "app": true
   },
   {
     "slug": "contraception-assessment",
     "title": "Contraception Assessment",
     "description": "Contraceptive method eligibility screening using UKMEC (UK Medical Eligibility Criteria) categories for 11 contraceptive methods.",
-    "app": false
+    "app": true
   },
   {
     "slug": "corrected-calcium-calculator",
     "title": "Corrected Calcium Calculator",
     "description": "An albumin-adjusted (corrected) calcium calculator for adults. It takes a measured total calcium result and the patient's serum albumin, applies the standard albumin-correction formula, and reports a corrected calcium…",
-    "app": false
+    "app": true
   },
   {
     "slug": "craniofacial-surgery-waiting-list-card",
     "title": "Craniofacial Surgery Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a craniofacial surgery waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "ct-scan-test-request",
     "title": "CT Scan Test Request",
     "description": "A UK NHS–aligned CT (computed tomography) scan request (referral) that a clinician completes to request a CT examination for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "ct-scan-test-result",
     "title": "CT Scan Test Result",
     "description": "A UK NHS–aligned CT (computed tomography) scan result (report) that a reporting clinician completes after a CT examination has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "curb-65-pneumonia-severity-score",
     "title": "CURB-65 Pneumonia Severity Score",
     "description": "A clinician-facing severity assessment for adults with community-acquired pneumonia (CAP).",
-    "app": false
+    "app": true
   },
   {
     "slug": "cystoscopy-test-request",
     "title": "Cystoscopy Test Request",
     "description": "A UK NHS–aligned cystoscopy (bladder endoscopy) request (referral) that a clinician completes to request a cystoscopic examination of the lower urinary tract.",
-    "app": false
+    "app": true
   },
   {
     "slug": "cystoscopy-test-result",
     "title": "Cystoscopy Test Result",
     "description": "A UK NHS–aligned cystoscopy (bladder endoscopy) result (report) that an operating clinician completes after a cystoscopic examination of the lower urinary tract has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "cytology-test-request",
     "title": "Cytology Test Request",
     "description": "A UK NHS–aligned cytology specimen request (referral) that a clinician completes to request a cytology examination of a specimen — cervical smear, urine, sputum, serous-cavity effusion (pleural / ascitic), fine-needle…",
-    "app": false
+    "app": true
   },
   {
     "slug": "cytology-test-result",
     "title": "Cytology Test Result",
     "description": "A UK NHS–aligned cytology test result (report) that a reporting clinician completes after a cytology specimen has been examined microscopically.",
-    "app": false
+    "app": true
   },
   {
     "slug": "dental-assessment",
     "title": "Dental Assessment",
     "description": "Oral health evaluation using the DMFT (Decayed, Missing, Filled Teeth) Index with periodontal and radiographic assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "dermatology-assessment",
     "title": "Dermatology Assessment",
     "description": "Dermatological quality of life evaluation using the DLQI (Dermatology Life Quality Index) with lesion characterization.",
-    "app": false
+    "app": true
   },
   {
     "slug": "dermatology-waiting-list-card",
     "title": "Dermatology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a dermatology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "dexa-bone-density-test-request",
     "title": "DEXA Bone Density Test Request",
     "description": "A UK NHS–aligned DEXA / DXA bone-densitometry (osteoporosis) scan request (referral) that a clinician completes to request a dual-energy X-ray absorptiometry examination to measure bone mineral density (BMD).",
-    "app": false
+    "app": true
   },
   {
     "slug": "dexa-bone-density-test-result",
     "title": "DEXA Bone Density Test Result",
     "description": "A UK NHS–aligned DEXA / DXA (dual-energy X-ray absorptiometry) bone-density result (report) that a reporting clinician completes after a DEXA examination has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "diabetes-assessment",
     "title": "Diabetes Assessment",
     "description": "Structured diabetes review aligned with NICE NG28 (type 2) / NG17 (type 1) and the Diabetes UK 15 Healthcare Essentials, capturing diabetes history, glycaemic control, medications, complications screening,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "diabetes-eye-screening",
     "title": "Diabetes Eye Screening record",
     "description": "A structured record of a diabetic retinal screening episode for the UK NHS Diabetic Eye Screening Programme (DESP).",
-    "app": false
+    "app": true
   },
   {
     "slug": "diabetes-podiatry-assessment",
     "title": "Diabetes Podiatry Assessment",
     "description": "A structured diabetic foot risk-screening record aligned with NICE NG19 (Diabetic foot problems: prevention and management).",
-    "app": false
+    "app": true
   },
   {
     "slug": "dietic-assessment",
     "title": "Dietetic Assessment",
     "description": "A UK-aligned, dietitian-driven dietetic assessment: a comprehensive evaluation of a patient's nutritional status, eating patterns, medical history, and food environment, conducted by a registered dietitian.",
-    "app": false
+    "app": true
   },
   {
     "slug": "dyslexia-assessment",
     "title": "Dyslexia Assessment",
     "description": "Specific learning difficulty evaluation using standardized scores for reading, writing, spelling, phonological processing, working memory, and processing speed with severity classification.",
-    "app": false
+    "app": true
   },
   {
     "slug": "echocardiogram-test-request",
     "title": "Echocardiogram Test Request",
     "description": "A UK NHS–aligned cardiac echocardiogram request (referral) that a clinician completes to request an echocardiogram (echo) examination for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "echocardiogram-test-result",
     "title": "Echocardiogram Test Result",
     "description": "A UK NHS–aligned echocardiogram (echo) result (report) that a reporting clinician completes after an echocardiogram study has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "edinburgh-postnatal-depression-scale",
     "title": "Edinburgh Postnatal Depression Scale (EPDS)",
     "description": "A 10-item self-report screening questionnaire for perinatal depression — covering both the antenatal (during pregnancy) and postnatal (after birth) periods.",
-    "app": false
+    "app": true
   },
   {
     "slug": "electrocardiogram-test-request",
     "title": "Electrocardiogram Test Request",
     "description": "A UK NHS–aligned electrocardiogram (ECG) test request (referral) that a clinician completes to request a cardiac ECG examination for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "electrocardiogram-test-result",
     "title": "Electrocardiogram Test Result",
     "description": "A UK NHS–aligned electrocardiogram (ECG) test result (report) that a reporting clinician completes after an ECG examination has been recorded.",
-    "app": false
+    "app": true
   },
   {
     "slug": "electroencephalogram-test-request",
     "title": "Electroencephalogram Test Request",
     "description": "A UK NHS–aligned electroencephalogram (EEG) request (referral) that a clinician completes to request a recording of the brain's electrical activity, most often to support the diagnosis and classification of epilepsy and…",
-    "app": false
+    "app": true
   },
   {
     "slug": "electroencephalogram-test-result",
     "title": "Electroencephalogram Test Result",
     "description": "A UK NHS–aligned electroencephalogram (EEG) result (report) that a reporting clinician completes after an EEG recording has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "emergency-department-triage-note",
     "title": "Emergency Department Triage Note",
     "description": "A first-contact assessment that a triage nurse completes when a patient arrives at the emergency department (ED).",
-    "app": false
+    "app": true
   },
   {
     "slug": "emergency-medical-technician-psychomotor-examination",
     "title": "Emergency Medical Technician Psychomotor Examination",
     "description": "NREMT-style psychomotor skills examination for Emergency Medical Technicians, scored against a point-based checklist for scene size-up, primary survey, history taking, secondary assessment, and reassessment, with…",
-    "app": false
+    "app": true
   },
   {
     "slug": "employee-offboarding-checklist",
     "title": "Employee Offboarding Checklist",
     "description": "Structured offboarding checklist ensuring every departing employee completes the administrative, operational, and knowledge-transfer steps required to protect patient safety, organizational data, and service continuity.",
-    "app": false
+    "app": true
   },
   {
     "slug": "employee-onboarding-checklist",
     "title": "Employee Onboarding Checklist",
     "description": "Employee onboarding checklist for healthcare staff. Tracks completion of mandatory requirements: occupational health clearance, DBS checks, professional registration, mandatory training, IT access, uniform/ID.",
-    "app": false
+    "app": true
   },
   {
     "slug": "employee-satisfaction-survey",
     "title": "Employee Satisfaction Survey",
     "description": "Employee satisfaction survey measuring workplace experience quality using Likert-scale scoring across multiple employment domains with normalized composite scoring to inform retention, engagement, and culture programmes.",
-    "app": false
+    "app": true
   },
   {
     "slug": "encounter-satisfaction",
     "title": "Encounter Satisfaction",
     "description": "Patient encounter satisfaction survey for collecting feedback on healthcare experiences.",
-    "app": false
+    "app": true
   },
   {
     "slug": "endocrinology-assessment",
     "title": "Endocrinology Assessment",
     "description": "General endocrinology consultation assessment covering the thyroid, adrenal, glucose, reproductive, pituitary, and bone/calcium axes, integrating symptom review, clinical examination, and laboratory findings to…",
-    "app": false
+    "app": true
   },
   {
     "slug": "endocrinology-waiting-list-card",
     "title": "Endocrinology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a endocrinology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "endometriosis-assessment",
     "title": "Endometriosis Assessment",
     "description": "Endometriosis evaluation using revised ASRM (American Society for Reproductive Medicine) staging and EHP-30 quality of life scoring, with comprehensive pelvic pain profiling and fertility assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "endoscopy-test-request",
     "title": "Endoscopy Test Request",
     "description": "A UK NHS–aligned GI endoscopy procedure request (referral) that a clinician completes to request a gastrointestinal endoscopy for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "epilepsy-review",
     "title": "Epilepsy Annual Review",
     "description": "A UK primary-care structured annual review for adults with epilepsy, aligned with NICE NG217 (Epilepsies in children, young people and adults, 2022).",
-    "app": false
+    "app": true
   },
   {
     "slug": "ergonomic-assessment",
     "title": "Ergonomic Assessment",
     "description": "Workplace ergonomic evaluation using the REBA (Rapid Entire Body Assessment) for musculoskeletal risk.",
-    "app": false
+    "app": true
   },
   {
     "slug": "estimated-glomerular-filtration-rate-calculator",
     "title": "Estimated Glomerular Filtration Rate (eGFR) Calculator",
     "description": "A formula calculator that estimates the glomerular filtration rate (GFR) — the volume of blood the kidneys filter each minute — from a single serum creatinine measurement together with the patient's age and sex.",
-    "app": false
+    "app": true
   },
   {
     "slug": "expense-reimbursement",
     "title": "Expense Reimbursement",
     "description": "A workplace expense reimbursement claim that a worker (for example a clinician) completes after spending their own money on a work-related expense and wanting to be repaid.",
-    "app": false
+    "app": true
   },
   {
     "slug": "eye-prescription",
     "title": "Eye Prescription",
     "description": "A UK General Optical Council (GOC) aligned spectacle prescription as issued by a registered optometrist or dispensing optician following a sight test.",
-    "app": false
+    "app": true
   },
   {
     "slug": "eye-vision-test-request",
     "title": "Eye Vision Test Request",
     "description": "A UK NHS–aligned ophthalmic / optometric eye examination request (referral) that a clinician completes to request an eye vision test for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "eye-vision-test-result",
     "title": "Eye Vision Test Result",
     "description": "A UK NHS–aligned ophthalmic / optometric eye examination result (report) that a reporting clinician completes after an eye vision test has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "fall-risk-assessment",
     "title": "Fall Risk Assessment",
     "description": "Fall risk evaluation using the Morse Fall Scale (MFS) with comprehensive environmental, medication, mobility, cognitive, and sensory assessments for fall prevention planning.",
-    "app": false
+    "app": true
   },
   {
     "slug": "family-and-general-medicine-waiting-list-card",
     "title": "Family and General Medicine Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a family and general medicine waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "fertility-assessment",
     "title": "Fertility Assessment",
     "description": "Fertility (sub-fertility) assessment aligned with NICE CG156, capturing reproductive history, menstrual and hormonal profile, lifestyle factors, and partner/semen analysis to guide investigation and treatment referral…",
-    "app": false
+    "app": true
   },
   {
     "slug": "first-aid-training-checklist",
     "title": "First Aid Training Checklist",
     "description": "First Aid at Work (FAW) competency assessment aligned with UK HSE guidance and the St John Ambulance syllabus, covering scene assessment, primary survey, life-threatening emergencies, and injury management with a pass /…",
-    "app": false
+    "app": true
   },
   {
     "slug": "first-responder-assessment",
     "title": "First Responder Assessment",
     "description": "First responder fitness and competency evaluation for paramedics, EMTs, and first aiders. Covers physical fitness, clinical skills, equipment competency, and psychological readiness.",
-    "app": false
+    "app": true
   },
   {
     "slug": "fluid-balance-chart",
     "title": "Fluid Balance Chart",
     "description": "A bedside record of a patient's fluid intake and output over a charting period (typically 24 hours), used to monitor hydration, renal function, and the response to fluid therapy.",
-    "app": false
+    "app": true
   },
   {
     "slug": "fluoroscopy-test-request",
     "title": "Fluoroscopy Test Request",
     "description": "A UK NHS–aligned fluoroscopy / contrast-study request (referral) that a clinician completes to request a fluoroscopic examination — barium studies (swallow, meal, follow-through, enema), water-soluble contrast studies,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "fluoroscopy-test-result",
     "title": "Fluoroscopy Test Result",
     "description": "A UK NHS–aligned fluoroscopy / contrast-study result (report) that a reporting clinician completes after a fluoroscopic examination has been performed — barium studies (swallow, meal, follow-through, enema), a…",
-    "app": false
+    "app": true
   },
   {
     "slug": "four-a-test-for-delirium",
     "title": "4AT — Rapid Delirium and Cognitive-Impairment Screen",
     "description": "The 4AT is a validated, rapid bedside screening instrument for delirium and possible cognitive impairment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "framingham-risk-score-for-hard-coronary-heart-disease",
     "title": "Framingham Risk Score for Hard Coronary Heart Disease",
     "description": "Estimates 10-year risk of heart attack (myocardial infarction or coronary death) in patients aged 30-79 years with no history of CHD or diabetes, using the Wilson/D'Agostino 1998 Cox regression model.",
-    "app": false
+    "app": true
   },
   {
     "slug": "gastroenterologic-surgery-waiting-list-card",
     "title": "Gastroenterologic Surgery Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a gastroenterologic surgery waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "gastroenterology-assessment",
     "title": "Gastroenterology Assessment",
     "description": "Gastrointestinal symptom evaluation covering upper and lower GI, abdominal pain, liver/pancreas function with red flag detection.",
-    "app": false
+    "app": true
   },
   {
     "slug": "gastroenterology-waiting-list-card",
     "title": "Gastroenterology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a gastroenterology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "general-practice-waiting-list-card",
     "title": "General Practice Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a general practice waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "general-practitioner-referral-letter",
     "title": "General Practitioner Referral Letter",
     "description": "A structured referral letter from primary care to a specialist or service. It records who is being referred, who is referring, where and why, and how urgently, then applies a documentation engine that grades the…",
-    "app": false
+    "app": true
   },
   {
     "slug": "general-surgery-waiting-list-card",
     "title": "General Surgery Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a general surgery waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "genetic-assessment",
     "title": "Genetic Assessment",
     "description": "Genetic counselling referral assessment using weighted risk factor scoring across cancer genetics, cardiovascular genetics, neurogenetics, and reproductive genetics.",
-    "app": false
+    "app": true
   },
   {
     "slug": "genetic-test-request",
     "title": "Genetic Test Request",
     "description": "A UK NHS–aligned clinical genetics / genomic test request (referral) that a clinician completes to request a genomic test for a patient or family.",
-    "app": false
+    "app": true
   },
   {
     "slug": "genetic-test-result",
     "title": "Genetic Test Result",
     "description": "A UK NHS–aligned genetic / genomic test result (report) that a reporting clinician completes after a genomic test has been performed and analysed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "genetics-assessment",
     "title": "Genetics Assessment",
     "description": "Clinical genetics assessment capturing proband medical history, detailed three-generation family pedigree, ancestry, and targeted risk scoring (e.g.",
-    "app": false
+    "app": true
   },
   {
     "slug": "geriatrics-waiting-list-card",
     "title": "Geriatrics Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a geriatrics waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "gerontology-assessment",
     "title": "Gerontology Assessment",
     "description": "Elderly patient assessment using the Clinical Frailty Scale (CFS) with functional, cognitive, mobility, nutrition, and polypharmacy evaluation.",
-    "app": false
+    "app": true
   },
   {
     "slug": "glasgow-blatchford-bleeding-score",
     "title": "Glasgow-Blatchford Bleeding Score (GBS)",
     "description": "A pre-endoscopy risk-stratification score for adults presenting with suspected acute upper gastrointestinal bleeding.",
-    "app": false
+    "app": true
   },
   {
     "slug": "glasgow-coma-scale",
     "title": "Glasgow Coma Scale",
     "description": "A structured, clinician-driven assessment of impaired consciousness. The observer scores three independent responses — Eye opening (E, 1–4), Verbal response (V, 1–5), and Motor response (M, 1–6) — and the engine…",
-    "app": false
+    "app": true
   },
   {
     "slug": "grace-score-for-acute-coronary-syndrome",
     "title": "GRACE Score for Acute Coronary Syndrome",
     "description": "The GRACE (Global Registry of Acute Coronary Events) score is a validated risk-stratification tool for adults presenting with an acute coronary syndrome (ACS), used above all in non-ST-elevation ACS (NSTEMI and unstable…",
-    "app": false
+    "app": true
   },
   {
     "slug": "gynecology-assessment",
     "title": "Gynecology Assessment",
     "description": "Gynaecological symptom assessment covering menstrual history, cervical screening, obstetric history, and sexual health.",
-    "app": false
+    "app": true
   },
   {
     "slug": "has-bled-score-for-major-bleeding-risk",
     "title": "HAS-BLED Score for Major Bleeding Risk",
     "description": "A bedside bleeding-risk score for adults with atrial fibrillation (AF) who are receiving, or being considered for, oral anticoagulation.",
-    "app": false
+    "app": true
   },
   {
     "slug": "health-screening-questionnaire",
     "title": "Health Screening Questionnaire",
     "description": "A generic, purpose-flexible baseline health and lifestyle screen used by employers, gyms and fitness professionals, and primary-care / preventive-health services to establish a person's medical history, uncover hidden…",
-    "app": false
+    "app": true
   },
   {
     "slug": "hearing-aid-assessment",
     "title": "Hearing Aid Assessment",
     "description": "Hearing aid candidacy evaluation using the HHIE-S (Hearing Handicap Inventory for the Elderly - Screening) questionnaire.",
-    "app": false
+    "app": true
   },
   {
     "slug": "hearing-test-request",
     "title": "Hearing Test Request",
     "description": "A UK NHS–aligned audiology / hearing-assessment request (referral) that a clinician completes to request a hearing test for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "hearing-test-result",
     "title": "Hearing Test Result",
     "description": "A UK NHS–aligned hearing test result (report) that a reporting clinician completes after an audiological examination has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "heart-failure-review",
     "title": "Heart Failure Annual Review",
     "description": "A UK primary-care structured annual review for adults with an established diagnosis of chronic heart failure.",
-    "app": false
+    "app": true
   },
   {
     "slug": "heart-health-check",
     "title": "Heart Health Check",
     "description": "NHS Heart Health Check for cardiovascular risk assessment using simplified QRISK3-based scoring with 10-year CVD risk estimation and heart age calculation.",
-    "app": false
+    "app": true
   },
   {
     "slug": "hematology-assessment",
     "title": "Hematology Assessment",
     "description": "Haematological evaluation covering complete blood count, coagulation studies, peripheral blood film, iron studies, haemoglobinopathy screening, bone-marrow review, transfusion history, and current treatment, producing a…",
-    "app": false
+    "app": true
   },
   {
     "slug": "hematology-waiting-list-card",
     "title": "Hematology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a hematology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "hernia-diagnostic-evaluation",
     "title": "Hernia Diagnostic Evaluation",
     "description": "A hernia diagnostic evaluation is the clinical assessment used to detect, classify, and grade the urgency of an abdominal-wall or groin hernia, performed by a GP, surgical registrar, or general surgeon.",
-    "app": false
+    "app": true
   },
   {
     "slug": "hip-replacement-surgery-evaluation",
     "title": "Hip Replacement Surgery Evaluation",
     "description": "A hip-replacement surgery evaluation is the orthopaedic assessment used to determine whether a patient is a suitable candidate for total hip arthroplasty.",
-    "app": false
+    "app": true
   },
   {
     "slug": "histopathology-test-request",
     "title": "Histopathology Test Request",
     "description": "A UK NHS–aligned tissue histopathology specimen request (referral) that a clinician completes when submitting a tissue specimen for histopathological examination.",
-    "app": false
+    "app": true
   },
   {
     "slug": "histopathology-test-result",
     "title": "Histopathology Test Result",
     "description": "A UK NHS–aligned histopathology result (report) that a reporting clinician completes after a tissue specimen has been examined.",
-    "app": false
+    "app": true
   },
   {
     "slug": "history-and-physical-examination",
     "title": "History and Physical Examination (H&P)",
     "description": "The comprehensive clerking and admission document that records a patient's history and physical examination at a single clinical encounter: presenting complaint and history of the presenting complaint, past medical and…",
-    "app": false
+    "app": true
   },
   {
     "slug": "holter-monitor-test-request",
     "title": "Holter Monitor Test Request",
     "description": "A UK NHS–aligned ambulatory ECG (Holter) monitoring request (referral) that a clinician completes to request ambulatory cardiac rhythm monitoring for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "holter-monitor-test-result",
     "title": "Holter Monitor Test Result",
     "description": "A UK NHS–aligned ambulatory ECG (Holter) monitor result (report) that a reporting clinician completes after an ambulatory cardiac rhythm recording has been performed and analysed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "hormone-replacement-therapy-assessment",
     "title": "Hormone Replacement Therapy Assessment",
     "description": "HRT eligibility and symptom assessment using the MRS (Menopause Rating Scale) covering vasomotor, bone, cardiovascular, and breast health.",
-    "app": false
+    "app": true
   },
   {
     "slug": "hospital-daily-monitoring-checklist",
     "title": "Hospital Daily Monitoring Checklist",
     "description": "A hospital administrator's / medical superintendent's daily rounds checklist that audits 97 concrete operational checkpoints across 22 hospital areas — OPD, Causality (Casualty), Dispensary, HR attendance, Ambulance,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "hospital-dashboard-metrics",
     "title": "Hospital Dashboard Metrics",
     "description": "A periodic (typically monthly) hospital KPI dashboard: 67 operational metrics across 14 departmental categories — antibiotics/narcotics and culture monitoring, inpatient/ward, emergency department, infection control…",
-    "app": false
+    "app": true
   },
   {
     "slug": "hospital-discharge",
     "title": "Hospital Discharge",
     "description": "Hospital discharge summary form aligned with UK NICE NG27 and the SAFER patient-flow bundle, capturing diagnoses, procedures, medication reconciliation, follow-up arrangements, and community handover details to support…",
-    "app": false
+    "app": true
   },
   {
     "slug": "hospital-performance-indicators",
     "title": "Hospital Performance Indicators",
     "description": "A hospital Balanced Scorecard (Kaplan & Norton, 1992/1996) KPI report: 50 indicators across the four classic Balanced Scorecard perspectives applied to a hospital — Finance (9), Process (28), Learning and Growth (8),…",
-    "app": false
+    "app": true
   },
   {
     "slug": "hypertension-review",
     "title": "Hypertension Annual Review",
     "description": "A UK primary-care annual hypertension review that records the objective data needed to confirm blood-pressure control and complete a structured yearly review under NICE NG136 (Hypertension in adults: diagnosis and…",
-    "app": false
+    "app": true
   },
   {
     "slug": "immunology-waiting-list-card",
     "title": "Immunology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a immunology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "infectious-diseases-waiting-list-card",
     "title": "Infectious Diseases Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a infectious diseases waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "inpatient-clinical-note",
     "title": "Inpatient Clinical Note",
     "description": "A structured clinical note written about an admitted patient during a hospital episode.",
-    "app": false
+    "app": true
   },
   {
     "slug": "integumentary-assessment",
     "title": "Integumentary Assessment",
     "description": "Structured integumentary (skin, hair, nails) clinical assessment combining a head-to-toe skin inspection with the Braden Scale for pressure ulcer risk and wound TIME assessment, to grade pressure-ulcer risk and…",
-    "app": false
+    "app": true
   },
   {
     "slug": "internal-medicine-waiting-list-card",
     "title": "Internal Medicine Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a internal medicine waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "international-certificate-of-vaccination-or-prophylaxis",
     "title": "International Certificate of Vaccination or Prophylaxis (ICVP)",
     "description": "An implementation of the WHO model International Certificate of Vaccination or Prophylaxis (\"yellow card\"), the official document used under the International Health Regulations 2005, Annex 6 to record vaccinations or…",
-    "app": false
+    "app": true
   },
   {
     "slug": "international-patient-summary",
     "title": "International Patient Summary",
     "description": "International Patient Summary (IPS) — a standardized, minimal, specialty-agnostic electronic health record extract conforming to ISO 27269 and HL7 FHIR R5, designed to support cross-border and unplanned care by…",
-    "app": false
+    "app": true
   },
   {
     "slug": "issue-tracker",
     "title": "Issue tracker",
     "description": "A general-purpose issue tracker that borrows the structure of a clinical SOAP-style assessment and applies it to any reportable problem — software defects, operational incidents, safety events, project blockers,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "kinesiology-assessment",
     "title": "Kinesiology Assessment",
     "description": "Functional movement screening using the FMS (Functional Movement Screen) with 7 standardized movement tests.",
-    "app": false
+    "app": true
   },
   {
     "slug": "knee-replacement-surgery-evaluation",
     "title": "Knee Replacement Surgery Evaluation",
     "description": "An orthopaedic knee-replacement surgery evaluation: the assessment used by an orthopaedic surgeon or extended-scope physiotherapist in a joint-replacement clinic to decide whether a patient is a suitable candidate for…",
-    "app": false
+    "app": true
   },
   {
     "slug": "laboratory-medicine-waiting-list-card",
     "title": "Laboratory Medicine Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a laboratory medicine waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "learning-disability-annual-health-check",
     "title": "Learning Disability Annual Health Check",
     "description": "A UK primary-care annual health check for people aged 14 or over on a GP practice's learning-disability (LD) register.",
-    "app": false
+    "app": true
   },
   {
     "slug": "learning-disability-assessment",
     "title": "Learning Disability Assessment",
     "description": "Structured annual health check and adaptive-functioning assessment for people with a learning disability, aligned with the NHS England Annual Health Check and DSM-5-TR / ICD-11 criteria, producing a severity category…",
-    "app": false
+    "app": true
   },
   {
     "slug": "legal-requirements-privacy-notice",
     "title": "Legal Requirements Privacy Notice",
     "description": "A UK NHS GP practice privacy notice informing patients how their information is shared to meet legal requirements.",
-    "app": false
+    "app": true
   },
   {
     "slug": "lifeguard-certification-checklist",
     "title": "Lifeguard Certification Checklist",
     "description": "Pool / beach lifeguard certification checklist aligned with the RLSS UK National Pool Lifeguard Qualification (NPLQ) and International Life Saving Federation (ILSF) competencies, covering supervision and scanning,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "lumbar-puncture-test-request",
     "title": "Lumbar Puncture Test Request",
     "description": "A UK NHS–aligned lumbar puncture (LP) request (referral) that a clinician completes to request cerebrospinal fluid (CSF) sampling and/or manometry (opening-pressure measurement) for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "lumbar-puncture-test-result",
     "title": "Lumbar Puncture Test Result",
     "description": "A UK NHS–aligned lumbar puncture (LP) / cerebrospinal-fluid (CSF) analysis result (report) that a reporting clinician completes after a lumbar puncture has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "mammography-test-request",
     "title": "Mammography Test Request",
     "description": "A UK NHS–aligned breast mammography imaging request (referral) that a clinician completes to request a mammogram for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "mammography-test-result",
     "title": "Mammography Test Result",
     "description": "A UK NHS–aligned breast mammography result (report) that a reporting clinician completes after a mammography examination has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "mast-cell-activation-syndrome-assessment",
     "title": "Mast Cell Activation Syndrome (MCAS) Assessment",
     "description": "MCAS symptom evaluation across dermatological, gastrointestinal, cardiovascular, respiratory, and neurological systems with trigger identification.",
-    "app": false
+    "app": true
   },
   {
     "slug": "medical-certificate-of-cause-of-death",
     "title": "Medical Certificate of Cause of Death (MCCD)",
     "description": "A statutory documentation instrument used in the United Kingdom to record the cause of death of a person for the purpose of death registration.",
-    "app": false
+    "app": true
   },
   {
     "slug": "medical-device-assessment",
     "title": "Medical Device Assessment",
     "description": "A single-page, step-by-step questionnaire that assesses a medical device against the EU MDR 2017/745 Annex VIII classification rules (mirrored by the UK Medical Devices Regulations 2002).",
-    "app": false
+    "app": true
   },
   {
     "slug": "medical-error-report",
     "title": "Medical Error Report",
     "description": "Medical error reporting form for incident documentation, root cause analysis, and patient safety improvement. Uses WHO severity scale and NCC MERP harm categories.",
-    "app": false
+    "app": true
   },
   {
     "slug": "medical-fit-note",
     "title": "Medical Fit Note",
     "description": "A single-page, step-by-step form for a clinician to assess, sign and approve a fit note (Statement of Fitness for Work) for an employee taking sick leave.",
-    "app": false
+    "app": true
   },
   {
     "slug": "medical-information-form-for-air-travel",
     "title": "Medical Information Form for Air Travel (MEDIF)",
     "description": "A Medical Information Form (MEDIF) is the standardized airline document used to determine whether a passenger with specific health needs is fit to fly and whether in-flight medical support (supplemental oxygen,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "medical-language-speaking-assessment-for-cymraeg",
     "title": "Medical Language Speaking Assessment for Cymraeg",
     "description": "Clinical Welsh-language (Cymraeg) speaking assessment for healthcare professionals working with Welsh-speaking patients, aligned to the NHS Wales \"More Than Just Words\" framework and mapped to CEFR levels A1 through C2…",
-    "app": false
+    "app": true
   },
   {
     "slug": "medical-language-speaking-assessment-for-english",
     "title": "Medical Language Speaking Assessment for English",
     "description": "Clinical English-language speaking assessment for internationally educated healthcare professionals, modelled on the Occupational English Test (OET) Medicine speaking sub-test, using role-played patient scenarios and…",
-    "app": false
+    "app": true
   },
   {
     "slug": "medical-operation-note",
     "title": "Medical Operation Note",
     "description": "A surgical operation note (\"op note\") is the legal contemporaneous record written by the operating team immediately after a procedure.",
-    "app": false
+    "app": true
   },
   {
     "slug": "medical-records-release-permission",
     "title": "Medical Records Release Permission",
     "description": "Authorization form for releasing medical records, validated for completeness of patient consent and recipient information.",
-    "app": false
+    "app": true
   },
   {
     "slug": "medical-waiting-list-card",
     "title": "Medical Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a medical waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "medication-reconciliation",
     "title": "Medication Reconciliation",
     "description": "A structured medicines-safety document that reconciles a patient's medicines at a transition of care — admission, internal transfer, or discharge.",
-    "app": false
+    "app": true
   },
   {
     "slug": "meeting",
     "title": "Meeting",
     "description": "A general-purpose meeting record form that captures the invitation, agenda, participants, resources, and recurrence schedule before the meeting, and the summary, action items, outputs, and outcomes after the meeting.",
-    "app": false
+    "app": true
   },
   {
     "slug": "mental-health-act-assessment",
     "title": "Mental Health Act Assessment",
     "description": "A formal assessment under the UK Mental Health Act 1983 (as amended by the Mental Health Act 2007) to determine whether a person with a mental disorder should be detained in hospital for assessment or treatment,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "mental-health-assessment",
     "title": "Mental Health Assessment",
     "description": "Combined depression and anxiety screening using PHQ-9 (Patient Health Questionnaire-9) and GAD-7 (Generalized Anxiety Disorder-7) with risk assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "mental-state-examination",
     "title": "Mental State Examination (MSE)",
     "description": "A structured clinician record of a psychiatric assessment at a single point in time.",
-    "app": false
+    "app": true
   },
   {
     "slug": "microbiology-culture-test-request",
     "title": "Microbiology Culture Test Request",
     "description": "A UK NHS–aligned microbiology specimen culture / MC&S request (referral) that a clinician completes to order microscopy, culture, and antibiotic-sensitivity testing (and related molecular / screening tests) on a…",
-    "app": false
+    "app": true
   },
   {
     "slug": "microbiology-culture-test-result",
     "title": "Microbiology Culture Test Result",
     "description": "A UK NHS–aligned microbiology culture / MC&S result (report) that a reporting clinician completes after a clinical specimen has been processed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "mobility-assessment",
     "title": "Mobility Assessment",
     "description": "Balance and gait evaluation using the Tinetti Assessment Tool (Performance-Oriented Mobility Assessment) with fall risk stratification.",
-    "app": false
+    "app": true
   },
   {
     "slug": "model-for-end-stage-liver-disease-score",
     "title": "Model for End-Stage Liver Disease (MELD) Score",
     "description": "A laboratory-based severity calculator for chronic liver disease. It takes a small number of objective blood results — total bilirubin, INR, serum creatinine, and (for MELD-Na) serum sodium — applies a validated…",
-    "app": false
+    "app": true
   },
   {
     "slug": "modified-early-warning-score",
     "title": "Modified Early Warning Score (MEWS)",
     "description": "A bedside aggregate track-and-trigger score for adult inpatients. It records five routine physiological observations — systolic blood pressure, heart rate, respiratory rate, temperature, and level of consciousness…",
-    "app": false
+    "app": true
   },
   {
     "slug": "mri-scan-test-request",
     "title": "MRI Scan Test Request",
     "description": "A UK NHS–aligned MRI scan request (referral) that a clinician completes to request a magnetic-resonance-imaging examination.",
-    "app": false
+    "app": true
   },
   {
     "slug": "mri-scan-test-result",
     "title": "MRI Scan Test Result",
     "description": "A UK NHS–aligned MRI (magnetic resonance imaging) scan result (report) that a reporting clinician completes after an MRI examination has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "national-early-warning-score-2",
     "title": "National Early Warning Score 2 (NEWS2)",
     "description": "A UK NHS–aligned implementation of the National Early Warning Score 2 (NEWS2), the standardized track-and-trigger early warning system published by the Royal College of Physicians (RCP) in December 2017.",
-    "app": false
+    "app": true
   },
   {
     "slug": "nephrology-waiting-list-card",
     "title": "Nephrology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a nephrology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "nerve-conduction-study-test-request",
     "title": "Nerve Conduction Study Test Request",
     "description": "A UK NHS–aligned nerve conduction study / EMG (electrodiagnostic) request (referral) that a clinician completes to request a neurophysiology examination.",
-    "app": false
+    "app": true
   },
   {
     "slug": "nerve-conduction-study-test-result",
     "title": "Nerve Conduction Study Test Result",
     "description": "A UK NHS–aligned nerve conduction study / EMG (electrodiagnostic) result (report) that a reporting clinician completes after a neurophysiology examination has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "neurodiversity-adjustment-request",
     "title": "Neurodiversity Adjustment Request",
     "description": "A UK–aligned workplace reasonable-adjustments request for neurodiversity that a worker (or a manager on their behalf) completes to ask their employer for adjustments at work.",
-    "app": false
+    "app": true
   },
   {
     "slug": "neurodiversity-adjustment-response",
     "title": "Neurodiversity Adjustment Response",
     "description": "A UK–aligned workplace reasonable-adjustments response for neurodiversity that an employer (line manager, HR adviser, or occupational-health lead) completes in answer to a request for adjustments.",
-    "app": false
+    "app": true
   },
   {
     "slug": "neurodiversity-adjustment-review",
     "title": "Neurodiversity Adjustment Review",
     "description": "A UK–aligned workplace reasonable-adjustments review for neurodiversity that a manager or HR contact completes with the worker to check whether the agreed adjustments are still working.",
-    "app": false
+    "app": true
   },
   {
     "slug": "neurology-assessment",
     "title": "Neurology Assessment",
     "description": "Neurological evaluation using the NIHSS (National Institutes of Health Stroke Scale) with headache, seizure, motor, sensory, and cognitive assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "neurology-waiting-list-card",
     "title": "Neurology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a neurology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "neuropsychiatry-waiting-list-card",
     "title": "Neuropsychiatry Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a neuropsychiatry waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "neurosurgery-waiting-list-card",
     "title": "Neurosurgery Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a neurosurgery waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "newborn-and-infant-physical-examination",
     "title": "Newborn and Infant Physical Examination (NIPE)",
     "description": "A UK national screening-programme examination that records a systematic head-to-toe physical assessment of a baby and classifies four key screening components — eyes, heart, hips, and testes (in boys) — as Satisfactory,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "newborn-blood-spot-screening",
     "title": "Newborn Blood Spot Screening",
     "description": "A record of the newborn blood spot (heel-prick) screening test offered to every baby in the UK, normally taken around day 5 of life (counting the day of birth as day 0).",
-    "app": false
+    "app": true
   },
   {
     "slug": "nuclear-medicine-test-request",
     "title": "Nuclear Medicine Test Request",
     "description": "A UK NHS–aligned nuclear medicine (radionuclide imaging) request (referral) that a clinician completes to request a radionuclide study — for example a bone scan, myocardial perfusion scan, V/Q lung scan, thyroid uptake,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "nuclear-medicine-test-result",
     "title": "Nuclear Medicine Test Result",
     "description": "A UK NHS–aligned nuclear medicine (radionuclide scan) result (report) that a reporting clinician completes after a radionuclide examination has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "nuclear-medicine-waiting-list-card",
     "title": "Nuclear Medicine Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a nuclear medicine waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "nursing-care-plan",
     "title": "Nursing Care Plan",
     "description": "A structured nursing care plan that documents patient care following the nursing process — Assessment, Diagnosis, Planning, Implementation, Evaluation (ADPIE) — and is commonly organized by activities of daily living…",
-    "app": false
+    "app": true
   },
   {
     "slug": "nutrition-assessment",
     "title": "Nutrition Assessment",
     "description": "Nutritional status evaluation using the Malnutrition Universal Screening Tool (MUST) with comprehensive dietary, swallowing, gastrointestinal, and nutritional support assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "objectives-and-key-results-tracker",
     "title": "Objectives and Key Results tracker",
     "description": "A general-purpose Objectives and Key Results (OKR) tracker. Each submission captures one Objective with its 1–5 Key Results through a single-page, ten-step wizard, applies a seven-axis scoring engine, and produces a…",
-    "app": false
+    "app": true
   },
   {
     "slug": "obstetrics-and-gynaecology-waiting-list-card",
     "title": "Obstetrics and Gynaecology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a obstetrics and gynaecology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "obstetrics-assessment",
     "title": "Obstetrics Assessment",
     "description": "Antenatal obstetric assessment aligned with NICE NG201, stratifying pregnancies into low, moderate, and high risk to allocate care pathway (midwifery-led, obstetrician-led, or multidisciplinary) and to schedule…",
-    "app": false
+    "app": true
   },
   {
     "slug": "occupational-medicine-waiting-list-card",
     "title": "Occupational Medicine Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a occupational medicine waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "occupational-therapy-assessment",
     "title": "Occupational Therapy Assessment",
     "description": "Functional performance evaluation using the COPM (Canadian Occupational Performance Measure) across self-care, productivity, and leisure domains.",
-    "app": false
+    "app": true
   },
   {
     "slug": "oncology-assessment",
     "title": "Oncology Assessment",
     "description": "Cancer patient evaluation using ECOG (Eastern Cooperative Oncology Group) Performance Status for treatment planning and prognosis.",
-    "app": false
+    "app": true
   },
   {
     "slug": "oncology-waiting-list-card",
     "title": "Oncology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a oncology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "ophthalmology-assessment",
     "title": "Ophthalmology Assessment",
     "description": "Ophthalmic evaluation covering visual acuity, anterior and posterior segment examination, visual fields, and functional impact assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "ophthalmology-waiting-list-card",
     "title": "Ophthalmology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a ophthalmology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "oral-and-maxillofacial-surgery-waiting-list-card",
     "title": "Oral and Maxillofacial Surgery Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a oral and maxillofacial surgery waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "organ-donation-assessment",
     "title": "Organ Donation Assessment",
     "description": "Organ donation assessment evaluates potential organ donors (living and deceased). Assesses medical suitability, organ function, immunological compatibility, and ethical/consent requirements.",
-    "app": false
+    "app": true
   },
   {
     "slug": "orthopaedics-waiting-list-card",
     "title": "Orthopaedics Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a orthopaedics waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "orthopedic-assessment",
     "title": "Orthopaedic Assessment",
     "description": "Musculoskeletal evaluation using the DASH (Disabilities of the Arm, Shoulder and Hand) questionnaire with range of motion and functional assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "otolaryngology-assessment",
     "title": "Otolaryngology Assessment",
     "description": "General ear-nose-throat (otolaryngology) consultation assessment covering presenting complaint, history, examination findings, and the SNOT-22 symptom score to quantify sinonasal quality of life and guide ENT management.",
-    "app": false
+    "app": true
   },
   {
     "slug": "otorhinolaryngology-waiting-list-card",
     "title": "Otorhinolaryngology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a otorhinolaryngology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "ottawa-ankle-rules",
     "title": "Ottawa Ankle Rules (and Ottawa Foot Rules)",
     "description": "A validated clinical decision rule that decides whether an ankle X-ray or a foot X-ray is needed after an acute ankle or midfoot injury.",
-    "app": false
+    "app": true
   },
   {
     "slug": "ottawa-knee-rule",
     "title": "Ottawa Knee Rule",
     "description": "A validated clinical decision rule that decides whether a knee radiograph (X-ray) is needed after an acute knee injury.",
-    "app": false
+    "app": true
   },
   {
     "slug": "outpatient-outcome",
     "title": "Outpatient Outcome Report",
     "description": "Structured outpatient outcome report documenting encounter details, operational efficiency, clinical outcome, patient-reported outcome measures (PROMs), patient-reported experience measures (PREMs), and follow-up plan,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "padua-venous-thromboembolism-risk-assessment",
     "title": "Padua Venous Thromboembolism Risk Assessment (Padua Prediction Score)",
     "description": "A bedside risk-stratification tool that estimates the risk of venous thromboembolism (VTE — deep-vein thrombosis and pulmonary embolism) in hospitalized medical patients.",
-    "app": false
+    "app": true
   },
   {
     "slug": "paediatric-early-warning-score",
     "title": "Paediatric Early Warning Score (PEWS)",
     "description": "An age-banded track-and-trigger early-warning tool for children. It records a set of physiological observations across three domains — respiratory, cardiovascular, and behaviour / neurological — scores each parameter…",
-    "app": false
+    "app": true
   },
   {
     "slug": "paediatric-surgery-waiting-list-card",
     "title": "Paediatric Surgery Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a paediatric surgery waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "paediatrics-waiting-list-card",
     "title": "Paediatrics Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a paediatrics waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "palliative-assessment",
     "title": "Palliative Assessment",
     "description": "Symptom-focused palliative care assessment using the Edmonton Symptom Assessment System-revised (ESAS-r) alongside performance status, goals-of-care documentation, medication and symptom-control planning, and…",
-    "app": false
+    "app": true
   },
   {
     "slug": "parkland-formula-for-burns",
     "title": "Parkland Formula for Burns",
     "description": "A fluid-resuscitation calculator for adults and children with major thermal burns.",
-    "app": false
+    "app": true
   },
   {
     "slug": "partogram",
     "title": "Partogram (Partograph)",
     "description": "A graphical record of the progress of labour. The partogram plots a timed series of observations — cervical dilatation, descent of the fetal head, uterine contractions, fetal heart rate, amniotic fluid (liquor) and…",
-    "app": false
+    "app": true
   },
   {
     "slug": "pathology-waiting-list-card",
     "title": "Pathology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a pathology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "patient-intake",
     "title": "Patient Intake",
     "description": "General patient intake form collecting demographics, insurance, medical history, medications, allergies, and review of systems with risk level stratification.",
-    "app": false
+    "app": true
   },
   {
     "slug": "patient-reported-outcome-measures",
     "title": "Patient-Reported Outcome Measures",
     "description": "A battery of four independent, validated patient-reported outcome instruments, commonly administered together in spine-surgery outcomes research: the SF-36v2 Health Survey, the Neck Disability Index (NDI), the modified…",
-    "app": false
+    "app": true
   },
   {
     "slug": "patient-room-readiness",
     "title": "Patient Room Readiness",
     "description": "A housekeeping / facilities room-readiness checklist, completed by an inspector immediately before a patient room is handed over for occupancy.",
-    "app": false
+    "app": true
   },
   {
     "slug": "patient-satisfaction-survey",
     "title": "Patient Satisfaction Survey",
     "description": "Patient satisfaction survey measuring healthcare experience quality using Likert-scale scoring across multiple care domains with normalized composite scoring.",
-    "app": false
+    "app": true
   },
   {
     "slug": "pediatric-assessment",
     "title": "Pediatric Assessment",
     "description": "Child development screening covering birth history, growth, developmental milestones, immunization status, and family environment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "perioperative-optimization",
     "title": "Perioperative Optimization",
     "description": "A UK NHS–aligned perioperative optimization and prehabilitation intake: the screening questionnaire a surgical or anaesthetic team uses to identify reversible health problems before surgery, decide what can be treated…",
-    "app": false
+    "app": true
   },
   {
     "slug": "pet-scan-test-request",
     "title": "PET Scan Test Request",
     "description": "A UK NHS–aligned PET-CT (positron emission tomography) scan request (referral) that a clinician completes to request a PET-CT examination, most commonly an oncology FDG-PET-CT for cancer staging, restaging, or…",
-    "app": false
+    "app": true
   },
   {
     "slug": "pet-scan-test-result",
     "title": "PET Scan Test Result",
     "description": "A UK NHS–aligned PET-CT (positron emission tomography) scan result (report) that a reporting clinician completes after a PET-CT examination has been performed, most commonly an oncology FDG-PET-CT for cancer staging,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "pharmacology-waiting-list-card",
     "title": "Pharmacology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a pharmacology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "physical-medicine-and-rehabilitation-waiting-list-card",
     "title": "Physical Medicine and Rehabilitation Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a physical medicine and rehabilitation waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and…",
-    "app": false
+    "app": true
   },
   {
     "slug": "plastic-surgery-assessment",
     "title": "Plastic Surgery Assessment",
     "description": "Plastic surgery assessment evaluating reconstructive and aesthetic surgery candidates using ASA Physical Status Classification (I-V), wound classification, and surgical complexity scoring.",
-    "app": false
+    "app": true
   },
   {
     "slug": "plastic-surgery-waiting-list-card",
     "title": "Plastic Surgery Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a plastic surgery waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "podiatric-surgery-waiting-list-card",
     "title": "Podiatric Surgery Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a podiatric surgery waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "post-anaesthesia-care-unit-record",
     "title": "Post-Anaesthesia Care Unit (PACU) Record",
     "description": "A structured recovery-room record for patients emerging from anaesthesia or sedation.",
-    "app": false
+    "app": true
   },
   {
     "slug": "post-operative-report",
     "title": "Post-Operative Report",
     "description": "Structured post-operative (operation note) report documenting the procedure, intra-operative findings, anaesthesia summary, specimens and implants, immediate recovery status, complications, and onward plan, with…",
-    "app": false
+    "app": true
   },
   {
     "slug": "post-traumatic-stress-assessment",
     "title": "Post-Traumatic Stress Assessment",
     "description": "Post-traumatic stress symptom screen based on the DSM-5-aligned PCL-5 (PTSD Checklist for DSM-5), used by clinicians to identify probable PTSD, monitor severity, and track response to trauma-focused therapy.",
-    "app": false
+    "app": true
   },
   {
     "slug": "pre-anaesthesia-assessment",
     "title": "Pre-Anaesthesia Assessment",
     "description": "A UK NHS–aligned, clinician-driven pre-operative assessment that records objective findings (history, examination, vitals, laboratory results, imaging) and computes an ASA Physical Status grade (I–VI), a composite…",
-    "app": false
+    "app": true
   },
   {
     "slug": "pre-operative-assessment-by-clinician",
@@ -1639,642 +1639,642 @@ export const forms: Form[] = [
     "slug": "pre-operative-assessment-by-patient",
     "title": "Pre-operative Assessment by Patient",
     "description": "A UK NHS–aligned, patient self-report pre-operative questionnaire that the patient (or their carer) completes before surgery.",
-    "app": false
+    "app": true
   },
   {
     "slug": "predicting-risk-of-cardiovascular-disease-events",
     "title": "Predicting Risk of Cardiovascular Disease Events (PREVENT)",
     "description": "AHA PREVENT risk calculator predicting 10- and 30-year risk of total cardiovascular disease (and its subtypes atherosclerotic CVD and heart failure) in patients aged 30-79 without known CVD.",
-    "app": false
+    "app": true
   },
   {
     "slug": "pregnancy-ultrasound-test-request",
     "title": "Pregnancy Ultrasound Test Request",
     "description": "A UK NHS–aligned obstetric ultrasound scan request (referral) that a clinician completes to request an ultrasound examination for a pregnant patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "prenatal-assessment",
     "title": "Prenatal Assessment",
     "description": "Antenatal evaluation covering pregnancy details, obstetric history, vital signs, laboratory results, and mental health screening with risk stratification.",
-    "app": false
+    "app": true
   },
   {
     "slug": "prescription-request",
     "title": "Prescription Request",
     "description": "Prescription request form collecting patient information, clinician details, medication and dosage, substitution options, and request type classification with priority urgency grading (Routine / Urgent / Emergency).",
-    "app": false
+    "app": true
   },
   {
     "slug": "preventive-medicine-waiting-list-card",
     "title": "Preventive Medicine Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a preventive medicine waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "provider-transfer-request",
     "title": "Provider Transfer Request",
     "description": "Inter-provider handover form for transferring a patient's care between clinicians, wards, or organizations, structured around the SBAR (Situation, Background, Assessment, Recommendation) framework with…",
-    "app": false
+    "app": true
   },
   {
     "slug": "psychiatry-assessment",
     "title": "Psychiatry Assessment",
     "description": "Comprehensive psychiatric evaluation using the GAF (Global Assessment of Functioning) Scale with mental status examination, risk assessment, and capacity evaluation.",
-    "app": false
+    "app": true
   },
   {
     "slug": "psychiatry-waiting-list-card",
     "title": "Psychiatry Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a psychiatry waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "psychology-assessment",
     "title": "Psychology Assessment",
     "description": "General psychological screening assessment that collects self-reported data on depression, anxiety, and stress symptoms using the DASS-21 instrument, computes severity categories per subscale, and flags safety-critical…",
-    "app": false
+    "app": true
   },
   {
     "slug": "public-health-waiting-list-card",
     "title": "Public Health Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a public health waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "pulmonary-embolism-rule-out-criteria",
     "title": "Pulmonary Embolism Rule-out Criteria (PERC)",
     "description": "A bedside rule-out screen for adults in whom a clinician already judges the pre-test probability of pulmonary embolism (PE) to be low.",
-    "app": false
+    "app": true
   },
   {
     "slug": "pulmonary-function-test-request",
     "title": "Pulmonary Function Test Request",
     "description": "A UK NHS–aligned lung-function / spirometry test request (referral) that a clinician completes to request pulmonary function testing for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "pulmonary-function-test-result",
     "title": "Pulmonary Function Test Result",
     "description": "A UK NHS–aligned pulmonary function test (lung-function / spirometry) result (report) that a reporting clinician completes after a lung-function test has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "pulmonology-assessment",
     "title": "Pulmonology Assessment",
     "description": "Respiratory evaluation using GOLD (Global Initiative for Chronic Obstructive Lung Disease) staging with spirometry, exacerbation history, and functional assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "qrisk3-cardiovascular-disease-risk-score",
     "title": "QRISK3 Cardiovascular Disease Risk Score",
     "description": "A primary-prevention risk calculator that estimates an adult's 10-year risk of a first cardiovascular disease (CVD) event — coronary heart disease, stroke, or transient ischaemic attack — from routinely available…",
-    "app": false
+    "app": true
   },
   {
     "slug": "quick-sequential-organ-failure-assessment",
     "title": "Quick Sequential Organ Failure Assessment (qSOFA)",
     "description": "A bedside sepsis-risk screen for adults with suspected or confirmed infection. It records three objective clinical criteria — respiratory rate, mentation, and systolic blood pressure — scores each as 0 or 1, sums a…",
-    "app": false
+    "app": true
   },
   {
     "slug": "radiation-oncology-waiting-list-card",
     "title": "Radiation Oncology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a radiation oncology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "radiology-waiting-list-card",
     "title": "Radiology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a radiology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "recognition-of-stroke-in-the-emergency-room",
     "title": "Recognition Of Stroke In the Emergency Room (ROSIER)",
     "description": "A bedside stroke-recognition instrument for adults presenting acutely to the emergency department with suspected stroke or transient ischaemic attack.",
-    "app": false
+    "app": true
   },
   {
     "slug": "recommended-summary-plan-for-emergency-care-and-treatment",
     "title": "Recommended Summary Plan for Emergency Care and Treatment (ReSPECT)",
     "description": "A UK personalized emergency care and treatment plan created through shared decision-making between a person and one or more clinicians.",
-    "app": false
+    "app": true
   },
   {
     "slug": "renal-assessment",
     "title": "Renal Assessment",
     "description": "Renal (kidney) assessment aligned with KDIGO 2012/2024 CKD classification, stratifying chronic kidney disease by GFR category (G1-G5) and albuminuria category (A1-A3) to produce a composite risk level that drives…",
-    "app": false
+    "app": true
   },
   {
     "slug": "research-and-planning-privacy-notice",
     "title": "Research and Planning Privacy Notice",
     "description": "Read-and-acknowledge privacy notice covering the use of patient data for research and service-planning purposes, aligned with UK GDPR, the Data Protection Act 2018, the Common Law Duty of Confidentiality, and the NHS…",
-    "app": false
+    "app": true
   },
   {
     "slug": "respiratory-medicine-waiting-list-card",
     "title": "Respiratory Medicine Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a respiratory medicine waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming…",
-    "app": false
+    "app": true
   },
   {
     "slug": "respirology-assessment",
     "title": "Respirology Assessment",
     "description": "Respiratory evaluation using the MRC (Medical Research Council) Dyspnoea Scale with cough assessment, pulmonary function, and exposure history.",
-    "app": false
+    "app": true
   },
   {
     "slug": "return-to-work",
     "title": "Return to Work",
     "description": "A clinician-issued medical certificate authorizing an employee's return to work after illness, injury, or extended absence.",
-    "app": false
+    "app": true
   },
   {
     "slug": "rheumatology-assessment",
     "title": "Rheumatology Assessment",
     "description": "Rheumatological evaluation using the DAS28 (Disease Activity Score in 28 joints) with joint assessment, laboratory results, and extra-articular features.",
-    "app": false
+    "app": true
   },
   {
     "slug": "rheumatology-waiting-list-card",
     "title": "Rheumatology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a rheumatology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "rockall-score-for-upper-gastrointestinal-bleeding",
     "title": "Rockall Score for Upper Gastrointestinal Bleeding",
     "description": "A risk-stratification instrument that estimates the risk of rebleeding and mortality in adults presenting with acute upper gastrointestinal (GI) bleeding. It has two forms that share the same clinical variables:",
-    "app": false
+    "app": true
   },
   {
     "slug": "screening-program-privacy-notice",
     "title": "Screening Program Privacy Notice",
     "description": "A UK NHS GP practice privacy notice informing patients how their information is used for medical research, planning services, and checking the quality of care (national clinical audits).",
-    "app": false
+    "app": true
   },
   {
     "slug": "seasonal-affective-disorder-assessment",
     "title": "Seasonal Affective Disorder Assessment",
     "description": "Seasonal mood disorder evaluation using SPAQ Global Seasonality Score (GSS) and PHQ-9 depression severity screening with combined severity classification.",
-    "app": false
+    "app": true
   },
   {
     "slug": "semaglutide-assessment",
     "title": "Semaglutide Assessment",
     "description": "GLP-1 receptor agonist eligibility screening for semaglutide therapy, evaluating absolute/relative contraindications, metabolic profile, and treatment planning.",
-    "app": false
+    "app": true
   },
   {
     "slug": "sequential-organ-failure-assessment",
     "title": "Sequential Organ Failure Assessment (SOFA)",
     "description": "A UK NHS–aligned, clinician-driven Sequential Organ Failure Assessment (SOFA) score that records objective physiological and laboratory findings for six organ systems and computes an organ-dysfunction score for each…",
-    "app": false
+    "app": true
   },
   {
     "slug": "sleep-quality-assessment",
     "title": "Sleep Quality Assessment",
     "description": "Sleep quality evaluation using the PSQI (Pittsburgh Sleep Quality Index) covering sleep habits, latency, duration, efficiency, disturbances, and daytime dysfunction.",
-    "app": false
+    "app": true
   },
   {
     "slug": "sleep-study-test-request",
     "title": "Sleep Study Test Request",
     "description": "A UK NHS–aligned sleep study / polysomnography request (referral) that a clinician completes to request a sleep investigation for a patient, mainly to diagnose or exclude obstructive sleep apnoea (OSA).",
-    "app": false
+    "app": true
   },
   {
     "slug": "sleep-study-test-result",
     "title": "Sleep Study Test Result",
     "description": "A UK NHS–aligned sleep study / polysomnography result (report) that a reporting clinician completes after a sleep investigation has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "soap-note",
     "title": "SOAP Note",
     "description": "A structured clinical progress note that records a single patient encounter in the four canonical SOAP sections — Subjective, Objective, Assessment, and Plan — and grades the note for documentation completeness rather…",
-    "app": false
+    "app": true
   },
   {
     "slug": "sports-medicine-assessment",
     "title": "Sports Medicine Assessment",
     "description": "Pre-participation physical evaluation (PPE) for athletes and sportspeople, aligned with the AAP/AAFP/ACSM/AMSSM/AOSSM/AOASM Pre-Participation Physical Evaluation (5th ed.) monograph, to clear participation, identify…",
-    "app": false
+    "app": true
   },
   {
     "slug": "stomatology-waiting-list-card",
     "title": "Stomatology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a stomatology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "stroke-assessment",
     "title": "Stroke Assessment",
     "description": "Acute stroke evaluation using the NIHSS (National Institutes of Health Stroke Scale) with symptom onset timing, consciousness, motor/sensory examination, and risk factors.",
-    "app": false
+    "app": true
   },
   {
     "slug": "structured-medication-review",
     "title": "Structured Medication Review (SMR)",
     "description": "A comprehensive, patient-centred medication review for people with problematic polypharmacy, frailty, one or more long-term conditions, or high-risk medicines.",
-    "app": false
+    "app": true
   },
   {
     "slug": "substance-abuse-assessment",
     "title": "Substance Abuse Assessment",
     "description": "Substance use disorder evaluation using AUDIT (Alcohol Use Disorders Identification Test) and DAST-10 (Drug Abuse Screening Test) with comprehensive biopsychosocial assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "sundowner-syndrome-assessment",
     "title": "Sundowner Syndrome Assessment",
     "description": "Sundowner syndrome (sundowning) evaluation using Cohen-Mansfield Agitation Inventory (CMAI) scoring and Neuropsychiatric Inventory (NPI) for behavioural symptoms in elderly patients, particularly those with dementia.",
-    "app": false
+    "app": true
   },
   {
     "slug": "systematic-coronary-risk-evaluation-2-diabetes",
     "title": "SCORE2-Diabetes",
     "description": "SCORE2-Diabetes predicts 10-year risk of fatal and non-fatal cardiovascular disease in individuals with type 2 diabetes without prior CVD, aged 40-69 years.",
-    "app": false
+    "app": true
   },
   {
     "slug": "thoracic-surgery-waiting-list-card",
     "title": "Thoracic Surgery Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a thoracic surgery waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "timi-risk-score-for-acute-coronary-syndrome",
     "title": "TIMI Risk Score for Acute Coronary Syndrome (UA/NSTEMI)",
     "description": "A bedside risk-stratification tool for adults presenting with unstable angina (UA) or non-ST-elevation myocardial infarction (NSTEMI).",
-    "app": false
+    "app": true
   },
   {
     "slug": "toxicology-test-request",
     "title": "Toxicology Test Request",
     "description": "A UK NHS–aligned toxicology / poisons / therapeutic-drug-level blood-test request (referral) that a clinician completes to request one or more toxicology assays — paracetamol, salicylate, alcohol, drugs-of-abuse screen,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "toxicology-test-result",
     "title": "Toxicology Test Result",
     "description": "A UK NHS–aligned toxicology / poisons / therapeutic-drug-level test result (report) that a reporting clinician completes after a toxicology assay has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "tropical-medicine-waiting-list-card",
     "title": "Tropical Medicine Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a tropical medicine waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "tumor-marker-test-request",
     "title": "Tumor Marker Test Request",
     "description": "A UK NHS–aligned serum tumour-marker blood-test request (referral) that a clinician completes to request one or more serum tumour markers for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "tumor-marker-test-result",
     "title": "Tumor Marker Test Result",
     "description": "A UK NHS–aligned serum tumour-marker test result (report) that a reporting clinician completes after one or more serum tumour markers have been measured.",
-    "app": false
+    "app": true
   },
   {
     "slug": "uk-nhs-digital-technology-assessment-criteria",
     "title": "UK NHS Digital Technology Assessment Criteria (DTAC)",
     "description": "A UK NHS–aligned assessment of a digital health technology against the NHS England Digital Technology Assessment Criteria (DTAC).",
-    "app": false
+    "app": true
   },
   {
     "slug": "ultrasound-test-request",
     "title": "Ultrasound Test Request",
     "description": "A UK NHS–aligned general (non-obstetric) diagnostic ultrasound request (referral) that a clinician completes to request an ultrasound examination — abdominal, pelvic, renal-tract, hepatobiliary, small-parts (thyroid,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "ultrasound-test-result",
     "title": "Ultrasound Test Result",
     "description": "A UK NHS–aligned general (non-obstetric) ultrasound result (report) that a reporting clinician completes after a diagnostic ultrasound examination has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-birth-registration",
     "title": "United Kingdom Birth Registration",
     "description": "Prepare to register a birth in England and Wales (GOV.UK \"Register a birth\") and order the birth certificate from the General Register Office (GRO).",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-council-tax-discount-application",
     "title": "United Kingdom Council Tax Discount Application",
     "description": "A single-page, step-by-step application to a local council in England for a Council Tax discount, exemption, disregard or reduction.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-death-registration",
     "title": "United Kingdom death registration (England and Wales)",
     "description": "Registering a death in England and Wales after a doctor has completed the medical certificate of cause of death (MCCD): the 5-day deadline, the qualified informant, medical examiner confirmation, coroner involvement,…",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-divorce-application",
     "title": "United Kingdom Divorce Application",
     "description": "A completeness and time-gate checker for applying for a divorce (or the dissolution of a civil partnership) in England and Wales under the no-fault regime of the Divorce, Dissolution and Separation Act 2020.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-driver-and-vehicle-licensing-agency-b1-form",
     "title": "United Kingdom Driver and Vehicle Licensing Agency B1 Form",
     "description": "Confidential medical information — neurological conditions for driving fitness assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-driver-and-vehicle-licensing-agency-m1-form",
     "title": "United Kingdom Driver and Vehicle Licensing Agency M1 Form",
     "description": "Confidential medical information — mental health conditions for driving fitness assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-driver-and-vehicle-licensing-agency-v1-form",
     "title": "United Kingdom Driver and Vehicle Licensing Agency V1 Form",
     "description": "General confidential medical information — vision self-declaration for driving fitness assessment.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-last-will-and-testament",
     "title": "United Kingdom Last Will and Testament",
     "description": "A will-drafting documentation instrument for England and Wales. The person preparing a will records the testator, the estate, the executors, the beneficiaries and their shares, guardians for children under 18, funeral…",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-lasting-power-of-attorney-for-financial-decisions",
     "title": "United Kingdom Lasting Power of Attorney for Financial Decisions",
     "description": "A digital implementation of the Office of the Public Guardian (OPG) form LP1F — Lasting power of attorney for property and financial affairs.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
     "title": "United Kingdom Lasting Power of Attorney for Health and Care Decisions",
     "description": "A digital implementation of the statutory Lasting Power of Attorney for Health and Welfare (statutory form LP1H) under the Mental Capacity Act 2005 (England and Wales).",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-marriage-certificate-application",
     "title": "United Kingdom Marriage Certificate Application",
     "description": "A completeness and validity check for giving notice of marriage or civil partnership in England and Wales and ordering a marriage certificate from the General Register Office (GRO).",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-maternity-certificate-mat-b1",
     "title": "United Kingdom Maternity Certificate MAT B1",
     "description": "Maternity certificate issued by doctors or registered midwives to enable pregnant women to claim statutory maternity benefits.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-nhs-england-medical-exemption-certificate",
     "title": "UK NHS England Medical Exemption Certificate (FP92A)",
     "description": "A digital implementation of the FP92A application form completed by a UK doctor (or other health professional with access to the patient's medical records) to apply for a Medical Exemption (MedEx) Certificate for NHS…",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-statement-of-fitness-for-work",
     "title": "United Kingdom Statement of Fitness for Work",
     "description": "A digital implementation of the UK Statement of Fitness for Work — commonly known as the fit note or Med 3 — issued by a healthcare professional (doctor, nurse, occupational therapist, pharmacist, or physiotherapist) to…",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-vehicle-bill-of-sale",
     "title": "United Kingdom Vehicle Bill of Sale",
     "description": "A bill of sale / sales receipt for a private vehicle sale in the United Kingdom, following the GOV.UK \"Buy a vehicle\" and \"Sell, scrap or transfer a vehicle\" journeys.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-kingdom-vehicle-registration-application",
     "title": "United Kingdom Vehicle Registration Application",
     "description": "Registering a vehicle with the Driver and Vehicle Licensing Agency (DVLA) in Great Britain: the V62 application for a vehicle registration certificate (V5C, the log book), and the first-registration variants V55/4 (new…",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-states-birth-certificate-application",
     "title": "United States Birth Certificate Application",
     "description": "Request a certified copy of a US birth certificate from the state or territory vital records office that registered the birth.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-states-divorce-petition",
     "title": "United States Divorce Petition",
     "description": "Petition for dissolution of marriage, the divorce decree and the vital-records divorce certificate for United States courts.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-states-durable-financial-power-of-attorney",
     "title": "United States Durable Financial Power of Attorney",
     "description": "A United States execution-readiness checker for a durable power of attorney for property and finances.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-states-health-care-power-of-attorney",
     "title": "United States Health Care Power of Attorney",
     "description": "A durable power of attorney for health care: the document in which an adult (the principal) names an agent, and successor agents, to make health care decisions if the principal cannot.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-states-hipaa-authorization-form",
     "title": "United States HIPAA Authorization Form",
     "description": "A United States Health Insurance Portability and Accountability Act (HIPAA) authorization form.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-states-last-will-and-testament",
     "title": "United States Last Will and Testament",
     "description": "A planning and validity-checking form for a United States will. A single continuous single-page wizard collects the testator and state, the family and spouse, the estate and the specific and residuary bequests, the…",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-states-marriage-license-application",
     "title": "United States Marriage License Application",
     "description": "A single-page, step-by-step questionnaire for applying for a United States marriage license and, after the ceremony, the certified marriage certificate.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-states-property-tax-exemption-application",
     "title": "United States Property Tax Exemption Application",
     "description": "A county or state application for a residential property tax homestead exemption and related relief: senior, disability, disabled-veteran and circuit-breaker relief, plus assessment-appeal basics.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-states-social-security-card-application",
     "title": "United States Social Security Card Application (Form SS-5)",
     "description": "A single-page, step-by-step questionnaire for Form SS-5, the application for an original, replacement, or corrected Social Security card.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-states-standard-certificate-of-death",
     "title": "US Standard Certificate of Death (NCHS 2003 revision)",
     "description": "A documentation-support and validity-classification form for the U.S. Standard Certificate of Death as completed by the funeral director and the medical certifier.",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-states-vehicle-bill-of-sale",
     "title": "United States Vehicle Bill of Sale",
     "description": "A bill of sale for a private-party sale of a motor vehicle in the United States. One continuous single-page wizard collects the sale (state, date, price, payment, sales-tax basis), the seller and buyer, the vehicle…",
-    "app": false
+    "app": true
   },
   {
     "slug": "united-states-vehicle-title-and-registration-application",
     "title": "United States Vehicle Title and Registration Application",
     "description": "An application for a certificate of title and registration with a United States state motor vehicle agency.",
-    "app": false
+    "app": true
   },
   {
     "slug": "urinalysis-test-request",
     "title": "Urinalysis Test Request",
     "description": "A UK NHS–aligned urine pathology test request (order) that a clinician completes to order one or more urine investigations for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "urinalysis-test-result",
     "title": "Urinalysis Test Result",
     "description": "A UK NHS–aligned urinalysis result (report) that a reporting clinician completes after one or more urine investigations have been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "urology-assessment",
     "title": "Urology Assessment",
     "description": "Urological evaluation using the IPSS (International Prostate Symptom Score) with quality of life assessment, renal function review, and sexual health screening.",
-    "app": false
+    "app": true
   },
   {
     "slug": "urology-waiting-list-card",
     "title": "Urology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a urology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "vaccinations-assessment",
     "title": "Vaccinations Assessment",
     "description": "Immunization-schedule compliance assessment covering childhood, adult, travel, and occupational vaccinations, with contraindication screening, consent capture, and administration record.",
-    "app": false
+    "app": true
   },
   {
     "slug": "vaccinations-checklist",
     "title": "Vaccinations Checklist",
     "description": "Immunization status tracking for healthcare workers and patients covering routine, occupational, travel, and special circumstance vaccines with compliance scoring and risk stratification.",
-    "app": false
+    "app": true
   },
   {
     "slug": "vascular-surgery-waiting-list-card",
     "title": "Vascular Surgery Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a vascular surgery waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "venereology-waiting-list-card",
     "title": "Venereology Waiting List Card",
     "description": "A practitioner-completed administrative card that places a patient on a venereology waiting list and gives the patient a transparent, easy-to-use view of their referral, expected wait, and upcoming appointment(s).",
-    "app": false
+    "app": true
   },
   {
     "slug": "ward-round-note",
     "title": "Ward Round Note",
     "description": "A daily inpatient review entry completed at the bedside during a ward round. It captures a structured, contemporaneous record of a single review: when the patient was seen and by whom (date, time, clinician name and…",
-    "app": false
+    "app": true
   },
   {
     "slug": "waterlow-pressure-ulcer-risk-assessment",
     "title": "Waterlow Pressure Ulcer Risk Assessment",
     "description": "A bedside screening tool that estimates an adult patient's risk of developing a pressure ulcer (pressure sore, bedsore, decubitus ulcer).",
-    "app": false
+    "app": true
   },
   {
     "slug": "wells-score-for-deep-vein-thrombosis",
     "title": "Wells Score for Deep Vein Thrombosis (DVT)",
     "description": "A bedside clinical prediction rule that estimates the pre-test probability of a first lower-limb deep vein thrombosis (DVT) in adults with a suspicious leg.",
-    "app": false
+    "app": true
   },
   {
     "slug": "wells-score-for-pulmonary-embolism",
     "title": "Wells Score for Pulmonary Embolism",
     "description": "A clinical prediction rule that estimates the pre-test probability of acute pulmonary embolism (PE) in adults presenting with suspected PE.",
-    "app": false
+    "app": true
   },
   {
     "slug": "who-acute-referral-form",
     "title": "WHO Acute Referral Form",
     "description": "World Health Organization standardized acute referral form for transferring patients between healthcare facilities.",
-    "app": false
+    "app": true
   },
   {
     "slug": "who-counter-referral-form",
     "title": "WHO Counter-Referral Form",
     "description": "World Health Organization standardized counter-referral form for discharging patients back from a referral facility to their primary care facility.",
-    "app": false
+    "app": true
   },
   {
     "slug": "who-emergency-first-aid-form",
     "title": "WHO Emergency First Aid Form",
     "description": "World Health Organization standardized emergency first aid documentation form for community first aid responders.",
-    "app": false
+    "app": true
   },
   {
     "slug": "who-emergency-unit-general-form",
     "title": "WHO Emergency Unit Form: General",
     "description": "World Health Organization standardized emergency unit clinical documentation form for general (non-trauma) patients.",
-    "app": false
+    "app": true
   },
   {
     "slug": "who-emergency-unit-trauma-form",
     "title": "WHO Emergency Unit Form: Trauma",
     "description": "World Health Organization standardized emergency unit clinical documentation form for trauma patients.",
-    "app": false
+    "app": true
   },
   {
     "slug": "who-prehospital-form",
     "title": "WHO Prehospital Form",
     "description": "World Health Organization standardized prehospital clinical documentation form for emergency medical services.",
-    "app": false
+    "app": true
   },
   {
     "slug": "who-surgical-safety-checklist",
     "title": "WHO Surgical Safety Checklist",
     "description": "A digital implementation of the World Health Organization Surgical Safety Checklist (WHO/IER/PSP/2008.05, Safe Surgery Saves Lives).",
-    "app": false
+    "app": true
   },
   {
     "slug": "workplace-climate-assessment",
     "title": "Workplace Climate Assessment",
     "description": "Workplace climate assessment measuring organizational culture, psychological safety, and employee experience using a validated Likert-scale instrument to inform leadership, inclusion, and wellbeing programmes.",
-    "app": false
+    "app": true
   },
   {
     "slug": "workplace-safety-assessment",
     "title": "Workplace Safety Assessment",
     "description": "Workplace safety audit form aligned with UK Health and Safety Executive (HSE) standards, covering physical, chemical, biological, ergonomic, and organizational risks to identify hazards and verify control measures in…",
-    "app": false
+    "app": true
   },
   {
     "slug": "workplace-stress-assessment",
     "title": "Workplace Stress Assessment",
     "description": "Workplace stress assessment using the UK HSE Management Standards Indicator Tool to measure perceived stress across seven organizational domains and identify teams or individuals at elevated risk of work-related ill…",
-    "app": false
+    "app": true
   },
   {
     "slug": "x-ray-test-request",
     "title": "X-Ray Test Request",
     "description": "A UK NHS–aligned plain-radiograph (X-ray) imaging request (referral) that a clinician completes to request a plain X-ray examination for a patient.",
-    "app": false
+    "app": true
   },
   {
     "slug": "x-ray-test-result",
     "title": "X-Ray Test Result",
     "description": "A UK NHS–aligned plain-radiograph (X-ray) result (report) that a reporting clinician completes after a plain X-ray examination has been performed.",
-    "app": false
+    "app": true
   },
   {
     "slug": "zarit-burden-interview",
     "title": "Zarit Burden Interview (ZBI)",
     "description": "A caregiver self-report questionnaire that measures the subjective burden experienced by an informal carer looking after a person with dementia, chronic illness, or long-term disability.",
-    "app": false
+    "app": true
   }
 ];

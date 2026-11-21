@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { renderPdf } from '#lib/report/pdf-client.js';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
   import { assessment } from '#lib/stores/assessment.svelte.js';
@@ -39,14 +40,10 @@
   async function downloadPDF() {
     pdfError = '';
     try {
-      const res = await fetch(`/${plural}/${id}/report/pdf`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          data: assessment.data,
-          validation: assessment.validation,
-          flags: assessment.flags
-        })
+      const res = await renderPdf({
+        data: assessment.data,
+        validation: assessment.validation,
+        flags: assessment.flags
       });
       if (res.ok) {
         const blob = await res.blob();

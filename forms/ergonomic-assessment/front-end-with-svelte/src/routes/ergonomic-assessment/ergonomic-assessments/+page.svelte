@@ -56,10 +56,12 @@
     },
 
     {
-      id: 'rebaScore',
+      // Its own id: SVAR keys columns by id, and 'rebaScore' is the REBA column.
+      id: 'action',
       header: 'Action',
       width: 180,
-      template: (v: number) => rebaActionLevel(v)
+      template: (_v: unknown, row: Record<string, unknown>) =>
+        rebaActionLevel(row.rebaScore as number)
     },
     {
       id: 'painSeverity',

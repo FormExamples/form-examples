@@ -10,6 +10,8 @@
 // shell for pages that are not prerendered (a record, /<slug>/.../[id]/). It
 // then copies build/<slug>/ and build/_app/<slug>/ into this site's build/.
 // The forms' theme CSS is not copied: every form loads the site's /themes/.
+// Nor is pdfmake: a form's report loads the site's one copy at /vendor/pdfmake/,
+// which this script copies from the site's own pdfmake dependency.
 //
 // Finally it writes build/404.html. GitHub Pages serves it for any path with
 // no file; for a path under a form it forwards to that form's 200.html with
@@ -25,7 +27,7 @@
 //   node scripts/build-forms.mjs [--jobs N] [<slug>...]   # default: every form, N = cores / 2
 
 import { spawn } from 'node:child_process';
-import { cpSync, existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { availableParallelism } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -79,6 +81,9 @@ async function buildOne({ slug, app }) {
   if (existsSync(join(BUILD, slug)) && !existsSync(join(BUILD, slug, '200.html'))) {
     return { slug, error: `the site already has a /${slug}/ page` };
   }
+  // Replace, not merge: a rebuild's hashed chunks must not pile up beside the last ones.
+  rmSync(join(BUILD, slug), { recursive: true, force: true });
+  rmSync(join(BUILD, '_app', slug), { recursive: true, force: true });
   cpSync(pages, join(BUILD, slug), { recursive: true });
   cpSync(assets, join(BUILD, '_app', slug), { recursive: true });
   return { slug };
@@ -138,8 +143,17 @@ async function main() {
     }),
   );
 
+  const vendor = join(BUILD, 'vendor', 'pdfmake');
+  for (const file of ['pdfmake.min.js', 'vfs_fonts.js']) {
+    cpSync(join(SITE, 'node_modules', 'pdfmake', 'build', file), join(vendor, file));
+  }
+
   const built = results.filter((r) => !r.error).map((r) => r.slug).sort();
-  writeFileSync(join(BUILD, '404.html'), notFoundPage(built));
+  // Every form now in build/, not only this run's: a run may build just a few.
+  const served = readdirSync(BUILD)
+    .filter((slug) => existsSync(join(BUILD, slug, '200.html')))
+    .sort();
+  writeFileSync(join(BUILD, '404.html'), notFoundPage(served));
   const failed = results.filter((r) => r.error);
   for (const { slug, error } of failed) console.error(`\n--- ${slug}\n${error}`);
   console.log(`build-forms: ${built.length} built, ${failed.length} failed, ${Math.round((Date.now() - started) / 1000)}s`);

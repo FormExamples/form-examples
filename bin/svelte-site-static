@@ -1,0 +1,309 @@
+#!/usr/bin/env python3
+"""bin/svelte-site-static — let each form's Svelte front-end build for formexamples.github.io.
+
+Per spec/monorepo-github-pages/ "Forms on the site", the public site serves every
+form's own Svelte front-end at /<slug>/, built by
+formexamples.github.io/scripts/build-forms.mjs with VITE_FORM_EXAMPLES_SITE=1. This
+tool makes a `forms/<slug>/front-end-with-svelte/` ready for that. Without the
+variable the front-end builds and runs as before.
+
+  vite.config.ts         adapter() picks @sveltejs/adapter-static in site mode
+                         (pages and assets in build/, fallback <slug>/200.html),
+                         and siteKit adds appDir _app/<slug> and the prerender
+                         entry /<slug>/
+  src/routes/<slug>/+layout.ts
+                         prerender = 'auto' and trailingSlash = 'always' in site
+                         mode only
+  src/app.html           the __spa script: the site's 404.html forwards a page that
+                         is not prerendered (a record) to <slug>/200.html?__spa=<path>,
+                         and this puts the path back before the router starts
+  package.json           devDependency @sveltejs/adapter-static
+  pnpm-lock.yaml         `pnpm install --lockfile-only`; unless --no-lock
+  report PDF             a static host runs no server, so the report's
+                         report/pdf/+server.ts becomes src/lib/report/pdf-client.ts,
+                         which builds the PDF in the browser (pdfmake's browser
+                         build) from the same lines and returns it as a Response;
+                         the report page's fetch(..., { body: JSON.stringify(X) })
+                         becomes renderPdf(X), and the rest of its download code is
+                         unchanged
+
+A front-end already done is left alone, so the tool can be rerun. Run Prettier on
+the files it writes (the fleet's `pnpm run format`).
+
+Usage:
+  bin/svelte-site-static [--no-lock] --all|<slug>...
+  bin/svelte-site-static --check --all|<slug>...   # CI drift check
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import pathlib
+import re
+import subprocess
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+MARKER = "VITE_FORM_EXAMPLES_SITE"
+ADAPTER_STATIC = "^4.0.1"
+
+VITE_PRELUDE = """
+// formexamples.github.io serves this form at /<SLUG>/ (spec/monorepo-github-pages/):
+// with VITE_FORM_EXAMPLES_SITE=1 it builds statically, its assets under /_app/<SLUG>/.
+const SLUG = '{slug}';
+const site = process.env.VITE_FORM_EXAMPLES_SITE === '1';
+const adapter = () =>
+  site
+    ? adapterStatic({{ pages: 'build', assets: 'build', fallback: `${{SLUG}}/200.html`, strict: false }})
+    : adapterAuto();
+const siteKit = site
+  ? {{
+      appDir: `_app/${{SLUG}}`,
+      prerender: {{ entries: [`/${{SLUG}}/`], handleHttpError: 'warn' as const, handleMissingId: 'warn' as const }}
+    }}
+  : {{}};
+"""
+
+LAYOUT = """// In the formexamples.github.io build (VITE_FORM_EXAMPLES_SITE=1) every page
+// the crawler reaches is prerendered, with a trailing slash like the rest of
+// the site; a record page (`[id]`) is not, and falls back to the app's
+// 200.html. Elsewhere nothing is prerendered and URLs are unchanged.
+const site = import.meta.env.VITE_FORM_EXAMPLES_SITE === '1';
+
+export const prerender = site ? 'auto' : false;
+export const trailingSlash = site ? 'always' : 'never';
+"""
+
+SPA = """    <script>
+      // formexamples.github.io: its 404.html sends a page that is not prerendered
+      // (a record, /<slug>/.../[id]/) here as ?__spa=<path>; put the path back
+      // before the router starts, so the app renders that page.
+      (function () {
+        var p = new URLSearchParams(location.search).get('__spa');
+        if (p && p.charAt(0) === '/' && p.charAt(1) !== '/') history.replaceState(null, '', p);
+      })();
+    </script>
+"""
+
+PDF_TAIL = """  const pdfMake = await loadPdfMake();
+  const pdf = pdfMake.createPdf(docDefinition);
+  return new Response(await pdf.getBlob(), { headers: { 'Content-Type': 'application/pdf' } });
+}
+
+/** The part of pdfmake's browser build this report uses. */
+type PdfMake = {
+  createPdf(doc: unknown): { getBlob(): Promise<Blob> };
+  addVirtualFileSystem(vfs: unknown): void;
+};
+
+/**
+ * pdfmake's browser build. On formexamples.github.io every form shares the site's
+ * one copy at /vendor/pdfmake/ (the other branch is left out of that build);
+ * elsewhere it is bundled with the app.
+ */
+async function loadPdfMake(): Promise<PdfMake> {
+  if (import.meta.env.VITE_FORM_EXAMPLES_SITE === '1') {
+    await loadScript('/vendor/pdfmake/pdfmake.min.js');
+    await loadScript('/vendor/pdfmake/vfs_fonts.js');
+    return (window as unknown as { pdfMake: PdfMake }).pdfMake;
+  }
+  const [{ default: bundled }, { default: vfs }] = await Promise.all([
+    import('pdfmake/build/pdfmake'),
+    import('pdfmake/build/vfs_fonts')
+  ]);
+  const pdfMake = bundled as unknown as PdfMake;
+  pdfMake.addVirtualFileSystem(vfs);
+  return pdfMake;
+}
+
+function loadScript(src: string): Promise<void> {
+  if (document.querySelector(`script[src="${src}"]`)) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error(`could not load ${src}`));
+    document.head.append(script);
+  });
+}
+"""
+
+PDF_CLIENT = """// Generated by bin/svelte-site-static from this report's former report/pdf/+server.ts.
+// A static host (formexamples.github.io) runs no server, so the PDF is built in
+// the browser with pdfmake's browser build, from the same lines the endpoint ran,
+// and returned as a Response the way the endpoint answered.
+{imports}
+
+/** The report PDF for a request body the report page used to POST, as a Response. */
+export async function renderPdf(body: unknown): Promise<Response> {{
+{lines}
+
+""" + PDF_TAIL
+
+FETCH = re.compile(
+    r"fetch\(\s*(?:resolve\()?\s*(?:`[^`]*report/pdf[^`]*`|'[^']*report/pdf[^']*')\s*\)?\s*,\s*\{\s*method:\s*'POST',\s*"
+    r"headers:\s*\{\s*'Content-Type':\s*'application/json'\s*\},\s*body:\s*JSON\.stringify\((?P<body>.*?)\)\s*,?\s*\}\s*\)",
+    re.S,
+)
+
+
+def app_of(slug: str) -> pathlib.Path:
+    return FORMS / slug / "front-end-with-svelte"
+
+
+def servers(app: pathlib.Path) -> list[pathlib.Path]:
+    return sorted(app.glob("src/routes/**/report/pdf/+server.ts"))
+
+
+def pdf_client(server: pathlib.Path) -> str:
+    text = server.read_text()
+    # The endpoint's import statements (one may span lines), less the server-only ones.
+    preamble = text.split("export const POST", 1)[0]
+    imports = [m.group(0) for m in re.finditer(r"^import [^;]*;", preamble, re.M | re.S)
+               if "RequestHandler" not in m.group(0) and "node:" not in m.group(0)]
+    handler = text.split("=> {", 1)[1]
+    # The endpoint's own lines, up to where it loads the server-side pdfmake.
+    head = re.split(r"\n[^\n]*(?:const PdfPrinter|import\('pdfmake'\))", handler, maxsplit=1)[0]
+    lines = [line for line in head.rstrip().splitlines() if line.strip()]
+    while lines and lines[-1].strip().startswith("//"):
+        lines.pop()
+    body = "\n".join(lines).replace("(await request.json())", "body")
+    if "docDefinition" not in body:
+        # An endpoint that builds the document inline: createPdf(build...(...)).
+        inline = re.search(r"createPdf\((build\w+\([^)]*\))\)", handler)
+        if inline:
+            body += f"\n  const docDefinition = {inline.group(1)};"
+    if "request" in body or "docDefinition" not in body:
+        raise ValueError(f"{server}: endpoint shape not recognized")
+    return PDF_CLIENT.format(imports="\n".join(imports), lines=body)
+
+
+def report_pages(app: pathlib.Path) -> list[pathlib.Path]:
+    return [p for p in app.glob("src/**/*.svelte") if re.search(r"report/pdf(?!-client)", p.read_text())]
+
+
+def problems(slug: str) -> list[str]:
+    app = app_of(slug)
+    found = []
+    vite = (app / "vite.config.ts").read_text()
+    if MARKER not in vite or "...siteKit" not in vite:
+        found.append("vite.config.ts does not build statically for the site")
+    if not (app / "src" / "routes" / slug / "+layout.ts").is_file():
+        found.append(f"no src/routes/{slug}/+layout.ts")
+    if "__spa" not in (app / "src" / "app.html").read_text():
+        found.append("src/app.html lacks the __spa script")
+    if "@sveltejs/adapter-static" not in (app / "package.json").read_text():
+        found.append("package.json lacks @sveltejs/adapter-static")
+    elif "@sveltejs/adapter-static" not in (app / "pnpm-lock.yaml").read_text():
+        found.append("pnpm-lock.yaml lacks @sveltejs/adapter-static")
+    if servers(app):
+        found.append("a report/pdf/+server.ts endpoint remains")
+    client = app / "src" / "lib" / "report" / "pdf-client.ts"
+    if client.exists() and "loadPdfMake" not in client.read_text():
+        found.append("src/lib/report/pdf-client.ts does not share the site's pdfmake")
+    for page in report_pages(app):
+        found.append(f"{page.relative_to(app)} still fetches report/pdf")
+    return found
+
+
+def apply(slug: str, lock: bool) -> list[str]:
+    app = app_of(slug)
+    notes = []
+    vite_path = app / "vite.config.ts"
+    vite = vite_path.read_text()
+    if MARKER not in vite:
+        if "import adapter from '@sveltejs/adapter-auto';" not in vite or vite.count("adapter: adapter()") != 1:
+            raise ValueError("vite.config.ts shape not recognized")
+        vite = vite.replace(
+            "import adapter from '@sveltejs/adapter-auto';",
+            "import adapterAuto from '@sveltejs/adapter-auto';\nimport adapterStatic from '@sveltejs/adapter-static';",
+        )
+        vite = vite.replace("\nexport default defineConfig(", VITE_PRELUDE.format(slug=slug) + "\nexport default defineConfig(", 1)
+        vite = vite.replace("adapter: adapter()", "adapter: adapter(),\n      ...siteKit")
+        vite_path.write_text(vite)
+
+    layout = app / "src" / "routes" / slug / "+layout.ts"
+    if not layout.exists():
+        layout.write_text(LAYOUT)
+
+    html_path = app / "src" / "app.html"
+    html = html_path.read_text()
+    if "__spa" not in html:
+        if "    %sveltekit.head%" not in html:
+            raise ValueError("src/app.html has no %sveltekit.head%")
+        html_path.write_text(html.replace("    %sveltekit.head%", SPA + "    %sveltekit.head%", 1))
+
+    client = app / "src" / "lib" / "report" / "pdf-client.ts"
+    if client.exists() and "loadPdfMake" not in client.read_text():
+        text = client.read_text()
+        start = text.index("  const [{ default: pdfMake }")
+        client.write_text(text[:start] + PDF_TAIL)
+    for server in servers(app):
+        content = pdf_client(server)
+        if client.exists() and client.read_text() != content:
+            raise ValueError("two report/pdf endpoints with different bodies")
+        client.parent.mkdir(parents=True, exist_ok=True)
+        client.write_text(content)
+        server.unlink()
+    for page in report_pages(app):
+        text = page.read_text()
+        new, n = FETCH.subn(lambda m: f"renderPdf({m['body']})", text)
+        if not n:
+            raise ValueError(f"{page.relative_to(app)}: report/pdf fetch not recognized")
+        if "renderPdf }" not in new:
+            new = re.sub(r"(<script[^>]*>\n)", r"\1  import { renderPdf } from '#lib/report/pdf-client.js';\n", new, count=1)
+        page.write_text(new)
+
+    pkg_path = app / "package.json"
+    pkg = json.loads(pkg_path.read_text())
+    dev = pkg.setdefault("devDependencies", {})
+    if "@sveltejs/adapter-static" not in dev:
+        dev["@sveltejs/adapter-static"] = ADAPTER_STATIC
+        pkg["devDependencies"] = dict(sorted(dev.items()))
+        pkg_path.write_text(json.dumps(pkg, indent=2, ensure_ascii=False) + "\n")
+    if lock and "@sveltejs/adapter-static" not in (app / "pnpm-lock.yaml").read_text():
+        result = subprocess.run(["pnpm", "install", "--lockfile-only", "--silent"], cwd=app, capture_output=True, text=True)
+        if result.returncode:
+            notes.append(f"pnpm lock failed: {(result.stderr or result.stdout).strip()[-300:]}")
+    return notes
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--no-lock", action="store_true")
+    args = parser.parse_args()
+    if args.all:
+        slugs = sorted(p.parent.parent.name for p in FORMS.glob("*/front-end-with-svelte/package.json"))
+    elif args.slugs:
+        slugs = args.slugs
+    else:
+        parser.error("name forms, or pass --all")
+
+    if args.check:
+        bad = {slug: found for slug in slugs if (found := problems(slug))}
+        for slug, found in bad.items():
+            for problem in found:
+                print(f"{slug}: {problem}")
+        print(f"{len(slugs) - len(bad)}/{len(slugs)} front-ends build for formexamples.github.io")
+        return 1 if bad else 0
+
+    failed = 0
+    for slug in slugs:
+        try:
+            for note in apply(slug, not args.no_lock):
+                print(f"{slug}: {note}", file=sys.stderr)
+                failed += 1
+        except ValueError as error:
+            print(f"{slug}: skipped: {error}", file=sys.stderr)
+            failed += 1
+    print(f"{len(slugs) - failed}/{len(slugs)} front-ends ready, {failed} need a hand")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

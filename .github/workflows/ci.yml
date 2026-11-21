@@ -193,6 +193,9 @@ jobs:
       - name: Every Axum crate migrates the CHECK constraints from sql/
         run: bin/axum-check-constraints --check --all
 
+      - name: Every Svelte front-end builds for formexamples.github.io
+        run: bin/svelte-site-static --check --all
+
       - name: Every layer of every form is namespaced by its slug
         run: bin/test-form-namespacing
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { renderPdf } from '#lib/report/pdf-client.js';
   // The signed hernia diagnostic evaluation report: the classification, the
   // urgency band, the fired-rule audit trail, the safety flags, and the
   // management plan. Safety flags are printed whether or not the clinician
@@ -30,18 +31,11 @@
     downloading = true;
     downloadError = '';
     try {
-      const response = await fetch(
-        `/hernia-diagnostic-evaluation/hernia-diagnostic-evaluations/${id}/report/pdf`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            data: evaluationStore.data,
-            result,
-            generatedAt: new Date().toISOString()
-          })
-        }
-      );
+      const response = await renderPdf({
+        data: evaluationStore.data,
+        result,
+        generatedAt: new Date().toISOString()
+      });
       if (!response.ok) throw new Error(`PDF generation failed: ${response.status}`);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);

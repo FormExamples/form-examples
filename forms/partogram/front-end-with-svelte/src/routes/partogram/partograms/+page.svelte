@@ -99,7 +99,9 @@
   ];
 
   function init(api: IApi) {
-    api.exec('sort-rows', { key: 'activePhaseStartAt', order: 'asc' });
+    // The earliest active phase first. SVAR sorts by a column, and activePhaseStartAt
+    // is not one: elapsed hours, longest first, is the same order.
+    api.exec('sort-rows', { key: 'elapsedHours', order: 'desc' });
     // Open a record when its row is selected.
     api.on('select-row', (ev: { id?: string | number }) => {
       if (ev?.id != null) goto(`/partogram/partograms/${ev.id}`);

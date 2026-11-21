@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { renderPdf } from '#lib/report/pdf-client.js';
   import { goto } from '$app/navigation';
   import { browser } from '$app/env';
   import { page } from '$app/state';
@@ -101,11 +102,7 @@
   async function downloadPDF() {
     pdfError = '';
     try {
-      const res = await fetch(`/neurodiversity-adjustment-requests/${id}/report/pdf`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: requestStore.data, result: requestStore.result })
-      });
+      const res = await renderPdf({ data: requestStore.data, result: requestStore.result });
       if (res.ok) {
         const blob = await res.blob();
         const url = URL.createObjectURL(blob);

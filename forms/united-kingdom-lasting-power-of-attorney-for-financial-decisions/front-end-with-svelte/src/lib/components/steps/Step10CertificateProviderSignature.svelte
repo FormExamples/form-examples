@@ -13,7 +13,7 @@
   const cp = $derived(store.data.certificateProvider!);
 
   // Ensure exactly one certificate-provider signature exists at LP1F section 10.
-  function ensureCpSignature() {
+  function ensureCpSignature(create = true) {
     let sig = store.data.signatures.find(
       (s) => s.role === 'certificate_provider' && s.lp1fSection === 10
     );
@@ -29,12 +29,20 @@
         isWitnessed: false,
         witness: null
       };
-      store.data.signatures.push(sig);
+      if (create) store.data.signatures.push(sig);
     }
     return sig;
   }
 
-  const cpSig = $derived(ensureCpSignature());
+  // Create the record now, not while rendering: Svelte forbids changing state
+  // inside $derived or a template, so the derived value below only finds it.
+  ensureCpSignature();
+  // Again before each update: loading another record replaces the data.
+  $effect.pre(() => {
+    store.ensureCertificateProvider();
+    ensureCpSignature();
+  });
+  const cpSig = $derived(ensureCpSignature(false));
 
   const knowsDonorOptions = [
     { value: 'friend', label: 'A friend who has known the donor personally for at least 2 years' },

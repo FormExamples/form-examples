@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { renderPdf } from '#lib/report/pdf-client.js';
   // The signed dietetic report: the scores, the fired-rule audit trail, the
   // safety flags, and the care plan. Safety flags are printed whether or not
   // the dietitian overrode the composite risk category.
@@ -42,14 +43,10 @@
     downloading = true;
     downloadError = '';
     try {
-      const response = await fetch(`/dietic-assessment/dietic-assessments/${id}/report/pdf`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          data: assessmentStore.data,
-          result,
-          generatedAt: new Date().toISOString()
-        })
+      const response = await renderPdf({
+        data: assessmentStore.data,
+        result,
+        generatedAt: new Date().toISOString()
       });
       if (!response.ok) throw new Error(`PDF generation failed: ${response.status}`);
       const blob = await response.blob();

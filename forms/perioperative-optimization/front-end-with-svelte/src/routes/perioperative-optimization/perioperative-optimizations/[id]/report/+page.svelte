@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { renderPdf } from '#lib/report/pdf-client.js';
   // The signed optimization report: the domain table, the screening scores, the
   // safety flags, and the prehabilitation plan. Safety flags are printed
   // whether or not the clinician overrode the readiness band.
@@ -30,18 +31,11 @@
     downloading = true;
     downloadError = '';
     try {
-      const response = await fetch(
-        `/perioperative-optimization/perioperative-optimizations/${id}/report/pdf`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            data: assessmentStore.data,
-            result,
-            generatedAt: new Date().toISOString()
-          })
-        }
-      );
+      const response = await renderPdf({
+        data: assessmentStore.data,
+        result,
+        generatedAt: new Date().toISOString()
+      });
       if (!response.ok) throw new Error(`PDF generation failed: ${response.status}`);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);

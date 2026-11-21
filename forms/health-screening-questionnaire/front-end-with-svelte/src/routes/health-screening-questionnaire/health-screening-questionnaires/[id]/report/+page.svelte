@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { renderPdf } from '#lib/report/pdf-client.js';
   // The signed health screening report: the scores, the fired-rule audit
   // trail, the safety flags, and the recommendation. Safety flags are printed
   // whether or not the assessor overrode the risk band.
@@ -32,18 +33,11 @@
     downloading = true;
     downloadError = '';
     try {
-      const response = await fetch(
-        `/health-screening-questionnaire/health-screening-questionnaires/${id}/report/pdf`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            data: questionnaireStore.data,
-            result,
-            generatedAt: new Date().toISOString()
-          })
-        }
-      );
+      const response = await renderPdf({
+        data: questionnaireStore.data,
+        result,
+        generatedAt: new Date().toISOString()
+      });
       if (!response.ok) throw new Error(`PDF generation failed: ${response.status}`);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);

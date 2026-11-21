@@ -96,6 +96,10 @@ the superseded one-shots, and the rest) are catalogued in
 repo's own 40KB target. Each has a `--check` CI drift detector, listed in the
 Verify block below; `docs/tools.md` has every tool's generated header.
 
+### Svelte on the public site
+
+- `bin/svelte-site-static [--check] [--no-lock] [--all|<slug>…]` — make every `front-end-with-svelte/` build statically for formexamples.github.io, which serves it at `/<slug>/`, per [`spec/monorepo-github-pages/`](spec/monorepo-github-pages/) "Forms on the site": `vite.config.ts` picks `@sveltejs/adapter-static` (assets under `/_app/<slug>/`, a `<slug>/200.html` fallback) when `VITE_FORM_EXAMPLES_SITE=1`, `src/routes/<slug>/+layout.ts` prerenders in that mode, `src/app.html` gets the `__spa` path-restore script, and the report's `report/pdf/+server.ts` becomes a browser-side `src/lib/report/pdf-client.ts`. `formexamples.github.io/scripts/build-forms.mjs` builds and assembles them; `--check` is the CI drift detector
+
 ### Svelte lint and format
 
 - `bin/svelte-lint-format-refactor [--setup|--format|--check] [--all|<slug>…]` — add and enforce ESLint + Prettier in every `front-end-with-svelte/`: copies the templates in `etc/svelte-lint-format/` (`eslint.config.js`, `.prettierrc`, `.prettierignore`), adds the dev dependencies and `lint` / `lint:fix` / `format` / `format:check` scripts (`--setup`), runs `prettier --write` + `eslint --fix` and lists what is left to hand-fix (`--format`). `--check` is the static CI drift detector; CI runs `pnpm run lint && pnpm run format:check` per front-end. `static/themes/` is Prettier-ignored (vendored, must stay byte-identical)
@@ -237,6 +241,7 @@ bin/svelte-lily-scope-rename --check --all    # Svelte Lily unscoped -> @lilydes
 bin/svelte-lily-picker-defaults --check --all # Svelte Lily default theme-order/text-size-scale + DateTimePicker-retirement drift detector
 # bin/svelte-lily-picker-bar-0-6 --check --all # one-shot, superseded by svelte-lily-picker-bar-0-7 — expects ^0.6.0; do not run as a CI gate
 # bin/svelte-lily-picker-bar-0-7 --check --all # one-shot, superseded by svelte-lily-headless-0-11 — expects headless ^0.10.0; do not run as a CI gate (picker-bar ^0.7.0 is still current)
+bin/svelte-site-static --check --all  # every Svelte front-end builds statically for formexamples.github.io (/<slug>/, browser-built PDF)
 bin/svelte-lily-headless-0-11 --check --all # Svelte Lily svelte-headless ^0.11.0: package.json, release-age exclusion, pnpm-lock.yaml
 bin/svelte-lily-theme-picker-0-4 --check --all # Svelte Lily theme-picker ^0.4.0: override, release-age exclusion, "Follow this device" option, no cookie
 bin/browser-color-scheme-refactor --check --all # HTML + Svelte theme follows the browser's light/dark setting when none is saved (spec.md §5)

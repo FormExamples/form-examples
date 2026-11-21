@@ -16,7 +16,10 @@
     }
   }
   ensureCp();
-  const cp = $derived(lpaStore.application.certificateProvider!);
+  // Again before each update: loading another record replaces the application.
+  $effect.pre(ensureCp);
+  // A blank stand-in for the moment between loading a record and the effect above.
+  const cp = $derived(lpaStore.application.certificateProvider ?? emptyCertificateProvider());
 
   const PROFESSIONS = [
     { value: 'solicitor', label: 'Solicitor' },

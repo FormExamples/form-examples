@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { renderPdf } from '#lib/report/pdf-client.js';
   import { goto } from '$app/navigation';
   import { resolve } from '$app/paths';
   import { page } from '$app/state';
@@ -43,14 +44,7 @@
   async function downloadPDF() {
     pdfError = '';
     try {
-      const res = await fetch(
-        resolve(`inpatient-clinical-note/inpatient-clinical-notes/${id}/report/pdf`),
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ data: assessment.data, result: assessment.result })
-        }
-      );
+      const res = await renderPdf({ data: assessment.data, result: assessment.result });
       if (res.ok) {
         const blob = await res.blob();
         const url = URL.createObjectURL(blob);

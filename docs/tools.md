@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-125 tools.
+126 tools.
 
 - [`bin/axum-api-namespace`](#axum-api-namespace)
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
@@ -96,6 +96,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-locale-select-refactor`](#svelte-locale-select-refactor)
 - [`bin/svelte-pnpm-workspace-fix`](#svelte-pnpm-workspace-fix)
 - [`bin/svelte-share-button-refactor`](#svelte-share-button-refactor)
+- [`bin/svelte-site-static`](#svelte-site-static)
 - [`bin/svelte-test-result-theming-backport`](#svelte-test-result-theming-backport)
 - [`bin/svelte-text-size-select-refactor`](#svelte-text-size-select-refactor)
 - [`bin/svelte-theme-css-sync`](#svelte-theme-css-sync)
@@ -3017,6 +3018,45 @@ by bin/svelte-text-size-select-refactor. Forms without it are skipped and
 reported for hand migration.
 
 Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="svelte-site-static"><code>bin/svelte-site-static</code></h2>
+
+```text
+bin/svelte-site-static — let each form's Svelte front-end build for formexamples.github.io.
+
+Per spec/monorepo-github-pages/ "Forms on the site", the public site serves every
+form's own Svelte front-end at /<slug>/, built by
+formexamples.github.io/scripts/build-forms.mjs with VITE_FORM_EXAMPLES_SITE=1. This
+tool makes a `forms/<slug>/front-end-with-svelte/` ready for that. Without the
+variable the front-end builds and runs as before.
+
+  vite.config.ts         adapter() picks @sveltejs/adapter-static in site mode
+                         (pages and assets in build/, fallback <slug>/200.html),
+                         and siteKit adds appDir _app/<slug> and the prerender
+                         entry /<slug>/
+  src/routes/<slug>/+layout.ts
+                         prerender = 'auto' and trailingSlash = 'always' in site
+                         mode only
+  src/app.html           the __spa script: the site's 404.html forwards a page that
+                         is not prerendered (a record) to <slug>/200.html?__spa=<path>,
+                         and this puts the path back before the router starts
+  package.json           devDependency @sveltejs/adapter-static
+  pnpm-lock.yaml         `pnpm install --lockfile-only`; unless --no-lock
+  report PDF             a static host runs no server, so the report's
+                         report/pdf/+server.ts becomes src/lib/report/pdf-client.ts,
+                         which builds the PDF in the browser (pdfmake's browser
+                         build) from the same lines and returns it as a Response;
+                         the report page's fetch(..., { body: JSON.stringify(X) })
+                         becomes renderPdf(X), and the rest of its download code is
+                         unchanged
+
+A front-end already done is left alone, so the tool can be rerun. Run Prettier on
+the files it writes (the fleet's `pnpm run format`).
+
+Usage:
+  bin/svelte-site-static [--no-lock] --all|<slug>...
+  bin/svelte-site-static --check --all|<slug>...   # CI drift check
 ```
 
 <h2 id="svelte-test-result-theming-backport"><code>bin/svelte-test-result-theming-backport</code></h2>

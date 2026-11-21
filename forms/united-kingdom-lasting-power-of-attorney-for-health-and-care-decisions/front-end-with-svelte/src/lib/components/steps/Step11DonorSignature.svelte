@@ -8,7 +8,7 @@
   function changed() {
     lpaStore.recompute();
   }
-  function ensure(): Signature {
+  function ensure(create = true): Signature {
     let s = lpaStore.application.signatures.find((s) => s.signerRole === 'donor');
     if (!s) {
       s = {
@@ -21,12 +21,21 @@
         witnessSignedAt: '',
         witnessIsAttorney: ''
       };
-      lpaStore.application.signatures.push(s);
-      changed();
+      if (create) {
+        lpaStore.application.signatures.push(s);
+        changed();
+      }
     }
     return s;
   }
-  const sig = $derived(ensure());
+  // Create the record now, not while rendering: Svelte forbids changing state
+  // inside $derived or a template, so the derived value below only finds it.
+  ensure();
+  // Again before each update: loading another record replaces the data.
+  $effect.pre(() => {
+    ensure();
+  });
+  const sig = $derived(ensure(false));
 </script>
 
 <div class="space-y-4">

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { renderPdf } from '#lib/report/pdf-client.js';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
   import { assessment } from '#lib/stores/assessment.svelte.js';
@@ -36,14 +37,7 @@
   async function downloadPDF() {
     pdfError = '';
     try {
-      const res = await fetch(
-        `/body-mass-index-and-body-surface-area-calculators/${id}/report/pdf`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ data: assessment.data, result: assessment.result })
-        }
-      );
+      const res = await renderPdf({ data: assessment.data, result: assessment.result });
       if (res.ok) {
         const blob = await res.blob();
         const url = URL.createObjectURL(blob);

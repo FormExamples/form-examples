@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { renderPdf } from '#lib/report/pdf-client.js';
   // The signed knee-replacement surgery evaluation report: the scores, the
   // fired-rule audit trail, the safety flags, and the management plan.
   // Safety flags are printed whether or not the clinician overrode the
@@ -28,18 +29,11 @@
     downloading = true;
     downloadError = '';
     try {
-      const response = await fetch(
-        `/knee-replacement-surgery-evaluation/knee-replacement-surgery-evaluations/${id}/report/pdf`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            data: evaluationStore.data,
-            result,
-            generatedAt: new Date().toISOString()
-          })
-        }
-      );
+      const response = await renderPdf({
+        data: evaluationStore.data,
+        result,
+        generatedAt: new Date().toISOString()
+      });
       if (!response.ok) throw new Error(`PDF generation failed: ${response.status}`);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);

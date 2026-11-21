@@ -9,7 +9,7 @@
     lpaStore.recompute();
   }
 
-  function ensureCp(): Signature {
+  function ensureCp(create = true): Signature {
     let s = lpaStore.application.signatures.find((s) => s.signerRole === 'certificate-provider');
     if (!s) {
       s = {
@@ -22,13 +22,15 @@
         witnessSignedAt: '',
         witnessIsAttorney: ''
       };
-      lpaStore.application.signatures.push(s);
-      changed();
+      if (create) {
+        lpaStore.application.signatures.push(s);
+        changed();
+      }
     }
     return s;
   }
 
-  function ensureAtt(idx: number): Signature {
+  function ensureAtt(idx: number, create = true): Signature {
     let s = lpaStore.application.signatures.find(
       (s) => s.signerRole === 'attorney' && s.signerIndex === idx
     );
@@ -43,13 +45,24 @@
         witnessSignedAt: '',
         witnessIsAttorney: ''
       };
-      lpaStore.application.signatures.push(s);
-      changed();
+      if (create) {
+        lpaStore.application.signatures.push(s);
+        changed();
+      }
     }
     return s;
   }
 
-  const cpSig = $derived(ensureCp());
+  // Create the records now and whenever the attorneys change, not while
+  // rendering: Svelte forbids changing state inside $derived or a template,
+  // so cpSig and the template's ensureAtt(i) only find them.
+  function ensureAll() {
+    ensureCp();
+    lpaStore.application.attorneys.forEach((_attorney, i) => ensureAtt(i));
+  }
+  ensureAll();
+  $effect.pre(ensureAll);
+  const cpSig = $derived(ensureCp(false));
   const attorneys = $derived(lpaStore.application.attorneys);
 
   const METHODS = [
@@ -99,7 +112,7 @@
   </section>
 
   {#each attorneys as att, i (i)}
-    {@const sig = ensureAtt(i)}
+    {@const sig = ensureAtt(i, false)}
     <section class="rounded-lg border border-base-300 bg-base-200 p-4">
       <h3 class="mb-3 font-medium text-base-content">
         Attorney #{i + 1} — {att.givenNames}

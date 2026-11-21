@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { renderPdf } from '#lib/report/pdf-client.js';
   import { goto } from '$app/navigation';
   import { resultStore } from '#lib/stores/result.svelte.js';
   import Badge from '#lib/components/ui/Badge.svelte';
@@ -30,11 +31,7 @@
   async function downloadPDF() {
     pdfError = '';
     try {
-      const res = await fetch('/report/pdf', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: resultStore.data, result: resultStore.result })
-      });
+      const res = await renderPdf({ data: resultStore.data, result: resultStore.result });
       if (res.ok) {
         const blob = await res.blob();
         const url = URL.createObjectURL(blob);

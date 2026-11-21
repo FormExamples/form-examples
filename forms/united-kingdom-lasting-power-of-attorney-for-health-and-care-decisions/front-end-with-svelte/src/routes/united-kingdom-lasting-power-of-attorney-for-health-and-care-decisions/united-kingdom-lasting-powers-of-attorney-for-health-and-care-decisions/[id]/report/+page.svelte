@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { renderPdf } from '#lib/report/pdf-client.js';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
   import { lpaStore } from '#lib/stores/lpa.svelte.js';
@@ -16,10 +17,9 @@
   async function downloadPDF() {
     pdfError = '';
     try {
-      const res = await fetch(`/${plural}/${id}/report/pdf`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ application: lpaStore.application, validity: lpaStore.validity })
+      const res = await renderPdf({
+        application: lpaStore.application,
+        validity: lpaStore.validity
       });
       if (res.ok) {
         const blob = await res.blob();

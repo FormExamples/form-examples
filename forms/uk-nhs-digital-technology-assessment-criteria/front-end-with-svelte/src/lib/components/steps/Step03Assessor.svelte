@@ -59,7 +59,7 @@
         id="step-3-assessment-date"
         label="Assessment date"
         bind:value={
-          () => store.data.assessment.assessmentDate ?? undefined,
+          () => store.data.assessment.assessmentDate ?? '',
           (v) => (store.data.assessment.assessmentDate = v || null)
         }
         aria-invalid={store.errors['step-3-assessment-date'] ? 'true' : undefined}
@@ -69,7 +69,7 @@
       <DateInput
         label="Review due date"
         bind:value={
-          () => store.data.assessment.reviewDueDate ?? undefined,
+          () => store.data.assessment.reviewDueDate ?? '',
           (v) => (store.data.assessment.reviewDueDate = v || null)
         }
       />
