@@ -25,7 +25,7 @@
     "@lilydesignsystem/svelte-text-size-picker": "^0.3.2",
     "@lilydesignsystem/svelte-theme-picker": "^0.4.0",
     "@sveltejs/adapter-static": "^4.0.1",
-    "@sveltejs/kit": "^3.1.1",
+    "@sveltejs/kit": "^3.4.0",
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
     "@tailwindcss/vite": "^4.3.5",
     "@types/node": "^26.6.6",
