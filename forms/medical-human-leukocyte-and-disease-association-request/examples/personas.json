@@ -1,0 +1,771 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "b27-suspected-spondyloarthritis-complete",
+      "description": "Well-formed routine request: HLA-B27 for suspected axial spondyloarthritis, clinical details, report email, three or more matching identifiers, consent confirmed, 6 mL EDTA. Expect usually-appropriate, ok, routine, accept.",
+      "state": {
+        "patient": {
+          "familyName": "Ashworth",
+          "givenNames": "Claire",
+          "previousName": "",
+          "birthDate": "1981-06-02",
+          "sex": "female",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0101",
+          "medicalRecordNumber": "H101010",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr R Menon",
+          "clinicianRole": "rheumatologist",
+          "clinicianEmail": "r.menon@example.org",
+          "department": "Rheumatology",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": "rheumatology.reports@example.org"
+        },
+        "tests": {
+          "hlaA29": false,
+          "hlaB27": true,
+          "hlaB51": false,
+          "hlaB5701": false,
+          "hlaDr15Dq6": false,
+          "hlaDq2Dq8": false,
+          "hlaDqa105": false,
+          "otherHlaDiseaseAssociation": false,
+          "testDetail": ""
+        },
+        "clinical": {
+          "indicationCategory": "suspected-disease",
+          "clinicalDetails": "Chronic inflammatory back pain, onset under 40, suspected axial spondyloarthritis.",
+          "plannedDrug": "",
+          "previousHlaTypingKnown": false
+        },
+        "urgency": {
+          "urgentTesting": false,
+          "urgentTestingReason": "",
+          "highRiskSample": false,
+          "highRiskDescription": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 3,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "sampleVolumeMl": 6,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "10 working days (local policy)",
+        "requiredSamplesSummary": "5-10 mL EDTA blood (one tube serves every test)",
+        "selectedTests": [
+          "hla-b27"
+        ],
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-TRIAGE-03",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "b5701-abacavir-pre-prescribing",
+      "description": "HLA-B*57:01 before starting abacavir for HIV: a time-critical pre-prescribing test. Expect usually-appropriate, ok, urgent, accept, with the abacavir-start-pending flag.",
+      "state": {
+        "patient": {
+          "familyName": "Mbeki",
+          "givenNames": "Thabo",
+          "previousName": "",
+          "birthDate": "1981-06-02",
+          "sex": "male",
+          "ethnicity": "Black African",
+          "nationalHealthIdentifier": "900 000 0101",
+          "medicalRecordNumber": "H101010",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr S Patel",
+          "clinicianRole": "infectious-disease-physician",
+          "clinicianEmail": "r.menon@example.org",
+          "department": "HIV medicine",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": "rheumatology.reports@example.org"
+        },
+        "tests": {
+          "hlaA29": false,
+          "hlaB27": false,
+          "hlaB51": false,
+          "hlaB5701": true,
+          "hlaDr15Dq6": false,
+          "hlaDq2Dq8": false,
+          "hlaDqa105": false,
+          "otherHlaDiseaseAssociation": false,
+          "testDetail": ""
+        },
+        "clinical": {
+          "indicationCategory": "pre-treatment-drug-hypersensitivity",
+          "clinicalDetails": "Newly diagnosed HIV-1; abacavir/lamivudine proposed as part of first-line therapy.",
+          "plannedDrug": "abacavir",
+          "previousHlaTypingKnown": false
+        },
+        "urgency": {
+          "urgentTesting": false,
+          "urgentTestingReason": "",
+          "highRiskSample": false,
+          "highRiskDescription": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 3,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "sampleVolumeMl": 6,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "2 working days (local policy)",
+        "requiredSamplesSummary": "5-10 mL EDTA blood (one tube serves every test)",
+        "selectedTests": [
+          "hla-b-57-01"
+        ],
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-TRIAGE-01",
+            "axis": "triage",
+            "category": "pre-treatment",
+            "description": "Pre-treatment drug-hypersensitivity test: the drug start waits for the result."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABACAVIR-001",
+            "category": "abacavir-start-pending",
+            "priority": "high",
+            "description": "HLA-B*57:01 requested with a planned drug (abacavir): the prescription waits for the result.",
+            "suggestedAction": "Treat as a time-critical pre-prescribing test and do not start the drug until the result is back."
+          }
+        ]
+      }
+    },
+    {
+      "name": "previous-typing-known-duplicate",
+      "description": "HLA-B27 requested although the patient has been HLA typed before; an HLA type is lifelong. Expect usually-not-appropriate (score 2), query-referrer, with the previous-hla-result flag.",
+      "state": {
+        "patient": {
+          "familyName": "Lindgren",
+          "givenNames": "Sven",
+          "previousName": "",
+          "birthDate": "1981-06-02",
+          "sex": "male",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0101",
+          "medicalRecordNumber": "H101010",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr R Menon",
+          "clinicianRole": "rheumatologist",
+          "clinicianEmail": "r.menon@example.org",
+          "department": "Rheumatology",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": "rheumatology.reports@example.org"
+        },
+        "tests": {
+          "hlaA29": false,
+          "hlaB27": true,
+          "hlaB51": false,
+          "hlaB5701": false,
+          "hlaDr15Dq6": false,
+          "hlaDq2Dq8": false,
+          "hlaDqa105": false,
+          "otherHlaDiseaseAssociation": false,
+          "testDetail": ""
+        },
+        "clinical": {
+          "indicationCategory": "suspected-disease",
+          "clinicalDetails": "Chronic inflammatory back pain, onset under 40, suspected axial spondyloarthritis.",
+          "plannedDrug": "",
+          "previousHlaTypingKnown": true
+        },
+        "urgency": {
+          "urgentTesting": false,
+          "urgentTestingReason": "",
+          "highRiskSample": false,
+          "highRiskDescription": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 3,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "sampleVolumeMl": 6,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 2,
+        "appropriatenessBand": "usually-not-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "10 working days (local policy)",
+        "requiredSamplesSummary": "5-10 mL EDTA blood (one tube serves every test)",
+        "selectedTests": [
+          "hla-b27"
+        ],
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-02",
+            "axis": "appropriateness",
+            "category": "previous-typing",
+            "description": "The patient has been HLA typed before: an HLA type is lifelong, so a repeat is usually unnecessary."
+          },
+          {
+            "ruleId": "R-TRIAGE-03",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PREVIOUS-HLA-001",
+            "category": "previous-hla-result-possible-duplicate",
+            "priority": "medium",
+            "description": "The patient has already been HLA typed; an HLA type is lifelong.",
+            "suggestedAction": "Ask the laboratory for the earlier result before sending a new sample."
+          }
+        ]
+      }
+    },
+    {
+      "name": "coeliac-no-clinical-details",
+      "description": "HLA-DQ2/DQ8 with the clinical-details box left blank and no report destination. Expect may-be-appropriate (score 5), low completeness, query-referrer, with the no-clinical-details and report-destination-missing flags.",
+      "state": {
+        "patient": {
+          "familyName": "Rossi",
+          "givenNames": "Marco",
+          "previousName": "",
+          "birthDate": "1981-06-02",
+          "sex": "male",
+          "ethnicity": "",
+          "nationalHealthIdentifier": "900 000 0101",
+          "medicalRecordNumber": "H101010",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr R Menon",
+          "clinicianRole": "general-practitioner",
+          "clinicianEmail": "r.menon@example.org",
+          "department": "",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": ""
+        },
+        "tests": {
+          "hlaA29": false,
+          "hlaB27": false,
+          "hlaB51": false,
+          "hlaB5701": false,
+          "hlaDr15Dq6": false,
+          "hlaDq2Dq8": true,
+          "hlaDqa105": false,
+          "otherHlaDiseaseAssociation": false,
+          "testDetail": ""
+        },
+        "clinical": {
+          "indicationCategory": "",
+          "clinicalDetails": "",
+          "plannedDrug": "",
+          "previousHlaTypingKnown": false
+        },
+        "urgency": {
+          "urgentTesting": false,
+          "urgentTestingReason": "",
+          "highRiskSample": false,
+          "highRiskDescription": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 3,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "sampleVolumeMl": 6,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 5,
+        "appropriatenessBand": "may-be-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 55,
+        "triageTier": "routine",
+        "targetTimeframe": "10 working days (local policy)",
+        "requiredSamplesSummary": "5-10 mL EDTA blood (one tube serves every test)",
+        "selectedTests": [
+          "hla-dq2-dq8"
+        ],
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-01",
+            "axis": "appropriateness",
+            "category": "no-clinical-details",
+            "description": "No clinical details: the laboratory cannot judge whether the test fits the question."
+          },
+          {
+            "ruleId": "R-COMP-CLINICAL",
+            "axis": "completeness",
+            "category": "clinical",
+            "description": "Missing: clinical details (weight 20)."
+          },
+          {
+            "ruleId": "R-COMP-INDICATION",
+            "axis": "completeness",
+            "category": "indication",
+            "description": "Missing: indication category (weight 10)."
+          },
+          {
+            "ruleId": "R-COMP-ETHNICITY",
+            "axis": "completeness",
+            "category": "ethnicity",
+            "description": "Missing: ethnicity (allele frequencies differ by population) (weight 5)."
+          },
+          {
+            "ruleId": "R-COMP-REPORT",
+            "axis": "completeness",
+            "category": "report",
+            "description": "Missing: report destination (email or copy-to) (weight 10)."
+          },
+          {
+            "ruleId": "R-TRIAGE-03",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-NO-DETAILS-001",
+            "category": "no-clinical-details",
+            "priority": "medium",
+            "description": "No clinical details were given.",
+            "suggestedAction": "Give the suspected condition or the reason for the test so the laboratory can vet the request."
+          },
+          {
+            "flagId": "F-REPORT-DEST-001",
+            "category": "report-destination-missing",
+            "priority": "low",
+            "description": "No report email or copy-to destination given.",
+            "suggestedAction": "Give an authorized secure email address or a copy-to name for the report."
+          }
+        ]
+      }
+    },
+    {
+      "name": "other-hla-high-risk-incomplete",
+      "description": "Other HLA association with no allele named and a high-risk sample with no description, volume under range. Expect may-be-appropriate (score 5), caution, query-referrer, with the high-risk-sample flag.",
+      "state": {
+        "patient": {
+          "familyName": "Haddad",
+          "givenNames": "Leila",
+          "previousName": "",
+          "birthDate": "1981-06-02",
+          "sex": "female",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0101",
+          "medicalRecordNumber": "H101010",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr R Menon",
+          "clinicianRole": "rheumatologist",
+          "clinicianEmail": "r.menon@example.org",
+          "department": "Rheumatology",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": "rheumatology.reports@example.org"
+        },
+        "tests": {
+          "hlaA29": false,
+          "hlaB27": false,
+          "hlaB51": false,
+          "hlaB5701": false,
+          "hlaDr15Dq6": false,
+          "hlaDq2Dq8": false,
+          "hlaDqa105": false,
+          "otherHlaDiseaseAssociation": true,
+          "testDetail": ""
+        },
+        "clinical": {
+          "indicationCategory": "suspected-disease",
+          "clinicalDetails": "Unexplained recurrent anterior uveitis; ophthalmology suspects an HLA-associated condition.",
+          "plannedDrug": "",
+          "previousHlaTypingKnown": false
+        },
+        "urgency": {
+          "urgentTesting": false,
+          "urgentTestingReason": "",
+          "highRiskSample": true,
+          "highRiskDescription": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 3,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "sampleVolumeMl": 3,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 5,
+        "appropriatenessBand": "may-be-appropriate",
+        "identitySafetyBand": "caution",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "10 working days (local policy)",
+        "requiredSamplesSummary": "5-10 mL EDTA blood (one tube serves every test)",
+        "selectedTests": [
+          "other-hla-disease-association"
+        ],
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-04",
+            "axis": "appropriateness",
+            "category": "other-hla",
+            "description": "Other HLA association requested with no allele or antigen specified."
+          },
+          {
+            "ruleId": "R-ID-VOL-01",
+            "axis": "identity",
+            "category": "volume",
+            "description": "EDTA volume 3 mL is outside the expected 5-10 mL."
+          },
+          {
+            "ruleId": "R-ID-RISK-01",
+            "axis": "identity",
+            "category": "high-risk",
+            "description": "High-risk sample without a description of the risk."
+          },
+          {
+            "ruleId": "R-TRIAGE-03",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-HIGH-RISK-001",
+            "category": "high-risk-sample",
+            "priority": "high",
+            "description": "The sample is flagged as high risk.",
+            "suggestedAction": "Confirm the sample is labelled and packaged as high risk, and warn the laboratory."
+          }
+        ]
+      }
+    },
+    {
+      "name": "dqa1-05-limited-evidence",
+      "description": "HLA-DQA1*05 to predict anti-TNF response in Crohn disease: an emerging use with limited evidence. Expect may-be-appropriate (score 6), ok, routine, with the limited-evidence flag.",
+      "state": {
+        "patient": {
+          "familyName": "Okonkwo",
+          "givenNames": "Ngozi",
+          "previousName": "",
+          "birthDate": "1981-06-02",
+          "sex": "female",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0101",
+          "medicalRecordNumber": "H101010",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr R Menon",
+          "clinicianRole": "gastroenterologist",
+          "clinicianEmail": "r.menon@example.org",
+          "department": "Gastroenterology",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": "rheumatology.reports@example.org"
+        },
+        "tests": {
+          "hlaA29": false,
+          "hlaB27": false,
+          "hlaB51": false,
+          "hlaB5701": false,
+          "hlaDr15Dq6": false,
+          "hlaDq2Dq8": false,
+          "hlaDqa105": true,
+          "otherHlaDiseaseAssociation": false,
+          "testDetail": ""
+        },
+        "clinical": {
+          "indicationCategory": "treatment-response",
+          "clinicalDetails": "Crohn disease, about to start infliximab; asking whether HLA-DQA1*05 carriage predicts immunogenicity.",
+          "plannedDrug": "infliximab",
+          "previousHlaTypingKnown": false
+        },
+        "urgency": {
+          "urgentTesting": false,
+          "urgentTestingReason": "",
+          "highRiskSample": false,
+          "highRiskDescription": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 3,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "sampleVolumeMl": 6,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 6,
+        "appropriatenessBand": "may-be-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "10 working days (local policy)",
+        "requiredSamplesSummary": "5-10 mL EDTA blood (one tube serves every test)",
+        "selectedTests": [
+          "hla-dqa1-05"
+        ],
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-05",
+            "axis": "appropriateness",
+            "category": "hla-dqa1-05",
+            "description": "HLA-DQA1*05 for anti-TNF response is an emerging use with limited evidence."
+          },
+          {
+            "ruleId": "R-TRIAGE-03",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-LIMITED-EVIDENCE-001",
+            "category": "other",
+            "priority": "low",
+            "description": "HLA-DQA1*05 for anti-TNF response is an emerging use with limited evidence.",
+            "suggestedAction": "Confirm the result will change management before sending the sample."
+          }
+        ]
+      }
+    },
+    {
+      "name": "too-few-identifiers-reject",
+      "description": "HLA-A29 for suspected birdshot chorioretinopathy, but the sample label carries two identifiers and the form details are not confirmed to match. Expect reject-risk, reject, with the identity-mismatch-risk flag.",
+      "state": {
+        "patient": {
+          "familyName": "Varga",
+          "givenNames": "Eszter",
+          "previousName": "",
+          "birthDate": "1981-06-02",
+          "sex": "female",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0101",
+          "medicalRecordNumber": "H101010",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr R Menon",
+          "clinicianRole": "ophthalmologist",
+          "clinicianEmail": "r.menon@example.org",
+          "department": "Ophthalmology",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": "rheumatology.reports@example.org"
+        },
+        "tests": {
+          "hlaA29": true,
+          "hlaB27": false,
+          "hlaB51": false,
+          "hlaB5701": false,
+          "hlaDr15Dq6": false,
+          "hlaDq2Dq8": false,
+          "hlaDqa105": false,
+          "otherHlaDiseaseAssociation": false,
+          "testDetail": ""
+        },
+        "clinical": {
+          "indicationCategory": "suspected-disease",
+          "clinicalDetails": "Bilateral posterior uveitis with typical cream-coloured fundus lesions; birdshot chorioretinopathy suspected.",
+          "plannedDrug": "",
+          "previousHlaTypingKnown": false
+        },
+        "urgency": {
+          "urgentTesting": false,
+          "urgentTestingReason": "",
+          "highRiskSample": false,
+          "highRiskDescription": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 2,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": false,
+          "sampleVolumeMl": 6,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "identitySafetyBand": "reject-risk",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "10 working days (local policy)",
+        "requiredSamplesSummary": "5-10 mL EDTA blood (one tube serves every test)",
+        "selectedTests": [
+          "hla-a29"
+        ],
+        "recommendation": "reject",
+        "recommendationLabel": "Reject",
+        "firedRules": [
+          {
+            "ruleId": "R-ID-3PT-01",
+            "axis": "identity",
+            "category": "identifiers",
+            "description": "Fewer than 3 identifiers on the sample or the form: samples not labelled correctly are discarded."
+          },
+          {
+            "ruleId": "R-ID-MATCH-01",
+            "axis": "identity",
+            "category": "match",
+            "description": "Match between sample and form details not confirmed."
+          },
+          {
+            "ruleId": "R-TRIAGE-03",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-IDENTITY-001",
+            "category": "identity-mismatch-risk",
+            "priority": "high",
+            "description": "Fewer than 3 identifiers on the sample or form: the sample is at risk of being discarded.",
+            "suggestedAction": "Re-label the sample and form with at least 3 matching identifiers."
+          }
+        ]
+      }
+    }
+  ]
+}

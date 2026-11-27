@@ -1,0 +1,36 @@
+{
+  "resourceType": "Patient",
+  "id": "7a7d4711-da1e-5160-a5d3-bc100b7fbc4a",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Patient"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "name": [
+    {
+      "use": "official",
+      "family": "Doe",
+      "given": [
+        "Jane"
+      ]
+    }
+  ],
+  "birthDate": "1965-06-15",
+  "gender": "female",
+  "telecom": [
+    {
+      "system": "email",
+      "value": "jane.doe@example.com"
+    },
+    {
+      "system": "phone",
+      "value": "07700900000"
+    }
+  ],
+  "address": [
+    {
+      "postalCode": "SW1A 1AA"
+    }
+  ]
+}

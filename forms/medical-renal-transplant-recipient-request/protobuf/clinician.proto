@@ -1,0 +1,32 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: clinician
+
+syntax = "proto3";
+
+package form_examples.medical_renal_transplant_recipient_request;
+
+enum ClinicianRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_NEPHROLOGIST = 1;  // nephrologist
+  ROLE_TRANSPLANT_SURGEON = 2;  // transplant-surgeon
+  ROLE_TRANSPLANT_COORDINATOR = 3;  // transplant-coordinator
+  ROLE_DIALYSIS_NURSE = 4;  // dialysis-nurse
+  ROLE_PHLEBOTOMIST = 5;  // phlebotomist
+  ROLE_OTHER = 6;  // other
+}
+
+message Clinician {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  string postal_address_as_full_text = 8;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 9;  // CHAR(2) — max 2 chars
+  string postcode = 10;  // TEXT
+  ClinicianRoleEnum role = 11;  // VARCHAR(30)
+  string registration_body = 12;  // TEXT
+  string registration_number = 13;  // TEXT
+}

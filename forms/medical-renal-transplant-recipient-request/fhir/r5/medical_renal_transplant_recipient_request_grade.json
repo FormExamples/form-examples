@@ -1,0 +1,21 @@
+{
+  "resourceType": "ClinicalImpression",
+  "id": "4d5894e4-81bf-52cd-b448-d9549f130359",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "completed",
+  "subject": {
+    "reference": "Patient/7a7d4711-da1e-5160-a5d3-bc100b7fbc4a"
+  },
+  "encounter": {
+    "reference": "Encounter/accabb62-22ce-5614-bd36-0d06fb965241"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "date": "2026-04-09T10:00:00+00:00",
+  "description": "Medical Renal Transplant Recipient Request grading result",
+  "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Appropriateness Score: 5; Appropriateness Band: usually-appropriate; Identity Safety Band: ok; Completeness Percent: 1; Triage Tier: routine; Target Timeframe: Example Target Timeframe; Required Samples Summary: Example text.; Recommendation: accept; Clinician Notes: Example text.; Signed At: 2026-04-09T10:00:00+00:00"
+}

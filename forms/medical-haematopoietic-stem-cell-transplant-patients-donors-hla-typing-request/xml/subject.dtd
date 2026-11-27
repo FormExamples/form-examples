@@ -1,0 +1,18 @@
+<!ELEMENT subject (id,created_at,updated_at,deleted_at,family_name,given_names,previous_name,birth_date,sex,national_health_identifier,medical_record_number,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode)>
+<!ATTLIST subject xmlns CDATA #FIXED "https://formexamples.github.io/medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request/xml">
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT family_name (#PCDATA)>
+<!ELEMENT given_names (#PCDATA)>
+<!ELEMENT previous_name (#PCDATA)>
+<!ELEMENT birth_date (#PCDATA)>
+<!ELEMENT sex (#PCDATA)>
+<!ELEMENT national_health_identifier (#PCDATA)>
+<!ELEMENT medical_record_number (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT postal_address_as_full_text (#PCDATA)>
+<!ELEMENT country_as_iso_3166_1_alpha_2 (#PCDATA)>
+<!ELEMENT postcode (#PCDATA)>

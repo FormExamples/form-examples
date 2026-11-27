@@ -1,0 +1,34 @@
+{
+  "resourceType": "DetectedIssue",
+  "id": "94018a65-cbc6-5f39-b3cf-afbb57c99f2b",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "urn:form-examples:medical-renal-living-donor-request",
+          "code": "grading-fired-rule",
+          "display": "General"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:medical-renal-living-donor-request:rules",
+        "code": "RULE-001",
+        "display": "Example grading rule"
+      }
+    ]
+  },
+  "severity": "moderate",
+  "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+  "detail": "Example text."
+}

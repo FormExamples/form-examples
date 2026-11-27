@@ -1,0 +1,500 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: hsct_hla_typing_request
+openapi: 3.1.0
+info:
+  title: Medical Haematopoietic Stem Cell Transplant Patients Donors Hla Typing Request — HsctHlaTypingRequest
+  version: 1.0.0
+  description: "HSCT HLA-typing request for one person (recipient or potential donor): role, donor type, clinical details, linked recipient details when the sample is from a relative, referrer, urgency, sample collection and laboratory-use fields."
+x-namespace:
+  form: medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request
+  apiPrefix: /api/medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request/
+  sqlSchema: medical_haematopoietic_stem_cell_transplant_patients_donors_hla_typing_request
+  xmlNamespace: https://formexamples.github.io/medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request/xml
+tags:
+  - name: medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request
+    description: Medical Haematopoietic Stem Cell Transplant Patients Donors Hla Typing Request form
+paths:
+  /api/medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request/hsct_hla_typing_requests:
+    get:
+      summary: List HsctHlaTypingRequest records
+      tags: [medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request]
+      operationId: listHsctHlaTypingRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of HsctHlaTypingRequest records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HsctHlaTypingRequest"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new HsctHlaTypingRequest
+      tags: [medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request]
+      operationId: createHsctHlaTypingRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HsctHlaTypingRequest"
+      responses:
+        "200":
+          description: The newly created HsctHlaTypingRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HsctHlaTypingRequest"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request/hsct_hla_typing_requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one HsctHlaTypingRequest by id
+      tags: [medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request]
+      operationId: getHsctHlaTypingRequest
+      responses:
+        "200":
+          description: The requested HsctHlaTypingRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HsctHlaTypingRequest"
+        "404":
+          description: HsctHlaTypingRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing HsctHlaTypingRequest
+      tags: [medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request]
+      operationId: updateHsctHlaTypingRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HsctHlaTypingRequest"
+      responses:
+        "200":
+          description: The updated HsctHlaTypingRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HsctHlaTypingRequest"
+        "404":
+          description: HsctHlaTypingRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing HsctHlaTypingRequest
+      tags: [medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request]
+      operationId: replaceHsctHlaTypingRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HsctHlaTypingRequest"
+      responses:
+        "200":
+          description: The updated HsctHlaTypingRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HsctHlaTypingRequest"
+        "404":
+          description: HsctHlaTypingRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a HsctHlaTypingRequest
+      tags: [medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request]
+      operationId: deleteHsctHlaTypingRequest
+      responses:
+        "200":
+          description: HsctHlaTypingRequest deleted
+        "404":
+          description: HsctHlaTypingRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    HsctHlaTypingRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        subject_id:
+          type: string
+          format: uuid
+          description: Foreign key to the person sampled.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - received
+            - vetted
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, received, vetted, rejected."
+        request_date:
+          type: [string, 'null']
+          format: date
+          description: Date the request was made.
+        subject_role:
+          type: string
+          enum:
+            - hsct-recipient
+            - potential-donor
+            - ""
+          description: "Role of the person sampled: hsct-recipient, potential-donor. Separates the two sample sets the laboratory needs."
+        donor_type:
+          type: string
+          enum:
+            - matched-sibling
+            - haploidentical-relative
+            - other-relative
+            - unrelated-volunteer
+            - unknown
+            - ""
+          description: "Donor type when subject_role is potential-donor: matched-sibling, haploidentical-relative, other-relative, unrelated-volunteer, unknown. Not on the source form; recommended."
+        hla_typing_resolution:
+          type: string
+          enum:
+            - not-specified
+            - low
+            - high
+            - ""
+          description: "HLA typing resolution requested: not-specified, low, high. Not on the source form; recommended."
+        ethnicity:
+          type: string
+          maxLength: 100
+          description: Self-described ethnicity (mandatory on the source form); informs HLA haplotype interpretation.
+        clinical_details:
+          type: string
+          maxLength: 1000
+          description: "Clinical details: disease, indication for HSCT, or donor information."
+        referrer_department:
+          type: string
+          maxLength: 255
+          description: Department or practice of the requesting clinician.
+        referrer_organization:
+          type: string
+          maxLength: 255
+          description: Hospital or organization of the requesting clinician.
+        copy_of_report_to:
+          type: string
+          maxLength: 255
+          description: Name or address for a copy of the report, if any.
+        report_email:
+          type: [string, 'null']
+          description: "Preferred email address for the report. Health data: use an authorized secure address only."
+        recipient_family_name:
+          type: string
+          maxLength: 255
+          description: "When the sample is from a relative: the recipient's family name."
+        recipient_given_names:
+          type: string
+          maxLength: 255
+          description: "When the sample is from a relative: the recipient's given names."
+        recipient_medical_record_number:
+          type: string
+          maxLength: 40
+          description: "When the sample is from a relative: the recipient's medical record number."
+        recipient_birth_date:
+          type: [string, 'null']
+          format: date
+          description: "When the sample is from a relative: the recipient's birth date."
+        relationship_to_recipient:
+          type: string
+          maxLength: 100
+          description: "When the sample is from a relative: relationship to the recipient (for example sibling, parent, child)."
+        urgent_testing:
+          type: boolean
+          description: Whether the sample requires urgent testing (the source form says to telephone the laboratory).
+        urgent_testing_reason:
+          type: string
+          maxLength: 500
+          description: Reason urgent testing is needed.
+        requested_by_signed_at:
+          type: [string, 'null']
+          format: date-time
+          description: When the requester signed the request.
+        consent_and_identity_confirmed:
+          type: boolean
+          description: Requester confirms informed consent was obtained (donor consent separate from recipient consent) and identity verified.
+        sample_collector_name:
+          type: string
+          maxLength: 255
+          description: Name of the person who collected the sample.
+        sample_collected_at:
+          type: [string, 'null']
+          format: date-time
+          description: Date and time the sample was collected.
+        identifiers_on_sample_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of identifiers on the sample labels (minimum 3 required).
+        identifiers_on_form_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of identifiers on the request form (minimum 3 required).
+        sample_and_form_details_match:
+          type: boolean
+          description: Whether the details on the samples and the form match.
+        edta_purple_volume_ml:
+          type: [integer, 'null']
+          format: int32
+          description: Total volume of purple-top EDTA blood sent, in mL (recipient 18, potential donor 10 expected).
+        edta_pink_volume_ml:
+          type: [integer, 'null']
+          format: int32
+          description: Total volume of pink-top (hand-labelled) EDTA blood sent, in mL (6 expected).
+        clotted_red_volume_ml:
+          type: [integer, 'null']
+          format: int32
+          description: Volume of clotted red-top blood sent, in mL (recipient only, 6 expected).
+        samples_other_description:
+          type: string
+          maxLength: 255
+          description: Other sample types sent, if any.
+        laboratory_recipient_identifier:
+          type: string
+          maxLength: 100
+          description: "Laboratory use: recipient identifier assigned by the laboratory."
+        laboratory_donor_identifier:
+          type: string
+          maxLength: 100
+          description: "Laboratory use: donor identifier assigned by the laboratory."
+        laboratory_sample_number:
+          type: string
+          maxLength: 100
+          description: "Laboratory use: sample number."
+        laboratory_sample_received_at:
+          type: [string, 'null']
+          format: date-time
+          description: "Laboratory use: date and time the sample was received."
+        laboratory_identifiers_checked_by:
+          type: string
+          maxLength: 255
+          description: "Laboratory use: name of the person who checked the sample identifiers."
+      required:
+        - created_at
+        - updated_at
+        - subject_id
+        - clinician_id
+        - status
+        - subject_role
+        - donor_type
+        - hla_typing_resolution
+        - ethnicity
+        - clinical_details
+        - referrer_department
+        - referrer_organization
+        - copy_of_report_to
+        - recipient_family_name
+        - recipient_given_names
+        - recipient_medical_record_number
+        - relationship_to_recipient
+        - urgent_testing
+        - urgent_testing_reason
+        - consent_and_identity_confirmed
+        - sample_collector_name
+        - sample_and_form_details_match
+        - samples_other_description
+        - laboratory_recipient_identifier
+        - laboratory_donor_identifier
+        - laboratory_sample_number
+        - laboratory_identifiers_checked_by
+      description: "HSCT HLA-typing request for one person (recipient or potential donor): role, donor type, clinical details, linked recipient details when the sample is from a relative, referrer, urgency, sample collection and laboratory-use fields."

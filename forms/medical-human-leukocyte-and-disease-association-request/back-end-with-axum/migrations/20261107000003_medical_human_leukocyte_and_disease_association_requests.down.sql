@@ -1,0 +1,1 @@
+DROP TABLE "medical_human_leukocyte_and_disease_association_requests";

@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medical_renal_transplant_recipient_request_test
+
+syntax = "proto3";
+
+package form_examples.medical_renal_transplant_recipient_request;
+
+enum MedicalRenalTransplantRecipientRequestTestTestCodeEnum {
+  TESTCODE_UNSPECIFIED = 0;
+  TESTCODE_LIST_REGISTRATION_FIRST_TYPING_AND_RETYPING = 1;  // list-registration-first-typing-and-retyping
+  TESTCODE_LIST_REGISTRATION_RETURNING_TO_LIST = 2;  // list-registration-returning-to-list
+  TESTCODE_LIST_REGISTRATION_OTHER = 3;  // list-registration-other
+  TESTCODE_DECEASED_DONOR_FULL_CROSSMATCH = 4;  // deceased-donor-full-crossmatch
+  TESTCODE_DECEASED_DONOR_DAY_OF_TRANSPLANT = 5;  // deceased-donor-day-of-transplant
+  TESTCODE_LIVING_DONOR_FULL_CROSSMATCH = 6;  // living-donor-full-crossmatch
+  TESTCODE_LIVING_DONOR_DAY_OF_TRANSPLANT = 7;  // living-donor-day-of-transplant
+  TESTCODE_LIVING_DONOR_VIRTUAL_CROSSMATCH = 8;  // living-donor-virtual-crossmatch
+  TESTCODE_LIVING_DONOR_MATCH_GRADE = 9;  // living-donor-match-grade
+  TESTCODE_LIVING_DONOR_ABO_TITRES_ONLY = 10;  // living-donor-abo-titres-only
+  TESTCODE_AUTOLOGOUS_CROSSMATCH = 11;  // autologous-crossmatch
+  TESTCODE_HLA_ANTIBODY_MONITORING_ROUTINE_TRANSPLANT_LIST = 12;  // hla-antibody-monitoring-routine-transplant-list
+  TESTCODE_HLA_ANTIBODY_MONITORING_ROUTINE_POST_TRANSPLANT = 13;  // hla-antibody-monitoring-routine-post-transplant
+  TESTCODE_HLA_ANTIBODY_MONITORING_POST_TRANSFUSION = 14;  // hla-antibody-monitoring-post-transfusion
+  TESTCODE_HLA_REJECTION_INVESTIGATION = 15;  // hla-rejection-investigation
+  TESTCODE_ABO_INCOMPATIBLE_TRANSPLANT_MONITORING = 16;  // abo-incompatible-transplant-monitoring
+  TESTCODE_RED_CELL_ANTIBODY_FOLLOW_UP = 17;  // red-cell-antibody-follow-up
+}
+
+message MedicalRenalTransplantRecipientRequestTest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string request_id = 5;  // UUID — uuid
+  MedicalRenalTransplantRecipientRequestTestTestCodeEnum test_code = 6;  // VARCHAR(60)
+  string test_detail = 7;  // VARCHAR(255) — max 255 chars
+}

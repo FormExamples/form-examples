@@ -1,0 +1,724 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "recipient-complete",
+      "description": "Well-formed routine request for an HSCT recipient: full volumes (18 + 6 + 6 mL), three or more matching identifiers, consent confirmed. Expect usually-appropriate, ok, routine, accept.",
+      "state": {
+        "subject": {
+          "familyName": "Brennan",
+          "givenNames": "Tomas",
+          "previousName": "",
+          "birthDate": "1975-04-11",
+          "sex": "male",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0201",
+          "medicalRecordNumber": "H201010",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr A Rahman",
+          "clinicianRole": "haematologist",
+          "clinicianEmail": "a.rahman@example.org",
+          "department": "Haematology",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": "bmt.reports@example.org"
+        },
+        "request": {
+          "subjectRole": "hsct-recipient",
+          "donorType": "",
+          "hlaTypingResolution": "high",
+          "clinicalDetails": "Acute myeloid leukaemia in first remission; allogeneic HSCT planned."
+        },
+        "recipient": {
+          "recipientFamilyName": "",
+          "recipientGivenNames": "",
+          "recipientMedicalRecordNumber": "",
+          "recipientBirthDate": "",
+          "relationshipToRecipient": ""
+        },
+        "urgency": {
+          "urgentTesting": false,
+          "urgentTestingReason": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 3,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "edtaPurpleVolumeMl": 18,
+          "edtaPinkVolumeMl": 6,
+          "clottedRedVolumeMl": 6,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratoryRecipientIdentifier": "",
+          "laboratoryDonorIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "10 working days (local policy)",
+        "requiredSamplesSummary": "18 mL EDTA (purple) + 6 mL EDTA (pink, hand-labelled) + 6 mL clotted (red)",
+        "subjectRole": "hsct-recipient",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-TRIAGE-02",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "matched-sibling-donor-complete",
+      "description": "Potential donor (matched sibling) with the recipient named, relationship given and donor volumes (10 + 6 mL). Expect usually-appropriate, ok, routine, accept.",
+      "state": {
+        "subject": {
+          "familyName": "Brennan",
+          "givenNames": "Aoife",
+          "previousName": "",
+          "birthDate": "1978-09-23",
+          "sex": "female",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0202",
+          "medicalRecordNumber": "H201011",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr A Rahman",
+          "clinicianRole": "haematologist",
+          "clinicianEmail": "a.rahman@example.org",
+          "department": "Haematology",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": "bmt.reports@example.org"
+        },
+        "request": {
+          "subjectRole": "potential-donor",
+          "donorType": "matched-sibling",
+          "hlaTypingResolution": "high",
+          "clinicalDetails": "Full sibling of a recipient with AML; HLA typing to assess donor suitability."
+        },
+        "recipient": {
+          "recipientFamilyName": "Brennan",
+          "recipientGivenNames": "Tomas",
+          "recipientMedicalRecordNumber": "H201010",
+          "recipientBirthDate": "1975-04-11",
+          "relationshipToRecipient": "Sister"
+        },
+        "urgency": {
+          "urgentTesting": false,
+          "urgentTestingReason": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 3,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "edtaPurpleVolumeMl": 10,
+          "edtaPinkVolumeMl": 6,
+          "clottedRedVolumeMl": null,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratoryRecipientIdentifier": "",
+          "laboratoryDonorIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "10 working days (local policy)",
+        "requiredSamplesSummary": "10 mL EDTA (purple) + 6 mL EDTA (pink, hand-labelled)",
+        "subjectRole": "potential-donor",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-TRIAGE-02",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "donor-without-recipient",
+      "description": "Potential donor with no recipient details: the laboratory cannot pair the sample. Expect usually-not-appropriate (score 3), query-referrer, with the donor-without-recipient-details flag.",
+      "state": {
+        "subject": {
+          "familyName": "Brennan",
+          "givenNames": "Aoife",
+          "previousName": "",
+          "birthDate": "1978-09-23",
+          "sex": "female",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0202",
+          "medicalRecordNumber": "H201011",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr A Rahman",
+          "clinicianRole": "haematologist",
+          "clinicianEmail": "a.rahman@example.org",
+          "department": "Haematology",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": "bmt.reports@example.org"
+        },
+        "request": {
+          "subjectRole": "potential-donor",
+          "donorType": "matched-sibling",
+          "hlaTypingResolution": "high",
+          "clinicalDetails": "Full sibling of a recipient with AML; HLA typing to assess donor suitability."
+        },
+        "recipient": {
+          "recipientFamilyName": "",
+          "recipientGivenNames": "",
+          "recipientMedicalRecordNumber": "",
+          "recipientBirthDate": "",
+          "relationshipToRecipient": ""
+        },
+        "urgency": {
+          "urgentTesting": false,
+          "urgentTestingReason": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 3,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "edtaPurpleVolumeMl": 10,
+          "edtaPinkVolumeMl": 6,
+          "clottedRedVolumeMl": null,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratoryRecipientIdentifier": "",
+          "laboratoryDonorIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 3,
+        "appropriatenessBand": "usually-not-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 90,
+        "triageTier": "routine",
+        "targetTimeframe": "10 working days (local policy)",
+        "requiredSamplesSummary": "10 mL EDTA (purple) + 6 mL EDTA (pink, hand-labelled)",
+        "subjectRole": "potential-donor",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-01",
+            "axis": "appropriateness",
+            "category": "donor-without-recipient",
+            "description": "Potential donor with no recipient details: the laboratory cannot pair or interpret the sample."
+          },
+          {
+            "ruleId": "R-COMP-RECIPIENT",
+            "axis": "completeness",
+            "category": "recipient",
+            "description": "Missing: linked recipient (name, record number, relationship) (weight 10)."
+          },
+          {
+            "ruleId": "R-TRIAGE-02",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-DONOR-NO-RECIPIENT-001",
+            "category": "donor-without-recipient-details",
+            "priority": "high",
+            "description": "Potential donor with no recipient name and record number.",
+            "suggestedAction": "Give the recipient name, record number and relationship so the laboratory can pair the samples."
+          }
+        ]
+      }
+    },
+    {
+      "name": "unrelated-volunteer-with-relationship",
+      "description": "Donor type unrelated volunteer, yet a relationship to the recipient is given. Expect may-be-appropriate (score 5), with the other flag.",
+      "state": {
+        "subject": {
+          "familyName": "Brennan",
+          "givenNames": "Aoife",
+          "previousName": "",
+          "birthDate": "1978-09-23",
+          "sex": "female",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0202",
+          "medicalRecordNumber": "H201011",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr A Rahman",
+          "clinicianRole": "haematologist",
+          "clinicianEmail": "a.rahman@example.org",
+          "department": "Haematology",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": "bmt.reports@example.org"
+        },
+        "request": {
+          "subjectRole": "potential-donor",
+          "donorType": "unrelated-volunteer",
+          "hlaTypingResolution": "high",
+          "clinicalDetails": "Full sibling of a recipient with AML; HLA typing to assess donor suitability."
+        },
+        "recipient": {
+          "recipientFamilyName": "Brennan",
+          "recipientGivenNames": "Tomas",
+          "recipientMedicalRecordNumber": "H201010",
+          "recipientBirthDate": "1975-04-11",
+          "relationshipToRecipient": "Sister"
+        },
+        "urgency": {
+          "urgentTesting": false,
+          "urgentTestingReason": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 3,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "edtaPurpleVolumeMl": 10,
+          "edtaPinkVolumeMl": 6,
+          "clottedRedVolumeMl": null,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratoryRecipientIdentifier": "",
+          "laboratoryDonorIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 5,
+        "appropriatenessBand": "may-be-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "10 working days (local policy)",
+        "requiredSamplesSummary": "10 mL EDTA (purple) + 6 mL EDTA (pink, hand-labelled)",
+        "subjectRole": "potential-donor",
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-03",
+            "axis": "appropriateness",
+            "category": "unrelated-with-relationship",
+            "description": "Donor type is unrelated volunteer but a relationship to the recipient is given."
+          },
+          {
+            "ruleId": "R-TRIAGE-02",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-UNRELATED-RELATIONSHIP-001",
+            "category": "other",
+            "priority": "low",
+            "description": "Donor type is unrelated volunteer but a relationship to the recipient is given.",
+            "suggestedAction": "Correct the donor type or clear the relationship."
+          }
+        ]
+      }
+    },
+    {
+      "name": "urgent-no-reason-no-details",
+      "description": "Urgent request with no reason, no clinical details and no ethnicity. Expect may-be-appropriate (score 5), urgent, query-referrer, with urgent-without-reason, no-clinical-details and missing-ethnicity flags.",
+      "state": {
+        "subject": {
+          "familyName": "Brennan",
+          "givenNames": "Tomas",
+          "previousName": "",
+          "birthDate": "1975-04-11",
+          "sex": "male",
+          "ethnicity": "",
+          "nationalHealthIdentifier": "900 000 0201",
+          "medicalRecordNumber": "H201010",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr A Rahman",
+          "clinicianRole": "haematologist",
+          "clinicianEmail": "a.rahman@example.org",
+          "department": "Haematology",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": "bmt.reports@example.org"
+        },
+        "request": {
+          "subjectRole": "hsct-recipient",
+          "donorType": "",
+          "hlaTypingResolution": "high",
+          "clinicalDetails": ""
+        },
+        "recipient": {
+          "recipientFamilyName": "",
+          "recipientGivenNames": "",
+          "recipientMedicalRecordNumber": "",
+          "recipientBirthDate": "",
+          "relationshipToRecipient": ""
+        },
+        "urgency": {
+          "urgentTesting": true,
+          "urgentTestingReason": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 3,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "edtaPurpleVolumeMl": 18,
+          "edtaPinkVolumeMl": 6,
+          "clottedRedVolumeMl": 6,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratoryRecipientIdentifier": "",
+          "laboratoryDonorIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 5,
+        "appropriatenessBand": "may-be-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 75,
+        "triageTier": "urgent",
+        "targetTimeframe": "2 working days (local policy)",
+        "requiredSamplesSummary": "18 mL EDTA (purple) + 6 mL EDTA (pink, hand-labelled) + 6 mL clotted (red)",
+        "subjectRole": "hsct-recipient",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-02",
+            "axis": "appropriateness",
+            "category": "no-clinical-details",
+            "description": "No clinical details: the laboratory cannot judge the request."
+          },
+          {
+            "ruleId": "R-COMP-ETHNICITY",
+            "axis": "completeness",
+            "category": "ethnicity",
+            "description": "Missing: ethnicity (allele frequencies differ by population) (weight 10)."
+          },
+          {
+            "ruleId": "R-COMP-CLINICAL",
+            "axis": "completeness",
+            "category": "clinical",
+            "description": "Missing: clinical details (weight 15)."
+          },
+          {
+            "ruleId": "R-TRIAGE-01",
+            "axis": "triage",
+            "category": "urgent",
+            "description": "Urgent testing requested: telephone the laboratory."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-URGENT-REASON-001",
+            "category": "urgent-without-reason",
+            "priority": "low",
+            "description": "Urgent testing requested without a reason.",
+            "suggestedAction": "Give the reason and telephone the laboratory so it can prioritize."
+          },
+          {
+            "flagId": "F-ETHNICITY-001",
+            "category": "missing-ethnicity",
+            "priority": "low",
+            "description": "Ethnicity is blank; allele frequencies differ by population.",
+            "suggestedAction": "Record the self-described ethnicity."
+          },
+          {
+            "flagId": "F-NO-DETAILS-001",
+            "category": "no-clinical-details",
+            "priority": "medium",
+            "description": "No clinical details were given.",
+            "suggestedAction": "Give the disease and the indication for transplant or donation."
+          }
+        ]
+      }
+    },
+    {
+      "name": "insufficient-volumes",
+      "description": "Recipient sample with the purple EDTA at 10 mL and no clotted tube, below the 18 mL and 6 mL required. Expect caution, query-referrer, with the sample-volume-insufficient flag.",
+      "state": {
+        "subject": {
+          "familyName": "Brennan",
+          "givenNames": "Tomas",
+          "previousName": "",
+          "birthDate": "1975-04-11",
+          "sex": "male",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0201",
+          "medicalRecordNumber": "H201010",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr A Rahman",
+          "clinicianRole": "haematologist",
+          "clinicianEmail": "a.rahman@example.org",
+          "department": "Haematology",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": "bmt.reports@example.org"
+        },
+        "request": {
+          "subjectRole": "hsct-recipient",
+          "donorType": "",
+          "hlaTypingResolution": "high",
+          "clinicalDetails": "Acute myeloid leukaemia in first remission; allogeneic HSCT planned."
+        },
+        "recipient": {
+          "recipientFamilyName": "",
+          "recipientGivenNames": "",
+          "recipientMedicalRecordNumber": "",
+          "recipientBirthDate": "",
+          "relationshipToRecipient": ""
+        },
+        "urgency": {
+          "urgentTesting": false,
+          "urgentTestingReason": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 3,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "edtaPurpleVolumeMl": 10,
+          "edtaPinkVolumeMl": 6,
+          "clottedRedVolumeMl": null,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratoryRecipientIdentifier": "",
+          "laboratoryDonorIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "identitySafetyBand": "caution",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "10 working days (local policy)",
+        "requiredSamplesSummary": "18 mL EDTA (purple) + 6 mL EDTA (pink, hand-labelled) + 6 mL clotted (red)",
+        "subjectRole": "hsct-recipient",
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-ID-VOL-01",
+            "axis": "identity",
+            "category": "volume",
+            "description": "Volume below the requirement for this role: purple EDTA, red clotted."
+          },
+          {
+            "ruleId": "R-TRIAGE-02",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-VOLUME-001",
+            "category": "sample-volume-insufficient",
+            "priority": "medium",
+            "description": "Recorded volume is below the requirement for this role: purple EDTA, red clotted.",
+            "suggestedAction": "Send the full volumes; the laboratory cannot type from an insufficient sample."
+          }
+        ]
+      }
+    },
+    {
+      "name": "too-few-identifiers-reject",
+      "description": "Recipient sample whose label carries two identifiers, with form details not confirmed to match. Expect reject-risk, reject, with the identity-mismatch-risk flag.",
+      "state": {
+        "subject": {
+          "familyName": "Brennan",
+          "givenNames": "Tomas",
+          "previousName": "",
+          "birthDate": "1975-04-11",
+          "sex": "male",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0201",
+          "medicalRecordNumber": "H201010",
+          "address": "",
+          "postcode": ""
+        },
+        "referrer": {
+          "clinicianName": "Dr A Rahman",
+          "clinicianRole": "haematologist",
+          "clinicianEmail": "a.rahman@example.org",
+          "department": "Haematology",
+          "organization": "Example General Hospital",
+          "copyOfReportTo": "",
+          "reportEmail": "bmt.reports@example.org"
+        },
+        "request": {
+          "subjectRole": "hsct-recipient",
+          "donorType": "",
+          "hlaTypingResolution": "high",
+          "clinicalDetails": "Acute myeloid leukaemia in first remission; allogeneic HSCT planned."
+        },
+        "recipient": {
+          "recipientFamilyName": "",
+          "recipientGivenNames": "",
+          "recipientMedicalRecordNumber": "",
+          "recipientBirthDate": "",
+          "relationshipToRecipient": ""
+        },
+        "urgency": {
+          "urgentTesting": false,
+          "urgentTestingReason": ""
+        },
+        "requester": {
+          "requestedBySignedAt": "2026-09-01T09:30",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "J Okoye",
+          "sampleCollectedAt": "2026-09-01T10:15",
+          "identifiersOnSampleCount": 2,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": false,
+          "edtaPurpleVolumeMl": 18,
+          "edtaPinkVolumeMl": 6,
+          "clottedRedVolumeMl": 6,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratoryRecipientIdentifier": "",
+          "laboratoryDonorIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "identitySafetyBand": "reject-risk",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "10 working days (local policy)",
+        "requiredSamplesSummary": "18 mL EDTA (purple) + 6 mL EDTA (pink, hand-labelled) + 6 mL clotted (red)",
+        "subjectRole": "hsct-recipient",
+        "recommendation": "reject",
+        "recommendationLabel": "Reject",
+        "firedRules": [
+          {
+            "ruleId": "R-ID-3PT-01",
+            "axis": "identity",
+            "category": "identifiers",
+            "description": "Fewer than 3 identifiers on the sample or the form: samples not labelled correctly are discarded."
+          },
+          {
+            "ruleId": "R-ID-MATCH-01",
+            "axis": "identity",
+            "category": "match",
+            "description": "Match between sample and form details not confirmed."
+          },
+          {
+            "ruleId": "R-TRIAGE-02",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-IDENTITY-001",
+            "category": "identity-mismatch-risk",
+            "priority": "high",
+            "description": "Fewer than 3 identifiers on the sample or form: the sample is at risk of being discarded.",
+            "suggestedAction": "Re-label the sample and form with at least 3 matching identifiers."
+          }
+        ]
+      }
+    }
+  ]
+}

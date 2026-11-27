@@ -1,0 +1,27 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medical_renal_living_donor_request_test
+
+syntax = "proto3";
+
+package form_examples.medical_renal_living_donor_request;
+
+enum MedicalRenalLivingDonorRequestTestTestCodeEnum {
+  TESTCODE_UNSPECIFIED = 0;
+  TESTCODE_LIVING_DONOR_FULL_CROSSMATCH = 1;  // living-donor-full-crossmatch
+  TESTCODE_LIVING_DONOR_VIRTUAL_CROSSMATCH = 2;  // living-donor-virtual-crossmatch
+  TESTCODE_LIVING_DONOR_MATCH_GRADE = 3;  // living-donor-match-grade
+  TESTCODE_ALTRUISTIC_DONOR = 4;  // altruistic-donor
+  TESTCODE_DAY_OF_TRANSPLANT_SAMPLES = 5;  // day-of-transplant-samples
+  TESTCODE_ABO_TITRES_ONLY = 6;  // abo-titres-only
+  TESTCODE_RED_CELL_ANTIBODY_FOLLOW_UP = 7;  // red-cell-antibody-follow-up
+}
+
+message MedicalRenalLivingDonorRequestTest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string request_id = 5;  // UUID — uuid
+  MedicalRenalLivingDonorRequestTestTestCodeEnum test_code = 6;  // VARCHAR(60)
+  string test_detail = 7;  // VARCHAR(255) — max 255 chars
+}

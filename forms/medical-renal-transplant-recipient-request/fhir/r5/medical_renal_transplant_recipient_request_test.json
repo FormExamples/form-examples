@@ -1,0 +1,84 @@
+{
+  "resourceType": "Observation",
+  "id": "577350af-b221-5718-8af4-5704450237c7",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+        "code": "medical_renal_transplant_recipient_request_test",
+        "display": "Medical Renal Transplant Recipient Request Test"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/7a7d4711-da1e-5160-a5d3-bc100b7fbc4a"
+  },
+  "encounter": {
+    "reference": "Encounter/accabb62-22ce-5614-bd36-0d06fb965241"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+            "code": "test_code",
+            "display": "Test Code"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-renal-transplant-recipient-request:test_code",
+            "code": "list-registration-first-typing-and-retyping",
+            "display": "List-Registration-First-Typing-And-Retyping"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+            "code": "test_detail",
+            "display": "Test Detail"
+          }
+        ]
+      },
+      "valueString": "Example Test Detail"
+    }
+  ]
+}

@@ -1,0 +1,377 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: patient
+openapi: 3.1.0
+info:
+  title: Medical Renal Transplant Recipient Request — Patient
+  version: 1.0.0
+  description: Transplant recipient (patient).
+x-namespace:
+  form: medical-renal-transplant-recipient-request
+  apiPrefix: /api/medical-renal-transplant-recipient-request/
+  sqlSchema: medical_renal_transplant_recipient_request
+  xmlNamespace: https://formexamples.github.io/medical-renal-transplant-recipient-request/xml
+tags:
+  - name: medical-renal-transplant-recipient-request
+    description: Medical Renal Transplant Recipient Request form
+paths:
+  /api/medical-renal-transplant-recipient-request/patients:
+    get:
+      summary: List Patient records
+      tags: [medical-renal-transplant-recipient-request]
+      operationId: listPatient
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of Patient records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Patient"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new Patient
+      tags: [medical-renal-transplant-recipient-request]
+      operationId: createPatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "200":
+          description: The newly created Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/medical-renal-transplant-recipient-request/patients/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Patient by id
+      tags: [medical-renal-transplant-recipient-request]
+      operationId: getPatient
+      responses:
+        "200":
+          description: The requested Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing Patient
+      tags: [medical-renal-transplant-recipient-request]
+      operationId: updatePatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "200":
+          description: The updated Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing Patient
+      tags: [medical-renal-transplant-recipient-request]
+      operationId: replacePatient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Patient"
+      responses:
+        "200":
+          description: The updated Patient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+        "404":
+          description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a Patient
+      tags: [medical-renal-transplant-recipient-request]
+      operationId: deletePatient
+      responses:
+        "200":
+          description: Patient deleted
+        "404":
+          description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        family_name:
+          type: string
+          maxLength: 255
+          description: Family name (surname).
+        given_names:
+          type: string
+          maxLength: 255
+          description: Given names (forenames).
+        previous_name:
+          type: string
+          maxLength: 255
+          description: Previous name, if any; aids identity matching against historical samples and records.
+        birth_date:
+          type: string
+          format: date
+          description: Birth date.
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - other
+            - unknown
+            - ""
+          description: "Sex recorded for the patient: female, male, other, unknown."
+        ethnicity:
+          type: string
+          maxLength: 100
+          description: Self-described ethnicity; relevant to HLA allele-frequency interpretation.
+        national_health_identifier:
+          type: string
+          maxLength: 40
+          description: National health identifier issued by the patient's health system (for example a national insurance or health-card number), as free text.
+        medical_record_number:
+          type: string
+          maxLength: 40
+          description: Hospital or institution medical record number (hospital number).
+        email:
+          type: [string, 'null']
+          description: Email address.
+        phone:
+          type: [string, 'null']
+          description: Phone number.
+        postal_address_as_full_text:
+          type: [string, 'null']
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: [string, 'null']
+          maxLength: 2
+          description: Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.
+        postcode:
+          type: [string, 'null']
+          description: Postal code, such as for validating the postal address.
+      required:
+        - created_at
+        - updated_at
+        - family_name
+        - given_names
+        - previous_name
+        - birth_date
+        - sex
+        - ethnicity
+        - national_health_identifier
+        - medical_record_number
+      description: Transplant recipient (patient).

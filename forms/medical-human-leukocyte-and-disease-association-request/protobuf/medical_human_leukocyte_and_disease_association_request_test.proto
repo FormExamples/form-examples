@@ -1,0 +1,28 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medical_human_leukocyte_and_disease_association_request_test
+
+syntax = "proto3";
+
+package form_examples.medical_human_leukocyte_and_disease_association_request;
+
+enum MedicalHumanLeukocyteAndDiseaseAssociationRequestTestTestCodeEnum {
+  TESTCODE_UNSPECIFIED = 0;
+  TESTCODE_HLA_A29 = 1;  // hla-a29
+  TESTCODE_HLA_B27 = 2;  // hla-b27
+  TESTCODE_HLA_B51 = 3;  // hla-b51
+  TESTCODE_HLA_B_57_01 = 4;  // hla-b-57-01
+  TESTCODE_HLA_DR15_DQ6 = 5;  // hla-dr15-dq6
+  TESTCODE_HLA_DQ2_DQ8 = 6;  // hla-dq2-dq8
+  TESTCODE_HLA_DQA1_05 = 7;  // hla-dqa1-05
+  TESTCODE_OTHER_HLA_DISEASE_ASSOCIATION = 8;  // other-hla-disease-association
+}
+
+message MedicalHumanLeukocyteAndDiseaseAssociationRequestTest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string request_id = 5;  // UUID — uuid
+  MedicalHumanLeukocyteAndDiseaseAssociationRequestTestTestCodeEnum test_code = 6;  // VARCHAR(60)
+  string test_detail = 7;  // VARCHAR(255) — max 255 chars
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE patient SYSTEM "patient.dtd">
+<patient xmlns="https://formexamples.github.io/medical-renal-transplant-recipient-request/xml">
+<id>7a7d4711-da1e-5160-a5d3-bc100b7fbc4a</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<family_name>Example</family_name>
+<given_names>Example</given_names>
+<previous_name>Example</previous_name>
+<birth_date>2026-01-15</birth_date>
+<sex>female</sex>
+<ethnicity>White British</ethnicity>
+<national_health_identifier></national_health_identifier>
+<medical_record_number></medical_record_number>
+<email>jane.doe@example.com</email>
+<phone>07700900000</phone>
+<postal_address_as_full_text>Example text.</postal_address_as_full_text>
+<country_as_iso_3166_1_alpha_2></country_as_iso_3166_1_alpha_2>
+<postcode>SW1A 1AA</postcode>
+</patient>

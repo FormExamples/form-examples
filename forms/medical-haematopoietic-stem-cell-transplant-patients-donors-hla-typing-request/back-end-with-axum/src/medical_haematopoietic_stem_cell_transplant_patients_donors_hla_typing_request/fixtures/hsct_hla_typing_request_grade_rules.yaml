@@ -1,0 +1,7 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-b4d2e6a81c55"
+  deletedAt: null
+  gradeId: "00000000-0000-4000-8000-b4d2e6a81c54"
+  ruleId: "R-TRIAGE-02"
+  axis: "triage"

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_human_leukocyte_and_disease_association_request SYSTEM "medical_human_leukocyte_and_disease_association_request.dtd">
+<medical_human_leukocyte_and_disease_association_request xmlns="https://formexamples.github.io/medical-human-leukocyte-and-disease-association-request/xml">
+<id>257bd20c-9eef-561c-9038-0739d692831d</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>65998191-1f70-5f1b-b3d3-65ea200a9b9d</patient_id>
+<clinician_id>e8019117-53cd-559c-bc47-aaeb1ba432dc</clinician_id>
+<status>draft</status>
+<request_date>2026-01-15</request_date>
+<referrer_department></referrer_department>
+<referrer_organization></referrer_organization>
+<copy_of_report_to></copy_of_report_to>
+<report_email></report_email>
+<clinical_details>Example text.</clinical_details>
+<indication_category>suspected-disease</indication_category>
+<ethnicity>White British</ethnicity>
+<previous_hla_typing_known>true</previous_hla_typing_known>
+<planned_drug>Example text.</planned_drug>
+<urgent_testing>true</urgent_testing>
+<urgent_testing_reason>Example text.</urgent_testing_reason>
+<high_risk_sample>true</high_risk_sample>
+<high_risk_description>Example text.</high_risk_description>
+<requested_by_signed_at>2026-04-09T10:00:00Z</requested_by_signed_at>
+<consent_and_identity_confirmed>true</consent_and_identity_confirmed>
+<sample_collector_name>Example</sample_collector_name>
+<sample_collected_at>2026-04-09T10:00:00Z</sample_collected_at>
+<identifiers_on_sample_count>2</identifiers_on_sample_count>
+<identifiers_on_form_count>2</identifiers_on_form_count>
+<sample_and_form_details_match>true</sample_and_form_details_match>
+<sample_volume_ml>1</sample_volume_ml>
+<samples_other_description>Example text.</samples_other_description>
+<laboratory_sample_number></laboratory_sample_number>
+<laboratory_sample_received_at>2026-04-09T10:00:00Z</laboratory_sample_received_at>
+<laboratory_identifiers_checked_by></laboratory_identifiers_checked_by>
+</medical_human_leukocyte_and_disease_association_request>

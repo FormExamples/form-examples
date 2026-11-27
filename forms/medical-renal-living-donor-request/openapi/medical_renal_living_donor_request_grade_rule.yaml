@@ -1,0 +1,346 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medical_renal_living_donor_request_grade_rule
+openapi: 3.1.0
+info:
+  title: Medical Renal Living Donor Request — MedicalRenalLivingDonorRequestGradeRule
+  version: 1.0.0
+  description: Audit trail of every appropriateness / identity / completeness / triage rule that fired for this request.
+x-namespace:
+  form: medical-renal-living-donor-request
+  apiPrefix: /api/medical-renal-living-donor-request/
+  sqlSchema: medical_renal_living_donor_request
+  xmlNamespace: https://formexamples.github.io/medical-renal-living-donor-request/xml
+tags:
+  - name: medical-renal-living-donor-request
+    description: Medical Renal Living Donor Request form
+paths:
+  /api/medical-renal-living-donor-request/medical_renal_living_donor_request_grade_rules:
+    get:
+      summary: List MedicalRenalLivingDonorRequestGradeRule records
+      tags: [medical-renal-living-donor-request]
+      operationId: listMedicalRenalLivingDonorRequestGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of MedicalRenalLivingDonorRequestGradeRule records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalRenalLivingDonorRequestGradeRule"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new MedicalRenalLivingDonorRequestGradeRule
+      tags: [medical-renal-living-donor-request]
+      operationId: createMedicalRenalLivingDonorRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalRenalLivingDonorRequestGradeRule"
+      responses:
+        "200":
+          description: The newly created MedicalRenalLivingDonorRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalRenalLivingDonorRequestGradeRule"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/medical-renal-living-donor-request/medical_renal_living_donor_request_grade_rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalRenalLivingDonorRequestGradeRule by id
+      tags: [medical-renal-living-donor-request]
+      operationId: getMedicalRenalLivingDonorRequestGradeRule
+      responses:
+        "200":
+          description: The requested MedicalRenalLivingDonorRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalRenalLivingDonorRequestGradeRule"
+        "404":
+          description: MedicalRenalLivingDonorRequestGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing MedicalRenalLivingDonorRequestGradeRule
+      tags: [medical-renal-living-donor-request]
+      operationId: updateMedicalRenalLivingDonorRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalRenalLivingDonorRequestGradeRule"
+      responses:
+        "200":
+          description: The updated MedicalRenalLivingDonorRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalRenalLivingDonorRequestGradeRule"
+        "404":
+          description: MedicalRenalLivingDonorRequestGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing MedicalRenalLivingDonorRequestGradeRule
+      tags: [medical-renal-living-donor-request]
+      operationId: replaceMedicalRenalLivingDonorRequestGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalRenalLivingDonorRequestGradeRule"
+      responses:
+        "200":
+          description: The updated MedicalRenalLivingDonorRequestGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalRenalLivingDonorRequestGradeRule"
+        "404":
+          description: MedicalRenalLivingDonorRequestGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a MedicalRenalLivingDonorRequestGradeRule
+      tags: [medical-renal-living-donor-request]
+      operationId: deleteMedicalRenalLivingDonorRequestGradeRule
+      responses:
+        "200":
+          description: MedicalRenalLivingDonorRequestGradeRule deleted
+        "404":
+          description: MedicalRenalLivingDonorRequestGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    MedicalRenalLivingDonorRequestGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (for example R-ID-3PT-01).
+        axis:
+          type: string
+          enum:
+            - appropriateness
+            - identity
+            - completeness
+            - triage
+            - ""
+          description: "Scoring axis: appropriateness, identity, completeness, triage."
+        category:
+          type: string
+          maxLength: 50
+          description: Category the rule relates to.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - rule_id
+        - axis
+        - category
+        - description
+      description: Audit trail of every appropriateness / identity / completeness / triage rule that fired for this request.

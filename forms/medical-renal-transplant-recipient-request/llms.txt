@@ -1,0 +1,27 @@
+# Medical Renal Transplant Recipient Request
+
+> A generic, jurisdiction-neutral **histocompatibility and immunogenetics request** that a transplant or dialysis clinician completes for a **kidney, kidney/pancreas or pancreas transplant recipient**. It asks a transplant immunology laboratory to perform HLA typing, crossmatching, HLA-antibody monitoring, rejection investigation, ABO-incompatible transplant monitoring or red-cell antibody follow-up, and tells the laboratory what it needs to interpret the result: organ required, sensitization history (transplants, transfusions, pregnancies), clinical information, mode of dialysis and dialysis unit.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Axum JSON-API back-end](back-end-with-axum/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-7a1c0e3b5d25"
+  deletedAt: null
+  requestId: "00000000-0000-4000-8000-7a1c0e3b5d23"
+  appropriatenessScore: 8
+  appropriatenessBand: "usually-appropriate"
+  identitySafetyBand: "ok"
+  completenessPercent: 80
+  triageTier: "routine"
+  recommendation: "accept"

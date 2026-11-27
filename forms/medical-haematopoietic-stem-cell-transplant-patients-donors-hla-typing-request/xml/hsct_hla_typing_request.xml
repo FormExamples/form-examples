@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hsct_hla_typing_request SYSTEM "hsct_hla_typing_request.dtd">
+<hsct_hla_typing_request xmlns="https://formexamples.github.io/medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request/xml">
+<id>7328c098-ca16-5dce-bee9-e8db909debf3</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<subject_id>079f5a81-efae-5d02-b4ca-fa8e046f9a19</subject_id>
+<clinician_id>94476f5c-3c2a-500a-8aaf-4006a3c7b389</clinician_id>
+<status>draft</status>
+<request_date>2026-01-15</request_date>
+<subject_role>hsct-recipient</subject_role>
+<donor_type>matched-sibling</donor_type>
+<hla_typing_resolution>not-specified</hla_typing_resolution>
+<ethnicity>White British</ethnicity>
+<clinical_details>Example text.</clinical_details>
+<referrer_department></referrer_department>
+<referrer_organization></referrer_organization>
+<copy_of_report_to></copy_of_report_to>
+<report_email></report_email>
+<recipient_family_name>Example</recipient_family_name>
+<recipient_given_names>Example</recipient_given_names>
+<recipient_medical_record_number></recipient_medical_record_number>
+<recipient_birth_date>2026-01-15</recipient_birth_date>
+<relationship_to_recipient>Spouse</relationship_to_recipient>
+<urgent_testing>true</urgent_testing>
+<urgent_testing_reason>Example text.</urgent_testing_reason>
+<requested_by_signed_at>2026-04-09T10:00:00Z</requested_by_signed_at>
+<consent_and_identity_confirmed>true</consent_and_identity_confirmed>
+<sample_collector_name>Example</sample_collector_name>
+<sample_collected_at>2026-04-09T10:00:00Z</sample_collected_at>
+<identifiers_on_sample_count>2</identifiers_on_sample_count>
+<identifiers_on_form_count>2</identifiers_on_form_count>
+<sample_and_form_details_match>true</sample_and_form_details_match>
+<edta_purple_volume_ml>1</edta_purple_volume_ml>
+<edta_pink_volume_ml>1</edta_pink_volume_ml>
+<clotted_red_volume_ml>1</clotted_red_volume_ml>
+<samples_other_description>Example text.</samples_other_description>
+<laboratory_recipient_identifier></laboratory_recipient_identifier>
+<laboratory_donor_identifier></laboratory_donor_identifier>
+<laboratory_sample_number></laboratory_sample_number>
+<laboratory_sample_received_at>2026-04-09T10:00:00Z</laboratory_sample_received_at>
+<laboratory_identifiers_checked_by></laboratory_identifiers_checked_by>
+</hsct_hla_typing_request>

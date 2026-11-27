@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_renal_living_donor_request_grade_flag SYSTEM "medical_renal_living_donor_request_grade_flag.dtd">
+<medical_renal_living_donor_request_grade_flag xmlns="https://formexamples.github.io/medical-renal-living-donor-request/xml">
+<id>c51b3d02-a7e8-56ad-87e9-efda6e465847</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<grade_id>bbaae2e8-7e94-5365-8726-e114134b225a</grade_id>
+<flag_id>3126cc5a-65ff-57f1-8848-3344df48e19b</flag_id>
+<category>identity-mismatch-risk</category>
+<priority>low</priority>
+<description>Example text.</description>
+<suggested_action></suggested_action>
+</medical_renal_living_donor_request_grade_flag>

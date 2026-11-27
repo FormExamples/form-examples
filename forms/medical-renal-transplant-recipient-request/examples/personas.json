@@ -1,0 +1,785 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "routine-list-registration-complete",
+      "description": "Well-formed routine request: first typing and re-typing plus routine transplant-list antibody monitoring, sensitization history answered (none), ABO known, three or more identifiers matching, consent confirmed. Expect usually-appropriate, ok, routine, accept.",
+      "state": {
+        "recipient": {
+          "familyName": "Fenwick",
+          "givenNames": "Harold",
+          "previousName": "",
+          "birthDate": "1968-03-14",
+          "sex": "male",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0001",
+          "medicalRecordNumber": "H123456",
+          "address": "",
+          "postcode": ""
+        },
+        "history": {
+          "organRequired": "kidney",
+          "previousTransplantCount": 0,
+          "previousTransplantDates": "",
+          "transfusionCount": 0,
+          "transfusionDates": "",
+          "pregnancyCount": 0,
+          "pregnancyDates": ""
+        },
+        "clinical": {
+          "autoimmuneDisease": false,
+          "virologyRisk": false,
+          "immunosuppression": "",
+          "clinicalInformation": "",
+          "recipientAboGroup": "a",
+          "dialysisMode": "unit-haemodialysis",
+          "dialysisUnitName": "Unit 1"
+        },
+        "tests": {
+          "listRegistrationFirstTypingAndRetyping": true,
+          "listRegistrationReturningToList": false,
+          "listRegistrationOther": false,
+          "deceasedDonorFullCrossmatch": false,
+          "deceasedDonorDayOfTransplant": false,
+          "livingDonorFullCrossmatch": false,
+          "livingDonorDayOfTransplant": false,
+          "livingDonorVirtualCrossmatch": false,
+          "livingDonorMatchGrade": false,
+          "livingDonorAboTitresOnly": false,
+          "autologousCrossmatch": false,
+          "hlaMonitoringRoutineTransplantList": true,
+          "hlaMonitoringRoutinePostTransplant": false,
+          "hlaMonitoringPostTransfusion": false,
+          "hlaRejectionInvestigation": false,
+          "aboIncompatibleMonitoring": false,
+          "redCellAntibodyFollowUp": false,
+          "testDetail": "",
+          "urgentTesting": false,
+          "urgentTestingReason": "",
+          "dfppStatus": "",
+          "postTransfusionDatesAndNumber": "",
+          "donorReference": ""
+        },
+        "requester": {
+          "clinicianName": "Dr P Anand",
+          "clinicianRole": "nephrologist",
+          "clinicianEmail": "p.anand@example.org",
+          "transplantCentreName": "Example Transplant Centre",
+          "requestedBySignedAt": "2026-09-01T10:00",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "Nurse A Patel",
+          "sampleCollectedAt": "2026-09-01T09:30",
+          "identifiersOnSampleCount": 4,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "samplesEdtaPurpleCount": 1,
+          "samplesEdtaPinkHandLabelledCount": 1,
+          "samplesSerumCount": 2
+        },
+        "lab": {
+          "laboratoryDonorIdentifier": "",
+          "laboratoryRecipientIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "5 working days (local policy)",
+        "requiredSamplesSummary": "10 mL EDTA; 6 mL EDTA hand-labelled; 12 mL serum",
+        "selectedTests": [
+          "list-registration-first-typing-and-retyping",
+          "hla-antibody-monitoring-routine-transplant-list"
+        ],
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-TRIAGE-04",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "day-of-transplant-stat",
+      "description": "Deceased-donor day-of-transplant crossmatch for a previously transfused recipient: stat triage, day-of-transplant and sensitised flags.",
+      "state": {
+        "recipient": {
+          "familyName": "Fenwick",
+          "givenNames": "Harold",
+          "previousName": "",
+          "birthDate": "1968-03-14",
+          "sex": "male",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0001",
+          "medicalRecordNumber": "H123456",
+          "address": "",
+          "postcode": ""
+        },
+        "history": {
+          "organRequired": "kidney",
+          "previousTransplantCount": 1,
+          "previousTransplantDates": "2019",
+          "transfusionCount": 2,
+          "transfusionDates": "2018",
+          "pregnancyCount": 0,
+          "pregnancyDates": ""
+        },
+        "clinical": {
+          "autoimmuneDisease": false,
+          "virologyRisk": false,
+          "immunosuppression": "",
+          "clinicalInformation": "",
+          "recipientAboGroup": "o",
+          "dialysisMode": "unit-haemodialysis",
+          "dialysisUnitName": ""
+        },
+        "tests": {
+          "listRegistrationFirstTypingAndRetyping": false,
+          "listRegistrationReturningToList": false,
+          "listRegistrationOther": false,
+          "deceasedDonorFullCrossmatch": true,
+          "deceasedDonorDayOfTransplant": true,
+          "livingDonorFullCrossmatch": false,
+          "livingDonorDayOfTransplant": false,
+          "livingDonorVirtualCrossmatch": false,
+          "livingDonorMatchGrade": false,
+          "livingDonorAboTitresOnly": false,
+          "autologousCrossmatch": false,
+          "hlaMonitoringRoutineTransplantList": false,
+          "hlaMonitoringRoutinePostTransplant": false,
+          "hlaMonitoringPostTransfusion": false,
+          "hlaRejectionInvestigation": false,
+          "aboIncompatibleMonitoring": false,
+          "redCellAntibodyFollowUp": false,
+          "testDetail": "",
+          "urgentTesting": false,
+          "urgentTestingReason": "",
+          "dfppStatus": "",
+          "postTransfusionDatesAndNumber": "",
+          "donorReference": "D-4471"
+        },
+        "requester": {
+          "clinicianName": "Dr P Anand",
+          "clinicianRole": "nephrologist",
+          "clinicianEmail": "p.anand@example.org",
+          "transplantCentreName": "Example Transplant Centre",
+          "requestedBySignedAt": "2026-09-01T10:00",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "Nurse A Patel",
+          "sampleCollectedAt": "2026-09-01T09:30",
+          "identifiersOnSampleCount": 4,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "samplesEdtaPurpleCount": 1,
+          "samplesEdtaPinkHandLabelledCount": 1,
+          "samplesSerumCount": 2
+        },
+        "lab": {
+          "laboratoryDonorIdentifier": "",
+          "laboratoryRecipientIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "stat",
+        "targetTimeframe": "same day, hours (local policy)",
+        "requiredSamplesSummary": "30 mL EDTA; 12 mL serum",
+        "selectedTests": [
+          "deceased-donor-full-crossmatch",
+          "deceased-donor-day-of-transplant"
+        ],
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-TRIAGE-01",
+            "axis": "triage",
+            "category": "day-of-transplant",
+            "description": "Day-of-transplant test: a donor organ or transplant is imminent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-DAY-OF-TRANSPLANT-001",
+            "category": "day-of-transplant-stat",
+            "priority": "high",
+            "description": "Day-of-transplant crossmatch requested.",
+            "suggestedAction": "Telephone the laboratory now to confirm the sample is expected, and transport with minimum delay."
+          },
+          {
+            "flagId": "F-SENSITISED-001",
+            "category": "sensitised-recipient",
+            "priority": "medium",
+            "description": "Recipient has a sensitizing event (previous transplant, transfusion or pregnancy).",
+            "suggestedAction": "Expect HLA antibodies; allow time for antibody characterization and unacceptable-mismatch assignment."
+          }
+        ]
+      }
+    },
+    {
+      "name": "virtual-crossmatch-without-antibody-monitoring",
+      "description": "Living-donor virtual crossmatch with no HLA-antibody monitoring requested: appropriateness capped at may-be-appropriate with the virtual-crossmatch flag.",
+      "state": {
+        "recipient": {
+          "familyName": "Fenwick",
+          "givenNames": "Harold",
+          "previousName": "",
+          "birthDate": "1968-03-14",
+          "sex": "male",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0001",
+          "medicalRecordNumber": "H123456",
+          "address": "",
+          "postcode": ""
+        },
+        "history": {
+          "organRequired": "kidney-pancreas",
+          "previousTransplantCount": 0,
+          "previousTransplantDates": "",
+          "transfusionCount": 0,
+          "transfusionDates": "",
+          "pregnancyCount": 1,
+          "pregnancyDates": "2012"
+        },
+        "clinical": {
+          "autoimmuneDisease": false,
+          "virologyRisk": false,
+          "immunosuppression": "",
+          "clinicalInformation": "",
+          "recipientAboGroup": "b",
+          "dialysisMode": "pre-dialysis",
+          "dialysisUnitName": ""
+        },
+        "tests": {
+          "listRegistrationFirstTypingAndRetyping": false,
+          "listRegistrationReturningToList": false,
+          "listRegistrationOther": false,
+          "deceasedDonorFullCrossmatch": false,
+          "deceasedDonorDayOfTransplant": false,
+          "livingDonorFullCrossmatch": false,
+          "livingDonorDayOfTransplant": false,
+          "livingDonorVirtualCrossmatch": true,
+          "livingDonorMatchGrade": false,
+          "livingDonorAboTitresOnly": false,
+          "autologousCrossmatch": false,
+          "hlaMonitoringRoutineTransplantList": false,
+          "hlaMonitoringRoutinePostTransplant": false,
+          "hlaMonitoringPostTransfusion": false,
+          "hlaRejectionInvestigation": false,
+          "aboIncompatibleMonitoring": false,
+          "redCellAntibodyFollowUp": false,
+          "testDetail": "",
+          "urgentTesting": false,
+          "urgentTestingReason": "",
+          "dfppStatus": "",
+          "postTransfusionDatesAndNumber": "",
+          "donorReference": ""
+        },
+        "requester": {
+          "clinicianName": "Dr P Anand",
+          "clinicianRole": "nephrologist",
+          "clinicianEmail": "p.anand@example.org",
+          "transplantCentreName": "Example Transplant Centre",
+          "requestedBySignedAt": "2026-09-01T10:00",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "Nurse A Patel",
+          "sampleCollectedAt": "2026-09-01T09:30",
+          "identifiersOnSampleCount": 4,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "samplesEdtaPurpleCount": 1,
+          "samplesEdtaPinkHandLabelledCount": 1,
+          "samplesSerumCount": 2
+        },
+        "lab": {
+          "laboratoryDonorIdentifier": "",
+          "laboratoryRecipientIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 5,
+        "appropriatenessBand": "may-be-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "5 working days (local policy)",
+        "requiredSamplesSummary": "10 mL EDTA; 6 mL EDTA hand-labelled; 12 mL serum; 6 mL EDTA (potential ABO titres)",
+        "selectedTests": [
+          "living-donor-virtual-crossmatch"
+        ],
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-01",
+            "axis": "appropriateness",
+            "category": "virtual-crossmatch",
+            "description": "Virtual crossmatch or match grade relies on a current HLA-antibody profile; none is requested."
+          },
+          {
+            "ruleId": "R-TRIAGE-04",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-VIRTUAL-XM-001",
+            "category": "virtual-crossmatch-without-antibody-profile",
+            "priority": "medium",
+            "description": "Virtual crossmatch or match grade requested without a current HLA-antibody monitoring request.",
+            "suggestedAction": "Confirm with the laboratory that a recent HLA-antibody profile exists for this recipient."
+          },
+          {
+            "flagId": "F-SENSITISED-001",
+            "category": "sensitised-recipient",
+            "priority": "medium",
+            "description": "Recipient has a sensitizing event (previous transplant, transfusion or pregnancy).",
+            "suggestedAction": "Expect HLA antibodies; allow time for antibody characterization and unacceptable-mismatch assignment."
+          }
+        ]
+      }
+    },
+    {
+      "name": "rejection-investigation-no-transplant",
+      "description": "Rejection investigation for a recipient on haemodialysis with no transplant recorded: usually-not-appropriate, query the referrer.",
+      "state": {
+        "recipient": {
+          "familyName": "Fenwick",
+          "givenNames": "Harold",
+          "previousName": "",
+          "birthDate": "1968-03-14",
+          "sex": "male",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0001",
+          "medicalRecordNumber": "H123456",
+          "address": "",
+          "postcode": ""
+        },
+        "history": {
+          "organRequired": "kidney",
+          "previousTransplantCount": 0,
+          "previousTransplantDates": "",
+          "transfusionCount": 0,
+          "transfusionDates": "",
+          "pregnancyCount": 0,
+          "pregnancyDates": ""
+        },
+        "clinical": {
+          "autoimmuneDisease": false,
+          "virologyRisk": false,
+          "immunosuppression": "",
+          "clinicalInformation": "",
+          "recipientAboGroup": "a",
+          "dialysisMode": "unit-haemodialysis",
+          "dialysisUnitName": ""
+        },
+        "tests": {
+          "listRegistrationFirstTypingAndRetyping": false,
+          "listRegistrationReturningToList": false,
+          "listRegistrationOther": false,
+          "deceasedDonorFullCrossmatch": false,
+          "deceasedDonorDayOfTransplant": false,
+          "livingDonorFullCrossmatch": false,
+          "livingDonorDayOfTransplant": false,
+          "livingDonorVirtualCrossmatch": false,
+          "livingDonorMatchGrade": false,
+          "livingDonorAboTitresOnly": false,
+          "autologousCrossmatch": false,
+          "hlaMonitoringRoutineTransplantList": false,
+          "hlaMonitoringRoutinePostTransplant": false,
+          "hlaMonitoringPostTransfusion": false,
+          "hlaRejectionInvestigation": true,
+          "aboIncompatibleMonitoring": false,
+          "redCellAntibodyFollowUp": false,
+          "testDetail": "",
+          "urgentTesting": false,
+          "urgentTestingReason": "",
+          "dfppStatus": "",
+          "postTransfusionDatesAndNumber": "",
+          "donorReference": ""
+        },
+        "requester": {
+          "clinicianName": "Dr P Anand",
+          "clinicianRole": "nephrologist",
+          "clinicianEmail": "p.anand@example.org",
+          "transplantCentreName": "Example Transplant Centre",
+          "requestedBySignedAt": "2026-09-01T10:00",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "Nurse A Patel",
+          "sampleCollectedAt": "2026-09-01T09:30",
+          "identifiersOnSampleCount": 4,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "samplesEdtaPurpleCount": 1,
+          "samplesEdtaPinkHandLabelledCount": 1,
+          "samplesSerumCount": 2
+        },
+        "lab": {
+          "laboratoryDonorIdentifier": "",
+          "laboratoryRecipientIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 2,
+        "appropriatenessBand": "usually-not-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "urgent",
+        "targetTimeframe": "3-5 working days (local policy)",
+        "requiredSamplesSummary": "12 mL serum",
+        "selectedTests": [
+          "hla-rejection-investigation"
+        ],
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-02",
+            "axis": "appropriateness",
+            "category": "rejection-investigation",
+            "description": "Rejection investigation requested for a recipient with no transplant recorded."
+          },
+          {
+            "ruleId": "R-TRIAGE-03",
+            "axis": "triage",
+            "category": "rejection",
+            "description": "HLA rejection investigation: prioritized work-up."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "too-few-identifiers-reject",
+      "description": "Sample labelled with only two identifiers, unknown ABO group and unanswered history: identity reject-risk, reject recommendation, urgent without a reason.",
+      "state": {
+        "recipient": {
+          "familyName": "Fenwick",
+          "givenNames": "Harold",
+          "previousName": "",
+          "birthDate": "1968-03-14",
+          "sex": "male",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0001",
+          "medicalRecordNumber": "H123456",
+          "address": "",
+          "postcode": ""
+        },
+        "history": {
+          "organRequired": "kidney",
+          "previousTransplantCount": null,
+          "previousTransplantDates": "",
+          "transfusionCount": null,
+          "transfusionDates": "",
+          "pregnancyCount": null,
+          "pregnancyDates": ""
+        },
+        "clinical": {
+          "autoimmuneDisease": false,
+          "virologyRisk": false,
+          "immunosuppression": "",
+          "clinicalInformation": "",
+          "recipientAboGroup": "unknown",
+          "dialysisMode": "capd",
+          "dialysisUnitName": ""
+        },
+        "tests": {
+          "listRegistrationFirstTypingAndRetyping": false,
+          "listRegistrationReturningToList": false,
+          "listRegistrationOther": false,
+          "deceasedDonorFullCrossmatch": false,
+          "deceasedDonorDayOfTransplant": false,
+          "livingDonorFullCrossmatch": false,
+          "livingDonorDayOfTransplant": false,
+          "livingDonorVirtualCrossmatch": false,
+          "livingDonorMatchGrade": false,
+          "livingDonorAboTitresOnly": false,
+          "autologousCrossmatch": false,
+          "hlaMonitoringRoutineTransplantList": false,
+          "hlaMonitoringRoutinePostTransplant": true,
+          "hlaMonitoringPostTransfusion": false,
+          "hlaRejectionInvestigation": false,
+          "aboIncompatibleMonitoring": false,
+          "redCellAntibodyFollowUp": false,
+          "testDetail": "",
+          "urgentTesting": true,
+          "urgentTestingReason": "",
+          "dfppStatus": "",
+          "postTransfusionDatesAndNumber": "",
+          "donorReference": ""
+        },
+        "requester": {
+          "clinicianName": "Dr P Anand",
+          "clinicianRole": "nephrologist",
+          "clinicianEmail": "p.anand@example.org",
+          "transplantCentreName": "Example Transplant Centre",
+          "requestedBySignedAt": "2026-09-01T10:00",
+          "consentAndIdentityConfirmed": false
+        },
+        "sample": {
+          "sampleCollectorName": "Nurse A Patel",
+          "sampleCollectedAt": "2026-09-01T09:30",
+          "identifiersOnSampleCount": 2,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": false,
+          "samplesEdtaPurpleCount": 1,
+          "samplesEdtaPinkHandLabelledCount": 1,
+          "samplesSerumCount": 2
+        },
+        "lab": {
+          "laboratoryDonorIdentifier": "",
+          "laboratoryRecipientIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "identitySafetyBand": "reject-risk",
+        "completenessPercent": 75,
+        "triageTier": "urgent",
+        "targetTimeframe": "1 working day (local policy)",
+        "requiredSamplesSummary": "12 mL serum",
+        "selectedTests": [
+          "hla-antibody-monitoring-routine-post-transplant"
+        ],
+        "recommendation": "reject",
+        "recommendationLabel": "Reject",
+        "firedRules": [
+          {
+            "ruleId": "R-ID-3PT-01",
+            "axis": "identity",
+            "category": "identifiers",
+            "description": "Fewer than 3 identifiers on the sample or the form: samples not labelled correctly are discarded."
+          },
+          {
+            "ruleId": "R-ID-MATCH-01",
+            "axis": "identity",
+            "category": "match",
+            "description": "Match between sample and form details not confirmed."
+          },
+          {
+            "ruleId": "R-ID-CONSENT-01",
+            "axis": "identity",
+            "category": "consent",
+            "description": "Informed consent and identity verification not confirmed by the requester."
+          },
+          {
+            "ruleId": "R-COMP-SENSITISATION",
+            "axis": "completeness",
+            "category": "sensitisation",
+            "description": "Missing: sensitization counts (transplants, transfusions, pregnancies) (weight 15)."
+          },
+          {
+            "ruleId": "R-COMP-ABO",
+            "axis": "completeness",
+            "category": "abo",
+            "description": "Missing: recipient ABO group (weight 10)."
+          },
+          {
+            "ruleId": "R-TRIAGE-02",
+            "axis": "triage",
+            "category": "urgent",
+            "description": "Urgent testing requested."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-MISSING-ABO-001",
+            "category": "missing-abo-group",
+            "priority": "medium",
+            "description": "Recipient ABO group is unknown or not recorded.",
+            "suggestedAction": "Record the ABO group; ABO compatibility is the first crossmatch gate."
+          },
+          {
+            "flagId": "F-IDENTITY-001",
+            "category": "identity-mismatch-risk",
+            "priority": "high",
+            "description": "Fewer than 3 identifiers on the sample or form: the sample is at risk of being discarded.",
+            "suggestedAction": "Re-label the sample and form with at least 3 matching identifiers."
+          },
+          {
+            "flagId": "F-URGENT-REASON-001",
+            "category": "urgent-without-reason",
+            "priority": "low",
+            "description": "Urgent testing requested without a reason.",
+            "suggestedAction": "Give the reason so the laboratory can prioritize."
+          },
+          {
+            "flagId": "F-SENSITISATION-UNKNOWN-001",
+            "category": "missing-sensitisation-history",
+            "priority": "low",
+            "description": "Sensitization history is incomplete: unanswered is not the same as none.",
+            "suggestedAction": "Enter 0 for none, or the count; leave blank only when unknown."
+          }
+        ]
+      }
+    },
+    {
+      "name": "abo-incompatible-without-dfpp",
+      "description": "ABO-incompatible monitoring with no DFPP status for a failing-transplant recipient: appropriateness capped and the DFPP flag fires.",
+      "state": {
+        "recipient": {
+          "familyName": "Fenwick",
+          "givenNames": "Harold",
+          "previousName": "",
+          "birthDate": "1968-03-14",
+          "sex": "male",
+          "ethnicity": "White British",
+          "nationalHealthIdentifier": "900 000 0001",
+          "medicalRecordNumber": "H123456",
+          "address": "",
+          "postcode": ""
+        },
+        "history": {
+          "organRequired": "kidney",
+          "previousTransplantCount": 1,
+          "previousTransplantDates": "",
+          "transfusionCount": 0,
+          "transfusionDates": "",
+          "pregnancyCount": 0,
+          "pregnancyDates": ""
+        },
+        "clinical": {
+          "autoimmuneDisease": false,
+          "virologyRisk": false,
+          "immunosuppression": "",
+          "clinicalInformation": "",
+          "recipientAboGroup": "o",
+          "dialysisMode": "failing-transplant",
+          "dialysisUnitName": ""
+        },
+        "tests": {
+          "listRegistrationFirstTypingAndRetyping": false,
+          "listRegistrationReturningToList": false,
+          "listRegistrationOther": false,
+          "deceasedDonorFullCrossmatch": false,
+          "deceasedDonorDayOfTransplant": false,
+          "livingDonorFullCrossmatch": false,
+          "livingDonorDayOfTransplant": false,
+          "livingDonorVirtualCrossmatch": false,
+          "livingDonorMatchGrade": false,
+          "livingDonorAboTitresOnly": false,
+          "autologousCrossmatch": false,
+          "hlaMonitoringRoutineTransplantList": false,
+          "hlaMonitoringRoutinePostTransplant": false,
+          "hlaMonitoringPostTransfusion": false,
+          "hlaRejectionInvestigation": false,
+          "aboIncompatibleMonitoring": true,
+          "redCellAntibodyFollowUp": false,
+          "testDetail": "",
+          "urgentTesting": false,
+          "urgentTestingReason": "",
+          "dfppStatus": "",
+          "postTransfusionDatesAndNumber": "",
+          "donorReference": ""
+        },
+        "requester": {
+          "clinicianName": "Dr P Anand",
+          "clinicianRole": "nephrologist",
+          "clinicianEmail": "p.anand@example.org",
+          "transplantCentreName": "Example Transplant Centre",
+          "requestedBySignedAt": "2026-09-01T10:00",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "Nurse A Patel",
+          "sampleCollectedAt": "2026-09-01T09:30",
+          "identifiersOnSampleCount": 4,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "samplesEdtaPurpleCount": 1,
+          "samplesEdtaPinkHandLabelledCount": 1,
+          "samplesSerumCount": 2
+        },
+        "lab": {
+          "laboratoryDonorIdentifier": "",
+          "laboratoryRecipientIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 5,
+        "appropriatenessBand": "may-be-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "5 working days (local policy)",
+        "requiredSamplesSummary": "6 mL EDTA",
+        "selectedTests": [
+          "abo-incompatible-transplant-monitoring"
+        ],
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-04",
+            "axis": "appropriateness",
+            "category": "abo-incompatible",
+            "description": "ABO-incompatible monitoring without a DFPP status."
+          },
+          {
+            "ruleId": "R-TRIAGE-04",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-SENSITISED-001",
+            "category": "sensitised-recipient",
+            "priority": "medium",
+            "description": "Recipient has a sensitizing event (previous transplant, transfusion or pregnancy).",
+            "suggestedAction": "Expect HLA antibodies; allow time for antibody characterization and unacceptable-mismatch assignment."
+          },
+          {
+            "flagId": "F-ABOI-DFPP-001",
+            "category": "abo-incompatible-without-dfpp-status",
+            "priority": "medium",
+            "description": "ABO-incompatible monitoring requested without a DFPP status (pre, post or none).",
+            "suggestedAction": "State whether the sample is pre-DFPP, post-DFPP or no DFPP."
+          }
+        ]
+      }
+    }
+  ]
+}

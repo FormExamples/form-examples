@@ -1,0 +1,75 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medical_renal_living_donor_request
+
+syntax = "proto3";
+
+package form_examples.medical_renal_living_donor_request;
+
+enum MedicalRenalLivingDonorRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_RECEIVED = 3;  // received
+  STATUS_VETTED = 4;  // vetted
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum MedicalRenalLivingDonorRequestDonationPathwayEnum {
+  DONATIONPATHWAY_UNSPECIFIED = 0;
+  DONATIONPATHWAY_DIRECTED = 1;  // directed
+  DONATIONPATHWAY_ALTRUISTIC = 2;  // altruistic
+  DONATIONPATHWAY_PAIRED_EXCHANGE = 3;  // paired-exchange
+}
+
+enum MedicalRenalLivingDonorRequestDonorAboGroupEnum {
+  DONORABOGROUP_UNSPECIFIED = 0;
+  DONORABOGROUP_A = 1;  // a
+  DONORABOGROUP_B = 2;  // b
+  DONORABOGROUP_AB = 3;  // ab
+  DONORABOGROUP_O = 4;  // o
+  DONORABOGROUP_UNKNOWN = 5;  // unknown
+}
+
+enum MedicalRenalLivingDonorRequestRecipientAboGroupEnum {
+  RECIPIENTABOGROUP_UNSPECIFIED = 0;
+  RECIPIENTABOGROUP_A = 1;  // a
+  RECIPIENTABOGROUP_B = 2;  // b
+  RECIPIENTABOGROUP_AB = 3;  // ab
+  RECIPIENTABOGROUP_O = 4;  // o
+  RECIPIENTABOGROUP_UNKNOWN = 5;  // unknown
+}
+
+message MedicalRenalLivingDonorRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string donor_id = 5;  // UUID — uuid
+  string recipient_id = 6;  // UUID — uuid
+  string clinician_id = 7;  // UUID — uuid
+  MedicalRenalLivingDonorRequestStatusEnum status = 8;  // VARCHAR(20)
+  string request_date = 9;  // DATE — iso 8601 date
+  MedicalRenalLivingDonorRequestDonationPathwayEnum donation_pathway = 10;  // VARCHAR(20)
+  string relationship_of_donor_to_recipient = 11;  // VARCHAR(255) — max 255 chars
+  string recipient_transplant_centre_name = 12;  // VARCHAR(255) — max 255 chars
+  MedicalRenalLivingDonorRequestDonorAboGroupEnum donor_abo_group = 13;  // VARCHAR(10)
+  MedicalRenalLivingDonorRequestRecipientAboGroupEnum recipient_abo_group = 14;  // VARCHAR(10)
+  bool urgent_testing = 15;  // BOOLEAN
+  string urgent_testing_reason = 16;  // VARCHAR(500) — max 500 chars
+  string transplant_centre_name = 17;  // VARCHAR(255) — max 255 chars
+  string requested_by_signed_at = 18;  // TIMESTAMPTZ — iso 8601
+  bool consent_and_identity_confirmed = 19;  // BOOLEAN
+  string sample_collector_name = 20;  // VARCHAR(255) — max 255 chars
+  string sample_collected_at = 21;  // TIMESTAMPTZ — iso 8601
+  int32 identifiers_on_sample_count = 22;  // INTEGER
+  int32 identifiers_on_form_count = 23;  // INTEGER
+  bool sample_and_form_details_match = 24;  // BOOLEAN
+  int32 samples_edta_purple_count = 25;  // INTEGER
+  int32 samples_edta_pink_hand_labelled_count = 26;  // INTEGER
+  string samples_other_description = 27;  // VARCHAR(255) — max 255 chars
+  string laboratory_donor_identifier = 28;  // VARCHAR(100) — max 100 chars
+  string laboratory_recipient_identifier = 29;  // VARCHAR(100) — max 100 chars
+  string laboratory_sample_number = 30;  // VARCHAR(100) — max 100 chars
+  string laboratory_sample_received_at = 31;  // TIMESTAMPTZ — iso 8601
+  string laboratory_identifiers_checked_by = 32;  // VARCHAR(255) — max 255 chars
+}

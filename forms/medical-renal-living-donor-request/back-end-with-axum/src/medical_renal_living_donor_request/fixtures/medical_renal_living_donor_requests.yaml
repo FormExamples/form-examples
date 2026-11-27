@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-8b2d1f4c6e34"
+  deletedAt: null
+  donorId: "00000000-0000-4000-8000-8b2d1f4c6e31"
+  recipientId: "00000000-0000-4000-8000-8b2d1f4c6e32"
+  clinicianId: "00000000-0000-4000-8000-8b2d1f4c6e33"
+  status: "draft"
+  donationPathway: "directed"

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_renal_living_donor_request SYSTEM "medical_renal_living_donor_request.dtd">
+<medical_renal_living_donor_request xmlns="https://formexamples.github.io/medical-renal-living-donor-request/xml">
+<id>4a4b0556-d45b-5556-a870-08cef0ba2ae3</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<donor_id>44c0909b-22ea-5d4e-ae51-61aff1f993c3</donor_id>
+<recipient_id>18612999-7847-589d-989c-548b2dad39bf</recipient_id>
+<clinician_id>16338a75-5fd2-50f6-a17b-8660e1012554</clinician_id>
+<status>draft</status>
+<request_date>2026-01-15</request_date>
+<donation_pathway>directed</donation_pathway>
+<relationship_of_donor_to_recipient>Spouse</relationship_of_donor_to_recipient>
+<recipient_transplant_centre_name>Example</recipient_transplant_centre_name>
+<donor_abo_group>a</donor_abo_group>
+<recipient_abo_group>a</recipient_abo_group>
+<urgent_testing>true</urgent_testing>
+<urgent_testing_reason>Example text.</urgent_testing_reason>
+<transplant_centre_name>Example</transplant_centre_name>
+<requested_by_signed_at>2026-04-09T10:00:00Z</requested_by_signed_at>
+<consent_and_identity_confirmed>true</consent_and_identity_confirmed>
+<sample_collector_name>Example</sample_collector_name>
+<sample_collected_at>2026-04-09T10:00:00Z</sample_collected_at>
+<identifiers_on_sample_count>2</identifiers_on_sample_count>
+<identifiers_on_form_count>2</identifiers_on_form_count>
+<sample_and_form_details_match>true</sample_and_form_details_match>
+<samples_edta_purple_count>2</samples_edta_purple_count>
+<samples_edta_pink_hand_labelled_count>2</samples_edta_pink_hand_labelled_count>
+<samples_other_description>Example text.</samples_other_description>
+<laboratory_donor_identifier></laboratory_donor_identifier>
+<laboratory_recipient_identifier></laboratory_recipient_identifier>
+<laboratory_sample_number></laboratory_sample_number>
+<laboratory_sample_received_at>2026-04-09T10:00:00Z</laboratory_sample_received_at>
+<laboratory_identifiers_checked_by></laboratory_identifiers_checked_by>
+</medical_renal_living_donor_request>

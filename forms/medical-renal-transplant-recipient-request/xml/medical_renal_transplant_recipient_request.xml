@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_renal_transplant_recipient_request SYSTEM "medical_renal_transplant_recipient_request.dtd">
+<medical_renal_transplant_recipient_request xmlns="https://formexamples.github.io/medical-renal-transplant-recipient-request/xml">
+<id>accabb62-22ce-5614-bd36-0d06fb965241</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>7a7d4711-da1e-5160-a5d3-bc100b7fbc4a</patient_id>
+<clinician_id>dfa9ce55-1fc2-5847-9483-3d016968b0d4</clinician_id>
+<status>draft</status>
+<request_date>2026-01-15</request_date>
+<organ_required>kidney</organ_required>
+<previous_transplant_count>2</previous_transplant_count>
+<previous_transplant_dates>2026-01-15</previous_transplant_dates>
+<transfusion_count>2</transfusion_count>
+<transfusion_dates>2026-01-15</transfusion_dates>
+<pregnancy_count>2</pregnancy_count>
+<pregnancy_dates>2026-01-15</pregnancy_dates>
+<autoimmune_disease>true</autoimmune_disease>
+<virology_risk>true</virology_risk>
+<immunosuppression></immunosuppression>
+<clinical_information>Example Hospital</clinical_information>
+<recipient_abo_group>a</recipient_abo_group>
+<dialysis_mode>unit-haemodialysis</dialysis_mode>
+<dialysis_unit_name>Example</dialysis_unit_name>
+<urgent_testing>true</urgent_testing>
+<urgent_testing_reason>Example text.</urgent_testing_reason>
+<dfpp_status>pre-dfpp</dfpp_status>
+<post_transfusion_dates_and_number>2026-01-15</post_transfusion_dates_and_number>
+<donor_reference></donor_reference>
+<requested_by_signed_at>2026-04-09T10:00:00Z</requested_by_signed_at>
+<transplant_centre_name>Example</transplant_centre_name>
+<consent_and_identity_confirmed>true</consent_and_identity_confirmed>
+<sample_collector_name>Example</sample_collector_name>
+<sample_collected_at>2026-04-09T10:00:00Z</sample_collected_at>
+<identifiers_on_sample_count>2</identifiers_on_sample_count>
+<identifiers_on_form_count>2</identifiers_on_form_count>
+<sample_and_form_details_match>true</sample_and_form_details_match>
+<samples_edta_purple_count>2</samples_edta_purple_count>
+<samples_edta_pink_hand_labelled_count>2</samples_edta_pink_hand_labelled_count>
+<samples_serum_count>2</samples_serum_count>
+<samples_other_description>Example text.</samples_other_description>
+<laboratory_donor_identifier></laboratory_donor_identifier>
+<laboratory_recipient_identifier></laboratory_recipient_identifier>
+<laboratory_sample_number></laboratory_sample_number>
+<laboratory_sample_received_at>2026-04-09T10:00:00Z</laboratory_sample_received_at>
+<laboratory_identifiers_checked_by></laboratory_identifiers_checked_by>
+</medical_renal_transplant_recipient_request>

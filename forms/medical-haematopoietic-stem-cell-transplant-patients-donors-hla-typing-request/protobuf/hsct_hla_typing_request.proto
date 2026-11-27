@@ -1,0 +1,80 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: hsct_hla_typing_request
+
+syntax = "proto3";
+
+package form_examples.medical_haematopoietic_stem_cell_transplant_patients_donors_hla_typing_request;
+
+enum HsctHlaTypingRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_RECEIVED = 3;  // received
+  STATUS_VETTED = 4;  // vetted
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum HsctHlaTypingRequestSubjectRoleEnum {
+  SUBJECTROLE_UNSPECIFIED = 0;
+  SUBJECTROLE_HSCT_RECIPIENT = 1;  // hsct-recipient
+  SUBJECTROLE_POTENTIAL_DONOR = 2;  // potential-donor
+}
+
+enum HsctHlaTypingRequestDonorTypeEnum {
+  DONORTYPE_UNSPECIFIED = 0;
+  DONORTYPE_MATCHED_SIBLING = 1;  // matched-sibling
+  DONORTYPE_HAPLOIDENTICAL_RELATIVE = 2;  // haploidentical-relative
+  DONORTYPE_OTHER_RELATIVE = 3;  // other-relative
+  DONORTYPE_UNRELATED_VOLUNTEER = 4;  // unrelated-volunteer
+  DONORTYPE_UNKNOWN = 5;  // unknown
+}
+
+enum HsctHlaTypingRequestHlaTypingResolutionEnum {
+  HLATYPINGRESOLUTION_UNSPECIFIED = 0;
+  HLATYPINGRESOLUTION_NOT_SPECIFIED = 1;  // not-specified
+  HLATYPINGRESOLUTION_LOW = 2;  // low
+  HLATYPINGRESOLUTION_HIGH = 3;  // high
+}
+
+message HsctHlaTypingRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string subject_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  HsctHlaTypingRequestStatusEnum status = 7;  // VARCHAR(20)
+  string request_date = 8;  // DATE — iso 8601 date
+  HsctHlaTypingRequestSubjectRoleEnum subject_role = 9;  // VARCHAR(20)
+  HsctHlaTypingRequestDonorTypeEnum donor_type = 10;  // VARCHAR(30)
+  HsctHlaTypingRequestHlaTypingResolutionEnum hla_typing_resolution = 11;  // VARCHAR(20)
+  string ethnicity = 12;  // VARCHAR(100) — max 100 chars
+  string clinical_details = 13;  // VARCHAR(1000) — max 1000 chars
+  string referrer_department = 14;  // VARCHAR(255) — max 255 chars
+  string referrer_organization = 15;  // VARCHAR(255) — max 255 chars
+  string copy_of_report_to = 16;  // VARCHAR(255) — max 255 chars
+  string report_email = 17;  // TEXT
+  string recipient_family_name = 18;  // VARCHAR(255) — max 255 chars
+  string recipient_given_names = 19;  // VARCHAR(255) — max 255 chars
+  string recipient_medical_record_number = 20;  // VARCHAR(40) — max 40 chars
+  string recipient_birth_date = 21;  // DATE — iso 8601 date
+  string relationship_to_recipient = 22;  // VARCHAR(100) — max 100 chars
+  bool urgent_testing = 23;  // BOOLEAN
+  string urgent_testing_reason = 24;  // VARCHAR(500) — max 500 chars
+  string requested_by_signed_at = 25;  // TIMESTAMPTZ — iso 8601
+  bool consent_and_identity_confirmed = 26;  // BOOLEAN
+  string sample_collector_name = 27;  // VARCHAR(255) — max 255 chars
+  string sample_collected_at = 28;  // TIMESTAMPTZ — iso 8601
+  int32 identifiers_on_sample_count = 29;  // INTEGER
+  int32 identifiers_on_form_count = 30;  // INTEGER
+  bool sample_and_form_details_match = 31;  // BOOLEAN
+  int32 edta_purple_volume_ml = 32;  // INTEGER
+  int32 edta_pink_volume_ml = 33;  // INTEGER
+  int32 clotted_red_volume_ml = 34;  // INTEGER
+  string samples_other_description = 35;  // VARCHAR(255) — max 255 chars
+  string laboratory_recipient_identifier = 36;  // VARCHAR(100) — max 100 chars
+  string laboratory_donor_identifier = 37;  // VARCHAR(100) — max 100 chars
+  string laboratory_sample_number = 38;  // VARCHAR(100) — max 100 chars
+  string laboratory_sample_received_at = 39;  // TIMESTAMPTZ — iso 8601
+  string laboratory_identifiers_checked_by = 40;  // VARCHAR(255) — max 255 chars
+}

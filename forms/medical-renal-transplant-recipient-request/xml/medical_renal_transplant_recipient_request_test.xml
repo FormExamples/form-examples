@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_renal_transplant_recipient_request_test SYSTEM "medical_renal_transplant_recipient_request_test.dtd">
+<medical_renal_transplant_recipient_request_test xmlns="https://formexamples.github.io/medical-renal-transplant-recipient-request/xml">
+<id>577350af-b221-5718-8af4-5704450237c7</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<request_id>8f168bde-a32e-5a99-a934-60be218959a5</request_id>
+<test_code>list-registration-first-typing-and-retyping</test_code>
+<test_detail></test_detail>
+</medical_renal_transplant_recipient_request_test>

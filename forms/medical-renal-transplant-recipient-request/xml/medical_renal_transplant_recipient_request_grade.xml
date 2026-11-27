@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_renal_transplant_recipient_request_grade SYSTEM "medical_renal_transplant_recipient_request_grade.dtd">
+<medical_renal_transplant_recipient_request_grade xmlns="https://formexamples.github.io/medical-renal-transplant-recipient-request/xml">
+<id>4d5894e4-81bf-52cd-b448-d9549f130359</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<request_id>8f168bde-a32e-5a99-a934-60be218959a5</request_id>
+<appropriateness_score>5</appropriateness_score>
+<appropriateness_band>usually-appropriate</appropriateness_band>
+<identity_safety_band>ok</identity_safety_band>
+<completeness_percent>1</completeness_percent>
+<triage_tier>routine</triage_tier>
+<target_timeframe></target_timeframe>
+<required_samples_summary>Example text.</required_samples_summary>
+<recommendation>accept</recommendation>
+<clinician_notes>Example text.</clinician_notes>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</medical_renal_transplant_recipient_request_grade>

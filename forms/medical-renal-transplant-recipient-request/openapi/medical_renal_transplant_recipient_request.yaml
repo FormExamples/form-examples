@@ -1,0 +1,525 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medical_renal_transplant_recipient_request
+openapi: 3.1.0
+info:
+  title: Medical Renal Transplant Recipient Request — MedicalRenalTransplantRecipientRequest
+  version: 1.0.0
+  description: "Renal transplant recipient request: organ required, sensitisation history, clinical information, dialysis, requester and sample-collection details, and laboratory-use fields. Requested tests are in the child table."
+x-namespace:
+  form: medical-renal-transplant-recipient-request
+  apiPrefix: /api/medical-renal-transplant-recipient-request/
+  sqlSchema: medical_renal_transplant_recipient_request
+  xmlNamespace: https://formexamples.github.io/medical-renal-transplant-recipient-request/xml
+tags:
+  - name: medical-renal-transplant-recipient-request
+    description: Medical Renal Transplant Recipient Request form
+paths:
+  /api/medical-renal-transplant-recipient-request/medical_renal_transplant_recipient_requests:
+    get:
+      summary: List MedicalRenalTransplantRecipientRequest records
+      tags: [medical-renal-transplant-recipient-request]
+      operationId: listMedicalRenalTransplantRecipientRequest
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of MedicalRenalTransplantRecipientRequest records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalRenalTransplantRecipientRequest"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new MedicalRenalTransplantRecipientRequest
+      tags: [medical-renal-transplant-recipient-request]
+      operationId: createMedicalRenalTransplantRecipientRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalRenalTransplantRecipientRequest"
+      responses:
+        "200":
+          description: The newly created MedicalRenalTransplantRecipientRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalRenalTransplantRecipientRequest"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/medical-renal-transplant-recipient-request/medical_renal_transplant_recipient_requests/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalRenalTransplantRecipientRequest by id
+      tags: [medical-renal-transplant-recipient-request]
+      operationId: getMedicalRenalTransplantRecipientRequest
+      responses:
+        "200":
+          description: The requested MedicalRenalTransplantRecipientRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalRenalTransplantRecipientRequest"
+        "404":
+          description: MedicalRenalTransplantRecipientRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing MedicalRenalTransplantRecipientRequest
+      tags: [medical-renal-transplant-recipient-request]
+      operationId: updateMedicalRenalTransplantRecipientRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalRenalTransplantRecipientRequest"
+      responses:
+        "200":
+          description: The updated MedicalRenalTransplantRecipientRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalRenalTransplantRecipientRequest"
+        "404":
+          description: MedicalRenalTransplantRecipientRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing MedicalRenalTransplantRecipientRequest
+      tags: [medical-renal-transplant-recipient-request]
+      operationId: replaceMedicalRenalTransplantRecipientRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalRenalTransplantRecipientRequest"
+      responses:
+        "200":
+          description: The updated MedicalRenalTransplantRecipientRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalRenalTransplantRecipientRequest"
+        "404":
+          description: MedicalRenalTransplantRecipientRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a MedicalRenalTransplantRecipientRequest
+      tags: [medical-renal-transplant-recipient-request]
+      operationId: deleteMedicalRenalTransplantRecipientRequest
+      responses:
+        "200":
+          description: MedicalRenalTransplantRecipientRequest deleted
+        "404":
+          description: MedicalRenalTransplantRecipientRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    MedicalRenalTransplantRecipientRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the transplant recipient.
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the requesting clinician.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - received
+            - vetted
+            - rejected
+            - ""
+          description: "Request lifecycle status: draft, submitted, received, vetted, rejected."
+        request_date:
+          type: [string, 'null']
+          format: date
+          description: Date the request was made.
+        organ_required:
+          type: string
+          enum:
+            - kidney
+            - kidney-pancreas
+            - pancreas
+            - ""
+          description: "Organ required: kidney, kidney-pancreas, pancreas."
+        previous_transplant_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of previous transplants; NULL when unknown or not answered.
+        previous_transplant_dates:
+          type: string
+          maxLength: 500
+          description: Dates of previous transplants.
+        transfusion_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of previous blood transfusions; NULL when unknown or not answered.
+        transfusion_dates:
+          type: string
+          maxLength: 500
+          description: Dates of previous transfusions.
+        pregnancy_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of previous pregnancies; NULL when unknown, not applicable or not answered.
+        pregnancy_dates:
+          type: string
+          maxLength: 500
+          description: Dates of previous pregnancies.
+        autoimmune_disease:
+          type: boolean
+          description: Whether the recipient has an autoimmune disease.
+        virology_risk:
+          type: boolean
+          description: Whether the recipient has a virology risk (for example a blood-borne virus) the laboratory should know about.
+        immunosuppression:
+          type: string
+          maxLength: 500
+          description: Current immunosuppression, if any.
+        clinical_information:
+          type: string
+          maxLength: 1000
+          description: Additional clinical information supporting the request.
+        recipient_abo_group:
+          type: string
+          enum:
+            - a
+            - b
+            - ab
+            - o
+            - unknown
+            - ""
+          description: "Recipient ABO blood group, if known: a, b, ab, o, unknown. Not on the source paper form; recommended for ABO-incompatibility checks."
+        dialysis_mode:
+          type: string
+          enum:
+            - unit-haemodialysis
+            - capd
+            - home-peritoneal-dialysis
+            - pre-dialysis
+            - failing-transplant
+            - ""
+          description: "Mode of dialysis: unit-haemodialysis, capd, home-peritoneal-dialysis, pre-dialysis, failing-transplant."
+        dialysis_unit_name:
+          type: string
+          maxLength: 255
+          description: Name of the recipient's dialysis unit (free text so any region can use it).
+        urgent_testing:
+          type: boolean
+          description: Whether the samples require urgent testing.
+        urgent_testing_reason:
+          type: string
+          maxLength: 500
+          description: Reason urgent testing is needed.
+        dfpp_status:
+          type: string
+          enum:
+            - pre-dfpp
+            - post-dfpp
+            - no-dfpp
+            - ""
+          description: "Double-filtration plasmapheresis (DFPP) status for ABO-incompatible transplant monitoring: pre-dfpp, post-dfpp, no-dfpp."
+        post_transfusion_dates_and_number:
+          type: string
+          maxLength: 500
+          description: Date(s) and number of transfusions, for post-transfusion HLA antibody monitoring.
+        donor_reference:
+          type: string
+          maxLength: 100
+          description: Donor identifier or reference supplied by the requester for donor-specific tests, if any.
+        requested_by_signed_at:
+          type: [string, 'null']
+          format: date-time
+          description: When the requester signed the request.
+        transplant_centre_name:
+          type: string
+          maxLength: 255
+          description: Name of the transplant centre.
+        consent_and_identity_confirmed:
+          type: boolean
+          description: Requester confirms informed consent was obtained and patient identity verified for the requested tests.
+        sample_collector_name:
+          type: string
+          maxLength: 255
+          description: Name of the person who collected the samples.
+        sample_collected_at:
+          type: [string, 'null']
+          format: date-time
+          description: Date and time the samples were collected.
+        identifiers_on_sample_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of patient identifiers on the sample labels (minimum 3 required).
+        identifiers_on_form_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of patient identifiers on the request form (minimum 3 required).
+        sample_and_form_details_match:
+          type: boolean
+          description: Whether the details on the samples and the form match.
+        samples_edta_purple_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of purple-top EDTA tubes (addressograph-labelled) sent.
+        samples_edta_pink_hand_labelled_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of pink-top EDTA tubes (hand-labelled) sent.
+        samples_serum_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of serum tubes (red or gold) sent.
+        samples_other_description:
+          type: string
+          maxLength: 255
+          description: Other sample types sent, if any.
+        laboratory_donor_identifier:
+          type: string
+          maxLength: 100
+          description: "Laboratory use: donor identifier assigned by the laboratory."
+        laboratory_recipient_identifier:
+          type: string
+          maxLength: 100
+          description: "Laboratory use: recipient identifier assigned by the laboratory."
+        laboratory_sample_number:
+          type: string
+          maxLength: 100
+          description: "Laboratory use: sample number."
+        laboratory_sample_received_at:
+          type: [string, 'null']
+          format: date-time
+          description: "Laboratory use: date and time the sample was received."
+        laboratory_identifiers_checked_by:
+          type: string
+          maxLength: 255
+          description: "Laboratory use: name of the person who checked the sample identifiers."
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - clinician_id
+        - status
+        - organ_required
+        - previous_transplant_dates
+        - transfusion_dates
+        - pregnancy_dates
+        - autoimmune_disease
+        - virology_risk
+        - immunosuppression
+        - clinical_information
+        - recipient_abo_group
+        - dialysis_mode
+        - dialysis_unit_name
+        - urgent_testing
+        - urgent_testing_reason
+        - dfpp_status
+        - post_transfusion_dates_and_number
+        - donor_reference
+        - transplant_centre_name
+        - consent_and_identity_confirmed
+        - sample_collector_name
+        - sample_and_form_details_match
+        - samples_other_description
+        - laboratory_donor_identifier
+        - laboratory_recipient_identifier
+        - laboratory_sample_number
+        - laboratory_identifiers_checked_by
+      description: "Renal transplant recipient request: organ required, sensitisation history, clinical information, dialysis, requester and sample-collection details, and laboratory-use fields. Requested tests are in the child table."

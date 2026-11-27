@@ -1,0 +1,57 @@
+-- Requesting clinician and sample collector information.
+
+CREATE TABLE medical_renal_living_donor_request.clinician (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    deleted_at TIMESTAMPTZ DEFAULT NULL,
+    name TEXT NOT NULL,
+    email TEXT,
+    phone TEXT,
+    postal_address_as_full_text TEXT,
+    country_as_iso_3166_1_alpha_2 CHAR(2),
+    postcode TEXT,
+    role VARCHAR(30) NOT NULL DEFAULT '' CHECK (role IN ('nephrologist', 'transplant-surgeon', 'transplant-coordinator', 'independent-assessor', 'phlebotomist', 'other', '')),
+    registration_body TEXT NOT NULL DEFAULT '',
+    registration_number TEXT NOT NULL DEFAULT ''
+);
+
+CREATE TRIGGER trigger_mrldr_clinician_updated_at
+    BEFORE UPDATE ON medical_renal_living_donor_request.clinician
+    FOR EACH ROW
+    EXECUTE FUNCTION medical_renal_living_donor_request.set_updated_at();
+
+COMMENT ON TABLE medical_renal_living_donor_request.clinician IS
+    'Clinician who requests the tests (and, where different, collects the samples).';
+COMMENT ON COLUMN medical_renal_living_donor_request.clinician.id IS
+    'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN medical_renal_living_donor_request.clinician.created_at IS
+    'Timestamp when the record was created.';
+COMMENT ON COLUMN medical_renal_living_donor_request.clinician.updated_at IS
+    'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN medical_renal_living_donor_request.clinician.deleted_at IS
+    'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN medical_renal_living_donor_request.clinician.name IS
+    'Name.';
+COMMENT ON COLUMN medical_renal_living_donor_request.clinician.email IS
+    'Email address.';
+COMMENT ON COLUMN medical_renal_living_donor_request.clinician.phone IS
+    'Phone number.';
+COMMENT ON COLUMN medical_renal_living_donor_request.clinician.postal_address_as_full_text IS
+    'Postal address as full text.';
+COMMENT ON COLUMN medical_renal_living_donor_request.clinician.country_as_iso_3166_1_alpha_2 IS
+    'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
+COMMENT ON COLUMN medical_renal_living_donor_request.clinician.postcode IS
+    'Postal code, such as for validating the postal address.';
+COMMENT ON COLUMN medical_renal_living_donor_request.clinician.role IS
+    'Clinician role: nephrologist, transplant-surgeon, transplant-coordinator, independent-assessor, phlebotomist, other.';
+COMMENT ON COLUMN medical_renal_living_donor_request.clinician.registration_body IS
+    'Professional registration body, as free text (varies by jurisdiction).';
+COMMENT ON COLUMN medical_renal_living_donor_request.clinician.registration_number IS
+    'Professional registration number.';
+
+CREATE INDEX clinician_index_gto
+    ON medical_renal_living_donor_request.clinician
+    USING GIN ((
+        name
+    ) gin_trgm_ops);

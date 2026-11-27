@@ -1,0 +1,722 @@
+{
+  "resourceType": "Bundle",
+  "id": "c5e38202-743d-5136-ba10-67ef819406aa",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Medical Haematopoietic Stem Cell Transplant Patients/Donors HLA Typing Request example bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:94476f5c-3c2a-500a-8aaf-4006a3c7b389",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "94476f5c-3c2a-500a-8aaf-4006a3c7b389",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "urn:uuid:7328c098-ca16-5dce-bee9-e8db909debf3"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request:role",
+                  "code": "haematologist",
+                  "display": "Haematologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueString": "Example Registration Body"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7328c098-ca16-5dce-bee9-e8db909debf3",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "7328c098-ca16-5dce-bee9-e8db909debf3",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "planned",
+        "class": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
+              }
+            ]
+          }
+        ],
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Medical Haematopoietic Stem Cell Transplant Patients Donors Hla Typing Request"
+          }
+        ],
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e9b86eb2-f798-598c-8e08-dd0fc43838ba",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "e9b86eb2-f798-598c-8e08-dd0fc43838ba",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+              "code": "hsct_hla_typing_request_grade",
+              "display": "Hsct Hla Typing Request Grade"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "urn:uuid:7328c098-ca16-5dce-bee9-e8db909debf3"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "appropriateness_score",
+                  "display": "Appropriateness Score"
+                }
+              ]
+            },
+            "valueInteger": 5
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "appropriateness_band",
+                  "display": "Appropriateness Band"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request:appropriateness_band",
+                  "code": "usually-appropriate",
+                  "display": "Usually-Appropriate"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "identity_safety_band",
+                  "display": "Identity Safety Band"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request:identity_safety_band",
+                  "code": "ok",
+                  "display": "Ok"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "completeness_percent",
+                  "display": "Completeness Percent"
+                }
+              ]
+            },
+            "valueInteger": 1
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "triage_tier",
+                  "display": "Triage Tier"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request:triage_tier",
+                  "code": "routine",
+                  "display": "Routine"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "target_timeframe",
+                  "display": "Target Timeframe"
+                }
+              ]
+            },
+            "valueString": "Example Target Timeframe"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "required_samples_summary",
+                  "display": "Required Samples Summary"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "recommendation",
+                  "display": "Recommendation"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request:recommendation",
+                  "code": "accept",
+                  "display": "Accept"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "clinician_notes",
+                  "display": "Clinician Notes"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "signed_at",
+                  "display": "Signed At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "graded_at",
+                  "display": "Graded At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:932176a6-0471-5b30-9c39-16df30489dbb",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "932176a6-0471-5b30-9c39-16df30489dbb",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                "code": "grading-additional-flag",
+                "display": "donor-without-recipient-details"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
+            }
+          ]
+        },
+        "severity": "low",
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:038fb170-29d2-55fe-ae52-26c1d2cabeec",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "038fb170-29d2-55fe-ae52-26c1d2cabeec",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                "code": "grading-fired-rule",
+                "display": "General"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:079f5a81-efae-5d02-b4ca-fa8e046f9a19",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "079f5a81-efae-5d02-b4ca-fa8e046f9a19",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+              "code": "subject",
+              "display": "Subject"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "urn:uuid:7328c098-ca16-5dce-bee9-e8db909debf3"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "family_name",
+                  "display": "Family Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "given_names",
+                  "display": "Given Names"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "previous_name",
+                  "display": "Previous Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "birth_date",
+                  "display": "Birth Date"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "sex",
+                  "display": "Sex"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request:sex",
+                  "code": "female",
+                  "display": "Female"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "national_health_identifier",
+                  "display": "National Health Identifier"
+                }
+              ]
+            },
+            "valueString": "Example National Health Identifier"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "medical_record_number",
+                  "display": "Medical Record Number"
+                }
+              ]
+            },
+            "valueString": "Example Medical Record Number"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          }
+        ]
+      }
+    }
+  ]
+}

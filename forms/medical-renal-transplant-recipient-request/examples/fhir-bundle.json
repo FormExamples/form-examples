@@ -1,0 +1,464 @@
+{
+  "resourceType": "Bundle",
+  "id": "579e5500-a59b-55f5-a856-fb574ca62383",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "Medical Renal Transplant Recipient Request example bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:dfa9ce55-1fc2-5847-9483-3d016968b0d4",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "dfa9ce55-1fc2-5847-9483-3d016968b0d4",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+              "code": "clinician",
+              "display": "Clinician"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:7a7d4711-da1e-5160-a5d3-bc100b7fbc4a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:accabb62-22ce-5614-bd36-0d06fb965241"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                  "code": "country_as_iso_3166_1_alpha_2",
+                  "display": "Country As Iso 3166 1 Alpha 2"
+                }
+              ]
+            },
+            "valueString": "Example Country As Iso 3166 1 Alpha 2"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                  "code": "postcode",
+                  "display": "Postcode"
+                }
+              ]
+            },
+            "valueString": "SW1A 1AA"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request:role",
+                  "code": "nephrologist",
+                  "display": "Nephrologist"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                  "code": "registration_body",
+                  "display": "Registration Body"
+                }
+              ]
+            },
+            "valueString": "Example Registration Body"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                  "code": "registration_number",
+                  "display": "Registration Number"
+                }
+              ]
+            },
+            "valueString": "Example Registration Number"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:accabb62-22ce-5614-bd36-0d06fb965241",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "accabb62-22ce-5614-bd36-0d06fb965241",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "planned",
+        "class": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
+              }
+            ]
+          }
+        ],
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "Medical Renal Transplant Recipient Request"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:7a7d4711-da1e-5160-a5d3-bc100b7fbc4a"
+        },
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4d5894e4-81bf-52cd-b448-d9549f130359",
+      "resource": {
+        "resourceType": "ClinicalImpression",
+        "id": "4d5894e4-81bf-52cd-b448-d9549f130359",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/ClinicalImpression"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "completed",
+        "subject": {
+          "reference": "urn:uuid:7a7d4711-da1e-5160-a5d3-bc100b7fbc4a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:accabb62-22ce-5614-bd36-0d06fb965241"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "date": "2026-04-09T10:00:00+00:00",
+        "description": "Medical Renal Transplant Recipient Request grading result",
+        "summary": "Deleted At: 2026-04-09T10:00:00+00:00; Appropriateness Score: 5; Appropriateness Band: usually-appropriate; Identity Safety Band: ok; Completeness Percent: 1; Triage Tier: routine; Target Timeframe: Example Target Timeframe; Required Samples Summary: Example text.; Recommendation: accept; Clinician Notes: Example text.; Signed At: 2026-04-09T10:00:00+00:00"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f3dc880c-e411-50ea-90a4-8e016ed58799",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "f3dc880c-e411-50ea-90a4-8e016ed58799",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                "code": "grading-additional-flag",
+                "display": "day-of-transplant-stat"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:medical-renal-transplant-recipient-request:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
+            }
+          ]
+        },
+        "severity": "low",
+        "subject": {
+          "reference": "urn:uuid:7a7d4711-da1e-5160-a5d3-bc100b7fbc4a"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:42fbf5cf-16d1-5c48-bd6d-04fa62f0f674",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "42fbf5cf-16d1-5c48-bd6d-04fa62f0f674",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                "code": "grading-fired-rule",
+                "display": "General"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:medical-renal-transplant-recipient-request:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "subject": {
+          "reference": "urn:uuid:7a7d4711-da1e-5160-a5d3-bc100b7fbc4a"
+        },
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:577350af-b221-5718-8af4-5704450237c7",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "577350af-b221-5718-8af4-5704450237c7",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+              "code": "medical_renal_transplant_recipient_request_test",
+              "display": "Medical Renal Transplant Recipient Request Test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:7a7d4711-da1e-5160-a5d3-bc100b7fbc4a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:accabb62-22ce-5614-bd36-0d06fb965241"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                  "code": "test_code",
+                  "display": "Test Code"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request:test_code",
+                  "code": "list-registration-first-typing-and-retyping",
+                  "display": "List-Registration-First-Typing-And-Retyping"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:medical-renal-transplant-recipient-request",
+                  "code": "test_detail",
+                  "display": "Test Detail"
+                }
+              ]
+            },
+            "valueString": "Example Test Detail"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7a7d4711-da1e-5160-a5d3-bc100b7fbc4a",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "7a7d4711-da1e-5160-a5d3-bc100b7fbc4a",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Patient"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Doe",
+            "given": [
+              "Jane"
+            ]
+          }
+        ],
+        "birthDate": "1965-06-15",
+        "gender": "female",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "jane.doe@example.com"
+          },
+          {
+            "system": "phone",
+            "value": "07700900000"
+          }
+        ],
+        "address": [
+          {
+            "postalCode": "SW1A 1AA"
+          }
+        ]
+      }
+    }
+  ]
+}

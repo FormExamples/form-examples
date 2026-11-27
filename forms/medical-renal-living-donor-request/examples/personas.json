@@ -1,0 +1,662 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`.",
+  "personas": [
+    {
+      "name": "directed-full-crossmatch-complete",
+      "description": "Well-formed directed donation with a full crossmatch: donor O to recipient A (compatible), three or more identifiers matching, hand-labelled tube sent, consent confirmed. Expect usually-appropriate, ok, routine, accept.",
+      "state": {
+        "donor": {
+          "familyName": "Aldridge",
+          "givenNames": "Maria",
+          "previousName": "",
+          "birthDate": "1975-06-02",
+          "sex": "female",
+          "nationalHealthIdentifier": "900 000 1001",
+          "medicalRecordNumber": "D100200",
+          "address": "",
+          "postcode": ""
+        },
+        "recipient": {
+          "familyName": "Aldridge",
+          "givenNames": "Peter",
+          "previousName": "",
+          "birthDate": "1972-11-20",
+          "sex": "male",
+          "nationalHealthIdentifier": "900 000 1002",
+          "medicalRecordNumber": "R100201",
+          "address": "",
+          "postcode": ""
+        },
+        "pathway": {
+          "donationPathway": "directed",
+          "relationshipOfDonorToRecipient": "Spouse",
+          "recipientTransplantCentreName": "",
+          "donorAboGroup": "o",
+          "recipientAboGroup": "a"
+        },
+        "tests": {
+          "livingDonorFullCrossmatch": true,
+          "livingDonorVirtualCrossmatch": false,
+          "livingDonorMatchGrade": false,
+          "altruisticDonor": false,
+          "dayOfTransplantSamples": false,
+          "aboTitresOnly": false,
+          "redCellAntibodyFollowUp": false,
+          "testDetail": "",
+          "urgentTesting": false,
+          "urgentTestingReason": ""
+        },
+        "requester": {
+          "clinicianName": "Dr P Anand",
+          "clinicianRole": "transplant-coordinator",
+          "clinicianEmail": "p.anand@example.org",
+          "transplantCentreName": "Example Transplant Centre",
+          "requestedBySignedAt": "2026-09-01T10:00",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "Nurse A Patel",
+          "sampleCollectedAt": "2026-09-01T09:30",
+          "identifiersOnSampleCount": 4,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "samplesEdtaPurpleCount": 2,
+          "samplesEdtaPinkHandLabelledCount": 1,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratoryDonorIdentifier": "",
+          "laboratoryRecipientIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "5 working days (local policy)",
+        "requiredSamplesSummary": "30 mL EDTA; 6 mL EDTA hand-labelled; 6 mL EDTA (potential ABO titres)",
+        "selectedTests": [
+          "living-donor-full-crossmatch"
+        ],
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-TRIAGE-03",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ONE-FORM-001",
+            "category": "donor-and-recipient-on-one-form",
+            "priority": "low",
+            "description": "Donor and recipient are both identified, but the sample on this request is the donor's only.",
+            "suggestedAction": "Send the recipient's samples on the recipient request; do not put recipient samples on this form."
+          }
+        ]
+      }
+    },
+    {
+      "name": "day-of-transplant-stat",
+      "description": "Day-of-transplant samples for a directed donation. Expect stat triage and the day-of-transplant sample tubes.",
+      "state": {
+        "donor": {
+          "familyName": "Aldridge",
+          "givenNames": "Maria",
+          "previousName": "",
+          "birthDate": "1975-06-02",
+          "sex": "female",
+          "nationalHealthIdentifier": "900 000 1001",
+          "medicalRecordNumber": "D100200",
+          "address": "",
+          "postcode": ""
+        },
+        "recipient": {
+          "familyName": "Aldridge",
+          "givenNames": "Peter",
+          "previousName": "",
+          "birthDate": "1972-11-20",
+          "sex": "male",
+          "nationalHealthIdentifier": "900 000 1002",
+          "medicalRecordNumber": "R100201",
+          "address": "",
+          "postcode": ""
+        },
+        "pathway": {
+          "donationPathway": "directed",
+          "relationshipOfDonorToRecipient": "Spouse",
+          "recipientTransplantCentreName": "",
+          "donorAboGroup": "o",
+          "recipientAboGroup": "a"
+        },
+        "tests": {
+          "livingDonorFullCrossmatch": false,
+          "livingDonorVirtualCrossmatch": false,
+          "livingDonorMatchGrade": false,
+          "altruisticDonor": false,
+          "dayOfTransplantSamples": true,
+          "aboTitresOnly": false,
+          "redCellAntibodyFollowUp": false,
+          "testDetail": "",
+          "urgentTesting": false,
+          "urgentTestingReason": ""
+        },
+        "requester": {
+          "clinicianName": "Dr P Anand",
+          "clinicianRole": "transplant-coordinator",
+          "clinicianEmail": "p.anand@example.org",
+          "transplantCentreName": "Example Transplant Centre",
+          "requestedBySignedAt": "2026-09-01T10:00",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "Nurse A Patel",
+          "sampleCollectedAt": "2026-09-01T09:30",
+          "identifiersOnSampleCount": 4,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "samplesEdtaPurpleCount": 2,
+          "samplesEdtaPinkHandLabelledCount": null,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratoryDonorIdentifier": "",
+          "laboratoryRecipientIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "stat",
+        "targetTimeframe": "same day, hours (local policy)",
+        "requiredSamplesSummary": "20 mL EDTA",
+        "selectedTests": [
+          "day-of-transplant-samples"
+        ],
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-TRIAGE-01",
+            "axis": "triage",
+            "category": "day-of-transplant",
+            "description": "Day-of-transplant samples: a transplant is imminent."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ONE-FORM-001",
+            "category": "donor-and-recipient-on-one-form",
+            "priority": "low",
+            "description": "Donor and recipient are both identified, but the sample on this request is the donor's only.",
+            "suggestedAction": "Send the recipient's samples on the recipient request; do not put recipient samples on this form."
+          }
+        ]
+      }
+    },
+    {
+      "name": "altruistic-donor-with-crossmatch",
+      "description": "Altruistic donor with a full crossmatch requested: there is no recipient to crossmatch. Expect usually-not-appropriate and query-referrer.",
+      "state": {
+        "donor": {
+          "familyName": "Aldridge",
+          "givenNames": "Maria",
+          "previousName": "",
+          "birthDate": "1975-06-02",
+          "sex": "female",
+          "nationalHealthIdentifier": "900 000 1001",
+          "medicalRecordNumber": "D100200",
+          "address": "",
+          "postcode": ""
+        },
+        "recipient": {
+          "familyName": "",
+          "givenNames": "",
+          "previousName": "",
+          "birthDate": "",
+          "sex": "",
+          "nationalHealthIdentifier": "",
+          "medicalRecordNumber": "",
+          "address": "",
+          "postcode": ""
+        },
+        "pathway": {
+          "donationPathway": "altruistic",
+          "relationshipOfDonorToRecipient": "",
+          "recipientTransplantCentreName": "",
+          "donorAboGroup": "o",
+          "recipientAboGroup": ""
+        },
+        "tests": {
+          "livingDonorFullCrossmatch": true,
+          "livingDonorVirtualCrossmatch": false,
+          "livingDonorMatchGrade": false,
+          "altruisticDonor": false,
+          "dayOfTransplantSamples": false,
+          "aboTitresOnly": false,
+          "redCellAntibodyFollowUp": false,
+          "testDetail": "",
+          "urgentTesting": false,
+          "urgentTestingReason": ""
+        },
+        "requester": {
+          "clinicianName": "Dr P Anand",
+          "clinicianRole": "transplant-coordinator",
+          "clinicianEmail": "p.anand@example.org",
+          "transplantCentreName": "Example Transplant Centre",
+          "requestedBySignedAt": "2026-09-01T10:00",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "Nurse A Patel",
+          "sampleCollectedAt": "2026-09-01T09:30",
+          "identifiersOnSampleCount": 4,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "samplesEdtaPurpleCount": 2,
+          "samplesEdtaPinkHandLabelledCount": 1,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratoryDonorIdentifier": "",
+          "laboratoryRecipientIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 2,
+        "appropriatenessBand": "usually-not-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "5 working days (local policy)",
+        "requiredSamplesSummary": "30 mL EDTA; 6 mL EDTA hand-labelled; 6 mL EDTA (potential ABO titres)",
+        "selectedTests": [
+          "living-donor-full-crossmatch"
+        ],
+        "recommendation": "query-referrer",
+        "recommendationLabel": "Query the referrer",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-02",
+            "axis": "appropriateness",
+            "category": "altruistic-crossmatch",
+            "description": "An altruistic donor has no recipient, so a crossmatch or match grade cannot be done."
+          },
+          {
+            "ruleId": "R-TRIAGE-03",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "virtual-crossmatch-recipient-abo-unknown",
+      "description": "Virtual crossmatch for a directed donation where the recipient ABO group is not recorded. Expect may-be-appropriate and the virtual-crossmatch flag.",
+      "state": {
+        "donor": {
+          "familyName": "Aldridge",
+          "givenNames": "Maria",
+          "previousName": "",
+          "birthDate": "1975-06-02",
+          "sex": "female",
+          "nationalHealthIdentifier": "900 000 1001",
+          "medicalRecordNumber": "D100200",
+          "address": "",
+          "postcode": ""
+        },
+        "recipient": {
+          "familyName": "Aldridge",
+          "givenNames": "Peter",
+          "previousName": "",
+          "birthDate": "1972-11-20",
+          "sex": "male",
+          "nationalHealthIdentifier": "900 000 1002",
+          "medicalRecordNumber": "R100201",
+          "address": "",
+          "postcode": ""
+        },
+        "pathway": {
+          "donationPathway": "directed",
+          "relationshipOfDonorToRecipient": "Spouse",
+          "recipientTransplantCentreName": "",
+          "donorAboGroup": "o",
+          "recipientAboGroup": "unknown"
+        },
+        "tests": {
+          "livingDonorFullCrossmatch": false,
+          "livingDonorVirtualCrossmatch": true,
+          "livingDonorMatchGrade": false,
+          "altruisticDonor": false,
+          "dayOfTransplantSamples": false,
+          "aboTitresOnly": false,
+          "redCellAntibodyFollowUp": false,
+          "testDetail": "",
+          "urgentTesting": false,
+          "urgentTestingReason": ""
+        },
+        "requester": {
+          "clinicianName": "Dr P Anand",
+          "clinicianRole": "transplant-coordinator",
+          "clinicianEmail": "p.anand@example.org",
+          "transplantCentreName": "Example Transplant Centre",
+          "requestedBySignedAt": "2026-09-01T10:00",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "Nurse A Patel",
+          "sampleCollectedAt": "2026-09-01T09:30",
+          "identifiersOnSampleCount": 4,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "samplesEdtaPurpleCount": 2,
+          "samplesEdtaPinkHandLabelledCount": 1,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratoryDonorIdentifier": "",
+          "laboratoryRecipientIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 5,
+        "appropriatenessBand": "may-be-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "5 working days (local policy)",
+        "requiredSamplesSummary": "10 mL EDTA; 6 mL EDTA hand-labelled; 6 mL EDTA (potential ABO titres)",
+        "selectedTests": [
+          "living-donor-virtual-crossmatch"
+        ],
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-01",
+            "axis": "appropriateness",
+            "category": "virtual-crossmatch",
+            "description": "Virtual crossmatch or match grade relies on recipient information; the recipient ABO group is not known."
+          },
+          {
+            "ruleId": "R-TRIAGE-03",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-VIRTUAL-XM-001",
+            "category": "virtual-crossmatch-without-antibody-profile",
+            "priority": "medium",
+            "description": "Virtual crossmatch or match grade requested without recipient information (ABO group unknown).",
+            "suggestedAction": "Record the recipient ABO group and confirm the laboratory holds a current recipient HLA-antibody profile."
+          },
+          {
+            "flagId": "F-ONE-FORM-001",
+            "category": "donor-and-recipient-on-one-form",
+            "priority": "low",
+            "description": "Donor and recipient are both identified, but the sample on this request is the donor's only.",
+            "suggestedAction": "Send the recipient's samples on the recipient request; do not put recipient samples on this form."
+          }
+        ]
+      }
+    },
+    {
+      "name": "abo-incompatible-without-titres",
+      "description": "Donor A with recipient O (ABO-incompatible) and a full crossmatch but no ABO titres. Expect may-be-appropriate and the ABO-incompatible flag.",
+      "state": {
+        "donor": {
+          "familyName": "Aldridge",
+          "givenNames": "Maria",
+          "previousName": "",
+          "birthDate": "1975-06-02",
+          "sex": "female",
+          "nationalHealthIdentifier": "900 000 1001",
+          "medicalRecordNumber": "D100200",
+          "address": "",
+          "postcode": ""
+        },
+        "recipient": {
+          "familyName": "Aldridge",
+          "givenNames": "Peter",
+          "previousName": "",
+          "birthDate": "1972-11-20",
+          "sex": "male",
+          "nationalHealthIdentifier": "900 000 1002",
+          "medicalRecordNumber": "R100201",
+          "address": "",
+          "postcode": ""
+        },
+        "pathway": {
+          "donationPathway": "directed",
+          "relationshipOfDonorToRecipient": "Spouse",
+          "recipientTransplantCentreName": "",
+          "donorAboGroup": "a",
+          "recipientAboGroup": "o"
+        },
+        "tests": {
+          "livingDonorFullCrossmatch": true,
+          "livingDonorVirtualCrossmatch": false,
+          "livingDonorMatchGrade": false,
+          "altruisticDonor": false,
+          "dayOfTransplantSamples": false,
+          "aboTitresOnly": false,
+          "redCellAntibodyFollowUp": false,
+          "testDetail": "",
+          "urgentTesting": false,
+          "urgentTestingReason": ""
+        },
+        "requester": {
+          "clinicianName": "Dr P Anand",
+          "clinicianRole": "transplant-coordinator",
+          "clinicianEmail": "p.anand@example.org",
+          "transplantCentreName": "Example Transplant Centre",
+          "requestedBySignedAt": "2026-09-01T10:00",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "Nurse A Patel",
+          "sampleCollectedAt": "2026-09-01T09:30",
+          "identifiersOnSampleCount": 4,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "samplesEdtaPurpleCount": 2,
+          "samplesEdtaPinkHandLabelledCount": 1,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratoryDonorIdentifier": "",
+          "laboratoryRecipientIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 5,
+        "appropriatenessBand": "may-be-appropriate",
+        "identitySafetyBand": "ok",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "5 working days (local policy)",
+        "requiredSamplesSummary": "30 mL EDTA; 6 mL EDTA hand-labelled; 6 mL EDTA (potential ABO titres)",
+        "selectedTests": [
+          "living-donor-full-crossmatch"
+        ],
+        "recommendation": "accept",
+        "recommendationLabel": "Accept and process",
+        "firedRules": [
+          {
+            "ruleId": "R-APPROP-03",
+            "axis": "appropriateness",
+            "category": "abo-incompatible",
+            "description": "Known ABO-incompatible pair without ABO titres requested."
+          },
+          {
+            "ruleId": "R-TRIAGE-03",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ABO-INCOMPATIBLE-001",
+            "category": "donor-recipient-abo-incompatible",
+            "priority": "high",
+            "description": "Donor and recipient ABO groups are incompatible and no ABO titres are requested.",
+            "suggestedAction": "Request ABO titres; an ABO-incompatible pair may proceed by desensitization or paired exchange."
+          },
+          {
+            "flagId": "F-ONE-FORM-001",
+            "category": "donor-and-recipient-on-one-form",
+            "priority": "low",
+            "description": "Donor and recipient are both identified, but the sample on this request is the donor's only.",
+            "suggestedAction": "Send the recipient's samples on the recipient request; do not put recipient samples on this form."
+          }
+        ]
+      }
+    },
+    {
+      "name": "too-few-identifiers-reject",
+      "description": "Only two identifiers on the sample label. Expect reject-risk identity band and a reject recommendation.",
+      "state": {
+        "donor": {
+          "familyName": "Aldridge",
+          "givenNames": "Maria",
+          "previousName": "",
+          "birthDate": "1975-06-02",
+          "sex": "female",
+          "nationalHealthIdentifier": "900 000 1001",
+          "medicalRecordNumber": "D100200",
+          "address": "",
+          "postcode": ""
+        },
+        "recipient": {
+          "familyName": "Aldridge",
+          "givenNames": "Peter",
+          "previousName": "",
+          "birthDate": "1972-11-20",
+          "sex": "male",
+          "nationalHealthIdentifier": "900 000 1002",
+          "medicalRecordNumber": "R100201",
+          "address": "",
+          "postcode": ""
+        },
+        "pathway": {
+          "donationPathway": "directed",
+          "relationshipOfDonorToRecipient": "Spouse",
+          "recipientTransplantCentreName": "",
+          "donorAboGroup": "o",
+          "recipientAboGroup": "a"
+        },
+        "tests": {
+          "livingDonorFullCrossmatch": true,
+          "livingDonorVirtualCrossmatch": false,
+          "livingDonorMatchGrade": false,
+          "altruisticDonor": false,
+          "dayOfTransplantSamples": false,
+          "aboTitresOnly": false,
+          "redCellAntibodyFollowUp": false,
+          "testDetail": "",
+          "urgentTesting": false,
+          "urgentTestingReason": ""
+        },
+        "requester": {
+          "clinicianName": "Dr P Anand",
+          "clinicianRole": "transplant-coordinator",
+          "clinicianEmail": "p.anand@example.org",
+          "transplantCentreName": "Example Transplant Centre",
+          "requestedBySignedAt": "2026-09-01T10:00",
+          "consentAndIdentityConfirmed": true
+        },
+        "sample": {
+          "sampleCollectorName": "Nurse A Patel",
+          "sampleCollectedAt": "2026-09-01T09:30",
+          "identifiersOnSampleCount": 2,
+          "identifiersOnFormCount": 4,
+          "sampleAndFormDetailsMatch": true,
+          "samplesEdtaPurpleCount": 2,
+          "samplesEdtaPinkHandLabelledCount": 1,
+          "samplesOtherDescription": ""
+        },
+        "lab": {
+          "laboratoryDonorIdentifier": "",
+          "laboratoryRecipientIdentifier": "",
+          "laboratorySampleNumber": "",
+          "laboratorySampleReceivedAt": "",
+          "laboratoryIdentifiersCheckedBy": ""
+        }
+      },
+      "expected": {
+        "appropriatenessScore": 8,
+        "appropriatenessBand": "usually-appropriate",
+        "identitySafetyBand": "reject-risk",
+        "completenessPercent": 100,
+        "triageTier": "routine",
+        "targetTimeframe": "5 working days (local policy)",
+        "requiredSamplesSummary": "30 mL EDTA; 6 mL EDTA hand-labelled; 6 mL EDTA (potential ABO titres)",
+        "selectedTests": [
+          "living-donor-full-crossmatch"
+        ],
+        "recommendation": "reject",
+        "recommendationLabel": "Reject",
+        "firedRules": [
+          {
+            "ruleId": "R-ID-3PT-01",
+            "axis": "identity",
+            "category": "identifiers",
+            "description": "Fewer than 3 identifiers on the sample or the form: samples not labelled correctly are discarded."
+          },
+          {
+            "ruleId": "R-TRIAGE-03",
+            "axis": "triage",
+            "category": "routine",
+            "description": "No urgency indicators: routine."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-ONE-FORM-001",
+            "category": "donor-and-recipient-on-one-form",
+            "priority": "low",
+            "description": "Donor and recipient are both identified, but the sample on this request is the donor's only.",
+            "suggestedAction": "Send the recipient's samples on the recipient request; do not put recipient samples on this form."
+          },
+          {
+            "flagId": "F-IDENTITY-001",
+            "category": "identity-mismatch-risk",
+            "priority": "high",
+            "description": "Fewer than 3 identifiers on the sample or form: the sample is at risk of being discarded.",
+            "suggestedAction": "Re-label the sample and form with at least 3 matching identifiers."
+          }
+        ]
+      }
+    }
+  ]
+}

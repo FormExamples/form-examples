@@ -1,0 +1,9 @@
+<!ELEMENT medical_human_leukocyte_and_disease_association_request_test (id,created_at,updated_at,deleted_at,request_id,test_code,test_detail)>
+<!ATTLIST medical_human_leukocyte_and_disease_association_request_test xmlns CDATA #FIXED "https://formexamples.github.io/medical-human-leukocyte-and-disease-association-request/xml">
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT request_id (#PCDATA)>
+<!ELEMENT test_code (#PCDATA)>
+<!ELEMENT test_detail (#PCDATA)>

@@ -1,0 +1,61 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medical_human_leukocyte_and_disease_association_request
+
+syntax = "proto3";
+
+package form_examples.medical_human_leukocyte_and_disease_association_request;
+
+enum MedicalHumanLeukocyteAndDiseaseAssociationRequestStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_RECEIVED = 3;  // received
+  STATUS_VETTED = 4;  // vetted
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum MedicalHumanLeukocyteAndDiseaseAssociationRequestIndicationCategoryEnum {
+  INDICATIONCATEGORY_UNSPECIFIED = 0;
+  INDICATIONCATEGORY_SUSPECTED_DISEASE = 1;  // suspected-disease
+  INDICATIONCATEGORY_PRE_TREATMENT_DRUG_HYPERSENSITIVITY = 2;  // pre-treatment-drug-hypersensitivity
+  INDICATIONCATEGORY_TREATMENT_RESPONSE = 3;  // treatment-response
+  INDICATIONCATEGORY_FAMILY_SCREENING = 4;  // family-screening
+  INDICATIONCATEGORY_EXCLUSION_OF_DISEASE = 5;  // exclusion-of-disease
+  INDICATIONCATEGORY_OTHER = 6;  // other
+}
+
+message MedicalHumanLeukocyteAndDiseaseAssociationRequest {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  MedicalHumanLeukocyteAndDiseaseAssociationRequestStatusEnum status = 7;  // VARCHAR(20)
+  string request_date = 8;  // DATE — iso 8601 date
+  string referrer_department = 9;  // VARCHAR(255) — max 255 chars
+  string referrer_organization = 10;  // VARCHAR(255) — max 255 chars
+  string copy_of_report_to = 11;  // VARCHAR(255) — max 255 chars
+  string report_email = 12;  // TEXT
+  string clinical_details = 13;  // VARCHAR(1000) — max 1000 chars
+  MedicalHumanLeukocyteAndDiseaseAssociationRequestIndicationCategoryEnum indication_category = 14;  // VARCHAR(40)
+  string ethnicity = 15;  // VARCHAR(100) — max 100 chars
+  bool previous_hla_typing_known = 16;  // BOOLEAN
+  string planned_drug = 17;  // VARCHAR(100) — max 100 chars
+  bool urgent_testing = 18;  // BOOLEAN
+  string urgent_testing_reason = 19;  // VARCHAR(500) — max 500 chars
+  bool high_risk_sample = 20;  // BOOLEAN
+  string high_risk_description = 21;  // VARCHAR(255) — max 255 chars
+  string requested_by_signed_at = 22;  // TIMESTAMPTZ — iso 8601
+  bool consent_and_identity_confirmed = 23;  // BOOLEAN
+  string sample_collector_name = 24;  // VARCHAR(255) — max 255 chars
+  string sample_collected_at = 25;  // TIMESTAMPTZ — iso 8601
+  int32 identifiers_on_sample_count = 26;  // INTEGER
+  int32 identifiers_on_form_count = 27;  // INTEGER
+  bool sample_and_form_details_match = 28;  // BOOLEAN
+  int32 sample_volume_ml = 29;  // INTEGER
+  string samples_other_description = 30;  // VARCHAR(255) — max 255 chars
+  string laboratory_sample_number = 31;  // VARCHAR(100) — max 100 chars
+  string laboratory_sample_received_at = 32;  // TIMESTAMPTZ — iso 8601
+  string laboratory_identifiers_checked_by = 33;  // VARCHAR(255) — max 255 chars
+}

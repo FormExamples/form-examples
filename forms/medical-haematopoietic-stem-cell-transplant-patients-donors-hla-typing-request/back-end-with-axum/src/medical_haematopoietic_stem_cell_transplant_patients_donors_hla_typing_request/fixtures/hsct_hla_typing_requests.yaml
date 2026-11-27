@@ -1,0 +1,8 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-b4d2e6a81c53"
+  deletedAt: null
+  subjectId: "00000000-0000-4000-8000-b4d2e6a81c51"
+  clinicianId: "00000000-0000-4000-8000-b4d2e6a81c52"
+  status: "draft"
+  subjectRole: "hsct-recipient"

@@ -1,0 +1,1 @@
+DROP TABLE "medical_renal_transplant_recipient_request_grade_flags";
