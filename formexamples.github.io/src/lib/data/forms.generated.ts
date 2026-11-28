@@ -1156,6 +1156,18 @@ export const forms: Form[] = [
     "app": true
   },
   {
+    "slug": "medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+    "title": "Medical Haematopoietic Stem Cell Transplant Patients/Donors HLA Typing Request",
+    "description": "A generic HLA typing request for haematopoietic stem cell transplant (HSCT) patients and potential donors, completed by a haematology or transplant clinician.",
+    "app": true
+  },
+  {
+    "slug": "medical-human-leukocyte-and-disease-association-request",
+    "title": "Medical Human Leukocyte and Disease Association Request",
+    "description": "A generic HLA typing request for disease association or drug-hypersensitivity screening, completed by a consultant or general practitioner.",
+    "app": true
+  },
+  {
     "slug": "medical-information-form-for-air-travel",
     "title": "Medical Information Form for Air Travel (MEDIF)",
     "description": "A Medical Information Form (MEDIF) is the standardized airline document used to determine whether a passenger with specific health needs is fit to fly and whether in-flight medical support (supplemental oxygen,…",
@@ -1183,6 +1195,18 @@ export const forms: Form[] = [
     "slug": "medical-records-release-permission",
     "title": "Medical Records Release Permission",
     "description": "Authorization form for releasing medical records, validated for completeness of patient consent and recipient information.",
+    "app": true
+  },
+  {
+    "slug": "medical-renal-living-donor-request",
+    "title": "Medical Renal Living Donor Request",
+    "description": "A generic histocompatibility request for a living kidney donor, completed by a transplant clinician.",
+    "app": true
+  },
+  {
+    "slug": "medical-renal-transplant-recipient-request",
+    "title": "Medical Renal Transplant Recipient Request",
+    "description": "A generic, jurisdiction-neutral histocompatibility and immunogenetics request that a transplant or dialysis clinician completes for a kidney, kidney/pancreas or pancreas transplant recipient.",
     "app": true
   },
   {

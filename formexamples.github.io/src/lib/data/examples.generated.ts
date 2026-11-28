@@ -4071,6 +4071,76 @@ export const examples: ExampleEntry[] = [
     ]
   },
   {
+    "slug": "medical-haematopoietic-stem-cell-transplant-patients-donors-hla-typing-request",
+    "title": "Medical Haematopoietic Stem Cell Transplant Patients/Donors HLA Typing Request",
+    "description": "A generic HLA typing request for haematopoietic stem cell transplant (HSCT) patients and potential donors, completed by a haematology or transplant clinician. One form is completed per person sampled: either the recipient, or a relative who may donate. For a relative, the recipient details and relationship are given so the laboratory can pair the samples.",
+    "personas": [
+      {
+        "name": "recipient-complete",
+        "description": "Well-formed routine request for an HSCT recipient: full volumes (18 + 6 + 6 mL), three or more matching identifiers, consent confirmed. Expect usually-appropriate, ok, routine, accept."
+      },
+      {
+        "name": "matched-sibling-donor-complete",
+        "description": "Potential donor (matched sibling) with the recipient named, relationship given and donor volumes (10 + 6 mL). Expect usually-appropriate, ok, routine, accept."
+      },
+      {
+        "name": "donor-without-recipient",
+        "description": "Potential donor with no recipient details: the laboratory cannot pair the sample. Expect usually-not-appropriate (score 3), query-referrer, with the donor-without-recipient-details flag."
+      },
+      {
+        "name": "unrelated-volunteer-with-relationship",
+        "description": "Donor type unrelated volunteer, yet a relationship to the recipient is given. Expect may-be-appropriate (score 5), with the other flag."
+      },
+      {
+        "name": "urgent-no-reason-no-details",
+        "description": "Urgent request with no reason, no clinical details and no ethnicity. Expect may-be-appropriate (score 5), urgent, query-referrer, with urgent-without-reason, no-clinical-details and missing-ethnicity flags."
+      },
+      {
+        "name": "insufficient-volumes",
+        "description": "Recipient sample with the purple EDTA at 10 mL and no clotted tube, below the 18 mL and 6 mL required. Expect caution, query-referrer, with the sample-volume-insufficient flag."
+      },
+      {
+        "name": "too-few-identifiers-reject",
+        "description": "Recipient sample whose label carries two identifiers, with form details not confirmed to match. Expect reject-risk, reject, with the identity-mismatch-risk flag."
+      }
+    ]
+  },
+  {
+    "slug": "medical-human-leukocyte-and-disease-association-request",
+    "title": "Medical Human Leukocyte and Disease Association Request",
+    "description": "A generic HLA typing request for disease association or drug-hypersensitivity screening, completed by a consultant or general practitioner. It asks a laboratory to type specific HLA alleles linked to a condition (HLA-A29, B27, B51, B57:01, DR15/DQ6, DQ2/DQ8, DQA105, or another named association), with free-text clinical details, report destination and a high-risk-sample flag.",
+    "personas": [
+      {
+        "name": "b27-suspected-spondyloarthritis-complete",
+        "description": "Well-formed routine request: HLA-B27 for suspected axial spondyloarthritis, clinical details, report email, three or more matching identifiers, consent confirmed, 6 mL EDTA. Expect usually-appropriate, ok, routine, accept."
+      },
+      {
+        "name": "b5701-abacavir-pre-prescribing",
+        "description": "HLA-B*57:01 before starting abacavir for HIV: a time-critical pre-prescribing test. Expect usually-appropriate, ok, urgent, accept, with the abacavir-start-pending flag."
+      },
+      {
+        "name": "previous-typing-known-duplicate",
+        "description": "HLA-B27 requested although the patient has been HLA typed before; an HLA type is lifelong. Expect usually-not-appropriate (score 2), query-referrer, with the previous-hla-result flag."
+      },
+      {
+        "name": "coeliac-no-clinical-details",
+        "description": "HLA-DQ2/DQ8 with the clinical-details box left blank and no report destination. Expect may-be-appropriate (score 5), low completeness, query-referrer, with the no-clinical-details and report-destination-missing flags."
+      },
+      {
+        "name": "other-hla-high-risk-incomplete",
+        "description": "Other HLA association with no allele named and a high-risk sample with no description, volume under range. Expect may-be-appropriate (score 5), caution, query-referrer, with the high-risk-sample flag."
+      },
+      {
+        "name": "dqa1-05-limited-evidence",
+        "description": "HLA-DQA1*05 to predict anti-TNF response in Crohn disease: an emerging use with limited evidence. Expect may-be-appropriate (score 6), ok, routine, with the limited-evidence flag."
+      },
+      {
+        "name": "too-few-identifiers-reject",
+        "description": "HLA-A29 for suspected birdshot chorioretinopathy, but the sample label carries two identifiers and the form details are not confirmed to match. Expect reject-risk, reject, with the identity-mismatch-risk flag."
+      }
+    ]
+  },
+  {
     "slug": "medical-information-form-for-air-travel",
     "title": "Medical Information Form for Air Travel (MEDIF)",
     "description": "A Medical Information Form (MEDIF) is the standardized airline document used to determine whether a passenger with specific health needs is fit to fly and whether in-flight medical support (supplemental oxygen, stretcher, incubator, medical escort, battery-powered medical device) must be arranged in advance. It is completed in two parts: Part 1 by the passenger (or booking agent) and Part 2 by the attending physician, then forwarded to the airline's medical desk for clearance.",
@@ -4162,6 +4232,68 @@ export const examples: ExampleEntry[] = [
       {
         "name": "complete-but-minor-issues",
         "description": "Every required field present, but both email addresses are malformed and the authorisation end date precedes its start date — expect Complete completeness with Minor Issues validation (3 fired format/logic rules), demonstrating the axes can diverge the other way."
+      }
+    ]
+  },
+  {
+    "slug": "medical-renal-living-donor-request",
+    "title": "Medical Renal Living Donor Request",
+    "description": "A generic histocompatibility request for a living kidney donor, completed by a transplant clinician. It asks a transplant immunology laboratory for donor crossmatching (full or virtual), match grading, altruistic-donor work-up, day-of-transplant samples, ABO titres or red-cell antibody follow-up, and records donor and recipient identifiers, relationship, transplant centre and ABO groups. It is the donor-side companion of [medical-renal-transplant-recipient-request](../medical-renal-transplant-recipient-request/).",
+    "personas": [
+      {
+        "name": "directed-full-crossmatch-complete",
+        "description": "Well-formed directed donation with a full crossmatch: donor O to recipient A (compatible), three or more identifiers matching, hand-labelled tube sent, consent confirmed. Expect usually-appropriate, ok, routine, accept."
+      },
+      {
+        "name": "day-of-transplant-stat",
+        "description": "Day-of-transplant samples for a directed donation. Expect stat triage and the day-of-transplant sample tubes."
+      },
+      {
+        "name": "altruistic-donor-with-crossmatch",
+        "description": "Altruistic donor with a full crossmatch requested: there is no recipient to crossmatch. Expect usually-not-appropriate and query-referrer."
+      },
+      {
+        "name": "virtual-crossmatch-recipient-abo-unknown",
+        "description": "Virtual crossmatch for a directed donation where the recipient ABO group is not recorded. Expect may-be-appropriate and the virtual-crossmatch flag."
+      },
+      {
+        "name": "abo-incompatible-without-titres",
+        "description": "Donor A with recipient O (ABO-incompatible) and a full crossmatch but no ABO titres. Expect may-be-appropriate and the ABO-incompatible flag."
+      },
+      {
+        "name": "too-few-identifiers-reject",
+        "description": "Only two identifiers on the sample label. Expect reject-risk identity band and a reject recommendation."
+      }
+    ]
+  },
+  {
+    "slug": "medical-renal-transplant-recipient-request",
+    "title": "Medical Renal Transplant Recipient Request",
+    "description": "A generic, jurisdiction-neutral histocompatibility and immunogenetics request that a transplant or dialysis clinician completes for a kidney, kidney/pancreas or pancreas transplant recipient. It asks a transplant immunology laboratory to perform HLA typing, crossmatching, HLA-antibody monitoring, rejection investigation, ABO-incompatible transplant monitoring or red-cell antibody follow-up, and tells the laboratory what it needs to interpret the result: organ required, sensitization history (transplants, transfusions, pregnancies), clinical information, mode of dialysis and dialysis unit.",
+    "personas": [
+      {
+        "name": "routine-list-registration-complete",
+        "description": "Well-formed routine request: first typing and re-typing plus routine transplant-list antibody monitoring, sensitization history answered (none), ABO known, three or more identifiers matching, consent confirmed. Expect usually-appropriate, ok, routine, accept."
+      },
+      {
+        "name": "day-of-transplant-stat",
+        "description": "Deceased-donor day-of-transplant crossmatch for a previously transfused recipient: stat triage, day-of-transplant and sensitised flags."
+      },
+      {
+        "name": "virtual-crossmatch-without-antibody-monitoring",
+        "description": "Living-donor virtual crossmatch with no HLA-antibody monitoring requested: appropriateness capped at may-be-appropriate with the virtual-crossmatch flag."
+      },
+      {
+        "name": "rejection-investigation-no-transplant",
+        "description": "Rejection investigation for a recipient on haemodialysis with no transplant recorded: usually-not-appropriate, query the referrer."
+      },
+      {
+        "name": "too-few-identifiers-reject",
+        "description": "Sample labelled with only two identifiers, unknown ABO group and unanswered history: identity reject-risk, reject recommendation, urgent without a reason."
+      },
+      {
+        "name": "abo-incompatible-without-dfpp",
+        "description": "ABO-incompatible monitoring with no DFPP status for a failing-transplant recipient: appropriateness capped and the DFPP flag fires."
       }
     ]
   },
